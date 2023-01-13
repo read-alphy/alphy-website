@@ -10,17 +10,22 @@ import FeedBurgerMenu from './FeedBurgerMenu'
 import { useNavigate } from 'react-router-dom'
 import SignIn from '../routes/SignIn'
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import ArrowLeft from "../img/arrow-left.svg"
+import ArrowRight from "../img/arrow-right.svg"
+import { set } from 'lodash'
 
 
 export default function Article() {
-    const sessionContext = useSessionContext()
+    //const sessionContext = useSessionContext()
+    const sessionContext = { userId: "123" }
 
     const [data, setData] = useState([])
     const params = useParams()
     const [loading, setLoading] = useState(false)
     const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=true"
     const navigate = useNavigate("/sign-in")
-    const [collapsed, setCollapsed] = useState(true);
+    const [collapsed, setCollapsed] = useState(false);
+    let buttonImage;
     const coinData = async () => {
         try {
             await axios.get(url)
@@ -37,32 +42,40 @@ export default function Article() {
         setLoading(false)
     }, [url])
 
+    if (collapsed === true) {
+        buttonImage = ArrowRight
+    }
+    else {
+        buttonImage = ArrowLeft
+    }
+
+
     return (
         <div className="article">
 
             {sessionContext.userId ? (
                 <div className="article-body">
                     <div className="article-block-1">
+                        <button className="menuToggler" onClick={() => setCollapsed(!collapsed)} >
+                            <img src={buttonImage}></img>
+                        </button>
 
-                        <button className="menuToggler" onClick={() => setCollapsed(!collapsed)}>Toggle Menu</button>
                         {collapsed ? (<div className='feed-burger-menu'>
                             <FeedBurgerMenu data={data} />
-                        </div>) : (<div className="user-feed">
-                            <div className="create-article">
+                        </div>) : (
+                            <div className="not-collapsed-article-block-1">
+                                <div className='feed-burger-menu'>
+                                    <FeedBurgerMenu data={data} />
+                                </div>
 
-                                <Link to="/article/new-article"><p>New +</p></Link>
-                            </div>
-                            <Feed coins={data} />
-                        </div>)}
+                                <div className="user-feed">
+                                    <div className="create-article">
 
-
-
-
-
-
-                        <div className='feed-burger-menu'>
-                            <FeedBurgerMenu data={data} />
-                        </div>
+                                        <Link to="/article/new-article"><p>New +</p></Link>
+                                    </div>
+                                    <Feed coins={data} />
+                                </div>
+                            </div>)}
                     </div>
                     <div className="article-block-2">
                         <ArticleCreator />
@@ -72,9 +85,6 @@ export default function Article() {
 
             ) : (
                 <div>
-                    <p> Sign In to continue!
-                    </p>
-
                     <SignIn />
                 </div>)}
         </div>

@@ -6,10 +6,8 @@ import { useParams } from 'react-router-dom'
 import axios from "axios"
 import { Link } from 'react-router-dom'
 import { useLocation } from "react-router-dom";
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 function ArticleCreator() {
-    const sessionContext = useSessionContext()
     const location = useLocation();
     const [data, setData] = useState([])
     const params = useParams()

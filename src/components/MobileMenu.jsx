@@ -12,7 +12,8 @@ import { useEffect } from 'react';
 function MobileMenu(signOut, data) {
 
 
-    const sessionContext = useSessionContext()
+    //const sessionContext = useSessionContext()
+    const sessionContext = { userId: "123" }
     const navigate = useNavigate()
 
 

@@ -9,7 +9,10 @@ import Session from "supertokens-auth-react/recipe/session";
 
 // TODO: This screen needs to be more professional
 export default function Home2() {
-    const sessionContext = useSessionContext();
+
+
+    //const sessionContext = useSessionContext();
+    const sessionContext = { userId: "123" }
     const navigate = useNavigate();
 
     async function logoutClicked() {

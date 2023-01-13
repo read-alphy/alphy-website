@@ -8,6 +8,7 @@ function Home(props) {
         <div>
             <Welcome />
             <Coins coins={props.coins} />
+
         </div>
     )
 }

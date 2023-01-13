@@ -18,6 +18,24 @@ export const SuperTokensConfig = {
                     ThirdPartyPasswordless.Apple.init(),
                 ],
             },
+            style: {
+                container: {
+                    backgroundColor: "#242423",
+                },
+                headerTitle: { color: "#ced4da", },
+                label: { color: "#ced4da", },
+                input: {
+                    backgroundColor: "#FFF",
+                    color: "#242423",
+                },
+                button: {
+                    backgroundColor: "#FFF",
+                    color: "#242423",
+                },
+                superTokensBranding: {
+                    display: "none"
+                }
+            },
             contactMethod: "EMAIL",
         }),
         Session.init(),

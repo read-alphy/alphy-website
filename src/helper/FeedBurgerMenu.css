@@ -3,13 +3,14 @@
   position: relative;
   width: 30px;
   height: 30px;
+  display: none;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   @apply bg-white bg-slate-800;
   background-color: white;
-  display: none;
+
 
 }
 
@@ -49,7 +50,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
   border-radius: 10px 0px 0px 10px;
-  background: black;
+  background: #212529;
 
 
 }
@@ -105,6 +106,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 
   .bm-burger-button {
+    display: flex;
     margin-left: 30px;
     opacity: 0.3
   }
