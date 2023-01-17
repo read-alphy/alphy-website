@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { UserAuth } from "../../../context/AuthContext"
 import { useParams } from 'react-router-dom'
 import { AiFillCaretUp, AiFillCaretDown } from "react-icons/ai"
 import { Sparklines, SparklinesLine } from 'react-sparklines';

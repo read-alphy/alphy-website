@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+/* import React, { useState } from 'react'
 import { AiOutlineMail } from "react-icons/ai"
 import { RiLockPasswordLine } from "react-icons/ri"
 import { Link, useNavigate } from "react-router-dom"
@@ -54,4 +54,4 @@ function SignUp() {
     )
 }
 
-export default SignUp
+export default SignUp */

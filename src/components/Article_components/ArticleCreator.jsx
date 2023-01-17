@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from 'react'
-import { UserAuth } from "../../context/AuthContext"
 import Feed from "./Feed"
 import { useParams } from 'react-router-dom'
 import axios from "axios"

@@ -1,8 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import { useState } from 'react';
-import { UserAuth } from "../context/AuthContext"
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Languages from "../helper/Languages"
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 

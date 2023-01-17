@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { UserAuth } from "../context/AuthContext"
 import Feed from "./Article_components/Feed"
 import ArticleCreator from "./Article_components/ArticleCreator"
 import { useParams } from 'react-router-dom'
@@ -8,7 +7,6 @@ import { Link } from 'react-router-dom'
 import Content from './Article_components/Content'
 import FeedBurgerMenu from './FeedBurgerMenu'
 import { useNavigate } from 'react-router-dom'
-import SignIn from '../routes/SignIn'
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import ArrowLeft from "../img/arrow-left.svg"
 import ArrowRight from "../img/arrow-right.svg"
@@ -53,40 +51,35 @@ export default function Article() {
     return (
         <div className="article">
 
-            {sessionContext.userId ? (
-                <div className="article-body">
-                    <div className="article-block-1">
-                        <button className="menuToggler" onClick={() => setCollapsed(!collapsed)} >
-                            <img src={buttonImage}></img>
-                        </button>
 
-                        {collapsed ? (<div className='feed-burger-menu'>
-                            <FeedBurgerMenu data={data} />
-                        </div>) : (
-                            <div className="not-collapsed-article-block-1">
-                                <div className='feed-burger-menu'>
-                                    <FeedBurgerMenu data={data} />
+            <div className="article-body">
+                <div className="article-block-1">
+                    <button className="menuToggler" onClick={() => setCollapsed(!collapsed)} >
+                        <img src={buttonImage}></img>
+                    </button>
+
+                    {collapsed ? (<div className='feed-burger-menu'>
+                        <FeedBurgerMenu data={data} />
+                    </div>) : (
+                        <div className="not-collapsed-article-block-1">
+                            <div className='feed-burger-menu'>
+                                <FeedBurgerMenu data={data} />
+                            </div>
+
+                            <div className="user-feed">
+                                <div className="create-article">
+
+                                    <Link to="/article/new-article"><p>New +</p></Link>
                                 </div>
-
-                                <div className="user-feed">
-                                    <div className="create-article">
-
-                                        <Link to="/article/new-article"><p>New +</p></Link>
-                                    </div>
-                                    <Feed coins={data} />
-                                </div>
-                            </div>)}
-                    </div>
-                    <div className="article-block-2">
-                        <ArticleCreator />
-                        <Content />
-                    </div>
+                                <Feed coins={data} />
+                            </div>
+                        </div>)}
                 </div>
-
-            ) : (
-                <div>
-                    <SignIn />
-                </div>)}
+                <div className="article-block-2">
+                    <ArticleCreator />
+                    <Content />
+                </div>
+            </div>
         </div>
     )
 }

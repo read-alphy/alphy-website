@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom"
 import Switcher from './Switcher'
 import Logout from "../supertokens_home/Logout"
 import MobileMenu from './MobileMenu'
-import { UserAuth } from "../context/AuthContext"
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { signOut } from "supertokens-auth-react/recipe/session";
 import { useState } from 'react'

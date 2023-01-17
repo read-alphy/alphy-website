@@ -1,13 +1,10 @@
 import Navbar from "./components/Navbar"
 import { useState } from "react";
 import { useEffect } from "react";
-import SignIn from "./routes/SignIn";
-import SignUp from "./routes/SingUp";
-import Account from "./routes/Account";
+import Account from "./routes/Account.jsx.old";
 import axios from "axios";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./routes/Home";
-import { AuthContextProvider } from "./context/AuthContext";
 import Coins from "./components/Coins";
 import Article from "./components/Article";
 import SuperTokens, { SuperTokensWrapper, getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react";

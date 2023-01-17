@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { AiOutlineHeart } from "react-icons/ai"
-import { Sparklines, SparklinesLine } from 'react-sparklines';
+import React from 'react'
+
 import { Link } from "react-router-dom"
-// import { db } from "../firebase"
-import { UserAuth } from "../../context/AuthContext"
-import { arrayUnion, doc, updateDoc } from "firebase/firestore"
+
 
 
 function FeedItem({ coin }) {
