@@ -1,17 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import Languages from "../helper/Languages"
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
+// import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
-
-
-// React Icons
 
 export default function Welcome() {
     //const sessionContext = useSessionContext()
-    const sessionContext = { userId: "123" }
-    const navigate = useNavigate()
+    // const sessionContext = { userId: "123" }
+    // const navigate = useNavigate()
 
     const [inputValue, setInputValue] = useState('');
 

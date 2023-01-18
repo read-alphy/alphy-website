@@ -2,48 +2,68 @@ import React from 'react'
 
 import { Link } from "react-router-dom"
 
+const handleClick = (id) => {
+    return () => {
+        window.location.href = `/article/${id}`
+    }
+}
 
-
-function FeedItem({ coin }) {
-
-    /*     const [savedCoin, setSavedCoin] = useState(false)
-        const { user } = UserAuth()
-    
-        const handleSavedCoin = () => {
-            setSavedCoin(prevCoin => !prevCoin)
-        }
-    
-        const coinPath = doc(db, "user", `${user?.email}`)
-        const saveCoin = async () => {
-            if (user?.email) {
-                handleSavedCoin()
-                await updateDoc(coinPath, {
-                    favorites: arrayUnion({
-                        id: coin.id,
-                        name: coin.name,
-                        image: coin.image,
-                        rank: coin.market_cap_rank,
-                        symbol: coin.symbol,
-                        price: coin.current_price,
-                    })
-                })
-            } else {
-                alert("Please sign in.")
-            }
-        } */
+function FeedItem({ index,item }) {
 
     return (
-        <tr className='feed-element'>
-            <td>{coin.market_cap_rank}</td>
+        <tr key={index} onClick={handleClick(item.source_id)}>
+            <td>{index + 1}</td>
             <td>
-                <div>
-                    <div>{coin.name}</div>
-                </div>
+                {item.source_type === "youtube" ? (
+                    <img src={`https://i.ytimg.com/vi/${item.source_id}/default.jpg`} alt={item.title} />
+                ) : (
+                    "Source: " + item.source_type
+                )}
             </td>
+                <td>
+                {item.title.length > 75 ? (
+                    item.title.substring(0, 75) + "..."
+                ) : (
+                    item.title
+                )}
+            </td>
+            <td className='text-left'>{item.creator_name}</td>
             <td>
-                <div><Link to={`/article/${coin.id}`}>{coin.symbol.toUpperCase()}</Link></div>
+                {
+                item.summary_requested ? (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                        />
+                    </svg>
+                ) : (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        >
+                        <path
+
+strokeLinecap="round"
+strokeLinejoin="round"
+strokeWidth={2}
+
+d="M6 18L18 6M6 6l12 12"
+/>
+                    </svg>)
+                }
             </td>
-            <td>${coin.current_price.toLocaleString()}</td>
         </tr>
     )
 }

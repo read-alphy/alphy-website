@@ -1,5 +1,4 @@
 import React from 'react'
-import { useEffect } from 'react';
 import { useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import useDarkMode from '../hooks/useDarkMode';

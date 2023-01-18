@@ -1,6 +1,5 @@
 import React from 'react'
-import Switcher from './Switcher'
-import { AiOutlineTwitter, AiOutlineInstagram, AiOutlineGithub, AiFillDiscord } from "react-icons/ai"
+import { AiOutlineTwitter } from "react-icons/ai"
 import DiscordLogo from "../img/discord-mark-black.svg"
 
 function Footer() {
@@ -12,7 +11,7 @@ function Footer() {
                     <p ><br />Feel free to ping our Discord server or Twitter page <br></br> for your questions and feedback.</p>
                 </div>
                 <div className='socials'>
-                    <img src={DiscordLogo}></img>
+                    <img src={DiscordLogo} alt={'discord'}></img>
                     <AiOutlineTwitter size={30} />
                 </div>
 
