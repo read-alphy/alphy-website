@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Link } from "react-router-dom"
-
 const handleClick = (id) => {
     return () => {
         window.location.href = `/article/${id}`

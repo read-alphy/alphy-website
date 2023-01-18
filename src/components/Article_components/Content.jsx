@@ -29,6 +29,7 @@ export default function Article() {
     useEffect(() => {
         fetchData()
         setLoading(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [source_id])
 
     // use loading state to render loading component

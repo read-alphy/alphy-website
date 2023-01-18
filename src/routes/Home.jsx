@@ -1,7 +1,7 @@
 import React from 'react'
 import Feed from '../components/WelcomeFeed'
-import Trending from '../components/Trending'
 import Welcome from "../components/Welcome"
+// import Trending from '../components/Trending'
 
 function Home(props) {
     return (

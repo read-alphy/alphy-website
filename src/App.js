@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar"
 import { useState } from "react";
 import { useEffect } from "react";
-import Account from "./routes/Account.jsx.old";
+// import Account from "./routes/Account.jsx.old";
 import axios from "axios";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./routes/Home";
