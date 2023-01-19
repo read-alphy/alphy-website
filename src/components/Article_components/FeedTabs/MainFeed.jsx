@@ -1,11 +1,9 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import FeedItem from '../FeedItem'
-import { Tab, Tabs, TabPanel } from 'react-bootstrap';
+import React, {useState } from 'react'
+import { Tab, Tabs } from 'react-bootstrap';
+import SideFeedItem from './SideFeedItem';
 
-function MainFeed({ coins }) {
-
-
+function MainFeed(props) {
+    const data = props.data
     const [searchText, setSearchText] = useState("")
 
     return (
@@ -20,14 +18,17 @@ function MainFeed({ coins }) {
                         <thead>
                         </thead>
                         <tbody>
-                            {coins.filter((value) => {
+                            {data
+                                .filter((value) => {
                                 if (searchText === "") {
                                     return value
-                                } else if (value.name.toLowerCase().includes(searchText.toLowerCase())) {
+                                } else if (value.title.toLowerCase().includes(searchText.toLowerCase())) {
                                     return value
-                                }
-                            }).map((coin) => (
-                                <FeedItem key={coin.id} coin={coin} />
+                                }else{
+                                    return null
+                                }})
+                                .map((item,index) => (
+                                <SideFeedItem key={index} index={index} item={item} />
                             ))}
                         </tbody>
                     </table>

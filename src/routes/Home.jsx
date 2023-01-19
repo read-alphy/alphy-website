@@ -1,14 +1,13 @@
 import React from 'react'
-import Coins from '../components/Coins'
-import Trending from '../components/Trending'
+import Feed from '../components/WelcomeFeed'
 import Welcome from "../components/Welcome"
+// import Trending from '../components/Trending'
 
 function Home(props) {
     return (
         <div>
             <Welcome />
-            <Coins coins={props.coins} />
-
+            <Feed data={props.data} />
         </div>
     )
 }

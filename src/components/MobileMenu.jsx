@@ -1,13 +1,13 @@
 import React from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import { Link, useNavigate } from "react-router-dom"
-import Switcher from './Switcher'
 import "../helper/MobileMenu.css"
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import { signOut } from "supertokens-auth-react/recipe/session";
-import Feed from './Article_components/Feed'
-import { useState } from 'react';
-import { useEffect } from 'react';
+// import Switcher from './Switcher'
+// import { useSessionContext } from "supertokens-auth-react/recipe/session";
+// import { signOut } from "supertokens-auth-react/recipe/session";
+// import Feed from './Article_components/Feed'
+// import { useState } from 'react';
+// import { useEffect } from 'react';
 
 function MobileMenu(signOut, data) {
 
