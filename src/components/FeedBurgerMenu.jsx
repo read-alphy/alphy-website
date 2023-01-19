@@ -1,13 +1,11 @@
 import React from 'react'
 import { slide as Menu } from 'react-burger-menu'
-import { Link } from "react-router-dom"
-import Switcher from './Switcher'
 import "../helper/FeedBurgerMenu.css"
-import Feed from './Article_components/Feed'
+import Feed from './WelcomeFeed'
 
-function FeedBurgerMenu({ data }) {
+function FeedBurgerMenu(props) {
+    const data = props.data
     return (
-
         <div className="collapsed-feed-menu">
             <Menu id={"sidebar"} left>
                 <div className="user-feed-burger">
@@ -15,7 +13,7 @@ function FeedBurgerMenu({ data }) {
                         <button href="/article/new-article"><p>New +</p></button>
                     </div>
                     <div className="user-feed-burger-feed">
-                        <Feed className="heyyo" coins={data} />
+                        <Feed data={data} />
                     </div>
 
                 </div>

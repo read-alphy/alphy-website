@@ -1,14 +1,14 @@
 import React from 'react'
-import { CgProfile } from "react-icons/cg"
-import { Link, useNavigate } from "react-router-dom"
-import Switcher from './Switcher'
-import Logout from "../supertokens_home/Logout"
-import MobileMenu from './MobileMenu'
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import { signOut } from "supertokens-auth-react/recipe/session";
-import { useState } from 'react'
-import { useEffect } from 'react'
-import axios from 'axios'
+import { Link } from "react-router-dom"
+// import { useState } from 'react'
+// import { useEffect } from 'react'
+// import axios from 'axios'
+// import { CgProfile } from "react-icons/cg"
+// import Switcher from './Switcher'
+// import Logout from "../supertokens_home/Logout"
+// import MobileMenu from './MobileMenu'
+// import { useSessionContext } from "supertokens-auth-react/recipe/session";
+// import { signOut } from "supertokens-auth-react/recipe/session";
 
 function Navbar() {
 
@@ -16,17 +16,15 @@ function Navbar() {
   //const sessionContext = useSessionContext()
   const sessionContext = { userId: "123" }
 
-  const [data, setData] = useState([])
-  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=true"
+  // const [data, setData] = useState([])
+  // const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=true"
 
-  useEffect(() => {
-    axios.get(url)
-      .then((response) => {
-
-        setData(response.data)
-
-      })
-  }, [url])
+  // useEffect(() => {
+  //   axios.get(url)
+  //     .then((response) => {
+  //       setData(response.data)
+  //     })
+  // }, [url])
 
   /* 
     const navigate = useNavigate()

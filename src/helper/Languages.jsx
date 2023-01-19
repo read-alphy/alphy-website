@@ -7,8 +7,8 @@ function Languages() {
     return (
         <div className="language-selection">
             <select value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>
-                {options.map(option => (
-                    <option key={option} value={option}>{option}</option>
+                {options.map((option,index) => (
+                    <option key={index} value={option}>{option}</option>
                 ))}
             </select>
         </div>

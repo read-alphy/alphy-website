@@ -1,40 +1,13 @@
 import React from "react";
-import { useEffect, useState } from 'react'
-import Feed from "./Feed"
-import { useParams } from 'react-router-dom'
-import axios from "axios"
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { useLocation } from "react-router-dom";
 
 function ArticleCreator() {
     const location = useLocation();
-    const [data, setData] = useState([])
-    const params = useParams()
-    const [loading, setLoading] = useState(false)
-    const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=true"
-
-    const coinData = async () => {
-        try {
-            await axios.get(url)
-                .then((response) => {
-                    setData(response.data)
-                })
-            setLoading(true)
-        } catch (error) {
-            console.error(`ERROR:  ${error}`)
-        }
-    }
-    useEffect(() => {
-        coinData()
-        setLoading(false)
-    }, [url])
-
     const [inputValue, setInputValue] = useState('');
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Do something with the inputValue here
         console.log(inputValue);
     }
 

@@ -1,14 +1,25 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import FeedItem from '../FeedItem'
-import { Tab, Tabs, TabPanel } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { Tab, Tabs } from 'react-bootstrap';
+import SideFeedItem from './SideFeedItem';
 
-function MyWorksFeed({ coins }) {
+function MyWorksFeed() {
 
+    // const[data, setData] = useState([])
+    // const url = `${process.env.REACT_APP_API_URL}/summaries`
+    // useEffect(() => {
+    //     axios.get(url)
+    //         .then(res => { 
+    //             setData(res.data)
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // }, [])
+    // console.log(data)
+
+    const data = [{'title': 'test'}]
 
     const [searchText, setSearchText] = useState("")
-
-
     return (
 
         <div className="signed-in-feed">
@@ -21,14 +32,16 @@ function MyWorksFeed({ coins }) {
                         <thead >
                         </thead>
                         <tbody>
-                            {coins.filter((value) => {
+                            {data.filter((value) => {
                                 if (searchText === "") {
                                     return value
-                                } else if (value.name.toLowerCase().includes(searchText.toLowerCase())) {
+                                } else if (value.title.toLowerCase().includes(searchText.toLowerCase())) {
                                     return value
+                                }else{
+                                    return null
                                 }
-                            }).map((coin) => (
-                                <FeedItem key={coin.id} coin={coin} />
+                            }).map((item,index) => (
+                                <SideFeedItem key={index} index={index} item={item} />
                             ))}
                         </tbody>
                     </table>
