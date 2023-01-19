@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3a133ec2.css",
+    "main.js": "/static/js/main.6b63d53f.js",
+    "static/media/discord-mark-black.svg": "/static/media/discord-mark-black.0bd20a499c0a21e6243a37535c7fd5be.svg",
+    "static/media/arrow-left.svg": "/static/media/arrow-left.f2e43edf7b21e9efc28fb02e0aec6b87.svg",
+    "index.html": "/index.html",
+    "static/media/arrow-right.svg": "/static/media/arrow-right.a705e0070bffece60eb5ddd48a70f1a5.svg",
+    "static/media/search.svg": "/static/media/search.6bf7f4ff9a211ab3065f.svg",
+    "main.3a133ec2.css.map": "/static/css/main.3a133ec2.css.map",
+    "main.6b63d53f.js.map": "/static/js/main.6b63d53f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a133ec2.css",
+    "static/js/main.6b63d53f.js"
+  ]
+}
