@@ -14,11 +14,10 @@ function Feed({ data }) {
                 <table className='main-page-feed'>
                     <thead className='header'>
                         <tr>
-                        <th>#</th>
+                        <th>Thumbnail</th>
                         <th>Title</th>
                         <th>Source</th>
-                        <th className='text-left'>Creator Name</th>
-                        <th>Summary</th>
+                        <th>Date</th>
                         </tr>
                     </thead>
                     <tbody className='main-page-feed-elements'>
