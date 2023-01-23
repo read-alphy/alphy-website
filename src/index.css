@@ -43,7 +43,7 @@ MAIN PAGE
 
 .navbar {
   display: flex;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   left: 0;
   flex-direction: row;
@@ -232,6 +232,19 @@ MAIN PAGE
 
 }
 
+.user-feed{
+  color: #ced4da;
+  /* background: #212529;  */
+  padding-right: 15px;
+  width: 350px;
+  padding-top: 30px;
+  height: 92vh;
+}
+
+.user-feed::-webkit-scrollbar {
+  width: 0px;
+}
+
 
 .user-feed table {
   width: 100%;
@@ -293,7 +306,6 @@ table tr {
 
 .search-main-feed input {
 
-
   padding: 10px 10px 10px 10px;
   padding-left: 40px;
   width: 40vw;
@@ -325,24 +337,8 @@ table tr {
 .main-page-feed {
   margin: auto;
   width: 80vw;
-
 }
 
-
-
-.user-feed {
-  max-width: 500px;
-  min-width: 300px;
-  overflow-y: scroll;
-  max-height: 100vh;
-  padding-top: 30px;
-  height: 100%;
-  color: #ced4da;
-  margin: auto;
-  padding-right: 15px;
-  background: #212529;
-
-}
 
 .sideBarContent {
   transition: all 0.5s ease;
@@ -354,16 +350,67 @@ table tr {
 
 .article-block-1 {
 
-  height: 100vh;
-  max-height: 100vh;
-  border-right: 1px solid #2f3542;
-
-
+  height: parent;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  /* border-right: 1px solid #2f3542; */
 }
 
+.left-feed{
+  height: parent;
+  overflow-x: hidden;
+  max-width: 350px;
+  overflow-y: auto;
+  /* animation-name: slideIn;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards; */
+}
 
+.menu-toggler {
+  top: 0;
+}
 
+.arrow-right {
+  transform: rotate(0deg);
+  transition: transform 0.5s ease-in-out;
+}
 
+.arrow-left {
+  transform: rotate(360deg);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* ANIMATIONS */
+/* 
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0%); }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0%); }
+  to { transform: translateX(-100%); }
+}
+
+.left-feed.collapsed {
+  animation-name: slideOut;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.left-feed.collapsed:animation-end {
+  display:none;
+} */
+
+.left-feed {
+  width: 350px;
+  transition: width 0.5s ease-out;
+}
+
+.left-feed.collapsed {
+  width: 0;
+}
 
 
 
@@ -575,11 +622,9 @@ CONTENT PAGE
   color: #ced4da;
 }
 
-.menuToggler {
-  float: right;
-
-
-  margin-top: 15px;
+.content-active-button{
+  border-bottom: 3px solid rgba(239, 237, 239, 0.5);
+  color: #586675;
 }
 
 .summary-and-transcript-buttons button {
@@ -636,17 +681,9 @@ CONTENT PAGE
   padding: 0px;
   float: right;
   overflow-y: scroll;
-  max-height: 100vh;
-  margin-left: 100px;
+  max-height: 92vh;
+  padding-left: 40px;
 }
-
-
-
-
-
-
-
-
 
 
 .main-content {
@@ -767,10 +804,8 @@ CONTENT
 .article-body {
   display: flex;
   flex-direction: row;
-  max-height: 100vh;
+  max-height: 92vh;
 }
-
-
 
 
 
