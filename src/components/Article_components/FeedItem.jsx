@@ -1,15 +1,15 @@
 import React from 'react'
-
-const handleClick = (id) => {
-    return () => {
-        window.location.href = `/article/${id}`
-    }
-}
+import { useNavigate } from 'react-router-dom'
 
 function FeedItem({ index,item }) {
+    const navigate = useNavigate()
+
+    const handleClick = (id) => {
+        navigate(`/article/${id}`)
+    }
 
     return (
-        <tr key={index} onClick={handleClick(item.source_id)}>
+        <tr key={index} onClick={handleClick(item.source_id)} className="cursor-pointer">
             <td>
                 {item.source_type === "youtube" ? (
                     <img src={`https://i.ytimg.com/vi/${item.source_id}/default.jpg`} alt={item.title} />

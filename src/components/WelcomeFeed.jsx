@@ -9,7 +9,7 @@ function Feed({ data }) {
         <div className='main-page-feed-section'>
             <div className='main-page-feed-table-parent'>
                 <div className='search-main-feed'>
-                    <input onChange={(e) => setSearchText(e.target.value)} type="text" className='bg-gray-100 dark:bg-gray-600 rounded-md py-1 indent-3 outline-none' placeholder="Search Alphy's database..." />
+                <input onChange={(e) => setSearchText(e.target.value)} type="text" className='py-1 bg-gray-100 rounded-md outline-none dark:bg-gray-600 indent-3' placeholder="Search Alphy's database..." />
                 </div>
                 <table className='main-page-feed'>
                     <thead className='header'>
