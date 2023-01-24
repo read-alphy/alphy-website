@@ -9,7 +9,7 @@ function FeedItem({ index,item }) {
     }
 
     return (
-        <tr key={index} onClick={handleClick(item.source_id)} className="cursor-pointer">
+        <tr key={index} onClick={()=>handleClick(item.source_id)} className="cursor-pointer">
             <td>
                 {item.source_type === "youtube" ? (
                     <img src={`https://i.ytimg.com/vi/${item.source_id}/default.jpg`} alt={item.title} />
