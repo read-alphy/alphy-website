@@ -3,24 +3,23 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom'
 import Languages from "../helper/Languages"
-// import { useSessionContext } from "supertokens-auth-react/recipe/session";
-
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import axios from "axios"
 
 export default function Welcome() {
-    //const sessionContext = useSessionContext()
-    // const sessionContext = { userId: "123" }
+    const sessionContext = useSessionContext()
     // const navigate = useNavigate()
 
     const [inputValue, setInputValue] = useState('');
     const [language, setLanguage] = useState('en-US');
 
-    const handleSubmit = (event, selectedOption) => {
+    const handleSubmit = async (event, selectedOption) => {
         event.preventDefault();
         // Do something with the inputValue here
         console.log(inputValue);
         console.log(selectedOption);
         // go to article/new-article
-        // window.location.href = `/article/new-article`;
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL || "http://localhost:3001"}/summaries`, { url: "https://www.youtube.com/watch?v=KP5PA-Oymz8" });
 
     }
 
