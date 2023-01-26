@@ -12,11 +12,6 @@ export const SuperTokensConfig = {
     recipeList: [
         ThirdPartyPasswordless.init({
             signInUpFeature: {
-                providers: [
-                    // ThirdPartyPasswordless.Github.init(),
-                    ThirdPartyPasswordless.Google.init(),
-                    ThirdPartyPasswordless.Apple.init(),
-                ],
             },
             style: {
                 container: {
