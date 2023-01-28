@@ -9,14 +9,13 @@ function MainFeed(props) {
 
     return (
 
-        <div className="signed-in-feed">
+        <div className="signed-in-feed ">
             <Tabs>
-                <Tab title="">
+                <Tab title="" className=''>
                     <div >
-                        <input onChange={(e) => setSearchText(e.target.value)} type="text" placeholder='Search' />
+                        <input className='' onChange={(e) => setSearchText(e.target.value)} type="text" placeholder='Search' />
                     </div>
-                    <table >
-                        <tbody>
+                
                             {data
                                 .filter((value) => {
                                 if (searchText === "") {
@@ -29,8 +28,7 @@ function MainFeed(props) {
                                 .map((item,index) => (
                                 <SideFeedItem key={index} index={index} item={item} onClick={onClick} />
                             ))}
-                        </tbody>
-                    </table>
+                     
                 </Tab>
             </Tabs>
         </div>

@@ -8,11 +8,11 @@ function Home(props) {
     return (
         <div>
             <Welcome />
-            <div className='hidden lg:block'>
+            <div className='hidden md:block'>
                 <Feed data={props.data} />
             </div>
 
-            <div className='block lg:hidden'>
+            <div className='block md:hidden'>
                 <FeedMobile data={props.data} />
             </div>
         </div>

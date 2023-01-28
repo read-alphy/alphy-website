@@ -53,7 +53,7 @@ module.exports = {
       colors: {
         main:'#2f3542',
         mainText: '#ced4da',
-      
+        sideColor: '#212529',
 
        
       },

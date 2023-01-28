@@ -8,14 +8,14 @@ import ContentTab from './ContentTabs/ContentTab'
 export default function Content(props) {
     const data = props.data
     const location = useLocation();
-    
+
     const [activeTab, setActiveTab] = useState('tab1');
-    
+
     return location.pathname !== "/article/new-article" ? (
-        < div className="content" >
-            <h1 className="content-title">{data.title}</h1>
-            <div className="content-upperside">
-                <div className="key-takeaways">
+        < div className={`container  mx-auto md:px-10 lg:px-20 `} >
+            <h1 className="mt-10 text-xl text-left lg:mt-20 lg:text-3xl text-mainText">{data.title}</h1>
+            <div className="grid grid-cols-2 gap-8 mt-16">
+                <div className="col-span-2 p-4 border lg:col-span-1 border-mainText text-mainText">
                     <h1>Key Takeaways</h1>
                     <br></br>
                     {data.key_takeaways ? data.key_takeaways.map((item, index) => {
@@ -26,21 +26,23 @@ export default function Content(props) {
                         )
                     }) : null}
                 </div>
-                <iframe
-                    title="My YouTube Video"
-                    width="560"
-                    height="315"
-                    src={`https://www.youtube.com/embed/${data.source_id}`}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                ></iframe>
-            </div>
-            <div className="summary-and-transcript">
+                <div className='col-span-2 lg:col-span-1'>
+                    <iframe
+                        title="My YouTube Video"
+                        className='w-full lg:w-120 h-80'
+                        src={`https://www.youtube.com/embed/${data.source_id}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    ></iframe >
+                </div>
+
+            </div >
+            <div className="mt-14 lg:mt-0 summary-and-transcript">
                 <div className="summary-and-transcript-buttons">
 
-                    <button className={activeTab === 'tab1' ? 'content-active-button ' : ''} 
+                    <button className={activeTab === 'tab1' ? 'content-active-button ' : ''}
                         onClick={() => setActiveTab('tab1')}>Summary</button>
-                    <button className={activeTab === 'tab2' ? 'content-active-button' : ''} 
+                    <button className={activeTab === 'tab2' ? 'content-active-button' : ''}
                         onClick={() => setActiveTab('tab2')}>Transcript</button>
                 </div>
                 <div className="main-content">

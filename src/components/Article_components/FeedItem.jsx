@@ -1,8 +1,12 @@
+import moment from 'moment'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 function FeedItem({ index,item }) {
     const navigate = useNavigate()
+
+    const window = useWindowSize()
 
     const handleClick = (id) => {
         navigate(`/article/${id}`)
@@ -17,15 +21,15 @@ function FeedItem({ index,item }) {
                     "Source: " + item.source_type
                 )}
             </td>
-                <td>
-                {item.title.length > 75 ? (
-                    item.title.substring(0, 75) + "..."
+                <td title={item.title} className='text-left md:pl-4 lg:pl-0'>
+                {item.title.length > ( window.width >1024 ? 75 : 46) ? (
+                    item.title.substring(0, ( window.width >1024 ? 75 : 46)) + "..."
                 ) : (
                     item.title
                 )}
             </td>
-            <td className='text-left'>{item.creator_name}</td>
-            <td className='text-left'>3 weeks ago</td>
+            <td className='text-left '>{item.creator_name}</td>
+            <td className='text-left'>{moment(item.source_ts).format("DD:MM:YYYY")}</td>
         </tr>
     )
 }

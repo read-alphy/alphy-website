@@ -3,7 +3,7 @@ import Tooltip from '../../../helper/Tooltip'
 import './SideFeedItem.css'
 
 const SideFeedItem = (props) => {
-    
+
     const item = props.item
     const index = props.index
     const onClick = props.onClick
@@ -16,28 +16,26 @@ const SideFeedItem = (props) => {
 
 
     return (
-        <tr>
-            <td>
-                <div key={index} className={'video-container'}
-                    onClick={()=>{onClick(source_id)}}
-                >    
-                    <div className='side-feed-thumbnail'>
-                        <div className="video" style={{backgroundImage: `url(${imageUrl})`}} >
-                        </div>
-                    </div>
-                    <div className='side-feed-text'>
-                        {/* <Tooltip content={`${item.title}`} direction="right"> */}
-                            <div className='side-feed-title' >
-                                {/* if the title is more than 75 chars put ... */}
-                                {item.title.length > 75 ? item.title.slice(0,75) + '...' : item.title}
-                            </div>
-                        {/* </Tooltip> */}
-                        <div className='side-feed-creator'>{item.creator_name}</div>
-                        <div className='side-feed-date'>Date</div>
-                    </div>
+
+        <div key={index} className={' flex  space-x-3 my-4'}
+            onClick={() => { onClick(source_id) }}
+        >
+            <div className=''>
+                <div className="video" style={{ backgroundImage: `url(${imageUrl})` }} >
                 </div>
-            </td>
-        </tr>
+            </div>
+            <div className='text-xs lg:w-40'>
+                {/* <Tooltip content={`${item.title}`} direction="right"> */}
+                <div className='text-sm text-mainText' >
+                    {/* if the title is more than 75 chars put ... */}
+                    {item.title.length > 75 ? item.title.slice(0, 75) + '...' : item.title}
+                </div>
+                {/* </Tooltip> */}
+                <div className='side-feed-creator'>{item.creator_name}</div>
+                <div className='side-feed-date'>Date</div>
+            </div>
+        </div>
+
     )
 }
 

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 // import { useSessionContext } from "supertokens-auth-react/recipe/session";
 // import { signOut } from "supertokens-auth-react/recipe/session";
 
-function Navbar() {
+function Navbar({ arrowDirection, setArrowDirection }) {
 
 
   //const sessionContext = useSessionContext()
@@ -47,12 +47,16 @@ function Navbar() {
         </Link>
       </div>
       <div>
-        <div className=' navbar-right-section md:block hidden'>
+        <div className='hidden navbar-right-section md:block'>
 
           {sessionContext.userId ? (
             <div className='signed-in-navbar'>
-              <Link to="/article/new-article" className="navbar-link"> User Hub
-              </Link>
+              <div className='hidden lg:block'>
+                <Link to="/article/new-article" className="navbar-link"> User Hub </Link>
+              </div>
+              <div onClick={()=>setArrowDirection(arrowDirection == "left" ? "right" : "left")}  className='block lg:hidden'>
+              <i className="text-2xl ri-menu-line text-mainText"></i>
+              </div>
               {/* <button onClick={handleSignOut} className="navbar-link">Log Out</button> */}
             </div>
 

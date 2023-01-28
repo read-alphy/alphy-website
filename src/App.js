@@ -11,13 +11,16 @@ import Article from "./components/Article";
 // import { SuperTokensConfig } from "./routes/SuperTokenComponents/Config";
 // import Home2 from "./supertokens_home"
 import Footer from "./components/Footer";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 
 function App() {
-
+  const windowSize = useWindowSize()
   const [data, setData] = useState([])
   const url = `${process.env.REACT_APP_API_URL}/summaries`
   const location = useLocation();
+  const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "left" : "right");
+
   useEffect(() => {
     axios.get(url)
       .then((response) => {
@@ -28,7 +31,7 @@ function App() {
   return (
 
     <div className="App">
-      <Navbar />
+      <Navbar arrowDirection={arrowDirection} setArrowDirection={setArrowDirection} />
       <Routes>
         {/* {getSuperTokensRoutesForReactRouterDom(require("react-router-dom"))} */}
         {/* <Route path="/" element={<SessionAuth>
@@ -36,8 +39,8 @@ function App() {
           </SessionAuth>} /> */}
         <Route path="/" element={<Home data={data} />} />
         <Route path="/article/:article_ID" element={
-        /* <SessionAuth><Article data={data} /></SessionAuth> */
-        <Article data={data} />}/>
+          /* <SessionAuth><Article data={data} /></SessionAuth> */
+          <Article feedData={data} arrowDirection={arrowDirection} setArrowDirection={setArrowDirection} />} />
       </Routes>
       {location.pathname === "/" ? (<Footer />) : (null)}
     </div>

@@ -10,13 +10,13 @@ import {animated} from 'react-spring'
 import { useTransition } from 'react-spring'
 import axios from 'axios'
 import Loading from './Loading'
+import { useWindowSize } from '../hooks/useWindowSize'
 
 
-export default function Article(props) {
-    const feedData = props.data;
+export default function Article({feedData, arrowDirection, setArrowDirection}) {
     const location = useLocation();
     const navigate = useNavigate();
-    
+
     
     const [collapsed, setCollapsed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +63,6 @@ export default function Article(props) {
 
 
     // const buttonImage = collapsed ? ArrowRight : ArrowLeft;
-    const [arrowDirection, setArrowDirection] = useState("left");
     const handleClick2 = () => {
         setArrowDirection(arrowDirection === "right" ? "left" : "right");
         setCollapsed(!collapsed);
@@ -76,19 +75,51 @@ export default function Article(props) {
 
     return (
         <div className="article">
-            <div className="article-body">
-                <div className="article-block-1">
-                    <div className={`left-feed ${collapsed ? 'collapsed' : ''}`}>
+            <div className=" article-body">
+                <div className="flex">
+                    <div className={`left-feed hidden  lg:block ${collapsed ? 'collapsed' : ''}`}>
                         <div className="not-collapsed-article-block-1">
                             <div className="user-feed">
+                            <Link to="/article/new-article">
                                 <div className="create-article">
-                                    <Link to="/article/new-article"><p>New +</p></Link>
+                                   <p>New +</p>
                                 </div>
+                             </Link>
                                 {memoizedFeed}
                             </div>
                         </div>
                     </div>
-                    <button onClick={handleClick2}>
+                        {arrowDirection === "left" ? 
+
+                        <div className='fixed inset-x-0 top-0 z-50 h-full transition origin-top-right transform lg:hidden '>
+                        <div className='rounded-lg rounded-t-none shadow-lg bg-sideColor'>
+                            <div className='h-screen px-4 overflow-y-auto'>
+
+                                <div className='flex items-center justify-end p-4 bg-sideColor'>
+                                    <div className="cursor-pointer" onClick={()=>setArrowDirection("right")} >
+                                        <i className="text-2xl text-white ri-close-line"></i>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4">
+                                    <div onClick={()=>setArrowDirection("right")} className="">
+                                         <Link to="/article/new-article">
+                                              <div className="flex items-center justify-center w-full py-2 mb-4 text-xl font-semibold rounded-md shadow-md bg-mainText text-main">
+                                                 <p>New +</p>
+                                              </div>
+                                         </Link>
+                                         {memoizedFeed}
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                        :<></>
+                        }
+
+
+                    <button className='hidden top-20 lg:block ' onClick={handleClick2}>
                         <img
                             src={arrowDirection === "right" ? ArrowRight : ArrowLeft}
                             alt={`toggle ${arrowDirection} arrow`}
@@ -99,8 +130,8 @@ export default function Article(props) {
                         <img src={buttonImage} alt={'toggle menu'}></img>
                     </button> */}
                 </div>
-                <div className="article-block-2">
-                    {isLoading? <Loading/> : <ArticleCreator />}
+                <div className="px-4 mx-auto">
+                    {isLoading? <Loading/> : <ArticleCreator arrowDirection={arrowDirection} />}
                     {isLoading ? <Loading /> : <Content data={data}/>}                    
                 </div>
             </div>
