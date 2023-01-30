@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useState } from 'react'
 import { useLocation } from "react-router-dom";
 
@@ -6,9 +7,10 @@ function ArticleCreator() {
     const location = useLocation();
     const [inputValue, setInputValue] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(inputValue);
+        await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`, { url: inputValue })
     }
 
 

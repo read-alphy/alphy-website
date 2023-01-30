@@ -22,7 +22,7 @@ export default function Welcome() {
         // Do something with the inputValue here
         console.log(inputValue);
         console.log(selectedOption);
-        await axios.post(`${process.env.REACT_APP_BACKEND_URL || "http://localhost:3001"}/summaries`, { url: inputValue, language: selectedOption })
+        await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`, { url: inputValue, language: selectedOption })
         // go to article/new-article
         // window.location.href = `/article/new-article`;
 
