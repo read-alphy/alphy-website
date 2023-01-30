@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom'
@@ -14,11 +15,14 @@ export default function Welcome() {
     const [inputValue, setInputValue] = useState('');
     const [language, setLanguage] = useState('en-US');
 
-    const handleSubmit = (event, selectedOption) => {
+
+
+    const handleSubmit = async (event, selectedOption) => {
         event.preventDefault();
         // Do something with the inputValue here
         console.log(inputValue);
         console.log(selectedOption);
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL || "http://localhost:3001"}/summaries`, { url: inputValue, language: selectedOption })
         // go to article/new-article
         // window.location.href = `/article/new-article`;
 
@@ -33,7 +37,7 @@ export default function Welcome() {
                     Transcribe and summarize any YouTube with just one click
                 </h2>
 
-                <p className='mb-4 text-center'>   Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and summarize the video for you. </p>
+                <p className='mb-4 text-center'>   Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and summarize the video!     </p>
 
                 <form className="items-center justify-center space-x-4 lg:flex" onSubmit={(e) => handleSubmit(e, language)}>
                     <input className='lg:w-[600px] w-full  py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-white focus:outline-none' type="url" name="content_link" value={inputValue} onChange={(event) => setInputValue(event.target.value)}
@@ -41,6 +45,7 @@ export default function Welcome() {
                     <div className='flex items-center mt-4 space-x-4 md:justify-center lg:mt-0'>
                         <Languages language={language} onLangChange={setLanguage} />
                         <button className="w-full px-8 py-2 duration-300 rounded-md bg-main md:w-auto lg:w-auto hover:opacity-75" type="submit">Submit</button>
+
                     </div>
 
                 </form>
