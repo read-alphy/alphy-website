@@ -11,13 +11,15 @@ import { useTransition } from 'react-spring'
 import axios from 'axios'
 import Loading from './Loading'
 import { useWindowSize } from '../hooks/useWindowSize'
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
+
 
 
 function Article({feedData, arrowDirection, setArrowDirection}) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    
+    const sessionContext = useSessionContext();
     const [collapsed, setCollapsed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);   
@@ -82,10 +84,11 @@ function Article({feedData, arrowDirection, setArrowDirection}) {
                             <div className="user-feed
                             ">
                             <Link to="/article/new-article">
-                                <div className="create-article">
-                                   <p>New +</p>
-                                </div>
+                  
+                            <p>New +</p>
+                       
                              </Link>
+                             
                                 {memoizedFeed}
                             </div>
                         </div>

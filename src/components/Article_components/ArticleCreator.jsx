@@ -1,14 +1,27 @@
 import React from "react";
+import axios from "axios";
 import { useState } from 'react'
 import { useLocation } from "react-router-dom";
+import Languages from "../../helper/Languages"
+import { useNavigate } from "react-router-dom";
+import { SessionContext } from "supertokens-auth-react/recipe/session";
 
 function ArticleCreator() {
     const location = useLocation();
     const [inputValue, setInputValue] = useState('');
+    const [language, setLanguage] = useState('en-US');
+    const navigate = useNavigate()
 
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(inputValue);
+        if (SessionContext.userId) {
+            await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`, { url: inputValue })
+        }
+        else {
+            navigate("/auth")
+        }
+
     }
 
 
@@ -42,10 +55,12 @@ function ArticleCreator() {
 
 
             <form className="sign-in-input" onSubmit={handleSubmit}>
+
                 <label>
                     <input type="url" name="content_link" value={inputValue} onChange={(event) => setInputValue(event.target.value)}
                         placeholder="Insert the YouTube link to start" />
                 </label>
+                <Languages language={language} onLangChange={setLanguage} />
                 <button className="submit-btn" type="submit" value="Submit">Submit</button>
             </form>
 
