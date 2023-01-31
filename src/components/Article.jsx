@@ -84,7 +84,7 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
                             <div className="user-feed">
                             <Link to="/article/new-article">
                   
-                            <p>New +</p>
+                            <p>Submit a video for work</p>
                        
                              </Link>
                              

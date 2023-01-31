@@ -820,6 +820,9 @@ CONTENT
   height: 70vh;
 }
 
+footer {
+  background: black;
+}
 
 .footer-main {
   display: flex;
