@@ -3,6 +3,7 @@ import Feed from '../components/WelcomeFeed'
 import Welcome from "../components/Welcome"
 import FeedMobile from '../components/WelcomeFeedMobile'
 // import Trending from '../components/Trending'
+import About from "../components/About"
 
 function Home(props) {
     return (
@@ -11,6 +12,7 @@ function Home(props) {
             <div className='hidden md:block w-full'>
                 <Feed data={props.data} />
             </div>
+            <About />
 
             <div className='block md:hidden'>
                 <FeedMobile data={props.data} />
