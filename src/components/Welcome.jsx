@@ -33,7 +33,7 @@ export default function Welcome() {
             let answer = axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`, { url: inputValue, language: selectedOption })
             setInputValue("")
             if (answer.status === 200) {
-                toast.success('Succesfully submitted the link! \n\n We will send you an email when the article is ready.')
+                toast.success('Succesfully submitted the ! \n\n We will send you an email when the article is ready.')
             }
             else {
                 toast.error('There was an error submitting the form. Please try again.')

@@ -1,18 +1,17 @@
 import React from 'react'
-import { AiOutlineTwitter } from "react-icons/ai"
-import DiscordLogo from "../img/discord-mark-black.svg"
-
+import DiscordLogo from "../img/discord.svg"
+import TwitterLogo from "../img/twitter.svg"
 function Footer() {
     return (
         <div className='footer-main '>
-            <div className='grid gap-2 my-5 footer-main-2 md:grid-cols-4 sm:grid-cols-3'>
+            <div className='grid gap-2 my-5 container mx-auto w-800 footer-main-2 md:grid-cols-4 sm:grid-cols-3'>
                 <div>
-                    <h1 >Reach Us</h1>
-                    <p ><br />Feel free to ping our Discord server or Twitter page <br></br> for your questions and feedback.</p>
+                    <h1 className="text-2xl">Reach Us</h1>
+                    <p ><br />Feel free to reach us through<span className="text-yellow-600"> hello@alphy.tech</span> or ping us on our Discord for any questions and feedback.</p>
                 </div>
-                <div className='socials'>
+                <div className='relative flex mb-4 space-x-20 px-4'>
                     <img src={DiscordLogo} alt={'discord'}></img>
-                    <AiOutlineTwitter size={30} />
+                    <img src={TwitterLogo} alt={'twitter'}></img>
                 </div>
 
             </div>

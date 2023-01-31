@@ -303,11 +303,8 @@ table tr {
 .main-page-feed-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding-bottom: 100px;
   color: #ced4da;
-
-
 
 }
 
@@ -348,11 +345,6 @@ table tr {
   margin-top: 30px;
 }
 
-
-.main-page-feed {
-  margin: auto;
-  width: 80vw;
-}
 
 
 .sideBarContent {
@@ -831,12 +823,13 @@ CONTENT
 
 .footer-main {
   display: flex;
-  flex-direction: column;
   color: #ced4da;
+  background: black;
+  padding-top: 30px;
 }
 
 .footer-main-2 {
-  max-width: 1000px;
+
   justify-content: space-between;
   display: flex;
   flex-direction: row;
@@ -847,9 +840,7 @@ CONTENT
 
 }
 
-.footer-main-2 img {
-  padding-bottom: 40px;
-}
+
 
 
 

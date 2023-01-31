@@ -18,7 +18,8 @@ function App() {
   SuperTokens.init(SuperTokensConfig)
   const windowSize = useWindowSize()
   const [data, setData] = useState([])
-  const url = `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`
+  // const url = `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`
+  const url = `https://backend-production-33df.up.railway.app/summaries`
   const location = useLocation();
   const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "right" : "left");
 
