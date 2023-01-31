@@ -20,13 +20,18 @@ function App() {
   const url = `${process.env.REACT_APP_API_URL}/summaries`
   const location = useLocation();
   const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "left" : "right");
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     axios.get(url)
       .then((response) => {
         setData(response.data)
+        setLoading(false)
       })
   }, [url])
+
+  // loading state
 
   return (
 
@@ -37,7 +42,7 @@ function App() {
         {/* <Route path="/" element={<SessionAuth>
             <Home2 />
           </SessionAuth>} /> */}
-        <Route path="/" element={<Home data={data} />} />
+        <Route path="/" element={<Home data={data} isLoading={loading}/>} />
         <Route path="/article/:article_ID" element={
           /* <SessionAuth><Article data={data} /></SessionAuth> */
           <Article feedData={data} arrowDirection={arrowDirection} setArrowDirection={setArrowDirection} />} />

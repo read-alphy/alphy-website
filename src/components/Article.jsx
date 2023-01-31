@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef } from 'react'
+import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react'
 import Feed from "./Article_components/Feed"
 import ArticleCreator from "./Article_components/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -13,7 +13,7 @@ import Loading from './Loading'
 import { useWindowSize } from '../hooks/useWindowSize'
 
 
-export default function Article({feedData, arrowDirection, setArrowDirection}) {
+function Article({feedData, arrowDirection, setArrowDirection}) {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
         else{
             // console.log(data)
         }
-      }, [location.pathname]);
+      }, [location.pathname, navigate]);
 
 
     // const buttonImage = collapsed ? ArrowRight : ArrowLeft;
@@ -70,7 +70,7 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
     
     
     //Memoize the feed component so it only re-renders if the data prop change
-    const memoizedFeed = useMemo(() => <Feed data={feedData} onClick={handleClick}/>, [feedData]);
+    const memoizedFeed = useMemo(() => <Feed data={feedData} onClick={handleClick} navigate={navigate}/>, [feedData]);
 
 
     return (
@@ -79,7 +79,8 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
                 <div className="flex">
                     <div className={`left-feed hidden  lg:block ${collapsed ? 'collapsed' : ''}`}>
                         <div className="not-collapsed-article-block-1">
-                            <div className="user-feed">
+                            <div className="user-feed
+                            ">
                             <Link to="/article/new-article">
                                 <div className="create-article">
                                    <p>New +</p>
@@ -139,6 +140,7 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
     )
 }
 
+export default Article;
 
 // {collapsed
 //     ? (

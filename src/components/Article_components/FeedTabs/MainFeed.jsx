@@ -5,6 +5,7 @@ import SideFeedItem from './SideFeedItem';
 function MainFeed(props) {
     const data = props.data
     const onClick = props.onClick
+    const navigate = props.navigate
     const [searchText, setSearchText] = useState("")
 
     return (
@@ -26,7 +27,7 @@ function MainFeed(props) {
                                     return null
                                 }})
                                 .map((item,index) => (
-                                <SideFeedItem key={index} index={index} item={item} onClick={onClick} />
+                                <SideFeedItem key={index} index={index} item={item} onClick={onClick} navigate={navigate}/>
                             ))}
                      
                 </Tab>

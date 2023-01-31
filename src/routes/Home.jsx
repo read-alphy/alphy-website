@@ -9,7 +9,7 @@ function Home(props) {
         <div>
             <Welcome />
             <div className='hidden md:block'>
-                <Feed data={props.data} />
+                <Feed data={props.data} isLoading={props.isLoading} />
             </div>
 
             <div className='block md:hidden'>
