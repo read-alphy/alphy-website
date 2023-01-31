@@ -30,7 +30,7 @@ function MobileMenu(signOut, data) {
     return (
         <Menu right>
 
-            {sessionContext.userId ? (<Link to="/article/new-article">New +</Link>) : null}
+            {/*        {sessionContext.userId ? (<Link to="/article/new-article">New +</Link>) : null} */}
 
             {sessionContext.userId ? (< button onClick={handleSignOut}>Log Out</button>) : (<Link to="/auth">
                 Sign In

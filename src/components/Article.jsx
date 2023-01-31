@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useMemo, useEffect, useRef } from 'react'
 import Feed from "./Article_components/Feed"
-import ArticleCreator from "./Article_components/ArticleCreator"
+// import ArticleCreator from "./Article_components/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Content from './Article_components/Content'
 import ArrowLeft from "../img/arrow-left.svg"
@@ -78,15 +78,15 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
     return (
         <div className="article">
             <div className=" article-body">
-                <div className="flex">
-                    <div className={`left-feed hidden  lg:block ${collapsed ? 'collapsed' : ''}`}>
-                        <div className="not-collapsed-article-block-1">
+                <div className="flex ml-5 mr-5 ">
+                    <div className={`left-feed hidden lg:block ${collapsed ? 'collapsed' : ''}`}>
+                        <div className="not-collapsed-article-block-1 ">
                             <div className="user-feed">
-                            <Link to="/article/new-article">
+{/*                             <Link to="/article/new-article">
                   
                             <p>Submit a video for work</p>
                        
-                             </Link>
+                             </Link> */}
                              
                                 {memoizedFeed}
                             </div>
@@ -106,11 +106,11 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
 
                                 <div className="mt-4">
                                     <div onClick={()=>setArrowDirection("right")} className="">
-                                         <Link to="/article/new-article">
+{/*                                          <Link to="/article/new-article">
                                               <div className="flex items-center justify-center w-full py-2 mb-4 text-xl font-semibold rounded-md shadow-md bg-mainText text-main">
                                                  <p>New +</p>
                                               </div>
-                                         </Link>
+                                         </Link> */}
                                          {memoizedFeed}
                                      </div>
                                 </div>
@@ -134,7 +134,6 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
                     </button> */}
                 </div>
                 <div className="px-4 mx-auto">
-                    {isLoading? <Loading/> : <ArticleCreator arrowDirection={arrowDirection} />}
                     {isLoading ? <Loading /> : <Content data={data}/>}                    
                 </div>
             </div>
