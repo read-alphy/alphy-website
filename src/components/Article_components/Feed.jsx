@@ -5,6 +5,7 @@ import MyWorksFeed from './FeedTabs/MyWorksFeed'
 function Feed(props) {
     const data = props.data
     const onClick = props.onClick
+    const navigate = props.navigate
     // console.log(props)
 
 
@@ -15,6 +16,7 @@ function Feed(props) {
 
             </div>
         </div >
+
     )
 }
 

@@ -9,9 +9,11 @@ function Home(props) {
     return (
         <div className="container mx-auto w-800">
             <Welcome />
-            <div className='hidden md:block w-full'>
-                <Feed data={props.data} />
-            </div>   
+
+            <div className='hidden md:block'>
+                <Feed data={props.data} isLoading={props.isLoading} />
+            </div>
+
 
             <div className='block md:hidden'>
                 <FeedMobile data={props.data} />

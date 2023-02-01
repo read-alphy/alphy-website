@@ -236,7 +236,6 @@ MAIN PAGE
   color: #ced4da;
   /* background: #212529;  */
   padding-right: 15px;
-  width: 350px;
   padding-top: 30px;
   height: 92vh;
 }
@@ -379,12 +378,12 @@ table tr {
 }
 
 .arrow-right {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
   transition: transform 0.5s ease-in-out;
 }
 
 .arrow-left {
-  transform: rotate(360deg);
+  transform: rotate(540deg);
   transition: transform 0.5s ease-in-out;
 }
 

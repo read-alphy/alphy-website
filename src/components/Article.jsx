@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef } from 'react'
+import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react'
 import Feed from "./Article_components/Feed"
 // import ArticleCreator from "./Article_components/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -15,7 +15,7 @@ import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 
 
-export default function Article({feedData, arrowDirection, setArrowDirection}) {
+function Article({feedData, arrowDirection, setArrowDirection}) {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -61,7 +61,7 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
         else{
             // console.log(data)
         }
-      }, [location.pathname]);
+      }, [location.pathname, navigate]);
 
 
     // const buttonImage = collapsed ? ArrowRight : ArrowLeft;
@@ -72,12 +72,13 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
     
     
     //Memoize the feed component so it only re-renders if the data prop change
-    const memoizedFeed = useMemo(() => <Feed data={feedData} onClick={handleClick}/>, [feedData]);
+    const memoizedFeed = useMemo(() => <Feed data={feedData} onClick={handleClick} navigate={navigate}/>, [feedData]);
 
 
     return (
         <div className="article">
             <div className=" article-body">
+
                 <div className="flex ml-5 mr-5 ">
                     <div className={`left-feed hidden lg:block ${collapsed ? 'collapsed' : ''}`}>
                         <div className="not-collapsed-article-block-1 ">
@@ -141,6 +142,7 @@ export default function Article({feedData, arrowDirection, setArrowDirection}) {
     )
 }
 
+export default Article;
 
 // {collapsed
 //     ? (

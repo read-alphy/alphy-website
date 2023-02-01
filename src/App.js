@@ -21,14 +21,20 @@ function App() {
   // const url = `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`
   const url = `https://backend-production-33df.up.railway.app/summaries`
   const location = useLocation();
-  const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "right" : "left");
+  const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "left" : "right");
+  const [loading, setLoading] = useState(false)
+
 
   useEffect(() => {
+    setLoading(true)
     axios.get(url)
       .then((response) => {
         setData(response.data)
+        setLoading(false)
       })
   }, [url])
+
+  // loading state
 
   return (
     <SuperTokensWrapper>
@@ -39,6 +45,7 @@ function App() {
           {getSuperTokensRoutesForReactRouterDom(require("react-router-dom"))}
           <Route path="/auth" element={<SessionAuth>
             <Home2 />
+
           </SessionAuth>} />
           <Route path="/" element={<Home data={data} />} />
           <Route path="/article/:article_ID" element={
