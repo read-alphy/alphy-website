@@ -11,12 +11,12 @@ function Home(props) {
             <Welcome />
             <div className='hidden md:block w-full'>
                 <Feed data={props.data} />
-            </div>
-            <About />
+            </div>   
 
             <div className='block md:hidden'>
                 <FeedMobile data={props.data} />
             </div>
+<About />
         </div>
     )
 }
