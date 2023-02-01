@@ -232,7 +232,7 @@ MAIN PAGE
 
 }
 
-.user-feed{
+.user-feed {
   color: #ced4da;
   /* background: #212529;  */
   padding-right: 15px;
@@ -241,9 +241,24 @@ MAIN PAGE
 }
 
 .user-feed::-webkit-scrollbar {
-  width: 0px;
+  width: 0px
 }
 
+.user-feed::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.user-feed::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(left, #999, #888);
+  -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.8);
+}
+
+.user-feed:-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(left, #888, #777);
+}
 
 .user-feed table {
   width: 100%;
@@ -287,11 +302,8 @@ table tr {
 .main-page-feed-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding-bottom: 100px;
   color: #ced4da;
-
-
 
 }
 
@@ -333,11 +345,6 @@ table tr {
 }
 
 
-.main-page-feed {
-  margin: auto;
-  width: 80vw;
-}
-
 
 .sideBarContent {
   transition: all 0.5s ease;
@@ -356,7 +363,7 @@ table tr {
   /* border-right: 1px solid #2f3542; */
 }
 
-.left-feed{
+.left-feed {
   height: parent;
   overflow-x: hidden;
   max-width: 350px;
@@ -621,7 +628,7 @@ CONTENT PAGE
   color: #ced4da;
 }
 
-.content-active-button{
+.content-active-button {
   border-bottom: 3px solid rgba(239, 237, 239, 0.5);
   color: #586675;
 }
@@ -709,27 +716,7 @@ CONTENT PAGE
   height: 10px;
 }
 
-.signed-in-feed input {
 
-  padding: 10px 10px 10px 10px;
-  padding-left: 40px;
-  width: 100%;
-  margin-right: 20px;
-  font-size: 16px;
-  border-bottom: 0.5px solid #ced4da;
-
-  color: #ced4da;
-  background-color: #212529;
-  background-image: url("./img/search.svg");
-  background-position: 10px 8px;
-  background-repeat: no-repeat;
-
-}
-
-.signed-in-feed input:focus {
-  border-color: #3c4fe0;
-  box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
-}
 
 
 /*
@@ -812,15 +799,19 @@ CONTENT
   height: 70vh;
 }
 
+footer {
+  background: black;
+}
 
 .footer-main {
   display: flex;
-  flex-direction: column;
   color: #ced4da;
+  background: black;
+  padding-top: 30px;
 }
 
 .footer-main-2 {
-  max-width: 1000px;
+
   justify-content: space-between;
   display: flex;
   flex-direction: row;
@@ -831,9 +822,7 @@ CONTENT
 
 }
 
-.footer-main-2 img {
-  padding-bottom: 40px;
-}
+
 
 
 
@@ -907,11 +896,6 @@ DIFFERENT SCREEN SIZES
   .menuToggler {
 
     display: none;
-  }
-
-  .signed-in-feed input {
-    width: 30vw;
-    min-width: 250px;
   }
 
   .new-submission {

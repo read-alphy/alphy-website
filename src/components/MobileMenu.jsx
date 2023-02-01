@@ -3,7 +3,7 @@ import { slide as Menu } from 'react-burger-menu'
 import { Link, useNavigate } from "react-router-dom"
 import "../helper/MobileMenu.css"
 // import Switcher from './Switcher'
-// import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 // import { signOut } from "supertokens-auth-react/recipe/session";
 // import Feed from './Article_components/Feed'
 // import { useState } from 'react';
@@ -12,8 +12,7 @@ import "../helper/MobileMenu.css"
 function MobileMenu(signOut, data) {
 
 
-    //const sessionContext = useSessionContext()
-    const sessionContext = { userId: "123" }
+    const sessionContext = useSessionContext()
     const navigate = useNavigate()
 
 
@@ -31,7 +30,7 @@ function MobileMenu(signOut, data) {
     return (
         <Menu right>
 
-            {sessionContext.userId ? (<Link to="/article/new-article">New +</Link>) : null}
+            {/*        {sessionContext.userId ? (<Link to="/article/new-article">New +</Link>) : null} */}
 
             {sessionContext.userId ? (< button onClick={handleSignOut}>Log Out</button>) : (<Link to="/auth">
                 Sign In
