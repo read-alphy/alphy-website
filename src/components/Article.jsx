@@ -77,9 +77,9 @@ function Article({feedData, arrowDirection, setArrowDirection}) {
 
     return (
         <div className="article">
-            <div className=" article-body">
+            <div className="flex">
 
-                <div className="flex ml-5 mr-5 ">
+                <div className="flex ml-0 mr-0 lg:ml-5 lg:mr-5 ">
                     <div className={`left-feed hidden lg:block ${collapsed ? 'collapsed' : ''}`}>
                         <div className="not-collapsed-article-block-1 ">
                             <div className="user-feed">
@@ -134,7 +134,7 @@ function Article({feedData, arrowDirection, setArrowDirection}) {
                         <img src={buttonImage} alt={'toggle menu'}></img>
                     </button> */}
                 </div>
-                <div className="px-4 mx-auto">
+                <div className="px-10">
                     {isLoading ? <Loading /> : <Content data={data}/>}                    
                 </div>
             </div>

@@ -7,13 +7,13 @@ function Languages(props) {
     const onLangChange = props.onLangChange;
 
     return (
-        <div className="language-selection">
-            <select value={language} onChange={e => onLangChange(e.target.value)}>
-                {options.map((option, index) => (
-                    <option key={index} value={option}>{option}</option>
-                ))}
-            </select>
-        </div>
+        <div className="w-1/3 lg:w-auto">
+        <select className='w-full p-2 rounded-md lg:w-32 text-main' value={language} onChange={e => onLangChange(e.target.value)}>
+            {options.map((option, index) => (
+                <option className='rounded-none' key={index} value={option}>{option}</option>
+            ))}
+        </select>
+    </div>
     );
 }
 

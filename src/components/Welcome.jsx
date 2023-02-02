@@ -58,16 +58,16 @@ export default function Welcome() {
 
                 <p className='mb-4 text-center'>   Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and summarize the video!     </p>
 
-                <form className="items-center justify-center space-x-4 lg:flex" onSubmit={(e) => handleSubmit(e, language)}>
-                    <input className='lg:w-[600px] w-full  py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-white focus:outline-none' type="text" name="content_link" value={inputValue} onChange={(event) => setInputValue(event.target.value)}
-                        placeholder="Insert the YouTube link to start" />
-                    <Toaster />
+                <form className="items-center justify-center w-full lg:space-x-4 lg:flex" onSubmit={(e) => handleSubmit(e, language)}>
                     <div className='flex items-center mt-4 space-x-4 md:justify-center lg:mt-0'>
+                        <input className='w-full lg:w-[600px]  text-main  py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-white focus:outline-none' type="text" name="content_link" value={inputValue} onChange={(event) => setInputValue(event.target.value)}
+                            placeholder="Insert the YouTube link to start" />
                         <Languages language={language} onLangChange={setLanguage} />
-                        <button className="w-full px-8 py-2 duration-300 rounded-md bg-main md:w-auto lg:w-auto hover:opacity-75" type="submit">Submit</button>
 
                     </div>
 
+                    <Toaster />
+                    <button className="w-full px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 bg-main md:w-auto lg:w-auto hover:opacity-75" type="submit">Submit</button>
                 </form>
             </div>
         </div>
