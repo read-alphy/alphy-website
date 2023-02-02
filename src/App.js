@@ -21,12 +21,8 @@ function App() {
   // const url = `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`
   const url = `https://backend-production-33df.up.railway.app/summaries`
   const location = useLocation();
-<<<<<<< HEAD
   const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "left" : "right");
   const [loading, setLoading] = useState(false)
-=======
-  const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "right" : "left");
->>>>>>> main
 
   useEffect(() => {
     setLoading(true)

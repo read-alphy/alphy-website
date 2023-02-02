@@ -10,7 +10,7 @@ module.exports = {
       xl: '1280px',
       '2xl': '1280px',
     },
-    
+
     extend: {
       height: {
         6.5: '1.675rem',
@@ -51,17 +51,18 @@ module.exports = {
         '5xs': '8px',
       },
       colors: {
-        main:'#2f3542',
+        main: '#2f3542',
         mainText: '#ced4da',
         sideColor: '#212529',
+        darker: '#03001C',
 
-       
+
       },
       backgroundImage: theme => ({
         "searchBg": "url('./img/search.svg')",
 
 
-        
+
       }),
     },
 

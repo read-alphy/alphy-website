@@ -716,27 +716,7 @@ CONTENT PAGE
   height: 10px;
 }
 
-.signed-in-feed input {
 
-  padding: 10px 10px 10px 10px;
-  padding-left: 40px;
-  width: 100%;
-  margin-right: 20px;
-  font-size: 16px;
-  border-bottom: 0.5px solid #ced4da;
-
-  color: #ced4da;
-  background-color: #212529;
-  background-image: url("./img/search.svg");
-  background-position: 10px 8px;
-  background-repeat: no-repeat;
-
-}
-
-.signed-in-feed input:focus {
-  border-color: #3c4fe0;
-  box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
-}
 
 
 /*
@@ -819,6 +799,9 @@ CONTENT
   height: 70vh;
 }
 
+footer {
+  background: black;
+}
 
 .footer-main {
   display: flex;
@@ -913,11 +896,6 @@ DIFFERENT SCREEN SIZES
   .menuToggler {
 
     display: none;
-  }
-
-  .signed-in-feed input {
-    width: 30vw;
-    min-width: 250px;
   }
 
   .new-submission {

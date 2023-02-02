@@ -3,18 +3,16 @@ import Feed from '../components/WelcomeFeed'
 import Welcome from "../components/Welcome"
 import FeedMobile from '../components/WelcomeFeedMobile'
 // import Trending from '../components/Trending'
+import About from "../components/About"
 
 function Home(props) {
     return (
         <div className="container mx-auto w-800">
             <Welcome />
             <div className='hidden md:block'>
-                <Feed data={props.data} isLoading={props.isLoading} />
+                <Feed  />
             </div>
-
-            <div className='block md:hidden'>
-                <FeedMobile data={props.data} />
-            </div>
+            <About />
         </div>
     )
 }

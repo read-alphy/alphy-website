@@ -11,21 +11,18 @@ export default function Content(props) {
 
     const [activeTab, setActiveTab] = useState('tab1');
 
-    return location.pathname !== "/article/new-article" ? (
+    return (
         < div className={`container  mx-auto md:px-10 lg:px-20 `} >
             <h1 className="mt-10 text-xl text-left lg:mt-20 lg:text-3xl text-mainText">{data.title}</h1>
             <div className="grid grid-cols-2 gap-8 mt-16">
                 <div className="col-span-2 p-4  lg:col-span-1 border-mainText text-mainText">
-                    <div href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 ">
+                    <div href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 shadow-md">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Key Takeaways</h5>
                         <p class="font-normal text-gray-700 dark:text-gray-400">
-                            I want you to act as an English translator, spelling corrector and improver. I will speak to you in any language and you will detect the language, translate it and answer in the corrected and improved version of my text, in English. I want you to replace my simplified A0-level words and sentences with more beautiful and elegant, upper level English words and sentences. Keep the meaning same, but make them more literary. I want you to only reply the correction, the improvements and nothing else, do not write explanations. My first sentence is "istanbulu cok seviyom burada olmak cok guzel”
-
-
                             {data.key_takeaways ? data.key_takeaways.map((item, index) => {
                                 return (
                                     <div key={index} className="key-takeaways-item">
-                                        <p>{item}</p>
+                                        <p> • {item}</p>
                                     </div>
                                 )
                             }) : null}
@@ -59,5 +56,5 @@ export default function Content(props) {
                 </div>
             </div>
 
-        </div >) : null
+        </div >)
 }

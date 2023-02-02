@@ -52,7 +52,7 @@ function Navbar({ arrowDirection, setArrowDirection }) {
           {sessionContext.userId ? (
             <div className='signed-in-navbar'>
               <div className='hidden lg:block'>
-                <Link to="/article/new-article" className="navbar-link"> User Hub </Link>
+                {/*                 <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
                 <button onClick={handleSignOut} className="navbar-link">Log Out</button>
               </div>
               <div onClick={() => setArrowDirection(arrowDirection == "left" ? "right" : "left")} className='block lg:hidden'>
@@ -64,7 +64,7 @@ function Navbar({ arrowDirection, setArrowDirection }) {
           ) : (
             <div>
               <div className='hidden lg:block'>
-                <Link to="/article/new-article" className="navbar-link"> User Hub </Link>
+                {/* <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
                 <Link to="/auth">
                   Sign In
                 </Link>

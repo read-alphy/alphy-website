@@ -44,9 +44,6 @@ export default function Welcome() {
             toast.error("Please provide a link to a YouTube video or Twitter Spaces.")
 
         }
-        // go to article/new-article
-        // window.location.href = `/article/new-article`;
-
 
     }
 
