@@ -1,7 +1,7 @@
 import React from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import "../helper/FeedBurgerMenu.css"
-import Feed from './WelcomeFeed'
+import Feed from './Landing_page/WelcomeFeed'
 
 function FeedBurgerMenu(props) {
     const data = props.data

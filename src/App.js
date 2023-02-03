@@ -17,11 +17,21 @@ import { useWindowSize } from "./hooks/useWindowSize";
 function App() {
   SuperTokens.init(SuperTokensConfig)
   const windowSize = useWindowSize()
-  const [data, setData] = useState([])
   const location = useLocation();
+  const [data, setData] = useState([])
   const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "left" : "right");
+  const [isLoading, setIsLoading] = useState(true)
+  const url = `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`
+  
+  useEffect(() => {
+    setIsLoading(true)
+    axios.get(url)
+      .then((response) => {
+        setData(response.data)
+        setIsLoading(false)
+      })
+  }, [url])
 
-  // loading state
 
   return (
     <SuperTokensWrapper>
@@ -33,7 +43,7 @@ function App() {
           <Route path="/auth" element={<SessionAuth>
             <Home2 />
           </SessionAuth>} />  */}
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home data={data} isLoading={isLoading} />} />
         <Route path="/article/:article_ID" element={
           /* <SessionAuth><Article data={data} /></SessionAuth> */
           <Article feedData={data} arrowDirection={arrowDirection} setArrowDirection={setArrowDirection} />} />

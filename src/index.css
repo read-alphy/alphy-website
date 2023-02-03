@@ -229,9 +229,10 @@ MAIN PAGE
 .user-feed {
   color: #ced4da;
   /* background: #212529;  */
-  padding-right: 15px;
-  padding-top: 30px;
-  height: 92vh;
+  /* padding-right: 15px;
+  padding-top: 30px;*/
+  height: 92vh; 
+  overflow-y: scroll;
 }
 
 .user-feed::-webkit-scrollbar {
@@ -350,13 +351,10 @@ table tr {
 }
 
 .left-feed {
-  height: parent;
+  /* height: parent;
   overflow-x: hidden;
   max-width: 350px;
-  overflow-y: auto;
-  /* animation-name: slideIn;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards; */
+  overflow-y: auto; */
 }
 
 .menu-toggler {
@@ -404,7 +402,7 @@ table tr {
 }
 
 .animation1 {
-  height:50px;
+  height:40px;
   overflow:hidden;
 }
 
@@ -483,15 +481,21 @@ table tr {
 
 .left-feed {
   width: 350px;
+  opacity: 0.9;
   transition: width 0.5s ease-out;
 }
 
-.left-feed.collapsed {
-  width: 0;
+.left-feed:hover{
+  width: 700px;
+  opacity: 1;
+  transition: width 0.5s ease-out;
 }
 
 
-
+.left-feed.collapsed {
+  width: 0;
+  opacity: 0.4;
+}
 /* 
 
 
@@ -554,7 +558,7 @@ CONTENT PAGE
 
 
 .article {
-  max-height: 90vh;
+  /* max-height: 92vh; */
 }
 
 .not-collapsed-article-block-1 {
@@ -784,13 +788,6 @@ CONTENT PAGE
   max-height: 100vh;
 }
 
-.signed-in-feed thead {
-  height: 10px;
-}
-
-
-
-
 /*
 
 
@@ -860,9 +857,9 @@ CONTENT
 
 
 .article-body {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  max-height: 92vh;
+  max-height: 92vh; */
 }
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from "axios";
 import { useState } from 'react';
-import Languages from "../helper/Languages"
+import Languages from "../../helper/Languages"
 // import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import toast, { Toaster } from 'react-hot-toast';
 

@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 import './FeedItem.css'
 
 const FeedItem = (props) => {
@@ -6,14 +7,14 @@ const FeedItem = (props) => {
     const item = props.item
     const source_id = item.source_id
     const imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
-
+    const navigate = useNavigate();
     return (
         <tr className={'grid'}>
             <td className='flex w-full'>
                 <div
                     className={'flex flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  hover:scale-105 transform hover:translate-x-2 hover:translate-y-2 mr-auto ml-auto'}
                     onClick={() => {
-                        props.onClick(item.source_id)
+                        navigate(`/article/${item.source_id}`)
                     }}
                 >
                     <div className="w-1/2 min-w-150 max-w-[300px] mr-3">

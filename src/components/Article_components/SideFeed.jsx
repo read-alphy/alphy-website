@@ -4,13 +4,14 @@ import MainFeed from "./FeedTabs/MainFeed"
 function SideFeed(props) {
     const data = props.data
     const onClick = props.onClick
-    const navigate = props.navigate
+    const isLoading = props.isLoading
 
 
     return (
+        
         <div className='user-feed-buttons'>
             <div>
-                <MainFeed data={data} onClick={onClick} />
+                <MainFeed data={data} onClick={onClick} isLoading={isLoading} />
             </div>
         </div >
 

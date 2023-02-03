@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react'
-import Feed from "./Article_components/SideFeed"
+import SideFeed from "./Article_components/SideFeed"
 // import ArticleCreator from "./Article_components/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Content from './Article_components/Content'
@@ -21,7 +21,7 @@ function Article({feedData, arrowDirection, setArrowDirection}) {
 
     const sessionContext = useSessionContext();
     const [collapsed, setCollapsed] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(feedData?.length === 0);
     const [data, setData] = useState([]);   
 
     const handleClick = useCallback(async (id) => {
@@ -40,27 +40,24 @@ function Article({feedData, arrowDirection, setArrowDirection}) {
         }
     }, [navigate]);
 
+    const fetchData = async (url) => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(url);
+            setData(response.data);
+        } catch (error) {
+            console.error(`Error fetching data: ${error}`);
+        } finally {
+            setIsLoading(false);
+        }
+    };
     useEffect(() => {
+        console.log('useEffect')
         const source_id = location.pathname.split("/")[2]
+        console.log(source_id)
         const url = `${process.env.REACT_APP_API_URL}/summaries/${source_id}`
-        const fetchData = async () => {
-            try {
-                setIsLoading(true);
-                const response = await axios.get(url);
-                setData(response.data);
-            } catch (error) {
-                console.error(`Error fetching data: ${error}`);
-            } finally {
-                setIsLoading(false);
-            }
-            };
-        if(data.length === 0){
-            fetchData();
-            console.log('fetching data')
-        }
-        else{
-            // console.log(data)
-        }
+        fetchData(url);
+        
       }, [location.pathname, navigate]);
 
 
@@ -72,30 +69,23 @@ function Article({feedData, arrowDirection, setArrowDirection}) {
     
     
     //Memoize the feed component so it only re-renders if the data prop change
-    const memoizedFeed = useMemo(() => <Feed data={feedData} onClick={handleClick} navigate={navigate}/>, [feedData]);
+    const memoizedFeed = useMemo(() => <SideFeed data={feedData} onClick={handleClick} navigate={navigate} isLoading={isLoading} />, [feedData]);
 
 
     return (
-        <div className="article">
-            <div className=" article-body">
-
-                <div className="flex ml-5 mr-5 ">
-                    <div className={`left-feed hidden lg:block ${collapsed ? 'collapsed' : ''}`}>
+        <div className="article max-[92vh]">
+            <div className="flex flex-row article-body">
+                <div className="flex mr-5 ">
+                    <div className={`left-feed overflow-x-hidden hidden lg:block ${collapsed ? 'collapsed' : ''}`}>
                         <div className="not-collapsed-article-block-1 ">
                             <div className="user-feed">
-{/*                             <Link to="/article/new-article">
-                  
-                            <p>Submit a video for work</p>
-                       
-                             </Link> */}
-                             
                                 {memoizedFeed}
                             </div>
                         </div>
                     </div>
                         {arrowDirection === "left" ? 
 
-                        <div className='fixed inset-x-0 top-0 z-50 h-full transition origin-top-right transform lg:hidden '>
+                        <div className='fixed top-0 z-50 transition origin-top-right transform lg:hidden mb-auto pt-[2px]'>
                         <div className='rounded-lg rounded-t-none shadow-lg bg-sideColor'>
                             <div className='h-screen px-4 overflow-y-auto'>
 
@@ -134,7 +124,7 @@ function Article({feedData, arrowDirection, setArrowDirection}) {
                         <img src={buttonImage} alt={'toggle menu'}></img>
                     </button> */}
                 </div>
-                <div className="px-4 mx-auto">
+                <div className="px-4 mx-auto max-h-[92vh] overflow-y-scroll">
                     {isLoading ? <Loading /> : <Content data={data}/>}                    
                 </div>
             </div>

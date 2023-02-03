@@ -1,41 +1,25 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { propTypes } from 'react-bootstrap/esm/Image'
-import FeedItem from './Article_components/FeedTabs/FeedItem'
+import FeedItem from '../Article_components/FeedTabs/FeedItem'
 import axios from 'axios'
-import SkeletonItem from './Article_components/FeedTabs/SkeletonItem'
+import SkeletonItem from '../Article_components/FeedTabs/SkeletonItem'
+import { useNavigate } from 'react-router-dom';
 
-function Feed() {
-  const [isLoading, setIsLoading] = useState(false)
+function Feed({data, isLoading}) {
   const [searchText, setSearchText] = useState("");
-  const [data, setData] = useState([])
-  
-  const url = `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`
-  useEffect(() => {
-    setIsLoading(true)
-    axios.get(url)
-      .then((response) => {
-        setData(response.data)
-        setIsLoading(false)
-      })
-  }, [url])
+  const navigate = useNavigate();
 
+  const onClick = (id) => {
+    navigate('/article/' + id);
+  };
+  
 const filteredData =
     searchText === ""
       ? data
       : data.filter(value =>
           value.title.toLowerCase().includes(searchText.toLowerCase())
         );
-  
-const onClick = (id) => {
-  // navigate to article page/id
-  console.log(id)
-  // navigator
-
-}
-
-
-
 
     return (
       <div className="main-page-feed-section">
