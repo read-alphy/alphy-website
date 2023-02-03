@@ -157,15 +157,9 @@ MAIN PAGE
   transition: all 100ms ease-in-out;
 }
 
-.language-selection {
-  width: 150px;
-
-}
-
 .language-selection select {
 
   font-size: 14px;
-
   line-height: 20px;
   padding: 0 16px;
   height: 35px;
@@ -307,14 +301,6 @@ table tr {
 
 }
 
-.main-page-feed-table-parent {
-  background: #212529;
-  border: 1px solid #0b090a;
-  border-radius: 10px;
-  padding: 40px;
-}
-
-
 .search-main-feed input {
 
   padding: 10px 10px 10px 10px;
@@ -388,26 +374,112 @@ table tr {
 }
 
 /* ANIMATIONS */
-/* 
-@keyframes slideIn {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0%); }
+
+.mobile-welcome::before {
+  content: "Transcribe ";
+  animation: animate2 infinite 8s;
+  display: flex-inline;
+  align-items: center;
 }
 
-@keyframes slideOut {
-  from { transform: translateX(0%); }
-  to { transform: translateX(-100%); }
+@keyframes animate2 {
+
+  0% {
+      content: "Transcribe ";
+  }
+
+
+  33% {
+      content: "Summarize ";
+  }
+
+  66% {
+      content: "Search ";
+  }
+  100% {
+      content: "Transcribe ";
+  }
+
+
 }
 
-.left-feed.collapsed {
-  animation-name: slideOut;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+.animation1 {
+  height:50px;
+  overflow:hidden;
 }
 
-.left-feed.collapsed:animation-end {
-  display:none;
-} */
+.animation1 > div > div {
+  /* padding: 0 0.75rem; */
+  height:2.61rem;
+  margin-bottom: 2.61rem;
+  display:inline-block;
+  align-items: flex-start;
+}
+
+.animation1 div:first-child {
+  animation: text-animation 8s infinite;
+}
+
+@keyframes text-animation {
+  0% {margin-top: 0;
+    width: 182px;
+    min-width: 182px;
+  }
+  10% {margin-top: 0;
+    width: 182px;
+    min-width: 182px;
+  }
+  20% {margin-top: -5.22rem;
+    width: 192px;
+    min-width: 192px;
+  }
+  30% {margin-top: -5.22rem;
+    width: 192px;
+    min-width: 192px;
+  }
+  40% {margin-top: -10.44rem;
+    width: 120px;
+    min-width: 120px;
+  }
+  60% {margin-top: -10.44rem;
+    width: 120px;
+    min-width: 120px;
+  }
+  70% {margin-top: -5.22rem;
+    width: 192px;
+    min-width: 192px;
+  }
+  80% {margin-top: -5.22rem;
+    width: 192px;
+    min-width: 192px;
+  }
+  90% {margin-top: 0;
+    width: 182px;
+    min-width: 182px;
+  }
+  100% {margin-top: 0;
+    width: 182px;
+    min-width: 182px;
+  }
+}
+
+/* animations in media query */
+@media screen and (max-width: 768px) {
+  @keyframes animate2 {
+
+    0% {margin-top: 0;}
+    10% {margin-top: 0;}
+    20% {margin-top: -5.22rem;}
+    30% {margin-top: -5.22rem;}
+    40% {margin-top: -10.44rem;}
+    60% {margin-top: -10.44rem;}
+    70% {margin-top: -5.22rem;}
+    80% {margin-top: -5.22rem;}
+    90% {margin-top: 0;}
+    100% {margin-top: 0;}
+    
+  }
+}
 
 .left-feed {
   width: 350px;

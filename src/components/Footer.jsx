@@ -25,7 +25,7 @@ function Footer() {
                         {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" /> */}
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Alphy</span>
                     </a>
-                    <p className="text-l font-semibold whitespace-nowrap dark:text-white"><br />Feel free to reach us through <span className="text-yellow-600"> hello@alphy.tech</span> or ping us on our Discord for any questions and feedback.</p>
+                    <p className="text-l font-semibold lg:whitespace-nowrap dark:text-white"><br />Feel free to reach us through <span className="text-yellow-600"> hello@alphy.tech</span> or ping us on our Discord for any questions and feedback.</p>
 
                 </div>
                 <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">

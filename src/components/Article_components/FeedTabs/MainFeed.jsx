@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Tab, Tabs } from 'react-bootstrap';
-import SideFeedItem from './SideFeedItem';
+import FeedItem from './FeedItem';
 
 function MainFeed(props) {
     const data = props.data
@@ -36,7 +36,7 @@ function MainFeed(props) {
                                     return null
                                 }})
                                 .map((item,index) => (
-                                <SideFeedItem key={index} index={index} item={item} onClick={onClick} navigate={navigate}/>
+                                <FeedItem key={index} index={index} item={item}/>
                             ))}
                      
                 </Tab>

@@ -18,20 +18,8 @@ function App() {
   SuperTokens.init(SuperTokensConfig)
   const windowSize = useWindowSize()
   const [data, setData] = useState([])
-  // const url = `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`
-  const url = `https://backend-production-33df.up.railway.app/summaries`
   const location = useLocation();
   const [arrowDirection, setArrowDirection] = useState(windowSize.width < 1024 ? "left" : "right");
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    axios.get(url)
-      .then((response) => {
-        setData(response.data)
-        setLoading(false)
-      })
-  }, [url])
 
   // loading state
 
@@ -45,7 +33,7 @@ function App() {
           <Route path="/auth" element={<SessionAuth>
             <Home2 />
           </SessionAuth>} />  */}
-        <Route path="/" element={<Home data={data} isLoading={loading}/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/article/:article_ID" element={
           /* <SessionAuth><Article data={data} /></SessionAuth> */
           <Article feedData={data} arrowDirection={arrowDirection} setArrowDirection={setArrowDirection} />} />

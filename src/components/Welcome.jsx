@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from "axios";
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom'
 import Languages from "../helper/Languages"
 // import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import toast, { Toaster } from 'react-hot-toast';
@@ -17,14 +15,9 @@ export default function Welcome() {
     const [language, setLanguage] = useState('en-US');
 
 
-
     const handleSubmit = (event, selectedOption) => {
         event.preventDefault();
-
-
-
         toast.dismiss();
-
         // Do something with the inputValue here
         console.log(inputValue);
         console.log(selectedOption);
@@ -51,12 +44,31 @@ export default function Welcome() {
     return (
 
         <div className="container px-4 mx-auto py-18 lg:py-28">
-            <div className="text-mainText">
-                <h2 className="my-4 text-2xl font-semibold text-center lg:text-4xl ">
-                    Transcribe and summarize any YouTube with just one click
-                </h2>
+            <div className="text-mainText ">
 
-                <p className='mb-4 text-center'>   Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and summarize the video!     </p>
+            <h2 className="hidden lg:flex my-4 text-4xl font-semibold text-center lg:text-4xl flex justify-center">
+                <section class=" animation1 lg:mr-2">
+                    <div class="first "><div>Transcribe</div></div>
+                    <div class="second"><div>Summarize</div></div>
+                    <div class="third"><div>Search</div></div>
+                </section>
+                 YouTube with just one click
+            </h2>
+            <h2 className="flex flex-row flex-wrap lg:hidden my-4 text-4xl font-semibold text-center lg:text-4xl flex justify-center">
+                <div h-3>
+                    <section className="animation1 lg:mr-2">
+                    <div className="first "><div>Transcribe</div></div>
+                    <div className="second"><div>Summarize</div></div>
+                    <div className="third"><div>Search</div></div>
+                    </section>
+                </div>
+                <div style={{flexBasis: 'auto', flexGrow: 1}}>
+                    YouTube with just one click
+                </div>
+            </h2>
+
+
+                <p className='text-center text-gray-300 mb-10 mt-10'>Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and summarize the video!     </p>
 
                 <form className="items-center justify-center space-x-4 lg:flex" onSubmit={(e) => handleSubmit(e, language)}>
                     <input className='lg:w-[600px] w-full  py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-white focus:outline-none' type="text" name="content_link" value={inputValue} onChange={(event) => setInputValue(event.target.value)}

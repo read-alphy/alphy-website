@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react'
-import Feed from "./Article_components/Feed"
+import Feed from "./Article_components/SideFeed"
 // import ArticleCreator from "./Article_components/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Content from './Article_components/Content'
