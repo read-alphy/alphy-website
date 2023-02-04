@@ -1,24 +1,14 @@
 import React from 'react'
-import Feed from '../components/WelcomeFeed'
-import Welcome from "../components/Welcome"
-import FeedMobile from '../components/WelcomeFeedMobile'
-// import Trending from '../components/Trending'
-import About from "../components/About"
+import Feed from '../components/Landing_page/WelcomeFeed'
+import Welcome from "../components/Landing_page/Welcome"
+import About from "../components/Landing_page/About"
 
-function Home(props) {
-    return (
+function Home({data, isLoading}) {
+return (
         <div className="container mx-auto w-800">
             <Welcome />
-
-            <div className='hidden md:block'>
-                <Feed data={props.data} isLoading={props.isLoading} />
-            </div>
-
-
-            <div className='block md:hidden'>
-                <FeedMobile data={props.data} />
-            </div>
-<About />
+            <Feed data={data} isLoading={isLoading} />
+            <About />
         </div>
     )
 }
