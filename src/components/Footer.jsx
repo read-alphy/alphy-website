@@ -25,7 +25,7 @@ function Footer() {
                         {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" /> */}
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Alphy</span>
                     </a>
-                    <p className="text-l font-semibold whitespace-nowrap dark:text-white"><br />Feel free to reach us through <span className="text-yellow-600"> hello@alphy.tech</span> or ping us on our Discord for any questions and feedback.</p>
+                    <p className="text-l font-semibold whitespace-nowrap dark:text-white"><br />Feel free to reach us through <span className="text-yellow-600"> info@alphy.tech</span> or ping us on our Discord for any questions and feedback.</p>
 
                 </div>
                 <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">
@@ -33,7 +33,7 @@ function Footer() {
                         <h2 class="mb-6 mt-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Reach us</h2>
                         <ul class="text-gray-600 dark:text-gray-400">
                             <li class="mb-4">
-                                <a href="mailto:hello@alphy.tech" class="hover:underline ">hello@alphy.tech</a>
+                                <a href="mailto:info@alphy.tech" class="hover:underline ">info@alphy.tech</a>
                             </li>
                             <li class="mb-4">
                                 <a href="https://discord.gg/" class="hover:underline">Discord</a>
