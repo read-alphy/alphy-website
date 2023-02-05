@@ -43,9 +43,9 @@ export default function Welcome() {
 
 	return (
 		<div className="container px-4 mx-auto py-18 lg:py-28">
-			<div className="text-mainText ">
-				<h2 className="hidden lg:flex my-4 text-4xl font-semibold text-center lg:text-4xl flex justify-center">
-					<section class=" animation1 lg:mr-2 text-[#d97706] ">
+			<div className="text-mainText">
+				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-[#ced4da] text-[2.25rem] font-semibold">
+					<section class="animation1 lg:mr-2 text-[#d97706] block">
 						<div class="first ">
 							<div>Transcribe</div>
 						</div>
@@ -53,28 +53,14 @@ export default function Welcome() {
 							<div>Summarize</div>
 						</div>
 						<div class="third">
-							<div>Search</div>
+							<div>Question</div>
+						</div>
+						<div class="forth">
+							<div>Transcribe</div>
 						</div>
 					</section>
 					YouTube with just one click
-				</h2>
-				<h2 className="flex flex-row flex-wrap lg:hidden my-4 text-4xl font-semibold text-center lg:text-4xl flex justify-center">
-					<div>
-						<section className="animation1 lg:mr-2 text-[#d97706]">
-							<div className="first ">
-								<div>Transcribe</div>
-							</div>
-							<div className="second">
-								<div>Summarize</div>
-							</div>
-							<div className="third">
-								<div>Search</div>
-							</div>
-						</section>
-					</div>
-					<div style={{ flexBasis: 'auto', flexGrow: 1 }}>YouTube with just one click</div>
-				</h2>
-
+				</div>
 				<p className="text-center text-gray-300 mb-10 mt-10">
 					Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and
 					summarize the video!{' '}

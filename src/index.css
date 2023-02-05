@@ -394,101 +394,75 @@ label {
 .animation1 > div > div {
 	/* padding: 0 0.75rem; */
 	height: 2.61rem;
-	margin-bottom: 2.61rem;
 	display: inline-block;
 	align-items: flex-start;
 }
 
-.animation1 div:first-child {
-	animation: text-animation 8s infinite;
+.animation2 {
+	height: 40px;
+	overflow: hidden;
+}
+
+.animation2 > div > div {
+	/* padding: 0 0.75rem; */
+	height: 2.61rem;
+	display: inline-block;
+	align-items: flex-start;
+}
+
+.animation1 > div {
+	animation: text-animation 4s infinite;
+}
+
+.animation2 > div {
+	animation: text-animation2 16s infinite;
+}
+
+@keyframes text-animation2 {
+	5% {
+		transform: translateY(-112%);
+	}
+	50% {
+		transform: translateY(-100%);
+	}
+	54% {
+		transform: translateY(-212%);
+	}
+	55% {
+		transform: translateY(-200%);
+	}
+	100% {
+		transform: translateY(-200%);
+	}
 }
 
 @keyframes text-animation {
 	0% {
-		margin-top: 0;
 		width: 182px;
-		min-width: 182px;
 	}
-	10% {
-		margin-top: 0;
+	18% {
+		transform: translateY(-112%);
+		width: 192px;
+	}
+	33% {
+		transform: translateY(-100%);
+		width: 192px;
+	}
+	51% {
+		transform: translateY(-212%);
+		width: 162px;
+	}
+	66% {
+		transform: translateY(-200%);
+		width: 162px;
+	}
+	85% {
+		transform: translateY(-312%);
 		width: 182px;
-		min-width: 182px;
-	}
-	20% {
-		margin-top: -5.22rem;
-		width: 192px;
-		min-width: 192px;
-	}
-	30% {
-		margin-top: -5.22rem;
-		width: 192px;
-		min-width: 192px;
-	}
-	40% {
-		margin-top: -10.44rem;
-		width: 120px;
-		min-width: 120px;
-	}
-	60% {
-		margin-top: -10.44rem;
-		width: 120px;
-		min-width: 120px;
-	}
-	70% {
-		margin-top: -5.22rem;
-		width: 192px;
-		min-width: 192px;
-	}
-	80% {
-		margin-top: -5.22rem;
-		width: 192px;
-		min-width: 192px;
-	}
-	90% {
-		margin-top: 0;
-		width: 182px;
-		min-width: 182px;
 	}
 	100% {
-		margin-top: 0;
+		transform: translateY(-300%);
 		width: 182px;
-		min-width: 182px;
-	}
-}
-
-/* animations in media query */
-@media screen and (max-width: 768px) {
-	@keyframes text-animation {
-		0% {
-			margin-top: 0;
-		}
-		10% {
-			margin-top: 0;
-		}
-		20% {
-			margin-top: -5.22rem;
-		}
-		30% {
-			margin-top: -5.22rem;
-		}
-		40% {
-			margin-top: -10.44rem;
-		}
-		60% {
-			margin-top: -10.44rem;
-		}
-		70% {
-			margin-top: -5.22rem;
-		}
-		80% {
-			margin-top: -5.22rem;
-		}
-		90% {
-			margin-top: 0;
-		}
-		100% {
-			margin-top: 0;
-		}
 	}
 }
 
