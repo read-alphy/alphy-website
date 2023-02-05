@@ -83,12 +83,14 @@ export default function Welcome() {
 					</div>
 
 					<Toaster />
-					<button
-						className="w-full px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 bg-main md:w-auto lg:w-auto hover:opacity-75"
-						type="submit"
-					>
-						Submit
-					</button>
+					<div className="flex justify-center">
+						<button
+							className="w-2/3 px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 bg-main md:w-auto lg:w-auto hover:opacity-75"
+							type="submit"
+						>
+							Submit
+						</button>
+					</div>
 				</form>
 			</div>
 		</div>

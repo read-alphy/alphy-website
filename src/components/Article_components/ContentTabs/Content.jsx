@@ -9,13 +9,19 @@ export default function Content(props) {
 	const data = props.data;
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
-
+console.log(data)
 	return (
 		<div className={`container  mx-auto md:px-10 lg:px-20 `}>
-			<h1 className="mt-10 text-xl text-left lg:mt-20 lg:text-3xl text-mainText">{data.title}</h1>
+			<div className='grid grid-cols-3'>
+				<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-mainText">{data.title}</h1>
+				<div className='flex flex-col items-center mt-5 cursor-pointer md:hidden'>
+					<img src='/youtubeicon.png' width={80} />
+					<p  className='-mt-3'>Click to Watch</p>
+				</div>
+			</div>
 			<div className="grid grid-cols-2 gap-8 mt-16">
 				{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
-				<div className="hidden col-span-2 lg:col-span-1 lg:block">
+				<div className="hidden col-span-2 lg:col-span-1 md:block">
 					<iframe
 						title="My YouTube Video"
 						className="w-full lg:w-120 h-80"
