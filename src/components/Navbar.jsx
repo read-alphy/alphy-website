@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 // import { useState } from 'react'
 // import { useEffect } from 'react'
 // import axios from 'axios'
@@ -14,6 +14,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	const sessionContext = useSessionContext();
 
 	const navigate = useNavigate();
+	const location = useLocation()
 
 	const handleSignOut = async () => {
 		try {
@@ -24,6 +25,8 @@ function Navbar({ collapsed, setCollapsed }) {
 		}
 	};
 
+	console.log(location.pathname);
+
 	return (
 		<div className="navbar">
 			<div className="company-logo">
@@ -33,25 +36,57 @@ function Navbar({ collapsed, setCollapsed }) {
 			</div>
 
 			<div>
-				<div className="hidden navbar-right-section md:block">
+				<div className=" navbar-right-section">
 					{sessionContext.userId ? (
 						<div className="signed-in-navbar">
-							<div className="hidden lg:block">
-								{/*                 <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
-								<button onClick={handleSignOut} className="navbar-link">
-									Log Out
-								</button>
-							</div>
-							<div onClick={() => setCollapsed(!collapsed)} className="block lg:hidden">
+
+							{location.pathname.includes('article') ?
+								<div>
+									<div className="hidden lg:block">
+										<button onClick={handleSignOut} className="navbar-link">
+											Log Out
+										</button>
+									</div>
+									<div onClick={() => setCollapsed(!collapsed)} className="block mr-4 cursor-pointer lg:hidden">
+										<i className="text-2xl ri-menu-line text-mainText"></i>
+									</div>
+								</div>
+
+								:
+								<div className="hidden lg:block">
+									<button onClick={handleSignOut} className="navbar-link">
+										Log Out
+									</button>
+								</div>
+
+							}
+
+							<div onClick={() => setCollapsed(!collapsed)} className="block mr-4 cursor-pointer lg:hidden">
 								<i className="text-2xl ri-menu-line text-mainText"></i>
 							</div>
 						</div>
 					) : (
 						<div>
-							<div className="hidden lg:block">
-								{/* <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
-								<Link to="/auth">Sign In</Link>
-							</div>
+							{location.pathname.includes('article') ?
+								<div>
+									<div className="hidden lg:block">
+										{/* <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
+										<Link to="/auth">Sign In</Link>
+									</div>
+									<div onClick={() => setCollapsed(!collapsed)} className="block mr-4 cursor-pointer lg:hidden">
+										<i className="text-2xl ri-menu-line text-mainText"></i>
+									</div>
+								</div>
+
+								:
+								<div className="mr-4">
+									{/* <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
+									<Link to="/auth">Sign In</Link>
+								</div>
+
+							}
+
+
 						</div>
 					)}
 				</div>

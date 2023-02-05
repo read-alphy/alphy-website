@@ -44,7 +44,7 @@ export default function Welcome() {
 	return (
 		<div className="container px-4 mx-auto py-18 lg:py-28">
 			<div className="text-mainText ">
-				<h2 className="hidden lg:flex my-4 text-4xl font-semibold text-center lg:text-4xl flex justify-center">
+				<h2 className="flex justify-center hidden my-4 text-4xl font-semibold text-center lg:flex lg:text-4xl">
 					<section class=" animation1 lg:mr-2 text-[#d97706] ">
 						<div class="first ">
 							<div>Transcribe</div>
@@ -58,7 +58,7 @@ export default function Welcome() {
 					</section>
 					YouTube with just one click
 				</h2>
-				<h2 className="flex flex-row flex-wrap lg:hidden my-4 text-4xl font-semibold text-center lg:text-4xl flex justify-center">
+				<h2 className="flex flex-row flex-wrap justify-center my-4 text-4xl font-semibold text-center lg:hidden lg:text-4xl">
 					<div>
 						<section className="animation1 lg:mr-2 text-[#d97706]">
 							<div className="first ">
@@ -75,7 +75,7 @@ export default function Welcome() {
 					<div style={{ flexBasis: 'auto', flexGrow: 1 }}>YouTube with just one click</div>
 				</h2>
 
-				<p className="text-center text-gray-300 mb-10 mt-10">
+				<p className="mt-10 mb-10 text-center text-gray-300">
 					Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and
 					summarize the video!{' '}
 				</p>
@@ -97,12 +97,16 @@ export default function Welcome() {
 					</div>
 
 					<Toaster />
+					<div className='flex justify-center'>
 					<button
-						className="w-full px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 bg-main md:w-auto lg:w-auto hover:opacity-75"
+						className="w-2/3 px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 bg-main md:w-auto lg:w-auto hover:opacity-75"
 						type="submit"
 					>
 						Submit
 					</button>
+					</div>
+					
+				
 				</form>
 			</div>
 		</div>

@@ -65,7 +65,7 @@ function Article({ feedData, collapsed, setCollapsed }) {
 									</div>
 
 									<div className="mt-4">
-										<div onClick={() => setCollapsed(true)} className="">
+										<div  className="">
 											{memoizedFeed}
 										</div>
 									</div>
