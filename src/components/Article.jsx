@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './Article_components/ContentTabs/Content';
 import ArrowLeft from '../img/arrow-left.svg';
 import ArrowRight from '../img/arrow-right.svg';
-import FeedBurgerMenu from './FeedBurgerMenu';
+
 import { animated } from 'react-spring';
 import { useTransition } from 'react-spring';
 import axios from 'axios';
@@ -20,6 +20,8 @@ function Article({ feedData, collapsed, setCollapsed }) {
 	const sessionContext = useSessionContext();
 	const [isLoading, setIsLoading] = useState(feedData?.length === 0);
 	const [data, setData] = useState([]);
+
+
 
 	const fetchData = async (url) => {
 		try {
@@ -48,24 +50,25 @@ function Article({ feedData, collapsed, setCollapsed }) {
 	return (
 		<div className="article max-[92vh]">
 			<div className="flex flex-row article-body">
-				<div className="flex mr-5 ">
+				<div className="flex mr-5">
+
 					<div className={`left-feed overflow-x-hidden hidden lg:block ${collapsed ? 'collapsed' : ''}`}>
-						<div className="not-collapsed-article-block-1 ">
+						<div className="bg-zinc-50 mr-5">
 							<div className="user-feed">{memoizedFeed}</div>
 						</div>
 					</div>
 					{!collapsed ? (
-						<div className="fixed top-0 z-50 transition origin-top-right transform lg:hidden mb-auto pt-[2px]">
-							<div className="rounded-lg rounded-t-none shadow-lg bg-sideColor">
+						<div className="fixed top-0 z-50 transition origin-top-right transform md:hidden mb-auto pt-[2px]">
+							<div className="rounded-lg rounded-t-none shadow-lg bg-whiteLike">
 								<div className="h-screen px-4 overflow-y-auto">
-									<div className="flex items-center justify-end p-4 bg-sideColor">
+									<div className="flex items-center justify-end p-4 ">
 										<div className="cursor-pointer" onClick={() => setCollapsed(true)}>
-											<i className="text-2xl text-white ri-close-line"></i>
+											<i className="text-2xl text-blueLike ri-close-line"></i>
 										</div>
 									</div>
 
 									<div className="mt-4">
-										<div  className="">
+										<div className="">
 											{memoizedFeed}
 										</div>
 									</div>

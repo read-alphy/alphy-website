@@ -10,7 +10,7 @@
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   @apply bg-white bg-slate-800;
-  background-color: white;
+  background-color: #F9F8F8;
   display: none;
 }
 
@@ -58,7 +58,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Wrapper for item list */
 .bm-item-list {
   @apply text-slate-100 text-slate-800 p-4;
-  color: white;
+  color: #F9F8F8;
 
 }
 

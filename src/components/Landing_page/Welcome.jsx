@@ -42,10 +42,10 @@ export default function Welcome() {
 	};
 
 	return (
-		<div className="container px-4 mx-auto py-18 lg:py-28">
-			<div className="text-mainText">
-				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-[#ced4da] text-[2.25rem] font-semibold">
-					<section class="animation1 lg:mr-2 text-[#d97706] block">
+		<div className="container font-semibold px-4 mx-auto py-18 lg:py-28">
+			<div>
+				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
+					<section class="animation1 lg:mr-2 text-orangeLike block">
 						<div class="first ">
 							<div>Transcribe</div>
 						</div>
@@ -61,7 +61,7 @@ export default function Welcome() {
 					</section>
 					YouTube with just one click
 				</div>
-				<p className="text-center text-gray-300 mb-10 mt-10">
+				<p className="text-bordoLike text-center mb-10 mt-10">
 					Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and
 					summarize the video!{' '}
 				</p>
@@ -72,7 +72,7 @@ export default function Welcome() {
 				>
 					<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
 						<input
-							className="w-full lg:w-[600px]  text-main  py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-white focus:outline-none"
+							className="w-full lg:w-[600px] border border-bordoLike text-bordoLike py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-whiteLike focus:outline-none"
 							type="text"
 							name="content_link"
 							value={inputValue}
@@ -85,7 +85,7 @@ export default function Welcome() {
 					<Toaster />
 					<div className="flex justify-center">
 						<button
-							className="w-2/3 px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 bg-main md:w-auto lg:w-auto hover:opacity-75"
+							className="w-2/3 border-2 border-bordoLike bg-orangeLike px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
 						>
 							Submit

@@ -56,6 +56,18 @@ module.exports = {
         sideColor: '#212529',
         darker: '#03001C',
 
+        // palette - sunset
+        bordoLike: "#04293A",
+        purpleLike: "#774360",
+        redLike: "#B25068",
+        orangeLike: "#93BFCF",
+
+        //palette - fener
+        whiteLike: "#F9F8F8",
+        blueLike: "#04293A"
+
+
+
 
       },
       backgroundImage: theme => ({

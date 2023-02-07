@@ -18,11 +18,11 @@ function App() {
 	const windowSize = useWindowSize();
 	const location = useLocation();
 
-	const url = `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`;
+	const url = `https://backend-production-33df.up.railway.app/summaries`;
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [collapsed, setCollapsed] = useState(windowSize.width < 1024);
+	const [collapsed, setCollapsed] = useState(windowSize.width < 768);
 
 	useEffect(() => {
 		setIsLoading(true);

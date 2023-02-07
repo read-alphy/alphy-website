@@ -11,7 +11,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	const ArrowButton = ({ direction }) => {
 		return (
 			<button
-				className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+				className="text-3xl text-blueLike font-semibold py-1 px-3 rounded"
 				onClick={() => {
 					{
 						direction === 'left'
@@ -26,48 +26,46 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	};
 
 	return (
-		<div className="col-span-2 lg:col-span-1 border-mainText text-mainText flex justify-center items-center mx-5">
+		<div className="col-span-2  md:min-w-[400px] lg:col-span-1 border-blueLike text-blueLike flex justify-center items-center mx-5">
 			<div
 				href="#"
-				className={`block w-full pt-6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 shadow-md ${
-					keysCollapsed ? 'sm:h-[300px]' : null
-				} flex flex-col justify-start`}
+				className={`block w-full pt-6 bg-[#ECF9FF] border-gray-200  rounded-lg shadow-md ${keysCollapsed ? 'sm:h-[300px]' : null
+					} flex flex-col justify-start`}
 			>
-				<div className="flex flex-col justify-between items-center">
+				<div className="flex flex-col justify-between items-center ">
 					<div
-						className={`flex flex-col items-center border-b-2 border-gray-600 pb-1 justify-center px-2 w-full`}
-					>
-						<h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white items-center">
-							Key Takeaways {keysCollapsed ? `#${current + 1}/${key_takeaways.length}` : null}
-						</h5>
-					</div>
-					<div
-						className={`flex flex-column ${keysCollapsed ? 'justify-between ' : 'justify-center '} w-full`}
+						className={`flex flex-row items-center border-b border-gray-600 pb-1 justify-center px-2 w-full ${keysCollapsed ? 'justify-between ' : 'justify-center '}`}
+
 					>
 						{keysCollapsed ? <ArrowButton direction={'left'} /> : null}
-						<button
-							onClick={handleClick}
-							className={'text-blue-500 hover:text-blue-700 font-light text-sm'}
-						>
-							{keysCollapsed ? 'Show Them All' : 'Collapse'}
-						</button>
+						<h5 class="text-xl pb-5 font-bold tracking-tight text-gray-900 text-blueLike items-center">
+							Key Takeaways {keysCollapsed ? `${current + 1}/${key_takeaways.length}` : null}
+						</h5>
 						{keysCollapsed ? <ArrowButton direction={'right'} /> : null}
 					</div>
+
 				</div>
 
-				<div className="text-xl m-3 px-8">
+				<div className="text-xl m-3 px-8 object-fit:contain">
 					{keysCollapsed ? (
 						<p>{key_takeaways[current]}</p>
 					) : (
 						key_takeaways.map((item, index) => (
-							<p key={index} className={'border-b-2 border-gray-600 mb-3'}>
+							<p key={index} className={'border-b border-slate-200 pb-5 pt-5'}>
 								{'• '}
 								{item}
 							</p>
 						))
 					)}
 				</div>
+				<button
+					onClick={handleClick}
+					className={'text-blue-500 hover:text-blue-700 font-light text-sm mt-5'}
+				>
+					{keysCollapsed ? 'Show Them All' : 'Collapse'}
+				</button>
 			</div>
+
 		</div>
 	);
 };

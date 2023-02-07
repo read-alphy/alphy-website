@@ -26,17 +26,19 @@ function Navbar({ collapsed, setCollapsed }) {
 	};
 
 	console.log(location.pathname);
+	//Navbar component called About that sends people to #about section on the homepage
 
 	return (
-		<div className="navbar">
+		<div className="navbar bg-bordoLike text-slate-100 font-bold">
 			<div className="company-logo">
 				<Link to="/">
-					<h1 className="text-2xl">Alphy</h1>
+					<h1 className="text-2xl">ALPHY</h1>
 				</Link>
 			</div>
 
 			<div>
 				<div className=" navbar-right-section">
+
 					{sessionContext.userId ? (
 						<div className="signed-in-navbar">
 

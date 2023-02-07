@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tab, Tabs} from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
 
 
 function ContentTab(props) {
@@ -7,7 +7,8 @@ function ContentTab(props) {
     return (
         <Tabs>
             <Tab eventKey="transcript" title="" >
-                    <p className='text-lg font-normal mb-4'>{data}</p>
+                <p className='text-lg font-normal mb-4 max-w-screen-md
+            '>{data}</p>
             </Tab>
         </Tabs>
     )

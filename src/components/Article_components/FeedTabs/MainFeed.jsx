@@ -9,9 +9,12 @@ function MainFeed(props) {
 	const [searchText, setSearchText] = useState("");
 
 	return (
-		<div className="signed-in-feed pt-2">
+		<div className="signed-in-feed pt-2 mr-6">
 			<div>
-				<form className="flex items-center w-10/12">
+				<div>
+					<h1 className="ml-2 mb-10 text-left text-blueLike font-semibold text-xl">Search by content or creator</h1>
+				</div>
+				<form className="flex items-center mb-5">
 					<label for="simple-search" class="sr-only">
 						Search
 					</label>
@@ -20,20 +23,20 @@ function MainFeed(props) {
 							onChange={(e) => setSearchText(e.target.value)}
 							type="text"
 							id="simple-search"
-							class="bg-gray-50 border border-slate-700 text-gray-900 text-sm rounded-l-lg rounded-r-s focus:ring-slate-500 focus:border-slate-500 block w-full pl-4 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
+							className="ml-2 bg-whiteLike border border-bordoLike text-bordoLike text-gray-900 text-sm rounded-l-lg rounded-r-s focus:ring-slate-500 focus:border-slate-500 block w-full pl-4 p-2.5 "
 							placeholder="Search"
 							required
 						/>
 					</div>
 					<button
 						type="submit"
-						class="p-2.5 text-sm font-medium border text-white bg-darker rounded-r-lg border-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300 dark:bg-darker dark:hover:bg-slate-700 dark:focus:ring-slate-800"
+						class="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-orangeLike rounded-r-lg border-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300"
 					>
 						<svg
-							class="w-5 h-5"
+							className="w-5 h-5 ml-5"
 							fill="none"
 							stroke="currentColor"
-							viewBox="0 0 24 24"
+							viewBox="0 0 24 24 "
 							xmlns="http://www.w3.org/2000/svg"
 						>
 							<path
@@ -43,32 +46,32 @@ function MainFeed(props) {
 								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 							></path>
 						</svg>
-						<span class="sr-only">Search</span>
+						<span className="sr-only">Search</span>
 					</button>
 				</form>
 			</div>
 
 			{isLoading
 				? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
-						<SkeletonItem key={index} />
-				  ))
+					<SkeletonItem key={index} />
+				))
 				: data
-						.filter((value) => {
-							if (searchText === "") {
-								return value;
-							} else if (
-								value.title
-									.toLowerCase()
-									.includes(searchText.toLowerCase())
-							) {
-								return value;
-							} else {
-								return null;
-							}
-						})
-						.map((item, index) => (
-							<FeedItem key={index} item={item} />
-						))}
+					.filter((value) => {
+						if (searchText === "") {
+							return value;
+						} else if (
+							value.title
+								.toLowerCase()
+								.includes(searchText.toLowerCase())
+						) {
+							return value;
+						} else {
+							return null;
+						}
+					})
+					.map((item, index) => (
+						<FeedItem key={index} item={item} />
+					))}
 		</div>
 	);
 }

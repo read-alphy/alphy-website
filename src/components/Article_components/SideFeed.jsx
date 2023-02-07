@@ -6,7 +6,7 @@ function SideFeed(props) {
 	const isLoading = props.isLoading;
 
 	return (
-		<div className="user-feed-buttons">
+		<div className="user-feed-buttons mt-10">
 			<div>
 				<MainFeed data={data} isLoading={isLoading} />
 			</div>
