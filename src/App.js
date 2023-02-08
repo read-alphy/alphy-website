@@ -18,7 +18,7 @@ function App() {
 	const windowSize = useWindowSize();
 	const location = useLocation();
 
-	const url = `https://backend-production-33df.up.railway.app/summaries`;
+	const url = `https://backend-production-33df.up.railway.app/summaries?limit=15&offset=0`;
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);

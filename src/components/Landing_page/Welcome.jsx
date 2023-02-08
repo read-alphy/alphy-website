@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Languages from './Languages';
 // import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import toast, { Toaster } from 'react-hot-toast';
+import Loading from '../Loading';
+import ReactLoading from 'react-loading';
 
 export default function Welcome() {
 	//const sessionContext = useSessionContext()
@@ -12,6 +14,7 @@ export default function Welcome() {
 
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
@@ -25,16 +28,30 @@ export default function Welcome() {
 			inputValue.includes('https://youtu.be') ||
 			inputValue.includes('twitter.com/i/spaces')
 		) {
-			let answer = axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
-				url: inputValue,
-				language: selectedOption,
-			});
-			setInputValue('');
-			if (answer.status === 200) {
-				toast.success('Succesfully submitted the ! \n\n We will send you an email when the article is ready.');
-			} else {
-				toast.error('There was an error submitting the form. Please try again.');
-			}
+			setLoading(true);
+			axios
+				// set headers for CORS
+				.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+					url: inputValue,
+					language: selectedOption,
+				})
+				.then((response) => {
+					console.log(response);
+					setInputValue('');
+					setLoading(false);
+					if (response.status === 200 || response.status === 201 || response.status === 202) {
+						toast.success(
+							'Succesfully submitted the ! \n\n We will send you an email when the article is ready.',
+						);
+					} else {
+						toast.error('There was an error submitting the form. Please try again.');
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+					setLoading(false);
+					toast.error('There was an error submitting the form. Please try again.');
+				});
 		} else {
 			setInputValue('');
 			toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
@@ -43,6 +60,16 @@ export default function Welcome() {
 
 	return (
 		<div className="container font-semibold px-4 mx-auto py-18 lg:py-28">
+			{loading && (
+				<div className="flex justify-center items-center h-screen">
+					<div className="flex flex-col items-center">
+						<ReactLoading type="spinningBubbles" color="#000" />
+						<p className="text-bordoLike text-center mb-10 mt-10">
+							We are processing your request. This may take a few seconds.
+						</p>
+					</div>
+				</div>
+			)}
 			<div>
 				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
 					<section class="animation1 lg:mr-2 text-orangeLike block">
