@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './Article_components/ContentTabs/Content';
 import ArrowLeft from '../img/arrow-left.svg';
 import ArrowRight from '../img/arrow-right.svg';
+import { signOut } from 'supertokens-auth-react/recipe/session';
 
 import { animated } from 'react-spring';
 import { useTransition } from 'react-spring';
@@ -16,6 +17,11 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 function Article({ feedData, collapsed, setCollapsed }) {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const windowSize = useWindowSize();
+	if (windowSize.width > 768) {
+
+		collapsed = false
+	}
 
 	const sessionContext = useSessionContext();
 	const [isLoading, setIsLoading] = useState(feedData?.length === 0);
@@ -35,7 +41,14 @@ function Article({ feedData, collapsed, setCollapsed }) {
 			setIsLoading(false);
 		}
 	};
-
+	const handleSignOut = async () => {
+		try {
+			await signOut();
+			navigate('/');
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
 	useEffect(() => {
 		const source_id = location.pathname.split('/')[2];
 		const url = `${process.env.REACT_APP_API_URL}/summaries/${source_id}`;
@@ -59,14 +72,21 @@ function Article({ feedData, collapsed, setCollapsed }) {
 					</div>
 					{!collapsed ? (
 						<div className="fixed top-0 z-50 transition origin-top-right transform md:hidden mb-auto pt-[2px]">
+
 							<div className="rounded-lg rounded-t-none shadow-lg bg-whiteLike">
+
 								<div className="h-screen px-4 overflow-y-auto">
 									<div className="flex items-center justify-end p-4 ">
 										<div className="cursor-pointer" onClick={() => setCollapsed(true)}>
 											<i className="text-2xl text-blueLike ri-close-line"></i>
 										</div>
 									</div>
-
+									<div className="grid grid-row">
+										<Link className="ml-5 text-l font-semibold text-blueLike pb-5">Home Page</Link>
+										{sessionContext.userId ? (<button onClick={handleSignOut} className="ml-5 text-l font-semibold text-blueLike">
+											Log Out
+										</button>) : (<Link className="ml-5 text-l font-semibold text-blueLike" to="/auth">Sign In</Link>)}
+									</div>
 									<div className="mt-4">
 										<div className="">
 											{memoizedFeed}

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import Languages from './Languages';
-// import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function Welcome() {
@@ -12,6 +12,7 @@ export default function Welcome() {
 
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
+	const sessionContext = useSessionContext()
 
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
@@ -61,9 +62,10 @@ export default function Welcome() {
 					</section>
 					YouTube with just one click
 				</div>
-				<p className="text-bordoLike text-center mb-10 mt-10">
-					Paste a YouTube link, choose the language of the video, and submit. Alphy will transcribe and
-					summarize the video!{' '}
+				<p className="text-bordoLike md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+					Paste a YouTube link, choose the language of the video (only English for now), and submit. Alphy will transcribe,
+					summarize and prepare the content for questioning. We will notify you via email when it's ready!
+					{' '}
 				</p>
 
 				<form
@@ -84,12 +86,18 @@ export default function Welcome() {
 
 					<Toaster />
 					<div className="flex justify-center">
-						<button
-							className="w-2/3 border-2 border-bordoLike bg-orangeLike px-8 py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+						{sessionContext.userId ? (<button
+							className="w-1/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
 						>
 							Submit
-						</button>
+						</button>) : (<button
+							className="w-2/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+							type="submit"
+						>
+							Sign In To Submit
+						</button>)}
+
 					</div>
 				</form>
 			</div>

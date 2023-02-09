@@ -22,7 +22,7 @@ function App() {
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [collapsed, setCollapsed] = useState(windowSize.width < 768);
+	const [collapsed, setCollapsed] = useState(true);
 
 	useEffect(() => {
 		setIsLoading(true);
