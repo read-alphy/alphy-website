@@ -89,7 +89,7 @@ function Navbar({ collapsed, setCollapsed }) {
 									{/* <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
 									<Link to="/auth">Sign In</Link>
 								</div>
-							)}
+}
 						</div>
 					)}
 				</div>
