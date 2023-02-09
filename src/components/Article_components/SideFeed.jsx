@@ -8,9 +8,10 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 	const temp = 10;
 	const limit = temp;
 
-	const getData = (offset) => {
+	const searchInputRef = React.useRef(null);
+
+	const getData = (offset, search) => {
 		setIsLoading(true);
-		console.log('search', search);
 		axios
 			.get(
 				`${
@@ -25,12 +26,12 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 
 	const nextPage = () => {
 		setOffset(offset + limit);
-		getData(offset + limit);
+		getData(offset + limit, search);
 	};
 
 	const prevPage = () => {
 		setOffset(offset - limit);
-		getData(offset - limit);
+		getData(offset - limit, search);
 	};
 
 	return (
@@ -47,7 +48,13 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 						onSubmit={(e) => {
 							e.preventDefault();
 							setOffset(0);
-							getData(offset);
+							// if input is empty get it from searchInputRef
+							if (searchInputRef.current.value.length === 0) {
+								setSearch('');
+								getData(0, '');
+							} else {
+								getData(0, search);
+							}
 						}}
 					>
 						<label for="simple-search" class="sr-only">
@@ -55,11 +62,10 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 						</label>
 						<div class="relative w-full">
 							<input
+								ref={searchInputRef}
 								type="text"
 								onChange={(e) => {
 									setSearch(e.target.value);
-									console.log('search');
-									console.log(search);
 								}}
 								id="simple-search"
 								className="ml-2 bg-whiteLike border border-bordoLike text-bordoLike text-gray-900 text-sm rounded-l-lg rounded-r-s focus:ring-slate-500 focus:border-slate-500 block w-full pl-4 p-2.5 "
