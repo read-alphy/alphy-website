@@ -18,7 +18,7 @@ function App() {
 	const windowSize = useWindowSize();
 	const location = useLocation();
 
-	const url = `https://backend-production-33df.up.railway.app/summaries?limit=15&offset=0`;
+	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -43,12 +43,24 @@ function App() {
           <Route path="/auth" element={<SessionAuth>
             <Home2 />
           </SessionAuth>} />  */}
-					<Route path="/" element={<Home data={data} isLoading={isLoading} />} />
+					<Route
+						path="/"
+						element={
+							<Home data={data} isLoading={isLoading} setData={setData} setIsLoading={setIsLoading} />
+						}
+					/>
 					<Route
 						path="/article/:article_ID"
 						element={
 							/* <SessionAuth><Article data={data} /></SessionAuth> */
-							<Article feedData={data} collapsed={collapsed} setCollapsed={setCollapsed} />
+							<Article
+								feedData={data}
+								setFeedData={setData}
+								collapsed={collapsed}
+								setCollapsed={setCollapsed}
+								setFeedLoading={setIsLoading}
+								feedLoading={isLoading}
+							/>
 						}
 					/>
 				</Routes>

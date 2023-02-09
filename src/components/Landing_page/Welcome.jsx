@@ -30,15 +30,14 @@ export default function Welcome() {
 		) {
 			setLoading(true);
 			axios
-				// set headers for CORS
 				.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
 					url: inputValue,
 					language: selectedOption,
 				})
 				.then((response) => {
 					console.log(response);
-					setInputValue('');
 					setLoading(false);
+					setInputValue('');
 					if (response.status === 200 || response.status === 201 || response.status === 202) {
 						toast.success(
 							'Succesfully submitted the ! \n\n We will send you an email when the article is ready.',
@@ -46,11 +45,6 @@ export default function Welcome() {
 					} else {
 						toast.error('There was an error submitting the form. Please try again.');
 					}
-				})
-				.catch((error) => {
-					console.log(error);
-					setLoading(false);
-					toast.error('There was an error submitting the form. Please try again.');
 				});
 		} else {
 			setInputValue('');

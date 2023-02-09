@@ -13,7 +13,7 @@ import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 
-function Article({ feedData, collapsed, setCollapsed }) {
+function Article({ feedData, collapsed, setCollapsed, setFeedData, setFeedLoading, feedLoading }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -21,11 +21,8 @@ function Article({ feedData, collapsed, setCollapsed }) {
 	const [isLoading, setIsLoading] = useState(feedData?.length === 0);
 	const [data, setData] = useState([]);
 
-
-
 	const fetchData = async (url) => {
 		try {
-			console.log('fetching the article ' + url.split('/')[4]);
 			setIsLoading(true);
 			const response = await axios.get(url);
 			setData(response.data);
@@ -42,19 +39,18 @@ function Article({ feedData, collapsed, setCollapsed }) {
 		fetchData(url);
 	}, [location.pathname, navigate]);
 
-	const memoizedFeed = useMemo(
-		() => <SideFeed data={feedData} navigate={navigate} isLoading={isLoading} />,
-		[feedData],
+	const sideFeed = useMemo(
+		() => <SideFeed data={feedData} setData={setFeedData} isLoading={feedLoading} setIsLoading={setFeedLoading} />,
+		[feedData, setFeedData, feedLoading, setFeedLoading],
 	);
 
 	return (
 		<div className="article max-[92vh]">
 			<div className="flex flex-row article-body">
 				<div className="flex mr-5">
-
 					<div className={`left-feed overflow-x-hidden hidden lg:block ${collapsed ? 'collapsed' : ''}`}>
 						<div className="bg-zinc-50 mr-5">
-							<div className="user-feed">{memoizedFeed}</div>
+							<div className="user-feed bg-gradient-to-r from-gray-300 to-gray-200">{sideFeed}</div>
 						</div>
 					</div>
 					{!collapsed ? (
@@ -68,9 +64,7 @@ function Article({ feedData, collapsed, setCollapsed }) {
 									</div>
 
 									<div className="mt-4">
-										<div className="">
-											{memoizedFeed}
-										</div>
+										<div className="">{sideFeed}</div>
 									</div>
 								</div>
 							</div>
