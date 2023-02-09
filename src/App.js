@@ -12,17 +12,20 @@ import { SuperTokensConfig } from './routes/SuperTokenComponents/Config';
 import Home2 from './supertokens_home';
 import Footer from './components/Footer';
 import { useWindowSize } from './hooks/useWindowSize';
+import { offset } from '@popperjs/core';
 
 function App() {
 	SuperTokens.init(SuperTokensConfig);
 	const windowSize = useWindowSize();
 	const location = useLocation();
 
-	const url = `https://backend-production-33df.up.railway.app/summaries`;
+	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+
 	const [collapsed, setCollapsed] = useState(true);
+
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -43,12 +46,37 @@ function App() {
           <Route path="/auth" element={<SessionAuth>
             <Home2 />
           </SessionAuth>} />  */}
-					<Route path="/" element={<Home data={data} isLoading={isLoading} />} />
+					<Route
+						path="/"
+						element={
+							<Home
+								data={data}
+								isLoading={isLoading}
+								setData={setData}
+								setIsLoading={setIsLoading}
+								search={search}
+								setSearch={setSearch}
+								offset={offset}
+								setOffset={setOffset}
+							/>
+						}
+					/>
 					<Route
 						path="/article/:article_ID"
 						element={
 							/* <SessionAuth><Article data={data} /></SessionAuth> */
-							<Article feedData={data} collapsed={collapsed} setCollapsed={setCollapsed} />
+							<Article
+								feedData={data}
+								setFeedData={setData}
+								search={search}
+								setSearch={setSearch}
+								collapsed={collapsed}
+								setCollapsed={setCollapsed}
+								feedLoading={isLoading}
+								setFeedLoading={setIsLoading}
+								offset={offset}
+								setOffset={setOffset}
+							/>
 						}
 					/>
 				</Routes>

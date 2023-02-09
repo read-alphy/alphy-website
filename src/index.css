@@ -9,15 +9,12 @@
 }
 
 body {
-	background: #FBFBFA;
+	background: #fbfbfa;
 	display: flex;
 	flex-direction: column;
 	width: 100vw;
 	overflow-x: hidden;
 }
-
-
-
 
 /* 
 
@@ -35,7 +32,6 @@ MAIN PAGE
 
 
 */
-
 
 .navbar {
 	display: flex;
@@ -174,15 +170,11 @@ MAIN PAGE
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-
-
 .welcome-text h2 {
-
 	font-size: 35px;
 }
 
 .welcome-text p {
-
 	font-size: 20px;
 }
 
@@ -194,7 +186,6 @@ MAIN PAGE
 }
 
 .user-feed {
-
 	/* background: #212529;  */
 	/* padding-right: 15px;
   padding-top: 30px;*/
@@ -251,11 +242,9 @@ table tr {
 
 thead {
 	height: 90px;
-
 }
 
 table tr {
-
 	border-bottom: 1px solid #2d3136;
 }
 
@@ -263,7 +252,6 @@ table tr {
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 100px;
-
 }
 
 .search-main-feed input {
@@ -272,8 +260,6 @@ table tr {
 	width: 40vw;
 	margin-right: 20px;
 	font-size: 16px;
-
-
 
 	background-image: url('./img/search.svg');
 	background-position: 10px 8px;
@@ -286,7 +272,6 @@ table tr {
 }
 
 .main-page-feed-section h1 {
-
 	font-size: 30px;
 	font-weight: 600;
 	margin-bottom: 20px;
@@ -309,12 +294,11 @@ table tr {
 	/* border-right: 1px solid #2f3542; */
 }
 
-
 .menu-toggler {
 	top: 0;
 }
 
-.arrow-right {
+/* .arrow-right {
 	transform: rotate(0deg);
 	transition: transform 0.5s ease-in-out;
 }
@@ -322,11 +306,9 @@ table tr {
 .arrow-left {
 	transform: rotate(360deg);
 	transition: transform 0.5s ease-in-out;
-}
+} */
 
 /* ANIMATIONS */
-
-
 
 .text-center {
 	text-align: center;
@@ -378,7 +360,7 @@ label {
 	overflow: hidden;
 }
 
-.animation1>div>div {
+.animation1 > div > div {
 	/* padding: 0 0.75rem; */
 	height: 2.61rem;
 	display: inline-block;
@@ -390,18 +372,18 @@ label {
 	overflow: hidden;
 }
 
-.animation2>div>div {
+.animation2 > div > div {
 	/* padding: 0 0.75rem; */
 	height: 2.61rem;
 	display: inline-block;
 	align-items: flex-start;
 }
 
-.animation1>div {
+.animation1 > div {
 	animation: text-animation 4s infinite;
 }
 
-.animation2>div {
+.animation2 > div {
 	animation: text-animation2 16s infinite;
 }
 
@@ -466,12 +448,13 @@ label {
 .left-feed {
 	width: 400px;
 	opacity: 1;
-	transition: width 0.5s ease-out;
+	/* transtion opacity and width  */
+	transition: opacity 0.5s ease;
 }
 
 .left-feed.collapsed {
 	width: 0;
-	opacity: 0.4;
+	opacity: 0;
 }
 
 /* 
@@ -501,7 +484,6 @@ CONTENT PAGE
 }
 
 .content-title {
-
 	font-size: 30px;
 	margin-left: 30px;
 	margin-top: 50px;
@@ -520,7 +502,6 @@ CONTENT PAGE
 .article {
 	/* max-height: 92vh; */
 }
-
 
 .create-article {
 	align-items: center;
@@ -580,15 +561,11 @@ CONTENT PAGE
 }
 
 .new-submission {
-
-
 	padding-top: 100px;
 	padding-right: 100px;
 	padding-left: 100px;
 	left: 350px;
 }
-
-
 
 .new-submission input {
 	min-width: 400px;
@@ -634,12 +611,10 @@ CONTENT PAGE
 
 .summary-and-transcript-buttons {
 	border-bottom: 1px solid rgba(239, 237, 239, 0.5);
-
 }
 
 .content-active-button {
 	border-bottom: 3px solid rgba(239, 237, 239, 0.5);
-
 }
 
 .summary-and-transcript-buttons button {
@@ -653,11 +628,8 @@ CONTENT PAGE
 }
 
 .summary-and-transcript-buttons.tabs button:focus {
-	border-bottom: 3px solid #04293A;
-
+	border-bottom: 3px solid #04293a;
 }
-
-
 
 .user-feed-buttons .tabs {
 	border-bottom: 1px solid rgba(239, 237, 239, 0.5);
@@ -724,8 +696,6 @@ CONTENT
 	height: 30px;
 }
 
-
-
 .mons {
 	width: 30px;
 }
@@ -746,7 +716,6 @@ footer {
 
 .footer-main {
 	display: flex;
-
 
 	padding-top: 30px;
 }
@@ -862,8 +831,6 @@ DIFFERENT SCREEN SIZES
 }
 
 @media screen and (max-width: 1200px) {
-
-
 	.main-page-feed-section {
 		padding-bottom: 20px;
 	}
