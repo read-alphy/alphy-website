@@ -82,7 +82,8 @@ function Article({ feedData, collapsed, setCollapsed }) {
 										</div>
 									</div>
 									<div className="grid grid-row">
-										<Link className="ml-5 text-l font-semibold text-blueLike pb-5">Home Page</Link>
+										<p className="ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
+										<Link className="ml-5 text-l font-semibold text-blueLike pb-5" to="/">Home</Link>
 										{sessionContext.userId ? (<button onClick={handleSignOut} className="ml-5 text-l font-semibold text-blueLike">
 											Log Out
 										</button>) : (<Link className="ml-5 text-l font-semibold text-blueLike" to="/auth">Sign In</Link>)}
