@@ -15,7 +15,7 @@ export default function Welcome() {
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
 
-const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const sessionContext = useSessionContext()
 
 
