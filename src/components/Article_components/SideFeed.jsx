@@ -4,23 +4,21 @@ import { Tab, Tabs } from 'react-bootstrap';
 import FeedItem from './FeedTabs/FeedItem';
 import SkeletonItem from './FeedTabs/SkeletonItem';
 
-function SideFeed({ data, isLoading, setData, setIsLoading }) {
-	const [searchText, setSearchText] = useState('');
+function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
 	const temp = 10;
 	const limit = temp;
-	const [offset, setOffset] = useState(0);
+
 	const getData = (offset) => {
 		setIsLoading(true);
-		console.log(searchText);
+		console.log('search', search);
 		axios
 			.get(
 				`${
 					process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${searchText}&offset=${offset}&limit=${limit + 1}`,
+				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
 				setData(response.data);
-				console.log('data', response.data);
 				setIsLoading(false);
 			});
 	};
@@ -48,8 +46,8 @@ function SideFeed({ data, isLoading, setData, setIsLoading }) {
 						className="flex items-center mb-5"
 						onSubmit={(e) => {
 							e.preventDefault();
-							getData(offset);
 							setOffset(0);
+							getData(offset);
 						}}
 					>
 						<label for="simple-search" class="sr-only">
@@ -57,11 +55,15 @@ function SideFeed({ data, isLoading, setData, setIsLoading }) {
 						</label>
 						<div class="relative w-full">
 							<input
-								onChange={(e) => setSearchText(e.target.value)}
 								type="text"
+								onChange={(e) => {
+									setSearch(e.target.value);
+									console.log('search');
+									console.log(search);
+								}}
 								id="simple-search"
 								className="ml-2 bg-whiteLike border border-bordoLike text-bordoLike text-gray-900 text-sm rounded-l-lg rounded-r-s focus:ring-slate-500 focus:border-slate-500 block w-full pl-4 p-2.5 "
-								placeholder="Search"
+								placeholder={search ? search : 'Search YouTube videos or Twitter spaces...'}
 							/>
 						</div>
 						<button
@@ -86,10 +88,23 @@ function SideFeed({ data, isLoading, setData, setIsLoading }) {
 						</button>
 					</form>
 				</div>
-
-				{isLoading
-					? Array.from(Array(temp), (_, index) => index + 1).map((index) => <SkeletonItem key={index} />)
-					: data.map((item, index) => <FeedItem key={index} item={item} />)}
+				<div className={`side-feed-page-buttons flex justify-between mt-2`}>
+					{offset > 0 && (
+						<button className="bg-orangeLike text-whiteLike rounded-lg px-4 py-2" onClick={prevPage}>
+							{'Prev Page'}
+						</button>
+					)}
+					{data.length > limit && (
+						<button className="bg-orangeLike text-whiteLike rounded-lg px-4 py-2" onClick={nextPage}>
+							{'Next Page'}
+						</button>
+					)}
+				</div>
+				<div className="signed-in-feed-elements">
+					{isLoading
+						? Array.from(Array(temp), (_, index) => index + 1).map((index) => <SkeletonItem key={index} />)
+						: data.map((item, index) => <FeedItem key={index} item={item} />)}
+				</div>
 			</div>
 		</div>
 	);

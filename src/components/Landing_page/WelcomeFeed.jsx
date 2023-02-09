@@ -6,18 +6,9 @@ import axios from 'axios';
 import SkeletonItem from '../Article_components/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
 
-function Feed({ data, isLoading, setData, setIsLoading }) {
+function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
 	const temp = 10;
-
-	const [searchText, setSearchText] = useState('');
-	const [offset, setOffset] = useState(0);
-	const navigate = useNavigate();
-
 	const limit = temp;
-
-	const onClick = (id) => {
-		navigate('/article/' + id);
-	};
 
 	const getData = (offset) => {
 		setIsLoading(true);
@@ -25,7 +16,7 @@ function Feed({ data, isLoading, setData, setIsLoading }) {
 			.get(
 				`${
 					process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${searchText}&offset=${offset}&limit=${limit + 1}`,
+				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
 				setData(response.data);
@@ -61,10 +52,12 @@ function Feed({ data, isLoading, setData, setIsLoading }) {
 					<div class="relative w-full">
 						<input
 							type="text"
-							onChange={(e) => setSearchText(e.target.value)}
+							onChange={(e) => {
+								setSearch(e.target.value);
+							}}
 							id="voice-search"
-							class="bg-slate-100 border border-bordoLike text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5"
-							placeholder="Search YouTube videos or Twitter spaces..."
+							className="bg-slate-100 border border-bordoLike text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5"
+							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
 					<button
@@ -88,6 +81,7 @@ function Feed({ data, isLoading, setData, setIsLoading }) {
 						</svg>
 					</button>
 				</form>
+
 				<div className={`buttons flex justify-between mt-2`}>
 					{offset > 0 && (
 						<button className="bg-orangeLike text-whiteLike rounded-lg px-4 py-2" onClick={prevPage}>
@@ -126,9 +120,7 @@ function Feed({ data, isLoading, setData, setIsLoading }) {
 						) : (
 							data
 								.slice(0, limit)
-								.map((item, index) => (
-									<FeedItem index={index} item={item} key={index} onClick={onClick} />
-								))
+								.map((item, index) => <FeedItem index={index} item={item} key={index} />)
 						)}
 					</tbody>
 				</table>

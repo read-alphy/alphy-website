@@ -12,6 +12,7 @@ import { SuperTokensConfig } from './routes/SuperTokenComponents/Config';
 import Home2 from './supertokens_home';
 import Footer from './components/Footer';
 import { useWindowSize } from './hooks/useWindowSize';
+import { offset } from '@popperjs/core';
 
 function App() {
 	SuperTokens.init(SuperTokensConfig);
@@ -23,6 +24,8 @@ function App() {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [collapsed, setCollapsed] = useState(windowSize.width < 768);
+	const [search, setSearch] = useState('');
+	const [offset, setOffset] = useState(0);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -46,7 +49,16 @@ function App() {
 					<Route
 						path="/"
 						element={
-							<Home data={data} isLoading={isLoading} setData={setData} setIsLoading={setIsLoading} />
+							<Home
+								data={data}
+								isLoading={isLoading}
+								setData={setData}
+								setIsLoading={setIsLoading}
+								search={search}
+								setSearch={setSearch}
+								offset={offset}
+								setOffset={setOffset}
+							/>
 						}
 					/>
 					<Route
@@ -56,10 +68,14 @@ function App() {
 							<Article
 								feedData={data}
 								setFeedData={setData}
+								search={search}
+								setSearch={setSearch}
 								collapsed={collapsed}
 								setCollapsed={setCollapsed}
-								setFeedLoading={setIsLoading}
 								feedLoading={isLoading}
+								setFeedLoading={setIsLoading}
+								offset={offset}
+								setOffset={setOffset}
 							/>
 						}
 					/>

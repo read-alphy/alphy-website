@@ -12,8 +12,20 @@ import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
+import { offset } from '@popperjs/core';
 
-function Article({ feedData, collapsed, setCollapsed, setFeedData, setFeedLoading, feedLoading }) {
+function Article({
+	feedData,
+	collapsed,
+	setCollapsed,
+	setFeedData,
+	setFeedLoading,
+	feedLoading,
+	search,
+	setSearch,
+	offset,
+	setOffset,
+}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -40,8 +52,19 @@ function Article({ feedData, collapsed, setCollapsed, setFeedData, setFeedLoadin
 	}, [location.pathname, navigate]);
 
 	const sideFeed = useMemo(
-		() => <SideFeed data={feedData} setData={setFeedData} isLoading={feedLoading} setIsLoading={setFeedLoading} />,
-		[feedData, setFeedData, feedLoading, setFeedLoading],
+		() => (
+			<SideFeed
+				data={feedData}
+				setData={setFeedData}
+				isLoading={feedLoading}
+				setIsLoading={setFeedLoading}
+				search={search}
+				setSearch={setSearch}
+				offset={offset}
+				setOffset={setOffset}
+			/>
+		),
+		[feedData, setFeedData, feedLoading, setFeedLoading, search, setSearch, offset, setOffset],
 	);
 
 	return (
