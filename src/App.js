@@ -19,14 +19,13 @@ function App() {
 	const windowSize = useWindowSize();
 	const location = useLocation();
 
-	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
-
-	const [data, setData] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
 	const [offset, setOffset] = useState(0);
-
+	const [isLoading, setIsLoading] = useState(true);
 	const [collapsed, setCollapsed] = useState(true);
+	const [data, setData] = useState([]);
+
+	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
 
 	useEffect(() => {
 		setIsLoading(true);

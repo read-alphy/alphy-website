@@ -7,7 +7,7 @@ function Languages(props) {
     const onLangChange = props.onLangChange;
 
     return (
-        <div className="w-1/3 border border-bordoLike rounded-md lg:w-auto">
+        <div className="w-1/3 border border-[#6B728E] rounded-md lg:w-auto">
             <select className='w-full p-2 rounded-md lg:w-32 text-main' value={language} onChange={e => onLangChange(e.target.value)}>
                 {options.map((option, index) => (
                     <option className='rounded-none' key={index} value={option}>{option}</option>

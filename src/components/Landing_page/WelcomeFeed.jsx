@@ -15,8 +15,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 		setIsLoading(true);
 		axios
 			.get(
-				`${
-					process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -38,7 +37,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 	return (
 		<div className="main-page-feed-section">
 			<h2 className="text-bordoLike text-2xl mx-auto pb-10 font-semibold">Browse Alphy's database</h2>
-			<div className="main-page-feed-table-parent bg-slate-50 border-[1px] border-[#0b090a] rounded-[10px] sm:p-[40px] p-[10px]">
+			<div className="main-page-feed-table-parent bg-slate-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form
 					class="flex items-center"
 					onSubmit={(e) => {
@@ -64,13 +63,13 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 								setSearch(e.target.value);
 							}}
 							id="voice-search"
-							className="bg-slate-100 border border-bordoLike text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5"
+							className="bg-slate-100 border border-[#6B728E] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm: mt-10 pl-5 p-2.5"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
 					<button
 						type="submit"
-						class="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-orangeLike rounded-lg border border-bordoLike hover:bg-purpleLike focus:ring-4 focus:outline-none focus:ring-blue-300"
+						class="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-orangeLike rounded-lg border border-bordoLike hover:bg-blueLike focus:ring-4 focus:outline-none focus:ring-blue-300 sm: mt-10"
 					>
 						<svg
 							aria-hidden="true"
@@ -83,7 +82,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
-								stroke-width="2"
+								strokeWidth="2"
 								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 							></path>
 						</svg>
@@ -91,29 +90,19 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 				</form>
 
 				<div className={`buttons flex justify-between mt-2`}>
-					{offset > 0 && (
-						<button className="bg-orangeLike text-whiteLike rounded-lg px-4 py-2" onClick={prevPage}>
-							{'Prev Page'}
-						</button>
-					)}
-					{data.length > limit && (
-						<button className="bg-orangeLike text-whiteLike rounded-lg px-4 py-2" onClick={nextPage}>
-							{'Next Page'}
-						</button>
-					)}
+
 				</div>
 				<table className="main-page-feed w-full">
 					<thead className="header h-0" />
 					<tbody
 						className={`
             grid grid-cols-1 mt-10
-            ${
-				isLoading
-					? 'lg:grid-cols-2 xl:grid-cols-2'
-					: data.length === 1
-					? 'lg:grid-cols-1 xl:grid-cols-1'
-					: 'lg:grid-cols-2 xl:grid-cols-2'
-			}
+            ${isLoading
+								? 'lg:grid-cols-2 xl:grid-cols-2'
+								: data.length === 1
+									? 'lg:grid-cols-1 xl:grid-cols-1'
+									: 'lg:grid-cols-2 xl:grid-cols-2'
+							}
             gap-4
             `}
 					>
@@ -132,6 +121,18 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 						)}
 					</tbody>
 				</table>
+				<div className="grid grid-cols-2">
+					{offset > 0 && (
+						<button className="col-span-1 justify-self-start text-blueLike font-semibold mt-10 underline" onClick={prevPage}>
+							{'Prev'}
+						</button>
+					)}
+					{data.length > limit && (
+						<button className="col-span-2 justify-self-end text-blueLike font-semibold  mt-10 underline" onClick={nextPage}>
+							{'Next'}
+						</button>
+					)}
+				</div>
 			</div>
 		</div>
 	);
