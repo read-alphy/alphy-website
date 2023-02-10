@@ -48,7 +48,9 @@ function Navbar({ collapsed, setCollapsed }) {
 										</button>
 									</div>
 									<div
-										onClick={() => setCollapsed(!collapsed)}
+										onClick={() => {
+											setCollapsed(!collapsed);
+										}}
 										className="block mr-4 cursor-pointer lg:hidden"
 									>
 										<i className="text-2xl ri-menu-line text-mainText"></i>
@@ -78,7 +80,9 @@ function Navbar({ collapsed, setCollapsed }) {
 										<Link to="/auth">Sign In</Link>
 									</div>
 									<div
-										onClick={() => setCollapsed(!collapsed)}
+										onClick={() => {
+											setCollapsed(!collapsed);
+										}}
 										className="block mr-4 cursor-pointer lg:hidden"
 									>
 										<i className="text-2xl ri-menu-line text-mainText"></i>

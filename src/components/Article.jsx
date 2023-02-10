@@ -98,43 +98,43 @@ function Article({
 					) : (
 						<></>
 					)}
-					{!collapsed ? ( // hamburger menu for mobile devices
-						<div className="fixed top-0 z-50 transition origin-top-right transform md:hidden mb-auto pt-[2px]">
-							<div className="rounded-lg rounded-t-none shadow-lg bg-whiteLike">
-								<div className="h-screen px-4 overflow-y-auto">
-									<div className="flex items-center justify-end p-4 ">
-										<div className="cursor-pointer" onClick={() => setCollapsed(true)}>
-											<i className="text-2xl text-blueLike ri-close-line"></i>
-										</div>
+				</div>
+				{!collapsed ? ( // hamburger menu for mobile devices
+					<div className="fixed top-0 z-50 transition origin-top-right transform md:hidden mb-auto pt-[2px]">
+						<div className="rounded-lg rounded-t-none shadow-lg bg-whiteLike">
+							<div className="h-screen px-4 overflow-y-auto">
+								<div className="flex items-center justify-end p-4 ">
+									<div className="cursor-pointer" onClick={() => setCollapsed(true)}>
+										<i className="text-2xl text-blueLike ri-close-line"></i>
 									</div>
-									<div className="grid grid-row">
-										<p className="ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
-										<Link className="ml-5 text-l font-semibold text-blueLike pb-5" to="/">
-											Home
+								</div>
+								<div className="grid grid-row">
+									<p className="ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
+									<Link className="ml-5 text-l font-semibold text-blueLike pb-5" to="/">
+										Home
+									</Link>
+									{sessionContext.userId ? (
+										<button
+											onClick={handleSignOut}
+											className="ml-5 text-l font-semibold text-blueLike"
+										>
+											Log Out
+										</button>
+									) : (
+										<Link className="ml-5 text-l font-semibold text-blueLike" to="/auth">
+											Sign In
 										</Link>
-										{sessionContext.userId ? (
-											<button
-												onClick={handleSignOut}
-												className="ml-5 text-l font-semibold text-blueLike"
-											>
-												Log Out
-											</button>
-										) : (
-											<Link className="ml-5 text-l font-semibold text-blueLike" to="/auth">
-												Sign In
-											</Link>
-										)}
-									</div>
-									<div className="mt-4">
-										<div className="">{sideFeed}</div>
-									</div>
+									)}
+								</div>
+								<div className="mt-4">
+									<div className="">{sideFeed}</div>
 								</div>
 							</div>
 						</div>
-					) : (
-						<></>
-					)}
-				</div>
+					</div>
+				) : (
+					<></>
+				)}
 
 				{collapsed && (
 					<button
