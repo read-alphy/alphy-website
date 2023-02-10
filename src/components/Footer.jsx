@@ -37,19 +37,19 @@ function Footer() {
 						or ping us on our Discord for any questions and feedback.
 					</p>
 				</div>
-				<div className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1 mb-10">
+				<div className="grid grid-cols-1 sm:grid-cols-1 mb-5">
 					<div>
-						<h2 className="sm:mb-6 text-xl text-mainText font-semibold text-gray-900 uppercase">
+						<h2 className="sm:mb-6 text-2xl text-whiteLike font-bold ">
 							REACH US
 						</h2>
 					</div>
 
-					<a href="mailto:info@alphy.tech" className="">
+					<a href="mailto:info@alphy.tech" className="mb-5">
 						info@alphy.tech
 					</a>
 
 
-					<a href="https://discord.gg/" className="">
+					<a href="https://discord.gg/" className="mb-5">
 						Discord
 					</a>
 
