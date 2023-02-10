@@ -18,6 +18,8 @@ function App() {
 	SuperTokens.init(SuperTokensConfig);
 	const windowSize = useWindowSize();
 	const location = useLocation();
+	const [search, setSearch] = useState('');
+	const [offset, setOffset] = useState(0);
 
 	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
 

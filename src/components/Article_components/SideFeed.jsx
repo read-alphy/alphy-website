@@ -14,8 +14,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 		setIsLoading(true);
 		axios
 			.get(
-				`${
-					process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -35,7 +34,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 	};
 
 	return (
-		<div className="user-feed-buttons mt-10">
+		<div className="user-feed-buttons mt-10 mb-5">
 			<div className="signed-in-feed pt-2 mr-6">
 				<div>
 					<div>
@@ -94,23 +93,26 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 						</button>
 					</form>
 				</div>
-				<div className={`side-feed-page-buttons flex justify-between mt-2`}>
-					{offset > 0 && (
-						<button className="bg-orangeLike text-whiteLike rounded-lg px-4 py-2" onClick={prevPage}>
-							{'Prev Page'}
-						</button>
-					)}
-					{data.length > limit && (
-						<button className="bg-orangeLike text-whiteLike rounded-lg px-4 py-2" onClick={nextPage}>
-							{'Next Page'}
-						</button>
-					)}
-				</div>
+
+
+
 				<div className="signed-in-feed-elements">
 					{isLoading
 						? Array.from(Array(temp), (_, index) => index + 1).map((index) => <SkeletonItem key={index} />)
 						: data.map((item, index) => <FeedItem key={index} item={item} />)}
 				</div>
+			</div>
+			<div className="grid grid-cols-2">
+				{offset > 0 && (
+					<button className="col-span-1 justify-self-start text-blueLike font-semibold underline ml-5" onClick={prevPage}>
+						{'Prev'}
+					</button>
+				)}
+				{data.length > limit && (
+					<button className="col-span-2 justify-self-end text-blueLike font-semibold  underline mr-5" onClick={nextPage}>
+						{'Next'}
+					</button>
+				)}
 			</div>
 		</div>
 	);

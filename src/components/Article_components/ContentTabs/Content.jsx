@@ -4,12 +4,13 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import ContentTab from './ContentTab';
 import KeyTakeAways from './KeyTakeAways';
+import QuestionAnswering from '../QuestionAnswering';
 
 export default function Content(props) {
 	const data = props.data;
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
-	console.log(data)
+
 	return (
 		<div className={`container  mx-auto md:px-10 lg:px-20 `}>
 			<div className='grid grid-cols-3'>
@@ -20,7 +21,9 @@ export default function Content(props) {
 				</div>
 			</div>
 			<div className="grid grid-cols-2 gap-8 mt-16 mb-10">
+
 				{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
+
 				<div className="hidden col-span-2 lg:col-span-1 lg:block w-5/6">
 					<iframe
 						title="My YouTube Video"
@@ -31,6 +34,7 @@ export default function Content(props) {
 					></iframe>
 				</div>
 			</div>
+			{/* <QuestionAnswering data={data} /> */}
 			<div className="mt-14 lg:mt-0	">
 				<div className="summary-and-transcript-buttons text-xl">
 					<button
