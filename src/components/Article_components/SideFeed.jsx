@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import FeedItem from './FeedTabs/FeedItem';
 import SkeletonItem from './FeedTabs/SkeletonItem';
@@ -10,11 +11,16 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 
 	const searchInputRef = React.useRef(null);
 
+	useEffect(() => {
+		console.log('side feed rendered');
+	}, []);
+
 	const getData = (offset, search) => {
 		setIsLoading(true);
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${
+					process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -37,10 +43,47 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 		<div className="user-feed-buttons mt-10 mb-5">
 			<div className="signed-in-feed pt-2 mr-6">
 				<div>
-					<div>
-						<h1 className="ml-2 mb-10 text-left text-blueLike font-semibold text-xl">
-							Search by content or creator
-						</h1>
+					<div className="flex justify-between ml-2 mb-10">
+						<h1 className=" text-blueLike font-semibold text-xl">Search by content or creator</h1>
+						<button
+							className="
+								text-whiteLike
+								bg-bordoLike
+								rounded-md
+								p-2
+								text-sm
+								font-semibold
+								transition
+								duration-500
+								ease-in-out
+								transform
+								hover:-translate-y-1
+								hover:scale-110
+								active:scale-90
+								shadow-md
+								outline-none
+								focus:outline-none
+								mr-1
+								mb-1
+							"
+							onClick={() => setCollapsed(true)}
+						>
+							{/* cross svg */}
+							<svg
+								className="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24 "
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									strokeLinecap={'round'}
+									strokeLinejoin={'round'}
+									strokeWidth={'2'}
+									d="M6 18L18 6M6 6l12 12"
+								></path>
+							</svg>
+						</button>
 					</div>
 					<form
 						className="flex items-center mb-5"
@@ -56,10 +99,10 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 							}
 						}}
 					>
-						<label for="simple-search" class="sr-only">
+						<label htmlFor="simple-search" className="sr-only">
 							Search
 						</label>
-						<div class="relative w-full">
+						<div className="relative w-full">
 							<input
 								ref={searchInputRef}
 								type="text"
@@ -73,7 +116,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 						</div>
 						<button
 							type="submit"
-							class="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-orangeLike rounded-r-lg border-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300"
+							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-orangeLike rounded-r-lg border-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300"
 						>
 							<svg
 								className="w-5 h-5 ml-5"
@@ -83,9 +126,9 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 								xmlns="http://www.w3.org/2000/svg"
 							>
 								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
+									strokeLinecap={'round'}
+									strokeLinejoin={'round'}
+									strokeWidth={'2'}
 									d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 								></path>
 							</svg>
@@ -93,23 +136,32 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 						</button>
 					</form>
 				</div>
-
-
-
-				<div className="signed-in-feed-elements">
-					{isLoading
-						? Array.from(Array(temp), (_, index) => index + 1).map((index) => <SkeletonItem key={index} />)
-						: data.map((item, index) => <FeedItem setCollapsed={setCollapsed} key={index} item={item} />)}
-				</div>
+				<table>
+					<tbody>
+						{isLoading
+							? Array.from(Array(temp), (_, index) => index + 1).map((index) => (
+									<SkeletonItem key={index} />
+							  ))
+							: data.map((item, index) => (
+									<FeedItem setCollapsed={setCollapsed} key={index} item={item} />
+							  ))}
+					</tbody>
+				</table>
 			</div>
 			<div className="grid grid-cols-2">
 				{offset > 0 && (
-					<button className="col-span-1 justify-self-start text-blueLike font-semibold underline ml-5" onClick={prevPage}>
+					<button
+						className="col-span-1 justify-self-start text-blueLike font-semibold underline ml-5"
+						onClick={prevPage}
+					>
 						{'Prev'}
 					</button>
 				)}
 				{data.length > limit && (
-					<button className="col-span-2 justify-self-end text-blueLike font-semibold  underline mr-5" onClick={nextPage}>
+					<button
+						className="col-span-2 justify-self-end text-blueLike font-semibold  underline mr-5"
+						onClick={nextPage}
+					>
 						{'Next'}
 					</button>
 				)}

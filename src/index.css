@@ -445,16 +445,14 @@ label {
 	}
 }
 
-.left-feed {
-	width: 400px;
+.user-feed {
 	opacity: 1;
 	/* transtion opacity and width  */
-	transition: opacity 0.5s ease;
+	transition: all 0.5s ease;
 }
 
-.left-feed.collapsed {
-	width: 0;
-	opacity: 0;
+.user-feed.collapsed {
+	opacity: 0.5;
 }
 
 /* 

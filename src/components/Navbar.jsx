@@ -25,7 +25,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		}
 	};
 
-	console.log(location.pathname);
+	// console.log(location.pathname);
 	//Navbar component called About that sends people to #about section on the homepage
 
 	return (
@@ -88,8 +88,8 @@ function Navbar({ collapsed, setCollapsed }) {
 								<div className="mr-4">
 									{/* <Link to="/article/new-article" className="navbar-link"> User Hub </Link> */}
 									<Link to="/auth">Sign In</Link>
-								</div>)}
-
+								</div>
+							)}
 						</div>
 					)}
 				</div>

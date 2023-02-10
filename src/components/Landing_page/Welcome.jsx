@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import Languages from './Languages';
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../Loading';
 import ReactLoading from 'react-loading';
@@ -16,8 +16,7 @@ export default function Welcome() {
 	const [language, setLanguage] = useState('en-US');
 
 	const [loading, setLoading] = useState(false);
-	const sessionContext = useSessionContext()
-
+	const sessionContext = useSessionContext();
 
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
@@ -69,26 +68,26 @@ export default function Welcome() {
 			)}
 			<div>
 				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
-					<section class="animation1 lg:mr-2 text-orangeLike block">
-						<div class="first ">
+					<section className="animation1 lg:mr-2 text-orangeLike block">
+						<div className="first ">
 							<div>Transcribe</div>
 						</div>
-						<div class="second">
+						<div className="second">
 							<div>Summarize</div>
 						</div>
-						<div class="third">
+						<div className="third">
 							<div>Question</div>
 						</div>
-						<div class="forth">
+						<div className="forth">
 							<div>Transcribe</div>
 						</div>
 					</section>
 					YouTube with just one click
 				</div>
 				<p className="text-bordoLike md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-					Paste a YouTube link, choose the language of the video (only English for now), and submit. Alphy will transcribe,
-					summarize and prepare the content for questioning. We will notify you via email when it's ready!
-					{' '}
+					Paste a YouTube link, choose the language of the video (only English for now), and submit. Alphy
+					will transcribe, summarize and prepare the content for questioning. We will notify you via email
+					when it's ready!{' '}
 				</p>
 
 				<form
@@ -110,18 +109,21 @@ export default function Welcome() {
 
 					<Toaster />
 					<div className="flex justify-center">
-						{sessionContext.userId ? (<button
-							className="w-1/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
-							type="submit"
-						>
-							Submit
-						</button>) : (<button
-							className="w-2/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
-							type="submit"
-						>
-							Sign In To Submit
-						</button>)}
-
+						{sessionContext.userId ? (
+							<button
+								className="w-1/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+								type="submit"
+							>
+								Submit
+							</button>
+						) : (
+							<button
+								className="w-2/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+								type="submit"
+							>
+								Sign In To Submit
+							</button>
+						)}
 					</div>
 				</form>
 			</div>
