@@ -9,14 +9,16 @@ export default function Content(props) {
 	const data = props.data;
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
-	console.log(data)
+	console.log(data);
 	return (
 		<div className={`container  mx-auto md:px-10 lg:px-20 `}>
-			<div className='grid grid-cols-3'>
-				<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">{data.title}</h1>
-				<div className='flex flex-col items-center mt-5 cursor-pointer lg:hidden'>
-					<img src='/youtubeicon.png' width={80} />
-					<p className='-mt-3 font-semibold'>Click to Watch</p>
+			<div className="grid grid-cols-3">
+				<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
+					{data.title}
+				</h1>
+				<div className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
+					<img src="/youtubeicon.png" width={80} />
+					<p className="-mt-3 font-semibold">Click to Watch</p>
 				</div>
 			</div>
 			<div className="grid grid-cols-2 gap-8 mt-16 mb-10">

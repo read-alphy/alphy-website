@@ -4,7 +4,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import FeedItem from './FeedTabs/FeedItem';
 import SkeletonItem from './FeedTabs/SkeletonItem';
 
-function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
+function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset, setCollapsed }) {
 	const temp = 10;
 	const limit = temp;
 
@@ -109,7 +109,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 				<div className="signed-in-feed-elements">
 					{isLoading
 						? Array.from(Array(temp), (_, index) => index + 1).map((index) => <SkeletonItem key={index} />)
-						: data.map((item, index) => <FeedItem key={index} item={item} />)}
+						: data.map((item, index) => <FeedItem setCollapsed={setCollapsed} key={index} item={item} />)}
 				</div>
 			</div>
 		</div>

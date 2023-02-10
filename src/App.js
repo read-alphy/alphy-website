@@ -23,9 +23,10 @@ function App() {
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [search, setSearch] = useState('');
+	const [offset, setOffset] = useState(0);
 
 	const [collapsed, setCollapsed] = useState(true);
-
 
 	useEffect(() => {
 		setIsLoading(true);

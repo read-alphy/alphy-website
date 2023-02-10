@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
 	const temp = 10;
 	const limit = temp;
+	const searchInputRef = React.useRef(null);
 
 	const getData = (offset) => {
 		setIsLoading(true);
@@ -43,7 +44,13 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 					onSubmit={(e) => {
 						e.preventDefault();
 						setOffset(0);
-						getData(offset);
+						// if input is empty get it from searchInputRef
+						if (searchInputRef.current.value.length === 0) {
+							setSearch('');
+							getData(0, '');
+						} else {
+							getData(0, search);
+						}
 					}}
 				>
 					<label for="voice-search" class="sr-only">
@@ -51,6 +58,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 					</label>
 					<div class="relative w-full">
 						<input
+							ref={searchInputRef}
 							type="text"
 							onChange={(e) => {
 								setSearch(e.target.value);
