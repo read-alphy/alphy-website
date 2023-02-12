@@ -42,7 +42,7 @@ function Navbar({ collapsed, setCollapsed }) {
 					<div className="signed-in-navbar grid ">
 
 						<a href="/#feedback" type="button" class="text-gray-900 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2">Give us feedback!</a>
-						<a href="/#about" className="hidden lg:block mr-5 pt-2"> About Alphy </a>
+						<a href="/#about" className="hidden lg:block mr-5 pt-2"> About </a>
 
 
 						{sessionContext.userId ? (<div className="hidden lg:block pt-2">
