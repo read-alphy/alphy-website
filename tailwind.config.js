@@ -14,7 +14,9 @@ module.exports = {
     extend: {
       height: {
         6.5: '1.675rem',
-        'a4': '842px'
+        'a4': '842px',
+        120: '30rem',
+        144: '36rem'
       },
       width: {
         22: '5.6rem',
@@ -60,7 +62,7 @@ module.exports = {
         bordoLike: "#04293A",
         purpleLike: "#774360",
         redLike: "#B25068",
-        orangeLike: "#93BFCF",
+        lightblueLike: "#93BFCF",
 
         //palette - fener
         whiteLike: "#F9F8F8",

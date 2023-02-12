@@ -21,9 +21,7 @@ export default function Welcome() {
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
 		toast.dismiss();
-		// Do something with the inputValue here
-		console.log(inputValue);
-		console.log(selectedOption);
+		// Do something with the inputValue here	
 
 		if (
 			inputValue.includes('https://www.youtube.com') ||
@@ -55,7 +53,7 @@ export default function Welcome() {
 	};
 
 	return (
-		<div className="container font-semibold px-4 mx-auto py-18 lg:py-28">
+		<div className="container px-4 mx-auto py-18 lg:py-28">
 			{loading && (
 				<div className="flex justify-center items-center h-screen">
 					<div className="flex flex-col items-center">
@@ -68,7 +66,7 @@ export default function Welcome() {
 			)}
 			<div>
 				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
-					<section className="animation1 lg:mr-2 text-orangeLike block">
+					<section className="animation1 lg:mr-2 text-lightblueLike block">
 						<div className="first ">
 							<div>Transcribe</div>
 						</div>
@@ -111,14 +109,14 @@ export default function Welcome() {
 					<div className="flex justify-center">
 						{sessionContext.userId ? (
 							<button
-								className="w-1/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+								className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"
 							>
 								Submit
 							</button>
 						) : (
 							<button
-								className="w-2/3 border-2 border-bordoLike px-8 bg-orangeLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+								className="w-2/3 border-2 border-bordoLike px-8 bg-lightblueLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"
 							>
 								Sign In To Submit

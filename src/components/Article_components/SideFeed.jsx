@@ -19,8 +19,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 		setIsLoading(true);
 		axios
 			.get(
-				`${
-					process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -116,7 +115,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 						</div>
 						<button
 							type="submit"
-							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-orangeLike rounded-r-lg border-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300"
+							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-lightblueLike rounded-r-lg border-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300"
 						>
 							<svg
 								className="w-5 h-5 ml-5"
@@ -140,11 +139,11 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 					<tbody>
 						{isLoading
 							? Array.from(Array(temp), (_, index) => index + 1).map((index) => (
-									<SkeletonItem key={index} />
-							  ))
+								<SkeletonItem key={index} />
+							))
 							: data.map((item, index) => (
-									<FeedItem setCollapsed={setCollapsed} key={index} item={item} />
-							  ))}
+								<FeedItem setCollapsed={setCollapsed} key={index} item={item} />
+							))}
 					</tbody>
 				</table>
 			</div>

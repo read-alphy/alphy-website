@@ -2,6 +2,7 @@ import React from 'react';
 import Feed from '../components/Landing_page/WelcomeFeed';
 import Welcome from '../components/Landing_page/Welcome';
 import About from '../components/Landing_page/About';
+import FeedbackForm from '../components/FeedbackForm';
 
 function Home({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
 	return (
@@ -18,6 +19,7 @@ function Home({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 				setOffset={setOffset}
 			/>
 			<About />
+			<FeedbackForm />
 		</div>
 	);
 }

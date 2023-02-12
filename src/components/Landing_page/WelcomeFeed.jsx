@@ -15,8 +15,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 		setIsLoading(true);
 		axios
 			.get(
-				`${
-					process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -70,7 +69,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-orangeLike rounded-lg border border-bordoLike hover:bg-blueLike focus:ring-4 focus:outline-none focus:ring-blue-300 sm: mt-10"
+						className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-lightblueLike rounded-lg border border-bordoLike hover:bg-blueLike focus:ring-4 focus:outline-none focus:ring-blue-300 sm: mt-10"
 					>
 						<svg
 							aria-hidden="true"
@@ -96,13 +95,12 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 					<tbody
 						className={`
             grid grid-cols-1 mt-10
-            ${
-				isLoading
-					? 'lg:grid-cols-2 xl:grid-cols-2'
-					: data.length === 1
-					? 'lg:grid-cols-1 xl:grid-cols-1'
-					: 'lg:grid-cols-2 xl:grid-cols-2'
-			}
+            ${isLoading
+								? 'lg:grid-cols-2 xl:grid-cols-2'
+								: data.length === 1
+									? 'lg:grid-cols-1 xl:grid-cols-1'
+									: 'lg:grid-cols-2 xl:grid-cols-2'
+							}
             gap-4
             `}
 					>

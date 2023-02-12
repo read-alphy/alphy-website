@@ -25,3 +25,4 @@ src/.env
 .env
 src/components/Article_components/EmbeddingSearch.jsx
 src/components/Article_components/QuestionAnswering.jsx
+src/components/Article_components/QuestionAnswering.jsx
