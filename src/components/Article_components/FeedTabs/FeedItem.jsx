@@ -1,12 +1,13 @@
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 import './FeedItem.css';
 
-const FeedItem = (props) => {
-	const item = props.item;
+const FeedItem = ({ item, setCollapsed }) => {
 	const source_id = item.source_id;
 	const imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
 	const navigate = useNavigate();
+	const windowSize = useWindowSize();
 	return (
 		<tr className={'grid'}>
 			<td className="flex w-full">
@@ -16,6 +17,7 @@ const FeedItem = (props) => {
 					}
 					onClick={() => {
 						navigate(`/article/${item.source_id}`);
+						if (windowSize.width < 768) setCollapsed(true);
 					}}
 				>
 					<div className="w-1/2 min-w-150 max-w-[300px] mr-3">

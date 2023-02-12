@@ -9,12 +9,14 @@ import { useNavigate } from 'react-router-dom';
 function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
 	const temp = 10;
 	const limit = temp;
+	const searchInputRef = React.useRef(null);
 
 	const getData = (offset) => {
 		setIsLoading(true);
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${
+					process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -38,18 +40,25 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 			<h2 className="text-bordoLike text-2xl mx-auto pb-10 font-semibold">Browse Alphy's database</h2>
 			<div className="main-page-feed-table-parent bg-slate-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form
-					class="flex items-center"
+					className="flex items-center"
 					onSubmit={(e) => {
 						e.preventDefault();
 						setOffset(0);
-						getData(offset);
+						// if input is empty get it from searchInputRef
+						if (searchInputRef.current.value.length === 0) {
+							setSearch('');
+							getData(0, '');
+						} else {
+							getData(0, search);
+						}
 					}}
 				>
-					<label for="voice-search" class="sr-only">
+					<label htmlFor="voice-search" className="sr-only">
 						Search
 					</label>
-					<div class="relative w-full">
+					<div className="relative w-full">
 						<input
+							ref={searchInputRef}
 							type="text"
 							onChange={(e) => {
 								setSearch(e.target.value);
@@ -61,11 +70,11 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 					</div>
 					<button
 						type="submit"
-						class="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-orangeLike rounded-lg border border-bordoLike hover:bg-blueLike focus:ring-4 focus:outline-none focus:ring-blue-300 sm: mt-10"
+						className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-orangeLike rounded-lg border border-bordoLike hover:bg-blueLike focus:ring-4 focus:outline-none focus:ring-blue-300 sm: mt-10"
 					>
 						<svg
 							aria-hidden="true"
-							class="w-5 h-5 -ml-1"
+							className="w-5 h-5 -ml-1"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -81,20 +90,19 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 					</button>
 				</form>
 
-				<div className={`buttons flex justify-between mt-2`}>
-
-				</div>
+				<div className={`buttons flex justify-between mt-2`}></div>
 				<table className="main-page-feed w-full">
 					<thead className="header h-0" />
 					<tbody
 						className={`
             grid grid-cols-1 mt-10
-            ${isLoading
-								? 'lg:grid-cols-2 xl:grid-cols-2'
-								: data.length === 1
-									? 'lg:grid-cols-1 xl:grid-cols-1'
-									: 'lg:grid-cols-2 xl:grid-cols-2'
-							}
+            ${
+				isLoading
+					? 'lg:grid-cols-2 xl:grid-cols-2'
+					: data.length === 1
+					? 'lg:grid-cols-1 xl:grid-cols-1'
+					: 'lg:grid-cols-2 xl:grid-cols-2'
+			}
             gap-4
             `}
 					>
@@ -115,12 +123,18 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 				</table>
 				<div className="grid grid-cols-2">
 					{offset > 0 && (
-						<button className="col-span-1 justify-self-start text-blueLike font-semibold mt-10 underline" onClick={prevPage}>
+						<button
+							className="col-span-1 justify-self-start text-blueLike font-semibold mt-10 underline"
+							onClick={prevPage}
+						>
 							{'Prev'}
 						</button>
 					)}
 					{data.length > limit && (
-						<button className="col-span-2 justify-self-end text-blueLike font-semibold  mt-10 underline" onClick={nextPage}>
+						<button
+							className="col-span-2 justify-self-end text-blueLike font-semibold  mt-10 underline"
+							onClick={nextPage}
+						>
 							{'Next'}
 						</button>
 					)}
