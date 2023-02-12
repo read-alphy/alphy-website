@@ -16,6 +16,7 @@ export default function Content(props) {
 	const [activeTab, setActiveTab] = useState('tab1');
 
 	let transcript = ""
+	let key_takeaways = data ? data.key_takeaways ? data.key_takeaways.split(/\r?\n/) : null : null;
 
 
 	async function transcriptParser() {
@@ -63,7 +64,7 @@ export default function Content(props) {
 			</div>
 			<div className="grid grid-cols-2 gap-8 mt-16 mb-10">
 				<div className="w-2/3">
-					{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
+					{key_takeaways ? <KeyTakeAways key_takeaways={key_takeaways} /> : null}
 				</div>
 				<div className="hidden lg:block w-5/6">
 					<iframe
