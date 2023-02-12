@@ -35,16 +35,16 @@ export default function Content(props) {
 				</div>
 			</div>
 			{/* <QuestionAnswering data={data} /> */}
-			<div className="mt-14 lg:mt-0	">
-				<div className="summary-and-transcript-buttons text-xl">
+			<div className="mt-14 lg:mt-0 w-full">
+				<div className="summary-and-transcript-buttons text-xl w-full ">
 					<button
-						className={activeTab === 'tab1' ? 'content-active-button ' : ''}
+						className={activeTab === 'tab1' ? 'content-active-button border-r-1 w-1/2' : 'border-r-1 w-1/2'}
 						onClick={() => setActiveTab('tab1')}
 					>
 						Summary
 					</button>
 					<button
-						className={activeTab === 'tab2' ? 'content-active-button' : ''}
+						className={activeTab === 'tab2' ? 'content-active-button w-1/2' : 'w-1/2'}
 						onClick={() => setActiveTab('tab2')}
 					>
 						Transcript

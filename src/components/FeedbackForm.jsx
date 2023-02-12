@@ -17,7 +17,8 @@ export default function FeedbackForm() {
 
 
             <div className=" flex justify-center ">
-                <iframe className="sm:w-5/6 md:w-1/3 mb-20 md:ml-30 overflow-auto h-160 " src="https://tally.so/embed/mKp7XX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+                <iframe className="sm:w-5/6 max-w-4xl mb-20 md:ml-30 overflow-auto h-160 " src="https://tally.so/embed/mKp7XX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+
             </div>
         </div >)
 
