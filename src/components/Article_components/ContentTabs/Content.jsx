@@ -37,7 +37,6 @@ export default function Content(props) {
 		}
 
 		transcript = nothing
-		console.log(nothing)
 
 	}
 
