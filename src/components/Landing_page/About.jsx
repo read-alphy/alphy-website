@@ -17,7 +17,7 @@ export default function About() {
 
                 <h2 className="lg:text-xl  font-semibold"> What is Alphy?</h2>
                 <br></br>
-                <p> Alphy uses artificial intelligence to transcribe and summarize on an audio-based content and offers semantic research on the transcript for you to talk with the content. It aims to help users meaningfully interact with the speeh-based information on the Internet.
+                <p> Alphy transcribes and summarizes audio-based content and offers semantic research on the transcript for you to talk with the content. It aims to help users meaningfully interact with the speeh-based information on the Internet with the help of artificial intelligence.
                 </p>
                 <br></br>
                 <br></br>
