@@ -12,12 +12,12 @@ export default function FeedbackForm() {
 
     }
     return (
-        <div className="mx-auto mb-20" id="feedback">
+        <div className="mx-auto pt-20 w-800 pb-20 bg-slate-200" id="feedback">
             <div className=" flex justify-center "></div>
 
 
             <div className=" flex justify-center ">
-                <iframe className="w-2/3 mb-20 md:ml-30 overflow-x-auto h-144" src="https://tally.so/embed/mKp7XX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+                <iframe className="sm:w-5/6 md:w-1/3 mb-20 md:ml-30 overflow-auto h-144" src="https://tally.so/embed/mKp7XX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
             </div>
         </div >)
 

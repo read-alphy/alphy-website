@@ -35,7 +35,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 	};
 
 	return (
-		<div className="main-page-feed-section">
+		<div className="main-page-feed-section container mx-auto w-800">
 			<h2 className="text-bordoLike text-2xl mx-auto pb-10 font-semibold">Browse Alphy's database</h2>
 			<div className="main-page-feed-table-parent bg-slate-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form

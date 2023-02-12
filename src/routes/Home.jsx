@@ -6,7 +6,7 @@ import FeedbackForm from '../components/FeedbackForm';
 
 function Home({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
 	return (
-		<div className="container mx-auto w-800">
+		<div className="mx-auto w-800">
 			<Welcome />
 			<Feed
 				data={data}

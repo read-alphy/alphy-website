@@ -5,9 +5,9 @@
 export default function About() {
 
     return (
-        <div className="flex justify-center text-blueLike">
+        <div className="mx-auto w-800 flex justify-center text-blueLike bg-slate-100">
 
-            <div id="about" className="px-4 container w-4/6 pt-20 pb-20 text-l lg:text-l">
+            <div id="about" className="px-4 container w-5/6 md:w-1/3 pt-20 pb-20 text-l lg:text-l">
                 <br></br><br></br>
                 <h1 className="text-4xl  font-semibold">About
 
@@ -15,7 +15,7 @@ export default function About() {
                 </h1>
                 <br></br>
 
-                <h2 className="lg:text-xl  font-semibold"> What is it?</h2>
+                <h2 className="lg:text-xl  font-semibold"> What is Alphy?</h2>
                 <br></br>
                 <p> Alphy uses artificial intelligence to transcribe and summarize on an audio-based content and offers semantic research on the transcript for you to talk with the content. It aims to help users meaningfully interact with the speeh-based information on the Internet.
                 </p>
