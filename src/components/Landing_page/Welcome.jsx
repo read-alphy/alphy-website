@@ -6,6 +6,7 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../Loading';
 import ReactLoading from 'react-loading';
+import { useNavigate } from 'react-router-dom';
 
 export default function Welcome() {
 	//const sessionContext = useSessionContext()
@@ -17,6 +18,7 @@ export default function Welcome() {
 
 	const [loading, setLoading] = useState(false);
 	const sessionContext = useSessionContext();
+	const navigate = useNavigate();
 
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
@@ -28,24 +30,32 @@ export default function Welcome() {
 			inputValue.includes('https://youtu.be') ||
 			inputValue.includes('twitter.com/i/spaces')
 		) {
-			setLoading(true);
-			axios
-				.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
-					url: inputValue,
-					language: selectedOption,
-				})
-				.then((response) => {
-					console.log(response);
-					setLoading(false);
-					setInputValue('');
-					if (response.status === 200 || response.status === 201 || response.status === 202) {
-						toast.success(
-							'Succesfully submitted the ! \n\n We will send you an email when the article is ready.',
-						);
-					} else {
-						toast.error('There was an error submitting the form. Please try again.');
-					}
-				});
+			if (sessionContext.id) {
+
+
+				setLoading(true);
+				axios
+					.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+						url: inputValue,
+						language: selectedOption,
+					})
+					.then((response) => {
+						console.log(response);
+						setLoading(false);
+						setInputValue('');
+						if (response.status === 200 || response.status === 201 || response.status === 202) {
+							toast.success(
+								'Succesfully submitted the ! \n\n We will send you an email when the article is ready.',
+							);
+						} else {
+							toast.error('There was an error submitting the form. Please try again.');
+						}
+					})
+			}
+			else {
+				navigate("/auth")
+			};
+
 		} else {
 			setInputValue('');
 			toast.error('Please provide a link to a YouTube video or Twitter Spaces.');

@@ -42,48 +42,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 		<div className="user-feed-buttons mt-10 mb-5">
 			<div className="signed-in-feed pt-2 mr-6">
 				<div>
-					<div className="flex justify-between ml-2 mb-10">
-						<h1 className=" text-blueLike font-semibold text-xl">Search by content or creator</h1>
-						<button
-							className="
-								text-whiteLike
-								bg-bordoLike
-								rounded-md
-								p-2
-								text-sm
-								font-semibold
-								transition
-								duration-500
-								ease-in-out
-								transform
-								hover:-translate-y-1
-								hover:scale-110
-								active:scale-90
-								shadow-md
-								outline-none
-								focus:outline-none
-								mr-1
-								mb-1
-							"
-							onClick={() => setCollapsed(true)}
-						>
-							{/* cross svg */}
-							<svg
-								className="w-5 h-5"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24 "
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									strokeLinecap={'round'}
-									strokeLinejoin={'round'}
-									strokeWidth={'2'}
-									d="M6 18L18 6M6 6l12 12"
-								></path>
-							</svg>
-						</button>
-					</div>
+
 					<form
 						className="flex items-center mb-5"
 						onSubmit={(e) => {
@@ -109,13 +68,14 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 									setSearch(e.target.value);
 								}}
 								id="simple-search"
-								className="ml-2 bg-whiteLike border border-bordoLike text-bordoLike text-gray-900 text-sm rounded-l-lg rounded-r-s focus:ring-slate-500 focus:border-slate-500 block w-full pl-4 p-2.5 "
+								className="ml-2 bg-whiteLike border border-bordoLike text-bordoLike text-gray-900 text-sm rounded-l-lg  focus:ring-slate-500 focus:border-slate-500 block w-full pl-4 p-2.5 "
 								placeholder={search ? search : 'Search YouTube videos or Twitter spaces...'}
 							/>
+
 						</div>
 						<button
 							type="submit"
-							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-lightblueLike rounded-r-lg border-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300"
+							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-lightblueLike rounded-r-lg border-slate-700 hover:bg-blueLike focus:ring-1 focus:outline-none focus:ring-slate-300"
 						>
 							<svg
 								className="w-5 h-5 ml-5"
@@ -133,6 +93,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 							</svg>
 							<span className="sr-only">Search</span>
 						</button>
+
 					</form>
 				</div>
 				<table>
@@ -150,7 +111,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 			<div className="grid grid-cols-2">
 				{offset > 0 && (
 					<button
-						className="col-span-1 justify-self-start text-blueLike font-semibold underline ml-5"
+						className="col-span-1 justify-self-start text-blueLike font-semibold underline mt-5 ml-5"
 						onClick={prevPage}
 					>
 						{'Prev'}
@@ -158,7 +119,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 				)}
 				{data.length > limit && (
 					<button
-						className="col-span-2 justify-self-end text-blueLike font-semibold  underline mr-5"
+						className="col-span-2 justify-self-end text-blueLike font-semibold  underline mt-5 mr-5"
 						onClick={nextPage}
 					>
 						{'Next'}

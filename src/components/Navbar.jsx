@@ -25,8 +25,8 @@ function Navbar({ collapsed, setCollapsed }) {
 		}
 	};
 
-	console.log(location.pathname);
-	//Navbar component called About that sends people to #about section on the homepage
+
+
 
 	return (
 		<div className="navbar bg-bordoLike text-slate-100 font-bold">

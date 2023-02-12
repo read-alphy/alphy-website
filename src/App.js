@@ -42,10 +42,10 @@ function App() {
 				<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 
 				<Routes>
-					{/* {getSuperTokensRoutesForReactRouterDom(require("react-router-dom"))}
-          <Route path="/auth" element={<SessionAuth>
-            <Home2 />
-          </SessionAuth>} />  */}
+					{getSuperTokensRoutesForReactRouterDom(require("react-router-dom"))}
+					<Route path="/auth" element={<SessionAuth>
+						<Home2 />
+					</SessionAuth>} />
 					<Route
 						path="/"
 						element={

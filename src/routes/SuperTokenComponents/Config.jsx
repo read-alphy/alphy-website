@@ -20,21 +20,19 @@ export const SuperTokensConfig = {
             },
             style: {
                 container: {
-                    backgroundColor: "#242423",
+                    fontFamily: "Open Sans, sans-serif",
                 },
-                headerTitle: { color: "#ced4da", },
-                label: { color: "#ced4da", },
-                input: {
-                    backgroundColor: "#FFF",
-                    color: "#242423",
-                },
+
+
                 button: {
-                    backgroundColor: "#FFF",
-                    color: "#242423",
+                    backgroundColor: "#93BFCF",
+                    border: "#93BFCF",
+                    color: "#F9F8F8",
                 },
                 superTokensBranding: {
                     display: "none"
-                }
+                },
+
             },
             contactMethod: "EMAIL",
         }),

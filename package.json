@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.2.2",
+    "fs": "^0.0.1-security",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "^18.2.0",
@@ -27,6 +28,9 @@
     "react-toggle-dark-mode": "^1.1.1",
     "react-tooltip": "^5.5.2",
     "remixicon": "^2.5.0",
+    "srt-parser-2": "^1.2.2",
+    "subtitle": "^4.2.1",
+    "subtitles-parser": "^0.0.2",
     "supertokens-auth-react": "^0.29.0",
     "swiper": "^9.0.2",
     "web-vitals": "^3.1.1"
