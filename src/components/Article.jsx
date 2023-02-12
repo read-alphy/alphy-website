@@ -59,7 +59,7 @@ function Article({
 	};
 	useEffect(() => {
 		const source_id = location.pathname.split('/')[2];
-		const url = `${process.env.REACT_APP_API_URL}/summaries/${source_id}`;
+		const url = `${process.env.REACT_APP_API_URL}/summaries/youtube/${source_id}`;
 		fetchData(url);
 	}, [location.pathname, navigate]);
 
