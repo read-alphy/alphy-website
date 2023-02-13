@@ -43,18 +43,18 @@ function Navbar({ collapsed, setCollapsed }) {
 
 					<div className="signed-in-navbar grid ">
 
-						<a href="/#feedback" type="button" className={`hidden lg:block text-gray-900 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2`}>Give us feedback!</a>
+						<a href="/#feedback" type="button" className={`hidden md:block text-gray-900 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2`}>Give us feedback!</a>
 
-						<a href="/#about" className="hidden lg:block mr-5 pt-2"> About </a>
+						<a href="/#about" className="hidden md:block mr-5 pt-2"> About </a>
 
 
-						{sessionContext.userId ? (<div className="hidden lg:block pt-2">
+						{sessionContext.userId ? (<div className="hidden md:block pt-2">
 							<button onClick={handleSignOut} className="navbar-link">
 								Log Out
 							</button>
 						</div>) : (
 
-							<div className="hidden lg:block pt-2">
+							<div className="hidden md:block pt-2">
 
 								<Link to="/auth">Sign In</Link>
 							</div>
@@ -62,7 +62,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 						<div
 							onClick={() => setCollapsed(!collapsed)}
-							className={`block mr-4 cursor-pointer lg:hidden`}
+							className={`block mr-4 cursor-pointer md:hidden`}
 						>
 							<i className="text-2xl ri-menu-line text-mainText"></i>
 
