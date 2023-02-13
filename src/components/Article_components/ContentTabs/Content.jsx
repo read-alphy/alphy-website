@@ -22,6 +22,7 @@ export default function Content(props) {
 
 
 	async function transcriptParser() {
+
 		let summaryArray = data.summary.split("\n")
 		summary = summaryArray.map(item => item).join("<br></br>")
 		var parser = new srtParser2();

@@ -11,13 +11,7 @@ export const SuperTokensConfig = {
     // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides
     recipeList: [
         ThirdPartyPasswordless.init({
-            signInUpFeature: {
-                providers: [
-                    // ThirdPartyPasswordless.Github.init(),
-                    /*                  ThirdPartyPasswordless.Google.init(),
-                                     ThirdPartyPasswordless.Apple.init(), */
-                ],
-            },
+
             style: {
                 container: {
                     fontFamily: "Open Sans, sans-serif",
@@ -40,4 +34,4 @@ export const SuperTokensConfig = {
     ],
 };
 
-console.log(`BACK ${process.env.REACT_APP_BACKEND_URL}, FRONT ${process.env.REACT_APP_FRONTEND_URL}`)
+console.log(`BACK ${process.env.REACT_APP_API_URL}, FRONT ${process.env.REACT_APP_API_URL}`)

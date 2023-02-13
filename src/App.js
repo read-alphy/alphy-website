@@ -83,7 +83,7 @@ function App() {
 				{location.pathname === '/' ? <Footer /> : null}
 			</div>
 
-			{/* </div > */}
+
 		</SuperTokensWrapper>
 	);
 }

@@ -56,18 +56,18 @@ module.exports = {
       colors: {
         main: '#2f3542',
         mainText: '#ced4da',
-        sideColor: '#212529',
+        sideColor: '#000',
         darker: '#03001C',
 
         // palette - sunset
-        bordoLike: "#04293A",
-        purpleLike: "#774360",
+        bordoLike: "#000",
+        purpleLike: "#000",
         redLike: "#B25068",
-        lightblueLike: "#93BFCF",
+        lightblueLike: "#000",
 
         //palette - fener
         whiteLike: "#F9F8F8",
-        blueLike: "#04293A"
+        blueLike: "#000000"
 
 
 
