@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default function CallAPIView() {
     async function callAPIClicked() {
-        let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/sessioninfo`);
+        let response = await axios.get(`${process.env.REACT_APP_API_URL}/sessioninfo`);
         window.alert("Session Information:\n" + JSON.stringify(response.data, null, 2));
     }
 
