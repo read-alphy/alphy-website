@@ -97,7 +97,7 @@ export default function Content(props) {
 					</button>
 				</div>
 				<div className="main-content lg:ml-10">
-					{activeTab === 'tab1' && <ContentTab data={summary} />}
+					{activeTab === 'tab1' && <ContentTab data={summary ? summary : data.summary} />}
 					{activeTab === 'tab2' && <ContentTab data={transcript ? transcript : data.transcript} />}
 				</div>
 			</div>
