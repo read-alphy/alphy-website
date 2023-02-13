@@ -4,7 +4,7 @@ import Session from "supertokens-auth-react/recipe/session";
 export const SuperTokensConfig = {
     appInfo: {
         appName: "Alphy",
-        apiDomain: process.env.REACT_APP_API_UR || "http://localhost:3001",
+        apiDomain: process.env.REACT_APP_API_URL || "http://localhost:3001",
         websiteDomain: "https://alphy.tech" || "http://localhost:3000",
     },
     // recipeList contains all the modules that you want to
