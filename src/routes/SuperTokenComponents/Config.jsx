@@ -6,6 +6,7 @@ export const SuperTokensConfig = {
         appName: "Alphy",
         apiDomain: process.env.REACT_APP_API_URL || "http://localhost:3001",
         websiteDomain: "https://alphy.tech" || "http://localhost:3000",
+        apiBasePath: "/auth"
     },
     // recipeList contains all the modules that you want to
     // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides
