@@ -14,8 +14,8 @@ export const SuperTokensConfig = {
             signInUpFeature: {
                 providers: [
                     // ThirdPartyPasswordless.Github.init(),
-                    ThirdPartyPasswordless.Google.init(),
-                    ThirdPartyPasswordless.Apple.init(),
+                    /*                  ThirdPartyPasswordless.Google.init(),
+                                     ThirdPartyPasswordless.Apple.init(), */
                 ],
             },
             style: {

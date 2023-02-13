@@ -110,7 +110,7 @@ export default function Welcome() {
 							value={inputValue}
 							onChange={(event) => setInputValue(event.target.value)}
 							placeholder="Insert a link to start"
-							autocomplete="off"
+							autoComplete="off"
 						/>
 						<Languages language={language} onLangChange={setLanguage} />
 					</div>

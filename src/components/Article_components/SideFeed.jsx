@@ -40,6 +40,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 
 	return (
 		<div className="user-feed-buttons mt-10 mb-5">
+
 			<div className="signed-in-feed pt-2 mr-6">
 				<div>
 

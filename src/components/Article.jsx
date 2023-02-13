@@ -3,8 +3,7 @@ import SideFeed from './Article_components/SideFeed';
 // import ArticleCreator from "./Article_components/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './Article_components/ContentTabs/Content';
-import ArrowLeft from '../img/arrow-left.svg';
-import ArrowRight from '../img/arrow-right.svg';
+
 import { signOut } from 'supertokens-auth-react/recipe/session';
 import axios from 'axios';
 import Loading from './Loading';
@@ -23,16 +22,18 @@ function Article({
 	offset,
 	setOffset,
 }) {
+
 	const location = useLocation();
 	const navigate = useNavigate();
-	const windowSize = useWindowSize();
 
+	const windlowLocationArticle = useLocation().pathname.includes("/article")
+	/* 	const windowSize = useWindowSize();
 	useEffect(() => {
-		if (windowSize.width > 768) {
-			// setCollapsed(false);
-			console.log('article rendered');
-		}
-	}, []);
+			if (windowSize.width > 768) {
+				// setCollapsed(false);
+	
+			}
+		}, []); */
 
 	const sessionContext = useSessionContext();
 	const [isLoading, setIsLoading] = useState(feedData?.length === 0);
@@ -99,6 +100,7 @@ function Article({
 
 				</div>
 				{!collapsed ? ( // hamburger menu for mobile devices
+
 					<div className="fixed top-0 z-50 transition origin-top-right transform md:hidden mb-auto pt-[2px]">
 						<div className="rounded-lg rounded-t-none shadow-lg bg-whiteLike">
 							<div className="h-screen px-4 overflow-y-auto">
@@ -106,35 +108,70 @@ function Article({
 
 								</div>
 								<div className="grid grid-row">
-									<p className="ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
-									<Link className="ml-5 text-l font-semibold text-blueLike pb-5" to="/">
-										Home
-									</Link>
-									{sessionContext.userId ? (
+									<div className="grid grid-cols-2">
+										<p className=" ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
+
 										<button
-											onClick={handleSignOut}
-											className="ml-5 text-l font-semibold text-blueLike"
+											className={`mb-10 w-1/12 justify-self-end mr-5 ${collapsed ? "hidden" : "block"}`}
+
+
+											onClick={() => setCollapsed(true)}
 										>
-											Log Out
+											{/* cross svg */}
+											<svg
+												className="w-5 h-5"
+												fill="bg-blueLike"
+												stroke="currentColor"
+												viewBox="0 0 24 24 "
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													strokeLinecap={'round'}
+													strokeLinejoin={'round'}
+													strokeWidth={'2'}
+													d="M6 18L18 6M6 6l12 12"
+												></path>
+											</svg>
 										</button>
-									) : (
-										<Link className="ml-5 text-l font-semibold text-blueLike" to="/auth">
-											Sign In
+									</div>
+									<div className="w-1/3 ml-5 mb-5">
+										<a href="/#feedback" type="button" className={`text-blueLike font-semibold `} onClick={() => setCollapsed(true)}>Give us feedback!</a>
+									</div>
+									<div className="w-1/3 ml-5 mb-5">
+										<Link className="text-l font-semibold text-blueLike" to="/" onClick={() => setCollapsed(true)}>
+											Home
 										</Link>
+									</div>
+									{sessionContext.userId ? (
+										<div className="w-1/3 ml-5 mb-5">
+											<button
+												onClick={handleSignOut}
+												className=" text-l font-semibold text-blueLike"
+											>
+												Log Out
+											</button>
+										</div>
+									) : (
+										<div className="w-1/3 ml-5 mb-5">
+											<Link className="text-l font-semibold text-blueLike" to="/auth " onClick={() => setCollapsed(true)}>
+												Sign In
+											</Link>
+										</div>
 									)}
 								</div>
-								<div className="mt-4">
+								<div className={`mt-4 ${windlowLocationArticle ? ('block') : ('block')}`}>
 									<div className="">{sideFeed}</div>
 								</div>
 							</div>
 						</div>
 					</div>
+
 				) : (
 					<></>
 				)}
 
 
-				<div className="chimp px-4 mx-auto h-[92vh]  ">
+				<div className="px-4 mx-auto h-[92vh]  ">
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}
 				</div>
 			</div>

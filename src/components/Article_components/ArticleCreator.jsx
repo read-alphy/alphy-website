@@ -57,7 +57,7 @@ function ArticleCreator() {
             <form className="sign-in-input" onSubmit={handleSubmit}>
 
                 <label>
-                    <input type="url" name="content_link" autocomplete="off" value={inputValue} onChange={(event) => setInputValue(event.target.value)}
+                    <input type="url" name="content_link" autoComplete="off" value={inputValue} onChange={(event) => setInputValue(event.target.value)}
                         placeholder="Insert the YouTube link to start" />
                 </label>
                 <Languages language={language} onLangChange={setLanguage} />

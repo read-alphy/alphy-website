@@ -39,7 +39,7 @@ function Footer() {
 				</div>
 				<div className="grid grid-cols-1 sm:grid-cols-1 mb-5">
 					<div>
-						<h2 className="sm:mb-6 text-2xl text-whiteLike font-bold ">REACH US</h2>
+						<h2 className="mb-6  text-2xl text-whiteLike font-bold ">REACH US</h2>
 					</div>
 
 					<a href="mailto:info@alphy.tech" className="mb-5">
