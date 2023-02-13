@@ -14,14 +14,16 @@ export default function Content(props) {
 	const data = props.data;
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
-	let summaryArray = data.summary.split("\n")
-	let summary = summaryArray.map(item => item).join("<br></br>")
 
 
+
+	let summary
 	let transcript
 
 
 	async function transcriptParser() {
+		let summaryArray = data.summary.split("\n")
+		summary = summaryArray.map(item => item).join("<br></br>")
 		var parser = new srtParser2();
 		let srt_array = parser.fromSrt(data.transcript);
 
@@ -64,13 +66,13 @@ export default function Content(props) {
 					<p className="-mt-3 font-semibold">Click to Watch</p>
 				</div>
 			</div>
-			<div className="grid grid-cols-2 gap-8 mt-16 mb-10">
-				<div className="w-2/3">
+			<div className="grid lg:grid-cols-2 gap-8 mt-16 mb-10">
+				<div className="md:w-full  lg:w-full">
 					{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 				</div>
-				<div className="hidden lg:block w-5/6">
+				<div className="hidden lg:block w-2/3 ">
 					<iframe
-						title="My YouTube Video"
+						title="My YouTube Video "
 						className="max-w-80 lg:w-120 h-80 w-auto"
 						src={`https://www.youtube.com/embed/${data.source_id}`}
 						frameBorder="0"

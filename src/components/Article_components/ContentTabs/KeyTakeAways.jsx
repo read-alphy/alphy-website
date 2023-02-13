@@ -26,18 +26,16 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	};
 
 	return (
-		<div className="col-span-2  md:min-w-[400px] lg:col-span-1 border-blueLike text-blueLike flex justify-center items-center mx-5">
+		<div className=" md:min-w-[400px] lg:col-span-1 border-blueLike text-blueLike flex justify-center items-center mx-5">
 			<div
 				href="#"
-				className={`block w-full pt-6 bg-[#ECF9FF] border-gray-200  rounded-lg shadow-md ${
-					keysCollapsed ? 'sm:h-[300px]' : null
-				} flex flex-col justify-start`}
+				className={`block w-full pt-6 bg-[#ECF9FF] border-gray-200 sm:h-[300px] lg:min-h-[350px] rounded-lg shadow-md ${keysCollapsed ? 'sm:h-[300px]' : null
+					} flex flex-col justify-start`}
 			>
 				<div className="flex flex-col justify-between items-center ">
 					<div
-						className={`flex flex-row items-center border-b border-gray-600 pb-1 justify-center px-2 w-full ${
-							keysCollapsed ? 'justify-between ' : 'justify-center '
-						}`}
+						className={`flex flex-row items-center border-b border-gray-600 pb-1 justify-center px-2 w-full ${keysCollapsed ? 'justify-between ' : 'justify-center '
+							}`}
 					>
 						{keysCollapsed ? <ArrowButton direction={'left'} /> : null}
 						<h5 className="text-xl pb-5 font-bold tracking-tight text-gray-900 text-blueLike items-center">
