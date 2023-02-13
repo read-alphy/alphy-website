@@ -1,4 +1,4 @@
-import ThirdPartyPasswordless from "supertokens-auth-react/recipe/thirdpartypasswordless";
+import Passwordless from "supertokens-auth-react/recipe/passwordless";
 import Session from "supertokens-auth-react/recipe/session";
 
 export const SuperTokensConfig = {
@@ -6,18 +6,18 @@ export const SuperTokensConfig = {
         appName: "Alphy",
         apiDomain: process.env.REACT_APP_API_URL || "http://localhost:3001",
         websiteDomain: "https://alphy.tech" || "http://localhost:3000",
+        apiBasePath: "/auth",
+        websiteBasePath: "/auth"
     },
     // recipeList contains all the modules that you want to
     // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides
     recipeList: [
-        ThirdPartyPasswordless.init({
+        Passwordless.init({
 
             style: {
                 container: {
                     fontFamily: "Open Sans, sans-serif",
                 },
-
-
                 button: {
                     backgroundColor: "#93BFCF",
                     border: "#93BFCF",
@@ -26,7 +26,6 @@ export const SuperTokensConfig = {
                 superTokensBranding: {
                     display: "none"
                 },
-
             },
             contactMethod: "EMAIL",
         }),
