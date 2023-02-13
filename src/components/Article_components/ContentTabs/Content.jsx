@@ -14,24 +14,27 @@ export default function Content(props) {
 	const data = props.data;
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
+	let summaryArray = data.summary.split("\n")
+	let summary = summaryArray.map(item => item).join("<br></br>")
 
-	let transcript = ""
+
+	let transcript
 
 
 	async function transcriptParser() {
 		var parser = new srtParser2();
-		var srt_array = parser.fromSrt(data.transcript);
+		let srt_array = parser.fromSrt(data.transcript);
 
 		let nothing = ""
 		let count = 0
-		console.log(srt_array[0], srt_array[0].text, srt_array[0].startTime, srt_array[0].endTime)
+
 		nothing = nothing + "00:00:00 " + "<br></br>"
 		for (let i = 0; i < srt_array.length; i++) {
 
 			count = count + 1
 			nothing = nothing + srt_array[i].text + " "
 			if (count > 6 && srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === ".") {
-				nothing = nothing + "<br></br>" + srt_array[i + 1].startTime.substring(0, srt_array[i + 1].startTime.length - 4) + "<br></br>"
+				nothing = nothing + "<br></br>" + srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4) + "<br></br>"
 				count = 0
 			}
 		}
@@ -92,8 +95,8 @@ export default function Content(props) {
 					</button>
 				</div>
 				<div className="main-content lg:ml-10">
-					{activeTab === 'tab1' && <ContentTab data={data.summary} />}
-					{activeTab === 'tab2' && <ContentTab data={transcript} />}
+					{activeTab === 'tab1' && <ContentTab data={summary} />}
+					{activeTab === 'tab2' && <ContentTab data={transcript ? transcript : data.transcript} />}
 				</div>
 			</div>
 		</div>
