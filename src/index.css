@@ -198,7 +198,7 @@ MAIN PAGE
 	width: 0px;
 }
 
-.chimp {
+.scrolling {
 	overflow-y: scroll;
 	scrollbar-width: none
 }

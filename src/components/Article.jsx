@@ -171,7 +171,7 @@ function Article({
 				)}
 
 
-				<div className="px-4 mx-auto h-[92vh]  ">
+				<div className="scrolling px-4 mx-auto h-[92vh]  ">
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}
 				</div>
 			</div>
