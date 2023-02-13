@@ -31,7 +31,7 @@ export default function Welcome() {
 			inputValue.includes('twitter.com/i/spaces')
 		) {
 			console.log("this is sessionContext.id:", sessionContext.id)
-			if (sessionContext.id) {
+			if (sessionContext.userId !== undefined) {
 				setLoading(true);
 				axios
 					.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
