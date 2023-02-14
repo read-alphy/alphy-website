@@ -50,13 +50,13 @@ function Navbar({ collapsed, setCollapsed }) {
 
 						{sessionContext.userId ? (<div className="hidden md:block pt-2">
 
-							<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
+							<Link className="text-l font-semibold text-whiteLike" onClick={handleSignOut}>
 								Log Out
 							</Link>
 
 						</div>) : (
 
-							<div className="hidden md:block pt-2">
+							<div className="hidden md:block pt-2 text-whiteLike">
 
 								<Link to="/auth">Sign In</Link>
 							</div>
