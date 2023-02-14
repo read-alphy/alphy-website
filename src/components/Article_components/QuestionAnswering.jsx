@@ -22,7 +22,7 @@ export default function QuestionAnswering(source_id) {
 
 
     const fetchData = () => {
-        if (!sessionContext.userId) {
+        if (sessionContext.userId) {
             try {
                 setIsLoadingInside(true);
                 setAnswer(false)
@@ -66,7 +66,7 @@ export default function QuestionAnswering(source_id) {
                 <button type="submit" onClick={fetchData} className="text-white absolute right-2.5 bottom-2.5 bg-slate-400 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2">Go</button>
 
             </div>
-
+            <Toaster />
             {isLoadingInside ?
 
                 (<div
