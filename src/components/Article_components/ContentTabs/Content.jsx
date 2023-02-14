@@ -68,7 +68,7 @@ export default function Content(props) {
 					<p className="-mt-3 font-semibold">Click to Watch</p>
 				</div>
 			</div>
-			{/* <QuestionAnswering source_id={data.source_id} /> */}
+			<QuestionAnswering source_id={data.source_id} />
 			<div className="grid  lg:grid-cols-2 gap-8 mt-16 mb-10">
 				<div className="md:w-full  lg:w-full">
 					{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
