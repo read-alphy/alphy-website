@@ -35,7 +35,7 @@ export default function QuestionAnswering(source_id) {
 
                             setData(response.data)
 
-                            setInputValue('');
+
                             setIsLoadingInside(false);
                         });
             } catch (error) {
