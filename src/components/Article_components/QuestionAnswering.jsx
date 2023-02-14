@@ -27,7 +27,7 @@ export default function QuestionAnswering(source_id) {
             axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
                 .then(
                     response => {
-                        console.log("hello")
+
                         console.log(response.data.answer)
                         console.log(response.data.sources[0])
                         setData(response.data)
@@ -76,7 +76,8 @@ export default function QuestionAnswering(source_id) {
 
                 <div className="text-whiteLike pt-10 pb-10">
                     <div >
-                        <div className={`${data.length ? "block" : "hidden"}`}>
+                        {/* <div className={`${data.length ? "block" : "hidden"}`}> */}
+                        <div>
 
                             <div>
                                 <h1 className="mb-1 text-xl">Answer</h1>
