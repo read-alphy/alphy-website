@@ -118,14 +118,14 @@ export default function Welcome() {
 					<div className="flex justify-center">
 						{sessionContext.userId ? (
 							<button
-								className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+								className="w-1/3 border-2 border-bordoLike px-8 bg-whiteLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"
 							>
 								Submit
 							</button>
 						) : (
 							<button
-								className="w-2/3 border-2 border-bordoLike px-8 bg-lightblueLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
+								className="w-2/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"
 							>
 								Sign In To Submit

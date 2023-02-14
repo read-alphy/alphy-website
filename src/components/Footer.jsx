@@ -29,7 +29,7 @@ function Footer() {
 						<br />
 						Feel free to reach us through{' '}
 						<a href="mailto:info@alphy.app">
-							<span className="text-lightblueLike hover:text-whiteLike cursor-pointer ">
+							<span className="text-green-300 hover:text-green-200 cursor-pointer ">
 								{' '}
 								info@alphy.app
 							</span>{' '}

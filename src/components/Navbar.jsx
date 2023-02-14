@@ -121,12 +121,9 @@ function Navbar({ collapsed, setCollapsed }) {
 								</div>
 								{sessionContext.userId ? (
 									<div className="w-1/3 ml-5 mb-5">
-										<button
-											onClick={handleSignOut}
-											className=" text-l font-semibold text-blueLike"
-										>
+										<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
 											Log Out
-										</button>
+										</Link>
 									</div>
 								) : (
 									<div className="w-1/3 ml-5 mb-5">

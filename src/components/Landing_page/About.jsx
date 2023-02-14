@@ -48,7 +48,7 @@ export default function About() {
                     • Once a video is processed, it is public. You can read it all you want without signing in.
                     <br ></br>
                     <br></br>
-                    • If you see a video that has a really bad transcription (wrong language, missing punctuations, etc.), please ping us on Discord, Twitter or via info@alphy.apiBasePath.</p>
+                    • If you see a video that has a really bad transcription (wrong language, missing punctuations, etc.), please ping us via the socials we shared at the bottom of the page.</p>
                 <br></br>
                 <br></br>
 

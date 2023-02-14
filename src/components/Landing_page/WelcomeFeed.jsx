@@ -37,7 +37,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 	return (
 		<div className="main-page-feed-section container mx-auto w-800">
 			<h2 className="text-bordoLike text-2xl mx-auto pb-10 font-semibold">Browse Alphy's database</h2>
-			<div className="main-page-feed-table-parent bg-slate-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
+			<div className="main-page-feed-table-parent bg-zinc-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form
 					className="flex items-center"
 					onSubmit={(e) => {
@@ -63,7 +63,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 								setSearch(e.target.value);
 							}}
 							id="voice-search"
-							className="bg-slate-100 border border-[#6B728E] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm: mt-10 pl-5 p-2.5"
+							className="bg-zinc-50 border border-[#6B728E] text-gray-900 text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full sm: mt-10 pl-5 p-2.5"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>

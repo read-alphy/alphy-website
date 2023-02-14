@@ -60,10 +60,10 @@ module.exports = {
         darker: '#03001C',
 
         // palette - sunset
-        bordoLike: "#1a1a1a",
-        purpleLike: "#1a1a1a",
+        bordoLike: "#20262E",
+        purpleLike: "#20262E",
         redLike: "#B25068",
-        lightblueLike: "#000",
+        lightblueLike: "#20262E",
 
         //palette - fener
         whiteLike: "#F9F8F8",
