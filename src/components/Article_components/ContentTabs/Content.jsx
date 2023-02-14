@@ -56,7 +56,8 @@ export default function Content(props) {
 
 
 	return (
-		<div className={`container  mx-auto md:px-10 lg:px-20 overflow-x-hidden`}>
+		<div className={`container grow mx-auto md:px-10 lg:px-20 overflow-x-hidden`}>
+
 			<div className="grid grid-cols-3">
 				<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
 					{data.title}
@@ -67,7 +68,8 @@ export default function Content(props) {
 					<p className="-mt-3 font-semibold">Click to Watch</p>
 				</div>
 			</div>
-			<div className="grid lg:grid-cols-2 gap-8 mt-16 mb-10">
+			<QuestionAnswering source_id={data.source_id} />
+			<div className="grid  lg:grid-cols-2 gap-8 mt-16 mb-10">
 				<div className="md:w-full  lg:w-full">
 					{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 				</div>
@@ -81,7 +83,7 @@ export default function Content(props) {
 					></iframe>
 				</div>
 			</div>
-			{/* <QuestionAnswering data={data} /> */}
+
 			<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
 				<div className="summary-and-transcript-buttons text-xl w-5/6 ">
 					<button
