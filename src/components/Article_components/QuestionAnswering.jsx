@@ -28,18 +28,17 @@ export default function QuestionAnswering(source_id) {
                 setAnswer(false)
                 setData("")
 
-                console.log(isLoadingInside)
+
                 axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
                     .then(
                         response => {
 
                             setData(response.data)
-                            console.log(response.data.sources.map((source) => source.text).join("<br></br>"))
+
                             setInputValue('');
                             setIsLoadingInside(false);
                         });
             } catch (error) {
-                console.log(inputValue)
 
                 console.error(`Error fetching data: ${error}`);
                 setIsLoadingInside(false);
@@ -47,6 +46,7 @@ export default function QuestionAnswering(source_id) {
         }
         else {
             toast.error('Need to sign in to ask questions.');
+            setInputValue('');
         }
     };
 
