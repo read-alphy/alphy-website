@@ -94,7 +94,7 @@ function Article({
 
 					<div className={`w-[400px] overflow-x-hidden hidden lg:block`}>
 						<div className="bg-zinc-50 mr-5">
-							<div className="user-feed bg-gradient-to-r from-gray-300 to-gray-200">{sideFeed}</div>
+							<div className="user-feed bg-zinc-100">{sideFeed}</div>
 						</div>
 					</div>
 

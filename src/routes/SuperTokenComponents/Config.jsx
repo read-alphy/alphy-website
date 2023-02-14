@@ -5,7 +5,7 @@ export const SuperTokensConfig = {
     appInfo: {
         appName: "Alphy",
         apiDomain: process.env.REACT_APP_API_URL || "http://localhost:3001",
-        websiteDomain: "https://alphy.tech" || "http://localhost:3000",
+        websiteDomain: "https://alphy.app" || "http://localhost:3000",
         apiBasePath: "/auth",
         websiteBasePath: "/auth"
     },

@@ -28,10 +28,10 @@ function Footer() {
 					<p className="text-l font-semibold sm:whitespace-nowrap">
 						<br />
 						Feel free to reach us through{' '}
-						<a href="mailto:info@alphy.tech">
+						<a href="mailto:info@alphy.app">
 							<span className="text-lightblueLike hover:text-whiteLike cursor-pointer ">
 								{' '}
-								info@alphy.tech
+								info@alphy.app
 							</span>{' '}
 						</a>
 						or ping us on our Discord for any questions and feedback.
@@ -42,8 +42,8 @@ function Footer() {
 						<h2 className="mb-6  text-2xl text-whiteLike font-bold ">REACH US</h2>
 					</div>
 
-					<a href="mailto:info@alphy.tech" className="mb-5">
-						info@alphy.tech
+					<a href="mailto:info@alphy.app" className="mb-5">
+						info@alphy.app
 					</a>
 
 					<a href="https://discord.gg/" className="mb-5">
