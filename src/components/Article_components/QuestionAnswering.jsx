@@ -10,27 +10,30 @@ export default function QuestionAnswering(source_id) {
 
     let displayLoading = "none"
     const [data, setData] = useState("");
-    const [search, setSearch] = useState('')
-    const [isLoading, setIsLoading] = useState(data?.length === 0);
+
+
+    const [isLoadingInside, setIsLoadingInside] = useState(data.length === 0);
     const [answer, setAnswer] = useState(false)
     const [inputValue, setInputValue] = useState('');
 
-    console.log(source_id.source_id)
+
 
     const dummy = "This text talks about the perception of time and how it is recorded in physics. Albert Einstein was the person who developed the concept that time is associated with one of four dimensions which make up spacetime, rather than being a universal parameter. Herman Minkowski noticed that Maxwell's equations work best if treated in this way, in which time and space can be rotated into each other, so as not to change the equations. Minkowski then proposed combining these two dimensions into a spacetime diagram, where a person's motion at a steady velocity traces a straight line tilted at a 45 degree angle, while no matter what direction one moves in space, they are only able to move forward in time. Ultimately, this reveals that time is simply a label for coordinates, and can be changed depending on how the axes are chosen."
-    const fetchData = (event) => {
-        event.preventDefault()
+    const fetchData = () => {
+
         try {
-            console.log(inputValue)
+
             displayLoading = "block"
-            setIsLoading(true);
+            setIsLoadingInside(true);
+
             axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
                 .then(
                     response => {
 
-                        console.log(response.data.answer)
-                        console.log(response.data.sources[0])
+                        console.log(response.data)
+                        console.log(response.data.sources[0].text)
                         setData(response.data)
+                        console.log(response.data.sources.map((source) => source.text).join("<br></br>"))
                         setInputValue('');
                     });
         } catch (error) {
@@ -38,7 +41,7 @@ export default function QuestionAnswering(source_id) {
             displayLoading = "none"
             console.error(`Error fetching data: ${error}`);
         } finally {
-            setIsLoading(false);
+            setIsLoadingInside(false);
         }
     };
 
@@ -54,27 +57,30 @@ export default function QuestionAnswering(source_id) {
                     <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 <input value={inputValue} onChange={(event) => setInputValue(event.target.value)} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-whiteLike placeholder:text-zinc-90  placeholder:italic rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: How does X work? What are the best practices for taking notes?" autoComplete="off" required />
-                <button onClick={fetchData} className="text-white absolute right-2.5 bottom-2.5 bg-slate-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Go </button>
+                <button onClick={fetchData} className="text-white absolute right-2.5 bottom-2.5 bg-slate-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Go</button>
 
             </div>
 
-            {isLoading || data.length ?
+            {!isLoadingInside ?
 
-                <div
+                (<div
 
-                    className="loading"
+                    className="loading mt-10 mb-10"
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
                         height: '20vh',
-                        display: displayLoading
                     }}
                 >
                     <ReactLoading type="spinningBubbles" className="text-whiteLike" />
-                </div> :
+                </div>) : null
+            }
+
+            {data.length ?
 
                 <div className="text-whiteLike pt-10 pb-10">
+
                     <div >
                         {/* <div className={`${data.length ? "block" : "hidden"}`}> */}
                         <div>
@@ -112,12 +118,10 @@ export default function QuestionAnswering(source_id) {
 
                         : (null)}
 
-                    <br></br>
-                    <br></br>
+                </div> : null}
 
-                </div>
 
-            }
         </div>
+
     )
 }
