@@ -39,6 +39,7 @@ export default function Welcome() {
 						language: selectedOption,
 					})
 					.then((response) => {
+						console.log(response)
 						setLoading(false);
 						setInputValue('');
 						if (response.status === 200 || response.status === 201 || response.status === 202) {
@@ -74,7 +75,7 @@ export default function Welcome() {
 			)}
 			<div>
 				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
-					<section className="animation1 lg:mr-2 text-lightblueLike block">
+					<section className="animation1 lg:mr-2 text-green-300 block">
 						<div className="first ">
 							<div>Transcribe</div>
 						</div>

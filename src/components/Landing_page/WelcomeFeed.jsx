@@ -36,8 +36,8 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 
 	return (
 		<div className="main-page-feed-section container mx-auto w-800">
-			<h2 className="text-bordoLike text-2xl mx-auto pb-3 font-semibold">Summaries you may like, while you wait...</h2>
-
+			<h2 className="text-gray-700 text-2xl mx-auto pb-3 font-semibold">Summaries you may like, while you wait...</h2>
+			<p className="text-gray-500 text-l mx-auto pb-10 "></p>
 			<div className="main-page-feed-table-parent bg-zinc-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form
 					className="flex items-center"
