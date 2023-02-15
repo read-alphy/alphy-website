@@ -61,9 +61,9 @@ export default function Welcome() {
 	};
 
 	return (
-		<div className="container px-4 mx-auto py-18 lg:py-28">
+		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[92vh" : ""}`}>
 			{loading && (
-				<div className="flex justify-center items-center h-screen">
+				<div className={`flex justify-center items-center h-screen`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
 						<p className="text-bordoLike text-center mb-10 mt-10">
