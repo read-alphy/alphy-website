@@ -9,6 +9,8 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function QuestionAnswering(source_id) {
 
+
+
     const sessionContext = useSessionContext()
 
     const [data, setData] = useState("");
@@ -51,7 +53,7 @@ export default function QuestionAnswering(source_id) {
     };
 
     return (
-        <div className="bg-gray-600 border-whiteLike border mt-20 rounded-2xl p-5 mb-20  mx-auto">
+        <div className="bg-gray-600 border-whiteLike border mt-20 rounded-2xl p-5 pb-20 mb-20  mx-auto">
 
             <h1 className="text-xl pb-3 text-gray-300">Ask questions to the video.</h1>
             <p className="text-gray-400 pb-7">Navigate through the video by asking real questions and getting AI-generated acccurate answers. </p>

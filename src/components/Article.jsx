@@ -66,7 +66,7 @@ function Article({
 
 	// use effect every render
 	useEffect(() => {
-		console.log('article component rendered');
+
 	}, []);
 
 	const sideFeed = useMemo(

@@ -10,10 +10,10 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 	const limit = temp;
 
 	const searchInputRef = React.useRef(null);
-
-	useEffect(() => {
-		console.log('side feed rendered');
-	}, []);
+	/* 
+		useEffect(() => {
+			console.log('side feed rendered');
+		}, []); */
 
 	const getData = (offset, search) => {
 		setIsLoading(true);

@@ -29,7 +29,7 @@ function App() {
 
 	useEffect(() => {
 		setIsLoading(true);
-		console.log('fetching summaries');
+
 		axios.get(url).then((response) => {
 			setData(response.data);
 			setIsLoading(false);

@@ -33,4 +33,4 @@ export const SuperTokensConfig = {
     ],
 };
 
-console.log(`BACK ${process.env.REACT_APP_API_URL}, FRONT ${process.env.REACT_APP_API_URL}`)
+/* console.log(`BACK ${process.env.REACT_APP_API_URL}, FRONT ${process.env.REACT_APP_API_URL}`) */
