@@ -62,7 +62,7 @@ export default function Welcome() {
 	};
 
 	return (
-		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[92vh" : ""}`}>
+		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[92vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
 			{loading && (
 				<div className={`flex justify-center items-center h-[92vh]`}>
 					<div className="flex flex-col items-center">
