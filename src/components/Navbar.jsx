@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 // import { CgProfile } from "react-icons/cg"
 // import Switcher from './Switcher'
 // import Logout from "../supertokens_home/Logout"
-// import MobileMenu from './MobileMenu'
+
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { signOut } from 'supertokens-auth-react/recipe/session';
 import { useNavigate } from 'react-router-dom';
@@ -121,6 +121,7 @@ function Navbar({ collapsed, setCollapsed }) {
 										Home
 									</Link>
 								</div>
+								<a href="/#about" className="text-blueLike ml-5 mb-5"> About </a>
 								{sessionContext.userId ? (
 									<div className="w-1/3 ml-5 mb-5">
 										<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
