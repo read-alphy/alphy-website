@@ -46,11 +46,11 @@ function Footer() {
 						info@alphy.app
 					</a>
 
-					<a href="https://discord.gg/" className="mb-5">
+					<a href="https://discord.gg/2Vvk9xJz" className="mb-5">
 						Discord
 					</a>
 
-					<a href="https://twitter.com" className="">
+					<a href="https://twitter.com/alphyapp" className="">
 						Twitter
 					</a>
 				</div>
