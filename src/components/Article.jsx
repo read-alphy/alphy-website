@@ -142,7 +142,7 @@ function Article({
 											Home
 										</Link>
 									</div>
-									{sessionContext.userId ? (
+									{sessionContext.userId.length !== 0 ? (
 										<div className="w-1/3 ml-5 mb-5">
 											<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
 												Log Out
