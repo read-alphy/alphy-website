@@ -35,7 +35,7 @@ function Article({
 			}
 		}, []); */
 
-	const sessionContext = useSessionContext();
+	let sessionContext = useSessionContext();
 	const [isLoading, setIsLoading] = useState(feedData?.length === 0);
 	const [data, setData] = useState([]);
 

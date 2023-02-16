@@ -18,7 +18,7 @@ export default function Welcome() {
 	const [language, setLanguage] = useState('en-US');
 
 	const [loading, setLoading] = useState(false);
-	const sessionContext = useSessionContext();
+	let sessionContext = useSessionContext();
 	console.log(sessionContext)
 	const navigate = useNavigate();
 	const handleSubmit = (event, selectedOption) => {

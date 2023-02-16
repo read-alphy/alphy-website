@@ -12,7 +12,7 @@ import { signOut } from 'supertokens-auth-react/recipe/session';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar({ collapsed, setCollapsed }) {
-	const sessionContext = useSessionContext();
+	let sessionContext = useSessionContext();
 
 	const navigate = useNavigate();
 	const location = useLocation();
