@@ -22,14 +22,15 @@ export default function Welcome() {
 	console.log(sessionContext)
 	const navigate = useNavigate();
 	const handleSubmit = (event, selectedOption) => {
-		event.preventDefault();
+
 		toast.dismiss();
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
-				inputValue.includes('twitter.com/i/spaces')
+				inputValue.includes('twitter.com/i/spaces') ||
+				inputValue.includes()
 			) {
 
 
@@ -40,7 +41,7 @@ export default function Welcome() {
 						language: selectedOption,
 					})
 					.then((response) => {
-						console.log(response)
+
 						setLoading(false);
 						setInputValue('');
 						if (response.status === 200 || response.status === 201 || response.status === 202) {
