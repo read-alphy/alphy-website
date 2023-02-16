@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import Languages from './Languages';
 import Session from 'supertokens-auth-react/recipe/session';
+import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../Loading';
 import ReactLoading from 'react-loading';
@@ -17,14 +18,14 @@ export default function Welcome() {
 	const [language, setLanguage] = useState('en-US');
 
 	const [loading, setLoading] = useState(false);
-	const sessionContext = Session.getUserId();
+	const sessionContext = useSessionContext();
 	console.log(sessionContext)
 	const navigate = useNavigate();
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
 		toast.dismiss();
 		// Do something with the inputValue here	
-		if (sessionContext.length !== 0) {
+		if (sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
@@ -118,7 +119,7 @@ export default function Welcome() {
 
 					<Toaster />
 					<div className="flex justify-center">
-						{sessionContext.length !== 0 ? (
+						{sessionContext.doesSessionExist ? (
 							<button
 								className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"

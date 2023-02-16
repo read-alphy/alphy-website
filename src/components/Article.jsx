@@ -50,9 +50,9 @@ function Article({
 			setIsLoading(false);
 		}
 	};
-	const handleSignOut = async () => {
+	const handleSignOut = () => {
 		try {
-			await signOut();
+			signOut();
 			navigate('/');
 		} catch (error) {
 			console.log(error.message);

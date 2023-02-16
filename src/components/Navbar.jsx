@@ -18,12 +18,12 @@ function Navbar({ collapsed, setCollapsed }) {
 	const location = useLocation();
 
 
-	const handleSignOut = async () => {
+	const handleSignOut = () => {
 		try {
-			await signOut();
+			signOut();
 			if (location.pathname === "/") {
 				window.location.reload();
-				navigate('/');
+
 			}
 			else {
 				navigate('/');
