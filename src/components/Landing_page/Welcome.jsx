@@ -117,7 +117,7 @@ export default function Welcome() {
 
 					<Toaster />
 					<div className="flex justify-center">
-						{sessionContext.userId ? (
+						{sessionContext.userId.length !== 0 ? (
 							<button
 								className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"
