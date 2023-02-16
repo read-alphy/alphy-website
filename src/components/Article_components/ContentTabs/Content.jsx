@@ -63,7 +63,7 @@ export default function Content(props) {
 					{data.title}
 				</h1>
 
-				<div className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
+				<div src={`https://www.youtube.com/watch?v=${data.source_id}`} className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
 					<img src="/youtubeicon.png" width={80} />
 					<p className="-mt-3 font-semibold">Click to Watch</p>
 				</div>
