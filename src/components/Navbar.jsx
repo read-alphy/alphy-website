@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 // import { CgProfile } from "react-icons/cg"
 // import Switcher from './Switcher'
 // import Logout from "../supertokens_home/Logout"
-import SuperTokens from "supertokens-react-native";
+
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { signOut } from "supertokens-auth-react/recipe/passwordless";
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 	const handleSignOut = async () => {
 		try {
-			await SuperTokens.signOut();
+			await signOut();
 
 			if (location.pathname === "/") {
 				window.location.reload();
@@ -55,7 +55,7 @@ function Navbar({ collapsed, setCollapsed }) {
 						<a href="/#about" className="hidden md:block mr-5 pt-2"> About </a>
 
 
-						{sessionContext.doesSessionExist ? (<div className="hidden md:block pt-2">
+						{sessionContext.userId ? (<div className="hidden md:block pt-2">
 
 							<Link className="text-l font-semibold text-whiteLike" onClick={handleSignOut}>
 								Log Out
@@ -129,7 +129,7 @@ function Navbar({ collapsed, setCollapsed }) {
 									</Link>
 								</div>
 								<a href="/#about" className="text-blueLike ml-5 mb-5"> About </a>
-								{sessionContext.doesSessionExist ? (
+								{sessionContext.userId ? (
 									<div className="w-1/3 ml-5 mb-5">
 										<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
 											Log Out

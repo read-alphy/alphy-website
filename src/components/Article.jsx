@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './Article_components/ContentTabs/Content';
 
 import { signOut } from "supertokens-auth-react/recipe/passwordless";
-import SuperTokens from "supertokens-react-native";
+
 import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
@@ -53,7 +53,7 @@ function Article({
 	};
 	const handleSignOut = async () => {
 		try {
-			await SuperTokens.signOut();
+			await signOut();
 			navigate('/');
 		} catch (error) {
 			console.log(error.message);
