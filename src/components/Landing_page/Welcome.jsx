@@ -24,14 +24,14 @@ export default function Welcome() {
 		event.preventDefault();
 		toast.dismiss();
 		// Do something with the inputValue here	
+		if (sessionContext.userId !== undefined) {
+			if (
+				inputValue.includes('https://www.youtube.com') ||
+				inputValue.includes('https://youtu.be') ||
+				inputValue.includes('twitter.com/i/spaces')
+			) {
 
-		if (
-			inputValue.includes('https://www.youtube.com') ||
-			inputValue.includes('https://youtu.be') ||
-			inputValue.includes('twitter.com/i/spaces')
-		) {
 
-			if (sessionContext.userId !== undefined) {
 				setLoading(true);
 				axios
 					.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
@@ -51,14 +51,17 @@ export default function Welcome() {
 						}
 					})
 			}
-			else {
-				navigate("/auth")
-			};
 
-		} else {
-			setInputValue('');
-			toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
+			else {
+				setInputValue('');
+				toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
+			}
+
 		}
+
+		else {
+			navigate("/auth")
+		};
 	};
 
 	return (
