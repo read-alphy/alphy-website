@@ -15,7 +15,7 @@ function ArticleCreator() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (SessionContext.userId) {
+        if (sessionContext.doesSessionExist) {
             await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/summaries`, { url: inputValue })
         }
         else {

@@ -24,7 +24,7 @@ export default function QuestionAnswering(source_id) {
 
 
     const fetchData = () => {
-        if (sessionContext.userId) {
+        if (sessionContext.doesSessionExist) {
             try {
                 setIsLoadingInside(true);
                 setAnswer(false)

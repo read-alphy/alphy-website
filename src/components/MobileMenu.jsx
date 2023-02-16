@@ -18,10 +18,10 @@ function MobileMenu(signOut, data) {
 
     const handleSignOut = async () => {
         try {
-            console.log(sessionContext.userId)
+            console.log(sessionContext.doesSessionExist)
             await signOut()
             navigate("/")
-            console.log(sessionContext.userId)
+            console.log(sessionContext.doesSessionExist)
         } catch (error) {
             console.log(error.message);
 
@@ -30,9 +30,9 @@ function MobileMenu(signOut, data) {
     return (
         <Menu right>
 
-            {/*        {sessionContext.userId ? (<Link to="/article/new-article">New +</Link>) : null} */}
+            {/*        {sessionContext.doesSessionExist ? (<Link to="/article/new-article">New +</Link>) : null} */}
 
-            {sessionContext.userId ? (<div className="w-1/3 ml-5 mb-5">
+            {sessionContext.doesSessionExist ? (<div className="w-1/3 ml-5 mb-5">
                 <Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
                     Log Out
                 </Link>

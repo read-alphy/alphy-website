@@ -55,7 +55,7 @@ function Navbar({ collapsed, setCollapsed }) {
 						<a href="/#about" className="hidden md:block mr-5 pt-2"> About </a>
 
 
-						{sessionContext.userId ? (<div className="hidden md:block pt-2">
+						{sessionContext.doesSessionExist ? (<div className="hidden md:block pt-2">
 
 							<Link className="text-l font-semibold text-whiteLike" onClick={handleSignOut}>
 								Log Out
@@ -129,7 +129,7 @@ function Navbar({ collapsed, setCollapsed }) {
 									</Link>
 								</div>
 								<a href="/#about" className="text-blueLike ml-5 mb-5"> About </a>
-								{sessionContext.userId ? (
+								{sessionContext.doesSessionExist ? (
 									<div className="w-1/3 ml-5 mb-5">
 										<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
 											Log Out

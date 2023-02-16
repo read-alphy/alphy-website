@@ -24,7 +24,7 @@ export default function Home2() {
     return (
         <div className="fill">
             <Logout logoutClicked={logoutClicked} />
-            <SuccessView userId={sessionContext.userId} />
+            <SuccessView userId={sessionContext.doesSessionExist} />
         </div>
     );
 }
