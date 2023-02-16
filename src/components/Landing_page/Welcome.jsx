@@ -19,12 +19,11 @@ export default function Welcome() {
 	const [loading, setLoading] = useState(false);
 	const sessionContext = useSessionContext();
 	const navigate = useNavigate();
-
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
 		toast.dismiss();
 		// Do something with the inputValue here	
-		if (sessionContext.userId !== undefined) {
+		if (sessionContext.userId.length === 0) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
@@ -58,7 +57,6 @@ export default function Welcome() {
 			}
 
 		}
-
 		else {
 			navigate("/auth")
 		};
