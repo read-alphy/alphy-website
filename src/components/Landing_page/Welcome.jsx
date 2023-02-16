@@ -63,7 +63,7 @@ export default function Welcome() {
 
 	return (
 		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[92vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
-			{loading && (
+			{/* 			{loading && (
 				<div className={`flex justify-center items-center h-[92vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
@@ -72,7 +72,7 @@ export default function Welcome() {
 						</p>
 					</div>
 				</div>
-			)}
+			)} */}
 			<div>
 				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
 					<section className="animation1 lg:mr-2 text-green-300 block">

@@ -14,6 +14,7 @@ export const SuperTokensConfig = {
     recipeList: [
         Passwordless.init({
 
+
             style: {
                 container: {
                     fontFamily: "Open Sans, sans-serif",
