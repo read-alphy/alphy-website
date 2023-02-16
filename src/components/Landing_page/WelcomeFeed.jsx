@@ -110,7 +110,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 								<SkeletonItem key={index} />
 							))
 						) : data.length === 0 ? (
-							<tr>
+							<tr className="border-b-0">
 								<td>No results found</td>
 							</tr>
 						) : (
