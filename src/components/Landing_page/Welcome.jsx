@@ -23,7 +23,7 @@ export default function Welcome() {
 		event.preventDefault();
 		toast.dismiss();
 		// Do something with the inputValue here	
-		if (sessionContext.userId.length === 0) {
+		if (sessionContext.userId.length !== 0) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
