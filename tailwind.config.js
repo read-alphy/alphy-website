@@ -10,7 +10,7 @@ module.exports = {
       xl: '1280px',
       '2xl': '1280px',
     },
-
+    darkMode: "class",
     extend: {
       height: {
         6.5: '1.675rem',

@@ -10,6 +10,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { signOut } from "supertokens-auth-react/recipe/passwordless";
 import { useNavigate } from 'react-router-dom';
+import Logo from "../img/logo.png"
 
 function Navbar({ collapsed, setCollapsed }) {
 	let sessionContext = useSessionContext();
@@ -38,12 +39,18 @@ function Navbar({ collapsed, setCollapsed }) {
 
 
 	return (
-		<div className="navbar bg-bordoLike text-slate-100 font-bold max-h-[20vh]">
-			<div className="company-logo">
+		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[20vh]">
+			<div className="pl-10 flex flex-row ">
 				<Link to="/">
+
+					{/* <img className="w-10" src={Logo} /> */}
 					<h1 className="text-2xl">ALPHY</h1>
+
 				</Link>
+
 			</div>
+
+
 
 			<div>
 				<div className=" navbar-right-section">
