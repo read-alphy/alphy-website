@@ -3,7 +3,7 @@ import SuccessView from "./SuccessView";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "supertokens-auth-react/recipe/passwordless";
-import SuperTokens from "supertokens-auth-react";
+import SuperTokens from "supertokens-react-native";
 import EmailVerification from "supertokens-auth-react/recipe/emailverification";
 import Session from "supertokens-auth-react/recipe/session";
 
@@ -13,7 +13,7 @@ export default function Home2() {
     const navigate = useNavigate();
 
     async function logoutClicked() {
-        await signOut();
+        await SuperTokens.signOut();
         navigate("/auth");
     }
 

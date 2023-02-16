@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 // import { CgProfile } from "react-icons/cg"
 // import Switcher from './Switcher'
 // import Logout from "../supertokens_home/Logout"
-
+import SuperTokens from "supertokens-react-native";
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { signOut } from "supertokens-auth-react/recipe/passwordless";
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 	const handleSignOut = async () => {
 		try {
-			await signOut();
+			await SuperTokens.signOut();
 
 			if (location.pathname === "/") {
 				window.location.reload();
