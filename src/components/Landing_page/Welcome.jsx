@@ -18,7 +18,7 @@ export default function Welcome() {
 
 	const [loading, setLoading] = useState(false);
 	const sessionContext = Session.getUserId();
-	console.log("sessionContext")
+	console.log(sessionContext)
 	const navigate = useNavigate();
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault();
