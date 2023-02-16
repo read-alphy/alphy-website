@@ -8,7 +8,7 @@ import { Link, useLocation } from 'react-router-dom';
 // import Logout from "../supertokens_home/Logout"
 
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
-import { signOut } from 'supertokens-auth-react/recipe/session';
+import { signOut } from "supertokens-auth-react/recipe/thirdparty";
 import { useNavigate } from 'react-router-dom';
 
 function Navbar({ collapsed, setCollapsed }) {
@@ -18,9 +18,10 @@ function Navbar({ collapsed, setCollapsed }) {
 	const location = useLocation();
 
 
-	const handleSignOut = () => {
+	async function handleSignOut() {
 		try {
-			signOut();
+			await signOut();
+
 			if (location.pathname === "/") {
 				window.location.reload();
 

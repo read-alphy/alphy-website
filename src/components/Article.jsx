@@ -4,7 +4,7 @@ import SideFeed from './Article_components/SideFeed';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './Article_components/ContentTabs/Content';
 
-import { signOut } from 'supertokens-auth-react/recipe/session';
+import { signOut } from "supertokens-auth-react/recipe/thirdparty";
 import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
@@ -50,9 +50,9 @@ function Article({
 			setIsLoading(false);
 		}
 	};
-	const handleSignOut = () => {
+	async function handleSignOut() {
 		try {
-			signOut();
+			await signOut();
 			navigate('/');
 		} catch (error) {
 			console.log(error.message);
