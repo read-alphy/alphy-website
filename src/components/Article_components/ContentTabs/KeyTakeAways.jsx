@@ -12,7 +12,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	const ArrowButton = ({ direction }) => {
 		return (
 			<button
-				className="text-3xl text-zinc-400 font-semibold py-1 px-3 rounded"
+				className="text-3xl text-zinc-400  py-1 px-3 rounded"
 				onClick={() => {
 					{
 						direction === 'left'

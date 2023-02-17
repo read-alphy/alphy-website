@@ -69,8 +69,8 @@ export default function Content(props) {
 				</div>
 			</div>
 			<QuestionAnswering source_id={data.source_id} />
-			<div className="grid  lg:grid-cols-2 gap-8 mt-16 mb-10">
-				<div className="md:w-full  lg:w-full">
+			<div className="grid lg:grid-cols-2 gap-8 mt-16 mb-10">
+				<div className="md:w-full  ">
 					{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 				</div>
 				<div className="hidden lg:block w-2/3 ">

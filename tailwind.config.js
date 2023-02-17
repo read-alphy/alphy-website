@@ -28,6 +28,8 @@ module.exports = {
         112: '28rem',
         116: '29rem',
         120: '30rem',
+        144: '36rem',
+        160: '40rem',
         'a4': '795px'
       },
       zIndex: {
