@@ -19,7 +19,7 @@ export default function Welcome() {
 
 	const [loading, setLoading] = useState(false);
 	let sessionContext = useSessionContext();
-	console.log(sessionContext)
+
 	const navigate = useNavigate();
 	const handleSubmit = (event, selectedOption) => {
 
@@ -45,6 +45,7 @@ export default function Welcome() {
 						setLoading(false);
 						setInputValue('');
 						if (response.status === 200 || response.status === 201 || response.status === 202) {
+							console.log("Success!")
 							toast.success(
 								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
 							);
