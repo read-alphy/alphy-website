@@ -25,7 +25,7 @@ function App() {
 	const [collapsed, setCollapsed] = useState(true);
 	const [data, setData] = useState([]);
 
-	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
+	const url = `http://alphy-cpu-vm.westus.cloudapp.azure.com/summaries?limit=11&offset=0`;
 
 	useEffect(() => {
 		setIsLoading(true);
