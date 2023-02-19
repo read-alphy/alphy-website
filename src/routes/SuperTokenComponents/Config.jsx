@@ -17,7 +17,7 @@ export const SuperTokensConfig = {
 
             style: {
                 container: {
-                    fontFamily: "Open Sans, sans-serif",
+                    fontFamily: "Segoe UI, sans-serif",
                 },
                 button: {
                     backgroundColor: "#93BFCF",

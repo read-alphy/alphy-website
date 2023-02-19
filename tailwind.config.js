@@ -32,6 +32,11 @@ module.exports = {
         160: '40rem',
         'a4': '795px'
       },
+      dropShadow: {
+        '3xl': '0 20px 17px rgba(0, 0, 0, 0.35)',
+
+      },
+
       zIndex: {
         '-10': '-10',
       },

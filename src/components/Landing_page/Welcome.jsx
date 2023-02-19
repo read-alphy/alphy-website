@@ -80,7 +80,7 @@ export default function Welcome() {
 			)}
 			<div>
 				<div className="welcome-prompt text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
-					<section className="animation1 lg:mr-2 text-green-300 block">
+					<section className="animation1 lg:mr-2 text-green-400 block">
 						<div className="first ">
 							<div>Transcribe</div>
 						</div>
@@ -96,7 +96,7 @@ export default function Welcome() {
 					</section>
 					YouTube with just one click
 				</div>
-				<p className="text-bordoLike md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+				<p className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 					Paste a YouTube link, choose the language of the video (only English for now), and submit. Alphy
 					will transcribe, summarize and prepare the content for questioning. We will notify you via email
 					when it's ready!{' '}
