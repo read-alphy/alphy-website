@@ -12,7 +12,7 @@ export default function FeedbackForm() {
 
     }
     return (
-        <div className="mx-auto pt-20 w-800 pb-20 bg-slate-200" id="feedback">
+        <div className="mx-auto pt-20 w-800 pb-20 " id="feedback">
             <div className=" flex justify-center "></div>
 
 

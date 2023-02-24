@@ -18,8 +18,8 @@ function Footer() {
 	    
 				</div> */
 
-		<footer className={'p-4 sm:p-6 flex flex-col justify center items-center text-mainText bg-blueLike'}>
-			<hr className={'my-6 border-gray-200 sm:mx-auto lg:my-8'} />
+		<footer className={'p-4 sm:p-6 flex flex-col justify center items-center text-mainText bg-bordoLike'}>
+			<hr className={'my-6 bg-bordoLike sm:mx-auto lg:my-8'} />
 			<div className={'container md:flex md:justify-between mx-auto'}>
 				<div className={'mb-6 md:mb-0 ml-100'}>
 

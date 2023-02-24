@@ -69,14 +69,14 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 									setSearch(e.target.value);
 								}}
 								id="simple-search"
-								className="ml-2 bg-whiteLike border border-bordoLike text-bordoLike text-gray-900 text-sm rounded-l-lg  focus:ring-slate-500 focus:border-slate-500 block w-full pl-4 p-2.5 "
+								className="ml-2 bg-whiteLike border border-zinc-300 text-zinc-500 text-gray-900 text-sm rounded-l-lg focus:outline-none block w-full pl-4 p-2.5 "
 								placeholder={search ? search : 'Search YouTube videos or Twitter spaces...'}
 							/>
 
 						</div>
 						<button
 							type="submit"
-							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-lightblueLike rounded-r-lg border-slate-700 hover:bg-blueLike focus:ring-1 focus:outline-none focus:ring-slate-300"
+							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-bordoLike rounded-r-lg border-slate-700 "
 						>
 							<svg
 								className="w-5 h-5 ml-5"

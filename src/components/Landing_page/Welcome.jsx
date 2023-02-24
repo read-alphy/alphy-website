@@ -9,6 +9,7 @@ import Loading from '../Loading';
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function Welcome() {
 	//const sessionContext = useSessionContext()
 	// const sessionContext = { userId: "123" }
@@ -19,8 +20,9 @@ export default function Welcome() {
 
 	const [loading, setLoading] = useState(false);
 	let sessionContext = useSessionContext();
-
 	const navigate = useNavigate();
+
+
 	const handleSubmit = (event, selectedOption) => {
 
 		toast.dismiss();
@@ -41,15 +43,30 @@ export default function Welcome() {
 						language: selectedOption,
 					})
 					.then((response) => {
-
 						setLoading(false);
 						setInputValue('');
-						if (response.status === 200 || response.status === 201 || response.status === 202) {
-							console.log("Success!")
+						if (response.status === 200) {
+
+							toast(
+								'Someone already submitted this video! Give us a few minutes to process it.', {
+								icon: '⌛',
+								style: {
+									background: "#F9F8F8"
+								}
+							}
+							);
+
+						}
+
+						else if (response.status === 202) {
+
 							toast.success(
 								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
 							);
-						} else {
+
+						}
+
+						else {
 							toast.error('There was an error submitting the form. Please try again.');
 						}
 					})
@@ -120,7 +137,7 @@ export default function Welcome() {
 					</div>
 
 					<Toaster />
-					<div className="flex justify-center">
+					<div className="flex justify-center ">
 						{sessionContext.doesSessionExist ? (
 							<button
 								className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"

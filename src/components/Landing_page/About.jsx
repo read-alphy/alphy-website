@@ -5,7 +5,7 @@
 export default function About() {
 
     return (
-        <div className="mx-auto w-800 flex justify-center text-blueLike bg-slate-100">
+        <div className="mx-auto w-800 flex justify-center text-blueLike bg-zinc-100">
 
             <div id="about" className="px-4 container w-5/6 max-w-4xl pt-20 pb-20 text-l lg:text-l">
                 <br></br><br></br>

@@ -35,7 +35,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 	};
 
 	return (
-		<div className="main-page-feed-section container mx-auto w-800">
+		<div className="main-page-feed-section container mx-auto w-800 drop-shadow-2xl">
 			<h2 className="text-gray-700 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">Summaries you may like, while you wait...</h2>
 			<p className="text-gray-500 text-l mx-auto pb-10 "></p>
 			<div className="main-page-feed-table-parent bg-zinc-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
@@ -64,14 +64,14 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 								setSearch(e.target.value);
 							}}
 							id="voice-search"
-							className="bg-zinc-50 border border-[#6B728E] text-gray-900 text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full sm: mt-10 pl-5 p-2.5"
+							className="bg-zinc-50 border border-slate-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-zinc-500 focus:border-zinc-500 block w-full sm: mt-10 pl-5 p-2.5"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
 
 					<button
 						type="submit"
-						className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-lightblueLike rounded-lg border border-bordoLike hover:bg-blueLike focus:ring-4 focus:outline-none focus:ring-blue-300 sm: mt-10"
+						className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-lightblueLike rounded-lg border border-bordoLike hover:bg-blueLike sm: mt-10"
 					>
 						<svg
 							aria-hidden="true"
@@ -91,7 +91,7 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 					</button>
 				</form>
 
-				<div className={`buttons flex justify-between mt-2`}></div>
+				<div className={`buttons flex justify-between mt-2 `}></div>
 				<table className="main-page-feed w-full">
 					<thead className="header h-0" />
 					<tbody

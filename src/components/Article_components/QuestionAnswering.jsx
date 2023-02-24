@@ -29,30 +29,9 @@ export default function QuestionAnswering(source_id) {
 
     const fetchData = () => {
         toast.dismiss()
-        if (sessionContext.doesSessionExist) {
-            try {
-                setIsLoadingInside(true);
-                setAnswer(false)
-                setData("")
 
-
-                axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
-                    .then(
-                        response => {
-
-                            setData(response.data)
-
-
-                            setIsLoadingInside(false);
-                        });
-            } catch (error) {
-
-                console.error(`Error fetching data: ${error}`);
-                setIsLoadingInside(false);
-            }
-        }
-        else {
-            toast('You need to sign in to ask questions.', {
+        if (inputValue.length > 200) {
+            toast('Your question is too long, please keep it under 200 characters.', {
                 icon: '❗',
                 style: {
                     background: "#F9F8F8"
@@ -60,23 +39,58 @@ export default function QuestionAnswering(source_id) {
 
             });
             setInputValue('');
+            return
+        }
+        else {
+            if (sessionContext.doesSessionExist) {
+                try {
+                    setIsLoadingInside(true);
+                    setAnswer(false)
+                    setData("")
+
+
+                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
+                        .then(
+                            response => {
+
+                                setData(response.data)
+
+
+                                setIsLoadingInside(false);
+                            });
+                } catch (error) {
+
+                    console.error(`Error fetching data: ${error}`);
+                    setIsLoadingInside(false);
+                }
+            }
+            else {
+                toast('You need to sign in to ask questions.', {
+                    icon: '❗',
+                    style: {
+                        background: "#F9F8F8"
+                    }
+
+                });
+                setInputValue('');
+            }
         }
     };
 
     return (
         <div className="bg-whiteLike drop-shadow-3xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto">
             <Toaster position="bottom-center" />
-            <h1 className="text-xl pb-3 text-bordoLike">Ask questions to the video.</h1>
-            <p className="text-bordoLike  pb-7">Navigate through the video by asking real questions and getting AI-generated acccurate answers. </p>
+            <h1 className="text-xl pb-3 text-zinc-600">Ask questions and get real answers.</h1>
+            <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p>
             <div className="flex items-center">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                     </div>
-                    <input value={inputValue} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-bordoLike placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg bg-whiteLike focus:ring-6 focus:ring-zinc-200 focus:border-zinc-300" placeholder="Ex: How does X work? What are the best practices for taking notes?" autoComplete="off" required />
+                    <input value={inputValue} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg bg-whiteLike focus:outline-none" placeholder="Ex: How does X work? What are the best practices for taking notes?" autoComplete="off" required />
                 </div>
-                <button type="submit" onClick={fetchData} class="p-3.5 ml-2 text-sm font-medium text-whiteLike bg-bordoLike rounded-lg border border-zinc-600 hover:bg-zinc-600 focus:ring-4 focus:outline-none">
+                <button type="submit" onClick={fetchData} class="p-3.5 ml-2 text-sm font-medium text-whiteLike bg-bordoLike rounded-md border border-zinc-600 hover:bg-zinc-700 focus:ring-4 focus:outline-none">
 
                     <span className="text-whiteLike text-l">Search</span>
                 </button>

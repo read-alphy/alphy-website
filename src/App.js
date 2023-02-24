@@ -28,8 +28,9 @@ function App() {
 	const url = `http://alphy-cpu-vm.westus.cloudapp.azure.com/summaries?limit=11&offset=0`;
 
 	useEffect(() => {
-		setIsLoading(true);
 
+
+		setIsLoading(true);
 		axios.get(url).then((response) => {
 			setData(response.data);
 			setIsLoading(false);

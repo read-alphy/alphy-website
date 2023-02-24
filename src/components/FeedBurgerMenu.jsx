@@ -12,7 +12,7 @@ function FeedBurgerMenu(props) {
                     {/*                     <div className="create-article">
                         <button href="/article/new-article"><p>New +</p></button>
                     </div> */}
-                    <div className="user-feed-burger-feed">
+                    <div className="user-feed-burger-feed ">
                         <Feed data={data} />
                     </div>
 
