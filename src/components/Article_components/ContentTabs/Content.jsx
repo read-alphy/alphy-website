@@ -12,15 +12,12 @@ import { Tab, Tabs } from 'react-bootstrap';
 
 
 export default function Content(props) {
-	//const data = props.data;
-	const data = { summary: "summary\nhello", transcript: "transcript" }
+	const data = props.data;
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
-
 	let summaryArray = data.summary.split("\n")
-
 	const handleClick = (event) => {
 		setAutoplay(1)
 		let formattedTimestamp = event.target.textContent
@@ -37,13 +34,8 @@ export default function Content(props) {
 
 	async function transcriptParser() {
 
-
-
-
-		let a = `1\n00:00:02,000 --> 00:00:07,000\nDownloaded from\nYTS.MX\n2\n00:00:03,210 --> 00:00:05,212\n[grand orchestral fanfare playing]3\n00:00:08,000 --> 00:00:13,000\nOfficial YIFY movies site:\nYTS.MX\n4\n00:00:27,993 --> 00:00:30,030\n♪\n5\n00:01:05,030 --> 00:01:07,067\n♪`
-
 		var parser = new srtParser2();
-		var srt_array = parser.fromSrt(a);
+		var srt_array = parser.fromSrt(data.transcript);
 
 
 
