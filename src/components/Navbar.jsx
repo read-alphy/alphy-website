@@ -55,22 +55,22 @@ function Navbar({ collapsed, setCollapsed }) {
 			<div>
 				<div className=" navbar-right-section">
 
-					<div className="signed-in-navbar grid ">
+					<div className="signed-in-navbar grid gap-4">
 
-						<a href="/#feedback" type="button" className={`hidden md:block text-gray-900 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2`}>Give us feedback!</a>
+						<a href="/#feedback" type="button" className={`hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2`}>Give us feedback!</a>
 
-						<a href="/#about" className="hidden md:block mr-5 pt-2"> About </a>
+						<a href="/#about" className="hidden font-semibold text-zinc-200 md:block mr-5 pt-2"> About </a>
 
 
 						{sessionContext.userId ? (<div className="hidden md:block pt-2">
 
-							<Link className="text-l font-semibold text-whiteLike" onClick={handleSignOut}>
+							<Link className="text-l font-semibold text-zinc-200" onClick={handleSignOut}>
 								Log Out
 							</Link>
 
 						</div>) : (
 
-							<div className="hidden md:block pt-2 text-whiteLike">
+							<div className="hidden md:block font-semibold pt-2 text-zinc-200">
 
 								<Link to="/auth">Sign In</Link>
 							</div>
