@@ -71,6 +71,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [showBaseQA, setShowBaseQA] = useState(false)
     const [baseSources, setBaseSources] = useState(false)
     const [baseQuestion, setBaseQuestion] = useState("")
+    const [isCleared, setIsCleared] = useState(false)
 
     const [optionValue, setOptionValue] = useState("")
 
@@ -79,7 +80,10 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 
 
-
+    const handleClear = () => {
+        setIsCleared(true)
+        setShowBaseQA(false)
+    }
 
     const handleBaseQA = (event) => {
         setShowBaseQA(true)
@@ -205,24 +209,31 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 </div>
 
 
+
+
+
+
                 <div className="mt-20">
 
+                    {isCleared ?
+
+                        (<div><p className="mb-5 text-xl text-zinc-600"> Some questions we already answered for you</p>
+                            {Object.keys(source_id.key_qa).map((item, index) =>
+                                <button key={index} onClick={handleBaseQA} class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-lg">{item}</button>
+                            )
+                            }
+                        </div>)
+                        :
+
+                        (<button className="mx-auto" onClick={handleClear}><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        </button>)
 
 
 
-
-                    <p className="mb-5 text-xl text-zinc-600"> Some questions we already answered for you</p>
-
-
-
-                    {Object.keys(source_id.key_qa).map((item, index) =>
-                        <button key={index} onClick={handleBaseQA} class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-lg">{item}</button>
-                    )
                     }
-
-
                 </div>
-
                 {isLoadingInside && !showBaseQA ?
 
                     (<div
@@ -275,6 +286,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                             <svg className="animate-bounce" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                                 <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" fillRule="evenodd"></path>
                                             </svg> </button> </div>
+
 
                                     )
 
