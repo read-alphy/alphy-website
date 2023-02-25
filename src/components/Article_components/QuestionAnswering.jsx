@@ -10,7 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function QuestionAnswering(source_id, key_qa) {
 
     const sessionContext = useSessionContext()
-    console.log(source_id, key_qa)
+    console.log(source_id.source_id, source_id.key_qa, key_qa.key_qa, key_qa.source_id)
     const dummy = {
         key_qa: {
             "What key elements does Michael Seibel identify as ensuring a successful startup? ": {
