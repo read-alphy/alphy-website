@@ -94,7 +94,7 @@ export default function Content(props) {
 					<iframe id="player"
 						title="My YouTube Video "
 						className="max-w-80 lg:w-120 h-80 w-auto"
-						src={`https://www.youtube.com/embed/zIwLWfaAg-8?autoplay=${autoplay}&start=${timestamp}`}
+						src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
 						frameBorder="0"
 						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					></iframe>
