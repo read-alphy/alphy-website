@@ -105,7 +105,7 @@ export default function Content(props) {
 						></iframe>
 					</div>
 				</div>
-				<QuestionAnswering data={data} />
+				{data ? <QuestionAnswering data={data} /> : null}
 				<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
 					<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
 						<button
