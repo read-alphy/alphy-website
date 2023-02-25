@@ -14,8 +14,6 @@ export default function QuestionAnswering(source_id) {
     const sessionContext = useSessionContext()
 
     const [data, setData] = useState("");
-
-
     const [isLoadingInside, setIsLoadingInside] = useState(false);
     const [answer, setAnswer] = useState(false)
     const [inputValue, setInputValue] = useState('');

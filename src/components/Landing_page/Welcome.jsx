@@ -26,15 +26,16 @@ export default function Welcome() {
 	const handleSubmit = (event, selectedOption) => {
 
 		toast.dismiss();
+
+
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
+
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
-				inputValue.includes('twitter.com/i/spaces') ||
-				inputValue.includes()
+				inputValue.includes('https://m.youtube.com')
 			) {
-
 
 				setLoading(true);
 				axios
@@ -45,20 +46,20 @@ export default function Welcome() {
 					.then((response) => {
 						setLoading(false);
 						setInputValue('');
-						if (response.status === 200) {
+						/* 						if (response.status === 200) {
+						
+													toast(
+														'Someone already submitted this video! Give us a few minutes to process it.', {
+														icon: '⌛',
+														style: {
+															background: "#F9F8F8"
+														}
+													}
+													);
+						
+												} */
 
-							toast(
-								'Someone already submitted this video! Give us a few minutes to process it.', {
-								icon: '⌛',
-								style: {
-									background: "#F9F8F8"
-								}
-							}
-							);
-
-						}
-
-						else if (response.status === 202) {
+						if (response.status === 200 || response.status === 201 || response.status === 202) {
 
 							toast.success(
 								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
@@ -79,7 +80,9 @@ export default function Welcome() {
 
 		}
 		else {
+
 			navigate("/auth")
+
 		};
 	};
 
