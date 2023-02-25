@@ -30,6 +30,7 @@ export default function Welcome() {
 
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
+			console.log(sessionContext.doesSessionExist)
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
@@ -42,6 +43,7 @@ export default function Welcome() {
 						language: selectedOption,
 					})
 					.then((response) => {
+						console.log(response)
 						setLoading(false);
 						setInputValue('');
 						/* 						if (response.status === 200) {
@@ -58,7 +60,6 @@ export default function Welcome() {
 												} */
 
 						if (response.status === 200 || response.status === 201 || response.status === 202) {
-
 							toast.success(
 								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
 							);
@@ -79,8 +80,8 @@ export default function Welcome() {
 
 		}
 		else {
-			toast.error("You need to be logged in to submit content.");
-			//navigate("/auth")
+
+			navigate("/auth")
 			console.log("hey")
 		};
 	};
