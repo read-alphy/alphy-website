@@ -211,7 +211,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 
 
-                    <p className="mb-10 text-l "> Some questions we already answered for you</p>
+                    <p className="mb-5 text-xl text-zinc-600"> Some questions we already answered for you</p>
 
 
 
