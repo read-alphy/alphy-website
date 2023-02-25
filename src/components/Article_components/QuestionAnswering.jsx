@@ -10,7 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function QuestionAnswering(source_id, key_qa) {
 
     const sessionContext = useSessionContext()
-    console.log(source_id.source_id, source_id.key_qa, key_qa.key_qa, key_qa.source_id)
+    // console.log(source_id.source_id, source_id.key_qa)
     const dummy = {
         key_qa: {
             "What key elements does Michael Seibel identify as ensuring a successful startup? ": {
@@ -57,8 +57,7 @@ export default function QuestionAnswering(source_id, key_qa) {
             }
         }
     }
-    /*     console.log(dummy.key_qa[Object.keys(dummy.key_qa)[0]].sources[0].text)
-        console.log(Object.keys(dummy.key_qa)[0]) */
+
 
     const [answerData, setAnswerData] = useState("");
 
@@ -66,6 +65,18 @@ export default function QuestionAnswering(source_id, key_qa) {
     const [isLoadingInside, setIsLoadingInside] = useState(false);
     const [answer, setAnswer] = useState(false)
     const [inputValue, setInputValue] = useState('');
+    const [showBaseQA, setShowBaseQA] = useState(false)
+    const [baseSources, setBaseSources] = useState(false)
+
+
+
+
+    const handleBaseQA = (event) => {
+        setShowBaseQA(true)
+        setInputValue(event.target.textContent)
+    }
+
+
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
@@ -95,7 +106,7 @@ export default function QuestionAnswering(source_id, key_qa) {
                     setAnswer(false)
                     setAnswerData("")
 
-                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id}/question`, inputValue)
+                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
                         .then(
                             response => {
 
@@ -135,7 +146,9 @@ export default function QuestionAnswering(source_id, key_qa) {
                         <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                     </div>
                     <input value={inputValue} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg bg-whiteLike focus:outline-none" placeholder="Ex: How does X work? What are the best practices for taking notes?" autoComplete="off" required />
+
                 </div>
+
                 <button type="submit" onClick={fetchData} class="p-3.5 ml-2 text-sm font-medium text-whiteLike bg-bordoLike rounded-md border border-zinc-600 hover:bg-zinc-700 focus:ring-4 focus:outline-none">
 
                     <span className="text-whiteLike text-l">Search</span>
@@ -144,14 +157,18 @@ export default function QuestionAnswering(source_id, key_qa) {
             </div>
 
 
-            {/*           <div className="">
-                {Object.keys(dummy.key_qa).map((item, index) => <p className="text-zinc-600" key={index}> {item} </p>
+            <div className="mt-10">
+                <p className="mb-10 text-zinc-700 text-l">Try out these questions:</p>
+                {Object.keys(source_id.key_qa).map((item, index) =>
+                    <kbd key={index} onClick={handleBaseQA} class="font-sans cursor-pointer mt-2 px-2 py-1.5 text-md font-base text-gray-800 bg-gray-100 border border-gray-200 rounded-lg ml-5">{item}</kbd>
                 )
                 }
-            </div> */}
 
 
-            {isLoadingInside ?
+            </div>
+
+
+            {isLoadingInside && !showBaseQA ?
 
                 (<div
 
@@ -168,7 +185,7 @@ export default function QuestionAnswering(source_id, key_qa) {
                 </div>) : (<div> </div>)
             }
 
-            {answerData.length != 0 ?
+            {answerData.length != 0 && !showBaseQA ?
 
                 (<div className="text-zinc-600 pt-10 pb-10">
 
@@ -223,6 +240,65 @@ export default function QuestionAnswering(source_id, key_qa) {
 
                 : (null)
             }
+
+            {showBaseQA ?
+
+                (<div className="text-zinc-600 pt-10 pb-10">
+
+                    {
+
+
+                        <div>
+                            <div>
+                                <h1 className="mb-4 text-xl">Answer</h1>
+                                <p className="text-zinc-600">{source_id.key_qa[inputValue].answer}</p>
+                            </div>
+
+
+                            <button className={`cursor-pointer justify-end mt-10 mx-auto flex`} onClick={() => setBaseSources(!baseSources)}>
+
+                                <svg className={`${baseSources ? "hidden" : "block"} animate-bounce`} aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
+                                    <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z" fillRule="evenodd"></path>
+                                </svg>
+
+                            </button>
+
+                            {baseSources ?
+
+                                (<div>
+                                    <div>
+                                        <h1 className="mb-4 text-xl"> Sources from the video</h1>
+
+                                        {
+
+                                            source_id.key_qa[inputValue] ? source_id.key_qa[inputValue].sources.map((source, index) =>
+                                                <p key={index}>{index + 1}. <br /> <br /> {source.text} <br /> <br /> </p>
+                                            ) : null
+
+                                        }
+                                    </div>
+                                    <button className={`cursor-pointer  justify-end  mt-10 mx-auto flex`} onClick={() => setBaseSources(!baseSources)}>
+
+                                        <svg className="animate-bounce" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
+                                            <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" fillRule="evenodd"></path>
+                                        </svg> </button> </div>
+
+                                )
+
+                                : (null)}
+                        </div>
+
+
+
+
+                    }
+
+
+                </div>)
+
+                : (null)
+            }
+
 
 
         </div >
