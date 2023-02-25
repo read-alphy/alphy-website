@@ -17,7 +17,7 @@ export default function Content(props) {
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
-	let summaryArray = data.summary.split("\n")
+	let summaryArray
 	const handleClick = (event) => {
 		setAutoplay(1)
 		let formattedTimestamp = event.target.textContent
@@ -33,7 +33,7 @@ export default function Content(props) {
 
 
 	async function transcriptParser() {
-
+		summaryArray = data.summary.split("\n")
 		var parser = new srtParser2();
 		var srt_array = parser.fromSrt(data.transcript);
 
