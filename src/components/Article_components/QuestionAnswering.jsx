@@ -133,7 +133,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
             return
         }
         else {
-            if (!sessionContext.doesSessionExist) {
+            if (sessionContext.doesSessionExist) {
                 try {
                     setIsLoadingInside(true);
                     setAnswer(false)
@@ -204,7 +204,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
                 </div>
 
-                {/* 
+
                 <div className="mt-20">
 
 
@@ -217,7 +217,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                     }
 
 
-                </div> */}
+                </div>
 
 
                 {isLoadingInside && !showBaseQA ?
