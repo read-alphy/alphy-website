@@ -14,6 +14,8 @@ export default function QuestionAnswering(source_id) {
     const sessionContext = useSessionContext()
 
     const [data, setData] = useState("");
+
+
     const [isLoadingInside, setIsLoadingInside] = useState(false);
     const [answer, setAnswer] = useState(false)
     const [inputValue, setInputValue] = useState('');
@@ -106,19 +108,19 @@ export default function QuestionAnswering(source_id) {
                         height: '20vh',
                     }}
                 >
-                    <ReactLoading type="spinningBubbles" className="text-bordoLike" />
+                    <ReactLoading type="spinningBubbles" className="text-zinc-600" />
                 </div>) : (<div> </div>)
             }
 
             {data.length != 0 ?
 
-                (<div className="text-whiteLike pt-10 pb-10">
+                (<div className="text-zinc-600 pt-10 pb-10">
 
                     {data.answer ? (
                         <div>
                             <div>
                                 <h1 className="mb-4 text-xl">Answer</h1>
-                                <p className="text-whiteLike">{data.answer}</p>
+                                <p className="text-zinc-600">{data.answer}</p>
                             </div>
 
 
