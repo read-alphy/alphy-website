@@ -171,8 +171,8 @@ export default function QuestionAnswering(source_id, key_qa, data) {
         <div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto">
             <div className='pl-10 pr-10 pt-10'>
                 <Toaster position="bottom-center" />
-                <h1 className="text-xl pb-3 text-zinc-600">Ask questions and get real answers.</h1>
-                <p className="text-zinc-600  pb-7">We already answered several questions for you. Feel free to check them out or ask your own question. </p>
+                <h1 className="text-xl pb-3 text-zinc-600">Ask Alphy about the video and get real answers.</h1>
+                <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p>
                 <div className="flex items-center">
 
                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
@@ -193,7 +193,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                         </div>
 
-                        <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg bg-whiteLike focus:outline-none" placeholder="Write your own query..." autoComplete="off" required />
+                        <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg bg-whiteLike focus:outline-none" placeholder="Ask anything to the transcript..." autoComplete="off" required />
 
                     </div>
 
