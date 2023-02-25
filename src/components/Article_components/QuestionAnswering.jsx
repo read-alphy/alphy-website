@@ -175,7 +175,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p>
                 <div className="flex items-center">
 
-                    <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
+                    {/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
 
                         <option onClick={handleOptionClear}> Questions we already answered</option>
 
@@ -186,7 +186,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                         }
 
 
-                    </select>
+                    </select> */}
 
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -205,9 +205,13 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 </div>
 
 
-                {/*               <div className="mt-20">
+                <div className="mt-20">
 
 
+
+
+
+                    <p className="mb-10 text-l "> Some questions we already answered for you</p>
 
 
 
@@ -218,7 +222,6 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 
                 </div>
- */}
 
                 {isLoadingInside && !showBaseQA ?
 
