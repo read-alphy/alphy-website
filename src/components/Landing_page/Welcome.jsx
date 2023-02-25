@@ -24,9 +24,9 @@ export default function Welcome() {
 
 
 	const handleSubmit = (event, selectedOption) => {
-
-		toast.dismiss();
 		event.preventDefault();
+		toast.dismiss();
+
 
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
