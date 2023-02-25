@@ -14,9 +14,8 @@ export const SuperTokensConfig = {
     recipeList: [
         Passwordless.init({
 
-
             style: {
-                container: {
+                headerTitle: {
                     fontFamily: "Segoe UI, sans-serif",
                 },
                 button: {
