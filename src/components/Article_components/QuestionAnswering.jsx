@@ -7,10 +7,10 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-export default function QuestionAnswering(data) {
+export default function QuestionAnswering(source_id, key_qa) {
 
     const sessionContext = useSessionContext()
-    console.log(data.source_id)
+    console.log(source_id, key_qa)
     const dummy = {
         key_qa: {
             "What key elements does Michael Seibel identify as ensuring a successful startup? ": {
@@ -95,7 +95,7 @@ export default function QuestionAnswering(data) {
                     setAnswer(false)
                     setAnswerData("")
 
-                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${data.source_id}/question`, inputValue)
+                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id}/question`, inputValue)
                         .then(
                             response => {
 
