@@ -27,7 +27,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	};
 
 	return (
-		<div className=" md:min-w-[400px] lg:col-span-1 border-blueLike text-blueLike flex justify-center items-center mx-5">
+		<div className=" md:min-w-[400px] lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5">
 			<div
 				href="#"
 				className={` w-full pt-6 drop-shadow-xl bg-zinc-100 border-gray-200 sm:min-h-[300px] lg:min-h-[350px] rounded-lg shadow-md ${keysCollapsed ? 'sm:h-[300px]' : null
@@ -39,7 +39,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 							}`}
 					>
 						{keysCollapsed ? <ArrowButton direction={'left'} /> : null}
-						<h5 className="text-xl font-bold tracking-tight text-gray-900 text-blueLike items-center">
+						<h5 className="text-xl font-bold tracking-tight text-zinc-600 text-blueLike items-center">
 							Key Takeaways {keysCollapsed ? `${current + 1}/${key_takeaways.length}` : null}
 						</h5>
 						{keysCollapsed ? <ArrowButton direction={'right'} /> : null}

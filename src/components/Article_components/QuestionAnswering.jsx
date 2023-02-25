@@ -171,11 +171,15 @@ export default function QuestionAnswering(source_id, key_qa) {
 
                         <option selected onClick={handleOptionClear}> Questions we already answered</option>
 
-                        {Object.keys(source_id.key_qa).map((item, index) =>
-                            <option value={optionValue} key={index} onClick={handleBaseQA} class="font-sans cursor-pointer mt-2  text-md font-base text-gray-800 bg-gray100 border border-gray-200 rounded-lg">
-                                {item}</option>
-                        )
-                        }
+                        {source_id ?
+                            <div>
+                                {Object.keys(source_id.key_qa).map((item, index) =>
+                                    <option value={optionValue} key={index} onClick={handleBaseQA} class="font-sans cursor-pointer mt-2  text-md font-base text-gray-800 bg-gray100 border border-gray-200 rounded-lg">
+                                        {item}</option>
+                                )
+                                }
+                            </div>
+                            : null}
 
                     </select>
                     <div class="relative w-full">
