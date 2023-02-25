@@ -26,11 +26,11 @@ export default function Welcome() {
 	const handleSubmit = (event, selectedOption) => {
 
 		toast.dismiss();
-
+		event.preventDefault();
 
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
-			console.log(sessionContext.doesSessionExist)
+
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
