@@ -7,9 +7,10 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-export default function QuestionAnswering(source_id, key_qa) {
+export default function QuestionAnswering(source_id) {
 
     const sessionContext = useSessionContext()
+    console.log(source_id)
     // console.log(source_id.source_id, source_id.key_qa)
     const dummy = {
         key_qa: {
@@ -171,7 +172,7 @@ export default function QuestionAnswering(source_id, key_qa) {
 
                         <option selected onClick={handleOptionClear}> Questions we already answered</option>
 
-                        {source_id ?
+                        {source_id.key_qa ?
                             <div>
                                 {Object.keys(source_id.key_qa).map((item, index) =>
                                     <option value={optionValue} key={index} onClick={handleBaseQA} class="font-sans cursor-pointer mt-2  text-md font-base text-gray-800 bg-gray100 border border-gray-200 rounded-lg">
