@@ -67,6 +67,7 @@ export default function QuestionAnswering(source_id, key_qa) {
     const [inputValue, setInputValue] = useState('');
     const [showBaseQA, setShowBaseQA] = useState(false)
     const [baseSources, setBaseSources] = useState(false)
+    const [baseQuestion, setBaseQuestion] = useState("")
 
 
 
@@ -74,6 +75,7 @@ export default function QuestionAnswering(source_id, key_qa) {
     const handleBaseQA = (event) => {
         setShowBaseQA(true)
         setInputValue(event.target.textContent)
+        setBaseQuestion(event.target.textContent)
     }
 
 
@@ -159,7 +161,7 @@ export default function QuestionAnswering(source_id, key_qa) {
 
             <div className="mt-10">
                 <p className="mb-2 text-zinc-700 text-l">Try out these questions:</p>
-                {Object.keys(dummy.key_qa).map((item, index) =>
+                {Object.keys(source_id.key_qa).map((item, index) =>
                     <button key={index} onClick={handleBaseQA} class="font-sans cursor-pointer mt-2 px-2 py-1.5 text-md font-base text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">{item}</button>
                 )
                 }
@@ -251,7 +253,7 @@ export default function QuestionAnswering(source_id, key_qa) {
                         <div>
                             <div>
                                 <h1 className="mb-4 text-xl">Answer</h1>
-                                <p className="text-zinc-600">{dummy.key_qa[inputValue].answer}</p>
+                                <p className="text-zinc-600">{source_id.key_qa[baseQuestion].answer}</p>
                             </div>
 
 
@@ -271,7 +273,7 @@ export default function QuestionAnswering(source_id, key_qa) {
 
                                         {
 
-                                            dummy.key_qa[inputValue] ? dummy.key_qa[inputValue].sources.map((source, index) =>
+                                            source_id.key_qa[baseQuestion] ? source_id.key_qa[baseQuestion].sources.map((source, index) =>
                                                 <p key={index}>{index + 1}. <br /> <br /> {source.text} <br /> <br /> </p>
                                             ) : null
 
