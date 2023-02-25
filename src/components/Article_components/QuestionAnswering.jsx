@@ -12,7 +12,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const sessionContext = useSessionContext()
 
 
-    console.log("this is source id", source_id.key_qa)
+
     // console.log(source_id.source_id, source_id.key_qa)
     const dummy = {
         key_qa: {
@@ -75,7 +75,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [optionValue, setOptionValue] = useState("")
 
 
-    console.log(source_id)
+
 
 
 
@@ -177,7 +177,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
 
-                        <option selected onClick={handleOptionClear}> Questions we already answered</option>
+                        <option onClick={handleOptionClear}> Questions we already answered</option>
 
                         {Object.keys(source_id.key_qa).map((item, index) =>
                             <option value={optionValue} key={index} onClick={handleBaseQA} class="font-sans cursor-pointer mt-2  text-md font-base text-gray-800 bg-gray100 border border-gray-200 rounded-lg">
