@@ -73,14 +73,8 @@ export default function Content(props) {
 
 	}
 
+	transcriptParser()
 
-	useEffect(() => {
-		// load data asynchronously here
-		// set dataLoaded to true once the data has arrived
-		if (data.length > 0) {
-			transcriptParser()
-		}
-	}, []);
 
 	return (
 		<div className={`container grow mx-auto md:px-10 lg:px-20 overflow-x-hidden`}>
@@ -142,7 +136,6 @@ export default function Content(props) {
 								{activeTab === "tab2" &&
 									<div className='text-lg font-normal mb-4 max-w-screen-md' >
 										{isLoading ? <Loading /> : (
-
 											transcript.map((item, index) => {
 												transcriptParser();
 												if (index % 2 === 0) {
