@@ -205,7 +205,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 </div>
 
 
-                <div className="mt-20">
+                {/*               <div className="mt-20">
 
 
 
@@ -218,7 +218,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 
                 </div>
-
+ */}
 
                 {isLoadingInside && !showBaseQA ?
 
