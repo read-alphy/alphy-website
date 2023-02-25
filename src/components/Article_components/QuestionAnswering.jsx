@@ -7,10 +7,12 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-export default function QuestionAnswering(source_id) {
+export default function QuestionAnswering(source_id, key_qa, data) {
 
     const sessionContext = useSessionContext()
     console.log(source_id.source_id)
+    console.log(key_qa.key_qa)
+    console.log("this is data", data)
     // console.log(source_id.source_id, source_id.key_qa)
     const dummy = {
         key_qa: {
