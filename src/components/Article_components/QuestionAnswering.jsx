@@ -7,13 +7,13 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-export default function QuestionAnswering(source_id) {
-
-
+export default function QuestionAnswering(data) {
 
     const sessionContext = useSessionContext()
 
-    const [data, setData] = useState("");
+
+
+    const [answerData, setAnswerData] = useState("");
 
 
     const [isLoadingInside, setIsLoadingInside] = useState(false);
@@ -46,14 +46,14 @@ export default function QuestionAnswering(source_id) {
                 try {
                     setIsLoadingInside(true);
                     setAnswer(false)
-                    setData("")
+                    setAnswerData("")
 
 
-                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
+                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${data.source_id}/question`, inputValue)
                         .then(
                             response => {
 
-                                setData(response.data)
+                                setAnswerData(response.data)
 
 
                                 setIsLoadingInside(false);
@@ -94,6 +94,14 @@ export default function QuestionAnswering(source_id) {
 
                     <span className="text-whiteLike text-l">Search</span>
                 </button>
+                {/*                 {
+                    data.key_qa.map((item, index) => (
+                        <p key={index} className={'border-b border-slate-200 pb-5 pt-5'}>
+                            {'• '}
+                            {item} &&&      {item.answer}
+                        </p>
+                    ))
+                } */}
             </div>
 
             {isLoadingInside ?
@@ -106,21 +114,22 @@ export default function QuestionAnswering(source_id) {
                         justifyContent: 'center',
                         alignItems: 'center',
                         height: '20vh',
+
                     }}
                 >
-                    <ReactLoading type="spinningBubbles" className="text-zinc-600" />
+                    <ReactLoading type="spinningBubbles" color="#52525b" />
                 </div>) : (<div> </div>)
             }
 
-            {data.length != 0 ?
+            {answerData.length != 0 ?
 
                 (<div className="text-zinc-600 pt-10 pb-10">
 
-                    {data.answer ? (
+                    {answerData.answer ? (
                         <div>
                             <div>
                                 <h1 className="mb-4 text-xl">Answer</h1>
-                                <p className="text-zinc-600">{data.answer}</p>
+                                <p className="text-zinc-600">{answerData.answer}</p>
                             </div>
 
 
@@ -136,9 +145,9 @@ export default function QuestionAnswering(source_id) {
 
                                 (<div>
                                     <div>
-                                        <h1 className="mb-4 text-xl"> Sources </h1>
+                                        <h1 className="mb-4 text-xl"> Sources from the video</h1>
 
-                                        {data.sources.map((source, index) =>
+                                        {answerData.sources.map((source, index) =>
 
                                             <p key={index}>{source.text} <br /> <br /></p>)}
                                     </div>
