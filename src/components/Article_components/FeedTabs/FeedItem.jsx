@@ -36,7 +36,7 @@ const FeedItem = ({ item, setCollapsed }) => {
 					<div className="text-xs w-1/2">
 						<div className="text-sm video-text text-bordoLike font-semibold">{item.title}</div>
 						<div className="side-feed-creator font-italic text-purpleLike">{item.creator_name}</div>
-						<div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div>
+						{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 					</div>
 				</div>
 			</td>

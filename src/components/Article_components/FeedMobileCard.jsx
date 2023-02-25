@@ -23,7 +23,7 @@ function FeedMobileCard({ index, item }) {
             <div className='col-span-3 '>
                 <p className='text-sm'>{item.title.length > 50 ? item.title.substring(0, 50) + "..." : item.title}</p>
                 <p className='my-2 text-xs opacity-75'>{item.creator_name}</p>
-                <p className='my-2 text-xs opacity-75'>Date: {moment(item.source_ts).format("DD:MM:YYYY") }</p>
+                {/*  <p className='my-2 text-xs opacity-75'>Date: {moment(item.source_ts).format("DD:MM:YYYY") }</p> */}
 
                 {/* <div className='flex items-center space-x-3'>
                     <p className='text-xs opacity-90'>Summary:</p>
