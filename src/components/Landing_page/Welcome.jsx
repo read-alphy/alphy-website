@@ -61,13 +61,16 @@ export default function Welcome() {
 
 						if (response.status === 200 || response.status === 201 || response.status === 202) {
 							toast.success(
-								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
+								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.', { duration: 3000 }
 							);
 
 						}
 
 						else {
-							toast.error('There was an error submitting the form. Please try again.');
+							toast.error('There was an error submitting the form. Please try again.', {
+								duration:
+									3000
+							});
 						}
 					})
 			}
@@ -82,7 +85,7 @@ export default function Welcome() {
 		else {
 
 			navigate("/auth")
-			console.log("hey")
+
 		};
 	};
 
