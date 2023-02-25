@@ -8,13 +8,14 @@ import QuestionAnswering from '../QuestionAnswering';
 import srtParser2 from "srt-parser-2"
 import { Tab, Tabs } from 'react-bootstrap';
 
-
+import Loading from '../../Loading';
 
 
 export default function Content(props) {
 	const [loading, setLoading] = useState(false);
-	const data = props.data;
 
+	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
+	const data = props.data;
 
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
@@ -71,9 +72,7 @@ export default function Content(props) {
 		}
 
 	}
-	if (data.length > 0) {
-		transcriptParser()
-	}
+
 
 	useEffect(() => {
 		// load data asynchronously here
@@ -133,25 +132,26 @@ export default function Content(props) {
 							<Tab eventKey="transcript" title="" >
 								{activeTab === "tab1" &&
 									<div className='text-lg font-normal mb-4 max-w-screen-md'>
-										{summaryArray.length === 0 ? (<tr className="border-b-0">
+										{isLoading ? <Loading /> : (summaryArray.length === 0 ? (<tr className="border-b-0">
 											<td>No results found</td>
 										</tr>) : (summaryArray.map((item, index) => {
 											return (<p key={index}><br></br>{item}</p>)
-										}))}
+										})))}
 									</div>
 								}
 								{activeTab === "tab2" &&
 									<div className='text-lg font-normal mb-4 max-w-screen-md' >
-										{dataLoaded ? (transcript.map((item, index) => {
-											if (index % 2 === 0) {
-												return (<a onClick={handleClick} className="cursor-pointer " key={index}><br></br>{item} </a>)
-											}
-											else {
-												return (<div key={index}><br></br>{item}</div>)
-											}
-										})) : (<tr className="border-b-0">
-											<td>No results found</td>
-										</tr>)}
+										{isLoading ? <Loading /> : (
+
+											transcript.map((item, index) => {
+												transcriptParser();
+												if (index % 2 === 0) {
+													return (<a onClick={handleClick} className="cursor-pointer " key={index}><br></br>{item} </a>)
+												}
+												else {
+													return (<div key={index}><br></br>{item}</div>)
+												}
+											}))}
 									</div>}
 							</Tab>
 						</Tabs>

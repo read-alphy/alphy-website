@@ -28,8 +28,6 @@ function App() {
 	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
 
 	useEffect(() => {
-
-
 		setIsLoading(true);
 		axios.get(url).then((response) => {
 			setData(response.data);

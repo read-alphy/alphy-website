@@ -30,13 +30,11 @@ export default function Welcome() {
 
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
-
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com')
 			) {
-
 				setLoading(true);
 				axios
 					.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
@@ -74,15 +72,16 @@ export default function Welcome() {
 			}
 
 			else {
+
 				setInputValue('');
 				toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
 			}
 
 		}
 		else {
-
-			navigate("/auth")
-
+			toast.error("You need to be logged in to submit content.");
+			//navigate("/auth")
+			console.log("hey")
 		};
 	};
 
@@ -121,7 +120,7 @@ export default function Welcome() {
 					will transcribe, summarize and prepare the content for questioning. We will notify you via email
 					when it's ready!{' '}
 				</p>
-
+				<Toaster />
 				<form
 					className="items-center justify-center w-full lg:space-x-4 lg:flex"
 					onSubmit={(e) => handleSubmit(e, language)}
@@ -139,7 +138,7 @@ export default function Welcome() {
 						<Languages language={language} onLangChange={setLanguage} />
 					</div>
 
-					<Toaster />
+
 					<div className="flex justify-center ">
 						{sessionContext.doesSessionExist ? (
 							<button
