@@ -12,19 +12,23 @@ import { Tab, Tabs } from 'react-bootstrap';
 
 
 export default function Content(props) {
+	const [loading, setLoading] = useState(false);
 	const data = props.data;
+
+
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
-	let summaryArray
+	const [dataLoaded, setDataLoaded] = useState(false);
+
+	let summaryArray = ""
 	const handleClick = (event) => {
 		setAutoplay(1)
 		let formattedTimestamp = event.target.textContent
 		const [hours, minutes, seconds] = formattedTimestamp.split(":");
 
 		setTimestamp((hours * 3600) + (minutes * 60) + seconds * 1);
-
 
 	}
 
@@ -67,79 +71,91 @@ export default function Content(props) {
 		}
 
 	}
+	if (data.length > 0) {
+		transcriptParser()
+	}
 
-	transcriptParser()
-
-
+	useEffect(() => {
+		// load data asynchronously here
+		// set dataLoaded to true once the data has arrived
+		if (data.length > 0) {
+			transcriptParser()
+		}
+	}, []);
 
 	return (
 		<div className={`container grow mx-auto md:px-10 lg:px-20 overflow-x-hidden`}>
 
-			<div className="grid grid-cols-3">
-				<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
-					{data.title}
-				</h1>
+			<div>
+				<div className="grid grid-cols-3">
+					<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
+						{data.title}
+					</h1>
 
-				<div src={`https://www.youtube.com/watch?v=${data.source_id}`} className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
-					<img src="/youtubeicon.png" width={80} />
-					<p className="-mt-3 font-semibold">Click to Watch</p>
+					<div src={`https://www.youtube.com/watch?v=${data.source_id}`} className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
+						<img src="/youtubeicon.png" width={80} />
+						<p className="-mt-3 font-semibold">Click to Watch</p>
+					</div>
 				</div>
-			</div>
 
-			<div className="grid lg:grid-cols-2 gap-8 mt-16 mb-10">
-				<div className="md:w-full  ">
-					{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
+				<div className="grid lg:grid-cols-2 gap-8 mt-16 mb-10">
+					<div className="md:w-full  ">
+						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
+					</div>
+					<div className="hidden lg:block w-2/3 ">
+						<iframe id="player"
+							title="My YouTube Video "
+							className="max-w-80 lg:w-120 h-80 w-auto"
+							src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
+							frameBorder="0"
+							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						></iframe>
+					</div>
 				</div>
-				<div className="hidden lg:block w-2/3 ">
-					<iframe id="player"
-						title="My YouTube Video "
-						className="max-w-80 lg:w-120 h-80 w-auto"
-						src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
-						frameBorder="0"
-						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-					></iframe>
-				</div>
-			</div>
-			<QuestionAnswering source_id={data.source_id} />
-			<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
-				<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
-					<button
-						className={activeTab === 'tab1' ? 'content-active-button border-r-1 w-1/2' : 'border-r-1 w-1/2'}
-						onClick={() => setActiveTab('tab1')}
-					>
-						Summary
-					</button>
-					<button
-						className={activeTab === 'tab2' ? 'content-active-button w-1/2' : 'w-1/2'}
-						onClick={() => setActiveTab('tab2')}
-					>
-						Transcript
-					</button>
-				</div>
-				<div className="main-content lg:ml-10 text-zinc-600">
-					<Tabs>
-						<Tab eventKey="transcript" title="" >
-							{activeTab === "tab1" &&
-
-								<div className='text-lg font-normal mb-4 max-w-screen-md'>
-									{summaryArray.map((item, index) => {
-										return (<p key={index}><br></br>{item}</p>)
-									})}
-								</div>
-							}
-							{activeTab === "tab2" &&
-								<div className='text-lg font-normal mb-4 max-w-screen-md' >
-									{transcript.map((item, index) => {
-										if (index % 2 === 0) {
-											return (<a onClick={handleClick} className="cursor-pointer " key={index}><br></br>{item} </a>)
-										}
-										else {
-											return (<div key={index}><br></br>{item}</div>)
-										}
-									})}
-								</div>}
-						</Tab>
-					</Tabs>
+				<QuestionAnswering source_id={data.source_id} />
+				<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
+					<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
+						<button
+							className={activeTab === 'tab1' ? 'content-active-button border-r-1 w-1/2' : 'border-r-1 w-1/2'}
+							onClick={() => setActiveTab('tab1')}
+						>
+							Summary
+						</button>
+						<button
+							className={activeTab === 'tab2' ? 'content-active-button w-1/2' : 'w-1/2'}
+							onClick={() => setActiveTab('tab2')}
+						>
+							Transcript
+						</button>
+					</div>
+					<div className="main-content lg:ml-10 text-zinc-600">
+						<Tabs>
+							<Tab eventKey="transcript" title="" >
+								{activeTab === "tab1" &&
+									<div className='text-lg font-normal mb-4 max-w-screen-md'>
+										{summaryArray.length === 0 ? (<tr className="border-b-0">
+											<td>No results found</td>
+										</tr>) : (summaryArray.map((item, index) => {
+											return (<p key={index}><br></br>{item}</p>)
+										}))}
+									</div>
+								}
+								{activeTab === "tab2" &&
+									<div className='text-lg font-normal mb-4 max-w-screen-md' >
+										{dataLoaded ? (transcript.map((item, index) => {
+											if (index % 2 === 0) {
+												return (<a onClick={handleClick} className="cursor-pointer " key={index}><br></br>{item} </a>)
+											}
+											else {
+												return (<div key={index}><br></br>{item}</div>)
+											}
+										})) : (<tr className="border-b-0">
+											<td>No results found</td>
+										</tr>)}
+									</div>}
+							</Tab>
+						</Tabs>
+					</div>
 				</div>
 			</div>
 		</div>
