@@ -10,8 +10,55 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function QuestionAnswering(data) {
 
     const sessionContext = useSessionContext()
-
-
+    console.log(data.source_id)
+    const dummy = {
+        key_qa: {
+            "What key elements does Michael Seibel identify as ensuring a successful startup? ": {
+                "answer": "Michael Seibel identifies three key elements to ensure a successful startup: \n1. Hack your motivation - make sure that you are personally motivated to stay with the company even if it is not doing well or the idea is no longer popular. \n2. Be brave enough to walk alone - you need to be willing to do things differently than the people around you in order to succeed. \n3. Garbage in, garbage out - make sure that you are getting your insights from reliable sources and not just from what you read or see on social media. Don't rely on investors to invent the future - focus on building the company for your users and not for investors. Lastly, learn by doing - the best way to learn how to do startups is by actually doing them.",
+                "sources": [
+                    {
+                        "text": "So, to summarize, when picking a problem you want to solve and a team you want to work with, hack your motivation. Make sure that you're actually going to stay motivated personally over the course of years, even if the company is not doing well, even if the idea doesn't look like it's part of a fad anymore. Two: be brave enough to walk alone. You're going to have to do things differently than the people around you to succeed, because the vast majority of the people around you are going to fail. Three: garbage in, garbage out. Where you get your insights. How do you feed your startup brain if you're feeding it with garbage? Your model for how startups work will be garbage and your startup won't work for investors. Don't invent the future. They're not as important as founders. So if you're spending your time just trying to figure out how to make investors happy, stop.",
+                        "similarity": 0.8377334100983289
+                    },
+                    {
+                        "text": "You've really got to reconsider how to hack your personal motivation so that you're going to survive the 10-year journey, generally the closer you feel to your users, the more you believe you're having an impact in their lives, and the closer you feel to your co-founders, and the more you don't want to let them down, the better success you're going to find over time. So, number one: how does the idea you choose, or the problem they choose to solve, hack your motivation? Number two: are you brave enough to walk alone in the dark? Excellence in startups is actually very different from excellence in other parts of life. So for most of you, you put yourself amongst the smart kids in middle school and you took good classes in high school. You got into good university.",
+                        "similarity": 0.8321182737199322
+                    },
+                    {
+                        "text": "We've put all this information, all of this information, a place called the startup school, and so if you just go to startupschoolorg, you can see tons of content that is good. Information is not garbage in. If you build your mental model of startups based on that content, you'll be doing better generally. And if you're building your mental model based off what you read or what you see tweeted, what you read on tech crunch, sorry, what you see tweeted, okay. My last major point: investors don't invent the future. Something happened in the last 15 years where investors became influencers and founders stopped building companies for their users and started building companies for investors. They started seeing investors as a gatekeeper. They started seeing investors as better able to determine what product they should build than the users who actually have a problem.",
+                        "similarity": 0.8317926363965705
+                    },
+                    {
+                        "text": "Once again, you're reaching for strategies that work in careers. Careers and startups are different. If you think about startups, literally, the number one thing that you can compare them to to be accurate would probably be sports like professional sports, because professional sports has the same ridiculously high level of failure, or the like music business trying to be a famous entertainer. So it turns out that in those types of jobs with such a high failure rate, the number one way that you actually learn to do something is by doing it. The number one way you learn how to do startups is by doing them. There aren't great prerequisites. What's funny about this is that you actually learn 10 times faster. When you're doing a startup, you have a gun to your head, your customers yelling at you: there's very little money in the bank.",
+                        "similarity": 0.8258502534685439
+                    }
+                ]
+            },
+            "What advice does Seibel give for entrepreneurs looking for an investor?": {
+                "answer": "Seibel advises entrepreneurs looking for an investor to think of them as service providers, providing cash as a service. He also advises to not try to push ideas that investors saw on Clubhouse or other platforms, and to not try to remove value from the company. He suggests that founders should have a strong vision for the future and that investors can be helpful conversation partners when dealing with big strategic questions or when there is information that the founder does not have. Lastly, he suggests that investors often have good networks and can introduce founders to operators with direct experience that they can learn from. He also advises to not limit oneself to the local pool of investors, but to look for investors in the global community.",
+                "sources": [
+                    {
+                        "text": "Those will not hold your hand and show you how to build a billion dollar company. Nobody really knows how to build a billion dollar company. Everyone knows some information that can be helpful, but no one can guide you and walk you down the path, just like they're giving you directions to the local library. That doesn't exist. Also, you should think of investors like service providers and the service they provide is cash. You would never think that your lawyers are going to tell you what to do or how to make a product that millions people want. So you shouldn't think you're investors. In my experience, founders are the ones to change the world. Investors help a little bit, and so, if you don't have a strong vision for what the future should be, get one: help adopt an investor just because they think they're getting deal flow by marketing themselves online.",
+                        "similarity": 0.8499401125985991
+                    },
+                    {
+                        "text": "Not try to push you ideas, because they saw this happen on clubhouse the other day and other kinds of stupidity desperately not try to remove value from the company is probably the first thing that you should look for for an investor. I think the second thing that's helpful is they're a helpful conversation partner. They're a helpful conversation partner when you're dealing with a big strategic question. They're a helpful conversation partner when there's just information that you don't have that is well known within the investor community. They're a helpful conversation partner sometimes when things are looking down and you just want to talk to someone who's seen this game many times before. And then i think the third thing that investors often do is they often have good networks, and so they can often introduce you to operators who have direct experience that you can learn from.",
+                        "similarity": 0.843081072847086
+                    },
+                    {
+                        "text": "If you are thinking that the local pool of investors is the only pool of investors you access to, you're probably doing it wrong. More importantly, most of investors in the global community have a ton of money and know where to put it. So what i see time and time again is: if you actually go out and do something, investors will come to you. If you actually go out and launch something on product hunt and start getting customers, or launch something on hacker news and start getting customers, or get your thing out there and start to get customers, investors find you. But that's not the popular path. Everyone wants to be able to brag about the money they made, the money that they raise to their friends, and so they're out there all slinging decks with no products built and no customers. Slinging a deck with no product built and no customers is average. You have to be extraordinary to win.",
+                        "similarity": 0.8395507971569628
+                    },
+                    {
+                        "text": "My first thought when i'm talking to them is: i cannot wait for a great software engineering team to pitch me the same idea, because they're the ones who are actually going to figure it out. They're the ones who have the tools to figure it out. Okay, next question: let's see: how do you apply the mentality that investors are service writers in a pitch deck? Trying to court investors is part of the game sometimes you know. What's weird is that trying to court investors is way less part of the game than you probably understand it. One thing that's become painfully obvious during covid is that the investment community is global, and if you're pitching investors in your local community and you're not pitching the global community of investors, you're probably doing it wrong.",
+                        "similarity": 0.8378414787845345
+                    }
+                ]
+            }
+        }
+    }
+    /*     console.log(dummy.key_qa[Object.keys(dummy.key_qa)[0]].sources[0].text)
+        console.log(Object.keys(dummy.key_qa)[0]) */
 
     const [answerData, setAnswerData] = useState("");
 
@@ -48,7 +95,6 @@ export default function QuestionAnswering(data) {
                     setAnswer(false)
                     setAnswerData("")
 
-
                     axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${data.source_id}/question`, inputValue)
                         .then(
                             response => {
@@ -78,7 +124,7 @@ export default function QuestionAnswering(data) {
     };
 
     return (
-        <div className="bg-whiteLike drop-shadow-3xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto">
+        <div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto">
             <Toaster position="bottom-center" />
             <h1 className="text-xl pb-3 text-zinc-600">Ask questions and get real answers.</h1>
             <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p>
@@ -94,15 +140,16 @@ export default function QuestionAnswering(data) {
 
                     <span className="text-whiteLike text-l">Search</span>
                 </button>
-                {/*                 {
-                    data.key_qa.map((item, index) => (
-                        <p key={index} className={'border-b border-slate-200 pb-5 pt-5'}>
-                            {'• '}
-                            {item} &&&      {item.answer}
-                        </p>
-                    ))
-                } */}
+
             </div>
+
+
+            {/*           <div className="">
+                {Object.keys(dummy.key_qa).map((item, index) => <p className="text-zinc-600" key={index}> {item} </p>
+                )
+                }
+            </div> */}
+
 
             {isLoadingInside ?
 
