@@ -71,7 +71,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [showBaseQA, setShowBaseQA] = useState(false)
     const [baseSources, setBaseSources] = useState(false)
     const [baseQuestion, setBaseQuestion] = useState("")
-    const [isCleared, setIsCleared] = useState(false)
+    const [isCleared, setIsCleared] = useState(true)
 
     const [optionValue, setOptionValue] = useState("")
 
@@ -86,6 +86,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     }
 
     const handleBaseQA = (event) => {
+        setIsCleared(false)
         setShowBaseQA(true)
         setInputValue(event.target.textContent)
         setBaseQuestion(event.target.textContent)
