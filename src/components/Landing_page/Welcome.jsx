@@ -123,7 +123,7 @@ export default function Welcome() {
 							<div>Transcribe</div>
 						</div>
 					</section>
-					YouTube with just one click
+					online conversations with just one click
 				</div>
 				<p className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 					Paste a YouTube link, choose the language of the video (only English for now), and submit. Alphy
