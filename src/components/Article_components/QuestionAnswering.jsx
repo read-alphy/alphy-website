@@ -72,7 +72,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [baseSources, setBaseSources] = useState(false)
     const [baseQuestion, setBaseQuestion] = useState("")
     const [isCleared, setIsCleared] = useState(true)
-
+    const [showUserQA, setShowUserQA] = useState(false)
     const [optionValue, setOptionValue] = useState("")
 
 
@@ -83,6 +83,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const handleClear = () => {
         setIsCleared(true)
         setShowBaseQA(false)
+        setShowUserQA(false)
     }
 
     const handleBaseQA = (event) => {
@@ -113,6 +114,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const fetchData = () => {
         toast.dismiss()
         setShowBaseQA(false)
+        setShowUserQA(true)
 
 
         if (inputValue.length > 200) {
@@ -252,7 +254,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                     </div>) : (<div> </div>)
                 }
 
-                {answerData.length != 0 && !showBaseQA ?
+                {answerData.length != 0 && !showBaseQA && showUserQA ?
 
                     (<div className="text-zinc-600 pt-10 pb-10">
 

@@ -65,10 +65,10 @@ export default function Content(props) {
 			nothing = nothing + " " + srt_array[i].text
 			if (count > 6 && srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === ".") {
 				transcript.push(nothing)
-				nothing = ""
 				transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4))
 				//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
 				count = 0
+				nothing = ""
 			}
 		}
 
