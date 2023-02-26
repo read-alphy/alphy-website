@@ -39,7 +39,6 @@ function App() {
 		<SuperTokensWrapper>
 			<div className="App">
 				<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
-
 				<Routes>
 					{getSuperTokensRoutesForReactRouterDom(require("react-router-dom"))}
 					<Route path="/auth" element={<SessionAuth>
