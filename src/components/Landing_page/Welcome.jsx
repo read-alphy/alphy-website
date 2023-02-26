@@ -34,7 +34,7 @@ export default function Welcome() {
 				inputValue.includes('https://m.youtube.com')
 			) {
 				setLoading(true);
-				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+				axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
 
 					url: inputValue,
 					language: selectedOption
