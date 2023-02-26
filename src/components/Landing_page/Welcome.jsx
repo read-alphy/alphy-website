@@ -78,6 +78,7 @@ export default function Welcome() {
 							duration:
 								3000
 						});
+						setInputValue(error)
 						setLoading(false)
 						throw error;
 					});
