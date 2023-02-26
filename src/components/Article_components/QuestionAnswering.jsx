@@ -270,7 +270,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 
                                 <button className={`cursor-pointer justify-end mt-10 mx-auto flex`} onClick={() => setAnswer(!answer)}>
-                                    <span className={`${answer ? "hidden" : "block"} text-zinc-600 text-l`}>See sources</span>
+                                    <span className={`${answer ? "hidden" : "block"} text-zinc-600 text-l pr-1`}>See sources</span>
                                     <svg className={`${answer ? "hidden" : "block"} `} aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                         <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z" fillRule="evenodd"></path>
                                     </svg>
@@ -288,7 +288,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                                 <p key={index}>{source.text} <br /> <br /></p>)}
                                         </div>
                                         <button className={`cursor-pointer  justify-end  mt-10 mx-auto flex`} onClick={() => setAnswer(!answer)}>
-                                            <span className={`${answer ? "block" : "hidden"} text-zinc-600 text-l`}>See less</span>
+                                            <span className={`${answer ? "block" : "hidden"} text-zinc-600 text-l pr-1`}>See less</span>
                                             <svg className="" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                                 <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" fillRule="evenodd"></path>
                                             </svg> </button> </div>
@@ -329,7 +329,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 
                                 <button className={`cursor-pointer justify-end mt-10 mx-auto flex`} onClick={() => setBaseSources(!baseSources)}>
-                                    <span className={`${baseSources ? "hidden" : "block"} text-zinc-600 text-l`}>See sources</span>
+                                    <span className={`${baseSources ? "hidden" : "block"} text-zinc-600 text-l pr-1`}>See sources</span>
                                     <svg className={`${baseSources ? "hidden" : "block"} `} aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                         <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z" fillRule="evenodd"></path>
                                     </svg>
@@ -351,7 +351,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                             }
                                         </div>
                                         <button className={`cursor-pointer  justify-end  mt-10 mx-auto flex`} onClick={() => setBaseSources(!baseSources)}>
-                                            <span className="text-zinc-600 text-l">See less</span>
+                                            <span className="text-zinc-600 text-l pr-1">See less</span>
                                             <svg className="" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                                 <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" fillRule="evenodd"></path>
                                             </svg> </button> </div>
