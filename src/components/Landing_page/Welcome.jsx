@@ -33,7 +33,9 @@ export default function Welcome() {
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com')
 			) {
+				event.preventDefault()
 				setLoading(true);
+
 				axios.post(`https://backend-production-33df.up.railway.app/summaries`, {
 
 					url: inputValue,
@@ -42,6 +44,7 @@ export default function Welcome() {
 				})
 
 					.then((response) => {
+						event.preventDefault()
 						setLoading(false);
 						setInputValue('');
 						/* 						if (response.status === 200) {
