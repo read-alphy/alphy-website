@@ -33,9 +33,6 @@ export default function Welcome() {
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com')
 			) {
-
-
-
 				setLoading(true);
 				axios
 					.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
@@ -43,7 +40,6 @@ export default function Welcome() {
 						language: selectedOption,
 					})
 					.then((response) => {
-						console.log(response)
 						setLoading(false);
 						setInputValue('');
 						/* 						if (response.status === 200) {
@@ -95,7 +91,7 @@ export default function Welcome() {
 	return (
 		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[90vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
 			{loading && (
-				<div className={`flex justify-center items-center h-[90	vh]`}>
+				<div className={`flex justify-center items-center h-[90vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
 						<p className="text-bordoLike text-center mb-10 mt-10">
