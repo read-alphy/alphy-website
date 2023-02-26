@@ -128,7 +128,7 @@ export default function Welcome() {
 				<Toaster />
 				<form
 					className="items-center justify-center w-full lg:space-x-4 lg:flex"
-					onSubmit={(e) => handleSubmit(e, language)}
+
 				>
 					<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
 
@@ -155,6 +155,7 @@ export default function Welcome() {
 							<button
 								className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"
+								onClick={(e) => handleSubmit(e, language)}
 							>
 								Submit
 							</button>
@@ -162,7 +163,7 @@ export default function Welcome() {
 							<button
 								className="w-2/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 								type="submit"
-							>
+								onClick={(e) => handleSubmit(e, language)}>
 								Sign In To Submit
 							</button>
 						)}
