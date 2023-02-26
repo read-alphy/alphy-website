@@ -24,7 +24,7 @@ export default function Welcome() {
 
 
 	const handleSubmit = (event, selectedOption) => {
-		event.preventDefault()
+
 		toast.dismiss()
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
@@ -36,7 +36,7 @@ export default function Welcome() {
 
 
 				setLoading(true);
-				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+				axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
 
 					url: inputValue,
 					language: selectedOption
@@ -102,7 +102,7 @@ export default function Welcome() {
 	return (
 		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[90vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
 			{loading && (
-				<div className={`flex justify-center items-center h-[90vh]`}>
+				<div className={`flex justify-center items-center h-[95vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
 						<p className="text-bordoLike text-center mb-10 mt-10">
