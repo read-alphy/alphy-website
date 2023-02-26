@@ -43,6 +43,7 @@ export default function Welcome() {
 				})
 
 					.then((response) => {
+						console.log(response)
 						setLoading(false);
 						setInputValue('');
 						/* 						if (response.status === 200) {
