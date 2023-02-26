@@ -24,7 +24,7 @@ export default function Welcome() {
 
 
 	const handleSubmit = (event, selectedOption) => {
-
+		event.preventDefault()
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
 			if (
