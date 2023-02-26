@@ -35,13 +35,16 @@ export default function Welcome() {
 
 
 				setLoading(true);
-				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
-
-					url: inputValue,
-					language: selectedOption,
-
+				axios(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						url: inputValue,
+						language: selectedOption
+					}
 				})
-
 					.then((response) => {
 						console.log(response)
 						setLoading(false);
@@ -72,6 +75,14 @@ export default function Welcome() {
 						}
 
 					})
+					.catch(error => {
+
+						toast.error('There was an error submitting the form. Please try again.', {
+							duration:
+								3000
+						});
+						throw error;
+					});
 			}
 
 			else {
