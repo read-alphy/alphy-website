@@ -201,8 +201,8 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                         </div>
 
                         <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg bg-whiteLike focus:outline-none" placeholder="Ask anything to the transcript..." autoComplete="off" required />
-                        {inputValue.length > 0 ? <div onClick={handleClear} className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                            <svg width="20" onClick={handleClear} className="cursor-pointer" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        {inputValue.length > 0 ? <div onClick={handleClear} className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 ">
+                            <svg width="20" onClick={handleClear} className="cursor-pointer" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </div> : null}
