@@ -185,7 +185,7 @@ MAIN PAGE
 	/* background: #212529;  */
 	/* padding-right: 15px;
   padding-top: 30px;*/
-	height: 92vh;
+	height: 90vh;
 	overflow-y: scroll;
 }
 
@@ -650,7 +650,7 @@ CONTENT PAGE
 	padding: 0px;
 	float: right;
 	overflow-y: scroll;
-	max-height: 92vh;
+	max-height: 90vh;
 	padding-left: 40px;
 }
 

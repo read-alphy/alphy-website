@@ -89,7 +89,7 @@ function Article({
 
 
 	return (
-		<div className="article max-[92vh] ">
+		<div className="article max-[920h] ">
 			<div className="flex flex-row article-body ">
 				<div className={`user-feed flex ${collapsed ? '' : ' mr-5'}`}>
 
@@ -169,7 +169,7 @@ function Article({
 				)}
 
 
-				<div className="scrolling px-4 mx-auto h-[92vh]  ">
+				<div className="scrolling px-4 mx-auto h-[90vh]  ">
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}
 				</div>
 			</div>

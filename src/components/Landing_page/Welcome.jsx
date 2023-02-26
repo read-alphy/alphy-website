@@ -26,8 +26,6 @@ export default function Welcome() {
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault()
 		toast.dismiss();
-
-
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
 
@@ -96,9 +94,9 @@ export default function Welcome() {
 	};
 
 	return (
-		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[92vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
+		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[90vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
 			{loading && (
-				<div className={`flex justify-center items-center h-[92vh]`}>
+				<div className={`flex justify-center items-center h-[90	vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
 						<p className="text-bordoLike text-center mb-10 mt-10">
@@ -123,10 +121,10 @@ export default function Welcome() {
 							<div>Transcribe</div>
 						</div>
 					</section>
-					online conversations with just one click
+					online media with just one click
 				</div>
 				<p className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-					Paste a YouTube link, choose the language of the video (only English for now), and submit. Alphy
+					Paste a link to a YouTube video or Twitter Spaces, choose the language of the video (only English for now), and submit. Alphy
 					will transcribe, summarize and prepare the content for questioning. We will notify you via email
 					when it's ready!{' '}
 				</p>

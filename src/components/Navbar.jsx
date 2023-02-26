@@ -39,7 +39,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 
 	return (
-		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[20vh]">
+		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[10vh]">
 			<div className="pl-10 flex flex-row ">
 				<Link to="/">
 
