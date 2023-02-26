@@ -72,7 +72,7 @@ export default function Content(props) {
 			}
 		}
 
-		console.log(transcript)
+
 
 	}
 
