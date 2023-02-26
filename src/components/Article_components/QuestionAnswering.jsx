@@ -179,7 +179,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
         <div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto">
             <div className='Md:pl-10 md:pr-10 pt-10'>
                 <Toaster position="bottom-center" />
-                <h1 className="text-xl pb-8 text-zinc-600">Ask Alphy about the video and get real answers.</h1>
+                <h1 className="text-xl pb-8 text-zinc-600">Ask real questions and get real answers.</h1>
                 {/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
                 <div className="flex items-center">
 
