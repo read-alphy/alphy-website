@@ -28,7 +28,6 @@ export default function Welcome() {
 		toast.dismiss();
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
-
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
@@ -124,7 +123,7 @@ export default function Welcome() {
 					online media with just one click
 				</div>
 				<p className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-					Paste a link to a YouTube video or Twitter Spaces, choose the language of the video (only English for now), and submit. Alphy
+					Paste a link to a YouTube video or Twitter Spaces, choose the language of the content (only English for now), and submit. Alphy
 					will transcribe, summarize and prepare the content for questioning. We will notify you via email
 					when it's ready!{' '}
 				</p>
