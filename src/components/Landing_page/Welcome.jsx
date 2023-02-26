@@ -23,7 +23,7 @@ export default function Welcome() {
 	const navigate = useNavigate();
 
 
-	const handleSubmit = async (event, selectedOption) => {
+	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault()
 		toast.dismiss();
 		// Do something with the inputValue here	
@@ -34,7 +34,7 @@ export default function Welcome() {
 				inputValue.includes('https://m.youtube.com')
 			) {
 				setLoading(true);
-				axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
+				/* axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
 
 					url: inputValue,
 					language: selectedOption
@@ -56,20 +56,20 @@ export default function Welcome() {
 												);
 						
 																		} */
-						if (response.status === 200 || response.status === 201 || response.status === 202) {
-							toast.success(
-								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.', { duration: 3000 }
-							);
+				/*if (response.status === 200 || response.status === 201 || response.status === 202) {
+					toast.success(
+						'Succesfully submitted the content! \n\n We will send you an email when the article is ready.', { duration: 3000 }
+					);
 
-						}
-						else {
-							toast.error('There was an error submitting the form. Please try again.', {
-								duration:
-									3000
-							});
-						}
+				}
+				else {
+					toast.error('There was an error submitting the form. Please try again.', {
+						duration:
+							3000
+					});
+				}
 
-					})
+			}) */
 			}
 
 			else {
