@@ -24,8 +24,7 @@ export default function Welcome() {
 
 
 	const handleSubmit = (event, selectedOption) => {
-		event.preventDefault()
-		toast.dismiss();
+
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
 			if (
@@ -33,18 +32,16 @@ export default function Welcome() {
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com')
 			) {
-				event.preventDefault()
 				setLoading(true);
-
-				axios.post(`https://backend-production-33df.up.railway.app/summaries`, {
+				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
 
 					url: inputValue,
-					language: selectedOption
+					language: selectedOption,
+					withCredentials: true
 
 				})
 
 					.then((response) => {
-						event.preventDefault()
 						setLoading(false);
 						setInputValue('');
 						/* 						if (response.status === 200) {
