@@ -25,6 +25,7 @@ export default function Welcome() {
 
 	const handleSubmit = (event, selectedOption) => {
 		event.preventDefault()
+		toast.dismiss()
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
 			if (
@@ -35,18 +36,14 @@ export default function Welcome() {
 
 
 				setLoading(true);
-				axios(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					data: {
-						url: inputValue,
-						language: selectedOption
-					}
+				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+
+					url: inputValue,
+					language: selectedOption
+
 				})
 					.then((response) => {
-						console.log(response)
+
 						setLoading(false);
 						setInputValue('');
 						/* 						if (response.status === 200) {
@@ -77,7 +74,7 @@ export default function Welcome() {
 					})
 					.catch(error => {
 
-						toast.error(error, {
+						toast.error('There was an error submitting the form. Please try again.', {
 							duration:
 								3000
 						});
