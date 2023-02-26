@@ -179,7 +179,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
             <div className='Md:pl-10 md:pr-10 pt-10'>
                 <Toaster position="bottom-center" />
                 <h1 className="text-xl pb-3 text-zinc-600">Ask Alphy about the video and get real answers.</h1>
-                <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p>
+                {/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
                 <div className="flex items-center">
 
                     {/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
@@ -201,6 +201,11 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                         </div>
 
                         <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className=" block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg bg-whiteLike focus:outline-none" placeholder="Ask anything to the transcript..." autoComplete="off" required />
+                        {showBaseQA || answerData.length > 0 ? <div class="absolute inset-y-0 right-0 flex items-center pl-3 pointer-events-none">
+                            <svg width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div> : null}
 
                     </div>
 
@@ -228,10 +233,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                         </div>)
                         :
 
-                        (<button onClick={handleClear} className="mx-auto text-zinc-700"><svg aria-hidden="true" fill="none" width="30px" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        </button>)
+                        (null)
 
 
 
@@ -267,8 +269,8 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 
                                 <button className={`cursor-pointer justify-end mt-10 mx-auto flex`} onClick={() => setAnswer(!answer)}>
-
-                                    <svg className={`${answer ? "hidden" : "block"} animate-bounce`} aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
+                                    <span className="text-zinc-600 text-l">See sources</span>
+                                    <svg className={`${answer ? "hidden" : "block"} `} aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                         <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z" fillRule="evenodd"></path>
                                     </svg>
 
@@ -285,8 +287,8 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                                 <p key={index}>{source.text} <br /> <br /></p>)}
                                         </div>
                                         <button className={`cursor-pointer  justify-end  mt-10 mx-auto flex`} onClick={() => setAnswer(!answer)}>
-
-                                            <svg className="animate-bounce" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
+                                            <span className="text-zinc-600 text-l">See less</span>
+                                            <svg className="" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                                 <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" fillRule="evenodd"></path>
                                             </svg> </button> </div>
 

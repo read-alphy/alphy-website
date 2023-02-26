@@ -130,6 +130,7 @@ export default function Welcome() {
 					onSubmit={(e) => handleSubmit(e, language)}
 				>
 					<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
+
 						<input
 							className="w-full lg:w-[600px] border border-[#6B728E] text-bordoLike py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-whiteLike focus:outline-none"
 							type="text"
@@ -139,8 +140,13 @@ export default function Welcome() {
 							placeholder="Insert a link to start"
 							autoComplete="off"
 						/>
+
+
+
 						<Languages language={language} onLangChange={setLanguage} />
 					</div>
+
+
 
 
 					<div className="flex justify-center ">
@@ -161,6 +167,8 @@ export default function Welcome() {
 						)}
 					</div>
 				</form>
+
+
 			</div>
 		</div>
 	);

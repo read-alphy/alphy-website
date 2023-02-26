@@ -111,6 +111,7 @@ export default function Content(props) {
 					</div>
 				</div>
 				{isLoading ? <Loading /> : <QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} />}
+				<QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} />
 				<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
 					<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
 						<button
