@@ -35,10 +35,10 @@ export default function Welcome() {
 			) {
 				setLoading(true);
 				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
-					data: {
-						url: inputValue,
-						language: selectedOption
-					}
+
+					url: inputValue,
+					language: selectedOption
+
 				})
 
 					.then((response) => {
