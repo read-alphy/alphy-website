@@ -77,10 +77,11 @@ export default function Welcome() {
 					})
 					.catch(error => {
 
-						toast.error('There was an error submitting the form. Please try again.', {
+						toast.error(error, {
 							duration:
 								3000
 						});
+						setLoading(false)
 						throw error;
 					});
 			}
