@@ -34,15 +34,11 @@ export default function Welcome() {
 				inputValue.includes('https://m.youtube.com')
 			) {
 				setLoading(true);
-				fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						url: inputValue,
-						language: selectedOption
-					})
+				axios.post(`https://backend-production-33df.up.railway.app/summaries`, {
+
+					url: inputValue,
+					language: selectedOption
+
 				})
 
 					.then((response) => {
