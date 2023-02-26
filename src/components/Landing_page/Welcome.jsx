@@ -23,8 +23,8 @@ export default function Welcome() {
 	const navigate = useNavigate();
 
 
-	const handleSubmit = (selectedOption) => {
-
+	const handleSubmit = (event, selectedOption) => {
+		event.preventDefault()
 		toast.dismiss();
 
 
@@ -87,6 +87,7 @@ export default function Welcome() {
 			navigate("/auth")
 
 		};
+		return false
 	};
 
 	return (
@@ -127,7 +128,7 @@ export default function Welcome() {
 				<Toaster />
 				<form
 					className="items-center justify-center w-full lg:space-x-4 lg:flex"
-					onSubmit={() => handleSubmit(language)}
+					onSubmit={(e) => handleSubmit(e, language)}
 				>
 					<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
 
