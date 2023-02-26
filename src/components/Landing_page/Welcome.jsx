@@ -27,18 +27,20 @@ export default function Welcome() {
 		event.preventDefault()
 		toast.dismiss();
 		// Do something with the inputValue here	
-		if (sessionContext.doesSessionExist) {
+		if (!sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com')
 			) {
 				setLoading(true);
-				axios
-					.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
+					data: {
 						url: inputValue,
-						language: selectedOption,
-					})
+						language: selectedOption
+					}
+				})
+
 					.then((response) => {
 						setLoading(false);
 						setInputValue('');
@@ -88,7 +90,7 @@ export default function Welcome() {
 
 	return (
 		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[90vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
-			{/* 			{loading && (
+			{loading && (
 				<div className={`flex justify-center items-center h-[90vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
@@ -97,7 +99,7 @@ export default function Welcome() {
 						</p>
 					</div>
 				</div>
-			)} */}
+			)}
 
 			<div className="welcome-prompt 	text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
 				<section className="animation1 lg:mr-2 text-green-400 block">
