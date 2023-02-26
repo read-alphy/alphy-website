@@ -24,7 +24,7 @@ export default function Welcome() {
 
 
 	const handleSubmit = (event, selectedOption) => {
-		event.preventDefault();
+
 		toast.dismiss();
 
 
