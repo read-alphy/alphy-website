@@ -121,23 +121,25 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 						)}
 					</tbody>
 				</table>
-				<div className="grid grid-cols-2">
-					{offset > 0 && (
-						<button
-							className="col-span-1 justify-self-start text-blueLike font-semibold mt-10 underline"
-							onClick={prevPage}
-						>
-							{'Prev'}
-						</button>
-					)}
-					{data.length > limit && (
-						<button
-							className="col-span-2 justify-self-end text-blueLike font-semibold  mt-10 underline"
-							onClick={nextPage}
-						>
-							{'Next'}
-						</button>
-					)}
+				<div className="grid flex">
+					<div className="grid-cols-2 w-full flex">
+						{offset > 0 && (
+							<button
+								className="col-span-1 w-1/2 justify-start left-0 flex text-blueLike font-semibold mt-10 underline"
+								onClick={prevPage}
+							>
+								{'Prev'}
+							</button>
+						)}
+						{data.length > limit && (
+							<button
+								className="col-span-2 justify-end w-1/2 right-0 flex text-blueLike font-semibold  mt-10 underline"
+								onClick={nextPage}
+							>
+								{'Next'}
+							</button>
+						)}
+					</div>
 				</div>
 			</div>
 		</div>
