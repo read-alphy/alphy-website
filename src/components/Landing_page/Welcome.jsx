@@ -35,7 +35,7 @@ export default function Welcome() {
 
 
 				setLoading(true);
-				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/`, {
+				axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries`, {
 
 					url: inputValue,
 					language: selectedOption,
