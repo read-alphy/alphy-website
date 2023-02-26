@@ -23,11 +23,11 @@ export default function Welcome() {
 	const navigate = useNavigate();
 
 
-	const handleSubmit = (event, selectedOption) => {
+	const handleSubmit = async (event, selectedOption) => {
 		event.preventDefault()
 		toast.dismiss();
 		// Do something with the inputValue here	
-		if (!sessionContext.doesSessionExist) {
+		if (sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
