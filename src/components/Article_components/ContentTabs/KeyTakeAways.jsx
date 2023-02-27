@@ -1,12 +1,15 @@
+import { useRef } from 'react';
 import { useState } from 'react';
-
 
 const KeyTakeAways = ({ key_takeaways }) => {
 	const [current, setCurrent] = useState(0);
 	const [keysCollapsed, setKeysCollapsed] = useState(true);
-
+	const KTref = useRef(null);
 	const handleClick = () => {
 		setKeysCollapsed(!keysCollapsed);
+		if (!keysCollapsed) {
+			KTref.current.scrollIntoView({ behavior: 'smooth' });
+		}
 	};
 
 	const ArrowButton = ({ direction }) => {
@@ -27,16 +30,21 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	};
 
 	return (
-		<div className=" md:min-w-[400px] lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5">
+		<div
+			className=" md:min-w-[400px] lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5"
+			ref={KTref}
+		>
 			<div
 				href="#"
-				className={` w-full pt-6 drop-shadow-xl bg-zinc-100 border-gray-200 sm:min-h-[300px] lg:min-h-[350px] rounded-lg shadow-md ${keysCollapsed ? 'sm:h-[300px]' : null
-					} flex flex-col justify-start`}
+				className={` w-full pt-6 drop-shadow-xl bg-zinc-100 border-gray-200 sm:min-h-[300px] lg:min-h-[350px] rounded-lg shadow-md ${
+					keysCollapsed ? 'sm:h-[300px]' : null
+				} flex flex-col justify-start`}
 			>
 				<div className="flex flex-col  justify-between items-center ">
 					<div
-						className={`flex flex-row items-center border-b border-gray-200 pb-1 justify-center px-2 w-full ${keysCollapsed ? 'justify-between ' : 'justify-center '
-							}`}
+						className={`flex flex-row items-center border-b border-gray-200 pb-1 justify-center px-2 w-full ${
+							keysCollapsed ? 'justify-between ' : 'justify-center '
+						}`}
 					>
 						{keysCollapsed ? <ArrowButton direction={'left'} /> : null}
 						<h5 className="text-xl font-bold tracking-tight text-zinc-600 text-blueLike items-center">
@@ -58,7 +66,10 @@ const KeyTakeAways = ({ key_takeaways }) => {
 						))
 					)}
 				</div>
-				<button onClick={handleClick} className={'text-gray-500 underline hover:text-blue-700 font-light text-sm mt-5 mb-10'}>
+				<button
+					onClick={handleClick}
+					className={'text-gray-500 underline hover:text-blue-700 font-light text-sm mt-5 mb-10'}
+				>
 					{keysCollapsed ? 'Show Them All' : 'Collapse'}
 				</button>
 			</div>
