@@ -49,7 +49,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 					</div>
 				</div>
 
-				<div className="text-xl mt-10 px-8 object-fit:contain">
+				<div className="text-l mt-10 px-8 object-fit:contain">
 					{keysCollapsed ? (
 						<p>{key_takeaways[current]}</p>
 					) : (
