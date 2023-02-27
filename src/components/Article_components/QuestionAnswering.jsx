@@ -264,13 +264,13 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                         {answerData.answer ? (
                             <div>
                                 <div>
-                                    <h1 className="mb-4 text-xl">Answer</h1>
+                                    <h1 className="mb-4 text-xl">Answer from Alphy</h1>
                                     <p className="text-zinc-600">{answerData.answer}</p>
                                 </div>
 
 
                                 <button className={`cursor-pointer justify-end mt-10 mx-auto flex`} onClick={() => setAnswer(!answer)}>
-                                    <span className={`${answer ? "hidden" : "block"} text-zinc-600 text-l pr-1`}>See sources</span>
+                                    <span className={`${answer ? "hidden" : "block"} text-zinc-600 text-l pr-1`}>See sources from the video</span>
                                     <svg className={`${answer ? "hidden" : "block"} `} aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30px">
                                         <path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z" fillRule="evenodd"></path>
                                     </svg>
