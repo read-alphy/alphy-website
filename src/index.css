@@ -33,7 +33,6 @@ MAIN PAGE
 
 */
 
-
 .navbar {
 	display: flex;
 	/* position: sticky; */
@@ -41,7 +40,6 @@ MAIN PAGE
 	left: 0;
 	flex-direction: row;
 	justify-content: space-between;
-
 
 	z-index: 1;
 	margin: auto;
@@ -60,8 +58,6 @@ MAIN PAGE
 	justify-content: space-between;
 	padding: 10px;
 }
-
-
 
 .navbar-right-section {
 	right: 0;
@@ -195,10 +191,8 @@ MAIN PAGE
 
 .scrolling {
 	overflow-y: scroll;
-	scrollbar-width: none
+	scrollbar-width: none;
 }
-
-
 
 .user-feed::-webkit-scrollbar-thumb {
 	border-radius: 10px;
@@ -357,7 +351,7 @@ label {
 	overflow: hidden;
 }
 
-.animation1>div>div {
+.animation1 > div > div {
 	/* padding: 0 0.75rem; */
 	height: 2.61rem;
 	display: inline-block;
@@ -369,18 +363,18 @@ label {
 	overflow: hidden;
 }
 
-.animation2>div>div {
+.animation2 > div > div {
 	/* padding: 0 0.75rem; */
 	height: 2.61rem;
 	display: inline-block;
 	align-items: flex-start;
 }
 
-.animation1>div {
-	animation: text-animation 4s infinite;
+.animation1 > div {
+	animation: text-animation 5s infinite;
 }
 
-.animation2>div {
+.animation2 > div {
 	animation: text-animation2 16s infinite;
 }
 
@@ -408,37 +402,37 @@ label {
 
 @keyframes text-animation {
 	0% {
-		width: 182px;
+		width: 166.1px;
 	}
 
 	18% {
 		transform: translateY(-112%);
-		width: 192px;
+		width: 182px;
 	}
 
 	33% {
 		transform: translateY(-100%);
-		width: 192px;
+		width: 182px;
 	}
 
 	51% {
 		transform: translateY(-212%);
-		width: 162px;
+		width: 148px;
 	}
 
 	66% {
 		transform: translateY(-200%);
-		width: 162px;
+		width: 148px;
 	}
 
 	85% {
 		transform: translateY(-312%);
-		width: 182px;
+		width: 166.1px;
 	}
 
 	100% {
 		transform: translateY(-300%);
-		width: 182px;
+		width: 166.1px;
 	}
 }
 
