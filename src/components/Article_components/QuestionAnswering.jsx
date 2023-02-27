@@ -114,7 +114,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
         toast.dismiss()
         setShowBaseQA(false)
         setShowUserQA(true)
-
+        setSignedInError(true)
 
         if (inputValue.length > 200) {
             toast('Your question is too long, please keep it under 200 characters.', {
@@ -200,7 +200,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                         </div>
 
-                        <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className={`block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${signedInError && inputValue.length === 0 ? "border border-red-400" : "border border-zinc-200"} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`} placeholder="Ask anything to the transcript..." autoComplete="off" required />
+                        <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className={`block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${signedInError ? "border border-red-400" : "border border-zinc-200"} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`} placeholder="Ask anything to the transcript..." autoComplete="off" required />
                         {inputValue.length > 0 ? <div onClick={handleClear} className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 ">
                             <svg width="20" onClick={handleClear} className="cursor-pointer" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -211,11 +211,11 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
                     <button type="submit" onClick={fetchData} class="p-3.5 ml-2 text-sm font-medium text-whiteLike bg-bordoLike rounded-md border border-zinc-600 hover:bg-zinc-700 focus:ring-4 focus:outline-none">
 
-                        <span className="text-whiteLike text-l">Search</span>
+                        <span className="text-whiteLike text-l pt-1">Search</span>
                     </button>
 
                 </div>
-                {signedInError && inputValue.length === 0 ?
+                {signedInError ?
                     <div>
                         <span className="text-sm text-red-400">You need to sign in to ask questions.</span>
                     </div> : null
