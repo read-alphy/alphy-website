@@ -226,7 +226,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
                     {isCleared ?
 
-                        (<div><p className="mb-5 text-xl text-zinc-600"> Some questions we already answered for you</p>
+                        (<div><p className="mb-5 text-xl text-zinc-600"> Or check out the questions from the video that we already answered for you</p>
                             {Object.keys(source_id.key_qa).map((item, index) =>
                                 <button key={index} onClick={handleBaseQA} class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-lg">{item}</button>
                             )
