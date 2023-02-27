@@ -112,9 +112,9 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
     const fetchData = () => {
         toast.dismiss()
-        setShowBaseQA("")
         setShowUserQA(true)
         setSignedInError(true)
+        setBaseQuestion("")
 
         if (inputValue.length > 200) {
             toast('Your question is too long, please keep it under 200 characters.', {
@@ -170,6 +170,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                 }); */
                 setInputValue('');
                 setSignedInError(true)
+
             }
         }
     };
