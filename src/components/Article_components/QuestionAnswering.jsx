@@ -259,7 +259,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
                 {answerData.length != 0 && !showBaseQA && showUserQA ?
 
-                    (<div className="text-zinc-600 pt-10 pb-10">
+                    (<div className="text-zinc-600 pb-10">
 
                         {answerData.answer ? (
                             <div>
