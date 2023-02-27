@@ -105,7 +105,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 	const fetchData = () => {
 		toast.dismiss();
-		setShowBaseQA(false);
+		setShowBaseQA('');
 		setShowUserQA(true);
 		setSignedInError(true);
 
