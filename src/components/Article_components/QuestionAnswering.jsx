@@ -164,7 +164,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 setInputValue('');
                 setIsCleared(true)
                 setinputError(true)
-                setShowBaseQA(true)
+
             }
         }
     };
@@ -221,7 +221,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
                 <div className="mt-20">
 
-                    {!isLoadingInside || (isCleared && answerData.length === 0) ?
+                    {(isCleared && (isLoadingInside || answerData.length === 0)) ?
 
                         (<div><p className="mb-5 text-xl text-zinc-600"> Or check out the questions from the video that we already answered for you</p>
                             {Object.keys(source_id.key_qa).map((item, index) =>
