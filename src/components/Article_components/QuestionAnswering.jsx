@@ -105,9 +105,9 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 	const fetchData = () => {
 		toast.dismiss();
-		setShowBaseQA('');
+		setShowBaseQA(false);
 		setShowUserQA(true);
-		setSignedInError(true);
+		setSignedInError(false);
 
 		if (inputValue.length > 200) {
 			toast('Your question is too long, please keep it under 200 characters.', {
@@ -159,7 +159,9 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 
                                 }); */
 				setInputValue('');
+				setIsCleared(true);
 				setSignedInError(true);
+				setShowBaseQA(true);
 			}
 		}
 	};
@@ -208,9 +210,9 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 							onKeyDown={handleKeyDown}
 							type="text"
 							id="search"
-							className={`block w-full p-4 pl-10 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${
-								signedInError && baseQuestion.length === 0
-									? 'border border-red-400'
+							className={`block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${
+								signedInError && inputValue.length === 0
+									? 'border-2 border-red-00'
 									: 'border border-zinc-200'
 							} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`}
 							placeholder="Ask anything to the transcript..."
