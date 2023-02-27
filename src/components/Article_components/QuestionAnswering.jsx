@@ -83,6 +83,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
         setShowBaseQA(false)
         setShowUserQA(false)
         setInputValue("")
+        setAnswerData("")
     }
 
     const handleBaseQA = (event) => {
