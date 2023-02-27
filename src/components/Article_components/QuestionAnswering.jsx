@@ -160,6 +160,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 		}
 	};
 
+<<<<<<< HEAD
 	return (
 		<div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QAref}>
 			<div className="Md:pl-10 md:pr-10 pt-10">
@@ -168,6 +169,99 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 				{/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
 				<div className="flex items-center">
 					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
+=======
+    const handleOptionClear = () => {
+        setShowBaseQA(false)
+        setInputValue("")
+    }
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            fetchData();
+        }
+    }
+
+    const handleClick = () => {
+        if (showBaseQA) {
+            setInputValue("")
+        }
+
+    }
+
+    const fetchData = () => {
+        toast.dismiss()
+        setShowBaseQA(false)
+        setShowUserQA(true)
+        setSignedInError(true)
+
+        if (inputValue.length > 200) {
+            toast('Your question is too long, please keep it under 200 characters.', {
+                icon: '❗',
+                style: {
+                    background: "#F9F8F8"
+                }
+
+            });
+            setInputValue('');
+            return
+        }
+        else if (inputValue.length === 0) {
+            toast('Please enter a question.', {
+                icon: '❗',
+                style: {
+                    background: "#F9F8F8"
+                }
+
+            });
+            setInputValue('');
+            return
+        }
+        else {
+            if (sessionContext.doesSessionExist) {
+                try {
+                    setIsLoadingInside(true);
+                    setAnswer(false)
+                    setAnswerData("")
+
+                    axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id}/question`, inputValue)
+                        .then(
+                            response => {
+
+                                setAnswerData(response.data)
+
+
+                                setIsLoadingInside(false);
+                            });
+                } catch (error) {
+
+                    console.error(`Error fetching data: ${error}`);
+                    setIsLoadingInside(false);
+                }
+            }
+            else {
+                toast('You need to sign in to ask questions.', {
+                    icon: '❗',
+                    style: {
+                        background: "#F9F8F8"
+                    }
+
+                });
+                setInputValue('');
+                setSignedInError(true)
+            }
+        }
+    };
+
+    return (
+        <div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto">
+            <div className='Md:pl-10 md:pr-10 pt-10'>
+                <Toaster position="bottom-center" />
+                <h1 className="text-xl pb-8 text-zinc-600">Ask real questions and get real answers.</h1>
+                {/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
+                <div className="flex items-center">
+
+                    {/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
+>>>>>>> main
 
                         <option onClick={handleOptionClear}> Questions we already answered</option>
 
@@ -197,6 +291,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 							</svg>
 						</div>
 
+<<<<<<< HEAD
 						<input
 							value={inputValue}
 							onClick={() => handleClick(true)}
@@ -233,6 +328,14 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 							</div>
 						) : null}
 					</div>
+=======
+                        <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className={`block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${signedInError ? "border border-red-400" : "border border-zinc-200"} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`} placeholder="Ask anything to the transcript..." autoComplete="off" required />
+                        {inputValue.length > 0 ? <div onClick={handleClear} className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 ">
+                            <svg width="20" onClick={handleClear} className="cursor-pointer" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div> : null}
+>>>>>>> main
 
 					<button
 						type="submit"
@@ -278,6 +381,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 					<div> </div>
 				)}
 
+<<<<<<< HEAD
 				{answerData.length != 0 && !showBaseQA && showUserQA ? (
 					<div className="text-zinc-600 pb-10">
 						{answerData.answer ? (
@@ -309,6 +413,17 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 										></path>
 									</svg>
 								</button>
+=======
+                        <span className="text-whiteLike text-l pt-1">Search</span>
+                    </button>
+
+                </div>
+                {signedInError ?
+                    <div>
+                        <span className="text-sm text-red-400">You need to sign in to ask questions.</span>
+                    </div> : null
+                }
+>>>>>>> main
 
 								{answer ? (
 									<div>
