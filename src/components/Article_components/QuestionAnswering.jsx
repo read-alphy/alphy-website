@@ -171,7 +171,9 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 
                                 }); */
                 setInputValue('');
+                setIsCleared(true)
                 setSignedInError(true)
+                setShowBaseQA(true)
             }
         }
     };
