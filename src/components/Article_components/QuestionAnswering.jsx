@@ -114,6 +114,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
         toast.dismiss()
         setShowBaseQA(false)
         setShowUserQA(true)
+        setSignedInError(false)
 
 
         if (inputValue.length > 200) {
@@ -161,13 +162,13 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 }
             }
             else {
-                toast('You need to sign in to ask questions.', {
-                    icon: '❗',
-                    style: {
-                        background: "#F9F8F8"
-                    }
-
-                });
+                /*                 toast('You need to sign in to ask questions.', {
+                                    icon: '❗',
+                                    style: {
+                                        background: "#F9F8F8"
+                                    }
+                
+                                }); */
                 setInputValue('');
                 setSignedInError(true)
             }
