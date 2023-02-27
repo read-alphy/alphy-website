@@ -120,11 +120,13 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
         if (inputValue.length > 200) {
 
+            setinputError(true)
             setErrorText('Your question is too long, please keep it under 200 characters.')
             setInputValue('');
             return
         }
         else if (inputValue.length === 0) {
+            setinputError(true)
 
             setErrorText('Please enter a question.')
             setInputValue('');
