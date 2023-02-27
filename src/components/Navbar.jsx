@@ -138,15 +138,15 @@ function Navbar({ collapsed, setCollapsed }) {
 								<a href="/#about" className="text-blueLike ml-5 mb-5"> About </a>
 								{sessionContext.userId ? (
 									<div className="w-1/3 ml-5 mb-5">
-										<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
+										<a className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
 											Log Out
-										</Link>
+										</a>
 									</div>
 								) : (
 									<div className="w-1/3 ml-5 mb-5">
-										<Link className="text-l font-semibold text-blueLike" to="/auth " onClick={() => setCollapsed(true)}>
+										<a className="text-l font-semibold text-blueLike" to="/auth " onClick={() => setCollapsed(true)}>
 											Sign In
-										</Link>
+										</a>
 									</div>
 								)}
 							</div>
