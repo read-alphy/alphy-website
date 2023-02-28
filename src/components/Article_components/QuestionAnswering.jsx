@@ -110,7 +110,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
     const handleClick = () => {
         if (showBaseQA) {
-            setInputValue('');
+            /*  setInputValue(''); */
         }
     };
 
