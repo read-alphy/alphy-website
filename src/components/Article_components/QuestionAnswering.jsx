@@ -9,7 +9,10 @@ import './QA.css';
 import TypeIt from 'typeit-react';
 
 export default function QuestionAnswering(source_id, key_qa, data) {
-	const sessionContext = useSessionContext();
+
+    const sessionContext = useSessionContext()
+
+    console.log(source_id.key_qa)
 
 	// console.log(source_id.source_id, source_id.key_qa)
 	const dummy = {
@@ -61,24 +64,27 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 	const [answerData, setAnswerData] = useState('');
 
-	const [isLoadingInside, setIsLoadingInside] = useState(false);
-	const [answer, setAnswer] = useState(false);
-	const [inputValue, setInputValue] = useState('');
-	const [showBaseQA, setShowBaseQA] = useState(false);
-	const [baseSources, setBaseSources] = useState(false);
-	const [baseQuestion, setBaseQuestion] = useState('');
-	const [isCleared, setIsCleared] = useState(true);
-	const [showUserQA, setShowUserQA] = useState(false);
-	const [optionValue, setOptionValue] = useState('');
-	const [signedInError, setSignedInError] = useState(false);
-	const QARef = useRef(null);
+    const [isLoadingInside, setIsLoadingInside] = useState(false);
+    const [answer, setAnswer] = useState(false)
+    const [inputValue, setInputValue] = useState('');
+    const [showBaseQA, setShowBaseQA] = useState(false)
+    const [baseSources, setBaseSources] = useState(false)
+    const [baseQuestion, setBaseQuestion] = useState("")
+    const [isCleared, setIsCleared] = useState(true)
+    const [showUserQA, setShowUserQA] = useState(false)
+    const [optionValue, setOptionValue] = useState("")
+    const [inputError, setinputError] = useState(false)
+    const [errorText, setErrorText] = useState("")
 
-	const handleClear = () => {
-		setIsCleared(true);
-		setShowBaseQA(false);
-		setShowUserQA(false);
-		setInputValue('');
-	};
+
+    const handleClear = () => {
+        setIsCleared(true)
+        setShowBaseQA(false)
+        setShowUserQA(false)
+        setInputValue("")
+        setAnswerData("")
+        setinputError(false)
+    }
 
 	const handleBaseQA = (event) => {
 		setIsCleared(false);
@@ -105,36 +111,33 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 		}
 	};
 
-	const fetchData = () => {
-		toast.dismiss();
-		setShowBaseQA(false);
-		setShowUserQA(true);
-		setSignedInError(false);
+    const fetchData = () => {
+        toast.dismiss()
+        setShowBaseQA(false)
+        setShowUserQA(true)
+        setinputError(false)
 
-		if (inputValue.length > 200) {
-			toast('Your question is too long, please keep it under 200 characters.', {
-				icon: '❗',
-				style: {
-					background: '#F9F8F8',
-				},
-			});
-			setInputValue('');
-			return;
-		} else if (inputValue.length === 0) {
-			toast('Please enter a question.', {
-				icon: '❗',
-				style: {
-					background: '#F9F8F8',
-				},
-			});
-			setInputValue('');
-			return;
-		} else {
-			if (sessionContext.doesSessionExist) {
-				try {
-					setIsLoadingInside(true);
-					setAnswer(false);
-					setAnswerData('');
+
+        if (inputValue.length > 200) {
+
+            setinputError(true)
+            setErrorText('Your question is too long, please keep it under 200 characters.')
+            setInputValue('');
+            return
+        }
+        else if (inputValue.length === 0) {
+            setinputError(true)
+
+            setErrorText('Please enter a question.')
+            setInputValue('');
+            return
+        }
+        else {
+            if (sessionContext.doesSessionExist) {
+                try {
+                    setIsLoadingInside(true);
+                    setAnswer(false)
+                    setAnswerData("")
 
 					axios
 						.post(
@@ -160,13 +163,14 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                     }
                 
                                 }); */
-				setInputValue('');
-				setIsCleared(true);
-				setSignedInError(true);
-				setShowBaseQA(true);
-			}
-		}
-	};
+                setErrorText('You need to sign in to ask questions.')
+                setInputValue('');
+                setIsCleared(true)
+                setinputError(true)
+
+            }
+        }
+    };
 
 	return (
 		<div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}>
@@ -205,95 +209,64 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 							</svg>
 						</div>
 
-						<input
-							value={inputValue}
-							onClick={() => handleClick(true)}
-							onChange={(event) => setInputValue(event.target.value)}
-							onKeyDown={handleKeyDown}
-							type="text"
-							id="search"
-							className={`block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${
-								signedInError && inputValue.length === 0
-									? 'border-2 border-red-00'
-									: 'border border-zinc-200'
-							} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`}
-							placeholder="Ask anything to the transcript..."
-							autoComplete="off"
-							required
-						/>
-						{inputValue.length > 0 ? (
-							<div
-								onClick={handleClear}
-								className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "
-							>
-								<svg
-									width="20"
-									onClick={handleClear}
-									className="cursor-pointer"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="1.5"
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M6 18L18 6M6 6l12 12"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									></path>
-								</svg>
-							</div>
-						) : null}
-					</div>
+                        <input value={inputValue} onClick={() => handleClick(true)} onChange={(event) => setInputValue(event.target.value)} onKeyDown={handleKeyDown} type="text" id="search" className={`block w-full p-4 pl-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0 ? "border-2 border-red-400" : "border border-zinc-200"} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`} placeholder="Ask anything to the transcript..." autoComplete="off" required />
+                        {inputValue.length > 0 ? <div onClick={handleClear} className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 ">
+                            <svg width="20" onClick={handleClear} className="cursor-pointer" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div> : null}
 
-					<button
-						type="submit"
-						onClick={fetchData}
-						class="p-3.5 ml-2 text-sm font-medium text-whiteLike bg-bordoLike rounded-md border border-zinc-600 hover:bg-zinc-700 focus:ring-4 focus:outline-none"
-					>
-						<span className="text-whiteLike text-l pt-1">Search</span>
-					</button>
-				</div>
-				{signedInError && baseQuestion.length === 0 ? (
-					<div>
-						<span className="text-sm text-red-400">You need to sign in to ask questions.</span>
-					</div>
-				) : null}
+                    </div>
 
-				<div className="mt-20">
-					{isCleared ? (
-						<div>
-							<p className="mb-5 text-xl text-zinc-600">
-								{' '}
-								Or check out the questions from the video that we already answered for you
-							</p>
-							{Object.keys(source_id.key_qa).map((item, index) => (
-								<button
-									key={index}
-									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-lg"
-								>
-									{item}
-								</button>
-							))}
-						</div>
-					) : null}
-				</div>
-				{isLoadingInside && !showBaseQA ? (
-					<div
-						className="loading mt-10 mb-10"
-						style={{
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							height: '20vh',
-						}}
-					>
-						<ReactLoading type="spinningBubbles" color="#52525b" />
-					</div>
-				) : (
-					<div> </div>
-				)}
+                    <button type="submit" onClick={fetchData} class="p-3.5 ml-2 text-sm font-medium text-whiteLike bg-bordoLike rounded-md border border-zinc-600 hover:bg-zinc-700 focus:ring-4 focus:outline-none">
+
+                        <span className="text-whiteLike text-l">Search</span>
+                    </button>
+
+                </div>
+                {inputError && inputValue.length === 0 ?
+                    <div>
+                        <span className="text-sm text-red-400">{errorText}</span>
+                    </div> : null
+                }
+
+
+
+
+                <div className="mt-20">
+
+                    {(isCleared && (isLoadingInside || answerData.length === 0)) ?
+
+                        (<div><p className="mb-5 text-xl text-zinc-600"> Or check out the questions from the video that we already answered for you</p>
+                            {Object.keys(source_id.key_qa).map((item, index) =>
+                                <button key={index} onClick={handleBaseQA} class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-lg">{item}</button>
+                            )
+                            }
+                        </div>)
+                        :
+
+                        (null)
+
+
+
+                    }
+                </div>
+                {isLoadingInside && !showBaseQA ?
+
+                    (<div
+
+                        className="loading mt-10 mb-10"
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '20vh',
+
+                        }}
+                    >
+                        <ReactLoading type="spinningBubbles" color="#52525b" />
+                    </div>) : (<div> </div>)
+                }
 
 				{answerData.length !== 0 && !showBaseQA && showUserQA ? (
 					<div className="text-zinc-600 pb-10">
@@ -375,25 +348,46 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 					</div>
 				) : null}
 
-				{showBaseQA ? (
-					<div className="text-zinc-600 pb-10">
-						{
-							<div>
-								<div>
-									<h1 className="mb-4 text-xl">Answer from Alphy</h1>
-									{/* <p className="text-zinc-600 typewriter">{source_id.key_qa[baseQuestion].answer}</p> */}
-									<TypeIt
-										options={{
-											strings: [source_id.key_qa[baseQuestion].answer],
-											speed: 5,
-											waitUntilVisible: true,
-											startDelay: 1000,
-											cursorSpeed: 1000,
-											cursorDelay: 500,
-											breakLines: false,
-										}}
-									/>
-								</div>
+
+                                    )
+
+                                    : (null)}
+                            </div>)
+
+
+                            :
+
+                            (<div>
+                                <p className="text-whiteLike flex mx-auto justify-center  text-xl">It seems like the content doesn't have an answer for this query. Try another one!</p>
+                            </div>)
+
+                        }
+
+
+                    </div>)
+
+                    : (null)
+                }
+
+                {showBaseQA ?
+
+                    (<div className="text-zinc-600 pb-10">
+
+                        {
+
+
+                            <div>
+                                <div>
+                                    <h1 className="mb-4 text-xl">Answer from Alphy</h1>
+                                    <p className="text-zinc-600">{
+                                        source_id.key_qa[baseQuestion].answer.split("\n").map((line, index) => (
+                                            <div key={index}>
+                                                {line}
+                                                {index !== source_id.key_qa[baseQuestion].answer.split("\n").length - 1 && <br />}
+                                            </div>
+                                        ))
+                                    }</p>
+                                </div>
 
 								<button
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}

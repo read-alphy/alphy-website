@@ -89,7 +89,7 @@ function SignIn() {
         e.preventDefault()
         setError("")
         try {
-            await signIn(email, password).then(() => { navigate("/home") })
+            await signIn(email, password).then(() => { navigate("/") })
 
 
         } catch (error) {

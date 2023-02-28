@@ -25,7 +25,8 @@ function App() {
 	const [collapsed, setCollapsed] = useState(true);
 	const [data, setData] = useState([]);
 
-	const url = `https://backend-production-33df.up.railway.app/summaries?limit=11&offset=0`;
+	const url = `${process.env.REACT_APP_API_URL}/summaries?limit=11&offset=0`
+
 
 	useEffect(() => {
 		setIsLoading(true);

@@ -18,10 +18,10 @@ function MobileMenu(signOut, data) {
 
     const handleSignOut = async () => {
         try {
-            console.log(sessionContext.doesSessionExist)
+
             await signOut()
             navigate("/")
-            console.log(sessionContext.doesSessionExist)
+
         } catch (error) {
             console.log(error.message);
 
