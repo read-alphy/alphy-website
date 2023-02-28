@@ -74,7 +74,7 @@ export default function Welcome() {
 					})
 					.catch(error => {
 
-						toast.error('There was an error submitting the form. Please try again on desktop.', {
+						toast.error('There was an error submitting the form. Please try again on desktop on another browser than Safari.', {
 							duration:
 								3000
 						});
