@@ -304,7 +304,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                     <TypeIt
                                         options={{
                                             strings: answerData.answer.split('\n'),
-                                            speed: 10,
+                                            speed: 5,
                                             cursorChar: "|",
                                         }}
                                     />
@@ -390,7 +390,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                     <TypeIt
                                         options={{
                                             strings: source_id.key_qa[baseQuestion].answer.split('\n'),
-                                            speed: 10,
+                                            speed: 5,
                                             /* cursorChar: '█', */
                                             cursorChar: '|',
                                         }}
