@@ -11,7 +11,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
     const sessionContext = useSessionContext()
 
-    console.log(baseQuestion)
+    console.log(source_id.key_qa)
 
     // console.log(source_id.source_id, source_id.key_qa)
     const dummy = {

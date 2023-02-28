@@ -22,7 +22,6 @@ function Navbar({ collapsed, setCollapsed }) {
 	const handleSignOut = async () => {
 		try {
 			await signOut();
-
 			if (location.pathname === "/") {
 				window.location.reload();
 
