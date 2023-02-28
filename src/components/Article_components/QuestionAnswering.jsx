@@ -75,7 +75,10 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [optionValue, setOptionValue] = useState('');
     const [inputError, setinputError] = useState(false);
     const [errorText, setErrorText] = useState('');
+    const [answerValue, setAnswerValue] = useState('');
 
+
+    console.log(answerValue.length)
     const handleClear = () => {
         setIsCleared(true);
         setShowBaseQA(false);
@@ -297,11 +300,11 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                             <div>
                                 <div>
                                     <h1 className="mb-4 text-xl">Answer from Alphy</h1>
-                                    <TypeIt
+                                    <TypeIt onChange={(e) => setAnswerValue(e.target.value)}
                                         options={{
                                             strings: answerData.answer.split('\n'),
                                             speed: 10,
-                                            cursorChar: '|',
+                                            cursorChar: "|",
                                         }}
                                     />
                                 </div>
