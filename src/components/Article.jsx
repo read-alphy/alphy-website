@@ -28,6 +28,11 @@ function Article({
 	const navigate = useNavigate();
 
 	const windlowLocationArticle = useLocation().pathname.includes("/article")
+	const handleFeedbackNavigation = () => {
+		setCollapsed(true)
+		navigate("/").then(navigate("/#feedback"))
+
+	}
 	/* 	const windowSize = useWindowSize();
 	useEffect(() => {
 			if (windowSize.width > 768) {
@@ -136,7 +141,7 @@ function Article({
 										</button>
 									</div>
 									<div className="w-1/3 ml-5 mb-5">
-										<a href="/#feedback" type="button" className={`text-blueLike font-semibold `} onClick={() => setCollapsed(true)}>Give us feedback!</a>
+										<a href="" type="button" className={`text-blueLike font-semibold `} onClick={handleFeedbackNavigation}>Give us feedback!</a>
 									</div>
 									<div className="w-1/3 ml-5 mb-5">
 										<Link className="text-l font-semibold text-blueLike" to="/" onClick={() => setCollapsed(true)}>
