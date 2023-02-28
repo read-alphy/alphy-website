@@ -5,6 +5,8 @@ import ReactLoading from 'react-loading';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from 'react';
+import './QA.css';
+import TypeIt from 'typeit-react';
 
 export default function QuestionAnswering(source_id, key_qa, data) {
 	const sessionContext = useSessionContext();
@@ -293,7 +295,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 					<div> </div>
 				)}
 
-				{answerData.length != 0 && !showBaseQA && showUserQA ? (
+				{answerData.length !== 0 && !showBaseQA && showUserQA ? (
 					<div className="text-zinc-600 pb-10">
 						{answerData.answer ? (
 							<div>
@@ -379,7 +381,18 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 							<div>
 								<div>
 									<h1 className="mb-4 text-xl">Answer from Alphy</h1>
-									<p className="text-zinc-600">{source_id.key_qa[baseQuestion].answer}</p>
+									{/* <p className="text-zinc-600 typewriter">{source_id.key_qa[baseQuestion].answer}</p> */}
+									<TypeIt
+										options={{
+											strings: [source_id.key_qa[baseQuestion].answer],
+											speed: 5,
+											waitUntilVisible: true,
+											startDelay: 1000,
+											cursorSpeed: 1000,
+											cursorDelay: 500,
+											breakLines: false,
+										}}
+									/>
 								</div>
 
 								<button
