@@ -14,7 +14,7 @@ export default function Home2() {
 
     async function logoutClicked() {
         await signOut();
-        navigate("/");
+        navigate("/home");
     }
 
     if (sessionContext.loading === true) {

@@ -9,7 +9,6 @@ function Home({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 
 	useEffect(() => {
 		setTimeout(() => {
-
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
 
 		}, 0);

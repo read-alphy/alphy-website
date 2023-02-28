@@ -12,7 +12,7 @@ function Account() {
   const handleSignOut = async () => {
     try {
       await logout()
-      navigate("/")
+      navigate("/home")
     } catch (error) {
       console.log(error.message);
     }

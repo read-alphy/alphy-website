@@ -22,7 +22,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	const handleSignOut = async () => {
 		try {
 			await signOut();
-			if (location.pathname === "/") {
+			if (location.pathname === "/home") {
 				window.location.reload();
 
 			}
@@ -40,7 +40,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[10vh]">
 			<div className="pl-10 flex flex-row ">
-				<Link to="/">
+				<Link to="/home">
 
 					{/* <img className="w-10" src={Logo} /> */}
 					<h1 className="text-2xl">ALPHY</h1>
@@ -56,9 +56,9 @@ function Navbar({ collapsed, setCollapsed }) {
 
 					<div className="signed-in-navbar grid gap-4">
 
-						<a href="/#feedback" type="button" className={`hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2`}>Give us feedback!</a>
+						<a href="/home#feedback" type="button" className={`hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2`}>Give us feedback!</a>
 
-						<a href="/#about" className="hidden font-semibold text-zinc-200 md:block mr-5 pt-2"> About </a>
+						<a href="/home#about" className="hidden font-semibold text-zinc-200 md:block mr-5 pt-2"> About </a>
 
 
 						{sessionContext.userId ? (<div className="hidden md:block pt-2">
@@ -127,14 +127,14 @@ function Navbar({ collapsed, setCollapsed }) {
 									</button>
 								</div>
 								<div className="w-1/3 ml-5 mb-5">
-									<a href="/#feedback" type="button" className={`text-blueLike font-semibold `} onClick={() => setCollapsed(true)}>Give us feedback!</a>
+									<a href="/home#feedback" type="button" className={`text-blueLike font-semibold `} onClick={() => setCollapsed(true)}>Give us feedback!</a>
 								</div>
 								<div className="w-1/3 ml-5 mb-5">
-									<Link className="text-l font-semibold text-blueLike" to="/" onClick={() => setCollapsed(true)}>
+									<Link className="text-l font-semibold text-blueLike" to="/home" onClick={() => setCollapsed(true)}>
 										Home
 									</Link>
 								</div>
-								<a href="/#about" className="text-blueLike ml-5 mb-5"> About </a>
+								<a href="/home#about" className="text-blueLike ml-5 mb-5"> About </a>
 								{sessionContext.userId ? (
 									<div className="w-1/3 ml-5 mb-5">
 										<a className="text-l font-semibold text-blueLike" onClick={handleSignOut}>

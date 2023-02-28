@@ -27,7 +27,7 @@ function SignIn() {
         }
     }, []);
     let displayed;
-    if (location.state && location.state.from === "/") {
+    if (location.state && location.state.from === "/home") {
         console.log(location.state)
         console.log(location.state.from)
         displayed =
