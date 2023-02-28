@@ -301,7 +301,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                         options={{
                                             strings: answerData.answer.split('\n'),
                                             speed: 10,
-                                            cursorChar: '█',
+                                            cursorChar: '|',
                                         }}
                                     />
                                 </div>
