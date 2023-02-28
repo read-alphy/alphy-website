@@ -7,13 +7,13 @@ import { useEffect } from 'react';
 
 function Home({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
 
-	/* useEffect(() => {
+	useEffect(() => {
 		setTimeout(() => {
 
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
 
 		}, 0);
-	}, []); */
+	}, []);
 	return (
 		<div className="mx-auto w-800">
 			<Welcome />
