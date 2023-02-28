@@ -11,7 +11,7 @@ import TypeIt from 'typeit-react';
 export default function QuestionAnswering(source_id, key_qa, data) {
     const sessionContext = useSessionContext();
 
-    console.log(source_id.key_qa);
+
 
     // console.log(source_id.source_id, source_id.key_qa)
     const dummy = {
@@ -77,8 +77,8 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [errorText, setErrorText] = useState('');
     const [answerValue, setAnswerValue] = useState('');
 
+    console.log(answerData.answer.split('\n').length)
 
-    console.log(answerValue.length)
     const handleClear = () => {
         setIsCleared(true);
         setShowBaseQA(false);
@@ -300,7 +300,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                             <div>
                                 <div>
                                     <h1 className="mb-4 text-xl">Answer from Alphy</h1>
-                                    <TypeIt onChange={(e) => setAnswerValue(e.target.value)}
+                                    <TypeIt
                                         options={{
                                             strings: answerData.answer.split('\n'),
                                             speed: 10,
