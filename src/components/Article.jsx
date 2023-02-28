@@ -136,43 +136,43 @@ function Article({
 										</button>
 									</div>
 									<div className="w-1/3 ml-5 mb-5">
-										<a href="/home#" feedback" type="button" className={`text-blueLike font-semibold `} onClick={() => setCollapsed(true)}>Give us feedback!</a>
-								</div>
-								<div className="w-1/3 ml-5 mb-5">
-									<Link className="text-l font-semibold text-blueLike" to="/home" onClick={() => setCollapsed(true)}>
-										Home
-									</Link>
-								</div>
-								{sessionContext.doesSessionExist ? (
+										<a href="/home#feedback" type="button" className={`text-blueLike font-semibold `} onClick={() => setCollapsed(true)}>Give us feedback!</a>
+									</div>
 									<div className="w-1/3 ml-5 mb-5">
-										<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
-											Log Out
+										<Link className="text-l font-semibold text-blueLike" to="/home" onClick={() => setCollapsed(true)}>
+											Home
 										</Link>
 									</div>
-								) : (
-									<div className="w-1/3 ml-5 mb-5">
-										<Link className="text-l font-semibold text-blueLike" to="/auth " onClick={() => setCollapsed(true)}>
-											Sign In
-										</Link>
-									</div>
-								)}
-							</div>
-							<div className={`mt-4 ${windlowLocationArticle ? ('block') : ('block')}`}>
-								<div className="">{sideFeed}</div>
+									{sessionContext.doesSessionExist ? (
+										<div className="w-1/3 ml-5 mb-5">
+											<Link className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
+												Log Out
+											</Link>
+										</div>
+									) : (
+										<div className="w-1/3 ml-5 mb-5">
+											<Link className="text-l font-semibold text-blueLike" to="/auth " onClick={() => setCollapsed(true)}>
+												Sign In
+											</Link>
+										</div>
+									)}
+								</div>
+								<div className={`mt-4 ${windlowLocationArticle ? ('block') : ('block')}`}>
+									<div className="">{sideFeed}</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					</div>
 
-			) : (
-			<></>
+				) : (
+					<></>
 				)}
 
 
-			<div className="scrolling px-4 mx-auto h-[90vh]  ">
-				{isLoading || data.length ? <Loading /> : <Content data={data} />}
+				<div className="scrolling px-4 mx-auto h-[90vh]  ">
+					{isLoading || data.length ? <Loading /> : <Content data={data} />}
+				</div>
 			</div>
-		</div>
 		</div >
 	);
 }
