@@ -27,7 +27,7 @@ function SignIn() {
         }
     }, []);
     let displayed;
-    if (location.state && location.state.from === "/home") {
+    if (location.state && location.state.from === "/") {
         console.log(location.state)
         console.log(location.state.from)
         displayed =
@@ -89,7 +89,7 @@ function SignIn() {
         e.preventDefault()
         setError("")
         try {
-            await signIn(email, password).then(() => { navigate("/home") })
+            await signIn(email, password).then(() => { navigate("/") })
 
 
         } catch (error) {

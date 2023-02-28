@@ -20,7 +20,7 @@ function MobileMenu(signOut, data) {
         try {
 
             await signOut()
-            navigate("/home")
+            navigate("/")
 
         } catch (error) {
             console.log(error.message);

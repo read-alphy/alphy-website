@@ -46,7 +46,7 @@ function App() {
 						<Home2 />
 					</SessionAuth>} />
 					<Route
-						path="/home"
+						path="/"
 						element={
 							<Home
 								data={data}
