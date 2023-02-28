@@ -324,7 +324,14 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                             <div>
                                 <div>
                                     <h1 className="mb-4 text-xl">Answer from Alphy</h1>
-                                    <p className="text-zinc-600">{source_id.key_qa[baseQuestion].answer}</p>
+                                    <p className="text-zinc-600">{
+                                        source_id.key_qa[baseQuestion].answer.split("\n").map((line, index) => (
+                                            <div key={index}>
+                                                {line}
+                                                {index !== source_id.key_qa[baseQuestion].answer.split("\n").length - 1 && <br />}
+                                            </div>
+                                        ))
+                                    }</p>
                                 </div>
 
 
