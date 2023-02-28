@@ -39,7 +39,7 @@ export default function Welcome() {
 				axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
 
 					url: inputValue,
-					language: selectedOption
+					language: "English"
 
 				})
 					.then((response) => {
@@ -154,7 +154,7 @@ export default function Welcome() {
 
 
 
-					<Languages language={language} onLangChange={setLanguage} />
+					{/* <Languages language={language} onLangChange={setLanguage} /> */}
 				</div>
 
 
@@ -165,7 +165,7 @@ export default function Welcome() {
 						<button
 							className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
-							onClick={(e) => { handleSubmit(e, language) }}
+							onClick={(e) => { handleSubmit() }}
 						>
 							Submit
 						</button>
@@ -173,7 +173,7 @@ export default function Welcome() {
 						<button
 							className="w-2/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
-							onClick={(e) => { handleSubmit(e, language) }}
+							onClick={(e) => { handleSubmit() }}
 						>
 
 							Sign In To Submit
