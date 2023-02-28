@@ -77,7 +77,10 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [errorText, setErrorText] = useState('');
     const [answerValue, setAnswerValue] = useState('');
 
-    console.log(answerData.answer.split('\n').length)
+
+    if (answerData.answer !== undefined) {
+        console.log(answerData.answer.split('\n').length)
+    }
 
     const handleClear = () => {
         setIsCleared(true);
