@@ -75,12 +75,10 @@ export default function QuestionAnswering(source_id, key_qa, data) {
     const [optionValue, setOptionValue] = useState('');
     const [inputError, setinputError] = useState(false);
     const [errorText, setErrorText] = useState('');
-    const [answerValue, setAnswerValue] = useState('');
 
 
-    if (answerData.answer !== undefined) {
-        console.log(answerData.answer.split('\n').length)
-    }
+
+
 
     const handleClear = () => {
         setIsCleared(true);
