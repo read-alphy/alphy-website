@@ -144,6 +144,7 @@ export default function Content(props) {
 									<div className='text-lg font-normal mb-4 max-w-screen-md' >
 										{isLoading ? <Loading /> : (
 											transcript.map((item, index) => {
+												console.log(item)
 												transcriptParser();
 												if (index % 2 === 0) {
 													return (<a onClick={handleClick} className="cursor-pointer " key={index}><br></br>{item} </a>)
