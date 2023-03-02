@@ -135,7 +135,7 @@ export default function Content(props) {
 												transcriptParser();
 
 												if (index % 2 === 0) {
-													return (<a onClick={handleClick} className="cursor-pointer md:pointer-events-none lg:pointer-events-auto" key={index}><br></br>{item} </a>)
+													return (<a onClick={handleClick} className="lg:cursor-pointer pointer-events-none lg:pointer-events-auto" key={index}><br></br>{item} </a>)
 												}
 												else {
 													return (<div key={index}><br></br>{item}</div>)
