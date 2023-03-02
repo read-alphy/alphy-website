@@ -22,11 +22,13 @@ export default function Welcome() {
 
 
 
+
 	const handleSubmit = (event, selectedOption) => {
 		let video_id = ""
 		let source_type = ""
 		toast.dismiss()
 		// Do something with the inputValue here	
+
 		if (!sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
@@ -65,64 +67,116 @@ export default function Welcome() {
 						video_id = video_id.substring(0, ampersandPosition);
 					}
 				}
-
-
+				navigate("/article/" + video_id)
 				axios.get(`${process.env.REACT_APP_API_URL}/summaries/${source_type}/${video_id}`).then((response) => {
 					if (response === 200) {
 						navigate("/article/" + video_id)
 						return
 					}
-				})
+					else {
+						//send request to database for post
 
-				//send request to database for post
+						axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
 
-				axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
+							url: inputValue,
+							language: "English"
 
-					url: inputValue,
-					language: "English"
+						})
+							.then((response) => {
+								console.log(response)
+								setLoading(false);
+								setInputValue('');
+								/* 						if (response.status === 200) {
+								
+														toast(
+															'Someone already submitted this video! Give us a few minutes to process it.', {
+															icon: '⌛',
+															style: {
+																background: "#F9F8F8"
+															}
+														}
+														);
+								
+																				} */
+								if (response.status === 200 || response.status === 201 || response.status === 202) {
+									toast.success(
+										'Succesfully submitted the content! \n\n We will send you an email when the article is ready.', { duration: 3000 }
+									);
 
-				})
-					.then((response) => {
-						console.log(response)
-						setLoading(false);
-						setInputValue('');
-						/* 						if (response.status === 200) {
-						
-												toast(
-													'Someone already submitted this video! Give us a few minutes to process it.', {
-													icon: '⌛',
-													style: {
-														background: "#F9F8F8"
+								}
+								else {
+									toast.error('There was an error submitting the form. Please try again.', {
+										duration:
+											3000
+									});
+								}
+
+							})
+							.catch(error => {
+
+								toast.error('There was an error submitting the form. Please try again on desktop on another browser than Safari.', {
+									duration:
+										3000
+								});
+								setInputValue("")
+								setLoading(false)
+								throw error;
+
+							})
+
+					}
+				}).catch((error) => {
+
+					//send request to database for post
+
+					axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
+
+						url: inputValue,
+						language: "English"
+
+					})
+						.then((response) => {
+							console.log(response)
+							setLoading(false);
+							setInputValue('');
+							/* 						if (response.status === 200) {
+							
+													toast(
+														'Someone already submitted this video! Give us a few minutes to process it.', {
+														icon: '⌛',
+														style: {
+															background: "#F9F8F8"
+														}
 													}
-												}
-												);
-						
-																		} */
-						if (response.status === 200 || response.status === 201 || response.status === 202) {
-							toast.success(
-								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.', { duration: 3000 }
-							);
+													);
+							
+																			} */
+							if (response.status === 200 || response.status === 201 || response.status === 202) {
+								toast.success(
+									'Succesfully submitted the content! \n\n We will send you an email when the article is ready.', { duration: 3000 }
+								);
 
-						}
-						else {
-							toast.error('There was an error submitting the form. Please try again.', {
+							}
+							else {
+								toast.error('There was an error submitting the form. Please try again.', {
+									duration:
+										3000
+								});
+							}
+
+						})
+						.catch(error => {
+
+							toast.error('There was an error submitting the form. Please try again on desktop on another browser than Safari.', {
 								duration:
 									3000
 							});
-						}
+							setInputValue("")
+							setLoading(false)
+							throw error;
 
-					})
-					.catch(error => {
-
-						toast.error('There was an error submitting the form. Please try again on desktop on another browser than Safari.', {
-							duration:
-								3000
-						});
-						setInputValue("")
-						setLoading(false)
-						throw error;
-
-					})
+						})
+				})
 			}
 
 			else {
