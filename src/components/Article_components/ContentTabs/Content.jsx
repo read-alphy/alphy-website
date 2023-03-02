@@ -52,7 +52,7 @@ export default function Content(props) {
 		transcript.push("00:00:00")
 
 		for (let i = 0; i < srt_array.length; i++) {
-			console.log(srt_array[i].text)
+
 			count = count + 1
 			nothing = nothing + " " + srt_array[i].text
 			if (count > 6 && srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === ".") {
