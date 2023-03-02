@@ -11,9 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Welcome() {
-	//const sessionContext = useSessionContext()
-	// const sessionContext = { userId: "123" }
-	// const navigate = useNavigate()
+
 
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
@@ -23,19 +21,61 @@ export default function Welcome() {
 	const navigate = useNavigate();
 
 
-	const handleSubmit = (event, selectedOption) => {
 
+	const handleSubmit = (event, selectedOption) => {
+		let video_id = ""
+		let source_type = ""
 		toast.dismiss()
 		// Do something with the inputValue here	
-		if (sessionContext.doesSessionExist) {
+		if (!sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
-				inputValue.includes('https://m.youtube.com')
+				inputValue.includes('https://m.youtube.com') ||
+				inputValue.includes('https://twitter.com/i/spaces')
 			) {
 
-
 				setLoading(true);
+
+				//check if the video is already in the database
+
+				if (inputValue.includes('https://www.youtube.com') || inputValue.includes('https://m.youtube.com')) {
+					source_type = "youtube"
+					video_id = inputValue.split('v=')[1];
+					var ampersandPosition = video_id.indexOf('&');
+					if (ampersandPosition != -1) {
+						video_id = video_id.substring(0, ampersandPosition);
+					}
+
+				}
+				else if (inputValue.includes('https://youtu.be')) {
+					source_type = "youtube"
+					video_id = inputValue.split('be/')[1];
+					var ampersandPosition = video_id.indexOf('&');
+					if (ampersandPosition != -1) {
+						video_id = video_id.substring(0, ampersandPosition);
+					}
+				}
+
+				else if (inputValue.includes("https://twitter.com/i/spaces")) {
+					source_type = "twitter"
+					video_id = inputValue.split("https://twitter.com/i/spaces/")[1]
+					var ampersandPosition = video_id.indexOf('?');
+					if (ampersandPosition != -1) {
+						video_id = video_id.substring(0, ampersandPosition);
+					}
+				}
+
+
+				axios.get(`${process.env.REACT_APP_API_URL}/summaries/${source_type}/${video_id}`).then((response) => {
+					if (response === 200) {
+						navigate("/article/" + video_id)
+						return
+					}
+				})
+
+				//send request to database for post
+
 				axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
 
 					url: inputValue,
@@ -81,7 +121,8 @@ export default function Welcome() {
 						setInputValue("")
 						setLoading(false)
 						throw error;
-					});
+
+					})
 			}
 
 			else {
@@ -92,6 +133,7 @@ export default function Welcome() {
 			}
 
 		}
+
 		else {
 
 			navigate("/auth")
