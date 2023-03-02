@@ -305,7 +305,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                         options={{
                                             strings: answerData.answer.split('\n'),
                                             speed: 5,
-                                            cursorChar: "|",
+                                            cursorChar: "",
                                         }}
                                     />
                                 </div>
@@ -387,14 +387,15 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                             <div>
                                 <div>
                                     <h1 className="mb-4 text-xl">Answer from Alphy</h1>
-                                    <TypeIt
+                                    {/*                                     <TypeIt
                                         options={{
                                             strings: source_id.key_qa[baseQuestion].answer.split('\n'),
                                             speed: 5,
-                                            /* cursorChar: '█', */
+                                        
                                             cursorChar: '|',
                                         }}
-                                    />
+                                    /> */}
+                                    <p>{source_id.key_qa[baseQuestion].answer}</p>
                                 </div>
 
                                 <button
