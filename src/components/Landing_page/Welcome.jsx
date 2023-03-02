@@ -27,7 +27,7 @@ export default function Welcome() {
 		let source_type = ""
 		toast.dismiss()
 		// Do something with the inputValue here	
-		if (!sessionContext.doesSessionExist) {
+		if (sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
