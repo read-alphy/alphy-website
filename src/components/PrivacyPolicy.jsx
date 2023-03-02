@@ -5,8 +5,8 @@ export default function PrivacyPolicy() {
 
 
     return (
-        <div className="text-zinc-600 mt-10 mb-10 mx-auto max-w-[800px]">
-            <h1 className="text-2xl font-bold mb-5 mt-10">Privacy Policy</h1>
+        <div className="text-zinc-600 mt-20 mb-40 mx-auto max-w-[800px]">
+            <h1 className="text-3xl font-bold mb-5 pt-5">Privacy Policy</h1>
             <p className="pt-1">Last updated: March 02, 2023</p>
             <p className="pt-1">This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
             <p className="pt-1">We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/" target="_blank">Free Privacy Policy Generator</a>.</p>

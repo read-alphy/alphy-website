@@ -13,6 +13,7 @@ import Home2 from './supertokens_home';
 import Footer from './components/Footer';
 import { useWindowSize } from './hooks/useWindowSize';
 import { offset } from '@popperjs/core';
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
 	SuperTokens.init(SuperTokensConfig);
@@ -39,7 +40,11 @@ function App() {
 	return (
 		<SuperTokensWrapper>
 			<div className="App">
+
+
 				<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
+
+
 				<Routes>
 					{getSuperTokensRoutesForReactRouterDom(require("react-router-dom"))}
 					<Route path="/auth" element={<SessionAuth>
@@ -78,8 +83,9 @@ function App() {
 							/>
 						}
 					/>
+					<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 				</Routes>
-				{location.pathname === '/' ? <Footer /> : null}
+				{location.pathname === '/' || location.pathname === "/privacypolicy" ? <Footer /> : null}
 			</div>
 
 

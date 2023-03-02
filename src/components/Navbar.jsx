@@ -11,12 +11,22 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { signOut } from 'supertokens-auth-react/recipe/passwordless';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../img/logo.png';
+import { useGoogleLogin } from '@react-oauth/google';
+
+
 
 function Navbar({ collapsed, setCollapsed }) {
 	let sessionContext = useSessionContext();
 
 	const navigate = useNavigate();
 	const location = useLocation();
+
+	/* 	const responseMessage = (response) => {
+			console.log(response);
+		};
+		const errorMessage = (error) => {
+			console.log(error);
+		}; */
 
 	const handleSignOut = async () => {
 		try {
@@ -31,8 +41,16 @@ function Navbar({ collapsed, setCollapsed }) {
 		}
 	};
 
+
+	const login = useGoogleLogin({
+		onSuccess: tokenResponse => console.log(tokenResponse),
+	});
+
+
+
 	return (
-		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[10vh]">
+		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[10vh] min-h-[60px]">
+
 			<div className="pl-10 flex flex-row ">
 				<Link to="/">
 					{/* <img className="w-10" src={Logo} /> */}
@@ -51,6 +69,7 @@ function Navbar({ collapsed, setCollapsed }) {
 							Give us feedback!
 						</a>
 
+
 						<a href="/#about" className="hidden font-semibold text-zinc-200 md:block mr-5 pt-2">
 							{' '}
 							About{' '}
@@ -65,6 +84,9 @@ function Navbar({ collapsed, setCollapsed }) {
 						) : (
 							<div className="hidden md:block font-semibold pt-2 text-zinc-200">
 								<Link to="/auth">Sign In</Link>
+								{/* <button onClick={() => login()}>
+									Sign in🚀{' '}
+								</button> */}
 							</div>
 						)}
 
@@ -85,9 +107,8 @@ function Navbar({ collapsed, setCollapsed }) {
 									<p className=" ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
 
 									<button
-										className={`mb-10 w-1/12 justify-self-end mr-5 text-blueLike ${
-											collapsed ? 'block' : 'block'
-										}`}
+										className={`mb-10 w-1/12 justify-self-end mr-5 text-blueLike ${collapsed ? 'block' : 'block'
+											}`}
 										onClick={() => setCollapsed(true)}
 									>
 										<svg
@@ -137,6 +158,7 @@ function Navbar({ collapsed, setCollapsed }) {
 									</div>
 								) : (
 									<div className="w-1/3 ml-5 mb-5">
+
 										<a
 											className="text-l font-semibold text-blueLike"
 											to="/auth "
