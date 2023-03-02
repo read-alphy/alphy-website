@@ -38,7 +38,7 @@ export default function Content(props) {
 
 
 	async function transcriptParser() {
-		console.log(data)
+
 		summaryArray = data.summary.split("\n")
 		var parser = new srtParser2();
 		var srt_array = parser.fromSrt(data.transcript);
@@ -51,17 +51,8 @@ export default function Content(props) {
 
 		transcript.push("00:00:00")
 
-
-		/* 	for (let i = 0; i < srt_array.length; i++) {
-				count = count + 1
-				nothing = nothing + srt_array[i].text + " "
-				if (count > 6 && srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === ".") {
-					nothing = nothing + "<br></br>" + srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4) + "<br></br>"
-					timestamps = timestamps + srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)
-					count = 0
-				}
-			} */
 		for (let i = 0; i < srt_array.length; i++) {
+			console.log(srt_array[i].text)
 			count = count + 1
 			nothing = nothing + " " + srt_array[i].text
 			if (count > 6 && srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === ".") {
@@ -144,8 +135,9 @@ export default function Content(props) {
 									<div className='text-lg font-normal mb-4 max-w-screen-md' >
 										{isLoading ? <Loading /> : (
 											transcript.map((item, index) => {
-												console.log(item)
+
 												transcriptParser();
+
 												if (index % 2 === 0) {
 													return (<a onClick={handleClick} className="cursor-pointer " key={index}><br></br>{item} </a>)
 												}
