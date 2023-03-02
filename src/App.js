@@ -78,8 +78,9 @@ function App() {
 							/>
 						}
 					/>
+					<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 				</Routes>
-				{location.pathname === '/' ? <Footer /> : null}
+				{location.pathname === '/' || location.pathname === "/privacypolicy" ? <Footer /> : null}
 			</div>
 
 
