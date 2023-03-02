@@ -52,6 +52,7 @@ export default function Content(props) {
 		transcript.push("00:00:00")
 
 		for (let i = 0; i < srt_array.length; i++) {
+			console.log(srt_array[i].text)
 
 			count = count + 1
 			nothing = nothing + " " + srt_array[i].text
@@ -135,7 +136,6 @@ export default function Content(props) {
 									<div className='text-lg font-normal mb-4 max-w-screen-md' >
 										{isLoading ? <Loading /> : (
 											transcript.map((item, index) => {
-
 												transcriptParser();
 
 												if (index % 2 === 0) {
