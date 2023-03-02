@@ -38,6 +38,7 @@ export default function Content(props) {
 
 
 	async function transcriptParser() {
+		console.log(data)
 		summaryArray = data.summary.split("\n")
 		var parser = new srtParser2();
 		var srt_array = parser.fromSrt(data.transcript);

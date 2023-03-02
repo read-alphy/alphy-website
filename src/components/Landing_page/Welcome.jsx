@@ -23,8 +23,7 @@ export default function Welcome() {
 
 
 	const handleSubmit = (event, selectedOption) => {
-		let video_id = ""
-		let source_type = ""
+
 		toast.dismiss()
 		// Do something with the inputValue here	
 		if (sessionContext.doesSessionExist) {
@@ -38,34 +37,34 @@ export default function Welcome() {
 				setLoading(true);
 
 				//check if the video is already in the database
-
-				if (inputValue.includes('https://www.youtube.com') || inputValue.includes('https://m.youtube.com')) {
-					source_type = "youtube"
-					video_id = inputValue.split('v=')[1];
-					var ampersandPosition = video_id.indexOf('&');
-					if (ampersandPosition != -1) {
-						video_id = video_id.substring(0, ampersandPosition);
-					}
-
-				}
-				else if (inputValue.includes('https://youtu.be')) {
-					source_type = "youtube"
-					video_id = inputValue.split('be/')[1];
-					var ampersandPosition = video_id.indexOf('&');
-					if (ampersandPosition != -1) {
-						video_id = video_id.substring(0, ampersandPosition);
-					}
-				}
-
-				else if (inputValue.includes("https://twitter.com/i/spaces")) {
-					source_type = "twitter"
-					video_id = inputValue.split("https://twitter.com/i/spaces/")[1]
-					var ampersandPosition = video_id.indexOf('?');
-					if (ampersandPosition != -1) {
-						video_id = video_id.substring(0, ampersandPosition);
-					}
-				}
-
+				/* 
+								if (inputValue.includes('https://www.youtube.com') || inputValue.includes('https://m.youtube.com')) {
+									source_type = "youtube"
+									video_id = inputValue.split('v=')[1];
+									var ampersandPosition = video_id.indexOf('&');
+									if (ampersandPosition != -1) {
+										video_id = video_id.substring(0, ampersandPosition);
+									}
+				
+								}
+								else if (inputValue.includes('https://youtu.be')) {
+									source_type = "youtube"
+									video_id = inputValue.split('be/')[1];
+									var ampersandPosition = video_id.indexOf('&');
+									if (ampersandPosition != -1) {
+										video_id = video_id.substring(0, ampersandPosition);
+									}
+								}
+				
+								else if (inputValue.includes("https://twitter.com/i/spaces")) {
+									source_type = "twitter"
+									video_id = inputValue.split("https://twitter.com/i/spaces/")[1]
+									var ampersandPosition = video_id.indexOf('?');
+									if (ampersandPosition != -1) {
+										video_id = video_id.substring(0, ampersandPosition);
+									}
+								}
+				 */
 				/* 
 								axios.get(`${process.env.REACT_APP_API_URL}/summaries/${source_type}/${video_id}`).then((response) => {
 									if (response === 200) {
