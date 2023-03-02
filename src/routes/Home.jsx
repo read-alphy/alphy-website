@@ -16,6 +16,7 @@ function Home({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 	return (
 		<div className="mx-auto w-800">
 			<Welcome />
+
 			<Feed
 				data={data}
 				setData={setData}
