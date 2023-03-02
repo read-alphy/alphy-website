@@ -67,7 +67,7 @@ export default function Welcome() {
 						video_id = video_id.substring(0, ampersandPosition);
 					}
 				}
-				navigate("/article/" + video_id)
+
 				axios.get(`${process.env.REACT_APP_API_URL}/summaries/${source_type}/${video_id}`).then((response) => {
 					if (response === 200) {
 						navigate("/article/" + video_id)
