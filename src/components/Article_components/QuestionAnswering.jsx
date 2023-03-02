@@ -261,7 +261,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 ) : null}
 
                 <div className="mt-20">
-                    {isCleared && (isLoadingInside || answerData.length === 0) ? (
+                    {isCleared && (!isLoadingInside && answerData.length === 0) ? (
                         <div>
                             <p className="mb-5 text-xl text-zinc-600">
                                 {' '}
