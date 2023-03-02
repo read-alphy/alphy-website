@@ -42,14 +42,13 @@ export default function Content(props) {
 		summaryArray = data.summary.split("\n")
 		var parser = new srtParser2();
 		var srt_array = parser.fromSrt(data.transcript);
-		console.log(srt_array)
+
 		let nothing = ""
 		let count = 0
 
 		transcript.push("00:00:00")
 
 		for (let i = 0; i < srt_array.length; i++) {
-			console.log(srt_array[i].text)
 
 			count = count + 1
 			nothing = nothing + " " + srt_array[i].text
