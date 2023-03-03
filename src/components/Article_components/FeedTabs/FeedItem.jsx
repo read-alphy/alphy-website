@@ -2,10 +2,19 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import './FeedItem.css';
+import Twitter from '../../../img/twitter_spaces.png';
 
 const FeedItem = ({ item, setCollapsed }) => {
 	const source_id = item.source_id;
-	const imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
+	let imageUrl
+	if (item.source_type === "youtube") {
+		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`
+	}
+	else if (item.source_type === "twitter") {
+		imageUrl = Twitter
+	};
+
+
 	const navigate = useNavigate();
 	const windowSize = useWindowSize();
 	return (

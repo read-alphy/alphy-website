@@ -5,12 +5,7 @@ export default function FeedbackForm() {
     const [inputValue, setInputValue] = useState('');
 
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        toast.dismiss();
 
-
-    }
     return (
         <div className="mx-auto pt-20 w-800 pb-20 " id="feedback">
             <div className=" flex justify-center "></div>
