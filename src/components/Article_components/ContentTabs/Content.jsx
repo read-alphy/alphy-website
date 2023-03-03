@@ -96,16 +96,16 @@ export default function Content(props) {
 						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 					</div>
 					<div className="hidden lg:block w-2/3 ">
-						{data.source_type === "spaces" ? <div href={`https://twitter.com/i/spaces/${data.source_id}`} className="block w-2/3 "> <img className=" cursor-pointer" src={Twitter}></img>
-							<p className="text-l text-zinc-600 mt-3 cursor-pointer">Listen to "{data.title}" </p></div>
+						{data.source_type === "spaces" ? (<div href={`https://twitter.com/i/spaces/${data.source_id}`} className="block w-2/3 "> <img className=" cursor-pointer" src={Twitter}></img>
+							<p className="text-l text-zinc-600 mt-3 cursor-pointer">Listen to "{data.title}" </p></div>)
 							:
-							<iframe id="player"
+							(<iframe id="player"
 								title="My YouTube Video "
 								className="max-w-80 lg:w-120 h-80 w-auto"
 								src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
 								frameBorder="0"
 								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-							></iframe>
+							></iframe>)
 						}
 					</div>
 				</div>
