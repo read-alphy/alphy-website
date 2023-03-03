@@ -261,7 +261,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                 ) : null}
 
                 <div className="mt-20">
-                    {isCleared && (isLoadingInside || answerData.length === 0) ? (
+                    {isCleared && (!isLoadingInside && answerData.length === 0) ? (
                         <div>
                             <p className="mb-5 text-xl text-zinc-600">
                                 {' '}
@@ -305,7 +305,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                                         options={{
                                             strings: answerData.answer.split('\n'),
                                             speed: 5,
-                                            cursorChar: "|",
+                                            cursorChar: "",
                                         }}
                                     />
                                 </div>
@@ -387,14 +387,15 @@ export default function QuestionAnswering(source_id, key_qa, data) {
                             <div>
                                 <div>
                                     <h1 className="mb-4 text-xl">Answer from Alphy</h1>
-                                    <TypeIt
+                                    {/*                                     <TypeIt
                                         options={{
                                             strings: source_id.key_qa[baseQuestion].answer.split('\n'),
                                             speed: 5,
-                                            /* cursorChar: '█', */
+                                        
                                             cursorChar: '|',
                                         }}
-                                    />
+                                    /> */}
+                                    <p>{source_id.key_qa[baseQuestion].answer}</p>
                                 </div>
 
                                 <button

@@ -10,7 +10,6 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 	const limit = temp;
 
 	const searchInputRef = React.useRef(null);
-
 	const getData = (offset, search) => {
 		setIsLoading(true);
 		axios

@@ -7,7 +7,7 @@ import KeyTakeAways from './KeyTakeAways';
 import QuestionAnswering from '../QuestionAnswering';
 import srtParser2 from "srt-parser-2"
 import { Tab, Tabs } from 'react-bootstrap';
-
+import Twitter from "../../../img/twitter_spaces.png"
 import Loading from '../../Loading';
 
 
@@ -43,11 +43,8 @@ export default function Content(props) {
 		var parser = new srtParser2();
 		var srt_array = parser.fromSrt(data.transcript);
 
-
-
 		let nothing = ""
 		let count = 0
-
 
 		transcript.push("00:00:00")
 
@@ -81,10 +78,16 @@ export default function Content(props) {
 					</h1>
 
 					<div className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
-						<a href={`https://www.youtube.com/watch?v=${data.source_id}`} >
-							<img src="/youtubeicon.png" width={80} />
-							<p className="-mt-3 font-semibold">Click to Watch</p>
-						</a>
+						{data.source_type === "youtube" ?
+							<a href={`https://www.youtube.com/watch?v=${data.source_id}`} >
+								<img src="/youtubeicon.png" width={80} />
+								<p className="-mt-3 font-semibold">Click to Watch</p>
+							</a>
+							: <a className="mt-7" href={`https://twitter.com/i/spaces/${data.source_id}`} >
+								<img src={Twitter} width={100} />
+								<p className="mt-3 font-semibold text-zinc-500">Click to Listen</p>
+							</a>
+						}
 					</div>
 				</div>
 
@@ -92,14 +95,18 @@ export default function Content(props) {
 					<div className="md:w-full  ">
 						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 					</div>
-					<div className="hidden lg:block w-2/3 ">
-						<iframe id="player"
-							title="My YouTube Video "
-							className="max-w-80 lg:w-120 h-80 w-auto"
-							src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
-							frameBorder="0"
-							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-						></iframe>
+					<div className="hidden lg:block w-full ">
+						{data.source_type === "spaces" ? (<div className="block w-2/3 "><a href={`https://twitter.com/i/spaces/${data.source_id}`} > <img className=" cursor-pointer " src={Twitter}></img></a>
+							<a href={`https://twitter.com/i/spaces/${data.source_id}`} className="text-l text-zinc-600 mt-3 cursor-pointer">Listen to "{data.title}" </a></div>)
+							:
+							(<iframe id="player"
+								title="My YouTube Video "
+								className="max-w-80 lg:w-120 h-80 w-auto"
+								src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
+								frameBorder="0"
+								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+							></iframe>)
+						}
 					</div>
 				</div>
 				{isLoading ? <Loading /> : <QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} />}
@@ -135,11 +142,10 @@ export default function Content(props) {
 									<div className='text-lg font-normal mb-4 max-w-screen-md' >
 										{isLoading ? <Loading /> : (
 											transcript.map((item, index) => {
-
 												transcriptParser();
 
 												if (index % 2 === 0) {
-													return (<a onClick={handleClick} className="cursor-pointer sm:pointer-events-none" key={index}><br></br>{item} </a>)
+													return (<a onClick={handleClick} className="lg:cursor-pointer pointer-events-none lg:pointer-events-auto" key={index}><br></br>{item} </a>)
 												}
 												else {
 													return (<div key={index}><br></br>{item}</div>)

@@ -67,9 +67,18 @@ function Article({
 			console.log(error.message);
 		}
 	};
+
+
 	useEffect(() => {
 		const source_id = location.pathname.split('/')[2];
-		const url = `${process.env.REACT_APP_API_URL}/summaries/youtube/${source_id}`;
+		let source_type
+		if (source_id.length === 11) {
+			source_type = "youtube"
+		}
+		else if (source_id.length === 13) {
+			source_type = "spaces"
+		}
+		const url = `${process.env.REACT_APP_API_URL}/summaries/${source_type}/${source_id}`;
 		fetchData(url);
 	}, [location.pathname, navigate]);
 
