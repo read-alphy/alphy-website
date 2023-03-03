@@ -33,7 +33,6 @@ MAIN PAGE
 
 */
 
-
 .navbar {
 	display: flex;
 	/* position: sticky; */
@@ -41,7 +40,6 @@ MAIN PAGE
 	left: 0;
 	flex-direction: row;
 	justify-content: space-between;
-
 
 	z-index: 1;
 	margin: auto;
@@ -60,8 +58,6 @@ MAIN PAGE
 	justify-content: space-between;
 	padding: 10px;
 }
-
-
 
 .navbar-right-section {
 	right: 0;
@@ -181,45 +177,13 @@ MAIN PAGE
 	display: none;
 }
 
-.user-feed {
-	/* background: #212529;  */
-	/* padding-right: 15px;
-  padding-top: 30px;*/
-	height: 90vh;
-	overflow-y: scroll;
-}
-
-.user-feed::-webkit-scrollbar {
-	width: 0px;
-}
-
 .scrolling {
 	overflow-y: scroll;
-	scrollbar-width: none
-}
-
-
-
-.user-feed::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	background: linear-gradient(left, #999, #888);
-	-webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.8);
-}
-
-.user-feed:-webkit-scrollbar-thumb:hover {
-	background: linear-gradient(left, #888, #777);
-}
-
-.user-feed table {
-	width: 100%;
+	scrollbar-width: none;
 }
 
 table thead {
 	text-align: left;
-}
-
-table tr {
-	padding-left: 30px;
 }
 
 .feed-element {
@@ -357,7 +321,7 @@ label {
 	overflow: hidden;
 }
 
-.animation1>div>div {
+.animation1 > div > div {
 	/* padding: 0 0.75rem; */
 	height: 2.61rem;
 	display: inline-block;
@@ -369,18 +333,18 @@ label {
 	overflow: hidden;
 }
 
-.animation2>div>div {
+.animation2 > div > div {
 	/* padding: 0 0.75rem; */
 	height: 2.61rem;
 	display: inline-block;
 	align-items: flex-start;
 }
 
-.animation1>div {
-	animation: text-animation 4s infinite;
+.animation1 > div {
+	animation: text-animation 10s infinite;
 }
 
-.animation2>div {
+.animation2 > div {
 	animation: text-animation2 16s infinite;
 }
 
@@ -408,48 +372,57 @@ label {
 
 @keyframes text-animation {
 	0% {
-		width: 182px;
+		width: 166.05px;
 	}
+	/* transcribe -> summarize */
 
-	18% {
+	6% {
 		transform: translateY(-112%);
-		width: 192px;
-	}
-
-	33% {
-		transform: translateY(-100%);
-		width: 192px;
-	}
-
-	51% {
-		transform: translateY(-212%);
-		width: 162px;
-	}
-
-	66% {
-		transform: translateY(-200%);
-		width: 162px;
-	}
-
-	85% {
-		transform: translateY(-312%);
 		width: 182px;
 	}
 
+	10% {
+		transform: translateY(-100%);
+		width: 182px;
+	}
+	/* summarize */
+	33.33% {
+		transform: translateY(-100%);
+		width: 182px;
+	}
+	/* summarize -> Question */
+	39.33% {
+		transform: translateY(-212%);
+		width: 147.78px;
+	}
+
+	43.33% {
+		transform: translateY(-200%);
+		width: 147.78px;
+	}
+
+	/* Question */
+
+	66.66% {
+		transform: translateY(-200%);
+		width: 147.78px;
+	}
+
+	/* Question -> Transcribe */
+
+	72.66% {
+		transform: translateY(-312%);
+		width: 166.05px;
+	}
+
+	76.66% {
+		transform: translateY(-300%);
+		width: 166.05px;
+	}
 	100% {
 		transform: translateY(-300%);
-		width: 182px;
+		width: 166.05px;
 	}
-}
-
-.user-feed {
-	opacity: 1;
-	/* transtion opacity and width  */
-	transition: all 0.5s ease;
-}
-
-.user-feed.collapsed {
-	opacity: 0.5;
 }
 
 /* 
@@ -622,25 +595,6 @@ CONTENT PAGE
 	border-bottom: 3px solid #04293a;
 }
 
-.user-feed-buttons .tabs {
-	border-bottom: 1px solid rgba(239, 237, 239, 0.5);
-
-	display: flex;
-	flex-direction: row;
-}
-
-.user-feed-buttons {
-	padding-left: 10px;
-}
-
-.user-feed-buttons .tabs button {
-	font-weight: bold;
-	text-align: center;
-
-	height: 60px;
-	width: 150px;
-}
-
 .article-block-2 .tab-content {
 	margin-left: 30px;
 }
@@ -689,12 +643,6 @@ CONTENT
 
 .mons {
 	width: 30px;
-}
-
-.article-body {
-	/* display: flex;
-  flex-direction: row;
-  max-height: 92vh; */
 }
 
 #supertokens-root {

@@ -9,10 +9,7 @@ import Loading from '../Loading';
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function Welcome() {
-
-
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
 
@@ -20,12 +17,9 @@ export default function Welcome() {
 	let sessionContext = useSessionContext();
 	const navigate = useNavigate();
 
-
-
 	const handleSubmit = (event, selectedOption) => {
-
-		toast.dismiss()
-		// Do something with the inputValue here	
+		toast.dismiss();
+		// Do something with the inputValue here
 		if (sessionContext.doesSessionExist) {
 			if (
 				inputValue.includes('https://www.youtube.com') ||
@@ -33,7 +27,6 @@ export default function Welcome() {
 				inputValue.includes('https://m.youtube.com') ||
 				inputValue.includes('https://twitter.com/i/spaces')
 			) {
-
 				setLoading(true);
 
 				//check if the video is already in the database
@@ -76,14 +69,13 @@ export default function Welcome() {
 
 				//send request to database for post
 
-				axios.post(`${process.env.REACT_APP_API_URL}/summaries`, {
-
-					url: inputValue,
-					language: "English"
-
-				})
+				axios
+					.post(`${process.env.REACT_APP_API_URL}/summaries`, {
+						url: inputValue,
+						language: 'English',
+					})
 					.then((response) => {
-						console.log(response)
+						console.log(response);
 						setLoading(false);
 						setInputValue('');
 						/* 						if (response.status === 200) {
@@ -100,49 +92,41 @@ export default function Welcome() {
 																		} */
 						if (response.status === 200 || response.status === 201 || response.status === 202) {
 							toast.success(
-								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.', { duration: 3000 }
+								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
+								{ duration: 3000 },
 							);
-
-						}
-						else {
+						} else {
 							toast.error('There was an error submitting the form. Please try again.', {
-								duration:
-									3000
+								duration: 3000,
 							});
 						}
-
 					})
-					.catch(error => {
-
-						toast.error('There was an error submitting the form. Please try again on desktop on another browser than Safari.', {
-							duration:
-								3000
-						});
-						setInputValue("")
-						setLoading(false)
+					.catch((error) => {
+						toast.error(
+							'There was an error submitting the form. Please try again on desktop on another browser than Safari.',
+							{
+								duration: 3000,
+							},
+						);
+						setInputValue('');
+						setLoading(false);
 						throw error;
 					});
-			}
-
-			else {
-
+			} else {
 				setInputValue('');
 				toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
-
 			}
-
+		} else {
+			navigate('/auth');
 		}
-
-		else {
-
-			navigate("/auth")
-
-		};
-
 	};
 
 	return (
-		<div className={`container px-4 mx-auto py-18 lg:py-28 ${loading ? "max-[90vh] overflow-x-hidden overflow-y-hidden" : ""}`}>
+		<div
+			className={`container px-4 mx-auto py-18 lg:py-28 ${
+				loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
+			}`}
+		>
 			{loading && (
 				<div className={`flex justify-center items-center h-[95vh]`}>
 					<div className="flex flex-col items-center">
@@ -154,8 +138,8 @@ export default function Welcome() {
 				</div>
 			)}
 
-			<div className="welcome-prompt 	text-5xl flex sm:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
-				<section className="animation1 lg:mr-2 text-green-400 block">
+			<div className="welcome-prompt 	text-5xl flex md:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
+				<section className="animation1 md:mr-2 text-green-400 block ">
 					<div className="first ">
 						<div>Transcribe</div>
 					</div>
@@ -172,17 +156,13 @@ export default function Welcome() {
 				online media with just one click
 			</div>
 			<p className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-				Paste a link to a YouTube video or Twitter Spaces, choose the language of the content (only English for now), and submit. Alphy
-				will transcribe, summarize and prepare the content for questioning. We will notify you via email
-				when it's ready!{' '}
+				Paste a link to a YouTube video or Twitter Spaces, choose the language of the content (only English for
+				now), and submit. Alphy will transcribe, summarize and prepare the content for questioning. We will
+				notify you via email when it's ready!{' '}
 			</p>
 			<Toaster />
-			<div
-				className="items-center justify-center w-full lg:space-x-4 lg:flex"
-
-			>
+			<div className="items-center justify-center w-full lg:space-x-4 lg:flex">
 				<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
-
 					<input
 						className="w-full lg:w-[600px] border border-[#6B728E] text-bordoLike py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-whiteLike focus:outline-none"
 						type="text"
@@ -193,20 +173,17 @@ export default function Welcome() {
 						autoComplete="off"
 					/>
 
-
-
 					{/* <Languages language={language} onLangChange={setLanguage} /> */}
 				</div>
-
-
-
 
 				<div className="flex justify-center ">
 					{sessionContext.doesSessionExist ? (
 						<button
 							className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
-							onClick={(e) => { handleSubmit() }}
+							onClick={(e) => {
+								handleSubmit();
+							}}
 						>
 							Submit
 						</button>
@@ -214,15 +191,15 @@ export default function Welcome() {
 						<button
 							className="w-2/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
-							onClick={(e) => { handleSubmit() }}
+							onClick={(e) => {
+								handleSubmit();
+							}}
 						>
-
 							Sign In To Submit
 						</button>
 					)}
 				</div>
 			</div>
-
 		</div>
 	);
 }

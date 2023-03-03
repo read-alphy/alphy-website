@@ -13,8 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../img/logo.png';
 import { useGoogleLogin } from '@react-oauth/google';
 
-
-
 function Navbar({ collapsed, setCollapsed }) {
 	let sessionContext = useSessionContext();
 
@@ -27,6 +25,21 @@ function Navbar({ collapsed, setCollapsed }) {
 		const errorMessage = (error) => {
 			console.log(error);
 		}; */
+
+	const handleScroll = (target) => {
+		// if in article page first navigate to main page
+		if (location.pathname.includes('/article')) {
+			navigate('/');
+			setTimeout(() => {
+				const about = document.getElementById(target);
+				about.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}, 1);
+		} else {
+			setCollapsed(true);
+			const about = document.getElementById(target);
+			about.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+	};
 
 	const handleSignOut = async () => {
 		try {
@@ -41,16 +54,12 @@ function Navbar({ collapsed, setCollapsed }) {
 		}
 	};
 
-
 	const login = useGoogleLogin({
-		onSuccess: tokenResponse => console.log(tokenResponse),
+		onSuccess: (tokenResponse) => console.log(tokenResponse),
 	});
-
-
 
 	return (
 		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[10vh] min-h-[60px]">
-
 			<div className="pl-10 flex flex-row ">
 				<Link to="/">
 					{/* <img className="w-10" src={Logo} /> */}
@@ -61,19 +70,21 @@ function Navbar({ collapsed, setCollapsed }) {
 			<div>
 				<div className=" navbar-right-section">
 					<div className="signed-in-navbar grid gap-4">
-						<a
-							href="/#feedback"
+						<div
 							type="button"
-							className={`hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4`}
+							onClick={() => handleScroll('feedback')}
+							className={`cursor-pointer hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4`}
 						>
 							Give us feedback!
-						</a>
+						</div>
 
-
-						<a href="/#about" className="hidden font-semibold text-zinc-200 md:block mr-5 pt-2">
+						<div
+							className="hidden cursor-pointer font-semibold text-zinc-200 md:block mr-5 pt-2"
+							onClick={() => handleScroll('about')}
+						>
 							{' '}
 							About{' '}
-						</a>
+						</div>
 
 						{sessionContext.userId ? (
 							<div className="hidden md:block pt-2">
@@ -107,8 +118,9 @@ function Navbar({ collapsed, setCollapsed }) {
 									<p className=" ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
 
 									<button
-										className={`mb-10 w-1/12 justify-self-end mr-5 text-blueLike ${collapsed ? 'block' : 'block'
-											}`}
+										className={`mb-10 w-1/12 justify-self-end mr-5 text-blueLike ${
+											collapsed ? 'block' : 'block'
+										}`}
 										onClick={() => setCollapsed(true)}
 									>
 										<svg
@@ -128,14 +140,15 @@ function Navbar({ collapsed, setCollapsed }) {
 									</button>
 								</div>
 								<div className="w-1/3 ml-5 mb-5">
-									<a
-										href="/#feedback"
+									<div
 										type="button"
-										className={`text-blueLike font-semibold `}
-										onClick={() => setCollapsed(true)}
+										className={`text-blueLike font-semibold cursor-pointer `}
+										onClick={() => {
+											handleScroll('feedback');
+										}}
 									>
 										Give us feedback!
-									</a>
+									</div>
 								</div>
 								<div className="w-1/3 ml-5 mb-5">
 									<Link
@@ -146,10 +159,17 @@ function Navbar({ collapsed, setCollapsed }) {
 										Home
 									</Link>
 								</div>
-								<a href="/#about" className="text-blueLike ml-5 mb-5">
-									{' '}
-									About{' '}
-								</a>
+								<div className="w-1/3 ml-5 mb-5">
+									<div
+										type="button"
+										className={`text-blueLike font-semibold cursor-pointer `}
+										onClick={() => {
+											handleScroll('about');
+										}}
+									>
+										About
+									</div>
+								</div>
 								{sessionContext.userId ? (
 									<div className="w-1/3 ml-5 mb-5">
 										<a className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
@@ -158,7 +178,6 @@ function Navbar({ collapsed, setCollapsed }) {
 									</div>
 								) : (
 									<div className="w-1/3 ml-5 mb-5">
-
 										<a
 											className="text-l font-semibold text-blueLike"
 											to="/auth "

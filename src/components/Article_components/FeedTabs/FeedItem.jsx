@@ -17,7 +17,9 @@ const FeedItem = ({ item, setCollapsed }) => {
 					}
 					onClick={() => {
 						navigate(`/article/${item.source_id}`);
-						if (windowSize.width < 768) { setCollapsed(true) };
+						if (windowSize.width < 768) {
+							setCollapsed(true);
+						}
 					}}
 				>
 					<div className="w-1/2 min-w-150 max-w-[300px] mr-3">

@@ -10,16 +10,13 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 	const limit = temp;
 
 	const searchInputRef = React.useRef(null);
-	/* 
-		useEffect(() => {
-			console.log('side feed rendered');
-		}, []); */
 
 	const getData = (offset, search) => {
 		setIsLoading(true);
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${
+					process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -39,77 +36,69 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 	};
 
 	return (
-		<div className="user-feed-buttons mt-10 mb-5">
-
-			<div className="signed-in-feed pt-2 mr-6">
-				<div>
-
-					<form
-						className="flex items-center mb-5"
-						onSubmit={(e) => {
-							e.preventDefault();
-							setOffset(0);
-							// if input is empty get it from searchInputRef
-							if (searchInputRef.current.value.length === 0) {
-								setSearch('');
-								getData(0, '');
-							} else {
-								getData(0, search);
-							}
+		<div className="user-feed-buttons w-[400px]">
+			<form
+				className="flex items-center mb-5"
+				onSubmit={(e) => {
+					e.preventDefault();
+					setOffset(0);
+					// if input is empty get it from searchInputRef
+					if (searchInputRef.current.value.length === 0) {
+						setSearch('');
+						getData(0, '');
+					} else {
+						getData(0, search);
+					}
+				}}
+			>
+				<label htmlFor="simple-search" className="sr-only">
+					Search
+				</label>
+				<div className="relative w-full">
+					<input
+						ref={searchInputRef}
+						type="text"
+						onChange={(e) => {
+							setSearch(e.target.value);
 						}}
-					>
-						<label htmlFor="simple-search" className="sr-only">
-							Search
-						</label>
-						<div className="relative w-full">
-							<input
-								ref={searchInputRef}
-								type="text"
-								onChange={(e) => {
-									setSearch(e.target.value);
-								}}
-								id="simple-search"
-								className="ml-2 bg-whiteLike border border-zinc-300 text-zinc-500 text-gray-900 text-sm rounded-l-lg focus:outline-none block w-full pl-4 p-2.5 "
-								placeholder={search ? search : 'Search YouTube videos or Twitter spaces...'}
-							/>
-
-						</div>
-						<button
-							type="submit"
-							className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-bordoLike rounded-r-lg border-slate-700 "
-						>
-							<svg
-								className="w-5 h-5 ml-5"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24 "
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									strokeLinecap={'round'}
-									strokeLinejoin={'round'}
-									strokeWidth={'2'}
-									d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-								></path>
-							</svg>
-							<span className="sr-only">Search</span>
-						</button>
-
-					</form>
+						id="simple-search"
+						className="ml-2 bg-whiteLike border border-zinc-300 text-zinc-500 text-gray-900 text-sm rounded-l-lg focus:outline-none block w-full pl-4 p-2.5 "
+						placeholder={search ? search : 'Search YouTube videos or Twitter spaces...'}
+					/>
 				</div>
-				<table>
+				<button
+					type="submit"
+					className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-bordoLike rounded-r-lg border-slate-700 "
+				>
+					<svg
+						className="w-5 h-5 ml-5"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24 "
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							strokeLinecap={'round'}
+							strokeLinejoin={'round'}
+							strokeWidth={'2'}
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+						></path>
+					</svg>
+					<span className="sr-only">Search</span>
+				</button>
+			</form>
+			<div className="signed-in-feed h-[75vh] overflow-y-scroll">
+				<table className="flex pr-10">
 					<tbody>
 						{isLoading
 							? Array.from(Array(temp), (_, index) => index + 1).map((index) => (
-								<SkeletonItem key={index} />
-							))
-							: data.map((item, index) => (
-								<FeedItem setCollapsed={setCollapsed} key={index} item={item} />
-							))}
+									<SkeletonItem key={index} />
+							  ))
+							: data.map((item, index) => <FeedItem key={index} item={item} />)}
 					</tbody>
 				</table>
 			</div>
-			<div className="grid grid-cols-2">
+			{/* <div className="grid grid-cols-2">
 				{offset > 0 && (
 					<button
 						className="col-span-1 justify-self-start text-blueLike font-semibold underline mt-5 ml-5"
@@ -126,7 +115,7 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 						{'Next'}
 					</button>
 				)}
-			</div>
+			</div> */}
 		</div>
 	);
 }

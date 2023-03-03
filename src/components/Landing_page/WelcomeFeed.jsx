@@ -15,7 +15,8 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 		setIsLoading(true);
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${
+					process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -36,7 +37,9 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 
 	return (
 		<div className="main-page-feed-section container mx-auto w-800 drop-shadow-2xl">
-			<h2 className="text-gray-700 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">Explore the videos other users unlocked with Alphy</h2>
+			<h2 className="text-gray-700 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
+				Explore the videos other users unlocked with Alphy
+			</h2>
 			<p className="text-gray-500 text-l mx-auto pb-10 "></p>
 			<div className="main-page-feed-table-parent bg-zinc-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form
@@ -92,17 +95,18 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 				</form>
 
 				<div className={`buttons flex justify-between mt-2 `}></div>
-				<table className="main-page-feed w-full">
+				<table className="main-page-feed  w-full">
 					<thead className="header h-0" />
 					<tbody
 						className={`
             grid grid-cols-1 mt-10
-            ${isLoading
-								? 'lg:grid-cols-2 xl:grid-cols-2'
-								: data.length === 1
-									? 'lg:grid-cols-1 xl:grid-cols-1'
-									: 'lg:grid-cols-2 xl:grid-cols-2'
-							}
+            ${
+				isLoading
+					? 'lg:grid-cols-2 xl:grid-cols-2'
+					: data.length === 1
+					? 'lg:grid-cols-1 xl:grid-cols-1'
+					: 'lg:grid-cols-2 xl:grid-cols-2'
+			}
             gap-4
             `}
 					>
