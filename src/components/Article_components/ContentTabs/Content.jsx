@@ -96,7 +96,7 @@ export default function Content(props) {
 						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 					</div>
 					<div className="hidden lg:block w-full ">
-						{data.source_type === "spaces" ? (<div className="block w-2/3 "> <img href={`https://twitter.com/i/spaces/${data.source_id}`} className=" cursor-pointer " src={Twitter}></img>
+						{data.source_type === "spaces" ? (<div className="block w-2/3 "><a href={`https://twitter.com/i/spaces/${data.source_id}`} > <img className=" cursor-pointer " src={Twitter}></img></a>
 							<a href={`https://twitter.com/i/spaces/${data.source_id}`} className="text-l text-zinc-600 mt-3 cursor-pointer">Listen to "{data.title}" </a></div>)
 							:
 							(<iframe id="player"
