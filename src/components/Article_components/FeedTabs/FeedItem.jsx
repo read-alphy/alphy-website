@@ -10,7 +10,7 @@ const FeedItem = ({ item, setCollapsed }) => {
 	if (item.source_type === "youtube") {
 		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`
 	}
-	else if (item.source_type === "twitter") {
+	else if (item.source_type === "spaces") {
 		imageUrl = Twitter
 	};
 
