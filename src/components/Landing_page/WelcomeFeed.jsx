@@ -6,7 +6,16 @@ import axios from 'axios';
 import SkeletonItem from '../Article_components/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
 
-function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset }) {
+function Feed() {
+	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [search, setSearch] = useState('');
+	const [offset, setOffset] = useState(0);
+
+	useEffect(() => {
+		getData(0);
+	}, []);
+
 	const temp = 10;
 	const limit = temp;
 	const searchInputRef = React.useRef(null);
@@ -95,9 +104,8 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 				</form>
 
 				<div className={`buttons flex justify-between mt-2 `}></div>
-				<table className="main-page-feed  w-full">
-					<thead className="header h-0" />
-					<tbody
+				<div className="main-page-feed  w-full">
+					<div
 						className={`
             grid grid-cols-1 mt-10
             ${
@@ -123,8 +131,8 @@ function Feed({ data, isLoading, setData, setIsLoading, search, setSearch, offse
 								.slice(0, limit)
 								.map((item, index) => <FeedItem index={index} item={item} key={index} />)
 						)}
-					</tbody>
-				</table>
+					</div>
+				</div>
 				<div className="grid flex">
 					<div className="grid-cols-2 w-full flex">
 						{offset > 0 && (

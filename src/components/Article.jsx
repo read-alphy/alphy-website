@@ -11,42 +11,24 @@ import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 
-function Article({
-	feedData,
-	collapsed,
-	setCollapsed,
-	setFeedData,
-	setFeedLoading,
-	feedLoading,
-	search,
-	setSearch,
-	offset,
-	setOffset,
-}) {
+function Article({ source_type, collapsed, setCollapsed }) {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const source_id = location.pathname.split('/')[2];
 
 	const windlowLocationArticle = useLocation().pathname.includes('/article');
-	const handleFeedbackNavigation = () => {
+	const handleScroll = (target) => {
 		setCollapsed(true);
-		// // navigate to main page and focus to id feedback
 		navigate('/');
 		setTimeout(() => {
-			const feedback = document.getElementById('feedback');
-			feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			const feedback = document.getElementById(target);
+			feedback.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}, 100);
 	};
-	/* 	const windowSize = useWindowSize();
-	useEffect(() => {
-			if (windowSize.width > 768) {
-				// setCollapsed(false);
-	
-			}
-		}, []); */
 
 	let sessionContext = useSessionContext();
-	const [isLoading, setIsLoading] = useState(feedData?.length === 0);
 	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const fetchData = async (url) => {
 		try {
@@ -54,6 +36,10 @@ function Article({
 			const response = await axios.get(url);
 			setData(response.data);
 		} catch (error) {
+			if (error.response?.status === 404) {
+				setIsLoading(false);
+				navigate('/404');
+			}
 			console.error(`Error fetching data: ${error}`);
 		} finally {
 			setIsLoading(false);
@@ -68,109 +54,72 @@ function Article({
 		}
 	};
 
+	// trigger when collapsed changes
+	useEffect(() => {
+		console.log('collapsed changed');
+		// if (collapsed) {
+		// 	setCollapsed(false);
+		// }
+	}, [collapsed]);
 
 	useEffect(() => {
-		const source_id = location.pathname.split('/')[2];
-		let source_type
-		if (source_id.length === 11) {
-			source_type = "youtube"
-		}
-		else if (source_id.length === 13) {
-			source_type = "spaces"
-		}
 		const url = `${process.env.REACT_APP_API_URL}/summaries/${source_type}/${source_id}`;
 		fetchData(url);
 	}, [location.pathname, navigate]);
 
-	// use effect every render
-	useEffect(() => {}, []);
-
-	const sideFeed = useMemo(
-		() => (
-			<SideFeed
-				data={feedData}
-				setData={setFeedData}
-				isLoading={feedLoading}
-				setIsLoading={setFeedLoading}
-				search={search}
-				setSearch={setSearch}
-				offset={offset}
-				setOffset={setOffset}
-				setCollapsed={setCollapsed}
-			/>
-		),
-		[feedData, setFeedData, feedLoading, setFeedLoading, search, setSearch, offset, setOffset, collapsed],
-	);
+	const sideFeed = <SideFeed setCollapsed={setCollapsed} source_id={source_id} />;
 
 	return (
 		<div className="article ">
 			<div className="flex flex-row article-body ">
-				<div className={`user-feed flex max-w-[400px] hidden lg:block`}>
-					<div className="bg-zinc-50 mr-5">
-						<div className="user-feed bg-zinc-100 mt-10">{sideFeed}</div>
-					</div>
-				</div>
-				{!collapsed ? ( // hamburger menu for mobile devices
-					<div className="fixed top-0 z-50 transition origin-top-right transform md:hidden mb-auto pt-[2px]">
-						<div className="rounded-lg rounded-t-none shadow-lg bg-whiteLike">
-							<div className="h-screen px-4 overflow-y-auto">
-								<div className="flex items-center justify-end p-4 "></div>
-								<div className="grid grid-row">
-									<div className="grid grid-cols-2">
-										<p className=" ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
-
-										<button
-											className={`mb-10 w-1/12 justify-self-end mr-5 ${
-												collapsed ? 'hidden' : 'block'
-											}`}
-											onClick={() => setCollapsed(true)}
-										>
-											{/* cross svg */}
-											<svg
-												className="w-5 h-5"
-												fill="bg-blueLike"
-												stroke="currentColor"
-												viewBox="0 0 24 24 "
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													strokeLinecap={'round'}
-													strokeLinejoin={'round'}
-													strokeWidth={'2'}
-													d="M6 18L18 6M6 6l12 12"
-												></path>
-											</svg>
-										</button>
-									</div>
-									<div className="w-1/3 ml-5 mb-5">
+				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[400px]`}>{sideFeed}</div>
+				<div
+					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mb-auto pt-[2px] rounded-lg mt-[10vh] mr-2 ml-2 shadow-lg bg-zinc-100 ${
+						collapsed ? 'ham-collapsed' : 'ham-not-collapsed'
+					}`}
+				>
+					<div className="rounded-lg rounded-t-none shadow-lg">
+						<div className="h-screen px-4 overflow-y-auto">
+							<div className="flex">
+								<div className="w-1/4 flex">
+									<div className="justify-center items-center ml-auto mr-auto flex">
 										<div
-											type="button"
-											className={`text-blueLike font-semibold cursor-pointer`}
-											onClick={handleFeedbackNavigation}
-										>
-											Give us feedback!
-										</div>
-									</div>
-									<div className="w-1/3 ml-5 mb-5">
-										<Link
-											className="text-l font-semibold text-blueLike"
-											to="/"
-											onClick={() => setCollapsed(true)}
+											className="text-l font-semibold text-blueLike cursor-pointer"
+											onClick={() => navigate('/')}
 										>
 											Home
-										</Link>
+										</div>
 									</div>
-									{sessionContext.doesSessionExist ? (
-										<div className="w-1/3 ml-5 mb-5">
+								</div>
+								<div className="w-1/4 flex">
+									<div className="justify-center items-center ml-auto mr-auto flex">
+										<div
+											className="text-l font-semibold text-blueLike cursor-pointer"
+											onClick={() => handleScroll('about')}
+										>
+											About
+										</div>
+									</div>
+								</div>
+								<div className="w-1/4 m-1 ">
+									<div
+										type="button"
+										onClick={() => handleScroll('feedback')}
+										className={`cursor-pointer text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-3 py-1.5 text-center`}
+									>
+										Give us feedback!
+									</div>
+								</div>
+								<div className="w-1/4 flex">
+									<div className="justify-center items-center ml-auto mr-auto flex">
+										{sessionContext.doesSessionExist ? (
 											<Link
 												className="text-l font-semibold text-blueLike"
 												onClick={handleSignOut}
 											>
 												Log Out
 											</Link>
-										</div>
-									) : (
-										<div className="w-1/3 ml-5 mb-5">
+										) : (
 											<Link
 												className="text-l font-semibold text-blueLike"
 												to="/auth "
@@ -178,20 +127,18 @@ function Article({
 											>
 												Sign In
 											</Link>
-										</div>
-									)}
+										)}
+									</div>
 								</div>
-								<div className={`mt-4 ${windlowLocationArticle ? 'block' : 'block'}`}>
-									<div className="">{sideFeed}</div>
-								</div>
+							</div>
+							<div className={`${windlowLocationArticle ? 'block' : 'block'}`}>
+								<div className="">{sideFeed} </div>
 							</div>
 						</div>
 					</div>
-				) : (
-					<></>
-				)}
+				</div>
 
-				<div className="scrolling px-4 mx-auto max-h-[85vh]">
+				<div className={`scrolling px-4 mx-auto max-h-[90vh] ${collapsed ? ' ' : ' blur-sm sm:blur-none '}}`}>
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}
 				</div>
 			</div>

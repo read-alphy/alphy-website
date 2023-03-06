@@ -4,34 +4,30 @@ import { useWindowSize } from '../../../hooks/useWindowSize';
 import './FeedItem.css';
 import Twitter from '../../../img/twitter_spaces.png';
 
-const FeedItem = ({ item, setCollapsed }) => {
+const FeedItem = ({ item, setCollapsed, poi }) => {
 	const source_id = item.source_id;
-	let imageUrl
-	if (item.source_type === "youtube") {
-		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`
+	let imageUrl;
+	if (item.source_type === 'youtube') {
+		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
+	} else if (item.source_type === 'spaces') {
+		imageUrl = Twitter;
 	}
-	else if (item.source_type === "spaces") {
-		imageUrl = Twitter
-	};
-
 
 	const navigate = useNavigate();
 	const windowSize = useWindowSize();
 	return (
-		<tr className={'grid border-b-0'}>
-			<td className="flex w-full">
+		<div className={'grid border-b-0'}>
+			<div className="flex w-full">
 				<div
-					className={
-						'flex flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-slate-200  p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  hover:scale-105 transform hover:translate-x-2 hover:translate-y-2 mr-auto ml-auto'
-					}
+					className={`flex ${' '} flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-slate-200  p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  hover:scale-105 transform hover:translate-x-2 hover:translate-y-2 mr-auto ml-auto`}
 					onClick={() => {
-						navigate(`/article/${item.source_id}`);
+						navigate(`/${item.source_type === 'spaces' ? 'sp' : 'yt'}/${item.source_id}`);
 						if (windowSize.width < 768) {
 							setCollapsed(true);
 						}
 					}}
 				>
-					<div className="w-1/2 min-w-150 max-w-[300px] mr-3">
+					<div className="w-1/2 min-w-[100px] max-w-[300px] mr-3">
 						<div
 							className="flex items-center justify-center h-0 rounded-md bg-gray-600"
 							style={{
@@ -50,8 +46,8 @@ const FeedItem = ({ item, setCollapsed }) => {
 						{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 					</div>
 				</div>
-			</td>
-		</tr>
+			</div>
+		</div>
 	);
 };
 export default FeedItem;

@@ -13,82 +13,50 @@ import Home2 from './supertokens_home';
 import Footer from './components/Footer';
 import { useWindowSize } from './hooks/useWindowSize';
 import { offset } from '@popperjs/core';
-import PrivacyPolicy from "./components/PrivacyPolicy";
+import PrivacyPolicy from './components/PrivacyPolicy';
+import NotFound from './routes/NotFound';
 
 function App() {
 	SuperTokens.init(SuperTokensConfig);
 	const windowSize = useWindowSize();
 	const location = useLocation();
 
-	const [search, setSearch] = useState('');
-	const [offset, setOffset] = useState(0);
-	const [isLoading, setIsLoading] = useState(true);
 	const [collapsed, setCollapsed] = useState(true);
-	const [data, setData] = useState([]);
-
-	const url = `${process.env.REACT_APP_API_URL}/summaries?limit=11&offset=0`
-
-
-	useEffect(() => {
-		setIsLoading(true);
-		axios.get(url).then((response) => {
-			setData(response.data);
-			setIsLoading(false);
-		});
-	}, [url]);
-
 	return (
 		<SuperTokensWrapper>
 			<div className="App">
-
-
 				<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 
-
 				<Routes>
-					{getSuperTokensRoutesForReactRouterDom(require("react-router-dom"))}
-					<Route path="/auth" element={<SessionAuth>
-						<Home2 />
-					</SessionAuth>} />
+					{getSuperTokensRoutesForReactRouterDom(require('react-router-dom'))}
 					<Route
-						path="/"
+						path="/auth"
 						element={
-							<Home
-								data={data}
-								isLoading={isLoading}
-								setData={setData}
-								setIsLoading={setIsLoading}
-								search={search}
-								setSearch={setSearch}
-								offset={offset}
-								setOffset={setOffset}
-							/>
+							<SessionAuth>
+								<Home2 />
+							</SessionAuth>
+						}
+					/>
+					<Route path="/" element={<Home />} />
+					<Route
+						path="/yt/:article_ID"
+						element={
+							/* <SessionAuth><Article data={data} /></SessionAuth> */
+							<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'youtube'} />
 						}
 					/>
 					<Route
-						path="/article/:article_ID"
+						path="/sp/:article_ID"
 						element={
 							/* <SessionAuth><Article data={data} /></SessionAuth> */
-							<Article
-								feedData={data}
-								setFeedData={setData}
-								search={search}
-								setSearch={setSearch}
-								collapsed={collapsed}
-								setCollapsed={setCollapsed}
-								feedLoading={isLoading}
-								setFeedLoading={setIsLoading}
-								offset={offset}
-								setOffset={setOffset}
-							/>
+							<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'spaces'} />
 						}
 					/>
 					<Route path="/privacypolicy" element={<PrivacyPolicy />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
-				{location.pathname === '/' || location.pathname === "/privacypolicy" ? <Footer /> : null}
+				{location.pathname === '/' || location.pathname === '/privacypolicy' ? <Footer /> : null}
 			</div>
-
-
 		</SuperTokensWrapper>
 	);
 }

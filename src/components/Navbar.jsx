@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // import { useState } from 'react'
 // import { useEffect } from 'react'
@@ -19,16 +19,9 @@ function Navbar({ collapsed, setCollapsed }) {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	/* 	const responseMessage = (response) => {
-			console.log(response);
-		};
-		const errorMessage = (error) => {
-			console.log(error);
-		}; */
-
 	const handleScroll = (target) => {
 		// if in article page first navigate to main page
-		if (location.pathname.includes('/article')) {
+		if (location.pathname !== '/') {
 			navigate('/');
 			setTimeout(() => {
 				const about = document.getElementById(target);
@@ -58,8 +51,27 @@ function Navbar({ collapsed, setCollapsed }) {
 		onSuccess: (tokenResponse) => console.log(tokenResponse),
 	});
 
+	// get the position of the navbar and fire a function if it is not at the top
+	useEffect(() => {
+		window.addEventListener('scroll', () => {
+			if (window.scrollY > 0) {
+				setCollapsed(true);
+			} else {
+				// setCollapsed(false);
+			}
+		});
+	}, []);
+
+	// boolean to check if the user is in the /yt/id or /sp/id
+	const isYt = useLocation().pathname.includes('/yt');
+	const isSp = useLocation().pathname.includes('/sp');
+
 	return (
-		<div className="navbar  bg-bordoLike text-slate-100 font-bold max-h-[10vh] min-h-[60px]">
+		<div
+			className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${
+				collapsed ? ' ' : '  '
+			}`}
+		>
 			<div className="pl-10 flex flex-row ">
 				<Link to="/">
 					{/* <img className="w-10" src={Logo} /> */}
@@ -101,98 +113,73 @@ function Navbar({ collapsed, setCollapsed }) {
 							</div>
 						)}
 
-						<div onClick={() => setCollapsed(!collapsed)} className={`block mr-4 cursor-pointer md:hidden`}>
-							<i className="text-2xl ri-menu-line text-mainText"></i>
+						<div
+							id={'nav-icon3'}
+							onClick={() => setCollapsed(!collapsed)}
+							className={`block cursor-pointer md:hidden ${collapsed ? ' ' : ' open '}`}
+						>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			{!collapsed ? ( // hamburger menu for mobile devices
-				<div className="fixed top-0 z-50 transition origin-top-left w-full transform md:hidden mb-auto pt-[2px]">
-					<div className="rounded-lg rounded-t-none shadow-lg bg-whiteLike">
-						<div className="h-screen px-4 overflow-y-auto">
-							<div className="flex items-center justify-end p-4 "></div>
-							<div className="grid grid-row">
-								<div className="grid grid-cols-2">
-									<p className=" ml-5 text-xl font-bold text-blueLike pb-10">ALPHY</p>
-
-									<button
-										className={`mb-10 w-1/12 justify-self-end mr-5 text-blueLike ${
-											collapsed ? 'block' : 'block'
-										}`}
-										onClick={() => setCollapsed(true)}
-									>
-										<svg
-											className="w-5 h-5"
-											fill="bg-blueLike"
-											stroke="currentColor"
-											viewBox="0 0 24 24 "
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												strokeLinecap={'round'}
-												strokeLinejoin={'round'}
-												strokeWidth={'2'}
-												d="M6 18L18 6M6 6l12 12"
-											></path>
-										</svg>
-									</button>
-								</div>
-								<div className="w-1/3 ml-5 mb-5">
+			{!isYt && !isSp && (
+				<div
+					className={`fixed top-0 z-50 w-screen transition origin-top-right transform md:hidden mb-auto pt-[2px] rounded-lg mt-[10vh] mr-2 ml-2 shadow-lg bg-zinc-100 ${
+						collapsed ? 'nav-ham-collapsed' : 'nav-ham-not-collapsed'
+					}`}
+				>
+					<div className="rounded-lg rounded-t-none shadow-lg">
+						<div className="overflow-y-auto">
+							<div className="flex items-center justify-end"></div>
+							<div className="flex">
+								<div className="w-1/3 m-1 ">
 									<div
 										type="button"
-										className={`text-blueLike font-semibold cursor-pointer `}
-										onClick={() => {
-											handleScroll('feedback');
-										}}
+										onClick={() => handleScroll('feedback')}
+										className={`cursor-pointer text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-3 py-1.5 text-center`}
 									>
 										Give us feedback!
 									</div>
 								</div>
-								<div className="w-1/3 ml-5 mb-5">
-									<Link
-										className="text-l font-semibold text-blueLike"
-										to="/"
-										onClick={() => setCollapsed(true)}
-									>
-										Home
-									</Link>
-								</div>
-								<div className="w-1/3 ml-5 mb-5">
-									<div
-										type="button"
-										className={`text-blueLike font-semibold cursor-pointer `}
-										onClick={() => {
-											handleScroll('about');
-										}}
-									>
-										About
-									</div>
-								</div>
-								{sessionContext.userId ? (
-									<div className="w-1/3 ml-5 mb-5">
-										<a className="text-l font-semibold text-blueLike" onClick={handleSignOut}>
-											Log Out
-										</a>
-									</div>
-								) : (
-									<div className="w-1/3 ml-5 mb-5">
-										<a
-											className="text-l font-semibold text-blueLike"
-											to="/auth "
-											onClick={() => setCollapsed(true)}
+								<div className="w-1/3 flex">
+									<div className="justify-center items-center ml-auto mr-auto flex">
+										<Link
+											className="text-l font-semibold text-blueLike cursor-pointer"
+											onClick={() => handleScroll('about')}
 										>
-											Sign In
-										</a>
+											About
+										</Link>
 									</div>
-								)}
+								</div>
+								<div className="w-1/3 flex">
+									<div className="justify-center items-center ml-auto mr-auto flex">
+										{sessionContext.doesSessionExist ? (
+											<Link
+												className="text-l font-semibold text-blueLike"
+												onClick={handleSignOut}
+											>
+												Log Out
+											</Link>
+										) : (
+											<Link
+												className="text-l font-semibold text-blueLike"
+												to="/auth "
+												onClick={() => setCollapsed(true)}
+											>
+												Sign In
+											</Link>
+										)}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			) : (
-				<></>
 			)}
 		</div>
 	);

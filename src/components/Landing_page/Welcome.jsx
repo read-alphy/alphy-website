@@ -128,7 +128,7 @@ export default function Welcome() {
 			}`}
 		>
 			{loading && (
-				<div className={`flex justify-center items-center h-[95vh]`}>
+				<div className={`flex justify-center items-center h-[90vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
 						<p className="text-bordoLike text-center mb-10 mt-10">
@@ -138,7 +138,7 @@ export default function Welcome() {
 				</div>
 			)}
 
-			<div className="welcome-prompt 	text-5xl flex md:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
+			<div className="welcome-prompt text-5xl flex md:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
 				<section className="animation1 md:mr-2 text-green-400 block ">
 					<div className="first ">
 						<div>Transcribe</div>

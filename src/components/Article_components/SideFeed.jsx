@@ -5,48 +5,74 @@ import { Tab, Tabs } from 'react-bootstrap';
 import FeedItem from './FeedTabs/FeedItem';
 import SkeletonItem from './FeedTabs/SkeletonItem';
 
-function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, offset, setOffset, setCollapsed }) {
+function SideFeed({ setCollapsed, source_id }) {
+	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [search, setSearch] = useState('');
+	const [offset, setOffset] = useState(0);
+	const [hasMore, setHasMore] = useState(true);
+
 	const temp = 10;
 	const limit = temp;
 
 	const searchInputRef = React.useRef(null);
-	const getData = (offset, search) => {
+	const feedRef = React.useRef(null);
+
+	const fetchData = (offset, search) => {
+		if (!hasMore) {
+			return;
+		}
 		setIsLoading(true);
 		axios
 			.get(
 				`${
 					process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
+				}/summaries?q=${search}&offset=${offset}&limit=${limit}`,
 			)
 			.then((response) => {
-				setData(response.data);
+				if (response.data.length > 0) setData([...data, ...response.data]);
+				if (response.data.length < limit) {
+					setHasMore(false);
+				}
 				setIsLoading(false);
 			});
 	};
 
+	useEffect(() => {
+		fetchData(0, search);
+	}, []);
+
 	const nextPage = () => {
 		setOffset(offset + limit);
-		getData(offset + limit, search);
+		fetchData(offset + limit, search);
 	};
 
 	const prevPage = () => {
 		setOffset(offset - limit);
-		getData(offset - limit, search);
+		fetchData(offset - limit, search);
 	};
-
+	const handleScroll = (event) => {
+		const element = event.target;
+		if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+			// you're at the bottom of the page
+			nextPage();
+			// scroll a little bit up to avoid triggering the event again
+			element.scrollTop = element.scrollTop - 1;
+		}
+	};
 	return (
-		<div className="user-feed-buttons w-[400px]">
+		<div className="user-feed-buttons">
 			<form
-				className="flex items-center mb-5"
+				className="flex items-center h-[10vh] min-h-[50px] transparency "
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
 					// if input is empty get it from searchInputRef
 					if (searchInputRef.current.value.length === 0) {
 						setSearch('');
-						getData(0, '');
+						fetchData(0, '');
 					} else {
-						getData(0, search);
+						fetchData(0, search);
 					}
 				}}
 			>
@@ -86,35 +112,33 @@ function SideFeed({ data, isLoading, setData, setIsLoading, search, setSearch, o
 					<span className="sr-only">Search</span>
 				</button>
 			</form>
-			<div className="signed-in-feed h-[75vh] overflow-y-scroll">
-				<table className="flex pr-10">
-					<tbody>
+			<div className="signed-in-feed flex">
+				<div className="h-[80vh] overflow-y-scroll pl-1 pr-5" onScroll={handleScroll}>
+					<div className="items " ref={feedRef}>
 						{isLoading
-							? Array.from(Array(temp), (_, index) => index + 1).map((index) => (
-									<SkeletonItem key={index} />
-							  ))
-							: data.map((item, index) => <FeedItem key={index} item={item} />)}
-					</tbody>
-				</table>
+							? // if data is not empty, show the data then show 10 skeletons
+							  data.length > 0
+								? data
+										.map((item, index) =>
+											item.source_id === source_id ? (
+												<FeedItem
+													key={index}
+													item={item}
+													setCollapsed={setCollapsed}
+													poi={true}
+												/>
+											) : (
+												<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
+											),
+										)
+										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index} />))
+								: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
+							: data.map((item, index) => (
+									<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
+							  ))}
+					</div>
+				</div>
 			</div>
-			{/* <div className="grid grid-cols-2">
-				{offset > 0 && (
-					<button
-						className="col-span-1 justify-self-start text-blueLike font-semibold underline mt-5 ml-5"
-						onClick={prevPage}
-					>
-						{'Prev'}
-					</button>
-				)}
-				{data.length > limit && (
-					<button
-						className="col-span-2 justify-self-end text-blueLike font-semibold  underline mt-5 mr-5"
-						onClick={nextPage}
-					>
-						{'Next'}
-					</button>
-				)}
-			</div> */}
 		</div>
 	);
 }
