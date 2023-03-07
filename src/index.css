@@ -273,11 +273,11 @@ table tr {
 
 .ham-collapsed {
 	/* go to left and set opacity to 0  no animation*/
-	transform: translateX(-100%);
+	transform: translateY(100%);
 }
 
 .ham-not-collapsed {
-	transform: translateX(0);
+	transform: translateY(0);
 }
 
 .nav-ham-collapsed {

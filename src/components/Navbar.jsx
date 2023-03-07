@@ -57,7 +57,7 @@ function Navbar({ collapsed, setCollapsed }) {
 			if (window.scrollY > 0) {
 				setCollapsed(true);
 			} else {
-				// setCollapsed(false);
+				setCollapsed(false);
 			}
 		});
 	}, []);
@@ -67,107 +67,108 @@ function Navbar({ collapsed, setCollapsed }) {
 	const isSp = useLocation().pathname.includes('/sp');
 
 	return (
-		<div
-			className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${
-				collapsed ? ' ' : '  '
-			}`}
-		>
-			<div className="pl-10 flex flex-row ">
-				<Link to="/">
-					{/* <img className="w-10" src={Logo} /> */}
-					<h1 className="text-2xl">ALPHY</h1>
-				</Link>
-			</div>
+		<div className="">
+			<div
+				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${
+					collapsed ? ' ' : '  '
+				}`}
+			>
+				<div className="pl-10 flex flex-row ">
+					<Link to="/">
+						{/* <img className="w-10" src={Logo} /> */}
+						<h1 className="text-2xl">ALPHY</h1>
+					</Link>
+				</div>
 
-			<div>
-				<div className=" navbar-right-section">
-					<div className="signed-in-navbar grid gap-4">
-						<div
-							type="button"
-							onClick={() => handleScroll('feedback')}
-							className={`cursor-pointer hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4`}
-						>
-							Give us feedback!
-						</div>
-
-						<div
-							className="hidden cursor-pointer font-semibold text-zinc-200 md:block mr-5 pt-2"
-							onClick={() => handleScroll('about')}
-						>
-							{' '}
-							About{' '}
-						</div>
-
-						{sessionContext.userId ? (
-							<div className="hidden md:block pt-2">
-								<a className="text-l font-semibold text-zinc-200" onClick={handleSignOut}>
-									Log Out
-								</a>
+				<div>
+					<div className=" navbar-right-section">
+						<div className="signed-in-navbar grid gap-4">
+							<div
+								type="button"
+								onClick={() => handleScroll('feedback')}
+								className={`cursor-pointer hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4`}
+							>
+								Give us feedback!
 							</div>
-						) : (
-							<div className="hidden md:block font-semibold pt-2 text-zinc-200">
-								<Link to="/auth">Sign In</Link>
-								{/* <button onClick={() => login()}>
+
+							<div
+								className="hidden cursor-pointer font-semibold text-zinc-200 md:block mr-5 pt-2"
+								onClick={() => handleScroll('about')}
+							>
+								{' '}
+								About{' '}
+							</div>
+
+							{sessionContext.userId ? (
+								<div className="hidden md:block pt-2">
+									<a className="text-l font-semibold text-zinc-200" onClick={handleSignOut}>
+										Log Out
+									</a>
+								</div>
+							) : (
+								<div className="hidden md:block font-semibold pt-2 text-zinc-200">
+									<Link to="/auth">Sign In</Link>
+									{/* <button onClick={() => login()}>
 									Sign in🚀{' '}
 								</button> */}
-							</div>
-						)}
+								</div>
+							)}
 
-						<div
-							id={'nav-icon3'}
-							onClick={() => setCollapsed(!collapsed)}
-							className={`block cursor-pointer md:hidden ${collapsed ? ' ' : ' open '}`}
-						>
-							<span></span>
-							<span></span>
-							<span></span>
-							<span></span>
+							<div
+								id={'nav-icon3'}
+								onClick={() => setCollapsed(!collapsed)}
+								className={`block cursor-pointer md:hidden ${collapsed ? ' ' : ' open '}`}
+							>
+								<span></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 			{!isYt && !isSp && (
 				<div
-					className={`fixed top-0 z-50 w-screen transition origin-top-right transform md:hidden mb-auto pt-[2px] rounded-lg mt-[10vh] mr-2 ml-2 shadow-lg bg-zinc-100 ${
-						collapsed ? 'nav-ham-collapsed' : 'nav-ham-not-collapsed'
+					className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
+						collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 				>
-					<div className="rounded-lg rounded-t-none shadow-lg">
+					<div className="">
 						<div className="overflow-y-auto">
-							<div className="flex items-center justify-end"></div>
 							<div className="flex">
-								<div className="w-1/3 m-1 ">
-									<div
-										type="button"
-										onClick={() => handleScroll('feedback')}
-										className={`cursor-pointer text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-3 py-1.5 text-center`}
-									>
-										Give us feedback!
-									</div>
-								</div>
 								<div className="w-1/3 flex">
 									<div className="justify-center items-center ml-auto mr-auto flex">
 										<Link
-											className="text-l font-semibold text-blueLike cursor-pointer"
+											className="text-l font-semibold text-slate-100 cursor-pointer"
 											onClick={() => handleScroll('about')}
 										>
 											About
 										</Link>
 									</div>
 								</div>
+
+								<div className="w-1/3 flex m-1 justify-center">
+									<div
+										type="button"
+										onClick={() => handleScroll('feedback')}
+										className={`cursor-pointer text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 w-[100px] rounded-lg text-sm py-1.5 text-center`}
+									>
+										Give us feedback!
+									</div>
+								</div>
 								<div className="w-1/3 flex">
 									<div className="justify-center items-center ml-auto mr-auto flex">
 										{sessionContext.doesSessionExist ? (
 											<Link
-												className="text-l font-semibold text-blueLike"
+												className="text-l font-semibold text-slate-100"
 												onClick={handleSignOut}
 											>
 												Log Out
 											</Link>
 										) : (
 											<Link
-												className="text-l font-semibold text-blueLike"
+												className="text-l font-semibold text-slate-100"
 												to="/auth "
 												onClick={() => setCollapsed(true)}
 											>

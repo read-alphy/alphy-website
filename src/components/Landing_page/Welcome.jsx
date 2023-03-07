@@ -123,7 +123,7 @@ export default function Welcome() {
 
 	return (
 		<div
-			className={`container px-4 mx-auto py-18 lg:py-28 ${
+			className={`container px-4 mx-auto py-10 sm:py-18 lg:py-28 ${
 				loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 			}`}
 		>

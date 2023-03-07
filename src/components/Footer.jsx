@@ -18,21 +18,17 @@ function Footer() {
 	    
 				</div> */
 
-		<footer className={'p-4 sm:p-6 flex flex-col justify center items-center text-mainText bg-bordoLike'}>
+		<footer className={'p-4 sm:p-6 flex flex-col justify center items-center w-full text-mainText bg-bordoLike'}>
 			<hr className={'my-6 bg-bordoLike sm:mx-auto lg:my-8'} />
-			<div className={'container md:flex md:justify-between mx-auto'}>
-				<div className={'mb-6 md:mb-0 ml-100'}>
+			<div className={'container lg:flex lg:justify-between mx-auto'}>
+				<div className={'mb-6 md:mb-0 '}>
+					<span className={' text-2xl font-semibold lg:whitespace-nowrap'}>ALPHY</span>
 
-					<span className={'self-center text-2xl font-semibold whitespace-nowrap'}>ALPHY</span>
-
-					<p className="text-l font-semibold sm:whitespace-nowrap">
+					<p className="text-l font-semibold md:whitespace-nowrap">
 						<br />
 						Feel free to reach us through{' '}
 						<a href="mailto:info@alphy.app">
-							<span className="text-green-400 hover:text-green-300 cursor-pointer ">
-								{' '}
-								info@alphy.app
-							</span>{' '}
+							<span className="text-green-400 hover:text-green-300 cursor-pointer "> info@alphy.app</span>{' '}
 						</a>
 						or ping us on our Discord for any questions and feedback.
 					</p>
@@ -58,7 +54,7 @@ function Footer() {
 					</a>
 				</div>
 			</div>
-		</footer >
+		</footer>
 	);
 }
 

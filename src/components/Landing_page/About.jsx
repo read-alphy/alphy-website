@@ -1,6 +1,6 @@
 export default function About() {
 	return (
-		<div className="mx-auto w-800 flex justify-center text-blueLike bg-zinc-100">
+		<div className="mx-auto md:w-800 w-full flex justify-center text-blueLike bg-zinc-100">
 			<div id="about" className="px-4 container w-5/6 max-w-4xl mt-40 pb-20 text-l lg:text-l">
 				<h1 className="text-4xl  font-semibold">About</h1>
 				<br></br>

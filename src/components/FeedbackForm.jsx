@@ -9,7 +9,7 @@ export default function FeedbackForm() {
 		toast.dismiss();
 	};
 	return (
-		<div className="mx-auto mt-20 w-800 pb-20 " id="feedback">
+		<div className="mx-auto mt-20 md:w-800 w-full pb-20 " id="feedback">
 			<div className=" flex justify-center "></div>
 
 			<div className=" flex justify-center ">

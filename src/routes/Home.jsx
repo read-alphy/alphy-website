@@ -12,7 +12,7 @@ function Home({}) {
 		}, 0);
 	}, []);
 	return (
-		<div className="mx-auto w-800">
+		<div className="mx-auto md:w-800 w-full">
 			<Welcome />
 			<Feed />
 			<About />
