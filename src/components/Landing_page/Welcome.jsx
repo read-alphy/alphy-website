@@ -2,94 +2,65 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import Languages from './Languages';
-import Session from 'supertokens-auth-react/recipe/session';
-import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../Loading';
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
+import { auth, signInWithGoogle } from '../../helper/firebase';
 
 export default function Welcome() {
+	const navigate = useNavigate();
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
-
+	const [currentUser, setCurrentUser] = useState(null);
 	const [loading, setLoading] = useState(false);
-	let sessionContext = useSessionContext();
-	const navigate = useNavigate();
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			setCurrentUser(user);
+		});
+
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
 	const handleSubmit = (event, selectedOption) => {
 		toast.dismiss();
-		// Do something with the inputValue here
-		if (sessionContext.doesSessionExist) {
-			if (
+		if (
+			!(
 				inputValue.includes('https://www.youtube.com') ||
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com') ||
 				inputValue.includes('https://twitter.com/i/spaces')
-			) {
-				setLoading(true);
+			)
+		) {
+			setInputValue('');
+			toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
+			return;
+		}
 
-				//check if the video is already in the database
-				/* 
-								if (inputValue.includes('https://www.youtube.com') || inputValue.includes('https://m.youtube.com')) {
-									source_type = "youtube"
-									video_id = inputValue.split('v=')[1];
-									var ampersandPosition = video_id.indexOf('&');
-									if (ampersandPosition != -1) {
-										video_id = video_id.substring(0, ampersandPosition);
-									}
-				
-								}
-								else if (inputValue.includes('https://youtu.be')) {
-									source_type = "youtube"
-									video_id = inputValue.split('be/')[1];
-									var ampersandPosition = video_id.indexOf('&');
-									if (ampersandPosition != -1) {
-										video_id = video_id.substring(0, ampersandPosition);
-									}
-								}
-				
-								else if (inputValue.includes("https://twitter.com/i/spaces")) {
-									source_type = "twitter"
-									video_id = inputValue.split("https://twitter.com/i/spaces/")[1]
-									var ampersandPosition = video_id.indexOf('?');
-									if (ampersandPosition != -1) {
-										video_id = video_id.substring(0, ampersandPosition);
-									}
-								}
-				 */
-				/* 
-								axios.get(`${process.env.REACT_APP_API_URL}/summaries/${source_type}/${video_id}`).then((response) => {
-									if (response === 200) {
-										navigate("/article/" + video_id)
-										return
-									}
-								}).catch((error) => {
-				 */
-
-				//send request to database for post
-
+		if (currentUser) {
+			setLoading(true);
+			// get id token
+			currentUser.getIdToken().then((idToken) => {
 				axios
-					.post(`${process.env.REACT_APP_API_URL}/summaries`, {
-						url: inputValue,
-						language: 'English',
-					})
+					.post(
+						`${process.env.REACT_APP_API_URL}/summaries`,
+						{
+							url: inputValue,
+							language: 'en',
+						},
+						{
+							headers: {
+								'id-token': idToken,
+							},
+						},
+					)
 					.then((response) => {
 						console.log(response);
 						setLoading(false);
 						setInputValue('');
-						/* 						if (response.status === 200) {
-						
-												toast(
-													'Someone already submitted this video! Give us a few minutes to process it.', {
-													icon: '⌛',
-													style: {
-														background: "#F9F8F8"
-													}
-												}
-												);
-						
-																		} */
 						if (response.status === 200 || response.status === 201 || response.status === 202) {
 							toast.success(
 								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
@@ -112,12 +83,10 @@ export default function Welcome() {
 						setLoading(false);
 						throw error;
 					});
-			} else {
-				setInputValue('');
-				toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
-			}
+			});
 		} else {
-			navigate('/auth');
+			// sign in
+			signInWithGoogle();
 		}
 	};
 
@@ -177,7 +146,7 @@ export default function Welcome() {
 				</div>
 
 				<div className="flex justify-center ">
-					{sessionContext.doesSessionExist ? (
+					{currentUser ? (
 						<button
 							className="w-1/3 border-2 border-bordoLike px-8 bg-lightblueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-0 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"

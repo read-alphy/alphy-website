@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// import { useState } from 'react'
-// import { useEffect } from 'react'
-// import axios from 'axios'
-// import { CgProfile } from "react-icons/cg"
-// import Switcher from './Switcher'
-// import Logout from "../supertokens_home/Logout"
-
-import { useSessionContext } from 'supertokens-auth-react/recipe/session';
-import { signOut } from 'supertokens-auth-react/recipe/passwordless';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../img/logo.png';
-import { useGoogleLogin } from '@react-oauth/google';
+import { auth, signInWithGoogle } from '../helper/firebase';
+import { useState } from 'react';
 
 function Navbar({ collapsed, setCollapsed }) {
-	let sessionContext = useSessionContext();
-
 	const navigate = useNavigate();
 	const location = useLocation();
+	const [currentUser, setCurrentUser] = useState(null);
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			setCurrentUser(user);
+		});
+
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
 	const handleScroll = (target) => {
 		// if in article page first navigate to main page
@@ -36,31 +37,29 @@ function Navbar({ collapsed, setCollapsed }) {
 
 	const handleSignOut = async () => {
 		try {
-			await signOut();
-			if (location.pathname === '/') {
-				window.location.reload();
-			} else {
-				navigate('/');
-			}
+			await auth.signOut();
+			navigate('/');
 		} catch (error) {
-			console.log(error.message);
+			console.log(error);
 		}
 	};
 
-	const login = useGoogleLogin({
-		onSuccess: (tokenResponse) => console.log(tokenResponse),
-	});
+	const handleSignIn = () => {
+		// google sign in
+		signInWithGoogle();
+		setCollapsed(true);
+	};
 
 	// get the position of the navbar and fire a function if it is not at the top
-	useEffect(() => {
-		window.addEventListener('scroll', () => {
-			if (window.scrollY > 0) {
-				setCollapsed(true);
-			} else {
-				setCollapsed(false);
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	window.addEventListener('scroll', () => {
+	// 		if (window.scrollY > 0) {
+	// 			setCollapsed(true);
+	// 		} else {
+	// 			setCollapsed(false);
+	// 		}
+	// 	});
+	// }, []);
 
 	// boolean to check if the user is in the /yt/id or /sp/id
 	const isYt = useLocation().pathname.includes('/yt');
@@ -99,18 +98,24 @@ function Navbar({ collapsed, setCollapsed }) {
 								About{' '}
 							</div>
 
-							{sessionContext.userId ? (
+							{/* if user is in, show logout else login */}
+							{currentUser ? (
 								<div className="hidden md:block pt-2">
-									<a className="text-l font-semibold text-zinc-200" onClick={handleSignOut}>
+									<a
+										className="text-l font-semibold text-zinc-200 cursor-pointer"
+										onClick={handleSignOut}
+									>
 										Log Out
 									</a>
 								</div>
 							) : (
-								<div className="hidden md:block font-semibold pt-2 text-zinc-200">
-									<Link to="/auth">Sign In</Link>
-									{/* <button onClick={() => login()}>
-									Sign in🚀{' '}
-								</button> */}
+								<div className="hidden md:block font-semibold pt-2 cursor-pointer text-zinc-200">
+									<a
+										className="text-l font-semibold text-zinc-200 cursor-pointer"
+										onClick={handleSignIn}
+									>
+										Login
+									</a>
 								</div>
 							)}
 
@@ -128,60 +133,54 @@ function Navbar({ collapsed, setCollapsed }) {
 					</div>
 				</div>
 			</div>
-			{!isYt && !isSp && (
-				<div
-					className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
-						collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-					}`}
-				>
-					<div className="">
-						<div className="overflow-y-auto">
-							<div className="flex">
-								<div className="w-1/3 flex">
-									<div className="justify-center items-center ml-auto mr-auto flex">
-										<Link
-											className="text-l font-semibold text-slate-100 cursor-pointer"
-											onClick={() => handleScroll('about')}
-										>
-											About
-										</Link>
-									</div>
-								</div>
-
-								<div className="w-1/3 flex m-1 justify-center">
-									<div
-										type="button"
-										onClick={() => handleScroll('feedback')}
-										className={`cursor-pointer text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 w-[100px] rounded-lg text-sm py-1.5 text-center`}
+			<div
+				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
+					collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
+				}`}
+			>
+				<div className="">
+					<div className="overflow-y-auto">
+						<div className="flex">
+							<div className="w-1/3 flex">
+								<div className="justify-center items-center ml-auto mr-auto flex">
+									<Link
+										className="text-l font-semibold text-slate-100 cursor-pointer"
+										onClick={() => handleScroll('about')}
 									>
-										Give us feedback!
-									</div>
+										About
+									</Link>
 								</div>
-								<div className="w-1/3 flex">
-									<div className="justify-center items-center ml-auto mr-auto flex">
-										{sessionContext.doesSessionExist ? (
-											<Link
-												className="text-l font-semibold text-slate-100"
-												onClick={handleSignOut}
-											>
-												Log Out
-											</Link>
-										) : (
-											<Link
-												className="text-l font-semibold text-slate-100"
-												to="/auth "
-												onClick={() => setCollapsed(true)}
-											>
-												Sign In
-											</Link>
-										)}
-									</div>
+							</div>
+
+							<div className="w-1/3 flex m-1 justify-center">
+								<div
+									type="button"
+									onClick={() => handleScroll('feedback')}
+									className={`cursor-pointer text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 w-[100px] rounded-lg text-sm py-1.5 text-center`}
+								>
+									Give us feedback!
+								</div>
+							</div>
+							<div className="w-1/3 flex">
+								<div className="justify-center items-center ml-auto mr-auto flex">
+									{currentUser ? (
+										<Link className="text-l font-semibold text-slate-100" onClick={handleSignOut}>
+											Log Out
+										</Link>
+									) : (
+										<Link
+											className="text-l font-semibold text-slate-100"
+											onClick={() => handleSignIn()}
+										>
+											Sign In
+										</Link>
+									)}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			)}
+			</div>
 		</div>
 	);
 }
