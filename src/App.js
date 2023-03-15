@@ -9,10 +9,23 @@ import { useWindowSize } from './hooks/useWindowSize';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './routes/NotFound';
 import image from './img/robot.png';
+import Auth from './routes/Auth';
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+const firebaseConfig = {
+	apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
+	authDomain: 'alphy-74583.firebaseapp.com',
+	projectId: 'alphy-74583',
+	storageBucket: 'alphy-74583.appspot.com',
+	messagingSenderId: '606454102589',
+	appId: '1:606454102589:web:1b94cc9a6d7b00a28c4854',
+};
 
 function App() {
 	const windowSize = useWindowSize();
 	const location = useLocation();
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
 
 	const [collapsed, setCollapsed] = useState(true);
 
@@ -35,6 +48,7 @@ function App() {
 					<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 					<Routes>
 						<Route path="/" element={<Home />} />
+						<Route path="/auth/*" element={<Auth />} />
 						<Route
 							path="/yt/:article_ID"
 							element={

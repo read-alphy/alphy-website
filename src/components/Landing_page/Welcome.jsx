@@ -6,24 +6,14 @@ import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../Loading';
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
-import { auth, signInWithGoogle } from '../../helper/firebase';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Welcome() {
 	const navigate = useNavigate();
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
-	const [currentUser, setCurrentUser] = useState(null);
 	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((user) => {
-			setCurrentUser(user);
-		});
-
-		return () => {
-			unsubscribe();
-		};
-	}, []);
+	const { currentUser } = useAuth();
 
 	const handleSubmit = (event, selectedOption) => {
 		toast.dismiss();
@@ -86,7 +76,7 @@ export default function Welcome() {
 			});
 		} else {
 			// sign in
-			signInWithGoogle();
+			navigate('/auth');
 		}
 	};
 

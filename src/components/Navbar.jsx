@@ -1,24 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../img/logo.png';
-import { auth, signInWithGoogle } from '../helper/firebase';
-import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 function Navbar({ collapsed, setCollapsed }) {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [currentUser, setCurrentUser] = useState(null);
-
-	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((user) => {
-			setCurrentUser(user);
-		});
-
-		return () => {
-			unsubscribe();
-		};
-	}, []);
+	const { currentUser, logout } = useAuth();
 
 	const handleScroll = (target) => {
 		// if in article page first navigate to main page
@@ -37,7 +25,8 @@ function Navbar({ collapsed, setCollapsed }) {
 
 	const handleSignOut = async () => {
 		try {
-			await auth.signOut();
+			logout();
+			setCollapsed(true);
 			navigate('/');
 		} catch (error) {
 			console.log(error);
@@ -45,9 +34,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	};
 
 	const handleSignIn = () => {
-		// google sign in
-		signInWithGoogle();
-		setCollapsed(true);
+		navigate('/auth');
 	};
 
 	// get the position of the navbar and fire a function if it is not at the top
@@ -103,7 +90,7 @@ function Navbar({ collapsed, setCollapsed }) {
 								<div className="hidden md:block pt-2">
 									<a
 										className="text-l font-semibold text-zinc-200 cursor-pointer"
-										onClick={handleSignOut}
+										onClick={() => handleSignOut()}
 									>
 										Log Out
 									</a>
@@ -112,7 +99,7 @@ function Navbar({ collapsed, setCollapsed }) {
 								<div className="hidden md:block font-semibold pt-2 cursor-pointer text-zinc-200">
 									<a
 										className="text-l font-semibold text-zinc-200 cursor-pointer"
-										onClick={handleSignIn}
+										onClick={() => handleSignIn()}
 									>
 										Login
 									</a>
@@ -170,7 +157,8 @@ function Navbar({ collapsed, setCollapsed }) {
 									) : (
 										<Link
 											className="text-l font-semibold text-slate-100"
-											onClick={() => handleSignIn()}
+											to="/auth"
+											onClick={() => setCollapsed(true)}
 										>
 											Sign In
 										</Link>

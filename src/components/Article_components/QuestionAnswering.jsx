@@ -6,7 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from 'react';
 import './QA.css';
 import TypeIt from 'typeit-react';
-import { auth, signInWithGoogle } from '../../helper/firebase';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function QuestionAnswering(source_id, key_qa, data) {
 	// console.log(source_id.source_id, source_id.key_qa)
@@ -59,7 +59,6 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 	const QARef = useRef(null);
 
 	const [answerData, setAnswerData] = useState('');
-
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
 	const [answer, setAnswer] = useState(false);
 	const [inputValue, setInputValue] = useState('');
@@ -71,8 +70,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 	const [optionValue, setOptionValue] = useState('');
 	const [inputError, setinputError] = useState(false);
 	const [errorText, setErrorText] = useState('');
-	const [currentUser, setCurrentUser] = useState(null);
-
+	const { currentUser } = useAuth();
 	const handleClear = () => {
 		setIsCleared(true);
 		setShowBaseQA(false);
@@ -162,16 +160,6 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 			}
 		}
 	};
-
-	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((user) => {
-			setCurrentUser(user);
-		});
-
-		return () => {
-			unsubscribe();
-		};
-	}, []);
 
 	return (
 		<div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}>
