@@ -153,7 +153,7 @@ export default function Content(props) {
 												return (
 													<p key={index}>
 														<br></br>
-														<p dangerouslySetInnerHTML={item} />
+														<p dangerouslySetInnerHTML={{ __html: item }} />
 													</p>
 												);
 											})
