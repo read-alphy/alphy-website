@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-
+import { FaGoogle, FaTwitter } from 'react-icons/fa';
+import { GoogleLogin } from '@react-oauth/google';
 function Navbar({ collapsed, setCollapsed }) {
+	const auth = useAuth()
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { currentUser, logout } = useAuth();
@@ -23,9 +25,23 @@ function Navbar({ collapsed, setCollapsed }) {
 		}
 	};
 
+	const handleLoginWithGoogle = () => {
+		auth.loginWithGoogle()
+		setCollapsed(true)
+			.then(() => {
+				navigate('/');
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	};
+
+
 	const handleSignOut = async () => {
 		try {
-			logout();
+			auth.logout()
+
+
 			setCollapsed(true);
 			navigate('/');
 		} catch (error) {
@@ -34,7 +50,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	};
 
 	const handleSignIn = () => {
-		navigate('/auth');
+		// navigate('/auth');
 	};
 
 	// get the position of the navbar and fire a function if it is not at the top
@@ -55,9 +71,8 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 		<div className="">
 			<div
-				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${
-					collapsed ? ' ' : '  '
-				}`}
+				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${collapsed ? ' ' : '  '
+					}`}
 			>
 				<div className="pl-10 flex flex-row ">
 					<Link to="/">
@@ -85,25 +100,26 @@ function Navbar({ collapsed, setCollapsed }) {
 								About{' '}
 							</div>
 
+
 							{/* if user is in, show logout else login */}
 							{currentUser ? (
 								<div className="hidden md:block pt-2">
-									<a
-										className="text-l font-semibold text-zinc-200 cursor-pointer"
-										onClick={() => handleSignOut()}
+									<button
+										className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+										onClick={handleSignOut}
 									>
-										Log Out
-									</a>
+										<FaGoogle className="inline-block mr-2 mb-1" />
+										Sign Out
+									</button>
 								</div>
 							) : (
-								<div className="hidden md:block font-semibold pt-2 cursor-pointer text-zinc-200">
-									<a
-										className="text-l font-semibold text-zinc-200 cursor-pointer"
-										onClick={() => handleSignIn()}
-									>
-										Login
-									</a>
-								</div>
+								<button
+									className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+									onClick={handleLoginWithGoogle}
+								>
+									<FaGoogle className="inline-block mr-2 mb-1" />
+									Sign In
+								</button>
 							)}
 
 							<div
@@ -121,9 +137,8 @@ function Navbar({ collapsed, setCollapsed }) {
 				</div>
 			</div>
 			<div
-				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
-					collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-				}`}
+				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
+					}`}
 			>
 				<div className="">
 					<div className="overflow-y-auto">
@@ -151,18 +166,28 @@ function Navbar({ collapsed, setCollapsed }) {
 							<div className="w-1/3 flex">
 								<div className="justify-center items-center ml-auto mr-auto flex">
 									{currentUser ? (
-										<Link className="text-l font-semibold text-slate-100" onClick={handleSignOut}>
-											Log Out
-										</Link>
+										<div className="hidden md:block pt-2">
+											<button
+												className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+												onClick={handleSignOut}
+											>
+												<FaGoogle className="inline-block mr-2 mb-1" />
+												Sign Out
+											</button>
+										</div>
 									) : (
-										<Link
-											className="text-l font-semibold text-slate-100"
-											to="/auth"
-											onClick={() => setCollapsed(true)}
+										<button
+											className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+											onClick={handleLoginWithGoogle}
 										>
+											<FaGoogle className="inline-block mr-2 mb-1" />
 											Sign In
-										</Link>
+										</button>
 									)}
+
+
+
+
 								</div>
 							</div>
 						</div>

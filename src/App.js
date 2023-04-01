@@ -48,7 +48,7 @@ function App() {
 					<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route path="/auth/*" element={<Auth />} />
+						{/* <Route path="/auth/*" element={<Auth />} /> */}
 						<Route
 							path="/yt/:article_ID"
 							element={
