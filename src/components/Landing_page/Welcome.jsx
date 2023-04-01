@@ -64,7 +64,7 @@ export default function Welcome() {
 					})
 					.catch((error) => {
 						toast.error(
-							'There was an error submitting the form. Please try again on desktop on another browser than Safari.',
+							'There was an error submitting the form. Please try again.',
 							{
 								duration: 3000,
 							},
@@ -76,15 +76,20 @@ export default function Welcome() {
 			});
 		} else {
 			// sign in
-			navigate('/auth');
+			// navigate('/auth');
+			toast.error(
+				'Please sign in to submit content.',
+				{
+					duration: 3000,
+				},
+			);
 		}
 	};
 
 	return (
 		<div
-			className={`container px-4 mx-auto py-10 sm:py-18 lg:py-28 ${
-				loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
-			}`}
+			className={`container px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
+				}`}
 		>
 			{loading && (
 				<div className={`flex justify-center items-center h-[90vh]`}>
