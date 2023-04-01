@@ -105,7 +105,7 @@ function Navbar({ collapsed, setCollapsed }) {
 							{currentUser ? (
 								<div className="hidden md:block pt-2">
 									<button
-										className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+										className="hidden md:block bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 										onClick={handleSignOut}
 									>
 										<FaGoogle className="inline-block mr-2 mb-1" />
@@ -114,7 +114,7 @@ function Navbar({ collapsed, setCollapsed }) {
 								</div>
 							) : (
 								<button
-									className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+									className="hidden md:block bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 									onClick={handleLoginWithGoogle}
 								>
 									<FaGoogle className="inline-block mr-2 mb-1" />
@@ -171,7 +171,7 @@ function Navbar({ collapsed, setCollapsed }) {
 												className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 												onClick={handleSignOut}
 											>
-												<FaGoogle className="inline-block mr-2 mb-1" />
+												<FaGoogle className="inline-block mr-2 mb-1 w-1/6" />
 												Sign Out
 											</button>
 										</div>
@@ -180,7 +180,7 @@ function Navbar({ collapsed, setCollapsed }) {
 											className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 											onClick={handleLoginWithGoogle}
 										>
-											<FaGoogle className="inline-block mr-2 mb-1" />
+											<FaGoogle className="inline-block mr-2 mb-1 w-1/6" />
 											Sign In
 										</button>
 									)}
