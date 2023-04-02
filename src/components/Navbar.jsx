@@ -103,9 +103,9 @@ function Navbar({ collapsed, setCollapsed }) {
 
 							{/* if user is in, show logout else login */}
 							{currentUser ? (
-								<div className="hidden md:block pt-2">
+								<div className="hidden md:block ">
 									<button
-										className="hidden md:block bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+										className="hidden md:block bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold  py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 										onClick={handleSignOut}
 									>
 										<FaGoogle className="inline-block mr-2 mb-1" />
