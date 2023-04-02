@@ -170,9 +170,10 @@ export default function Content(props) {
 
 												if (index % 2 === 0) {
 													return (
+
 														<a
 															onClick={handleClick}
-															className="lg:cursor-pointer pointer-events-none lg:pointer-events-auto"
+															className={`${data.source_type === "youtube" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto`}
 															key={index}
 														>
 															<br></br>
