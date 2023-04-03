@@ -131,8 +131,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 					axios
 						.post(
-							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${
-								source_id.source_id
+							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/youtube/${source_id.source_id
 							}/question`,
 							inputValue,
 						)
@@ -147,12 +146,12 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 				}
 			} else {
 				/*                 toast('You need to sign in to ask questions.', {
-                                    icon: '❗',
-                                    style: {
-                                        background: "#F9F8F8"
-                                    }
-                
-                                }); */
+									icon: '❗',
+									style: {
+										background: "#F9F8F8"
+									}
+			    
+								}); */
 				setErrorText('You need to sign in to ask questions.');
 				setInputValue('');
 				setIsCleared(true);
@@ -205,11 +204,10 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 							onKeyDown={handleKeyDown}
 							type="text"
 							id="search"
-							className={`block w-full p-4 pl-10 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${
-								inputError && inputValue.length === 0
-									? 'border-2 border-red-400'
-									: 'border border-zinc-200'
-							} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`}
+							className={`block w-full p-4 pl-10 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+								? 'border-2 border-red-400'
+								: 'border border-zinc-200'
+								} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`}
 							placeholder="Ask anything to the transcript..."
 							autoComplete="off"
 							required
@@ -258,13 +256,20 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 						<div>
 							<p className="mb-5 text-xl text-zinc-600">
 								{' '}
-								Or check out the questions from the video that we already answered for you
+								Or check out the questions we already answered for you
 							</p>
 							{Object.keys(source_id.key_qa).map((item, index) => (
-								<button
+
+								index % 2 == 0 ? <button
 									key={index}
 									onClick={handleBaseQA}
 									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-lg"
+								>
+									{item}
+								</button> : <button
+									key={index}
+									onClick={handleBaseQA}
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-200 border border-gray-200 rounded-lg"
 								>
 									{item}
 								</button>
@@ -413,10 +418,10 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 
 											{source_id.key_qa[baseQuestion]
 												? source_id.key_qa[baseQuestion].sources.map((source, index) => (
-														<p key={index}>
-															{index + 1}. <br /> <br /> {source.text} <br /> <br />{' '}
-														</p>
-												  ))
+													<p key={index}>
+														{index + 1}. <br /> <br /> {source.text} <br /> <br />{' '}
+													</p>
+												))
 												: null}
 										</div>
 										<button

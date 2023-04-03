@@ -166,7 +166,7 @@ export default function Content(props) {
 											<Loading />
 										) : (
 											transcript.map((item, index) => {
-												transcriptParser();
+												/* transcriptParser(); */
 
 												if (index % 2 === 0) {
 													return (
