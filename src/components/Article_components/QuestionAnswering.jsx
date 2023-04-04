@@ -137,6 +137,7 @@ export default function QuestionAnswering(source_id, key_qa, data) {
 						)
 						.then((response) => {
 							setAnswerData(response.data);
+							console.log(answerData)
 
 							setIsLoadingInside(false);
 						});

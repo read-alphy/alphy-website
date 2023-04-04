@@ -11,21 +11,20 @@ export default function About() {
 					{' '}
 					Alphy aims to help users meaningfully interact with the speech-based information on the Internet
 					with the help of artificial intelligence. It transcribes and summarizes audio-based content and
-					offers semantic research on the transcript to allow users navigate the content with ease.
+					offers semantic search on the transcript to allow users navigate the content with ease.
 				</p>
 				<br></br>
 				<br></br>
 				<h2 className="lg:text-xl  font-semibold"> What can I do with Alphy?</h2>
 				<br></br>
 				<p>
-					• You can do semantic research on the video transcript, meaning that you can ask questions or search
-					for a specific topic and get the most relevant answers presented by the content.
+					• You can ask questions to a video or recording to get the most relevant answers presented by the content.
 					<br></br>
 					<br></br>• You can get a detailed summary of the content as well as a TL:DR version of that summary
 					that lays out the key takeaways of the video.
 					<br></br>
 					<br></br>• As YouTube and Twitter don't provide the best auto-generated transcripts, you can also
-					get a decent transcript with Alphy.
+					get an accurate transcript with Alphy.
 				</p>
 				<br></br>
 				<br></br>
@@ -38,12 +37,12 @@ export default function About() {
 					{/*                     <br></br>
                     • There is a limit on the number of submissions you can make a day to decrease the bloat.
                     <br></br> */}
-					<br></br>• Currently, Alphy only supports English. We are working on supporting other languages.
+					<br></br>• Currently, Alphy only supports content in English. We are working on supporting other languages.
 					<br></br>
 					<br></br>• Transcription process may take some time. We will notify you via email when your work is
 					ready.
 					<br></br>
-					<br></br>• Once a video is processed, it is public. You can read it all you want without signing in.
+					<br></br>• Once the content is processed, it is public. Anyone can read it without signing in.
 					<br></br>
 					<br></br>• If you see a video that has a really bad transcription (wrong language, missing
 					punctuations, etc.), please ping us via the socials we shared at the bottom of the page.
