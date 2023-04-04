@@ -5,7 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { GoogleLogin } from '@react-oauth/google';
 function Navbar({ collapsed, setCollapsed }) {
-	const auth = useAuth()
+	const auth = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { currentUser, logout } = useAuth();
@@ -26,7 +26,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	};
 
 	const handleLoginWithGoogle = () => {
-		auth.loginWithGoogle()
+		auth.loginWithGoogle();
 		setCollapsed(true)
 			.then(() => {
 				navigate('/');
@@ -36,11 +36,9 @@ function Navbar({ collapsed, setCollapsed }) {
 			});
 	};
 
-
 	const handleSignOut = async () => {
 		try {
-			auth.logout()
-
+			auth.logout();
 
 			setCollapsed(true);
 			navigate('/');
@@ -71,8 +69,9 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 		<div className="">
 			<div
-				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${collapsed ? ' ' : '  '
-					}`}
+				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${
+					collapsed ? ' ' : '  '
+				}`}
 			>
 				<div className="pl-10 flex flex-row ">
 					<Link to="/">
@@ -99,7 +98,6 @@ function Navbar({ collapsed, setCollapsed }) {
 								{' '}
 								About{' '}
 							</div>
-
 
 							{/* if user is in, show logout else login */}
 							{currentUser ? (
@@ -137,8 +135,9 @@ function Navbar({ collapsed, setCollapsed }) {
 				</div>
 			</div>
 			<div
-				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-					}`}
+				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden ${
+					collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed '
+				}`}
 			>
 				<div className="">
 					<div className="overflow-y-auto">
@@ -164,30 +163,14 @@ function Navbar({ collapsed, setCollapsed }) {
 								</div>
 							</div>
 							<div className="w-1/3 flex">
-								<div className="justify-center items-center ml-auto mr-auto flex">
-									{currentUser ? (
-										<div className="hidden md:block pt-2">
-											<button
-												className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
-												onClick={handleSignOut}
-											>
-												<FaGoogle className="inline-block mr-2 mb-1 w-1/6" />
-												Sign Out
-											</button>
-										</div>
-									) : (
-										<button
-											className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
-											onClick={handleLoginWithGoogle}
-										>
-											<FaGoogle className="inline-block mr-2 mb-1 w-1/6" />
-											Sign In
-										</button>
-									)}
-
-
-
-
+								<div className="justify-center items-center ml-auto mr-auto flex text-sm">
+									<button
+										className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+										onClick={currentUser ? handleSignOut : handleLoginWithGoogle}
+									>
+										<FaGoogle className="inline-block mr-1 mb-1 w-1/6" />
+										{currentUser ? 'Sign Out' : 'Sign In'}
+									</button>
 								</div>
 							</div>
 						</div>

@@ -11,41 +11,45 @@ function Feed() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
 	const [offset, setOffset] = useState(0);
+	const [hasMore, setHasMore] = useState(true);
 
 	useEffect(() => {
-		getData(0);
+		getData(0, true, true);
 	}, []);
 
 	const temp = 10;
 	const limit = temp;
 	const searchInputRef = React.useRef(null);
 
-	const getData = (offset) => {
+	const getData = (offset, firstTime, hasMore) => {
+		if (!hasMore) {
+			return;
+		}
 		setIsLoading(true);
 		axios
 			.get(
 				`${
 					process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
+				}/summaries?q=${search}&offset=${offset}&limit=${limit}`,
 			)
 			.then((response) => {
-				setData(response.data);
+				setHasMore(!(response.data.length < limit));
+				if (firstTime) {
+					setData(response.data);
+				} else {
+					setData([...data, ...response.data]);
+				}
 				setIsLoading(false);
 			});
 	};
 
-	const nextPage = () => {
+	const loadMore = () => {
 		setOffset(offset + limit);
-		getData(offset + limit);
-	};
-
-	const prevPage = () => {
-		setOffset(offset - limit);
-		getData(offset - limit);
+		getData(offset + limit, false, true);
 	};
 
 	return (
-		<div className="main-page-feed-section container mx-auto md:w-800 w-full drop-shadow-2xl">
+		<div className="main-page-feed-section container mx-auto w-full drop-shadow-2xl">
 			<h2 className="text-gray-700 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
 				Explore the videos other users unlocked with Alphy
 			</h2>
@@ -56,13 +60,10 @@ function Feed() {
 					onSubmit={(e) => {
 						e.preventDefault();
 						setOffset(0);
-						// if input is empty get it from searchInputRef
 						if (searchInputRef.current.value.length === 0) {
 							setSearch('');
-							getData(0, '');
-						} else {
-							getData(0, search);
 						}
+						getData(0, true, true);
 					}}
 				>
 					<label htmlFor="voice-search" className="sr-only">
@@ -80,7 +81,6 @@ function Feed() {
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
-
 					<button
 						type="submit"
 						className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-lightblueLike rounded-lg border border-bordoLike hover:bg-blueLike sm: mt-10"
@@ -107,51 +107,39 @@ function Feed() {
 				<div className="main-page-feed  w-full">
 					<div
 						className={`
-            grid grid-cols-1 mt-10
-            ${
-				isLoading
-					? 'lg:grid-cols-2 xl:grid-cols-2'
-					: data.length === 1
-					? 'lg:grid-cols-1 xl:grid-cols-1'
-					: 'lg:grid-cols-2 xl:grid-cols-2'
-			}
-            gap-4
-            `}
+							grid grid-cols-1 mt-10
+							${
+								isLoading
+									? 'lg:grid-cols-2 xl:grid-cols-2'
+									: data.length === 1
+									? 'lg:grid-cols-1 xl:grid-cols-1'
+									: 'lg:grid-cols-2 xl:grid-cols-2'
+							}
+							gap-4
+							`}
 					>
-						{isLoading ? (
-							Array.from(Array(temp), (_, index) => index + 1).map((index) => (
-								<SkeletonItem key={index} />
-							))
-						) : data.length === 0 ? (
-							<tr className="border-b-0">
-								<td>No results found</td>
-							</tr>
-						) : (
-							data
-								.slice(0, limit)
-								.map((item, index) => <FeedItem index={index} item={item} key={index} />)
-						)}
+						{isLoading
+							? data.length > 0
+								? data
+										.map((item, index) => <FeedItem key={index} item={item} />)
+										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+								: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
+							: data.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 					</div>
-				</div>
-				<div className="grid flex">
-					<div className="grid-cols-2 w-full flex">
-						{offset > 0 && (
-							<button
-								className="col-span-1 w-1/2 justify-start left-0 flex text-blueLike font-semibold mt-10 underline"
-								onClick={prevPage}
-							>
-								{'Prev'}
-							</button>
-						)}
-						{data.length > limit && (
-							<button
-								className="col-span-2 justify-end w-1/2 right-0 flex text-blueLike font-semibold  mt-10 underline"
-								onClick={nextPage}
-							>
-								{'Next'}
-							</button>
-						)}
-					</div>
+					{hasMore && (
+						<div className="grid flex">
+							<div className="grid-cols-2 w-full flex">
+								{
+									<button
+										className="col-span-2 justify-end w-1/2 right-0 flex text-blueLike font-semibold  mt-10 underline"
+										onClick={loadMore}
+									>
+										{'Load more'}
+									</button>
+								}
+							</div>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
