@@ -78,6 +78,9 @@ function Navbar({ collapsed, setCollapsed }) {
 					<Link to="/">
 						{/* <img className="w-10" src={Logo} /> */}
 						<h1 className="text-2xl">ALPHY</h1>
+
+
+
 					</Link>
 				</div>
 
