@@ -11,7 +11,7 @@ function Feed() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
 	const [offset, setOffset] = useState(0);
-
+	console.log(data.length)
 	useEffect(() => {
 		getData(0);
 	}, []);
@@ -24,8 +24,7 @@ function Feed() {
 		setIsLoading(true);
 		axios
 			.get(
-				`${
-					process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit + 1}`,
 			)
 			.then((response) => {
@@ -108,13 +107,12 @@ function Feed() {
 					<div
 						className={`
             grid grid-cols-1 mt-10
-            ${
-				isLoading
-					? 'lg:grid-cols-2 xl:grid-cols-2'
-					: data.length === 1
-					? 'lg:grid-cols-1 xl:grid-cols-1'
-					: 'lg:grid-cols-2 xl:grid-cols-2'
-			}
+            ${isLoading
+								? 'lg:grid-cols-2 xl:grid-cols-2'
+								: data.length === 1
+									? 'lg:grid-cols-1 xl:grid-cols-1'
+									: 'lg:grid-cols-2 xl:grid-cols-2'
+							}
             gap-4
             `}
 					>

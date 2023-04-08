@@ -16,6 +16,8 @@ export default function Content(props) {
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
 
+	const transcript_to_pass = data.transcript
+
 	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
@@ -57,6 +59,7 @@ export default function Content(props) {
 				nothing = '';
 			}
 		}
+
 	}
 
 	transcriptParser();
@@ -117,7 +120,7 @@ export default function Content(props) {
 				{isLoading ? (
 					<Loading />
 				) : (
-					<QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} />
+					<QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} transcript={transcript} />
 				)}
 
 				<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
