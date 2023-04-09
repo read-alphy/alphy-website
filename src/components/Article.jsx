@@ -33,7 +33,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			const response = await axios.get(url);
 			setData(response.data);
 
-			console.log(source_id)
+
 			//changing page details
 			const pageTitle = document.getElementById('page-title');
 			if (pageTitle) {
@@ -56,17 +56,17 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			}
 
 			const metaTagImagTwitter = document.querySelector('meta[name="twitter:image"]');
-			if (metaTagImage) {
+			if (metaTagImagTwitter) {
 				metaTagImagTwitter.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
 			}
 
 			const metaTagDescriptionTwitter = document.querySelector('meta[name="twitter:description"]');
-			if (metaTagDescription) {
+			if (metaTagDescriptionTwitter) {
 				metaTagDescriptionTwitter.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
 			}
 
 			const metaTagTitleTwitter = document.querySelector('meta[property="og:title"]');
-			if (metaTagTitle) {
+			if (metaTagTitleTwitter) {
 				metaTagTitleTwitter.setAttribute('content', `Alphy | ${response.data.title}`);
 			}
 
