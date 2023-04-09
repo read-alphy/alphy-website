@@ -50,7 +50,22 @@ function Article({ source_type, collapsed, setCollapsed }) {
 				metaTagDescription.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
 			}
 
-			const metaTagTitle = document.querySelector('meta[property="og:title"]');
+			const metaTagTitle = document.querySelector('meta[name=twitter:title"]');
+			if (metaTagTitle) {
+				metaTagTitle.setAttribute('content', `Alphy | ${response.data.title}`);
+			}
+
+			const metaTagImagTwitter = document.querySelector('meta[name="twitter:image"]');
+			if (metaTagImage) {
+				metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
+			}
+
+			const metaTagDescriptionTwitter = document.querySelector('meta[name="twitter:description"]');
+			if (metaTagDescription) {
+				metaTagDescription.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
+			}
+
+			const metaTagTitleTwitter = document.querySelector('meta[property="og:title"]');
 			if (metaTagTitle) {
 				metaTagTitle.setAttribute('content', `Alphy | ${response.data.title}`);
 			}
