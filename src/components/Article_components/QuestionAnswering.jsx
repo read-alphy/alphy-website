@@ -333,14 +333,14 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 												<div>
 													<p key={index}>
 														{index + 1}. <br /> <br /></p>
-													<div className="mb-5">
+													{/* 	<div className="mb-5">
 														{(index === 0) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp1} </a> : null}
 
 														{(index === 1) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp2} </a> : null}
 
 														{(index === 2) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp3} </a> : null}
 
-													</div>
+													</div> */}
 													<p key={index}>
 														{source.text} <br /> <br />
 													</p>
