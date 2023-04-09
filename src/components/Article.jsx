@@ -47,7 +47,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 			const metaTagDescription = document.querySelector('meta[property="og:description"]');
 			if (metaTagDescription) {
-				metaTagDescription.setAttribute('content', `Start asking real questions and cut down on time.`);
+				metaTagDescription.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
 			}
 
 			const metaTagTitle = document.querySelector('meta[property="og:title"]');
