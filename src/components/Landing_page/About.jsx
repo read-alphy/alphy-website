@@ -9,7 +9,7 @@ export default function About() {
 				<br></br>
 				<p>
 					{' '}
-					Alphy aims to help users meaningfully interact with the speech-based information on the Internet
+					Alphy aims to help users meaningfully interact with the information on audiovisual content.
 					with the help of artificial intelligence. It transcribes and summarizes audio-based content and
 					offers semantic search on the transcript to allow users navigate the content with ease.
 				</p>

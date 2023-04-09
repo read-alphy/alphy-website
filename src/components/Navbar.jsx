@@ -32,6 +32,11 @@ function Navbar({ collapsed, setCollapsed }) {
 		if (pageTitle) {
 			pageTitle.innerHTML = "Alphy";
 		}
+
+	}
+	const metaTag = document.querySelector('meta[property="og:image"]');
+	if (metaTag) {
+		metaTag.setAttribute('content', "https://i.ibb.co/Q8pQPFs/1.png");
 	}
 
 	const handleLoginWithGoogle = () => {
