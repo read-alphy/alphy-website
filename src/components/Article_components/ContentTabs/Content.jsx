@@ -16,9 +16,7 @@ export default function Content(props) {
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
 
-	const transcript_to_pass = data.transcript
 
-	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
@@ -176,7 +174,7 @@ export default function Content(props) {
 
 														<a
 															onClick={handleClick}
-															className={`${data.source_type === "youtube" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto`}
+															className={`${data.source_type === "youtube" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
 															key={index}
 														>
 															<br></br>

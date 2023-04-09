@@ -32,6 +32,14 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			setIsLoading(true);
 			const response = await axios.get(url);
 			setData(response.data);
+			const pageTitle = document.getElementById('page-title');
+			if (pageTitle) {
+				pageTitle.innerHTML = `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`;
+			}
+			const articleImage = document.getElementById("article-image");
+			if (articleImage) {
+				articleImage.src = response.data.image;
+			}
 		} catch (error) {
 			if (error.response?.status === 404) {
 				setIsLoading(false);

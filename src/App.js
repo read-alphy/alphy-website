@@ -30,7 +30,9 @@ function App() {
 	const [collapsed, setCollapsed] = useState(true);
 
 	return (
+
 		<div className="App">
+
 			{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 				<>
 					<div className="sm:flex sm:flex-row items-center justify-center h-screen bg-[#2D3136]">

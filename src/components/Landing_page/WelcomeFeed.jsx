@@ -11,7 +11,7 @@ function Feed() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
 	const [offset, setOffset] = useState(0);
-	console.log(data.length)
+
 	useEffect(() => {
 		getData(0);
 	}, []);

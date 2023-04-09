@@ -14,7 +14,9 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 	const QARef = useRef(null);
 
-
+	const [source_timestamp1, setSource_timestamp1] = useState("")
+	const [source_timestamp2, setSource_timestamp2] = useState("")
+	const [source_timestamp3, setSource_timestamp3] = useState("")
 
 	const [answerData, setAnswerData] = useState('');
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
@@ -99,15 +101,34 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 
 
-							const source1 = answerData.sources[0]["text"]
+							const source1 = answerData.sources[0]["text"].match(/[^.!?]+[.!?]/)[0];
+							const source2 = answerData.sources[1]["text"].match(/[^.!?]+[.!?]/)[0];
+							const source3 = answerData.sources[2]["text"].match(/[^.!?]+[.!?]/)[0];
+
+
 
 							for (let i = 0; i < source_id.transcript.length; i++) {
-								const x = source1.match(/[^.!?]+[.!?]/)[0];
 								console.log(source_id.transcript[i])
 
-								if (source_id.transcript[i].includes(x)) {
 
-									console.log("this is the answer", source_id.transcript[i - 1])
+								/* 								console.log(source_id.transcript[i])
+																console.log(x) */
+
+								if (source_id.transcript[i].includes(source1) === true) {
+									setSource_timestamp1(source_id.transcript[i - 1])
+									console.log("true")
+
+								}
+
+								if (source_id.transcript[i].includes(source2) === true) {
+									setSource_timestamp2(source_id.transcript[i - 1])
+									console.log("true")
+
+								}
+
+								if (source_id.transcript[i].includes(source3) === true) {
+									setSource_timestamp3(source_id.transcript[i - 1])
+									console.log("true")
 								}
 							}
 
@@ -312,6 +333,14 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 												<div>
 													<p key={index}>
 														{index + 1}. <br /> <br /></p>
+													<div className="mb-5">
+														{(index === 0) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp1} </a> : null}
+
+														{(index === 1) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp2} </a> : null}
+
+														{(index === 2) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp3} </a> : null}
+
+													</div>
 													<p key={index}>
 														{source.text} <br /> <br />
 													</p>

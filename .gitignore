@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 src/.env
 .env
+src/components/Article_components/QuestionAnswering.jsx
+src/components/Article_components/ContentTabs/Content.jsx
+src/components/Landing_page/WelcomeFeed.jsx
