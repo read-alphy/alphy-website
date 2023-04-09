@@ -32,15 +32,27 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			setIsLoading(true);
 			const response = await axios.get(url);
 			setData(response.data);
-			const pageTitle = document.getElementById('page-title');
 
+
+			//changing page details
+			const pageTitle = document.getElementById('page-title');
 			if (pageTitle) {
 				pageTitle.innerHTML = response.data.title;
 
 			}
-			const metaTag = document.querySelector('meta[property="og:image"]');
-			if (metaTag) {
-				metaTag.setAttribute('content', `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`);
+			const metaTagImage = document.querySelector('meta[property="og:image"]');
+			if (metaTagImage) {
+				metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`);
+			}
+
+			const metaTagDescription = document.querySelector('meta[property="og:description"]');
+			if (metaTagDescription) {
+				metaTagDescription.setAttribute('content', `Start asking real questions and cut down on time.`);
+			}
+
+			const metaTagTitle = document.querySelector('meta[property="og:title"]');
+			if (metaTagTitle) {
+				metaTagTitle.setAttribute('content', `Alphy | ${response.data.title}`);
 			}
 
 		} catch (error) {
