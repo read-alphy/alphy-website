@@ -33,7 +33,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			const response = await axios.get(url);
 			setData(response.data);
 
-
+			console.log(source_id)
 			//changing page details
 			const pageTitle = document.getElementById('page-title');
 			if (pageTitle) {
@@ -42,7 +42,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			}
 			const metaTagImage = document.querySelector('meta[property="og:image"]');
 			if (metaTagImage) {
-				metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`);
+				metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
 			}
 
 			const metaTagDescription = document.querySelector('meta[property="og:description"]');
