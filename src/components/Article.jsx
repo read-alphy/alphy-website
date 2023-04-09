@@ -34,11 +34,11 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			setData(response.data);
 			const pageTitle = document.getElementById('page-title');
 			if (pageTitle) {
-				pageTitle.innerHTML = `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`;
+				pageTitle.innerHTML = response.data.title;
 			}
 			const articleImage = document.getElementById("article-image");
 			if (articleImage) {
-				articleImage.src = response.data.image;
+				articleImage.src = `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`;;
 			}
 		} catch (error) {
 			if (error.response?.status === 404) {
