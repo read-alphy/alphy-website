@@ -36,12 +36,13 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 			if (pageTitle) {
 				pageTitle.innerHTML = response.data.title;
-				console.log(response.data.title, pageTitle.innerHTML)
+
 			}
-			const articleImage = document.getElementById("article-image");
-			if (articleImage) {
-				articleImage.src = `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`;;
+			const metaTag = document.querySelector('meta[property="og:image"]');
+			if (metaTag) {
+				metaTag.setAttribute('content', `https://i.ytimg.com/vi/${response.data.source_id}/hqdefault.jpg`);
 			}
+
 		} catch (error) {
 			if (error.response?.status === 404) {
 				setIsLoading(false);
