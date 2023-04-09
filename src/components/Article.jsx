@@ -33,8 +33,10 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			const response = await axios.get(url);
 			setData(response.data);
 			const pageTitle = document.getElementById('page-title');
+
 			if (pageTitle) {
 				pageTitle.innerHTML = response.data.title;
+				console.log(response.data.title, pageTitle.innerHTML)
 			}
 			const articleImage = document.getElementById("article-image");
 			if (articleImage) {
@@ -76,6 +78,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 	return (
 		<div className="article ">
+
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
