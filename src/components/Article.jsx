@@ -87,7 +87,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 				<div
 					className={`scrolling px-4 mx-auto max-h-[90vh] ${
-						collapsed ? ' ' : ' blur-sm sm:blur-none max-h-[80vh] md:max-h-[90vh] '
+						collapsed ? ' ' : ' blur-sm sm:blur-none max-h-[80vh] sm:max-h-[90vh] '
 					}}`}
 				>
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}

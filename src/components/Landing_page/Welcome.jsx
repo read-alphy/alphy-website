@@ -99,13 +99,13 @@ export default function Welcome() {
 
 			<div className="welcome-prompt flex flex-col justify-center text-bordoLike font-bold lg:text-7xl text-5xl lg:px-56 text-center">
 				<section className="animation1 block justify-center lg:h-[4.5rem] h-[3rem] text-green-400 select-none drag-none mx-auto">
-					<div className="first flex justify-center">
+					<div className="first flex justify-center  ">
 						<div className="">Transcribe</div>
 					</div>
 					<div className="second  flex justify-center">
 						<div className="">Summarize</div>
 					</div>
-					<div className="third  flex justify-center">
+					<div className="third  flex justify-start">
 						<div className="">Question</div>
 					</div>
 					<div className="forth  flex justify-center">
