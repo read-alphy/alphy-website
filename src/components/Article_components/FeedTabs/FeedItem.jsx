@@ -19,16 +19,12 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 		<div className={'grid border-b-0'}>
 			<div className="flex w-full">
 				<div
-					className={`flex ${' '} ${!item.is_complete ? "pointer-events-none" : ""}flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-slate-200  p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
+					className={`flex ${' '} ${'pointer-events-none'}flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-slate-200  p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 					onClick={() => {
-						if (item.is_complete) {
-							navigate(`/${item.source_type === 'spaces' ? 'sp' : 'yt'}/${item.source_id}`);
-						}
+						navigate(`/${item.source_type === 'spaces' ? 'sp' : 'yt'}/${item.source_id}`);
 					}}
 				>
-
 					<div className="w-1/2 min-w-[100px] max-w-[300px] mr-3">
-
 						<div
 							className="flex items-center justify-center h-0 rounded-md bg-gray-600"
 							style={{
@@ -42,7 +38,9 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 					</div>
 
 					<div className="text-xs w-1/2">
-						{!item.is_complete ? <div className="side-feed-creator font-bold text-purpleLike"> 📝 IN PROGRESS</div> : null}
+						{!item.is_complete ? (
+							<div className="side-feed-creator font-bold text-purpleLike"> 📝 IN PROGRESS</div>
+						) : null}
 						<div className="text-sm video-text text-bordoLike font-semibold">{item.title}</div>
 						<div className="side-feed-creator font-italic text-purpleLike">{item.creator_name}</div>
 

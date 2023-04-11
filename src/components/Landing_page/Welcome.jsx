@@ -97,15 +97,15 @@ export default function Welcome() {
 				</div>
 			)}
 
-			<div className="welcome-prompt flex flex-col justify-center text-bordoLike font-bold lg:text-7xl text-5xl lg:px-56 text-center">
-				<section className="animation1 block justify-center lg:h-[4.5rem] h-[3rem] text-green-400 select-none drag-none mx-auto">
+			<div className="welcome-prompt flex flex-col justify-center text-bordoLike font-bold lg:text-6xl md:text-5xl text-3xl lg:px-56 text-center">
+				<section className="animation1 block justify-center lg:h-[3.5rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">
 					<div className="first flex justify-center  ">
 						<div className="">Transcribe</div>
 					</div>
 					<div className="second  flex justify-center">
 						<div className="">Summarize</div>
 					</div>
-					<div className="third  flex justify-start">
+					<div className="third  flex justify-center">
 						<div className="">Question</div>
 					</div>
 					<div className="forth  flex justify-center">
@@ -115,8 +115,8 @@ export default function Welcome() {
 				online media with just one click
 			</div>
 			<p className="text-bordoLike text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-				Submit a link to a YouTube video or Twitter Spaces and Alphy will transcribe and summarize the content and prepare it for questioning. We will
-				notify you via email when it's ready!{' '}
+				Submit a link to a YouTube video or Twitter Spaces and Alphy will transcribe and summarize the content
+				and prepare it for questioning. We will notify you via email when it's ready!{' '}
 			</p>
 			<Toaster />
 			<div className="items-center justify-center w-full lg:space-x-4 lg:flex">

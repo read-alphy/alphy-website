@@ -30,10 +30,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	};
 
 	return (
-		<div
-			className=" md:min-w-[400px] lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5"
-			ref={KTref}
-		>
+		<div className=" lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5" ref={KTref}>
 			<div
 				href="#"
 				className={` w-full pt-6 drop-shadow-xl bg-zinc-100 border-gray-200 sm:min-h-[200px] lg:min-h-[250px] rounded-lg shadow-md flex justify-between ${

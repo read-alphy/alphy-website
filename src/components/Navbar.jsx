@@ -11,10 +11,9 @@ function Navbar({ collapsed, setCollapsed }) {
 	const { currentUser, logout } = useAuth();
 
 	const handleScroll = (target) => {
-
-
 		// if in article page first navigate to main page
 		if (location.pathname !== '/') {
+			console.log('debug');
 			navigate('/');
 			setTimeout(() => {
 				const about = document.getElementById(target);
@@ -30,13 +29,12 @@ function Navbar({ collapsed, setCollapsed }) {
 	if (location.pathname === '/') {
 		const pageTitle = document.getElementById('page-title');
 		if (pageTitle) {
-			pageTitle.innerHTML = "Alphy";
+			pageTitle.innerHTML = 'Alphy';
 		}
-
 	}
 	const metaTag = document.querySelector('meta[property="og:image"]');
 	if (metaTag) {
-		metaTag.setAttribute('content', "https://i.ibb.co/Q8pQPFs/1.png");
+		metaTag.setAttribute('content', 'https://i.ibb.co/Q8pQPFs/1.png');
 	}
 
 	const handleLoginWithGoogle = () => {
@@ -91,9 +89,6 @@ function Navbar({ collapsed, setCollapsed }) {
 					<Link to="/">
 						{/* <img className="w-10" src={Logo} /> */}
 						<h1 className="text-2xl">ALPHY</h1>
-
-
-
 					</Link>
 				</div>
 
@@ -161,12 +156,12 @@ function Navbar({ collapsed, setCollapsed }) {
 						<div className="flex">
 							<div className="w-1/3 flex">
 								<div className="justify-center items-center ml-auto mr-auto flex">
-									<Link
+									<div
 										className="text-l font-semibold text-slate-100 cursor-pointer"
 										onClick={() => handleScroll('about')}
 									>
 										About
-									</Link>
+									</div>
 								</div>
 							</div>
 

@@ -16,7 +16,6 @@ export default function Content(props) {
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
 
-
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
@@ -57,13 +56,12 @@ export default function Content(props) {
 				nothing = '';
 			}
 		}
-
 	}
 
 	transcriptParser();
 
 	return (
-		<div className={`container grow mx-auto md:px-10 lg:px-20 overflow-x-hidden`}>
+		<div className={`container grow mx-auto md:px-10 xl:px-20 pb-20 overflow-x-hidden`}>
 			<div>
 				<div className="grid grid-cols-3">
 					<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
@@ -85,11 +83,8 @@ export default function Content(props) {
 					</div>
 				</div>
 
-				<div className="grid lg:grid-cols-2 gap-8 mt-16 mb-10">
-					<div className="md:w-full  ">
-						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
-					</div>
-					<div className="hidden lg:block w-full ">
+				<div className="flex flex-col xl:flex-row mt-16 mb-10 items-center">
+					<div className="hidden lg:flex justify-center items-center xl:w-1/2 w-2/3 h-[300px] h-inherit mx-auto pb-10 xl:pb-0">
 						{data.source_type === 'spaces' ? (
 							<div className="block w-2/3 ">
 								<a href={`https://twitter.com/i/spaces/${data.source_id}`}>
@@ -107,96 +102,117 @@ export default function Content(props) {
 							<iframe
 								id="player"
 								title="My YouTube Video "
-								className="max-w-80 lg:w-120 h-80 w-auto"
 								src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
+								width="100%"
+								height="100%"
 								frameBorder="0"
 								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 							></iframe>
 						)}
 					</div>
+					<div className="w-full md:w-3/4 2xl:w-1/2 mx-auto">
+						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
+					</div>{' '}
 				</div>
 				{isLoading ? (
 					<Loading />
 				) : (
-					<QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} transcript={transcript} />
+					data.is_complete && (
+						<QuestionAnswering
+							source_id={data.source_id}
+							key_qa={data.key_qa}
+							data={data}
+							transcript={transcript}
+						/>
+					)
 				)}
 
-				<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
-					<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
-						<button
-							className={
-								activeTab === 'tab1' ? 'content-active-button border-r-1 w-1/2' : 'border-r-1 w-1/2'
-							}
-							onClick={() => setActiveTab('tab1')}
-						>
-							Summary
-						</button>
-						<button
-							className={activeTab === 'tab2' ? 'content-active-button w-1/2' : 'w-1/2'}
-							onClick={() => setActiveTab('tab2')}
-						>
-							Transcript
-						</button>
-					</div>
-					<div className="main-content lg:ml-10 text-zinc-600">
-						<Tabs>
-							<Tab eventKey="transcript" title="">
-								{activeTab === 'tab1' && (
-									<div className="text-lg font-normal mb-4 max-w-screen-md">
-										{isLoading ? (
-											<Loading />
-										) : summaryArray.length === 0 ? (
-											<tr className="border-b-0">
-												<td>No results found</td>
-											</tr>
-										) : (
-											summaryArray.map((item, index) => {
-												return (
-													<p key={index}>
-														<br></br>
-														<p dangerouslySetInnerHTML={{ __html: item }} />
-													</p>
-												);
-											})
-										)}
-									</div>
-								)}
-								{activeTab === 'tab2' && (
-									<div className="text-lg font-normal mb-4 max-w-screen-md">
-										{isLoading ? (
-											<Loading />
-										) : (
-											transcript.map((item, index) => {
-												/* transcriptParser(); */
-
-												if (index % 2 === 0) {
+				{data.is_complete ? (
+					<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
+						<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
+							<button
+								className={
+									activeTab === 'tab1' ? 'content-active-button border-r-1 w-1/2' : 'border-r-1 w-1/2'
+								}
+								onClick={() => setActiveTab('tab1')}
+							>
+								Summary
+							</button>
+							<button
+								className={activeTab === 'tab2' ? 'content-active-button w-1/2' : 'w-1/2'}
+								onClick={() => setActiveTab('tab2')}
+							>
+								Transcript
+							</button>
+						</div>
+						<div className="main-content lg:ml-10 text-zinc-600">
+							<Tabs>
+								<Tab eventKey="transcript" title="">
+									{activeTab === 'tab1' && (
+										<div className="text-lg font-normal mb-4 max-w-screen-md">
+											{isLoading ? (
+												<Loading />
+											) : summaryArray.length === 0 ? (
+												<tr className="border-b-0">
+													<td>No results found</td>
+												</tr>
+											) : (
+												summaryArray.map((item, index) => {
 													return (
+														<p key={index}>
+															<br></br>
+															<p dangerouslySetInnerHTML={{ __html: item }} />
+														</p>
+													);
+												})
+											)}
+										</div>
+									)}
+									{activeTab === 'tab2' && (
+										<div className="text-lg font-normal mb-4 max-w-screen-md">
+											{isLoading ? (
+												<Loading />
+											) : (
+												transcript.map((item, index) => {
+													/* transcriptParser(); */
 
-														<a
-															onClick={handleClick}
-															className={`${data.source_type === "youtube" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
-															key={index}
-														>
-															<br></br>
-															{item}{' '}
-														</a>
-													);
-												} else {
-													return (
-														<div key={index}>
-															<br></br>
-															{item}
-														</div>
-													);
-												}
-											})
-										)}
-									</div>
-								)}
-							</Tab>
-						</Tabs>
+													if (index % 2 === 0) {
+														return (
+															<a
+																onClick={handleClick}
+																className={`${
+																	data.source_type === 'youtube'
+																		? 'lg:cursor-pointer lg:pointer-events-auto'
+																		: ''
+																} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
+																key={index}
+															>
+																<br></br>
+																{item}{' '}
+															</a>
+														);
+													} else {
+														return (
+															<div key={index}>
+																<br></br>
+																{item}
+															</div>
+														);
+													}
+												})
+											)}
+										</div>
+									)}
+								</Tab>
+							</Tabs>
+						</div>
 					</div>
-				</div>
+				) : (
+					<p className="text-xl text-zinc-600 font-normal max-w-screen-md mx-auto p-3 lg:p-20">
+						Alphy is doing it's best to process this video, it will be ready in a few minutes. In the
+						meantime, you can check out other videos.
+					</p>
+				)}
 			</div>
 		</div>
 	);
