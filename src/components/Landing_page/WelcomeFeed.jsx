@@ -127,17 +127,15 @@ function Feed() {
 							: data.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 					</div>
 					{hasMore && (
-						<div className="grid flex">
-							<div className="grid-cols-2 w-full flex">
-								{
-									<button
-										className="col-span-2 justify-end w-1/2 right-0 flex text-blueLike font-semibold  mt-10 underline"
-										onClick={loadMore}
-									>
-										{'Load more'}
-									</button>
-								}
-							</div>
+						<div className="w-full flex justify-center">
+							{
+								<button
+									className="justify-center flex text-blueLike font-semibold  mt-10 underline"
+									onClick={loadMore}
+								>
+									{'Load more'}
+								</button>
+							}
 						</div>
 					)}
 				</div>
