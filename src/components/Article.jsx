@@ -32,6 +32,44 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			setIsLoading(true);
 			const response = await axios.get(url);
 			setData(response.data);
+
+
+			//changing page details
+			const pageTitle = document.getElementById('page-title');
+			if (pageTitle) {
+				pageTitle.innerHTML = response.data.title;
+
+			}
+			const metaTagImage = document.querySelector('meta[property="og:image"]');
+			if (metaTagImage) {
+				metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
+			}
+
+			const metaTagDescription = document.querySelector('meta[property="og:description"]');
+			if (metaTagDescription) {
+				metaTagDescription.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
+			}
+
+			const metaTagTitle = document.querySelector('meta[name=twitter:title"]');
+			if (metaTagTitle) {
+				metaTagTitle.setAttribute('content', `Alphy | ${response.data.title}`);
+			}
+
+			const metaTagImagTwitter = document.querySelector('meta[name="twitter:image"]');
+			if (metaTagImagTwitter) {
+				metaTagImagTwitter.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
+			}
+
+			const metaTagDescriptionTwitter = document.querySelector('meta[name="twitter:description"]');
+			if (metaTagDescriptionTwitter) {
+				metaTagDescriptionTwitter.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
+			}
+
+			const metaTagTitleTwitter = document.querySelector('meta[property="og:title"]');
+			if (metaTagTitleTwitter) {
+				metaTagTitleTwitter.setAttribute('content', `Alphy | ${response.data.title}`);
+			}
+
 		} catch (error) {
 			if (error.response?.status === 404) {
 				setIsLoading(false);
@@ -68,6 +106,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 	return (
 		<div className="article ">
+
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
 					collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'

@@ -16,7 +16,7 @@ export default function Content(props) {
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
 
-	const location = useLocation();
+
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
@@ -57,6 +57,7 @@ export default function Content(props) {
 				nothing = '';
 			}
 		}
+
 	}
 
 	transcriptParser();
@@ -117,7 +118,7 @@ export default function Content(props) {
 				{isLoading ? (
 					<Loading />
 				) : (
-					<QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} />
+					<QuestionAnswering source_id={data.source_id} key_qa={data.key_qa} data={data} transcript={transcript} />
 				)}
 
 				<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
@@ -173,7 +174,7 @@ export default function Content(props) {
 
 														<a
 															onClick={handleClick}
-															className={`${data.source_type === "youtube" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto`}
+															className={`${data.source_type === "youtube" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
 															key={index}
 														>
 															<br></br>

@@ -11,6 +11,8 @@ function Navbar({ collapsed, setCollapsed }) {
 	const { currentUser, logout } = useAuth();
 
 	const handleScroll = (target) => {
+
+
 		// if in article page first navigate to main page
 		if (location.pathname !== '/') {
 			navigate('/');
@@ -24,6 +26,18 @@ function Navbar({ collapsed, setCollapsed }) {
 			about.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}
 	};
+
+	if (location.pathname === '/') {
+		const pageTitle = document.getElementById('page-title');
+		if (pageTitle) {
+			pageTitle.innerHTML = "Alphy";
+		}
+
+	}
+	const metaTag = document.querySelector('meta[property="og:image"]');
+	if (metaTag) {
+		metaTag.setAttribute('content', "https://i.ibb.co/Q8pQPFs/1.png");
+	}
 
 	const handleLoginWithGoogle = () => {
 		auth.loginWithGoogle();
@@ -77,6 +91,9 @@ function Navbar({ collapsed, setCollapsed }) {
 					<Link to="/">
 						{/* <img className="w-10" src={Logo} /> */}
 						<h1 className="text-2xl">ALPHY</h1>
+
+
+
 					</Link>
 				</div>
 
@@ -90,7 +107,7 @@ function Navbar({ collapsed, setCollapsed }) {
 							>
 								Give us feedback!
 							</div>
-
+							{/* <a href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light" width="250" height="54" /></a> */}
 							<div
 								className="hidden cursor-pointer font-semibold text-zinc-200 md:block mr-5 pt-2"
 								onClick={() => handleScroll('about')}

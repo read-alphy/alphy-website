@@ -1,9 +1,9 @@
 {
-  "name": "Alphy, the new generation speech-to-meaning agent",
+  "name": "Alphy, the agent that listens for you.",
   "short_name": "Alphy",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "/logo-inverted-white-bg-round.png",
       "sizes": "192x192",
       "type": "image/png"
     },
@@ -13,7 +13,7 @@
       "type": "image/png"
     },
     {
-      "src": "/logo.png",
+      "src": "/logo-inverted-white-bg-round.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     }

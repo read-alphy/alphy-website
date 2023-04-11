@@ -114,9 +114,8 @@ export default function Welcome() {
 				</section>
 				online media with just one click
 			</div>
-			<p className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-				Paste a link to a YouTube video or Twitter Spaces, choose the language of the content (only English for
-				now), and submit. Alphy will transcribe, summarize and prepare the content for questioning. We will
+			<p className="text-bordoLike text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+				Submit a link to a YouTube video or Twitter Spaces and Alphy will transcribe and summarize the content and prepare it for questioning. We will
 				notify you via email when it's ready!{' '}
 			</p>
 			<Toaster />
