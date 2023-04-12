@@ -7,9 +7,9 @@ import Twitter from '../../../img/twitter_spaces.png';
 const FeedItem = ({ item, setCollapsed, poi }) => {
 	const source_id = item.source_id;
 	let imageUrl;
-	if (item.source_type === 'youtube') {
+	if (item.source_type === 'yt') {
 		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
-	} else if (item.source_type === 'spaces') {
+	} else if (item.source_type === 'sp') {
 		imageUrl = Twitter;
 	}
 
@@ -21,7 +21,9 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 				<div
 					className={`flex ${' '} ${'pointer-events-none'}flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-slate-200  p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 					onClick={() => {
+
 						navigate(`/${item.source_type === 'spaces' ? 'sp' : 'yt'}/${item.source_id}`);
+
 					}}
 				>
 					<div className="w-1/2 min-w-[100px] max-w-[300px] mr-3">

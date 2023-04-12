@@ -69,23 +69,26 @@ export default function Content(props) {
 					</h1>
 
 					<div className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
-						{data.source_type === 'youtube' ? (
+						{data.source_type === 'yt' ? (
 							<a href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 								<img src="/youtubeicon.png" width={80} />
 								<p className="-mt-3 font-semibold">Click to Watch</p>
 							</a>
 						) : (
-							<a className="mt-7" href={`https://twitter.com/i/spaces/${data.source_id}`}>
+							<a className="mt-7" href={`https://twitter.com/i/
+              
+              
+              /${data.source_id}`}>
 								<img src={Twitter} width={100} />
 								<p className="mt-3 font-semibold text-zinc-500">Click to Listen</p>
 							</a>
 						)}
 					</div>
 				</div>
-
 				<div className="flex flex-col xl:flex-row mt-16 mb-10 items-center">
 					<div className="hidden lg:flex justify-center items-center xl:w-1/2 w-2/3 h-[300px] h-inherit mx-auto pb-10 xl:pb-0">
-						{data.source_type === 'spaces' ? (
+						{data.source_type === 'sp' ? (
+
 							<div className="block w-2/3 ">
 								<a href={`https://twitter.com/i/spaces/${data.source_id}`}>
 									{' '}
@@ -127,6 +130,7 @@ export default function Content(props) {
 					)
 				)}
 
+
 				{data.is_complete ? (
 					<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
 						<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
@@ -160,6 +164,7 @@ export default function Content(props) {
 												summaryArray.map((item, index) => {
 													return (
 														<p key={index}>
+
 															<br></br>
 															<p dangerouslySetInnerHTML={{ __html: item }} />
 														</p>
@@ -181,7 +186,7 @@ export default function Content(props) {
 															<a
 																onClick={handleClick}
 																className={`${
-																	data.source_type === 'youtube'
+																	data.source_type === 'yt'
 																		? 'lg:cursor-pointer lg:pointer-events-auto'
 																		: ''
 																} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
