@@ -82,9 +82,8 @@ export default function Welcome() {
 
 	return (
 		<div
-			className={`container px-4 mx-auto py-10 sm:py-18 lg:py-28 ${
-				loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
-			}`}
+			className={`container px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
+				}`}
 		>
 			{loading && (
 				<div className={`flex justify-center items-center h-[90vh]`}>
@@ -115,8 +114,8 @@ export default function Welcome() {
 				online media with just one click
 			</div>
 			<p className="text-bordoLike text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-				Submit a link to a YouTube video or Twitter Spaces and Alphy will transcribe and summarize the content
-				and prepare it for questioning. We will notify you via email when it's ready!{' '}
+				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning. We will
+				notify you with email when it's ready!{' '}
 			</p>
 			<Toaster />
 			<div className="items-center justify-center w-full lg:space-x-4 lg:flex">
