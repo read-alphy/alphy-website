@@ -185,11 +185,10 @@ export default function Content(props) {
 														return (
 															<a
 																onClick={handleClick}
-																className={`${
-																	data.source_type === 'yt'
-																		? 'lg:cursor-pointer lg:pointer-events-auto'
-																		: ''
-																} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
+																className={`${data.source_type === 'yt'
+																	? 'lg:cursor-pointer lg:pointer-events-auto'
+																	: ''
+																	} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
 																key={index}
 															>
 																<br></br>

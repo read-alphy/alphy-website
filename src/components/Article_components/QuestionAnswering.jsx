@@ -65,6 +65,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 		}
 	};
 
+
 	const fetchData = () => {
 		toast.dismiss();
 		setShowBaseQA(false);
@@ -91,7 +92,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 					axios
 						.post(
-							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${source_id.source_type}/${source_id.source_id
+							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${source_id.data.source_type}/${source_id.source_id
 							}/question`,
 							inputValue,
 						)
