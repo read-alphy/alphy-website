@@ -54,13 +54,13 @@ function App() {
 						<Route
 							path="/yt/:article_ID"
 							element={
-								<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'youtube'} />
+								<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} />
 							}
 						/>
 						<Route
 							path="/sp/:article_ID"
 							element={
-								<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'spaces'} />
+								<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'} />
 							}
 						/>
 						<Route path="/privacypolicy" element={<PrivacyPolicy />} />
