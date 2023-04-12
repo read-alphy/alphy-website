@@ -337,114 +337,53 @@ label {
 }
 
 .animation1 {
-	height: 40px;
 	overflow: hidden;
-}
-
-.animation1 > div > div {
-	/* padding: 0 0.75rem; */
-	height: 2.61rem;
-	display: inline-block;
-	align-items: flex-start;
-}
-
-.animation2 {
-	height: 40px;
-	overflow: hidden;
-}
-
-.animation2 > div > div {
-	/* padding: 0 0.75rem; */
-	height: 2.61rem;
-	display: inline-block;
-	align-items: flex-start;
 }
 
 .animation1 > div {
 	animation: text-animation 10s infinite;
 }
 
-.animation2 > div {
-	animation: text-animation2 16s infinite;
-}
-
-@keyframes text-animation2 {
-	5% {
-		transform: translateY(-112%);
-	}
-
-	50% {
-		transform: translateY(-100%);
-	}
-
-	54% {
-		transform: translateY(-212%);
-	}
-
-	55% {
-		transform: translateY(-200%);
-	}
-
-	100% {
-		transform: translateY(-200%);
-	}
-}
-
 @keyframes text-animation {
 	0% {
-		width: 166.05px;
 	}
 	/* transcribe -> summarize */
 
 	6% {
 		transform: translateY(-112%);
-		width: 182px;
 	}
 
 	10% {
 		transform: translateY(-100%);
-		width: 182px;
 	}
 	/* summarize */
 	33.33% {
 		transform: translateY(-100%);
-		width: 182px;
 	}
 	/* summarize -> Question */
 	39.33% {
 		transform: translateY(-212%);
-		width: 147.78px;
 	}
 
 	43.33% {
 		transform: translateY(-200%);
-		width: 147.78px;
 	}
-
-	/* Question */
 
 	66.66% {
 		transform: translateY(-200%);
-		width: 147.78px;
 	}
-
-	/* Question -> Transcribe */
 
 	72.66% {
 		transform: translateY(-312%);
-		width: 166.05px;
 	}
 
 	76.66% {
-		transform: translateY(-300%);
-		width: 166.05px;
+		transform: translateY(-302%);
 	}
 	100% {
-		transform: translateY(-300%);
-		width: 166.05px;
+		transform: translateY(-302%);
 	}
 }
-
 /* 
 
 

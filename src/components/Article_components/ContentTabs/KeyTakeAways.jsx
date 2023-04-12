@@ -29,12 +29,9 @@ const KeyTakeAways = ({ key_takeaways }) => {
 			</button>
 		);
 	};
-
 	return (
-		<div
-			className=" md:min-w-[400px] lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5"
-			ref={KTref}
-		>
+
+		<div className=" lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5" ref={KTref}>
 
 			<div
 				href="#"

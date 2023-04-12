@@ -1,6 +1,6 @@
 export default function About() {
 	return (
-		<div className="mx-auto md:w-800 w-full flex justify-center text-blueLike bg-zinc-100">
+		<div className="mx-auto md:w-800 w-full flex justify-center text-blueLike bg-zinc-100" id="about">
 			<div id="about" className="px-4 container w-5/6 max-w-4xl mt-40 pb-20 text-l lg:text-l">
 				<h1 className="text-4xl  font-semibold">About</h1>
 				<br></br>
@@ -9,16 +9,17 @@ export default function About() {
 				<br></br>
 				<p>
 					{' '}
-					Alphy aims to help users meaningfully interact with the information on audiovisual content.
-					with the help of artificial intelligence. It transcribes and summarizes audio-based content and
-					offers semantic search on the transcript to allow users navigate the content with ease.
+					Alphy aims to help users meaningfully interact with the information on audiovisual content. with the
+					help of artificial intelligence. It transcribes and summarizes audio-based content and offers
+					semantic search on the transcript to allow users navigate the content with ease.
 				</p>
 				<br></br>
 				<br></br>
 				<h2 className="lg:text-xl  font-semibold"> What can I do with Alphy?</h2>
 				<br></br>
 				<p>
-					• You can ask questions to a video or recording to get the most relevant answers presented by the content.
+					• You can ask questions to a video or recording to get the most relevant answers presented by the
+					content.
 					<br></br>
 					<br></br>• You can get a detailed summary of the content as well as a TL:DR version of that summary
 					that lays out the key takeaways of the video.
@@ -37,7 +38,8 @@ export default function About() {
 					{/*                     <br></br>
                     • There is a limit on the number of submissions you can make a day to decrease the bloat.
                     <br></br> */}
-					<br></br>• Currently, Alphy only supports content in English. We are working on supporting other languages.
+					<br></br>• Currently, Alphy only supports content in English. We are working on supporting other
+					languages.
 					<br></br>
 					<br></br>• Transcription process may take some time. We will notify you via email when your work is
 					ready.
