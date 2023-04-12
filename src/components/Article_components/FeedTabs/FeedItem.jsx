@@ -22,7 +22,7 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 					className={`flex ${' '} ${'pointer-events-none'}flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-slate-200  p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 					onClick={() => {
 
-						navigate(`/${item.source_type === 'spaces' ? 'sp' : 'yt'}/${item.source_id}`);
+						navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
 
 					}}
 				>
