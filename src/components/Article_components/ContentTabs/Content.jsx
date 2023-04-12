@@ -71,7 +71,7 @@ export default function Content(props) {
 					</h1>
 
 					<div className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
-						{data.source_type === 'youtube' ? (
+						{data.source_type === 'yt' ? (
 							<a href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 								<img src="/youtubeicon.png" width={80} />
 								<p className="-mt-3 font-semibold">Click to Watch</p>
@@ -90,7 +90,7 @@ export default function Content(props) {
 						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 					</div>
 					<div className="hidden lg:block w-full ">
-						{data.source_type === 'spaces' ? (
+						{data.source_type === 'sp' ? (
 							<div className="block w-2/3 ">
 								<a href={`https://twitter.com/i/spaces/${data.source_id}`}>
 									{' '}
@@ -152,10 +152,10 @@ export default function Content(props) {
 										) : (
 											summaryArray.map((item, index) => {
 												return (
-													<p key={index}>
+													<div>
 														<br></br>
-														<p dangerouslySetInnerHTML={{ __html: item }} />
-													</p>
+														<p key={index} dangerouslySetInnerHTML={{ __html: item }} />
+													</div>
 												);
 											})
 										)}
@@ -174,7 +174,7 @@ export default function Content(props) {
 
 														<a
 															onClick={handleClick}
-															className={`${data.source_type === "youtube" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
+															className={`${data.source_type === "yt" ? "lg:cursor-pointer lg:pointer-events-auto" : ""} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
 															key={index}
 														>
 															<br></br>

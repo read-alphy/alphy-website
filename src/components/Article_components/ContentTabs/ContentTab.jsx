@@ -9,7 +9,7 @@ function ContentTab(props) {
     return (
         <Tabs>
             <Tab eventKey="transcript" title="" >
-                <p className='text-lg font-normal mb-4 max-w-screen-md
+                <p className='text-lg font-normal mb-4   max-w-screen-md
             ' dangerouslySetInnerHTML={{ __html: data }} />
             </Tab>
         </Tabs>
