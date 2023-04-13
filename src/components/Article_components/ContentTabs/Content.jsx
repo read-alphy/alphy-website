@@ -67,6 +67,10 @@ export default function Content(props) {
 					<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
 						{data.title}
 					</h1>
+					<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike font-light">
+						{data.creator_name}
+					</h2>
+
 
 					<div className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
 						{data.source_type === 'yt' ? (
@@ -85,6 +89,8 @@ export default function Content(props) {
 						)}
 					</div>
 				</div>
+
+
 				<div className="flex flex-col xl:flex-row mt-16 mb-10 items-center">
 					<div className="hidden lg:flex justify-center items-center xl:w-1/2 w-2/3 h-[300px] h-inherit mx-auto pb-10 xl:pb-0">
 						{data.source_type === 'sp' ? (
@@ -117,6 +123,8 @@ export default function Content(props) {
 						{data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null}
 					</div>{' '}
 				</div>
+
+
 				{isLoading ? (
 					<Loading />
 				) : (
