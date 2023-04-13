@@ -163,9 +163,9 @@ export default function Content(props) {
 											) : (
 												summaryArray.map((item, index) => {
 													return (
-														<p key={index}>
+														<p className="mb-6" key={index}>
 
-															<br></br>
+
 															<p dangerouslySetInnerHTML={{ __html: item }} />
 														</p>
 													);
