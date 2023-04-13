@@ -175,6 +175,8 @@ export default function Content(props) {
 
 
 															<p dangerouslySetInnerHTML={{ __html: item }} />
+
+
 														</p>
 													);
 												})
@@ -189,7 +191,7 @@ export default function Content(props) {
 												transcript.map((item, index) => {
 													/* transcriptParser(); */
 
-													if (index % 2 === 0) {
+													if (index % 2 === 0 && index < transcript.length - 1) {
 														return (
 															<a
 																onClick={handleClick}
@@ -203,7 +205,7 @@ export default function Content(props) {
 																{item}{' '}
 															</a>
 														);
-													} else {
+													} else if (index % 2 === 1 && index < transcript.length - 1) {
 														return (
 															<div key={index}>
 																<br></br>
