@@ -96,7 +96,7 @@ export default function Welcome() {
 				</div>
 			)}
 
-			<div className="welcome-prompt flex flex-col justify-center text-bordoLike font-bold lg:text-6xl md:text-5xl text-3xl lg:px-56 text-center">
+			<div className="flex flex-col justify-center text-bordoLike font-semibold font-noto lg:text-6xl md:text-5xl text-3xl lg:px-56 text-center">
 				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">
 					<div className="first flex justify-center  ">
 						<div className="">Transcribe</div>

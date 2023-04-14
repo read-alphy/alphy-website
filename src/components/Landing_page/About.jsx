@@ -7,7 +7,7 @@ export default function About() {
 
 				<h2 className="lg:text-xl  font-semibold"> What is Alphy?</h2>
 				<br></br>
-				<p>
+				<p className="text-xl">
 					{' '}
 					Alphy aims to help users meaningfully interact with the information on audiovisual content. with the
 					help of artificial intelligence. It transcribes and summarizes audio-based content and offers
@@ -17,7 +17,7 @@ export default function About() {
 				<br></br>
 				<h2 className="lg:text-xl  font-semibold"> What can I do with Alphy?</h2>
 				<br></br>
-				<p>
+				<p className="text-xl">
 					• You can ask questions to a video or recording to get the most relevant answers presented by the
 					content.
 					<br></br>
@@ -31,14 +31,14 @@ export default function About() {
 				<br></br>
 				<h1 className="text-2xl  font-semibold">Quick info about the product:</h1>
 				<br></br>
-				<p>
+				<p className="text-xl">
 					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to
 					Alphy.
 					<br></br>
 					{/*                     <br></br>
                     • There is a limit on the number of submissions you can make a day to decrease the bloat.
                     <br></br> */}
-					<br></br>• Currently, Alphy only supports content in English. We are working on supporting other
+					<br></br>• Currently, Alphy works best in English. We are working on supporting other
 					languages.
 					<br></br>
 					<br></br>• Transcription process may take some time. We will notify you via email when your work is

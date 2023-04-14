@@ -25,8 +25,7 @@ function SideFeed({ setCollapsed, source_id }) {
 		setIsLoading(true);
 		axios
 			.get(
-				`${
-					process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit}`,
 			)
 			.then((response) => {
@@ -63,7 +62,7 @@ function SideFeed({ setCollapsed, source_id }) {
 	return (
 		<div className="user-feed-buttons">
 			<form
-				className="flex items-center h-[10vh] min-h-[50px] transparency "
+				className="flex items-center h-[10vh] min-h-[50px] transparency max-w-[95%]"
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
@@ -117,25 +116,25 @@ function SideFeed({ setCollapsed, source_id }) {
 					<div className="items " ref={feedRef}>
 						{isLoading
 							? // if data is not empty, show the data then show 10 skeletons
-							  data.length > 0
+							data.length > 0
 								? data
-										.map((item, index) =>
-											item.source_id === source_id ? (
-												<FeedItem
-													key={index}
-													item={item}
-													setCollapsed={setCollapsed}
-													poi={true}
-												/>
-											) : (
-												<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
-											),
-										)
-										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index} />))
+									.map((item, index) =>
+										item.source_id === source_id ? (
+											<FeedItem
+												key={index}
+												item={item}
+												setCollapsed={setCollapsed}
+												poi={true}
+											/>
+										) : (
+											<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
+										),
+									)
+									.concat([...Array(10)].map((item, index) => <SkeletonItem key={index} />))
 								: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 							: data.map((item, index) => (
-									<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
-							  ))}
+								<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
+							))}
 					</div>
 				</div>
 			</div>

@@ -57,6 +57,10 @@ module.exports = {
 				'4xs': '10px',
 				'5xs': '8px',
 			},
+			fontFamily: {
+				noto: ['Noto Sans', 'sans-serif'],
+
+			},
 			colors: {
 				main: '#2f3542',
 				mainText: '#ced4da',

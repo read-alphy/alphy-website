@@ -170,6 +170,7 @@ MAIN PAGE
 	font-size: 20px;
 }
 
+
 .welcome-img {
 	width: 90%;
 	margin-left: 100px;
@@ -340,13 +341,13 @@ label {
 	overflow: hidden;
 }
 
-.animation1 > div {
+.animation1>div {
 	animation: text-animation 10s infinite;
 }
 
 @keyframes text-animation {
-	0% {
-	}
+	0% {}
+
 	/* transcribe -> summarize */
 
 	6% {
@@ -356,10 +357,12 @@ label {
 	10% {
 		transform: translateY(-100%);
 	}
+
 	/* summarize */
 	33.33% {
 		transform: translateY(-100%);
 	}
+
 	/* summarize -> Question */
 	39.33% {
 		transform: translateY(-212%);
@@ -380,10 +383,12 @@ label {
 	76.66% {
 		transform: translateY(-302%);
 	}
+
 	100% {
 		transform: translateY(-302%);
 	}
 }
+
 /* 
 
 
