@@ -28,8 +28,7 @@ function Feed() {
 		setIsLoading(true);
 		axios
 			.get(
-				`${
-					process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit}`,
 			)
 			.then((response) => {
@@ -108,10 +107,9 @@ function Feed() {
 					<div
 						className={`
 							grid grid-cols-1 mt-10
-							${
-								isLoading
-									? 'lg:grid-cols-2 xl:grid-cols-2'
-									: data.length === 1
+							${isLoading
+								? 'lg:grid-cols-2 xl:grid-cols-2'
+								: data.length === 1
 									? 'lg:grid-cols-1 xl:grid-cols-1'
 									: 'lg:grid-cols-2 xl:grid-cols-2'
 							}
@@ -121,8 +119,8 @@ function Feed() {
 						{isLoading
 							? data.length > 0
 								? data
-										.map((item, index) => <FeedItem key={index} item={item} />)
-										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									.map((item, index) => <FeedItem key={index} item={item} />)
+									.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 								: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 							: data.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 					</div>

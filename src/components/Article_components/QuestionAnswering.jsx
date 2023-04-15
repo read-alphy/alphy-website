@@ -296,7 +296,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 									<TypeIt
 										options={{
 											strings: answerData.answer.split('\n'),
-											speed: 5,
+											speed: 3,
 											cursorChar: '',
 										}}
 									/>

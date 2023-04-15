@@ -81,9 +81,8 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 		<div className="">
 			<div
-				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${
-					collapsed ? ' ' : '  '
-				}`}
+				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${collapsed ? ' ' : '  '
+					}`}
 			>
 				<div className="pl-10 flex flex-row ">
 					<Link to="/">
@@ -147,9 +146,8 @@ function Navbar({ collapsed, setCollapsed }) {
 				</div>
 			</div>
 			<div
-				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden ${
-					collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed '
-				}`}
+				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed '
+					}`}
 			>
 				<div className="">
 					<div className="overflow-y-auto">

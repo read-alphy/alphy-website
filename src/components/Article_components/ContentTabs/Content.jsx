@@ -22,6 +22,9 @@ export default function Content(props) {
 	const [dataLoaded, setDataLoaded] = useState(false);
 
 	let summaryArray = '';
+	let transcript_array = []
+
+
 	const handleClick = (event) => {
 		setAutoplay(1);
 		let formattedTimestamp = event.target.textContent;
@@ -34,28 +37,33 @@ export default function Content(props) {
 
 	async function transcriptParser() {
 		summaryArray = data.summary.split('\n');
+		transcript_array = data.transcript_chunked.split("\n")
+		/*
 		var parser = new srtParser2();
-		var srt_array = parser.fromSrt(data.transcript);
 
-		let nothing = '';
-		let count = 0;
+					var srt_array = parser.fromSrt(data.transcript);
+		
+				let nothing = '';
+				let count = 0;
+		
+				transcript.push('00:00:00');
+		
+				for (let i = 0; i < srt_array.length; i++) {
+					count = count + 1;
+					nothing = nothing + ' ' + srt_array[i].text;
+					if (
+						count > 6 &&
+						srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
+					) {
+						transcript.push(nothing);
+						transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
+						//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
+						count = 0;
+						nothing = '';
+					}
+				} */
 
-		transcript.push('00:00:00');
 
-		for (let i = 0; i < srt_array.length; i++) {
-			count = count + 1;
-			nothing = nothing + ' ' + srt_array[i].text;
-			if (
-				count > 6 &&
-				srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
-			) {
-				transcript.push(nothing);
-				transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-				//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-				count = 0;
-				nothing = '';
-			}
-		}
 	}
 
 	transcriptParser();
@@ -139,7 +147,7 @@ export default function Content(props) {
 				)}
 
 
-				{data.is_complete ? (
+				{data.is_complete || data.transcript ? (
 					<div className="lg:ml-10 mt-14 lg:mt-0 w-full">
 						<div className="summary-and-transcript-buttons text-xl w-full 	text-zinc-600 ">
 							<button
@@ -188,24 +196,24 @@ export default function Content(props) {
 											{isLoading ? (
 												<Loading />
 											) : (
-												transcript.map((item, index) => {
+												transcript_array.map((item, index) => {
 													/* transcriptParser(); */
 
-													if (index % 2 === 0 && index < transcript.length - 1) {
+													if (index % 4 === 1 && index < transcript_array.length - 1) {
 														return (
 															<a
 																onClick={handleClick}
 																className={`${data.source_type === 'yt'
 																	? 'lg:cursor-pointer lg:pointer-events-auto'
 																	: ''
-																	} pointer-events-none lg:pointer-events-auto lg:text-blue-900 lg:font-bold underline`}
+																	} pointer-events-none lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline`}
 																key={index}
 															>
 																<br></br>
-																{item}{' '}
+																{item.substring(0, 8)}{' '}
 															</a>
 														);
-													} else if (index % 2 === 1 && index < transcript.length - 1) {
+													} else if (index % 4 === 2 && index < transcript_array.length - 1) {
 														return (
 															<div key={index}>
 																<br></br>
@@ -223,8 +231,10 @@ export default function Content(props) {
 					</div>
 				) : (
 					<p className="text-xl text-zinc-600 font-normal max-w-screen-md mx-auto p-3 lg:p-20">
+
 						Alphy is doing it's best to process this video, it will be ready in a few minutes. In the
 						meantime, you can check out other videos.
+
 					</p>
 				)}
 			</div>

@@ -107,16 +107,14 @@ function Article({ source_type, collapsed, setCollapsed }) {
 	return (
 		<div className="article ">
 			<div
-				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
-					collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-				}`}
+				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
+					}`}
 			></div>
 			<div className="flex flex-row article-body ">
 				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[400px]`}>{sideFeed}</div>
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[20vh] w-full shadow-lg bg-zinc-100 ${
-						collapsed ? 'ham-collapsed' : 'ham-not-collapsed'
-					}`}
+					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[20vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed' : 'ham-not-collapsed'
+						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen px-4 overflow-y-auto">{sideFeed}</div>
@@ -124,9 +122,8 @@ function Article({ source_type, collapsed, setCollapsed }) {
 				</div>
 
 				<div
-					className={`scrolling px-4 mx-auto max-h-[90vh] ${
-						collapsed ? ' ' : ' blur-sm sm:blur-none max-h-[80vh] sm:max-h-[90vh] '
-					}}`}
+					className={`scrolling px-4 mx-auto max-h-[90vh] ${collapsed ? ' ' : ' blur-sm sm:blur-none max-h-[80vh] sm:max-h-[90vh] '
+						}}`}
 				>
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}
 				</div>
