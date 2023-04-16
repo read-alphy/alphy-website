@@ -342,6 +342,8 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 														{(index === 2) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp3} </a> : null}
 
 													</div> */}
+
+
 													<p key={index}>
 														{source.text} <br /> <br />
 													</p>
@@ -388,10 +390,15 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 				{showBaseQA ? (
 					<div className="text-zinc-600 pb-10">
 						{
+
 							<div>
-								<div>
+								<div className="answer-area">
 									<h1 className="mb-4 text-xl">Answer from Alphy</h1>
 									<p>{source_id.key_qa[baseQuestion].answer}</p>
+
+
+
+
 								</div>
 
 								<button

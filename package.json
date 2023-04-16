@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.2.2",
     "firebase": "^9.19.1",
+    "flowbite": "^1.6.5",
     "fs": "^0.0.1-security",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
