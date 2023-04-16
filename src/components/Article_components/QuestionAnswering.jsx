@@ -31,6 +31,8 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 	const [inputError, setinputError] = useState(false);
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
+
+
 	const handleClear = () => {
 		setIsCleared(true);
 		setShowBaseQA(false);
@@ -292,15 +294,25 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 						{answerData.answer ? (
 							<div>
 								<div>
-									<h1 className="mb-4 text-xl">Answer from Alphy</h1>
-									<TypeIt
-										options={{
-											strings: answerData.answer.split('\n'),
-											speed: 3,
-											cursorChar: '',
-										}}
-									/>
+
+									<h1 className="mb-4 text-xl flex flex-row ">Answer from Alphy
+
+
+										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+											<path clip-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fill-rule="evenodd"></path>
+										</svg>
+
+
+									</h1>
 								</div>
+								<TypeIt
+									options={{
+										strings: answerData.answer.split('\n'),
+										speed: 3,
+										cursorChar: '',
+									}}
+								/>
+
 
 								<button
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
@@ -393,12 +405,17 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 							<div>
 								<div className="answer-area">
-									<h1 className="mb-4 text-xl">Answer from Alphy</h1>
+									<h1 className="mb-4 text-xl flex flex-row">Answer from Alphy
+
+
+										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+											<path clip-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fill-rule="evenodd"></path>
+										</svg>
+
+
+
+									</h1>
 									<p>{source_id.key_qa[baseQuestion].answer}</p>
-
-
-
-
 								</div>
 
 								<button
