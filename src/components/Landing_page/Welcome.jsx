@@ -19,7 +19,7 @@ export default function Welcome() {
 		toast.dismiss();
 		if (
 			!(
-				inputValue.includes('https://www.youtube.com') ||
+				inputValue.includes('https://www.youtube.com/watch') ||
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com') ||
 				inputValue.includes('https://twitter.com/i/spaces')
@@ -28,55 +28,86 @@ export default function Welcome() {
 			setInputValue('');
 			toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
 			return;
-		}
 
-		if (currentUser) {
-			setLoading(true);
-			// get id token
-			currentUser.getIdToken().then((idToken) => {
-				axios
-					.post(
-						`${process.env.REACT_APP_API_URL}/summaries`,
-						{
-							url: inputValue,
-							language: 'en',
-						},
-						{
-							headers: {
-								'id-token': idToken,
+		}
+		else {
+			let videoId
+			let video_source
+			//check if video already exists
+			if (inputValue.includes('https://www.youtube.com')) {
+				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
+				video_source = "yt"
+				console.log(videoId)
+
+			}
+
+			else if (inputValue.includes('https://youtu.be')) {
+				videoId = inputValue.split('/').pop().split("?")[0];
+				video_source = "yt"
+				console.log(videoId)
+			}
+
+			else if (inputValue.includes('https://m.youtube.com')) {
+				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
+				video_source = "yt"
+				console.log(videoId)
+			}
+			else if (inputValue.includes('https://twitter.com/i/spaces')) {
+				videoId = inputValue.split('/').pop().split("?")[0];
+				video_source = "sp"
+				console.log(videoId)
+			}
+
+
+			if (currentUser) {
+				setLoading(true);
+				// get id token
+				currentUser.getIdToken().then((idToken) => {
+					axios
+						.post(
+							`${process.env.REACT_APP_API_URL}/summaries`,
+							{
+								url: inputValue,
+								language: 'en',
 							},
-						},
-					)
-					.then((response) => {
-						console.log(response);
-						setLoading(false);
-						setInputValue('');
-						if (response.status === 200 || response.status === 201 || response.status === 202) {
-							toast.success(
-								'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
-								{ duration: 3000 },
-							);
-						} else {
+							{
+								headers: {
+									'id-token': idToken,
+								},
+							},
+						)
+						.then((response) => {
+
+							setLoading(false);
+							setInputValue('');
+							navigate(`/${video_source}/${videoId}`)
+							if (response.status === 200 || response.status === 201 || response.status === 202) {
+								toast.success(
+									'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
+									{ duration: 3000 },
+								);
+							} else {
+								toast.error('There was an error submitting the form. Please try again.', {
+									duration: 3000,
+								});
+							}
+						})
+						.catch((error) => {
 							toast.error('There was an error submitting the form. Please try again.', {
 								duration: 3000,
 							});
-						}
-					})
-					.catch((error) => {
-						toast.error('There was an error submitting the form. Please try again.', {
-							duration: 3000,
+							setInputValue('');
+							setLoading(false);
+							throw error;
 						});
-						setInputValue('');
-						setLoading(false);
-						throw error;
-					});
-			});
-		} else {
-			// sign in
-			// navigate('/auth');
-			toast.error('Please sign in to submit content.', {
-				duration: 3000,
-			});
+				});
+			} else {
+				// sign in
+				// navigate('/auth');
+				toast.error('Please sign in to submit content.', {
+					duration: 3000,
+				});
+			}
 		}
 	};
 
@@ -141,8 +172,8 @@ export default function Welcome() {
 				<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
 					<div className="w-full flex flex-col">
 						<p class=" text-l mb-2 text-gray-600 dark:text-gray-400 pb-2 ">
-							<button data-popover-target="popover-description" data-popover-placement="left" data-popover-offset="20" type="button"><svg class="w-5 h-5 ml-1 pt-1 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button>
 
+							<button data-popover-target="popover-description" data-popover-placement="left" data-popover-offset="20" type="button"><svg class="w-5 h-5 ml-1 pt-1 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button>
 
 							Instructions for Alphy</p>
 						<div id="popover-description" class="popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 border border-slate-800 rounded-lg shadow-sm opacity-0 w-72">
