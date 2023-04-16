@@ -37,31 +37,31 @@ export default function Content(props) {
 
 	async function transcriptParser() {
 		summaryArray = data.summary.split('\n');
-		transcript_array = data.transcript_chunked.split("\n")
-		/*
+		/* transcript_array = data.transcript_chunked.split("\n") */
+
 		var parser = new srtParser2();
 
-					var srt_array = parser.fromSrt(data.transcript);
-		
-				let nothing = '';
-				let count = 0;
-		
-				transcript.push('00:00:00');
-		
-				for (let i = 0; i < srt_array.length; i++) {
-					count = count + 1;
-					nothing = nothing + ' ' + srt_array[i].text;
-					if (
-						count > 6 &&
-						srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
-					) {
-						transcript.push(nothing);
-						transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-						//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-						count = 0;
-						nothing = '';
-					}
-				} */
+		var srt_array = parser.fromSrt(data.transcript);
+
+		let nothing = '';
+		let count = 0;
+
+		transcript.push('00:00:00');
+
+		for (let i = 0; i < srt_array.length; i++) {
+			count = count + 1;
+			nothing = nothing + ' ' + srt_array[i].text;
+			if (
+				count > 6 &&
+				srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
+			) {
+				transcript.push(nothing);
+				transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
+				//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
+				count = 0;
+				nothing = '';
+			}
+		}
 
 
 	}
@@ -196,10 +196,10 @@ export default function Content(props) {
 											{isLoading ? (
 												<Loading />
 											) : (
-												transcript_array.map((item, index) => {
+												transcript.map((item, index) => {
 													/* transcriptParser(); */
 
-													if (index % 4 === 1 && index < transcript_array.length - 1) {
+													if (index % 2 === 0 && index < transcript.length - 1) {
 														return (
 															<a
 																onClick={handleClick}
@@ -210,10 +210,10 @@ export default function Content(props) {
 																key={index}
 															>
 																<br></br>
-																{item.substring(0, 8)}{' '}
+																{item}{' '}
 															</a>
 														);
-													} else if (index % 4 === 2 && index < transcript_array.length - 1) {
+													} else if (index % 2 === 1 && index < transcript.length - 1) {
 														return (
 															<div key={index}>
 																<br></br>

@@ -117,6 +117,14 @@ export default function Welcome() {
 				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning. We will
 				notify you with email when it's ready!{' '}
 			</p>
+			<ul className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+				<li>
+					Alphy works best with the content in English!
+				</li>
+				<li>
+					Videos longer than 2.5 hours are not allowed!
+				</li>
+			</ul>
 			<Toaster />
 			<div className="items-center justify-center w-full lg:space-x-4 lg:flex">
 				<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
