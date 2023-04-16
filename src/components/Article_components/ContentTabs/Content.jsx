@@ -72,19 +72,20 @@ export default function Content(props) {
 		<div className={`container grow mx-auto md:px-10 xl:px-20 pb-20 overflow-x-hidden`}>
 			<div>
 				<div className="grid grid-cols-3">
-					<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
-						{data.title}
-					</h1>
-					<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike font-light">
-						{data.creator_name}
-					</h2>
+					<div className="col-span-2">
+						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-20 lg:text-3xl text-blueLike font-bold">
+							{data.title}
+						</h1>
+						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike font-light">
+							{data.creator_name}
+						</h2>
+					</div>
 
-
-					<div className="flex flex-col items-center mt-5 cursor-pointer lg:hidden">
+					<div className="flex flex-col mt-10 ml-2 items-center cursor-pointer lg:hidden">
 						{data.source_type === 'yt' ? (
 							<a href={`https://www.youtube.com/watch?v=${data.source_id}`}>
-								<img src="/youtubeicon.png" width={80} />
-								<p className="-mt-3 font-semibold">Click to Watch</p>
+								<img className="ml-1" src="/youtubeicon.png" width={80} />
+								<p className="-mt-3  text-center items-center text-sm font-medium">Click to Watch</p>
 							</a>
 						) : (
 							<a className="mt-7" href={`https://twitter.com/i/
@@ -92,10 +93,11 @@ export default function Content(props) {
               
               /${data.source_id}`}>
 								<img src={Twitter} width={100} />
-								<p className="mt-3 font-semibold text-zinc-500">Click to Listen</p>
+								<p className="mt-3 text-sm font-medium text-center items-center ">Click to Listen</p>
 							</a>
 						)}
 					</div>
+
 				</div>
 
 
