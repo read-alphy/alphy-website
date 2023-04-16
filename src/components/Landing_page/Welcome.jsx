@@ -37,25 +37,25 @@ export default function Welcome() {
 			if (inputValue.includes('https://www.youtube.com')) {
 				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
 				video_source = "yt"
-				console.log(videoId)
+
 
 			}
 
 			else if (inputValue.includes('https://youtu.be')) {
 				videoId = inputValue.split('/').pop().split("?")[0];
 				video_source = "yt"
-				console.log(videoId)
+
 			}
 
 			else if (inputValue.includes('https://m.youtube.com')) {
 				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
 				video_source = "yt"
-				console.log(videoId)
+
 			}
 			else if (inputValue.includes('https://twitter.com/i/spaces')) {
 				videoId = inputValue.split('/').pop().split("?")[0];
 				video_source = "sp"
-				console.log(videoId)
+
 			}
 
 
