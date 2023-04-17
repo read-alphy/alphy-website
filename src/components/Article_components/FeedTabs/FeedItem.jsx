@@ -12,7 +12,7 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 	} else if (item.source_type === 'sp') {
 		imageUrl = Twitter;
 	}
-
+	console.log(item)
 	const navigate = useNavigate();
 	const windowSize = useWindowSize();
 	return (
@@ -40,9 +40,9 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 					</div>
 
 					<div className="text-xs w-1/2">
-						{!item.is_complete ? (
+						{item.is_complete ? null : (
 							<div className="side-feed-creator font-bold text-purpleLike"> 📝 IN PROGRESS</div>
-						) : null}
+						)}
 						<div className="text-sm video-text text-bordoLike font-semibold">{item.title}</div>
 						<div className="side-feed-creator font-italic text-purpleLike">{item.creator_name}</div>
 

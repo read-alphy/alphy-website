@@ -8,12 +8,15 @@ import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
+
 export default function Welcome() {
 	const navigate = useNavigate();
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
 	const [loading, setLoading] = useState(false);
 	const { currentUser } = useAuth();
+
+
 
 	const handleSubmit = (event, selectedOption) => {
 		toast.dismiss();
@@ -81,16 +84,16 @@ export default function Welcome() {
 							setLoading(false);
 							setInputValue('');
 							navigate(`/${video_source}/${videoId}`)
-							if (response.status === 200 || response.status === 201 || response.status === 202) {
-								toast.success(
-									'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
-									{ duration: 3000 },
-								);
-							} else {
-								toast.error('There was an error submitting the form. Please try again.', {
-									duration: 3000,
-								});
-							}
+							/* 							if (response.status === 200 || response.status === 201 || response.status === 202) {
+															toast.success(
+																'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
+																{ duration: 3000 },
+															);
+														} else {
+															toast.error('There was an error submitting the form. Please try again.', {
+																duration: 3000,
+															});
+														} */
 						})
 						.catch((error) => {
 							toast.error('There was an error submitting the form. Please try again.', {
@@ -176,7 +179,7 @@ export default function Welcome() {
 							<button data-popover-target="popover-description" data-popover-placement="left" data-popover-offset="20" type="button"><svg class="w-5 h-5 ml-1 pt-1 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button>
 
 							Instructions for Alphy</p>
-						<div id="popover-description" class="popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 border border-slate-800 rounded-lg shadow-sm opacity-0 w-72">
+						<div data-popover id="popover-description" class="popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 border border-slate-800 rounded-lg shadow-sm opacity-0 w-72">
 							<div class="p-3 space-y-2">
 								<h3 class="font-semibold text-gray-900">Before submitting</h3>
 								<p> Please make sure the duration of the content does not exceed <strong className="underline">3 hours</strong>. Otherwise, you will get an error. </p>
