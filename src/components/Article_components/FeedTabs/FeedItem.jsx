@@ -12,7 +12,7 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 	} else if (item.source_type === 'sp') {
 		imageUrl = Twitter;
 	}
-	console.log(item)
+
 	const navigate = useNavigate();
 	const windowSize = useWindowSize();
 	return (

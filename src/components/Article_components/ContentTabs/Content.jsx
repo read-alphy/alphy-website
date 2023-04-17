@@ -234,7 +234,7 @@ export default function Content(props) {
 				) : (
 					<p className="text-xl text-zinc-600 font-normal max-w-screen-md mx-auto p-3 lg:p-20">
 
-						Alphy is doing it's best to process this video, it will be ready in a few minutes. In the
+						Alphy is doing its best to process this video, it will be ready in a few minutes. In the
 						meantime, you can check out other videos.
 
 					</p>
