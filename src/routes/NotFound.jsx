@@ -1,11 +1,24 @@
 // create a 404 page
+import { Link } from "react-router-dom";
+import Smiley from "../img/smiling_robot.png";
+
 
 export default function NotFound() {
+
 	return (
-		<div className="flex items-center w-full justify-center text-center h-[90vh] ">
-			<h1 className="welcome-prompt text-5xl flex md:flex-row flex-col justify-center text-bordoLike text-[2.25rem] font-semibold">
-				Not Found
+		<div className="flex flex-col items-center w-full justify-center text-blueLike text-center h-[70vh] ">
+			<img src={Smiley} className="opacity-70 saturate-50"></img>
+			<h1 className="welcome-prompt mb-5 text-6xl flex md:flex-row flex-col justify-center  text-[2.25rem] font-bold">
+				Oops!
 			</h1>
+			<h2 className="mb-5">Sorry, we can't seem to find the page you were looking for :( <br></br>   </h2>
+			<div className="flex flex-row">
+				<Link to="/" type="button" class="text-bordoLike mr-5 underline">Go Home</Link>
+
+				<a href="https://twitter.com/alphyapp" type="button" class="text-bordoLike ml-5 underline">Reach us</a>
+
+			</div>
+
 		</div>
 	);
 }
