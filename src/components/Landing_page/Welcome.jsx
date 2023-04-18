@@ -35,7 +35,7 @@ export default function Welcome() {
 	const options = {
 		placement: 'left',
 		triggerType: 'hover',
-		offset: 30,
+		offset: 20,
 
 	};
 
