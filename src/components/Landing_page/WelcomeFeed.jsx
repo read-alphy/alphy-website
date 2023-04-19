@@ -13,6 +13,7 @@ function Feed() {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 
+
 	useEffect(() => {
 		getData(0, true, true);
 	}, []);
@@ -20,6 +21,8 @@ function Feed() {
 	const temp = 10;
 	const limit = temp;
 	const searchInputRef = React.useRef(null);
+
+
 
 	const getData = (offset, firstTime, hasMore) => {
 		if (!hasMore) {
