@@ -170,7 +170,7 @@ export default function Welcome() {
 						<div className="">Transcribe</div>
 					</div>
 				</section>
-				online media with just one click. It's free.
+				audiovisual content with just one click. It's free.
 			</div>
 			<p className="text-bordoLike text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
