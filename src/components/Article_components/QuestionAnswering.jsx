@@ -67,7 +67,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 		}
 	};
 
-
+	console.log(answerData.answer)
 	const fetchData = () => {
 		toast.dismiss();
 		setShowBaseQA(false);
@@ -111,7 +111,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 
 							for (let i = 0; i < source_id.transcript.length; i++) {
-								console.log(source_id.transcript[i])
+
 
 
 								/* 								console.log(source_id.transcript[i])
@@ -156,11 +156,13 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 		}
 	};
 
+
 	return (
 		<div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}>
 			<div className="Md:pl-10 md:pr-10 pt-10">
 				<Toaster position="bottom-center" />
 				<h1 className="text-xl pb-8 text-zinc-600">Ask real questions and get real answers.</h1>
+
 				{/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
 				<div className="flex items-center">
 					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
@@ -289,11 +291,16 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 					<div> </div>
 				)}
 
+
+
+
+
 				{answerData.length !== 0 && !showBaseQA && showUserQA ? (
 					<div className="text-zinc-600 pb-10">
 						{answerData.answer ? (
-							<div>
+							<div className="answer-area" >
 								<div>
+
 
 									<h1 className="mb-4 text-xl flex flex-row ">Answer from Alphy
 
@@ -305,13 +312,17 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 									</h1>
 								</div>
-								<TypeIt
+								<TypeIt className="mb-3"
+
 									options={{
 										strings: answerData.answer.split('\n'),
+										html: true,
 										speed: 3,
 										cursorChar: '',
 									}}
 								/>
+
+
 
 
 								<button
