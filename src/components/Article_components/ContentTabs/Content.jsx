@@ -22,7 +22,7 @@ export default function Content(props) {
 	const [dataLoaded, setDataLoaded] = useState(false);
 
 	let summaryArray = '';
-	let transcript_array = []
+
 
 
 	const handleClick = (event) => {
@@ -52,7 +52,7 @@ export default function Content(props) {
 			count = count + 1;
 			nothing = nothing + ' ' + srt_array[i].text;
 			if (
-				count > 6 ||
+				count > 6 &&
 				srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
 			) {
 				transcript.push(nothing);
