@@ -9,6 +9,7 @@ import srtParser2 from 'srt-parser-2';
 import { Tab, Tabs } from 'react-bootstrap';
 import Twitter from '../../../img/twitter_spaces.png';
 import Loading from '../../Loading';
+import working from './working.svg';
 
 export default function Content(props) {
 	const [loading, setLoading] = useState(false);
@@ -70,6 +71,7 @@ export default function Content(props) {
 
 	return (
 		<div className={`container grow mx-auto md:px-10 xl:px-20 pb-20 overflow-x-hidden`}>
+
 			<div>
 				<div className="grid grid-cols-3">
 					<div className="col-span-2">
@@ -96,9 +98,11 @@ export default function Content(props) {
 								<p className="mt-3 text-sm font-medium text-center items-center ">Click to Listen</p>
 							</a>
 						)}
+
 					</div>
 
 				</div>
+
 
 
 				<div className="flex flex-col xl:flex-row mt-16 mb-10 items-center">
@@ -232,12 +236,15 @@ export default function Content(props) {
 						</div>
 					</div>
 				) : (
-					<p className="text-xl text-zinc-600 font-normal max-w-screen-md mx-auto p-3 lg:p-20">
+					<div className="flex flex-col">
+						<p className="text-xl text-zinc-600 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
 
-						Alphy is doing its best to process this video, it will be ready in a few minutes. In the
-						meantime, you can check out other videos.
+							Alphy is doing its best to process this video, it will be ready in a few minutes. In the
+							meantime, you can check out other videos.
+							<img className="opacity-30 mx-auto" src={working} alt="My SVG" />
+						</p>
 
-					</p>
+					</div>
 				)}
 			</div>
 		</div>

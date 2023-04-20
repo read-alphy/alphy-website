@@ -30,6 +30,11 @@ body {
 	font-weight: 400
 }
 
+.answer-area p::before {
+	content: " ";
+
+}
+
 .answer-area h1,
 h2,
 h3 {

@@ -67,7 +67,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 		}
 	};
 
-	console.log(answerData.answer)
+
 	const fetchData = () => {
 		toast.dismiss();
 		setShowBaseQA(false);
@@ -298,11 +298,11 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 				{answerData.length !== 0 && !showBaseQA && showUserQA ? (
 					<div className="text-zinc-600 pb-10">
 						{answerData.answer ? (
-							<div className="answer-area" >
+							<div  >
 								<div>
 
 
-									<h1 className="mb-4 text-xl flex flex-row ">Answer from Alphy
+									<h1 className="text-xl flex flex-row ">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -312,18 +312,19 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 									</h1>
 								</div>
-								<TypeIt className="mb-3"
+								<div className="answer-area text-l ">
+									<TypeIt className="mb-3"
 
-									options={{
-										strings: answerData.answer.split('\n'),
-										html: true,
-										speed: 3,
-										cursorChar: '',
-									}}
-								/>
+										options={{
+											strings: answerData.answer.split('\n'),
+											html: true,
+											speed: 1,
+											cursorChar: '',
+										}}
+									/>
 
 
-
+								</div>
 
 								<button
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
@@ -415,7 +416,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 						{
 
 							<div>
-								<div className="answer-area">
+								<div >
 									<h1 className="mb-4 text-xl flex flex-row">Answer from Alphy
 
 
@@ -426,7 +427,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 
 									</h1>
-									<p>{source_id.key_qa[baseQuestion].answer}</p>
+									<p className="answer-area" dangerouslySetInnerHTML={{ __html: source_id.key_qa[baseQuestion].answer }} />
 								</div>
 
 								<button
