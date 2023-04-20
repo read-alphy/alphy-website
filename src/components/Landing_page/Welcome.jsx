@@ -28,8 +28,13 @@ export default function Welcome() {
 			toast("⚠️ We are encountering some technical issues. \n\n You may experience long waiting times or errors with your videos longer than 1 hour.", {
 				duration: 5000,
 				position: "top-center",
-				className: "text-xl	font-semibold",
-				icon: ""
+				className: "text-2xl min-w-[400px]",
+				icon: "",
+				style: {
+
+					margin: "20px",
+
+				}
 			})
 		}
 	}, []);
