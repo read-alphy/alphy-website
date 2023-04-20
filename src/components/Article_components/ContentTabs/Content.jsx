@@ -22,6 +22,7 @@ export default function Content(props) {
 	const [timestamp, setTimestamp] = useState();
 	const [dataLoaded, setDataLoaded] = useState(false);
 
+	console.log(data.transcript)
 	let summaryArray = '';
 
 
@@ -53,7 +54,7 @@ export default function Content(props) {
 			count = count + 1;
 			nothing = nothing + ' ' + srt_array[i].text;
 			if (
-				count > 6 &&
+				(count > 6 || count >= srt_array.length) &&
 				srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
 			) {
 				transcript.push(nothing);

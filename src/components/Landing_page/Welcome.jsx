@@ -25,7 +25,7 @@ export default function Welcome() {
 		if (!showToaster) {
 			// if not, display the toaster and set a flag in localStorage
 			setShowToaster(true);
-			toast("⚠️ We are encountering some technical issues. You may encounter long waiting times or errors with your videos longer than 1 hour.", {
+			toast("⚠️ We are encountering some technical issues. \n\n You may experience long waiting times or errors with your videos longer than 1 hour.", {
 				duration: 5000,
 				position: "top-center",
 				className: "text-xl	font-semibold",
