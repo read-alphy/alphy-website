@@ -19,7 +19,7 @@ export default function About() {
 							<strong> • An AI-powered chatbot generated on top of the content transcript </strong> that allows you to ask questions and get AI-generated answers, unlocking an immense information capture potential for your the users.
 						</li>
 						<li className="pt-3">
-							<strong> • The summary and TL:DR of the content</strong> for you to cut down on time to get the most relevant information</li>
+							<strong> • The summary and TL:DR of the content</strong> for you to cut down on time to get the most relevant information.</li>
 					</ol>
 				</p>
 				<br></br>
