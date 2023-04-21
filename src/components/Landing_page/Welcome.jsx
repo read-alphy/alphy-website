@@ -18,7 +18,7 @@ export default function Welcome() {
 	const { currentUser } = useAuth();
 	const [showToaster, setShowToaster] = useState(false);
 
-	useEffect(() => {
+	/*useEffect(() => {
 		// check if the toaster has already been displayed
 
 
@@ -39,7 +39,7 @@ export default function Welcome() {
 		}
 	}, []);
 
-
+*/
 	/*
 	* $targetEl: required
 	* $triggerEl: required
