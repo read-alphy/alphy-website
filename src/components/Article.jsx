@@ -99,6 +99,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 	useEffect(() => {
 		const url = `${process.env.REACT_APP_API_URL}/summaries/${source_type}/${source_id}`;
+		console.log(url)
 		fetchData(url);
 	}, [location.pathname, navigate]);
 
