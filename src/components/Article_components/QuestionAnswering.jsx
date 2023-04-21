@@ -9,11 +9,12 @@ import './QA.css';
 import TypeIt from 'typeit-react';
 import { useAuth } from '../../hooks/useAuth';
 
-export default function QuestionAnswering(source_id, key_qa, data, transcript) {
-	// console.log(source_id.source_id, source_id.key_qa)
+export default function QuestionAnswering(props) {
+	// console.log(props.props, props.key_qa)
 
 	const QARef = useRef(null);
 
+	console.log(props.data.source_id)
 	const [source_timestamp1, setSource_timestamp1] = useState("")
 	const [source_timestamp2, setSource_timestamp2] = useState("")
 	const [source_timestamp3, setSource_timestamp3] = useState("")
@@ -31,6 +32,14 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 	const [inputError, setinputError] = useState(false);
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
+	const [variable, setVariable] = useState("");
+
+	function updateVariable(event) {
+
+		props.timestampChanger(event)
+
+	}
+
 
 
 	const handleClear = () => {
@@ -94,7 +103,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 					axios
 						.post(
-							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${source_id.data.source_type}/${source_id.source_id
+							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${props.data.source_type}/${props.data.source_id
 							}/question`,
 							inputValue,
 						)
@@ -110,27 +119,27 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 
 
-							for (let i = 0; i < source_id.transcript.length; i++) {
+							for (let i = 0; i < props.transcript.length; i++) {
 
 
 
-								/* 								console.log(source_id.transcript[i])
+								/* 								console.log(props.transcript[i])
 																console.log(x) */
 
-								if (source_id.transcript[i].includes(source1) === true) {
-									setSource_timestamp1(source_id.transcript[i - 1])
+								if (props.transcript[i].includes(source1) === true) {
+									setSource_timestamp1(props.transcript[i - 1])
 									console.log("true")
 
 								}
 
-								if (source_id.transcript[i].includes(source2) === true) {
-									setSource_timestamp2(source_id.transcript[i - 1])
+								if (props.transcript[i].includes(source2) === true) {
+									setSource_timestamp2(props.transcript[i - 1])
 									console.log("true")
 
 								}
 
-								if (source_id.transcript[i].includes(source3) === true) {
-									setSource_timestamp3(source_id.transcript[i - 1])
+								if (props.transcript[i].includes(source3) === true) {
+									setSource_timestamp3(props.transcript[i - 1])
 									console.log("true")
 								}
 							}
@@ -169,7 +178,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
                         <option onClick={handleOptionClear}> Questions we already answered</option>
 
-                        {Object.keys(source_id.key_qa).map((item, index) =>
+                        {Object.keys(props.key_qa).map((item, index) =>
                             <option value={optionValue} key={index} onClick={handleBaseQA} class="font-sans cursor-pointer mt-2  text-md font-base text-gray-800 bg-gray100 border border-gray-200 rounded-lg">
                                 {item}</option>
                         )
@@ -256,7 +265,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 								{' '}
 								Or check out the questions Alphy already answered for you
 							</p>
-							{Object.keys(source_id.key_qa).map((item, index) => (
+							{Object.keys(props.key_qa).map((item, index) => (
 
 								index % 2 == 0 ? <button
 									key={index}
@@ -302,7 +311,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 								<div>
 
 
-									<h1 className="text-xl flex flex-row ">Answer from Alphy
+									<h1 className="text-xl flex flex-row font-semibold">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -352,12 +361,13 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 								{answer ? (
 									<div>
 										<div>
-											<h1 className="mb-4 text-xl"> Sources from the video</h1>
+											<h1 className="mb-4 text-xl font-semibold md:mb-8"> Sources from the video sorted by relevance:</h1>
 
 											{answerData.sources.map((source, index) => (
 												<div>
-													<p key={index}>
-														{index + 1}. <br /> <br /></p>
+													<a className="underline">
+														{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+													</a>
 													{/* 	<div className="mb-5">
 														{(index === 0) ? <a className="text-blue-900 font-bold underline cursor-pointer mb-5">{source_timestamp1} </a> : null}
 
@@ -368,8 +378,10 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 													</div> */}
 
 
-													<p key={index}>
-														{source.text} <br /> <br />
+													<p className="mt-5" key={index}>
+														{source.text[0] === source.text[0].toUpperCase() ? "" : "..."}
+														{source.text}
+														{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
 													</p>
 												</div>
 											))}
@@ -417,7 +429,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 							<div>
 								<div >
-									<h1 className="mb-4 text-xl flex flex-row">Answer from Alphy
+									<h1 className="mb-4 text-xl flex flex-row font-semibold">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -427,7 +439,7 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 
 
 									</h1>
-									<p className="answer-area" dangerouslySetInnerHTML={{ __html: source_id.key_qa[baseQuestion].answer }} />
+									<p className="answer-area" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
 								</div>
 
 								<button
@@ -456,12 +468,19 @@ export default function QuestionAnswering(source_id, key_qa, data, transcript) {
 								{baseSources ? (
 									<div>
 										<div>
-											<h1 className="mb-4 text-xl"> Sources from the video</h1>
+											<h1 className="mb-4 text-xl font-semibold"> Sources from the video</h1>
 
-											{source_id.key_qa[baseQuestion]
-												? source_id.key_qa[baseQuestion].sources.map((source, index) => (
+											{props.key_qa[baseQuestion]
+												? props.key_qa[baseQuestion].sources.map((source, index) => (
 													<p key={index}>
-														{index + 1}. <br /> <br /> {source.text} <br /> <br />{' '}
+
+														<a className="underline md:cursor-pointer" onClick={updateVariable}>
+															{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+														</a>
+
+
+														<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
+
 													</p>
 												))
 												: null}

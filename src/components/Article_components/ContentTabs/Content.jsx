@@ -27,7 +27,23 @@ export default function Content(props) {
 
 
 
-	const handleClick = (event) => {
+
+	// for question answering
+	const timestampChanger = (event) => {
+		setAutoplay(1);
+		let formattedTimestamp = event.target.textContent;
+		const [hours, minutes, seconds] = formattedTimestamp.split(':');
+		setTimestamp(hours * 3600 + minutes * 60 + seconds.substring(0, 2) * 1)
+
+		/* 
+				setTimestamp(hours[0] === "0" ? hours[1] * 3600 : hours * 3600
+		
+					+ minutes[0] === "0" ? minutes[1] * 60 : minutes * 60
+		
+						+ seconds[0] === "0" ? seconds[1] * 1 : seconds.substring(0, 2) * 1) */
+
+	}
+	const handleClickTimestamp = (event) => {
 		setAutoplay(1);
 		let formattedTimestamp = event.target.textContent;
 		const [hours, minutes, seconds] = formattedTimestamp.split(':');
@@ -185,6 +201,7 @@ export default function Content(props) {
 							key_qa={data.key_qa}
 							data={data}
 							transcript={transcript}
+							timestampChanger={timestampChanger}
 						/>
 					)
 				)}
@@ -245,7 +262,7 @@ export default function Content(props) {
 													if (index % 2 === 0 && index < transcript.length - 1) {
 														return (
 															<a
-																onClick={handleClick}
+																onClick={handleClickTimestamp}
 																className={`${data.source_type === 'yt'
 																	? 'lg:cursor-pointer lg:pointer-events-auto'
 																	: ''
