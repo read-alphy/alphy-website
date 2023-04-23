@@ -15,7 +15,6 @@ function Feed() {
 	const [hasMore, setHasMore] = useState(true);
 	const { currentUser } = useAuth();
 
-
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
@@ -24,12 +23,9 @@ function Feed() {
 
 	useEffect(() => {
 		getData(0, true, true);
-		getDataPersonal(0, true, true);
-
-		if (currentUser !== null) {
-			getDataPersonal(0, true, true);
-
-		}
+		/* 		if (currentUser !== null) {
+					getDataPersonal(0, true, true);
+				} */
 
 	}, []);
 
@@ -39,6 +35,7 @@ function Feed() {
 
 	const navigateFeeds = (state) => {
 		setisPublic(!isPublic)
+		getDataPersonal(0, true, true);
 	}
 
 	const getData = (offset, firstTime, hasMore) => {
@@ -46,23 +43,23 @@ function Feed() {
 			return;
 		}
 		setIsLoading(true);
-		if (currentUser) {
-			axios
-				.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
-				)
-				.then((response) => {
-					setHasMore(!(response.data.length < limit));
 
-					if (firstTime) {
-						setData(response.data);
-					} else {
-						setData([...data, ...response.data]);
-					}
-					setIsLoading(false);
-				})
-		}
+		axios
+			.get(
+				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
+			)
+			.then((response) => {
+				setHasMore(!(response.data.length < limit));
+
+				if (firstTime) {
+					setData(response.data);
+				} else {
+					setData([...data, ...response.data]);
+				}
+				setIsLoading(false);
+			})
+
 	};
 
 	const getDataPersonal = (offset, firstTime, hasMorePersonal) => {
@@ -71,8 +68,8 @@ function Feed() {
 		}
 		setIsLoadingPersonal(true);
 		if (currentUser) {
+			setIsLoadingPersonal(true)
 			currentUser.getIdToken().then((idtoken) =>
-
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 					}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
@@ -82,9 +79,7 @@ function Feed() {
 				})
 					.then((response) => {
 						setHasMorePersonal(!(response.data.length < limit));
-
-
-
+						console.log(currentUser)
 						if (firstTime) {
 							setDataPersonal(response.data);
 
@@ -117,7 +112,7 @@ function Feed() {
 						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
 					</li>
 					<li class="mr-2">
-						<button onClick={() => setisPublic(false)} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"} ${currentUser == null || dataPersonal.length == 0 ? "pointer-events-none" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
+						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
 					</li>
 
 				</ul>
@@ -221,7 +216,7 @@ function Feed() {
 						<div
 							className={`
 							grid grid-cols-1 mt-10
-							${isLoading
+							${isLoadingPersonal
 									? 'lg:grid-cols-2 xl:grid-cols-2'
 									: data.length === 1
 										? 'lg:grid-cols-1 xl:grid-cols-1'
