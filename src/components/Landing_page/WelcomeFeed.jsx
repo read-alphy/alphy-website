@@ -70,28 +70,30 @@ function Feed() {
 			return;
 		}
 		setIsLoadingPersonal(true);
-		currentUser.getIdToken().then((idtoken) =>
+		if (currentUser) {
+			currentUser.getIdToken().then((idtoken) =>
 
-			axios.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
-				headers: {
-					'id-token': idtoken,
-				}
-			})
-				.then((response) => {
-					setHasMorePersonal(!(response.data.length < limit));
-
-
-
-					if (firstTime) {
-						setDataPersonal(response.data);
-
-					} else {
-						setDataPersonal([...dataPersonal, ...response.data]);
+				axios.get(
+					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
+					headers: {
+						'id-token': idtoken,
 					}
-					setIsLoadingPersonal(false);
-				}));
+				})
+					.then((response) => {
+						setHasMorePersonal(!(response.data.length < limit));
+
+
+
+						if (firstTime) {
+							setDataPersonal(response.data);
+
+						} else {
+							setDataPersonal([...dataPersonal, ...response.data]);
+						}
+						setIsLoadingPersonal(false);
+					}))
+		};
 	};
 
 	const loadMore = () => {
