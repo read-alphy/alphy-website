@@ -22,7 +22,9 @@ function Feed() {
 
 	useEffect(() => {
 		getData(0, true, true);
-		getDataPersonal(0, true, true);
+		if (currentUser) {
+			getDataPersonal(0, true, true);
+		}
 
 	}, []);
 
@@ -65,7 +67,9 @@ function Feed() {
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
-
+				headers: {
+					'id-token': currentUser["uid"],
+				}
 			}
 			)
 			.then((response) => {
@@ -99,7 +103,7 @@ function Feed() {
 			</h2>
 
 			<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-				<ul class="flex flex-wrap -mb-px">
+				{/* 				<ul class="flex flex-wrap -mb-px">
 					<li class="mr-2">
 						<button onClick={navigateFeeds} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
 					</li>
@@ -107,7 +111,7 @@ function Feed() {
 						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
 					</li>
 
-				</ul>
+				</ul> */}
 			</div>
 
 			<div className="main-page-feed-table-parent bg-zinc-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
