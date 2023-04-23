@@ -65,9 +65,7 @@ function Feed() {
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
 				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
-				headers: {
-					'id-token': currentUser["uid"],
-				}
+
 			}
 			)
 			.then((response) => {
