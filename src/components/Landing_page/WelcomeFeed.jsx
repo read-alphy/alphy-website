@@ -224,17 +224,21 @@ function Feed() {
 								}
 							gap-4
 							`}
-						>
+						>{currentUser == null ? <p className="text-center text-gray-500 items-center margin-auto text-xl mt-5 mb-5 w-full col-span-2">Sign in to see the content you previously submitted.</p> : null}
 							{isLoadingPersonal
 								? dataPersonal.length > 0
-									? dataPersonal
-										.map((item, index) => {
+									? dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
-											<FeedItem key={index} item={item} />
-										}).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />)) : [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
+									: [...Array(10)].map((item, index) => {
+										<div>
+
+											{currentUser ? <SkeletonItem key={index} /> :
+												null
+											}</div>
+									})
 								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 						</div>
-						{hasMore && (
+						{(hasMore && currentUser !== null) && (
 							<div className="w-full flex justify-center">
 								{
 									<button
