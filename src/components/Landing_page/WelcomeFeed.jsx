@@ -18,7 +18,7 @@ function Feed() {
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
 	const [dataPersonal, setDataPersonal] = useState([]);
-	const [isPublic, setisPublic] = useState(false);
+	const [isPublic, setisPublic] = useState(true);
 
 	useEffect(() => {
 		getData(0, true, true);
