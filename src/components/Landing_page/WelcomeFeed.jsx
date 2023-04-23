@@ -14,6 +14,7 @@ function Feed() {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const { currentUser } = useAuth();
+	console.log(currentUser)
 
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
@@ -84,7 +85,7 @@ function Feed() {
 						setDataPersonal(response.data);
 
 					} else {
-						setDataPersonal([...data, ...response.data]);
+						setDataPersonal([...dataPersonal, ...response.data]);
 					}
 					setIsLoadingPersonal(false);
 				}));
