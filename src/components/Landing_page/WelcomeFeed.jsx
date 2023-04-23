@@ -42,11 +42,7 @@ function Feed() {
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`, {
-				headers: {
-					'id-token': currentUser["uid"],
-				}
-			}
+				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
 			)
 			.then((response) => {
 				setHasMore(!(response.data.length < limit));
@@ -68,7 +64,11 @@ function Feed() {
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`,
+				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
+				headers: {
+					'id-token': currentUser["uid"],
+				}
+			}
 			)
 			.then((response) => {
 				setHasMorePersonal(!(response.data.length < limit));
