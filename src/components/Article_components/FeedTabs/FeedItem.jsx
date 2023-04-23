@@ -14,7 +14,7 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 	}
 
 	const navigate = useNavigate();
-	const windowSize = useWindowSize();
+
 	return (
 		<div className={'grid border-b-0'}>
 			<div className="flex w-full">
