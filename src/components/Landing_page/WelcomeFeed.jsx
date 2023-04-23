@@ -24,6 +24,7 @@ function Feed() {
 
 	useEffect(() => {
 		getData(0, true, true);
+		getDataPersonal(0, true, true);
 
 		if (currentUser !== null) {
 			getDataPersonal(0, true, true);
@@ -45,21 +46,23 @@ function Feed() {
 			return;
 		}
 		setIsLoading(true);
-		axios
-			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
-			)
-			.then((response) => {
-				setHasMore(!(response.data.length < limit));
+		if (currentUser) {
+			axios
+				.get(
+					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
+				)
+				.then((response) => {
+					setHasMore(!(response.data.length < limit));
 
-				if (firstTime) {
-					setData(response.data);
-				} else {
-					setData([...data, ...response.data]);
-				}
-				setIsLoading(false);
-			});
+					if (firstTime) {
+						setData(response.data);
+					} else {
+						setData([...data, ...response.data]);
+					}
+					setIsLoading(false);
+				})
+		}
 	};
 
 	const getDataPersonal = (offset, firstTime, hasMorePersonal) => {
