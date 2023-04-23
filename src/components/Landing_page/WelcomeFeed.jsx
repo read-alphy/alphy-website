@@ -14,7 +14,7 @@ function Feed() {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const { currentUser } = useAuth();
-	console.log(currentUser)
+
 
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
@@ -36,7 +36,7 @@ function Feed() {
 	const limit = temp;
 	const searchInputRef = React.useRef(null);
 
-	const navigateFeeds = () => {
+	const navigateFeeds = (state) => {
 		setisPublic(!isPublic)
 	}
 
@@ -109,10 +109,10 @@ function Feed() {
 			<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
 				<ul class="flex flex-wrap -mb-px">
 					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
+						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
 					</li>
 					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"} ${currentUser == null || dataPersonal.length == 0 ? "pointer-events-none" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
+						<button onClick={() => setisPublic(false)} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"} ${currentUser == null || dataPersonal.length == 0 ? "pointer-events-none" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
 					</li>
 
 				</ul>
