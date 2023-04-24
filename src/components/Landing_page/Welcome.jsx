@@ -18,7 +18,7 @@ export default function Welcome() {
 	const { currentUser } = useAuth();
 	const [showToaster, setShowToaster] = useState(false);
 
-
+/*
 	useEffect(() => {
 		// check if the toaster has already been displayed
 
@@ -40,7 +40,7 @@ export default function Welcome() {
 		}
 	}, []);
 
-
+*/
 
 
 
@@ -260,23 +260,23 @@ export default function Welcome() {
 				<div className="flex justify-center ">
 					{currentUser ? (
 						<button
-							className="w-1/3 border-2 pointer-events-none border-gray-300 px-8 bg-gray-300 text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-75"
+							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-75"
 							type="submit"
 							onClick={(e) => {
 								handleSubmit();
 							}}
 						>
-							Under Construction
+							Submit
 						</button>
 					) : (
 						<button
-							className="w-2/3 border-2 pointer-events-none border-gray-300 px-8 bg-gray-300 text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-10 md:w-auto lg:w-auto hover:opacity-75"
+							className="w-2/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-10 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
 							onClick={(e) => {
 								handleSubmit();
 							}}
 						>
-							Under Construction
+							Sign In To Submit
 						</button>
 					)}
 				</div>
