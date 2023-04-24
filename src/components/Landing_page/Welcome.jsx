@@ -19,17 +19,17 @@ export default function Welcome() {
 	const [showToaster, setShowToaster] = useState(false);
 
 
-	/*useEffect(() => {
+	useEffect(() => {
 		// check if the toaster has already been displayed
 
 
 		if (!showToaster) {
 			// if not, display the toaster and set a flag in localStorage
 			setShowToaster(true);
-			toast("⚠️ We are experiencing some technical problems. \n\n You may encounter long waiting times or errors with content longer than 1 hour.", {
+			toast("⚠️ We are experiencing exceptionally high demand. \n\n You may encounter longer than usual waiting times while we scale our infrastructure.", {
 				duration: 5000,
 				position: "top-center",
-				className: "text-xl min-w-[400px]",
+				className: "text-l min-w-[400px]",
 				icon: "",
 				style: {
 
@@ -40,12 +40,8 @@ export default function Welcome() {
 		}
 	}, []);
 
-*/
-	/*
-	* $targetEl: required
-	* $triggerEl: required
-	* options: optional
-	*/
+
+
 
 
 	// set the popover content element
