@@ -198,6 +198,7 @@ export default function Content(props) {
 					data.is_complete && (
 						<QuestionAnswering
 							source_id={data.source_id}
+							source_type={data.source_type}
 							key_qa={data.key_qa}
 							data={data}
 							transcript={transcript}
