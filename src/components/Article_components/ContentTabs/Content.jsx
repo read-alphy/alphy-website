@@ -10,10 +10,12 @@ import { Tab, Tabs } from 'react-bootstrap';
 import Twitter from '../../../img/twitter_spaces.png';
 import Loading from '../../Loading';
 import working from './working.svg';
+import { useWindowSize } from '../../../hooks/useWindowSize';
+
 
 export default function Content(props) {
 	const [loading, setLoading] = useState(false);
-
+	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
 
@@ -138,15 +140,12 @@ export default function Content(props) {
 
 					<div className="flex flex-col mt-10 ml-2 items-center cursor-pointer lg:hidden">
 						{data.source_type === 'yt' ? (
-							<a href={`https://www.youtube.com/watch?v=${data.source_id}`}>
+							<a target="_blank" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 								<img className="ml-1" src="/youtubeicon.png" width={80} />
 								<p className="-mt-3  text-center items-center text-sm font-medium">Click to Watch</p>
 							</a>
 						) : (
-							<a className="mt-7" href={`https://twitter.com/i/
-              
-              
-              /${data.source_id}`}>
+							<a className="mt-7" target="_blank" href={`https://twitter.com/i/${data.source_id}`}>
 								<img src={Twitter} width={100} />
 								<p className="mt-3 text-sm font-medium text-center items-center ">Click to Listen</p>
 							</a>
@@ -163,11 +162,11 @@ export default function Content(props) {
 						{data.source_type === 'sp' ? (
 
 							<div className="block w-2/3 ">
-								<a href={`https://twitter.com/i/spaces/${data.source_id}`}>
+								<a target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 									{' '}
 									<img className=" cursor-pointer " src={Twitter}></img>
 								</a>
-								<a
+								<a target="_blank"
 									href={`https://twitter.com/i/spaces/${data.source_id}`}
 									className="text-l text-zinc-600 mt-3 cursor-pointer"
 								>
@@ -262,17 +261,33 @@ export default function Content(props) {
 
 													if (index % 2 === 0 && index < transcript.length - 1) {
 														return (
-															<a
-																onClick={handleClickTimestamp}
-																className={`${data.source_type === 'yt'
-																	? 'lg:cursor-pointer lg:pointer-events-auto'
-																	: ''
-																	} pointer-events-none lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline`}
-																key={index}
-															>
-																<br></br>
-																{item}{' '}
-															</a>
+															windowSize > 999 && data.source_type === "yt" ?
+																<a
+																	onClick={handleClickTimestamp}
+																	className={`${data.source_type === 'yt'
+																		? 'lg:cursor-pointer lg:pointer-events-auto'
+																		: ''
+																		} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline`}
+																	key={index}
+																>
+																	<br></br>
+																	{item}{' '}
+																</a> :
+																<a
+
+																	target="_blank" href={`https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}`}
+
+
+																	className={`${data.source_type === 'yt'
+																		? 'lg:cursor-pointer lg:pointer-events-auto'
+																		: ''
+																		}  lg:pointer-events-auto lg:text-slate-900 font-bold underline`}
+																	key={index}
+																>
+																	<br></br>
+																	{item}{' '}
+																</a>
+
 														);
 													} else if (index % 2 === 1 && index < transcript.length - 1) {
 														return (
