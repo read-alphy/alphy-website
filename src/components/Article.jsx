@@ -122,7 +122,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen px-4 overflow-y-auto"><SideFeed setCollapsed={setCollapsed} source_id={source_id} collapser={Collapser} /></div>
+						<div className="h-screen "><SideFeed setCollapsed={setCollapsed} source_id={source_id} collapser={Collapser} /></div>
 					</div>
 				</div>
 
