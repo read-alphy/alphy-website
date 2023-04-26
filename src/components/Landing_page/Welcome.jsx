@@ -18,29 +18,29 @@ export default function Welcome() {
 	const { currentUser } = useAuth();
 	const [showToaster, setShowToaster] = useState(false);
 
-/*
-	useEffect(() => {
-		// check if the toaster has already been displayed
+
+	/* 	useEffect(() => {
+			// check if the toaster has already been displayed
+	
+	
+			if (!showToaster) {
+				// if not, display the toaster and set a flag in localStorage
+				setShowToaster(true);
+				toast("We are getting re", {
+					duration: 5000,
+					position: "top-center",
+					className: "text-l min-w-[400px]",
+					icon: "",
+					style: {
+	
+						margin: "20px",
+	
+					}
+				})
+			}
+		}, []); */
 
 
-		if (!showToaster) {
-			// if not, display the toaster and set a flag in localStorage
-			setShowToaster(true);
-			toast("⚠️ We are experiencing exceptionally high demand. \n\n You may encounter longer than usual waiting times while we scale our infrastructure.", {
-				duration: 5000,
-				position: "top-center",
-				className: "text-l min-w-[400px]",
-				icon: "",
-				style: {
-
-					margin: "20px",
-
-				}
-			})
-		}
-	}, []);
-
-*/
 
 
 

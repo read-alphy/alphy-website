@@ -328,8 +328,8 @@ export default function QuestionAnswering(props) {
 										options={{
 											strings: answerData.answer.split('\n'),
 											html: true,
-											speed: 1,
-											cursorChar: '',
+											speed: 0.1,
+											cursorChar: "",
 										}}
 									/>
 
