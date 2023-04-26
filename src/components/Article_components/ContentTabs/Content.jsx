@@ -19,6 +19,7 @@ export default function Content(props) {
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
 
+
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
@@ -63,6 +64,7 @@ export default function Content(props) {
 			var parser = new srtParser2();
 
 			var srt_array = parser.fromSrt(data.transcript);
+			console.log(srt_array)
 
 
 			let nothing = '';
@@ -83,6 +85,15 @@ export default function Content(props) {
 					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
 					count = 0;
 					nothing = '';
+				}
+				// in case missing punctuation, push it anyway
+				else if (count > 12) {
+					transcript.push(nothing);
+					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
+					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
+					count = 0;
+					nothing = '';
+
 				}
 
 			}
@@ -113,6 +124,7 @@ export default function Content(props) {
 					count = 0;
 					nothing = '';
 				}
+
 
 			}
 		}
