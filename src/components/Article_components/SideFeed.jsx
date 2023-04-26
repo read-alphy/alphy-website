@@ -161,7 +161,7 @@ function SideFeed({ setCollapsed, source_id }) {
 			</form>
 			<div className="signed-in-feed flex">
 				{/* <div className="h-[80vh] overflow-y-scroll pl-1 pr-5" onScroll={handleScroll}> */}
-				<div className="h-[76vh] overflow-y-scroll pl-1 pr-5">
+				<div className="h-[65vh] md:h-[76vh] overflow-y-scroll pl-1 pr-5">
 					<div className="items " ref={feedRef}>
 						{isLoading
 							? // if data is not empty, show the data then show 10 skeletons
