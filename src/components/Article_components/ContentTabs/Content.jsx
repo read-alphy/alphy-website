@@ -125,6 +125,15 @@ export default function Content(props) {
 					nothing = '';
 				}
 
+				else if (count > 12) {
+					transcript.push(nothing);
+					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
+					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
+					count = 0;
+					nothing = '';
+
+				}
+
 
 			}
 		}
