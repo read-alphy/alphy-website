@@ -13,10 +13,10 @@ export default function About() {
 					help of artificial intelligence. Upon submitting the link for a YouTube video or Twitter Spaces, Alphy gives you:
 					<ol className="mt-5">
 						<li className="pt-3">
-							<strong> • A highly accurate transcript </strong> of the content with timestamps, ready to use on any online video outlet.
+							<strong> • A highly accurate transcript </strong> of the content with timestamps, ready to use on your videos.
 						</li>
 						<li className="pt-3">
-							<strong> • An AI-powered chatbot generated on top of the content transcript </strong> that allows you to ask questions and get AI-generated answers, unlocking an immense information capture potential for your the users.
+							<strong> • An AI-powered chatbot generated on top of the content </strong> so that you can ask questions and get AI-generated answers, unlocking an immense information capture for the viewers.
 						</li>
 						<li className="pt-3">
 							<strong> • The summary and TL:DR of the content</strong> for you to cut down on time to get the most relevant information.</li>
