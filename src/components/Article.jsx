@@ -15,6 +15,10 @@ function Article({ source_type, collapsed, setCollapsed }) {
 	const navigate = useNavigate();
 	const source_id = location.pathname.split('/')[2];
 
+	const Collapser = () => {
+		setCollapsed(!collapsed);
+	};
+
 	const handleScroll = (target) => {
 		setCollapsed(true);
 		navigate('/');
@@ -103,7 +107,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 		fetchData(url);
 	}, [location.pathname, navigate]);
 
-	const sideFeed = <SideFeed setCollapsed={setCollapsed} source_id={source_id} />;
+
 
 	return (
 		<div className="article ">
@@ -112,18 +116,18 @@ function Article({ source_type, collapsed, setCollapsed }) {
 					}`}
 			></div>
 			<div className="flex flex-row article-body ">
-				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[400px]`}>{sideFeed}</div>
+				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[400px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} collapser={Collapser} /></div>
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[20vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed' : 'ham-not-collapsed'
+					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[18vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen px-4 overflow-y-auto">{sideFeed}</div>
+						<div className="h-screen px-4 overflow-y-auto"><SideFeed setCollapsed={setCollapsed} source_id={source_id} collapser={Collapser} /></div>
 					</div>
 				</div>
 
 				<div
-					className={`scrolling px-4 mx-auto max-h-[90vh] ${collapsed ? ' ' : ' blur-sm sm:blur-none max-h-[80vh] sm:max-h-[90vh] '
+					className={`scrolling px-4 mx-auto max-h-[90vh] ${collapsed ? 'hidden' : ' blur-sm sm:blur-none max-h-[80vh] sm:max-h-[90vh] '
 						}}`}
 				>
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}

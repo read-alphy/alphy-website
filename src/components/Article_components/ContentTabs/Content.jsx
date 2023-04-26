@@ -64,7 +64,7 @@ export default function Content(props) {
 			var parser = new srtParser2();
 
 			var srt_array = parser.fromSrt(data.transcript);
-			console.log(srt_array)
+
 
 
 			let nothing = '';

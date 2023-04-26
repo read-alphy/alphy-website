@@ -23,6 +23,7 @@ const FeedItem = ({ item, setCollapsed, poi }) => {
 					onClick={() => {
 
 						navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
+						setCollapsed(true)
 
 					}}
 				>

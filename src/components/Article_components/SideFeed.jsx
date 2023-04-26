@@ -5,7 +5,9 @@ import { Tab, Tabs } from 'react-bootstrap';
 import FeedItem from './FeedTabs/FeedItem';
 import SkeletonItem from './FeedTabs/SkeletonItem';
 
-function SideFeed({ setCollapsed, source_id }) {
+function SideFeed(props) {
+
+
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
@@ -81,7 +83,7 @@ function SideFeed({ setCollapsed, source_id }) {
 
 	};
 	return (
-		<div className="user-feed-buttons">
+		<div>
 			<form
 				className="flex items-center h-[10vh] min-h-[50px] transparency max-w-[95%]"
 				onSubmit={(e) => {
@@ -168,21 +170,28 @@ function SideFeed({ setCollapsed, source_id }) {
 							data.length > 0
 								? data
 									.map((item, index) =>
-										item.source_id === source_id ? (
-											<FeedItem
-												key={index}
-												item={item}
-												setCollapsed={setCollapsed}
-												poi={true}
-											/>
+										item.source_id === props.source_id ? (
+											<div onClick={props.Collapser} className="null">
+												<FeedItem
+													key={index}
+													item={item}
+													setCollapsed={props.setCollapsed}
+
+													poi={true}
+												/>
+											</div>
 										) : (
-											<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
+											<div onClick={props.Collapser} className="null">
+												<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+											</div>
 										)
 									)
 									.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 								: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 							: data.map((item, index) => (
-								<FeedItem key={index} item={item} setCollapsed={setCollapsed} />
+								<div onClick={props.Collapser} className="null">
+									<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+								</div>
 							))}
 					</div>
 				</div>
