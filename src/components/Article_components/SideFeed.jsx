@@ -175,7 +175,7 @@ function SideFeed(props) {
 												<FeedItem
 													key={index}
 													item={item}
-													setCollapsed={props.setCollapsed}
+													Collapser={props.Collapser}
 
 													poi={true}
 												/>

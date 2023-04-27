@@ -215,7 +215,7 @@ export default function Content(props) {
 				{isLoading ? (
 					<Loading />
 				) : (
-					data.is_complete && (
+					data.key_qa && (
 						<QuestionAnswering
 							source_id={data.source_id}
 							source_type={data.source_type}

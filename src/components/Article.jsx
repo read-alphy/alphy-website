@@ -40,7 +40,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 			//changing page details
 			const pageTitle = document.getElementById('page-title');
 			if (pageTitle) {
-				pageTitle.innerHTML = response.data.title;
+				pageTitle.innerHTML = response.data.title ? response.data.title : 'Alphy';
 			}
 			const metaTagImage = document.querySelector('meta[property="og:image"]');
 			if (metaTagImage) {
@@ -116,13 +116,13 @@ function Article({ source_type, collapsed, setCollapsed }) {
 					}`}
 			></div>
 			<div className="flex flex-row article-body ">
-				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[400px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} collapser={Collapser} /></div>
+				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[400px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[18vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen "><SideFeed setCollapsed={setCollapsed} source_id={source_id} collapser={Collapser} /></div>
+						<div className="h-screen "><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
 					</div>
 				</div>
 
