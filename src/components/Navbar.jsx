@@ -79,12 +79,12 @@ function Navbar({ collapsed, setCollapsed }) {
 	const isSp = useLocation().pathname.includes('/sp');
 
 	return (
-		<div className={`items-center ${isYt || isSp ? "" : "mx-auto max-w-[1000px]"}  justify-between`}>
+		<div className={`items-center ${isYt || isSp ? "" : "mx-auto max-w-[1200px]"}  justify-between`}>
 			<div
-				className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike font-bold h-[8vh] min-h-[50px] ${collapsed ? ' ' : '  '
+				className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike font-bold h-[8vh] min-h-[40px] ${collapsed ? ' ' : '  '
 					}`}
 			>
-				<div className={`pl-10 flex items-center ${(window.innerWidth > 999 && (isYt || isSp)) ? "bg-zinc-100 " : ""}  h-[10vh] min-h-[50px] min-w-[300px] w-[300px]`}>
+				<div className={`pl-10 flex items-center ${(window.innerWidth > 999 && (isYt || isSp)) ? "bg-zinc-100 " : ""}  h-[10vh] min-h-[40px] min-w-[300px] w-[300px]`}>
 					<Link to="/">
 						{/* <img className="w-10" src={Logo} /> */}
 						<h1 className="text-2xl">ALPHY</h1>
@@ -92,12 +92,12 @@ function Navbar({ collapsed, setCollapsed }) {
 				</div>
 
 				<div className="flex ">
-					<div className=" navbar-right-section ">
-						<div className=" grid grid-cols-3 gap-4 mt-6">
+					<div >
+						<div className=" grid grid-cols-3 gap-4 mt-6 ">
 							<div
 								type="button"
 								onClick={() => handleScroll('feedback')}
-								className={`hidden md:col-span-1 cursor-pointer text-center font-semibold text-blueLike md:block mr-5 pt-2`}
+								className={`hidden md:col-span-1 cursor-pointer text-center font-semibold text-blueLike md:block pt-2`}
 							>
 								Reach Us
 							</div>
@@ -145,7 +145,7 @@ function Navbar({ collapsed, setCollapsed }) {
 							<div
 								id={'nav-icon3'}
 								onClick={() => setCollapsed(!collapsed)}
-								className={`block cursor-pointer ml-20 md:hidden ${collapsed ? ' ' : ' open '}`}
+								className={`block cursor-pointer col-span-3 mr-5 md:hidden ${collapsed ? ' ' : ' open '}`}
 							>
 								<span></span>
 								<span></span>

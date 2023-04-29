@@ -103,7 +103,7 @@ function SideFeed(props) {
 				<label htmlFor="simple-search" className="sr-only">
 					Search
 				</label>
-				<div className="relative w-full">
+				<div className="relative w-full mb-10">
 					<input
 						value={search}
 						ref={searchInputRef}
@@ -144,7 +144,7 @@ function SideFeed(props) {
 				<button
 					onClick={handleSearch}
 					type="submit"
-					className="p-3 ml-2 rounded-r-full drop-shadow-sm transition duration-400 ease-in-out text-sm font-medium  text-gray-400 bg-zinc-50 hover:bg-zinc-100 rounded-r-full  "
+					className="p-3 ml-2 mb-10 rounded-r-full drop-shadow-sm transition duration-400 ease-in-out text-sm font-medium  text-gray-400 bg-zinc-50 hover:bg-zinc-100 rounded-r-full  "
 				>
 					<svg
 						width="22"
@@ -165,7 +165,7 @@ function SideFeed(props) {
 			</form>
 			<div className="signed-in-feed flex">
 				{/* <div className="h-[80vh] overflow-y-scroll pl-1 pr-5" onScroll={handleScroll}> */}
-				<div className="h-[68vh] md:h-[90vh] overflow-y-scroll pl-1 md:pr-5">
+				<div className="h-[68vh] md:h-[77vh] overflow-y-scroll pl-1 md:pr-5">
 					<div className="items " ref={feedRef}>
 						{isLoading
 							? // if data is not empty, show the data then show 10 skeletons
@@ -204,7 +204,7 @@ function SideFeed(props) {
 				<div className="w-full flex justify-center">
 					{
 						<p
-							className="justify-center items-center text-center flex cursor-pointer text-zinc-500 md:min-h-[20px] pb-10  "
+							className="justify-center items-center pt-2 	text-center flex cursor-pointer text-zinc-500   "
 							onClick={loadMore}
 						>
 							{'Load more'}

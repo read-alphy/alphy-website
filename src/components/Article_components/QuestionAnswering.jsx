@@ -169,7 +169,7 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div className="md:max-h-[60vh] overflow-auto mx-auto" ref={QARef}>
+		<div className="md:max-h-[60vh] overflow-auto mx-auto pb-5" ref={QARef}>
 			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the video</p>
 			<div className="Md:pl-10 md:pr-10 ">
 
@@ -201,7 +201,7 @@ export default function QuestionAnswering(props) {
 							onKeyDown={handleKeyDown}
 							type="text"
 							id="search"
-							className={`block w-full drop-shadow-md p-3 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+							className={`block w-full drop-shadow-md p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
 								? 'border-1 border-red-300'
 								: 'border border-zinc-100'
 								} placeholder:italic rounded-l-full bg-zinc-50 focus:outline-none focus:border-slate-50 focus:ring-slate-50`}

@@ -171,7 +171,7 @@ export default function Content(props) {
 		<div ref={ref} className={`container grow mx-auto md:px-10 overflow-x-hidden`}>
 
 			<div>
-				<div className="grid grid-cols-3">
+				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className="col-span-2">
 						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-10 lg:text-3xl text-blueLike font-bold">
 							{data.title}

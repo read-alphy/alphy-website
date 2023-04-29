@@ -89,7 +89,7 @@ MAIN PAGE
 	padding: 10px;
 }
 
-.navbar-right-section {}
+
 
 
 
@@ -456,9 +456,6 @@ CONTENT PAGE
 	margin-bottom: 10px;
 }
 
-.article {
-	/* max-height: 92vh; */
-}
 
 .create-article {
 	align-items: center;
@@ -690,9 +687,6 @@ DIFFERENT SCREEN SIZES
 		margin-left: 30px;
 	}
 
-	.navbar-right-section {
-		padding-right: 0px;
-	}
 
 	.App {
 		padding: 0 !important;
