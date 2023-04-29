@@ -81,7 +81,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 		<div className={`items-center ${isYt || isSp ? "" : "mx-auto max-w-[1000px]"}  justify-between`}>
 			<div
-				className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike font-bold border-b border-zinc-100	 h-[8vh] min-h-[50px] ${collapsed ? ' ' : '  '
+				className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike font-bold h-[8vh] min-h-[50px] ${collapsed ? ' ' : '  '
 					}`}
 			>
 				<div className={`pl-10 flex items-center ${(window.innerWidth > 999 && (isYt || isSp)) ? "bg-zinc-100 " : ""}  h-[10vh] min-h-[50px] min-w-[300px] w-[300px]`}>
