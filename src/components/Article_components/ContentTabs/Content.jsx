@@ -185,12 +185,12 @@ export default function Content(props) {
 					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
 						{data.source_type === 'yt' ? (
 							<a target="_blank" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
-								<img className="ml-1" src="/youtubeicon.png" width={60} />
+								<img className="ml-1" src="/youtubeicon.png" width={100} />
 								<p className="-mt-3  text-center items-center text-sm font-medium">Click to Watch</p>
 							</a>
 						) : (
 							<a className="mt-7" target="_blank" href={`https://twitter.com/i/${data.source_id}`}>
-								<img src={Twitter} width={70} />
+								<img src={Twitter} width={100} />
 								<p className="mt-3 text-sm font-medium text-center items-center ">Click to Listen</p>
 							</a>
 						)}

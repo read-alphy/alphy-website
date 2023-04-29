@@ -91,19 +91,19 @@ function Navbar({ collapsed, setCollapsed }) {
 					</Link>
 				</div>
 
-				<div className="flex">
+				<div className="flex ">
 					<div className=" navbar-right-section ">
-						<div className=" grid gap-4">
+						<div className=" grid grid-cols-3 gap-4 mt-6">
 							<div
 								type="button"
 								onClick={() => handleScroll('feedback')}
-								className={`hidden cursor-pointer font-semibold text-blueLike md:block mr-5 pt-2`}
+								className={`hidden md:col-span-1 cursor-pointer text-center font-semibold text-blueLike md:block mr-5 pt-2`}
 							>
 								Reach Us
 							</div>
 							{/* <a href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light" width="250" height="54" /></a> */}
 							<div
-								className="hidden cursor-pointer font-semibold text-blueLike md:block mr-5 pt-2"
+								className="hidden md:col-span-1 cursor-pointer text-center font-semibold text-blueLike md:block  pt-2"
 								onClick={() => handleScroll('about')}
 							>
 								{' '}
@@ -123,7 +123,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 							{/* if user is in, show logout else login */}
 							{currentUser ? (
-								<div className="hiddenmd:block ">
+								<div className="hidden md:block md:col-span-1 ">
 									<button
 										className="hidden md:block bg-zinc-200 hover:bg-zinc-100 text-slate-600 font-semibold  py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 										onClick={handleSignOut}
@@ -134,7 +134,7 @@ function Navbar({ collapsed, setCollapsed }) {
 								</div>
 							) : (
 								<button
-									className="hidden md:block bg-zinc-200 hover:bg-zinc-100 text-slate-600 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+									className="hidden md:block md:col-span-1 bg-zinc-200 hover:bg-zinc-100 text-slate-600 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 									onClick={handleLoginWithGoogle}
 								>
 									<FaGoogle className="inline-block mr-2 mb-1" />
@@ -145,7 +145,7 @@ function Navbar({ collapsed, setCollapsed }) {
 							<div
 								id={'nav-icon3'}
 								onClick={() => setCollapsed(!collapsed)}
-								className={`block cursor-pointer md:hidden ${collapsed ? ' ' : ' open '}`}
+								className={`block cursor-pointer ml-20 md:hidden ${collapsed ? ' ' : ' open '}`}
 							>
 								<span></span>
 								<span></span>

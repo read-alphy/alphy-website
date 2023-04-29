@@ -133,7 +133,7 @@ function Feed() {
 					<label htmlFor="voice-search" className="sr-only">
 						Search
 					</label>
-					<div className="relative w-full">
+					<div className="relative w-full  ">
 						<input
 							ref={searchInputRef}
 							type="text"
@@ -141,13 +141,13 @@ function Feed() {
 								setSearch(e.target.value);
 							}}
 							id="voice-search"
-							className="bg-zinc-50 border border-slate-200 text-gray-900 text-sm rounded-l-full focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 block w-full sm:mt-10 py-3"
+							className="bg-zinc-50 border border-slate-200 text-gray-900 text-sm rounded-l-full mt-5 md:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 block w-full  py-3"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center py-3 pl-7 text-sm font-medium text-zinc-500 border border-slate-200 rounded-r-full drop-shadow-sm bg-zinc-50 hover:bg-zinc-100 transition duration-400 ease-in-ease-out sm:mt-10"
+						className="inline-flex items-center py-3 pl-7 text-sm font-medium text-zinc-500 mt-5 md:mt-0 border border-slate-200 rounded-r-full drop-shadow-sm bg-zinc-50 hover:bg-zinc-100 transition duration-400 ease-in-ease-out sm:mt-10"
 					>
 						<svg
 							aria-hidden="true"

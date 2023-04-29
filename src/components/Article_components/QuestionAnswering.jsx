@@ -201,7 +201,7 @@ export default function QuestionAnswering(props) {
 							onKeyDown={handleKeyDown}
 							type="text"
 							id="search"
-							className={`block w-full drop-shadow-md p-5 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+							className={`block w-full drop-shadow-md p-3 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
 								? 'border-1 border-red-300'
 								: 'border border-zinc-100'
 								} placeholder:italic rounded-l-full bg-zinc-50 focus:outline-none focus:border-slate-50 focus:ring-slate-50`}
@@ -237,7 +237,7 @@ export default function QuestionAnswering(props) {
 					<button
 						type="submit"
 						onClick={fetchData}
-						class="p-5 rounded-r-full drop-shadow-md  transition duration-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 rounded-md  hover:bg-zinc-100 "
+						class="p-3 px-5 rounded-r-full drop-shadow-md  transition duration-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 rounded-md  hover:bg-zinc-100 "
 					>
 						<svg
 							aria-hidden="true"
