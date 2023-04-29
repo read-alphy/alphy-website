@@ -106,13 +106,13 @@ function Feed() {
 				Explore the videos other users unlocked with Alphy
 			</h2>
 
-			<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-				<ul class="flex flex-wrap -mb-px">
+			<div class="text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700">
+				<ul class="flex ml-6 flex-wrap -mb-px">
 					<li class="mr-2">
-						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
+						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
 					</li>
 					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
+						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
 					</li>
 
 				</ul>
@@ -141,17 +141,17 @@ function Feed() {
 								setSearch(e.target.value);
 							}}
 							id="voice-search"
-							className="bg-zinc-50 border border-slate-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-zinc-500 focus:border-zinc-500 block w-full sm: mt-10 pl-5 p-2.5"
+							className="bg-zinc-50 border border-slate-200 text-gray-900 text-sm rounded-l-full focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 block w-full sm:mt-10 py-3"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-whiteLike bg-lightblueLike rounded-lg border border-bordoLike hover:bg-blueLike sm: mt-10"
+						className="inline-flex items-center py-3 pl-7 text-sm font-medium text-zinc-500 border border-slate-200 rounded-r-full drop-shadow-sm bg-zinc-50 hover:bg-zinc-100 transition duration-400 ease-in-ease-out sm:mt-10"
 					>
 						<svg
 							aria-hidden="true"
-							className="w-5 h-5 -ml-1"
+							className="w-5 h-5 mr-10"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"

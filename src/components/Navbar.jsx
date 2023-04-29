@@ -79,42 +79,53 @@ function Navbar({ collapsed, setCollapsed }) {
 	const isSp = useLocation().pathname.includes('/sp');
 
 	return (
-		<div className="">
+		<div className={`items-center ${isYt || isSp ? "" : "mx-auto max-w-[1000px]"}  justify-between`}>
 			<div
-				className={`navbar z-50 bg-bordoLike text-slate-100 font-bold h-[10vh] min-h-[50px] ${collapsed ? ' ' : '  '
+				className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike font-bold border-b border-zinc-100	 h-[8vh] min-h-[50px] ${collapsed ? ' ' : '  '
 					}`}
 			>
-				<div className="pl-10 flex flex-row ">
+				<div className={`pl-10 flex items-center ${(window.innerWidth > 999 && (isYt || isSp)) ? "bg-zinc-100 " : ""}  h-[10vh] min-h-[50px] min-w-[300px] w-[300px]`}>
 					<Link to="/">
 						{/* <img className="w-10" src={Logo} /> */}
 						<h1 className="text-2xl">ALPHY</h1>
 					</Link>
 				</div>
 
-				<div>
-					<div className=" navbar-right-section">
-						<div className="signed-in-navbar grid gap-4">
+				<div className="flex">
+					<div className=" navbar-right-section ">
+						<div className=" grid gap-4">
 							<div
 								type="button"
 								onClick={() => handleScroll('feedback')}
-								className={`cursor-pointer hidden md:block text-zinc-600 font-semibold bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700  rounded-lg text-sm px-5 py-2.5 text-center mr-4`}
+								className={`hidden cursor-pointer font-semibold text-blueLike md:block mr-5 pt-2`}
 							>
-								Give us feedback!
+								Reach Us
 							</div>
 							{/* <a href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light" width="250" height="54" /></a> */}
 							<div
-								className="hidden cursor-pointer font-semibold text-zinc-200 md:block mr-5 pt-2"
+								className="hidden cursor-pointer font-semibold text-blueLike md:block mr-5 pt-2"
 								onClick={() => handleScroll('about')}
 							>
 								{' '}
 								About{' '}
 							</div>
+							{/* 							<div
+								className="hidden cursor-pointer font-semibold text-blueLik md:block mr-5 pt-2"
+
+							>
+								{' '}
+								<Link to="/plans">
+									
+									Pricing
+								</Link>{' '}
+							</div> */}
+
 
 							{/* if user is in, show logout else login */}
 							{currentUser ? (
-								<div className="hidden md:block ">
+								<div className="hiddenmd:block ">
 									<button
-										className="hidden md:block bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold  py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+										className="hidden md:block bg-zinc-200 hover:bg-zinc-100 text-slate-600 font-semibold  py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 										onClick={handleSignOut}
 									>
 										<FaGoogle className="inline-block mr-2 mb-1" />
@@ -123,7 +134,7 @@ function Navbar({ collapsed, setCollapsed }) {
 								</div>
 							) : (
 								<button
-									className="hidden md:block bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+									className="hidden md:block bg-zinc-200 hover:bg-zinc-100 text-slate-600 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 									onClick={handleLoginWithGoogle}
 								>
 									<FaGoogle className="inline-block mr-2 mb-1" />
@@ -146,16 +157,16 @@ function Navbar({ collapsed, setCollapsed }) {
 				</div>
 			</div>
 			<div
-				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed '
+				className={`w-screen  border-[0.5px] border-b border-zinc-100  transition origin-top-right transform md:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed '
 					}`}
 			>
 				<div className="">
-					<div className="overflow-y-auto">
+					<div className="overflow-y-auto z-50">
 						<div className="flex">
-							<div className="w-1/3 flex">
+							<div className="w-3/12 flex">
 								<div className="justify-center items-center ml-auto mr-auto flex">
 									<div
-										className="text-l font-semibold text-slate-100 cursor-pointer"
+										className="text-l font-semibold text-blueLike cursor-pointer"
 										onClick={() => handleScroll('about')}
 									>
 										About
@@ -163,7 +174,7 @@ function Navbar({ collapsed, setCollapsed }) {
 								</div>
 							</div>
 
-							<div className="w-1/3 flex m-1 justify-center">
+							{/* 							<div className="w-1/3 flex m-1 justify-center">
 								<div
 									type="button"
 									onClick={() => handleScroll('feedback')}
@@ -171,11 +182,32 @@ function Navbar({ collapsed, setCollapsed }) {
 								>
 									Give us feedback!
 								</div>
+							</div> */}
+							{/* 
+							<div
+								className="cursor-pointer w-3/12 text-center font-semibold text-blueLike md:block pt-5"
+
+							>
+								{' '}
+								<Link to="/plans">
+							
+									Pricing
+								</Link>{' '}
+							</div> */}
+							<div className="w-3/12 flex m-1 justify-center">
+								<div
+									type="button"
+									onClick={() => handleScroll('feedback')}
+									className={`cursor-pointer text-blueLike font-semibold  w-[100px] rounded-lg  py-1.5 text-center`}
+								>
+									Reach Us
+								</div>
 							</div>
+
 							<div className="w-1/3 flex">
 								<div className="justify-center items-center ml-auto mr-auto flex text-sm">
 									<button
-										className="bg-zinc-50 hover:bg-zinc-200 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+										className="bg-zinc-50 hover:bg-zinc-100 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
 										onClick={currentUser ? handleSignOut : handleLoginWithGoogle}
 									>
 										<FaGoogle className="inline-block mr-1 mb-1 w-1/6" />

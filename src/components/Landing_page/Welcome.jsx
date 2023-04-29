@@ -244,7 +244,7 @@ export default function Welcome() {
 						</div>
 						<input
 
-							className="w-full lg:w-[600px] border border-[#6B728E] text-bordoLike py-2 pl-4 rounded-md duration-200 focus:ring-2 focus:ring-whiteLike focus:outline-none"
+							className="w-full lg:w-[600px] border border-[#6B728E] text-bordoLike py-3 pl-4 rounded-full  focus:ring-2 focus:ring-whiteLike focus:outline-none"
 							type="text"
 							name="content_link"
 							value={inputValue}
@@ -260,7 +260,7 @@ export default function Welcome() {
 				<div className="flex justify-center ">
 					{currentUser ? (
 						<button
-							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-75"
+							className="w-1/3 border-2 border-blueLike transition duration-0 px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-75 hover:duration-400"
 							type="submit"
 							onClick={(e) => {
 								handleSubmit();
@@ -270,7 +270,7 @@ export default function Welcome() {
 						</button>
 					) : (
 						<button
-							className="w-2/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-2 mt-6 duration-300 rounded-md lg:mt-10 md:w-auto lg:w-auto hover:opacity-75"
+							className="w-2/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-2 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
 							onClick={(e) => {
 								handleSubmit();

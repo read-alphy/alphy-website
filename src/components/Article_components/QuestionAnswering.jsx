@@ -168,13 +168,16 @@ export default function QuestionAnswering(props) {
 
 
 	return (
-		<div className="bg-whiteLike drop-shadow-2xl border mt-20  rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}>
-			<div className="Md:pl-10 md:pr-10 pt-10">
+		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
+		<div className="md:max-h-[60vh] overflow-auto mx-auto" ref={QARef}>
+			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the video</p>
+			<div className="Md:pl-10 md:pr-10 ">
+
 				<Toaster position="bottom-center" />
-				<h1 className="text-xl pb-8 text-zinc-600">Ask real questions and get real answers.</h1>
+
 
 				{/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
-				<div className="flex items-center">
+				<div className="flex items-center pl-1 pr-1">
 					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
 
                         <option onClick={handleOptionClear}> Questions we already answered</option>
@@ -188,22 +191,8 @@ export default function QuestionAnswering(props) {
 
                     </select> */}
 
-					<div class="relative w-full">
-						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-							<svg
-								aria-hidden="true"
-								class="w-5 h-5 text-gray-500 dark:text-gray-400"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-									clip-rule="evenodd"
-								></path>
-							</svg>
-						</div>
+					<div class="relative w-full ">
+
 
 						<input
 							value={inputValue}
@@ -212,10 +201,10 @@ export default function QuestionAnswering(props) {
 							onKeyDown={handleKeyDown}
 							type="text"
 							id="search"
-							className={`block w-full p-4 pl-10 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
-								? 'border-2 border-red-400'
-								: 'border border-zinc-200'
-								} placeholder:italic rounded-lg bg-whiteLike focus:outline-none`}
+							className={`block w-full drop-shadow-md p-5 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+								? 'border-1 border-red-300'
+								: 'border border-zinc-100'
+								} placeholder:italic rounded-l-full bg-zinc-50 focus:outline-none focus:border-slate-50 focus:ring-slate-50`}
 							placeholder="Ask anything to the transcript..."
 							autoComplete="off"
 							required
@@ -248,9 +237,22 @@ export default function QuestionAnswering(props) {
 					<button
 						type="submit"
 						onClick={fetchData}
-						class="p-3.5 ml-2 text-sm font-medium text-whiteLike bg-bordoLike rounded-md border border-zinc-600 hover:bg-zinc-700 focus:ring-4 focus:outline-none"
+						class="p-5 rounded-r-full drop-shadow-md  transition duration-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 rounded-md  hover:bg-zinc-100 "
 					>
-						<span className="text-whiteLike text-l">Search</span>
+						<svg
+							aria-hidden="true"
+							width={21}
+							class="text-zinc-500 dark:text-gray-400"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+								clip-rule="evenodd"
+							></path>
+						</svg>
 					</button>
 				</div>
 				{inputError && inputValue.length === 0 ? (
@@ -259,9 +261,10 @@ export default function QuestionAnswering(props) {
 					</div>
 				) : null}
 
-				<div className="mt-20">
+				<div className="mt-10">
 					{isCleared && !isLoadingInside && answerData.length === 0 ? (
 						<div>
+
 							<p className="mb-5 text-xl text-zinc-600">
 								{' '}
 								Or check out the questions Alphy already answered for you
@@ -277,7 +280,7 @@ export default function QuestionAnswering(props) {
 								</button> : <button
 									key={index}
 									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-200 border border-gray-200 rounded-lg"
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-50 border border-gray-200 rounded-lg"
 								>
 									{item}
 								</button>

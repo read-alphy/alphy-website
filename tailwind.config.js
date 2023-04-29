@@ -78,7 +78,7 @@ module.exports = {
 
 				//palette - fener
 				whiteLike: '#F9F8F8',
-				blueLike: '#20262E',
+				blueLike: '#2f3542',
 			},
 			backgroundImage: (theme) => ({
 				searchBg: "url('./img/search.svg')",

@@ -14,7 +14,6 @@ function SideFeed(props) {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 
-
 	const temp = 10;
 	const limit = temp;
 
@@ -54,6 +53,8 @@ function SideFeed(props) {
 		getData(0, true, true, search);
 	}, []);
 
+
+
 	const handleSearch = () => {
 		getData(0, true, true, search);
 	}
@@ -61,6 +62,7 @@ function SideFeed(props) {
 		setSearch("")
 
 		getData(0, true, true, "");
+
 
 	}
 
@@ -83,9 +85,9 @@ function SideFeed(props) {
 
 	};
 	return (
-		<div>
+		<div id="side-feed">
 			<form
-				className="flex items-center h-[10vh] min-h-[50px] transparency max-w-[95%]"
+				className="flex items-center h-[10vh] min-h-[50px] pt-5 transparency max-w-[95%]"
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
@@ -111,7 +113,7 @@ function SideFeed(props) {
 						}}
 
 						id="simple-search"
-						className="ml-2 bg-whiteLike border border-zinc-300 text-zinc-500 text-gray-900 text-sm rounded-l-lg focus:outline-none block w-full pl-4 p-2.5 "
+						className="ml-2 bg-zinc-50 drop-shadow-sm rounded-l-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 block w-full pl-4 p-3 "
 						placeholder={'Search YouTube videos or Twitter spaces...'}
 
 					/>
@@ -142,10 +144,10 @@ function SideFeed(props) {
 				<button
 					onClick={handleSearch}
 					type="submit"
-					className="pt-2.5 pb-2.5 pr-3 text-sm font-medium border text-whiteLike bg-bordoLike rounded-r-lg border-slate-700 "
+					className="p-3 ml-2 rounded-r-full drop-shadow-sm transition duration-400 ease-in-out text-sm font-medium  text-gray-400 bg-zinc-50 hover:bg-zinc-100 rounded-r-full  "
 				>
 					<svg
-						className="w-5 h-5 ml-5"
+						width="22"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24 "
@@ -163,7 +165,7 @@ function SideFeed(props) {
 			</form>
 			<div className="signed-in-feed flex">
 				{/* <div className="h-[80vh] overflow-y-scroll pl-1 pr-5" onScroll={handleScroll}> */}
-				<div className="h-[68vh] md:h-[76vh] overflow-y-scroll pl-1 md:pr-5">
+				<div className="h-[68vh] md:h-[90vh] overflow-y-scroll pl-1 md:pr-5">
 					<div className="items " ref={feedRef}>
 						{isLoading
 							? // if data is not empty, show the data then show 10 skeletons
@@ -171,11 +173,11 @@ function SideFeed(props) {
 								? data
 									.map((item, index) =>
 										item.source_id === props.source_id ? (
-											<div onClick={props.Collapser} className="null">
+											<div onClick={props.setCollapsed} className="null">
 												<FeedItem
 													key={index}
 													item={item}
-													Collapser={props.Collapser}
+													Collapser={props.setCollapsed}
 
 													poi={true}
 												/>
@@ -202,7 +204,7 @@ function SideFeed(props) {
 				<div className="w-full flex justify-center">
 					{
 						<p
-							className="justify-center flex text-blueLike cursor-pointer font-semibold md:h-min-[30px] underline"
+							className="justify-center items-center text-center flex cursor-pointer text-zinc-500 md:min-h-[20px] pb-10  "
 							onClick={loadMore}
 						>
 							{'Load more'}

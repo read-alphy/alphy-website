@@ -70,15 +70,12 @@ MAIN PAGE
 	display: flex;
 	/* position: sticky; */
 	top: 0;
-	left: 0;
-	flex-direction: row;
-	justify-content: space-between;
+
+
 
 	z-index: 1;
-	margin: auto;
 
-	align-items: center;
-	width: 100vw;
+
 }
 
 .collapse-menu {
@@ -92,20 +89,9 @@ MAIN PAGE
 	padding: 10px;
 }
 
-.navbar-right-section {
-	right: 0;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding-right: 30px;
-}
+.navbar-right-section {}
 
-.signed-in-navbar {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding: 30px;
-}
+
 
 .navbar-link {
 	padding: 10px;
@@ -279,6 +265,12 @@ table tr {
 
 ::-webkit-scrollbar {
 	display: none;
+}
+
+.main-content::-webkit-scrollbar {
+	display: none;
+	width: 0;
+	height: 0;
 }
 
 .article-block-1 {
@@ -844,7 +836,7 @@ DIFFERENT SCREEN SIZES
 	position: absolute;
 	height: 4px;
 	width: 100%;
-	background: #f9f8f8;
+	background: #20262E;
 	border-radius: 2px;
 	opacity: 1;
 	left: 0;

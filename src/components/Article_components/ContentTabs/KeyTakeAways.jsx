@@ -35,7 +35,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 
 			<div
 				href="#"
-				className={` w-full pt-6 drop-shadow-xl bg-zinc-100 border-gray-200 sm:min-h-[200px] lg:min-h-[250px] rounded-lg shadow-md flex justify-between ${keysCollapsed ? 'sm:h-[300px]' : null
+				className={` w-full pt-6 drop-shadow-xl bg-zinc-100 border-gray-200 sm:min-h-[300px] lg:min-h-[500px] rounded-lg shadow-md flex justify-between ${keysCollapsed ? 'sm:h-[300px]' : null
 					} flex flex-col justify-start`}
 			>
 				<div>
@@ -54,7 +54,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 
 					<div className="text-l mt-10 px-8 object-fit:contain">
 						{keysCollapsed ? (
-							<p>{key_takeaways[current]}</p>
+							<p className="pt-10 text-xl">{key_takeaways[current]}</p>
 						) : (
 							key_takeaways.map((item, index) => (
 								<p key={index} className={'border-b border-slate-200 pb-5 pt-5'}>
