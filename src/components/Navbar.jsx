@@ -81,17 +81,17 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 		<div className={`items-center ${isYt || isSp ? "" : "mx-auto max-w-[1200px]"}  justify-between`}>
 			<div
-				className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike font-bold h-[8vh] min-h-[40px] ${collapsed ? ' ' : '  '
+				className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike font-bold ${isYt || isSp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 					}`}
 			>
-				<div className={`pl-10 flex items-center ${(window.innerWidth > 999 && (isYt || isSp)) ? "bg-zinc-100 " : ""}  h-[10vh] min-h-[40px] min-w-[300px] w-[300px]`}>
+				<div className={`pl-10 flex items-center ${(window.innerWidth > 999 && (isYt || isSp)) ? "bg-zinc-100 " : ""}  h-[10vh] min-h-[40px] min-w-[330px] w-[330px]`}>
 					<Link to="/">
 						{/* <img className="w-10" src={Logo} /> */}
 						<h1 className="text-2xl">ALPHY</h1>
 					</Link>
 				</div>
 
-				<div className="flex ">
+				<div className={`flex`}>
 					<div >
 						<div className=" grid grid-cols-3 gap-4 mt-6 ">
 							<div

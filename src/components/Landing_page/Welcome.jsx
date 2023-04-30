@@ -159,7 +159,7 @@ export default function Welcome() {
 
 	return (
 		<div
-			className={`container px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
+			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
 		>
 			{loading && (

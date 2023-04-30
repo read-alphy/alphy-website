@@ -169,7 +169,7 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div className="md:max-h-[60vh]  overflow-auto mx-auto pb-5" ref={QARef}>
+		<div className="md:max-h-[60vh] border-b  overflow-auto mx-auto pb-5" ref={QARef}>
 			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content</p>
 			<div className="Md:pl-10 md:pr-10 ">
 
@@ -276,13 +276,13 @@ export default function QuestionAnswering(props) {
 								index % 2 == 0 ? <button
 									key={index}
 									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-lg"
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-full"
 								>
 									{item}
 								</button> : <button
 									key={index}
 									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-50 border border-gray-200 rounded-lg"
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-50 border border-gray-200 rounded-full"
 								>
 									{item}
 								</button>
@@ -338,7 +338,7 @@ export default function QuestionAnswering(props) {
 										}}
 									/>
 
-
+									{/* <p dangerouslySetInnerHTML={{ __html: answerData.answer.split('\n') }}></p> */}
 								</div>
 
 								<button

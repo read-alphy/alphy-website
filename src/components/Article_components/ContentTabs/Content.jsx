@@ -168,12 +168,12 @@ export default function Content(props) {
 
 
 	return (
-		<div ref={ref} className={`container md:px-10 grow mx-auto overflow-x-hidden`}>
+		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
 
 			<div>
 				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className="col-span-2">
-						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-10 lg:text-3xl text-blueLike font-bold">
+						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike font-bold">
 							{data.title}
 						</h1>
 						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike font-light">
@@ -252,11 +252,11 @@ export default function Content(props) {
 							)}
 						</div>
 					</div>
-					<div className="w-full md:w-3/4  2xl:w-1/2 mx-auto">
+					<div className="w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0">
 
 
 						{data.is_complete || data.transcript ? (
-							<div className="lg:ml-10 mt-14 items-center lg:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300">
+							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300">
 
 								<div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:border-gray-700">
 									<ul class="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
@@ -292,7 +292,7 @@ export default function Content(props) {
 								Transcript
 							</button>
 						</div> */}
-								<div className="main-content text-zinc-600">
+								<div className="main-content mt-2 text-zinc-600">
 
 									<Tabs>
 										<Tab eventKey="transcript" title="">

@@ -116,7 +116,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 					}`}
 			></div>
 			<div className="flex flex-row article-body">
-				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 md:w-[300px] md:min-w-[300px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
+				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 md:w-[330px] md:min-w-[330px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[14vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed'
 						}`}
@@ -127,7 +127,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "overflow-hidden"} px-3 md:px-0 mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[80vh] max-h-[90vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "overflow-hidden"} px-3 md:px-0  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[80vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}

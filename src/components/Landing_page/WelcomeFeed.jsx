@@ -101,7 +101,7 @@ function Feed() {
 	};
 
 	return (
-		<div className="main-page-feed-section container mx-auto w-full drop-shadow-2xl">
+		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl">
 			<h2 className="text-gray-700 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
 				Explore the videos other users unlocked with Alphy
 			</h2>
