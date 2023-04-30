@@ -168,7 +168,7 @@ export default function Content(props) {
 
 
 	return (
-		<div ref={ref} className={`container grow mx-auto md:px-10 overflow-x-hidden`}>
+		<div ref={ref} className={`container md:px-10 grow mx-auto overflow-x-hidden`}>
 
 			<div>
 				<div className="grid grid-cols-3 max-h-[90vh]">
@@ -252,11 +252,11 @@ export default function Content(props) {
 							)}
 						</div>
 					</div>
-					<div className="w-full md:w-3/4 2xl:w-1/2 mx-auto">
+					<div className="w-full md:w-3/4  2xl:w-1/2 mx-auto">
 
 
 						{data.is_complete || data.transcript ? (
-							<div className="lg:ml-10 mt-14 lg:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300">
+							<div className="lg:ml-10 mt-14 items-center lg:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300">
 
 								<div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:border-gray-700">
 									<ul class="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">

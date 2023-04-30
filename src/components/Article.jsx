@@ -127,7 +127,7 @@ function Article({ source_type, collapsed, setCollapsed }) {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "overflow-hidden"}  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[80vh] max-h-[90vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "overflow-hidden"} px-3 md:px-0 mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[80vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
 					{isLoading || data.length ? <Loading /> : <Content data={data} />}

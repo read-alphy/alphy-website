@@ -29,11 +29,10 @@ export default function QuestionAnswering(props) {
 	const [baseQuestion, setBaseQuestion] = useState('');
 	const [isCleared, setIsCleared] = useState(true);
 	const [showUserQA, setShowUserQA] = useState(false);
-	const [optionValue, setOptionValue] = useState('');
+
 	const [inputError, setinputError] = useState(false);
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
-	const [variable, setVariable] = useState("");
 
 	function updateVariable(event) {
 
@@ -83,6 +82,7 @@ export default function QuestionAnswering(props) {
 		setShowBaseQA(false);
 		setShowUserQA(true);
 		setinputError(false);
+
 
 		if (inputValue.length > 200) {
 			setinputError(true);
@@ -169,8 +169,8 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div className="md:max-h-[60vh] overflow-auto mx-auto pb-5" ref={QARef}>
-			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the video</p>
+		<div className="md:max-h-[60vh]  overflow-auto mx-auto pb-5" ref={QARef}>
+			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content</p>
 			<div className="Md:pl-10 md:pr-10 ">
 
 				<Toaster position="bottom-center" />
@@ -260,6 +260,8 @@ export default function QuestionAnswering(props) {
 						<span className="text-sm text-red-400">{errorText}</span>
 					</div>
 				) : null}
+
+
 
 				<div className="mt-10">
 					{isCleared && !isLoadingInside && answerData.length === 0 ? (
