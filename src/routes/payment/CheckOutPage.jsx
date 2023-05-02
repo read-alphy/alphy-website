@@ -16,15 +16,16 @@ export default function App() {
     const [clientSecret, setClientSecret] = useState("");
     const { currentUser } = useAuth()
     const [user, setUser] = useState("")
+    const [called, setCalled] = useState(false)
     let userStripeId = ""
 
 
     useEffect(() => {
-        if (clientSecret.length === 0 && currentUser !== null) {
+        if (clientSecret.length === 0 && currentUser !== null && called === false) {
             setTimeout(() => {
                 getCustomerInfo()
                 fetchData()
-
+                setCalled(true)
 
             }, 2000)
 
@@ -32,7 +33,7 @@ export default function App() {
     })
 
     const getCustomerInfo = async () => {
-        await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=${currentUser.uid}`)
+        await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=${currentUser.uid}}`)
             //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
             .then(r => {
                 if (r.data !== null) {
@@ -40,6 +41,7 @@ export default function App() {
                     setUser(userStripe)
                     userStripeId = userStripe
                     console.log(userStripe)
+                    setCalled(true)
                 }
                 else {
                     setUser("")
@@ -48,8 +50,9 @@ export default function App() {
     }
 
     const fetchData = async () => {
+
+        //await axios.post(`https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N2dm5JmF4J0rk0xWfZYHspj&user_id=${currentUser.uid}&user_email=${currentUser.email}`)
         await axios.post(`https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N2dm5JmF4J0rk0xWfZYHspj&user_id=${currentUser.uid}&user_email=${currentUser.email}`)
-            //await axios.post(`https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N2dm5JmF4J0rk0xWfZYHspj&user_id=1233322111&user_email=${currentUser.email}`)
             .then(r => {
                 const clientSecret = r.data.latest_invoice.payment_intent.client_secret
                 setClientSecret(clientSecret)
@@ -78,7 +81,7 @@ export default function App() {
 
     return (
         <div className="mx-auto items-center">
-
+            {/* <button onClick={fetchData}>Create</button> */}
 
 
             {clientSecret.length > 0 ? (
@@ -99,7 +102,7 @@ export default function App() {
                 )}
 
             <button onClick={getCustomerInfo}>Get Current Data</button>
-            <a target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">Manage Sub</a>
+
         </div>
     );
 

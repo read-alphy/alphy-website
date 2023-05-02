@@ -110,15 +110,16 @@ function Navbar({ collapsed, setCollapsed }) {
 								About{' '}
 							</div>
 							<div
-								className="hidden md:col-span-1 text-center cursor-pointer font-semibold text-blueLike md:block  pt-2"
+								type="button"
 
+								className={`hidden md:col-span-1 cursor-pointer text-center font-semibold text-blueLike md:block pt-2`}
 							>
 								{' '}
 								<Link to="/plans">
-
-									Pricing
+									{currentUser ? "Account" : "Plans"}
 								</Link>{' '}
 							</div>
+
 
 
 							{/* if user is in, show logout else login */}
@@ -203,6 +204,20 @@ function Navbar({ collapsed, setCollapsed }) {
 									Reach Us
 								</div>
 							</div>
+
+							<div className="w-3/12 flex m-1 justify-center">
+								<div
+									type="button"
+
+									className={`cursor-pointer text-blueLike font-semibold  w-[100px] rounded-lg  py-1.5 text-center`}
+								>
+									<Link to="/plans">
+										{currentUser ? "Account" : "Plans"}
+									</Link>{' '}
+								</div>
+							</div>
+
+
 
 							<div className="w-1/3 flex">
 								<div className="justify-center items-center ml-auto mr-auto flex text-sm">

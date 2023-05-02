@@ -57,7 +57,7 @@ export default function CheckOutForm({ clientSecret }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e)
+
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
             // Make sure to disable form submission until Stripe.js has loaded.
@@ -113,7 +113,7 @@ export default function CheckOutForm({ clientSecret }) {
             <LinkAuthenticationElement
                 className="pointer-events-none"
                 id="link-authentication-element"
-                onChange={(e) => setEmail(e.target.value)}
+
                 options={{ defaultValues: { email: currentUser ? currentUser.email : "" } }}
             />
 
