@@ -8,6 +8,6 @@ const firebaseConfig = {
 	messagingSenderId: '606454102589',
 	appId: '1:606454102589:web:1b94cc9a6d7b00a28c4854',
 };
-const firebaseApp = initializeApp(firebaseConfig, "alphy");
+const firebaseApp = initializeApp(firebaseConfig);
 
 export { firebaseApp };

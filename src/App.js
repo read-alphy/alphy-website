@@ -23,7 +23,7 @@ import Success from './routes/payment/Success';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
-	authDomain: 'alphy-74583.firebaseapp.com',
+	authDomain: 'auth.alphy.app',
 	projectId: 'alphy-74583',
 	storageBucket: 'alphy-74583.appspot.com',
 	messagingSenderId: '606454102589',

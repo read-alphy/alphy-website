@@ -106,6 +106,7 @@ function SideFeed(props) {
 				<div className="relative w-full mb-10">
 					<input
 						value={search}
+						title={search}
 						ref={searchInputRef}
 						type="text"
 						onChange={(e) => {
@@ -113,7 +114,7 @@ function SideFeed(props) {
 						}}
 
 						id="simple-search"
-						className="ml-2 bg-zinc-50 drop-shadow-sm rounded-l-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 block w-full pl-4 p-3 "
+						className="ml-2 pr-10 bg-zinc-50 drop-shadow-sm rounded-l-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 block w-full pl-4 p-3 "
 						placeholder={'Search YouTube videos or Twitter spaces...'}
 
 					/>

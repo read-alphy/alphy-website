@@ -199,12 +199,13 @@ export default function QuestionAnswering(props) {
 							onClick={() => handleClick(true)}
 							onChange={(event) => setInputValue(event.target.value)}
 							onKeyDown={handleKeyDown}
+							title={inputValue}
 							type="text"
 							id="search"
-							className={`block w-full drop-shadow-md p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+							className={` block w-full drop-shadow-md p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
 								? 'border-1 border-red-300'
 								: 'border border-zinc-100'
-								} placeholder:italic rounded-l-full bg-zinc-50 focus:outline-none focus:border-slate-50 focus:ring-slate-50`}
+								} placeholder:italic rounded-l-full bg-zinc-50 focus:outline-none focus:border-slate-50 focus:ring-slate-50 `}
 							placeholder="Ask anything to the transcript..."
 							autoComplete="off"
 							required
