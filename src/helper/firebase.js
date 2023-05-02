@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
-	authDomain: 'alphy-74583.firebaseapp.com',
+	authDomain: 'alphy.app',
 	projectId: 'alphy-74583',
 	storageBucket: 'alphy-74583.appspot.com',
 	messagingSenderId: '606454102589',
