@@ -11,6 +11,9 @@ import Twitter from '../../../img/twitter_spaces.png';
 import Loading from '../../Loading';
 import working from './working.svg';
 import { useWindowSize } from '../../../hooks/useWindowSize';
+import { saveAs } from 'file-saver'; // library to save file as blob
+import Download from '../../../img/download.gif';
+import DownloadStatic from '../../../img/download_static.png';
 
 
 export default function Content(props) {
@@ -20,10 +23,11 @@ export default function Content(props) {
 	const data = props.data;
 	const ref = useRef(null);
 
-	const [activeTab, setActiveTab] = useState('tab1');
+	const [activeTab, setActiveTab] = useState('tab2');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
 	const [showButton, setShowButton] = useState(false);
+	const [downloading, setDownloading] = useState(false);
 
 	let summaryArray = '';
 	const handleClick = () => {
@@ -95,7 +99,7 @@ export default function Content(props) {
 
 			for (let i = 0; i < srt_array.length; i++) {
 				count = count + 1;
-				nothing = nothing + '' + srt_array[i].text;
+				nothing = nothing + ' ' + srt_array[i].text;
 				if (
 					(count > 6 || count >= srt_array.length) &&
 					srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
@@ -163,6 +167,37 @@ export default function Content(props) {
 
 
 	}
+
+	const handleDownload = () => {
+
+		setDownloading(true)
+		// create .srt file
+		setTimeout(() => {
+
+
+			if (activeTab === "tab2") {
+				const blob = new Blob([data.transcript], { type: 'text/srt' });
+
+				// save file as blob
+				saveAs(blob, `${data.title}_${data.creator_name}_transcript.srt`);
+				setTimeout(() => {
+					setDownloading(false)
+				}, 2000)
+			}
+			else if (activeTab === "tab1") {
+				const blob = new Blob([data.summary], { type: 'text/plain' });
+
+				// save file as blob
+				saveAs(blob, `${data.title}_${data.creator_name}_summary.txt`);
+				setTimeout(() => {
+					setDownloading(false)
+				}, 1600)
+			}
+
+		}, 3000)
+
+
+	};
 
 	transcriptParser();
 
@@ -319,6 +354,9 @@ export default function Content(props) {
 
 											{activeTab === 'tab1' && (
 												<div className="text-l font-normal mb-4 max-w-screen-md overflow-auto max-h-[80vh]">
+													<button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button>
+
+
 													{isLoading ? (
 														<Loading />
 													) : summaryArray.length === 0 ? (
@@ -342,6 +380,7 @@ export default function Content(props) {
 											)}
 											{activeTab === 'tab2' && (
 												<div className="text-l font-normal max-w-screen-md overflow-auto max-h-[80vh] ">
+													<button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
 													{isLoading ? (
 														<Loading />
 													) : (
@@ -364,7 +403,7 @@ export default function Content(props) {
 																		</a> :
 																		<a
 
-																			target="_blank" href={`https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}`}
+																			target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}`}
 
 
 																			className={`${data.source_type === 'yt'

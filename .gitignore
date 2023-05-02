@@ -24,3 +24,8 @@ yarn-error.log*
 src/.env
 .env
 
+src/App.js
+src/components/Navbar.jsx
+src/components/Landing_page/PricingTable.jsx
+src/routes/Home.jsx
+src/routes/Pricing.jsx

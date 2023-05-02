@@ -93,7 +93,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 				<div className={`flex`}>
 					<div >
-						<div className=" grid grid-cols-3 gap-4 mt-6 ">
+						<div className=" grid grid-cols-4 gap-3 mt-6 ">
 							<div
 								type="button"
 								onClick={() => handleScroll('feedback')}
@@ -109,16 +109,16 @@ function Navbar({ collapsed, setCollapsed }) {
 								{' '}
 								About{' '}
 							</div>
-							{/* 							<div
-								className="hidden cursor-pointer font-semibold text-blueLik md:block mr-5 pt-2"
+							<div
+								className="hidden md:col-span-1 text-center cursor-pointer font-semibold text-blueLike md:block  pt-2"
 
 							>
 								{' '}
 								<Link to="/plans">
-									
+
 									Pricing
 								</Link>{' '}
-							</div> */}
+							</div>
 
 
 							{/* if user is in, show logout else login */}
