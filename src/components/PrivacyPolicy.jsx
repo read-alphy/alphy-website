@@ -180,7 +180,7 @@ export default function PrivacyPolicy() {
             <h1 className="text-xl font-bold mb-5 mt-10">Contact Us</h1>
             <p className="pt-1">If you have any questions about this Privacy Policy, You can contact us:</p>
             <ul>
-                <li className="pt-1">By email: info@alphy.app</li>
+                <li className="pt-1">By email: support@alphy.app</li>
             </ul>
         </div>
     )
