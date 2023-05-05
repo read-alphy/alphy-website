@@ -27,8 +27,8 @@ function Footer() {
 					<p className="text-l font-semibold md:whitespace-nowrap">
 						<br />
 						Feel free to reach us through{' '}
-						<a href="mailto:info@alphy.app">
-							<span className="text-green-400 hover:text-green-300 cursor-pointer "> info@alphy.app</span>{' '}
+						<a href="mailto:support@alphy.app">
+							<span className="text-green-400 hover:text-green-300 cursor-pointer "> support@alphy.app</span>{' '}
 						</a>
 						or ping us on our Discord for any questions and feedback.
 					</p>
@@ -38,8 +38,8 @@ function Footer() {
 						<h2 className="mb-6  text-2xl text-whiteLike font-bold ">Related Links</h2>
 					</div>
 
-					<a href="mailto:info@alphy.app" className="mb-5">
-						info@alphy.app
+					<a href="mailto:support@alphy.app" className="mb-5">
+						support@alphy.app
 					</a>
 
 					<a href="https://discord.gg/N4CkQhCVv2" className="mb-5">
