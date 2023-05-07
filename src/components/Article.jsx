@@ -141,10 +141,10 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 				<meta property="og:description" content={data.title ? `Ask questions to ${data.title}` : "Ask questions to the content"}
 				/>
-				<meta name="description" content={data.title ? `Transcribe, summarize, and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"} />
+				<meta name="description" content={data.title ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"} />
 				{data.source_type === "yt" ? <meta name="twitter:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta name="twitter:image" content={Twitter} />}
 				{data.source_type === "yt" ? <meta property="og:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta property="og:image" content={Twitter} />}
-				<meta name="twitter:description" content={data.title ? `Transcribe, summarize, and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
+				<meta name="twitter:description" content={data.title ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
 				/>
 				<meta property="og:url" content={location.href} />
 			</Helmet>

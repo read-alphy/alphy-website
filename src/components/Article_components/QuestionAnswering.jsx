@@ -419,7 +419,7 @@ export default function QuestionAnswering(props) {
 										</svg>
 									</div>
 								</div>
-								<div id="answer-area" className="answer-area text-l ">
+								<div id="answer-area" className="answer-area text-l container">
 									<TypeIt className="mb-3"
 
 										options={{

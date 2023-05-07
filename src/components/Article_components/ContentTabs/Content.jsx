@@ -250,7 +250,7 @@ export default function Content(props) {
 
 
 				<div className="flex flex-col xl:flex-row mt-16">
-					<div className="grid grid-cols-2 w-full">
+					<div className="grid grid-cols-2 w-full ">
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 						<div className={`col-span-2 hidden lg:flex justify-center items-center w-full h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
