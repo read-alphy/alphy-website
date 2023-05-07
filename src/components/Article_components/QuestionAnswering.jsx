@@ -18,10 +18,6 @@ export default function QuestionAnswering(props) {
 	const location = useLocation();
 	const buttonRef = useRef(null);
 
-	const [source_timestamp1, setSource_timestamp1] = useState("")
-	const [source_timestamp2, setSource_timestamp2] = useState("")
-	const [source_timestamp3, setSource_timestamp3] = useState("")
-
 	const [answerData, setAnswerData] = useState('');
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
 	const [answer, setAnswer] = useState(false);
@@ -31,7 +27,6 @@ export default function QuestionAnswering(props) {
 	const [baseQuestion, setBaseQuestion] = useState('');
 	const [isCleared, setIsCleared] = useState(true);
 	const [showUserQA, setShowUserQA] = useState(false);
-
 	const [inputError, setinputError] = useState(false);
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
@@ -43,6 +38,7 @@ export default function QuestionAnswering(props) {
 		props.timestampChanger(event)
 
 	}
+
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -62,7 +58,6 @@ export default function QuestionAnswering(props) {
 				}, 300);
 
 			}
-
 
 		}, 1000);
 
@@ -154,6 +149,11 @@ export default function QuestionAnswering(props) {
 	};
 	const fetchData = () => {
 		toast.dismiss();
+
+
+
+
+
 		setShowBaseQA(false);
 		setShowUserQA(true);
 		setinputError(false);
@@ -186,40 +186,6 @@ export default function QuestionAnswering(props) {
 						.then((response) => {
 							setAnswerData(response.data);
 							setIsLoadingInside(false);
-
-
-
-							const source1 = answerData.sources[0]["text"].match(/[^.!?]+[.!?]/)[0];
-							const source2 = answerData.sources[1]["text"].match(/[^.!?]+[.!?]/)[0];
-							const source3 = answerData.sources[2]["text"].match(/[^.!?]+[.!?]/)[0];
-
-
-
-							for (let i = 0; i < props.transcript.length; i++) {
-
-
-
-								/* 								console.log(props.transcript[i])
-																console.log(x) */
-
-								if (props.transcript[i].includes(source1) === true) {
-									setSource_timestamp1(props.transcript[i - 1])
-									console.log("true")
-
-								}
-
-								if (props.transcript[i].includes(source2) === true) {
-									setSource_timestamp2(props.transcript[i - 1])
-									console.log("true")
-
-								}
-
-								if (props.transcript[i].includes(source3) === true) {
-									setSource_timestamp3(props.transcript[i - 1])
-									console.log("true")
-								}
-							}
-
 						});
 				} catch (error) {
 					console.error(`Error fetching data: ${error}`);

@@ -88,7 +88,6 @@ export default function Pricing({ stripePromise }) {
         await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=${currentUser.uid}`)
             //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
             .then(r => {
-                console.log(r)
                 if (r.data !== null) {
                     setCalled(true)
                     const userStripe = r.data
