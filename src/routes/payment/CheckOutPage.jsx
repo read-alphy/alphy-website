@@ -12,7 +12,7 @@ import Loading from "../../components/Loading";
 // This is your test publishable API key.
 const stripePromise = loadStripe("pk_test_51MeGOKJmF4J0rk0xCxBc6dR5K00J2dD5ubl4o8hxAiR1aWJq2LUsw3uLVPPmdKP82IKPX6Xhp0TG1P6QVDjmiT3y00mDm8PvrR")
 
-export default function App() {
+export default function CheckOutPage() {
     const [clientSecret, setClientSecret] = useState("");
     const { currentUser } = useAuth()
     const [user, setUser] = useState("")

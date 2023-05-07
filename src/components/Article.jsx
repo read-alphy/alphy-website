@@ -5,22 +5,23 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './Article_components/ContentTabs/Content';
 
 import { signOut } from 'supertokens-auth-react/recipe/passwordless';
+import Twitter from '..//img/twitter_spaces.png';
 
 import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
-
+import { Helmet } from "react-helmet";
 function Article({ source_type, collapsed, setCollapsed }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
+
+
 	if (location.pathname.split('/')[2].split("&q=")[0] !== undefined) {
 		source_id = location.pathname.split('/')[2].split("&q=")[0]
-
 	}
 	else {
 		source_id = location.pathname.split('/')[2];
-
 	}
 
 
@@ -43,27 +44,40 @@ function Article({ source_type, collapsed, setCollapsed }) {
 	const fetchData = async (url) => {
 		try {
 			setIsLoading(true);
-			const response = await axios.get(url);
-			setData(response.data);
+			const response = await axios.get(url).then(
+				(response) => {
+
+					setData(response.data);
+				}
+
+			).catch((error) => {
+				navigate('/404')
+			});
+
 
 			//changing page details
 			const pageTitle = document.getElementById('page-title');
 			if (pageTitle) {
 				pageTitle.innerHTML = response.data.title ? response.data.title : 'Alphy';
 			}
-			const metaTagImage = document.querySelector('meta[property="og:image"]');
-			if (metaTagImage) {
-				metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
-			}
+			/* 			const metaTagImage = document.querySelector('meta[property="og:image"]');
+						if (metaTagImage) {
+							if (data.source_type === "yt") {
+								metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
+							}
+							else if (data.source_type === "sp") {
+								metaTagImage.setAttribute('content', { Twitter });
+							}
+						} */
 
-			const metaTagDescription = document.querySelector('meta[property="og:description"]');
-			if (metaTagDescription) {
-				metaTagDescription.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
-			}
+			/* 			const metaTagDescription = document.querySelector('meta[property="og:description"]');
+						if (metaTagDescription) {
+							metaTagDescription.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
+						} */
 
-			const metaTagTitle = document.querySelector('meta[name=twitter:title"]');
-			if (metaTagTitle) {
-				metaTagTitle.setAttribute('content', `Alphy | ${response.data.title}`);
+			const metaTagTitleTwitter = document.querySelector('meta[name=twitter:title"]');
+			if (metaTagTitleTwitter) {
+				metaTagTitleTwitter.setAttribute('content', data.title ? `Alphy | ${response.data.title}` : "Alphy");
 			}
 
 			const metaTagImagTwitter = document.querySelector('meta[name="twitter:image"]');
@@ -71,18 +85,18 @@ function Article({ source_type, collapsed, setCollapsed }) {
 				metaTagImagTwitter.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
 			}
 
-			const metaTagDescriptionTwitter = document.querySelector('meta[name="twitter:description"]');
-			if (metaTagDescriptionTwitter) {
-				metaTagDescriptionTwitter.setAttribute(
-					'content',
-					`Start asking real questions to ${response.data.title}.`,
-				);
-			}
+			/* 		const metaTagDescriptionTwitter = document.querySelector('meta[name="twitter:description"]');
+					if (metaTagDescriptionTwitter) {
+						metaTagDescriptionTwitter.setAttribute(
+							'content',
+							`Start asking real questions to ${response.data.title}.`,
+						);
+					} */
 
-			const metaTagTitleTwitter = document.querySelector('meta[property="og:title"]');
-			if (metaTagTitleTwitter) {
-				metaTagTitleTwitter.setAttribute('content', `Alphy | ${response.data.title}`);
-			}
+			/* 			const metaTagTitle = document.querySelector('meta[property="og:title"]');
+						if (metaTagTitle) {
+							metaTagTitle.setAttribute('content', data.title ? `Alphy | ${response.data.title}` : 'Alphy');
+						} */
 		} catch (error) {
 			if (error.response?.status === 404) {
 				setIsLoading(false);
@@ -120,6 +134,20 @@ function Article({ source_type, collapsed, setCollapsed }) {
 
 	return (
 		<div className="article ">
+			<Helmet>
+				<title>{data.title ? `Alphy - ${data.title}` : "Alphy"} </title>
+				<meta property="og:title" content={data.title ? `Alphy - ${data.title}` : "Alphy"} />
+				<meta name="twitter:title" content={data.title ? `Alphy - ${data.title}` : "Alphy"} />
+
+				<meta property="og:description" content={data.title ? `Ask questions to ${data.title}` : "Ask questions to the content"}
+				/>
+				<meta name="description" content={data.title ? `Transcribe, summarize, and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"} />
+				{data.source_type === "yt" ? <meta name="twitter:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta name="twitter:image" content={Twitter} />}
+				{data.source_type === "yt" ? <meta property="og:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta property="og:image" content={Twitter} />}
+				<meta name="twitter:description" content={data.title ? `Transcribe, summarize, and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
+				/>
+				<meta property="og:url" content={location.href} />
+			</Helmet>
 			<div
 				className={`w-screen bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}

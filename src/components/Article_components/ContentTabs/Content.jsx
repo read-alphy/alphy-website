@@ -255,7 +255,7 @@ export default function Content(props) {
 						<div className={`col-span-2 hidden lg:flex justify-center items-center w-full h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
 
-								<div className="block w-2/3 ">
+								<div className="block w-full items-center mx-auto ">
 									<a target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 										{' '}
 										<img className=" cursor-pointer " src={Twitter}></img>
@@ -282,10 +282,11 @@ export default function Content(props) {
 							)}
 
 						</div>
-
+						{/* <Loading /> */}
 						<div className="col-span-2 md:mt-10">
-							{isLoading ? (
-								<Loading />
+							{isLoading ? (null
+
+
 							) : (
 								data.key_qa && (
 									<QuestionAnswering
@@ -300,7 +301,7 @@ export default function Content(props) {
 							)}
 						</div>
 					</div>
-					<div className="w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0">
+					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0`} >
 
 
 						{data.is_complete || data.transcript ? (
@@ -460,7 +461,8 @@ export default function Content(props) {
 								</div>
 							</div>
 						) : (
-							<div className="flex flex-col">
+							<div>
+								{/* <div className="flex flex-col">
 								<p className="text-xl text-zinc-600 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
 
 									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
@@ -468,6 +470,7 @@ export default function Content(props) {
 									<img className="opacity-30 mx-auto" src={working} alt="My SVG" />
 								</p>
 
+							</div> */}
 							</div>
 						)}
 					</div>{' '}
@@ -514,7 +517,18 @@ export default function Content(props) {
  */}
 			</div>
 
+			{isLoading &&
 
+				<div className="flex flex-col">
+					<p className="text-xl text-zinc-600 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
+
+						Alphy is doing its best to process this video, it will be ready in a few minutes. In the
+						meantime, you can check out other videos.
+						<img className="opacity-30 mx-auto" src={working} alt="My SVG" />
+					</p>
+
+				</div>
+			}
 
 		</div>
 	);

@@ -36,6 +36,7 @@ export default function QuestionAnswering(props) {
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
 	const [clicked, setClicked] = useState(false);
+	let from_qa_url = false
 
 	function updateVariable(event) {
 
@@ -45,12 +46,30 @@ export default function QuestionAnswering(props) {
 
 	useEffect(() => {
 		setTimeout(() => {
-			if (location.pathname.split('/')[2].split("&q=")[0] !== undefined && clicked === false) {
+			if (location.pathname.split('/')[2].split("&q=")[1] !== undefined && clicked === false) {
+
 				const my_question = location.pathname.split('/')[2].split("&q=")[1]
 				runAnswererFromUrl(my_question)
+
+				setTimeout(() => {
+					const element = document.querySelector("#q_and_a");
+					if (element) {
+						QARef.current = element;
+						element.scrollIntoView({ behavior: "smooth" });
+
+					}
+
+				}, 300);
+
 			}
+
+
 		}, 1000);
-	})
+
+
+
+
+	}, [])
 
 	function runAnswererFromUrl(my_question) {
 
@@ -225,8 +244,9 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div className="md:max-h-[60vh] border-b  overflow-auto mx-auto pb-5" ref={QARef}>
-			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content</p>
+		<div id="q_and_a" className={`md:max-h-[60vh] border-b overflow-auto mx-auto pb-5`} ref={QARef}>
+
+			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content. In any language you want.</p>
 			<div className="Md:pl-10 md:pr-10 ">
 
 				<Toaster position="bottom-center" />
@@ -389,9 +409,11 @@ export default function QuestionAnswering(props) {
 									</h1>
 									<div className="col-span-1 justify-end flex flex-row flex ">
 
-										<svg onClick={handleShareLink} title="Share question link" className="cursor-pointer " width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										<svg onClick={handleShareLink} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<title className="font-bold">Share link to question</title>
+											<path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" stroke-linecap="round" stroke-linejoin="round"></path>
 										</svg>
+
 										<svg onClick={handleCopyToClipboard} title="Copy question and answer" className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 											<path d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" stroke-linecap="round" stroke-linejoin="round"></path>
 										</svg>
@@ -511,13 +533,11 @@ export default function QuestionAnswering(props) {
 					<div className="text-zinc-600 pb-10">
 						{
 
-							<div>
+							<div className={`${clicked ? "animate-highlight animate-delay-1000" : ""}`}>
 								<div >
-									<div className="grid grid-cols-2 flex flex-row mb-4">
-
+									<div className={`grid grid-cols-2 flex flex-row mb-4 `}>
 
 										<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
-
 
 											<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 												<title className="font-bold">Clear</title>
@@ -528,9 +548,10 @@ export default function QuestionAnswering(props) {
 										</h1>
 										<div className="col-span-1 justify-end flex flex-row flex ">
 
+
 											<svg onClick={handleShareLink} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 												<title className="font-bold">Share link to question</title>
-												<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												<path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" stroke-linecap="round" stroke-linejoin="round"></path>
 											</svg>
 											<svg onClick={handleCopyToClipboard} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 												<title className="font-bold">Copy to clipboard</title>
