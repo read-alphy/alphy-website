@@ -21,7 +21,9 @@ export default function Content(props) {
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
+
 	const ref = useRef(null);
+
 
 	const [activeTab, setActiveTab] = useState('tab2');
 	const [autoplay, setAutoplay] = useState(0);
@@ -36,7 +38,7 @@ export default function Content(props) {
 
 	const checkScrollPosition = () => {
 		const windowHeight = ref.current.clientHeight;
-		console.log(windowHeight)
+
 		const scrollPosition = ref.current.scrollTop;
 
 		if (scrollPosition >= 3 * windowHeight) {
@@ -119,6 +121,13 @@ export default function Content(props) {
 					nothing = '';
 
 				}
+				else if (i === srt_array.length - 1) {
+
+					transcript.push(nothing);
+					count = 0;
+					nothing = '';
+				}
+
 
 			}
 		}
@@ -157,6 +166,9 @@ export default function Content(props) {
 					nothing = '';
 
 				}
+				else if (i === srt_array.length - 1) {
+					transcript.push(nothing);
+				}
 
 
 			}
@@ -167,6 +179,7 @@ export default function Content(props) {
 
 
 	}
+
 
 	const handleDownload = () => {
 
@@ -353,8 +366,8 @@ export default function Content(props) {
 											))} */}
 
 											{activeTab === 'tab1' && (
-												<div className="text-l font-normal mb-4 max-w-screen-md overflow-auto max-h-[80vh]">
-													<button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button>
+												<div className="content-area text-l font-normal mb-4 max-w-screen-md overflow-auto max-h-[80vh]">
+													{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
 
 													{isLoading ? (
@@ -379,45 +392,58 @@ export default function Content(props) {
 												</div>
 											)}
 											{activeTab === 'tab2' && (
-												<div className="text-l font-normal max-w-screen-md overflow-auto max-h-[80vh] ">
-													<button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
+												<div className="content-area text-l font-normal max-w-screen-md overflow-auto max-h-[80vh] ">
+
 													{isLoading ? (
 														<Loading />
 													) : (
 														transcript.map((item, index) => {
 															/* transcriptParser(); */
 
-															if (index % 2 === 0 && index < transcript.length - 1) {
+															if (index % 2 === 0 && index < transcript.length) {
 																return (
 																	window.innerWidth > 999 && data.source_type === "yt" ?
-																		<a
-																			onClick={handleClickTimestamp}
-																			className={`${data.source_type === 'yt'
-																				? 'lg:cursor-pointer lg:pointer-events-auto'
-																				: ''
-																				} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline`}
-																			key={index}
-																		>
-																			<br></br>
-																			<p className="text-md ">{item}{' '}</p>
-																		</a> :
-																		<a
-
-																			target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}`}
+																		<div className="flex flex-row">
+																			<a
+																				onClick={handleClickTimestamp}
+																				className={`${data.source_type === 'yt'
+																					? 'lg:cursor-pointer lg:pointer-events-auto'
+																					: ''
+																					} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline`}
+																				key={index}
+																			>
+																				<br></br>
 
 
-																			className={`${data.source_type === 'yt'
-																				? 'lg:cursor-pointer lg:pointer-events-auto'
-																				: ''
-																				}  lg:pointer-events-auto lg:text-slate-900 font-bold underline`}
-																			key={index}
-																		>
-																			<br></br>
-																			{item}{' '}
-																		</a>
+																				<p className="text-md ">{item}{' '}</p>
+
+																			</a>
+																			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end mr-8 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>}
+
+																		</div> :
+																		<div className="flex flex-row">
+																			<a
+
+																				target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}`}
+
+
+																				className={`${data.source_type === 'yt'
+																					? 'lg:cursor-pointer lg:pointer-events-auto'
+																					: ''
+																					}  lg:pointer-events-auto lg:text-slate-900 font-bold underline`}
+																				key={index}
+																			>
+																				<br></br>
+
+																				{item}{' '}
+
+
+																			</a>
+																			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end  mr-4 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>}
+																		</div>
 
 																);
-															} else if (index % 2 === 1 && index < transcript.length - 1) {
+															} else if (index % 2 === 1 && index < transcript.length) {
 																return (
 																	<div key={index}>
 																		<br></br>

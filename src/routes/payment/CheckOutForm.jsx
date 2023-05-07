@@ -76,13 +76,13 @@ export default function CheckOutForm({ clientSecret }) {
             }
             )
 
-            console.log(result.paymentIntent.id)
+
 
             if (result.error) {
-                console.error('Payment failed:', result.error.message);
+                console.error('Payment failed');
                 setIsLoading(false)
             } else {
-                console.log('Payment succeeded:', result.paymentIntent.id);
+                console.log('Payment succeeded');
                 setIsLoading(false)
 
             }
@@ -99,7 +99,7 @@ export default function CheckOutForm({ clientSecret }) {
 
         setIsLoading(false);
         setPaymentIntent("none");
-        console.log(paymentIntent)
+
     };
 
     const paymentElementOptions = {

@@ -79,7 +79,7 @@ function Feed() {
 				})
 					.then((response) => {
 						setHasMorePersonal(!(response.data.length < limit));
-						console.log(currentUser)
+
 						if (firstTime) {
 							setDataPersonal(response.data);
 

@@ -40,7 +40,7 @@ export default function App() {
                     const userStripe = r.data
                     setUser(userStripe)
                     userStripeId = userStripe
-                    console.log(userStripe)
+
                     setCalled(true)
                 }
                 else {
