@@ -219,7 +219,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 
 
-							<div className="w-1/3 flex">
+							<div className="w-1	/3 flex">
 								<div className="justify-center items-center ml-auto mr-auto flex text-sm">
 									<button
 										className="bg-zinc-50 hover:bg-zinc-100 text-slate-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"

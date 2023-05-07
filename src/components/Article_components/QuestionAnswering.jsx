@@ -9,12 +9,14 @@ import './QA.css';
 import TypeIt from 'typeit-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { useLocation } from 'react-router-dom';
 
 export default function QuestionAnswering(props) {
 	// console.log(props.props, props.key_qa)
 	const windowSize = useWindowSize();
 	const QARef = useRef(null);
-
+	const location = useLocation();
+	const buttonRef = useRef(null);
 
 	const [source_timestamp1, setSource_timestamp1] = useState("")
 	const [source_timestamp2, setSource_timestamp2] = useState("")
@@ -33,6 +35,7 @@ export default function QuestionAnswering(props) {
 	const [inputError, setinputError] = useState(false);
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
+	const [clicked, setClicked] = useState(false);
 
 	function updateVariable(event) {
 
@@ -40,7 +43,50 @@ export default function QuestionAnswering(props) {
 
 	}
 
+	useEffect(() => {
+		setTimeout(() => {
+			if (location.pathname.split('/')[2].split("&q=")[0] !== undefined && clicked === false) {
+				const my_question = location.pathname.split('/')[2].split("&q=")[1]
+				runAnswererFromUrl(my_question)
+			}
+		}, 1000);
+	})
 
+	function runAnswererFromUrl(my_question) {
+
+		if (my_question) {
+			const decodedText = decodeURIComponent(my_question);
+			console.log(decodedText)
+			if (props.key_qa[decodedText]) {
+				console.log(props.key_qa[decodedText])
+				setIsCleared(false);
+				setShowBaseQA(true);
+				setBaseQuestion(decodedText)
+				setInputValue(decodedText)
+				setClicked(true)
+
+			}
+
+			else {
+				setInputValue(decodedText);
+				setClicked(true);
+				setTimeout(() => {
+					if (buttonRef.current) {
+						buttonRef.current.click();
+
+					}
+				}, 1000);
+			}
+			/* 			axios
+							.post(
+								`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${props.data.source_type}/${props.data.source_id
+								}/question`,
+								inputValue,
+							).then((response) => {
+								
+							}) */
+		}
+	}
 
 	const handleClear = () => {
 		setIsCleared(true);
@@ -75,8 +121,18 @@ export default function QuestionAnswering(props) {
 			/*  setInputValue(''); */
 		}
 	};
-
-
+	const handleShareLink = () => {
+		const encodedText = encodeURIComponent(inputValue);
+		const url = `${window.location}&q=${encodedText}`;
+		navigator.clipboard.writeText(url);
+		toast.success('Copied to clipboard!');
+	};
+	const handleCopyToClipboard = () => {
+		const myHtml = document.getElementById("answer-area");
+		const plainText = `${inputValue} \n\n ${myHtml.innerText}`;
+		navigator.clipboard.writeText(plainText);
+		toast.success('Copied to clipboard!');
+	};
 	const fetchData = () => {
 		toast.dismiss();
 		setShowBaseQA(false);
@@ -237,8 +293,9 @@ export default function QuestionAnswering(props) {
 
 					<button
 						type="submit"
+						ref={buttonRef}
 						onClick={fetchData}
-						class="p-3 px-5 rounded-r-full drop-shadow-md  transition duration-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 rounded-md  hover:bg-zinc-100 "
+						class="p-3 px-5 rounded-r-full drop-shadow-md  transition 	-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 rounded-md  hover:bg-zinc-100 "
 					>
 						<svg
 							aria-hidden="true"
@@ -301,6 +358,7 @@ export default function QuestionAnswering(props) {
 							height: '20vh',
 						}}
 					>
+
 						<ReactLoading type="spinningBubbles" color="#52525b" />
 					</div>
 				) : (
@@ -315,10 +373,10 @@ export default function QuestionAnswering(props) {
 					<div className="text-zinc-600 pb-10">
 						{answerData.answer ? (
 							<div  >
-								<div>
+								<div className="grid grid-cols-2 flex flex-row">
 
 
-									<h1 className="text-xl flex flex-row font-semibold">Answer from Alphy
+									<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -327,8 +385,17 @@ export default function QuestionAnswering(props) {
 
 
 									</h1>
+									<div className="col-span-1 justify-end flex flex-row flex ">
+
+										<svg onClick={handleShareLink} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+										<svg onClick={handleCopyToClipboard} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</div>
 								</div>
-								<div className="answer-area text-l ">
+								<div id="answer-area" className="answer-area text-l ">
 									<TypeIt className="mb-3"
 
 										options={{
@@ -444,17 +511,29 @@ export default function QuestionAnswering(props) {
 
 							<div>
 								<div >
-									<h1 className="mb-4 text-xl flex flex-row font-semibold">Answer from Alphy
+									<div className="grid grid-cols-2 flex flex-row">
 
 
-										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-											<path clip-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fill-rule="evenodd"></path>
-										</svg>
+										<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
 
 
+											<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+												<path clip-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fill-rule="evenodd"></path>
+											</svg>
 
-									</h1>
-									<p className="answer-area" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
+
+										</h1>
+										<div className="col-span-1 justify-end flex flex-row flex ">
+
+											<svg onClick={handleShareLink} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											</svg>
+											<svg onClick={handleCopyToClipboard} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" stroke-linecap="round" stroke-linejoin="round"></path>
+											</svg>
+										</div>
+									</div>
+									<p id="answer-area" className="answer-area" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
 								</div>
 
 								<button

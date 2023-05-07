@@ -311,22 +311,22 @@ export default function Content(props) {
 									</ul>
 								</div>
 								{/* 
-						<div className="summary-and-transcript-buttons text-xl w-full space-between gap-4	text-zinc-600 ">
-							<button
-								className={
-									activeTab === 'tab1' ? 'content-active-button border-r-1 ' : 'border-r-1 '
-								}
-								onClick={() => setActiveTab('tab1')}
-							>
-								Summary
-							</button>
-							<button
-								className={activeTab === 'tab2' ? 'content-active-button ' : ''}
-								onClick={() => setActiveTab('tab2')}
-							>
-								Transcript
-							</button>
-						</div> */}
+								<div className="summary-and-transcript-buttons text-xl w-full space-between gap-4	text-zinc-600 ">
+									<button
+										className={
+											activeTab === 'tab1' ? 'content-active-button border-r-1 ' : 'border-r-1 '
+										}
+										onClick={() => setActiveTab('tab1')}
+									>
+										Summary
+									</button>
+									<button
+										className={activeTab === 'tab2' ? 'content-active-button ' : ''}
+										onClick={() => setActiveTab('tab2')}
+									>
+										Transcript
+									</button>
+								</div> */}
 								<div className="main-content mt-2 text-zinc-600">
 
 									<Tabs>

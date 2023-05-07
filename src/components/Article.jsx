@@ -13,7 +13,16 @@ import { useWindowSize } from '../hooks/useWindowSize';
 function Article({ source_type, collapsed, setCollapsed }) {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const source_id = location.pathname.split('/')[2];
+	let source_id
+	if (location.pathname.split('/')[2].split("&q=")[0] !== undefined) {
+		source_id = location.pathname.split('/')[2].split("&q=")[0]
+
+	}
+	else {
+		source_id = location.pathname.split('/')[2];
+
+	}
+
 
 	const Collapser = () => {
 		setCollapsed(!collapsed);
