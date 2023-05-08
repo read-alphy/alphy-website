@@ -5,15 +5,33 @@ import About from '../components/Landing_page/About';
 import FeedbackForm from '../components/FeedbackForm';
 import { useEffect } from 'react';
 import { Helmet } from "react-helmet";
-
+import { useAuth } from '../hooks/useAuth';
+import { useState } from 'react';
+import WelcomePopup from '../components/Landing_page/WelcomePopup.jsx';
 
 
 function Home({ }) {
+
+	const { currentUser } = useAuth();
+	const [showMessage, setShowMessage] = useState(false);
 
 	useEffect(() => {
 		setTimeout(() => {
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
 		}, 0);
+
+
+		if (currentUser !== null) {
+			const hasSeenWelcomeMessage = localStorage.getItem('hasSeenWelcomeMessage');
+			if (!hasSeenWelcomeMessage) {
+				console.log(currentUser)
+				setShowMessage(true);
+				localStorage.setItem('hasSeenWelcomeMessage', 'true');
+			}
+		}
+
+
+
 	}, []);
 	return (
 		<div className="mx-auto md:w-800 w-full">
@@ -31,7 +49,9 @@ function Home({ }) {
 			</Helmet>
 			<Welcome />
 			<Feed />
-
+			{showMessage &&
+				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
+			}
 			<About />
 			<FeedbackForm />
 
