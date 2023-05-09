@@ -187,7 +187,8 @@ export default function Pricing({ stripePromise }) {
 
                             <div className=" w-full pt-20 grid grid-col-3 mb-40 items-center margin-auto">
                                 <p className="text-center text-blueLike text-5xl font-bold mb-10">Manage Subscription </p>
-                                {hasActiveSub ? <div className="items-center flex flex-row justify-center"><a className="text-center text-blueLike text-l mx-auto justify-center underline font-semibold mb-10" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">Change your billing plan or cancel subscription</a> </div> : null}
+                                {hasActiveSub ? <div className="items-center flex flex-col justify-center"><a className="text-center text-blueLike text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">Change your billing plan or cancel subscription</a>
+                                    <p className="items-center flex mb-6 " >Remaining Credits: 15 hours</p> </div> : null}
                                 <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch">
                                     <div class="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 ">
 

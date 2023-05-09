@@ -10,7 +10,7 @@
         border-radius: 15px;
     }
 
-    .bg-gray-600.animate {
+    .bg-zinc-300.animate {
         animation: pulse 1s ease-in-out infinite;
     }
 

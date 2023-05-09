@@ -31,9 +31,11 @@ const firebaseConfig = {
 };
 
 function App() {
+	const { currentUser } = useAuth();
 
 
-	const windowSize = useWindowSize();
+
+
 	const location = useLocation();
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);

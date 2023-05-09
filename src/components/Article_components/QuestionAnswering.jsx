@@ -123,6 +123,7 @@ export default function QuestionAnswering(props) {
 		setShowBaseQA(false);
 		setInputValue('');
 	};
+	
 
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') {

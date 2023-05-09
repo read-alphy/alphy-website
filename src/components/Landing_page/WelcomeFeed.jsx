@@ -14,12 +14,13 @@ function Feed() {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const { currentUser } = useAuth();
-
+	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
 	const [dataPersonal, setDataPersonal] = useState([]);
 	const [isPublic, setisPublic] = useState(true);
+	const [submitted, setSubmitted] = useState(false);
 
 	useEffect(() => {
 		getData(0, true, true);
@@ -29,6 +30,14 @@ function Feed() {
 
 	}, []);
 
+	window.addEventListener('beforeunload', () => {
+		if (submitted===true){
+			localStorage.setItem('search', search);
+	}
+	else{
+		localStorage.setItem('search', '');
+	}
+	  });
 	const temp = 10;
 	const limit = temp;
 	const searchInputRef = React.useRef(null);
@@ -100,6 +109,12 @@ function Feed() {
 
 	};
 
+	
+	const handleKeyDown = (event) => {
+		if (event.key === 'Enter') {
+			;
+		}
+	};
 	return (
 		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl">
 			<h2 className="text-gray-700 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
@@ -121,13 +136,16 @@ function Feed() {
 			<div className="main-page-feed-table-parent bg-zinc-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form
 					className="flex items-center"
+					onKeyDown={handleKeyDown}
 					onSubmit={(e) => {
 						e.preventDefault();
 						setOffset(0);
+						localStorage.setItem('search', search);
 						if (searchInputRef.current.value.length === 0) {
 							setSearch('');
 						}
 						getData(0, true, true);
+						setSubmitted(true)
 					}}
 				>
 					<label htmlFor="voice-search" className="sr-only">
@@ -136,18 +154,20 @@ function Feed() {
 					<div className="relative w-full  ">
 						<input
 							ref={searchInputRef}
+							
+
 							type="text"
 							onChange={(e) => {
 								setSearch(e.target.value);
 							}}
-							id="voice-search"
+							id="input-box"
 							className="bg-zinc-50 border border-slate-200 text-gray-900 text-sm rounded-l-full mt-5 sm:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 block w-full  py-3"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center py-3 pl-7 text-sm font-medium text-zinc-500 mt-5 sm:mt-0 border border-slate-200 rounded-r-full drop-shadow-sm bg-zinc-50 hover:bg-zinc-100 transition duration-400 ease-in-ease-out sm:mt-10"
+						className="inline-flex items-center mt-5 sm:mt-0  py-3 pl-7 text-sm font-medium text-zinc-500 border border-slate-200 rounded-r-full drop-shadow-sm bg-zinc-50 hover:bg-zinc-100 transition duration-400 ease-in-ease-outs"
 					>
 						<svg
 							aria-hidden="true"
@@ -186,7 +206,7 @@ function Feed() {
 							{isLoading
 								? data.length > 0
 									? data
-										.map((item, index) => <FeedItem key={index} item={item} />)
+										.map((item, index) => <FeedItem key={index} item={item} mainFeedInput={inputValue}/>)
 										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: data.map((item, index) => <FeedItem key={index + 1000} item={item} />)}

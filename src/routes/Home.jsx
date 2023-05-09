@@ -24,6 +24,7 @@ function Home({ }) {
 		if (currentUser !== null) {
 			const hasSeenWelcomeMessage = localStorage.getItem('hasSeenWelcomeMessage');
 			if (!hasSeenWelcomeMessage) {
+
 				console.log(currentUser)
 				setShowMessage(true);
 				localStorage.setItem('hasSeenWelcomeMessage', 'true');
