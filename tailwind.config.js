@@ -85,6 +85,7 @@ module.exports = {
 				mainText: '#ced4da',
 				sideColor: '#000',
 				darker: '#03001C',
+				darkMode:"#191919",
 
 				// palette - sunset
 				bordoLike: '#20262E',
@@ -95,6 +96,8 @@ module.exports = {
 				//palette - fener
 				whiteLike: '#F9F8F8',
 				blueLike: '#2f3542',
+				mildDarkMode:"#202020",
+//				midestDarkMode:"#1a1a1a",
 			},
 			backgroundImage: (theme) => ({
 				searchBg: "url('./img/search.svg')",

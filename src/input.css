@@ -25,5 +25,5 @@ body {
 }
 
 .about-text>a {
-    @apply dark: text-blue-400 text-blue-700
+    @apply dark: text-blue-400 text-zinc-200
 }

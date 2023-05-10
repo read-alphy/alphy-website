@@ -69,11 +69,11 @@ const Auth = () => {
 			{error && <div className="text-red-500 mb-4">{error}</div>}
 			<form className="w-full max-w-sm" onSubmit={isRegister ? handleRegisterWithEmail : handleLoginWithEmail}>
 				<div className="mb-4">
-					<label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+					<label className="block text-gray-700 dark:text-zinc-300 font-bold mb-2" htmlFor="email">
 						Email
 					</label>
 					<input
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-300 leading-tight focus:outline-none focus:shadow-outline"
 						id="email"
 						type="email"
 						placeholder="Email"
@@ -83,11 +83,11 @@ const Auth = () => {
 					/>
 				</div>
 				<div className="mb-4">
-					<label className="block text-gray-700 font-bold mb-2" htmlFor="password">
+					<label className="block text-gray-700 dark:text-zinc-300 font-bold mb-2" htmlFor="password">
 						Password
 					</label>
 					<input
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-300 leading-tight focus:outline-none focus:shadow-outline"
 						id="password"
 						type="password"
 						placeholder="Password"
@@ -98,11 +98,11 @@ const Auth = () => {
 				</div>
 				{isRegister && (
 					<div className="mb-4">
-						<label className="block text-gray-700 font-bold mb-2" htmlFor="confirmPassword">
+						<label className="block text-gray-700 dark:text-zinc-300 font-bold mb-2" htmlFor="confirmPassword">
 							Confirm Password
 						</label>
 						<input
-							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-300 leading-tight focus:outline-none focus:shadow-outline"
 							id="confirmPassword"
 							type="password"
 							placeholder="Confirm Password"
@@ -135,7 +135,7 @@ const Auth = () => {
 				</button>
 			</div>
 			<div className="mt-4">
-				<Link className="text-blue-500 hover:text-blue-700" to={isRegister ? '/auth' : '/auth/register'}>
+				<Link className="text-zinc-200 hover:text-zinc-200" to={isRegister ? '/auth' : '/auth/register'}>
 					{isRegister ? 'Already have an account? Login here.' : "Don't have an account? Register here."}
 				</Link>
 			</div>

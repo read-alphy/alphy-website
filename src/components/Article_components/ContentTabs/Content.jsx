@@ -25,7 +25,7 @@ export default function Content(props) {
 	const ref = useRef(null);
 
 
-	const [activeTab, setActiveTab] = useState('tab2');
+	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
 	const [showButton, setShowButton] = useState(false);
@@ -221,13 +221,13 @@ export default function Content(props) {
 			<div>
 				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className="col-span-2">
-						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike font-bold">
+						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 							{data.title}
 						</h1>
-						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike font-light">
+						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light">
 							{data.creator_name}
 						</h2>
-						<p className="w-full mt-5 border border-zinc-100"></p>
+						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
 					</div>
 
 					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
@@ -262,7 +262,7 @@ export default function Content(props) {
 									</a>
 									<a target="_blank"
 										href={`https://twitter.com/i/spaces/${data.source_id}`}
-										className="text-l text-zinc-600 mt-3 cursor-pointer"
+										className="text-l text-zinc-600 dark:text-zinc-200 mt-3 cursor-pointer"
 									>
 										Listen to "{data.title}"{' '}
 									</a>
@@ -305,27 +305,27 @@ export default function Content(props) {
 
 
 						{data.is_complete || data.transcript ? (
-							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300">
+							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700">
 
-								<div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:border-gray-700">
+								<div class="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700">
 									<ul class="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
-										<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab3")} class={`text-l inline-block p-4 pt-6    rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Key Takeaways</button>
+										<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab3")} class={`text-l inline-block p-4 pt-6    rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
 										</li>
-										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab1")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Summary</button>
+										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab1")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Summary</button>
 										</li>
-										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab2")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Transcript</button>
+										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab2")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Transcript</button>
 										</li>
-										{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab4")} class={`text-l inline-block p-4 rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Ask questions</button>
+										{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab4")} class={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Ask questions</button>
 										</li> */}
 
 									</ul>
 								</div>
 								{/* 
-								<div className="summary-and-transcript-buttons text-xl w-full space-between gap-4	text-zinc-600 ">
+								<div className="summary-and-transcript-buttons text-xl w-full space-between gap-4	text-zinc-600 dark:text-zinc-200 ">
 									<button
 										className={
 											activeTab === 'tab1' ? 'content-active-button border-r-1 ' : 'border-r-1 '
@@ -341,7 +341,7 @@ export default function Content(props) {
 										Transcript
 									</button>
 								</div> */}
-								<div className="main-content mt-2 text-zinc-600">
+								<div className="main-content mt-2 text-zinc-600 dark:text-zinc-200">
 
 									<Tabs>
 										<Tab eventKey="transcript" title="">
@@ -404,13 +404,13 @@ export default function Content(props) {
 															if (index % 2 === 0 && index < transcript.length) {
 																return (
 																	window.innerWidth > 999 && data.source_type === "yt" ?
-																		<div className="flex flex-row">
+																		<div className="flex flex-row dark:text-zinc-300">
 																			<a
 																				onClick={handleClickTimestamp}
 																				className={`${data.source_type === 'yt'
 																					? 'lg:cursor-pointer lg:pointer-events-auto'
 																					: ''
-																					} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline`}
+																					} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-zinc-300`}
 																				key={index}
 																			>
 																				<br></br>
@@ -431,13 +431,13 @@ export default function Content(props) {
 																				className={`${data.source_type === 'yt'
 																					? 'lg:cursor-pointer lg:pointer-events-auto'
 																					: ''
-																					}  lg:pointer-events-auto lg:text-slate-900 font-bold underline`}
+																					}  lg:pointer-events-auto lg:text-slate-900 dark:text-zinc-300 font-bold underline`}
 																				key={index}
 																			>
 																				<br></br>
 
 																				{item}{' '}
-
+																				
 
 																			</a>
 																			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end  mr-4 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>}
@@ -463,7 +463,7 @@ export default function Content(props) {
 						) : (
 							<div>
 								{/* <div className="flex flex-col">
-								<p className="text-xl text-zinc-600 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
+								<p className="text-xl text-zinc-600 dark:text-zinc-200 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
 
 									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
 									meantime, you can check out other videos.
@@ -520,7 +520,7 @@ export default function Content(props) {
 			{isLoading &&
 
 				<div className="flex flex-col">
-					<p className="text-xl text-zinc-600 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
+					<p className="text-xl text-zinc-600 dark:text-zinc-200 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
 
 						Alphy is doing its best to process this video, it will be ready in a few minutes. In the
 						meantime, you can check out other videos.

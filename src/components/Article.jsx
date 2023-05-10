@@ -133,7 +133,7 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 
 
 	return (
-		<div className="article ">
+		<div className="article dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
 				<title>{data.title ? `Alphy - ${data.title}` : "Alphy"} </title>
 				<meta property="og:title" content={data.title ? `Alphy - ${data.title}` : "Alphy"} />
@@ -149,7 +149,7 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 				<meta property="og:url" content={location.href} />
 			</Helmet>
 			<div
-				className={`w-screen bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
+				className={`w-screenbg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 			></div>
 			<div className="flex flex-row article-body">

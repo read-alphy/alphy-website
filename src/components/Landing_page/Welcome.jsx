@@ -166,7 +166,7 @@ export default function Welcome() {
 				<div className={`flex justify-center items-center h-[90vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
-						<p className="text-bordoLike text-center mb-10 mt-10">
+						<p className="text-bordoLike dark:bg-darkMode dark:text-zinc-500 text-center mb-10 mt-10">
 							We are processing your request. This may take a few seconds.
 						</p>
 					</div>
@@ -174,7 +174,7 @@ export default function Welcome() {
 			)}
 
 
-			<div className="flex flex-col justify-center text-bordoLike font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-56 text-center">
+			<div className="flex flex-col justify-center text-bordoLike dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-56 text-center">
 				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">
 					<div className="first flex justify-center pb-3 ">
 						<div className="">Transcribe</div>
@@ -191,7 +191,7 @@ export default function Welcome() {
 				</section>
 				audiovisual content with just one click.
 			</div>
-			<p className="text-bordoLike text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+			<p className="text-bordoLike dark:bg-darkMode dark:text-zinc-500 text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
 				notify you with email when it's ready!{' '}
 			</p>
@@ -200,7 +200,7 @@ export default function Welcome() {
 
 
 			{/* 
-			<ul className="text-bordoLike text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+			<ul className="text-bordoLike dark:bg-darkMode dark:text-zinc-500 text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				<p className="text-xl mb-2">Before submitting:</p>
 				<li className="mb-1 font-semibold">
 					∙Alphy works best with the content in English. We are working on supporting other languages.
@@ -221,13 +221,13 @@ export default function Welcome() {
 
 					<div className="w-full flex flex-col">
 
-						<p class=" text-l mb-2 text-gray-600 dark:text-gray-400 pb-2 ">
+						<p class=" text-l mb-2 text-gray-600 dark:text-zinc-300 pb-2 ">
 
 							<button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="left" data-popover-offset="20" type="button"><svg class="w-5 h-5 ml-1 pt-1 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button>
 
 							Instructions for Alphy</p>
 
-						<div data-popover id="popoverDescription" role="tooltip" class={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
+						<div data-popover id="popoverDescription" role="tooltip" class={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
 							<div class="p-3 space-y-2">
 								<h3 class="font-semibold text-gray-900">Before submitting</h3>
 								<p> Please make sure the duration of the content does not exceed <strong className="underline">3 hours</strong>. Otherwise, you will get an error. </p>
@@ -238,13 +238,13 @@ export default function Welcome() {
 								</p>
 
 
-								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-blue-800 hover:text-blue-700">Reach us if you have any questions <svg class="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></a>
+								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-blue-800 hover:text-zinc-200">Reach us if you have any questions <svg class="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></a>
 							</div>
 							<div class="popover-arrow" role="presentation"></div>
 						</div>
 						<input
 
-							className="w-full lg:w-[600px] border border-[#6B728E] text-bordoLike py-3 pl-4 rounded-full  focus:ring-2 focus:ring-whiteLike focus:outline-none"
+							className="w-full lg:w-[600px] border border-zinc-300 text-bordoLike dark:bg-mildDarkMode  dark:border-zinc-600 dark:text-zinc-500 py-3 pl-4 rounded-full  focus:ring-whiteLike dark:focus:ring-mildDarkMode dark:focus:outline-none focus:outline-none"
 							type="text"
 							name="content_link"
 							value={inputValue}

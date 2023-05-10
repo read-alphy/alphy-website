@@ -23,7 +23,9 @@
             opacity: 1;
         }
     }
-
+    .bg-zinc-700.animate {
+        animation: pulse 1s ease-in-out infinite;
+    }
 
     .video-text {
         overflow: hidden;

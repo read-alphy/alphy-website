@@ -49,7 +49,7 @@ function App() {
 
 	return (
 
-		<div className="App">
+		<div className="App bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300">
 			<Elements stripe={stripePromise}>
 				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 					<>
@@ -91,10 +91,11 @@ function App() {
 							{/* <Route path="/prices" element={<Prices />} /> */}
 							{/* <Route path="/checkout" element={<CheckOut />} /> */}
 
-							<Route path="*" element={<NotFound />} />
+							<Route path="*" element={<NotFound to="/404"/>} />
+							<Route path="/404" element={<NotFound />} />
 						</Routes>
 
-						{location.pathname === '/' || location.pathname === '/privacypolicy' ? <Footer /> : null}
+						{location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null}
 
 					</>
 

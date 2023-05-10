@@ -165,7 +165,7 @@ function SideFeed(props) {
  */
 	};
 	return (
-		<div id="side-feed">
+		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300">
 
 
 
@@ -200,7 +200,7 @@ function SideFeed(props) {
 						}}
 
 						id="simple-search"
-						className="ml-2 pr-10 bg-zinc-50 drop-shadow-sm rounded-l-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 block w-full pl-4 p-3 "
+						className="ml-2 pr-10 bg-zinc-50 dark:bg-darkMode drop-shadow-sm rounded-l-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
 						placeholder={'Search YouTube videos or Twitter spaces...'}
 
 					/>
@@ -231,7 +231,7 @@ function SideFeed(props) {
 				<button
 					onClick={handleSearch}
 					type="submit"
-					className="p-3 ml-2 mb-10 rounded-r-full drop-shadow-sm transition duration-400 ease-in-out text-sm font-medium  text-gray-400 bg-zinc-50 hover:bg-zinc-100 rounded-r-full  "
+					className="p-3 ml-2 mb-10 rounded-r-full drop-shadow-sm transition duration-400 ease-in-out text-sm font-medium  text-gray-400 bg-zinc-50 dark:bg-darkMode hover:bg-zinc-100 rounded-r-full  "
 				>
 					<svg
 						width="22"
@@ -252,15 +252,15 @@ function SideFeed(props) {
 			</form>
 
 			
-			<div class="text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700">
-				<ul class="flex ml-6 flex-wrap -mb-px">
+			<div class="text-sm font-medium text-center text-gray-500  w-full dark:text-zinc-300 dark:border-gray-700">
+				<ul class="flex ml-6  flex-wrap -mb-px">
 					
 					
-					<li class="mr-2">
-						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
+					<li class="mr-2 ">
+						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li>
-					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
+					<li class="mr-2 ">
+						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 
 				</ul>

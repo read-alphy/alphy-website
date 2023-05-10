@@ -211,7 +211,7 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div id="q_and_a" className={`md:max-h-[60vh] border-b overflow-auto mx-auto pb-5`} ref={QARef}>
+		<div id="q_and_a" className={`question-answering md:max-h-[60vh] border-b overflow-auto mx-auto pb-5`} ref={QARef}>
 
 			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content. In any language you want.</p>
 			<div className="Md:pl-10 md:pr-10 ">
@@ -219,9 +219,9 @@ export default function QuestionAnswering(props) {
 				<Toaster position="bottom-center" />
 
 
-				{/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
+				{/* <p className="text-zinc-600 dark:text-zinc-200  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
 				<div className="flex items-center pl-1 pr-1">
-					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
+					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 dark:border-zinc-700 placeholder:italic rounded-lg focus:outline-none">
 
                         <option onClick={handleOptionClear}> Questions we already answered</option>
 
@@ -247,8 +247,8 @@ export default function QuestionAnswering(props) {
 							id="search"
 							className={` block w-full drop-shadow-md p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
 								? 'border-1 border-red-300'
-								: 'border border-zinc-100'
-								} placeholder:italic rounded-l-full bg-zinc-50 focus:outline-none focus:border-slate-50 focus:ring-slate-50 `}
+								: 'border border-zinc-100 dark:border-zinc-700'
+								} placeholder:italic rounded-l-full bg-zinc-50 dark:bg-darkMode focus:outline-none focus:border-slate-50 focus:ring-slate-50 `}
 							placeholder="Ask anything to the transcript..."
 							autoComplete="off"
 							required
@@ -283,12 +283,12 @@ export default function QuestionAnswering(props) {
 						type="submit"
 						ref={buttonRef}
 						onClick={fetchData}
-						class="p-3 px-5 rounded-r-full drop-shadow-md  transition 	-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 rounded-md  hover:bg-zinc-100 "
+						class="p-3  px-5 rounded-r-full drop-shadow-md  transition-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 dark:bg-darkMode rounded-md dark:border dark:border-zinc-700 hover:bg-zinc-100 "
 					>
 						<svg
 							aria-hidden="true"
-							width={21}
-							class="text-zinc-500 dark:text-gray-400"
+							width={20}
+							class="text-zinc-500 dark:text-zinc-300"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 							xmlns="http://www.w3.org/2000/svg"
@@ -313,7 +313,7 @@ export default function QuestionAnswering(props) {
 					{isCleared && !isLoadingInside && answerData.length === 0 ? (
 						<div>
 
-							<p className="mb-5 text-xl text-zinc-600">
+							<p className="mb-5 text-xl text-zinc-600 dark:text-zinc-200">
 								{' '}
 								Or check out the questions Alphy already answered for you
 							</p>
@@ -322,13 +322,13 @@ export default function QuestionAnswering(props) {
 								index % 2 == 0 ? <button
 									key={index}
 									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-full"
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600 dark:text-zinc-200  dark:bg-zinc-700 bg-zinc-100 border border-gray-200 dark:border-zinc-600 rounded-full"
 								>
 									{item}
 								</button> : <button
 									key={index}
 									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-50 border border-gray-200 rounded-full"
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600 dark:text-zinc-200  bg-zinc-50 dark:bg-mildDarkMode border border-gray-200 dark:border-zinc-600 rounded-full"
 								>
 									{item}
 								</button>
@@ -358,7 +358,7 @@ export default function QuestionAnswering(props) {
 
 
 				{answerData.length !== 0 && !showBaseQA && showUserQA ? (
-					<div className="text-zinc-600 pb-10">
+					<div className="text-zinc-600 dark:text-zinc-200 pb-10">
 						{answerData.answer ? (
 							<div  >
 								<div className="grid grid-cols-2 flex flex-row mb-4">
@@ -404,7 +404,7 @@ export default function QuestionAnswering(props) {
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
 									onClick={() => setAnswer(!answer)}
 								>
-									<span className={`${answer ? 'hidden' : 'block'} text-zinc-600 text-l pr-1`}>
+									<span className={`${answer ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
 										See sources from the video
 									</span>
 									<svg
@@ -464,7 +464,7 @@ export default function QuestionAnswering(props) {
 											onClick={() => setAnswer(!answer)}
 										>
 											<span
-												className={`${answer ? 'block' : 'hidden'} text-zinc-600 text-l pr-1`}
+												className={`${answer ? 'block' : 'hidden'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}
 											>
 												See less
 											</span>
@@ -497,7 +497,7 @@ export default function QuestionAnswering(props) {
 				) : null}
 
 				{showBaseQA ? (
-					<div className="text-zinc-600 pb-10">
+					<div className="text-zinc-600 dark:text-zinc-200 pb-10">
 						{
 
 							<div className={`${clicked ? "animate-highlight animate-delay-1000" : ""}`}>
@@ -533,7 +533,7 @@ export default function QuestionAnswering(props) {
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
 									onClick={() => setBaseSources(!baseSources)}
 								>
-									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 text-l pr-1`}>
+									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
 										See sources from the video{' '}
 									</span>
 									<svg
@@ -586,7 +586,7 @@ export default function QuestionAnswering(props) {
 												QARef.current.scrollIntoView({ behavior: 'smooth' });
 											}}
 										>
-											<span className="text-zinc-600 text-l pr-1">See less</span>
+											<span className="text-zinc-600 dark:text-zinc-200 text-l pr-1">See less</span>
 											<svg
 												className=""
 												aria-hidden="true"

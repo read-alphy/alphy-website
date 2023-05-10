@@ -29,7 +29,7 @@ export default function WelcomePopup(props) {
                 <ul class="list-disc pl-5 mb-4">
                     <li className="pb-2">You can use our service on YouTube videos and Twitter Spaces. Just submit a link and we will notify you when the work is done.</li>
                     <li className="pb-2">Enjoy 2 hours of free transcription credits: To help you get started, we're giving you 2 hours of transcription credits for free!</li>
-                    <li className="pb-2">Submission limits: Please note that there are some limits to content submission. To learn more about these limits, click <a href="/plans" class="text-blue-500">here</a>.</li>
+                    <li className="pb-2">Submission limits: Please note that there are some limits to content submission. To learn more about these limits, click <a href="/plans" class="text-zinc-200">here</a>.</li>
                     <li className="pb-2">Public workspace: All the work on Alphy is public, so feel free to browse, read, and ask questions. We're here to help and support your journey with Alphy.</li>
                 </ul>
                 <p class="mb-4">Once again, welcome to the Alphy community! We can't wait to see how our transcription services will enhance your online experience. Happy transcribing!</p>

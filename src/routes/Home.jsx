@@ -35,7 +35,7 @@ function Home({ }) {
 
 	}, []);
 	return (
-		<div className="mx-auto md:w-800 w-full">
+		<div className="mx-auto md:w-800 w-full bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
 				<title>{`Alphy, the next generation speech-to-meaning agent.`} </title>
 				<meta property="og:title" content={`Alphy, the next generation speech-to-meaning agent.`} />
