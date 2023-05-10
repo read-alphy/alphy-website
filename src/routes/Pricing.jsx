@@ -201,11 +201,11 @@ export default function Pricing({ stripePromise }) {
                                 {hasActiveSub ? <div className="items-center flex flex-col justify-center"><a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">Change your billing plan or cancel subscription</a>
                                     <p className="items-center flex mb-6 " >Remaining Credits: 15 hours</p> </div> : null}
 
-<div className="items-center flex justify-center"><label class="relative inline-flex items-center ">
+{/* <div className="items-center flex justify-center"><label class="relative inline-flex items-center ">
   <input type="checkbox" value="" class="sr-only peer" onClick={handleDarkMode}/>
   <div class="w-11 cursor-pointer h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
   <span class="ml-3 text-sm font-medium pointer-events-none text-gray-900 dark:text-gray-300">{isDarkMode=="dark" ? "Toggle Light Mode" : "Toggle Dark Mode"}</span>
-</label> </div>
+</label> </div> */}
 
                                 <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch">
                                     <div class="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
