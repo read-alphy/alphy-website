@@ -146,8 +146,9 @@ function SideFeed(props) {
 	};
 
 	const handleScroll = (event) => {
+		console.log("yo")
 		const { scrollTop, scrollHeight, clientHeight } = feedRef2.current;
-		if (scrollTop + clientHeight >= scrollHeight) {
+		if (scrollTop + clientHeight >= scrollHeight*0.95) {
 			
 			loadMore();
 			// scroll a little bit up to avoid triggering the event again
