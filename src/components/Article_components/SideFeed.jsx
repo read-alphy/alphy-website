@@ -146,7 +146,7 @@ function SideFeed(props) {
 	};
 
 	const handleScroll = (event) => {
-		console.log("yo")
+		
 		const { scrollTop, scrollHeight, clientHeight } = feedRef2.current;
 		if (scrollTop + clientHeight >= scrollHeight*0.95) {
 			
