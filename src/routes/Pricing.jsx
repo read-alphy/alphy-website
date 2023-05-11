@@ -75,7 +75,6 @@ export default function Pricing({ stripePromise }) {
         // can be removed just for debugging
         if (currentUser) {
             currentUser.getIdToken().then((idToken) => {
-                console.log("token", idToken)
                 axios
                     .get(
                         `${process.env.REACT_APP_API_URL}/credit`,
