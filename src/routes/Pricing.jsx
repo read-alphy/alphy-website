@@ -70,12 +70,37 @@ export default function Pricing({ stripePromise }) {
         offset: 10,
 
     };
+    
+    useEffect(() => {
+        // can be removed just for debugging
+        if (currentUser) {
+            currentUser.getIdToken().then((idToken) => {
+                console.log("token", idToken)
+                axios
+                    .get(
+                        `${process.env.REACT_APP_API_URL}/credit`,
+                        {
+                            headers: {
+                                'id-token': idToken,
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        const [fixed, monthly] = response.data
+                        console.log(`fixed=${fixed}, monthly=${monthly}`);
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    });
+            });
+        } 
+    }, [currentUser]);
 
     useEffect(() => {
         if (currentUser !== null && called === false) {
             setTimeout(() => {
                 try {
-                    getCustomerInfo()
+                    getCustomerInfo(currentUser)
                     setTimeout(() => {
                         setIsLoaded(true)
                     }, 400)
@@ -95,8 +120,15 @@ export default function Pricing({ stripePromise }) {
 
     const popover = new Popover($targetEl, $triggerEl, options);
 
-    const getCustomerInfo = async () => {
-        await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=${currentUser.uid}`)
+    const getCustomerInfo = async (currentUser) => {
+        const idToken = await currentUser.getIdToken()
+        await axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
+        {
+            headers: {
+                'id-token': idToken,
+            },
+        },
+        )
             //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
             .then(r => {
                 if (r.data !== null) {
@@ -104,8 +136,7 @@ export default function Pricing({ stripePromise }) {
                     const userStripe = r.data
                     setHasActiveSub(true)
                     userStripeId = userStripe
-
-
+                    // console.log(userStripeId)
                 }
                 else {
                     setHasActiveSub(false)

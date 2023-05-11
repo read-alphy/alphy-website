@@ -15,8 +15,8 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Pricing from './routes/Pricing';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import CheckOutPage from './routes/Payment/CheckOutPage';
-import Success from './routes/Payment/Success';
+import CheckOutPage from './routes/payment/CheckOutPage';
+import Success from './routes/payment/Success';
 
 
 
