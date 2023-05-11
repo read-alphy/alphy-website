@@ -245,7 +245,7 @@ export default function QuestionAnswering(props) {
 							title={inputValue}
 							type="text"
 							id="search"
-							className={` block w-full drop-shadow-md p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+							className={` block w-full drop-shadow-sm p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90  border-r-none ${inputError && inputValue.length === 0
 								? 'border-1 border-red-300'
 								: 'border border-zinc-100 dark:border-zinc-700'
 								} placeholder:italic rounded-l-full bg-zinc-50 dark:bg-darkMode focus:outline-none focus:border-slate-50 focus:ring-slate-50 `}
@@ -283,7 +283,7 @@ export default function QuestionAnswering(props) {
 						type="submit"
 						ref={buttonRef}
 						onClick={fetchData}
-						class="p-3  px-5 rounded-r-full drop-shadow-md  transition-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 dark:bg-darkMode rounded-md dark:border dark:border-zinc-700 hover:bg-zinc-100 "
+						class="p-3  px-5 rounded-r-full drop-shadow-sm  border-l-none text-sm font-medium text-whiteLike bg-zinc-50 dark:bg-darkMode rounded-md dark:border dark:border-zinc-700 "
 					>
 						<svg
 							aria-hidden="true"

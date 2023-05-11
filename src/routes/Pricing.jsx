@@ -196,7 +196,7 @@ export default function Pricing({ stripePromise }) {
                         windowSize.width > 999 ?
 
 
-                            <div className=" w-full pt-20 grid grid-col-3 mb-40 items-center margin-auto">
+                            <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-10">Manage Subscription </p>
                                 {hasActiveSub ? <div className="items-center flex flex-col justify-center"><a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">Change your billing plan or cancel subscription</a>
                                     <p className="items-center flex mb-6 " >Remaining Credits: 15 hours</p> </div> : null}
@@ -523,12 +523,12 @@ export default function Pricing({ stripePromise }) {
                     }
 
                 <div className="dark:bg-darkMode"> 
-                    < div id="FAQ" className="px-4 mx-auto container w-5/6 max-w-4xl mt-40 pb-20 text-l lg:text-l dark:bg-darkMode dark:text-zinc-300">
-                        <h1 className="text-4xl  font-semibold">FAQ</h1>
+                    < div id="FAQ" className="px-4 mx-auto container w-5/6 max-w-4xl mt-60  pb-20 text-l lg:text-l dark:bg-darkMode dark:text-zinc-300">
+                        <h1 className="text-2xl  font-semibold">FAQ</h1>
                         <br></br>
-                        <h2 className="text-xl lg:text-2xl   font-semibold"> Do my credits roll over?</h2>
+                        <h2 className="text-l lg:text-xl   font-normal"> Do my credits roll over?</h2>
                         <br></br>
-                        <p className="text-xl">
+                        <p className="text-md lg:text-l font-normal">
                             {' '}
                             If you are using the free version, you have 2 hours of free transcription in total. In premium, you get 10 hours of transcription credits every month (on top of your 2 hours of credit). If you don't use your credits, they will roll over to the next month. You can accumulate up to 30 hours of transcription credits.
 
@@ -536,18 +536,18 @@ export default function Pricing({ stripePromise }) {
                         <br></br>
                         <br></br>
 
-                        <h2 className="text-xl lg:text-2xl  font-semibold"> What happens to my credits if I cancel my subscriptions?</h2>
+                        <h2 className="text-l lg:text-xl  font-normal"> What happens to my credits if I cancel my subscriptions?</h2>
                         <br></br>
-                        <p className="text-xl">
+                        <p className="text-md lg:text-l">
                             {' '}
                             If you want to cancel your subscription, you can do so at any time. Your credits will still be yours. However you will only be able to access premium benefits until the end of the billing period.
 
                         </p>
                         <br></br>
                         <br></br>
-                        <h2 className="text-xl lg:text-2xl   font-semibold"> Can I get a refund?</h2>
+                        <h2 className="text-l lg:text-xl   font-normal"> Can I get a refund?</h2>
                         <br></br>
-                        <p className="text-xl">
+                        <p className="text-md lg:text-l">
                             {' '}
                             Sure! Reach us at info@alphy.app and we'll reimburse you for the remaining credits.
                         </p>

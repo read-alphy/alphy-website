@@ -232,7 +232,7 @@ function SideFeed(props) {
 				<button
 					onClick={handleSearch}
 					type="submit"
-					className="p-3 ml-2 mb-10 rounded-r-full drop-shadow-sm transition duration-400 ease-in-out text-sm font-medium  text-gray-400 bg-zinc-50 dark:bg-darkMode hover:bg-zinc-100 rounded-r-full  "
+					className="p-3 ml-2 mb-10 rounded-r-full drop-shadow-sm  text-sm font-medium  text-gray-400 bg-zinc-50 dark:bg-darkMode rounded-r-full  "
 				>
 					<svg
 						width="22"

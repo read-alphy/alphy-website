@@ -167,7 +167,7 @@ function Feed() {
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center mt-5 sm:mt-0  py-3 pl-7 text-sm font-medium text-zinc-500 border border-slate-200 dark:border-none  rounded-r-full drop-shadow-sm bg-zinc-50 dark:bg-darkMode hover:bg-zinc-100 transition duration-400 ease-in-ease-outs"
+						className="inline-flex items-center mt-5 sm:mt-0  py-3 pl-7 text-sm font-medium text-zinc-500 border border-slate-200 dark:border-none  rounded-r-full drop-shadow-sm dark:bg-darkMode "
 					>
 						<svg
 							aria-hidden="true"

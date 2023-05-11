@@ -191,7 +191,7 @@ export default function Welcome() {
 				</section>
 				audiovisual content with just one click.
 			</div>
-			<p className="text-bordoLike dark:bg-darkMode dark:text-zinc-500 text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-500 text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
 				notify you with email when it's ready!{' '}
 			</p>
@@ -260,7 +260,7 @@ export default function Welcome() {
 				<div className="flex justify-center ">
 					{currentUser ? (
 						<button
-							className="w-1/3 border-2 border-blueLike transition duration-0 px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-75 hover:duration-400"
+							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-90 transition duration-200 ease-in-out"
 							type="submit"
 							onClick={(e) => {
 								handleSubmit();

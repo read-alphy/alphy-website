@@ -40,7 +40,7 @@ export default function About() {
 				<br></br>
 				<h1 className="text-l underline font-semibold">Quick info about the product:</h1>
 				<br></br>
-				<p className="text-ll">
+				<p className="text-l">
 					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to
 					Alphy.
 
