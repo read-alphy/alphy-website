@@ -10,35 +10,30 @@ import { useAuth } from '../../hooks/useAuth';
 import { Popover } from 'flowbite';
 
 
-export default function Welcome() {
+export default function Welcome({hasActiveSub}) {
+
+	
 	const navigate = useNavigate();
 	const [inputValue, setInputValue] = useState('');
 	const [language, setLanguage] = useState('en-US');
 	const [loading, setLoading] = useState(false);
 	const { currentUser } = useAuth();
 	const [showToaster, setShowToaster] = useState(false);
+	
+	const[called, setCalled] = useState(false)
+	const[videoData, setVideoData] = useState([])
+	const[failed,setFailed]	= useState(false)
+	
+	
+	const auth = useAuth()
+    const handleLoginWithGoogle = () => {
+        auth.loginWithGoogle().then(() => {
+            window.location.reload()
+        })
+    };
 
 
-	/* 	useEffect(() => {
-			// check if the toaster has already been displayed
-	
-	
-			if (!showToaster) {
-				// if not, display the toaster and set a flag in localStorage
-				setShowToaster(true);
-				toast("We are getting re", {
-					duration: 5000,
-					position: "top-center",
-					className: "text-l min-w-[400px]",
-					icon: "",
-					style: {
-	
-						margin: "20px",
-	
-					}
-				})
-			}
-		}, []); */
+
 
 
 
@@ -57,10 +52,31 @@ export default function Welcome() {
 		offset: 20,
 
 	};
-
+	
 	const popover = new Popover($targetEl, $triggerEl, options);
 
+	/* const getYouTubeInfo = (videoId) => {
+		try {
+			const response =  axios.get(
+			  `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
+			).then((response) => {
+			
+			const duration =response.data.items[0].contentDetails.duration;
+			const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
 
+			const hours = parseInt(match[1]) || 0;
+			const minutes = parseInt(match[2]) || 0;
+			const seconds = parseInt(match[3]) || 0;
+			const duration_seconds = hours*3600 + minutes*60 + seconds
+			setVideoData([response.data.items[0].statistics.viewCount, duration_seconds]);
+			return(response.data.items[0].statistics.viewCount, duration_seconds)
+			})
+		  } catch (error) {
+			console.error('Error fetching video data:', error);
+		  }
+	} */
+
+ 
 	const handleSubmit = (event, selectedOption) => {
 		toast.dismiss();
 		if (
@@ -74,7 +90,6 @@ export default function Welcome() {
 			setInputValue('');
 			toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
 			return;
-
 		}
 		else {
 			let videoId
@@ -83,9 +98,8 @@ export default function Welcome() {
 			if (inputValue.includes('https://www.youtube.com')) {
 				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
 				video_source = "yt"
-
-
-			}
+			
+		}
 
 			else if (inputValue.includes('https://youtu.be')) {
 				videoId = inputValue.split('/').pop().split("?")[0];
@@ -99,8 +113,14 @@ export default function Welcome() {
 
 			}
 			else if (inputValue.includes('https://twitter.com/i/spaces')) {
+				if (hasActiveSub){
 				videoId = inputValue.split('/').pop().split("?")[0];
 				video_source = "sp"
+				}
+				else{
+					toast.error('Please switch to the premium plan to transcribe Twitter Spaces.');
+					return;
+				}
 
 			}
 
@@ -109,7 +129,7 @@ export default function Welcome() {
 				setLoading(true);
 				// get id token
 				currentUser.getIdToken().then((idToken) => {
-					axios
+				axios
 						.post(
 							`${process.env.REACT_APP_API_URL}/summaries`,
 							{
@@ -123,8 +143,10 @@ export default function Welcome() {
 							},
 						)
 						.then((response) => {
+							
 
 							setLoading(false);
+							setFailed(false)
 							setInputValue('');
 							navigate(`/${video_source}/${videoId}`)
 							/* 							if (response.status === 200 || response.status === 201 || response.status === 202) {
@@ -137,11 +159,20 @@ export default function Welcome() {
 																duration: 3000,
 															});
 														} */
-						})
-						.catch((error) => {
-							toast.error('There was an error submitting the form. Please try again.', {
-								duration: 3000,
+						}).
+						catch((error) => {
+							if(hasActiveSub){
+							toast('There was an error submitting the form. \n \n Potential causes: \n\n • You may have run out of credits \n\n • The video you are submitting is longer than 4 hours.', {
+								duration: 5000,
+								icon: '⚠️',
 							});
+						}
+						else{	toast('There was an error submitting the form. \n \n Potential causes: \n\n • You may have run out of credits \n\n • The video you are submitting has less than 30,000. \n\n • The video you are submitting is longer than 1 hour.', {
+								duration: 5000,
+								icon: '⚠️',
+							});
+						}
+							setFailed(true)
 							setInputValue('');
 							setLoading(false);
 							throw error;
@@ -156,6 +187,12 @@ export default function Welcome() {
 			}
 		}
 	};
+
+
+	
+
+
+
 
 	return (
 		<div
@@ -244,7 +281,7 @@ export default function Welcome() {
 						</div>
 						<input
 
-							className="w-full lg:w-[600px] border border-zinc-300 text-bordoLike dark:bg-mildDarkMode  dark:border-zinc-600 dark:text-zinc-500 py-3 pl-4 rounded-full  focus:ring-whiteLike dark:focus:ring-mildDarkMode dark:focus:outline-none focus:outline-none"
+							className={`w-full lg:w-[600px] border border-zinc-300 text-bordoLike dark:bg-mildDarkMode  dark:border-zinc-600 dark:text-zinc-500 py-3 pl-4 rounded-full  focus:ring-whiteLike dark:focus:ring-mildDarkMode dark:focus:outline-none focus:outline-none ${failed && inputValue.length===0 ? "border-red-500" : ""}`} 
 							type="text"
 							name="content_link"
 							value={inputValue}
@@ -252,6 +289,7 @@ export default function Welcome() {
 							placeholder="Insert a link to start"
 							autoComplete="off"
 						/>
+					{/* 	{failed && inputValue.length===0 ?<p className="font-light ml-2 text-red-500"> Check again.</p> : null} */}
 
 					</div>
 					{/* <Languages language={language} onLangChange={setLanguage} /> */}
@@ -272,9 +310,7 @@ export default function Welcome() {
 						<button
 							className="w-2/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-2 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-75"
 							type="submit"
-							onClick={(e) => {
-								handleSubmit();
-							}}
+							onClick={handleLoginWithGoogle}
 						>
 							Sign In To Submit
 						</button>

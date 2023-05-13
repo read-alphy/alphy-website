@@ -567,6 +567,23 @@ CONTENT PAGE
 	padding: 0;
 }
 
+.summary-text h2{
+	font-size:large;
+	font-weight:500;
+	text-decoration: underline;
+	padding-top: 10px;
+	
+}
+.summary-text 	ul{
+	list-style-type:disc;
+
+}
+.summary-text li::before {
+	content: "•"; /* Bullet point character */
+	color: #a1a1aa; /* Change color here */
+	margin-right: 0.5em; /* Add some spacing between the bullet and the text */
+  }
+
 .sign-in-input input {
 	position: relative;
 	cursor: text;

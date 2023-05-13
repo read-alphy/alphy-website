@@ -14,6 +14,7 @@ function Feed() {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const { currentUser } = useAuth();
+	
 	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
@@ -244,7 +245,7 @@ function Feed() {
 								}
 							gap-4
 							`}
-						>{currentUser == null ? <p className="text-center text-gray-500 items-center margin-auto text-xl mt-5 mb-5 w-full col-span-2">Sign in to see the content you previously submitted.</p> : null}
+						>{currentUser == null ? <p  className="text-center text-gray-500 items-center margin-auto text-xl mt-5 mb-5 w-full col-span-2">Sign in to see the content you previously submitted.</p> : null}
 							{isLoadingPersonal
 								? dataPersonal.length > 0
 									? dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))

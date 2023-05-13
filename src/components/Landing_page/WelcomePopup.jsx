@@ -25,12 +25,12 @@ export default function WelcomePopup(props) {
                         ></path>
                     </svg>
                 </div>
-                <p class="mb-2">We're thrilled to have you on board! Before you start, we'd like to share some exciting features and benefits available to you:</p>
+                <p class="mb-2">We're thrilled to have you on board! Here are the benefits available for you:</p>
                 <ul class="list-disc pl-5 mb-4">
                     <li className="pb-2">You can use our service on YouTube videos and Twitter Spaces. Just submit a link and we will notify you when the work is done.</li>
-                    <li className="pb-2">Enjoy 2 hours of free transcription credits: To help you get started, we're giving you 2 hours of transcription credits for free!</li>
-                    <li className="pb-2">Submission limits: Please note that there are some limits to content submission. To learn more about these limits, click <a href="/plans" class="text-zinc-200">here</a>.</li>
-                    <li className="pb-2">Public workspace: All the work on Alphy is public, so feel free to browse, read, and ask questions. We're here to help and support your journey with Alphy.</li>
+                    <li className="pb-2"><strong>Enjoy 2 hours of free transcription credits</strong>: To help you get started, we're giving you 2 hours of transcription credits for free!</li>
+                    <li className="pb-2"><strong>Submission limits</strong>: Please note that there are some limits to content submission. To learn more about these limits, click <a href="/plans" class="text-zinc-200">here</a>.</li>
+                    <li className="pb-2"><strong>Public workspace</strong>: All the work on Alphy is public, so feel free to browse, read, and ask questions. We're here to help and support your journey with Alphy.</li>
                 </ul>
                 <p class="mb-4">Once again, welcome to the Alphy community! We can't wait to see how our transcription services will enhance your online experience. Happy transcribing!</p>
                 <div className="w-full mx-auto text-center">

@@ -135,7 +135,7 @@ function Navbar({ collapsed, setCollapsed }) {
 						className={`hidden md:block md:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 md:block pt-2`}
 					>
 						{' '}
-						<Link to="/plans" className="dark:text-gray-200">
+						<Link to={currentUser ?"/account" : "/plans"} className="dark:text-gray-200">
 							{currentUser ? "Account" : "Plans"}
 						</Link>{' '}
 					</div>

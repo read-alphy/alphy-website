@@ -14,6 +14,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
 import Download from '../../../img/download.gif';
 import DownloadStatic from '../../../img/download_static.png';
+import ReactMarkdown from "react-markdown";
 
 
 export default function Content(props) {
@@ -86,6 +87,7 @@ export default function Content(props) {
 
 		if (data.summary !== null) {
 			summaryArray = data.summary.split('\n');
+			
 
 			var parser = new srtParser2();
 
@@ -213,7 +215,14 @@ export default function Content(props) {
 	};
 
 	transcriptParser();
-
+	const headingRenderer = ({ level, children }) => {
+		const Tag = `h${level}`;
+		return <Tag className={`text-2xl font-bold mb-4 mt-${level}`}>{children}</Tag>;
+	  };
+	
+	  const paragraphRenderer = ({ children }) => {
+		return <p className="text-lg mb-4">{children}</p>;
+	  };
 
 	return (
 		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
@@ -367,6 +376,7 @@ export default function Content(props) {
 											))} */}
 
 											{activeTab === 'tab1' && (
+												
 												<div className="content-area text-l font-normal mb-4 max-w-screen-md overflow-auto max-h-[80vh]">
 													{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
@@ -380,10 +390,14 @@ export default function Content(props) {
 													) : (
 														summaryArray.map((item, index) => {
 															return (
-																<p className="mb-6 text-md" key={index}>
+																<p className="mb-4" key={index}>
+																	<div className="summary-text">
+																	<ReactMarkdown>
+																		{item}
+																	</ReactMarkdown>
+																	</div>
 
-
-																	<p dangerouslySetInnerHTML={{ __html: item }} />
+																	
 
 
 																</p>

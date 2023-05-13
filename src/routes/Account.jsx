@@ -11,15 +11,18 @@ import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Popover } from 'flowbite';
 import ReactLoading from 'react-loading';
+import { useLocation } from "react-router-dom";
 
 
 
 
 
 
-export default function Pricing({ stripePromise }) {
+
+export default function Account({ stripePromise }) {
     
     const { currentUser } = useAuth();
+    
     const windowSize = useWindowSize();
     const [subscription, setSubscription] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -31,22 +34,11 @@ export default function Pricing({ stripePromise }) {
     const [credit, setCredit] = useState(0);
     const auth = useAuth();
 
-    const stripe = useStripe();
-    const [subscriptionData, setSubscriptionData] = useState(null);
     const navigate = useNavigate()
     let userStripeId = "";
     const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
 
-    const handleDarkMode = () => {
 
-
-      const colorTheme = isDarkMode === "dark" ? "light" : "dark";
-      document.documentElement.classList.remove(isDarkMode);
-      document.documentElement.classList.add(colorTheme);
-      setDarkMode(colorTheme);
-      localStorage.setItem("theme", colorTheme);
-      
-    };
     // set the popover content element
     const $targetEl = document.getElementById('popoverDescription');
 
@@ -75,10 +67,8 @@ export default function Pricing({ stripePromise }) {
     };
     
     useEffect(() => {
-        // can be removed just for debugging
 
         if (currentUser !== null && called === false) {
-            navigate("/account")
             setTimeout(() => {
                 try {
                     getCustomerInfo(currentUser)
@@ -238,11 +228,11 @@ export default function Pricing({ stripePromise }) {
 
 
                             <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
-                                <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-20">Choose the best plan for you</p>
+                                <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-10">Manage Subscription </p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">
-                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
-                                    <p className="items-center flex mb-6 " >Remaining Credits: {credit} minutes</p> </div> : null}
-                        
+                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can renew your subscription anythime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
+                                    <p className="items-center flex mb-6 " >Remaining Credits: {Math.floor(credit)} minutes</p> </div> : null}
+
                             {/* <div className="items-center flex justify-center"><label class="relative inline-flex items-center ">
                             <input type="checkbox" value="" class="sr-only peer" onClick={handleDarkMode}/>
                             <div class="w-11 cursor-pointer h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>

@@ -17,6 +17,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
 import Success from './routes/payment/Success';
+import Account from './routes/Account';
+import axios from 'axios';
+
 
 
 
@@ -31,9 +34,45 @@ const firebaseConfig = {
 };
 
 function App() {
+
 	const { currentUser } = useAuth();
+	const [hasActiveSub, setHasActiveSub] = useState(false)
+	const [called, setCalled] = useState(false)
 
+useEffect(() => {
+	setTimeout (() => {
+	if (currentUser !== null && called === false) {
+		getCustomerInfo(currentUser)
+	}
+}, 1000)
+})
 
+	const getCustomerInfo = async (currentUser) => {
+        const idToken = await currentUser.getIdToken()
+        
+        await axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
+        {
+            headers: {
+                'id-token': idToken,
+            },
+        },
+        )
+            //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
+            .then(r => {
+                
+                if (r.data !== null) {
+                    setCalled(true)
+                    setHasActiveSub(true)
+ 
+                }
+                else {
+                    setHasActiveSub(false)
+                    setCalled(true)
+
+                }
+            })
+
+    }
 
 
 	const location = useLocation();
@@ -68,7 +107,7 @@ function App() {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home />} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} />} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
@@ -85,8 +124,12 @@ function App() {
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
 
+							
+							<Route path="/account" element={<Account stripe={stripePromise} />} /> 
+							
 							<Route path="/plans" element={<Pricing stripe={stripePromise} />} />
-							<Route path="/plans/checkout" element={<CheckOutPage />}></Route>
+
+							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
 							<Route path="/plans/checkout/success" element={<Success />}></Route>
 							{/* <Route path="/prices" element={<Prices />} /> */}
 							{/* <Route path="/checkout" element={<CheckOut />} /> */}
