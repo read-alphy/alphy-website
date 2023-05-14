@@ -566,12 +566,16 @@ CONTENT PAGE
 	margin: 0;
 	padding: 0;
 }
+.summary-text pre code{
+	font-family: 'Segoe UI', sans-serif;
+}
 
-.summary-text h2{
-	font-size:large;
-	font-weight:500;
+.summary-text h2,h3,h4,h5{
 	
+	font-weight:600;
+	font-size: 20px;
 	padding-top: 10px;
+	
 	
 }
 .summary-text 	ul{
