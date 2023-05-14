@@ -151,7 +151,7 @@ export default function Account({ stripePromise }) {
     const handleSubscribe = () => {
 
         axios.post(
-            'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N2WwaJmF4J0rk0x8g3swifU&user_id=testuser'
+            'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N1S2dJmF4J0rk0xYlJBqdAm&user_id=testuser'
         ).then(response => {
             setSubscription(response.data)
             setClientSecret(response.data)
@@ -167,7 +167,7 @@ export default function Account({ stripePromise }) {
     /*    const createSubscription = () => {
            stripe.api_key = "sk_test_51MeGOKJmF4J0rk0xkdOKOYwsbwnaDPp1bZYfBWG0CYmDSVnMl5f99yo0vhWZxzIZSddN5fEyF6UsZ6MlwyjFKyfB00npolLt3i"
            axios.post(
-               'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N2WwaJmF4J0rk0x8g3swifU&user_id=testuser'
+               'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N1S2dJmF4J0rk0xYlJBqdAm&user_id=testuser'
            )
                .then(r => {
                    console.log(r.data.id, subscriptionData)
