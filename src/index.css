@@ -568,13 +568,18 @@ CONTENT PAGE
 }
 .summary-text pre code{
 	font-family: 'Segoe UI', sans-serif;
+	white-space: pre-wrap;
+	padding-left:10px;
+	
+	
 }
 
 .summary-text h2,h3,h4,h5{
 	
 	font-weight:600;
-	font-size: 20px;
-	padding-top: 10px;
+	font-size: 16px;
+	margin-top:30px;
+	font-family:"Noto Sans";
 	
 	
 }

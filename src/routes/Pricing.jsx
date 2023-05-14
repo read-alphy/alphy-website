@@ -28,7 +28,7 @@ export default function Pricing({ stripePromise }) {
     const [hasActiveSub, setHasActiveSub] = useState(false);
     const [called, setCalled] = useState(false);
     const [clientSecret, setClientSecret] = useState("");
-    const [credit, setCredit] = useState(0);
+    const [credit, setCredit] = useState(null);
     const auth = useAuth();
 
     const stripe = useStripe();
@@ -241,7 +241,10 @@ export default function Pricing({ stripePromise }) {
                                 <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-20">Choose the best plan for you</p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">
                                 { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
-                                    <p className="items-center flex mb-6 " >Remaining Credits: {credit} minutes</p> </div> : null}
+                                    {credit!==null ?
+                                    <p className="items-center flex mb-6 " >Remaining Credits: {credit} minutes</p> :null
+                                            }          
+                                    </div> : null}
                         
                             {/* <div className="items-center flex justify-center"><label class="relative inline-flex items-center ">
                             <input type="checkbox" value="" class="sr-only peer" onClick={handleDarkMode}/>
@@ -277,7 +280,7 @@ export default function Pricing({ stripePromise }) {
                                                 <li class="flex space-x-3">
 
                                                     {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription</span>
+                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube</span>
                                                 </li>
                                            
                                                 <li class="flex space-x-3">
@@ -454,7 +457,7 @@ export default function Pricing({ stripePromise }) {
                                             <li class="flex space-x-3">
 
                                                 {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription</span>
+                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube</span>
                                             </li>
                                             <li class="flex space-x-3">
                                                 <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Standard questioning</span>

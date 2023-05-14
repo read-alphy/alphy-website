@@ -11,6 +11,7 @@ import { Popover } from 'flowbite';
 
 
 export default function Welcome({hasActiveSub}) {
+	
 
 	
 	const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function Welcome({hasActiveSub}) {
 	const[called, setCalled] = useState(false)
 	const[videoData, setVideoData] = useState([])
 	const[failed,setFailed]	= useState(false)
+
 	
 	
 	const auth = useAuth()
@@ -36,6 +38,10 @@ export default function Welcome({hasActiveSub}) {
 
 
 
+	const handleCloseBanner = () => {
+		localStorage.setItem('bannerClosed', true);
+		console.log(localStorage.getItem("bannerClosed"))
+	};	
 
 
 
@@ -196,11 +202,30 @@ export default function Welcome({hasActiveSub}) {
 
 	return (
 		<div
-			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-[90vh] overflow-x-hidden overflow-y-hidden' : ''
+			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
 		>
-			{loading && (
-				<div className={`flex justify-center items-center h-[90vh]`}>
+			{localStorage.getItem("bannerClosed") ? null : 
+
+						<div id="marketing-banner" tabindex="-1" class={`fixed z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 drop-shadow-md rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600`}>
+				<div class="flex flex-col items-start mb-3 mr-4 md:items-center md:flex-row md:mb-0">
+			
+					<p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">Notice: Changes in Alphy's usage policy - Transcriptions now have quota limitations check. Check our {currentUser ? "Account" : "Plans"} page for more info! </p>
+				</div>
+				<div class="flex items-center flex-shrink-0">
+				<a href={currentUser ? "/account" : "plans"} class="inline-flex items-center px-3 py-2 mr-3 text-xs font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg> Learn more</a>
+					<button data-dismiss-target="#marketing-banner" type="button" class="absolute top-2.5 right-2.5 md:relative md:top-auto md:right-auto flex-shrink-0 inline-flex justify-center items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white">
+						
+						<svg onClick = {handleCloseBanner} aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+						<span class="sr-only">Close banner</span>
+					</button>
+				</div>
+			</div>
+			}
+
+
+{/* 			{loading && (
+				<div className={`z-50 top-0 flex justify-center items-center h-[90vh]`}>
 					<div className="flex flex-col items-center">
 						<ReactLoading type="spinningBubbles" color="#000" />
 						<p className="text-bordoLike dark:bg-darkMode dark:text-zinc-500 text-center mb-10 mt-10">
@@ -209,7 +234,7 @@ export default function Welcome({hasActiveSub}) {
 					</div>
 				</div>
 			)}
-
+ */}
 
 			<div className="flex flex-col justify-center text-bordoLike dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-56 text-center">
 				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">

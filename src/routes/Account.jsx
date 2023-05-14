@@ -31,7 +31,7 @@ export default function Account({ stripePromise }) {
     const [hasActiveSub, setHasActiveSub] = useState(false);
     const [called, setCalled] = useState(false);
     const [clientSecret, setClientSecret] = useState("");
-    const [credit, setCredit] = useState(0);
+    const [credit, setCredit] = useState(null);
     const auth = useAuth();
 
     const navigate = useNavigate()
@@ -53,6 +53,8 @@ export default function Account({ stripePromise }) {
 
     };
 
+    const popover = new Popover($targetEl, $triggerEl, options);
+
     const $targetEl1 = document.getElementById('popoverDescription1');
 
     // set the element that trigger the popover using hover or click
@@ -65,6 +67,7 @@ export default function Account({ stripePromise }) {
         offset: 10,
 
     };
+    const popover1 = new Popover($targetEl1, $triggerEl1, options1);
     
     useEffect(() => {
 
@@ -113,8 +116,7 @@ export default function Account({ stripePromise }) {
             });
         } 
     }, [currentUser]);
-    const popover = new Popover($targetEl, $triggerEl, options);
-
+  
     const getCustomerInfo = async (currentUser) => {
         const idToken = await currentUser.getIdToken()
         
@@ -231,7 +233,9 @@ export default function Account({ stripePromise }) {
                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-10">Manage Subscription </p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">
                                 { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can renew your subscription anythime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
-                                    <p className="items-center flex mb-6 " >Remaining Credits: {Math.floor(credit)} minutes</p> </div> : null}
+                                     {credit!==null ?
+                                    <p className="items-center flex mb-6 " >Remaining Credits: {Math.floor(credit)} minutes</p> :null
+                                            }      </div> : null}
 
                             {/* <div className="items-center flex justify-center"><label class="relative inline-flex items-center ">
                             <input type="checkbox" value="" class="sr-only peer" onClick={handleDarkMode}/>
@@ -267,7 +271,7 @@ export default function Account({ stripePromise }) {
                                                 <li class="flex space-x-3">
 
                                                     {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription</span>
+                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube videos</span>
                                                 </li>
                                            
                                                 <li class="flex space-x-3">
@@ -321,7 +325,7 @@ export default function Account({ stripePromise }) {
 
                                         {currentUser ?
                                             <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"}>
-                                                <button type="button" class={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                                <button type="button" class={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
                                             </a>
                                             :
                                             <button onClick={handleLoginWithGoogle} type="button" class="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
@@ -341,7 +345,7 @@ export default function Account({ stripePromise }) {
 
 
 
-                                    <div class="col-span-2 max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
+                                    <div class="col-span-2 max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
                                         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">Premium</h5>
                                         {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
                                         <div class="flex items-baseline text-gray-900 dark:text-white">
@@ -393,7 +397,7 @@ export default function Account({ stripePromise }) {
                                             </ul>
                                         </div>
                                         <a className={`${hasActiveSub ? "pointer-events-none" : ""}`} href={(currentUser && !hasActiveSub) && `/plans/checkout`}>
-                                            {currentUser ? <button type="button" class={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : "Upgrade Plan"}</button> : <div></div>}
+                                            {currentUser ? <button type="button" class={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : "Upgrade Plan"}</button> : <div></div>}
                                         </a>
 
 
@@ -417,7 +421,7 @@ export default function Account({ stripePromise }) {
                             <div className="mb-20">
 
                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-4xl font-semibold mt-20 mb-10">Manage Subscription </p>
-                                {hasActiveSub ? <div className="items-center flex flex-row justify-center"><a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-10" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">Change your billing plan or cancel subscription</a> </div> : null}
+                                {hasActiveSub ? <div className="items-center flex flex-row justify-center"> <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center px-10 md:px-0 underline font-semibold mb-10" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">{canceledAtPeriodEnd ?"We are sorry to see you go.  You can renew your subscription anythime through this link." : "Change your billing plan or cancel subscription"}</a> </div> : null}
                                 <div class="w-full md:min-w-[400px] items-center mx-auto max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 mb-10">
 
                                     <h5 class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</h5>
@@ -444,7 +448,7 @@ export default function Account({ stripePromise }) {
                                             <li class="flex space-x-3">
 
                                                 {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription</span>
+                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube videos</span>
                                             </li>
                                             <li class="flex space-x-3">
                                                 <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Standard questioning</span>
