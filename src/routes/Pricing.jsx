@@ -240,7 +240,7 @@ export default function Pricing({ stripePromise }) {
                             <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
                                 <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-20">Choose the best plan for you</p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">
-                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
+                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
                                     {credit!==null ?
                                     <p className="items-center flex mb-6 " >Remaining Credits: {credit} minutes</p> :null
                                             }          
@@ -333,7 +333,7 @@ export default function Pricing({ stripePromise }) {
                                         </div>
 
                                         {currentUser ?
-                                            <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"}>
+                                            <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
                                                 <button type="button" class={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
                                             </a>
                                             :
@@ -498,7 +498,7 @@ export default function Pricing({ stripePromise }) {
                                         </ul>
                                     </div>
                                     {currentUser ?
-                                        <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE"}>
+                                        <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
                                             <button type="button" class={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
                                         </a>
                                         :
