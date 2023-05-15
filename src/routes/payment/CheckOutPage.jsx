@@ -38,54 +38,13 @@ export default function CheckOutPage() {
 
     })
 
-    /* const getCustomerInfo = async () => {
-
-        const idToken = await currentUser.getIdToken()
-        
-        await axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
-        {
-            headers: {
-                'id-token': idToken,
-            },
-        },
-        ).then(r => {
-            if (r.data !== null) {
-                
-                const userStripe = r.data
-                setUser(userStripe)
-                userStripeId = userStripe
-
-                setCalled(true)
-            }
-            else {
-                setUser("")
-            }
-        })
-        await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=${currentUser.accessToken}}`)
-            //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
-            .then(r => {
-                if (r.data !== null) {
-                    
-                    const userStripe = r.data
-                    setUser(userStripe)
-                    userStripeId = userStripe
-
-                    setCalled(true)
-                }
-                else {
-                    setUser("")
-                }
-            }) 
-    }       
-        
-    */
   
 
     const fetchData = async () => {
         await currentUser.getIdToken().then((idToken) => {
             
-        //await axios.post(`https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N2dm5JmF4J0rk0xWfZYHspj&user_id=${currentUser.uid}&user_email=${currentUser.email}`)
-        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=price_1N84voJmF4J0rk0xPomcFY2i`,{},
+        
+        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=price_1N1S2dJmF4J0rk0xYlJBqdAm`,{},
             {
                 headers: {
                     'id-token': idToken,

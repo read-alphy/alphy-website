@@ -135,7 +135,7 @@ export default function Pricing({ stripePromise }) {
             },
         },
         )
-            //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
+            
             .then(r => {
                 
                 if (r.data.length >0) {
@@ -159,59 +159,6 @@ export default function Pricing({ stripePromise }) {
 
 
 
-
-
-
-
-
-    /*    const createSubscription = () => {
-           stripe.api_key = "sk_test_51MeGOKJmF4J0rk0xkdOKOYwsbwnaDPp1bZYfBWG0CYmDSVnMl5f99yo0vhWZxzIZSddN5fEyF6UsZ6MlwyjFKyfB00npolLt3i"
-           axios.post(
-               'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N84voJmF4J0rk0xPomcFY2i&user_id=testuser'
-           )
-               .then(r => {
-                   console.log(r.data.id, subscriptionData)
-                   const subscriptionId = r.data.id
-                   const clientSecret = r.data.latest_invoice.payment_intent.client_secret
-                   setSubscriptionData({ subscriptionId, clientSecret });
-                   console.log(r.data.id, subscriptionData)
-                   navigate("/plans/checkout")
-   
-               });
-   
-   
-   
-       } */
-
-    /*     const elements = useElements();
-        const handleSubmit = async (ev) => {
-            ev.preventDefault();
-    
-            if (!stripe || !elements) {
-                // Stripe.js has not loaded yet. Make sure to disable
-                // form submission until Stripe.js has loaded.
-                return;
-            }
-    
-            const cardElement = elements.getElement(CardElement);
-    
-            if (cardElement) {
-                setProcessing(true);
-                const payload = await stripe.confirmCardPayment(clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                    },
-                });
-                if (payload.error) {
-                    setError(payload.error);
-                    setProcessing(false);
-                } else {
-                    setError(null);
-                    setProcessing(false);
-                    setSucceeded(true);
-                }
-            }
-        }; */
 
     const handleLoginWithGoogle = () => {
         auth.loginWithGoogle().then(() => {

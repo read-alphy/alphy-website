@@ -127,7 +127,7 @@ export default function Account({ stripePromise }) {
             },
         },
         )
-            //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
+            
             .then(r => {
                 console.log(r.data)
                 if (r.data.length >0) {

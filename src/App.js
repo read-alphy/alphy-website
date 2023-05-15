@@ -59,7 +59,7 @@ useEffect(() => {
             },
         },
         )
-            //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
+            
             .then(r => {
                 
                 if (r.data !== null) {
