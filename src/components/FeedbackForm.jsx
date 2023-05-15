@@ -13,7 +13,7 @@ export default function FeedbackForm() {
 
 	useEffect(() => {
 		localStorage.getItem("theme") === "light" ? setTheme("light") : setTheme("dark");
-console.log(theme)
+
 	}, []);
 
 	return (
