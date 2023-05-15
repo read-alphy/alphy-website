@@ -15,6 +15,7 @@ import { saveAs } from 'file-saver'; // library to save file as blob
 import Download from '../../../img/download.gif';
 import DownloadStatic from '../../../img/download_static.png';
 import ReactMarkdown from "react-markdown";
+import { Popover } from 'flowbite';
 
 
 export default function Content(props) {
@@ -24,7 +25,7 @@ export default function Content(props) {
 	const data = props.data;
 
 	const ref = useRef(null);
-
+	
 
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
@@ -48,6 +49,25 @@ export default function Content(props) {
 			setShowButton(false);
 		}
 	};
+
+
+	const $targetEl = document.getElementById('popover-click');
+
+    // set the element that trigger the popover using hover or click
+    const $triggerEl = document.getElementById('popover-button');
+
+    // options with default values
+    const options = {
+        placement: 'right',
+        triggerType: 'click',
+        offset: 10,
+
+    };
+
+    const popover = new Popover($targetEl, $triggerEl, options);
+
+
+
 
 	useEffect(() => {
 		const scrollableDiv = ref.current;
@@ -183,23 +203,45 @@ export default function Content(props) {
 	}
 
 
-	const handleDownload = () => {
-
+	const handleDownload = (selection) => {
+		popover.toggle()
 		setDownloading(true)
 		// create .srt file
 		setTimeout(() => {
 
 
 			if (activeTab === "tab2") {
+				if (selection==1){
 				const blob = new Blob([data.transcript], { type: 'text/srt' });
 
 				// save file as blob
-				saveAs(blob, `${data.title}_${data.creator_name}_transcript.srt`);
+				saveAs(blob, `${data.title}_${data.creator_name}_subtitles.srt`);
+			
+			}
+			else if(selection==2){
+				let text = ""
+				let stop = false
+				for (let i = 0; i < transcript.length; i++){
+					text = text + transcript[i] + '\n\n'
+					if(i===transcript.length-1){
+						stop = true
+					}
+					
+				}
+				if (stop === true){
+				const blob = new Blob([text], { type: 'text/txt' });
+				saveAs(blob, `${data.title}_${data.creator_name}_transcript.txt`);
+				
+				}
+			}
+
 				setTimeout(() => {
 					setDownloading(false)
 				}, 2000)
 			}
-			else if (activeTab === "tab1") {
+
+
+/* 			else if (activeTab === "tab1") {
 				const blob = new Blob([data.summary], { type: 'text/plain' });
 
 				// save file as blob
@@ -208,22 +250,14 @@ export default function Content(props) {
 					setDownloading(false)
 				}, 1600)
 			}
-
+ */
 		}, 3000)
 
 
 	};
 
 	transcriptParser();
-	const headingRenderer = ({ level, children }) => {
-		const Tag = `h${level}`;
-		return <Tag className={`text-2xl font-bold mb-4 mt-${level}`}>{children}</Tag>;
-	  };
 	
-	  const paragraphRenderer = ({ children }) => {
-		return <p className="text-lg mb-4">{children}</p>;
-	  };
-
 	return (
 		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
 
@@ -433,7 +467,26 @@ export default function Content(props) {
 																				<p className="text-md ">{item}{' '}</p>
 
 																			</a>
-																			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end mr-8 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>}
+																			{index === 0 && 
+																			
+																			<div className="flex ml-auto justify-end flex-row justify-end">
+																			<button id="popover-button" data-popover-target = "popover-click" data-popover-trigger="click" className=" mr-8 opacity-80 pt-4" onClick={/* (selection) => handleDownload(selection) */ null}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
+																			<div data-popover id="popover-click" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
+																				
+																				<div onClick={() => handleDownload(1)} class="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																					<p className="">Download as Plain Subtitle (.srt)</p>
+																				</div>
+																				
+																				<div onClick={() => handleDownload(2)} class="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																				<p>Download Formatted Transcript (.txt)</p>	
+																				</div>
+																		{/* 		<div onClick={handleDownload(3)} class="px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																					<p>Download Timestamped Transcript (.srt)</p>		
+																				</div> */}
+																				<div data-popper-arrow></div>
+																			</div>
+																			</div>
+																			}
 
 																		</div> :
 																		<div className="flex flex-row">
