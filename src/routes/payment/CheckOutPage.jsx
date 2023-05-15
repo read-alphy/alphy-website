@@ -53,7 +53,7 @@ export default function CheckOutPage() {
         )
             .then(r => {
                 
-                console.log(r.data)
+                
                 const clientSecret = r.data[0].latest_invoice.payment_intent.client_secret
                 setClientSecret(clientSecret)
                 setCalled(true)

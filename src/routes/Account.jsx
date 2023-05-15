@@ -129,7 +129,7 @@ export default function Account({ stripePromise }) {
         )
             
             .then(r => {
-                console.log(r.data)
+                
                 if (r.data.length >0) {
                     setCalled(true)
                     const userStripe = r.data[0]

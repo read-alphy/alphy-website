@@ -42,7 +42,7 @@ export default function Welcome({hasActiveSub}) {
 		if(localStorage.getItem("bannerClosed") === null){
 		localStorage.setItem('bannerClosed', true);
 	}
-		console.log(localStorage.getItem("bannerClosed"))
+		
 	};	
 
 
