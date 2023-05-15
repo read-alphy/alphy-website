@@ -135,7 +135,7 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
-				<title>{data.title ? `Alphy - ${data.title}` : "Alphy"} </title>
+				<title>{data.title ? `${data.title}` : "Alphy"} </title>
 				<meta property="og:title" content={data.title ? `Alphy - ${data.title}` : "Alphy"} />
 				<meta name="twitter:title" content={data.title ? `Alphy - ${data.title}` : "Alphy"} />
 

@@ -240,7 +240,7 @@ export default function Pricing({ stripePromise }) {
                             <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
                                 <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-20">Choose the best plan for you</p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">
-                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
+                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
                                     {credit!==null ?
                                     <p className="items-center flex mb-6 " >Remaining Credits: {credit} minutes</p> :null
                                             }          
