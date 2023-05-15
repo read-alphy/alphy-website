@@ -19,6 +19,8 @@ import CheckOutPage from './routes/payment/CheckOutPage';
 import Success from './routes/payment/Success';
 import Account from './routes/Account';
 import axios from 'axios';
+import { Helmet } from "react-helmet";
+
 
 
 
@@ -89,6 +91,9 @@ useEffect(() => {
 	return (
 
 		<div className="App bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300">
+			<Helmet>
+			<title>Alphy: Unlock the Information in Audiovisual Content </title>
+			</Helmet>
 			<Elements stripe={stripePromise}>
 				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 					<>
