@@ -14,7 +14,21 @@ module.exports = {
 
 		},
 		darkMode: 'class',
+
 		extend: {
+			keyframes: {
+				highlight: {
+					'0%': {
+						background: 'rgb(254 252 232)',
+						'box-shadow': '0 0 0 rgba(0, 0, 0, 0) drop-shadow(0 0 2rem rgba(254, 240, 138, 0.7))',
+
+
+					},
+					'100%': {
+						background: 'none',
+					},
+				}
+			},
 			height: {
 				6.5: '1.675rem',
 				a4: '842px',
@@ -71,6 +85,7 @@ module.exports = {
 				mainText: '#ced4da',
 				sideColor: '#000',
 				darker: '#03001C',
+				darkMode:"#191919",
 
 				// palette - sunset
 				bordoLike: '#20262E',
@@ -81,10 +96,16 @@ module.exports = {
 				//palette - fener
 				whiteLike: '#F9F8F8',
 				blueLike: '#2f3542',
+				mildDarkMode:"#202020",
+//				midestDarkMode:"#1a1a1a",
 			},
 			backgroundImage: (theme) => ({
 				searchBg: "url('./img/search.svg')",
 			}),
+		},
+		animation: {
+			highlight: 'highlight 1s ease-in-out',
+			'highlight-delayed': 'highlight 1s ease-in-out 1000ms',
 		},
 	},
 };

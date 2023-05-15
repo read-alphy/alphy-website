@@ -14,12 +14,14 @@ function Feed() {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const { currentUser } = useAuth();
-
+	
+	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
 	const [dataPersonal, setDataPersonal] = useState([]);
 	const [isPublic, setisPublic] = useState(true);
+	const [submitted, setSubmitted] = useState(false);
 
 	useEffect(() => {
 		getData(0, true, true);
@@ -29,6 +31,14 @@ function Feed() {
 
 	}, []);
 
+	window.addEventListener('beforeunload', () => {
+		if (submitted===true){
+			localStorage.setItem('search', search);
+	}
+	else{
+		localStorage.setItem('search', '');
+	}
+	  });
 	const temp = 10;
 	const limit = temp;
 	const searchInputRef = React.useRef(null);
@@ -79,7 +89,7 @@ function Feed() {
 				})
 					.then((response) => {
 						setHasMorePersonal(!(response.data.length < limit));
-						console.log(currentUser)
+
 						if (firstTime) {
 							setDataPersonal(response.data);
 
@@ -100,34 +110,43 @@ function Feed() {
 
 	};
 
+	
+	const handleKeyDown = (event) => {
+		if (event.key === 'Enter') {
+			;
+		}
+	};
 	return (
 		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl">
-			<h2 className="text-gray-700 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
+			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
 				Explore the videos other users unlocked with Alphy
 			</h2>
 
-			<div class="text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700">
+			<div class="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700">
 				<ul class="flex ml-6 flex-wrap -mb-px">
 					<li class="mr-2">
-						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Global</button>
+						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li>
 					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>My Works</button>
+						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 
 				</ul>
 			</div>
 
-			<div className="main-page-feed-table-parent bg-zinc-50 border-[1px]  rounded-[10px] sm:p-[40px] p-[10px] ">
+			<div className="main-page-feed-table-parent bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] ">
 				<form
 					className="flex items-center"
+					onKeyDown={handleKeyDown}
 					onSubmit={(e) => {
 						e.preventDefault();
 						setOffset(0);
+						localStorage.setItem('search', search);
 						if (searchInputRef.current.value.length === 0) {
 							setSearch('');
 						}
 						getData(0, true, true);
+						setSubmitted(true)
 					}}
 				>
 					<label htmlFor="voice-search" className="sr-only">
@@ -136,18 +155,20 @@ function Feed() {
 					<div className="relative w-full  ">
 						<input
 							ref={searchInputRef}
+							
+
 							type="text"
 							onChange={(e) => {
 								setSearch(e.target.value);
 							}}
-							id="voice-search"
-							className="bg-zinc-50 border border-slate-200 text-gray-900 text-sm rounded-l-full mt-5 md:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 block w-full  py-3"
+							id="input-box"
+							className="bg-zinc-50 dark:bg-darkMode border border-slate-200   dark:border-none  text-gray-900 dark:text-zinc-200 text-sm rounded-l-full mt-5 sm:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 dark:focus:border-darkMode dark:focus:ring-darkMode block w-full  py-3"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/>
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center py-3 pl-7 text-sm font-medium text-zinc-500 mt-5 md:mt-0 border border-slate-200 rounded-r-full drop-shadow-sm bg-zinc-50 hover:bg-zinc-100 transition duration-400 ease-in-ease-out sm:mt-10"
+						className="inline-flex items-center mt-5 sm:mt-0  py-3 pl-7 text-sm font-medium text-zinc-500 border border-slate-200 dark:border-none  rounded-r-full drop-shadow-sm dark:bg-darkMode "
 					>
 						<svg
 							aria-hidden="true"
@@ -186,7 +207,7 @@ function Feed() {
 							{isLoading
 								? data.length > 0
 									? data
-										.map((item, index) => <FeedItem key={index} item={item} />)
+										.map((item, index) => <FeedItem key={index} item={item} mainFeedInput={inputValue}/>)
 										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: data.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
@@ -195,7 +216,7 @@ function Feed() {
 							<div className="w-full flex justify-center">
 								{
 									<button
-										className="justify-center flex text-blueLike font-semibold  mt-10 underline"
+										className="justify-center flex text-blueLike dark:bg-darkMode dark:text-zinc-300 font-semibold  mt-10 underline"
 										onClick={loadMore}
 									>
 										{'Load more'}
@@ -224,7 +245,7 @@ function Feed() {
 								}
 							gap-4
 							`}
-						>{currentUser == null ? <p className="text-center text-gray-500 items-center margin-auto text-xl mt-5 mb-5 w-full col-span-2">Sign in to see the content you previously submitted.</p> : null}
+						>{currentUser == null ? <p  className="text-center text-gray-500 items-center margin-auto text-xl mt-5 mb-5 w-full col-span-2">Sign in to see the content you previously submitted.</p> : null}
 							{isLoadingPersonal
 								? dataPersonal.length > 0
 									? dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
@@ -242,7 +263,7 @@ function Feed() {
 							<div className="w-full flex justify-center">
 								{
 									<button
-										className="justify-center flex text-blueLike font-semibold  mt-10 underline"
+										className="justify-center flex text-blueLike dark:bg-darkMode dark:text-zinc-300 font-semibold  mt-10 underline"
 										onClick={loadMore}
 									>
 										{'Load more'}

@@ -9,7 +9,6 @@
 }
 
 body {
-	background: #fbfbfa;
 	display: flex;
 	flex-direction: column;
 	width: 100vw;
@@ -273,6 +272,7 @@ table tr {
 	height: 0;
 }
 
+
 .article-block-1 {
 	height: parent;
 	display: flex;
@@ -430,7 +430,26 @@ CONTENT PAGE
 
 
 */
+.content-area {
+	overflow: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
 
+.content-area::-webkit-scrollbar {
+	display: none;
+	width: 0px;
+	height: 0px;
+}
+.question-answering{
+
+	scrollbar-width: none;
+}
+.question-answering::-webkit-scrollbar{
+	display: none;
+	width: 0;
+	height: 0;
+}
 .content-upperside {
 	display: flex;
 	flex-direction: row;
@@ -547,6 +566,32 @@ CONTENT PAGE
 	margin: 0;
 	padding: 0;
 }
+.summary-text pre code{
+	font-family: 'Segoe UI', sans-serif;
+	white-space: pre-wrap;
+	padding-left:10px;
+	
+	
+}
+
+.summary-text h2,h3,h4,h5{
+	
+	font-weight:600;
+	font-size: 16px;
+	margin-top:30px;
+	font-family:"Noto Sans";
+}
+
+
+.summary-text 	ul{
+	list-style-type:disc;
+
+}
+.summary-text li::before {
+	content: "•"; /* Bullet point character */
+	color: #a1a1aa; /* Change color here */
+	margin-right: 0.5em; /* Add some spacing between the bullet and the text */
+  }
 
 .sign-in-input input {
 	position: relative;

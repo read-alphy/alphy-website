@@ -9,16 +9,14 @@ import './QA.css';
 import TypeIt from 'typeit-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { useLocation } from 'react-router-dom';
 
 export default function QuestionAnswering(props) {
 	// console.log(props.props, props.key_qa)
 	const windowSize = useWindowSize();
 	const QARef = useRef(null);
-
-
-	const [source_timestamp1, setSource_timestamp1] = useState("")
-	const [source_timestamp2, setSource_timestamp2] = useState("")
-	const [source_timestamp3, setSource_timestamp3] = useState("")
+	const location = useLocation();
+	const buttonRef = useRef(null);
 
 	const [answerData, setAnswerData] = useState('');
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
@@ -29,10 +27,11 @@ export default function QuestionAnswering(props) {
 	const [baseQuestion, setBaseQuestion] = useState('');
 	const [isCleared, setIsCleared] = useState(true);
 	const [showUserQA, setShowUserQA] = useState(false);
-
 	const [inputError, setinputError] = useState(false);
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
+	const [clicked, setClicked] = useState(false);
+	let from_qa_url = false
 
 	function updateVariable(event) {
 
@@ -41,6 +40,67 @@ export default function QuestionAnswering(props) {
 	}
 
 
+	useEffect(() => {
+		setTimeout(() => {
+			if (location.pathname.split('/')[2].split("&q=")[1] !== undefined && clicked === false) {
+
+				const my_question = location.pathname.split('/')[2].split("&q=")[1]
+				runAnswererFromUrl(my_question)
+
+				setTimeout(() => {
+					const element = document.querySelector("#q_and_a");
+					if (element) {
+						QARef.current = element;
+						element.scrollIntoView({ behavior: "smooth" });
+
+					}
+
+				}, 300);
+
+			}
+
+		}, 1000);
+
+
+
+
+	}, [])
+
+	function runAnswererFromUrl(my_question) {
+
+		if (my_question) {
+			const decodedText = decodeURIComponent(my_question);
+
+			if (props.key_qa[decodedText]) {
+
+				setIsCleared(false);
+				setShowBaseQA(true);
+				setBaseQuestion(decodedText)
+				setInputValue(decodedText)
+				setClicked(true)
+
+			}
+
+			else {
+				setInputValue(decodedText);
+				setClicked(true);
+				setTimeout(() => {
+					if (buttonRef.current) {
+						buttonRef.current.click();
+
+					}
+				}, 1000);
+			}
+			/* 			axios
+							.post(
+								`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${props.data.source_type}/${props.data.source_id
+								}/question`,
+								inputValue,
+							).then((response) => {
+								
+							}) */
+		}
+	}
 
 	const handleClear = () => {
 		setIsCleared(true);
@@ -63,6 +123,7 @@ export default function QuestionAnswering(props) {
 		setShowBaseQA(false);
 		setInputValue('');
 	};
+	
 
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
@@ -75,10 +136,25 @@ export default function QuestionAnswering(props) {
 			/*  setInputValue(''); */
 		}
 	};
-
-
+	const handleShareLink = () => {
+		const encodedText = encodeURIComponent(inputValue);
+		const url = `${window.location}&q=${encodedText}`;
+		navigator.clipboard.writeText(url);
+		toast.success('Link copied to clipboard!');
+	};
+	const handleCopyToClipboard = () => {
+		const myHtml = document.getElementById("answer-area");
+		const plainText = `${inputValue} \n\n ${myHtml.innerText}`;
+		navigator.clipboard.writeText(plainText);
+		toast.success('Answer copied to clipboard!');
+	};
 	const fetchData = () => {
 		toast.dismiss();
+
+
+
+
+
 		setShowBaseQA(false);
 		setShowUserQA(true);
 		setinputError(false);
@@ -111,40 +187,6 @@ export default function QuestionAnswering(props) {
 						.then((response) => {
 							setAnswerData(response.data);
 							setIsLoadingInside(false);
-
-
-
-							const source1 = answerData.sources[0]["text"].match(/[^.!?]+[.!?]/)[0];
-							const source2 = answerData.sources[1]["text"].match(/[^.!?]+[.!?]/)[0];
-							const source3 = answerData.sources[2]["text"].match(/[^.!?]+[.!?]/)[0];
-
-
-
-							for (let i = 0; i < props.transcript.length; i++) {
-
-
-
-								/* 								console.log(props.transcript[i])
-																console.log(x) */
-
-								if (props.transcript[i].includes(source1) === true) {
-									setSource_timestamp1(props.transcript[i - 1])
-									console.log("true")
-
-								}
-
-								if (props.transcript[i].includes(source2) === true) {
-									setSource_timestamp2(props.transcript[i - 1])
-									console.log("true")
-
-								}
-
-								if (props.transcript[i].includes(source3) === true) {
-									setSource_timestamp3(props.transcript[i - 1])
-									console.log("true")
-								}
-							}
-
 						});
 				} catch (error) {
 					console.error(`Error fetching data: ${error}`);
@@ -169,16 +211,17 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div className="md:max-h-[60vh] border-b  overflow-auto mx-auto pb-5" ref={QARef}>
-			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content</p>
+		<div id="q_and_a" className={`question-answering md:max-h-[60vh] border-b overflow-auto mx-auto pb-5`} ref={QARef}>
+
+			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content. In any language you want.</p>
 			<div className="Md:pl-10 md:pr-10 ">
 
 				<Toaster position="bottom-center" />
 
 
-				{/* <p className="text-zinc-600  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
+				{/* <p className="text-zinc-600 dark:text-zinc-200  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
 				<div className="flex items-center pl-1 pr-1">
-					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 placeholder:italic rounded-lg focus:outline-none">
+					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 dark:border-zinc-700 placeholder:italic rounded-lg focus:outline-none">
 
                         <option onClick={handleOptionClear}> Questions we already answered</option>
 
@@ -199,12 +242,13 @@ export default function QuestionAnswering(props) {
 							onClick={() => handleClick(true)}
 							onChange={(event) => setInputValue(event.target.value)}
 							onKeyDown={handleKeyDown}
+							title={inputValue}
 							type="text"
 							id="search"
-							className={`block w-full drop-shadow-md p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+							className={` block w-full drop-shadow-sm p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90  border-r-none ${inputError && inputValue.length === 0
 								? 'border-1 border-red-300'
-								: 'border border-zinc-100'
-								} placeholder:italic rounded-l-full bg-zinc-50 focus:outline-none focus:border-slate-50 focus:ring-slate-50`}
+								: 'border border-zinc-100 dark:border-zinc-700'
+								} placeholder:italic rounded-l-full bg-zinc-50 dark:bg-darkMode focus:outline-none focus:border-slate-50 focus:ring-slate-50 `}
 							placeholder="Ask anything to the transcript..."
 							autoComplete="off"
 							required
@@ -217,10 +261,11 @@ export default function QuestionAnswering(props) {
 								<svg
 									width="20"
 									onClick={handleClear}
+
 									className="cursor-pointer"
 									fill="none"
 									stroke="currentColor"
-									stroke-width="1.5"
+									stroke-width="2"
 									viewBox="0 0 24 24"
 									xmlns="http://www.w3.org/2000/svg"
 								>
@@ -236,13 +281,14 @@ export default function QuestionAnswering(props) {
 
 					<button
 						type="submit"
+						ref={buttonRef}
 						onClick={fetchData}
-						class="p-3 px-5 rounded-r-full drop-shadow-md  transition duration-400 ease-in-out text-sm font-medium text-whiteLike bg-zinc-50 rounded-md  hover:bg-zinc-100 "
+						class="p-3  px-5 rounded-r-full drop-shadow-sm  border-l-none text-sm font-medium text-whiteLike bg-zinc-50 dark:bg-darkMode rounded-md dark:border dark:border-zinc-700 "
 					>
 						<svg
 							aria-hidden="true"
-							width={21}
-							class="text-zinc-500 dark:text-gray-400"
+							width={20}
+							class="text-zinc-500 dark:text-zinc-300"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 							xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +313,7 @@ export default function QuestionAnswering(props) {
 					{isCleared && !isLoadingInside && answerData.length === 0 ? (
 						<div>
 
-							<p className="mb-5 text-xl text-zinc-600">
+							<p className="mb-5 text-xl text-zinc-600 dark:text-zinc-200">
 								{' '}
 								Or check out the questions Alphy already answered for you
 							</p>
@@ -276,13 +322,13 @@ export default function QuestionAnswering(props) {
 								index % 2 == 0 ? <button
 									key={index}
 									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-100 border border-gray-200 rounded-full"
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600 dark:text-zinc-200  dark:bg-zinc-700 bg-zinc-100 border border-gray-200 dark:border-zinc-600 rounded-full"
 								>
 									{item}
 								</button> : <button
 									key={index}
 									onClick={handleBaseQA}
-									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600  bg-zinc-50 border border-gray-200 rounded-full"
+									class="font-sans mt-2 cursor-pointer px-5   py-3 text-md font-base text-zinc-600 dark:text-zinc-200  bg-zinc-50 dark:bg-mildDarkMode border border-gray-200 dark:border-zinc-600 rounded-full"
 								>
 									{item}
 								</button>
@@ -300,6 +346,7 @@ export default function QuestionAnswering(props) {
 							height: '20vh',
 						}}
 					>
+
 						<ReactLoading type="spinningBubbles" color="#52525b" />
 					</div>
 				) : (
@@ -311,23 +358,35 @@ export default function QuestionAnswering(props) {
 
 
 				{answerData.length !== 0 && !showBaseQA && showUserQA ? (
-					<div className="text-zinc-600 pb-10">
+					<div className="text-zinc-600 dark:text-zinc-200 pb-10">
 						{answerData.answer ? (
 							<div  >
-								<div>
+								<div className="grid grid-cols-2 flex flex-row mb-4">
 
 
-									<h1 className="text-xl flex flex-row font-semibold">Answer from Alphy
+									<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
 
 
-										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+										<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+											<title className="font-bold">Clear</title>
 											<path clip-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fill-rule="evenodd"></path>
 										</svg>
 
 
 									</h1>
+									<div className="col-span-1 justify-end flex flex-row flex ">
+
+										<svg onClick={handleShareLink} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<title className="font-bold">Share link to question</title>
+											<path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+
+										<svg onClick={handleCopyToClipboard} title="Copy question and answer" className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</div>
 								</div>
-								<div className="answer-area text-l ">
+								<div id="answer-area" className="answer-area text-l container">
 									<TypeIt className="mb-3"
 
 										options={{
@@ -345,7 +404,7 @@ export default function QuestionAnswering(props) {
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
 									onClick={() => setAnswer(!answer)}
 								>
-									<span className={`${answer ? 'hidden' : 'block'} text-zinc-600 text-l pr-1`}>
+									<span className={`${answer ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
 										See sources from the video
 									</span>
 									<svg
@@ -405,7 +464,7 @@ export default function QuestionAnswering(props) {
 											onClick={() => setAnswer(!answer)}
 										>
 											<span
-												className={`${answer ? 'block' : 'hidden'} text-zinc-600 text-l pr-1`}
+												className={`${answer ? 'block' : 'hidden'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}
 											>
 												See less
 											</span>
@@ -438,29 +497,43 @@ export default function QuestionAnswering(props) {
 				) : null}
 
 				{showBaseQA ? (
-					<div className="text-zinc-600 pb-10">
+					<div className="text-zinc-600 dark:text-zinc-200 pb-10">
 						{
 
-							<div>
+							<div className={`${clicked ? "animate-highlight animate-delay-1000" : ""}`}>
 								<div >
-									<h1 className="mb-4 text-xl flex flex-row font-semibold">Answer from Alphy
+									<div className={`grid grid-cols-2 flex flex-row mb-4 `}>
+
+										<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
+
+											<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+												<title className="font-bold">Clear</title>
+												<path clip-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fill-rule="evenodd"></path>
+											</svg>
 
 
-										<svg onClick={handleClear} className="ml-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-											<path clip-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fill-rule="evenodd"></path>
-										</svg>
+										</h1>
+										<div className="col-span-1 justify-end flex flex-row flex ">
 
 
-
-									</h1>
-									<p className="answer-area" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
+											<svg onClick={handleShareLink} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<title className="font-bold">Share link to question</title>
+												<path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" stroke-linecap="round" stroke-linejoin="round"></path>
+											</svg>
+											<svg onClick={handleCopyToClipboard} className="cursor-pointer" width="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<title className="font-bold">Copy to clipboard</title>
+												<path d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" stroke-linecap="round" stroke-linejoin="round"></path>
+											</svg>
+										</div>
+									</div>
+									<p id="answer-area" className="answer-area" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
 								</div>
 
 								<button
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
 									onClick={() => setBaseSources(!baseSources)}
 								>
-									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 text-l pr-1`}>
+									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
 										See sources from the video{' '}
 									</span>
 									<svg
@@ -513,7 +586,7 @@ export default function QuestionAnswering(props) {
 												QARef.current.scrollIntoView({ behavior: 'smooth' });
 											}}
 										>
-											<span className="text-zinc-600 text-l pr-1">See less</span>
+											<span className="text-zinc-600 dark:text-zinc-200 text-l pr-1">See less</span>
 											<svg
 												className=""
 												aria-hidden="true"

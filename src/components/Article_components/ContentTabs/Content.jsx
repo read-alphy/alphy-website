@@ -11,6 +11,11 @@ import Twitter from '../../../img/twitter_spaces.png';
 import Loading from '../../Loading';
 import working from './working.svg';
 import { useWindowSize } from '../../../hooks/useWindowSize';
+import { saveAs } from 'file-saver'; // library to save file as blob
+import Download from '../../../img/download.gif';
+import DownloadStatic from '../../../img/download_static.png';
+import ReactMarkdown from "react-markdown";
+import { Popover } from 'flowbite';
 
 
 export default function Content(props) {
@@ -18,12 +23,15 @@ export default function Content(props) {
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
 	const data = props.data;
+
 	const ref = useRef(null);
+	
 
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
 	const [showButton, setShowButton] = useState(false);
+	const [downloading, setDownloading] = useState(false);
 
 	let summaryArray = '';
 	const handleClick = () => {
@@ -32,7 +40,7 @@ export default function Content(props) {
 
 	const checkScrollPosition = () => {
 		const windowHeight = ref.current.clientHeight;
-		console.log(windowHeight)
+
 		const scrollPosition = ref.current.scrollTop;
 
 		if (scrollPosition >= 3 * windowHeight) {
@@ -41,6 +49,25 @@ export default function Content(props) {
 			setShowButton(false);
 		}
 	};
+
+
+	const $targetEl = document.getElementById('popover-click');
+
+    // set the element that trigger the popover using hover or click
+    const $triggerEl = document.getElementById('popover-button');
+
+    // options with default values
+    const options = {
+        placement: 'right',
+        triggerType: 'click',
+        offset: 10,
+
+    };
+
+    const popover = new Popover($targetEl, $triggerEl, options);
+
+
+
 
 	useEffect(() => {
 		const scrollableDiv = ref.current;
@@ -80,6 +107,7 @@ export default function Content(props) {
 
 		if (data.summary !== null) {
 			summaryArray = data.summary.split('\n');
+			
 
 			var parser = new srtParser2();
 
@@ -115,6 +143,13 @@ export default function Content(props) {
 					nothing = '';
 
 				}
+				else if (i === srt_array.length - 1) {
+
+					transcript.push(nothing);
+					count = 0;
+					nothing = '';
+				}
+
 
 			}
 		}
@@ -153,6 +188,9 @@ export default function Content(props) {
 					nothing = '';
 
 				}
+				else if (i === srt_array.length - 1) {
+					transcript.push(nothing);
+				}
 
 
 			}
@@ -164,22 +202,75 @@ export default function Content(props) {
 
 	}
 
+
+	const handleDownload = (selection) => {
+		popover.toggle()
+		setDownloading(true)
+		// create .srt file
+		setTimeout(() => {
+
+
+			if (activeTab === "tab2") {
+				if (selection==1){
+				const blob = new Blob([data.transcript], { type: 'text/srt' });
+
+				// save file as blob
+				saveAs(blob, `${data.title}_${data.creator_name}_subtitles.srt`);
+			
+			}
+			else if(selection==2){
+				let text = ""
+				let stop = false
+				for (let i = 0; i < transcript.length; i++){
+					text = text + transcript[i] + '\n\n'
+					if(i===transcript.length-1){
+						stop = true
+					}
+					
+				}
+				if (stop === true){
+				const blob = new Blob([text], { type: 'text/txt' });
+				saveAs(blob, `${data.title}_${data.creator_name}_transcript.txt`);
+				
+				}
+			}
+
+				setTimeout(() => {
+					setDownloading(false)
+				}, 2000)
+			}
+
+
+/* 			else if (activeTab === "tab1") {
+				const blob = new Blob([data.summary], { type: 'text/plain' });
+
+				// save file as blob
+				saveAs(blob, `${data.title}_${data.creator_name}_summary.txt`);
+				setTimeout(() => {
+					setDownloading(false)
+				}, 1600)
+			}
+ */
+		}, 3000)
+
+
+	};
+
 	transcriptParser();
-
-
+	
 	return (
 		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
 
 			<div>
 				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className="col-span-2">
-						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike font-bold">
+						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 							{data.title}
 						</h1>
-						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike font-light">
+						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light">
 							{data.creator_name}
 						</h2>
-						<p className="w-full mt-5 border border-zinc-100"></p>
+						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
 					</div>
 
 					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
@@ -202,19 +293,19 @@ export default function Content(props) {
 
 
 				<div className="flex flex-col xl:flex-row mt-16">
-					<div className="grid grid-cols-2 w-full">
+					<div className="grid grid-cols-2 w-full ">
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
-						<div className={`col-span-2 hidden lg:flex justify-center items-center w-full h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
+						<div className={`col-span-2 hidden lg:flex justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
 
-								<div className="block w-2/3 ">
+								<div className="block w-full items-center mx-auto ">
 									<a target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 										{' '}
 										<img className=" cursor-pointer " src={Twitter}></img>
 									</a>
 									<a target="_blank"
 										href={`https://twitter.com/i/spaces/${data.source_id}`}
-										className="text-l text-zinc-600 mt-3 cursor-pointer"
+										className="text-l text-zinc-600 dark:text-zinc-200 mt-3 cursor-pointer"
 									>
 										Listen to "{data.title}"{' '}
 									</a>
@@ -234,10 +325,11 @@ export default function Content(props) {
 							)}
 
 						</div>
-
+						{/* <Loading /> */}
 						<div className="col-span-2 md:mt-10">
-							{isLoading ? (
-								<Loading />
+							{isLoading ? (null
+
+
 							) : (
 								data.key_qa && (
 									<QuestionAnswering
@@ -252,47 +344,47 @@ export default function Content(props) {
 							)}
 						</div>
 					</div>
-					<div className="w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0">
+					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0`} >
 
 
 						{data.is_complete || data.transcript ? (
-							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300">
+							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700">
 
-								<div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:border-gray-700">
+								<div class="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700">
 									<ul class="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
-										<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab3")} class={`text-l inline-block p-4 pt-6    rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Key Takeaways</button>
+										<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab3")} class={`text-l inline-block p-4 pt-6    rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
 										</li>
-										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab1")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Summary</button>
+										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab1")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Summary</button>
 										</li>
-										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab2")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Transcript</button>
+										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab2")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Transcript</button>
 										</li>
-										{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab4")} class={`text-l inline-block p-4 rounded-t-lg  dark:text-blue-500 dark:border-blue-500`}>Ask questions</button>
+										{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab4")} class={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Ask questions</button>
 										</li> */}
 
 									</ul>
 								</div>
 								{/* 
-						<div className="summary-and-transcript-buttons text-xl w-full space-between gap-4	text-zinc-600 ">
-							<button
-								className={
-									activeTab === 'tab1' ? 'content-active-button border-r-1 ' : 'border-r-1 '
-								}
-								onClick={() => setActiveTab('tab1')}
-							>
-								Summary
-							</button>
-							<button
-								className={activeTab === 'tab2' ? 'content-active-button ' : ''}
-								onClick={() => setActiveTab('tab2')}
-							>
-								Transcript
-							</button>
-						</div> */}
-								<div className="main-content mt-2 text-zinc-600">
+								<div className="summary-and-transcript-buttons text-xl w-full space-between gap-4	text-zinc-600 dark:text-zinc-200 ">
+									<button
+										className={
+											activeTab === 'tab1' ? 'content-active-button border-r-1 ' : 'border-r-1 '
+										}
+										onClick={() => setActiveTab('tab1')}
+									>
+										Summary
+									</button>
+									<button
+										className={activeTab === 'tab2' ? 'content-active-button ' : ''}
+										onClick={() => setActiveTab('tab2')}
+									>
+										Transcript
+									</button>
+								</div> */}
+								<div className="main-content mt-2 text-zinc-600 dark:text-zinc-200">
 
 									<Tabs>
 										<Tab eventKey="transcript" title="">
@@ -318,7 +410,11 @@ export default function Content(props) {
 											))} */}
 
 											{activeTab === 'tab1' && (
-												<div className="text-l font-normal mb-4 max-w-screen-md overflow-auto max-h-[80vh]">
+												
+												<div className="content-area text-l font-normal mb-4 max-w-screen-md overflow-auto max-h-[80vh]">
+													{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
+
+
 													{isLoading ? (
 														<Loading />
 													) : summaryArray.length === 0 ? (
@@ -328,10 +424,14 @@ export default function Content(props) {
 													) : (
 														summaryArray.map((item, index) => {
 															return (
-																<p className="mb-6 text-md" key={index}>
+																<p className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
+																	<div className="summary-text">
+																	<ReactMarkdown>
+																		{item}
+																	</ReactMarkdown>
+																	</div>
 
-
-																	<p dangerouslySetInnerHTML={{ __html: item }} />
+																	
 
 
 																</p>
@@ -341,44 +441,77 @@ export default function Content(props) {
 												</div>
 											)}
 											{activeTab === 'tab2' && (
-												<div className="text-l font-normal max-w-screen-md overflow-auto max-h-[80vh] ">
+												<div className="content-area text-l font-normal max-w-screen-md overflow-auto max-h-[80vh] ">
+
 													{isLoading ? (
 														<Loading />
 													) : (
 														transcript.map((item, index) => {
 															/* transcriptParser(); */
 
-															if (index % 2 === 0 && index < transcript.length - 1) {
+															if (index % 2 === 0 && index < transcript.length) {
 																return (
 																	window.innerWidth > 999 && data.source_type === "yt" ?
-																		<a
-																			onClick={handleClickTimestamp}
-																			className={`${data.source_type === 'yt'
-																				? 'lg:cursor-pointer lg:pointer-events-auto'
-																				: ''
-																				} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline`}
-																			key={index}
-																		>
-																			<br></br>
-																			<p className="text-md ">{item}{' '}</p>
-																		</a> :
-																		<a
-
-																			target="_blank" href={`https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}`}
+																		<div className="flex flex-row dark:text-zinc-300">
+																			<a
+																				onClick={handleClickTimestamp}
+																				className={`${data.source_type === 'yt'
+																					? 'lg:cursor-pointer lg:pointer-events-auto'
+																					: ''
+																					} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-zinc-300`}
+																				key={index}
+																			>
+																				<br></br>
 
 
-																			className={`${data.source_type === 'yt'
-																				? 'lg:cursor-pointer lg:pointer-events-auto'
-																				: ''
-																				}  lg:pointer-events-auto lg:text-slate-900 font-bold underline`}
-																			key={index}
-																		>
-																			<br></br>
-																			{item}{' '}
-																		</a>
+																				<p className="text-md ">{item}{' '}</p>
+
+																			</a>
+																			{index === 0 && 
+																			
+																			<div className="flex ml-auto justify-end flex-row justify-end">
+																			<button id="popover-button" data-popover-target = "popover-click" data-popover-trigger="click" className=" mr-8 opacity-80 pt-4" onClick={/* (selection) => handleDownload(selection) */ null}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
+																			<div data-popover id="popover-click" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
+																				
+																				<div onClick={() => handleDownload(1)} class="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																					<p className="">Download as Plain Subtitle (.srt)</p>
+																				</div>
+																				
+																				<div onClick={() => handleDownload(2)} class="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																				<p>Download Formatted Transcript (.txt)</p>	
+																				</div>
+																		{/* 		<div onClick={handleDownload(3)} class="px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																					<p>Download Timestamped Transcript (.srt)</p>		
+																				</div> */}
+																				<div data-popper-arrow></div>
+																			</div>
+																			</div>
+																			}
+
+																		</div> :
+																		<div className="flex flex-row">
+																			<a
+
+																				target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}`}
+
+
+																				className={`${data.source_type === 'yt'
+																					? 'lg:cursor-pointer lg:pointer-events-auto'
+																					: ''
+																					}  lg:pointer-events-auto lg:text-slate-900 dark:text-zinc-300 font-bold underline`}
+																				key={index}
+																			>
+																				<br></br>
+
+																				{item}{' '}
+																				
+
+																			</a>
+																			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end  mr-4 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>}
+																		</div>
 
 																);
-															} else if (index % 2 === 1 && index < transcript.length - 1) {
+															} else if (index % 2 === 1 && index < transcript.length) {
 																return (
 																	<div key={index}>
 																		<br></br>
@@ -395,14 +528,16 @@ export default function Content(props) {
 								</div>
 							</div>
 						) : (
-							<div className="flex flex-col">
-								<p className="text-xl text-zinc-600 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
+							<div>
+								{/* <div className="flex flex-col">
+								<p className="text-xl text-zinc-600 dark:text-zinc-200 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
 
 									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
 									meantime, you can check out other videos.
 									<img className="opacity-30 mx-auto" src={working} alt="My SVG" />
 								</p>
 
+							</div> */}
 							</div>
 						)}
 					</div>{' '}
@@ -449,7 +584,18 @@ export default function Content(props) {
  */}
 			</div>
 
+			{isLoading &&
 
+				<div className="flex flex-col">
+								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 lg:p-20">
+
+									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
+									meantime, you can check out other videos.
+									<img className="opacity-10 mx-auto" src={working} alt="My SVG" />
+								</p>
+
+				</div>
+							}
 
 		</div>
 	);

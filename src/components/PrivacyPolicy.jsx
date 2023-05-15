@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
 
 
     return (
-        <div className="text-zinc-600 mt-20 mb-40 mx-auto max-w-[800px]">
+        <div className="text-zinc-600 dark:text-zinc-200 mt-20 mb-40 mx-auto max-w-[800px]">
             <h1 className="text-3xl font-bold mb-5 pt-5">Privacy Policy</h1>
             <p className="pt-1">Last updated: March 02, 2023</p>
             <p className="pt-1">This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>

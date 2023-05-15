@@ -18,9 +18,9 @@ function Footer() {
 	    
 				</div> */
 
-		<footer className={'p-4 sm:p-6 flex flex-col justify center items-center w-full text-mainText bg-bordoLike'}>
-			<hr className={'my-6 bg-bordoLike sm:mx-auto lg:my-8'} />
-			<div className={'container lg:flex lg:justify-between mx-auto'}>
+		<footer className={'p-4 sm:p-6 flex flex-col  justify-center items-center w-full text-mainText dark:bg-mildDarkMode bg-bordoLike'}>
+			<hr className={'my-6 bg-bordoLike sm:mx-auto lg:my-8 '} />
+			<div className={'container lg:flex lg:justify-between  mx-auto max-w-[1200px]'}>
 				<div className={'mb-6 md:mb-0 '}>
 					<span className={' text-2xl font-semibold lg:whitespace-nowrap'}>ALPHY</span>
 

@@ -31,7 +31,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 	};
 	return (
 
-		<div className=" lg:col-span-1 border-blueLike text-zinc-600 flex justify-center items-center mx-5" ref={KTref}>
+		<div className=" lg:col-span-1 border-blueLike text-zinc-600 dark:text-zinc-200 flex justify-center items-center mx-5" ref={KTref}>
 
 			<div
 				href="#"
@@ -45,7 +45,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 								}`}
 						>
 							{keysCollapsed ? <ArrowButton direction={'left'} /> : null}
-							<h5 className="text-xl font-bold tracking-tight text-zinc-600 text-blueLike items-center">
+							<h5 className="text-xl font-bold tracking-tight text-zinc-600 dark:text-zinc-200 text-blueLike dark:bg-darkMode dark:text-zinc-300 items-center">
 								Key Takeaways {keysCollapsed ? `${current + 1}/${key_takeaways.length}` : null}
 							</h5>
 							{keysCollapsed ? <ArrowButton direction={'right'} /> : null}
@@ -67,7 +67,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 				</div>
 				<button
 					onClick={handleClick}
-					className={'text-gray-500 underline hover:text-blue-700 font-light text-sm mt-5 mb-10'}
+					className={'text-gray-500 underline hover:text-zinc-200 font-light text-sm mt-5 mb-10'}
 				>
 					{keysCollapsed ? 'Show Them All' : 'Collapse'}
 				</button>
