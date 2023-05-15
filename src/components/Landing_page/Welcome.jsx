@@ -39,7 +39,9 @@ export default function Welcome({hasActiveSub}) {
 
 
 	const handleCloseBanner = () => {
+		if(localStorage.getItem("bannerClosed") === null){
 		localStorage.setItem('bannerClosed', true);
+	}
 		console.log(localStorage.getItem("bannerClosed"))
 	};	
 
@@ -205,9 +207,9 @@ export default function Welcome({hasActiveSub}) {
 			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
 		>
-			{localStorage.getItem("bannerClosed") ? null : 
+			{localStorage.getItem("bannerClosed")==="true" ? (null) : 
 
-						<div id="marketing-banner" tabindex="-1" class={`fixed z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 drop-shadow-md rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600`}>
+						(<div id="marketing-banner" tabindex="-1" class={`fixed ${localStorage.getItem("bannerClosed")===true ? "hidden":""}z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 drop-shadow-md rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600`}>
 				<div class="flex flex-col items-start mb-3 mr-4 md:items-center md:flex-row md:mb-0">
 			
 					<p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">Notice: We had some changes to our usage policy. Check the {currentUser ? "Account" : "Plans"} page for more info! </p>
@@ -220,7 +222,7 @@ export default function Welcome({hasActiveSub}) {
 						<span class="sr-only">Close banner</span>
 					</button>
 				</div>
-			</div>
+			</div>)
 			}
 
 
