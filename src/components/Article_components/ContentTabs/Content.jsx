@@ -534,15 +534,15 @@ export default function Content(props) {
 			{isLoading &&
 
 				<div className="flex flex-col">
-					<p className="text-xl text-zinc-600 dark:text-zinc-200 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
+								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 lg:p-20">
 
-						Alphy is doing its best to process this video, it will be ready in a few minutes. In the
-						meantime, you can check out other videos.
-						<img className="opacity-30 mx-auto" src={working} alt="My SVG" />
-					</p>
+									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
+									meantime, you can check out other videos.
+									<img className="opacity-10 mx-auto" src={working} alt="My SVG" />
+								</p>
 
 				</div>
-			}
+							}
 
 		</div>
 	);
