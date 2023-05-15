@@ -138,12 +138,12 @@ export default function Pricing({ stripePromise }) {
             //await axios.get(`https://backend-staging-2459.up.railway.app/payments/subscriptions?user_id=1233322111`)
             .then(r => {
                 
-                if (r.data !== null) {
+                if (r.data.length >0) {
                     setCalled(true)
                     const userStripe = r.data
                     setHasActiveSub(true)
                     userStripeId = userStripe
-                    if(r.data.cancel_at_period_end){
+                    if(r.data[0].cancel_at_period_end){
                         setCanceledAtPeriodEnd(true)
                     }
                 
@@ -156,15 +156,7 @@ export default function Pricing({ stripePromise }) {
             })
 
     }
-    const handleSubscribe = () => {
 
-        axios.post(
-            'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N1S2dJmF4J0rk0xYlJBqdAm&user_id=testuser'
-        ).then(response => {
-            setSubscription(response.data)
-            setClientSecret(response.data)
-        })
-    }
 
 
 
@@ -175,7 +167,7 @@ export default function Pricing({ stripePromise }) {
     /*    const createSubscription = () => {
            stripe.api_key = "sk_test_51MeGOKJmF4J0rk0xkdOKOYwsbwnaDPp1bZYfBWG0CYmDSVnMl5f99yo0vhWZxzIZSddN5fEyF6UsZ6MlwyjFKyfB00npolLt3i"
            axios.post(
-               'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N1S2dJmF4J0rk0xYlJBqdAm&user_id=testuser'
+               'https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N84voJmF4J0rk0xPomcFY2i&user_id=testuser'
            )
                .then(r => {
                    console.log(r.data.id, subscriptionData)

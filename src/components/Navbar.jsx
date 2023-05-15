@@ -30,7 +30,6 @@ function Navbar({ collapsed, setCollapsed }) {
       document.documentElement.classList.add(colorTheme);
       setDarkMode(colorTheme);
       localStorage.setItem("theme", colorTheme);
-      console.log(localStorage.theme);
     };
 
 	const handleScroll = (target) => {

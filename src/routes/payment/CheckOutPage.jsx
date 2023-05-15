@@ -85,7 +85,7 @@ export default function CheckOutPage() {
         await currentUser.getIdToken().then((idToken) => {
             
         //await axios.post(`https://backend-staging-2459.up.railway.app/payments/subscribe?subscription_type=price_1N2dm5JmF4J0rk0xWfZYHspj&user_id=${currentUser.uid}&user_email=${currentUser.email}`)
-        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=price_1N2dm5JmF4J0rk0xWfZYHspj`,{},
+        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=price_1N84voJmF4J0rk0xPomcFY2i`,{},
             {
                 headers: {
                     'id-token': idToken,
@@ -94,8 +94,8 @@ export default function CheckOutPage() {
         )
             .then(r => {
                 
-                console.log(r)
-                const clientSecret = r.data.latest_invoice.payment_intent.client_secret
+                console.log(r.data)
+                const clientSecret = r.data[0].latest_invoice.payment_intent.client_secret
                 setClientSecret(clientSecret)
                 setCalled(true)
             }
