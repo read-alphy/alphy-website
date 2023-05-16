@@ -292,12 +292,12 @@ export default function Welcome({hasActiveSub}) {
 							Instructions for Alphy </p>
 						<div data-popover id="popoverDescription" role="tooltip" class={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
 							<div class="p-3 space-y-2">
-								<h3 class="font-semibold text-gray-900">Before submitting</h3>
+								<p class="font-semibold text-l text-gray-900">Before submitting</p>
 								<p> Please make sure the duration of the content does not exceed <strong className="underline">1 hour</strong> if you are on a free tier and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p>
 								<p> Free tier users can only submit videos with more than <strong className="underline">10,000 views</strong>. There is no popularity limity if you are premium.</p>
 				<p>Submitting content will spend from your credits. Check the {currentUser ? "Acccount" : "Plans"} page for more info.</p>
 								<p></p>
-								<h3 class="font-semibold text-gray-900 pt-2">When the content is ready</h3>
+								<p class="font-semibold text-l text-gray-900 pt-2">When the content is ready</p>
 								<p>If you see a video that has inaccurate transcription and summary, please let us know. We will fix it as soon as possible.
 								</p>
 
