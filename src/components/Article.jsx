@@ -25,18 +25,6 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 	}
 
 
-	const Collapser = () => {
-		setCollapsed(!collapsed);
-	};
-
-	const handleScroll = (target) => {
-		setCollapsed(true);
-		navigate('/');
-		setTimeout(() => {
-			const feedback = document.getElementById(target);
-			feedback.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		}, 100);
-	};
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -134,20 +122,20 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
-			<Helmet>
-				<title>{data.title ? `${data.title}` : "Alphy"} </title>
-				<meta property="og:title" content={data.title ? `Alphy - ${data.title}` : "Alphy"} />
-				<meta name="twitter:title" content={data.title ? `Alphy - ${data.title}` : "Alphy"} />
+{/* 			<Helmet>
+				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
+				<meta property="og:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
+				<meta name="twitter:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
 
-				<meta property="og:description" content={data.title ? `Ask questions to ${data.title}` : "Ask questions to the content"}
+				<meta property="og:description" content={data.title!==undefined ? `Ask questions to ${data.title}` : "Ask questions to the content"}
 				/>
-				<meta name="description" content={data.title ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"} />
+				<meta name="description" content={data.title!== undefined? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"} />
 				{data.source_type === "yt" ? <meta name="twitter:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta name="twitter:image" content={Twitter} />}
 				{data.source_type === "yt" ? <meta property="og:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta property="og:image" content={Twitter} />}
-				<meta name="twitter:description" content={data.title ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
+				<meta name="twitter:description" content={data.title!== undefined ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
 				/>
 				<meta property="og:url" content={location.href} />
-			</Helmet>
+			</Helmet> */}
 			<div
 				className={`w-screenbg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}

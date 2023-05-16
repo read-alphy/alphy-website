@@ -21,7 +21,7 @@ import { Popover } from 'flowbite';
 export default function Content(props) {
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
-	const [isLoading, setIsLoading] = useState(props.data?.length === 0);
+	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
 	const data = props.data;
 
 	const ref = useRef(null);
@@ -293,7 +293,7 @@ export default function Content(props) {
 
 
 				<div className="flex flex-col xl:flex-row mt-16">
-					<div className="grid grid-cols-2 w-full ">
+					<div className="grid grid-cols-2 w-full md:min-w-[500px] ">
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 						<div className={`col-span-2 hidden lg:flex justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
@@ -344,11 +344,11 @@ export default function Content(props) {
 							)}
 						</div>
 					</div>
-					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0`} >
+					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0 `} >
 
 
-						{data.is_complete || data.transcript ? (
-							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700">
+						{data.is_complete || data.transcript!== undefined ? (
+							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl md:min-w-[500px]  rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700">
 
 								<div class="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700">
 									<ul class="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
