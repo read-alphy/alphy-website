@@ -30,6 +30,7 @@ function SideFeed(props) {
 		}
 
 		setIsLoadingPersonal(true);
+		localStorage.setItem("search",search_input)
 		
 		if (currentUser) {
 			setIsLoadingPersonal(true)
@@ -78,7 +79,7 @@ function SideFeed(props) {
 	const getData = (offset, firstTime, hasMore, search_input) => {
 
 		let query
-
+		localStorage.setItem("search",search_input)
 
 		if (!hasMore) {
 			return;
