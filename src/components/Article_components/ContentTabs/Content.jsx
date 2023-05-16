@@ -470,20 +470,18 @@ export default function Content(props) {
 																			{index === 0 && 
 																			
 																			<div className="flex ml-auto justify-end flex-row justify-end">
-																			<button id="popover-button" data-popover-target = "popover-click" data-popover-trigger="click" className=" mr-8 opacity-80 pt-4" onClick={/* (selection) => handleDownload(selection) */ null}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
+																			<button id="popover-button" data-popover-target = "popover-click" data-popover-trigger="click" className=" mr-8 opacity-80 pt-4">{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
 																			<div data-popover id="popover-click" role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
 																				
-																				<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																				<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-t-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																					<p className="">Download as Plain Subtitle (.srt)</p>
 																				</div>
 																				
-																				<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																				<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-b-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																				<p>Download Formatted Transcript (.txt)</p>	
 																				</div>
-																		{/* 		<div onClick={handleDownload(3)} className="px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
-																					<p>Download Timestamped Transcript (.srt)</p>		
-																				</div> */}
-																				<div data-popper-arrow></div>
+																
+																	
 																			</div>
 																			</div>
 																			}
