@@ -467,7 +467,7 @@ export default function Content(props) {
 																				<p className="text-md ">{item}{' '}</p>
 
 																			</a>
-																			{index === 0 && 
+																			{/* {index === 0 && 
 																			
 																			<div className="flex ml-auto justify-end flex-row justify-end">
 																			<button id="popover-button" data-popover-target = "popover-click" data-popover-trigger="click" className=" mr-8 opacity-80 pt-4">{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
@@ -480,11 +480,11 @@ export default function Content(props) {
 																				<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-b-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																				<p>Download Formatted Transcript (.txt)</p>	
 																				</div>
-																
+																				
 																	
 																			</div>
 																			</div>
-																			}
+																			} */}
 
 																		</div> :
 																		<div className="flex flex-row">
