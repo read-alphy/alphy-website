@@ -26,7 +26,7 @@ function Home({hasActiveSub}) {
 			
 			if (!hasSeenWelcomeMessage) {
 
-				console.log(currentUser)
+				
 				setShowMessage(true);
 				localStorage.setItem('hasSeenWelcomeMessage', 'true');
 			}
