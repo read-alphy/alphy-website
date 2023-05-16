@@ -62,7 +62,7 @@ useEffect(() => {
             
             .then(r => {
                 
-                if (r.data !== null) {
+                if (r.data.length>0) {
                     setCalled(true)
                     setHasActiveSub(true)
  

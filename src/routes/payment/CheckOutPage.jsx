@@ -42,7 +42,7 @@ export default function CheckOutPage() {
 
     const fetchData = async () => {
         await currentUser.getIdToken().then((idToken) => {
-
+console.log(idToken)
         axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription`,{},
             {
                 headers: {

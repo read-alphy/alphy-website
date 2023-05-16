@@ -175,7 +175,7 @@ export default function Welcome({hasActiveSub}) {
 								icon: '⚠️',
 							});
 						}
-						else{	toast('There was an error submitting the form. \n \n Potential causes: \n\n • You may have run out of credits \n\n • The video you are submitting has less than 10,000. \n\n • The video you are submitting is longer than 1 hour.', {
+						else{	toast('There was an error submitting the form. \n \n Potential causes: \n\n • You may have run out of credits \n\n • The video you are submitting has less than 10,000 views. \n\n • The video you are submitting is longer than 1 hour.', {
 								duration: 5000,
 								icon: '⚠️',
 							});
