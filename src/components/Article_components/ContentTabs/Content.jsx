@@ -428,9 +428,10 @@ export default function Content(props) {
 															return (
 																<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
 																	<div className="summary-text">
-																	<ReactMarkdown>
+																{/* 	<ReactMarkdown>
 																		{item}
-																	</ReactMarkdown>
+																	</ReactMarkdown> */}
+																	{item}
 																	</div>
 
 																	
