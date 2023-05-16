@@ -23,7 +23,7 @@ function SideFeed(props) {
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
 	
-	
+	console.log(localStorage.getItem("search").length>0)
 	const getDataPersonal = (offsetPersonal, firstTimePersonal, hasMorePersonal,search_input) => {
 		if (!hasMorePersonal) {
 			return;
@@ -107,7 +107,14 @@ function SideFeed(props) {
 
 	useEffect(() => {
 		if(localStorage.getItem("search").length>0){
-		getData(0, true, true, localStorage.getItem("search"));
+			let search_input
+			if(logalStorage.getItem("search").length>0){
+			search_input = localStorage.getItem("search")
+			}
+			else{
+				search_input=""
+			}
+		getData(0, true, true, search_input);
 		setSearch(localStorage.getItem("search"))
 		}
 		else{
