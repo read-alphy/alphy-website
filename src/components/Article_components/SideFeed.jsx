@@ -205,7 +205,7 @@ function SideFeed(props) {
 						placeholder={'Search YouTube videos or Twitter spaces...'}
 
 					/>
-					{search.length || localStorage.getItem("search").length > 0 ? (
+					{search.length > 0 || localStorage.getItem("search").length > 0 ? (
 						<div
 							onClick={handleClear}
 							className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "

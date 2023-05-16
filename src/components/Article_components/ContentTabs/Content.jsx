@@ -105,7 +105,7 @@ export default function Content(props) {
 
 	async function transcriptParser() {
 
-		if (data.summary !== null) {
+		if (data.summary !== undefined || data.summary !== null) {
 			summaryArray = data.summary.split('\n');
 			
 
