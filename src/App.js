@@ -92,9 +92,9 @@ useEffect(() => {
 	return (
 
 		<div className="App bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300">
-			<Helmet>
+	{/* 		<Helmet>
 			<title>Alphy: Unlock the Information in Audiovisual Content </title>
-			</Helmet>
+			</Helmet> */}
 			<Elements stripe={stripePromise}>
 				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 					<>
