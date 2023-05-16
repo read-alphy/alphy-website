@@ -108,7 +108,7 @@ function SideFeed(props) {
 	useEffect(() => {
 		if(localStorage.getItem("search").length>0){
 			let search_input
-			if(logalStorage.getItem("search").length>0){
+			if(localStorage.getItem("search").length>0){
 			search_input = localStorage.getItem("search")
 			}
 			else{
