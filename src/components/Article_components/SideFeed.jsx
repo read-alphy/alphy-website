@@ -37,7 +37,7 @@ function SideFeed(props) {
 
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/summaries?q=${search_input}&offset=${offsetPersonal}&limit=${limit}&only_mine=true`, {
+					}/summaries${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offsetPersonal}&only_mine=true`, {
 					headers: {
 						'id-token': idtoken,
 					}
@@ -88,7 +88,7 @@ function SideFeed(props) {
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search_input}&offset=${offset}&limit=${limit}&only_mine=false`
+			}/summaries${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offsetPersonal}&only_mine=false`
 			)
 			.then((response) => {
 				if (response.data.length > 0) setData([...data, ...response.data]);
@@ -107,18 +107,19 @@ function SideFeed(props) {
 
 	useEffect(() => {
 		if(localStorage.getItem("search")!==null){
-		
-		if(localStorage.getItem("search").length>0){
-			let search_input
-			
-			search_input = localStorage.getItem("search")
-			
 
-		getData(0, true, true, search_input);
-		setSearch(localStorage.getItem("search"))
-		}
+		
+					if(localStorage.getItem("search").length>0){
+
+					getData(0, true, true, localStorage.getItem("search"));
+					setSearch(localStorage.getItem("search"))
+					}
+					else{
+						getData(0, true, true, search);
+					}
 	}
 		else{
+			
 			getData(0, true, true, search);
 		}
 	}, []);
@@ -213,7 +214,7 @@ function SideFeed(props) {
 						placeholder={'Search YouTube videos or Twitter spaces...'}
 
 					/>
-					{search.length > 0 || localStorage.getItem("search").length > 0 ? (
+					{search.length > 0  ? (
 						<div
 							onClick={handleClear}
 							className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "
