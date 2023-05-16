@@ -88,7 +88,7 @@ function SideFeed(props) {
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-			}/summaries${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offsetPersonal}&only_mine=false`
+			}/summaries${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offset}&only_mine=false`
 			)
 			.then((response) => {
 				if (response.data.length > 0) setData([...data, ...response.data]);
@@ -141,14 +141,14 @@ function SideFeed(props) {
 	const loadMore = () => {
 		setOffset(offset + limit);
 		if(isPublic===true){
-		getData(offset + limit, false, true, search);
-	}
-	else{
-		
-		setOffsetPersonal(offsetPersonal + limit);
+			getData(offset + limit, false, true, search);
+		}
+		else{
+			
+			setOffsetPersonal(offsetPersonal + limit);
 
-		getDataPersonal(offsetPersonal + limit, false, true, search);
-	}
+			getDataPersonal(offsetPersonal + limit, false, true, search);
+		}
 		//feedRef.current.scrollTop = feedRef.current.scrollHeight;
 
 
