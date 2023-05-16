@@ -289,13 +289,13 @@ export default function Welcome({hasActiveSub}) {
 
 							<button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="left" data-popover-offset="20" type="button"><svg class="w-5 h-5 ml-1 pt-1 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button>
 
-							Instructions for Alphy</p>
-
+							Instructions for Alphy </p>
 						<div data-popover id="popoverDescription" role="tooltip" class={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
 							<div class="p-3 space-y-2">
 								<h3 class="font-semibold text-gray-900">Before submitting</h3>
-								<p> Please make sure the duration of the content does not exceed <strong className="underline">3 hours</strong>. Otherwise, you will get an error. </p>
-								<p> Alphy works best with the content in English. We are working on supporting other languages. Meanwhile, you may encounter some errors with content in other languages and alphabets.</p>
+								<p> Please make sure the duration of the content does not exceed <strong className="underline">1 hour</strong> if you are on a free tier and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p>
+								<p> Free tier users can only submit videos with more than <strong className="underline">10,000 views</strong>. There is no popularity limity if you are premium.</p>
+				<p>Submitting content will spend from your credits. Check the {currentUser ? "Acccount" : "Plans"} page for more info.</p>
 								<p></p>
 								<h3 class="font-semibold text-gray-900 pt-2">When the content is ready</h3>
 								<p>If you see a video that has inaccurate transcription and summary, please let us know. We will fix it as soon as possible.

@@ -188,7 +188,7 @@ export default function Account({ stripePromise }) {
                                     <div class="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
 
 
-                                        <h5 class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</h5>
+                                    <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</p>
                                         {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
                                         <div class="flex items-baseline text-gray-900 dark:text-white">
                                             {/* <span class="text-3xl font-semibold">$</span> */}
@@ -287,7 +287,7 @@ export default function Account({ stripePromise }) {
 
 
                                     <div class="col-span-2 max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
-                                        <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">Premium</h5>
+                                    <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
                                         {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
                                         <div class="flex items-baseline text-gray-900 dark:text-white">
                                             <span class="text-3xl font-semibold">$</span>
@@ -372,7 +372,7 @@ export default function Account({ stripePromise }) {
                               
                                     <div class="w-full md:min-w-[400px] items-center mx-auto max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 mb-10">
 
-                                    <h5 class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</h5>
+                                    <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</p>
                                     {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
                                     <div class="flex items-baseline text-gray-900 dark:text-white">
                                         {/* <span class="text-3xl font-semibold">$</span> */}
@@ -452,7 +452,7 @@ export default function Account({ stripePromise }) {
 
 
                                 <div class="items-center mx-auto max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
-                                    <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">Premium</h5>
+                                <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
                                     {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
                                     <div class="flex items-baseline text-gray-900 dark:text-white">
                                         <span class="text-3xl font-semibold">$</span>

@@ -190,10 +190,10 @@ function Navbar({ collapsed, setCollapsed }) {
 					}`}
 			>
 				<div className="text-center mx-auto items-center">
-					<div className="overflow-y-auto z-50 text-sm mx-auto items-center justify-center flex flex-row">
-						<div className="flex mx-auto flex-row">
+					<div className="overflow-y-auto z-50  text-sm mx-auto items-center justify-center flex flex-row">
+						<div className="flex mx-auto flex-row min-w-[300px]">
 							<div className="flex flex-row">
-								<div className="justify-center items-center ml-8 flex">
+								<div className="justify-center items-center flex ml-4">
 									<div
 										className="mr-2 font-normal text-blueLike dark:bg-darkMode dark:text-zinc-300 cursor-pointer"
 										onClick={() => handleScroll('about')}
@@ -227,7 +227,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 										<div className="flex font-normal ml-6 cursor-pointer">
 														{localStorage.getItem('theme') === 'dark' ? (
-													<svg className="mr-1 hover:text-zinc-50 duration-200 transition ease-in" onClick={handleDarkMode} width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<svg className="mr-1 hover:text-zinc-50 duration-200 transition ease-in" onClick={handleDarkMode} width={25} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 								</svg>):
 								<svg className="mr-2 hover:text-zinc-500 duration-200 transition ease-in" width={25} onClick={handleDarkMode} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -241,7 +241,7 @@ function Navbar({ collapsed, setCollapsed }) {
 										className="bg-zinc-50 dark:bg-darkMode hover:text-slate-400 duration-600 transition ease-in text-slate-500 font-normal py-2 px-4 rounded "
 										onClick={currentUser ? handleSignOut : handleLoginWithGoogle}
 									>
-										<FaGoogle className="inline-block mr-1 mb-1 w-1/6" />
+										{/* <FaGoogle className="inline-block mr-1 mb-1 w-1/6" /> */}
 										{currentUser ? 'Sign Out' : 'Sign In'}
 									</button>
 								</div>
