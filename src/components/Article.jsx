@@ -11,7 +11,7 @@ import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
-function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
+function Article({ source_type, collapsed, setCollapsed, hasActiveSub}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -106,7 +106,7 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 					className={`${collapsed ? "scrolling" : "overflow-hidden"} px-3 md:px-0  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[80vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : <Content data={data} />}
+					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} />}
 				</div>
 			</div>
 		</div>

@@ -19,6 +19,7 @@ import { Popover } from 'flowbite';
 
 
 export default function Content(props) {
+	
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
@@ -34,9 +35,7 @@ export default function Content(props) {
 	const [downloading, setDownloading] = useState(false);
 
 	let summaryArray = '';
-	const handleClick = () => {
-		ref.current.scrollIntoView({ behavior: 'smooth' });
-	};
+
 
 	const checkScrollPosition = () => {
 		const windowHeight = ref.current.clientHeight;
@@ -51,21 +50,21 @@ export default function Content(props) {
 	};
 
 
-	const $targetEl = document.getElementById('popover-click');
+
+	const $targetEl = document.getElementById('popoverHover');
 
     // set the element that trigger the popover using hover or click
-    const $triggerEl = document.getElementById('popover-button');
+    const $triggerEl = document.getElementById('popoverButton');
 
     // options with default values
     const options = {
-        placement: 'right',
-        triggerType: 'click',
-        offset: 10,
+        placement: 'left',
+        triggerType: 'hover',
+        offset: 5,
 
     };
 
     const popover = new Popover($targetEl, $triggerEl, options);
-
 
 
 
@@ -204,8 +203,11 @@ export default function Content(props) {
 
 
 	const handleDownload = (selection) => {
-		popover.toggle()
+		
 		setDownloading(true)
+		popover.toggle()
+		
+		
 		// create .srt file
 		setTimeout(() => {
 
@@ -257,7 +259,7 @@ export default function Content(props) {
 	};
 
 	transcriptParser();
-	
+
 	return (
 		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
 
@@ -467,24 +469,22 @@ export default function Content(props) {
 																				<p className="text-md ">{item}{' '}</p>
 
 																			</a>
-																			{/* {index === 0 && 
+																		
 																			
-																			<div className="flex ml-auto justify-end flex-row justify-end">
-																			<button id="popover-button" data-popover-target = "popover-click" data-popover-trigger="click" className=" mr-8 opacity-80 pt-4">{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
-																			<div data-popover id="popover-click" role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
-																				
-																				<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-t-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																					<p className="">Download as Plain Subtitle (.srt)</p>
-																				</div>
-																				
-																				<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-b-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																				<p>Download Formatted Transcript (.txt)</p>	
-																				</div>
-																				
-																	
+																			<div className={`${index !==0 || props.hasActiveSub === false ? "hidden" : ""} flex ml-auto justify-end flex-row justify-end`} >
+																						<button id="popoverButton" data-popover-target = "popoverHover" data-popover-trigger="hover" className=" mr-8 opacity-80 pt-4">{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
+																				<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
+																							
+																							<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-t-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																								<p className="">Download as Plain Subtitle (.srt)</p>
+																							</div>
+																							
+																							<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-b-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																							<p>Download Formatted Transcript (.txt)</p>	
+																							</div>
 																			</div>
 																			</div>
-																			} */}
+																		 
 
 																		</div> :
 																		<div className="flex flex-row">

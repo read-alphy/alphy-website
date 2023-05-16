@@ -54,7 +54,7 @@ useEffect(() => {
 
 	const getCustomerInfo = async (currentUser) => {
         const idToken = await currentUser.getIdToken().then((idToken) => {
-        
+
         axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
         {
             headers: {
@@ -64,7 +64,7 @@ useEffect(() => {
         )
             
             .then(r => {
-                
+			
                 if (r.data.length>0) {
                     setCalled(true)
                     setHasActiveSub(true)
@@ -118,7 +118,7 @@ useEffect(() => {
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} />
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} />
 								}
 							/>
 							<Route
