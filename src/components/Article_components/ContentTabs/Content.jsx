@@ -529,59 +529,12 @@ export default function Content(props) {
 							</div>
 						) : (
 							<div>
-								{/* <div className="flex flex-col">
-								<p className="text-xl text-zinc-600 dark:text-zinc-200 font-bold max-w-screen-md mx-auto p-3 lg:p-20">
-
-									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
-									meantime, you can check out other videos.
-									<img className="opacity-30 mx-auto" src={working} alt="My SVG" />
-								</p>
-
-							</div> */}
+								
 							</div>
 						)}
 					</div>{' '}
 				</div>
 
-				{/* 
-				{isLoading ? (
-					<Loading />
-				) : (
-					data.key_qa && (
-						<QuestionAnswering
-							source_id={data.source_id}
-							source_type={data.source_type}
-							key_qa={data.key_qa}
-							data={data}
-							transcript={transcript}
-							timestampChanger={timestampChanger}
-						/>
-					)
-				)} */}
-
-				{/* 	<div id="bottom-banner" tabindex="-1" class="fixed bottom-0   h-[100px] z-50 w-1/6 right-0 ">
-
-					{showButton && (
-						<button onClick={handleClick} data-dismiss-target="#bottom-banner" type="button" class="right-0 bottom-0 pl-5 sm:ml-10 md:ml-20 mt-10 text-gray-600 ">
-							<svg
-								className="right-0 "
-								aria-hidden="true"
-								fill="currentColor"
-								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
-								width="40px"
-							>
-								<path
-									clipRule="evenodd"
-									d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z"
-									fillRule="evenodd"
-								></path>
-							</svg>{' '}
-
-						</button>)}
-
-				</div>
- */}
 			</div>
 
 			{isLoading &&

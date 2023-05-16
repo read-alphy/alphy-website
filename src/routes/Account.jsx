@@ -364,8 +364,13 @@ export default function Account({ stripePromise }) {
                             <div className="mb-20">
 
                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-4xl font-semibold mt-20 mb-10">Manage Subscription </p>
-                                {hasActiveSub ? <div className="items-center flex flex-row justify-center"> <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center px-10 md:px-0 max-w-[600px] underline font-semibold mb-10" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE">{canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> </div> : null}
-                                <div class="w-full md:min-w-[400px] items-center mx-auto max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 mb-10">
+                                {currentUser ? <div className="items-center flex flex-col justify-center">  
+                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
+                                     {credit!==null ?
+                                    <p className="items-center flex mb-6 " >Remaining Credits: {Math.floor(credit)} minutes</p> :null
+                                            }      </div> : null}
+                              
+                                    <div class="w-full md:min-w-[400px] items-center mx-auto max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 mb-10">
 
                                     <h5 class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</h5>
                                     {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
