@@ -34,57 +34,15 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 			setIsLoading(true);
 			const response = await axios.get(url).then(
 				(response) => {
-
+					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
+				}
 				}
 
 			).catch((error) => {
 				navigate('/404')
 			});
 
-
-			//changing page details
-			const pageTitle = document.getElementById('page-title');
-			if (pageTitle) {
-				pageTitle.innerHTML = response.data.title ? response.data.title : 'Alphy';
-			}
-			/* 			const metaTagImage = document.querySelector('meta[property="og:image"]');
-						if (metaTagImage) {
-							if (data.source_type === "yt") {
-								metaTagImage.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
-							}
-							else if (data.source_type === "sp") {
-								metaTagImage.setAttribute('content', { Twitter });
-							}
-						} */
-
-			/* 			const metaTagDescription = document.querySelector('meta[property="og:description"]');
-						if (metaTagDescription) {
-							metaTagDescription.setAttribute('content', `Start asking real questions to ${response.data.title}.`);
-						} */
-
-			const metaTagTitleTwitter = document.querySelector('meta[name=twitter:title"]');
-			if (metaTagTitleTwitter) {
-				metaTagTitleTwitter.setAttribute('content', data.title ? `Alphy | ${response.data.title}` : "Alphy");
-			}
-
-			const metaTagImagTwitter = document.querySelector('meta[name="twitter:image"]');
-			if (metaTagImagTwitter) {
-				metaTagImagTwitter.setAttribute('content', `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
-			}
-
-			/* 		const metaTagDescriptionTwitter = document.querySelector('meta[name="twitter:description"]');
-					if (metaTagDescriptionTwitter) {
-						metaTagDescriptionTwitter.setAttribute(
-							'content',
-							`Start asking real questions to ${response.data.title}.`,
-						);
-					} */
-
-			/* 			const metaTagTitle = document.querySelector('meta[property="og:title"]');
-						if (metaTagTitle) {
-							metaTagTitle.setAttribute('content', data.title ? `Alphy | ${response.data.title}` : 'Alphy');
-						} */
 		} catch (error) {
 			if (error.response?.status === 404) {
 				setIsLoading(false);
