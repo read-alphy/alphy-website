@@ -48,12 +48,12 @@ function Navbar({ collapsed, setCollapsed }) {
 		}
 	};
 
-	if (location.pathname === '/') {
+/* 	if (location.pathname === '/') {
 		const pageTitle = document.getElementById('page-title');
 		if (pageTitle) {
 			pageTitle.innerHTML = 'Alphy';
 		}
-	}
+	} */
 	const metaTag = document.querySelector('meta[property="og:image"]');
 	if (metaTag) {
 		metaTag.setAttribute('content', 'https://i.ibb.co/Q8pQPFs/1.png');

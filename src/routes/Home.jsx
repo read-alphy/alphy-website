@@ -46,7 +46,7 @@ function Home({hasActiveSub}) {
 					property="og:description" />
 				<meta name="twitter:title" content={`Alphy, the next generation speech-to-meaning agent.}`} />
 				<meta name="twitter:description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
-				<meta name="twitter:image" content="https://i.ibb.co/Q8pQPFs/1.png" />
+				<meta name="twitter:image" content="https://ibb.co/6ygbg9G" />
 				<meta property="og:url" content="https://alphy.app/" />
 				<meta content="https://i.ibb.co/Q8pQPFs/1.png" property="og:image" />
 			</Helmet>
