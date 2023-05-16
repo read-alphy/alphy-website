@@ -42,9 +42,8 @@ export default function CheckOutPage() {
 
     const fetchData = async () => {
         await currentUser.getIdToken().then((idToken) => {
-            
-        
-        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=price_1N1S2dJmF4J0rk0xYlJBqdAm`,{},
+
+        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription`,{},
             {
                 headers: {
                     'id-token': idToken,
@@ -55,6 +54,8 @@ export default function CheckOutPage() {
                 
                 
                 const clientSecret = r.data[0].latest_invoice.payment_intent.client_secret
+                
+                
                 setClientSecret(clientSecret)
                 setCalled(true)
             }
