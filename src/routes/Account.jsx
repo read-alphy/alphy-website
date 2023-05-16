@@ -178,86 +178,86 @@ export default function Account({ stripePromise }) {
                                     <p className="items-center flex mb-6 " >Remaining Credits: {Math.floor(credit)} minutes</p> :null
                                             }      </div> : null}
 
-                            {/* <div className="items-center flex justify-center"><label class="relative inline-flex items-center ">
-                            <input type="checkbox" value="" class="sr-only peer" onClick={handleDarkMode}/>
-                            <div class="w-11 cursor-pointer h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            <span class="ml-3 text-sm font-medium pointer-events-none text-gray-900 dark:text-gray-300">{isDarkMode=="dark" ? "Toggle Light Mode" : "Toggle Dark Mode"}</span>
+                            {/* <div className="items-center flex justify-center"><label className="relative inline-flex items-center ">
+                            <input type="checkbox" value="" className="sr-only peer" onClick={handleDarkMode}/>
+                            <div className="w-11 cursor-pointer h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <span className="ml-3 text-sm font-medium pointer-events-none text-gray-900 dark:text-gray-300">{isDarkMode=="dark" ? "Toggle Light Mode" : "Toggle Dark Mode"}</span>
                             </label> </div> */}
 
                                 <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch">
-                                    <div class="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
+                                    <div className="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
 
 
-                                    <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</p>
-                                        {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
-                                        <div class="flex items-baseline text-gray-900 dark:text-white">
-                                            {/* <span class="text-3xl font-semibold">$</span> */}
-                                            <span class="text-5xl font-extrabold tracking-tight">Free</span>
-                                            {/* <span class="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span> */}
+                                    <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</p>
+                                        {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
+                                        <div className="flex items-baseline text-gray-900 dark:text-white">
+                                            {/* <span className="text-3xl font-semibold">$</span> */}
+                                            <span className="text-5xl font-extrabold tracking-tight">Free</span>
+                                            {/* <span className="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span> */}
                                         </div>
                                         <p className="mt-3 text-gray-400">Discover Alphy's capabilities </p>
                                         <div className="h-[320px]">
-                                            <ul role="list" class="space-y-5 my-7">
-                                                <li class="flex space-x-3">
+                                            <ul role="list" className="space-y-5 my-7">
+                                                <li className="flex space-x-3">
 
-                                                    {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
+                                                    {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
                                                 </li>
 
-                                                <li class="flex mt-20 space-x-3">
+                                                <li className="flex mt-20 space-x-3">
 
-                                                    {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Access Alphy's public database</span>
+                                                    {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Access Alphy's public database</span>
                                                 </li>
-                                                <li class="flex space-x-3">
+                                                <li className="flex space-x-3">
 
-                                                    {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube videos</span>
+                                                    {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube videos</span>
                                                 </li>
                                            
-                                                <li class="flex space-x-3">
+                                                <li className="flex space-x-3">
 
 
-                                                    <p class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
-                                                        Standard Questioning <button id="popoverButton1" data-popover-target="popoverDescription1" data-popover-placement="right" data-popover-offset="20" type="button"><svg class="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button></p>
+                                                    <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
+                                                        Standard Questioning <button id="popoverButton1" data-popover-target="popoverDescription1" data-popover-placement="right" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
 
-                                                    <div data-popover id="popoverDescription1" role="tooltip" class={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
-                                                        <div class="p-3 space-y-2">
+                                                    <div data-popover id="popoverDescription1" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
+                                                        <div className="p-3 space-y-2">
                                                             <p> Rate limits may apply for rapid queries.</p>
 
                                                         </div>
-                                                        <div class="popover-arrow" role="presentation"></div>
+                                                        <div className="popover-arrow" role="presentation"></div>
                                                     </div>
                                                 </li>
-                                                {/*      <li class="flex space-x-3">
-                                        <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Browser Extension</span>
+                                                {/*      <li className="flex space-x-3">
+                                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Browser Extension</span>
                                     </li> */}
-                                                <li class="flex space-x-3">
+                                                <li className="flex space-x-3">
 
-                                                    {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 1 hour</span>
+                                                    {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 1 hour</span>
                                                 </li>
-                                                <li class="flex space-x-3">
+                                                <li className="flex space-x-3">
 
-                                                    {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    {/* <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
+                                                    {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                    {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
 
-                                                    <p class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
-                                                        Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="right" data-popover-offset="20" type="button"><svg class="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button></p>
+                                                    <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
+                                                        Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="right" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
 
-                                                    <div data-popover id="popoverDescription" role="tooltip" class={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
-                                                        <div class="p-3 space-y-2">
+                                                    <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
+                                                        <div className="p-3 space-y-2">
                                                             <p> You can only submit videos with greater than <strong className="underline">10,000 views</strong></p>
 
                                                         </div>
-                                                        <div class="popover-arrow" role="presentation"></div>
+                                                        <div className="popover-arrow" role="presentation"></div>
                                                     </div>
                                                 </li>
 
-                                                <li class="flex space-x-3 pt-4">
+                                                <li className="flex space-x-3 pt-4">
 
 
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
                                                     </span>
                                                 </li>
 
@@ -266,10 +266,10 @@ export default function Account({ stripePromise }) {
 
                                         {currentUser ?
                                             <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                                <button type="button" class={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                                <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
                                             </a>
                                             :
-                                            <button onClick={handleLoginWithGoogle} type="button" class="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
+                                            <button onClick={handleLoginWithGoogle} type="button" className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
                                         }
 
 
@@ -286,53 +286,53 @@ export default function Account({ stripePromise }) {
 
 
 
-                                    <div class="col-span-2 max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
-                                    <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
-                                        {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
-                                        <div class="flex items-baseline text-gray-900 dark:text-white">
-                                            <span class="text-3xl font-semibold">$</span>
-                                            <span class="text-5xl font-extrabold tracking-tight">5</span>
-                                            <span class="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span>
+                                    <div className="col-span-2 max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
+                                    <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
+                                        {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
+                                        <div className="flex items-baseline text-gray-900 dark:text-white">
+                                            <span className="text-3xl font-semibold">$</span>
+                                            <span className="text-5xl font-extrabold tracking-tight">5</span>
+                                            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span>
                                         </div>
                                         <p className="mt-3 text-gray-400">Level up your reach </p>
                                         <div className="h-[320px]">
-                                            <ul role="list" class="space-y-5 my-7">
-                                                <li class="flex space-x-3">
+                                            <ul role="list" className="space-y-5 my-7">
+                                                <li className="flex space-x-3">
 
-                                                    {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
+                                                    {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
                                                 </li>
-                                                <li class="flex space-x-3">
+                                                <li className="flex space-x-3">
 
 
-                                                    <span class="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
-                                                </li>
-
-                                                <li class="flex space-x-3">
-
-                                                    <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Extra 10 hours of prioritized transcription credits per month</span>
+                                                    <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
                                                 </li>
 
-                                                <li class="flex space-x-3">
-                                                    <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 4 hours</span>
+                                                <li className="flex space-x-3">
+
+                                                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Extra 10 hours of prioritized transcription credits per month</span>
                                                 </li>
 
-                                                <li class="flex space-x-3">
-                                                    <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                    {/* <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
+                                                <li className="flex space-x-3">
+                                                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 4 hours</span>
                                                 </li>
-                                                <li class="flex space-x-3">
 
-                                        <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Free Twitter Spaces transcription</span>
+                                                <li className="flex space-x-3">
+                                                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                    {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
+                                                </li>
+                                                <li className="flex space-x-3">
+
+                                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Free Twitter Spaces transcription</span>
                                                     </li>   
 
-                                                <li class="flex space-x-3">
-                                                    <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts and summaries</span>
+                                                <li className="flex space-x-3">
+                                                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts and summaries</span>
                                                 </li>
 
                                             </ul>
@@ -340,7 +340,7 @@ export default function Account({ stripePromise }) {
                                         <a className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} href={
                                             (currentUser && !hasActiveSub) ? `/plans/checkout` : (canceledAtPeriodEnd ? "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE": "")}
                 >
-                                            {currentUser ? <button type="button" class={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</button> : <div></div>}
+                                            {currentUser ? <button type="button" className={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</button> : <div></div>}
                                         </a>
 
 
@@ -370,66 +370,66 @@ export default function Account({ stripePromise }) {
                                     <p className="items-center flex mb-6 " >Remaining Credits: {Math.floor(credit)} minutes</p> :null
                                             }      </div> : null}
                               
-                                    <div class="w-full md:min-w-[400px] items-center mx-auto max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 mb-10">
+                                    <div className="w-full md:min-w-[400px] items-center mx-auto max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 mb-10">
 
-                                    <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</p>
-                                    {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
-                                    <div class="flex items-baseline text-gray-900 dark:text-white">
-                                        {/* <span class="text-3xl font-semibold">$</span> */}
-                                        <span class="text-5xl font-extrabold tracking-tight">Free</span>
-                                        {/* <span class="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span> */}
+                                    <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</p>
+                                    {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
+                                    <div className="flex items-baseline text-gray-900 dark:text-white">
+                                        {/* <span className="text-3xl font-semibold">$</span> */}
+                                        <span className="text-5xl font-extrabold tracking-tight">Free</span>
+                                        {/* <span className="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span> */}
                                     </div>
                                     <p className="mt-3 text-gray-400">Discover Alphy's capabilities </p>
                                     <div className="h-[320px]">
-                                        <ul role="list" class="space-y-5 my-7">
-                                            <li class="flex space-x-3">
+                                        <ul role="list" className="space-y-5 my-7">
+                                            <li className="flex space-x-3">
 
-                                                {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
+                                                {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
                                             </li>
 
-                                            <li class="flex mt-20 space-x-3">
+                                            <li className="flex mt-20 space-x-3">
 
-                                                {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Access Alphy's public database</span>
+                                                {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Access Alphy's public database</span>
                                             </li>
-                                            <li class="flex space-x-3">
+                                            <li className="flex space-x-3">
 
-                                                {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube videos</span>
+                                                {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube videos</span>
                                             </li>
-                                            <li class="flex space-x-3">
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Standard questioning</span>
+                                            <li className="flex space-x-3">
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Standard questioning</span>
                                             </li>
-                                            {/*      <li class="flex space-x-3">
-                                        <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Browser Extension</span>
+                                            {/*      <li className="flex space-x-3">
+                                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Browser Extension</span>
                                     </li> */}
-                                            <li class="flex space-x-3">
+                                            <li className="flex space-x-3">
 
-                                                {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 1 hour</span>
+                                                {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 1 hour</span>
                                             </li>
-                                            <li class="flex space-x-3">
+                                            <li className="flex space-x-3">
 
-                                                {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                {/* <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
+                                                {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
 
-                                                <p class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
-                                                    Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="right" data-popover-offset="20" type="button"><svg class="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only">Show information</span></button></p>
+                                                <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
+                                                    Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="right" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
 
-                                                <div data-popover id="popoverDescription" role="tooltip" class={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
-                                                    <div class="p-3 space-y-2">
+                                                <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
+                                                    <div className="p-3 space-y-2">
                                                         <p> You can only submit videos with greater than <strong className="underline">10,000 views</strong></p>
 
                                                     </div>
-                                                    <div class="popover-arrow" role="presentation"></div>
+                                                    <div className="popover-arrow" role="presentation"></div>
                                                 </div>
                                             </li>
 
-                                            <li class="flex space-x-3 pt-4">
+                                            <li className="flex space-x-3 pt-4">
 
 
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
                                                 </span>
                                             </li>
 
@@ -438,10 +438,10 @@ export default function Account({ stripePromise }) {
                                     </div>
                                     {currentUser ?
                                         <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                            <button type="button" class={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                            <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
                                         </a>
                                         :
-                                        <button onClick={handleLoginWithGoogle} type="button" class="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
+                                        <button onClick={handleLoginWithGoogle} type="button" className="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
                                     }
                                 </div>
 
@@ -451,55 +451,55 @@ export default function Account({ stripePromise }) {
 
 
 
-                                <div class="items-center mx-auto max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
-                                <p class="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
-                                    {/* <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
-                                    <div class="flex items-baseline text-gray-900 dark:text-white">
-                                        <span class="text-3xl font-semibold">$</span>
-                                        <span class="text-5xl font-extrabold tracking-tight">5</span>
-                                        <span class="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span>
+                                <div className="items-center mx-auto max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
+                                <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
+                                    {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
+                                    <div className="flex items-baseline text-gray-900 dark:text-white">
+                                        <span className="text-3xl font-semibold">$</span>
+                                        <span className="text-5xl font-extrabold tracking-tight">5</span>
+                                        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span>
                                     </div>
                                     <p className="mt-3 text-gray-400">Level up your reach </p>
                                     <div className="h-[320px]">
-                                        <ul role="list" class="space-y-5 my-7">
-                                            <li class="flex space-x-3">
+                                        <ul role="list" className="space-y-5 my-7">
+                                            <li className="flex space-x-3">
 
-                                                {/* <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
+                                                {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
                                             </li>
-                                            <li class="flex space-x-3">
+                                            <li className="flex space-x-3">
 
 
-                                                <span class="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
-                                            </li>
-
-                                            <li class="flex space-x-3">
-
-                                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Extra 10 hours of prioritized transcription credits per month</span>
+                                                <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
                                             </li>
 
-                                            <li class="flex space-x-3">
+                                            <li className="flex space-x-3">
 
-                                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 4 hours</span>
+                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Extra 10 hours of prioritized transcription credits per month</span>
                                             </li>
 
-                                            <li class="flex space-x-3">
-                                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                {/* <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
-                                            </li>
-                                            <li class="flex space-x-3">
+                                            <li className="flex space-x-3">
 
-<svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-<span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Free Twitter Spaces transcription</span>
+                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 4 hours</span>
+                                            </li>
+
+                                            <li className="flex space-x-3">
+                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
+                                            </li>
+                                            <li className="flex space-x-3">
+
+<svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+<span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Free Twitter Spaces transcription</span>
             </li>   
 
 
-                                            <li class="flex space-x-3">
-                                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                                <span class="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts and summaries</span>
+                                            <li className="flex space-x-3">
+                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts and summaries</span>
                                             </li>
 
                                         </ul>
@@ -508,7 +508,7 @@ export default function Account({ stripePromise }) {
                                     <a className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} href={
                                             (currentUser && !hasActiveSub) ? `/plans/checkout` : (canceledAtPeriodEnd ? "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE": "")}
                 >
-                                            {currentUser ? <button type="button" class={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</button> : <div></div>}
+                                            {currentUser ? <button type="button" className={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</button> : <div></div>}
                                         </a>
                                 </div>
 

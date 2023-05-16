@@ -41,6 +41,9 @@ function App() {
 	const [hasActiveSub, setHasActiveSub] = useState(false)
 	const [called, setCalled] = useState(false)
 
+	const stripePromise = loadStripe(
+		"pk_live_51MeGOKJmF4J0rk0xzE0Cl6UmLItHqja1URuUZGHsfOpoATmt60o5CDG3rNXyHrvd28CCxUnb5biyLOMewIz0psQz00mEIfPVl6"
+	);
 useEffect(() => {
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
@@ -50,9 +53,9 @@ useEffect(() => {
 })
 
 	const getCustomerInfo = async (currentUser) => {
-        const idToken = await currentUser.getIdToken()
+        const idToken = await currentUser.getIdToken().then((idToken) => {
         
-        await axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
+        axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
         {
             headers: {
                 'id-token': idToken,
@@ -73,6 +76,7 @@ useEffect(() => {
 
                 }
             })
+		})
 
     }
 
@@ -83,9 +87,6 @@ useEffect(() => {
 
 	const [collapsed, setCollapsed] = useState(true);
 
-	const stripePromise = loadStripe(
-		"pk_live_51MeGOKJmF4J0rk0xzE0Cl6UmLItHqja1URuUZGHsfOpoATmt60o5CDG3rNXyHrvd28CCxUnb5biyLOMewIz0psQz00mEIfPVl6"
-	);
 
 
 	return (

@@ -20,9 +20,9 @@ useEffect (() => {
 			</h1>
 			<h2 className="mb-5">Sorry, we can't seem to find the page you were looking for :( <br></br>   </h2>
 			<div className="flex flex-row pb-20 mb-20">
-				<Link to="/" type="button" class="text-bordoLike dark:bg-darkMode dark:text-zinc-300 mr-5 underline">Go Home</Link>
+				<Link to="/" type="button" className="text-bordoLike dark:bg-darkMode dark:text-zinc-300 mr-5 underline">Go Home</Link>
 
-				<a href="https://twitter.com/alphyapp" type="button" class="text-bordoLike dark:bg-darkMode dark:text-zinc-300 ml-5 underline">Reach us</a>
+				<a href="https://twitter.com/alphyapp" type="button" className="text-bordoLike dark:bg-darkMode dark:text-zinc-300 ml-5 underline">Reach us</a>
 
 			</div>
 

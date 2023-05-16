@@ -122,13 +122,13 @@ function Feed() {
 				Explore the videos other users unlocked with Alphy
 			</h2>
 
-			<div class="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700">
-				<ul class="flex ml-6 flex-wrap -mb-px">
-					<li class="mr-2">
-						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
+			<div className="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700">
+				<ul className="flex ml-6 flex-wrap -mb-px">
+					<li className="mr-2">
+						<button onClick={() => setisPublic(true)} className={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li>
-					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
+					<li className="mr-2">
+						<button onClick={navigateFeeds} className={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 
 				</ul>

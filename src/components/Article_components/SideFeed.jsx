@@ -216,14 +216,14 @@ function SideFeed(props) {
 								className="cursor-pointer"
 								fill="none"
 								stroke="currentColor"
-								stroke-width="1.5"
+								strokeWidth="1.5"
 								viewBox="0 0 24 24"
 								xmlns="http://www.w3.org/2000/svg"
 							>
 								<path
 									d="M6 18L18 6M6 6l12 12"
-									stroke-linecap="round"
-									stroke-linejoin="round"
+									strokeLinecap="round"
+									strokeLinejoin="round"
 								></path>
 							</svg>
 						</div>
@@ -253,15 +253,15 @@ function SideFeed(props) {
 			</form>
 
 			
-			<div class="text-sm font-medium text-center text-gray-500  w-full dark:text-zinc-300 dark:border-gray-700">
-				<ul class="flex ml-6  flex-wrap -mb-px">
+			<div className="text-sm font-medium text-center text-gray-500  w-full dark:text-zinc-300 dark:border-gray-700">
+				<ul className="flex ml-6  flex-wrap -mb-px">
 					
 					
-					<li class="mr-2 ">
-						<button onClick={() => setisPublic(true)} class={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
+					<li className="mr-2 ">
+						<button onClick={() => setisPublic(true)} className={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li>
-					<li class="mr-2 ">
-						<button onClick={navigateFeeds} class={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
+					<li className="mr-2 ">
+						<button onClick={navigateFeeds} className={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 
 				</ul>

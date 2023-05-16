@@ -350,19 +350,19 @@ export default function Content(props) {
 						{data.is_complete || data.transcript!== undefined ? (
 							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl md:min-w-[500px]  rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700">
 
-								<div class="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700">
-									<ul class="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
+								<div className="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700">
+									<ul className="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
 										<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab3")} class={`text-l inline-block p-4 pt-6    rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
+											<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6    rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
 										</li>
 										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab1")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Summary</button>
+											<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Summary</button>
 										</li>
 										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab2")} class={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Transcript</button>
+											<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Transcript</button>
 										</li>
 										{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab4")} class={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Ask questions</button>
+											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Ask questions</button>
 										</li> */}
 
 									</ul>
@@ -424,7 +424,7 @@ export default function Content(props) {
 													) : (
 														summaryArray.map((item, index) => {
 															return (
-																<p className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
+																<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
 																	<div className="summary-text">
 																	<ReactMarkdown>
 																		{item}
@@ -434,7 +434,7 @@ export default function Content(props) {
 																	
 
 
-																</p>
+																</div>
 															);
 														})
 													)}
@@ -471,16 +471,16 @@ export default function Content(props) {
 																			
 																			<div className="flex ml-auto justify-end flex-row justify-end">
 																			<button id="popover-button" data-popover-target = "popover-click" data-popover-trigger="click" className=" mr-8 opacity-80 pt-4" onClick={/* (selection) => handleDownload(selection) */ null}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
-																			<div data-popover id="popover-click" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
+																			<div data-popover id="popover-click" role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
 																				
-																				<div onClick={() => handleDownload(1)} class="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																				<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																					<p className="">Download as Plain Subtitle (.srt)</p>
 																				</div>
 																				
-																				<div onClick={() => handleDownload(2)} class="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																				<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																				<p>Download Formatted Transcript (.txt)</p>	
 																				</div>
-																		{/* 		<div onClick={handleDownload(3)} class="px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
+																		{/* 		<div onClick={handleDownload(3)} className="px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-400">
 																					<p>Download Timestamped Transcript (.srt)</p>		
 																				</div> */}
 																				<div data-popper-arrow></div>
