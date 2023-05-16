@@ -35,7 +35,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	const handleScroll = (target) => {
 		// if in article page first navigate to main page
 		if (location.pathname !== '/') {
-			console.log('debug');
+			
 			navigate('/');
 			setTimeout(() => {
 				const about = document.getElementById(target);

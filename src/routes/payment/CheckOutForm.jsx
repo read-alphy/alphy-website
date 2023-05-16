@@ -71,7 +71,7 @@ export default function CheckOutForm({ clientSecret }) {
             const result = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: "https://alphy.app/",
+                    return_url: "https://alphy.app/plans/checkout/success",
                 }
             }
             )

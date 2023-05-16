@@ -543,7 +543,7 @@ export default function Account({ stripePromise }) {
                         <br></br>
                         <p className="text-md lg:text-l">
                             {' '}
-                            Sure! Reach us at info@alphy.app and we'll reimburse you for the remaining credits.
+                            Sure! Reach us at support@alphy.app and we'll reimburse you for the remaining credits.
                         </p>
                         <br></br>
                         <br></br>

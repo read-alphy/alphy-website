@@ -16,7 +16,7 @@ export default function Success() {
         <div>
             {currentUser ?
                 <div className="text-2xl lg:text-5xl font-semibold text-zinc-700 container items-center  mx-auto mt-40 max-w-[1200px]">
-                    🎉 Thank you!
+                    🎉 Thank you! You have now subscribed to Alphy Premium!
                 </div>
                 : null}
         </div>
