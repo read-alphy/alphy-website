@@ -53,14 +53,7 @@ function Article({ source_type, collapsed, setCollapsed, mainFeedInput}) {
 			setIsLoading(false);
 		}
 	};
-	const handleSignOut = async () => {
-		try {
-			await signOut();
-			navigate('/');
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
+
 
 	// if windows size is less than 768px then collapse the navbar
 	const { width } = useWindowSize();

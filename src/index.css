@@ -572,8 +572,30 @@ CONTENT PAGE
 	padding-left:10px;
 }
 
-.summary-text h2,h3,h4,h5{
+.summary-text h2{
 	
+	font-weight:600;
+	font-size: 16px;
+	margin-top:30px;
+	font-family:"Noto Sans";
+}
+
+.summary-text h3{
+	
+	font-weight:600;
+	font-size: 16px;
+	margin-top:30px;
+	font-family:"Noto Sans";
+}
+
+.summary-text h4{
+	font-weight:600;
+	font-size: 16px;
+	margin-top:30px;
+	font-family:"Noto Sans";
+}
+
+.summary-text h5{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
