@@ -23,7 +23,7 @@ function SideFeed(props) {
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
 	
-	console.log(localStorage.getItem("search").length>0)
+	
 	const getDataPersonal = (offsetPersonal, firstTimePersonal, hasMorePersonal,search_input) => {
 		if (!hasMorePersonal) {
 			return;
@@ -37,7 +37,7 @@ function SideFeed(props) {
 
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/summaries?q=${localStorage.getItem("search").length>0 ? localStorage.getItem("search"): search_input}&offset=${offsetPersonal}&limit=${limit}&only_mine=true`, {
+					}/summaries?q=${search_input}&offset=${offsetPersonal}&limit=${limit}&only_mine=true`, {
 					headers: {
 						'id-token': idtoken,
 					}
@@ -106,17 +106,18 @@ function SideFeed(props) {
 	};
 
 	useEffect(() => {
+		if(localStorage.getItem("search")!==null){
+		
 		if(localStorage.getItem("search").length>0){
 			let search_input
-			if(localStorage.getItem("search").length>0){
+			
 			search_input = localStorage.getItem("search")
-			}
-			else{
-				search_input=""
-			}
+			
+
 		getData(0, true, true, search_input);
 		setSearch(localStorage.getItem("search"))
 		}
+	}
 		else{
 			getData(0, true, true, search);
 		}
