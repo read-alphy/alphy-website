@@ -279,10 +279,10 @@ export default function QuestionAnswering(props) {
 							title={inputValue}
 							type="text"
 							id="search"
-							className={` block w-full  p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
-								? 'border-1 border-r-0 border-red-300  focus:outline-none focus:border-red-300 focus:ring-slate-50'
-								: 'border border-zinc-200 border-r-0  dark:border-zinc-700  focus:outline-none focus:border-zinc-200 focus:ring-slate-50'
-								} placeholder:italic rounded-l-full bg-zinc-50 dark:bg-darkMode `}
+							className={` block w-full  p-3 pr-10 text-sm text-zinc-500 dark:text-zinc-200 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+								? 'border-1 border-r-0 border-red-300  focus:outline-none focus:border-red-300 focus:ring-0'
+								: 'border border-zinc-200 border-r-0  dark:border-zinc-700  dark:border-r-0 focus:outline-none focus:border-zinc-200 focus:border-r-0 dark:focus:border-zinc-700 dark:focus:ring-0 focus:ring-zinc-200 focus:ring-0	'
+								} placeholder:italic dark:placeholder:text-zinc-500 placeholder:text-zinc-400 rounded-l-full bg-zinc-50 dark:bg-darkMode `}
 							placeholder="Ask anything to the transcript..."
 							autoComplete="off"
 							required
@@ -408,7 +408,7 @@ export default function QuestionAnswering(props) {
 								{baseSources ? (
 									<div className="mt-10">
 										<div>
-											<h1 className="mb-4 text-xl font-semibold"> Sources from the video</h1>
+											<h1 className="mb-4 text-xl font-normal"> Sources from the video</h1>
 
 											{props.key_qa[item]
 												? props.key_qa[item].sources.map((source, index) => (
@@ -511,7 +511,7 @@ export default function QuestionAnswering(props) {
 								<div className="grid grid-cols-2 flex flex-row mb-4">
 
 
-									<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
+									<h1 className="text-xl col-span-1 flex flex-row font-normal">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -585,7 +585,7 @@ export default function QuestionAnswering(props) {
 								{answer ? (
 									<div>
 										<div>
-											<h1 className="mb-4 text-xl font-semibold md:mb-8"> Sources from the video sorted by relevance:</h1>
+											<h1 className="mb-4 text-xl font-normal md:mb-8"> Sources from the video sorted by relevance:</h1>
 
 											{answerData.sources.map((source, index) => (
 												<div>
@@ -663,7 +663,7 @@ export default function QuestionAnswering(props) {
 								<div >
 									<div className={`grid grid-cols-2 flex flex-row mb-4 `}>
 
-										<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
+										<h1 className="text-xl col-span-1 flex flex-row font-normal">Answer from Alphy
 
 											<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 												<title className="font-bold">Clear</title>
@@ -714,7 +714,7 @@ export default function QuestionAnswering(props) {
 								{baseSources ? (
 									<div>
 										<div>
-											<h1 className="mb-4 text-xl font-semibold"> Sources from the video</h1>
+											<h1 className="mb-4 text-xl font-normal"> Sources from the video</h1>
 
 											{props.key_qa[baseQuestion]
 												? props.key_qa[baseQuestion].sources.map((source, index) => (
