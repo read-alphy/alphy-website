@@ -32,7 +32,7 @@ export default function WelcomePopup(props) {
                     <li className="pb-2"><strong>Submission limits</strong>: Please note that there are some limits to content submission. To learn more about these limits, click <a href="/plans" className="text-zinc-200">here</a>.</li>
                     <li className="pb-2"><strong>Public workspace</strong>: All the work on Alphy is public, so feel free to browse, read, and ask questions. We're here to help and support your journey with Alphy.</li>
                 </ul>
-                <p className="mb-4">Once again, welcome to the Alphy community! We can't wait to see how our transcription services will enhance your online experience. Happy transcribing!</p>
+                <p className="mb-4">Welcome to the Alphy community! We can't wait to see how our transcription services will enhance your online experience. Happy transcribing!</p>
                 <div className="w-full mx-auto text-center">
                     <button onClick={() => props.setShowMessage(false)} className="bg-blueLike mt-4 hover:bg-slate-700 transition duration-200 ease-in text-white font-semibold py-2 px-4 rounded-full items-center mx-auto text-center">Get Started</button>
                 </div>

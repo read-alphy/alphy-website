@@ -41,6 +41,7 @@ function Home({hasActiveSub}) {
 			<Helmet>
 				{/* <title>{`Alphy, the next generation speech-to-meaning agent.`} </title> */}
 				<title>Alphy: Unlock the Information in Audiovisual Content </title>
+				<meta name="twitter:card" content="summary_large_image"></meta>
 				<meta property="og:title" content={`Alphy, the next generation speech-to-meaning agent.`} />
 				<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
 				<meta content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!"
