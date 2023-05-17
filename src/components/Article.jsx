@@ -75,6 +75,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub}) {
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
 				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
+				<meta name="twitter:card" content="summary_large_image"></meta>
 				<meta property="og:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
 				<meta name="twitter:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
 

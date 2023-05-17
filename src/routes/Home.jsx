@@ -19,18 +19,19 @@ function Home({hasActiveSub}) {
 		setTimeout(() => {
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
 		}, 0);
-		
 
+		
+/* 		console.log(localStorage.getItem('hasSeenWelcomeMessage'))
+		
+		
 		if (currentUser !== null) {
 			const hasSeenWelcomeMessage = localStorage.getItem('hasSeenWelcomeMessage');
 			
-			if (!hasSeenWelcomeMessage) {
-
-				
+			if (hasSeenWelcomeMessage!=="true") {
 				setShowMessage(true);
 				localStorage.setItem('hasSeenWelcomeMessage', 'true');
 			}
-		}
+		} */
 
 
 
@@ -52,9 +53,9 @@ function Home({hasActiveSub}) {
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} />
 			<Feed />
-			{showMessage &&
+{/* 			{showMessage &&
 				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
-			}
+			} */}
 			<About />
 			<FeedbackForm />
 

@@ -19,9 +19,10 @@ export default function Content(props) {
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
 	const data = props.data;
+	const transcript_raw = props.data.transcript;
 
 	const ref = useRef(null);
-	
+	let transcript = [];
 
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
@@ -64,6 +65,11 @@ export default function Content(props) {
 
 
 	useEffect(() => {
+		
+		if(transcript.length===0 && data.transcript!==null){
+			transcriptParser();
+
+		}
 		const scrollableDiv = ref.current;
 		scrollableDiv.addEventListener("scroll", checkScrollPosition);
 
@@ -95,7 +101,7 @@ export default function Content(props) {
 		setTimestamp(hours * 3600 + minutes * 60 + seconds * 1);
 	};
 
-	let transcript = [];
+	
 
 	async function transcriptParser() {
 
@@ -105,7 +111,7 @@ export default function Content(props) {
 
 			var parser = new srtParser2();
 
-			var srt_array = parser.fromSrt(data.transcript);
+			var srt_array = parser.fromSrt(transcript_raw);
 
 
 
@@ -113,6 +119,7 @@ export default function Content(props) {
 			let count = 0;
 
 			transcript.push('00:00:00');
+			
 
 
 			for (let i = 0; i < srt_array.length; i++) {
@@ -151,7 +158,7 @@ export default function Content(props) {
 
 			var parser = new srtParser2();
 
-			var srt_array = parser.fromSrt(data.transcript);
+			var srt_array = parser.fromSrt(transcript_raw);
 
 
 			let nothing = '';
@@ -292,7 +299,7 @@ export default function Content(props) {
 				<div className="flex flex-col xl:flex-row mt-16">
 					<div className="grid grid-cols-2 w-full md:min-w-[500px] ">
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
-						<div className={`col-span-2 hidden lg:flex justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
+						<div className={`col-span-2 hidden lg:flex justify-center items-center w-[95%] h-[400px] max-w-[800px] h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
 
 								<div className="block w-full items-center mx-auto ">
@@ -344,7 +351,7 @@ export default function Content(props) {
 					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0 `} >
 
 
-						{data.is_complete || data.transcript!== undefined ? (
+						{data.transcript!== undefined ? (
 							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl md:min-w-[500px]  rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700">
 
 								<div className="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700">
@@ -364,23 +371,7 @@ export default function Content(props) {
 
 									</ul>
 								</div>
-								{/* 
-								<div className="summary-and-transcript-buttons text-xl w-full space-between gap-4	text-zinc-600 dark:text-zinc-200 ">
-									<button
-										className={
-											activeTab === 'tab1' ? 'content-active-button border-r-1 ' : 'border-r-1 '
-										}
-										onClick={() => setActiveTab('tab1')}
-									>
-										Summary
-									</button>
-									<button
-										className={activeTab === 'tab2' ? 'content-active-button ' : ''}
-										onClick={() => setActiveTab('tab2')}
-									>
-										Transcript
-									</button>
-								</div> */}
+								
 								<div className="main-content mt-2 text-zinc-600 dark:text-zinc-200">
 
 									<Tabs>
@@ -444,7 +435,7 @@ export default function Content(props) {
 														<Loading />
 													) : (
 														transcript.map((item, index) => {
-															/* transcriptParser(); */
+														
 
 															if (index % 2 === 0 && index < transcript.length) {
 																return (
