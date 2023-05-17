@@ -51,7 +51,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 						{item.is_complete ? null : (
 							<div className="side-feed-creator font-bold text-purpleLike dark:text-zinc-300"> 📝 IN PROGRESS</div>
 						)}
-						<div className="text-sm video-text text-bordoLike dark:bg-mildDarkMode dark:text-zinc-300 font-semibold">{item.title}</div>
+						<div className="text-sm video-text text-bordoLike dark:bg-mildDarkMode dark:text-zinc-300 font-normal">{item.title}</div>
 						<div className="side-feed-creator font-italic text-purpleLike dark:text-zinc-300">{item.creator_name}</div>
 
 						{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}

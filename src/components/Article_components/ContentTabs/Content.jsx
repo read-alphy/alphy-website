@@ -330,7 +330,7 @@ export default function Content(props) {
 
 						</div>
 						{/* <Loading /> */}
-						<div className="col-span-2 md:mt-10">
+						<div className="col-span-2 md:mt-10 ">
 							{isLoading ? (null
 
 

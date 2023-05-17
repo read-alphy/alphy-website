@@ -263,19 +263,6 @@ export default function Welcome({hasActiveSub}) {
 
 
 
-			{/* 
-			<ul className="text-bordoLike dark:bg-darkMode dark:text-zinc-500 text-l md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-				<p className="text-xl mb-2">Before submitting:</p>
-				<li className="mb-1 font-semibold">
-					∙Alphy works best with the content in English. We are working on supporting other languages.
-				</li>
-				<li className="mb-1 font-semibold">
-					∙ Submitting a content longer than 3 hours will turn an error.
-				</li>
-				<li className="mb-1 font-semibold">
-					∙ Please notify us if you find any bugs or have any suggestions. We are working hard to improve Alphy.
-				</li>
-			</ul> */}
 
 			<Toaster />
 
@@ -302,7 +289,7 @@ export default function Welcome({hasActiveSub}) {
 								</p>
 
 
-								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-blue-800 hover:text-zinc-200">Reach us if you have any questions <svg className="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></a>
+								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-blue-800 hover:text-blue-700">Reach us if you have any questions <svg className="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></a>
 							</div>
 							<div className="popover-arrow" role="presentation"></div>
 						</div>
