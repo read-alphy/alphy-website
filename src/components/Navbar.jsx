@@ -56,7 +56,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	} */
 	const metaTag = document.querySelector('meta[property="og:image"]');
 	if (metaTag) {
-		metaTag.setAttribute('content', 'https://i.ibb.co/zmGbG9C/home.png');
+		metaTag.setAttribute('content', 'https://i.ibb.co/4g2Jtvc/home.png');
 	}
 
 	const handleLoginWithGoogle = () => {
