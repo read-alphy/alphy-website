@@ -47,7 +47,7 @@ export default function Content(props) {
 
 
 
-/* 	const $targetEl = document.getElementById('popoverHover');
+ 	const $targetEl = document.getElementById('popoverHover');
 
     // set the element that trigger the popover using hover or click
     const $triggerEl = document.getElementById('popoverButton');
@@ -60,8 +60,7 @@ export default function Content(props) {
 
     };
 
-    const popover = new Popover($targetEl, $triggerEl, options); */
-
+    const popover = new Popover($targetEl, $triggerEl, options);
 
 
 	useEffect(() => {
@@ -457,7 +456,7 @@ export default function Content(props) {
 																			</a>
 																		
 																			
-																			{/* <div className={`${index !==0 || props.hasActiveSub === false ? "hidden" : ""} flex ml-auto justify-end flex-row justify-end`} >
+																{/* 			<div className={`${index !==0 || props.hasActiveSub === false ? "hidden" : ""} flex ml-auto justify-end flex-row justify-end`} >
 																						<button id="popoverButton" data-popover-target = "popoverHover" data-popover-trigger="hover" className=" mr-8 opacity-80 pt-4">{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
 																				<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
 																							
@@ -469,8 +468,8 @@ export default function Content(props) {
 																							<p>Download Formatted Transcript (.txt)</p>	
 																							</div>
 																			</div>
-																			</div> */}
-																		 
+																			</div> 
+																		  */}
 
 																		</div> :
 																		<div className="flex flex-row">
