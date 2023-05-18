@@ -46,7 +46,7 @@ export default function Content(props) {
 	};
 
 
-
+/* 
  	const $targetEl = document.getElementById('popoverHover');
 
     // set the element that trigger the popover using hover or click
@@ -61,7 +61,7 @@ export default function Content(props) {
     };
 
     const popover = new Popover($targetEl, $triggerEl, options);
-
+ */
 
 	useEffect(() => {
 		
