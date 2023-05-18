@@ -318,7 +318,7 @@ function SideFeed(props) {
 							))
 							)
 						: 
-							(isLoadingPersonal
+							(currentUser ?  isLoadingPersonal
 								? // if dataPersonal is not empty, show the dataPersonal then show 10 skeletons
 								dataPersonal.length > 0
 									? dataPersonal
@@ -346,7 +346,9 @@ function SideFeed(props) {
 									<div onClick={props.Collapser} className="null">
 										<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
-								))
+								): <div>
+									 <p  className=" ml-5 text-gray-500 items-center margin-auto text-l mt-8 mb-5 w-full col-span-2">Sign in to see the content you previously submitted.</p>
+									</div>)
 						}
 					</div>
 				</div>

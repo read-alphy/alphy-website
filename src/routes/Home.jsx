@@ -16,6 +16,7 @@ function Home({hasActiveSub}) {
 	const [showMessage, setShowMessage] = useState(false);
 
 	useEffect(() => {
+		localStorage.setItem('search', '');
 		setTimeout(() => {
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
 		}, 0);
