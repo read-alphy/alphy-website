@@ -356,13 +356,13 @@ export default function Content(props) {
 								<div className="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700 ">
 									<ul className="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
 										<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6    rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
+											<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
 										</li>
 										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Summary</button>
+											<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-blue-500`}>Summary</button>
 										</li>
 										<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Transcript</button>
+											<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-blue-500`}>Transcript</button>
 										</li>
 										{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
 											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Ask questions</button>
