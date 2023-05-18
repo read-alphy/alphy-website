@@ -122,13 +122,13 @@ function Navbar({ collapsed, setCollapsed }) {
 					>
 						Reach Us
 					</div>
-					<div
+{/* 					<div
 						className="hidden md:block md:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 md:block  pt-2"
 						onClick={() => handleScroll('about')}
 					>
 						{' '}
 						About{' '}
-					</div>
+					</div> */}
 					<div
 						type="button"
 						className={`hidden md:block md:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 md:block pt-2`}
@@ -192,7 +192,7 @@ function Navbar({ collapsed, setCollapsed }) {
 				<div className="text-center mx-auto items-center">
 					<div className="overflow-y-auto z-50  text-sm mx-auto items-center justify-center flex flex-row">
 						<div className="flex mx-auto flex-row min-w-[300px]">
-							<div className="flex flex-row">
+						{/* 	<div className="flex flex-row">
 								<div className="justify-center items-center flex ml-4">
 									<div
 										className="mr-2 font-normal text-blueLike dark:bg-darkMode dark:text-zinc-300 cursor-pointer"
@@ -201,7 +201,7 @@ function Navbar({ collapsed, setCollapsed }) {
 										About
 									</div>
 								</div>
-							</div>
+							</div> */}
 
 							<div className=" flex m-1 ml-6 text-center justify-center text-sm">
 								<div
