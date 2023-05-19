@@ -212,7 +212,7 @@ function SideFeed(props) {
 
 						id="simple-search"
 						className="ml-2 pr-10 bg-zinc-50 dark:bg-darkMode drop-shadow-sm rounded-l-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
-						placeholder={'Search YouTube videos or Twitter spaces...'}
+						placeholder={'Search...'}
 
 					/>
 					{search.length > 0  ? (

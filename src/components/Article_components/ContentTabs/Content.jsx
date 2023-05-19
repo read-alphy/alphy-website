@@ -296,9 +296,9 @@ export default function Content(props) {
 
 
 				<div className="flex flex-col xl:flex-row mt-16">
-					<div className="grid grid-cols-2 w-full md:min-w-[500px] ">
+					<div className={`grid grid-cols-2 w-full md:min-w-[500px]`}>
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
-						<div className={`col-span-2 hidden lg:flex justify-center items-center w-[95%] h-[400px] max-w-[800px] h-inherit mx-auto pb-10 xl:pb-0`}>
+						<div className={`col-span-2 hidden xl:flex  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
 
 								<div className="block w-full items-center mx-auto ">
@@ -347,14 +347,14 @@ export default function Content(props) {
 							)}
 						</div>
 					</div>
-					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-full  2xl:w-1/2 mx-auto mt-10 md:mt-0 `} >
+					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-1/2 3xl:w-1/2 mx-auto mt-10 md:mt-0 ${window.innerWidth >1280 && window.innerWidth<1420 ? "": ""}`} >
 
 
-						{data.transcript!== undefined ? (
-							<div className="xl:ml-10  mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xxl md:min-w-[500px]  rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700">
+						{transcript.length>0 ? (
+							<div className={` mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xl 3xl:min-w-[500px]  ${window.innerWidth >1280 && window.innerWidth<1420 ? window.innerWidth >1280 && window.innerWidth<1340 ? "ml-2": "ml-6" : "xl:ml-10"} rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700`} >
 
 								<div className="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700 ">
-									<ul className="flex flex-wrap border-b border-gray-200 md:w-[400px] w-full mx-auto	">
+									<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto	">
 										<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
 											<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
 										</li>

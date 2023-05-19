@@ -131,8 +131,10 @@ export default function QuestionAnswering(props) {
 
 	const handleBaseQAaccordion= (event, index,item) => {
 
+		console.log(index,collapseIndex)
 			if(collapseIndex===index){
-				setCollapseIndex(null)
+				setCollapseIndex(-1)
+				return
 			}
 			else{
 				setCollapseIndex(index)
@@ -353,16 +355,17 @@ export default function QuestionAnswering(props) {
 								Questions by Alphy
 							</p>
 							{Object.keys(props.key_qa).map((item, index) => (
-									<div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-zinc-50 dark:bg-darkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+									<div id="accordion-flush"  data-active-classes="bg-zinc-50 dark:bg-darkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
 										<h2 id="accordion-flush-heading-1">
 											<button onClick={(event) => handleBaseQAaccordion(event,index,item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
 											<span>{item}</span>
-											<svg data-accordion-icon class={`w-6 h-6 ${index==collapseIndex ? "rotate-180": ""} shrink-0`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+											<svg data-accordion-icon class={`w-6 h-6 ${index==collapseIndex && collapseIndex!=-1 ? "rotate-180": ""} shrink-0`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 											</button>
 										</h2>
-								<div id="accordion-flush-body-1" class={index==collapseIndex ? "accordion-open": "hidden"} aria-labelledby="accordion-flush-heading-1">
+								<div class={index==collapseIndex && collapseIndex!=-1 ? "": "hidden"} aria-labelledby="accordion-flush-heading-1">
 										<div class="py-5 border-b border-gray-200 dark:border-gray-700">
 										<div className="flex flex-row justify-end text-slate-400">
+											
 												<svg onClick={handleShareLink} className="cursor-pointer flex flex-row" width="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 													<title className="font-bold">Share link to question</title>
 													<path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" strokeLinecap="round" strokeLinejoin="round"></path>

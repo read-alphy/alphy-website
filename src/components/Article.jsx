@@ -93,7 +93,17 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub}) {
 					}`}
 			></div>
 			<div className="flex flex-row article-body">
-				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 md:w-[330px] md:min-w-[330px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
+ 				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
+{/*  			<div className={`user-feed flex mr-5 hidden lg:block bg-zinc-100 dark:bg-mildDarkMode  md:w-[40px] md:min-w-[40px]`}>
+				<div className="mt-10">
+					<button onClick={() => setCollapsed(!collapsed)}>
+							<svg className={`${collapsed ? "": "rotate-180"}`} width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+								
+ </div> */}
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[14vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed'
 						}`}
