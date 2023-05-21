@@ -314,6 +314,7 @@ export default function Content(props) {
 									</a>
 								</div>
 							) : (
+								transcript.length>0 ||data.is_complete===true ?
 								<iframe
 									id="player"
 									title="My YouTube Video "
@@ -323,6 +324,7 @@ export default function Content(props) {
 									frameBorder="0"
 									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 								></iframe>
+								:null
 
 
 							)}
@@ -520,17 +522,17 @@ export default function Content(props) {
 
 			</div>
 
-			{isLoading &&
+			{transcript.length===0 ?
 
-				<div className="flex flex-col">
-								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 lg:p-20">
+				<div className="flex flex-col mb-20 ">
+								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
 									meantime, you can check out other videos.
-									<img className="opacity-10 mx-auto" src={working} alt="My SVG" />
+									<img className="opacity-20 mx-auto" src={working} alt="My SVG" />
 								</p>
 
-				</div>
+				</div>: null
 							}
 
 		</div>
