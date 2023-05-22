@@ -412,7 +412,7 @@ export default function QuestionAnswering(props) {
 								{baseSources ? (
 									<div className="mt-10">
 										<div>
-											<h1 className="mb-4 text-xl font-normal"> Sources from the video</h1>
+											<h1 className="mb-4 text-xl font-normal"> Sources from the video sorted by relevance</h1>
 
 											{props.key_qa[item]
 												? props.key_qa[item].sources.map((source, index) => (
@@ -715,7 +715,7 @@ export default function QuestionAnswering(props) {
 									onClick={() => setBaseSources(!baseSources)}
 								>
 									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
-										See sources from the video{' '}
+										See sources from the video sorted by relevance{' '}
 									</span>
 									<svg
 										className={`${baseSources ? 'hidden' : 'block'} `}
