@@ -131,7 +131,7 @@ export default function QuestionAnswering(props) {
 
 	const handleBaseQAaccordion= (event, index,item) => {
 
-		console.log(index,collapseIndex)
+		
 			if(collapseIndex===index){
 				setCollapseIndex(-1)
 				return
@@ -220,6 +220,7 @@ export default function QuestionAnswering(props) {
 							inputValue,
 						)
 						.then((response) => {
+							
 							setAnswerData(response.data);
 							setIsLoadingInside(false);
 						});
@@ -420,13 +421,31 @@ export default function QuestionAnswering(props) {
 														{source.start && source.end ? (
 															window.innerWidth > 999 && props.data.source_type == "yt" ?
 																<a onClick={updateVariable} className="underline cursor-pointer">
+																	
 
-																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
+																	{":"}
+																	{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start%3600)<600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}`:Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
+
+																	{" - "}
+																	
+																	{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
+																	{":"}
+																	{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end%3600)<600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}`:Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																</a> : <a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}`} className="underline">
 
 																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																</a>
-														) : null}
+														) : 
+														window.innerWidth > 999 && props.data.source_type == "yt" ?
+																<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
+															:
+															<a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=0`} className="underline">00:00:00</a>
+															}
 
 
 														<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
@@ -726,13 +745,32 @@ export default function QuestionAnswering(props) {
 														{source.start && source.end ? (
 															window.innerWidth > 999 && props.data.source_type == "yt" ?
 																<a onClick={updateVariable} className="underline cursor-pointer">
+																	
 
-																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
+																	{":"}
+																	{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start%3600)<600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}`:Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
+
+																	{" - "}
+																	
+																	{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
+																	{":"}
+																	{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end%3600)<600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}`:Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																</a> : <a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}`} className="underline">
 
 																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																</a>
-														) : null}
+														) : 
+														window.innerWidth > 999 && props.data.source_type == "yt" ?
+																<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
+															:
+															<a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=0`} className="underline">00:00:00</a>
+															}
+
 
 
 														<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
