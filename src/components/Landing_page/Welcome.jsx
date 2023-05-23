@@ -20,12 +20,35 @@ export default function Welcome({hasActiveSub}) {
 	const [loading, setLoading] = useState(false);
 	const { currentUser } = useAuth();
 	const [showToaster, setShowToaster] = useState(false);
+	const [credit, setCredit] = useState(0);
 	
 	const[called, setCalled] = useState(false)
 	const[videoData, setVideoData] = useState([])
 	const[failed,setFailed]	= useState(false)
 
-	
+	useEffect (() => {
+		if (currentUser) {
+            currentUser.getIdToken().then((idToken) => {
+                axios
+                    .get(
+                        `${process.env.REACT_APP_API_URL}/credit`,
+                        {
+                            headers: {
+                                'id-token': idToken,
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        const [fixed, monthly] = response.data
+                        setCredit(fixed + monthly)
+                        
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    });
+            });
+        } 
+	}, )
 	
 	const auth = useAuth()
     const handleLoginWithGoogle = () => {
@@ -126,7 +149,7 @@ export default function Welcome({hasActiveSub}) {
 				video_source = "sp"
 				}
 				else{
-					toast.error('Please switch to the premium plan to transcribe Twitter Spaces.');
+					toast.error('Please switch to the premium plan to transcribe Twitter Spaces. See Account page for more detail.');
 					return;
 				}
 
@@ -212,7 +235,7 @@ export default function Welcome({hasActiveSub}) {
 						(<div id="marketing-banner" tabindex="-1" className={`fixed ${localStorage.getItem("bannerClosed")===true ? "hidden":""}z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 drop-shadow-md rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600`}>
 				<div className="flex flex-col items-start mb-3 mr-4 md:items-center md:flex-row md:mb-0">
 			
-					<p className="flex items-center text-sm font-normal dark:text-zinc-300 text-gray-500 dark:dark:text-zinc-300 text-gray-400">Notice: We had some changes to our usage policy. Check the {currentUser ? "Account" : "Plans"} page for more info! </p>
+					<p className="flex items-center text-sm font-normal dark:text-zinc-300 text-gray-500 dark:dark:text-zinc-300 text-gray-400">Notice: We had some changes to our usage policy. Check the <span><a className="underline" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a></span> page for more info! </p>
 				</div>
 				<div className="flex items-center flex-shrink-0">
 				<a onClick={handleCloseBanner} href={currentUser ? "/account" : "plans"} className="inline-flex items-center px-3 py-2 mr-3 text-xs font-medium dark:text-zinc-300 text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:dark:text-zinc-300 text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg> Learn more</a>
@@ -272,19 +295,32 @@ export default function Welcome({hasActiveSub}) {
 
 					<div className="w-full flex flex-col">
 
-						<p className=" text-l mb-2 dark:text-zinc-300 text-gray-600 dark:text-zinc-300 pb-2 ">
+						<p className=" text-l mb-2 text-gray-600 dark:text-zinc-300 pb-2 ">
 
 							<button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="left" data-popover-offset="20" type="button"><svg className="w-5 h-5 ml-1 pt-1 dark:text-zinc-300 text-gray-400 hover:dark:text-zinc-300 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button>
 
 							Instructions for Alphy </p>
+							{currentUser && 
+							<span className="text-sm pl-2 mb-2 text-gray-600 dark:text-zinc-300"> 
+							
+							<a href="/account" className="underline">{hasActiveSub ? "Premium Plan" : "Free plan"}</a> - Remaining Credits : {Math.floor(credit)} minutes </span>
+							}
+
 						<div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm dark:text-zinc-300 text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
 							<div className="p-3 space-y-2">
-								<p className="font-normal text-l dark:text-zinc-300 text-gray-900">Before submitting</p>
-								<p> Please make sure the duration of the content does not exceed <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p>
-								<p> Free tier users can only submit videos with more than <strong className="underline">10,000 views</strong>. There is no popularity limit if you are premium.</p>
-				<p>Submitting content will spend from your credits. Check the {currentUser ? "Acccount" : "Plans"} page for more info.</p>
+								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900"><span >Free Plan</span>:</p>
 								<p></p>
-								<p className="font-normal text-l dark:text-zinc-300 text-gray-900 pt-2">When the content is ready</p>
+								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
+								<p> • Make sure it has more than <strong >10,000 views</strong>.</p>
+								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3"><span className="text-green-400">Premium Plan</span>:</p>
+								<p>• Feel free to submit content up to <span className="text-green-400">4 hours</span>.</p>
+								<p>• There is <span className="text-green-400">no view limit </span> for the content.</p>
+								<p>• You have access to <span className="text-green-400">unlimited Twitter Spaces transcription</span>.</p>
+								<p className="pt-2">Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a> page for more info about Premium benefits.</p>
+							{/* 	<p> Free tier users can only submit videos with more than <strong className="underline">10,000 views</strong>. There is no popularity limit if you are premium.</p>
+				<p>Submitting content will spend from your credits. Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Acccount" : "Plans"}</a> page for more info.</p>
+								<p></p> */}
+								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3">When the content is ready</p>
 								<p>If you see a video that has inaccurate transcription and summary, please let us know. We will fix it as soon as possible.
 								</p>
 
@@ -309,7 +345,7 @@ export default function Welcome({hasActiveSub}) {
 					{/* <Languages language={language} onLangChange={setLanguage} /> */}
 				</div>
 
-				<div className="flex justify-center ">
+				<div className="flex justify-center lg:mt-6">
 					{currentUser ? (
 						<button
 							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-90 transition duration-200 ease-in-out"
