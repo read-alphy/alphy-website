@@ -118,9 +118,9 @@ function Feed() {
 	};
 	return (
 		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl">
-			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
+{/* 			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
 				Explore the videos other users unlocked with Alphy
-			</h2>
+			</h2> */}
 
 			<div class="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700">
 				<ul class="flex ml-6 flex-wrap -mb-px">
