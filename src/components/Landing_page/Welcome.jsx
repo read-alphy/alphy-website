@@ -345,7 +345,7 @@ export default function Welcome({hasActiveSub}) {
 					{/* <Languages language={language} onLangChange={setLanguage} /> */}
 				</div>
 
-				<div className="flex justify-center lg:mt-6">
+				<div className={`flex justify-center ${currentUser ? "lg:mt-6" : ""}`}>
 					{currentUser ? (
 						<button
 							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-90 transition duration-200 ease-in-out"
