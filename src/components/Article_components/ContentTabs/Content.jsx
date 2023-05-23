@@ -5,6 +5,8 @@ import { Tab, Tabs } from 'react-bootstrap';
 import Twitter from '../../../img/twitter_spaces.png';
 import Loading from '../../Loading';
 import working from './working.svg';
+import working_darktheme from './working_darktheme.svg';
+
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
 import Download from '../../../img/download.gif';
@@ -20,7 +22,8 @@ export default function Content(props) {
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
 	const data = props.data;
 	const transcript_raw = props.data.transcript;
-
+	const theme = localStorage.getItem("theme")
+	
 	const ref = useRef(null);
 	let transcript = [];
 
@@ -301,14 +304,14 @@ export default function Content(props) {
 						<div className={`col-span-2 hidden xl:flex  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
 
-								<div className="block w-full items-center mx-auto ">
+								<div className={`block ${transcript.length>0 || data.is_complete===true ? "w-full" : "w-1/3"} items-center text-center mx-auto`}>
 									<a target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 										{' '}
 										<img className=" cursor-pointer " src={Twitter}></img>
 									</a>
 									<a target="_blank"
 										href={`https://twitter.com/i/spaces/${data.source_id}`}
-										className="text-l text-zinc-600 dark:text-zinc-200 mt-3 cursor-pointer"
+										className="text-l text-zinc-600 text-center dark:text-zinc-200 pt-2 cursor-pointer"
 									>
 										Listen to "{data.title}"{' '}
 									</a>
@@ -526,10 +529,12 @@ export default function Content(props) {
 
 				<div className="flex flex-col mb-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
-
+								
 									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
 									meantime, you can check out other videos.
-									<img className="opacity-20 mx-auto" src={working} alt="My SVG" />
+									 
+									 <img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
+									 
 								</p>
 
 				</div>: null
