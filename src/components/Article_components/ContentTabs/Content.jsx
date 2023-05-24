@@ -293,6 +293,14 @@ export default function Content(props) {
 						)}
 
 					</div>
+					{data.source_type === 'sp' &&
+					<div className="flex hidden flex-col ml-2 items-center  lg:block ">
+					<a className="mx-auto flex items-center flex-col cursor-pointer" target="_blank" href={`https://twitter.com/i/${data.source_id}`}>
+								<img src={Twitter} width={120} />
+								<p className="mt-3 text-sm font-light text-center items-center cursor-pointer">Click to Listen</p>
+							</a>
+					</div>
+}
 
 				</div>
 
@@ -301,21 +309,20 @@ export default function Content(props) {
 				<div className="flex flex-col xl:flex-row mt-16">
 					<div className={`grid grid-cols-2 w-full md:min-w-[500px]`}>
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
-						<div className={`col-span-2 hidden xl:flex  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
+						<div className={`col-span-2 hidden ${data.source_type==="sp"?"":"xl:flex"}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
-
+/* 
 								<div className={`block ${transcript.length>0 || data.is_complete===true ? "w-full" : "w-1/3"} items-center text-center mx-auto`}>
-									<a target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-										{' '}
-										<img className=" cursor-pointer " src={Twitter}></img>
-									</a>
+						
 									<a target="_blank"
 										href={`https://twitter.com/i/spaces/${data.source_id}`}
 										className="text-l text-zinc-600 text-center dark:text-zinc-200 pt-2 cursor-pointer"
 									>
+										<img src={Twitter} width={100} />
 										Listen to "{data.title}"{' '}
 									</a>
-								</div>
+								</div> */
+								null
 							) : (
 								transcript.length>0 ||data.is_complete===true ?
 								<iframe
@@ -334,7 +341,7 @@ export default function Content(props) {
 
 						</div>
 						{/* <Loading /> */}
-						<div className="col-span-2 md:mt-10 ">
+						<div className={`col-span-2 ${data.source_type=="yt" && "md:mt-10"}`}>
 							{isLoading ? (null
 
 
