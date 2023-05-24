@@ -566,10 +566,16 @@ CONTENT PAGE
 	margin: 0;
 	padding: 0;
 }
-.summary-text pre code{
+
+.summary-text {
+	font-family: 'Noto Sans', sans-serif;
+}
+.summary-text code{
 
 	white-space: pre-wrap;
 	padding-left:10px;
+	font-family: 'Noto Sans', sans-serif;
+
 }
 
 .summary-text h2{
