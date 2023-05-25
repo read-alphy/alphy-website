@@ -193,7 +193,7 @@ export default function Welcome({hasActiveSub}) {
 						}).
 						catch((error) => {
 							if(hasActiveSub){
-							toast('There was an error submitting the form. \n\n You are on the Premium Plan. Make sure you have enough credits and the content is not longer than 4 hours.', {
+							toast('There was an error submitting the form. \n\n You are on the Premium Plan. Make sure you have enough credits for the submission.', {
 								duration: 5000,
 								icon: '⚠️',
 							});
@@ -313,8 +313,8 @@ export default function Welcome({hasActiveSub}) {
 								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
 								<p> • Make sure it has more than <strong >10,000 views</strong>.</p>
 								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3"><span className="text-green-400">Premium Plan</span>:</p>
-								<p>• Feel free to submit content up to <span className="text-green-400">4 hours</span>.</p>
-								<p>• There is <span className="text-green-400">no view limit </span> for the content.</p>
+								<p>• No duration limit.</p>
+								<p>• No view limit. </p>
 								<p>• You have access to <span className="text-green-400">unlimited Twitter Spaces transcription</span>.</p>
 								<p className="pt-2">Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a> page for more info about Premium benefits.</p>
 							{/* 	<p> Free tier users can only submit videos with more than <strong className="underline">10,000 views</strong>. There is no popularity limit if you are premium.</p>
