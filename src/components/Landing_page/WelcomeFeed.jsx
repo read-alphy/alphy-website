@@ -6,30 +6,48 @@ import axios from 'axios';
 import SkeletonItem from '../Article_components/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { set } from 'lodash';
+import Robot from "../../img/cute robot grey.png"
 
-function Feed() {
+function Feed(props) {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
-	const { currentUser } = useAuth();
+	/*const const { currentUser } = useAuth(); */
+	const currentUser=props.currentUser;
 	
 	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
 	const [dataPersonal, setDataPersonal] = useState([]);
-	const [isPublic, setisPublic] = useState(true);
+	const [isPublic, setisPublic] = useState(false);
 	const [submitted, setSubmitted] = useState(false);
+	const [called, setCalled] = useState(false);
+	const [ready, setReady] = useState(false)
+	
+	
 
-	useEffect(() => {
-		getData(0, true, true);
+
+		
+
+	
+		
+		/* getData(0, true, true); */
 		/* 		if (currentUser !== null) {
 					getDataPersonal(0, true, true);
 				} */
 
-	}, []);
+
+
+useEffect(() => {
+	setTimeout(() => {
+		setReady(true)
+	},2000);
+
+} ,[])
 
 	window.addEventListener('beforeunload', () => {
 		if (submitted===true){
@@ -45,7 +63,12 @@ function Feed() {
 
 	const navigateFeeds = (state) => {
 		setisPublic(!isPublic)
-		getDataPersonal(0, true, true);
+		
+			getData(0, true, true);
+	
+	
+		
+		
 	}
 
 	const getData = (offset, firstTime, hasMore) => {
@@ -97,7 +120,10 @@ function Feed() {
 							setDataPersonal([...dataPersonal, ...response.data]);
 						}
 						setIsLoadingPersonal(false);
-					}))
+					})).catch((error) => {
+						setIsLoadingPersonal(false);
+						
+					});
 		};
 	};
 
@@ -116,6 +142,17 @@ function Feed() {
 			;
 		}
 	};
+
+if(called===false){
+	setTimeout(() => {
+		getDataPersonal(0, true, true);
+		
+		setCalled(true);
+	}, 1000);
+		
+}
+
+
 	return (
 		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl">
 {/* 			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
@@ -124,11 +161,14 @@ function Feed() {
 
 			<div class="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700">
 				<ul class="flex ml-6 flex-wrap -mb-px">
-					<li class="mr-2">
+{/* 					<li class="mr-2">
 						<button onClick={() => setisPublic(true)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
+					</li> */}
+					<li class="mr-2">
+						<button onClick={() => setisPublic(false)} class={`inline-block p-4 mb-1 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 mb-1 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
+						<button onClick={navigateFeeds} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li>
 
 				</ul>
@@ -245,21 +285,34 @@ function Feed() {
 								}
 							gap-4
 							`}
-						>{currentUser == null ? <p  className="text-center text-zinc-700 items-center margin-auto text-xl mt-5 mb-5 w-full col-span-2">Sign in to see the content you previously submitted.</p> : null}
+						>
+							
+							
+							{currentUser == null && called==true &&  <div className="flex flex-col  col-span-2 mx-auto items-center"><p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Sign in to see the content you previously submitted.<br></br>Or navigate to <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to explore Alphy's database.</p><img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>}
 							{isLoadingPersonal
 								? dataPersonal.length > 0
-									? dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									? 
+										dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
-									: [...Array(10)].map((item, index) => {
+											: [...Array(10)].map((item, index) => {
 										<div>
 
-											{currentUser ? <SkeletonItem key={index} /> :
-												null
-											}</div>
+											<SkeletonItem key={index} /> 
+												
+											</div>
 									})
 								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 						</div>
-						{(hasMore && currentUser !== null) && (
+						{called==true && currentUser!==null && ready==true && dataPersonal.length==0 ? (
+							<div className={`flex flex-col  col-span-2 mx-auto block items-center`} >
+
+								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Submit now or check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to explore the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
+								</div>
+						):null
+						}
+
+
+						{(hasMorePersonal && currentUser !== null) && (
 							<div className="w-full flex justify-center">
 								{
 									<button
@@ -270,7 +323,11 @@ function Feed() {
 									</button>
 								}
 							</div>
-						)}
+						
+						)
+						
+						}
+	
 					</div>}
 			</div>
 

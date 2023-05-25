@@ -307,8 +307,10 @@ export default function Content(props) {
 
 
 				<div className="flex flex-col xl:flex-row mt-16">
+				{transcript.length>0 &&
 					<div className={`grid grid-cols-2 w-full md:min-w-[500px]`}>
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
+						
 						<div className={`col-span-2 hidden ${data.source_type==="sp"?"":"xl:flex"}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
 /* 
@@ -341,7 +343,7 @@ export default function Content(props) {
 
 						</div>
 						{/* <Loading /> */}
-						<div className={`col-span-2 ${data.source_type=="yt" && "md:mt-10"}`}>
+						<div className={`col-span-2 ${data.source_type=="yt" && "md:mt-10"} drop-shadow-sm`}>
 							{isLoading ? (null
 
 
@@ -358,12 +360,14 @@ export default function Content(props) {
 								)
 							)}
 						</div>
+						
 					</div>
+					}
+					{transcript.length>0 &&
+					
 					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-1/2 3xl:w-1/2 mx-auto mt-10 md:mt-0 ${window.innerWidth >1280 && window.innerWidth<1420 ? "": ""}`} >
-
-
 						{transcript.length>0 ? (
-							<div className={` mt-14 xl:mt-0 w-full bg-[#f7g4g1] drop-shadow-xl 3xl:min-w-[500px]  ${window.innerWidth >1280 && window.innerWidth<1420 ? window.innerWidth >1280 && window.innerWidth<1340 ? "ml-2": "ml-6" : "xl:ml-10"} rounded-lg p-5 border-radius-4 border border-zinc-300 dark:border-zinc-700`} >
+							<div className={` mt-14 xl:mt-0 w-full bg-[#f7g4g1] 3xl:min-w-[500px]  ${window.innerWidth >1280 && window.innerWidth<1420 ? window.innerWidth >1280 && window.innerWidth<1340 ? "ml-2": "ml-6" : "xl:ml-10"} rounded-lg p-5 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
 								<div className="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700 ">
 									<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto	">
@@ -527,14 +531,14 @@ export default function Content(props) {
 								
 							</div>
 						)}
-					</div>{' '}
+					</div>}{' '}
 				</div>
 
 			</div>
 
 			{transcript.length===0 ?
 
-				<div className="flex flex-col mb-20 ">
+				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 								
 									Alphy is doing its best to process this video, it will be ready in a few minutes. In the

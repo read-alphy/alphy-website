@@ -247,10 +247,10 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-gray-300 dark:border-zinc-700 rounded-xl`} ref={QARef}>
+		<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
 			
 			
-			<p className="mb-4 font-medium text-xl text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
+			<p className="mb-4 font-light text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
 			<div className="Md:pl-10 md:pr-10 ">
 
 				<Toaster position="bottom-center" />
@@ -391,7 +391,7 @@ export default function QuestionAnswering(props) {
 									onClick={() => setBaseSources(!baseSources)}
 								>
 									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
-										See sources from the video{' '}
+										See sources from the {props.data.source_type=="yt"?"video":"recording"}{' '}
 									</span>
 									<svg
 										className={`${baseSources ? 'hidden' : 'block'} `}
@@ -586,7 +586,7 @@ export default function QuestionAnswering(props) {
 									onClick={() => setAnswer(!answer)}
 								>
 									<span className={`${answer ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
-										See sources from the video
+									See sources from the {props.data.source_type=="yt"?"video":"recording"}{' '}
 									</span>
 									<svg
 										className={`${answer ? 'hidden' : 'block'} `}

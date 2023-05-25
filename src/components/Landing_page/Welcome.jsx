@@ -193,13 +193,13 @@ export default function Welcome({hasActiveSub}) {
 						}).
 						catch((error) => {
 							if(hasActiveSub){
-							toast('There was an error submitting the form. \n \n Potential causes: \n\n • You may have run out of credits \n\n • The video you are submitting is longer than 4 hours.', {
+							toast('There was an error submitting the form. \n\n You are on the Premium Plan. Make sure you have enough credits and the content is not longer than 4 hours.', {
 								duration: 5000,
 								icon: '⚠️',
 							});
 						}
-						else{	toast('There was an error submitting the form. \n \n Potential causes: \n\n • You may have run out of credits \n\n • The video you are submitting has less than 10,000 views. \n\n • The video you are submitting is longer than 1 hour.', {
-								duration: 5000,
+						else{	toast('There was an error submitting the form. \n \n You are on the Free Plan. Make sure the content you are submitting is shorter than 1 hour and conforms with our content popularity limits.', {
+								duration: 6000,
 								icon: '⚠️',
 							});
 						}

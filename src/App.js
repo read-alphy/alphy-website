@@ -113,7 +113,7 @@ useEffect(() => {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} />} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
