@@ -62,7 +62,7 @@ useEffect(() => {
 	const searchInputRef = React.useRef(null);
 
 	const navigateFeeds = (state) => {
-		setisPublic(!isPublic)
+		setisPublic(true)
 		
 			getData(0, true, true);
 	
