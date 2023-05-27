@@ -28,7 +28,7 @@ function Feed(props) {
 	const [called, setCalled] = useState(false);
 	const [ready, setReady] = useState(false)
 	
-	
+	let calledAndEmpty = true 
 
 
 		
@@ -42,11 +42,13 @@ function Feed(props) {
 
 
 
+
 useEffect(() => {
 	setTimeout(() => {
 		setReady(true)
 	},2000);
 
+	
 } ,[])
 
 	window.addEventListener('beforeunload', () => {
@@ -62,9 +64,17 @@ useEffect(() => {
 	const searchInputRef = React.useRef(null);
 
 	const navigateFeeds = (state) => {
+		if(isPublic===false){
 		setisPublic(true)
 		
 			getData(0, true, true);
+
+		}
+
+		else{
+			setisPublic(false)
+			getDataPersonal(0, true, true);
+		}
 	
 	
 		
@@ -112,9 +122,15 @@ useEffect(() => {
 				})
 					.then((response) => {
 						setHasMorePersonal(!(response.data.length < limit));
+						
+						if(response.data.length>0){
+						calledAndEmpty = false
+					}
+						
 
 						if (firstTime) {
 							setDataPersonal(response.data);
+							
 
 						} else {
 							setDataPersonal([...dataPersonal, ...response.data]);
@@ -122,6 +138,7 @@ useEffect(() => {
 						setIsLoadingPersonal(false);
 					})).catch((error) => {
 						setIsLoadingPersonal(false);
+						
 						
 					});
 		};
@@ -165,7 +182,7 @@ if(called===false){
 						<button onClick={() => setisPublic(true)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li> */}
 					<li class="mr-2">
-						<button onClick={() => setisPublic(false)} class={`inline-block p-4 mb-1 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
+						<button onClick={navigateFeeds} class={`inline-block p-4 mb-1 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 					<li class="mr-2">
 						<button onClick={navigateFeeds} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
@@ -256,7 +273,7 @@ if(called===false){
 							<div className="w-full flex justify-center">
 								{
 									<button
-										className="justify-center flex text-blueLike dark:bg-darkMode dark:text-zinc-300 font-semibold  mt-10 underline"
+										className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline"
 										onClick={loadMore}
 									>
 										{'Load more'}
@@ -304,9 +321,9 @@ if(called===false){
 								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 						</div>
 						{called==true && currentUser!==null && ready==true && dataPersonal.length==0 ? (
-							<div className={`flex flex-col  col-span-2 mx-auto block items-center`} >
+							<div className={`flex flex-col ${calledAndEmpty===false?"hidden":""} col-span-2 mx-auto block items-center`} >
 
-								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Submit now or check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to explore the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
+								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
 								</div>
 						):null
 						}
@@ -316,7 +333,7 @@ if(called===false){
 							<div className="w-full flex justify-center">
 								{
 									<button
-										className="justify-center flex text-blueLike dark:bg-darkMode dark:text-zinc-300 font-semibold  mt-10 underline"
+										className="justify-center flex text-blueLike  dark:text-zinc-300 font-semibold  mt-10 underline"
 										onClick={loadMore}
 									>
 										{'Load more'}

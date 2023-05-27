@@ -180,7 +180,7 @@ function Navbar({ collapsed, setCollapsed }) {
 				<div
 					id={'nav-icon3'}
 					onClick={() => setCollapsed(!collapsed)}
-					className={`block cursor-pointer col-span-3 mr-5 md:hidden ${collapsed ? ' ' : ' open '} dark:text-gray-200`}
+					className={`block cursor-pointer col-span-3 mr-5 md:hidden ${collapsed ? ' ' : ' open '} dark:text-gray-200 dark:invert`}
 				>
 					<span></span>
 					<span></span>

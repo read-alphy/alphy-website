@@ -12,7 +12,13 @@ import { saveAs } from 'file-saver'; // library to save file as blob
 import Download from '../../../img/download.gif';
 import DownloadStatic from '../../../img/download_static.png';
 import ReactMarkdown from "react-markdown";
-import { Popover } from 'flowbite';
+// import { Popover } from 'flowbite';
+import {
+	Popover,
+	PopoverHandler,
+	PopoverContent,
+	ThemeProvider
+  } from "@material-tailwind/react";
 
 
 export default function Content(props) {
@@ -32,6 +38,7 @@ export default function Content(props) {
 	const [timestamp, setTimestamp] = useState();
 	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
+	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 
 	let summaryArray = '';
 
@@ -49,28 +56,49 @@ export default function Content(props) {
 	};
 
 
-/* 
- 	const $targetEl = document.getElementById('popoverHover');
+ let $targetElDownload= document.getElementById('popoverHover');
 
-    // set the element that trigger the popover using hover or click
-    const $triggerEl = document.getElementById('popoverButton');
+ const themePopover = {
+	popover: {
+	  styles: {
+		base: {
+		  bg: "bg-white dark:bg-mildDarkMode",
+		  color: "text-blue-gray-500 dark:text-zinc-200",
+		  border:"border-0",
+		  
+		},
+	  },
+	},
+  };
 
-    // options with default values
-    const options = {
-        placement: 'left',
-        triggerType: 'hover',
-        offset: 5,
+ // set the element that trigger the popover using hover or click
+ let $triggerElDownload = document.getElementById('popoverButtonDownload');
+ console.log($triggerElDownload)
 
-    };
+ // options with default values
+ const options = {
+	 placement: 'left',
+	 triggerType: 'hover'
 
-    const popover = new Popover($targetEl, $triggerEl, options);
- */
+ };
+
+
+
+ // let popover = new Popover($targetElDownload, $triggerElDownload, options);
+ 
 
 	useEffect(() => {
+
+		setTimeout(() => {
+			setBasicDataLoaded(true);
+		}
+			, 1000);
+		setTimeout(() => {
+			console.log("oi")
+		} , 1000);
 		
 		if(transcript.length===0 && data.transcript!==null){
 			transcriptParser();
-
 		}
 		const scrollableDiv = ref.current;
 		scrollableDiv.addEventListener("scroll", checkScrollPosition);
@@ -78,6 +106,9 @@ export default function Content(props) {
 		return () => {
 			scrollableDiv.removeEventListener("scroll", checkScrollPosition);
 		};
+
+
+
 	}, []);
 
 	// for question answering
@@ -208,8 +239,9 @@ export default function Content(props) {
 
 	const handleDownload = (selection) => {
 		
+		
 		setDownloading(true)
-	/* 	popover.toggle() */
+		// popover.toggle()
 		
 		
 		// create .srt file
@@ -221,7 +253,7 @@ export default function Content(props) {
 				const blob = new Blob([data.transcript], { type: 'text/srt' });
 
 				// save file as blob
-				saveAs(blob, `${data.title}_${data.creator_name}_subtitles.srt`);
+				saveAs(blob, `${data.creator_name}_${data.title}_Subtitles.srt`);
 			
 			}
 			else if(selection==2){
@@ -236,7 +268,7 @@ export default function Content(props) {
 				}
 				if (stop === true){
 				const blob = new Blob([text], { type: 'text/txt' });
-				saveAs(blob, `${data.title}_${data.creator_name}_transcript.txt`);
+				saveAs(blob, `${data.creator_name}_${data.title}_Transcript.txt`);
 				
 				}
 			}
@@ -365,7 +397,7 @@ export default function Content(props) {
 					}
 					{transcript.length>0 &&
 					
-					<div className={`${isLoading ? "hidden" : ""} w-full lg:w-1/2 3xl:w-1/2 mx-auto mt-10 md:mt-0 ${window.innerWidth >1280 && window.innerWidth<1420 ? "": ""}`} >
+					<div className={`${isLoading ? "hidden" : ""} w-full  3xl:w-1/2 mx-auto mt-10 md:mt-0 ${window.innerWidth >1280 && window.innerWidth<1420 ? "": ""}`} >
 						{transcript.length>0 ? (
 							<div className={` mt-14 xl:mt-0 w-full bg-[#f7g4g1] 3xl:min-w-[500px]  ${window.innerWidth >1280 && window.innerWidth<1420 ? window.innerWidth >1280 && window.innerWidth<1340 ? "ml-2": "ml-6" : "xl:ml-10"} rounded-lg p-5 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
@@ -471,29 +503,55 @@ export default function Content(props) {
 
 																			</a>
 																		
+																		
 																			
-																{/* 			<div className={`${index !==0 || props.hasActiveSub === false ? "hidden" : ""} flex ml-auto justify-end flex-row justify-end`} >
-																						<button id="popoverButton" data-popover-target = "popoverHover" data-popover-trigger="hover" className=" mr-8 opacity-80 pt-4">{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>
-																				<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 ">
-																							
-																							<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-t-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																								<p className="">Download as Plain Subtitle (.srt)</p>
-																							</div>
-																							
-																							<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 hover:rounded-b-lg dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																							<p>Download Formatted Transcript (.txt)</p>	
-																							</div>
-																			</div>
-																			</div> 
-																		  */}
+																			<div className={`${index !==0  ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`} >
+																			<Popover
+																			>
+																			
+		
+																				
+																				<PopoverHandler>
+																				<button id="popoverButtonDownload" data-popover-target = "popoverHover" data-popover-trigger="hover" className={`${props.hasActiveSub === false || props.hasActiveSub ==undefined ? "cursor-default dark:invert":""} mr-8 opacity-80 pt-4`} > <img className={`${props.hasActiveSub === false || props.hasActiveSub ==undefined ? " opacity-30":""} dark:invert`} src={DownloadStatic}></img></button>
+																				</PopoverHandler>
+																				
+																		<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
+																			<ThemeProvider value={themePopover}>
+																		<PopoverContent background="indigo">
+																		{props.hasActiveSub ==true && basicDataLoaded==true ?
+																		
+																					<div>
+ 																				<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																						<p className="">Download as Plain Subtitles (.srt)</p>
+																					</div>
+																					
+																					<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																					<p>Download Formatted Transcript (.txt)</p>	
+																					</div>
+																					</div>
+																					: 
+																					
+																					<div  className="px-3 cursor-pointer py-2 pointer-events-none ">
+																						<p className="">Go premium to download the transcript</p>
+																					</div>}
+																					</PopoverContent>
+																					</ThemeProvider>
+																					
+																	</div>
+																	</Popover>
+																	
+																	</div>
+																		
 
-																		</div> :
+																		</div> 
+																		
+																		:
 																		<div className="flex flex-row">
 																			<a
 
 																				target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}`}
-
-
+																				
+																						
 																				className={`${data.source_type === 'yt'
 																					? 'lg:cursor-pointer lg:pointer-events-auto'
 																					: ''
@@ -506,6 +564,43 @@ export default function Content(props) {
 																				
 
 																			</a>
+																			
+																			<div className={`${index !==0  ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`} >
+																			<Popover
+																			>
+																			
+		
+																				
+																				<PopoverHandler>
+																				<button id="popoverButtonDownload" data-popover-target = "popoverHover" data-popover-trigger="hover" className={`${props.hasActiveSub === false || props.hasActiveSub ==undefined ? "cursor-default dark:invert":""} mr-8 opacity-80 pt-4`} > <img className={`${props.hasActiveSub === false || props.hasActiveSub ==undefined ? " opacity-30":""} dark:invert`} src={DownloadStatic}></img></button>
+																				</PopoverHandler>
+																				
+																		<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
+																			<ThemeProvider value={themePopover}>
+																		<PopoverContent background="indigo">
+																		{props.hasActiveSub ==true && basicDataLoaded==true ?
+																		
+																					<div>
+ 																				<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																						<p className="">Download as Plain Subtitles (.srt)</p>
+																					</div>
+																					
+																					<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																					<p>Download Formatted Transcript (.txt)</p>	
+																					</div>
+																					</div>
+																					: 
+																					
+																					<div  className="px-3 cursor-pointer py-2 pointer-events-none ">
+																						<p className="">Go premium to download the transcript</p>
+																					</div>}
+																					</PopoverContent>
+																					</ThemeProvider>
+																					
+																	</div>
+																	</Popover>
+																	
+																	</div>
 																{/* 			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end  mr-4 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>} */}
 																		</div>
 

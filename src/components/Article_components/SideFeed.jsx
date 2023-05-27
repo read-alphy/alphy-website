@@ -386,7 +386,7 @@ function SideFeed(props) {
 						}
 									{called==true &&dataPersonal.length==0 && ready==true &&(
 							<div className="flex flex-col  mt-5 px-5 col-span-2 mx-auto items-center">
-								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Submit now or check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to explore the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>
+								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>
 				)
 			}
 					</div>
