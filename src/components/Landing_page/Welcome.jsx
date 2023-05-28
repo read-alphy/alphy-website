@@ -276,7 +276,7 @@ export default function Welcome({hasActiveSub}) {
 						<div className="">Transcribe</div>
 					</div>
 				</section>
-				<p classNAme="dark:text-zinc-300">audiovisual content with just one click.</p>
+				<p className="dark:text-zinc-200">audiovisual content with just one click.</p>
 			</div>
 			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
