@@ -41,6 +41,7 @@ function Navbar({ collapsed, setCollapsed }) {
       document.documentElement.classList.add(colorTheme);
       setDarkMode(colorTheme);
       localStorage.setItem("theme", colorTheme);
+	  
     };
 
 	const handleScroll = (target) => {

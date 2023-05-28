@@ -73,7 +73,7 @@ export default function Content(props) {
 
  // set the element that trigger the popover using hover or click
  let $triggerElDownload = document.getElementById('popoverButtonDownload');
- console.log($triggerElDownload)
+ 
 
  // options with default values
  const options = {
@@ -94,7 +94,7 @@ export default function Content(props) {
 		}
 			, 1000);
 		setTimeout(() => {
-			console.log("oi")
+			
 		} , 1000);
 		
 		if(transcript.length===0 && data.transcript!==null){
