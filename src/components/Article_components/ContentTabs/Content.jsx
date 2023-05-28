@@ -17,7 +17,9 @@ import {
 	Popover,
 	PopoverHandler,
 	PopoverContent,
-	ThemeProvider
+	ThemeProvider,
+	Select,
+	Option
   } from "@material-tailwind/react";
 
 
@@ -39,10 +41,75 @@ export default function Content(props) {
 	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
+	const [language, setLanguage] = useState('en');
 
 	let summaryArray = '';
 
-
+	const language_codes = {
+		"af": "Afrikaans",
+		"ar": "العربية",
+		"hy": "Հայերեն",
+		"az": "Azərbaycan dili",
+		"be": "Беларуская",
+		"bs": "Bosanski",
+		"bg": "Български",
+		"ca": "Català",
+		"zh": "中文",
+		"hr": "Hrvatski",
+		"cs": "Čeština",
+		"da": "Dansk",
+		"nl": "Nederlands",
+		"en": "English",
+		"et": "Eesti",
+		"fi": "Suomi",
+		"fr": "Français",
+		"gl": "Galego",
+		"de": "Deutsch",
+		"el": "Ελληνικά",
+		"he": "עברית",
+		"hi": "हिन्दी",
+		"hu": "Magyar",
+		"is": "Íslenska",
+		"id": "Bahasa Indonesia",
+		"it": "Italiano",
+		"ja": "日本語",
+		"kn": "ಕನ್ನಡ",
+		"kk": "Қазақ",
+		"ko": "한국어",
+		"lv": "Latviešu",
+		"lt": "Lietuvių",
+		"mk": "Македонски",
+		"ms": "Bahasa Melayu",
+		"mr": "मराठी",
+		"mi": "Māori",
+		"ne": "नेपाली",
+		"no": "Norsk",
+		"fa": "فارسی",
+		"pl": "Polski",
+		"pt": "Português",
+		"ro": "Română",
+		"ru": "Русский",
+		"sr": "Српски",
+		"sk": "Slovenčina",
+		"sl": "Slovenščina",
+		"es": "Español",
+		"sw": "Kiswahili",
+		"sv": "Svenska",
+		"tl": "Tagalog",
+		"ta": "தமிழ்",
+		"th": "ไทย",
+		"tr": "Türkçe",
+		"uk": "Українська",
+		"ur": "اردو",
+		"vi": "Tiếng Việt",
+		"cy": "Cymraeg"
+	}
+	const handleLanguageChange = (event) => {
+		const selectedCode = event.target.value;
+    setLanguage(selectedCode);
+	
+	  };
+	
 	const checkScrollPosition = () => {
 		const windowHeight = ref.current.clientHeight;
 
@@ -73,7 +140,7 @@ export default function Content(props) {
 
  // set the element that trigger the popover using hover or click
  let $triggerElDownload = document.getElementById('popoverButtonDownload');
- console.log($triggerElDownload)
+ 
 
  // options with default values
  const options = {
@@ -94,7 +161,7 @@ export default function Content(props) {
 		}
 			, 1000);
 		setTimeout(() => {
-			console.log("oi")
+			
 		} , 1000);
 		
 		if(transcript.length===0 && data.transcript!==null){
@@ -299,16 +366,58 @@ export default function Content(props) {
 	return (
 		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
 
-			<div>
+ 
+
+
+		<div>
 				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className="col-span-2">
-						<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+						<div className="flex flex-row">
+						<h1 className="col-span-2 mt-10 3xl:pt-8 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 							{data.title}
 						</h1>
+							
+<div className="flex flex-row">
+	<div className="hidden 3xl:block ml-20">
+					 <label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Language</label>
+					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+					{Object.entries(language_codes).map(([code, name]) => (
+						(language === code ? 
+							<option selected key={code} value={code}>
+								{name}
+							</option>:
+							<option key={code} value={code}>
+							{name}
+						</option>
+						)
+								))}
+					</select>
+					</div>
+{/* 					<div className="ml-4 mt-12">
+						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
+					</div> */}
+					</div>
+					</div>
 						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light">
 							{data.creator_name}
 						</h2>
 						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
+					<div className="mt-5 3xl:hidden ">
+					<label for="small" class="block mb-2 mt-5 text-sm font-medium text-gray-900 dark:text-white">Select Language</label>
+					<select  onChange={handleLanguageChange} id="small" class="block w-[300px] p-2.5 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+					{Object.entries(language_codes).map(([code, name]) => (
+						(language === code ? 
+							<option selected key={code} value={code}>
+								{name}
+							</option>:
+							<option key={code} value={code}>
+							{name}
+						</option>
+						)
+								))}
+					</select>
+					</div>
+
 					</div>
 
 					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
@@ -336,10 +445,13 @@ export default function Content(props) {
 
 				</div>
 
-
-
-				<div className="flex flex-col xl:flex-row mt-16">
+	<div id="content-area">
+		{language =="en"
+		?
+			<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 				{transcript.length>0 &&
+
+				
 					<div className={`grid grid-cols-2 w-full md:min-w-[500px]`}>
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 						
@@ -628,6 +740,22 @@ export default function Content(props) {
 						)}
 					</div>}{' '}
 				</div>
+:
+
+<div className="flex flex-col mb-20 mt-20 ">
+								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+								
+									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. Request Alphy to process it <a className="underline text-green-400">here</a>.
+									 
+								{/* 	<div className="ml-4 mt-12">
+						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
+					</div> */}
+								</p>
+
+				</div>
+	
+	}		
+		</div>
 
 			</div>
 
