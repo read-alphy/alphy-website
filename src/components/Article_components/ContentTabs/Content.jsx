@@ -29,9 +29,26 @@ export default function Content(props) {
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
-	const [content,setContent] = useState(props.data.transcript);
-	const data = props.data;
-	console.log(data.summaries)
+	
+	const data = props.data
+	let contentSummaries = []
+	let languages =[]
+
+	if((props.data!==undefined || props.data!==null) && contentSummaries.length==0){
+		contentSummaries = props.data.summaries
+		console.log(contentSummaries)
+		if(contentSummaries!==undefined){
+			contentSummaries.map(summary => languages.push(summary.lang));
+		}
+
+	}
+
+
+	
+
+	
+
+	
 
 	
 	
@@ -112,6 +129,23 @@ export default function Content(props) {
 		"vi": "Tiếng Việt",
 		"cy": "Cymraeg"
 	}
+
+	const reorderedLanguageCodes = {
+		...languages.reduce(
+		  (result, code) => {
+			if (language_codes.hasOwnProperty(code)) {
+			  result[code] = language_codes[code];
+			  delete language_codes[code];
+			}
+			return result;
+		  },
+		  {}
+		),
+		...language_codes
+	  };
+
+	
+	
 	const handleLanguageChange = (event) => {
 		const selectedCode = event.target.value;
     setLanguage(selectedCode);
@@ -397,15 +431,29 @@ export default function Content(props) {
 	<div className="hidden 3xl:block ml-20">
 					 <label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Language</label>
 					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					{Object.entries(language_codes).map(([code, name]) => (
+					{Object.entries(reorderedLanguageCodes).map(([code, name]) => (
+						
 						(language === code ? 
 							<option selected key={code} value={code}>
 								{name}
-							</option>:
+							</option>
+							:
+
+
+							(
+											
+						languages.includes(code) ?
 							<option key={code} value={code}>
-							{name}
-						</option>
+								{name}
+							</option>	
+							:
+							<option className="text-gray-300 dark:text-gray-500" key={code} value={code}>
+								{name}
+							</option>	
+							)
+							
 						)
+										
 								))}
 					</select>
 					</div>
@@ -422,7 +470,7 @@ export default function Content(props) {
 					<label for="small" class="block mb-2 mt-5 text-sm font-medium text-gray-900 dark:text-white">Select Language</label>
 					<select  onChange={handleLanguageChange} id="small" class="block w-[300px] p-2.5 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					{Object.entries(language_codes).map(([code, name]) => (
-						(language === code ? 
+						(language === code  ? 
 							<option selected key={code} value={code}>
 								{name}
 							</option>:
