@@ -90,7 +90,7 @@ useEffect(() => {
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
+				}/sources?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
 			)
 			.then((response) => {
 				setHasMore(!(response.data.length < limit));
@@ -115,7 +115,7 @@ useEffect(() => {
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/summaries?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
+					}/sources?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
 					headers: {
 						'id-token': idtoken,
 					}

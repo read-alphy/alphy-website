@@ -98,7 +98,7 @@ export default function Account({ stripePromise }) {
             currentUser.getIdToken().then((idToken) => {
                 axios
                     .get(
-                        `${process.env.REACT_APP_API_URL}/credit`,
+                        `${process.env.REACT_APP_API_URL}/payments/credit`,
                         {
                             headers: {
                                 'id-token': idToken,

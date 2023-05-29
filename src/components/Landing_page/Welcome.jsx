@@ -31,7 +31,7 @@ export default function Welcome({hasActiveSub}) {
             currentUser.getIdToken().then((idToken) => {
                 axios
                     .get(
-                        `${process.env.REACT_APP_API_URL}/credit`,
+                        `${process.env.REACT_APP_API_URL}/payments/credit`,
                         {
                             headers: {
                                 'id-token': idToken,
@@ -86,28 +86,6 @@ export default function Welcome({hasActiveSub}) {
 	
 	const popover = new Popover($targetEl, $triggerEl, options);
 
-	/* const getYouTubeInfo = (videoId) => {
-		try {
-			const response =  axios.get(
-			  `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
-			).then((response) => {
-			
-			const duration =response.data.items[0].contentDetails.duration;
-			const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-
-			const hours = parseInt(match[1]) || 0;
-			const minutes = parseInt(match[2]) || 0;
-			const seconds = parseInt(match[3]) || 0;
-			const duration_seconds = hours*3600 + minutes*60 + seconds
-			setVideoData([response.data.items[0].statistics.viewCount, duration_seconds]);
-			return(response.data.items[0].statistics.viewCount, duration_seconds)
-			})
-		  } catch (error) {
-			console.error('Error fetching video data:', error);
-		  }
-	} */
-
- 
 	const handleSubmit = (event, selectedOption) => {
 		toast.dismiss();
 		if (
@@ -160,12 +138,12 @@ export default function Welcome({hasActiveSub}) {
 				setLoading(true);
 				// get id token
 				currentUser.getIdToken().then((idToken) => {
+					
 				axios
 						.post(
-							`${process.env.REACT_APP_API_URL}/summaries`,
+							`${process.env.REACT_APP_API_URL}/sources/`,
 							{
 								url: inputValue,
-								language: 'en',
 							},
 							{
 								headers: {
@@ -198,7 +176,10 @@ export default function Welcome({hasActiveSub}) {
 								icon: '⚠️',
 							});
 						}
-						else{	toast('There was an error submitting the form. \n \n You are on the Free Plan. Make sure the content you are submitting is shorter than 1 hour and conforms with our content popularity limits.', {
+						else{	
+							console.log(error)
+							console.log(idToken)
+							toast('There was an error submitting the form. \n \n You are on the Free Plan. Make sure the content you are submitting is shorter than 1 hour and conforms with our content popularity limits.', {
 								duration: 6000,
 								icon: '⚠️',
 							});

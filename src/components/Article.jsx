@@ -64,7 +64,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub}) {
 	}, [width]);
 
 	useEffect(() => {
-		const url = `${process.env.REACT_APP_API_URL}/summaries/${source_type}/${source_id}`;
+		const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
 
 		fetchData(url);
 	}, [location.pathname, navigate]);

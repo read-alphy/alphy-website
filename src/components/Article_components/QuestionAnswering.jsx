@@ -100,14 +100,7 @@ export default function QuestionAnswering(props) {
 					}
 				}, 1000);
 			}
-			/* 			axios
-							.post(
-								`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${props.data.source_type}/${props.data.source_id
-								}/question`,
-								inputValue,
-							).then((response) => {
-								
-							}) */
+
 		}
 	}
 
@@ -215,7 +208,7 @@ export default function QuestionAnswering(props) {
 
 					axios
 						.post(
-							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${props.data.source_type}/${props.data.source_id
+							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/${props.data.source_type}/${props.data.source_id
 							}/question`,
 							inputValue,
 						)

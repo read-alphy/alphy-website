@@ -5,7 +5,8 @@ import { Tab, Tabs } from 'react-bootstrap';
 import Twitter from '../../../img/twitter_spaces.png';
 import Loading from '../../Loading';
 import working from './working.svg';
-import working_darktheme from './working_darktheme.svg';
+
+import axios from 'axios';
 
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
@@ -28,13 +29,20 @@ export default function Content(props) {
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
+	const [content,setContent] = useState(props.data.transcript);
 	const data = props.data;
+	console.log(data.summaries)
+
+	
+	
+	
 	const transcript_raw = props.data.transcript;
 	const theme = localStorage.getItem("theme")
 	
 	const ref = useRef(null);
 	let transcript = [];
 
+	
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
@@ -42,7 +50,7 @@ export default function Content(props) {
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	const [language, setLanguage] = useState('en');
-
+	
 	let summaryArray = '';
 
 	const language_codes = {
@@ -110,6 +118,24 @@ export default function Content(props) {
 	
 	  };
 	
+
+	const requestTranslation = () => {
+
+		axios
+						.post(
+							`${process.env.REACT_APP_API_URL}/sources/${data.source_type}/${data.source_id}?lang=${language}`,
+				
+						)
+						.then((response) => {
+							
+						})
+
+	}
+
+
+
+
+
 	const checkScrollPosition = () => {
 		const windowHeight = ref.current.clientHeight;
 
@@ -204,9 +230,10 @@ export default function Content(props) {
 	
 
 	async function transcriptParser() {
+		
 
-		if (data.summary !== undefined || data.summary !== null) {
-			summaryArray = data.summary.split('\n');
+		if (data.summaries[0] !== undefined || data.summaries[0] !== null) {
+			summaryArray = data.summaries[0].summary.split('\n');
 			
 
 			var parser = new srtParser2();
@@ -345,17 +372,6 @@ export default function Content(props) {
 				}, 2000)
 			}
 
-
-/* 			else if (activeTab === "tab1") {
-				const blob = new Blob([data.summary], { type: 'text/plain' });
-
-				// save file as blob
-				saveAs(blob, `${data.title}_${data.creator_name}_summary.txt`);
-				setTimeout(() => {
-					setDownloading(false)
-				}, 1600)
-			}
- */
 		}, 3000)
 
 
@@ -458,7 +474,7 @@ export default function Content(props) {
 						<div className={`col-span-2 hidden ${data.source_type==="sp"?"":"xl:flex"}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
 							{data.source_type === 'sp' ? (
 /* 
-								<div className={`block ${transcript.length>0 || data.is_complete===true ? "w-full" : "w-1/3"} items-center text-center mx-auto`}>
+								<div className={`block ${transcript.length>0 || data.complete===true ? "w-full" : "w-1/3"} items-center text-center mx-auto`}>
 						
 									<a target="_blank"
 										href={`https://twitter.com/i/spaces/${data.source_id}`}
@@ -470,7 +486,7 @@ export default function Content(props) {
 								</div> */
 								null
 							) : (
-								transcript.length>0 ||data.is_complete===true ?
+								transcript.length>0 ||data.complete===true ?
 								<iframe
 									id="player"
 									title="My YouTube Video "
@@ -492,11 +508,11 @@ export default function Content(props) {
 
 
 							) : (
-								data.key_qa && (
+								data.summaries[0].key_qa && (
 									<QuestionAnswering
 										source_id={data.source_id}
 										source_type={data.source_type}
-										key_qa={data.key_qa}
+										key_qa={data.summaries[0].key_qa}
 										data={data}
 										transcript={transcript}
 										timestampChanger={timestampChanger}
@@ -535,26 +551,13 @@ export default function Content(props) {
 
 									<Tabs>
 										<Tab eventKey="transcript" title="">
-											{/* {activeTab === "tab3" && (data ? data.key_takeaways ? <KeyTakeAways key_takeaways={data.key_takeaways} /> : null : null)} */}
-											{activeTab === "tab3" && (data ? data.key_takeaways ? data.key_takeaways.map((item, index) => {
+											
+											{activeTab === "tab3" && (data ? data.summaries[0].key_takeaways ? data.summaries[0].key_takeaways.map((item, index) => {
 												return (
 
 													<p className="pb-2">{index + 1}) {item}</p>)
 											}) : null : null)}
-											{/* 											{activeTab === "tab4" && (isLoading ? (
-												<Loading />
-											) : (
-												data.key_qa && (
-													<QuestionAnswering
-														source_id={data.source_id}
-														source_type={data.source_type}
-														key_qa={data.key_qa}
-														data={data}
-														transcript={transcript}
-														timestampChanger={timestampChanger}
-													/>
-												)
-											))} */}
+											
 
 											{activeTab === 'tab1' && (
 												
@@ -745,7 +748,7 @@ export default function Content(props) {
 <div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 								
-									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. Request Alphy to process it <a className="underline text-green-400">here</a>.
+									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. Request Alphy to process it <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.
 									 
 								{/* 	<div className="ml-4 mt-12">
 						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>

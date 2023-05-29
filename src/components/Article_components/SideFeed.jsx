@@ -41,7 +41,7 @@ function SideFeed(props) {
 
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/summaries${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offsetPersonal}&only_mine=true`, {
+					}/sources${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offsetPersonal}&only_mine=true`, {
 					headers: {
 						'id-token': idtoken,
 					}
@@ -92,7 +92,7 @@ function SideFeed(props) {
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-			}/summaries${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offset}&only_mine=false`
+			}/sources${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offset}&only_mine=false`
 			)
 			.then((response) => {
 				if (response.data.length > 0) setData([...data, ...response.data]);
