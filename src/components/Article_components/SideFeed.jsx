@@ -63,10 +63,24 @@ function SideFeed(props) {
 	};
 
 	const navigateFeeds = (state) => {
-		setisPublic(true)
+		
 		localStorage.setItem("search","")
 	
-		getData(0, true, true,search);
+		
+
+		if(isPublic===false && state==1){
+			setisPublic(true)
+			
+				getData(0, true, true,search);
+	
+			}
+	
+			else if(isPublic===true && state==2){
+				setisPublic(false)
+				getDataPersonal(0, true, true,search);
+			}
+		
+		
 
 	}
 	const temp = 10;
@@ -295,11 +309,11 @@ function SideFeed(props) {
 			<div className="text-sm font-medium text-center text-gray-500  w-full dark:text-zinc-300 dark:border-gray-700">
 				<ul className="flex ml-6  flex-wrap -mb-px">
 				<li className="mr-2 ">
-						<button onClick={() => setisPublic(false)} className={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
+						<button onClick={()=>navigateFeeds(2)} className={`inline-block p-4 ${!isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 					
 					<li className="mr-2 ">
-						<button onClick={navigateFeeds} className={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
+						<button onClick={() => navigateFeeds(1)} className={`inline-block p-4 ${isPublic ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300 "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li>
 				
 

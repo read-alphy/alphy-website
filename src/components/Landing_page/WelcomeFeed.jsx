@@ -64,14 +64,14 @@ useEffect(() => {
 	const searchInputRef = React.useRef(null);
 
 	const navigateFeeds = (state) => {
-		if(isPublic===false){
+		if(isPublic===false && state==2){
 		setisPublic(true)
 		
 			getData(0, true, true);
 
 		}
 
-		else{
+		else if(isPublic===true && state==1){
 			setisPublic(false)
 			getDataPersonal(0, true, true);
 		}
@@ -182,10 +182,10 @@ if(called===false){
 						<button onClick={() => setisPublic(true)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li> */}
 					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 mb-1 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
+						<button onClick={() => navigateFeeds(1)} class={`inline-block p-4 mb-1 ${!isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>My Works</button>
 					</li>
 					<li class="mr-2">
-						<button onClick={navigateFeeds} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
+						<button onClick={() => navigateFeeds(2)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Global</button>
 					</li>
 
 				</ul>

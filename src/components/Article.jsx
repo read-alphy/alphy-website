@@ -11,6 +11,7 @@ import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
+
 function Article({ source_type, collapsed, setCollapsed, hasActiveSub}) {
 	const location = useLocation();
 	const navigate = useNavigate();

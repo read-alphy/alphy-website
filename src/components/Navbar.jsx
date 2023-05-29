@@ -5,6 +5,9 @@ import { useAuth } from '../hooks/useAuth';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { GoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
+import Logo from "../img/logo.png"
+import LogoBlack from "../img/logo-inverted.png"
+
 function Navbar({ collapsed, setCollapsed }) {
 	const auth = useAuth();
 	const navigate = useNavigate();
@@ -41,6 +44,7 @@ function Navbar({ collapsed, setCollapsed }) {
       document.documentElement.classList.add(colorTheme);
       setDarkMode(colorTheme);
       localStorage.setItem("theme", colorTheme);
+	  
     };
 
 	const handleScroll = (target) => {
@@ -118,7 +122,12 @@ function Navbar({ collapsed, setCollapsed }) {
 	>
 		<div className={`pl-10 flex items-center font-bold  ${(windowWidth > 999 && (isYt || isSp))  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
 			<Link to="/" className="dark:text-gray-200">
-				<h1 className="text-2xl">ALPHY</h1>
+				<div className="flex-row flex">
+				<img src={Logo} width={40} className="hidden dark:block"></img>
+				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
+				<h1 className="ml-2 text-2xl">ALPHY</h1>
+				
+				</div>
 			</Link>
 		</div>
 

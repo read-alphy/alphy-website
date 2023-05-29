@@ -1,6 +1,8 @@
 import React from 'react';
 import DiscordLogo from '../img/discord.svg';
 import TwitterLogo from '../img/twitter.svg';
+import Logo from "../img/logo.png"
+import LogoBlack from "../img/logo-inverted.png"
 function Footer() {
 	return (
 		/*         <div className='footer-main '>
@@ -22,7 +24,14 @@ function Footer() {
 			<hr className={'my-6 bg-bordoLike sm:mx-auto lg:my-8 '} />
 			<div className={'container lg:flex lg:justify-between  mx-auto max-w-[1200px]'}>
 				<div className={'mb-6 md:mb-0 '}>
-					<span className={' text-2xl font-semibold lg:whitespace-nowrap'}>ALPHY</span>
+					<span className={' text-2xl font-semibold lg:whitespace-nowrap'}>
+					<div className="flex-row flex">
+
+				<img src={Logo} width={40} ></img>
+				
+				<h1 className="ml-2 text-2xl">ALPHY</h1>
+				</div>
+					</span>
 
 					<p className="text-l font-semibold md:whitespace-nowrap">
 						<br />
