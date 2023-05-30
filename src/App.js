@@ -42,7 +42,7 @@ function App() {
 	const [called, setCalled] = useState(false)
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
-
+	
 
 	const stripePromise = loadStripe(
 		process.env.REACT_APP_STRIPE_PK

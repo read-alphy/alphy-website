@@ -41,7 +41,7 @@ function SideFeed(props) {
 
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/sources${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offsetPersonal}&only_mine=true`, {
+					}/sources/${search_input.length>0?`?q=${search_input}&`:"?"}limit=${limit}&offset=${offsetPersonal}&only_mine=true`, {
 					headers: {
 						'id-token': idtoken,
 					}
@@ -58,7 +58,12 @@ function SideFeed(props) {
 							setDataPersonal([...dataPersonal, ...response.data]);
 						}
 						setIsLoadingPersonal(false);
-					}))
+					})
+					.catch((error) => {
+						console.log(error)
+					})
+					)
+
 		};
 	};
 
@@ -220,7 +225,6 @@ function SideFeed(props) {
 }
 	return (
 		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300">
-
 
 
 			<form
@@ -400,7 +404,7 @@ function SideFeed(props) {
 						}
 									{called==true &&dataPersonal.length==0 && ready==true &&(
 							<div className="flex flex-col  mt-5 px-5 col-span-2 mx-auto items-center">
-								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>
+								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy. {hasMorePersonal ? "If you've submitted content previously, simply refresh the page." : ""}</p> <img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>
 				)
 			}
 					</div>
