@@ -13,7 +13,7 @@ import StripeBanner from "../../img/stripe_banner.svg";
 // This is your test publishable API key.
 
 
-const stripePromise = loadStripe(process.env.STRIPE_PK)
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK)
 
 export default function CheckOutPage() {
     
