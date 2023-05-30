@@ -10,10 +10,11 @@ import axios from 'axios';
 
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
-import Download from '../../../img/download.gif';
+import {useAuth} from "../../../hooks/useAuth"
 import DownloadStatic from '../../../img/download_static.png';
 import ReactMarkdown from "react-markdown";
-// import { Popover } from 'flowbite';
+
+
 import {
 	Popover,
 	PopoverHandler,
@@ -29,29 +30,31 @@ export default function Content(props) {
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
+		
+	const [activeTab, setActiveTab] = useState('tab1');
+	const [autoplay, setAutoplay] = useState(0);
+	const [timestamp, setTimestamp] = useState();
+	const [showButton, setShowButton] = useState(false);
+	const [downloading, setDownloading] = useState(false);
+	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
+	const [language, setLanguage] = useState(props.data!==undefined && props.data.length>1 && props.data.lang===props.data.summaries[1].lang ? props.data.lang : 'en');
+	const [translationMessage, setTranslationMessage] = useState(false);
+	const[errorMessage, setErrorMessage] = useState(false);
+	const [translatingLanguage, setTranslatingLanguage] = useState("");
+	const [languagesWanted, setLanguagesWanted] = useState([]);
+	const {currentUser} = useAuth()
+	
+
 	
 	const data = props.data
+	
 	let contentSummaries = []
 	let languages =[]
-
-	if((props.data!==undefined || props.data!==null) && contentSummaries.length==0){
-		contentSummaries = props.data.summaries
-		console.log(contentSummaries)
-		if(contentSummaries!==undefined){
-			contentSummaries.map(summary => languages.push(summary.lang));
-		}
-
-	}
-
-
+	let summary=""
 	
 
-	
 
-	
 
-	
-	
 	
 	const transcript_raw = props.data.transcript;
 	const theme = localStorage.getItem("theme")
@@ -59,18 +62,12 @@ export default function Content(props) {
 	const ref = useRef(null);
 	let transcript = [];
 
-	
-	const [activeTab, setActiveTab] = useState('tab1');
-	const [autoplay, setAutoplay] = useState(0);
-	const [timestamp, setTimestamp] = useState();
-	const [showButton, setShowButton] = useState(false);
-	const [downloading, setDownloading] = useState(false);
-	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
-	const [language, setLanguage] = useState('en');
+
 	
 	let summaryArray = '';
 
 	const language_codes = {
+		"__":"__dummy",
 		"af": "Afrikaans",
 		"ar": "العربية",
 		"hy": "Հայերեն",
@@ -130,6 +127,24 @@ export default function Content(props) {
 		"cy": "Cymraeg"
 	}
 
+	
+	  if((props.data!==undefined || props.data!==null) && contentSummaries.length==0){
+		contentSummaries = props.data.summaries
+
+		
+		if(contentSummaries!==undefined){
+			
+			contentSummaries.map(summary => languages.push(summary.lang));
+			
+			summary = contentSummaries.find(summary => summary.lang ===   language);
+			
+			
+
+			
+		}
+
+	}
+
 	const reorderedLanguageCodes = {
 		...languages.reduce(
 		  (result, code) => {
@@ -145,26 +160,49 @@ export default function Content(props) {
 	  };
 
 	
-	
 	const handleLanguageChange = (event) => {
+	/* 	if(errorMessage ==true || translationMessage==true)
+		{
+			window.location.reload();
+		} */
 		const selectedCode = event.target.value;
     setLanguage(selectedCode);
+
 	
 	  };
 	
 
-	const requestTranslation = () => {
+	const requestTranslation = async () => {
 
-		axios
-						.post(
+		await currentUser.getIdToken().then((idToken) => {
+	
+			axios.post(
 							`${process.env.REACT_APP_API_URL}/sources/${data.source_type}/${data.source_id}?lang=${language}`,
+							{
+								lang: language,
+							},
+							{
+							headers: {
+								'id-token': idToken,
+							},
+						}
 				
 						)
 						.then((response) => {
-							
+							setLanguagesWanted([...languagesWanted, language])
+							setTranslationMessage(true)
+							setTranslatingLanguage(language)
+					
 						})
+						.catch((error) => {							
+							
+							setErrorMessage(true)
+						}
+						);
 
+		})
 	}
+
 
 
 
@@ -183,9 +221,7 @@ export default function Content(props) {
 	};
 
 
- let $targetElDownload= document.getElementById('popoverHover');
-
- const themePopover = {
+	const themePopover = {
 	popover: {
 	  styles: {
 		base: {
@@ -198,20 +234,7 @@ export default function Content(props) {
 	},
   };
 
- // set the element that trigger the popover using hover or click
- let $triggerElDownload = document.getElementById('popoverButtonDownload');
- 
 
- // options with default values
- const options = {
-	 placement: 'left',
-	 triggerType: 'hover'
-
- };
-
-
-
- // let popover = new Popover($targetElDownload, $triggerElDownload, options);
  
 
 	useEffect(() => {
@@ -266,8 +289,8 @@ export default function Content(props) {
 	async function transcriptParser() {
 		
 
-		if (data.summaries[0] !== undefined || data.summaries[0] !== null) {
-			summaryArray = data.summaries[0].summary.split('\n');
+		if (summary !== undefined || summary !== null) {
+			summaryArray = summary.summary.split('\n');
 			
 
 			var parser = new srtParser2();
@@ -421,17 +444,17 @@ export default function Content(props) {
 
 		<div>
 				<div className="grid grid-cols-3 max-h-[90vh]">
-					<div className="col-span-2">
-						<div className="flex flex-row">
+					<div className="col-span-2 ">
+						<div className="flex flex-row ">
 						<h1 className="col-span-2 mt-10 3xl:pt-8 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 							{data.title}
 						</h1>
 							
-<div className="flex flex-row">
-	<div className="hidden 3xl:block ml-20">
-					 <label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Language</label>
-					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					{Object.entries(reorderedLanguageCodes).map(([code, name]) => (
+<div className="flex flex-row justify-end mx-auto">
+	<div className="hidden 3xl:block flex  2xl:ml-40 justify-end ">
+{/* 					 <label for="small" class="block mb-2 text-sm font-light text-gray-500 dark:text-white">Language</label>
+ */}					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 						
 						(language === code ? 
 							<option selected key={code} value={code}>
@@ -440,26 +463,22 @@ export default function Content(props) {
 							:
 
 
-							(
-											
-						languages.includes(code) ?
-							<option key={code} value={code}>
+							(index===languages.length 
+								?
+								<option className="text-gray-500 dark:text-gray-300"disabled>--Request Translation--</option>
+								:
+						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
 								{name}
 							</option>	
-							:
-							<option className="text-gray-300 dark:text-gray-500" key={code} value={code}>
-								{name}
-							</option>	
+
 							)
 							
 						)
 										
 								))}
 					</select>
-					</div>
-{/* 					<div className="ml-4 mt-12">
-						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
-					</div> */}
+				</div>
+
 					</div>
 					</div>
 						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light">
@@ -467,17 +486,29 @@ export default function Content(props) {
 						</h2>
 						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
 					<div className="mt-5 3xl:hidden ">
-					<label for="small" class="block mb-2 mt-5 text-sm font-medium text-gray-900 dark:text-white">Select Language</label>
-					<select  onChange={handleLanguageChange} id="small" class="block w-[300px] p-2.5 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					{Object.entries(language_codes).map(([code, name]) => (
-						(language === code  ? 
+{/* 					<label for="small" class="block mb-2 text-sm font-light text-gray-500 dark:text-white">Language</label>
+ */}					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mb-6 text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
+						
+						(language === code ? 
 							<option selected key={code} value={code}>
 								{name}
-							</option>:
-							<option key={code} value={code}>
-							{name}
-						</option>
+							</option>
+							:
+
+
+							(index===languages.length 
+								?
+								<option className="text-gray-500 dark:text-gray-300"disabled>--Request Translation--</option>
+								:
+						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
+								{name}
+							</option>	
+
+							)
+							
 						)
+										
 								))}
 					</select>
 					</div>
@@ -510,7 +541,7 @@ export default function Content(props) {
 				</div>
 
 	<div id="content-area">
-		{language =="en"
+		{ summary !== undefined && language == summary.lang
 		?
 			<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 				{transcript.length>0 &&
@@ -556,11 +587,11 @@ export default function Content(props) {
 
 
 							) : (
-								data.summaries[0].key_qa && (
+								summary.key_qa && (
 									<QuestionAnswering
 										source_id={data.source_id}
 										source_type={data.source_type}
-										key_qa={data.summaries[0].key_qa}
+										key_qa={summary.key_qa}
 										data={data}
 										transcript={transcript}
 										timestampChanger={timestampChanger}
@@ -600,7 +631,7 @@ export default function Content(props) {
 									<Tabs>
 										<Tab eventKey="transcript" title="">
 											
-											{activeTab === "tab3" && (data ? data.summaries[0].key_takeaways ? data.summaries[0].key_takeaways.map((item, index) => {
+											{activeTab === "tab3" && (data ? summary.key_takeaways ? summary.key_takeaways.map((item, index) => {
 												return (
 
 													<p className="pb-2">{index + 1}) {item}</p>)
@@ -794,14 +825,17 @@ export default function Content(props) {
 :
 
 <div className="flex flex-col mb-20 mt-20 ">
+	{errorMessage ==true || (languagesWanted.includes(language)===true) ? null :
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
-								
-									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. Request Alphy to process it <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.
+
+									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub ==true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.</p> 
+									:<p>Go premium to request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" :"/plans"}>{currentUser ? "Account" : "Plans"} </a> page for more detail</p>}
 									 
 								{/* 	<div className="ml-4 mt-12">
 						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
 					</div> */}
 								</p>
+}
 
 				</div>
 	
@@ -810,7 +844,7 @@ export default function Content(props) {
 
 			</div>
 
-			{transcript.length===0 ?
+			{contentSummaries!==undefined && contentSummaries.length===	0  ?
 
 				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
@@ -824,6 +858,28 @@ export default function Content(props) {
 
 				</div>: null
 							}
+{languagesWanted.includes(language) && errorMessage==false && <div className="flex flex-col mb-20 mt-20 ">
+<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+
+	You successfully submitted your request! <br></br><br></br> Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
+	 
+	 <img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
+	 
+</p>
+
+</div>}
+
+{errorMessage ==true && <div className="flex flex-col mb-20 mt-20 ">
+<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+
+	There was an error with the request :( <br></br><br></br>Please refresh the page and try again. If the issue persists, please contact us at support@alphy.app
+	 
+	
+	 
+</p>
+
+</div>}
+				
 
 		</div>
 	);

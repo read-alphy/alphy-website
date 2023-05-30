@@ -40,6 +40,9 @@ function App() {
 	const { currentUser } = useAuth();
 	const [hasActiveSub, setHasActiveSub] = useState(false)
 	const [called, setCalled] = useState(false)
+	const [credit, setCredit] = useState(0)
+	const[creditcalled, setCreditCalled] = useState(false)
+
 
 	const stripePromise = loadStripe(
 		"pk_live_51MeGOKJmF4J0rk0xzE0Cl6UmLItHqja1URuUZGHsfOpoATmt60o5CDG3rNXyHrvd28CCxUnb5biyLOMewIz0psQz00mEIfPVl6"
@@ -51,6 +54,29 @@ useEffect(() => {
 		getCustomerInfo(currentUser)
 	}
 }, 1000)
+
+if (currentUser && creditcalled!==true) {
+	currentUser.getIdToken().then((idToken) => {
+		axios
+			.get(
+				`${process.env.REACT_APP_API_URL}/payments/credit`,
+				{
+					headers: {
+						'id-token': idToken,
+					},
+				},
+			)
+			.then((response) => {
+				const [fixed, monthly] = response.data
+				setCredit(fixed + monthly)
+				setCreditCalled(true)
+				
+			})
+			.catch((error) => {
+				console.error(error)
+			});
+	});
+} 
 })
 
 	const getCustomerInfo = async (currentUser) => {
@@ -114,7 +140,7 @@ useEffect(() => {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser}/>} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
@@ -132,7 +158,7 @@ useEffect(() => {
 
 
 							
-							<Route path="/account" element={<Account stripe={stripePromise} />} /> 
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit}/>} /> 
 							
 							<Route path="/plans" element={<Pricing stripe={stripePromise} />} />
 

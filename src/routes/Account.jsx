@@ -19,7 +19,7 @@ import { useLocation } from "react-router-dom";
 
 
 
-export default function Account({ stripePromise }) {
+export default function Account({ credit}) {
     
     const { currentUser } = useAuth();
     
@@ -31,7 +31,6 @@ export default function Account({ stripePromise }) {
     const [hasActiveSub, setHasActiveSub] = useState(false);
     const [called, setCalled] = useState(false);
     const [clientSecret, setClientSecret] = useState("");
-    const [credit, setCredit] = useState(null);
     const auth = useAuth();
 
     const navigate = useNavigate()
@@ -94,7 +93,7 @@ export default function Account({ stripePromise }) {
         else{
             setIsLoaded(true)
         }
-        if (currentUser) {
+        /* if (currentUser) {
             currentUser.getIdToken().then((idToken) => {
                 axios
                     .get(
@@ -114,7 +113,7 @@ export default function Account({ stripePromise }) {
                         console.error(error)
                     });
             });
-        } 
+        }  */
     }, [currentUser]);
   
     const getCustomerInfo = async (currentUser) => {

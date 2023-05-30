@@ -10,7 +10,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Popover } from 'flowbite';
 
 
-export default function Welcome({hasActiveSub}) {
+export default function Welcome({hasActiveSub,credit}) {
 	
 
 	
@@ -20,14 +20,13 @@ export default function Welcome({hasActiveSub}) {
 	const [loading, setLoading] = useState(false);
 	const { currentUser } = useAuth();
 	const [showToaster, setShowToaster] = useState(false);
-	const [credit, setCredit] = useState(0);
-	
+/* 	const [credit, setCredit] = useState(0);
+ */	
 	const[called, setCalled] = useState(false)
-	const[videoData, setVideoData] = useState([])
 	const[failed,setFailed]	= useState(false)
 
 	useEffect (() => {
-		if (currentUser) {
+		/* if (currentUser && called!==true) {
             currentUser.getIdToken().then((idToken) => {
                 axios
                     .get(
@@ -41,13 +40,14 @@ export default function Welcome({hasActiveSub}) {
                     .then((response) => {
                         const [fixed, monthly] = response.data
                         setCredit(fixed + monthly)
+						setCalled(true)
                         
                     })
                     .catch((error) => {
                         console.error(error)
                     });
             });
-        } 
+        }  */
 	}, )
 	
 	const auth = useAuth()
@@ -93,7 +93,8 @@ export default function Welcome({hasActiveSub}) {
 				inputValue.includes('https://www.youtube.com/watch') ||
 				inputValue.includes('https://youtu.be') ||
 				inputValue.includes('https://m.youtube.com') ||
-				inputValue.includes('https://twitter.com/i/spaces')
+				inputValue.includes('https://twitter.com/i/spaces') ||
+				inputValue.includes('https://www.youtube.com/live')
 			)
 		) {
 			setInputValue('');

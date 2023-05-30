@@ -10,7 +10,7 @@ import { useState } from 'react';
 import WelcomePopup from '../components/Landing_page/WelcomePopup.jsx';
 
 
-function Home({hasActiveSub,currentUser}) {
+function Home({hasActiveSub,currentUser,credit}) {
 
 	/* const { currentUser } = useAuth(); */
 	const [showMessage, setShowMessage] = useState(false);
@@ -53,7 +53,7 @@ function Home({hasActiveSub,currentUser}) {
 				<meta property="og:url" content="https://alphy.app/" />
 				<meta content="https://i.ibb.co/4g2Jtvc/home.png" property="og:image" />
 			</Helmet>
-			<Welcome hasActiveSub={hasActiveSub} />
+			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
 			<Feed currentUser={currentUser} />
 {/* 			{showMessage &&
 				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
