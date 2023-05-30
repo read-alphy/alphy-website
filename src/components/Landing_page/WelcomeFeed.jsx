@@ -30,7 +30,7 @@ function Feed(props) {
 	
 	let calledAndEmpty = true 
 
-
+console.log(hasMorePersonal)
 		
 
 	

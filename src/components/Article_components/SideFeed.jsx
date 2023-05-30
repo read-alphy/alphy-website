@@ -196,7 +196,7 @@ function SideFeed(props) {
 		}
 		setTimeout(() => {
 			setReady(true)
-		},500);
+		},1000);
 	}, []);
 
 	if(currentUser!==null && called===false){
