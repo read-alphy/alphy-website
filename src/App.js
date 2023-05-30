@@ -45,7 +45,7 @@ function App() {
 	
 
 	const stripePromise = loadStripe(
-		process.env.REACT_APP_STRIPE_PK
+		`${process.env.REACT_APP_STRIPE_PK}`
 	);
 	
 useEffect(() => {
