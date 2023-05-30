@@ -33,6 +33,14 @@ function Feed(props) {
 
 		
 
+	
+		
+		/* getData(0, true, true); */
+		/* 		if (currentUser !== null) {
+					getDataPersonal(0, true, true);
+				} */
+
+
 
 
 useEffect(() => {
@@ -58,12 +66,13 @@ useEffect(() => {
 	const navigateFeeds = (state) => {
 		if(isPublic===false && state==2){
 		setisPublic(true)
-		
-			getData(0, true, true);
+		setOffset(0)
+		getData(0, true, true);
 
 		}
 
 		else if(isPublic===true && state==1){
+			setOffsetPersonal(0)
 			setisPublic(false)
 			getDataPersonal(0, true, true);
 		}
@@ -103,7 +112,7 @@ useEffect(() => {
 		}
 		setIsLoadingPersonal(true);
 		if (currentUser) {
-			
+			setIsLoadingPersonal(true)
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
@@ -137,11 +146,15 @@ useEffect(() => {
 	};
 
 	const loadMore = () => {
+		if(isPublic){
 		setOffset(offset + limit);
 		getData(offset + limit, false, true);
-
-		setOffsetPersonal(offset + limit);
-		getDataPersonal(offset + limit, false, true);
+	}
+	else{
+		setOffsetPersonal(offsetPersonal + limit);
+		getDataPersonal(offsetPersonal + limit, false, true);
+	}	
+	
 
 	};
 
@@ -311,8 +324,7 @@ if(called===false){
 											</div>
 									})
 								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
-
-									</div>
+						</div>
 						{called==true && currentUser!==null && ready==true && dataPersonal.length==0 ? (
 							<div className={`flex flex-col ${calledAndEmpty===false?"hidden":""} col-span-2 mx-auto block items-center`} >
 
