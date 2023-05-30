@@ -221,12 +221,12 @@ export default function Welcome({hasActiveSub,credit}) {
 			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
 		>
-			{localStorage.getItem("bannerClosed")==="true" ? (null) : 
+			{/* {localStorage.getItem("bannerClosed")==="true" ? (null) : 
 
 						(<div id="marketing-banner" tabindex="-1" className={`fixed ${localStorage.getItem("bannerClosed")===true ? "hidden":""}z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 drop-shadow-md rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600`}>
 				<div className="flex flex-col items-start mb-3 mr-4 md:items-center md:flex-row md:mb-0">
 			
-					<p className="flex items-center text-sm font-normal dark:text-zinc-300 text-gray-500 dark:dark:text-zinc-300 text-gray-400">Notice: We had some changes to our usage policy. Check the <span><a className="underline" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a></span> page for more info! </p>
+					<p className="flex items-center text-sm font-normal dark:text-zinc-300 text-gray-500 dark:dark:text-zinc-300 text-gray-400">Notice: We had some changes to our usage policy. Check the <span><a className="underline" href={currentUser ? "/account" : "/plans"}>{currentUser ? " Account " : " Plans "}</a></span> page for more info! </p>
 				</div>
 				<div className="flex items-center flex-shrink-0">
 				<a onClick={handleCloseBanner} href={currentUser ? "/account" : "plans"} className="inline-flex items-center px-3 py-2 mr-3 text-xs font-medium dark:text-zinc-300 text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:dark:text-zinc-300 text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg> Learn more</a>
@@ -237,7 +237,7 @@ export default function Welcome({hasActiveSub,credit}) {
 					</button>
 				</div>
 			</div>)
-			}
+			} */}
 
 
 {/* 			{loading && (

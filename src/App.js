@@ -45,7 +45,7 @@ function App() {
 
 
 	const stripePromise = loadStripe(
-		"pk_live_51MeGOKJmF4J0rk0xzE0Cl6UmLItHqja1URuUZGHsfOpoATmt60o5CDG3rNXyHrvd28CCxUnb5biyLOMewIz0psQz00mEIfPVl6"
+		process.env.REACT_APP_STRIPE_PK
 	);
 	
 useEffect(() => {
