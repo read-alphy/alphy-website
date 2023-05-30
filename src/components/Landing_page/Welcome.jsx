@@ -106,8 +106,17 @@ export default function Welcome({hasActiveSub,credit}) {
 			let video_source
 			//check if video already exists
 			if (inputValue.includes('https://www.youtube.com')) {
+				
+				if(inputValue.includes('https://www.youtube.com/watch')){
 				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
+				console.log(videoId)
+				}
+				else if(inputValue.includes('https://www.youtube.com/live') ){
+					videoId = inputValue.split('/').pop().split("?")[0];
+					console.log(videoId)
+				}
 				video_source = "yt"
+				
 			
 		}
 
