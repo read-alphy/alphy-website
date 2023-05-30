@@ -33,14 +33,6 @@ function Feed(props) {
 
 		
 
-	
-		
-		/* getData(0, true, true); */
-		/* 		if (currentUser !== null) {
-					getDataPersonal(0, true, true);
-				} */
-
-
 
 
 useEffect(() => {
@@ -111,11 +103,11 @@ useEffect(() => {
 		}
 		setIsLoadingPersonal(true);
 		if (currentUser) {
-			setIsLoadingPersonal(true)
+			
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/sources?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
+					}/sources/?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
 					headers: {
 						'id-token': idtoken,
 					}
@@ -319,11 +311,12 @@ if(called===false){
 											</div>
 									})
 								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
-						</div>
+
+									</div>
 						{called==true && currentUser!==null && ready==true && dataPersonal.length==0 ? (
 							<div className={`flex flex-col ${calledAndEmpty===false?"hidden":""} col-span-2 mx-auto block items-center`} >
 
-								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
+								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy. {hasMorePersonal ? "If you've submitted content previously, simply refresh the page." : ""}</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
 								</div>
 						):null
 						}

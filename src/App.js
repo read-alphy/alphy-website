@@ -42,10 +42,10 @@ function App() {
 	const [called, setCalled] = useState(false)
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
-
+	
 
 	const stripePromise = loadStripe(
-		"pk_test_51MeGOKJmF4J0rk0xCxBc6dR5K00J2dD5ubl4o8hxAiR1aWJq2LUsw3uLVPPmdKP82IKPX6Xhp0TG1P6QVDjmiT3y00mDm8PvrR"
+		process.env.REACT_APP_STRIPE_PK
 	);
 	
 useEffect(() => {
