@@ -105,7 +105,7 @@ export default function Pricing({ stripePromise }) {
             currentUser.getIdToken().then((idToken) => {
                 axios
                     .get(
-                        `${process.env.REACT_APP_API_URL}/credit`,
+                        `${process.env.REACT_APP_API_URL}/payments/credit`,
                         {
                             headers: {
                                 'id-token': idToken,
@@ -225,7 +225,7 @@ export default function Pricing({ stripePromise }) {
                                                 <li className="flex space-x-3">
 
 
-                                                    <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
+                                                    {/*    <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
                                                         Standard Questioning <button id="popoverButton1" data-popover-target="popoverDescription1" data-popover-placement="right" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
 
                                                     <div data-popover id="popoverDescription1" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
@@ -234,7 +234,8 @@ export default function Pricing({ stripePromise }) {
 
                                                         </div>
                                                         <div className="popover-arrow" role="presentation"></div>
-                                                    </div>
+                                                    </div> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Ask questions to Alphy</span>
                                                 </li>
                                                 {/*      <li className="flex space-x-3">
                                         <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Browser Extension</span>
@@ -250,9 +251,9 @@ export default function Pricing({ stripePromise }) {
                                                     {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
 
                                                     <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
-                                                        Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="right" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
+                                                        Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="bottom" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
 
-                                                    <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
+                                                    <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-mildDarkMode border dark:border-0 rounded-lg shadow-sm opacity-0 w-72`}>
                                                         <div className="p-3 space-y-2">
                                                             <p> You can only submit videos with greater than <strong className="underline">10,000 views</strong></p>
 
@@ -323,7 +324,7 @@ export default function Pricing({ stripePromise }) {
 
                                                 <li className="flex space-x-3">
                                                     <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 4 hours</span>
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No duration limit for submissions</span>
                                                 </li>
 
                                                 <li className="flex space-x-3">
@@ -337,11 +338,11 @@ export default function Pricing({ stripePromise }) {
                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Free Twitter Spaces transcription</span>
                                                     </li>   
 
-                                                <li className="flex space-x-3">
+                                           {/*      <li className="flex space-x-3">
                                                     <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                                                     <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts and summaries</span>
                                                 </li>
-
+ */}
                                             </ul>
                                         </div>
                                         <a className={`${hasActiveSub ? "pointer-events-none" : ""}`} href={(currentUser && !hasActiveSub) && `/plans/checkout`}>
@@ -399,7 +400,17 @@ export default function Pricing({ stripePromise }) {
                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">2 hours of free transcription for YouTube</span>
                                             </li>
                                             <li className="flex space-x-3">
-                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Standard questioning</span>
+                                                     {/*    <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
+                                                        Standard Questioning <button id="popoverButton1" data-popover-target="popoverDescription1" data-popover-placement="right" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
+
+                                                    <div data-popover id="popoverDescription1" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
+                                                        <div className="p-3 space-y-2">
+                                                            <p> Rate limits may apply for rapid queries.</p>
+
+                                                        </div>
+                                                        <div className="popover-arrow" role="presentation"></div>
+                                                    </div> */}
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Ask questions to Alphy</span>
                                             </li>
                                             {/*      <li className="flex space-x-3">
                                         <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Browser Extension</span>
@@ -415,9 +426,9 @@ export default function Pricing({ stripePromise }) {
                                                 {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
 
                                                 <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
-                                                    Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="right" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
+                                                    Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="bottom" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
 
-                                                <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border rounded-lg shadow-sm opacity-0 w-72`}>
+                                                <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-mildDarkMode border dark:border-0 dark:text-zinc-200 rounded-lg shadow-sm opacity-0 w-72`}>
                                                     <div className="p-3 space-y-2">
                                                         <p> You can only submit videos with greater than <strong className="underline">10,000 views</strong></p>
 
@@ -482,7 +493,7 @@ export default function Pricing({ stripePromise }) {
                                             <li className="flex space-x-3">
 
                                                 <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 4 hours</span>
+                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No duration limit for submissions</span>
                                             </li>
 
                                             <li className="flex space-x-3">
@@ -497,10 +508,10 @@ export default function Pricing({ stripePromise }) {
             </li>   
 
 
-                                            <li className="flex space-x-3">
+                                     {/*        <li className="flex space-x-3">
                                                 <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts and summaries</span>
-                                            </li>
+                                            </li> */}
 
                                         </ul>
                                     </div>

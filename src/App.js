@@ -40,16 +40,43 @@ function App() {
 	const { currentUser } = useAuth();
 	const [hasActiveSub, setHasActiveSub] = useState(false)
 	const [called, setCalled] = useState(false)
+	const [credit, setCredit] = useState(0)
+	const[creditcalled, setCreditCalled] = useState(false)
+
 
 	const stripePromise = loadStripe(
 		"pk_test_51MeGOKJmF4J0rk0xCxBc6dR5K00J2dD5ubl4o8hxAiR1aWJq2LUsw3uLVPPmdKP82IKPX6Xhp0TG1P6QVDjmiT3y00mDm8PvrR"
 	);
+	
 useEffect(() => {
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
 		getCustomerInfo(currentUser)
 	}
 }, 1000)
+
+if (currentUser && creditcalled!==true) {
+	currentUser.getIdToken().then((idToken) => {
+		axios
+			.get(
+				`${process.env.REACT_APP_API_URL}/payments/credit`,
+				{
+					headers: {
+						'id-token': idToken,
+					},
+				},
+			)
+			.then((response) => {
+				const [fixed, monthly] = response.data
+				setCredit(fixed + monthly)
+				setCreditCalled(true)
+				
+			})
+			.catch((error) => {
+				console.error(error)
+			});
+	});
+} 
 })
 
 	const getCustomerInfo = async (currentUser) => {
@@ -113,7 +140,7 @@ useEffect(() => {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} />} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
@@ -124,14 +151,14 @@ useEffect(() => {
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'} />
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} />
 								}
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
 
 							
-							<Route path="/account" element={<Account stripe={stripePromise} />} /> 
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit}/>} /> 
 							
 							<Route path="/plans" element={<Pricing stripe={stripePromise} />} />
 

@@ -5,7 +5,7 @@
 * {
 	padding: 0;
 	margin: 0;
-	font-family: 'Segoe UI', sans-serif;
+	font-family: 'Noto Sans', sans-serif;
 }
 
 body {
@@ -566,10 +566,16 @@ CONTENT PAGE
 	margin: 0;
 	padding: 0;
 }
-.summary-text pre code{
-	font-family: 'Segoe UI', sans-serif;
+
+.summary-text {
+	font-family: 'Noto Sans', sans-serif;
+}
+.summary-text code{
+
 	white-space: pre-wrap;
 	padding-left:10px;
+	font-family: 'Noto Sans', sans-serif;
+
 }
 
 .summary-text h2{
@@ -577,7 +583,7 @@ CONTENT PAGE
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family:"Noto Sans";
+	font-family: 'Noto Sans', sans-serif;
 }
 
 .summary-text h3{
@@ -585,21 +591,21 @@ CONTENT PAGE
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family:"Noto Sans";
+	font-family: 'Noto Sans', sans-serif;
 }
 
 .summary-text h4{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family:"Noto Sans";
+	font-family: 'Noto Sans', sans-serif;
 }
 
 .summary-text h5{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family:"Noto Sans";
+	font-family: 'Noto Sans', sans-serif;
 }
 
 

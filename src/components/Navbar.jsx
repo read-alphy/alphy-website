@@ -5,19 +5,33 @@ import { useAuth } from '../hooks/useAuth';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { GoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
+import Logo from "../img/logo.png"
+import LogoBlack from "../img/logo-inverted.png"
+
 function Navbar({ collapsed, setCollapsed }) {
 	const auth = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { currentUser, logout } = useAuth();
 	const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
-
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	useEffect(() => {
 		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 			document.documentElement.classList.add('dark')
 		  } else {
 			document.documentElement.classList.remove('dark')
 		  }
+
+		  const handleResize = () => {
+			setWindowWidth(window.innerWidth);
+		  };
+	  
+		  window.addEventListener('resize', handleResize);
+	  
+		  // Cleanup the event listener when the component is unmounted
+		  return () => {
+			window.removeEventListener('resize', handleResize);
+		  };
 	}, []);
   
 	
@@ -30,6 +44,7 @@ function Navbar({ collapsed, setCollapsed }) {
       document.documentElement.classList.add(colorTheme);
       setDarkMode(colorTheme);
       localStorage.setItem("theme", colorTheme);
+	  
     };
 
 	const handleScroll = (target) => {
@@ -63,7 +78,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		auth.loginWithGoogle();
 		setCollapsed(true)
 			.then(() => {
-				navigate('/');
+				window.location.reload()
 			})
 			.catch((error) => {
 				console.log(error.message);
@@ -73,9 +88,8 @@ function Navbar({ collapsed, setCollapsed }) {
 	const handleSignOut = async () => {
 		try {
 			auth.logout();
-
 			setCollapsed(true);
-			navigate('/');
+			window.location.reload()
 		} catch (error) {
 			console.log(error);
 		}
@@ -106,9 +120,14 @@ function Navbar({ collapsed, setCollapsed }) {
 		className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 			}`}
 	>
-		<div className={`pl-10 flex items-center font-bold  ${(window.innerWidth > 999 && (isYt || isSp)) ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] min-w-[330px] w-[330px]`}>
+		<div className={`pl-10 flex items-center font-bold  ${(windowWidth > 999 && (isYt || isSp))  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
 			<Link to="/" className="dark:text-gray-200">
-				<h1 className="text-2xl">ALPHY</h1>
+				<div className="flex-row flex">
+				<img src={Logo} width={40} className="hidden dark:block"></img>
+				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
+				<h1 className="ml-2 text-2xl">ALPHY</h1>
+				
+				</div>
 			</Link>
 		</div>
 
@@ -122,13 +141,13 @@ function Navbar({ collapsed, setCollapsed }) {
 					>
 						Reach Us
 					</div>
-					<div
+{/* 					<div
 						className="hidden md:block md:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 md:block  pt-2"
 						onClick={() => handleScroll('about')}
 					>
 						{' '}
 						About{' '}
-					</div>
+					</div> */}
 					<div
 						type="button"
 						className={`hidden md:block md:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 md:block pt-2`}
@@ -170,7 +189,7 @@ function Navbar({ collapsed, setCollapsed }) {
 				<div
 					id={'nav-icon3'}
 					onClick={() => setCollapsed(!collapsed)}
-					className={`block cursor-pointer col-span-3 mr-5 md:hidden ${collapsed ? ' ' : ' open '} dark:text-gray-200`}
+					className={`block cursor-pointer col-span-3 mr-5 md:hidden ${collapsed ? ' ' : ' open '} dark:text-gray-200 dark:invert`}
 				>
 					<span></span>
 					<span></span>
@@ -192,7 +211,7 @@ function Navbar({ collapsed, setCollapsed }) {
 				<div className="text-center mx-auto items-center">
 					<div className="overflow-y-auto z-50  text-sm mx-auto items-center justify-center flex flex-row">
 						<div className="flex mx-auto flex-row min-w-[300px]">
-							<div className="flex flex-row">
+						{/* 	<div className="flex flex-row">
 								<div className="justify-center items-center flex ml-4">
 									<div
 										className="mr-2 font-normal text-blueLike dark:bg-darkMode dark:text-zinc-300 cursor-pointer"
@@ -201,7 +220,7 @@ function Navbar({ collapsed, setCollapsed }) {
 										About
 									</div>
 								</div>
-							</div>
+							</div> */}
 
 							<div className=" flex m-1 ml-6 text-center justify-center text-sm">
 								<div
@@ -226,7 +245,7 @@ function Navbar({ collapsed, setCollapsed }) {
 							</div>
 
 										<div className="flex font-normal ml-6 cursor-pointer">
-														{localStorage.getItem('theme') === 'dark' ? (
+														{localStorage.getItem('theme') === 'dark' && !collapsed ? (
 													<svg className="mr-1 hover:text-zinc-50 duration-200 transition ease-in" onClick={handleDarkMode} width={25} aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" strokeLinecap="round" strokeLinejoin="round"></path>
 								</svg>):

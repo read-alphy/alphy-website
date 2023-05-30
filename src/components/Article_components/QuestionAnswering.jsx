@@ -11,12 +11,14 @@ import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useLocation } from 'react-router-dom';
 
+
 export default function QuestionAnswering(props) {
 	// console.log(props.props, props.key_qa)
 	const windowSize = useWindowSize();
 	const QARef = useRef(null);
 	const location = useLocation();
 	const buttonRef = useRef(null);
+	const [collapseIndex, setCollapseIndex] = useState(-1);
 
 	const [answerData, setAnswerData] = useState('');
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
@@ -31,7 +33,7 @@ export default function QuestionAnswering(props) {
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
 	const [clicked, setClicked] = useState(false);
-	let from_qa_url = false
+
 
 	function updateVariable(event) {
 
@@ -46,6 +48,8 @@ export default function QuestionAnswering(props) {
 
 				const my_question = location.pathname.split('/')[2].split("&q=")[1]
 				runAnswererFromUrl(my_question)
+
+
 
 				setTimeout(() => {
 					const element = document.querySelector("#q_and_a");
@@ -62,8 +66,6 @@ export default function QuestionAnswering(props) {
 		}, 1000);
 
 
-
-
 	}, [])
 
 	function runAnswererFromUrl(my_question) {
@@ -71,12 +73,19 @@ export default function QuestionAnswering(props) {
 		if (my_question) {
 			const decodedText = decodeURIComponent(my_question);
 
+
+
 			if (props.key_qa[decodedText]) {
 
-				setIsCleared(false);
-				setShowBaseQA(true);
+				const keys = Object.keys(props.key_qa);
+				const index = keys.indexOf(decodedText);
+				
+				setCollapseIndex(index)
+				//setCollapseIndex(index)
+				//setIsCleared(false);
+				//setShowBaseQA(true);
 				setBaseQuestion(decodedText)
-				setInputValue(decodedText)
+				//setInputValue(decodedText)
 				setClicked(true)
 
 			}
@@ -91,14 +100,7 @@ export default function QuestionAnswering(props) {
 					}
 				}, 1000);
 			}
-			/* 			axios
-							.post(
-								`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${props.data.source_type}/${props.data.source_id
-								}/question`,
-								inputValue,
-							).then((response) => {
-								
-							}) */
+
 		}
 	}
 
@@ -119,6 +121,24 @@ export default function QuestionAnswering(props) {
 		QARef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
+
+	const handleBaseQAaccordion= (event, index,item) => {
+
+		
+			if(collapseIndex===index){
+				setCollapseIndex(-1)
+				return
+			}
+			else{
+				setCollapseIndex(index)
+			}
+	
+		// setIsCleared(false);
+		/* setShowBaseQA(true); */
+		// setInputValue(event.target.textContent);
+		setBaseQuestion(item);
+		QARef.current.scrollIntoView({ behavior: 'smooth' });
+	};
 	const handleOptionClear = () => {
 		setShowBaseQA(false);
 		setInputValue('');
@@ -137,14 +157,22 @@ export default function QuestionAnswering(props) {
 		}
 	};
 	const handleShareLink = () => {
-		const encodedText = encodeURIComponent(inputValue);
-		const url = `${window.location}&q=${encodedText}`;
+		const encodedText = encodeURIComponent(baseQuestion ? baseQuestion :inputValue);
+		
+		const url = `${window.location.origin}${location.pathname.split('&q=')[0]}&q=${encodedText}`;
 		navigator.clipboard.writeText(url);
 		toast.success('Link copied to clipboard!');
 	};
 	const handleCopyToClipboard = () => {
+		let question
+		if(baseQuestion){
+			 question = baseQuestion
+		}
+		else{
+			question = inputValue
+		}
 		const myHtml = document.getElementById("answer-area");
-		const plainText = `${inputValue} \n\n ${myHtml.innerText}`;
+		const plainText = `${question} \n\n ${myHtml.innerText}`
 		navigator.clipboard.writeText(plainText);
 		toast.success('Answer copied to clipboard!');
 	};
@@ -180,11 +208,12 @@ export default function QuestionAnswering(props) {
 
 					axios
 						.post(
-							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/summaries/${props.data.source_type}/${props.data.source_id
+							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/${props.data.source_type}/${props.data.source_id
 							}/question`,
 							inputValue,
 						)
 						.then((response) => {
+							
 							setAnswerData(response.data);
 							setIsLoadingInside(false);
 						});
@@ -211,9 +240,10 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div id="q_and_a" className={`question-answering md:max-h-[60vh] md:min-h-[800px] border-b overflow-auto mx-auto pb-5`} ref={QARef}>
-
-			<p className="mb-4 font-medium text-xl text-zinc-500">Chat with the content. In any language you want.</p>
+		<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
+			
+			
+			<p className="mb-4 font-light text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
 			<div className="Md:pl-10 md:pr-10 ">
 
 				<Toaster position="bottom-center" />
@@ -245,10 +275,10 @@ export default function QuestionAnswering(props) {
 							title={inputValue}
 							type="text"
 							id="search"
-							className={` block w-full drop-shadow-sm p-3 pr-10 text-sm text-zinc-500 placeholder:text-zinc-90  border-r-none ${inputError && inputValue.length === 0
-								? 'border-1 border-red-300'
-								: 'border border-zinc-100 dark:border-zinc-700'
-								} placeholder:italic rounded-l-full bg-zinc-50 dark:bg-darkMode focus:outline-none focus:border-slate-50 focus:ring-slate-50 `}
+							className={` block w-full  p-3 pr-10 text-sm text-zinc-500 dark:text-zinc-200 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
+								? 'border-1 border-r-0 border-red-300  focus:outline-none focus:border-red-300 focus:ring-0'
+								: 'border border-zinc-200 border-r-0  dark:border-zinc-700  dark:border-r-0 focus:outline-none focus:border-zinc-200 focus:border-r-0 dark:focus:border-zinc-700 dark:focus:ring-0 focus:ring-zinc-200 focus:ring-0	'
+								} placeholder:italic dark:placeholder:text-zinc-500 placeholder:text-zinc-400 rounded-l-full bg-zinc-50 dark:bg-darkMode `}
 							placeholder="Ask anything to the transcript..."
 							autoComplete="off"
 							required
@@ -283,7 +313,7 @@ export default function QuestionAnswering(props) {
 						type="submit"
 						ref={buttonRef}
 						onClick={fetchData}
-						className="p-3  px-5 rounded-r-full drop-shadow-sm  border-l-none text-sm font-medium text-whiteLike bg-zinc-50 dark:bg-darkMode rounded-md dark:border dark:border-zinc-700 "
+						className={`p-3  px-5 rounded-r-full   text-sm font-medium text-whiteLike bg-zinc-50 dark:bg-darkMode rounded-md dark:border dark:border-zinc-700 ${inputError && inputValue.length === 0 ? 'border border-red-300 border-l-0':"border border-zinc-200 border-l-0"}`}
 					>
 						<svg
 							aria-hidden="true"
@@ -303,21 +333,153 @@ export default function QuestionAnswering(props) {
 				</div>
 				{inputError && inputValue.length === 0 ? (
 					<div>
-						<span className="text-sm text-red-400">{errorText}</span>
+						<span className="text-sm ml-2 text-red-400">{errorText}</span>
 					</div>
 				) : null}
 
 
 
 				<div className="mt-10">
+					
 					{isCleared && !isLoadingInside && answerData.length === 0 ? (
 						<div>
 
-							<p className="mb-5 text-xl text-zinc-600 dark:text-zinc-200">
+							<p className="mb-5 underline text-l font-normal text-zinc-500 dark:text-zinc-200">
 								{' '}
-								Or check out the questions Alphy already answered for you
+								Questions by Alphy
 							</p>
 							{Object.keys(props.key_qa).map((item, index) => (
+									<div id="accordion-flush"  data-active-classes="bg-zinc-50 dark:bg-darkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+										<h2 id="accordion-flush-heading-1">
+											<button onClick={(event) => handleBaseQAaccordion(event,index,item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+											<span>{item}</span>
+											<svg data-accordion-icon class={`w-6 h-6 ${index==collapseIndex && collapseIndex!=-1 ? "rotate-180": ""} shrink-0`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+											</button>
+										</h2>
+								<div class={index==collapseIndex && collapseIndex!=-1 ? "": "hidden"} aria-labelledby="accordion-flush-heading-1">
+										<div class="py-5 border-b border-gray-200 dark:border-gray-700">
+										<div className="flex flex-row justify-end text-slate-400">
+											
+												<svg onClick={handleShareLink} className="cursor-pointer flex flex-row" width="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<title className="font-bold">Share link to question</title>
+													<path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" strokeLinecap="round" strokeLinejoin="round"></path>
+												</svg>
+												<svg onClick={handleCopyToClipboard} className="cursor-pointer flex flex-row" width="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<title className="font-bold">Copy to clipboard</title>
+													<path d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" strokeLinecap="round" strokeLinejoin="round"></path>
+												</svg>
+											</div>
+											<div>
+												<div>
+											<p id="answer-area" className="answer-area text-zinc-700 dark:text-zinc-300 font-normal" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
+											</div>
+									
+											
+											</div>
+								
+								<div className="col-span-1 justify-end flex flex-row flex ">
+										
+							<button
+									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
+									onClick={() => setBaseSources(!baseSources)}
+								>
+									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
+										See sources from the {props.data.source_type=="yt"?"video":"recording"}{' '}
+									</span>
+									<svg
+										className={`${baseSources ? 'hidden' : 'block'} `}
+										aria-hidden="true"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+										width="30px"
+									>
+										<path
+											clipRule="evenodd"
+											d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z"
+											fillRule="evenodd"
+										></path>
+									</svg>
+								</button>
+
+								{baseSources ? (
+									<div className="mt-10">
+										<div>
+											<h1 className="mb-4 text-xl font-normal"> Sources from the video sorted by relevance</h1>
+
+											{props.key_qa[item]
+												? props.key_qa[item].sources.map((source, index) => (
+													<p key={index}>
+
+														{source.start && source.end ? (
+															window.innerWidth > 999 && props.data.source_type == "yt" ?
+																<a onClick={updateVariable} className="underline cursor-pointer">
+																	
+
+																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
+																	{":"}
+																	{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start%3600)<600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}`:Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
+
+																	{" - "}
+																	
+																	{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
+																	{":"}
+																	{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end%3600)<600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}`:Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+																</a> : <a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}`} className="underline">
+
+																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+																</a>
+														) : 
+														window.innerWidth > 999 && props.data.source_type == "yt" ?
+																<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
+															:
+															<a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=0`} className="underline">00:00:00</a>
+															}
+
+
+														<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
+
+													</p>
+												))
+												: null}
+										</div>
+										<button
+											className={`cursor-pointer  justify-end  mt-10 mx-auto flex`}
+											onClick={() => {
+												setBaseSources(!baseSources);
+												QARef.current.scrollIntoView({ behavior: 'smooth' });
+											}}
+										>
+											<span className="text-zinc-600 dark:text-zinc-200 text-l pr-1">See less</span>
+											<svg
+												className=""
+												aria-hidden="true"
+												fill="currentColor"
+												viewBox="0 0 24 24"
+												xmlns="http://www.w3.org/2000/svg"
+												width="30px"
+											>
+												<path
+													clipRule="evenodd"
+													d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z"
+													fillRule="evenodd"
+												></path>
+											</svg>{' '}
+										</button>{' '}
+									</div>
+								) : null}
+										</div>
+										
+											
+											</div>
+										</div>
+									</div>))}
+
+							{/* {Object.keys(props.key_qa).map((item, index) => (
 
 								index % 2 == 0 ? <button
 									key={index}
@@ -332,7 +494,7 @@ export default function QuestionAnswering(props) {
 								>
 									{item}
 								</button>
-							))}
+							))} */}
 						</div>
 					) : null}
 				</div>
@@ -347,7 +509,7 @@ export default function QuestionAnswering(props) {
 						}}
 					>
 
-						<ReactLoading type="spinningBubbles" color="#52525b" />
+<ReactLoading type="spin" color="#a1a1aa" width={30}/>
 					</div>
 				) : (
 					<div> </div>
@@ -364,7 +526,7 @@ export default function QuestionAnswering(props) {
 								<div className="grid grid-cols-2 flex flex-row mb-4">
 
 
-									<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
+									<h1 className="text-xl col-span-1 flex flex-row font-normal">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -385,6 +547,18 @@ export default function QuestionAnswering(props) {
 											<path d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" strokeLinecap="round" strokeLinejoin="round"></path>
 										</svg>
 									</div>
+
+								
+
+							
+
+
+
+
+
+
+
+								
 								</div>
 								<div id="answer-area" className="answer-area text-l container">
 									<TypeIt className="mb-3"
@@ -405,7 +579,7 @@ export default function QuestionAnswering(props) {
 									onClick={() => setAnswer(!answer)}
 								>
 									<span className={`${answer ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
-										See sources from the video
+									See sources from the {props.data.source_type=="yt"?"video":"recording"}{' '}
 									</span>
 									<svg
 										className={`${answer ? 'hidden' : 'block'} `}
@@ -426,7 +600,7 @@ export default function QuestionAnswering(props) {
 								{answer ? (
 									<div>
 										<div>
-											<h1 className="mb-4 text-xl font-semibold md:mb-8"> Sources from the video sorted by relevance:</h1>
+											<h1 className="mb-4 text-xl font-normal md:mb-8"> Sources from the video sorted by relevance:</h1>
 
 											{answerData.sources.map((source, index) => (
 												<div>
@@ -504,7 +678,7 @@ export default function QuestionAnswering(props) {
 								<div >
 									<div className={`grid grid-cols-2 flex flex-row mb-4 `}>
 
-										<h1 className="text-xl col-span-1 flex flex-row font-semibold">Answer from Alphy
+										<h1 className="text-xl col-span-1 flex flex-row font-normal">Answer from Alphy
 
 											<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 												<title className="font-bold">Clear</title>
@@ -534,7 +708,7 @@ export default function QuestionAnswering(props) {
 									onClick={() => setBaseSources(!baseSources)}
 								>
 									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
-										See sources from the video{' '}
+										See sources from the video sorted by relevance{' '}
 									</span>
 									<svg
 										className={`${baseSources ? 'hidden' : 'block'} `}
@@ -555,7 +729,7 @@ export default function QuestionAnswering(props) {
 								{baseSources ? (
 									<div>
 										<div>
-											<h1 className="mb-4 text-xl font-semibold"> Sources from the video</h1>
+											<h1 className="mb-4 text-xl font-normal"> Sources from the video</h1>
 
 											{props.key_qa[baseQuestion]
 												? props.key_qa[baseQuestion].sources.map((source, index) => (
@@ -564,13 +738,32 @@ export default function QuestionAnswering(props) {
 														{source.start && source.end ? (
 															window.innerWidth > 999 && props.data.source_type == "yt" ?
 																<a onClick={updateVariable} className="underline cursor-pointer">
+																	
 
-																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
+																	{":"}
+																	{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start%3600)<600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}`:Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
+
+																	{" - "}
+																	
+																	{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
+																	{":"}
+																	{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end%3600)<600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}`:Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
+																	{":"}
+																	{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																</a> : <a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}`} className="underline">
 
 																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																</a>
-														) : null}
+														) : 
+														window.innerWidth > 999 && props.data.source_type == "yt" ?
+																<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
+															:
+															<a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=0`} className="underline">00:00:00</a>
+															}
+
 
 
 														<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}

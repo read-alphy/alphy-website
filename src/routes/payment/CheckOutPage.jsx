@@ -6,12 +6,14 @@ import CheckOutForm from "./CheckOutForm";
 import { useAuth } from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
-
+import StripeBanner from "../../img/stripe_banner.svg";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
+//const stripePromise = loadStripe("pk_live_51MeGOKJmF4J0rk0xzE0Cl6UmLItHqja1URuUZGHsfOpoATmt60o5CDG3rNXyHrvd28CCxUnb5biyLOMewIz0psQz00mEIfPVl6")
 const stripePromise = loadStripe("pk_test_51MeGOKJmF4J0rk0xCxBc6dR5K00J2dD5ubl4o8hxAiR1aWJq2LUsw3uLVPPmdKP82IKPX6Xhp0TG1P6QVDjmiT3y00mDm8PvrR")
+
 
 export default function CheckOutPage() {
     
@@ -75,12 +77,18 @@ export default function CheckOutPage() {
 
 
 
+let appearance
 
-
-
-    const appearance = {
+    if(localStorage.getItem("theme")==="dark"){
+        appearance = {
+            theme: 'night',
+        }
+    }
+    else{
+    appearance = {
         theme: 'stripe',
     };
+}
     const options = {
         clientSecret,
         appearance,
@@ -89,22 +97,26 @@ export default function CheckOutPage() {
 
 
     return (
-        <div className="mx-auto items-center">
+        <div className="h-[110vh] dark:bg-darkMode bg-zinc-50">
+        <div className="mx-auto container items-center pt-10 max-h-[95vh]">
             {/* <button onClick={fetchData}>Create</button> */}
 
 
             {clientSecret.length > 0 ? (
-                <div className="container max-w-[400px] mx-auto items-center mt-20 mb-20">
-                    <div className="mb-10">
+                <div className="container max-w-[400px] mx-auto items-center ">
+                    <div className="mb-10 mt-20">
                         <p className="text-xl mb-5">Alphy Monthly Subscription</p>
-                        <p className="text-zinc-500">$5.00</p>
+                        <p className="text-zinc-500">$5.00 </p>
+                       
                     </div>
-
+                    
+                  
 
                     <Elements options={options} stripe={stripePromise}>
 
                         <CheckOutForm clientSecret={clientSecret} />
                     </Elements>
+                    
 
                 </div>)
                 : (<Loading />
@@ -112,6 +124,7 @@ export default function CheckOutPage() {
 
             {/* <button onClick={getCustomerInfo}>Get Current Data</button> */}
 
+        </div>
         </div>
     );
 

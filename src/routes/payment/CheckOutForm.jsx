@@ -8,7 +8,7 @@ import {
     CardElement,
 
 } from "@stripe/react-stripe-js";
-
+import StripeBanner from "../../img/stripe_banner.svg";
 
 
 export default function CheckOutForm({ clientSecret }) {
@@ -108,7 +108,7 @@ export default function CheckOutForm({ clientSecret }) {
     }
 
     return (
-        <form id="payment-form" onSubmit={handleSubmit}>
+        <form className="dark:text-whiteLike  pb-20" id="payment-form" onSubmit={handleSubmit}>
 
             <LinkAuthenticationElement
                 className="pointer-events-none"
@@ -214,9 +214,13 @@ export default function CheckOutForm({ clientSecret }) {
                             Success!</p> : "Pay now")}
                 </span>
             </button>
-
+            
+{/* <img width={300} src={StripeBanner}></img> */}
             {/* Show any error or success messages */}
             {message && <div id="payment-message">{message}</div>}
+            <div className=" mt-5">
+                        <img width={120} src={StripeBanner}></img>
+                    </div> 
         </form>
     );
 }
