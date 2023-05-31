@@ -52,9 +52,9 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 					</div>
 
 					<div className="text-xs w-1/2">
-						{item.complete ? null : (
+						{item.summaries[0].complete ===true ? null : (
 							<div className="font-bold text-purpleLike dark:text-zinc-300"> 📝 IN PROGRESS</div>
-						)}
+						)}	
 						<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">{item.title}</div>
 						<div className="font-light text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
 
