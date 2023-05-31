@@ -37,7 +37,10 @@ export default function Content(props) {
 	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
-	const [language, setLanguage] = useState(props.data!==undefined && props.data.length>1 && props.data.lang===props.data.summaries[1].lang ? props.data.lang : 'en');
+	
+
+	
+	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && (props.data.lang === props.data.summaries[1].lang && props.data.summaries[1].complete==true)  ? props.data.lang : 'en')
 	const [translationMessage, setTranslationMessage] = useState(false);
 	const[errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
@@ -46,6 +49,7 @@ export default function Content(props) {
 	
 
 	
+
 	const data = props.data
 	
 	let contentSummaries = []
@@ -134,9 +138,10 @@ export default function Content(props) {
 		
 		if(contentSummaries!==undefined){
 			
-			contentSummaries.map(summary => languages.push(summary.lang));
+			contentSummaries.map(summary => summary.summary!==null && languages.push(summary.lang));
 			
 			summary = contentSummaries.find(summary => summary.lang ===   language);
+			
 			
 			
 
@@ -825,7 +830,7 @@ export default function Content(props) {
 :
 
 <div className="flex flex-col mb-20 mt-20 ">
-	{errorMessage ==true || (languagesWanted.includes(language)===true) || language=="en" ? null :
+	{errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) && summary.summary.length!=0 || language=="en" ? null :
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub ==true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.</p> 
