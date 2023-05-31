@@ -15,7 +15,7 @@ function SideFeed(props) {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const [navigated, setNavigated] = useState(false);
-	const [isPublic, setisPublic] = useState(false);
+	const [isPublic, setisPublic] = useState(localStorage.getItem("feedTab")!==null && localStorage.getItem("feedTab")=="true" ? true :  false);
 	const {currentUser} = useAuth();
 	const[firstTimePersonal, setFirstTimePersonal] = useState(true);
 	const [called, setCalled] = useState(false);
@@ -65,6 +65,7 @@ function SideFeed(props) {
 	const navigateFeeds = (state) => {
 		
 		localStorage.setItem("search","")
+		localStorage.setItem("feedTab",`${!isPublic}`)
 	
 		
 
@@ -79,6 +80,7 @@ function SideFeed(props) {
 				setisPublic(false)
 				getDataPersonal(0, true, true,search);
 			}
+		
 		
 		
 
