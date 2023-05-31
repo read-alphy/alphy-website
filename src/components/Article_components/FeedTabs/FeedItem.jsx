@@ -6,7 +6,8 @@ import Twitter from '../../../img/twitter_spaces.png';
 
 const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 	const source_id = item.source_id;
-
+	
+	
 	let imageUrl;
 	if (item.source_type === 'yt') {
 		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
@@ -34,15 +35,18 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 					}}
 					target="_blank"
 				>
-					<div className="w-1/2 min-w-[100px] max-w-[300px] mr-3">
+					<div className={`w-1/2 min-w-[100px] ${window.innerWidth<1660  ? "max-w-[100px]": "max-w-[300px]"} mr-3`}>
 						<div
-							className="flex items-center justify-center h-0 dark:opacity-80 rounded-md bg-gray-600"
+							className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
 							style={{
 								backgroundImage: `url(${imageUrl})`,
 								paddingBottom: '50%',
 								backgroundPosition: 'center',
 								backgroundRepeat: 'no-repeat',
 								backgroundSize: 'cover',
+								
+								
+								
 							}}
 						></div>
 					</div>

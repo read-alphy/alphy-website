@@ -27,6 +27,7 @@ import {
 
 export default function Content(props) {
 	
+	
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
@@ -898,10 +899,10 @@ export default function Content(props) {
 
 				</div>: null
 							}
-{languagesWanted.includes(language) && errorMessage==false && <div className="flex flex-col mb-20 mt-20 ">
+{((summary!=undefined && summary!==null && summary.summary==null) || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
 <p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
-	You successfully submitted your request! <br></br><br></br> Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
+	Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
 	 
 	 <img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
 	 

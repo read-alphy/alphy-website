@@ -150,7 +150,6 @@ function SideFeed(props) {
 		else{
 			
 			setOffsetPersonal(offsetPersonal + limit);
-
 			getDataPersonal(offsetPersonal + limit, false, true, search);
 		}
 		//feedRef.current.scrollTop = feedRef.current.scrollHeight;

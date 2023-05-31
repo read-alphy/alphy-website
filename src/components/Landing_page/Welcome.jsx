@@ -109,11 +109,11 @@ export default function Welcome({hasActiveSub,credit}) {
 				
 				if(inputValue.includes('https://www.youtube.com/watch')){
 				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
-				console.log(videoId)
+				
 				}
 				else if(inputValue.includes('https://www.youtube.com/live') ){
 					videoId = inputValue.split('/').pop().split("?")[0];
-					console.log(videoId)
+					
 				}
 				video_source = "yt"
 				
@@ -188,7 +188,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						}
 						else{	
 							console.log(error)
-							console.log(idToken)
+							
 							toast('There was an error submitting the form. \n \n You are on the Free Plan. Make sure the content you are submitting is shorter than 1 hour and conforms with our content popularity limits.', {
 								duration: 6000,
 								icon: '⚠️',
