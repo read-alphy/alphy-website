@@ -143,9 +143,12 @@ export default function Content(props) {
 			
 			contentSummaries.map(summary => summary.summary!==null && languages.push(summary.lang));
 			
+			
 			summary = contentSummaries.find(summary => summary.lang ===   language);
-			
-			
+			if(summary!==undefined && summary.length>0 && summary.summary===null){
+				setTranslationMessage(true)
+				languagesWanted.push(language)
+			}
 			
 
 			

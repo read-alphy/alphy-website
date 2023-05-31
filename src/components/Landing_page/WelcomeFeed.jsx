@@ -202,12 +202,23 @@ if(called===false){
 					onKeyDown={handleKeyDown}
 					onSubmit={(e) => {
 						e.preventDefault();
-						setOffset(0);
+						
 						localStorage.setItem('search', search);
 						if (searchInputRef.current.value.length === 0) {
 							setSearch('');
 						}
+					if(isPublic==true){
+						setOffset(0);
 						getData(0, true, true);
+						
+					}
+					else{
+						
+						setCalled(false)
+						setOffsetPersonal(0)
+						getDataPersonal(0, true, true);
+				
+					}
 						setSubmitted(true)
 					}}
 				>
@@ -325,7 +336,7 @@ if(called===false){
 									})
 								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 						</div>
-						{called==true && currentUser!==null && ready==true && dataPersonal.length==0 ? (
+						{called==true &&submitted==false&& currentUser!==null && ready==true && dataPersonal.length==0 ? (
 							<div className={`flex flex-col ${calledAndEmpty===false?"hidden":""} col-span-2 mx-auto block items-center`} >
 
 								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy. {hasMorePersonal ? "If you've submitted content previously, simply refresh the page." : ""}</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
