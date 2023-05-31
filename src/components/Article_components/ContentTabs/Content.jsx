@@ -40,7 +40,9 @@ export default function Content(props) {
 	
 
 	
-	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && (props.data.lang === props.data.summaries[1].lang && props.data.summaries[1].complete==true)  ? props.data.lang : 'en')
+	// const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && (props.data.lang === props.data.summaries[1].lang && props.data.summaries[1].summary==true)  ? props.data.lang : 'en')
+	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.summaries[1].summary!==null  ? props.data.lang : 'en')
+	
 	const [translationMessage, setTranslationMessage] = useState(false);
 	const[errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
