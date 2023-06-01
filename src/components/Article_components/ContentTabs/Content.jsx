@@ -40,7 +40,7 @@ export default function Content(props) {
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	
 
-	console.log(props.data.summaries)
+	
 
 	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.lang!== undefined ? props.data.summaries[0].lang : 'en')
 	
