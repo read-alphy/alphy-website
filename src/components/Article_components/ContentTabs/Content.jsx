@@ -467,34 +467,7 @@ export default function Content(props) {
 <div className="flex flex-row justify-end mx-auto">
 	<div className="hidden 3xl:block flex  2xl:ml-40 justify-end ">
 	
-			
-	{transcript.length===0 ? 
-			<select disabled={"true"} onChange={handleLanguageChange} id="small" class={`block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} >
-					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
-						
-						(language === code ? 
-							<option selected key={code} value={code}>
-								{name}
-							</option>
-							:
-
-
-							(index===languages.length 
-								?
-								<option className="text-gray-500 dark:text-gray-300"disabled>___________</option>
-								:
-						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
-								{name}
-							</option>	
-
-							)
-							
-						)
-										
-								))}
-					</select>
-					:
-					<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+			<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 						
 						(language === code ? 
@@ -518,7 +491,7 @@ export default function Content(props) {
 										
 								))}
 					</select>
-					}
+				
 					
 				</div>
 
