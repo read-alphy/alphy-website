@@ -42,7 +42,7 @@ export default function Content(props) {
 
 	
 
-	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.lang!== undefined ? props.data.summaries[0].lang : 'en')
+	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.lang!==undefined ? props.data.summaries[0].lang : 'en')
 	
 	
 	const [translationMessage, setTranslationMessage] = useState(false);
@@ -460,7 +460,7 @@ export default function Content(props) {
 				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className="col-span-2 ">
 						<div className="flex flex-row ">
-						<h1 className="col-span-2 mt-10 3xl:pt-8 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+						<h1 className="col-span-2 mt-10 3xl:pt-8 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 							{data.title}
 						</h1>
 							
@@ -557,7 +557,7 @@ export default function Content(props) {
 				</div>
 
 	<div id="content-area">
-		{ summary !== undefined && language == summary.lang
+		{ transcript.length==0 && language == summary.lang
 		?
 			<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 				{transcript.length>0 &&
@@ -860,7 +860,7 @@ export default function Content(props) {
 
 			</div>
 
-			{contentSummaries!==undefined && contentSummaries.length===0	  && language==="en"?
+			{transcript.length==0 && language==="en"?
 
 				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
