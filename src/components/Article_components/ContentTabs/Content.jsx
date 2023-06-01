@@ -31,13 +31,14 @@ export default function Content(props) {
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
-		
+	const [cautionaryTimeoutPassed, setCautionaryTimeoutPassed] = useState(false);
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
 	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
+	
 	
 
 	
@@ -841,7 +842,7 @@ export default function Content(props) {
 :
 
 <div className="flex flex-col mb-20 mt-20 ">
-	{errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) && summary.summary.length!=0 || language=="en" ? null :
+	{errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) || (summary.summary!==undefined && summary.summary.length>0) || language=="en" ? null :
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub ==true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.</p> 
@@ -860,6 +861,7 @@ export default function Content(props) {
 
 			</div>
 
+{basicDataLoaded && <div>
 			{transcript.length==0 && language==="en"?
 
 				<div className="flex flex-col mb-20 mt-20 ">
@@ -874,17 +876,17 @@ export default function Content(props) {
 
 				</div>: null
 							}
-{((summary!=undefined && summary!==null && summary.summary==null && summary.lang!=="en") || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
-<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+					{((summary!=undefined && summary!==null && summary.summary==null && summary.lang!=="en" ) || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
+					<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
-	Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
-	 
-	 <img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
-	 
-</p>
+						Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
+						
+						<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
+						
+					</p>
 
-</div>}
-
+					</div>}
+					</div>}
 {errorMessage ==true && <div className="flex flex-col mb-20 mt-20 ">
 <p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
