@@ -40,10 +40,10 @@ export default function Content(props) {
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	
 
-	
+	console.log(props.data.summaries)
 
-//	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.summaries[1].summary!==null  ? props.data.lang : 'en')
-	const[language, setLanguage] = useState("en")
+	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.lang!== undefined ? props.data.lang : 'en')
+	
 	
 	const [translationMessage, setTranslationMessage] = useState(false);
 	const[errorMessage, setErrorMessage] = useState(false);
@@ -447,6 +447,8 @@ export default function Content(props) {
 	};
 
 	transcriptParser();
+	
+	
 
 	return (
 		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
@@ -466,8 +468,8 @@ export default function Content(props) {
 	<div className="hidden 3xl:block flex  2xl:ml-40 justify-end ">
 	
 			
-	{data.length===0 ? 
-			<select disabled onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+	{transcript.length===0 ? 
+			<select disabled={"true"} onChange={handleLanguageChange} id="small" class={`block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} >
 					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 						
 						(language === code ? 
@@ -885,7 +887,7 @@ export default function Content(props) {
 
 			</div>
 
-			{contentSummaries!==undefined && contentSummaries.length===	0  ?
+			{contentSummaries!==undefined && contentSummaries.length===	0  && language==="en"?
 
 				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">

@@ -35,7 +35,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 					}}
 					target="_blank"
 				>
-					<div className={`w-1/2 min-w-[100px] ${window.innerWidth<1660  ? "max-w-[100px]": "max-w-[300px]"} mr-3`}>
+					<div className={`w-1/2 min-w-[100px] ${window.innerWidth<1660 && window.innerWidth>800 ? "min-w-[100px] max-w-[100px]": "min-w-[100px] max-w-[300px]"} mr-3`}>
 						<div
 							className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
 							style={{
@@ -52,7 +52,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 					</div>
 
 					<div className="text-xs w-1/2">
-						{item.summaries!==undefined && item.summaries[0]!==undefined && item.summaries[0].complete ===true ? null : (
+						{item.summaries!==undefined && item.summaries[0]!==undefined && item.summaries[0].summary!==null ? null : (
 							<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 						)}	
 						<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">{item.title}</div>
