@@ -158,9 +158,9 @@ if (currentUser && creditcalled!==true) {
 
 
 							
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit}/>} /> 
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>} /> 
 							
-							<Route path="/plans" element={<Pricing stripe={stripePromise} />} />
+							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>} />
 
 							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
 							<Route path="/plans/checkout/success" element={<Success />}></Route>

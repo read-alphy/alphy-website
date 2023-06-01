@@ -9,15 +9,21 @@ import { CardElement, useStripe, useElements, PaymentElement } from "@stripe/rea
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { Popover } from 'flowbite';
 import ReactLoading from 'react-loading';
+import {
+	Popover,
+	PopoverHandler,
+	PopoverContent,
+    ThemeProvider,
+
+  } from "@material-tailwind/react";
 
 
 
 
 
 
-export default function Pricing({ stripePromise }) {
+export default function Pricing({ stripePromise,hasActiveSub }) {
     
     const { currentUser } = useAuth();
     const windowSize = useWindowSize();
@@ -25,7 +31,7 @@ export default function Pricing({ stripePromise }) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [canceledAtPeriodEnd, setCanceledAtPeriodEnd] = useState(false);
 
-    const [hasActiveSub, setHasActiveSub] = useState(false);
+    
     const [called, setCalled] = useState(false);
     const [clientSecret, setClientSecret] = useState("");
     const [credit, setCredit] = useState(null);
@@ -37,42 +43,36 @@ export default function Pricing({ stripePromise }) {
     let userStripeId = "";
     const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
 
-    const handleDarkMode = () => {
+    const [openPopover, setOpenPopover] = useState(false);
+    const[openPopover1, setOpenPopover1] = useState(false);
+
+   
 
 
-      const colorTheme = isDarkMode === "dark" ? "light" : "dark";
-      document.documentElement.classList.remove(isDarkMode);
-      document.documentElement.classList.add(colorTheme);
-      setDarkMode(colorTheme);
-      localStorage.setItem("theme", colorTheme);
-      
-    };
-    // set the popover content element
-    const $targetEl = document.getElementById('popoverDescription');
+    //Popover
+    const triggers = {
+        onMouseEnter: () => setOpenPopover(true),
+        onMouseLeave: () => setOpenPopover(false),
+      };
 
-    // set the element that trigger the popover using hover or click
-    const $triggerEl = document.getElementById('popoverButton');
+      const triggers1 = {
+        onMouseEnter: () => setOpenPopover1(true),
+        onMouseLeave: () => setOpenPopover1(false),
+      };
 
-    // options with default values
-    const options = {
-        placement: 'right',
-        triggerType: 'hover',
-        offset: 10,
 
-    };
-
-    const $targetEl1 = document.getElementById('popoverDescription1');
-
-    // set the element that trigger the popover using hover or click
-    const $triggerEl1 = document.getElementById('popoverButton1');
-
-    // options with default values
-    const options1 = {
-        placement: 'right',
-        triggerType: 'hover',
-        offset: 10,
-
-    };
+      const themePopover = {
+        popover: {
+          styles: {
+            base: {
+              bg: "bg-zinc-50 dark:bg-mildDarkMode",
+              color: "text-zinc-600 dark:text-zinc-200",
+              border:"border-2 border-zinc-100 dark:border-mildDarkMode",
+              
+            },
+          },
+        },
+      };
     
     useEffect(() => {
         // can be removed just for debugging
@@ -81,7 +81,7 @@ export default function Pricing({ stripePromise }) {
             navigate("/account")
             setTimeout(() => {
                 try {
-                    getCustomerInfo(currentUser)
+                   
                     setTimeout(() => {
                         setIsLoaded(true)
                     }, 400)
@@ -101,61 +101,11 @@ export default function Pricing({ stripePromise }) {
         else{
             setIsLoaded(true)
         }
-        if (currentUser) {
-            currentUser.getIdToken().then((idToken) => {
-                axios
-                    .get(
-                        `${process.env.REACT_APP_API_URL}/payments/credit`,
-                        {
-                            headers: {
-                                'id-token': idToken,
-                            },
-                        },
-                    )
-                    .then((response) => {
-                        const [fixed, monthly] = response.data
-                        setCredit(fixed + monthly)
-                        
-                    })
-                    .catch((error) => {
-                        console.error(error)
-                    });
-            });
-        } 
+       
     }, [currentUser]);
-    const popover = new Popover($targetEl, $triggerEl, options);
+    
 
-    const getCustomerInfo = async (currentUser) => {
-        const idToken = await currentUser.getIdToken()
-        
-        await axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
-        {
-            headers: {
-                'id-token': idToken,
-            },
-        },
-        )
-            
-            .then(r => {
-                
-                if (r.data.length >0) {
-                    setCalled(true)
-                    const userStripe = r.data
-                    setHasActiveSub(true)
-                    userStripeId = userStripe
-                    if(r.data[0].cancel_at_period_end){
-                        setCanceledAtPeriodEnd(true)
-                    }
-                
-                }
-                else {
-                    setHasActiveSub(false)
-                    setCalled(true)
-
-                }
-            })
-
-    }
+  
 
 
 
@@ -245,22 +195,24 @@ export default function Pricing({ stripePromise }) {
                                                     {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
                                                     <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 1 hour</span>
                                                 </li>
-                                                <li className="flex space-x-3">
+                                                <li className="flex space-x-1">
 
                                                     {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
                                                     {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
-
+                                                    <Popover open={openPopover1} handler={setOpenPopover1}>
                                                     <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
-                                                        Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="bottom" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
-
-                                                    <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-mildDarkMode border dark:border-0 rounded-lg shadow-sm opacity-0 w-72`}>
-                                                        <div className="p-3 space-y-2">
+                                                        Content popularity limit </p>
+                                                        <PopoverHandler {...triggers1} >
+                                                        <svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg>
+                                                        </PopoverHandler>
+                                                    <ThemeProvider value={themePopover}>
+                                                    <PopoverContent {...triggers1}>
                                                             <p> You can only submit videos with greater than <strong className="underline">10,000 views</strong></p>
-
-                                                        </div>
-                                                        <div className="popover-arrow" role="presentation"></div>
-                                                    </div>
-                                                </li>
+                                                            </PopoverContent>
+                                                        </ThemeProvider>
+                                                        
+                                                            </Popover>
+                                                    </li>
 
                                                 <li className="flex space-x-3 pt-4">
 
@@ -332,6 +284,31 @@ export default function Pricing({ stripePromise }) {
                                                     {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
                                                     <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
                                                 </li>
+                                                <li className="flex space-x-3">
+                                                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                    {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+
+
+                                                    <Popover open={openPopover} handler={setOpenPopover }>
+                                                    <div className="flex flex-row">
+                                                        
+                                                            
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Multi-language translation </span>
+                                                    
+                                                    <PopoverHandler {...triggers} >
+                                                    <svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg>
+                                                    </PopoverHandler>
+                    <ThemeProvider value={themePopover}>
+                                                    <PopoverContent {...triggers}>
+                                                        <p className="">Generate summaries and ask questions to any content in over 50 languages, regardless of the language of the content.
+                                                        <br></br>
+                                                       </p>
+                                                    </PopoverContent>
+                                                    </ThemeProvider>
+                                                    </div>
+                                                    </Popover>
+                                                </li>
+                                                
                                                 <li className="flex space-x-3">
 
                                         <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
@@ -420,22 +397,24 @@ export default function Pricing({ stripePromise }) {
                                                 {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Submit content up to 1 hour</span>
                                             </li>
-                                            <li className="flex space-x-3">
+                                            <li className="flex space-x-1">
 
                                                 {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
                                                 {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">10,000 view limit on videos</span> */}
-
+                                                <Popover open={openPopover1} handler={setOpenPopover1}>
                                                 <p className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">
-                                                    Content popularity limit <button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="bottom" data-popover-offset="20" type="button"><svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button></p>
-
-                                                <div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-mildDarkMode border dark:border-0 dark:text-zinc-200 rounded-lg shadow-sm opacity-0 w-72`}>
-                                                    <div className="p-3 space-y-2">
+                                                    Content popularity limit </p>
+                                                    <PopoverHandler {...triggers1} >
+                                                    <svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg>
+                                                    </PopoverHandler>
+                                                <ThemeProvider value={themePopover}>
+                                                <PopoverContent {...triggers1}>
                                                         <p> You can only submit videos with greater than <strong className="underline">10,000 views</strong></p>
-
-                                                    </div>
-                                                    <div className="popover-arrow" role="presentation"></div>
-                                                </div>
-                                            </li>
+                                                        </PopoverContent>
+                                                    </ThemeProvider>
+                                                    
+                                                        </Popover>
+                                                </li>
 
                                             <li className="flex space-x-3 pt-4">
 
@@ -501,6 +480,31 @@ export default function Pricing({ stripePromise }) {
                                                 {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
                                             </li>
+                                            <li className="flex space-x-3">
+                                                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                    {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+
+
+                                                    <Popover open={openPopover} handler={setOpenPopover }>
+                                                    <div className="flex flex-row">
+                                                        
+                                                            
+                                                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Multi-language translation </span>
+                                                    
+                                                    <PopoverHandler {...triggers} >
+                                                    <svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg>
+                                                    </PopoverHandler>
+                    <ThemeProvider value={themePopover}>
+                                                    <PopoverContent {...triggers}>
+                                                        <p className="">Generate summaries and ask questions to any content in over 50 languages, regardless of the language of the content.
+                                                        <br></br>
+                                                       </p>
+                                                    </PopoverContent>
+                                                    </ThemeProvider>
+                                                    </div>
+                                                    </Popover>
+                                                </li>
+                                                
                                             <li className="flex space-x-3">
 
 <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-green-400 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
