@@ -557,7 +557,7 @@ export default function Content(props) {
 				</div>
 
 	<div id="content-area">
-		{ transcript.length==0 && language == summary.lang
+		{ transcript.length>0 && language == summary.lang
 		?
 			<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 				{transcript.length>0 &&
