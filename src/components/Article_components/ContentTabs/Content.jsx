@@ -874,7 +874,7 @@ export default function Content(props) {
 
 				</div>: null
 							}
-{((summary!=undefined && summary!==null && summary.summary==null) || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
+{((summary!=undefined && summary!==null && summary.summary==null && summary.lang!=="en") || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
 <p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 	Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
