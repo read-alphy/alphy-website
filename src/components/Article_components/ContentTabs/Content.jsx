@@ -480,7 +480,7 @@ export default function Content(props) {
 
 							(index===languages.length 
 								?
-								<option className="text-gray-500 dark:text-gray-300"disabled>--Request Translation--</option>
+								<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
 								:
 						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
 								{name}
@@ -516,7 +516,7 @@ export default function Content(props) {
 
 							(index===languages.length 
 								?
-								<option className="text-gray-500 dark:text-gray-300"disabled>--Request Translation--</option>
+								<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
 								:
 						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
 								{name}
@@ -842,7 +842,7 @@ export default function Content(props) {
 :
 
 <div className="flex flex-col mb-20 mt-20 ">
-	{errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) || (summary!==undefined && summary.summary!==undefined && summary.summary.length>0) || language=="en" ? null :
+	{errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) || (summary!==undefined && summary.summary!==undefined	&&summary.summary!==null && summary.summary.length>0) || language=="en" ? null :
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub ==true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.</p> 
