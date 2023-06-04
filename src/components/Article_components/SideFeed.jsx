@@ -15,7 +15,7 @@ function SideFeed(props) {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const [navigated, setNavigated] = useState(false);
-	const [isPublic, setisPublic] = useState(false);
+	const [isPublic, setisPublic] = useState(localStorage.getItem("feedTab")!==null && localStorage.getItem("feedTab")=="true" ? true :  false);
 	const {currentUser} = useAuth();
 	const[firstTimePersonal, setFirstTimePersonal] = useState(true);
 	const [called, setCalled] = useState(false);
@@ -31,6 +31,7 @@ function SideFeed(props) {
 		if (!hasMorePersonal) {
 			return;
 		}
+		
 
 		setIsLoadingPersonal(true);
 		localStorage.setItem("search",search_input)
@@ -65,6 +66,7 @@ function SideFeed(props) {
 	const navigateFeeds = (state) => {
 		
 		localStorage.setItem("search","")
+		localStorage.setItem("feedTab",`${!isPublic}`)
 	
 		
 
@@ -81,6 +83,7 @@ function SideFeed(props) {
 			}
 		
 		
+		
 
 	}
 	const temp = 10;
@@ -94,7 +97,7 @@ function SideFeed(props) {
 
 
 	const getData = (offset, firstTime, hasMore, search_input) => {
-
+				
 		let query
 		localStorage.setItem("search",search_input)
 
@@ -126,7 +129,6 @@ function SideFeed(props) {
 
 
 
-
 	const handleSearch = () => {
 		getData(0, true, true, search);
 	}
@@ -148,7 +150,6 @@ function SideFeed(props) {
 		else{
 			
 			setOffsetPersonal(offsetPersonal + limit);
-
 			getDataPersonal(offsetPersonal + limit, false, true, search);
 		}
 		//feedRef.current.scrollTop = feedRef.current.scrollHeight;
@@ -177,41 +178,54 @@ function SideFeed(props) {
  */
 	};
 	useEffect(() => {
-	
 
-		
-
-		if(localStorage.getItem("search")!==null){
+	if(called==false){
+		if(localStorage.getItem("search")!==null && localStorage.getItem("search")!=="undefined"){
 
 					if(localStorage.getItem("search").length>0){
 
-					getData(0, true, true, localStorage.getItem("search"));
-					setSearch(localStorage.getItem("search"))
+						if(isPublic==true){
+
+								getData(0, true, true, localStorage.getItem("search"));
+								setSearch(localStorage.getItem("search"))
+							}
+						else{
+							
+							getDataPersonal(0, true, true, localStorage.getItem("search"));
+							setSearch(localStorage.getItem("search"))
+						}
+
+					
 					}
 					else{
+						
+						if(isPublic==true){
 						getData(0, true, true, search);
+					}
+					else{
+						getDataPersonal(0, true, true, search);
+					}
 					}
 	}
 		else{
 			getData(0, true, true, search);
 		}
+	}
 		setTimeout(() => {
 			setReady(true)
 		},500);
 	}, []);
 
-	if(currentUser!==null && called===false){
+if(currentUser!==null && called===false && localStorage.getItem("search")!=="undefined"){
+	
 		if(localStorage.getItem("search")!==null){
-
 			if(localStorage.getItem("search").length>0){
-					getDataPersonal(0, true, true);
+					getDataPersonal(0, true, true,localStorage.getItem("search"));
 					setSearch(localStorage.getItem("search"))
 					}
 			else{
 				getDataPersonal(0, true, true, search);
 					}
-		
-
 				}
 				else{
 					getDataPersonal(0, true, true, search);
@@ -391,7 +405,7 @@ function SideFeed(props) {
 										<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
 								): <div className="items-center mx-auto ml-5">
-									{ready==true &&
+									{ready==true && isPublic==false &&
 									<div>
 									 <p  className="  text-zinc-500 dark:text-zinc-200 text-center items-center margin-auto text-l mt-16 mb-5 w-full col-span-2">Sign in to see the content you previously submitted or navigate to <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer mx-auto ">Global</a> to explore Alphy's database.</p>
 									 <img width={250} className="opacity-30 dark:opacity-30 mx-auto" src={Robot}></img>
@@ -399,9 +413,10 @@ function SideFeed(props) {
 									}
 									</div>)
 						}
-									{called==true &&dataPersonal.length==0 && ready==true &&(
+								{isPublic==false && called==true &&dataPersonal.length==0 && ready==true &&(
 							<div className="flex flex-col  mt-5 px-5 col-span-2 mx-auto items-center">
-								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy.</p> <img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img><p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy. {hasMorePersonal ? "If you've submitted content previously, simply refresh the page." : ""}</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
+								
+								<p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to get inspiration from the content other users unlocked with Alphy. {hasMorePersonal ? "If you've submitted content previously, simply refresh the page." : ""}</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
 							</div>
 				)
 			}

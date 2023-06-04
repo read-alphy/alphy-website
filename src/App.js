@@ -20,6 +20,9 @@ import Success from './routes/payment/Success';
 import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
+import Auth from './routes/Auth';
+
+
 
 
 
@@ -36,24 +39,45 @@ const firebaseConfig = {
 };
 
 function App() {
-
-	const { currentUser } = useAuth();
+	const auth = useAuth()
+	const { currentUser, applyActionCode } = useAuth();
 	const [hasActiveSub, setHasActiveSub] = useState(false)
 	const [called, setCalled] = useState(false)
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
-	
+	const urlParams = new URLSearchParams(window.location.search);
+
+	const verification = (urlParams.get('mode')=="verifyEmail");
+
+
 
 	const stripePromise = loadStripe(
-		process.env.REACT_APP_STRIPE_PK
+		`${process.env.REACT_APP_STRIPE_PK}`
 	);
 	
 useEffect(() => {
+	if(verification){
+		const url = window.location.href;
+		const oobCode = urlParams.get('oobCode');
+		auth.handleVerifyEmail(oobCode)
+		.then((resp) => {
+			
+			window.location.reload()
+
+
+
+		}
+		)
+
+
+		
+	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
 		getCustomerInfo(currentUser)
 	}
 }, 1000)
+
 
 if (currentUser && creditcalled!==true) {
 	currentUser.getIdToken().then((idToken) => {
@@ -156,16 +180,21 @@ if (currentUser && creditcalled!==true) {
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
+							<Route path="/u/login" element={<Auth/>}></Route>
+							<Route path="/u/register" element={<Auth/>}></Route>
+							<Route path="/u/resetpassword" element={<Auth/>}></Route>
+							
 
 							
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit}/>} /> 
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>} /> 
 							
-							<Route path="/plans" element={<Pricing stripe={stripePromise} />} />
+							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>} />
 
 							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
 							<Route path="/plans/checkout/success" element={<Success />}></Route>
 							{/* <Route path="/prices" element={<Prices />} /> */}
 							{/* <Route path="/checkout" element={<CheckOut />} /> */}
+							
 
 							<Route path="*" element={<NotFound to="/404"/>} />
 							<Route path="/404" element={<NotFound />} />

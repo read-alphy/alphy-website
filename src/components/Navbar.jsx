@@ -134,6 +134,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		<div className={`flex dark:bg-darkMode`}>
 			<div >
 				<div className="flex flex-row mt-6 dark:text-gray-300 dark:bg-darkMode">
+				<a className="mr-4 hidden md:block" href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a>
 					<div
 						type="button"
 						onClick={() => handleScroll('feedback')}
@@ -141,6 +142,8 @@ function Navbar({ collapsed, setCollapsed }) {
 					>
 						Reach Us
 					</div>
+
+					
 {/* 					<div
 						className="hidden md:block md:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 md:block  pt-2"
 						onClick={() => handleScroll('about')}
@@ -172,18 +175,18 @@ function Navbar({ collapsed, setCollapsed }) {
 								className="hidden md:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2  rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
 								onClick={handleSignOut}
 							>
-								<FaGoogle className="inline-block mr-2 mb-1" />
-								Sign Out
+{/* 								<FaGoogle className="inline-block mr-2 mb-1" />
+ */}								Sign Out
 							</button>
 						</div>
 					) : (
-						<button
+						<a
 						className="hidden md:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2  rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
-						onClick={handleLoginWithGoogle}
+						href="/u/login"
 					>
-						<FaGoogle className="inline-block mr-2 mb-1" />
-						Sign In
-					</button>
+{/* 						<FaGoogle className="inline-block mr-2 mb-1" />
+ */}						Sign In
+					</a>
 				)}
 
 				<div
@@ -223,6 +226,9 @@ function Navbar({ collapsed, setCollapsed }) {
 							</div> */}
 
 							<div className=" flex m-1 ml-6 text-center justify-center text-sm">
+								<div className="mr-4 mx-auto items-center hidden xs:flex">
+							<a  href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a>
+							</div>
 								<div
 									type="button"
 									onClick={() => handleScroll('feedback')}
@@ -256,13 +262,14 @@ function Navbar({ collapsed, setCollapsed }) {
 
 							<div className="flex">
 								<div className="justify-center items-center ml-auto mr-auto flex text-sm">
-									<button
+									<a
 										className="bg-zinc-50 dark:bg-darkMode hover:text-slate-400 duration-600 transition ease-in text-slate-500 font-normal py-2 px-4 rounded "
-										onClick={currentUser ? handleSignOut : handleLoginWithGoogle}
+										onClick={currentUser && handleSignOut }
+										href={currentUser==null && '/u/login'}
 									>
 										{/* <FaGoogle className="inline-block mr-1 mb-1 w-1/6" /> */}
 										{currentUser ? 'Sign Out' : 'Sign In'}
-									</button>
+									</a>
 								</div>
 							</div>
 						</div>

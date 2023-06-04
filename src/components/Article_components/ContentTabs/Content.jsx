@@ -27,17 +27,25 @@ import {
 
 export default function Content(props) {
 	
+	
 	const [loading, setLoading] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
-		
+	const [cautionaryTimeoutPassed, setCautionaryTimeoutPassed] = useState(false);
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
 	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
-	const [language, setLanguage] = useState(props.data!==undefined && props.data.length>1 && props.data.lang===props.data.summaries[1].lang ? props.data.lang : 'en');
+	
+	
+
+	
+
+	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.lang!==undefined ? props.data.summaries[0].lang : 'en')
+	
+	
 	const [translationMessage, setTranslationMessage] = useState(false);
 	const[errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
@@ -46,6 +54,7 @@ export default function Content(props) {
 	
 
 	
+
 	const data = props.data
 	
 	let contentSummaries = []
@@ -134,10 +143,14 @@ export default function Content(props) {
 		
 		if(contentSummaries!==undefined){
 			
-			contentSummaries.map(summary => languages.push(summary.lang));
+			contentSummaries.map(summary => summary.summary!==null && languages.push(summary.lang));
+			
 			
 			summary = contentSummaries.find(summary => summary.lang ===   language);
-			
+			if(summary!==undefined && summary.length>0 && summary.summary===null){
+				setTranslationMessage(true)
+				languagesWanted.push(language)
+			}
 			
 
 			
@@ -435,6 +448,8 @@ export default function Content(props) {
 	};
 
 	transcriptParser();
+	
+	
 
 	return (
 		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
@@ -446,14 +461,14 @@ export default function Content(props) {
 				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className="col-span-2 ">
 						<div className="flex flex-row ">
-						<h1 className="col-span-2 mt-10 3xl:pt-8 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-3xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+						<h1 className="col-span-2 mt-10 3xl:pt-8 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 							{data.title}
 						</h1>
 							
 <div className="flex flex-row justify-end mx-auto">
 	<div className="hidden 3xl:block flex  2xl:ml-40 justify-end ">
-{/* 					 <label for="small" class="block mb-2 text-sm font-light text-gray-500 dark:text-white">Language</label>
- */}					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+	
+			<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 						
 						(language === code ? 
@@ -465,7 +480,7 @@ export default function Content(props) {
 
 							(index===languages.length 
 								?
-								<option className="text-gray-500 dark:text-gray-300"disabled>--Request Translation--</option>
+								<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
 								:
 						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
 								{name}
@@ -477,6 +492,8 @@ export default function Content(props) {
 										
 								))}
 					</select>
+				
+					
 				</div>
 
 					</div>
@@ -499,7 +516,7 @@ export default function Content(props) {
 
 							(index===languages.length 
 								?
-								<option className="text-gray-500 dark:text-gray-300"disabled>--Request Translation--</option>
+								<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
 								:
 						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
 								{name}
@@ -541,7 +558,7 @@ export default function Content(props) {
 				</div>
 
 	<div id="content-area">
-		{ summary !== undefined && language == summary.lang
+		{ transcript.length>0 && language == summary.lang
 		?
 			<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 				{transcript.length>0 &&
@@ -825,7 +842,7 @@ export default function Content(props) {
 :
 
 <div className="flex flex-col mb-20 mt-20 ">
-	{errorMessage ==true || (languagesWanted.includes(language)===true) ? null :
+	{errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) || (summary!==undefined && summary.summary!==undefined	&&summary.summary!==null && summary.summary.length>0) || (contentSummaries!==undefined && contentSummaries.length>1 && (contentSummaries[0].lang==language || contentSummaries[1].lang===language)) || language=="en" ? null :
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub ==true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.</p> 
@@ -844,31 +861,32 @@ export default function Content(props) {
 
 			</div>
 
-			{contentSummaries!==undefined && contentSummaries.length===	0  ?
+{basicDataLoaded && <div>
+			{transcript.length==0 && language==="en"?
 
 				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 								
-									Alphy is doing its best to process this video, it will be ready in a few minutes. In the
-									meantime, you can check out other videos.
+									Alphy is doing its best to process this video, it will be ready in a few minutes. Please consider supporting us by giving an upvote on <a className="text-green-300 underline" href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"> Producthunt</a>!
 									 
 									 <img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
+									 
 									 
 								</p>
 
 				</div>: null
 							}
-{languagesWanted.includes(language) && errorMessage==false && <div className="flex flex-col mb-20 mt-20 ">
-<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+					{((summary!=undefined && summary!==null && summary.summary==null && summary.lang!=="en" ) || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
+					<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
-	You successfully submitted your request! <br></br><br></br> Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
-	 
-	 <img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
-	 
-</p>
+						Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
+						
+						<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
+						
+					</p>
 
-</div>}
-
+					</div>}
+					</div>}
 {errorMessage ==true && <div className="flex flex-col mb-20 mt-20 ">
 <p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
