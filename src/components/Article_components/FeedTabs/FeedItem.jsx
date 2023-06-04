@@ -15,7 +15,6 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 		imageUrl = Twitter;
 	}
 
-console.log(item)
 
 	
 	const navigate = useNavigate();
