@@ -175,18 +175,18 @@ function Navbar({ collapsed, setCollapsed }) {
 								className="hidden md:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2  rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
 								onClick={handleSignOut}
 							>
-								<FaGoogle className="inline-block mr-2 mb-1" />
-								Sign Out
+{/* 								<FaGoogle className="inline-block mr-2 mb-1" />
+ */}								Sign Out
 							</button>
 						</div>
 					) : (
-						<button
+						<a
 						className="hidden md:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2  rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
-						onClick={handleLoginWithGoogle}
+						href="/u/login"
 					>
-						<FaGoogle className="inline-block mr-2 mb-1" />
-						Sign In
-					</button>
+{/* 						<FaGoogle className="inline-block mr-2 mb-1" />
+ */}						Sign In
+					</a>
 				)}
 
 				<div
@@ -262,13 +262,14 @@ function Navbar({ collapsed, setCollapsed }) {
 
 							<div className="flex">
 								<div className="justify-center items-center ml-auto mr-auto flex text-sm">
-									<button
+									<a
 										className="bg-zinc-50 dark:bg-darkMode hover:text-slate-400 duration-600 transition ease-in text-slate-500 font-normal py-2 px-4 rounded "
-										onClick={currentUser ? handleSignOut : handleLoginWithGoogle}
+										onClick={currentUser && handleSignOut }
+										href={currentUser==null && '/u/login'}
 									>
 										{/* <FaGoogle className="inline-block mr-1 mb-1 w-1/6" /> */}
 										{currentUser ? 'Sign Out' : 'Sign In'}
-									</button>
+									</a>
 								</div>
 							</div>
 						</div>

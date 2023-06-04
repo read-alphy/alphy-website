@@ -11,11 +11,22 @@ import WelcomePopup from '../components/Landing_page/WelcomePopup.jsx';
 
 
 function Home({hasActiveSub,currentUser,credit}) {
+	const urlParams = new URLSearchParams(window.location.search);
+
+	const resetPassword = (urlParams.get('mode')=="resetPassword");
+	
 
 	/* const { currentUser } = useAuth(); */
-	const [showMessage, setShowMessage] = useState(false);
+	
 
 	useEffect(() => {
+		if(resetPassword){
+			const url = window.location.href;
+			const [baseUrl, queryString] = url.split('?');
+			window.location.href = (`${baseUrl}u/resetpassword/?${queryString}`);
+		}
+
+
 		localStorage.setItem('search', '');
 		setTimeout(() => {
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL

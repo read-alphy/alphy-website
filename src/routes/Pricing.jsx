@@ -229,7 +229,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                                 <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
                                             </a>
                                             :
-                                            <button onClick={handleLoginWithGoogle} type="button" className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
+                                            <a href="/u/login" type="button" className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</a>
                                         }
 
 
@@ -265,7 +265,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                                 <li className="flex space-x-3">
 
 
-                                                    <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
+                                                    <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the Basic Plan plus:</span>
                                                 </li>
 
                                                 <li className="flex space-x-3">
@@ -431,7 +431,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                             <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
                                         </a>
                                         :
-                                        <button onClick={handleLoginWithGoogle} type="button" className="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
+                                        <a href="/u/login" type="button" className="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</a>
                                     }
                                 </div>
 
@@ -460,7 +460,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                             <li className="flex space-x-3">
 
 
-                                                <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
+                                                <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the Basic Plan plus:</span>
                                             </li>
 
                                             <li className="flex space-x-3">
