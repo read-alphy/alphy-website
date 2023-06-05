@@ -172,7 +172,7 @@ function Navbar({ collapsed, setCollapsed }) {
 					{currentUser ? (
 						<div className="hidden md:block md:block md:flex  ">
 							<button
-								className="hidden md:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2  rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
+								className="hidden md:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2 cursor-pointer rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
 								onClick={handleSignOut}
 							>
 {/* 								<FaGoogle className="inline-block mr-2 mb-1" />
@@ -263,7 +263,7 @@ function Navbar({ collapsed, setCollapsed }) {
 							<div className="flex">
 								<div className="justify-center items-center ml-auto mr-auto flex text-sm">
 									<a
-										className="bg-zinc-50 dark:bg-darkMode hover:text-slate-400 duration-600 transition ease-in text-slate-500 font-normal py-2 px-4 rounded "
+										className="bg-zinc-50 dark:bg-darkMode hover:text-opacity-90 duration-600 transition ease-in text-slate-500 font-normal py-2 px-4 rounded cursor-pointer "
 										onClick={currentUser && handleSignOut }
 										href={currentUser==null && '/u/login'}
 									>

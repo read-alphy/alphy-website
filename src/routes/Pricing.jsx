@@ -15,6 +15,7 @@ import {
 	PopoverHandler,
 	PopoverContent,
     ThemeProvider,
+    Button
 
   } from "@material-tailwind/react";
 
@@ -224,14 +225,15 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                             </ul>
                                         </div>
 
+                        
                                         {currentUser ?
-                                            <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                                <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                            <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
+                                                <Button type="button" className={` bg-zinc-600  font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-darkMode" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
                                             </a>
                                             :
-                                            <a href="/u/login" type="button" className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</a>
+                                            <a href="/u/login" type="button"> 
+                                            <Button className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-white text-[16px]">{currentUser ? "Active" : "Sign Up For Free"}</Button></a>
                                         }
-
 
 
 
@@ -323,7 +325,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                             </ul>
                                         </div>
                                         <a className={`${hasActiveSub ? "pointer-events-none" : ""}`} href={(currentUser && !hasActiveSub) && `/plans/checkout`}>
-                                            {currentUser ? <button type="button" className={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : "Upgrade Plan"}</button> : <div></div>}
+                                        {currentUser ? <Button type="button" className={` bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-white justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div></div>}
                                         </a>
 
 
@@ -428,7 +430,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                     </div>
                                     {currentUser ?
                                         <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                            <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                            {currentUser ? <Button type="button" className={` bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-white justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div></div>}
                                         </a>
                                         :
                                         <a href="/u/login" type="button" className="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</a>

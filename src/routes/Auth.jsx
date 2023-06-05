@@ -347,7 +347,7 @@ verificationMessage==false ?
 		<div className="mt-4">
 						
 							{isRegister ? 
-							<div className="mt-2 text-center"><p className="text-zinc-600 text-sm "> Already have an account? Login <a href="/u/login" className="text-green-400">here.</a></p> </div>:<div><p className="text-zinc-600 text-sm">Don't have an account? <a href="/u/register" className="text-green-400">Register now.</a></p> </div>}
+							<div className="mt-2 text-center"><p className="text-zinc-600 text-sm "> Already have an account? Login <a href="/u/login" className="text-green-400">here.</a></p> </div>:<div className="text-center"><p className="text-zinc-600 text-sm">Don't have an account? <a href="/u/register" className="text-green-400">Register now.</a></p> </div>}
 						
 					</div>
 				</div>

@@ -17,6 +17,7 @@ import {
 	PopoverHandler,
 	PopoverContent,
     ThemeProvider,
+    Button
 
   } from "@material-tailwind/react";
 
@@ -128,12 +129,13 @@ export default function Account({ credit,hasActiveSub}) {
                                             <h1 className="text-md text-zinc-600 mb-10 ">Account Details</h1>
 
                             <div className="grid grid-cols-3 mb-5">
-                                            <div className="col-span-1 text-zinc-800 text-sm">
+                                            <div className="col-span-1 text-zinc-500 text-sm">
                                                 <p className="mb-2">Your Email</p>
                                                 <p className="mb-2">Password</p>
                                                 {credit!==null ?
-                                                <p className="mt-2">Remaining <br></br>Credits</p> :null
+                                                <p className="mt-2">Remaining Credits</p> :null
                                                         }
+                                                        <p className="mt-2">Plan</p>
                                             </div> 
                                 <div class="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
                                             <div className="col-span-1 text-black text-sm">
@@ -142,6 +144,7 @@ export default function Account({ credit,hasActiveSub}) {
                                                 {credit!==null ?
                                                 <p className="mt-2" >{Math.floor(credit)} minutes</p> :null
                                                         }
+                                                         <p className="mt-2">{hasActiveSub ? "Premium" : "Basic"}</p>
                                             </div>
                                
                             </div>
@@ -158,10 +161,12 @@ export default function Account({ credit,hasActiveSub}) {
                             </div>
                              :null}
                                 </div>
-                                {currentUser && <div class="border-b border-gray-300 w-[50vw] mt-10 mb-20 mx-auto items-center flex"></div>}
-                                <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-10">Manage Subscription </p>
+{/*                                 {currentUser && <div class="border-b border-gray-300 w-[50vw] mt-10 mb-20 mx-auto items-center flex"></div>}
+
+ */}
+                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-10 mt-20">Manage Subscription </p>
                          
-                     
+                                { hasActiveSub ? <a className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
                                 <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch">
                                     <div className="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
 
@@ -236,10 +241,11 @@ export default function Account({ credit,hasActiveSub}) {
 
                                         {currentUser ?
                                             <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                                <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                                <Button type="button" className={` bg-zinc-600  font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-darkMode" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
                                             </a>
                                             :
-                                            <a href="/u/login" type="button" className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</a>
+                                            <a href="/u/login" type="button"> 
+                                            <Button className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-white text-[16px]">{currentUser ? "Active" : "Sign Up For Free"}</Button></a>
                                         }
 
 
@@ -341,7 +347,8 @@ export default function Account({ credit,hasActiveSub}) {
                                         <a className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} href={
                                             (currentUser && !hasActiveSub) ? `/plans/checkout` : (canceledAtPeriodEnd ? "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE": "")}
                 >
-                                            {currentUser ? <button type="button" className={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</button> : <div></div>}
+                                            {currentUser ? <Button type="button" className={` bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-white justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div></div>}
+
                                         </a>
 
 
@@ -370,20 +377,22 @@ export default function Account({ credit,hasActiveSub}) {
                                             <h1 className="text-md text-zinc-600 mb-10 ">Account Details</h1>
 
                             <div className="grid grid-cols-3 mb-5  ">
-                                            <div className="col-span-1 text-zinc-800 text-sm border-r border-gray-300 pr-4">
-                                                <p className="mb-2">Your Email</p>
-                                                <p className="mb-2">Password</p>
+                                            <div className="col-span-1 text-zinc-500 text-sm border-r border-gray-300 pr-4">
+                                                <p className="mb-3">Your Email</p>
+                                                <p className="mb-3">Password</p>
                                                 {credit!==null ?
                                                 <p className="mt-2">Remaining <br></br>Credits</p> :null
                                                         }
+                                                        <p className="mt-2">Plan</p>
                                             </div> 
                                 {/* <div class="border-r border-gray-300 h-[10vh] col-span-1 mx-auto items-center flex"></div> */}
                                             <div className="col-span-2 text-black text-sm ml-6">
-                                                <p className="mb-2">{currentUser.email}</p>
+                                                <p className="mb-3">{currentUser.email}</p>
                                                 <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
                                                 {credit!==null ?
-                                                <p className="mt-2" >{Math.floor(credit)} minutes</p> :null
+                                                <p className="mt-5" >{Math.floor(credit)} minutes</p> :null
                                                         }
+                                                        <p className="mt-5">{hasActiveSub ? "Premium" : "Basic"}</p>
                                             </div>
                                
                             </div>
@@ -479,12 +488,14 @@ export default function Account({ credit,hasActiveSub}) {
                                         </ul>
                                     </div>
                                     {currentUser ?
-                                        <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                            <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
-                                        </a>
-                                        :
-                                        <a href="/u/login" type="button" className="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</a>
-                                    }
+                                            <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
+                                                <Button type="button" className={` bg-zinc-600  font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-darkMode" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
+                                            </a>
+                                            :
+                                            <a href="/u/login" type="button"> 
+                                            <Button className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-white text-[16px]">{currentUser ? "Active" : "Sign Up For Free"}</Button></a>
+                                        }
+
                                 </div>
 
 
@@ -579,7 +590,8 @@ export default function Account({ credit,hasActiveSub}) {
                                     <a className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} href={
                                             (currentUser && !hasActiveSub) ? `/plans/checkout` : (canceledAtPeriodEnd ? "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE": "")}
                 >
-                                            {currentUser ? <button type="button" className={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</button> : <div></div>}
+                                            {currentUser ? 
+                                            <Button type="button" className={` bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-white justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div></div>}
                                         </a>
                                 </div>
 
