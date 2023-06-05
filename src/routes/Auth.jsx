@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { repeat } from 'lodash';
-import { Button, ThemeProvider} from "@material-tailwind/react";
+import { Button} from "@material-tailwind/react";
 import ReactLoading from 'react-loading';
 
 

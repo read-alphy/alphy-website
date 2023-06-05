@@ -8,6 +8,7 @@ import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Popover } from 'flowbite';
+import { Button} from "@material-tailwind/react";
 
 
 export default function Welcome({hasActiveSub,credit}) {
@@ -224,9 +225,9 @@ export default function Welcome({hasActiveSub,credit}) {
 
 			<Toaster />
 
-			<div className="items-center justify-center w-full lg:space-x-4 lg:flex">
+			<div className="items-center container justify-center w-full mx-auto lg:ml-60">
 
-				<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
+				<div className="flex  items-center mt-4 space-x-4 md:justify-center lg:mt-0  ">
 
 					<div className="w-full flex flex-col">
 
@@ -252,9 +253,7 @@ export default function Welcome({hasActiveSub,credit}) {
 								<p>• No view limit. </p>
 								<p>• You have access to <span className="text-green-400">unlimited Twitter Spaces transcription</span>.</p>
 								<p className="pt-2">Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a> page for more info about Premium benefits.</p>
-							{/* 	<p> Free tier users can only submit videos with more than <strong className="underline">10,000 views</strong>. There is no popularity limit if you are premium.</p>
-				<p>Submitting content will spend from your credits. Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Acccount" : "Plans"}</a> page for more info.</p>
-								<p></p> */}
+						
 								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3">When the content is ready</p>
 								<p>If you see a video that has inaccurate transcription and summary, please let us know. We will fix it as soon as possible.
 								</p>
@@ -264,25 +263,29 @@ export default function Welcome({hasActiveSub,credit}) {
 							</div>
 							<div className="popover-arrow" role="presentation"></div>
 						</div>
-						<input
 
-							className={`w-full lg:w-[600px] border border-zinc-300 text-bordoLike dark:bg-mildDarkMode  dark:border-zinc-600 dark:text-zinc-500 py-3 pl-4 rounded-full  focus:ring-whiteLike dark:focus:ring-mildDarkMode dark:focus:outline-none focus:outline-none ${failed && inputValue.length===0 ? "border-red-500" : ""}`} 
-							type="text"
-							name="content_link"
-							value={inputValue}
-							onChange={(event) => setInputValue(event.target.value)}
-							placeholder="Insert a link to start"
-							autoComplete="off"
-						/>
-					{/* 	{failed && inputValue.length===0 ?<p className="font-light ml-2 text-red-500"> Check again.</p> : null} */}
+					
+						
 
 					</div>
-					{/* <Languages language={language} onLangChange={setLanguage} /> */}
+					
 				</div>
 
-				<div className={`flex justify-center ${currentUser ? "lg:mt-6" : ""}`}>
+			<div className=" sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5">
+				<div class="sm:col-span-2 lg:col-span-2 relative w-full min-w-[200px] h-12">
+							<input 
+							
+							value={inputValue}
+							onChange={(event) => setInputValue(event.target.value)}
+							placeholder=""
+							className="peer w-full border-t-gray-300 h-full bg-white dark:mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-blue-500"/>
+							<label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:!border-blue-500 after:border-blue-gray-200 peer-focus:after:!border-blue-500">Insert a link to start</label>
+							
+						 </div>
+				<div className={`sm:col-span-1 mt-5 sm:mt-0 flex ml-5  ${currentUser ? "" : ""}`}>
 					{currentUser ? (
-						<button
+						<div>
+						{/* <button
 							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-90 transition duration-200 ease-in-out"
 							type="submit"
 							onClick={(e) => {
@@ -290,16 +293,29 @@ export default function Welcome({hasActiveSub,credit}) {
 							}}
 						>
 							Submit
-						</button>
+						</button> */}
+
+						<Button type="submit"
+							onClick={(e) => {
+								handleSubmit();
+							}} className="bg-zinc-700 px-10 py-3  text-[15px] ">Submit</Button>
+						</div>
 					) : (
-						<a
-							className="w-2/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-90"
+						<div>
+							     
+								 <a href="/u/login">
+						<Button  className="bg-zinc-700 px-10 py-3  text-[15px] ">Sign in to submit</Button></a>
+						
+						{/* <a
+							className="w-2/3 border-2 border-blueLike px-8 text-center bg-blueLike text-whiteLike py-3 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-90"
 							type="submit"
 							href="/u/login"
 						>
 							Sign In To Submit
-						</a>
+						</a> */}
+						</div>
 					)}
+				</div>
 				</div>
 			</div>
 		</div>
