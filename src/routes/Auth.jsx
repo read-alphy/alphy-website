@@ -324,7 +324,8 @@ verificationMessage==false ?
 
 							{isRegister ===false ? 
 							<div className="text-zinc-600 dark:text-zinc-300 text-sm" ><p><a href="/u/resetpassword" className="underline cursor-pointer"> Forgot your password?</a></p> </div>:null}
-					
+					{isRegister ? 
+							<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm "> Already have an account? Login <a href="/u/login" className="text-green-400">here.</a></p> </div>:<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm">Don't have an account? <a href="/u/register" className="text-green-400">Register now.</a></p> </div>}
 					</div>
 
 		</div>
@@ -346,8 +347,7 @@ verificationMessage==false ?
 						
 		<div className="mt-4">
 						
-							{isRegister ? 
-							<div className="mt-2 text-center"><p className="text-zinc-600 dark:text-zinc-300 text-sm "> Already have an account? Login <a href="/u/login" className="text-green-400">here.</a></p> </div>:<div className="text-center"><p className="text-zinc-600 dark:text-zinc-300 text-sm">Don't have an account? <a href="/u/register" className="text-green-400">Register now.</a></p> </div>}
+							
 						
 					</div>
 				</div>

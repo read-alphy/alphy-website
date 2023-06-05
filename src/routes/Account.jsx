@@ -374,10 +374,10 @@ export default function Account({ credit,hasActiveSub}) {
                         {currentUser ? 
                                 <div className="px-4 sm:mx-0">
                                     
-                                            <h1 className="text-md text-zinc-600 mb-10 ">Account Details</h1>
+                                            <h1 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 ">Account Details</h1>
 
                             <div className="grid grid-cols-3 mb-5  ">
-                                            <div className="col-span-1 text-zinc-500 text-sm border-r border-gray-300 pr-4">
+                                            <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm border-r border-gray-300 pr-4">
                                                 <p className="mb-3">Your Email</p>
                                                 <p className="mb-3">Password</p>
                                                 {credit!==null ?
@@ -386,7 +386,7 @@ export default function Account({ credit,hasActiveSub}) {
                                                         <p className="mt-2">Plan</p>
                                             </div> 
                                 {/* <div class="border-r border-gray-300 h-[10vh] col-span-1 mx-auto items-center flex"></div> */}
-                                            <div className="col-span-2 text-black text-sm ml-6">
+                                            <div className="col-span-2 text-black dark:text-zinc-200 text-sm ml-6">
                                                 <p className="mb-3">{currentUser.email}</p>
                                                 <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
                                                 {credit!==null ?
