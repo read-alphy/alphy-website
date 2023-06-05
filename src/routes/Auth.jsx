@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { repeat } from 'lodash';
 import { Button} from "@material-tailwind/react";
 import ReactLoading from 'react-loading';
+import Google from "../img/google.png"
+
 
 
 const Auth = () => {
@@ -331,25 +333,26 @@ verificationMessage==false ?
 		</div>
 		<div className="">
 		<div className="flex items-center mt-10 mb-10">
-		<div class="border-b border-gray-300 w-[200px] mr-3"></div>
-		<span className="text-sm text-gray-400">OR</span>
-		<div class="border-b border-gray-300 w-[200px] ml-3 "></div>
+				<div class="border-b border-gray-300 w-[200px] mr-3"></div>
+				<span className="text-sm text-gray-400 font-light">OR</span>
+				<div class="border-b border-gray-300 w-[200px] ml-3 "></div>
 		</div>
+
 		<button
-							className=" py-4 px-4  w-full border rounded focus:outline-none focus:shadow-outline hover:opacity-80"
+							className="py-3 px-4  w-full border border-gray-500 rounded focus:outline-none focus:shadow-outline "
 							onClick={handleLoginWithGoogle}
 						>
-							<FaGoogle className="inline-block mr-2 mb-1" />
-							<span className="font-normal ">Continue with Google</span>
 							
+							<div className="flex flex-rows	">
+							<img src={Google} width={30}></img>
+							<span className=" ml-4 font-extral	text-zinc-700 dark:text-zinc-300 ">
+							
+							Continue with Google</span>
+							</div>
 						</button>
 
 						
-		<div className="mt-4">
-						
-							
-						
-					</div>
+
 				</div>
 
 				</div>
