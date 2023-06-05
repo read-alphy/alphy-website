@@ -126,10 +126,10 @@ export default function Account({ credit,hasActiveSub}) {
                         {currentUser ? 
                                 <div>
                                     
-                                            <h1 className="text-md text-zinc-600 mb-10 ">Account Details</h1>
+                                            <h1 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 ">Account Details</h1>
 
                             <div className="grid grid-cols-3 mb-5">
-                                            <div className="col-span-1 text-zinc-500 text-sm">
+                                            <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm">
                                                 <p className="mb-2">Your Email</p>
                                                 <p className="mb-2">Password</p>
                                                 {credit!==null ?
@@ -138,7 +138,7 @@ export default function Account({ credit,hasActiveSub}) {
                                                         <p className="mt-2">Plan</p>
                                             </div> 
                                 <div class="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
-                                            <div className="col-span-1 text-black text-sm">
+                                            <div className="col-span-1 text-black dark:text-zinc-200 text-sm">
                                                 <p className="mb-2">{currentUser.email}</p>
                                                 <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
                                                 {credit!==null ?
@@ -241,7 +241,7 @@ export default function Account({ credit,hasActiveSub}) {
 
                                         {currentUser ?
                                             <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                                <Button type="button" className={` bg-zinc-600  font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-darkMode" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
+                                                <Button type="button" className={` bg-zinc-600   font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-zinc-700" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
                                             </a>
                                             :
                                             <a href="/u/login" type="button"> 
@@ -489,7 +489,7 @@ export default function Account({ credit,hasActiveSub}) {
                                     </div>
                                     {currentUser ?
                                             <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                                <Button type="button" className={` bg-zinc-600  font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-darkMode" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
+                                                <Button type="button" className={` bg-zinc-600  font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-zinc-700" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
                                             </a>
                                             :
                                             <a href="/u/login" type="button"> 
