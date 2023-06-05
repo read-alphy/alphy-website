@@ -15,6 +15,7 @@ import {
 	PopoverHandler,
 	PopoverContent,
     ThemeProvider,
+    Button
 
   } from "@material-tailwind/react";
 
@@ -128,13 +129,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
 
                             <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
                                 <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-5xl font-bold mb-20">Choose the best plan for you</p>
-                                {currentUser ? <div className="items-center flex flex-col justify-center">
-                                { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
-                                    {credit!==null ?
-                                    <p className="items-center flex mb-6 " >Remaining Credits: {credit} minutes</p> :null
-                                            }          
-                                    </div> : null}
-                        
+                              
                             {/* <div className="items-center flex justify-center"><label className="relative inline-flex items-center ">
                             <input type="checkbox" value="" className="sr-only peer" onClick={handleDarkMode}/>
                             <div className="w-11 cursor-pointer h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
@@ -224,14 +219,15 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                             </ul>
                                         </div>
 
+                        
                                         {currentUser ?
-                                            <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                                <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                            <a target="_blank" href={hasActiveSub && !canceledAtPeriodEnd && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
+                                                <Button type="button" className={` bg-zinc-600  font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-zinc-700" : "pointer-events-none"} rounded-lg text-white text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
                                             </a>
                                             :
-                                            <button onClick={handleLoginWithGoogle} type="button" className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
+                                            <a href="/u/login" type="button"> 
+                                            <Button className="text-white bg-green-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-white text-[16px]">{currentUser ? "Active" : "Sign Up For Free"}</Button></a>
                                         }
-
 
 
 
@@ -265,7 +261,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                                 <li className="flex space-x-3">
 
 
-                                                    <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
+                                                    <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the Basic Plan plus:</span>
                                                 </li>
 
                                                 <li className="flex space-x-3">
@@ -323,7 +319,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                             </ul>
                                         </div>
                                         <a className={`${hasActiveSub ? "pointer-events-none" : ""}`} href={(currentUser && !hasActiveSub) && `/plans/checkout`}>
-                                            {currentUser ? <button type="button" className={`text-white bg-green-400  transition duration-200 ease-in ${hasActiveSub ? "pointer-events-none text-whiteLike" : ""} font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : "Upgrade Plan"}</button> : <div></div>}
+                                        {currentUser ? <Button type="button" className={` bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-white justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div></div>}
                                         </a>
 
 
@@ -428,10 +424,10 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                     </div>
                                     {currentUser ?
                                         <a target="_blank" href={hasActiveSub && "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"}>
-                                            <button type="button" className={`text-white bg-gray-400 hover:bg-gray-400 font-medium ${hasActiveSub ? "bg-zinc-50 dark:bg-darkMode0 dark:bg-darkMode0" : "pointer-events-none"} rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</button>
+                                            {currentUser ? <Button type="button" className={` bg-green-400  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-white justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div></div>}
                                         </a>
                                         :
-                                        <button onClick={handleLoginWithGoogle} type="button" className="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</button>
+                                        <a href="/u/login" type="button" className="text-white bg-green-400  transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-l px-5 py-2.5 inline-flex justify-center w-full text-center">{currentUser ? "Active" : "Sign Up For Free"}</a>
                                     }
                                 </div>
 
@@ -460,7 +456,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                             <li className="flex space-x-3">
 
 
-                                                <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the free plan plus:</span>
+                                                <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the Basic Plan plus:</span>
                                             </li>
 
                                             <li className="flex space-x-3">

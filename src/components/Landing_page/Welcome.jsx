@@ -8,6 +8,7 @@ import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Popover } from 'flowbite';
+import { Button} from "@material-tailwind/react";
 
 
 export default function Welcome({hasActiveSub,credit}) {
@@ -25,30 +26,6 @@ export default function Welcome({hasActiveSub,credit}) {
 	const[called, setCalled] = useState(false)
 	const[failed,setFailed]	= useState(false)
 
-	useEffect (() => {
-		/* if (currentUser && called!==true) {
-            currentUser.getIdToken().then((idToken) => {
-                axios
-                    .get(
-                        `${process.env.REACT_APP_API_URL}/payments/credit`,
-                        {
-                            headers: {
-                                'id-token': idToken,
-                            },
-                        },
-                    )
-                    .then((response) => {
-                        const [fixed, monthly] = response.data
-                        setCredit(fixed + monthly)
-						setCalled(true)
-                        
-                    })
-                    .catch((error) => {
-                        console.error(error)
-                    });
-            });
-        }  */
-	}, )
 	
 	const auth = useAuth()
     const handleLoginWithGoogle = () => {
@@ -189,7 +166,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						else{	
 							console.log(error)
 							
-							toast('There was an error submitting the form. \n \n You are on the Free Plan. Make sure the content you are submitting is shorter than 1 hour and conforms with our content popularity limits.', {
+							toast('There was an error submitting the form. \n \n You are on the Basic Plan. Make sure the content you are submitting is shorter than 1 hour and conforms with our content popularity limits.', {
 								duration: 6000,
 								icon: '⚠️',
 							});
@@ -220,39 +197,7 @@ export default function Welcome({hasActiveSub,credit}) {
 		<div
 			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
-		>
-			{/* {localStorage.getItem("bannerClosed")==="true" ? (null) : 
-
-						(<div id="marketing-banner" tabindex="-1" className={`fixed ${localStorage.getItem("bannerClosed")===true ? "hidden":""}z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 drop-shadow-md rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600`}>
-				<div className="flex flex-col items-start mb-3 mr-4 md:items-center md:flex-row md:mb-0">
-			
-					<p className="flex items-center text-sm font-normal dark:text-zinc-300 text-gray-500 dark:dark:text-zinc-300 text-gray-400">Notice: We had some changes to our usage policy. Check the <span><a className="underline" href={currentUser ? "/account" : "/plans"}>{currentUser ? " Account " : " Plans "}</a></span> page for more info! </p>
-				</div>
-				<div className="flex items-center flex-shrink-0">
-				<a onClick={handleCloseBanner} href={currentUser ? "/account" : "plans"} className="inline-flex items-center px-3 py-2 mr-3 text-xs font-medium dark:text-zinc-300 text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:dark:text-zinc-300 text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg> Learn more</a>
-					<button onClick = {handleCloseBanner} data-dismiss-target="#marketing-banner" type="button" className="absolute top-2.5 right-2.5 md:relative md:top-auto md:right-auto flex-shrink-0 inline-flex justify-center items-center dark:text-zinc-300 text-gray-400 hover:bg-gray-200 hover:dark:text-zinc-300 text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white">
-						
-						<svg onClick = {handleCloseBanner} aria-hidden="true" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-						<span className="sr-only">Close banner</span>
-					</button>
-				</div>
-			</div>)
-			} */}
-
-
-{/* 			{loading && (
-				<div className={`z-50 top-0 flex justify-center items-center h-[90vh]`}>
-					<div className="flex flex-col items-center">
-						<ReactLoading type="spinningBubbles" color="#000" />
-						<p className="text-bordoLike dark:bg-darkMode dark:text-zinc-500 text-center mb-10 mt-10">
-							We are processing your request. This may take a few seconds.
-						</p>
-					</div>
-				</div>
-			)}
- */}
-
-			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-56 text-center">
+		>			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-56 text-center">
 				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">
 					<div className="first flex justify-center pb-3 ">
 						<div className="">Transcribe</div>
@@ -280,9 +225,9 @@ export default function Welcome({hasActiveSub,credit}) {
 
 			<Toaster />
 
-			<div className="items-center justify-center w-full lg:space-x-4 lg:flex">
+			<div className="items-center container justify-center w-full mx-auto lg:ml-60">
 
-				<div className="flex items-center mt-4 space-x-4 md:justify-center lg:mt-0">
+				<div className="flex  items-center mt-4 space-x-4 md:justify-center lg:mt-0  ">
 
 					<div className="w-full flex flex-col">
 
@@ -294,12 +239,12 @@ export default function Welcome({hasActiveSub,credit}) {
 							{currentUser && 
 							<span className="text-sm pl-2 mb-2 text-gray-600 dark:text-zinc-300"> 
 							
-							<a href="/account" className="underline">{hasActiveSub ? "Premium Plan" : "Free plan"}</a> - Remaining Credits : {Math.floor(credit)} minutes </span>
+							<a href="/account" className="underline">{hasActiveSub ? "Premium Plan" : "Basic Plan"}</a> - Remaining Credits : {Math.floor(credit)} minutes </span>
 							}
 
 						<div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm dark:text-zinc-300 text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
 							<div className="p-3 space-y-2">
-								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900"><span >Free Plan</span>:</p>
+								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900"><span >Basic Plan</span>:</p>
 								<p></p>
 								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
 								<p> • Make sure it has more than <strong >10,000 views</strong>.</p>
@@ -308,9 +253,7 @@ export default function Welcome({hasActiveSub,credit}) {
 								<p>• No view limit. </p>
 								<p>• You have access to <span className="text-green-400">unlimited Twitter Spaces transcription</span>.</p>
 								<p className="pt-2">Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a> page for more info about Premium benefits.</p>
-							{/* 	<p> Free tier users can only submit videos with more than <strong className="underline">10,000 views</strong>. There is no popularity limit if you are premium.</p>
-				<p>Submitting content will spend from your credits. Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Acccount" : "Plans"}</a> page for more info.</p>
-								<p></p> */}
+						
 								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3">When the content is ready</p>
 								<p>If you see a video that has inaccurate transcription and summary, please let us know. We will fix it as soon as possible.
 								</p>
@@ -320,25 +263,29 @@ export default function Welcome({hasActiveSub,credit}) {
 							</div>
 							<div className="popover-arrow" role="presentation"></div>
 						</div>
-						<input
 
-							className={`w-full lg:w-[600px] border border-zinc-300 text-bordoLike dark:bg-mildDarkMode  dark:border-zinc-600 dark:text-zinc-500 py-3 pl-4 rounded-full  focus:ring-whiteLike dark:focus:ring-mildDarkMode dark:focus:outline-none focus:outline-none ${failed && inputValue.length===0 ? "border-red-500" : ""}`} 
-							type="text"
-							name="content_link"
-							value={inputValue}
-							onChange={(event) => setInputValue(event.target.value)}
-							placeholder="Insert a link to start"
-							autoComplete="off"
-						/>
-					{/* 	{failed && inputValue.length===0 ?<p className="font-light ml-2 text-red-500"> Check again.</p> : null} */}
+					
+						
 
 					</div>
-					{/* <Languages language={language} onLangChange={setLanguage} /> */}
+					
 				</div>
 
-				<div className={`flex justify-center ${currentUser ? "lg:mt-6" : ""}`}>
+			<div className=" sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5">
+				<div class="sm:col-span-2 lg:col-span-2 relative w-full min-w-[200px] h-12">
+							<input 
+							
+							value={inputValue}
+							onChange={(event) => setInputValue(event.target.value)}
+							placeholder=""
+							className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-green-400  dark:focus:border-l-green-400 dark:focus:border-b-green-400 focus:border-green-400"/>
+							<label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-green-400 before:border-blue-gray-200 peer-focus:before:!border-green-400 after:border-blue-gray-200 peer-focus:after:!border-green-400">Insert a link to start</label>
+							
+						 </div>
+				<div className={`sm:col-span-1 mt-5 sm:mt-0 flex ml-5  ${currentUser ? "" : ""}`}>
 					{currentUser ? (
-						<button
+						<div>
+						{/* <button
 							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-90 transition duration-200 ease-in-out"
 							type="submit"
 							onClick={(e) => {
@@ -346,16 +293,29 @@ export default function Welcome({hasActiveSub,credit}) {
 							}}
 						>
 							Submit
-						</button>
+						</button> */}
+
+						<Button type="submit"
+							onClick={(e) => {
+								handleSubmit();
+							}} className="bg-zinc-700 dark:bg-green-400 dark:text-zinc-300 px-10 py-3  text-[15px] ">Submit</Button>
+						</div>
 					) : (
-						<button
-							className="w-2/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-75"
+						<div>
+							     
+								 <a href="/u/login">
+						<Button  className="bg-zinc-700 px-10 py-3 dark:bg-green-400 dark:text-zinc-300 text-[15px] ">Sign in to submit</Button></a>
+						
+						{/* <a
+							className="w-2/3 border-2 border-blueLike px-8 text-center bg-blueLike text-whiteLike py-3 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-90"
 							type="submit"
-							onClick={handleLoginWithGoogle}
+							href="/u/login"
 						>
 							Sign In To Submit
-						</button>
+						</a> */}
+						</div>
 					)}
+				</div>
 				</div>
 			</div>
 		</div>
