@@ -76,7 +76,7 @@ export default function Content(props) {
 	let summaryArray = '';
 
 	const language_codes = {
-		"__":"__dummy",
+		"__":"__",
 		"af": "Afrikaans",
 		"ar": "العربية",
 		"hy": "Հայերեն",
@@ -147,6 +147,7 @@ export default function Content(props) {
 			
 			
 			summary = contentSummaries.find(summary => summary.lang ===   language);
+			
 			if(summary!==undefined && summary.length>0 && summary.summary===null){
 				setTranslationMessage(true)
 				languagesWanted.push(language)
@@ -303,7 +304,16 @@ export default function Content(props) {
 		
 
 		if (summary !== undefined || summary !== null) {
-			summaryArray = summary.summary.split('\n');
+		
+			
+			if(summary.summary_prettified!==undefined && summary.summary_prettified!==null){
+				
+				summaryArray = summary.summary_prettified.split('\n');
+			}
+			else{
+				summaryArray = summary.summary.split('\n');
+			
+			}
 			
 
 			var parser = new srtParser2();
