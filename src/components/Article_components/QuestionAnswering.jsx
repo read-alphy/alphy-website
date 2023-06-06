@@ -530,7 +530,7 @@ export default function QuestionAnswering(props) {
 {/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
 <TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
 				getBeforeInit={(instance) => {
-					instance.type("Alphy is going through the recording to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
+					instance.type("Going through the recording to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
 
 					// Remember to return it!
 					return instance;
