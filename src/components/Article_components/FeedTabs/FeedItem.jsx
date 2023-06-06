@@ -50,7 +50,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 					</div>
 
 					<div className="text-xs w-1/2">
-						{item.summaries!==undefined && item.summaries[0]!==undefined && (item.summaries[0].complete===true || (item.summaries[1]!==undefined && item.summaries[1].complete==true)) ? null : (
+						{item.summaries!==undefined && item.summaries[0]!==undefined && (item.summaries[0].complete===true || (item.summaries[1]!==undefined || item.summaries[0]!==undefined)) ? null : (
 							<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 						)}	
 						<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">{item.title}</div>
