@@ -299,8 +299,8 @@ export default function QuestionAnswering(props) {
 							title={inputValue}
 							type="text"
 							id="search"
-							placeholder="Search our database..."
-							className=" peer w-full h-full bg-white dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000"/>
+							placeholder="Ask anything to the transcript..."
+							className="placeholder:italic peer w-full h-full bg-white dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400"/>
 							{/* <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-000 before:border-green-400 peer-focus:before:!border-blue-000 after:border-green-400 peer-focus:after:!border-blue-000">Search our database...</label> */}
 							
 
@@ -331,18 +331,22 @@ export default function QuestionAnswering(props) {
 						) : null}
 					</div>
 
-					
+					{window.innerWidth>420 
+
+					&&
+
 					<Button type="submit"
 					ref={buttonRef}
 					onClick={fetchData}
+					
 							 className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none":""}`}>
-
+								
 {isLoadingInside ? <Spinner className="h-4 w-4"/>:
 					<svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 						<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
 						</svg>
 						}
-						</Button>
+						</Button>}
 
 				</div>
 				{inputError && inputValue.length === 0 ? (
@@ -365,7 +369,7 @@ export default function QuestionAnswering(props) {
 							{Object.keys(props.key_qa).map((item, index) => (
 									<div id="accordion-flush"  data-active-classes="bg-zinc-50 dark:bg-darkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
 										<h2 id="accordion-flush-heading-1">
-											<button onClick={(event) => handleBaseQAaccordion(event,index,item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+											<button onClick={(event) => handleBaseQAaccordion(event,index,item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
 											<span>{item}</span>
 											<svg data-accordion-icon class={`w-6 h-6 ${index==collapseIndex && collapseIndex!=-1 ? "rotate-180": ""} shrink-0`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 											</button>
@@ -385,7 +389,7 @@ export default function QuestionAnswering(props) {
 											</div>
 											<div>
 												<div>
-											<p id="answer-area" className="answer-area text-zinc-700 dark:text-zinc-300 font-normal" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
+											<p id="answer-area" className="answer-area text-zinc-700 dark:text-zinc-300 font-normal text-md sm:text-l" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
 											</div>
 									
 											
@@ -524,7 +528,7 @@ export default function QuestionAnswering(props) {
 					>
 
 {/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
-<TypeIt className="mb-3 text-zinc-600 dark:text-zinc-300"
+<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
 				getBeforeInit={(instance) => {
 					instance.type("Alphy is going through the recording to find your answer...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
 
@@ -589,7 +593,7 @@ export default function QuestionAnswering(props) {
 
 								
 								</div>
-								<div id="answer-area" className="answer-area text-l container">
+								<div id="answer-area" className="answer-area text-md sm:text-l container">
 									<TypeIt className="mb-3"
 
 										options={{
@@ -729,7 +733,7 @@ export default function QuestionAnswering(props) {
 											</svg>
 										</div>
 									</div>
-									<p id="answer-area" className="answer-area" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
+									<p id="answer-area" className="answer-area text-sm md:text-md" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
 								</div>
 
 								<button
