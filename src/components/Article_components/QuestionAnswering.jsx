@@ -510,6 +510,7 @@ export default function QuestionAnswering(props) {
 					>
 
 <ReactLoading type="spin" color="#a1a1aa" width={30}/>
+This may take a few seconds
 					</div>
 				) : (
 					<div> </div>
