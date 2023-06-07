@@ -74,6 +74,7 @@ export default function Content(props) {
 
 	
 	let summaryArray = '';
+	
 
 	const language_codes = {
 		"__":"__",
@@ -315,6 +316,7 @@ export default function Content(props) {
 			
 			}
 			
+			console.log(summaryArray)
 
 			var parser = new srtParser2();
 
