@@ -97,13 +97,13 @@ const changeMetadata = (e) => {
     
           {showform ? 
           <div>
-          <div className="mb-10 px-5">
+          <div className="mb-10 pr-5 pl-1">
           
             <div className="flex flex-row">
             
               <div>
-            <h1 className="text-xl font-semibold"> Welcome to Alphy!</h1>
-            <p className="mt-5 text-l">Please tell us a bit about yourself. It will only take 30 seconds.</p>
+            <h1 className="text-xl font-semibold dark:text-zinc-600"> Welcome to Alphy!</h1>
+            <p className="mt-5 text-l dark:text-zinc-600">Please tell us a bit about yourself. It will only take 30 seconds.</p>
             </div>
            
                     </div>

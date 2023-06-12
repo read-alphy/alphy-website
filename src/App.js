@@ -45,7 +45,7 @@ function App() {
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
-	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
+	const [showWelcomeForm, setShowWelcomeForm] = useState(true)
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
