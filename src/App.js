@@ -5,13 +5,11 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './routes/Home';
 import Article from './components/Article';
 import Footer from './components/Footer';
-import { useWindowSize } from './hooks/useWindowSize';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './routes/NotFound';
 import image from './img/robot.png';
 import { useAuth } from './hooks/useAuth';
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Pricing from './routes/Pricing';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -21,7 +19,8 @@ import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
-
+import { Option, Select } from '@material-tailwind/react';
+import WelcomeForm from './components/WelcomeForm';
 
 
 
@@ -46,36 +45,41 @@ function App() {
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
+	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
-
+	
 
 
 	const stripePromise = loadStripe(
 		`${process.env.REACT_APP_STRIPE_PK}`
 	);
-	
 useEffect(() => {
+
+	
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
 		auth.handleVerifyEmail(oobCode)
 		.then((resp) => {
-			
-			window.location.reload()
-
-
-
+			setShowWelcomeForm(true)
+			//window.location.reload()
 		}
-		)
-
-
-		
+		)	
 	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
 		getCustomerInfo(currentUser)
+		const createdAt = currentUser.metadata.createdAt
+		const lastLoginAt = currentUser.metadata.lastLoginAt
+		const registerRecently= parseInt(createdAt) - parseInt(lastLoginAt)
+		
+		if(registerRecently>-10000 && localStorage.getItem('welcomeForm')!=="false"){
+			setShowWelcomeForm(true)
+			localStorage.setItem('welcomeForm', 'false')
+		}
 	}
+
 }, 1000)
 
 
@@ -142,7 +146,20 @@ if (currentUser && creditcalled!==true) {
 
 	return (
 
+		
 		<div className="App bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300">
+
+			{showWelcomeForm && 
+					<div className="fixed inset-0 z-50 flex items-center justify-center ">
+								<div className="fixed inset-0 bg-black opacity-80"></div>
+								<div className="z-10 bg-white rounded-md shadow-lg w-full max-w-lg ">
+								<div className="flex  flex-col gap-6">
+								
+								<WelcomeForm currentUser={currentUser} setShowWelcomeForm={setShowWelcomeForm}/>
+							</div>	
+							</div>
+							</div>
+							}
 		<Helmet>
 			<title>Alphy: Unlock the Information in Audiovisual Content </title>
 			</Helmet> 
@@ -180,8 +197,8 @@ if (currentUser && creditcalled!==true) {
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
-							<Route path="/u/login" element={<Auth/>}></Route>
-							<Route path="/u/register" element={<Auth/>}></Route>
+							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
+							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth/>}></Route>
 							
 

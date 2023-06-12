@@ -11,7 +11,8 @@ import {
 	sendEmailVerification,
 	sendPasswordResetEmail,
 	confirmPasswordReset,
-	applyActionCode 
+	applyActionCode,
+	fetchSignInMethodsForEmail,
 } from 'firebase/auth';
 import { firebaseApp } from '../helper/firebase'; // assuming you have initialized Firebase in a separate file
 
@@ -61,8 +62,7 @@ const useAuth = () => {
 		
 		return createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
-				const user = userCredential.user;
-				
+				const user = userCredential.user;				
 				// Send email verification
 				sendEmailVerification(user)
 	 }).catch((error) => {
@@ -89,6 +89,9 @@ const useAuth = () => {
 		return signInWithPopup(auth, provider);
 	};
 
+	const checkIfUserExists = (email) => {
+		return fetchSignInMethodsForEmail(auth, email);
+	}
 
 	const loginWithTwitter = () => {
 		const provider = new TwitterAuthProvider();
@@ -109,7 +112,8 @@ const useAuth = () => {
 		resetPassword,
 		handlePasswordReset,
 		resendEmailVerification,
-		handleVerifyEmail
+		handleVerifyEmail,
+		checkIfUserExists
 		
 	};
 };

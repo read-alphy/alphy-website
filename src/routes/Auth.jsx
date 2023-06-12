@@ -10,7 +10,7 @@ import Google from "../img/google.png"
 
 
 
-const Auth = () => {
+const Auth = ({setShowWelcomeForm, showWelcomeForm}) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(null);
@@ -23,12 +23,13 @@ const Auth = () => {
 	const[successMessage,setSuccessMessage] = useState(false)
 	const resetPassword = (useLocation().pathname.includes('/u/resetpassword'));
 	const verification = (useLocation().pathname.includes('/u/verify') && urlParams.get('mode')=="verifyEmail");	
-
+	
 	const isRegister = useLocation().pathname.includes('/u/register');
 	const handleEmailChange = (event) => {
 		setEmail(event.target.value);
 	};
 
+		
 	
 	
 	const oobCode = urlParams.get('oobCode');
@@ -44,37 +45,58 @@ const Auth = () => {
 		}
 	
 	});
+
+
+
 	const handlePasswordChange = (event) => {
 		setPassword(event.target.value);
 	};
+
+
 	const handleRepeatPasswordChange = (event) => {
 		setRepeatPassword(event.target.value);}
 
-	const handleRegisterWithEmail = (event) => {
-		//setIsSubmitting(true)
-		event.preventDefault();
-		setIsSubmitting(true)
-		if(repeatPassword!==password){
-			setError('Passwords do not match.')
-			setIsSubmitting(false)
-		}
-		else if(password.length<8){
-			setError('Password must be at least 8 characters long.')
-			setIsSubmitting(false)
-		}
-		else{
-		auth.registerWithEmail(email, password)
-			.then(() => {
-				setVerificationMessage(true)
-				setIsSubmitting(false)
-			})
-			.catch((error) => {
-				console.log(error)
-				setIsSubmitting(false)
-			});
-		}
+
 		
-	};
+	const handleRegisterWithEmail = (event) => {
+		event.preventDefault();
+  setIsSubmitting(true);
+
+  auth.checkIfUserExists(email)
+    .then((signInMethods) => {
+      if (signInMethods.length > 0) {
+        setError('An account with this email already exists.');
+        setIsSubmitting(false);
+        return; // Stop executing the rest of the code
+      }
+      
+      if (repeatPassword !== password) {
+        setError('Passwords do not match.');
+        setIsSubmitting(false);
+      } else if (password.length < 8) {
+        setError('Password must be at least 8 characters long.');
+        setIsSubmitting(false);
+      } else {
+		setTimeout(() => {
+        auth.registerWithEmail(email, password)
+          .then(() => {
+            setVerificationMessage(true);
+            setIsSubmitting(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setIsSubmitting(false);
+          });
+		  	  }, 1000);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      setIsSubmitting(false);
+    });
+		}
+	
+	;
 
 	const handleLoginWithEmail = (event) => {
 		//setIsSubmitting(true)
@@ -82,7 +104,7 @@ const Auth = () => {
 		console.log('logging in');
 		auth.loginWithEmail(email, password)
 			.then((result) => {
-				console.log(result)
+				
 				if(result ==="verification error"){
 					setError("Please verify your email before logging in.")
 					setVerificationMessage(true)					
@@ -91,6 +113,7 @@ const Auth = () => {
 					setError("Oops! Incorrect email or password.");
 				}
 				else{
+				
 				navigate('/');
 				setIsSubmitting(false)
 			}
@@ -110,11 +133,15 @@ const Auth = () => {
 			});
 	};
 
-	const handleLoginWithGoogle = () => {
+	const handleLoginWithGoogle = (e) => {
+		localStorage.setItem("welcomeForm","true")
+		e.preventDefault();
 		auth.loginWithGoogle()
 			.then(() => {
+
 				navigate('/');
-			})
+			} 
+			)
 			.catch((error) => {
 				console.log(error)
 			});
@@ -290,7 +317,7 @@ verificationMessage==false ?
 (resetPassword=== false ? 
 <div className="mb-20 w-[300px]">
 	
-	
+	<iframe className="mt-[600px] h-[60vh] hidden" src={`https://tally.so/embed/mYRzAW=heyo?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
 		<div >
 			<h1 className="text-xl mb-8">{isRegister ? 'Create an account' : 'Login'}	</h1>
 			
@@ -302,8 +329,11 @@ verificationMessage==false ?
 			<label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-400 dark:peer-focus:text-green-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
 		</div>
 		<div class="relative z-0 w-full mb-6 group">
+		
+
 			<input onChange={handlePasswordChange} type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-400 focus:outline-none focus:ring-0 focus:border-green-400 peer" placeholder=" " required />
 			<label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-400 peer-focus:dark:text-green-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+		
 		</div>
 		{isRegister ? 
 		<div class="relative z-0 w-full mb-6 group">
@@ -419,7 +449,7 @@ verificationMessage==false ?
 
 			<div className="mb-20 w-[300px]">
 				<h1 className="text-xl mb-8">We've send a verification link to {email!==null ? email: "your email"}!</h1>
-				<p className="text-sm text-zinc-600 mb-10">Please follow it to complete your registration. If you didn't get the email, try again from the link below.</p>
+				<p className="text-sm text-zinc-600 mb-10">Please follow the link to complete your registration. If you didn't get the email, try again from the link below.</p>
 				<Button onClick={handleResendVerificationEmail}  className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-green-400`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Resend Link</span>}</Button>
 				{successMessage && <div className="text-zinc-500 text-sm mb-8 mt-5">We've successMessage the verification email. Please check your inbox.</div>}
 				</div>

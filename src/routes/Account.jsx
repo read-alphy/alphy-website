@@ -115,7 +115,7 @@ export default function Account({ credit,hasActiveSub}) {
         <div className="dark:bg-darkMode ">
             {isLoaded ?
 
-                <div clasName="dark:bg-darkMode">
+                <div className="dark:bg-darkMode">
 
                     {
                         windowSize.width > 999 ?
