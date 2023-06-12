@@ -577,6 +577,13 @@ CONTENT PAGE
 	font-family: 'Noto Sans', sans-serif;
 
 }
+
+.select-option span{
+	padding-left: 10px;
+	padding-top:5px;
+	padding-bottom:0px;
+}
+
 .or-area {
 	display: flex;
 	align-items: center;

@@ -121,7 +121,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
         <div className="dark:bg-darkMode ">
             {isLoaded ?
 
-                <div clasName="dark:bg-darkMode">
+                <div className="dark:bg-darkMode">
 
                     {
                         windowSize.width > 999 ?
