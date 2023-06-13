@@ -70,9 +70,9 @@ useEffect(() => {
 	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
-		const currentUserId = currentUser!==null ? currentUser.uid : '0';
+		const currentUserId = currentUser!==null ? currentUser.uid : '01';
 		if(window.clarity){
-			window.clarity('set', 'userId', "1");
+			window.clarity('set', {'userId': "101"});
 	}
 
 		getCustomerInfo(currentUser)
