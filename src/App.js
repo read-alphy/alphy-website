@@ -28,6 +28,7 @@ import WelcomeForm from './components/WelcomeForm';
 
 
 
+
 const firebaseConfig = {
 	apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
 	authDomain: 'auth.alphy.app',
@@ -45,7 +46,7 @@ function App() {
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
-	const [showWelcomeForm, setShowWelcomeForm] = useState(true)
+	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
@@ -57,6 +58,9 @@ function App() {
 useEffect(() => {
 
 	
+
+    // Send custom data
+    
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
@@ -69,6 +73,7 @@ useEffect(() => {
 	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
+		window.clarity("identify",'custom-id', currentUser.uid);
 		getCustomerInfo(currentUser)
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt

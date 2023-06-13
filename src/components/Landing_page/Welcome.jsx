@@ -296,7 +296,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						>
 							Submit
 						</button> */}
-
+						
 						<Button type="submit"
 							onClick={(e) => {
 								handleSubmit();
@@ -315,6 +315,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						>
 							Sign In To Submit
 						</a> */}
+					
 						</div>
 					)}
 				</div>

@@ -8,7 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { set } from 'lodash';
 import Robot from "../../img/cute robot grey.png"
-import { Button, Input} from "@material-tailwind/react";
+import { Button,  Popover,
+	PopoverHandler,
+	PopoverContent,} from "@material-tailwind/react";
 import { Howl } from 'howler';	
 import { useRef } from 'react';
 
@@ -31,6 +33,8 @@ function Feed(props) {
 	const [called, setCalled] = useState(false);
 	const [ready, setReady] = useState(false)
 	const [myUploads, setMyUploads] = useState(false)
+	const [dataUploads, setDataUploads] = useState([])
+	const [hasTier3, setHasTier3] = useState(true)
 	
 	let calledAndEmpty = true 
 
@@ -253,14 +257,25 @@ if(called===false){
 					<li class="mr-2">
 						<button onClick={() => navigateFeeds(2)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
+					
 					<li class="mr-2">
-						<button onClick={() => navigateFeeds(3)} class={`inline-block p-4 mb-1 ${!isPublic && myUploads==true ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Uploads</button>
+
+
+							<button onClick={() => navigateFeeds(3)} class={`relative infline-flex p-4 mb-1 ${!isPublic && myUploads==true ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+  
+  <span> My Uploads </span>
+  <div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div>
+</button>
+							
+							
 					</li>
+					
 
 				</ul>
 			</div>
 
 			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] ">
+			{isPublic ===false && myUploads == true ?null :
 				<form
 					className="flex items-center"
 					onKeyDown={handleKeyDown}
@@ -302,6 +317,7 @@ if(called===false){
 							className="bg-zinc-50 dark:bg-darkMode border border-slate-200   dark:border-none  text-gray-900 dark:text-zinc-200 text-sm rounded-l-full mt-5 sm:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 dark:focus:border-darkMode dark:focus:ring-darkMode block w-full  py-3"
 							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
 						/> */}
+						
 						<div class="relative w-full min-w-[200px] h-11 ">
 							<input 
 							ref={searchInputRef}
@@ -339,6 +355,7 @@ if(called===false){
 						</svg>
 						</Button>
 				</form>
+}
 
 				<div className={`buttons flex justify-between mt-2 `}></div>
 
@@ -440,25 +457,59 @@ if(called===false){
 					</div>}
 
 					{
-						isPublic==false && myUploads==true &&
+						hasTier3 && isPublic==false && myUploads==true &&
 
 						<div>
-	
+
+
+							<div className="mt-5 mb-5 ">
+							<Popover>
+								<p className="lg:text-xl text-zinc-600 dark:text-zinc-300 flex flex-row">Use Alphy on your audio files, privately.
+								
+								<PopoverHandler>
+
+								<svg className="w-5 h-5 ml-1 pt-1 cursor-pointer dark:text-zinc-300 text-gray-400 hover:dark:text-zinc-300 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg>
+
+								
+								</PopoverHandler>
+								</p>
+								
+								
+								
+								<PopoverContent>
+									<div>
+										<ol>
+										<li>Choose an audio file and upload to Alphy from below.</li>
+										<li>Alphy will process your video the same way it does with online content.</li>
+										<li>Only you can access the end result. Your submissions will not be a part of Alphy's public database.</li>
+										<li>All audio files are deleted after 24 hours of transcription.</li>
+										</ol>
+
+									</div>
+
+								</PopoverContent>
+								</Popover>
+								 </div>
+
 						<div class="flex items-center justify-center w-full">
-							<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+							<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
 								<div class="flex flex-col items-center justify-center pt-5 pb-6">
 									<svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-									<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload your first audio file</span> or drag and drop</p>
+									<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload your audio file</span> or drag and drop</p>
 									<p class="text-xs text-gray-500 dark:text-gray-400">MP3, M4A, MPGA, MPEG, WAV, OR WEBM</p>
 								</div>
 								<input onChange = {handleFileUpload} id="dropzone-file" type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 							</label>
-						</div> 
+						</div>
+						
 
 
 						{/* temporary */}
-						<div>
-						{dataPersonal.length > 0
+						<div
+							>
+								
+						{isLoadingPersonal
+								? dataPersonal.length > 0
 									? 
 										dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
@@ -467,7 +518,9 @@ if(called===false){
 
 											<SkeletonItem key={index} /> 
 												
-											</div>})}
+											</div>
+									})
+								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 										
 											</div>
 
