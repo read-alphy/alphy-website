@@ -72,7 +72,7 @@ useEffect(() => {
 	if (currentUser !== null && called === false) {
 		const currentUserId = currentUser!==null ? currentUser.uid : '0';
 		if(window.clarity){
-		window.clarity('set', 'userId', currentUserId.toString());
+			window.clarity('set', 'userId', "1");
 	}
 
 		getCustomerInfo(currentUser)
