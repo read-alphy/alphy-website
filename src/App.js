@@ -71,8 +71,9 @@ useEffect(() => {
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
 		const currentUserId = currentUser!==null ? currentUser.uid : '0';
-		window.clarity('set', 'userId', currentUserId);
-
+		if(window.clarity){
+		window.clarity('set', 'userId', currentUserId.toString());
+	}
 
 		getCustomerInfo(currentUser)
 		const createdAt = currentUser.metadata.createdAt
