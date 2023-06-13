@@ -69,6 +69,7 @@ useEffect(() => {
 	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
+		window.clarity("identify",'custom-id', currentUser.uid);
 		getCustomerInfo(currentUser)
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
