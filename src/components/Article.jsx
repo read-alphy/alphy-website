@@ -12,7 +12,7 @@ import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
 
-function Article({ source_type, collapsed, setCollapsed, hasActiveSub}) {
+function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -37,6 +37,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub}) {
 				(response) => {
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
+					setContentName(response.data.title)
 				}
 				}
 

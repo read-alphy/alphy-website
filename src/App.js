@@ -46,6 +46,7 @@ function App() {
 	const[creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
 	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
+	const [contentName, setContentName] = useState("")
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
@@ -70,10 +71,6 @@ useEffect(() => {
 	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
-		const currentUserId = currentUser!==null ? currentUser.uid : '01';
-		if(window.clarity){
-			window.clarity('set', {'userId': "101"});
-	}
 
 		getCustomerInfo(currentUser)
 		const createdAt = currentUser.metadata.createdAt
@@ -167,8 +164,9 @@ if (currentUser && creditcalled!==true) {
 							</div>
 							}
 		<Helmet>
-			<title>Alphy: Unlock the Information in Audiovisual Content </title>
-			</Helmet> 
+			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
+			<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
+		</Helmet> 
 			<Elements stripe={stripePromise}>
 				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 					<>
@@ -192,13 +190,13 @@ if (currentUser && creditcalled!==true) {
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} />
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} />
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 								}
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
