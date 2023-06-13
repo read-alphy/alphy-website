@@ -54,9 +54,22 @@ function App() {
 	const stripePromise = loadStripe(
 		`${process.env.REACT_APP_STRIPE_PK}`
 	);
+
+	useEffect (() => {
+		const script = document.createElement('script');
+		script.src = "https://www.clarity.ms/tag/fy8nzp2uqz"; // replace 'xxxxx' with your Clarity tag ID
+		script.async = true;
+		script.onload = () => {
+				const currentUserId = currentUser!==null ? currentUser.uid : '0';
+				window.clarity('set', 'userId', currentUserId);
+    };
+	document.body.appendChild(script);
+	return () => {
+		document.body.removeChild(script);
+	  };
+	}, []);
 useEffect(() => {
 
-	
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
@@ -69,7 +82,9 @@ useEffect(() => {
 	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
-		window.clarity("identify",'custom-id', currentUser.uid);
+
+
+
 		getCustomerInfo(currentUser)
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
