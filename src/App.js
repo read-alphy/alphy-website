@@ -28,7 +28,8 @@ import WelcomeForm from './components/WelcomeForm';
 
 
 
-const firebaseConfig = {
+
+const firebaseConfig = {	
 	apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
 	authDomain: 'auth.alphy.app',
 	projectId: 'alphy-74583',
@@ -56,6 +57,12 @@ function App() {
 		`${process.env.REACT_APP_STRIPE_PK}`
 	);
 
+	useEffect
+	(() => {
+		if(currentUser!==null){
+			window.clarity("identify", currentUser.uid)
+		}
+	})
 
 useEffect(() => {
 
