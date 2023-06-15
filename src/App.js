@@ -70,6 +70,7 @@ function App() {
 
 useEffect(() => {
 
+		
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
@@ -82,6 +83,11 @@ useEffect(() => {
 	}
 	setTimeout (() => {
 	if (currentUser !== null && called === false) {
+		var userId = localStorage.getItem("userId")
+		
+		if(userId===null){
+		localStorage.setItem('userId', currentUser.uid)
+		}
 
 		getCustomerInfo(currentUser)
 		const createdAt = currentUser.metadata.createdAt
