@@ -50,7 +50,8 @@
     gtag('config', 'G-8Z8TFG1KMS');
   </script>
   <script type="text/javascript">
-    var userId = localStorage.getItem('userId');
+    var userId = localStorage.getItem('userId') !==null ? localStorage.getItem('userId') : "notLoggedIn";
+    
     
     (function (c, l, a, r, i, t, y) {
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
