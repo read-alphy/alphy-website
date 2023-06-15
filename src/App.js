@@ -59,8 +59,12 @@ function App() {
 
 	useEffect
 	(() => {
+
+		window.clarity("identify", "123")
 		if(currentUser!==null){
+			
 			window.clarity("identify", currentUser.uid)
+			
 		}
 	})
 
