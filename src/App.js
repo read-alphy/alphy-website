@@ -73,6 +73,12 @@ useEffect(() => {
 		)	
 	}
 	setTimeout (() => {
+		var userId = localStorage.getItem("userId")
+		
+		if(userId===null || userId!==currentUser.uid){
+			localStorage.setItem('userId', currentUser.uid)
+		}
+		if(currentUser!== null )
 	if (currentUser !== null && called === false) {
 		var userId = localStorage.getItem("userId")
 		
