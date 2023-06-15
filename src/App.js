@@ -57,16 +57,7 @@ function App() {
 		`${process.env.REACT_APP_STRIPE_PK}`
 	);
 
-	useEffect
-	(() => {
-		
-		window.clarity("set", "alphy_user", "123")
-		if(currentUser!==null){
-			
-			window.clarity("identify", currentUser.uid)
-			
-		}
-	})
+
 
 useEffect(() => {
 
