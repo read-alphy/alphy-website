@@ -343,6 +343,7 @@ export default function Content(props) {
 
 			for (let i = 0; i < srt_array.length; i++) {
 				count = count + 1;
+				
 				nothing = nothing + ' ' + srt_array[i].text;
 				if (
 					(count > 6 || count >= srt_array.length) &&
@@ -722,9 +723,16 @@ export default function Content(props) {
 											
 											{activeTab === "tab3" && (data ? summary.key_takeaways ? summary.key_takeaways.map((item, index) => {
 												return (
-
 													<p className="pb-2">{index + 1}) {item}</p>)
-											}) : null : null)}
+											}) : (<p><p className="text-l text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+								
+											Processing key takeaways...
+											 
+											 <img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={80} alt="My SVG" /> 
+											 
+											 
+										</p>
+		</p>) : null)}
 											
 
 											{activeTab === 'tab1' && (
