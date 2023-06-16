@@ -20,7 +20,7 @@ export default function QuestionAnswering(props) {
 	const QARef = useRef(null);
 	const location = useLocation();
 	const buttonRef = useRef(null);
-	const [collapseIndex, setCollapseIndex] = useState(-1);
+	const [collapseIndex, setCollapseIndex] = useState(0);
 
 	const [answerData, setAnswerData] = useState('');
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
