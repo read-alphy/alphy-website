@@ -423,11 +423,11 @@ export default function QuestionAnswering(props) {
 								{baseSources ? (
 									<div className="mt-10">
 										<div>
-											<h1 className="mb-4 text-xl font-normal"> Sources from the video sorted by relevance</h1>
+											<h1 className="mb-4 text-xl font-normal text-zinc-700 dark:text-zinc-300"> Sources from the video sorted by relevance</h1>
 
 											{props.key_qa[item]
 												? props.key_qa[item].sources.map((source, index) => (
-													<p key={index}>
+													<p className=" text-zinc-700 dark:text-zinc-300"key={index}>
 
 														{source.start && source.end ? (
 															window.innerWidth > 999 && props.data.source_type == "yt" ?
