@@ -13,6 +13,8 @@ import { saveAs } from 'file-saver'; // library to save file as blob
 import {useAuth} from "../../../hooks/useAuth"
 import DownloadStatic from '../../../img/download_static.png';
 import ReactMarkdown from "react-markdown";
+import { Button } from '@material-tailwind/react';
+
 
 
 import {
@@ -38,9 +40,9 @@ export default function Content(props) {
 	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
+	const [showReportIssue, setShowReportIssue] = useState(false);
+	const [showRerportIssueError, setShowReportIssueError] = useState(false);
 	
-	
-
 	
 
 	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.lang!==undefined ? props.data.summaries[0].lang : 'en')
@@ -298,7 +300,17 @@ export default function Content(props) {
 		setTimestamp(hours * 3600 + minutes * 60 + seconds * 1);
 	};
 
+	const handleReportIssue = () => {
+		if(showReportIssue===false){
+		if(currentUser !== null && currentUser !== undefined){
+			setShowReportIssue(true);
+		}
+		else{
+			setShowReportIssueError(true)
+		}
+	}
 	
+	};
 
 	async function transcriptParser() {
 		
@@ -502,15 +514,64 @@ export default function Content(props) {
 										
 								))}
 					</select>
-				
-					
+	
 				</div>
 
 					</div>
 					</div>
-						<h2 className="col-span-2 mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light">
+					<div className="col-span-2   grid grid-cols-2 flex flex-row">
+						<div className="col-span-1">
+						<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light">
 							{data.creator_name}
 						</h2>
+						<Popover className="3xl:hidden">
+						<PopoverHandler>
+				<button className="3xl:hidden bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+
+				 <svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg><p className="text-left">Something seems not right?</p>
+
+				</button>
+				</PopoverHandler>
+				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+					{currentUser ? 
+		<div>
+			
+								<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+								<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src="https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+								</div>				:
+							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
+								</PopoverContent>
+								</Popover>
+
+						</div>
+
+						
+						<div className=" col-span-1 justify-end justify-space-between flex">
+					<Popover>
+						<PopoverHandler>
+				<button className="hidden 3xl:flex bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+
+				 <svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg><p className="text-left"> Something seems not right?</p>
+
+				</button>
+				</PopoverHandler>
+				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+					{currentUser ? 
+		<div>
+			
+								<iframe className="h-[600px] dark:hidden md:h-[560px] px-2" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+								<iframe className="h-[600px] hidden dark:block md:h-[560px] px-2" src="https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+								</div>				:
+							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
+								</PopoverContent>
+								</Popover>
+
+								</div>
+								</div>
 						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
 					<div className="mt-5 3xl:hidden ">
 {/* 					<label for="small" class="block mb-2 text-sm font-light text-gray-500 dark:text-white">Language</label>
@@ -554,6 +615,7 @@ export default function Content(props) {
 								<p className="mt-3 text-sm font-medium text-center items-center ">Click to Listen</p>
 							</a>
 						)}
+						
 
 					</div>
 					{data.source_type === 'sp' &&

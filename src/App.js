@@ -19,7 +19,6 @@ import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
-import { Option, Select } from '@material-tailwind/react';
 import WelcomeForm from './components/WelcomeForm';
 
 
