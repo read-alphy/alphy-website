@@ -947,8 +947,7 @@ export default function Content(props) {
 				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 								
-									Alphy is doing its best to process this video, it will be ready in a few minutes. Please consider supporting us by giving an upvote on <a className="text-green-300 underline" href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"> Producthunt</a>!
-									 
+									Alphy is doing its best to process this video, it will be ready in a few minutes. Meanwhile, you can check out other videos.									 
 									 <img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
 									 
 									 

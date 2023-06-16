@@ -134,7 +134,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		<div className={`flex dark:bg-darkMode`}>
 			<div >
 				<div className="flex flex-row mt-6 dark:text-gray-300 dark:bg-darkMode">
-				<a className="mr-4 hidden md:block" href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a>
+				{/* <a className="mr-4 hidden md:block" href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a> */}
 					<div
 						type="button"
 						onClick={() => handleScroll('feedback')}
@@ -227,7 +227,7 @@ function Navbar({ collapsed, setCollapsed }) {
 
 							<div className=" flex m-1 ml-6 text-center justify-center text-sm">
 								<div className="mr-4 mx-auto items-center hidden xs:flex">
-							<a  href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a>
+							{/* <a  href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a> */}
 							</div>
 								<div
 									type="button"
