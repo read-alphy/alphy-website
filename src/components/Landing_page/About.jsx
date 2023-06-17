@@ -1,15 +1,111 @@
+import { Fragment, useState } from "react";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+
+
 export default function About() {
+
+	const [open, setOpen] = useState(1);
+ 
+	const handleOpen = (value) => {
+	  setOpen(open === value ? 0 : value);
+	};
 	return (
-		<div className="mx-auto md:w-800 w-full flex justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-zinc-100" id="about">
-			<div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">
+		
+		<div className="mx-auto md:w-800 w-full flex justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-zinc-50" id="about">
+			<div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">	
+			<h1 className="text-2xl mb-5 underline font-semibold">About</h1>
+			<Fragment>
+      <Accordion open={open === 1}>
+        <AccordionHeader onClick={() => handleOpen(1)}>
+		What is Alphy?
+        </AccordionHeader>
+        <AccordionBody className="text-md">
+		<p className="text-l">
+					
+					Alphy is an AI tool that helps users meaningfully interact with online audiovisual content with the
+					help of artificial intelligence. Upon submitting the link for a YouTube video or Twitter Spaces, Alphy gives you:
+					<ol className="">
+						<li className="pt-3">
+							<strong> • A highly accurate transcript </strong> of the content with timestamps, ready to use on your videos.
+						</li>
+						<li className="pt-3">
+							<strong> • An AI-powered chatbot generated on top of the content </strong> so that you can ask questions and get AI-generated answers, unlocking an immense information capture for the viewers.
+						</li>
+						<li className="pt-3">
+							<strong> • The summary and TL:DR of the content</strong> for you to cut down on time to get the most relevant information.</li>
+					</ol>
+				</p>
+        </AccordionBody>
+      </Accordion>
+      <Accordion open={open === 2}>
+        <AccordionHeader onClick={() => handleOpen(2)}>
+		What can you do with Alphy?
+		        </AccordionHeader>
+        <AccordionBody className="text-md">
+		<p>
+					• <strong className="font-semibold"> Give life to the content with AI: </strong>  Alphy's search bot allows you to ask questions a video or recording to get the most relevant answers presented by the
+					content.
+					</p>
+					
+					<p className="pt-2">
+					• <strong className="font-semibold">Summarize to save time: </strong> Alphy distills the essence of lengthy content into concise summaries, putting the knowledge you need right at your fingertips.
+					</p>
+					
+					<p className="mt-2">
+					• <strong className="font-semibold">Transcribe with precision: </strong>Alphy's AI-powered transcription service effortlessly converts any audiovisual content into meticulously accurate text, saving you time and effort. 
+					</p>
+        </AccordionBody>
+      </Accordion>
+      <Accordion open={open === 3}>
+        <AccordionHeader onClick={() => handleOpen(3)}>
+		How to use the product?
+        </AccordionHeader>
+        <AccordionBody className="text-md">
+		<p className="text-l mt-2">
+					<p className="">
+					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to
+					Alphy.
+					</p>
+					<p className="mt-2">
+					• Make sure to check out your <a href="/plans" className="underline">plan</a> details to discover Alphy's capablities.
+					</p>
+
+					{/*                     <br></br>
+                    • There is a limit on the number of submissions you can make a day to decrease the bloat.
+                    <br></br> */}
+
+				<p className="mt-2">
+					• Transcription process may take some time. We will notify you via email when your work is
+					ready.
+
+					</p>
+					
+
+					<p className="mt-2">
+					• Once the content is processed, it is public. Anyone can read it.
+					</p>
+					
+				</p>
+        </AccordionBody>
+      </Accordion>
+	  
+    </Fragment>
+
+			</div>
+		
+		{/* <div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">
 				<h1 className="text-2xl  font-semibold">About</h1>
 				<br></br>
 
 				<h2 className="lg:text-l underline font-semibold mb-2"> What is Alphy?</h2>
 
 				<p className="text-l">
-					{' '}
-					Alphy aims to help users meaningfully interact with the information present in online audiovisual content with the
+					
+					Alphy aims to help users meaningfully interact with online audiovisual content with the
 					help of artificial intelligence. Upon submitting the link for a YouTube video or Twitter Spaces, Alphy gives you:
 					<ol className="">
 						<li className="pt-3">
@@ -24,49 +120,55 @@ export default function About() {
 				</p>
 
 				<br></br>
-				<h2 className="lg:text-l  underline font-semibold"> What can you do with Alphy?</h2>
+				<h2 className="lg:text-l  underline font-semibold"> What can you do with it?</h2>
 
 				<p className="text-l mt-2">
+					<p>
 					• You can ask questions to a video or recording to get the most relevant answers presented by the
 					content.
-
-					<br></br>• You can get a detailed summary of the content as well as a TL:DR version of that summary
+					</p>
+					
+					<p className="pt-2">
+					• You can get a detailed summary of the content as well as a TL:DR version of that summary
 					that lays out the key takeaways of the video.
-
-					<br></br>• You can access high quality transcripts that are far more accurate than the ones that are autiomatically generated by YouTube and Twitter.
+					</p>
+					
+					<p className="mt-2">
+					• You can access high quality transcripts that are far more accurate than the ones autiomatically generated by YouTube and Twitter.
+					</p>
+					
 
 				</p>
 
 				<br></br>
-				<h1 className="text-l underline font-semibold">Quick info about the product:</h1>
-				<br></br>
-				<p className="text-l">
+				<h1 className="text-l underline font-semibold">How to use the product?</h1>
+				
+				<p className="text-l mt-2">
+					<p className="">
 					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to
 					Alphy.
+					</p>
+					<p className="mt-2">
+					• Make sure to check the <a href="/plans" className="underline">plan details</a> to learn more about your current limits.
+					</p>
 
-					{/*                     <br></br>
-                    • There is a limit on the number of submissions you can make a day to decrease the bloat.
-                    <br></br> */}
-					<br></br>• Currently, Alphy works best in English. We are working on supporting other
-					languages. Meanwhile you may encounter some errors with non-English content.
+				
 
-
-					<br></br>• Transcription process may take some time. We will notify you via email when your work is
+				<p className="mt-2">
+					• Transcription process may take some time. We will notify you via email when your work is
 					ready.
 
+					</p>
+					
 
-					<br></br>
-					•  Please make sure the duration of the content does not exceed 3 hours. Otherwise, Alphy won't be able to process the content. We are working on increasing this limit.
-					<br></br>
-
-					• Once the content is processed, it is public. Anyone can read and ask questions without signing in.
-
-					<br></br>• If you see a video that has a really bad transcription (wrong language, missing
-					punctuations, etc.), please ping us via the socials we shared at the bottom of the page.
+					<p className="mt-2">
+					• Once the content is processed, it is public. Anyone can read it.
+					</p>
+					
 				</p>
 				<br></br>
 				<br></br>
-			</div>
+			</div> */}
 		</div>
 	);
 }

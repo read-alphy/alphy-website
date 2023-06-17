@@ -19,7 +19,6 @@ import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
-import { Option, Select } from '@material-tailwind/react';
 import WelcomeForm from './components/WelcomeForm';
 
 
@@ -29,7 +28,8 @@ import WelcomeForm from './components/WelcomeForm';
 
 
 
-const firebaseConfig = {
+
+const firebaseConfig = {	
 	apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
 	authDomain: 'auth.alphy.app',
 	projectId: 'alphy-74583',
@@ -46,7 +46,7 @@ function App() {
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
-	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
+	const [showWelcomeForm, setShowWelcomeForm] = useState(true)
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
@@ -55,12 +55,12 @@ function App() {
 	const stripePromise = loadStripe(
 		`${process.env.REACT_APP_STRIPE_PK}`
 	);
+
+
+
 useEffect(() => {
 
 	
-
-    // Send custom data
-    
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
@@ -72,8 +72,19 @@ useEffect(() => {
 		)	
 	}
 	setTimeout (() => {
+		var userId = localStorage.getItem("userId")
+		
+		if(userId===null || userId!==currentUser.uid){
+			localStorage.setItem('userId', currentUser.uid)
+		}
+		if(currentUser!== null )
 	if (currentUser !== null && called === false) {
-		window.clarity("identify",'custom-id', currentUser.uid);
+		var userId = localStorage.getItem("userId")
+		
+		if(userId===null){
+		localStorage.setItem('userId', currentUser.uid)
+		}
+
 		getCustomerInfo(currentUser)
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
@@ -166,8 +177,9 @@ if (currentUser && creditcalled!==true) {
 							</div>
 							}
 		<Helmet>
-			<title>Alphy: Unlock the Information in Audiovisual Content </title>
-			</Helmet> 
+			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
+			<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
+		</Helmet> 
 			<Elements stripe={stripePromise}>
 				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 					<>
@@ -191,13 +203,13 @@ if (currentUser && creditcalled!==true) {
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} />
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} />
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 								}
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
