@@ -534,7 +534,7 @@ useEffect(() => {
 </div>
 
 				</PopoverHandler>
-				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 					<div className="">
 						<div className="">
 					{data.source_type === 'yt' && 
@@ -548,10 +548,10 @@ useEffect(() => {
 								<p className=" font-medium items-center ">Click to listen</p>
 							</a>
 	}
-	<div class=" xl:hidden border-b border-gray-100 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+	<div class=" xl:hidden border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 	</div>
 	<p className="text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
-			<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border rounded-lg bg-zinc-50  dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-zinc-200	dark:border-zinc-500">
+			<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border focus:ring-0 dark:focus:ring-0 rounded-lg bg-zinc-50  dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-zinc-200	dark:border-zinc-500">
 					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 						
 						(language === code ? 
@@ -741,7 +741,7 @@ useEffect(() => {
 </div>
 
 	</PopoverHandler>
-	<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+	<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 		<div	>
 		{data.source_type === 'yt' && 
 							<a target="_blank" className="flex flex-row mb-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
@@ -754,9 +754,9 @@ useEffect(() => {
 					<p className=" text-zinc-600 dark:text-zinc-200 opacity-80 font-medium items-center ">Click to listen</p>
 					</a>
 	}
-	<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
+	<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 dark:opacity-40"></div>
 			<p className="mt-5 text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
-<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border rounded-lg bg-gray-50 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-whiteLike">
+<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border focus:ring-0 dark:focus:ring-0 rounded-lg bg-gray-50 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-whiteLike">
 		{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 			
 			(language === code ? 

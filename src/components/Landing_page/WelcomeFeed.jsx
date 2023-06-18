@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { set } from 'lodash';
 import Robot from "../../img/cute robot grey.png"
+import SeriousRobot from "../../img/serious_robot.png"
 import { Button,  Popover,
 	PopoverHandler,
 	PopoverContent,
@@ -53,6 +54,9 @@ function Feed(props) {
 	const audioRef = useRef(null);
 
 const handleFileUpload = (event) => {
+	if(currentUser===null){
+		
+	}
 	var file = event.target.files[0];
 	
 	const formData = new FormData();
@@ -520,8 +524,8 @@ if(called===false){
 
 
 							<div className="mt-5 mb-5  ">
-							<Popover>
-								<p className="text-l lg:text-xl text-zinc-700 dark:text-zinc-200 flex flex-row font-sans">Use Alphy on your audio files, privately. 
+							<Popover placement="bottom-start">
+								<p className="text-l lg:text-xl text-zinc-700 dark:text-zinc-200 flex flex-row font-sans">Now you can use Alphy on your audio files, privately. 
 								
 								
 
@@ -535,14 +539,16 @@ if(called===false){
 								
 								
 								
-								<PopoverContent>
+								<PopoverContent className="dark:bg-darkMode mt-2  border-0 dark:border-2 dark:border-zinc-800 font-sans dark:text-zinc-200 text-zinc-600 max-w-[400px]">
 									<div>
+							
+							<p className="mb-4">Transcribe, summarize, and question your own audio files in over 50 languages. </p>
+							<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 										<ol>
-											
-										<li>Choose an audio file and upload to Alphy from below.</li>
-										<li>Alphy will process your file the same way it does with online content, providing you<br></br> the transcript, summary, key takeaways, and a chatbot for your content.</li>
-										<li>Your uploads will not be shown on Alphy's public database.</li>
-										<li>We value your privacy. Tll audio files are deleted after the transcription.</li>
+										<li className="mb-2">1) Choose an audio file and upload to Alphy from below.</li>
+										<li className="mb-2">2) Alphy will process your file the same way it does with online content. providing you<br></br> the transcript, summary, key takeaways, and a chatbot.</li>
+										<li className="mb-2">3) Only you will be able to access the end work. <br></br> Your uploads will not be shown on Alphy's public database.</li>
+										<li className="mb-2">4) As we value your privacy, all audio files are deleted after the transcription is complete.</li>
 										</ol>
 
 									</div>
@@ -552,6 +558,8 @@ if(called===false){
 								 </div>
 								 <div class="border-b border-gray-200  flex mt-5 mb-5  dark:opacity-40 items-center  "></div>
 						{file === null ? 
+
+						(currentUser!==null ?
 							<div class="flex items-center justify-center w-full">
 							<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-mildDarkMode hover:bg-zinc-100 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in">
 								<div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -563,6 +571,13 @@ if(called===false){
 								<audio className="hidden" ref={audioRef} controls />
 							</label>
 						</div>
+						:
+						<div>
+							<div className="flex flex-col  col-span-2 mx-auto items-center"><p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-10 mb-5 w-full  col-span-2">You need to <a className="text-green-400 underline" href="/u/login">sign in</a> to upload personal files.</p></div>
+							</div>
+						
+						
+						)
 						:
 						<div >
 							<p className="flex flex-row font-sans text-zinc-700 dark:text-zinc-200"> Clear queue

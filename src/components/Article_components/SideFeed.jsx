@@ -395,7 +395,7 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 		<Menu className="ml-2" >
 		<MenuHandler>
 			<div className="flex-row flex dark:bg-transparent border-b  dark:border-b-zinc-700 w-full max-w-[250px] 3xl:max-w-[330px]">
-        <button className=" bg-transparent  w-full max-w-[250px] 3xl:max-w-[330px] flex  mb-5  pl-2" >
+        <button className=" bg-transparent  w-full max-w-[250px] 3xl:max-w-[330px] flex  mb-5  pl-4" >
 			{isPublic && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Global</span>}
 			{!isPublic && !myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Works</span>}
 			{!isPublic && myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Uploads</span>}
@@ -406,13 +406,13 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 		</div>
       </MenuHandler>
 	  <MenuList className="w-full max-w-[250px] 3xl:max-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
-		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  hover:bg-zinc-50 dark:hover:bg-darkMode text-left hover:text-zinc-200 dark:hover:text-zinc-500 transition duration-200 ease-in-out"  value="2">
+		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg   dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out"  value="2">
 			My Works
 		</MenuItem>
-		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600  hover:bg-zinc-50 dark:hover:bg-darkMode text-left hover:text-zinc-200 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="3">
+		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600  dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="3">
 			My Uploads
 		</MenuItem>
-		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600  hover:bg-zinc-50 dark:hover:bg-darkMode text-left hover:text-zinc-200 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="1">
+		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="1">
 			Global
 		</MenuItem>
 		</MenuList>
