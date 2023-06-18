@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { useEffect } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import FeedItem from '../Article_components/FeedTabs/FeedItem';
@@ -10,9 +10,11 @@ import { set } from 'lodash';
 import Robot from "../../img/cute robot grey.png"
 import { Button,  Popover,
 	PopoverHandler,
-	PopoverContent,} from "@material-tailwind/react";
-import { Howl } from 'howler';	
-import { useRef } from 'react';
+	PopoverContent,
+
+Progress} from "@material-tailwind/react";
+
+
 
 function Feed(props) {
 	const [data, setData] = useState([]);
@@ -22,7 +24,7 @@ function Feed(props) {
 	const [hasMore, setHasMore] = useState(true);
 	/*const const { currentUser } = useAuth(); */
 	const currentUser=props.currentUser;
-	
+
 	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(true);
@@ -33,65 +35,78 @@ function Feed(props) {
 	const [called, setCalled] = useState(false);
 	const [ready, setReady] = useState(false)
 	const [myUploads, setMyUploads] = useState(false)
-	const [dataUploads, setDataUploads] = useState([])
+	const [offsetUploads, setOffsetUploads] = useState(0);
+	const [hasMoreUploads, setHasMoreUploads] = useState(true);
+	const [dataUploads, setDataUploads] = useState([]);
+	const [isLoadingUploads, setIsLoadingUploads] = useState(true);
+	const [firstTimeUploads, setFirstTimeUploads] = useState(true);
 	const [hasTier3, setHasTier3] = useState(true)
+	const [uploadProgress, setUploadProgress] = useState(0)
+	const [uploadDuration, setUploadDuration] = useState("")
+	const [uploadTitle, setUploadTitle] = useState("")
+	const [file, setFile] = useState(null)
+	const [fileUploading, setFileUploading] = useState(false)
 	
 	let calledAndEmpty = true 
 
-
-
-
-	
+	const navigate = useNavigate();
+	const audioRef = useRef(null);
 
 const handleFileUpload = (event) => {
-const file = event.target.files[0];
-const reader = new FileReader();
-reader.readAsArrayBuffer(file);
-reader.onload = handleFileRead;
-};
-const handleFileRead = (event) => {
-const buffer = event.target.result;
-const signature = new Uint8Array(buffer).subarray(0, 4);
-// Perform file type detection based on the signature
-detectFileType(signature);
-};
-				
-const detectFileType = (signature) => {
-// Mapping of file signatures to file types
-const signatureMapping = {
-	".mp3": [0x49, 0x44, 0x33, 0x4], // ID3 tag
-	".mp31": [0xFF, 0xFB,0x90,0x64], // MPEG-1 Layer 3 (MP3) audio frame sync
-	".mp32": [0xFF, 0xF3], // MPEG-2 audio frame sync
-	".mp33": [0xFF, 0xF2], // MPEG-2.5 audio frame sync
-	".mpeg": [0x00, 0x00, 0x01, 0xBA], // MPEG Program Stream
-	".mpga": [0xFF, 0xFB], // MPEG-1 Layer 3 (MP3) (same as .mp3 as .mpga is essentially the same format)
-	".wav": [0x52, 0x49, 0x46, 0x46],
-	".webm": [0x1A, 0x45, 0xDF, 0xA3], // WebM
-	".m4a": [0x4D, 0x34, 0x41, 0x20], // M4A
-  };
-  
-  
-  
-
-// Iterate through the signature mapping
-for (const fileType in signatureMapping) {
-	const fileSignature = signatureMapping[fileType];
+	var file = event.target.files[0];
 	
-	console.log(signature,fileSignature)
-	if (arraysMatch(signature, fileSignature)) {
-	// File type matched
-	console.log("Detected file type:", fileType);
-	return;
-	}
+	const formData = new FormData();
+    formData.append('file', file)
+	setFile(formData)
+	const audio = audioRef.current;
+	audio.src = URL.createObjectURL(file);
+    audio.onloadedmetadata = () => {
+      setUploadDuration(audio.duration);
+	  setUploadTitle(event.target.files[0].name)
+	  
+    };
 }
 
-// File type not matched
-console.log("Unknown file type");
+const handlePostUpload = () => {
+	setFileUploading(true)
+	
+	axios
+	.post(
+		`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/upload`,file,
+		{
+		
+		headers: {
+			'Content-Type': 'multipart/form-data',
+			'id-token':currentUser.accessToken},
+			onUploadProgress: (progressEvent) => {
+				const progress = Math.round(
+				  (progressEvent.loaded * 100) / progressEvent.total
+				);
+				
+				setUploadProgress(progress);
+				
+		}
+	}
+	) .then((response) => {
+        // Handle the response after successful upload
+        const responsed = response.data
+		
+	//navigate("/up/"+responsed.source_id)
+		//page'e navige et
+      })
+	  .catch((error) => {
+        // Handle any errors that occur during upload
+        console.error(error);
+      });
 };
 
-const arraysMatch = (arr1, arr2) => {
-return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
-};
+const handleFileUploadClear = () => {
+	setFile(null)
+	setUploadProgress(0)
+	setUploadDuration("")
+	setUploadTitle("")
+	setFileUploading(false)
+}
 
 
 useEffect(() => {
@@ -115,15 +130,15 @@ useEffect(() => {
 	const searchInputRef = React.useRef(null);
 
 	const navigateFeeds = (state) => {
-		setMyUploads(false)
-		if(isPublic===false && state==2){
+		
+		if(state==2){
 		setisPublic(true)
 		setOffset(0)
 		getData(0, true, true);
 
 		}
 
-		else if(isPublic===true && state==1){
+		else if(state==1){
 			setOffsetPersonal(0)
 			setMyUploads(false)
 			setisPublic(false)
@@ -131,10 +146,12 @@ useEffect(() => {
 		}
 	
 		else if (state==3){
-			setOffset(0)
+			setOffsetUploads(0)
 			setMyUploads(true)
-			setOffsetPersonal(0)
+			setOffsetUploads(0)
 			setisPublic(false)
+			getDataUploads(0, true, true);
+			console.log(dataUploads)
 			
 			
 		}
@@ -152,7 +169,7 @@ useEffect(() => {
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/sources/?q=${search}&offset=${offset}&limit=${limit}&only_mine=false`
+				}/sources/?q=${search}&offset=${offset}&limit=${limit}`
 			)
 			.then((response) => {
 				setHasMore(!(response.data.length < limit));
@@ -177,7 +194,7 @@ useEffect(() => {
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/sources/?q=${search}&offset=${offset}&limit=${limit}&only_mine=true`, {
+					}/sources/?q=${search}&offset=${offset}&limit=${limit}&only_my=submits`, {
 					headers: {
 						'id-token': idtoken,
 					}
@@ -205,7 +222,44 @@ useEffect(() => {
 					});
 		};
 	};
+	const getDataUploads = (offsetUploads, firstTimeUploads, hasMoreUploads) => {
+		if (!hasMoreUploads) {
+			return;
+		}
+		
 
+		setIsLoadingUploads(true);
+
+		localStorage.setItem("search",search)
+		
+		if (currentUser) {
+			setIsLoadingUploads(true)
+			currentUser.getIdToken().then((idtoken) =>
+
+				axios.get(
+					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					}/sources/${search.length>0?`?q=${search}&`:"?"}limit=${limit}&offset=${offsetUploads}&only_my=uploads`, {
+					headers: {
+						'id-token': idtoken,
+					}
+				})
+					.then((response) => {
+						
+						
+						setHasMoreUploads(!(response.data.length < limit));
+
+
+						if ( firstTimeUploads) {
+							setDataUploads(response.data);						
+
+
+						} else {
+							setDataUploads([...dataUploads, ...response.data]);
+						}
+						setIsLoadingUploads(false);
+					}))
+		};
+	};
 	const loadMore = () => {
 		if(isPublic){
 		setOffset(offset + limit);
@@ -217,7 +271,8 @@ useEffect(() => {
 	}	
 	else if(isPublic==true && myUploads==true)
 	{
-		
+		setOffsetUploads(offsetUploads + limit);
+		getDataUploads(offsetUploads + limit, false, true,search);
 	}
 	
 
@@ -240,13 +295,16 @@ if(called===false){
 }
 
 
+
 	return (
-		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl">
+		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl ">
 {/* 			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
 				Explore the videos other users unlocked with Alphy
 			</h2> */}
+							
+	
 
-			<div class="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700">
+			<div class="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700 ">
 				<ul class="flex ml-6 flex-wrap -mb-px">
 {/* 					<li class="mr-2">
 						<button onClick={() => setisPublic(true)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
@@ -255,12 +313,6 @@ if(called===false){
 						<button onClick={() => navigateFeeds(1)} class={`inline-block p-4 mb-1 ${!isPublic && myUploads===false ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
 					</li>
 					<li class="mr-2">
-						<button onClick={() => navigateFeeds(2)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
-					</li>
-					
-					<li class="mr-2">
-
-
 							<button onClick={() => navigateFeeds(3)} class={`relative infline-flex p-4 mb-1 ${!isPublic && myUploads==true ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
   
   <span> My Uploads </span>
@@ -269,13 +321,18 @@ if(called===false){
 							
 							
 					</li>
+					<li class="mr-2">
+						<button onClick={() => navigateFeeds(2)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+					</li>
+					
+					
 					
 
 				</ul>
 			</div>
 
-			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] ">
-			{isPublic ===false && myUploads == true ?null :
+			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] min-h-[40vh]">
+			{isPublic ===false && myUploads == true ? null :
 				<form
 					className="flex items-center"
 					onKeyDown={handleKeyDown}
@@ -459,17 +516,19 @@ if(called===false){
 					{
 						hasTier3 && isPublic==false && myUploads==true &&
 
-						<div>
+						<div className="">
 
 
-							<div className="mt-5 mb-5 ">
+							<div className="mt-5 mb-5  ">
 							<Popover>
-								<p className="lg:text-xl text-zinc-600 dark:text-zinc-300 flex flex-row">Use Alphy on your audio files, privately.
+								<p className="text-l lg:text-xl text-zinc-700 dark:text-zinc-200 flex flex-row font-sans">Use Alphy on your audio files, privately. 
 								
+								
+
 								<PopoverHandler>
-
-								<svg className="w-5 h-5 ml-1 pt-1 cursor-pointer dark:text-zinc-300 text-gray-400 hover:dark:text-zinc-300 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg>
-
+			<div>{' '}<p className="font-sans underline cursor-pointer ml-2"> Learn more.</p>
+								{/* <svg className="w-5 h-5 ml-1 pt-1 cursor-pointer dark:text-zinc-300 text-gray-400 hover:dark:text-zinc-300 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg> */}
+								</div>
 								
 								</PopoverHandler>
 								</p>
@@ -479,10 +538,11 @@ if(called===false){
 								<PopoverContent>
 									<div>
 										<ol>
+											
 										<li>Choose an audio file and upload to Alphy from below.</li>
-										<li>Alphy will process your video the same way it does with online content.</li>
-										<li>Only you can access the end result. Your submissions will not be a part of Alphy's public database.</li>
-										<li>All audio files are deleted after 24 hours of transcription.</li>
+										<li>Alphy will process your file the same way it does with online content, providing you<br></br> the transcript, summary, key takeaways, and a chatbot for your content.</li>
+										<li>Your uploads will not be shown on Alphy's public database.</li>
+										<li>We value your privacy. Tll audio files are deleted after the transcription.</li>
 										</ol>
 
 									</div>
@@ -490,28 +550,173 @@ if(called===false){
 								</PopoverContent>
 								</Popover>
 								 </div>
-
-						<div class="flex items-center justify-center w-full">
-							<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+								 <div class="border-b border-gray-200  flex mt-5 mb-5  dark:opacity-40 items-center  "></div>
+						{file === null ? 
+							<div class="flex items-center justify-center w-full">
+							<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-mildDarkMode hover:bg-zinc-100 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in">
 								<div class="flex flex-col items-center justify-center pt-5 pb-6">
-									<svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-									<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload your audio file</span> or drag and drop</p>
-									<p class="text-xs text-gray-500 dark:text-gray-400">MP3, M4A, MPGA, MPEG, WAV, OR WEBM</p>
+									<svg aria-hidden="true" class="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+									<p class="mb-2 text-sm text-zinc-600 dark:text-zinc-200 font-sans">Click to upload an audio file</p>
+									<p class="text-xs text-zinc-600 dark:text-zinc-200">MP3, M4A, MPGA, MPEG, WAV, OR WEBM</p>
 								</div>
 								<input onChange = {handleFileUpload} id="dropzone-file" type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+								<audio className="hidden" ref={audioRef} controls />
 							</label>
 						</div>
+						:
+						<div >
+							<p className="flex flex-row font-sans text-zinc-700 dark:text-zinc-200"> Clear queue
+							<svg onClick={handleFileUploadClear} className="ml-2 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+											<title className="font-bold">Clear</title>
+											<path clipRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fillRule="evenodd"></path>
+									</svg>
+									</p>
+						<div className="lg:flex lg:flex-row lg:grid lg:grid-cols-5">
+							
+					<p className="lg:col-span-2 flex  items-center font-sans text-zinc-700 dark:text-zinc-200 mt-8 lg:mt-0"> {uploadTitle}</p>
+{/* 					<p className="text-sm text-zinc-600 dark:text-zinc-300 "> 
+			
+						Duration: {Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes
+
+						</p> */}
+					{/*  */}
+					<div className="lg:col-span-2 mt-2 ">
+						<div className="lg:grid lg:grid-cols-3">
+							<div className="lg:col-span-3 hidden lg:flex  lg:justify-center lg:mt-2">
+					{/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"}`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} /> */}
+					
+<div class={`${uploadProgress===0 &&"hidden"} w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700 mt-2`} >
+  <div class={`bg-green-400 h-3 rounded-full `} style={{width:uploadProgress +"%"}}></div>
+</div>
+
+{/*  */}					{fileUploading===false && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans w-full flex justify-center lg:mt-2">Waiting for approval...</p>}
+					{/* <Progress className={`${uploadProgress>0 && "hidden"}`}color="gray" size="lg" value={100} label={0} /> */}
+					</div>
+				{/* 	<div className="sm:col-span-1 text-sm flex justify-center font-sans  text-zinc-700 dark:text-zinc-200">
+					{Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes
+						</div> */}
+					</div>
+					</div>
+
+<div className="col-span-1 flex flex-col lg:flex-row lg:items-center lg:justify-center  lg:margin-auto">
+
+{fileUploading===0 && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans my-4 lg:hidden">Waiting for approval...</p>} 
+<div class={`${uploadProgress===0 &&"hidden"} my-4 lg:hidden w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700`} >
+  <div class={`bg-green-400 h-3 rounded-full w-[${uploadProgress}%]`} style={{width:uploadProgress +"%"}}></div>
+</div>
+{/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
+ */}
+{fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className="text-sm font-sans text-zinc-600 dark:text-zinc-300">{uploadProgress!==100 ? `Uploading... ${uploadProgress}% `  : "Complete!"}</p> </p>:<div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-green-400 lg:ml-10 normal-case max-w-[100px] my-4">Continue</Button></div>}
+					
+					</div>
+
+
+
+					
+					</div>
+						
+						</div>
+}
 						
 
+	
+								 
+						
+{dataUploads.length>0 && 
+<div className={ `${file!==null ? "md:mt-20 mt-10":""}`}>
+	<p className="text-zinc-600 dark:text-zinc-300 font-sans text-xl">Your Files</p>
+	<div class="border-b border-gray-200  flex mt-5 dark:opacity-40 items-center w-2/12 "></div>
 
+	{dataUploads.length > 10 && 
+<form
+					className="flex items-center"
+					onKeyDown={handleKeyDown}
+					onSubmit={(e) => {
+						e.preventDefault();
+						
+						localStorage.setItem('search', search);
+						if (searchInputRef.current.value.length === 0) {
+							setSearch('');
+						}
+					if(isPublic==true){
+						setOffset(0);
+						getData(0, true, true);
+						
+					}
+					else{
+						
+						setCalled(false)
+						setOffsetPersonal(0)
+						getDataPersonal(0, true, true);
+				
+					}
+						setSubmitted(true)
+					}}
+				>
+					<label htmlFor="voice-search" className="sr-only">
+						Search
+					</label>
+					<div className="relative w-full  ">
+{/* 						<input
+							ref={searchInputRef}
+							
+
+							type="text"
+							onChange={(e) => {
+								setSearch(e.target.value);
+							}}
+							id="input-box"
+							className="bg-zinc-50 dark:bg-darkMode border border-slate-200   dark:border-none  text-gray-900 dark:text-zinc-200 text-sm rounded-l-full mt-5 sm:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 dark:focus:border-darkMode dark:focus:ring-darkMode block w-full  py-3"
+							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
+						/> */}
+						
+						<div class="relative w-full min-w-[200px] h-11 ">
+							<input 
+							ref={searchInputRef}
+							
+							onChange={(e) => {
+								setSearch(e.target.value);
+							}}
+							placeholder="Search our database..."
+							className=" peer w-full h-full bg-white dark:bg-darkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000"/>
+							{/* <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-000 before:border-green-400 peer-focus:before:!border-blue-000 after:border-green-400 peer-focus:after:!border-blue-000">Search our database...</label> */}
+							
+						 </div>
+
+						
+					</div>
+
+					<Button type="submit"
+							 className="bg-zinc-700 text-[15px] ml-2 lg:ml-4 ">
+						
+					
+						<svg
+							aria-hidden="true"
+							className="w-5 h-4"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
+								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+							></path>
+						</svg>
+						</Button>
+				</form>
+				}
+</div>}
 						{/* temporary */}
 						<div
 							>
 								
-						{isLoadingPersonal
-								? dataPersonal.length > 0
+						{isLoadingUploads
+								? dataUploads.length > 0
 									? 
-										dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+										dataUploads.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
 											: [...Array(10)].map((item, index) => {
 										<div>
@@ -520,7 +725,7 @@ if(called===false){
 												
 											</div>
 									})
-								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
+								: dataUploads.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 										
 											</div>
 

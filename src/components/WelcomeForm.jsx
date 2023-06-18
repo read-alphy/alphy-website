@@ -18,7 +18,7 @@ export default function WelcomeForm({setShowWelcomeForm}){
   const {currentUser} = useAuth()
   if(currentUser!==null){
   var metadata = currentUser.metadata
-  console.log(metadata)
+  
   }
   
 

@@ -7,15 +7,27 @@ import Content from './Article_components/ContentTabs/Content';
 import { signOut } from 'supertokens-auth-react/recipe/passwordless';
 import Twitter from '..//img/twitter_spaces.png';
 
+import { useAuth } from '../hooks/useAuth';
 import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
 
+
+
 function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
+	const {currentUser} = useAuth();
+	
+
+	const [called, setCalled] = useState(false);
+	let idToken
+
+
+if(currentUser){idToken=currentUser.accessToken}
+	
 
 
 	if (location.pathname.split('/')[2].split("&q=")[0] !== undefined) {
@@ -25,23 +37,31 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 		source_id = location.pathname.split('/')[2];
 	}
 
-
+	
+	
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const fetchData = async (url) => {
+		
+		
 		try {
+			
 			setIsLoading(true);
-			const response = await axios.get(url).then(
+			
+			const response = await axios.get(url
+				).then(
 				(response) => {
+					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
 					setContentName(response.data.title)
-				}
+				}	
 				}
 
 			).catch((error) => {
+				
 				navigate('/404')
 			});
 
@@ -55,7 +75,45 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 			setIsLoading(false);
 		}
 	};
+	
 
+	const fetchDataUpload = async (url) => {
+	
+	
+		try {
+			
+			setIsLoading(true);
+			
+			const response = await axios.get(url,
+				{
+					headers: {
+						'id-token': idToken	,
+					}
+					}
+				).then(
+				(response) => {
+					
+					if(response.data!==null && response.data!==undefined){
+					setData(response.data);
+					setContentName(response.data.title)
+				}
+				}
+
+			).catch((error) => {
+				console.log(error)	
+				 navigate('/404') 
+			});
+
+		} catch (error) {
+			if (error.response?.status === 404) {
+				setIsLoading(false);
+				navigate('/404');
+			}
+			console.error(`Error fetching data: ${error}`);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	// if windows size is less than 768px then collapse the navbar
 	const { width } = useWindowSize();
@@ -65,16 +123,38 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 		}
 	}, [width]);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
+	
+	if (called===false){
+		if (source_type==="up" && data.length===0 && currentUser!==null){
+			setCalled(true)
+				fetchDataUpload(url);
+		}
+		if (source_type!=="up" && data.length===0 ){
+			setCalled(true)
+			fetchData(url);
+		}	
+		
+	}
+	
+	}, [location.pathname, navigate]); */
 
-		fetchData(url);
-	}, [location.pathname, navigate]);
-
-
+	const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
+	if (called===false){
+		if (source_type==="up" && data.length===0 && currentUser!==null){
+			setCalled(true)
+				fetchDataUpload(url);
+		}
+		if (source_type!=="up" && data.length===0 ){
+			setCalled(true)
+			fetchData(url);
+		}
+	}
 
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
+			
 			<Helmet>
 				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>

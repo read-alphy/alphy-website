@@ -113,14 +113,15 @@ function Navbar({ collapsed, setCollapsed }) {
 	// boolean to check if the user is in the /yt/id or /sp/id
 	const isYt = useLocation().pathname.includes('/yt');
 	const isSp = useLocation().pathname.includes('/sp');
+	const isUp= useLocation().pathname.includes('/up');
 
 	return (
-<div className={`items-center ${isYt || isSp ? "" : "mx-auto max-w-[1200px]"} justify-between dark:bg-darkMode`}>
+<div className={`items-center ${isYt || isSp || isUp ? "" : "mx-auto max-w-[1200px]"} justify-between dark:bg-darkMode`}>
 	<div
-		className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
+		className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 			}`}
 	>
-		<div className={`pl-10 flex items-center font-bold  ${(windowWidth > 999 && (isYt || isSp))  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
+		<div className={`pl-10 flex items-center font-bold  ${(windowWidth > 999 && (isYt || isSp || isUp))  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
 			<Link to="/" className="dark:text-gray-200">
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>

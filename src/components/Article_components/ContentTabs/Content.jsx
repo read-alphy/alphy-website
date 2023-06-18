@@ -3,17 +3,19 @@ import QuestionAnswering from '../QuestionAnswering';
 import srtParser2 from 'srt-parser-2';
 import { Tab, Tabs } from 'react-bootstrap';
 import Twitter from '../../../img/twitter_spaces.png';
+import TwitterLogo from '../../../img/Twitter Logo Blue.svg';
 import Loading from '../../Loading';
 import working from './working.svg';
 
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
 import {useAuth} from "../../../hooks/useAuth"
 import DownloadStatic from '../../../img/download_static.png';
 import ReactMarkdown from "react-markdown";
-import { Button } from '@material-tailwind/react';
+import { Button , Switch} from '@material-tailwind/react';
 
 
 
@@ -53,25 +55,35 @@ export default function Content(props) {
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const {currentUser} = useAuth()
-	
-
+	const navigate = useNavigate()
 	
 
 	const data = props.data
+
+
+	const title = data.title
+	const inputDate = data.added_ts!==undefined ? data.added_ts.substring(0,10) : undefined;
+	
+	let formattedDate = ""
+	if(inputDate!==undefined && formattedDate.length===0){
+		const parts = inputDate.split("-");
+		formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
+		
+	}
+
 	
 	let contentSummaries = []
 	let languages =[]
 	let summary=""
 	
-
-
-
 	
+
 	const transcript_raw = props.data.transcript;
 	const theme = localStorage.getItem("theme")
 	
 	const ref = useRef(null);
 	let transcript = [];
+	
 
 
 	
@@ -251,18 +263,37 @@ export default function Content(props) {
 	},
   };
 
-
  
+  const url = window.location.href;
+  const parts = url.split("/");
+  const upPart = parts[3];
 
-	useEffect(() => {
+  setTimeout(() => {
+	if(upPart==="up" && data.length===0 && basicDataLoaded===true){
+		navigate("/404")
+	}
+	  }, 1000);
 
+useEffect(() => {
+	
+		
+		if(data!=undefined && data.source_type==="up"){
 		setTimeout(() => {
 			setBasicDataLoaded(true);
-		}
-			, 1000);
-		setTimeout(() => {
 			
-		} , 1000);
+		}
+			, 2000);
+		}
+		else if (data!=undefined){
+			setTimeout(() => {
+				setBasicDataLoaded(true);
+			}
+				, 1000);
+		}
+		setTimeout(() => {
+		
+			
+		} , 2000);
 		
 		if(transcript.length===0 && data.transcript!==null){
 			transcriptParser();
@@ -328,7 +359,7 @@ export default function Content(props) {
 			
 			}
 			
-			console.log(summaryArray)
+			
 
 			var parser = new srtParser2();
 
@@ -442,7 +473,7 @@ export default function Content(props) {
 				const blob = new Blob([data.transcript], { type: 'text/srt' });
 
 				// save file as blob
-				saveAs(blob, `${data.creator_name}_${data.title}_Subtitles.srt`);
+				saveAs(blob, `${data.creator_name}_${title}_Subtitles.srt`);
 			
 			}
 			else if(selection==2){
@@ -457,7 +488,7 @@ export default function Content(props) {
 				}
 				if (stop === true){
 				const blob = new Blob([text], { type: 'text/txt' });
-				saveAs(blob, `${data.creator_name}_${data.title}_Transcript.txt`);
+				saveAs(blob, `${data.creator_name}_${title}_Transcript.txt`);
 				
 				}
 			}
@@ -477,22 +508,107 @@ export default function Content(props) {
 	
 
 	return (
-		<div ref={ref} className={`md:max-w-[90vw] scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
+		<div ref={ref} className={`md:max-w-[90vw]  scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
 
  
 
 
 		<div>
 				<div className="grid grid-cols-3 max-h-[90vh]">
-					<div className="col-span-2 ">
+					<div className={`col-span-2 lg:col-span-3 lg:mt-10 xl:mt-0 ${transcript.length>0 && language == summary.lang ?"xl:col-span-2": "xl:col-span-3" }`} >
 						<div className="flex flex-row ">
 						<h1 className="col-span-2 mt-10 3xl:pt-8 text-xl text-left lg:col-span-3 lg:mt-0 lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
-							{data.title}
+							{data.source_type=== 'up' ? title.substring(0, title.lastIndexOf('.')) :  title}
 						</h1>
 							
-<div className="flex flex-row justify-end mx-auto">
-	<div className="hidden 3xl:block flex  2xl:ml-40 justify-end ">
+<div className="flex flex-row justify-end mx-auto ">
+<Popover >
+				<PopoverHandler>
+					<div className="hidden lg:flex mt-8">
+						
+						<svg width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>	
+
+</div>
+
+				</PopoverHandler>
+				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+					<div className="">
+						<div className="">
+					{data.source_type === 'yt' && 
+							<a target="_blank" className="flex flex-row  xl:hidden mb-5 mt-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
+								 <img className="mr-1" src="/youtubeicon.png" width={40} /> 
+								<p className=" text-zinc-600 dark:text-zinc-200 items-center pt-1 text-center font-medium">Click to watch</p>
+							</a>
+ }{data.source_type==="sp" &&
+							<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
+								 <img className="mr-2" src={TwitterLogo} width={20} /> 
+								<p className=" font-medium items-center ">Click to listen</p>
+							</a>
+	}
+	<div class=" xl:hidden border-b border-gray-100 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+	</div>
+	<p className="text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
+			<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border rounded-lg bg-zinc-50  dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-zinc-200	dark:border-zinc-500">
+					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
+						
+						(language === code ? 
+							<option selected key={code} value={code}>
+								{name}
+							</option>
+							:
+
+
+							(index===languages.length 
+								?
+								<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
+								:
+						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
+								{name}
+							</option>	
+
+							)
+							
+						)
+										
+								))}
+					</select>
+
+					<div className="mt-5">
+					<div class="border-b border-gray-100 mx-auto items-center flex dark:opacity-40"></div>
+					</div>
+
+					<Popover className="">
+					
+						<PopoverHandler>
+							
+				<button className=" bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+
+				 <svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg><p className="text-left">Report an issue</p>
+
+				</button>
+				</PopoverHandler>
+				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+					{currentUser ? 
+		<div>
+			
+								<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+								<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src="https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+								</div>				:
+							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
+								</PopoverContent>
+								</Popover>
+					</div>
+				</PopoverContent>
+			</Popover>
+	{/* <div className="hidden 3xl:block flex  2xl:ml-40 justify-end ">
 	
+		
+
 			<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 						
@@ -518,16 +634,22 @@ export default function Content(props) {
 								))}
 					</select>
 	
-				</div>
+				</div> */}
 
 					</div>
 					</div>
 					<div className="col-span-2   grid grid-cols-2 flex flex-row">
 						<div className="col-span-1">
-						<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light">
-							{data.creator_name}
+						
+						<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light flex flex-row">
+							
+							{data.source_type!== "up" && data.creator_name}
+							{data.source_type==="up" && `Private Content - ${formattedDate}`}
+							
+
+
 						</h2>
-						<Popover className="3xl:hidden">
+						{/* <Popover className="3xl:hidden">
 						<PopoverHandler>
 				<button className="3xl:hidden bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
 
@@ -547,10 +669,8 @@ export default function Content(props) {
 							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
 								</PopoverContent>
 								</Popover>
-
 						</div>
 
-						
 						<div className=" col-span-1 justify-end justify-space-between flex">
 					<Popover>
 						<PopoverHandler>
@@ -571,14 +691,14 @@ export default function Content(props) {
 								</div>				:
 							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
 								</PopoverContent>
-								</Popover>
+								</Popover> */}
 
 								</div>
 								</div>
 						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
-					<div className="mt-5 3xl:hidden ">
-{/* 					<label for="small" class="block mb-2 text-sm font-light text-gray-500 dark:text-white">Language</label>
- */}					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mb-6 text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+					{/* <div className="mt-5 3xl:hidden ">
+ 					<label for="small" class="block mb-2 text-sm font-light text-gray-500 dark:text-white">Language</label>
+ 					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mb-6 text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
 						
 						(language === code ? 
@@ -603,32 +723,94 @@ export default function Content(props) {
 								))}
 					</select>
 					</div>
-
+ */}
 					</div>
 
 					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
-						{data.source_type === 'yt' ? (
-							<a target="_blank" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
-								<img className="ml-1" src="/youtubeicon.png" width={100} />
-								<p className="-mt-3  text-center items-center text-sm font-medium">Click to Watch</p>
+						
+	
+	<Popover >
+	<PopoverHandler>
+		<div className="lg:hidden mt-5">
+			
+			<svg width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+		<path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+		</svg>	
+
+</div>
+
+	</PopoverHandler>
+	<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+		<div	>
+		{data.source_type === 'yt' && 
+							<a target="_blank" className="flex flex-row mb-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
+								 <img className="ml-1" src="/youtubeicon.png" width={40} /> 
+								<p className=" text-zinc-600 dark:text-zinc-200 items-center pt-1 font-medium">Click to watch</p>
 							</a>
-						) : (
-							<a className="mt-7" target="_blank" href={`https://twitter.com/i/${data.source_id}`}>
-								<img src={Twitter} width={100} />
-								<p className="mt-3 text-sm font-medium text-center items-center ">Click to Listen</p>
-							</a>
-						)}
+ }{data.source_type==="sp" &&
+					<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
+					<img className="mr-2" src={TwitterLogo} width={20} /> 
+					<p className=" text-zinc-600 dark:text-zinc-200 opacity-80 font-medium items-center ">Click to listen</p>
+					</a>
+	}
+	<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
+			<p className="mt-5 text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
+<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border rounded-lg bg-gray-50 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-whiteLike">
+		{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
+			
+			(language === code ? 
+				<option selected key={code} value={code}>
+					{name}
+				</option>
+				:
+
+
+				(index===languages.length 
+					?
+					<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
+					:
+			<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
+					{name}
+				</option>	
+
+				)
+				
+			)
+							
+					))}
+		</select>
+		<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
+		<Popover className="">
+			<PopoverHandler>
+	<button className=" bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+
+	 <svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg><p className="text-left">Report an issue</p>
+
+	</button>
+	</PopoverHandler>
+	<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+		{currentUser ? 
+<div>
+
+					<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+					<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src="https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+					</div>				:
+				<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
+					</PopoverContent>
+					</Popover>
+		</div>
+	</PopoverContent>
+</Popover>
+	
+
+							
 						
 
 					</div>
-					{data.source_type === 'sp' &&
-					<div className="flex hidden flex-col ml-2 items-center  lg:block ">
-					<a className="mx-auto flex items-center flex-col cursor-pointer" target="_blank" href={`https://twitter.com/i/${data.source_id}`}>
-								<img src={Twitter} width={120} />
-								<p className="mt-3 text-sm font-light text-center items-center cursor-pointer">Click to Listen</p>
-							</a>
-					</div>
-}
+					
 
 				</div>
 
@@ -642,22 +824,9 @@ export default function Content(props) {
 					<div className={`grid grid-cols-2 w-full md:min-w-[500px]`}>
 						{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 						
-						<div className={`col-span-2 hidden ${data.source_type==="sp"?"":"xl:flex"}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
-							{data.source_type === 'sp' ? (
-/* 
-								<div className={`block ${transcript.length>0 || data.complete===true ? "w-full" : "w-1/3"} items-center text-center mx-auto`}>
-						
-									<a target="_blank"
-										href={`https://twitter.com/i/spaces/${data.source_id}`}
-										className="text-l text-zinc-600 text-center dark:text-zinc-200 pt-2 cursor-pointer"
-									>
-										<img src={Twitter} width={100} />
-										Listen to "{data.title}"{' '}
-									</a>
-								</div> */
-								null
-							) : (
-								transcript.length>0 ||data.complete===true ?
+						<div className={`col-span-2 hidden ${data.source_type==="yt"? "xl:flex":""}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
+							{data.source_type==="yt" && 
+								(transcript.length>0 ||data.complete===true ?
 								<iframe
 									id="player"
 									title="My YouTube Video "
@@ -667,10 +836,10 @@ export default function Content(props) {
 									frameBorder="0"
 									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 								></iframe>
-								:null
+								:null)
 
 
-							)}
+						}
 
 						</div>
 						{/* <Loading /> */}
@@ -852,7 +1021,7 @@ export default function Content(props) {
 																		<div className="flex flex-row">
 																			<a
 
-																				target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}`}
+																				target="_blank" href={data.source_type !=="up" ? "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}`:null}
 																				
 																						
 																				className={`${data.source_type === 'yt'
@@ -933,8 +1102,10 @@ export default function Content(props) {
 				</div>
 :
 
+
 <div className="flex flex-col mb-20 mt-20 ">
-	{errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) || (summary!==undefined && summary.summary!==undefined	&&summary.summary!==null && summary.summary.length>0) || (contentSummaries!==undefined && contentSummaries.length>1 && (contentSummaries[0].lang==language || contentSummaries[1].lang===language)) || language=="en" ? null :
+	{(errorMessage ==true || (languagesWanted.includes(language)===true) || languages.includes(language) || (summary!==undefined && summary.summary!==undefined	&&summary.summary!==null && summary.summary.length>0) || (contentSummaries!==undefined && contentSummaries.length>1 && (contentSummaries[0].lang==language || contentSummaries[1].lang===language)) || language=="en")? null :
+								
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub ==true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.</p> 
@@ -953,8 +1124,8 @@ export default function Content(props) {
 
 			</div>
 
-{basicDataLoaded && <div>
-			{transcript.length==0 && language==="en"?
+{basicDataLoaded== true && <div>
+			{data.length>0  && transcript.length==0 && language==="en"?
 
 				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
@@ -968,6 +1139,7 @@ export default function Content(props) {
 				</div>: null
 							}
 					{((summary!=undefined && summary!==null && summary.summary==null && summary.lang!=="en" ) || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
+					{data.length>0  && 
 					<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 						Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
@@ -975,7 +1147,7 @@ export default function Content(props) {
 						<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" /> 
 						
 					</p>
-
+				}
 					</div>}
 					</div>}
 {errorMessage ==true && <div className="flex flex-col mb-20 mt-20 ">

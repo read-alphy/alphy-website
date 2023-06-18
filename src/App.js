@@ -46,7 +46,8 @@ function App() {
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
-	const [showWelcomeForm, setShowWelcomeForm] = useState(true)
+	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
+	const [contentName, setContentName] = useState("")
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
@@ -89,6 +90,7 @@ useEffect(() => {
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
 		const registerRecently= parseInt(createdAt) - parseInt(lastLoginAt)
+		
 		
 		if(registerRecently>-10000 && localStorage.getItem('welcomeForm')!=="false"){
 			setShowWelcomeForm(true)
@@ -203,13 +205,19 @@ if (currentUser && creditcalled!==true) {
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser}/>
+								}
+							/>
+							<Route
+								path="/up/:article_ID"
+								element={
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser}/>
 								}
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
