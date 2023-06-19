@@ -137,6 +137,7 @@ if (currentUser && creditcalled!==true) {
         )
             
             .then(r => {
+				console.log(r)
 			
                 if (r.data.length>0) {
                     setCalled(true)
@@ -200,7 +201,7 @@ if (currentUser && creditcalled!==true) {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit}/>} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} />} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"

@@ -1,5 +1,5 @@
 import React from 'react';
-import Feed from '../components/Landing_page/WelcomeFeed';
+import WelcomeFeed from '../components/Landing_page/WelcomeFeed';
 import Welcome from '../components/Landing_page/Welcome';
 import About from '../components/Landing_page/About';
 import FeedbackForm from '../components/FeedbackForm';
@@ -65,7 +65,7 @@ function Home({hasActiveSub,currentUser,credit}) {
 				<meta content="https://i.ibb.co/4g2Jtvc/home.png" property="og:image" />
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
-			<Feed currentUser={currentUser} />
+			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} />
 {/* 			{showMessage &&
 				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
 			} */}

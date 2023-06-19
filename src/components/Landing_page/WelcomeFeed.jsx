@@ -17,7 +17,7 @@ Progress} from "@material-tailwind/react";
 
 
 
-function Feed(props) {
+function WelcomeFeed(props) {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
@@ -521,9 +521,12 @@ if(called===false){
 						hasTier3 && isPublic==false && myUploads==true &&
 
 						<div className="">
+							
+							
 
 
 							<div className="mt-5 mb-5  ">
+								
 							<Popover placement="bottom-start">
 								<p className="text-l lg:text-xl text-zinc-700 dark:text-zinc-200 flex flex-row font-sans">Now you can use Alphy on your audio files, privately. 
 								
@@ -542,13 +545,13 @@ if(called===false){
 								<PopoverContent className="dark:bg-darkMode mt-2  border-0 dark:border-2 dark:border-zinc-800 font-sans dark:text-zinc-200 text-zinc-600 max-w-[400px]">
 									<div>
 							
-							<p className="mb-4">Transcribe, summarize, and question your own audio files in over 50 languages. </p>
+							<p className="mb-4">Premium users can transcribe, summarize, and question their own audio files in over 50 languages. </p>
 							<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 										<ol>
 										<li className="mb-2">1) Choose an audio file and upload to Alphy from below.</li>
-										<li className="mb-2">2) Alphy will process your file the same way it does with online content. providing you<br></br> the transcript, summary, key takeaways, and a chatbot.</li>
-										<li className="mb-2">3) Only you will be able to access the end work. <br></br> Your uploads will not be shown on Alphy's public database.</li>
-										<li className="mb-2">4) As we value your privacy, all audio files are deleted after the transcription is complete.</li>
+										<li className="mb-2">2) Alphy will process your file the same way it does with online content, providing you the transcript, summary, key takeaways, and a chatbot.</li>
+										<li className="mb-2">3) Only you will be able to access the end work. Your uploads will not be shown on Alphy's public database.</li>
+										<li className="mb-2">4) To preserve privacy, all audio files are deleted after the transcription is complete.</li>
 										</ol>
 
 									</div>
@@ -559,7 +562,9 @@ if(called===false){
 								 <div class="border-b border-gray-200  flex mt-5 mb-5  dark:opacity-40 items-center  "></div>
 						{file === null ? 
 
-						(currentUser!==null ?
+						(
+							props.hasActiveSub === true
+							 ?
 							<div class="flex items-center justify-center w-full">
 							<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-mildDarkMode hover:bg-zinc-100 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in">
 								<div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -571,9 +576,10 @@ if(called===false){
 								<audio className="hidden" ref={audioRef} controls />
 							</label>
 						</div>
+						
 						:
 						<div>
-							<div className="flex flex-col  col-span-2 mx-auto items-center"><p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-10 mb-5 w-full  col-span-2">You need to <a className="text-green-400 underline" href="/u/login">sign in</a> to upload personal files.</p></div>
+							<div className="flex flex-col  col-span-2 mx-auto items-center"><p  className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-10 mb-5 w-full  col-span-2">You need to go <a className="text-green-400 underline" href="/plans">premium</a> to upload personal files.</p></div>
 							</div>
 						
 						
@@ -639,7 +645,7 @@ if(called===false){
 						
 {dataUploads.length>0 && 
 <div className={ `${file!==null ? "md:mt-20 mt-10":""}`}>
-	<p className="text-zinc-600 dark:text-zinc-300 font-sans text-xl">Your Files</p>
+	<p className="text-zinc-600 dark:text-zinc-300 font-sans text-xl">Previous Works</p>
 	<div class="border-b border-gray-200  flex mt-5 dark:opacity-40 items-center w-2/12 "></div>
 
 	{dataUploads.length > 10 && 
@@ -743,6 +749,21 @@ if(called===false){
 								: dataUploads.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
 										
 											</div>
+											{(hasMoreUploads && myUploads===true && currentUser !== null) && (
+							<div className="w-full flex justify-center">
+								{
+									<button
+										className="justify-center flex text-blueLike  dark:text-zinc-300 font-semibold  mt-10 underline"
+										onClick={loadMore}
+									>
+										{'Load more'}
+									</button>
+								}
+							</div>
+						
+						)
+						
+						}
 
 						</div>
 					}
@@ -755,4 +776,4 @@ if(called===false){
 	);
 }
 
-export default Feed;
+export default WelcomeFeed;
