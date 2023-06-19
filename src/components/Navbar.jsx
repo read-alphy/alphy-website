@@ -118,7 +118,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 <div className={`items-center ${isYt || isSp || isUp ? "" : "mx-auto max-w-[1200px]"} justify-between dark:bg-darkMode`}>
 	<div
-		className={`flex dropshadow-l justify-between flex-row top-0 z-50 text-blueLike bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
+		className={`flex dropshadow-l justify-between flex-row 	top-0 z-40 text-blueLike bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 			}`}
 	>
 		<div className={`pl-10 flex items-center font-bold  ${(windowWidth > 999 && (isYt || isSp || isUp))  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
@@ -209,11 +209,11 @@ function Navbar({ collapsed, setCollapsed }) {
 			
 			
 			<div
-				className={`w-screen   dark:bg-darkMode  transition origin-top-right transform md:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed '
+				className={`w-screen   dark:bg-darkMode  transition origin-top-right transform md:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed bg-zinc-50'
 					}`}
 			>
 				<div className="text-center mx-auto items-center">
-					<div className="overflow-y-auto z-50  text-sm mx-auto items-center justify-center flex flex-row">
+					<div className="overflow-y-auto z-40  text-sm mx-auto items-center justify-center flex flex-row">
 						<div className="flex mx-auto flex-row min-w-[300px]">
 						{/* 	<div className="flex flex-row">
 								<div className="justify-center items-center flex ml-4">

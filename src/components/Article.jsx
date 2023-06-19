@@ -171,7 +171,7 @@ if(currentUser){idToken=currentUser.accessToken}
 				<meta property="og:url" content={location.href} />
 			</Helmet>  
 			<div
-				className={`w-screenbg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
+				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 			></div>
 			<div className="flex flex-row article-body">
@@ -187,7 +187,7 @@ if(currentUser){idToken=currentUser.accessToken}
 								
  </div> */}
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[14vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed'
+					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[14vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">

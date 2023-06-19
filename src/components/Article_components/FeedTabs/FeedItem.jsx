@@ -24,13 +24,13 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 	
 
 	return (
-		<div className={'grid border-b-0'}>
+		<div className={'grid border-b-0 w-full md:w-full'}>
 			{item.source_type!=="up"
 			? 
 			<a href={`/${item.source_type}/${source_id}`} >
 			<div className="flex w-full">
 				<div
-					className={`flex ${' '} ${'pointer-events-none'}flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
+					className={`grid grid-cols-3 flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 					onClick={() => {
 						
 
@@ -40,9 +40,9 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 					}}
 					target="_blank"
 				>
-					<div className={`w-1/2 min-w-[100px] ${window.innerWidth<1660 && window.innerWidth>800 ? "min-w-[100px] max-w-[100px]": "min-w-[100px] max-w-[300px]"} mr-3`}>
+					<div className={`col-span-1 min-w-[100px] ${window.innerWidth<1660 && window.innerWidth>800 ? "min-w-[100px] max-w-[100px]": "min-w-[100px] max-w-[300px]"} mr-3`}>
 						<div
-							className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
+							className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
 							style={{
 								backgroundImage: `url(${imageUrl})`,
 								paddingBottom: '50%',
@@ -56,11 +56,11 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 						></div>
 					</div>
 
-					<div className="text-xs w-1/2">
+					<div className="col-span-2 text-xs">
 						{item.summaries!==undefined && item.summaries[0]!==undefined && (item.summaries[0].complete===true || (item.summaries[1]!==undefined || item.summaries[0]!==undefined)) ? null : (
 							<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 						)}	
-						<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">{item.title}</div>
+						<div className="text-sm md:video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">{item.title}</div>
 						<div className="font-light text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
 
 						{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}

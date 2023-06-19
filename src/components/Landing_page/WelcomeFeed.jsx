@@ -352,13 +352,19 @@ if(called===false){
 						getData(0, true, true);
 						
 					}
-					else{
+					else if (isPublic===false && myUploads===false){
 						
 						setCalled(false)
 						setOffsetPersonal(0)
 						getDataPersonal(0, true, true);
 				
 					}
+					else if (isPublic==false && myUploads==true){
+						setCalled(false)
+						setOffsetUploads(0)
+						getDataUploads(0, true, true,search);
+					}
+
 						setSubmitted(true)
 					}}
 				>

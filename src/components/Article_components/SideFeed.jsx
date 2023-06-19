@@ -12,6 +12,7 @@ import {
 	MenuList,
 	MenuItem,
 	Button,
+	Input
   } from "@material-tailwind/react";
 
 
@@ -300,12 +301,12 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 				setCalled(true);
 }
 	return (
-		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300">
+		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 md:bg-zinc-100">
 
 
 
 			<form
-				className="flex items-center h-[10vh] min-h-[50px] pt-5 transparency max-w-[95%]"
+				className="flex items-center h-[10vh] min-h-[50px] mt-5 md:pt-5 max-w-[95%] drop-shadow-sm "
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
@@ -324,7 +325,7 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 				<label htmlFor="simple-search" className="sr-only">
 					Search
 				</label>
-				<div className="relative w-full mb-10">
+				<div className="relative w-full mb-10 ">
 					<input
 						value={search.length===0 ? localStorage.getItem("search") : search}
 						title={search}
@@ -335,14 +336,15 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 						}}
 
 						id="simple-search"
-						className="ml-2 pr-10 bg-zinc-50 dark:bg-darkMode drop-shadow-sm rounded-l-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
+						className="ml-2 pr-10 bg-zinc-50 dark:bg-darkMode  rounded-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
 						placeholder={'Search...'}
 
 					/>
+					
 					{search.length > 0  ? (
 						<div
 							onClick={handleClear}
-							className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "
+							className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-10 "
 						>
 							<svg
 								width="20"
@@ -361,12 +363,36 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 								></path>
 							</svg>
 						</div>
-					) : null}
+					) : 
+					null
+					}
+					<div
+							onClick={handleClear}
+							className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "
+						>
+					
+<svg
+						width="20"
+						onClick={handleSearch}
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24 "
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							strokeLinecap={'round'}
+							strokeLinejoin={'round'}
+							strokeWidth={'2'}
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+						></path>
+					</svg>
+					</div>
+
 				</div>
-				<button
+				{/* <button
 					onClick={handleSearch}
 					type="submit"
-					className="p-3 ml-2 mb-10 rounded-r-full drop-shadow-sm  text-sm font-medium  text-gray-400 bg-zinc-50 dark:bg-darkMode rounded-r-full  "
+					className="p-3 ml-2 mb-10 rounded-r-full   text-sm font-medium  text-gray-400 bg-zinc-50 dark:bg-darkMode rounded-r-full border-whiteLike "
 				>
 					<svg
 						width="22"
@@ -383,7 +409,7 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 						></path>
 					</svg>
 					<span className="sr-only">Search</span>
-				</button>
+				</button> */}
 			</form>
 
 			
@@ -392,20 +418,20 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 		
 
 	
-		<Menu className="ml-2" >
+		<Menu placement="bottom-start" className="pl-2" >
 		<MenuHandler>
-			<div className="flex-row flex dark:bg-transparent border-b  dark:border-b-zinc-700 w-full max-w-[250px] 3xl:max-w-[330px]">
-        <button className=" bg-transparent  w-full max-w-[250px] 3xl:max-w-[330px] flex  mb-5  pl-4" >
+			<div className="flex-row flex dark:bg-transparent border-b  dark:border-b-zinc-700 w-full md:max-w-[250px] md:3xl:max-w-[330px]">
+        <button className=" bg-transparent  w-full max-w-[250px] 3xl:max-w-[330px] flex  mb-5  ml-4" >
 			{isPublic && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Global</span>}
 			{!isPublic && !myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Works</span>}
 			{!isPublic && myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Uploads</span>}
 			
 		
 		</button>
-		<svg  class={`w-6 h-6 mr-2 shrink-0 flex justify-end justify-space-between`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+		<svg  class={`w-6 h-6 mr-2 shrink-0 flex justify-right justify-space-between`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 		</div>
       </MenuHandler>
-	  <MenuList className="w-full max-w-[250px] 3xl:max-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
+	  <MenuList className=" z-50 -mt-2 w-full max-w-[250px] 3xl:max-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
 		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg   dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out"  value="2">
 			My Works
 		</MenuItem>
@@ -423,9 +449,9 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 			</div>
 
 
-			<div className="signed-in-feed flex">
+			<div className="signed-in-feed flex mt-4">
 				{/* <div className="h-[80vh] overflow-y-scroll pl-1 pr-5" onScroll={handleScroll}> */}
-				<div className="h-[68vh] md:h-[77vh] overflow-y-scroll pl-1 md:pr-5" ref={feedRef2} onScroll={handleScroll}>
+				<div className="h-[68vh] w-full  md:h-[77vh] overflow-y-scroll pl-1 md:pr-5" ref={feedRef2} onScroll={handleScroll}>
 					<div className="items " ref={feedRef} >
 						{isPublic &&
 							(isLoading
