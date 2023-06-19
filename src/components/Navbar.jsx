@@ -209,7 +209,7 @@ function Navbar({ collapsed, setCollapsed }) {
 			
 			
 			<div
-				className={`w-screen   dark:bg-darkMode  transition origin-top-right transform md:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed bg-zinc-50'
+				className={`w-screen   dark:bg-darkMode  transition origin-top-right transform md:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 			>
 				<div className="text-center mx-auto items-center">

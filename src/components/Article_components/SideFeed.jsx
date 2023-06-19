@@ -344,7 +344,7 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 					{search.length > 0  ? (
 						<div
 							onClick={handleClear}
-							className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-10 "
+							className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-10"
 						>
 							<svg
 								width="20"
@@ -421,7 +421,7 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 		<Menu placement="bottom-start" className="pl-2" >
 		<MenuHandler>
 			<div className="flex-row flex dark:bg-transparent border-b  dark:border-b-zinc-700 w-full md:max-w-[250px] md:3xl:max-w-[330px]">
-        <button className=" bg-transparent  w-full max-w-[250px] 3xl:max-w-[330px] flex  mb-5  ml-4" >
+        <button className=" bg-transparent  w-full lg:max-w-[250px] 3xl:max-w-[330px] flex  mb-5  ml-4" >
 			{isPublic && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Global</span>}
 			{!isPublic && !myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Works</span>}
 			{!isPublic && myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Uploads</span>}
@@ -431,14 +431,14 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 		<svg  class={`w-6 h-6 mr-2 shrink-0 flex justify-right justify-space-between`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 		</div>
       </MenuHandler>
-	  <MenuList className=" z-50 -mt-2 w-full max-w-[250px] 3xl:max-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
-		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg   dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out"  value="2">
+	  <MenuList className=" z-50 -mt-2 w-full lg:max-w-[250px] 3xl:max-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
+		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  hover:border-transparent hover:ring-0 hover:outline-none dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out"  value="2">
 			My Works
 		</MenuItem>
-		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600  dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="3">
+		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600  dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="3">
 			My Uploads
 		</MenuItem>
-		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="1">
+		<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="1">
 			Global
 		</MenuItem>
 		</MenuList>
