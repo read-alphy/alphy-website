@@ -306,7 +306,7 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 
 
 			<form
-				className="flex items-center h-[10vh] min-h-[50px] mt-5 md:pt-5 max-w-[95%] drop-shadow-sm "
+				className="flex items-center h-[10vh] min-h-[50px] pt-5  md:pt-10 max-w-[95%] drop-shadow-sm "
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
