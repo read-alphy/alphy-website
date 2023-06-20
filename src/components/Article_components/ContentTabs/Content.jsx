@@ -46,7 +46,6 @@ export default function Content(props) {
 	const [showRerportIssueError, setShowReportIssueError] = useState(false);
 	
 	
-
 	const [language, setLanguage] = useState(props.data.summaries !== undefined &&  props.data.summaries.length > 1 && props.data.lang!==undefined ? props.data.summaries[0].lang : 'en')
 	
 	
@@ -59,7 +58,7 @@ export default function Content(props) {
 	
 
 	const data = props.data
-
+	
 
 	const title = data.title
 	const inputDate = data.added_ts!==undefined ? data.added_ts.substring(0,10) : undefined;
@@ -188,7 +187,7 @@ export default function Content(props) {
 		...language_codes
 	  };
 
-	
+
 	const handleLanguageChange = (event) => {
 	/* 	if(errorMessage ==true || translationMessage==true)
 		{
@@ -504,8 +503,7 @@ useEffect(() => {
 	};
 
 	transcriptParser();
-	
-	
+
 
 	return (
 		<div ref={ref} className={`md:max-w-[90vw]  scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
@@ -1125,7 +1123,7 @@ useEffect(() => {
 			</div>
 
 {basicDataLoaded== true && <div>
-			{data.length>0  && transcript.length==0 && language==="en"?
+			{data!==null  && transcript.length===0 && (language==="en")?
 
 				<div className="flex flex-col mb-20 mt-20 ">
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
@@ -1139,7 +1137,7 @@ useEffect(() => {
 				</div>: null
 							}
 					{((summary!=undefined && summary!==null && summary.summary==null && summary.lang!=="en" ) || languagesWanted.includes(language)==true) && <div className="flex flex-col mb-20 mt-20 ">
-					{data.length>0  && 
+					{data!==null  && 
 					<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
 
 						Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!

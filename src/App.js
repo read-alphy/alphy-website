@@ -137,7 +137,7 @@ if (currentUser && creditcalled!==true) {
         )
             
             .then(r => {
-				console.log(r)
+				
 			
                 if (r.data.length>0) {
                     setCalled(true)
