@@ -95,7 +95,7 @@ const handlePostUpload = () => {
         // Handle the response after successful upload
         const responsed = response.data
 		
-	//navigate("/up/"+responsed.source_id)
+	navigate("/up/"+responsed.source_id)
 		//page'e navige et
       })
 	  .catch((error) => {
