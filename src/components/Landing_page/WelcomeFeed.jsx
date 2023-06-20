@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { Fragment, useState, useRef, useCallback} from 'react';
 import { useEffect } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import FeedItem from '../Article_components/FeedTabs/FeedItem';
@@ -14,6 +14,7 @@ import { Button,  Popover,
 	PopoverContent,
 
 Progress} from "@material-tailwind/react";
+import { useDropzone } from 'react-dropzone';
 
 
 
@@ -48,16 +49,20 @@ function WelcomeFeed(props) {
 	const [file, setFile] = useState(null)
 	const [fileUploading, setFileUploading] = useState(false)
 	
+
 	let calledAndEmpty = true 
+	
+
 
 	const navigate = useNavigate();
 	const audioRef = useRef(null);
 
 const handleFileUpload = (event) => {
+	
 	if(currentUser===null){
 		
 	}
-	var file = event.target.files[0];
+	const file = event.target.value;
 	
 	const formData = new FormData();
     formData.append('file', file)
@@ -66,7 +71,27 @@ const handleFileUpload = (event) => {
 	audio.src = URL.createObjectURL(file);
     audio.onloadedmetadata = () => {
       setUploadDuration(audio.duration);
-	  setUploadTitle(event.target.files[0].name)
+
+	  setUploadTitle(file.name)
+	  
+    };
+}
+
+const handleFileUploadByDrop = (files) => {
+	
+	if(currentUser===null){
+		
+	}
+	const file = files[0];
+	
+	const formData = new FormData();
+    formData.append('file', file)
+	setFile(formData)
+	const audio = audioRef.current;
+	audio.src = URL.createObjectURL(file);
+    audio.onloadedmetadata = () => {
+      setUploadDuration(audio.duration);
+	  setUploadTitle(file.name)
 	  
     };
 }
@@ -282,7 +307,12 @@ useEffect(() => {
 
 	};
 
-	
+	const onDrop = useCallback((acceptedFiles) => {
+		// Do something with the dropped files
+		
+		handleFileUploadByDrop(acceptedFiles);
+	  }, []);
+
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
 			;
@@ -297,8 +327,7 @@ if(called===false){
 	}, 1000);
 		
 }
-
-
+const { getRootProps, getInputProps, isDragActive } = useDropzone({onDrop});
 
 	return (
 		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl ">
@@ -571,14 +600,25 @@ if(called===false){
 						(
 							props.hasActiveSub === true
 							 ?
-							<div class="flex items-center justify-center w-full">
-							<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-mildDarkMode hover:bg-zinc-100 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in">
+							<div {...getRootProps()} class="flex items-center justify-center w-full">
+							<label for="dropzone-file" class={`flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-mildDarkMode hover:bg-zinc-100 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
 								<div class="flex flex-col items-center justify-center pt-5 pb-6">
+								{!isDragActive ? 
+								<div className= "items-center justify-center flex flex-col">
 									<svg aria-hidden="true" class="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-									<p class="mb-2 text-sm text-zinc-600 dark:text-zinc-200 font-sans">Click to upload an audio file</p>
+									<p class="mb-2 text-sm text-zinc-600 dark:text-zinc-200"><strong>Click to upload an audio file</strong> or drag and drop.</p>
 									<p class="text-xs text-zinc-600 dark:text-zinc-200">MP3, M4A, MPGA, MPEG, WAV, OR WEBM</p>
+									</div>:
+
+								<div className= "items-center justify-center flex flex-col">
+									<p class="mb-2 text-sm text-zinc-600 dark:text-zinc-200 font-sans"><strong>Drop your file here. </strong></p>
+										</div>
+								}
 								</div>
-								<input onChange = {handleFileUpload} id="dropzone-file" type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+								
+								<input {...getInputProps()} onChange = {handleFileUpload} id="dropzone-file" type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+								
+								
 								<audio className="hidden" ref={audioRef} controls />
 							</label>
 						</div>
@@ -592,8 +632,8 @@ if(called===false){
 						)
 						:
 						<div>
-							<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200 ${uploadProgress>0 ? "opacity-40 pointer-events-none":""}`}> Clear queue
-							<svg onClick={handleFileUploadClear} className="ml-2 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+							<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress>0 ? "italic":"underline"} `}>  {uploadProgress>0 ? "Processing...":"Try with another file"}
+							<svg onClick={handleFileUploadClear} className={`${uploadProgress>0 ? "opacity-40 pointer-events-none":" cursor-pointer "} ml-2`}  width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 											<title className="font-bold">Clear</title>
 											<path clipRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fillRule="evenodd"></path>
 									</svg>
