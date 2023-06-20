@@ -159,7 +159,7 @@ if (currentUser && creditcalled!==true) {
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 
-	const [collapsed, setCollapsed] = useState(true);
+	const [collapsed, setCollapsed] = useState(false);
 
 
 
