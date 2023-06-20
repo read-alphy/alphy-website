@@ -302,10 +302,8 @@ if(currentUser!==null && called===false && localStorage.getItem("search")!=="und
 }
 	return (
 		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 md:bg-zinc-100">
-
-
-
-			<form
+			
+		<form
 				className="flex items-center h-[10vh] min-h-[50px] pt-5  md:pt-10 max-w-[95%] drop-shadow-sm "
 				onSubmit={(e) => {
 					e.preventDefault();

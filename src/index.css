@@ -806,14 +806,7 @@ DIFFERENT SCREEN SIZES
 		text-align: center;
 	}
 
-	.user-feed-burger-feed {
-		width: 100%;
-	}
-
-	.user-feed {
-		display: none;
-	}
-
+	
 	.menuToggler {
 		display: none;
 	}

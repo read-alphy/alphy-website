@@ -15,7 +15,7 @@ import { Helmet } from "react-helmet";
 
 
 
-function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName}) {
+function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName}, props) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -23,6 +23,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 	
 
 	const [called, setCalled] = useState(false);
+	
 	let idToken
 
 
@@ -118,9 +119,10 @@ if(currentUser){idToken=currentUser.accessToken}
 	// if windows size is less than 768px then collapse the navbar
 	const { width } = useWindowSize();
 	useEffect(() => {
-		if (width < 768) {
+/* 		if (width < 768) {
 			setCollapsed(true);
 		}
+		 */
 	}, [width]);
 
 	/* useEffect(() => {
@@ -152,9 +154,23 @@ if(currentUser){idToken=currentUser.accessToken}
 		}
 	}
 
+	const handleCollapse = () => {
+		setCollapsed(!collapsed)
+		
+	}
+
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
-			
+			{/* <div className={`hidden md:flex ${collapsed ? "bg-zinc-50 dark:bg-darkMode" : " bg-zinc-100 dark:bg-mildDarkMode w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px] justify-end transition duration-400 ease-in-out "}  `}>
+				<button onClick={handleCollapse }>
+
+			<svg className={`${!collapsed && "rotate-180"} opacity-30`} width={40} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8.25 4.5l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+
+
+			</button			>
+			</div> */}
 			<Helmet>
 				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
@@ -174,18 +190,27 @@ if(currentUser){idToken=currentUser.accessToken}
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 			></div>
-			<div className="flex flex-row article-body">
- 				<div className={`user-feed flex hidden lg:block mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
-{/*  			<div className={`user-feed flex mr-5 hidden lg:block bg-zinc-100 dark:bg-mildDarkMode  md:w-[40px] md:min-w-[40px]`}>
-				<div className="mt-10">
-					<button onClick={() => setCollapsed(!collapsed)}>
-							<svg className={`${collapsed ? "": "rotate-180"}`} width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-						</svg>
-					</button>
-				</div>
-								
- </div> */}
+			
+			<div className="flex flex-row article-body ">
+				{collapsed==true && 
+			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
+			<div className={`hidden md:flex `}>
+				<button onClick={handleCollapse }>
+
+		
+<svg className={`${!collapsed && "rotate-180"} opacity-30`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+
+			</button			>
+			</div> 
+
+			</div>
+			}
+			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px] `}>
+				
+				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
+				
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden mt-[14vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
