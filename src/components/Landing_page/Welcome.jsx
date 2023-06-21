@@ -248,10 +248,12 @@ export default function Welcome({hasActiveSub,credit}) {
 								<p></p>
 								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
 								<p> • Make sure it has more than <strong >10,000 views</strong>.</p>
+								<p> • Alphy might fail to process content with location limits.</p>
 								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3"><span className="text-green-400">Premium Plan</span>:</p>
 								<p>• No duration limit.</p>
 								<p>• No view limit. </p>
 								<p>• You have access to <span className="text-green-400">unlimited Twitter Spaces transcription</span>.</p>
+								<p> • Alphy might fail to process content with location limits.</p>
 								<p className="pt-2">Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a> page for more info about Premium benefits.</p>
 						
 								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3">When the content is ready</p>
