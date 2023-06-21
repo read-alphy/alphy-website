@@ -23,7 +23,7 @@ export default function About() {
         <AccordionHeader onClick={() => handleOpen(1)}>
 		What is Alphy?
         </AccordionHeader>
-        <AccordionBody className="text-md">
+        <AccordionBody className="text-md dark:text-zinc-200">
 		<p className="text-l">
 					
 					Alphy is an AI tool that helps users meaningfully interact with online audiovisual content with the
@@ -45,7 +45,7 @@ export default function About() {
         <AccordionHeader onClick={() => handleOpen(2)}>
 		What can you do with Alphy?
 		        </AccordionHeader>
-        <AccordionBody className="text-md">
+        <AccordionBody className="text-md dark:text-zinc-200">
 		<p>
 					• <strong className="font-semibold"> Give life to the content with AI: </strong>  Alphy's search bot allows you to ask questions a video or recording to get the most relevant answers presented by the
 					content.
@@ -64,14 +64,17 @@ export default function About() {
         <AccordionHeader onClick={() => handleOpen(3)}>
 		How to use the product?
         </AccordionHeader>
-        <AccordionBody className="text-md">
+        <AccordionBody className="text-md dark:text-zinc-200">
 		<p className="text-l mt-2">
 					<p className="">
 					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to
 					Alphy.
 					</p>
 					<p className="mt-2">
-					• Make sure to check out your <a href="/plans" className="underline">plan</a> details to discover Alphy's capablities.
+					• Make sure that the content you are submitting doesn't have any location limits. Otherwise, Alphy might not be able to process it. 
+					</p>
+					<p className="mt-2">
+					• Check out your <a href="/plans" className="underline">plan</a> details to discover Alphy's capablities.
 					</p>
 
 					{/*                     <br></br>
