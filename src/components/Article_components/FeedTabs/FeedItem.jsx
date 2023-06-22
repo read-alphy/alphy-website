@@ -28,7 +28,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 			{item.source_type !== "up"
 				?
 				<a href={`/${item.source_type}/${source_id}`} >
-					<div className="flex w-full">
+					<div className="flex w-full ">
 						<div
 							className={`grid grid-cols-3 lg:grid-cols-2 flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 							onClick={() => {
@@ -54,7 +54,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 								></div>
 							</div>
 
-							<div className="col-span-2 lg:col-span-1 text-xs">
+							<div className="col-span-2 lg:col-span-1 text-xs ">
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
@@ -71,7 +71,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 				:
 
 				<a href={`/${item.source_type}/${source_id}`} >
-					<div className="flex w-full">
+					<div className="flex w-full hover:opacity-70 duration-200 transform ease-in*out">
 						<div
 							className={`flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full py-4 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 							onClick={() => {
