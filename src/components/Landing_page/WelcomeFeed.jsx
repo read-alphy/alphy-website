@@ -404,18 +404,7 @@ function WelcomeFeed(props) {
 							Search
 						</label>
 						<div className="relative w-full  ">
-							{/* 						<input
-							ref={searchInputRef}
-							
 
-							type="text"
-							onChange={(e) => {
-								setSearch(e.target.value);
-							}}
-							id="input-box"
-							className="bg-zinc-50 dark:bg-darkMode border border-slate-200   dark:border-none  text-gray-900 dark:text-zinc-200 text-sm rounded-l-full mt-5 sm:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 dark:focus:border-darkMode dark:focus:ring-darkMode block w-full  py-3"
-							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
-						/> */}
 
 							<div class="relative w-full min-w-[200px] h-11 ">
 								<input
@@ -619,7 +608,7 @@ function WelcomeFeed(props) {
 												}
 											</div>
 
-											<input {...getInputProps()} id="dropzone-file" type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+											<input {...getInputProps()} className="pointer-events-none" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 											<input onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 
 
@@ -728,18 +717,6 @@ function WelcomeFeed(props) {
 											Search
 										</label>
 										<div className="relative w-full  ">
-											{/* 						<input
-							ref={searchInputRef}
-							
-
-							type="text"
-							onChange={(e) => {
-								setSearch(e.target.value);
-							}}
-							id="input-box"
-							className="bg-zinc-50 dark:bg-darkMode border border-slate-200   dark:border-none  text-gray-900 dark:text-zinc-200 text-sm rounded-l-full mt-5 sm:mt-0 focus:outline-none focus:ring-slate-200 drop-shadow-sm focus:border-slate-200 dark:focus:border-darkMode dark:focus:ring-darkMode block w-full  py-3"
-							placeholder={search.length > 0 ? search : 'Search YouTube videos or Twitter spaces...'}
-						/> */}
 
 											<div class="relative w-full min-w-[200px] h-11 ">
 												<input
