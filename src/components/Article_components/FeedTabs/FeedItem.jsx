@@ -30,7 +30,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 				<a href={`/${item.source_type}/${source_id}`} >
 					<div className="flex w-full">
 						<div
-							className={`grid grid-cols-3 flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
+							className={`grid grid-cols-3 lg:grid-cols-2 flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 							onClick={() => {
 
 
@@ -40,7 +40,7 @@ const FeedItem = ({ item, setCollapsed, mainInputFeed }) => {
 							}}
 							target="_blank"
 						>
-							<div className={`col-span-1 min-w-[100px] ${window.innerWidth < 1660 && window.innerWidth > 800 ? "min-w-[100px] max-w-[200px]" : "min-w-[100px] max-w-[300px]"} mr-3 `}>
+							<div className={`col-span-1 min-w-[100px] min-w-[100px] max-w-[300px] mr-3`}>
 								<div
 									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
 									style={{
