@@ -50,6 +50,7 @@ function WelcomeFeed(props) {
 	const [uploadTitle, setUploadTitle] = useState("")
 	const [file, setFile] = useState(null)
 	const [fileUploading, setFileUploading] = useState(false)
+	const [errorMessage, setErrorMessage] = useState(false)
 
 
 	let calledAndEmpty = true
@@ -61,20 +62,18 @@ function WelcomeFeed(props) {
 
 	const handleFileUpload = (event) => {
 
-		if (currentUser === null) {
 
-		}
-		const file = event.target.value;
+		const uploadFile = event.target.value;
 
 		const formData = new FormData();
-		formData.append('file', file)
+		formData.append('file', uploadFile)
 		setFile(formData)
 		const audio = audioRef.current;
-		audio.src = URL.createObjectURL(file);
+		audio.src = URL.createObjectURL(uploadFile);
 		audio.onloadedmetadata = () => {
 			setUploadDuration(audio.duration);
 
-			setUploadTitle(file.name)
+			setUploadTitle(uploadFile.name)
 
 		};
 	}
@@ -128,6 +127,7 @@ function WelcomeFeed(props) {
 			})
 			.catch((error) => {
 				setUploadProgress(0)
+				setErrorMessage(true)
 				// Handle any errors that occur during upload
 				console.error(error);
 			});
@@ -184,7 +184,7 @@ function WelcomeFeed(props) {
 			setOffsetUploads(0)
 			setisPublic(false)
 			getDataUploads(0, true, true);
-			console.log(dataUploads)
+
 
 
 		}
@@ -619,7 +619,8 @@ function WelcomeFeed(props) {
 												}
 											</div>
 
-											<input {...getInputProps()} onChange={handleFileUpload} id="dropzone-file" type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+											<input {...getInputProps()} id="dropzone-file" type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+											<input onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 
 
 											<audio className="hidden" ref={audioRef} controls />
@@ -635,7 +636,7 @@ function WelcomeFeed(props) {
 							)
 							:
 							<div>
-								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Processing..." : "Try with another file"}
+								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Try with another file"}
 									<svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 										<title className="font-bold">Clear</title>
 										<path clipRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fillRule="evenodd"></path>
@@ -659,7 +660,7 @@ function WelcomeFeed(props) {
 													<div class={`bg-green-400 h-3 rounded-full `} style={{ width: uploadProgress + "%" }}></div>
 												</div>
 
-												{/*  */}					{fileUploading === false && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans w-full flex justify-center lg:mt-2">Waiting for approval...</p>}
+												{/*  */}					{fileUploading === false && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans w-full flex justify-center lg:mt-2">Click continue to process the file...</p>}
 												{/* <Progress className={`${uploadProgress>0 && "hidden"}`}color="gray" size="lg" value={100} label={0} /> */}
 											</div>
 											{/* 	<div className="sm:col-span-1 text-sm flex justify-center font-sans  text-zinc-700 dark:text-zinc-200">
@@ -676,7 +677,7 @@ function WelcomeFeed(props) {
 										</div>
 										{/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
  */}
-										{fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className="text-sm font-sans text-zinc-600 dark:text-zinc-300">{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : "Complete!"}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-green-400 lg:ml-10 normal-case max-w-[100px] my-4">Continue</Button></div>}
+										{fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className="text-sm font-sans text-zinc-600 dark:text-zinc-300">{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage === false ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-green-400 lg:ml-10 normal-case max-w-[100px] my-4">Continue</Button></div>}
 
 									</div>
 
