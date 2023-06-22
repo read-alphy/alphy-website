@@ -10,7 +10,7 @@ import TypeIt from 'typeit-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useLocation } from 'react-router-dom';
-import { Button, Spinner} from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
 import Working from "./ContentTabs/working.svg"
 
 
@@ -35,7 +35,7 @@ export default function QuestionAnswering(props) {
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
 	const [clicked, setClicked] = useState(false);
-	
+
 
 	function updateVariable(event) {
 
@@ -82,7 +82,7 @@ export default function QuestionAnswering(props) {
 
 				const keys = Object.keys(props.key_qa);
 				const index = keys.indexOf(decodedText);
-				
+
 				setCollapseIndex(index)
 				//setCollapseIndex(index)
 				//setIsCleared(false);
@@ -125,17 +125,17 @@ export default function QuestionAnswering(props) {
 	};
 
 
-	const handleBaseQAaccordion= (event, index,item) => {
+	const handleBaseQAaccordion = (event, index, item) => {
 
-		
-			if(collapseIndex===index){
-				setCollapseIndex(-1)
-				return
-			}
-			else{
-				setCollapseIndex(index)
-			}
-	
+
+		if (collapseIndex === index) {
+			setCollapseIndex(-1)
+			return
+		}
+		else {
+			setCollapseIndex(index)
+		}
+
 		// setIsCleared(false);
 		/* setShowBaseQA(true); */
 		// setInputValue(event.target.textContent);
@@ -146,7 +146,7 @@ export default function QuestionAnswering(props) {
 		setShowBaseQA(false);
 		setInputValue('');
 	};
-	
+
 
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
@@ -160,18 +160,18 @@ export default function QuestionAnswering(props) {
 		}
 	};
 	const handleShareLink = () => {
-		const encodedText = encodeURIComponent(baseQuestion ? baseQuestion :inputValue);
-		
+		const encodedText = encodeURIComponent(baseQuestion ? baseQuestion : inputValue);
+
 		const url = `${window.location.origin}${location.pathname.split('&q=')[0]}&q=${encodedText}`;
 		navigator.clipboard.writeText(url);
 		toast.success('Link copied to clipboard!');
 	};
 	const handleCopyToClipboard = () => {
 		let question
-		if(baseQuestion){
-			 question = baseQuestion
+		if (baseQuestion) {
+			question = baseQuestion
 		}
-		else{
+		else {
 			question = inputValue
 		}
 		const myHtml = document.getElementById("answer-area");
@@ -206,10 +206,10 @@ export default function QuestionAnswering(props) {
 			if (currentUser) {
 				try {
 					setIsLoadingInside(true);
-					
+
 					setAnswer(false);
 					setAnswerData('');
-					
+
 
 					axios
 						.post(
@@ -218,13 +218,13 @@ export default function QuestionAnswering(props) {
 							inputValue,
 						)
 						.then((response) => {
-							
+
 							setAnswerData(response.data);
 							setIsLoadingInside(false);
 						});
 				} catch (error) {
 					console.error(`Error fetching data: ${error}`);
-					
+
 					setIsLoadingInside(false);
 				}
 			} else {
@@ -247,10 +247,10 @@ export default function QuestionAnswering(props) {
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
 		<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
-			
-			
+
+
 			<p className="mb-4 font-light text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
-			
+
 			<div className="Md:pl-10 md:pr-10 ">
 
 				<Toaster position="bottom-center" />
@@ -273,7 +273,7 @@ export default function QuestionAnswering(props) {
 
 					<div className="relative w-full ">
 
-{/* 
+						{/* 
 						<input
 							value={inputValue}
 							onClick={() => handleClick(true)}
@@ -291,7 +291,7 @@ export default function QuestionAnswering(props) {
 							required
 						/> */}
 
-<input 
+						<input
 							value={inputValue}
 							onClick={() => handleClick(true)}
 							onChange={(event) => setInputValue(event.target.value)}
@@ -300,9 +300,9 @@ export default function QuestionAnswering(props) {
 							type="text"
 							id="search"
 							placeholder="Ask anything to the transcript..."
-							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400"/>
-							{/* <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-000 before:border-green-400 peer-focus:before:!border-blue-000 after:border-green-400 peer-focus:after:!border-blue-000">Search our database...</label> */}
-							
+							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
+						{/* <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-000 before:border-green-400 peer-focus:before:!border-blue-000 after:border-green-400 peer-focus:after:!border-blue-000">Search our database...</label> */}
+
 
 
 						{inputValue.length > 0 ? (
@@ -331,21 +331,21 @@ export default function QuestionAnswering(props) {
 						) : null}
 					</div>
 
-					{window.innerWidth>420 
+					{window.innerWidth > 420
 
-					&&
+						&&
 
-					<Button type="submit"
-					ref={buttonRef}
-					onClick={fetchData}
-					
-							 className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none":""}`}>
-								
-{isLoadingInside ? <Spinner className="h-4 w-4"/>:
-					<svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-						</svg>
-						}
+						<Button type="submit"
+							ref={buttonRef}
+							onClick={fetchData}
+
+							className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
+
+							{isLoadingInside ? <Spinner className="h-4 w-4" /> :
+								<svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+								</svg>
+							}
 						</Button>}
 
 				</div>
@@ -358,7 +358,7 @@ export default function QuestionAnswering(props) {
 
 
 				<div className="mt-10">
-					
+
 					{isCleared && !isLoadingInside && answerData.length === 0 ? (
 						<div>
 
@@ -367,17 +367,17 @@ export default function QuestionAnswering(props) {
 								Questions by Alphy
 							</p>
 							{Object.keys(props.key_qa).map((item, index) => (
-									<div id="accordion-flush"  data-active-classes="bg-zinc-50 dark:bg-darkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
-										<h2 id="accordion-flush-heading-1">
-											<button onClick={(event) => handleBaseQAaccordion(event,index,item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+								<div id="accordion-flush" data-active-classes="bg-zinc-50 dark:bg-darkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+									<h2 id="accordion-flush-heading-1">
+										<button onClick={(event) => handleBaseQAaccordion(event, index, item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
 											<span>{item}</span>
-											<svg data-accordion-icon class={`w-6 h-6 ${index==collapseIndex && collapseIndex!=-1 ? "rotate-180": ""} shrink-0`}  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-											</button>
-										</h2>
-								<div class={index==collapseIndex && collapseIndex!=-1 ? "": "hidden"} aria-labelledby="accordion-flush-heading-1">
+											<svg data-accordion-icon class={`w-6 h-6 ${index == collapseIndex && collapseIndex != -1 ? "rotate-180" : ""} shrink-0`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+										</button>
+									</h2>
+									<div class={index == collapseIndex && collapseIndex != -1 ? "" : "hidden"} aria-labelledby="accordion-flush-heading-1">
 										<div class="py-5 border-b border-gray-200 dark:border-gray-700">
-										<div className="flex flex-row justify-end text-slate-400">
-											
+											<div className="flex flex-row justify-end text-slate-400">
+
 												<svg onClick={handleShareLink} className="cursor-pointer flex flex-row" width="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 													<title className="font-bold">Share link to question</title>
 													<path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -389,113 +389,113 @@ export default function QuestionAnswering(props) {
 											</div>
 											<div>
 												<div>
-											<p id="answer-area" className="answer-area text-zinc-700 dark:text-zinc-300 font-normal text-md sm:text-l" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
+													<p id="answer-area" className="answer-area text-zinc-700 dark:text-zinc-300 font-normal text-md sm:text-l" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
+												</div>
+
+
 											</div>
-									
-											
+
+											<div className="col-span-1 justify-end flex flex-row flex ">
+
+												<button
+													className={`cursor-pointer justify-end mt-10 mx-auto flex`}
+													onClick={() => setBaseSources(!baseSources)}
+												>
+													<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
+														See sources from the {props.data.source_type == "yt" ? "video" : "recording"}{' '}
+													</span>
+													<svg
+														className={`${baseSources ? 'hidden' : 'block'} `}
+														aria-hidden="true"
+														fill="currentColor"
+														viewBox="0 0 24 24"
+														xmlns="http://www.w3.org/2000/svg"
+														width="30px"
+													>
+														<path
+															clipRule="evenodd"
+															d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z"
+															fillRule="evenodd"
+														></path>
+													</svg>
+												</button>
+
+												{baseSources ? (
+													<div className="mt-10">
+														<div>
+															<h1 className="mb-4 text-xl font-normal text-zinc-700 dark:text-zinc-300"> Sources from the video sorted by relevance</h1>
+
+															{props.key_qa[item]
+																? props.key_qa[item].sources.map((source, index) => (
+																	<p className=" text-zinc-700 dark:text-zinc-300" key={index}>
+
+																		{source.start && source.end ? (
+																			window.innerWidth > 999 && props.data.source_type == "yt" ?
+																				<a onClick={updateVariable} className="underline cursor-pointer">
+
+
+																					{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
+																					{":"}
+																					{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start % 3600) < 600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}` : Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
+																					{":"}
+																					{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
+
+																					{" - "}
+
+																					{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
+																					{":"}
+																					{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end % 3600) < 600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}` : Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
+																					{":"}
+																					{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+																				</a> : <a target="_blank" href={props.data.source_type === "yt" ? `https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}` : ""} className="underline">
+
+																					{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
+																				</a>
+																		) :
+																			window.innerWidth > 999 && props.data.source_type == "yt" ?
+																				<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
+																				:
+																				<a target="_blank" href={props.data.source_type === "yt" ? `https://youtu.be/${props.data.source_id}?t=0` : ""} className="underline">00:00:00</a>
+																		}
+
+
+																		<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
+
+																	</p>
+																))
+																: null}
+														</div>
+														<button
+															className={`cursor-pointer  justify-end  mt-10 mx-auto flex`}
+															onClick={() => {
+																setBaseSources(!baseSources);
+																QARef.current.scrollIntoView({ behavior: 'smooth' });
+															}}
+														>
+															<span className="text-zinc-600 dark:text-zinc-200 text-l pr-1">See less</span>
+															<svg
+																className=""
+																aria-hidden="true"
+																fill="currentColor"
+																viewBox="0 0 24 24"
+																xmlns="http://www.w3.org/2000/svg"
+																width="30px"
+															>
+																<path
+																	clipRule="evenodd"
+																	d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z"
+																	fillRule="evenodd"
+																></path>
+															</svg>{' '}
+														</button>{' '}
+													</div>
+												) : null}
 											</div>
-								
-								<div className="col-span-1 justify-end flex flex-row flex ">
-										
-							<button
-									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
-									onClick={() => setBaseSources(!baseSources)}
-								>
-									<span className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
-										See sources from the {props.data.source_type=="yt"?"video":"recording"}{' '}
-									</span>
-									<svg
-										className={`${baseSources ? 'hidden' : 'block'} `}
-										aria-hidden="true"
-										fill="currentColor"
-										viewBox="0 0 24 24"
-										xmlns="http://www.w3.org/2000/svg"
-										width="30px"
-									>
-										<path
-											clipRule="evenodd"
-											d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z"
-											fillRule="evenodd"
-										></path>
-									</svg>
-								</button>
-
-								{baseSources ? (
-									<div className="mt-10">
-										<div>
-											<h1 className="mb-4 text-xl font-normal text-zinc-700 dark:text-zinc-300"> Sources from the video sorted by relevance</h1>
-
-											{props.key_qa[item]
-												? props.key_qa[item].sources.map((source, index) => (
-													<p className=" text-zinc-700 dark:text-zinc-300"key={index}>
-
-														{source.start && source.end ? (
-															window.innerWidth > 999 && props.data.source_type == "yt" ?
-																<a onClick={updateVariable} className="underline cursor-pointer">
-																	
-
-																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
-																	{":"}
-																	{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start%3600)<600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}`:Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
-																	{":"}
-																	{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
-
-																	{" - "}
-																	
-																	{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
-																	{":"}
-																	{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end%3600)<600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}`:Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
-																	{":"}
-																	{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
-																</a> : <a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}`} className="underline">
-
-																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
-																</a>
-														) : 
-														window.innerWidth > 999 && props.data.source_type == "yt" ?
-																<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
-															:
-															<a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=0`} className="underline">00:00:00</a>
-															}
 
 
-														<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
-
-													</p>
-												))
-												: null}
 										</div>
-										<button
-											className={`cursor-pointer  justify-end  mt-10 mx-auto flex`}
-											onClick={() => {
-												setBaseSources(!baseSources);
-												QARef.current.scrollIntoView({ behavior: 'smooth' });
-											}}
-										>
-											<span className="text-zinc-600 dark:text-zinc-200 text-l pr-1">See less</span>
-											<svg
-												className=""
-												aria-hidden="true"
-												fill="currentColor"
-												viewBox="0 0 24 24"
-												xmlns="http://www.w3.org/2000/svg"
-												width="30px"
-											>
-												<path
-													clipRule="evenodd"
-													d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z"
-													fillRule="evenodd"
-												></path>
-											</svg>{' '}
-										</button>{' '}
 									</div>
-								) : null}
-										</div>
-										
-											
-											</div>
-										</div>
-									</div>))}
+								</div>))}
 
 							{/* {Object.keys(props.key_qa).map((item, index) => (
 
@@ -527,22 +527,22 @@ export default function QuestionAnswering(props) {
 						}}
 					>
 
-{/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
-<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
-				getBeforeInit={(instance) => {
-					instance.type("Going through the recording to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
+						{/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
+						<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
+							getBeforeInit={(instance) => {
+								instance.type("Going through the recording to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
 
-					// Remember to return it!
-					return instance;
-				}}
+								// Remember to return it!
+								return instance;
+							}}
 
-										options={{
-											loop: true,
-											html: true,
-											speed: 10,
-											cursorChar: "",
-										}}
-									/>
+							options={{
+								loop: true,
+								html: true,
+								speed: 10,
+								cursorChar: "",
+							}}
+						/>
 					</div>
 				) : (
 					<div> </div>
@@ -581,9 +581,6 @@ export default function QuestionAnswering(props) {
 										</svg>
 									</div>
 
-								
-
-							
 
 
 
@@ -591,7 +588,10 @@ export default function QuestionAnswering(props) {
 
 
 
-								
+
+
+
+
 								</div>
 								<div id="answer-area" className="answer-area text-md sm:text-l container">
 									<TypeIt className="mb-3"
@@ -612,7 +612,7 @@ export default function QuestionAnswering(props) {
 									onClick={() => setAnswer(!answer)}
 								>
 									<span className={`${answer ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-200 text-l pr-1`}>
-									See sources from the {props.data.source_type=="yt"?"video":"recording"}{' '}
+										See sources from the {props.data.source_type == "yt" ? "video" : "recording"}{' '}
 									</span>
 									<svg
 										className={`${answer ? 'hidden' : 'block'} `}
@@ -643,7 +643,7 @@ export default function QuestionAnswering(props) {
 															<a onClick={updateVariable} className="underline cursor-pointer">
 
 																{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
-															</a> : <a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}`} className="underline">
+															</a> : <a target="_blank" href={props.data.source_type === "yt" ? `https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}` : ""} className="underline">
 
 																{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 															</a>
@@ -771,31 +771,31 @@ export default function QuestionAnswering(props) {
 														{source.start && source.end ? (
 															window.innerWidth > 999 && props.data.source_type == "yt" ?
 																<a onClick={updateVariable} className="underline cursor-pointer">
-																	
+
 
 																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
 																	{":"}
-																	{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start%3600)<600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}`:Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
+																	{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start % 3600) < 600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}` : Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
 																	{":"}
 																	{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
 
 																	{" - "}
-																	
+
 																	{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
 																	{":"}
-																	{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end%3600)<600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}`:Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
+																	{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end % 3600) < 600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}` : Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
 																	{":"}
 																	{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
-																</a> : <a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}`} className="underline">
+																</a> : <a target="_blank" href={props.data.source_type === "yt" ? `https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}` : ""} className="underline">
 
 																	{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																</a>
-														) : 
-														window.innerWidth > 999 && props.data.source_type == "yt" ?
+														) :
+															window.innerWidth > 999 && props.data.source_type == "yt" ?
 																<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
-															:
-															<a target="_blank" href={`https://youtu.be/${props.data.source_id}?t=0`} className="underline">00:00:00</a>
-															}
+																:
+																<a target="_blank" href={props.data.source_type === "yt" ? `https://youtu.be/${props.data.source_id}?t=0` : ""} className="underline">00:00:00</a>
+														}
 
 
 
