@@ -32,7 +32,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 						}
 			
 			).then((response) => {
-				console.log(response)
+			
 				setRemoved(!removed)
 			})
 	}
