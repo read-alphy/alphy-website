@@ -133,11 +133,12 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 			const response = await axios.get(url,
 				{
 					headers: {
-						'id-token': idToken	,
+						'id-token': currentUser.accessToken	,
 					}
 					}
 				).then(
 				(response) => {
+					console.log(response.data)
 					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
@@ -147,7 +148,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 
 			).catch((error) => {
 				console.log(error)	
-				 navigate('/404') 
+				 
 			});
 
 		} catch (error) {
@@ -176,7 +177,8 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
  */	if (called===false){
 		if (source_type==="up" && data.length===0 && currentUser!==null){
 			setCalled(true)
-				fetchDataUpload(url);
+			fetchDataUpload(url);
+			
 				
 				
 		}

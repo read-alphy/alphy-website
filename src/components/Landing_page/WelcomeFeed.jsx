@@ -731,9 +731,9 @@ function WelcomeFeed(props) {
 							(
 								props.hasActiveSub === true
 									?
-									<div {...getRootProps()} class="flex items-center justify-center w-full">
-										<label for="dropzone-file" class={`flex flex-col items-center justify-center w-full h-48 border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
-											<div class="flex flex-col items-center justify-center pt-5 pb-6">
+									<div   class="flex items-center justify-center w-full">
+										<label  for="dropzone-file" class={`flex flex-col items-center justify-center w-full h-60 border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
+											<div {...getRootProps()} class="flex flex-col items-center justify-center pt-5 pb-6">
 												{!isDragActive ?
 													<div className="items-center justify-center flex flex-col">
 														<svg aria-hidden="true" class="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
@@ -741,14 +741,19 @@ function WelcomeFeed(props) {
 														<p class="text-xs text-zinc-600 dark:text-zinc-200">MP3, M4A, MPGA, MPEG, WAV, OR WEBM</p>
 													</div> :
 
-													<div className="items-center justify-center flex flex-col">
-														<p class="mb-2 text-sm text-zinc-600 dark:text-zinc-200 font-sans"><strong>Drop your file here. </strong></p>
+													<div className="items-center justify-center flex flex-col items-center">
+															<svg className="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200 items-center flex" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+														<p class="mb-2 text-sm text-zinc-600 dark:text-zinc-200 font-sans">
+													
+															<strong>Drop your file here. </strong></p>
 													</div>
 												}
 											</div>
 
 											<input {...getInputProps()} className="pointer-events-none" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
-											<input onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+											<input onChange={handleFileUpload} type="file" class="hidden pointer-events-none" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 
 
 											<audio className="hidden" ref={audioRef} controls />
@@ -805,7 +810,7 @@ function WelcomeFeed(props) {
 										</div>
 										{/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
  */}
-										{fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className={`text-sm font-sans ${errorMessage ? "text-red-400 dark:text-400" : "text-zinc-600 dark:text-zinc-300"}`}>{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage === false ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-green-400 lg:ml-10 normal-case max-w-[100px] my-4">Continue</Button></div>}
+										{fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className={`text-sm font-sans ${errorMessage ? "text-red-400 dark:text-400" : "text-zinc-600 dark:text-zinc-300"}`}>{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-green-400 lg:ml-10 normal-case max-w-[100px] my-4">Continue</Button></div>}
 
 									</div>
 
