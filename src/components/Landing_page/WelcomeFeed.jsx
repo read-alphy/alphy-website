@@ -13,8 +13,8 @@ import {
 	Button, Popover,
 	PopoverHandler,
 	PopoverContent,
+Carousel
 
-	Progress
 } from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
 
@@ -25,13 +25,13 @@ function WelcomeFeed(props) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
 	const [offset, setOffset] = useState(0);
-	const [hasMore, setHasMore] = useState(true);
+	const [hasMore, setHasMore] = useState(false);
 	/*const const { currentUser } = useAuth(); */
 	const currentUser = props.currentUser;
 
 	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
-	const [hasMorePersonal, setHasMorePersonal] = useState(true);
+	const [hasMorePersonal, setHasMorePersonal] = useState(false);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
 	const [dataPersonal, setDataPersonal] = useState([]);
 	const [isPublic, setisPublic] = useState(false);
@@ -40,7 +40,7 @@ function WelcomeFeed(props) {
 	const [ready, setReady] = useState(false)
 	const [myUploads, setMyUploads] = useState(false)
 	const [offsetUploads, setOffsetUploads] = useState(0);
-	const [hasMoreUploads, setHasMoreUploads] = useState(true);
+	const [hasMoreUploads, setHasMoreUploads] = useState(false);
 	const [dataUploads, setDataUploads] = useState([]);
 	const [isLoadingUploads, setIsLoadingUploads] = useState(true);
 	const [firstTimeUploads, setFirstTimeUploads] = useState(true);
@@ -51,6 +51,18 @@ function WelcomeFeed(props) {
 	const [file, setFile] = useState(null)
 	const [fileUploading, setFileUploading] = useState(false)
 	const [errorMessage, setErrorMessage] = useState(false)
+	const [myBookmarks, setMyBookmarks] = useState(false)
+	const [offsetBookmarks, setOffsetBookmarks] = useState(0);
+	const [hasMoreBookmarks, setHasMoreBookmarks] = useState(false);
+	const [dataBookmarks, setDataBookmarks] = useState([]);
+	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
+	const [firstTimeBookmarks, setFirstTimeBookmarks] = useState(true);
+
+
+
+
+
+
 
 
 	let calledAndEmpty = true
@@ -165,6 +177,8 @@ function WelcomeFeed(props) {
 	const navigateFeeds = (state) => {
 
 		if (state == 2) {
+			setMyUploads(false)
+			setMyBookmarks(false)
 			setisPublic(true)
 			setOffset(0)
 			getData(0, true, true);
@@ -172,6 +186,7 @@ function WelcomeFeed(props) {
 		}
 
 		else if (state == 1) {
+			setMyBookmarks(false)
 			setOffsetPersonal(0)
 			setMyUploads(false)
 			setisPublic(false)
@@ -181,11 +196,19 @@ function WelcomeFeed(props) {
 		else if (state == 3) {
 			setOffsetUploads(0)
 			setMyUploads(true)
+			setMyBookmarks(false)
 			setOffsetUploads(0)
 			setisPublic(false)
 			getDataUploads(0, true, true);
 
-
+		}
+		else if (state == 4) {
+			setMyUploads(false)
+			setOffsetBookmarks(0)
+			setMyBookmarks(true)
+			setOffsetBookmarks(0)
+			setisPublic(false)
+			getDataBookmarks(0, true, true);
 
 		}
 
@@ -255,6 +278,44 @@ function WelcomeFeed(props) {
 					});
 		};
 	};
+	const getDataBookmarks = (offsetBookmarks, firstTime, hasMoreBookmarks) => {
+		if (!hasMoreBookmarks) {
+			return;
+		}
+		setIsLoadingBookmarks(true);
+		if (currentUser) {
+			setIsLoadingBookmarks(true)
+			currentUser.getIdToken().then((idtoken) =>
+				axios.get(
+					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					}/sources/?q=${search}&offset=${offsetBookmarks}&limit=${limit}&only_my=bookmarks`, {
+					headers: {
+						'id-token': idtoken,
+					}
+				})
+					.then((response) => {
+						setHasMoreBookmarks(!(response.data.length < limit));
+
+						if (response.data.length > 0) {
+							calledAndEmpty = false
+						}
+
+
+						if (firstTime) {
+							setDataBookmarks(response.data);
+
+
+						} else {
+							setDataBookmarks([...dataPersonal, ...response.data]);
+						}
+						setIsLoadingBookmarks(false);
+					})).catch((error) => {
+						setIsLoadingBookmarks(false);
+
+
+					});
+		};
+	};
 	const getDataUploads = (offsetUploads, firstTimeUploads, hasMoreUploads) => {
 		if (!hasMoreUploads) {
 			return;
@@ -306,6 +367,10 @@ function WelcomeFeed(props) {
 			setOffsetUploads(offsetUploads + limit);
 			getDataUploads(offsetUploads + limit, false, true, search);
 		}
+		else if (myUploads === true && isPublic === false) {
+			setOffsetBookmarks(offsetBookmarks + limit);
+			getDataBookmarks(offsetBookmarks + limit, false, true, search);
+		}
 
 
 	};
@@ -341,15 +406,14 @@ function WelcomeFeed(props) {
 
 
 			<div class="text-sm font-medium text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700 ">
-				<ul class="flex ml-6 flex-wrap -mb-px">
-					{/* 					<li class="mr-2">
-						<button onClick={() => setisPublic(true)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
-					</li> */}
-					<li class="mr-2">
-						<button onClick={() => navigateFeeds(1)} class={`inline-block p-4 mb-1 ${!isPublic && myUploads === false ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
+				<ul class="flex flex-row pt-4 overflow-x-scroll w-full">
+					
+				
+					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
+						<button onClick={() => navigateFeeds(1)} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${!isPublic && myUploads === false && myBookmarks === false ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
 					</li>
-					<li class="mr-2">
-						<button onClick={() => navigateFeeds(3)} class={`relative infline-flex p-4 mb-1 ${!isPublic && myUploads == true ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
+						<button onClick={() => navigateFeeds(3)} class={`relative infline-flex p-1 py-4 sm:p-4 mb-1 ${!isPublic && myUploads == true && myBookmarks === false ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
 
 							<span> My Uploads </span>
 							<div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div>
@@ -357,11 +421,15 @@ function WelcomeFeed(props) {
 
 
 					</li>
-					<li class="mr-2">
-						<button onClick={() => navigateFeeds(2)} class={`inline-block p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+					<li class=" w-1/4 sm:w-1/4 lg:w-[150px]">
+						<button onClick={() => navigateFeeds(4)} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${myBookmarks && !isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
 					</li>
 
+					 <li class="w-1/4 sm:w-1/4 lg:w-[150px]">
+						<button onClick={() => navigateFeeds(2)} class={`inline-block p-1 py-4 sm:p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+					</li>
 
+					
 
 
 				</ul>
@@ -384,7 +452,7 @@ function WelcomeFeed(props) {
 								getData(0, true, true);
 
 							}
-							else if (isPublic === false && myUploads === false) {
+							else if (isPublic === false && myUploads === false && myBookmarks === false) {
 
 								setCalled(false)
 								setOffsetPersonal(0)
@@ -395,6 +463,11 @@ function WelcomeFeed(props) {
 								setCalled(false)
 								setOffsetUploads(0)
 								getDataUploads(0, true, true, search);
+							}
+							else if (isPublic == false && myBookmarks == true) {
+								setCalled(false)
+								setOffsetBookmarks(0)
+								getDataBookmarks(0, true, true, search);
 							}
 
 							setSubmitted(true)
@@ -485,7 +558,7 @@ function WelcomeFeed(props) {
 
 
 
-				{!isPublic && myUploads == false &&
+				{!isPublic && myUploads == false && myBookmarks === false &&
 					<div className="main-page-feed  w-full">
 						<div
 							className={`
@@ -544,6 +617,65 @@ function WelcomeFeed(props) {
 
 					</div>}
 
+				{!isPublic && myBookmarks == true &&
+					<div className="main-page-feed  w-full">
+						<div
+							className={`
+							grid grid-cols-1 mt-10
+							${isLoadingPersonal
+									? 'lg:grid-cols-2 xl:grid-cols-2'
+									: data.length === 1
+										? 'lg:grid-cols-1 xl:grid-cols-1'
+										: 'lg:grid-cols-2 xl:grid-cols-2'
+								}
+							gap-4
+							`}
+						>
+
+
+							{currentUser == null && called == true && <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Sign in to see the content you previously submitted.<br></br>Or navigate to <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to explore Alphy's database.</p><img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>}
+							{isLoadingBookmarks
+								? dataBookmarks.length > 0
+									?
+									dataBookmarks.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+
+									: [...Array(10)].map((item, index) => {
+										<div>
+
+											<SkeletonItem key={index} />
+
+										</div>
+									})
+								: dataBookmarks.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
+						</div>
+						{called == true && submitted == false && currentUser !== null && ready == true && dataBookmarks.length == 0 && myBookmarks == true ? (
+							<div className={`flex flex-col ${calledAndEmpty === false ? "hidden" : ""} col-span-2 mx-auto block items-center`} >
+
+								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">You haven't bookmarked any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer">Global</a> to find conversations you want to add to your knowledge base. </p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
+							</div>
+						) : null
+						}
+
+
+						{(hasMoreBookmarks && currentUser !== null) && (
+							<div className="w-full flex justify-center">
+								{
+									<button
+										className="justify-center flex text-blueLike  dark:text-zinc-300 font-semibold  mt-10 underline"
+										onClick={loadMore}
+									>
+										{'Load more'}
+									</button>
+								}
+							</div>
+
+						)
+
+						}
+
+
+					</div>}
+
 				{
 					hasTier3 && isPublic == false && myUploads == true &&
 
@@ -555,12 +687,12 @@ function WelcomeFeed(props) {
 						<div className="mt-5 mb-5  ">
 
 							<Popover placement="bottom-start">
-								<p className="text-l lg:text-xl text-zinc-700 dark:text-zinc-200 flex flex-row font-sans">Now you can use Alphy on your audio files, privately.
+								<p className="text-l lg:text-xl text-zinc-700 dark:text-zinc-200 flex flex-col sm:flex-row font-sans">Now you can use Alphy on your audio files, privately.
 
 
 
 									<PopoverHandler>
-										<div>{' '}<p className="font-sans underline cursor-pointer ml-2"> Learn more.</p>
+										<div>{' '}<p className="font-sans underline cursor-pointer mt-2 sm:mt-0 sm:ml-2"> Learn more.</p>
 											{/* <svg className="w-5 h-5 ml-1 pt-1 cursor-pointer dark:text-zinc-300 text-gray-400 hover:dark:text-zinc-300 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg> */}
 										</div>
 
@@ -569,7 +701,7 @@ function WelcomeFeed(props) {
 
 
 
-								<PopoverContent className="dark:bg-darkMode mt-2  border-0 dark:border-2 dark:border-zinc-800 font-sans dark:text-zinc-200 text-zinc-600 max-w-[400px]">
+								<PopoverContent className="dark:bg-darkMode mt-2   border-slate-800 font-sans dark:text-zinc-200 text-zinc-600 max-w-[350px]">
 									<div>
 
 										<p className="mb-4">Premium users can transcribe, summarize, and question their own audio files in over 50 languages. </p>

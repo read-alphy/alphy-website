@@ -632,6 +632,10 @@ CONTENT PAGE
 	font-family: 'Noto Sans', sans-serif;
 }
 
+.slick-arrow::before{
+	background:"black"
+}
+
 
 .summary-text 	ul{
 	list-style-type:disc;

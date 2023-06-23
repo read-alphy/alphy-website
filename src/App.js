@@ -20,6 +20,7 @@ import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
 import WelcomeForm from './components/WelcomeForm';
+import { set } from 'lodash';
 
 
 
@@ -48,6 +49,9 @@ function App() {
 	const urlParams = new URLSearchParams(window.location.search);
 	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
 	const [contentName, setContentName] = useState("")
+	const [collapsed, setCollapsed] = useState(false);
+	const [idToken, setIdToken] = useState("")
+	
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
@@ -78,9 +82,11 @@ useEffect(() => {
 		if(userId===null || userId!==currentUser.uid){
 			localStorage.setItem('userId', currentUser.uid)
 		}
-		if(currentUser!== null )
+		
 	if (currentUser !== null && called === false) {
 		var userId = localStorage.getItem("userId")
+	
+		setIdToken(currentUser.accessToken)
 		
 		if(userId===null){
 		localStorage.setItem('userId', currentUser.uid)
@@ -159,7 +165,7 @@ if (currentUser && creditcalled!==true) {
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 
-	const [collapsed, setCollapsed] = useState(false);
+	
 
 
 
@@ -206,19 +212,19 @@ if (currentUser && creditcalled!==true) {
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
 								}
 							/>
 							<Route
 								path="/up/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
 								}
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />

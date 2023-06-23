@@ -234,7 +234,30 @@ export default function Content(props) {
 
 
 
+const handleBookmark = async () => {
+	const changeBookmark = !props.isBookmarked
+	
+	await currentUser.getIdToken().then((idToken) => {
+		console.log(idToken)
+	axios.patch(
+		`${process.env.REACT_APP_API_URL}/sources/${data.source_type}/${data.source_id}/bookmark?bookmark=${changeBookmark}`,
+		{},
+{
+					headers: {
+						'accept': 'application/json',
+						'id-token': idToken	,
+					}
+					}
+		
+		).then(
+			props.setIsBookmarked(!props.isBookmarked)
+)
 
+
+	})
+
+	
+	}
 
 	const checkScrollPosition = () => {
 		const windowHeight = ref.current.clientHeight;
@@ -537,18 +560,39 @@ export default function Content(props) {
 											<div className="">
 												{data.source_type === 'yt' &&
 													<a target="_blank" className="flex flex-row  xl:hidden mb-5 mt-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
-														<img className="mr-1" src="/youtubeicon.png" width={40} />
-														<p className=" text-zinc-600 dark:text-zinc-200 items-center pt-1 text-center font-medium">Click to watch</p>
+														<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
+														<p className="text-zinc-600 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md">Click to watch</p>
 													</a>
 												}{data.source_type === "sp" &&
 													<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-														<img className="mr-2" src={TwitterLogo} width={20} />
-														<p className=" font-medium items-center ">Click to listen</p>
+														<img className="mr-2 -ml-2" src={TwitterLogo} width={20} />
+														<p className="font-medium items-center text-md">Click to listen</p>
 													</a>
 												}
+												
 												<div class=" xl:hidden border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+												<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
+
+													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-600 dark:text-zinc-200 opacity-80 cursor-pointer">
+														
+														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>}
+														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+	</svg>}
+	
+	{currentUser && props.isBookmarked ===true && (currentUser && data && data.submitter_id!==currentUser.uid) && <span className="ml-2">Remove Bookmark</span>}
+	{currentUser && props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&  <span className="ml-2">Add Bookmark</span>}
+	</p>
+												</div>
+												{ (currentUser && data && data.submitter_id!==currentUser.uid) &&
+											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>}
+
+							
 											</div>
 											<p className="text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
+										
 											<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border focus:ring-0 dark:focus:ring-0 rounded-lg bg-zinc-50  dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-zinc-200	dark:border-zinc-500">
 												{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 
@@ -576,6 +620,7 @@ export default function Content(props) {
 
 											<div className="mt-5">
 												<div class="border-b border-gray-100 mx-auto items-center flex dark:opacity-40"></div>
+												
 											</div>
 
 											<Popover className="">
@@ -647,81 +692,12 @@ export default function Content(props) {
 
 
 								</h2>
-								{/* <Popover className="3xl:hidden">
-						<PopoverHandler>
-				<button className="3xl:hidden bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
-
-				 <svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg><p className="text-left">Report an issue</p>
-
-				</button>
-				</PopoverHandler>
-				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
-					{currentUser ? 
-		<div>
-			
-								<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-								<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src="https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
-								</div>				:
-							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
-								</PopoverContent>
-								</Popover>
-						</div>
-
-						<div className=" col-span-1 justify-end justify-space-between flex">
-					<Popover>
-						<PopoverHandler>
-				<button className="hidden 3xl:flex bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
-
-				 <svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg><p className="text-left"> Report an issue</p>
-
-				</button>
-				</PopoverHandler>
-				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
-					{currentUser ? 
-		<div>
-			
-								<iframe className="h-[600px] dark:hidden md:h-[560px] px-2" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-								<iframe className="h-[600px] hidden dark:block md:h-[560px] px-2" src="https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
-								</div>				:
-							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
-								</PopoverContent>
-								</Popover> */}
+								
 
 							</div>
 						</div>
 						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
-						{/* <div className="mt-5 3xl:hidden ">
- 					<label for="small" class="block mb-2 text-sm font-light text-gray-500 dark:text-white">Language</label>
- 					<select  onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mb-6 text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
-						
-						(language === code ? 
-							<option selected key={code} value={code}>
-								{name}
-							</option>
-							:
-
-
-							(index===languages.length 
-								?
-								<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
-								:
-						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
-								{name}
-							</option>	
-
-							)
-							
-						)
-										
-								))}
-					</select>
-					</div>
- */}
+		
 					</div>
 
 					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
@@ -743,17 +719,35 @@ export default function Content(props) {
 								<div	>
 									{data.source_type === 'yt' &&
 										<a target="_blank" className="flex flex-row mb-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
-											<img className="ml-1" src="/youtubeicon.png" width={40} />
-											<p className=" text-zinc-600 dark:text-zinc-200 items-center pt-1 font-medium">Click to watch</p>
+											<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
+														<p className="text-zinc-600 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md opacity-80">Click to watch</p>
 										</a>
 									}{data.source_type === "sp" &&
 										<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-											<img className="mr-2" src={TwitterLogo} width={20} />
-											<p className=" text-zinc-600 dark:text-zinc-200 opacity-80 font-medium items-center ">Click to listen</p>
+											<img className="mr-2 -ml-2" src={TwitterLogo} width={20} />
+											<p className=" text-zinc-600 dark:text-zinc-200 opacity-80 font-medium items-center text-md">Click to listen</p>
 										</a>
 									}
-									<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 dark:opacity-40"></div>
-									<p className="mt-5 text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
+									<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
+									<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
+
+													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-600 dark:text-zinc-200 opacity-80 cursor-pointer">
+														
+														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>}
+														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+	</svg>}
+	
+	{currentUser && props.isBookmarked ===true && (currentUser && data && data.submitter_id!==currentUser.uid) && <span className="ml-2">Remove Bookmark</span>}
+	{currentUser && props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&  <span className="ml-2">Add Bookmark</span>}
+	</p>
+												</div>
+												{ (currentUser && data && data.submitter_id!==currentUser.uid) &&
+											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>}
+									
+										<p className="mt-5 text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
 									<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border focus:ring-0 dark:focus:ring-0 rounded-lg bg-gray-50 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-whiteLike">
 										{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 

@@ -15,19 +15,30 @@ import { Helmet } from "react-helmet";
 
 
 
-function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName}, props) {
+function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
 	const {currentUser} = useAuth();
+	const [windowSizeChecked,setWindowSizeChecked] = useState(false);
+	const [isBookmarked, setIsBookmarked] = useState(false);
 	
 
 	const [called, setCalled] = useState(false);
 	
-	let idToken
+	
 
 
-if(currentUser){idToken=currentUser.accessToken}
+	useEffect(() => {
+		if(!windowSizeChecked){
+			if(window.innerWidth<768){
+			setCollapsed(true)
+			}
+			setWindowSizeChecked(true)
+	}
+})
+
+
 	
 
 
@@ -54,10 +65,10 @@ if(currentUser){idToken=currentUser.accessToken}
 			const response = await axios.get(url
 				).then(
 				(response) => {
-					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
 					setContentName(response.data.title)
+					
 				}	
 				}
 
@@ -77,6 +88,40 @@ if(currentUser){idToken=currentUser.accessToken}
 		}
 	};
 	
+	
+	const checkBookmark = async () => {
+		try {
+		await currentUser.getIdToken() 
+		.then((idToken) => {
+		
+		axios.get(`${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}/bookmark`,
+					
+					{
+						headers: {
+							'id-token': idToken,
+						},
+					}
+
+					)
+					.then(
+						(response) => {
+							
+							if(response.data){
+								
+							
+								setIsBookmarked(response.data.is_bookmark)
+							}
+						})
+
+					}
+					)
+					}
+					
+					catch (error) {
+						console.log(error)
+					}
+					}
+
 
 	const fetchDataUpload = async (url) => {
 	
@@ -125,34 +170,31 @@ if(currentUser){idToken=currentUser.accessToken}
 		 */
 	}, [width]);
 
-	/* useEffect(() => {
-		const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
-	
-	if (called===false){
-		if (source_type==="up" && data.length===0 && currentUser!==null){
-			setCalled(true)
-				fetchDataUpload(url);
-		}
-		if (source_type!=="up" && data.length===0 ){
-			setCalled(true)
-			fetchData(url);
-		}	
-		
-	}
-	
-	}, [location.pathname, navigate]); */
 
 	const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
-	if (called===false){
+/* 	const url_bookmark= `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}/bookmark`
+ */	if (called===false){
 		if (source_type==="up" && data.length===0 && currentUser!==null){
 			setCalled(true)
 				fetchDataUpload(url);
+				
+				
 		}
-		if (source_type!=="up" && data.length===0 ){
+		if (source_type!=="up" && data.length===0 && currentUser!==null){
 			setCalled(true)
 			fetchData(url);
+			
+			
 		}
 	}
+
+	useEffect(() => {
+		if (currentUser!==null){
+			setTimeout(() => {
+				checkBookmark()
+			}, 1000);
+		}
+	}, )
 
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
@@ -224,7 +266,7 @@ if(currentUser){idToken=currentUser.accessToken}
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} />}
+					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked}/>}
 				</div>
 			</div>
 		</div>
