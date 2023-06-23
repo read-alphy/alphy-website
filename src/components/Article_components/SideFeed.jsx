@@ -252,7 +252,8 @@ function SideFeed(props) {
 
 	};
 
-
+console.log(dataBookmarks.length)
+console.log(myBookmarks)
 
 
 	const handleSearch = () => {
@@ -644,7 +645,7 @@ function SideFeed(props) {
 								) : <div className="items-center mx-auto ml-5">
 								{ready == true && myWorks==true && currentUser==null &&
 									<div>
-										<p className="  text-zinc-500 dark:text-zinc-200 text-center items-center margin-auto text-l mt-16 mb-5 w-full col-span-2">Sign in to see the content you previously submitted or navigate to <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer mx-auto " value="global">Global</a> to explore Alphy's database.</p>
+										<p className="  text-zinc-500 dark:text-zinc-200 text-center items-center margin-auto text-l mt-16 mb-5 w-full col-span-2">Sign in to see the content you previously submitted or navigate to <a onClick={() => navigateFeeds("global")} className="underline text-green-400 cursor-pointer mx-auto " value="global">Global</a> to explore Alphy's database.</p>
 										<img width={250} className="opacity-30 dark:opacity-30 mx-auto" src={Robot}></img>
 									</div>
 								}
@@ -653,7 +654,7 @@ function SideFeed(props) {
 						{ called == true && myWorks==true && dataPersonal.length == 0 && ready == true && search.length===0 && 	(
 							<div className="flex flex-col  mt-5 px-5 col-span-2 mx-auto items-center">
 
-								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={() => navigateFeeds(1)} className="underline text-green-400 cursor-pointer" value="global">Global</a> to get inspiration from the content other users unlocked with Alphy. {hasMorePersonal ? "If you've submitted content previously, simply refresh the page." : ""}</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
+								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Looks like you haven't submitted any content yet.<br></br>Check <a onClick={() => navigateFeeds("global")} className="underline text-green-400 cursor-pointer" value="global">Global</a> to get inspiration from the content other users unlocked with Alphy. {hasMorePersonal ? "If you've submitted content previously, simply refresh the page." : ""}</p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
 							</div>
 						)
 						}
@@ -690,19 +691,26 @@ function SideFeed(props) {
 									<div onClick={props.Collapser} className="null">
 										<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
-								) : <div className="items-center mx-auto ml-5">
-								{ready == true && global == false && myBookmarks == true && 
+								) : 
+								
+								
+							<div className="items-center mx-auto ml-5">
+
+								hello
+								{ready == true && global == false && myBookmarks == true ? 
 									<div>
 										<p className="  text-zinc-500 dark:text-zinc-200 text-center items-center margin-auto text-l mt-16 mb-5 w-full col-span-2">Sign in to see your bookmarks.</p>
 										<img width={250} className="opacity-30 dark:opacity-30 mx-auto" src={Robot}></img>
 									</div>
+									:null
 								}
 								
-						{ready == true && myBookmarks === true && dataBookmarks.length == 0 && currentUser !== null && search.length===0 &&
+						{myBookmarks === true && dataBookmarks.length == 0 && currentUser !== null && search.length===0 ?
 							<div className="flex flex-col  mt-5 px-5 col-span-2 mx-auto items-center">
 
-								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">You haven't bookmarked any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer" value="global">Global</a> to find conversations you want to add to your knowledge base. </p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>	
-							</div>}
+								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">You haven't bookmarked any content yet.<br></br>Check <a onClick={() => navigateFeeds("global")} className="underline text-green-400 cursor-pointer" value="global">Global</a> to find conversations you want to add to your knowledge base. </p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>	
+							</div>
+							:null}
 
 							
 							</div>
