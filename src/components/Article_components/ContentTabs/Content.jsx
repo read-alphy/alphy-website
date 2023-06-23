@@ -538,7 +538,7 @@ const handleBookmark = async () => {
 				<div className="grid grid-cols-3 max-h-[90vh]">
 					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && language == summary.lang ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						<div className="flex flex-row ">
-							<h1 className="col-span-2 mt-10 text-xl text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+							<h1 className="col-span-2 mt-10 text-xl lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 								{data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
 							</h1>
 

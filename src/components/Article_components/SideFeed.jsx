@@ -552,17 +552,17 @@ function SideFeed(props) {
 							<svg class={`w-6 h-6 mr-2 shrink-0 flex justify-right justify-space-between`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 						</div>
 					</MenuHandler>
-					<MenuList classNszame=" z-50 -mt-2 w-full lg:max-w-[250px] 3xl:max-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
-						<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  hover:border-transparent hover:ring-0 hover:outline-none dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="my_works">
+					<MenuList classNszame=" z-50 -mt-6 w-full lg:min-w-[250px] lg:max-w-[250px] 3xl:max-w-[330px] 3xl:min-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
+						<MenuItem onClick={navigateFeeds} className="font-sans lg:min-w-[220px] lg:max-w-[220px] 3xl:max-w-[305px] 3xl:min-w-[305px] dark:text-zinc-300 text-zinc-600 rounded-lg  hover:border-transparent hover:ring-0 hover:outline-none dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="my_works">
 							My Works
 						</MenuItem>
-						<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600  dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="my_uploads">
+						<MenuItem onClick={navigateFeeds} className="font-sans lg:min-w-[220px] lg:max-w-[220px] 3xl:max-w-[305px] 3xl:min-w-[305px] dark:text-zinc-300 text-zinc-600  dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="my_uploads">
 							My Uploads
 						</MenuItem>
-						<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="my_bookmarks">
+						<MenuItem onClick={navigateFeeds} className="font-sans lg:min-w-[220px] lg:max-w-[220px] 3xl:max-w-[305px] 3xl:min-w-[305px] dark:text-zinc-300 text-zinc-600 dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="my_bookmarks">
 							Bookmarks
 						</MenuItem>
-						<MenuItem onClick={navigateFeeds} className="font-sans dark:text-zinc-300 text-zinc-600 dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="global">
+						<MenuItem onClick={navigateFeeds} className="font-sans lg:min-w-[220px] lg:max-w-[220px] 3xl:max-w-[305px] 3xl:min-w-[305px] dark:text-zinc-300 text-zinc-600 dark:hover:bg-darkMode hover:border-transparent hover:ring-0 hover:outline-none text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="global">
 							Global
 						</MenuItem>
 					</MenuList>
@@ -585,7 +585,7 @@ function SideFeed(props) {
 										.map((item, index) =>
 											item.source_id === props.source_id ? (
 												<div onClick={props.setCollapsed} className="null">
-													<FeedItem
+													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks}
 														key={index}
 														item={item}
 														Collapser={props.setCollapsed}
@@ -595,7 +595,7 @@ function SideFeed(props) {
 												</div>
 											) : (
 												<div onClick={props.Collapser} className="null">
-													<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 												</div>
 											)
 										)
@@ -606,7 +606,7 @@ function SideFeed(props) {
 
 									<div onClick={props.Collapser} className="null">
 
-										<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+										<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>
 								))
 							)}
@@ -618,7 +618,7 @@ function SideFeed(props) {
 										.map((item, index) =>
 											item.source_id === props.source_id ? (
 												<div onClick={props.setCollapsed} className="null">
-													<FeedItem
+													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks}
 														key={index}
 														item={item}
 														Collapser={props.setCollapsed}
@@ -628,7 +628,7 @@ function SideFeed(props) {
 												</div>
 											) : (
 												<div onClick={props.Collapser} className="null">
-													<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 												</div>
 											)
 										)
@@ -637,7 +637,7 @@ function SideFeed(props) {
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: dataPersonal.map((item, index) => (
 									<div onClick={props.Collapser} className="null">
-										<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+										<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
 								) : <div className="items-center mx-auto ml-5">
 								{ready == true && myWorks==true && currentUser==null &&
@@ -667,7 +667,7 @@ function SideFeed(props) {
 										.map((item, index) =>
 											item.source_id === props.source_id ? (
 												<div onClick={props.setCollapsed} className="null">
-													<FeedItem
+													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks}
 														key={index}
 														item={item}
 														Collapser={props.setCollapsed}
@@ -677,7 +677,7 @@ function SideFeed(props) {
 												</div>
 											) : (
 												<div onClick={props.Collapser} className="null">
-													<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 												</div>
 											)
 										)
@@ -686,7 +686,7 @@ function SideFeed(props) {
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: dataBookmarks.map((item, index) => (
 									<div onClick={props.Collapser} className="null">
-										<FeedItem key={index} item={item} setCollapsed={props.setCollapsed} />
+										<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
 								) : <div className="items-center mx-auto ml-5">
 								{ready == true && global == false && myBookmarks == true && 
@@ -719,7 +719,7 @@ function SideFeed(props) {
 								(isLoadingUploads
 								? dataUploads.length > 0
 									?
-									dataUploads.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									dataUploads.map((item, index) => { <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
 									: [...Array(10)].map((item, index) => {
 										<div>
@@ -728,7 +728,7 @@ function SideFeed(props) {
 
 										</div>
 									})
-								: dataUploads.map((item, index) => <FeedItem key={index + 1000} item={item} />))}
+								: dataUploads.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />))}
 						</div>
 
 						{ready == true && myUploads === true && dataUploads.length == 0 && currentUser === null && (

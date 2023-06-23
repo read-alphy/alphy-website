@@ -537,10 +537,10 @@ function WelcomeFeed(props) {
 							{isLoading
 								? data.length > 0
 									? data
-										.map((item, index) => <FeedItem key={index} item={item} mainFeedInput={inputValue} />)
+										.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} mainFeedInput={inputValue} />)
 										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
-								: data.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
+								: data.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />)}
 						</div>
 						{hasMore && (
 							<div className="w-full flex justify-center">
@@ -578,7 +578,7 @@ function WelcomeFeed(props) {
 							{isLoadingPersonal
 								? dataPersonal.length > 0
 									?
-									dataPersonal.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									dataPersonal.map((item, index) => { <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
 									: [...Array(10)].map((item, index) => {
 										<div>
@@ -587,7 +587,7 @@ function WelcomeFeed(props) {
 
 										</div>
 									})
-								: dataPersonal.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
+								: dataPersonal.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />)}
 						</div>
 						{called == true && submitted == false && currentUser !== null && ready == true && dataPersonal.length == 0 && myUploads == false ? (
 							<div className={`flex flex-col ${calledAndEmpty === false ? "hidden" : ""} col-span-2 mx-auto block items-center`} >
@@ -637,7 +637,7 @@ function WelcomeFeed(props) {
 							{isLoadingBookmarks
 								? dataBookmarks.length > 0
 									?
-									dataBookmarks.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									dataBookmarks.map((item, index) => { <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
 									: [...Array(10)].map((item, index) => {
 										<div>
@@ -646,7 +646,7 @@ function WelcomeFeed(props) {
 
 										</div>
 									})
-								: dataBookmarks.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
+								: dataBookmarks.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />)}
 						</div>
 						{called == true && submitted == false && currentUser !== null && ready == true && dataBookmarks.length == 0 && myBookmarks == true ? (
 							<div className={`flex flex-col ${calledAndEmpty === false ? "hidden" : ""} col-span-2 mx-auto block items-center`} >
@@ -896,7 +896,7 @@ function WelcomeFeed(props) {
 							{isLoadingUploads
 								? dataUploads.length > 0
 									?
-									dataUploads.map((item, index) => { <FeedItem key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									dataUploads.map((item, index) => { <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
 									: [...Array(10)].map((item, index) => {
 										<div>
@@ -905,7 +905,7 @@ function WelcomeFeed(props) {
 
 										</div>
 									})
-								: dataUploads.map((item, index) => <FeedItem key={index + 1000} item={item} />)}
+								: dataUploads.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />)}
 
 						</div>
 						{(hasMoreUploads && myUploads === true && currentUser !== null) && (
