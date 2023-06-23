@@ -65,6 +65,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 			const response = await axios.get(url
 				).then(
 				(response) => {
+					console.log(response.data)
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
 					setContentName(response.data.title)
@@ -138,7 +139,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 					}
 				).then(
 				(response) => {
-					console.log(response.data)
+					
 					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
@@ -185,8 +186,11 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 		if (source_type!=="up" && data.length===0 && currentUser!==null){
 			setCalled(true)
 			fetchData(url);
-			
-			
+		
+		}
+		else if (source_type!=="up" && data.length===0 && currentUser===null){
+			setCalled(true)
+			fetchData(url);
 		}
 	}
 

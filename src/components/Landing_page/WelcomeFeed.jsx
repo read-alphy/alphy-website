@@ -313,7 +313,7 @@ function WelcomeFeed(props) {
 
 
 						} else {
-							setDataBookmarks([...dataPersonal, ...response.data]);
+							setDataBookmarks([...dataBookmarks, ...response.data]);
 						}
 						setIsLoadingBookmarks(false);
 					})).catch((error) => {
@@ -640,7 +640,7 @@ function WelcomeFeed(props) {
 						>
 
 
-							{currentUser == null && called == true && <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">Sign in to see the content you previously submitted.<br></br>Or navigate to <a onClick={() => navigateFeeds("global")} className="underline text-green-400 cursor-pointer">Global</a> to explore Alphy's database.</p><img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>}
+							{currentUser == null && called == true && <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2"><a className="underline text-green-400" href="/u/login">Sign in</a> to see your bookmarks.  </p><img className="opacity-50 dark:opacity-30" width={400} src={Robot}></img></div>}
 							{isLoadingBookmarks
 								? dataBookmarks.length > 0
 									?

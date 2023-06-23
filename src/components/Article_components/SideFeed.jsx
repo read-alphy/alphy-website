@@ -89,7 +89,7 @@ function SideFeed(props) {
 					}))
 		};
 	};
-	const getDataBookmarks = (offsetBookmarks, firstTime, hasMoreBookmarks) => {
+	const getDataBookmarks = (offsetBookmarks, firstTimeBookmarks, hasMoreBookmarks) => {
 		if (!hasMoreBookmarks) {
 			return;
 		}
@@ -110,12 +110,12 @@ function SideFeed(props) {
 
 
 
-						if (firstTime) {
+						if (firstTimeBookmarks) {
 							setDataBookmarks(response.data);
 
 
 						} else {
-							setDataBookmarks([...dataPersonal, ...response.data]);
+							setDataBookmarks([...dataBookmarks, ...response.data]);
 						}
 						setIsLoadingBookmarks(false);
 					})).catch((error) => {
@@ -663,8 +663,10 @@ console.log(myBookmarks)
 
 						
 						{myBookmarks&&
-							(currentUser ? isLoadingBookmarks
-								? // if dataPersonal is not empty, show the dataPersonal then show 10 skeletons
+							(currentUser 
+								? 
+								isLoadingBookmarks
+								? 
 								dataBookmarks.length > 0
 									? dataBookmarks
 										.map((item, index) =>
@@ -691,21 +693,24 @@ console.log(myBookmarks)
 									<div onClick={props.Collapser} className="null">
 										<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
-								) : 
+								)
+								: null
+								 )
+							}
 								
-								
-							<div className="items-center mx-auto ml-5">
+							{
+								<div className="items-center mx-auto ml-5">
 
-								hello
-								{ready == true && global == false && myBookmarks == true ? 
+								
+								{ready == true && currentUser===null && myBookmarks==true ? 
 									<div>
-										<p className="  text-zinc-500 dark:text-zinc-200 text-center items-center margin-auto text-l mt-16 mb-5 w-full col-span-2">Sign in to see your bookmarks.</p>
+										<p className="  text-zinc-500 dark:text-zinc-200 text-center items-center margin-auto text-l mt-16 mb-5 w-full col-span-2"><a className="underline text-green-400" href="/u/login">Sign in</a> to see your bookmarks.</p>
 										<img width={250} className="opacity-30 dark:opacity-30 mx-auto" src={Robot}></img>
 									</div>
 									:null
 								}
 								
-						{myBookmarks === true && dataBookmarks.length == 0 && currentUser !== null && search.length===0 ?
+						{dataBookmarks.length == 0 && currentUser !== null && search.length===0 ?
 							<div className="flex flex-col  mt-5 px-5 col-span-2 mx-auto items-center">
 
 								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">You haven't bookmarked any content yet.<br></br>Check <a onClick={() => navigateFeeds("global")} className="underline text-green-400 cursor-pointer" value="global">Global</a> to find conversations you want to add to your knowledge base. </p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>	
@@ -714,10 +719,10 @@ console.log(myBookmarks)
 
 							
 							</div>
-						)
+}
 
 
-						}
+						
 
 
 
@@ -740,7 +745,10 @@ console.log(myBookmarks)
 
 										</div>
 									})
-								: dataUploads.map((item, index) => <FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />))}
+								: dataUploads.map((item, index) => <FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />
+								)
+								)
+								}
 						</div>
 
 						{ready == true && myUploads === true && dataUploads.length == 0 && currentUser === null && (
