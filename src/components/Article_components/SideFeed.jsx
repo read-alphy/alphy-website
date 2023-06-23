@@ -585,7 +585,7 @@ function SideFeed(props) {
 										.map((item, index) =>
 											item.source_id === props.source_id ? (
 												<div onClick={props.setCollapsed} className="null">
-													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks}
+													<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks}
 														key={index}
 														item={item}
 														Collapser={props.setCollapsed}
@@ -595,7 +595,7 @@ function SideFeed(props) {
 												</div>
 											) : (
 												<div onClick={props.Collapser} className="null">
-													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
+													<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 												</div>
 											)
 										)
@@ -606,7 +606,7 @@ function SideFeed(props) {
 
 									<div onClick={props.Collapser} className="null">
 
-										<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
+										<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>
 								))
 							)}
@@ -618,7 +618,7 @@ function SideFeed(props) {
 										.map((item, index) =>
 											item.source_id === props.source_id ? (
 												<div onClick={props.setCollapsed} className="null">
-													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks}
+													<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks}
 														key={index}
 														item={item}
 														Collapser={props.setCollapsed}
@@ -628,7 +628,7 @@ function SideFeed(props) {
 												</div>
 											) : (
 												<div onClick={props.Collapser} className="null">
-													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
+													<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 												</div>
 											)
 										)
@@ -637,7 +637,7 @@ function SideFeed(props) {
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: dataPersonal.map((item, index) => (
 									<div onClick={props.Collapser} className="null">
-										<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
+										<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
 								) : <div className="items-center mx-auto ml-5">
 								{ready == true && myWorks==true && currentUser==null &&
@@ -667,7 +667,7 @@ function SideFeed(props) {
 										.map((item, index) =>
 											item.source_id === props.source_id ? (
 												<div onClick={props.setCollapsed} className="null">
-													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks}
+													<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks}
 														key={index}
 														item={item}
 														Collapser={props.setCollapsed}
@@ -677,7 +677,7 @@ function SideFeed(props) {
 												</div>
 											) : (
 												<div onClick={props.Collapser} className="null">
-													<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
+													<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 												</div>
 											)
 										)
@@ -686,7 +686,7 @@ function SideFeed(props) {
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: dataBookmarks.map((item, index) => (
 									<div onClick={props.Collapser} className="null">
-										<FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
+										<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
 								) : <div className="items-center mx-auto ml-5">
 								{ready == true && global == false && myBookmarks == true && 
@@ -701,6 +701,8 @@ function SideFeed(props) {
 
 								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">You haven't bookmarked any content yet.<br></br>Check <a onClick={navigateFeeds} className="underline text-green-400 cursor-pointer" value="global">Global</a> to find conversations you want to add to your knowledge base. </p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>	
 							</div>}
+
+							
 							</div>
 						)
 
@@ -719,7 +721,7 @@ function SideFeed(props) {
 								(isLoadingUploads
 								? dataUploads.length > 0
 									?
-									dataUploads.map((item, index) => { <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									dataUploads.map((item, index) => { <FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 
 									: [...Array(10)].map((item, index) => {
 										<div>
@@ -728,7 +730,7 @@ function SideFeed(props) {
 
 										</div>
 									})
-								: dataUploads.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />))}
+								: dataUploads.map((item, index) => <FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index + 1000} item={item} />))}
 						</div>
 
 						{ready == true && myUploads === true && dataUploads.length == 0 && currentUser === null && (
