@@ -22,7 +22,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 
 	const removeBookmark =  () => {
 		axios.patch(
-			`${process.env.REACT_APP_API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=false`,
+			`${process.env.REACT_APP_API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
 			{},
 	{
 						headers: {
@@ -32,14 +32,15 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 						}
 			
 			).then((response) => {
-				setRemoved(true)
+				console.log(response)
+				setRemoved(!removed)
 			})
 	}
 
 
 
 	return (
-		<div className={`grid border-b-0 w-full md:w-full ${removed && "hidden"}`}>
+		<div className={`grid border-b-0 w-full md:w-full `}>
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
@@ -98,7 +99,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 
 								// navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
 
-								if (sideFeed!==true) {setCollapsed(true)}
+							setCollapsed(sideFeed!==true && true)
 							}}
 							target="_blank"
 						>
@@ -120,10 +121,19 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 
 							<div className="col-span-2 lg:col-span-1 text-xs h-full">
 								<div className={`flex justify-end mr-5	 mb-5 ${sideFeed==true && "mr-0 mb-0"}`}>
+
+								{removed?
+								
+								<svg onClick={removeBookmark} className="w-6 text-zinc-600 opacity-50 dark:text-zinc-200 cursor-pointer" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" stroke-linecap="round" stroke-linejoin="round"></path>
+								<title className="border-0">Add back</title>
+							  </svg>
+							  :
 								<svg onClick={removeBookmark} className="w-6 text-zinc-600 opacity-50 dark:text-zinc-200 cursor-pointer" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" title="Remove Bookmark" alt="Remove Bookmark">
   <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
   <title className="border-0">Remove bookmark</title>
 </svg>
+}
 </div>
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
