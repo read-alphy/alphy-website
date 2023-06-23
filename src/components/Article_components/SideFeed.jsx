@@ -628,6 +628,7 @@ function SideFeed(props) {
 												</div>
 											) : (
 												<div onClick={props.Collapser} className="null">
+													
 													<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 												</div>
 											)
@@ -637,6 +638,7 @@ function SideFeed(props) {
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: dataPersonal.map((item, index) => (
 									<div onClick={props.Collapser} className="null">
+										
 										<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
 									</div>)
 								) : <div className="items-center mx-auto ml-5">

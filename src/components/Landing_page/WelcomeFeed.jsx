@@ -34,7 +34,7 @@ function WelcomeFeed(props) {
 	const [hasMorePersonal, setHasMorePersonal] = useState(false);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
 	const [dataPersonal, setDataPersonal] = useState([]);
-	const [isPublic, setisPublic] = useState(false);
+	const [global, setGlobal] = useState(false);
 	const [submitted, setSubmitted] = useState(false);
 	const [called, setCalled] = useState(false);
 	const [ready, setReady] = useState(false)
@@ -44,7 +44,7 @@ function WelcomeFeed(props) {
 	const [dataUploads, setDataUploads] = useState([]);
 	const [isLoadingUploads, setIsLoadingUploads] = useState(true);
 	const [firstTimeUploads, setFirstTimeUploads] = useState(true);
-	const [hasTier3, setHasTier3] = useState(true)
+
 	const [uploadProgress, setUploadProgress] = useState(0)
 	const [uploadDuration, setUploadDuration] = useState("")
 	const [uploadTitle, setUploadTitle] = useState("")
@@ -57,7 +57,7 @@ function WelcomeFeed(props) {
 	const [dataBookmarks, setDataBookmarks] = useState([]);
 	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
 	const [firstTimeBookmarks, setFirstTimeBookmarks] = useState(true);
-
+	const [myWorks, setMyWorks] = useState(false);
 
 
 
@@ -176,38 +176,45 @@ function WelcomeFeed(props) {
 
 	const navigateFeeds = (state) => {
 
-		if (state == 2) {
+		if (state == "global") {
+			setGlobal(true)
+			setMyWorks(false)
 			setMyUploads(false)
 			setMyBookmarks(false)
-			setisPublic(true)
+		
 			setOffset(0)
 			getData(0, true, true);
 
 		}
 
-		else if (state == 1) {
+		else if (state == "my_works") {
+			setGlobal(false)
+			setMyWorks(true)
+			setMyUploads(false)
 			setMyBookmarks(false)
 			setOffsetPersonal(0)
-			setMyUploads(false)
-			setisPublic(false)
+
 			getDataPersonal(0, true, true);
+			
 		}
 
-		else if (state == 3) {
-			setOffsetUploads(0)
+		else if (state == "my_uploads") {
+			setGlobal(false)
+			setMyWorks(false)
 			setMyUploads(true)
 			setMyBookmarks(false)
 			setOffsetUploads(0)
-			setisPublic(false)
+			
 			getDataUploads(0, true, true);
 
 		}
-		else if (state == 4) {
+		else if (state == "my_bookmarks") {
+			setGlobal(false)
+			setMyWorks(false)
 			setMyUploads(false)
-			setOffsetBookmarks(0)
 			setMyBookmarks(true)
 			setOffsetBookmarks(0)
-			setisPublic(false)
+			
 			getDataBookmarks(0, true, true);
 
 		}
@@ -355,19 +362,19 @@ function WelcomeFeed(props) {
 		};
 	};
 	const loadMore = () => {
-		if (isPublic) {
+		if (global) {
 			setOffset(offset + limit);
 			getData(offset + limit, false, true);
 		}
-		else if (isPublic === false && myUploads === false) {
+		else if (myWorks) {
 			setOffsetPersonal(offsetPersonal + limit);
 			getDataPersonal(offsetPersonal + limit, false, true);
 		}
-		else if (isPublic == true && myUploads == true) {
+		else if (myUploads) {
 			setOffsetUploads(offsetUploads + limit);
 			getDataUploads(offsetUploads + limit, false, true, search);
 		}
-		else if (myUploads === true && isPublic === false) {
+		else if (myBookmarks) {
 			setOffsetBookmarks(offsetBookmarks + limit);
 			getDataBookmarks(offsetBookmarks + limit, false, true, search);
 		}
@@ -410,10 +417,10 @@ function WelcomeFeed(props) {
 					
 				
 					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds(1)} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${!isPublic && myUploads === false && myBookmarks === false ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
+						<button onClick={() => navigateFeeds("my_works")} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
 					</li>
 					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds(3)} class={`relative infline-flex p-1 py-4 sm:p-4 mb-1 ${!isPublic && myUploads == true && myBookmarks === false ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+						<button onClick={() => navigateFeeds("my_uploads")} class={`relative infline-flex p-1 py-4 sm:p-4 mb-1 ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
 
 							<span> My Uploads </span>
 							<div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div>
@@ -422,11 +429,11 @@ function WelcomeFeed(props) {
 
 					</li>
 					<li class=" w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds(4)} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${myBookmarks && !isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
+						<button onClick={() => navigateFeeds("my_bookmarks")} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
 					</li>
 
 					 <li class="w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds(2)} class={`inline-block p-1 py-4 sm:p-4 mb-1 ${isPublic ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 mb-1 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
 
 					
@@ -436,7 +443,7 @@ function WelcomeFeed(props) {
 			</div>
 
 			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] min-h-[40vh]">
-				{isPublic === false && myUploads == true ? null :
+				{myUploads ? null :
 					<form
 						className="flex items-center"
 						onKeyDown={handleKeyDown}
@@ -447,24 +454,24 @@ function WelcomeFeed(props) {
 							if (searchInputRef.current.value.length === 0) {
 								setSearch('');
 							}
-							if (isPublic == true) {
+							if (global) {
 								setOffset(0);
 								getData(0, true, true);
 
 							}
-							else if (isPublic === false && myUploads === false && myBookmarks === false) {
+							else if (myWorks) {
 
 								setCalled(false)
 								setOffsetPersonal(0)
 								getDataPersonal(0, true, true);
 
 							}
-							else if (isPublic == false && myUploads == true) {
+							else if ( myUploads) {
 								setCalled(false)
 								setOffsetUploads(0)
 								getDataUploads(0, true, true, search);
 							}
-							else if (isPublic == false && myBookmarks == true) {
+							else if ( myBookmarks ) {
 								setCalled(false)
 								setOffsetBookmarks(0)
 								getDataBookmarks(0, true, true, search);
@@ -520,7 +527,7 @@ function WelcomeFeed(props) {
 
 				<div className={`buttons flex justify-between mt-2 `}></div>
 
-				{isPublic &&
+				{global &&
 					<div className="main-page-feed  w-full">
 						<div
 							className={`
@@ -558,7 +565,7 @@ function WelcomeFeed(props) {
 
 
 
-				{!isPublic && myUploads == false && myBookmarks === false &&
+				{myWorks &&
 					<div className="main-page-feed  w-full">
 						<div
 							className={`
@@ -617,7 +624,7 @@ function WelcomeFeed(props) {
 
 					</div>}
 
-				{!isPublic && myBookmarks == true &&
+				{ myBookmarks &&
 					<div className="main-page-feed  w-full">
 						<div
 							className={`
@@ -677,7 +684,7 @@ function WelcomeFeed(props) {
 					</div>}
 
 				{
-					hasTier3 && isPublic == false && myUploads == true &&
+					myUploads &&
 
 					<div className="">
 
@@ -830,7 +837,7 @@ function WelcomeFeed(props) {
 											if (searchInputRef.current.value.length === 0) {
 												setSearch('');
 											}
-											if (isPublic == true) {
+											if (global == true) {
 												setOffset(0);
 												getData(0, true, true);
 
