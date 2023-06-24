@@ -41,38 +41,6 @@ const handleShowWelcomeMessage = () => {
 }
 
 
-const handleForWhat = (event) => {
-  console.log(event)
-  setForWhat(event)
-
-}
-
-const changeMetadata = (e) => {
-  console.log(profession, fromWhere, forWhat)
-  e.preventDefault()
-  setTimeout(() => {
-  if(currentUser!==null){
-    try{
-      metadata.profession=profession
-      metadata.fromWhere=fromWhere  
-      metadata.forWhat=forWhat
-      metadata.showWelcomeForm=false
-      setShowWelcomeForm(false)
-      setTimeout(() => {
-        setShowWelcomeForm(false)
-      }
-      , 1000);
-    }
-    catch(error){
-      console.log(error)
-    }
-
-}
-  }, 1000);
-
-
-}
-
     return(
         <div className="flex flex-col w-full pl-10 py-5 pr-5">
           <div className="flex justify-end ">

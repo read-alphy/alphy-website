@@ -47,7 +47,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 				<a href={`/${item.source_type}/${source_id}`} >
 					<div className="flex w-full ">
 						<div
-							className={`grid grid-cols-3 lg:grid-cols-2 flex  flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
+							className={`grid grid-cols-3 lg:grid-cols-2 flex  flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-10 transform sm:hover:translate-x-2  mr-auto ml-auto`}
 							onClick={() => {
 
 

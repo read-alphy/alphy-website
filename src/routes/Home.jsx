@@ -32,20 +32,6 @@ function Home({hasActiveSub,currentUser,credit}) {
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
 		}, 0);
 
-		
-/* 		console.log(localStorage.getItem('hasSeenWelcomeMessage'))
-		
-		
-		if (currentUser !== null) {
-			const hasSeenWelcomeMessage = localStorage.getItem('hasSeenWelcomeMessage');
-			
-			if (hasSeenWelcomeMessage!=="true") {
-				setShowMessage(true);
-				localStorage.setItem('hasSeenWelcomeMessage', 'true');
-			}
-		} */
-
-
 
 	}, []);
 	return (

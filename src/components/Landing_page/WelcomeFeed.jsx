@@ -74,7 +74,7 @@ function WelcomeFeed(props) {
 
 	const handleFileUpload = (event) => {
 
-
+		setErrorMessage(false)
 		const uploadFile = event.target.value;
 
 		const formData = new FormData();
@@ -91,11 +91,16 @@ function WelcomeFeed(props) {
 	}
 
 	const handleFileUploadByDrop = (files) => {
+		setErrorMessage(false)
 
-		if (currentUser === null) {
-
-		}
 		const file = files[0];
+		const allowedExtensions = ['.mp3', '.m4a', '.mpga', '.mpeg', '.wav', '.webm'];
+		const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+		if (!allowedExtensions.includes(fileExtension)) {
+			setErrorMessage(true)
+			return
+			// You can display an error message or take other actions here
+		  }
 
 		const formData = new FormData();
 		formData.append('file', file)
@@ -138,8 +143,9 @@ function WelcomeFeed(props) {
 				//page'e navige et
 			})
 			.catch((error) => {
-				setUploadProgress(0)
+				
 				setErrorMessage(true)
+				handleFileUploadClear()
 				// Handle any errors that occur during upload
 				console.error(error);
 			});
@@ -417,10 +423,10 @@ function WelcomeFeed(props) {
 					
 				
 					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds("my_works")} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
+						<button onClick={() => navigateFeeds("my_works")} class={`inline-block p-1 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-medium"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
 					</li>
 					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds("my_uploads")} class={`relative infline-flex p-1 py-4 sm:p-4 mb-1 ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+						<button onClick={() => navigateFeeds("my_uploads")} class={`relative infline-flex p-1 py-4 sm:p-4  ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-medium "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
 
 							<span> My Uploads </span>
 							<div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div>
@@ -429,11 +435,11 @@ function WelcomeFeed(props) {
 
 					</li>
 					<li class=" w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds("my_bookmarks")} class={`inline-block p-1 sm:p-4 py-4 mb-1 ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
+						<button onClick={() => navigateFeeds("my_bookmarks")} class={`inline-block p-1 sm:p-4 py-4  ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-medium "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
 					</li>
 
 					 <li class="w-1/4 sm:w-1/4 lg:w-[150px]">
-						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 mb-1 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-medium "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
 
 					
@@ -716,8 +722,9 @@ function WelcomeFeed(props) {
 										<ol>
 											<li className="mb-2">1) Choose an audio file and upload to Alphy from below.</li>
 											<li className="mb-2">2) Alphy will process your file the same way it does with online content, providing you the transcript, summary, key takeaways, and a chatbot.</li>
-											<li className="mb-2">3) Only you will be able to access the end work. Your uploads will not be shown on Alphy's public database.</li>
-											<li className="mb-2">4) To preserve privacy, all audio files are deleted after the transcription is complete.</li>
+											<li className="mb-2">3) Only you will be able to access the end work. Your uploads will not be shown on Alphy's public database and will not be accessible by other parties.</li>
+											<li className="mb-2">4) To preserve privacy, all audio files are deleted after the transcription process is complete. </li>
+						
 										</ol>
 
 									</div>
@@ -733,12 +740,23 @@ function WelcomeFeed(props) {
 									?
 									<div   class="flex items-center justify-center w-full">
 										<label  for="dropzone-file" class={`flex flex-col items-center justify-center w-full h-60 border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
-											<div {...getRootProps()} class="flex flex-col items-center justify-center pt-5 pb-6">
+											<div {...getRootProps()}  class={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${isDragActive ? "" : ""}`} >
 												{!isDragActive ?
 													<div className="items-center justify-center flex flex-col">
+														{!errorMessage ? 
+														<div className="items-center justify-center flex flex-col">
 														<svg aria-hidden="true" class="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-														<p class="mb-2 text-sm text-zinc-700 dark:text-zinc-200"><strong>Click to upload an audio file</strong> or drag and drop.</p>
-														<p class="text-xs text-zinc-600 dark:text-zinc-200">MP3, M4A, MPGA, MPEG, WAV, OR WEBM</p>
+														<input id="dropzone-file" onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+														<p class="mb-2 text-sm text-zinc-700 dark:text-zinc-200"><span className="font-semibold">Click to upload an audio file</span> or drag and drop.</p>
+														<p class="text-xs text-zinc-600 dark:text-zinc-200"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
+														</div>
+														:
+														<div className="items-center justify-center flex flex-col">
+														<p class="mb-2 text-sm text-red-500"><span className="">Please make sure you submit one of the following file types!</span></p>
+														<p class="text-xs text-zinc-600 dark:text-zinc-200"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
+														</div>
+													}
+
 													</div> :
 
 													<div className="items-center justify-center flex flex-col items-center">
@@ -752,8 +770,8 @@ function WelcomeFeed(props) {
 												}
 											</div>
 
-											<input {...getInputProps()} className="pointer-events-none" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
-											<input onChange={handleFileUpload} type="file" class="hidden pointer-events-none" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+											<input {...getInputProps()} className="" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+											
 
 
 											<audio className="hidden" ref={audioRef} controls />
@@ -770,7 +788,7 @@ function WelcomeFeed(props) {
 							:
 							<div>
 								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Process another file instead"}
-									<svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+									<svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 && !errorMessage ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 										<title className="font-bold">Clear</title>
 										<path clipRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fillRule="evenodd"></path>
 									</svg>

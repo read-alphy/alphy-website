@@ -15,7 +15,11 @@ import { saveAs } from 'file-saver'; // library to save file as blob
 import { useAuth } from "../../../hooks/useAuth"
 import DownloadStatic from '../../../img/download_static.png';
 import ReactMarkdown from "react-markdown";
-import { Button, Switch } from '@material-tailwind/react';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
 
@@ -24,7 +28,6 @@ import {
 	PopoverHandler,
 	PopoverContent,
 	ThemeProvider,
-	Select,
 	Option
 } from "@material-tailwind/react";
 
@@ -44,17 +47,31 @@ export default function Content(props) {
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	const [showReportIssue, setShowReportIssue] = useState(false);
 	const [showRerportIssueError, setShowReportIssueError] = useState(false);
-
-
 	const [language, setLanguage] = useState(props.data.summaries !== undefined && props.data.summaries.length > 1 && props.data.lang !== undefined ? props.data.summaries[0].lang : 'en')
-
-
 	const [translationMessage, setTranslationMessage] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const { currentUser } = useAuth()
 	const navigate = useNavigate()
+	
+	const ITEM_HEIGHT = 48;
+	const ITEM_PADDING_TOP = 8;
+	const MenuProps = {
+
+	PaperProps: {
+		style: {
+		maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+		backgroundColor: localStorage.getItem("theme")==="dark" ? "#1E1E1E" : "#fff",
+		color: localStorage.getItem("theme")==="dark" ? "#e4e4e7" : "#3f3f46",
+		outline: "none",
+
+
+
+		
+		},
+	},
+	};
 
 
 	const data = props.data
@@ -238,7 +255,7 @@ const handleBookmark = async () => {
 	const changeBookmark = !props.isBookmarked
 	
 	await currentUser.getIdToken().then((idToken) => {
-		console.log(idToken)
+		
 	axios.patch(
 		`${process.env.REACT_APP_API_URL}/sources/${data.source_type}/${data.source_id}/bookmark?bookmark=${changeBookmark}`,
 		{},
@@ -561,7 +578,7 @@ const handleBookmark = async () => {
 												{data.source_type === 'yt' &&
 													<a target="_blank" className="flex flex-row  xl:hidden mb-5 mt-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 														<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
-														<p className="text-zinc-600 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md">Click to watch</p>
+														<p className="text-zinc-700 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md">Click to watch</p>
 													</a>
 												}{data.source_type === "sp" &&
 													<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
@@ -573,12 +590,12 @@ const handleBookmark = async () => {
 												<div class=" xl:hidden border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 												<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
-													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-600 dark:text-zinc-200 opacity-80 cursor-pointer">
+													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
 														
-														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>}
-														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 	</svg>}
 	
@@ -591,32 +608,51 @@ const handleBookmark = async () => {
 
 							
 											</div>
-											<p className="text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
-										
-											<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border focus:ring-0 dark:focus:ring-0 rounded-lg bg-zinc-50  dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-zinc-200	dark:border-zinc-500">
-												{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
+											<p className="mb-2 text-zinc-700 dark:text-zinc-300">Choose Language</p>
+											
+											<Box sx={{minWidth: 200}} className="">
+												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 " size="small">
+													
+													<Select
+													sx={{
+														border: "1px solid #e2e8f0",
+														
+													}}
+													value={language}
+													onChange={handleLanguageChange}
+													displayEmpty
+													MenuProps={MenuProps}
+													className="text-zinc-700 dark:text-zinc-200"
+													>
+													
+													{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 
-													(language === code ?
-														<option selected key={code} value={code}>
-															{name}
-														</option>
-														:
+(language === code ?
+	<MenuItem className="text-zinc-700 dark:text-zinc-200" key={code} value={code}>
+		{name}
+	</MenuItem>
+	:
 
 
-														(index === languages.length
-															?
-															<option className="text-gray-500 dark:text-gray-300" disabled>__________</option>
-															:
-															<option className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
-																{name}
-															</option>
+	(index === languages.length
+		?
+		<div class=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+		:
+		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
+			{name}
+		</MenuItem>
 
-														)
+	)
 
-													)
+)
 
-												))}
-											</select>
+))}
+
+
+													</Select>
+													
+												</FormControl>
+												</Box>
 
 											<div className="mt-5">
 												<div class="border-b border-gray-100 mx-auto items-center flex dark:opacity-40"></div>
@@ -627,7 +663,7 @@ const handleBookmark = async () => {
 
 												<PopoverHandler>
 
-													<button className=" bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+													<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
 
 														<svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 															<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -648,37 +684,7 @@ const handleBookmark = async () => {
 										</div>
 									</PopoverContent>
 								</Popover>
-								{/* <div className="hidden 3xl:block flex  2xl:ml-40 justify-end ">
-	
-		
-
-			<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-10  text-sm text-zinc-700 border border-blue-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					{Object.entries(reorderedLanguageCodes).map(([code, name],index) => (
-						
-						(language === code ? 
-							<option selected key={code} value={code}>
-								{name}
-							</option>
-							:
-
-
-							(index===languages.length 
-								?
-								<option className="text-gray-500 dark:text-gray-300"disabled>__________</option>
-								:
-						<option className={`${languages.includes(code) ?  "" : "text-gray-300 dark:text-gray-500"}`}  key={code} value={code}>
-								{name}
-							</option>	
-
-							)
-							
-						)
-										
-								))}
-					</select>
-	
-				</div> */}
-
+								
 							</div>
 						</div>
 						<div className="col-span-2   grid grid-cols-2 flex flex-row">
@@ -720,62 +726,82 @@ const handleBookmark = async () => {
 									{data.source_type === 'yt' &&
 										<a target="_blank" className="flex flex-row mb-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 											<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
-														<p className="text-zinc-600 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md opacity-80">Click to watch</p>
+														<p className="text-zinc-700 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md opacity-80">Click to watch</p>
 										</a>
 									}{data.source_type === "sp" &&
 										<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 											<img className="mr-2 -ml-2" src={TwitterLogo} width={20} />
-											<p className=" text-zinc-600 dark:text-zinc-200 opacity-80 font-medium items-center text-md">Click to listen</p>
+											<p className=" text-zinc-700 dark:text-zinc-200 opacity-80 font-medium items-center text-md">Click to listen</p>
 										</a>
 									}
 									<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
+									
+									{(currentUser && data && data.submitter_id!==currentUser.uid) &&
 									<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
-													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-600 dark:text-zinc-200 opacity-80 cursor-pointer">
+													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
 														
-														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>}
-														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-600 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 	</svg>}
 	
-	{currentUser && props.isBookmarked ===true && (currentUser && data && data.submitter_id!==currentUser.uid) && <span className="ml-2">Remove Bookmark</span>}
-	{currentUser && props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&  <span className="ml-2">Add Bookmark</span>}
+	{currentUser && props.isBookmarked ===true &&  <span className="ml-2">Remove Bookmark</span>}
+	{currentUser && props.isBookmarked===false &&    <span className="ml-2">Add Bookmark</span>}
 	</p>
 												</div>
-												{ (currentUser && data && data.submitter_id!==currentUser.uid) &&
-											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>}
+												}
+												{ (currentUser && data && data.submitter_id!==currentUser.uid) ?
+											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>:null}
 									
-										<p className="mt-5 text-zinc-600 dark:text-zinc-200 opacity-80">Choose Language</p>
-									<select onChange={handleLanguageChange} id="small" class="block w-[200px] p-2.5 mt-4 text-sm text-zinc-700 border focus:ring-0 dark:focus:ring-0 rounded-lg bg-gray-50 dark:bg-mildDarkMode dark:placeholder-gray-400 dark:text-whiteLike">
-										{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
+										<p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80">Choose Language</p>
+									
+										<Box sx={{minWidth: 200}} className="">
+												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 " size="small">
+													
+													<Select
+													value={language}
+													onChange={handleLanguageChange}
+													displayEmpty
+													MenuProps={MenuProps}
+													className="text-zinc-700 dark:text-zinc-200"
+													>
+													
+													{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 
-											(language === code ?
-												<option selected key={code} value={code}>
-													{name}
-												</option>
-												:
+(language === code ?
+	<MenuItem className="text-zinc-700 dark:text-zinc-200" key={code} value={code}>
+		{name}
+	</MenuItem>
+	:
 
 
-												(index === languages.length
-													?
-													<option className="text-gray-500 dark:text-gray-300" disabled>__________</option>
-													:
-													<option className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
-														{name}
-													</option>
+	(index === languages.length
+		?
+		<div class=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+		:
+		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
+			{name}
+		</MenuItem>
 
-												)
+	)
 
-											)
+)
 
-										))}
-									</select>
+))}
+
+
+													</Select>
+													
+												</FormControl>
+												</Box>
+
 									<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
 									<Popover className="">
 										<PopoverHandler>
-											<button className=" bg-none text-sm text-zinc-600 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+											<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
 
 												<svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 													<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -889,7 +915,7 @@ const handleBookmark = async () => {
 												</ul>
 											</div>
 
-											<div className="main-content text-zinc-600 dark:text-zinc-200">
+											<div className="main-content text-zinc-700 dark:text-zinc-200">
 
 												<Tabs>
 													<Tab eventKey="transcript" title="">

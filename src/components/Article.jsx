@@ -65,7 +65,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 			const response = await axios.get(url
 				).then(
 				(response) => {
-					console.log(response.data)
+					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
 					setContentName(response.data.title)

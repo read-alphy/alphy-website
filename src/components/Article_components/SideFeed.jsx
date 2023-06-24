@@ -252,8 +252,6 @@ function SideFeed(props) {
 
 	};
 
-console.log(dataBookmarks.length)
-console.log(myBookmarks)
 
 
 	const handleSearch = () => {
@@ -310,16 +308,7 @@ console.log(myBookmarks)
 			// scroll a little bit up to avoid triggering the event again
 
 		}
-		/* 		const element = event.target;
-				if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-					// you're at the bottom of the page
-					console.log("oi")
-					loadMore();
-					// scroll a little bit up to avoid triggering the event again
-					element.scrollTop = element.scrollTop - 1;
-					element.scrollTop = element.scrollTop - 1;
-				}
-		 */
+	
 	};
 
 	
@@ -574,9 +563,9 @@ console.log(myBookmarks)
 			</div>
 
 
-			<div className="signed-in-feed flex mt-4">
+			<div className="flex mt-4">
 				{/* <div className="h-[80vh] overflow-y-scroll pl-1 pr-5" onScroll={handleScroll}> */}
-				<div className="h-[68vh] w-full  md:h-[77vh] overflow-y-scroll pl-1 md:pr-5" ref={feedRef2} onScroll={handleScroll}>
+				<div className="side-feed h-[68vh] w-full  md:h-[77vh] overflow-y-scroll pl-1 md:pr-5" ref={feedRef2} onScroll={handleScroll}>
 					<div className="items " ref={feedRef} >
 						{global &&
 							(isLoading
