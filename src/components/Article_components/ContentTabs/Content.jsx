@@ -988,7 +988,7 @@ return (
 	
 
   
-											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200">
+											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 ">
 
 												<Tabs>
 													<Tab eventKey="transcript" title="">
@@ -1009,7 +1009,7 @@ return (
 
 														{activeTab === 'tab1' && (
 
-															<div className="content-area text-l font-normal  max-w-screen-md overflow-auto ">
+															<div className="content-area text-l font-normal  max-w-screen-md overflow-auto  max-h-[110vh]">
 																{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
 
