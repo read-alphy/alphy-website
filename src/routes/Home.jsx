@@ -1,5 +1,5 @@
 import React from 'react';
-import Feed from '../components/Landing_page/WelcomeFeed';
+import WelcomeFeed from '../components/Landing_page/WelcomeFeed';
 import Welcome from '../components/Landing_page/Welcome';
 import About from '../components/Landing_page/About';
 import FeedbackForm from '../components/FeedbackForm';
@@ -32,24 +32,10 @@ function Home({hasActiveSub,currentUser,credit}) {
 			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
 		}, 0);
 
-		
-/* 		console.log(localStorage.getItem('hasSeenWelcomeMessage'))
-		
-		
-		if (currentUser !== null) {
-			const hasSeenWelcomeMessage = localStorage.getItem('hasSeenWelcomeMessage');
-			
-			if (hasSeenWelcomeMessage!=="true") {
-				setShowMessage(true);
-				localStorage.setItem('hasSeenWelcomeMessage', 'true');
-			}
-		} */
-
-
 
 	}, []);
 	return (
-		<div className="mx-auto md:w-800 w-full bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300">
+		<div className="mx-auto md:w-800 w-full bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
 				{/* <title>{`Alphy, the next generation speech-to-meaning agent.`} </title> */}
 				<title>Alphy: Unlock the Information in Audiovisual Content </title>
@@ -65,7 +51,7 @@ function Home({hasActiveSub,currentUser,credit}) {
 				<meta content="https://i.ibb.co/4g2Jtvc/home.png" property="og:image" />
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
-			<Feed currentUser={currentUser} />
+			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} />
 {/* 			{showMessage &&
 				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
 			} */}

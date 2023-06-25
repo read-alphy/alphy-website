@@ -197,7 +197,7 @@ export default function Welcome({hasActiveSub,credit}) {
 		<div
 			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
-		>			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-56 text-center">
+		>			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-40 xl:px-56 text-center">
 				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">
 					<div className="first flex justify-center pb-3 ">
 						<div className="">Transcribe</div>
@@ -211,11 +211,14 @@ export default function Welcome({hasActiveSub,credit}) {
 					<div className="forth  flex justify-center pb-3">
 						<div className="">Transcribe</div>
 					</div>
-				</section>
-				<p className="dark:text-zinc-200">audiovisual content with just one click.</p>
+				</section> 
+				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">audiovisual content and 10x your learning, research, and creativity</p>
+				
+				
 			</div>
-			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
+			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-l md:text-[18px] lg:text-xl text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+				
+				Submit a link to a YouTube video or Twitter Spaces, or upload an audio file, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
 				notify you with email when it's ready!{' '}
 			</p>
 
@@ -231,7 +234,7 @@ export default function Welcome({hasActiveSub,credit}) {
 
 					<div className="w-full flex flex-col">
 
-						<p className=" text-l mb-2 text-gray-600 dark:text-zinc-300 pb-2 ">
+						<p className=" text-l mb-2 text-zinc-700 dark:text-zinc-200 pb-2 ">
 
 							<button id="popoverButton" data-popover-target="popoverDescription" data-popover-placement="left" data-popover-offset="20" type="button"><svg className="w-5 h-5 ml-1 pt-1 dark:text-zinc-300 text-gray-400 hover:dark:text-zinc-300 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg><span className="sr-only">Show information</span></button>
 
@@ -244,7 +247,7 @@ export default function Welcome({hasActiveSub,credit}) {
 
 						<div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm dark:text-zinc-300 text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
 							<div className="p-3 space-y-2">
-								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900"><span >Basic Plan</span>:</p>
+								<p className="font-semibold text-l text-zinc-700 dark:text-zinc-200"><span >Basic Plan</span>:</p>
 								<p></p>
 								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
 								<p> • Make sure it has more than <strong >10,000 views</strong>.</p>
@@ -256,12 +259,12 @@ export default function Welcome({hasActiveSub,credit}) {
 								<p> • Alphy might fail to process content with location limits.</p>
 								<p className="pt-2">Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a> page for more info about Premium benefits.</p>
 						
-								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3">When the content is ready</p>
+								<p className="font-semibold text-l text-zinc-700 dark:text-zinc-200 pt-3">When the content is ready</p>
 								<p>If you see a video that has inaccurate transcription and summary, please let us know. We will fix it as soon as possible.
 								</p>
 
 
-								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-blue-800 hover:text-blue-700">Reach us if you have any questions <svg className="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></a>
+								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-green-400 hover:text-green-300">Reach us if you have any questions <svg className="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></a>
 							</div>
 							<div className="popover-arrow" role="presentation"></div>
 						</div>
@@ -298,7 +301,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						>
 							Submit
 						</button> */}
-
+						
 						<Button type="submit"
 							onClick={(e) => {
 								handleSubmit();
@@ -317,6 +320,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						>
 							Sign In To Submit
 						</a> */}
+					
 						</div>
 					)}
 				</div>

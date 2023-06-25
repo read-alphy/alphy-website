@@ -20,6 +20,8 @@ import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
 import WelcomeForm from './components/WelcomeForm';
+import { set } from 'lodash';
+
 
 
 
@@ -47,6 +49,9 @@ function App() {
 	const urlParams = new URLSearchParams(window.location.search);
 	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
 	const [contentName, setContentName] = useState("")
+	const [collapsed, setCollapsed] = useState(false);
+	const [idToken, setIdToken] = useState("")
+	
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
@@ -60,7 +65,7 @@ function App() {
 
 useEffect(() => {
 
-		
+	
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
@@ -77,9 +82,11 @@ useEffect(() => {
 		if(userId===null || userId!==currentUser.uid){
 			localStorage.setItem('userId', currentUser.uid)
 		}
-		if(currentUser!== null )
+		
 	if (currentUser !== null && called === false) {
 		var userId = localStorage.getItem("userId")
+	
+		setIdToken(currentUser.accessToken)
 		
 		if(userId===null){
 		localStorage.setItem('userId', currentUser.uid)
@@ -89,6 +96,7 @@ useEffect(() => {
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
 		const registerRecently= parseInt(createdAt) - parseInt(lastLoginAt)
+		
 		
 		if(registerRecently>-10000 && localStorage.getItem('welcomeForm')!=="false"){
 			setShowWelcomeForm(true)
@@ -135,6 +143,7 @@ if (currentUser && creditcalled!==true) {
         )
             
             .then(r => {
+				
 			
                 if (r.data.length>0) {
                     setCalled(true)
@@ -156,14 +165,14 @@ if (currentUser && creditcalled!==true) {
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 
-	const [collapsed, setCollapsed] = useState(true);
+	
 
 
 
 	return (
 
 		
-		<div className="App bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300">
+		<div className="App bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
 
 			{showWelcomeForm && 
 					<div className="fixed inset-0 z-50 flex items-center justify-center ">
@@ -198,18 +207,24 @@ if (currentUser && creditcalled!==true) {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit}/>} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} />} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
+								}
+							/>
+							<Route
+								path="/up/:article_ID"
+								element={
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
 								}
 							/>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />

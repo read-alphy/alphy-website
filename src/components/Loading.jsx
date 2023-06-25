@@ -15,7 +15,7 @@ export default function Loading() {
 				height: '100vh',
 			}}
 		>
-			<ReactLoading type="spin" color="#a1a1aa" width={50}/>
+			<ReactLoading type="spin" color="#cfd8dc" width={50}/>
 
 		</div>
 	);

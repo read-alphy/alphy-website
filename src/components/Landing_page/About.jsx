@@ -23,19 +23,19 @@ export default function About() {
         <AccordionHeader onClick={() => handleOpen(1)}>
 		What is Alphy?
         </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-200">
-		<p className="text-l">
+        <AccordionBody className="text-md dark:text-zinc-300">
+		<p className="text-l dark:text-zinc-300">
 					
 					Alphy is an AI tool that helps users meaningfully interact with online audiovisual content with the
 					help of artificial intelligence. Upon submitting the link for a YouTube video or Twitter Spaces, Alphy gives you:
-					<ol className="">
-						<li className="pt-3">
+					<ol className="dark:text-zinc-300">
+						<li className="pt-3 dark:text-zinc-300">
 							<strong> • A highly accurate transcript </strong> of the content with timestamps, ready to use on your videos.
 						</li>
-						<li className="pt-3">
+						<li className="pt-3 dark:text-zinc-300">
 							<strong> • An AI-powered chatbot generated on top of the content </strong> so that you can ask questions and get AI-generated answers, unlocking an immense information capture for the viewers.
 						</li>
-						<li className="pt-3">
+						<li className="pt-3 dark:text-zinc-300">
 							<strong> • The summary and TL:DR of the content</strong> for you to cut down on time to get the most relevant information.</li>
 					</ol>
 				</p>
@@ -45,7 +45,7 @@ export default function About() {
         <AccordionHeader onClick={() => handleOpen(2)}>
 		What can you do with Alphy?
 		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-200">
+        <AccordionBody className="text-md">
 		<p>
 					• <strong className="font-semibold"> Give life to the content with AI: </strong>  Alphy's search bot allows you to ask questions a video or recording to get the most relevant answers presented by the
 					content.
@@ -64,7 +64,7 @@ export default function About() {
         <AccordionHeader onClick={() => handleOpen(3)}>
 		How to use the product?
         </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-200">
+        <AccordionBody className="text-md">
 		<p className="text-l mt-2">
 					<p className="">
 					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to

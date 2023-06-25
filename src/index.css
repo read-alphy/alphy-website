@@ -5,7 +5,12 @@
 * {
 	padding: 0;
 	margin: 0;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	
+}
+html {
+    overflow: hidden;
+    height: 100%;
 }
 
 body {
@@ -13,8 +18,17 @@ body {
 	flex-direction: column;
 	width: 100vw;
 	overflow-x: hidden;
+	overscroll-behavior: none;
 }
-
+.side-feed {
+	/* Hide the scrollbar */
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* Internet Explorer and Edge */
+  }
+  
+  .side-feed::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, and Opera */
+  }
 
 .answer-area li {
 	font-weight: 400;
@@ -568,13 +582,13 @@ CONTENT PAGE
 }
 
 .summary-text {
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Roboto'
 }
 .summary-text code{
 
 	white-space: pre-wrap;
 	padding-left:10px;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Roboto'
 
 }
 
@@ -602,7 +616,7 @@ CONTENT PAGE
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Roboto'
 }
 
 .summary-text h3{
@@ -610,21 +624,25 @@ CONTENT PAGE
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Roboto'
 }
 
 .summary-text h4{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Roboto'
 }
 
 .summary-text h5{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Roboto'
+}
+
+.slick-arrow::before{
+	background:"black"
 }
 
 
@@ -801,14 +819,7 @@ DIFFERENT SCREEN SIZES
 		text-align: center;
 	}
 
-	.user-feed-burger-feed {
-		width: 100%;
-	}
-
-	.user-feed {
-		display: none;
-	}
-
+	
 	.menuToggler {
 		display: none;
 	}
