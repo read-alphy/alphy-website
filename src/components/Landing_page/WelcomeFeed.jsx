@@ -786,8 +786,8 @@ function WelcomeFeed(props) {
 
 							)
 							:
-							<div className="rounded-lg dark:border-darkMode dark:bg-darkMode p-10 drop-shadow-md ">
-								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Process another file instead"}
+							<div className="rounded-xl dark:border-darkMode bg-white dark:bg-darkMode p-10 drop-shadow-md dark:drop-shadow-md font-semibold ">
+								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : ""} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Process another file instead"}
 									<svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 && !errorMessage ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 										<title className="font-bold">Clear</title>
 										<path clipRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fillRule="evenodd"></path>
@@ -795,7 +795,7 @@ function WelcomeFeed(props) {
 								</p>
 								<div className="lg:flex lg:flex-row lg:grid lg:grid-cols-5">
 
-									<p className="lg:col-span-2 flex  items-center font-sans text-zinc-700 dark:text-zinc-200 mt-8 lg:mt-0"> {uploadTitle}</p>
+									<p className="lg:col-span-2 flex  items-center font-sans text-zinc-700 dark:text-zinc-200 mt-8 lg:mt-0 "> {uploadTitle}</p>
 									{/* 					<p className="text-sm text-zinc-600 dark:text-zinc-300 "> 
 			
 						Duration: {Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes

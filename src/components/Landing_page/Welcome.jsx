@@ -197,7 +197,7 @@ export default function Welcome({hasActiveSub,credit}) {
 		<div
 			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
-		>			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-56 text-center">
+		>			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-40 xl:px-56 text-center">
 				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">
 					<div className="first flex justify-center pb-3 ">
 						<div className="">Transcribe</div>
@@ -211,11 +211,14 @@ export default function Welcome({hasActiveSub,credit}) {
 					<div className="forth  flex justify-center pb-3">
 						<div className="">Transcribe</div>
 					</div>
-				</section>
-				<p className="dark:text-zinc-200">audiovisual content with just one click.</p>
+				</section> 
+				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">audiovisual content and 10x your learning, research, and creativity.</p>
+				
+				
 			</div>
-			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-xl md:text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
-				Submit a link to a YouTube video or Twitter Spaces, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
+			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-l md:text-[18px] lg:text-xl text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
+				
+				Submit a link to a YouTube video or Twitter Spaces, or upload a recording, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
 				notify you with email when it's ready!{' '}
 			</p>
 
