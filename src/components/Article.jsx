@@ -239,7 +239,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 					}`}
 			></div>
 			
-			<div className="flex flex-row article-body ">
+			<div className="flex flex-row ">
 				{collapsed==true && 
 			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
 			<div className={`hidden md:flex `}>

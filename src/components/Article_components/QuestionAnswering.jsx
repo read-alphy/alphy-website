@@ -1,8 +1,6 @@
 //import usestate
 import React, { useState, useEffect } from 'react';
-import srtParser2 from 'srt-parser-2';
 import axios from 'axios';
-import ReactLoading from 'react-loading';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from 'react';
 import './QA.css';
@@ -11,7 +9,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useLocation } from 'react-router-dom';
 import { Button, Spinner } from "@material-tailwind/react";
-import Working from "./ContentTabs/working.svg"
+
 
 
 export default function QuestionAnswering(props) {
@@ -246,7 +244,7 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
+		<div id="q_and_a" className={` md:min-h-[600px] bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
 
 
 			<p className="mb-4 font-light text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
@@ -256,41 +254,13 @@ export default function QuestionAnswering(props) {
 				<Toaster position="bottom-center" />
 
 
-				{/* <p className="text-zinc-600 dark:text-zinc-200  pb-7">Navigate the content by asking real questions and getting AI-generated acccurate answers. </p> */}
+				
 				<div className="flex items-center pl-1 pr-1">
-					{/*                     <select className=" p-5 rounded-lg w-3/6 mx-auto bg-zinc-100 z-10 inline-flex items-center py-4 px-4 text-md font-medium text-center text-zinc-500 placeholder:text-zinc-90  border border-zinc-200 dark:border-zinc-700 placeholder:italic rounded-lg focus:outline-none">
-
-                        <option onClick={handleOptionClear}> Questions we already answered</option>
-
-                        {Object.keys(props.key_qa).map((item, index) =>
-                            <option value={optionValue} key={index} onClick={handleBaseQA} className="font-sans cursor-pointer mt-2  text-md font-base text-gray-800 bg-gray100 border border-gray-200 rounded-lg">
-                                {item}</option>
-                        )
-                        }
-
-
-                    </select> */}
+				
 
 					<div className="relative w-full ">
 
-						{/* 
-						<input
-							value={inputValue}
-							onClick={() => handleClick(true)}
-							onChange={(event) => setInputValue(event.target.value)}
-							onKeyDown={handleKeyDown}
-							title={inputValue}
-							type="text"
-							id="search"
-							className={` block w-full  p-3 pr-10 text-sm text-zinc-500 dark:text-zinc-200 placeholder:text-zinc-90   ${inputError && inputValue.length === 0
-								? 'border-1 border-r-0 border-red-300  focus:outline-none focus:border-red-300 focus:ring-0'
-								: 'border border-zinc-200 border-r-0  dark:border-zinc-700  dark:border-r-0 focus:outline-none focus:border-zinc-200 focus:border-r-0 dark:focus:border-zinc-700 dark:focus:ring-0 focus:ring-zinc-200 focus:ring-0	'
-								} placeholder:italic dark:placeholder:text-zinc-500 placeholder:text-zinc-400 rounded-l-full bg-zinc-50 dark:bg-darkMode `}
-							placeholder="Ask anything to the transcript..."
-							autoComplete="off"
-							required
-						/> */}
-
+						
 						<input
 							value={inputValue}
 							onClick={() => handleClick(true)}
@@ -300,8 +270,9 @@ export default function QuestionAnswering(props) {
 							type="text"
 							id="search"
 							placeholder="Ask anything to the transcript..."
-							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
-						{/* <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-000 before:border-green-400 peer-focus:before:!border-blue-000 after:border-green-400 peer-focus:after:!border-blue-000">Search our database...</label> */}
+							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
+					
+					
 
 
 
@@ -362,14 +333,14 @@ export default function QuestionAnswering(props) {
 					{isCleared && !isLoadingInside && answerData.length === 0 ? (
 						<div>
 
-							<p className="mb-5 underline text-l font-normal text-zinc-500 dark:text-zinc-200">
+							<p className="mb-5 underline text-l font-normal text-zinc-700 dark:text-zinc-200">
 								{' '}
 								Questions by Alphy
 							</p>
 							{Object.keys(props.key_qa).map((item, index) => (
-								<div id="accordion-flush" data-active-classes="bg-zinc-50 dark:bg-darkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+								<div id="accordion-flush" data-active-classes="bg-white dark:bg-mildDarkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
 									<h2 id="accordion-flush-heading-1">
-										<button onClick={(event) => handleBaseQAaccordion(event, index, item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+										<button onClick={(event) => handleBaseQAaccordion(event, index, item)} type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-zinc-700 border-b border-gray-200 dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
 											<span>{item}</span>
 											<svg data-accordion-icon class={`w-6 h-6 ${index == collapseIndex && collapseIndex != -1 ? "rotate-180" : ""} shrink-0`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 										</button>

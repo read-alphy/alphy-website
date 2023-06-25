@@ -108,7 +108,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 <div className={`items-center ${isYt || isSp || isUp ? "" : "mx-auto max-w-[1200px]"} justify-between dark:bg-darkMode`}>
 	<div
-		className={`flex dropshadow-l justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fbfbfa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
+		className={`flex dropshadow-l justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 			}`}
 	>
 		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>

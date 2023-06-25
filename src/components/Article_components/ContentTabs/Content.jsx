@@ -832,7 +832,7 @@ const handleBookmark = async () => {
 
 				</div>
 
-				<div id="content-area">
+				<div id="content-area ">
 					{transcript.length > 0 && language == summary.lang
 						?
 						<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
@@ -893,23 +893,23 @@ const handleBookmark = async () => {
 							}
 							{transcript.length > 0 &&
 
-								<div className={`${isLoading ? "hidden" : ""} w-full  3xl:w-1/2 mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
+								<div className={`${isLoading ? "hidden" : ""} w-full  3xl:w-1/2  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
 									{transcript.length > 0 ? (
-										<div className={` mt-14 xl:mt-0 w-full bg-[#f7g4g1] 3xl:min-w-[500px]  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
+										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px]  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
-											<div className="text-sm font-medium text-center text-gray-500 dark:text-zinc-300 dark:border-gray-700 ">
+											<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
 												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto	">
-													<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-														<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-blue-500`}>Key Takeaways</button>
+													<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300"}`} >
+														<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-green-400`}>Key Takeaways</button>
 													</li>
-													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-														<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-blue-500`}>Summary</button>
+													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300"}`} >
+														<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-green-400`}>Summary</button>
 													</li>
-													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-normal border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-														<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-blue-500`}>Transcript</button>
+													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-normal border-green-400" : "hover:text-gray-600 hover:border-gray-300"}`} >
+														<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-green-400`}>Transcript</button>
 													</li>
 													{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-blue-500`}>Ask questions</button>
+											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-green-400`}>Ask questions</button>
 										</li> */}
 
 												</ul>

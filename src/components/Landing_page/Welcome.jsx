@@ -212,7 +212,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						<div className="">Transcribe</div>
 					</div>
 				</section> 
-				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">audiovisual content and 10x your learning, research, and creativity.</p>
+				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">audiovisual content and 10x your learning, research, and creativity</p>
 				
 				
 			</div>
