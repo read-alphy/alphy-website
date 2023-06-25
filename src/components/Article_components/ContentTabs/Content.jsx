@@ -976,10 +976,11 @@ return (
 											<Selection.Root>
 											<Selection.Portal>
       <Selection.Content>
-		<div onClick={handleAskAlphy} className=" flex flex-col bg-zinc-50 dark:bg-darkMode text-zinc-700 dark:text-zinc-200 min-w-[100px] px-5 py-3 border drop-shadow-sm rounded-xl">
-			<button > Ask Alphy to learn more about it.</button>
+		
+			<Button className="bg-green-400 mt-2 mb-2 text-zinc-800 dark:text-zinc-800 rounded-lg" onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
 					
-			 </div>
+		
+			 <Selection.Arrow className="text-zinc-300"/>
 
       </Selection.Content>
     </Selection.Portal>
@@ -1183,6 +1184,7 @@ return (
 												</Tabs>
 											</div>
 										</Selection.Trigger>
+										
 										</Selection.Root>
 										</div>
 									) : (
