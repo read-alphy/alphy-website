@@ -786,7 +786,7 @@ function WelcomeFeed(props) {
 
 							)
 							:
-							<div>
+							<div className="rounded-lg dark:border-darkMode dark:bg-darkMode p-10 drop-shadow-md ">
 								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Process another file instead"}
 									<svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 && !errorMessage ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 										<title className="font-bold">Clear</title>
@@ -804,7 +804,7 @@ function WelcomeFeed(props) {
 									{/*  */}
 									<div className="lg:col-span-2 mt-2 ">
 										<div className="lg:grid lg:grid-cols-3">
-											<div className="lg:col-span-3 hidden lg:flex  lg:justify-center lg:mt-2">
+											<div className="lg:col-span-3 hidden lg:flex  lg:justify-center lg:mt-2 ">
 												{/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"}`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} /> */}
 
 												<div class={`${uploadProgress === 0 && "hidden"} w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700 mt-2`} >

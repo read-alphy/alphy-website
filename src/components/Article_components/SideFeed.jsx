@@ -528,10 +528,10 @@ function SideFeed(props) {
 
 
 
-				<Menu placement="bottom-start" className="pl-2" >
+				<Menu placement="bottom-start" className="pl-2 dark:bg-mildDarkMode" >
 					<MenuHandler>
-						<div className="flex-row flex dark:bg-transparent border-b  dark:border-b-zinc-700 w-full md:max-w-[250px] md:3xl:max-w-[330px]">
-							<button className=" bg-transparent  w-full lg:max-w-[250px] 3xl:max-w-[330px] flex  mb-5  ml-4" >
+						<div className="flex-row flex border-b  dark:border-b-zinc-700 w-full md:max-w-[250px] md:3xl:max-w-[330px] dark:bg-mildDarkMode">
+							<button className="bg-transparent  w-full lg:max-w-[250px] 3xl:max-w-[330px] flex  mb-5  ml-4" >
 								{global && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Global</span>}
 								{myWorks && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Works</span>}
 								{myBookmarks && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Bookmarks</span>}
@@ -542,7 +542,7 @@ function SideFeed(props) {
 							<svg class={`w-6 h-6 mr-2 shrink-0 flex justify-right justify-space-between`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 						</div>
 					</MenuHandler>
-					<MenuList classNszame=" z-50 -mt-6 w-full lg:min-w-[250px] lg:max-w-[250px] 3xl:max-w-[330px] 3xl:min-w-[330px] bg:zinc-50 dark:bg-darkMode dark:border-2 dark:border-darkMode border-0">
+					<MenuList className=" z-50 -mt-2 w-full lg:min-w-[250px] lg:max-w-[250px] 3xl:max-w-[330px] 3xl:min-w-[330px] bg:zinc-50 dark:bg-mildDarkMode  dark:border-2 dark:border-darkMode ">
 						<MenuItem onClick={navigateFeeds} className="font-sans lg:min-w-[220px] lg:max-w-[220px] 3xl:max-w-[305px] 3xl:min-w-[305px] dark:text-zinc-300 text-zinc-600 rounded-lg  hover:border-transparent hover:ring-0 hover:outline-none dark:hover:bg-darkMode text-left hover:text-zinc-400 dark:hover:text-zinc-500 transition duration-200 ease-in-out" value="my_works">
 							My Works
 						</MenuItem>
@@ -699,7 +699,7 @@ function SideFeed(props) {
 									:null
 								}
 								
-						{dataBookmarks.length == 0 && currentUser !== null && search.length===0 ?
+						{dataBookmarks.length == 0 && currentUser !== null && search.length===0 && myBookmarks==true ?
 							<div className="flex flex-col  mt-5 px-5 col-span-2 mx-auto items-center">
 
 								<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">You haven't bookmarked any content yet.<br></br>Check <a onClick={() => navigateFeeds("global")} className="underline text-green-400 cursor-pointer" value="global">Global</a> to find conversations you want to add to your knowledge base. </p> <img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>	
