@@ -722,19 +722,26 @@ return (
 															<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
 														</svg><p className="text-left">Report an issue</p>
 
-				</button>
-				</PopoverHandler>
-				<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
-					{currentUser ? 
-		<div>
-								<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-								<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-								</div>				:
-							<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
-								</PopoverContent>
-								</Popover>
+													</button>
+												</PopoverHandler>
+												<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+													{currentUser ?
+														<div>
 
+															<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wzNdZ1?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+															<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src="https://tally.so/embed/mRdjYp?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
+														</div> :
+														<p className="dark:text-zinc-200">Please <a className="text-green-400 underline" href="/u/login">sign in </a>to access the form.</p>}
+												</PopoverContent>
+											</Popover>
+										</div>
+									</PopoverContent>
+								</Popover>
+								
+							</div>
 						</div>
+						<div className="col-span-2   grid grid-cols-2 flex flex-row">
+							<div className="col-span-1">
 
 								<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light_ flex flex-row">
 
