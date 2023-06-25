@@ -17,13 +17,13 @@ export default function QuestionAnswering(props) {
 	const windowSize = useWindowSize();
 	const QARef = useRef(null);
 	const location = useLocation();
-	const buttonRef = useRef(null);
+	
 	const [collapseIndex, setCollapseIndex] = useState(0);
 
 	const [answerData, setAnswerData] = useState('');
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
 	const [answer, setAnswer] = useState(false);
-	const [inputValue, setInputValue] = useState('');
+	
 	const [showBaseQA, setShowBaseQA] = useState(false);
 	const [baseSources, setBaseSources] = useState(false);
 	const [baseQuestion, setBaseQuestion] = useState('');
@@ -86,17 +86,19 @@ export default function QuestionAnswering(props) {
 				//setIsCleared(false);
 				//setShowBaseQA(true);
 				setBaseQuestion(decodedText)
-				//setInputValue(decodedText)
+				//props.setInputValue(decodedText)
 				setClicked(true)
 
 			}
 
 			else {
-				setInputValue(decodedText);
+				props.setInputValue(decodedText);
+				
 				setClicked(true);
 				setTimeout(() => {
-					if (buttonRef.current) {
-						buttonRef.current.click();
+					if (props.buttonRef.current) {
+				
+					props.buttonRef.current.click();
 
 					}
 				}, 1000);
@@ -109,7 +111,7 @@ export default function QuestionAnswering(props) {
 		setIsCleared(true);
 		setShowBaseQA(false);
 		setShowUserQA(false);
-		setInputValue('');
+		props.setInputValue('');
 		setAnswerData('');
 		setinputError(false);
 	};
@@ -117,7 +119,7 @@ export default function QuestionAnswering(props) {
 	const handleBaseQA = (event) => {
 		setIsCleared(false);
 		setShowBaseQA(true);
-		setInputValue(event.target.textContent);
+		props.setInputValue(event.target.textContent);
 		setBaseQuestion(event.target.textContent);
 		QARef.current.scrollIntoView({ behavior: 'smooth' });
 	};
@@ -136,13 +138,13 @@ export default function QuestionAnswering(props) {
 
 		// setIsCleared(false);
 		/* setShowBaseQA(true); */
-		// setInputValue(event.target.textContent);
+		// props.setInputValue(event.target.textContent);
 		setBaseQuestion(item);
 		QARef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 	const handleOptionClear = () => {
 		setShowBaseQA(false);
-		setInputValue('');
+		props.setInputValue('');
 	};
 
 
@@ -154,11 +156,11 @@ export default function QuestionAnswering(props) {
 
 	const handleClick = () => {
 		if (showBaseQA) {
-			/*  setInputValue(''); */
+			/*  props.setInputValue(''); */
 		}
 	};
 	const handleShareLink = () => {
-		const encodedText = encodeURIComponent(baseQuestion ? baseQuestion : inputValue);
+		const encodedText = encodeURIComponent(props.inputValue.length>0 ? props.inputValue : baseQuestion);
 
 		const url = `${window.location.origin}${location.pathname.split('&q=')[0]}&q=${encodedText}`;
 		navigator.clipboard.writeText(url);
@@ -170,7 +172,7 @@ export default function QuestionAnswering(props) {
 			question = baseQuestion
 		}
 		else {
-			question = inputValue
+			question = props.inputValue
 		}
 		const myHtml = document.getElementById("answer-area");
 		const plainText = `${question} \n\n ${myHtml.innerText}`
@@ -179,26 +181,33 @@ export default function QuestionAnswering(props) {
 	};
 	const fetchData = () => {
 		toast.dismiss();
-
-
-
-
-
+		
 		setShowBaseQA(false);
 		setShowUserQA(true);
 		setinputError(false);
 
+		let selectionInput
+		if (props.selectionPrompt === "simple"){
+			selectionInput = "Explain '" + props.inputValue + "' like I'm five"
+		}
+		else if (props.selectionPrompt==="advanced"){
+			selectionInput ="Explain '" + props.inputValue + "' like I'm an expert and give as much detail as possible"
+		}
+		else if(props.selectionPrompt==="normal"){
+			selectionInput = props.inputValue
+		}
 
-		if (inputValue.length > 200) {
+
+		if (props.inputValue.length > 200) {
 			setinputError(true);
 			setErrorText('Your question is too long, please keep it under 200 characters.');
-			setInputValue('');
+			props.setInputValue('');
 			return;
-		} else if (inputValue.length === 0) {
+		} else if (props.inputValue.length === 0) {
 			setinputError(true);
 
 			setErrorText('Please enter a question.');
-			setInputValue('');
+			props.setInputValue('');
 			return;
 		} else {
 			if (currentUser) {
@@ -213,15 +222,17 @@ export default function QuestionAnswering(props) {
 						.post(
 							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/${props.data.source_type}/${props.data.source_id
 							}/question`,
-							inputValue,
+							props.inputValue,
 						)
 						.then((response) => {
+							props.setSelectionCall(false)
 
 							setAnswerData(response.data);
 							setIsLoadingInside(false);
 						});
 				} catch (error) {
 					console.error(`Error fetching data: ${error}`);
+					props.setSelectionCall(false)
 
 					setIsLoadingInside(false);
 				}
@@ -234,9 +245,10 @@ export default function QuestionAnswering(props) {
 			    
 								}); */
 				setErrorText('You need to sign in to ask questions.');
-				setInputValue('');
+				props.setInputValue('');
 				setIsCleared(true);
 				setinputError(true);
+				props.setSelectionCall(false)
 			}
 		}
 	};
@@ -262,13 +274,14 @@ export default function QuestionAnswering(props) {
 
 						
 						<input
-							value={inputValue}
+							ref={props.inputRef}
+							value={props.inputValue}
 							onClick={() => handleClick(true)}
-							onChange={(event) => setInputValue(event.target.value)}
+							onChange={(event) => props.setInputValue(event.target.value)}
 							onKeyDown={handleKeyDown}
-							title={inputValue}
+							title={props.inputValue}
 							type="text"
-							id="search"
+							id="questionAnswering"
 							placeholder="Ask anything to the transcript..."
 							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
 					
@@ -276,7 +289,7 @@ export default function QuestionAnswering(props) {
 
 
 
-						{inputValue.length > 0 ? (
+						{props.inputValue.length > 0 ? (
 							<div
 								onClick={handleClear}
 								className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "
@@ -307,8 +320,9 @@ export default function QuestionAnswering(props) {
 						&&
 
 						<Button type="submit"
-							ref={buttonRef}
+							ref={props.buttonRef}
 							onClick={fetchData}
+							id="questionButton"
 
 							className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
 
@@ -320,7 +334,7 @@ export default function QuestionAnswering(props) {
 						</Button>}
 
 				</div>
-				{inputError && inputValue.length === 0 ? (
+				{inputError && props.inputValue.length === 0 ? (
 					<div>
 						<span className="text-sm ml-2 text-red-400">{errorText}</span>
 					</div>

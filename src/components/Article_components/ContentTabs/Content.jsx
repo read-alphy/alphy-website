@@ -15,12 +15,11 @@ import { saveAs } from 'file-saver'; // library to save file as blob
 import { useAuth } from "../../../hooks/useAuth"
 import DownloadStatic from '../../../img/download_static.png';
 import ReactMarkdown from "react-markdown";
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';	
 import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
+import * as Selection from 'selection-popover'
 
 
 import {
@@ -28,7 +27,7 @@ import {
 	PopoverHandler,
 	PopoverContent,
 	ThemeProvider,
-	Option
+	Button
 } from "@material-tailwind/react";
 
 
@@ -52,27 +51,37 @@ export default function Content(props) {
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
 	const [languagesWanted, setLanguagesWanted] = useState([]);
+	const [askText, setAskText] = useState("");
+	const[selectionCall, setSelectionCall] = useState(false);
+	const [selectionPrompt, setSelectionPrompt] = useState("normal");
+	
+	const [inputValue, setInputValue] = useState("");
 	const { currentUser } = useAuth()
 	const navigate = useNavigate()
+
+	const buttonRef = useRef(null);
+	const inputRef = useRef(null);
+	const contentRef = useRef(null);
+
+	
 	
 	const ITEM_HEIGHT = 48;
 	const ITEM_PADDING_TOP = 8;
 	const MenuProps = {
 
-	PaperProps: {
-		style: {
-		maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-		backgroundColor: localStorage.getItem("theme")==="dark" ? "#1E1E1E" : "#fff",
-		color: localStorage.getItem("theme")==="dark" ? "#e4e4e7" : "#3f3f46",
-		outline: "none",
+			PaperProps: {
+				style: {
+				maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+				backgroundColor: localStorage.getItem("theme")==="dark" ? "#1E1E1E" : "#fff",
+				color: localStorage.getItem("theme")==="dark" ? "#e4e4e7" : "#3f3f46",
+				outline: "none",
 
 
 
-		
-		},
-	},
+				
+				},
+			},
 	};
-
 
 	const data = props.data
 
@@ -544,11 +553,55 @@ const handleBookmark = async () => {
 
 	transcriptParser();
 
+	useEffect(() => {
+		const handleSelection = () => {
+		  const selectedText = window.getSelection().toString();
+		  
+		  if (selectedText.length > 0) {
+		 	setAskText(selectedText)
+			
+			
+		  } else {
+			
+		  }
+		};
+	    
+		document.addEventListener('mouseup', handleSelection);
+		return () => {
+		  document.removeEventListener('mouseup', handleSelection);
+		};
+	  }, []);
 
-	return (
+	  
+
+	const handleAskAlphy = (promptSelection) => {
+		let askInput
+
+		
+		askInput = "Expand on '" + askText + "'"
+		
+		setInputValue(askInput)
+		//setSelectionCall(true)
+		
+		if (inputRef.current) {
+	
+			setTimeout (() => {
+				if(buttonRef.current) {
+			buttonRef.current.click()
+		}
+			}, 1000)
+			
+		  }
+
+			
+
+			
+		
+	}
+
+return (
 		<div ref={ref} className={`md:max-w-[90vw]  scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
-
-
+			
 
 
 			<div>
@@ -839,7 +892,7 @@ const handleBookmark = async () => {
 							{transcript.length > 0 &&
 
 
-								<div className={`grid grid-cols-2 w-full md:min-w-[500px]`}>
+								<div className={`grid-cols-2 w-full md:min-w-[500px]`}>
 									{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
 									<div className={`col-span-2 hidden ${data.source_type === "yt" ? "xl:flex" : ""}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
@@ -861,7 +914,7 @@ const handleBookmark = async () => {
 
 									</div>
 									{/* <Loading /> */}
-									<div className={`col-span-2 ${data.source_type == "yt" && "md:mt-10"} drop-shadow-sm`}>
+									<div className={`col-span-2 ${data.source_type == "yt" && "md:mt-10"} drop-shadow-sm `}>
 										{summary.key_qa === undefined || summary.key_qa === null ? (
 											<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
 												<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
@@ -880,7 +933,13 @@ const handleBookmark = async () => {
 												<QuestionAnswering
 													source_id={data.source_id}
 													source_type={data.source_type}
+													selectionCall={selectionCall}
+													setSelectionCall={setSelectionCall}
 													key_qa={summary.key_qa}
+													inputValue={inputValue}
+													setInputValue={setInputValue}
+													buttonRef={buttonRef}
+													inputRef={inputRef}
 													data={data}
 													transcript={transcript}
 													timestampChanger={timestampChanger}
@@ -893,7 +952,7 @@ const handleBookmark = async () => {
 							}
 							{transcript.length > 0 &&
 
-								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "w-2/3" : ""}`} >
+								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
 									{transcript.length > 0 ? (
 										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px]  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
@@ -914,8 +973,21 @@ const handleBookmark = async () => {
 
 												</ul>
 											</div>
+											<Selection.Root>
+											<Selection.Portal>
+      <Selection.Content>
+		<div onClick={handleAskAlphy} className=" flex flex-col bg-zinc-50 dark:bg-darkMode text-zinc-700 dark:text-zinc-200 min-w-[100px] px-5 py-3 border drop-shadow-sm rounded-xl">
+			<button > Ask Alphy to learn more about it.</button>
+					
+			 </div>
 
-											<div className="main-content text-zinc-700 dark:text-zinc-200">
+      </Selection.Content>
+    </Selection.Portal>
+    <Selection.Trigger>
+	
+
+  
+											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200">
 
 												<Tabs>
 													<Tab eventKey="transcript" title="">
@@ -936,7 +1008,7 @@ const handleBookmark = async () => {
 
 														{activeTab === 'tab1' && (
 
-															<div className="content-area text-l font-normal  max-w-screen-md overflow-auto max-h-[100vh] 3xl:max-h-[90vh]">
+															<div className="content-area text-l font-normal  max-w-screen-md overflow-auto ">
 																{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
 
@@ -966,7 +1038,7 @@ const handleBookmark = async () => {
 															</div>
 														)}
 														{activeTab === 'tab2' && (
-															<div className="content-area text-l font-normal max-w-screen-md overflow-auto max-h-[90vh] ">
+															<div className="content-area text-l font-normal max-w-screen-md overflow-auto max-h-[100vh] ">
 
 																{isLoading ? (
 																	<Loading />
@@ -1110,6 +1182,8 @@ const handleBookmark = async () => {
 													</Tab>
 												</Tabs>
 											</div>
+										</Selection.Trigger>
+										</Selection.Root>
 										</div>
 									) : (
 										<div>

@@ -744,15 +744,15 @@ function WelcomeFeed(props) {
 							(
 								props.hasActiveSub === true
 									?
-									<div   class="flex items-center justify-center w-full">
-										<label  for="dropzone-file" class={`flex flex-col items-center justify-center w-full h-60 border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
-											<div {...getRootProps()}  class={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${isDragActive ? "" : ""}`} >
+									<div  class="flex items-center justify-center w-full">
+										<label {...getRootProps()}  for="dropzone-file" class={`flex flex-col items-center justify-center w-full h-60 border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
+											<div   class={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${isDragActive ? "" : ""}`} >
 												{!isDragActive ?
 													<div className="items-center justify-center flex flex-col">
 														{!errorMessage ? 
 														<div className="items-center justify-center flex flex-col">
 														<svg aria-hidden="true" class="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-														<input id="dropzone-file" onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+														
 														<p class="mb-2 text-sm text-zinc-700 dark:text-zinc-200"><span className="font-semibold">Click to upload an audio file</span> or drag and drop.</p>
 														<p class="text-xs text-zinc-600 dark:text-zinc-200"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
 														</div>
@@ -777,7 +777,7 @@ function WelcomeFeed(props) {
 											</div>
 
 											<input {...getInputProps()} className="" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
-											
+											<input  onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 
 
 											<audio className="hidden" ref={audioRef} controls />
