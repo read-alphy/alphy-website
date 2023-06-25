@@ -24,7 +24,7 @@ function SideFeed(props) {
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const [navigated, setNavigated] = useState(false);
-	const [global, setGlobal] = useState(localStorage.getItem("feedTab") !== null && localStorage.getItem("feedTab") == "true" ? true : false);
+	const [global, setGlobal] = useState(localStorage.getItem("feedTab") !== null && localStorage.getItem("feedTab") == "global" ? true : false);
 	const { currentUser } = useAuth();
 	const [firstTimePersonal, setFirstTimePersonal] = useState(true);
 	const [called, setCalled] = useState(false);
@@ -39,10 +39,10 @@ function SideFeed(props) {
 	const [dataUploads, setDataUploads] = useState([]);
 	const [isLoadingUploads, setIsLoadingUploads] = useState(true);
 	const [firstTimeUploads, setFirstTimeUploads] = useState(true);
-	const [myUploads, setMyUploads] = useState(false);
-	const [myWorks, setMyWorks] = useState(false);
+	const [myUploads, setMyUploads] = useState(localStorage.getItem("feedTab") !== null && localStorage.getItem("feedTab") == "my_uploads" ? true : false);
+	const [myWorks, setMyWorks] = useState(localStorage.getItem("feedTab") !== null && localStorage.getItem("feedTab") == "my_works" ? true : false);
 
-	const [myBookmarks, setMyBookmarks] = useState(false)
+	const [myBookmarks, setMyBookmarks] = useState(localStorage.getItem("feedTab") !== null && localStorage.getItem("feedTab") == "my_bookmarks" ? true : false);
 	const [offsetBookmarks, setOffsetBookmarks] = useState(0);
 	const [hasMoreBookmarks, setHasMoreBookmarks] = useState(false);
 	const [dataBookmarks, setDataBookmarks] = useState([]);
@@ -173,6 +173,7 @@ function SideFeed(props) {
 			setMyWorks(false)
 			setMyUploads(false)
 			setMyBookmarks(false)
+			localStorage.setItem("feedTab", "global")
 			setOffset(0)
 			getData(0, true, true,search);
 
@@ -183,6 +184,7 @@ function SideFeed(props) {
 			setMyWorks(true)
 			setMyUploads(false)
 			setMyBookmarks(false)
+			localStorage.setItem("feedTab", "my_works")
 			setOffsetPersonal(0)
 
 			getDataPersonal(0, true, true,search);
@@ -193,6 +195,7 @@ function SideFeed(props) {
 			setMyWorks(false)
 			setMyUploads(true)
 			setMyBookmarks(false)
+			localStorage.setItem("feedTab", "my_uploads")
 			setOffsetUploads(0)
 			
 			getDataUploads(0, true, true,search);
@@ -203,6 +206,7 @@ function SideFeed(props) {
 			setMyWorks(false)
 			setMyUploads(false)
 			setMyBookmarks(true)
+			localStorage.setItem("feedTab", "my_bookmarks")
 			setOffsetBookmarks(0)
 
 			getDataBookmarks(0, true, true,search);
