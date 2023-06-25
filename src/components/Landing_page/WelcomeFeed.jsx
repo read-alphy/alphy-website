@@ -225,7 +225,7 @@ function WelcomeFeed(props) {
 			setMyUploads(false)
 			setMyBookmarks(true)
 			localStorage.setItem("feedTab", "my_bookmarks")
-			
+
 			setOffsetBookmarks(0)
 			getDataBookmarks(0, true, true);
 
@@ -792,7 +792,7 @@ function WelcomeFeed(props) {
 
 							)
 							:
-							<div className="rounded-xl dark:border-darkMode bg-white dark:bg-darkMode p-10 drop-shadow-md dark:drop-shadow-md font-semibold ">
+							<div className="rounded-xl dark:border-darkMode bg-white dark:bg-darkMode p-10 drop-shadow-sm dark:drop-shadow-sm font-semibold ">
 								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Process another file instead"}
 									<svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 && !errorMessage ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 										<title className="font-bold">Clear</title>

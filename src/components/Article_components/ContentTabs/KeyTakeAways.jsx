@@ -67,7 +67,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
 				</div>
 				<button
 					onClick={handleClick}
-					className={'text-gray-500 underline hover:text-zinc-200 font-light text-sm mt-5 mb-10'}
+					className={'text-gray-500 underline hover:text-zinc-200 font-light_ text-sm mt-5 mb-10'}
 				>
 					{keysCollapsed ? 'Show Them All' : 'Collapse'}
 				</button>

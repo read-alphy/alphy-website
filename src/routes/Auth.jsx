@@ -364,7 +364,7 @@ verificationMessage==false ?
 		<div className="">
 		<div className="flex items-center mt-10 mb-10">
 				<div class="border-b border-gray-300 w-[200px] mr-3"></div>
-				<span className="text-sm text-gray-400 font-light">OR</span>
+				<span className="text-sm text-gray-400 font-light_">OR</span>
 				<div class="border-b border-gray-300 w-[200px] ml-3 "></div>
 		</div>
 

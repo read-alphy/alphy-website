@@ -247,7 +247,7 @@ export default function QuestionAnswering(props) {
 		<div id="q_and_a" className={` md:min-h-[600px] bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
 
 
-			<p className="mb-4 font-light text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
+			<p className="mb-4 font-light_ text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
 
 			<div className="Md:pl-10 md:pr-10 ">
 

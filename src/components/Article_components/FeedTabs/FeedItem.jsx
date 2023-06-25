@@ -81,7 +81,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 							
 									{item.title}
 									</div>
-								<div className="font-light text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
+								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
 
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 							</div>
@@ -143,7 +143,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 							
 									{item.title}
 									</div>
-								<div className="font-light text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
+								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
 								</a>
 
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
@@ -175,7 +175,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
 								<div className="text-sm  text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal underline">{item.title}</div>
-								<div className="font-light text-zinc-500 dark:text-zinc-300 ">Time added: {formattedDate}</div>
+								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">Time added: {formattedDate}</div>
 
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 							</div>

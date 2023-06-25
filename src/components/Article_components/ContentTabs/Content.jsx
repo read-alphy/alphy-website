@@ -690,7 +690,7 @@ const handleBookmark = async () => {
 						<div className="col-span-2   grid grid-cols-2 flex flex-row">
 							<div className="col-span-1">
 
-								<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light flex flex-row">
+								<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light_ flex flex-row">
 
 									{data.source_type !== "up" && data.creator_name}
 									{data.source_type === "up" && `Private Content - ${formattedDate}`}
@@ -864,7 +864,7 @@ const handleBookmark = async () => {
 									<div className={`col-span-2 ${data.source_type == "yt" && "md:mt-10"} drop-shadow-sm`}>
 										{summary.key_qa === undefined || summary.key_qa === null ? (
 											<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
-												<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center italic">
+												<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
 
 													Generating questions... creating a chatbot...
 
@@ -893,7 +893,7 @@ const handleBookmark = async () => {
 							}
 							{transcript.length > 0 &&
 
-								<div className={`${isLoading ? "hidden" : ""} w-full  3xl:w-1/2  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
+								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
 									{transcript.length > 0 ? (
 										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px]  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
@@ -923,7 +923,7 @@ const handleBookmark = async () => {
 														{activeTab === "tab3" && (data ? summary.key_takeaways ? summary.key_takeaways.map((item, index) => {
 															return (
 																<p className="pb-2">{index + 1}) {item}</p>)
-														}) : (<p><p className="text-l text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+														}) : (<p><p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 															Processing key takeaways...
 
@@ -1124,7 +1124,7 @@ const handleBookmark = async () => {
 						<div className="flex flex-col mb-20 mt-20 ">
 							{(errorMessage == true || (languagesWanted.includes(language) === true) || languages.includes(language) || (summary !== undefined && summary.summary !== undefined && summary.summary !== null && summary.summary.length > 0) || (contentSummaries !== undefined && contentSummaries.length > 1 && (contentSummaries[0].lang == language || contentSummaries[1].lang === language)) || language == "en") ? null :
 
-								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub == true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-green-400 cursor-pointer">here</a>.</p>
 										: <p>Go premium to request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"} </a> page for more detail</p>}
@@ -1146,7 +1146,7 @@ const handleBookmark = async () => {
 				{data !== null && transcript.length === 0 && (language === "en") ?
 
 					<div className="flex flex-col mb-20 mt-20 ">
-						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 							Alphy is doing its best to process this video, it will be ready in a few minutes. Meanwhile, you can check out other videos.
 							<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
@@ -1158,7 +1158,7 @@ const handleBookmark = async () => {
 				}
 				{((summary != undefined && summary !== null && summary.summary == null && summary.lang !== "en" && language!=="en") || (languagesWanted.includes(language) == true && language!=="en")) && <div className="flex flex-col mb-20 mt-20 ">
 					{data !== null &&
-						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 							Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
 
@@ -1169,7 +1169,7 @@ const handleBookmark = async () => {
 				</div>}
 			</div>}
 			{errorMessage == true && <div className="flex flex-col mb-20 mt-20 ">
-				<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light max-w-screen-md mx-auto p-3 text-center">
+				<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 					There was an error with the request :( <br></br><br></br>Please refresh the page and try again. If the issue persists, please contact us at support@alphy.app
 

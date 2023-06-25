@@ -218,7 +218,7 @@ export default function Welcome({hasActiveSub,credit}) {
 			</div>
 			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-l md:text-[18px] lg:text-xl text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				
-				Submit a link to a YouTube video or Twitter Spaces, or upload a recording, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
+				Submit a link to a YouTube video or Twitter Spaces, or upload an audio file, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
 				notify you with email when it's ready!{' '}
 			</p>
 
