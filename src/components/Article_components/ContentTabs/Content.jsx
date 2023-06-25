@@ -893,7 +893,7 @@ const handleBookmark = async () => {
 							}
 							{transcript.length > 0 &&
 
-								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
+								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "w-2/3" : ""}`} >
 									{transcript.length > 0 ? (
 										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px]  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
