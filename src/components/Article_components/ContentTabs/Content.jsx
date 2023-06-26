@@ -635,7 +635,7 @@ return (
 													</a>
 												}{data.source_type === "sp" &&
 													<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-														<img className="mr-2 -ml-2" src={TwitterLogo} width={20} />
+														<img className="mr-2 ml-2" src={TwitterLogo} width={20} />
 														<p className="font-medium items-center text-md">Click to listen</p>
 													</a>
 												}
@@ -782,8 +782,8 @@ return (
 														<p className="text-zinc-700 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md opacity-80">Click to watch</p>
 										</a>
 									}{data.source_type === "sp" &&
-										<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-											<img className="mr-2 -ml-2" src={TwitterLogo} width={20} />
+										<a className="flex flex-row mb-5 mt-3  " target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
+											<img className="ml-2" src={TwitterLogo} width={20} />
 											<p className=" text-zinc-700 dark:text-zinc-200 opacity-80 font-medium items-center text-md">Click to listen</p>
 										</a>
 									}
