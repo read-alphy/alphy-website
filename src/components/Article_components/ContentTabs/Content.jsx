@@ -578,7 +578,7 @@ const handleBookmark = async () => {
 		let askInput
 
 		
-		askInput = "Explain the following in detail: '" + askText + "?'"
+		askInput = "Expand on the following: '" + askText + "?'"
 		
 		setInputValue(askInput)
 		//setSelectionCall(true)
