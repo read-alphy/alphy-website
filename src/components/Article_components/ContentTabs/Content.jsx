@@ -988,7 +988,7 @@ return (
 	
 
   
-											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 ">
+											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 " >
 
 												<Tabs>
 													<Tab eventKey="transcript" title="">

@@ -40,15 +40,15 @@ function Home({hasActiveSub,currentUser,credit}) {
 				{/* <title>{`Alphy, the next generation speech-to-meaning agent.`} </title> */}
 				<title>Alphy: Unlock the Information in Audiovisual Content </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
-				<meta property="og:title" content={`Alphy, the next generation speech-to-meaning agent.`} />
-				<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
-				<meta content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!"
+				<meta property="og:title" content={`Alphy: Unlock the Information in Audiovisual Content.`} />
+				<meta name="description" content="Transcribe, summarize, and question audiovisual content with the help of AI. Try Alphy for free!" />
+				<meta content="Transcribe, summarize, and question audiovisual content with the help of AI. Try Alphy for free!" 
 					property="og:description" />
-				<meta name="twitter:title" content={`Alphy, the next generation speech-to-meaning agent.}`} />
-				<meta name="twitter:description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
-				<meta name="twitter:image" content="https://i.ibb.co/4g2Jtvc/home.png" />
+				<meta property="og:title" content={`Alphy: Unlock the Information in Audiovisual Content.`} />
+				<meta name="twitter:description" content="Transcribe, summarize, and question audiovisual content with the help of AI. Try Alphy for free!" />
+				<meta name="twitter:image" content="../../public/homepage.png" />
 				<meta property="og:url" content="https://alphy.app/" />
-				<meta content="https://i.ibb.co/4g2Jtvc/home.png" property="og:image" />
+				<meta content="../../public/homepage.png" property="og:image" />
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
 			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} />
