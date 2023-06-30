@@ -242,7 +242,10 @@ export default function Welcome({hasActiveSub,credit}) {
 							{currentUser && 
 							<span className="text-sm pl-2 mb-2 text-gray-600 dark:text-zinc-300"> 
 							
-							<a href="/account" className="underline">{hasActiveSub ? "Premium Plan" : "Basic Plan"}</a> - Remaining Credits : {Math.floor(credit)} minutes </span>
+							<a href="/account" className="underline">{hasActiveSub ? "Premium Plan" : "Basic Plan"}</a> - Remaining Credits : {Math.floor(credit)} minutes 
+							
+						</span>
+							
 							}
 
 						<div data-popover id="popoverDescription" role="tooltip" className={`popover-description absolute z-10 invisible inline-block text-sm dark:text-zinc-300 text-gray-500 transition-opacity duration-300 bg-zinc-50 dark:bg-darkMode border border-slate-800 rounded-lg shadow-sm opacity-0 w-72`}>
