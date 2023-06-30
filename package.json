@@ -48,6 +48,7 @@
     "react-tabs": "^6.0.0",
     "react-toggle-dark-mode": "^1.1.1",
     "react-tooltip": "^5.5.2",
+    "react-zdog": "^1.0.11",
     "remixicon": "^2.5.0",
     "selection-popover": "^0.2.0",
     "slick-carousel": "^1.8.1",
