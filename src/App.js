@@ -174,7 +174,7 @@ if (currentUser && creditcalled!==true) {
 		
 		<div className="App bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
 
-			{showWelcomeForm && 
+	{/* 		{showWelcomeForm && 
 					<div className="fixed inset-0 z-50 flex items-center justify-center ">
 								<div className="fixed inset-0 bg-black opacity-80"></div>
 								<div className="z-10 bg-white rounded-md shadow-lg w-full max-w-lg ">
@@ -184,7 +184,7 @@ if (currentUser && creditcalled!==true) {
 							</div>	
 							</div>
 							</div>
-							}
+							} */}
 		<Helmet>
 			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
 			<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
