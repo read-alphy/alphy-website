@@ -4,7 +4,7 @@ import SideFeed from './Article_components/SideFeed';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './Article_components/ContentTabs/Content';
 
-import { signOut } from 'supertokens-auth-react/recipe/passwordless';
+
 import Twitter from '..//img/twitter_spaces.png';
 
 import { useAuth } from '../hooks/useAuth';
