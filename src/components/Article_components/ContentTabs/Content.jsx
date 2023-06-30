@@ -1223,10 +1223,13 @@ return (
 
 					<div className="flex flex-col mb-20 mt-20 ">
 						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
-
-							Alphy is doing its best to process this video, it will be ready in a few minutes. Meanwhile, you can check out other videos.
+						{data.source_type==="sp" ?
+						<p>We are currently having issues with Twitter Spaces due to the recent changes in Twitter API. We are on it. Meanwhile, your submissions may take longer to process than usual. </p>
+							:
+							<span>
+							Alphy is doing its best to process this {data.source_type==="yt" ? "video" : "recording"}, it will be ready in a few minutes. Meanwhile, you can check out other videos.
 							<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
-
+							</span>}
 
 						</p>
 
@@ -1236,7 +1239,7 @@ return (
 					{data !== null &&
 						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
-							Alphy is currently working hard to translate this video to {language_codes[language]}. Please come back in a few minutes!
+							Alphy is currently working hard to translate this  {data.source_type==="yt" ? "video" : "recording"} to {language_codes[language]}. Please come back in a few minutes!
 
 							<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
 
