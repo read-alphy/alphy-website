@@ -55,6 +55,10 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const metaTag = document.querySelector('meta[name="twitter:title"]');
+	if (metaTag) {
+		metaTag.setAttribute('content', data.title);
+	}
 	const fetchData = async (url) => {
 		
 		
@@ -228,8 +232,9 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 				<meta property="og:description" content={data.title!==undefined ? `Ask questions to ${data.title}` : "Ask questions to the content"}
 				/>
 				<meta name="description" content={data.title!== undefined? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"} />
-				{data.source_type!==undefined ? (data.source_type === "yt" ? <meta name="twitter:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta name="twitter:image" content={Twitter} />): <meta name="twitter:image" content={`https://i.ibb.co/4g2Jtvc/home.png`} /> }
-				{data.source_type!== undefined ? (data.source_type === "yt" ? <meta property="og:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta property="og:image" content={Twitter} />) : <meta property="og:image" content={`https://i.ibb.co/4g2Jtvc/home.png`} />}
+				{/* {data.source_type!==undefined ? (data.source_type === "yt" ? <meta name="twitter:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta name="twitter:image" content={Twitter} />): <meta name="twitter:image" content={`homepage.png`} /> }
+				{data.source_type!== undefined ? (data.source_type === "yt" ? <meta property="og:image" content={`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`} /> : <meta property="og:image" content={Twitter} />) : <meta property="og:image" content={`homepage.png`} />} */}
+			
 				<meta name="twitter:description" content={data.title!== undefined ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
 				/>
 				<meta property="og:url" content={location.href} />
