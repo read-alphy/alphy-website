@@ -21,7 +21,7 @@ import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
 import WelcomeForm from './components/WelcomeForm';
 import { set } from 'lodash';
-
+import { HelmetProvider } from 'react-helmet-async';
 
 
 
@@ -185,10 +185,12 @@ if (currentUser && creditcalled!==true) {
 							</div>
 							</div>
 							} */}
+							<HelmetProvider>
 		<Helmet>
 			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
 			<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
 		</Helmet> 
+		</HelmetProvider>
 			<Elements stripe={stripePromise}>
 				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 					<>
