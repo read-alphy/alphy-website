@@ -71,7 +71,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 								></div>
 							</div>
 
-							<div className="col-span-2 lg:col-span-1 text-xs ">
+							<div className="col-span-2 lg:col-span-1 justify-start text-xs ">
 							
 								
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (

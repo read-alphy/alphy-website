@@ -547,7 +547,7 @@ function WelcomeFeed(props) {
 							${isLoading
 									? 'lg:grid-cols-2 xl:grid-cols-2'
 									: data.length === 1
-										? 'lg:grid-cols-1 xl:grid-cols-1'
+										? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
 										: 'lg:grid-cols-2 xl:grid-cols-2'
 								}
 							gap-4
@@ -585,7 +585,7 @@ function WelcomeFeed(props) {
 							${isLoadingPersonal
 									? 'lg:grid-cols-2 xl:grid-cols-2'
 									: data.length === 1
-										? 'lg:grid-cols-1 xl:grid-cols-1'
+										? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
 										: 'lg:grid-cols-2 xl:grid-cols-2'
 								}
 							gap-4
@@ -644,7 +644,7 @@ function WelcomeFeed(props) {
 							${isLoadingPersonal
 									? 'lg:grid-cols-2 xl:grid-cols-2'
 									: data.length === 1
-										? 'lg:grid-cols-1 xl:grid-cols-1'
+										? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
 										: 'lg:grid-cols-2 xl:grid-cols-2'
 								}
 							gap-4

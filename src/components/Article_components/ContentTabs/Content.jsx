@@ -46,7 +46,7 @@ export default function Content(props) {
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	const [showReportIssue, setShowReportIssue] = useState(false);
 	const [showRerportIssueError, setShowReportIssueError] = useState(false);
-	const [language, setLanguage] = useState(props.data.summaries !== undefined && props.data.summaries.length > 1 && props.data.lang !== undefined ? props.data.summaries[0].lang : 'en')
+	const [language, setLanguage] = useState(props.data.summaries !== undefined && props.data.summaries.length > 1 && props.data.lang !== undefined ? props.data.lang : 'en')
 	const [translationMessage, setTranslationMessage] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
