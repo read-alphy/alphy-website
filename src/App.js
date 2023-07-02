@@ -21,7 +21,7 @@ import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
 import WelcomeForm from './components/WelcomeForm';
 import { set } from 'lodash';
-import { HelmetProvider } from 'react-helmet-async';
+
 
 
 
