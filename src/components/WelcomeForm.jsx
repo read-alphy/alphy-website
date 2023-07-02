@@ -14,7 +14,7 @@ export default function WelcomeForm({setShowWelcomeForm}){
   const [forWhat, setForWhat] = useState("")
   const [showform, setShowForm] = useState(true)
 
-
+console.log("hey")
   const {currentUser} = useAuth()
   if(currentUser!==null){
   var metadata = currentUser.metadata
