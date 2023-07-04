@@ -315,7 +315,7 @@ export default function QuestionAnswering(props) {
 						) : null}
 					</div>
 
-					{window.innerWidth > 420
+					{window.innerWidth > 400
 
 						&&
 
