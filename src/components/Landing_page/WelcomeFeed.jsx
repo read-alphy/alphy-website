@@ -242,7 +242,7 @@ function WelcomeFeed(props) {
 			setMyUploads(false)
 			setMyBookmarks(false)
 			setPlaylists(true)
-			localStorage.setItem("feedTab", "playlists")
+			//localStorage.setItem("feedTab", "playlists")
 
 		}
 

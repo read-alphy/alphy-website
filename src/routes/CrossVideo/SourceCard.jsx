@@ -31,7 +31,7 @@ const showDialog = () => {
 
     return(
         <div className="">
-        <div onClick={showDialog} className="rounded-lg border border-zinc-200 w-[240px] h-[220px] md:w-[320px] md:h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
+        <div onClick={showDialog} className="rounded-lg border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkMode w-[240px] h-[220px] md:w-[320px] md:h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
             <div className=" flex flex-row mt-4">
                     <div className={`min-w-[100px] max-w-[100px] mr-3 `}>
                                                 <div
@@ -88,8 +88,8 @@ const showDialog = () => {
             </div>
             
         </div>
-        {height>310 &&
-            <div className="absolute  bottom-0 rounded-lg border-b border-b-zinc-300 w-[220px] md:w-[298px] ml-[2px] h-20 bg-gradient-to-t from-zinc-50 to-transparent pointer-events-none">
+        {
+            <div className={`${height<310 &&"hidden"} absolute  bottom-0 rounded-lg border-b border-b-zinc-300 dark:border-b-mildDarkMode w-[220px] md:w-[316px] ml-[2px] h-20 bg-gradient-to-t from-zinc-50 dark:from-mildDarkMode to-transparent pointer-events-none`}>
 
            {/*   <p className="z-50 items-center text-center justify-center pt-12 flex  mx-auto">
                 <span className="text-green-400 underline rounded-full px-2 py-2 text-xs font-bold">Show More
