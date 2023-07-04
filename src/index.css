@@ -30,6 +30,16 @@ body {
 	display: none; /* Chrome, Safari, and Opera */
   }
 
+  .playlist-search{
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* Internet Explorer and Edge */
+
+  }
+
+  .playlist-search::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, and Opera */
+  }
+
 .answer-area li {
 	font-weight: 400;
 	margin: 10px;

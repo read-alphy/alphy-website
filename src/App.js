@@ -19,9 +19,7 @@ import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
-import WelcomeForm from './components/WelcomeForm';
-import { set } from 'lodash';
-
+import CrossVideo from './routes/CrossVideo/CrossVideo';
 
 
 
@@ -51,6 +49,7 @@ function App() {
 	const [contentName, setContentName] = useState("")
 	const [collapsed, setCollapsed] = useState(false);
 	const [idToken, setIdToken] = useState("")
+	const [userPlaylists, setUserPlaylists] = useState([])
 	
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
@@ -102,9 +101,16 @@ useEffect(() => {
 			setShowWelcomeForm(true)
 			localStorage.setItem('welcomeForm', 'false')
 		}
+
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists?user_id=${currentUser.uid}`).then((response) => {
+			
+			setUserPlaylists(response.data)
+		})
 	}
+	
 
 }, 1000)
+
 
 
 if (currentUser && creditcalled!==true) {
@@ -207,7 +213,7 @@ if (currentUser && creditcalled!==true) {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} />} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userPlaylists={userPlaylists}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
@@ -227,6 +233,15 @@ if (currentUser && creditcalled!==true) {
 									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
 								}
 							/>
+
+							<Route path="/playlist/:playlist_ID" element={
+							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} />
+							}></Route>
+								<Route path="/playlist/createPlaylist" element={
+								
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists}/>
+							
+							}> </Route>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
@@ -244,7 +259,7 @@ if (currentUser && creditcalled!==true) {
 							{/* <Route path="/prices" element={<Prices />} /> */}
 							{/* <Route path="/checkout" element={<CheckOut />} /> */}
 							
-
+								
 							<Route path="*" element={<NotFound to="/404"/>} />
 							<Route path="/404" element={<NotFound />} />
 						</Routes>

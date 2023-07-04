@@ -10,7 +10,7 @@ import { useState } from 'react';
 import WelcomePopup from '../components/Landing_page/WelcomePopup.jsx';
 
 
-function Home({hasActiveSub,currentUser,credit}) {
+function Home({hasActiveSub,currentUser,credit,userPlaylists}) {
 	const urlParams = new URLSearchParams(window.location.search);
 
 	const resetPassword = (urlParams.get('mode')=="resetPassword");
@@ -51,7 +51,7 @@ function Home({hasActiveSub,currentUser,credit}) {
 				<meta content="../../public/homepage.png" property="og:image" />
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
-			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} />
+			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userPlaylists={userPlaylists}/>
 {/* 			{showMessage &&
 				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
 			} */}

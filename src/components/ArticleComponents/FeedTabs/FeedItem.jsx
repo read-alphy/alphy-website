@@ -2,8 +2,11 @@ import './FeedItem.css';
 import Twitter from '../../../img/twitter_spaces.png';
 import axios from 'axios';
 import { useState } from 'react';
+import {Button} from "@material-tailwind/react";
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { set } from 'lodash';
 
-const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => {
+const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed,fromPlaylist, dataPlaylist,setDataPlaylist,sourceIDsPlaylist,setSourceIDsPlaylist}) => {
 	const source_id = item.source_id;
 	let formattedDate = ""
 	const inputDate = item.added_ts.substring(0, 10)
@@ -44,22 +47,41 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
-				<a href={`/${item.source_type}/${source_id}`} >
+				<a href={fromPlaylist===undefined && `/${item.source_type}/${source_id}`} >
 					<div className="flex w-full ">
 						<div
-							className={`grid grid-cols-3 lg:grid-cols-2 flex  flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-10 transform sm:hover:translate-x-2  mr-auto ml-auto`}
+							className={`grid ${fromPlaylist==="playlist" ? "grid-cols-4 cursor-default" : "grid-cols-3"} ${fromPlaylist===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${dataPlaylist!==undefined && dataPlaylist.includes(item) && fromPlaylist==="search" && "border-4 border-green-400"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
 							onClick={() => {
 
 
 								// navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
 
-								setCollapsed(true)
+								if(fromPlaylist===undefined){ setCollapsed(true)}
+								else{
+									if(fromPlaylist==="search"){
+									if(dataPlaylist.includes(item)){
+										const index = dataPlaylist.indexOf(item)
+										dataPlaylist.splice(index,1)
+										setDataPlaylist([...dataPlaylist])
+										const index2 = sourceIDsPlaylist.indexOf(item.source_id)
+										sourceIDsPlaylist.splice(index2,1)
+										setSourceIDsPlaylist([...sourceIDsPlaylist])
+
+									}
+									else{
+										setDataPlaylist([...dataPlaylist,item])
+										setSourceIDsPlaylist([...sourceIDsPlaylist,item.source_id])
+									}
+								}
+							
+								
+							}
 							}}
 							target="_blank"
 						>
-							<div className={`col-span-1 min-w-[100px] min-w-[100px] max-w-[300px] mr-3`}>
+							<div className={`col-span-1  min-w-[50px] max-w-[300px] mr-3`}>
 								<div
-									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
+									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
 									style={{
 										backgroundImage: `url(${imageUrl})`,
 										paddingBottom: '50%',
@@ -71,7 +93,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 								></div>
 							</div>
 
-							<div className="col-span-2 lg:col-span-1 justify-start text-xs ">
+							<div className={`col-span-2 ${!fromPlaylist && "lg:col-span-1"} justify-start text-xs`} >
 							
 								
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
@@ -85,6 +107,27 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 							</div>
+
+{fromPlaylist==="playlist" &&
+							<div className="justify-center items-center flex">
+								<RemoveCircleOutlineIcon
+								className="cursor-pointer"
+								onClick={ () => {
+									if(dataPlaylist.includes(item)){
+										const index = dataPlaylist.indexOf(item)
+										dataPlaylist.splice(index,1)
+										setDataPlaylist([...dataPlaylist])
+
+										const index2 = sourceIDsPlaylist.indexOf(item.source_id)
+										sourceIDsPlaylist.splice(index2,1)
+										setSourceIDsPlaylist([...sourceIDsPlaylist])
+									}
+								
+								}	
+								}
+								></RemoveCircleOutlineIcon>
+							</div>
+							}
 						</div>
 					</div>
 				</a>
@@ -130,11 +173,11 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 							  </svg>
 							  :
 								<svg onClick={removeBookmark} className="w-6 text-zinc-600 opacity-50 dark:text-zinc-200 cursor-pointer" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" title="Remove Bookmark" alt="Remove Bookmark">
-  <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
-  <title className="border-0">Remove bookmark</title>
-</svg>
-}
-</div>
+									<path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
+									<title className="border-0">Remove bookmark</title>
+									</svg>
+									}
+									</div>
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
@@ -174,7 +217,7 @@ const FeedItem = ({ item, setCollapsed, myBookmarks, currentUser,sideFeed }) => 
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
-								<div className="text-sm  text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal underline">{item.title}</div>
+								<div className="text-sm  text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal underline">{item.title} </div>
 								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">Time added: {formattedDate}</div>
 
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}

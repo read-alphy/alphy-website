@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useRef, useCallback } from 'react';
 import { useEffect } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import FeedItem from '../Article_components/FeedTabs/FeedItem';
+import FeedItem from '../ArticleComponents/FeedTabs/FeedItem';
 import axios from 'axios';
-import SkeletonItem from '../Article_components/FeedTabs/SkeletonItem';
+import SkeletonItem from '../ArticleComponents/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { set } from 'lodash';
@@ -58,6 +58,7 @@ function WelcomeFeed(props) {
 	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
 	const [firstTimeBookmarks, setFirstTimeBookmarks] = useState(true);
 	const [myWorks, setMyWorks] = useState(true);
+	const [playlists, setPlaylists] = useState(false)
 
 
 
@@ -67,7 +68,7 @@ function WelcomeFeed(props) {
 
 	let calledAndEmpty = true
 
-
+	console.log(props.userPlaylists)
 
 	const navigate = useNavigate();
 	const audioRef = useRef(null);
@@ -186,6 +187,7 @@ function WelcomeFeed(props) {
 			setGlobal(true)
 			setMyWorks(false)
 			setMyUploads(false)
+			setPlaylists(false)
 			setMyBookmarks(false)
 			localStorage.setItem("feedTab", "global")
 		
@@ -199,6 +201,7 @@ function WelcomeFeed(props) {
 			setMyWorks(true)
 			setMyUploads(false)
 			setMyBookmarks(false)
+			setPlaylists(false)
 			localStorage.setItem("feedTab", "my_works")
 
 			
@@ -211,6 +214,7 @@ function WelcomeFeed(props) {
 		else if (state == "my_uploads") {
 			setGlobal(false)
 			setMyWorks(false)
+			setPlaylists(false)
 			setMyUploads(true)
 			setMyBookmarks(false)
 			localStorage.setItem("feedTab", "my_uploads")
@@ -223,11 +227,22 @@ function WelcomeFeed(props) {
 			setGlobal(false)
 			setMyWorks(false)
 			setMyUploads(false)
+			setPlaylists(false)
 			setMyBookmarks(true)
 			localStorage.setItem("feedTab", "my_bookmarks")
 
 			setOffsetBookmarks(0)
 			getDataBookmarks(0, true, true);
+
+		}
+
+		else if (state == "playlists") {
+			setGlobal(false)
+			setMyWorks(false)
+			setMyUploads(false)
+			setMyBookmarks(false)
+			setPlaylists(true)
+			localStorage.setItem("feedTab", "playlists")
 
 		}
 
@@ -446,6 +461,9 @@ function WelcomeFeed(props) {
 
 					 <li class="w-1/4 sm:w-1/4 lg:w-[150px]">
 						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+					</li>
+					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
+						<button onClick={() => navigateFeeds("playlists")} class={`inline-block p-1 py-4 sm:p-4 ${playlists ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Playlists</button>
 					</li>
 
 					
@@ -962,9 +980,15 @@ function WelcomeFeed(props) {
 
 					</div>
 				}
+{playlists && props.userPlaylists!== undefined&& props.userPlaylists.length>0 &&
+	<div className="w-full flex flex-col items-center">
+		{props.userPlaylists.map((item, index) => <p key={index}><a href={`/playlist/${item.uid}`}>{item.name}</a></p>)}
+
 
 			</div>
+}
 
+</div>
 
 
 		</div>

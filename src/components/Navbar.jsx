@@ -103,16 +103,17 @@ function Navbar({ collapsed, setCollapsed }) {
 	// boolean to check if the user is in the /yt/id or /sp/id
 	const isYt = useLocation().pathname.includes('/yt');
 	const isSp = useLocation().pathname.includes('/sp');
-	const isUp= useLocation().pathname.includes('/up');
+	const isUp = useLocation().pathname.includes('/up');
+	const isPlaylist = useLocation().pathname.includes('/playlist');
 
 	return (
-<div className={`items-center ${isYt || isSp || isUp ? "" : "mx-auto max-w-[1200px]"} justify-between dark:bg-darkMode`}>
+<div className={`items-center ${isYt || isSp || isUp || isPlaylist ? "" : "mx-auto max-w-[1200px]"} justify-between dark:bg-darkMode`}>
 	<div
-		className={`flex dropshadow-l justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
+		className={`flex dropshadow-l justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isPlaylist ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 			}`}
 	>
-		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
-			{collapsed==true	 && (isYt || isSp || isUp) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
+		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp || isPlaylist) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
+			{collapsed==true	 && (isYt || isSp || isUp || isPlaylist) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
 			<Link to="/" className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>
@@ -121,7 +122,7 @@ function Navbar({ collapsed, setCollapsed }) {
 	
 				</div>
 			</Link>
-			{isYt || isSp || isUp ? 
+			{isYt || isSp || isUp || isPlaylist ? 
 				<div className={`hidden lg:flex 3xl:ml-40 lg:ml-20 pr-4 ${collapsed ? " lg:hidden bg-zinc-50 dark:bg-darkMode" : " bg-zinc-100 dark:bg-mildDarkMode  justify-end  "}  `}>
 				<button onClick={() =>setCollapsed(!collapsed) }>
 
