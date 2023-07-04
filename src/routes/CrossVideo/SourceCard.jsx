@@ -1,9 +1,17 @@
 import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import Twitter from '../../img/twitter_spaces.png';
 import React, { useState, useEffect, useRef } from 'react';
+import Dialog from '@mui/material/Dialog';
+import {Button} from "@material-tailwind/react";
+import { Item } from '@radix-ui/react-accordion';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export default function SourceCard({source}) {
-
+    const [openDialog, setOpenDialog] = useState(false);
+    const startTime= Math.floor(source.start)
+    
     let imageUrl
 	if (source.source_type === 'yt') {
 		imageUrl = `https://i.ytimg.com/vi/${source.source_id}/hqdefault.jpg`;
@@ -17,9 +25,13 @@ export default function SourceCard({source}) {
     if (element) {
       height = element.getBoundingClientRect().height;
     }
+const showDialog = () => {
+    setOpenDialog(true);
+    };
+
     return(
         <div className="">
-        <div className="rounded-lg border border-zinc-200 w-[240px] h-[220px] md:w-[320px] md:h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm ">
+        <div onClick={showDialog} className="rounded-lg border border-zinc-200 w-[240px] h-[220px] md:w-[320px] md:h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
             <div className=" flex flex-row mt-4">
                     <div className={`min-w-[100px] max-w-[100px] mr-3 `}>
                                                 <div
@@ -71,10 +83,6 @@ export default function SourceCard({source}) {
                 {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."}
 
 
-        
-               
-
-
                 </p>
 
             </div>
@@ -89,6 +97,33 @@ export default function SourceCard({source}) {
                 </p>   */}
             </div> 
             }
+
+
+            {openDialog && <Dialog className="bg-zinc-50" open={openDialog}
+           >
+            <CloseIcon onClick={() =>setOpenDialog(false)}></CloseIcon>
+                <div className="w-[600px] p-20"  onBlur={() => setOpenDialog(false)}>
+{source.source_type==="yt"&&
+                <iframe
+                className="w-[430px] h-[200px] items-center mx-auto mb-10"
+                        id="player"
+                        title="My YouTube Video "
+                        src={`https://www.youtube.com/embed/${source.source_id}?start=${startTime}`}
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    ></iframe>}
+<p className={`text-green-400 mt-4 mb-4`} >
+
+<TextSnippetIcon/>  Passage
+</p>
+{source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."}
+
+                
+                
+                </div>
+                </Dialog>}
         </div>
     )
 }

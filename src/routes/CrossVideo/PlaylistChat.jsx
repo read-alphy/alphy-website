@@ -89,7 +89,7 @@ const handleKeyDown = (event) => {
 
 
     return(
-        <div className=" max-w-[1000px] grow mx-auto pb-20">
+        <div className=" w-[1000px] max-w-[1000px] grow mx-auto pb-20">
             <div className="grid grid-cols-3 mt-20 w-full ml-10">
                 <div className="col-span-1">
             <p className="text-xl text-zinc-700 dark:text-zinc-300">{title}</p>
@@ -206,16 +206,17 @@ const handleKeyDown = (event) => {
                                                         }}
 
 									/> 
-                                  {<div class={`${answerData.length===0 &&"hidden"} border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+                                  {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                                     </div>
 
 				)}
 
-
-                                    <p className="text-green-400 ml-10 mt-4 mb-4    ">
+                            
+                                    <p className={`text-green-400 ml-10 mt-4 mb-4 ${answerData.length===0 && "hidden"}`} >
 
                                           <TextSnippetIcon/>  Passages
                                 </p>
+                               
                                     <div className="flex flex-row">
                                         
                      
