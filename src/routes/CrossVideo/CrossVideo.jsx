@@ -66,7 +66,7 @@ const handlePlaylist= () => {
 	// disallow creating if the user is not logged in
 
 
-	axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists`, {	
+	axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
 		"name": playlistTitle,
 		"user_id": currentUser.uid,
 		"description": playlistDescription,
