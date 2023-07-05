@@ -1,6 +1,7 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Button, Spinner} from "@material-tailwind/react";
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import TypeIt from 'typeit-react';
 import SourceCard from './SourceCard';
@@ -11,17 +12,53 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-export default function PlaylistChat({data,setData}) {
+import EditIcon from '@mui/icons-material/Edit';
+
+export default function PlaylistChat({data,setData,currentUser}) {
     const [inputValue, setInputValue] = useState("")
     const [isLoadingInside, setIsLoadingInside] = useState(false)
     const [isCleared, setIsCleared] = useState(false)
     const [inputError, setinputError] = useState(false)
     const [answerData, setAnswerData] = useState("")
+    const [i, setI] = useState(0)
+    const [answerReady, setAnswerReady] = useState(false)
+    const title = data.name
+    const description = data.description
+    const tracks = data.tracks
+    const playlistUserID = data.user_id
     
+    const playlistID = data.uid
+   let items = []
+/*    let speed = 20
+    
+    const [visibleWords, setVisibleWords] = useState([]);
+    let words = ""
+    if (answerData.answer !== undefined && answerData.answer.length>0){
+        words = answerData.answer.split(" ")
+    }
+    
+    useEffect(() => {
 
 
+      const intervalId = setInterval(() => {
+        if (i < words.length) {
+        setI(i+1)
+          setVisibleWords([...visibleWords, words[i]]);
+          console.log(visibleWords)
+        } else {
+            if(answerReady===false){
+          setAnswerReady(true)
+          setI(0)
+          setVisibleWords([])
+          clearInterval(intervalId);
+             } }
+      }, speed);
+  
+      return () => clearInterval(intervalId);  // Clean up on unmount
+    }, [words, speed]);
+ */
 
-let items = []
+//remove cursor for trendyol carousel gaps
 const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
 if(elements){
     elements.forEach(element => {
@@ -32,13 +69,10 @@ if(answerData.sources!==undefined){
    items =  answerData.sources.map((source) => <SourceCard source={source} />)
 }
 
-    const title = data.name
-    const description = data.description
-    const tracks = data.tracks
-    const playlistUserID = data.userID
-    const playlistID = data.uid
+
 
 const handleSubmit = () => {
+    
     setIsLoadingInside(true)
      axios.post
     (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistID}/question`,
@@ -64,6 +98,8 @@ const handleSubmit = () => {
         });
 }
     }, 500);
+    
+
 
 }).catch((error) => {
     setinputError(true)
@@ -94,6 +130,12 @@ const handleKeyDown = (event) => {
                 <div className="col-span-1">
             <p className="text-xl text-zinc-700 dark:text-zinc-300">{title}</p>
             <p className="text-md text-zinc-400 dark:text-zinc-500">{description}</p>
+          
+            </div>
+            <div className="col-span-1">
+                {currentUser.uid === playlistUserID && <EditIcon className="cursor-pointer" title={"Edit playlist"}/>}
+                
+    
             </div>
 
             </div>
@@ -196,7 +238,7 @@ const handleKeyDown = (event) => {
                         
                         <QuestionAnswerIcon className="text-green-400 mr-1"/>
                         Answer</p>
-                                                    <TypeIt className="mb-3 text-md"
+                                                   {/*  <TypeIt className="mb-3 text-md"
 
                                                         options={{
                                                             strings: answerData.answer.split('\n'),
@@ -205,7 +247,10 @@ const handleKeyDown = (event) => {
                                                             cursorChar: "",
                                                         }}
 
-									/> 
+									/>  */}
+                                    {<p dangerouslySetInnerHTML={{ __html: answerData.answer }}/> } 
+                                    
+
                                   {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                                     </div>
 
@@ -223,7 +268,9 @@ const handleKeyDown = (event) => {
                                    {answerData.sources!==undefined && isLoadingInside===false && 
                                    (
                                    window.innerWidth>1000 ?
-                                   <Carousel leftArrow={
+                                   <Carousel 
+                                   infinite={true}
+                                   leftArrow={
                                         <div className="mt-40 pr-4 w-8">
                                         <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800"/>
                                         </div>} 

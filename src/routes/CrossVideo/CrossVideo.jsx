@@ -156,7 +156,7 @@ const handlePlaylist= () => {
 
 {isCreatePlaylist ? <PlaylistCreation userPlaylists={userPlaylists} playlistDescription={playlistDescription} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist}  playlistTitle={playlistTitle} setPlaylistDescription={setPlaylistDescription} setPlaylistTitle={setPlaylistTitle} sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist}/>
 
-: isLoading ? null :<PlaylistChat data={data} setData={setData}/>}
+: isLoading ? null :<PlaylistChat data={data} setData={setData} currentUser={currentUser}/>}
 							
 					
 
