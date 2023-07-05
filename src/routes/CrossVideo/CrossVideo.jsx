@@ -89,6 +89,7 @@ const handlePlaylist= () => {
 
 }).then((response) => {
 	navigate(`/playlist/${response.data.uid}`)
+	
 })
 }
 else if(isEditPlaylist){
@@ -98,9 +99,8 @@ else if(isEditPlaylist){
 		"description": playlistDescription,
 		"sources": [...dataPlaylist],
 }).then((response) => {
-	setTimeout(() => {
 	navigate(`/playlist/${response.data.uid}`)
-	}, 3000)
+	localStorage.setItem("playlistEdited", "true")
 
 })
 }

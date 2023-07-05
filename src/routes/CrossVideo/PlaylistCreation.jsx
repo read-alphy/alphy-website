@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import {Button, Input, Textarea} from "@material-tailwind/react";
 import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import PlaylistBot from "../../img/playlist_bot.png"
+
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
 import Divider from '@mui/material/Divider';
@@ -93,14 +96,21 @@ const handleKeyDown = (event) => {
 		}
 	};
     return(
-        <div className="lg:grid lg:grid-cols-5 lg:w-[70vw] lg:mt-10 ">
-            <div className="col-span-2 flex justify-start  min-w-[300px]">
-                <div className=" w-full min-w-[300px] ">
-            <div className="flex items-center flex-col ">
-            <div className=" flex flex-row w-full">
+        <div className="px-4 sm:px-20 lg:px-0 lg:grid lg:grid-cols-5 lg:w-[70vw] lg:mt-10 ">
+        <div className="col-span-2 flex justify-start  min-w-[300px]">
+            <div className=" w-full min-w-[300px] ">
+            <div className="flex flex-col ">
+            
+            <div className="mt-10 lg:mt-0 ">
+                <a className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition"  href={`/`}>
+                <KeyboardArrowLeftIcon fontSize="small" className=""/>
+                <span className="">Go Back</span>
+                </a></div>
+                <div className=" flex flex-row w-full items-center">
+            <div class="relative w-full min-w-[200px] h-12 mt-10 ">
+            
+            <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1">Title</p>
 
-            <div class="relative w-full min-w-[200px] h-12 mt-5 ">
-                <p>Title</p>
             <input value={playlistTitle}
             placeholder="Set a title..."
 							onChange={(event) => setPlaylistTitle(event.target.value)} className="w-full text-l px-2 h-[50px] bg-white border border-zinc-400 focus:border-green-400 focus:outline-none focus:ring-0 rounded-lg"/>
@@ -114,7 +124,7 @@ const handleKeyDown = (event) => {
   
 </div>  
 <div className="w-full">
-                <p className="mt-16 ">Description</p>
+<p className="text-zinc-700 dark:text-zinc-300 mb-2 mt-16 ml-1">Description</p>
                 <textarea className={`min-h-[120px] rounded-lg bg-white border-zinc-400  resize-none text-sm w-full text-top focus:border-green-400 focus:outline-none focus:ring-0`} 
                 value={playlistDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
@@ -129,7 +139,7 @@ const handleKeyDown = (event) => {
                 
                 </div>
                 <div class=" mt-10 border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
-                <p className="mt-10 mb-4">Curate your knowledge hub</p>
+                <p className="mt-4 lg:mt-10 mb-6 text-zinc-700 dark:text-zinc-300 ml-1">Curate your knowledge hub</p>
                 <div className="w-full grid grid-cols-5 lg:grid-cols-6 ">
 				<div class="col-span-5 lg:col-span-6 relative w-full min-w-[200px] h-12">
                     
@@ -179,8 +189,13 @@ const handleKeyDown = (event) => {
 								}
 							</div>
 						)}
-                        {
-                            
+                        {data.length ===0 &&
+                             <p className="mt-5 mb-5 text-zinc-600 dark:text-zinc-300 flex flex-col"> 
+                             <span>         Expand the scope of your knowledge hub by adding new content from the search bar.</span>
+                                      <span className="mt-2">
+                      If you can't find what you are looking for, you can submit new content from the <a className="text-green-400 underline" href="/">main page</a>.
+                      </span>
+                                      </p>
                         }
                
 
@@ -194,9 +209,10 @@ const handleKeyDown = (event) => {
             
             <div className="col-span-3 grid-row-2 flex justify-start  lg:p-10 drop-shadow-sm">
             
-                <div className=" border-l w-full lg:px-10 mx-auto">
-                <p className="mt-5 ml-5 mb-5 text-lg">Knowledge Hub</p>
-                {dataPlaylist.length>0 && <p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>}
+                <div className=" lg:border-l w-full lg:px-10 mx-auto">
+                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">Knowledge Hub</p>
+     <p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>  
+        
 
 
        
@@ -205,7 +221,7 @@ const handleKeyDown = (event) => {
 										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromPlaylist={"playlist"} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist} />
                                         )				
                                         :
-                                        <p className="mt-5 ml-5 mb-5 text-zinc-600 dark:text-zinc-300">Start creating your knowledge hub by adding videos from the search bar on the left. </p>
+                                       null
                 }
 
 

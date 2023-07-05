@@ -8,10 +8,16 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import CloseIcon from '@mui/icons-material/Close';
 
 
-export default function SourceCard({source}) {
-    const [openDialog, setOpenDialog] = useState(false);
+export default function SourceCard({source, tracks, setSelectedSourceCard,selectedSourceCard, forDialog, openDialog,setOpenDialog}) {
+  const setOpenDialogInside = setOpenDialog
     const startTime= Math.floor(source.start)
+   
     
+    
+    const title = tracks[0].find((track) => track.source_id === source.source_id).source.title
+
+  
+
     let imageUrl
 	if (source.source_type === 'yt') {
 		imageUrl = `https://i.ytimg.com/vi/${source.source_id}/hqdefault.jpg`;
@@ -26,11 +32,14 @@ export default function SourceCard({source}) {
       height = element.getBoundingClientRect().height;
     }
 const showDialog = () => {
-    setOpenDialog(true);
+    setOpenDialogInside(true);
+    setSelectedSourceCard(source)
+    
     };
 
     return(
-        <div className="">
+        <div className="container">
+            {!forDialog ? 
         <div onClick={showDialog} className="rounded-lg border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkMode w-[240px] h-[220px] md:w-[320px] md:h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
             <div className=" flex flex-row mt-4">
                     <div className={`min-w-[100px] max-w-[100px] mr-3 `}>
@@ -49,8 +58,8 @@ const showDialog = () => {
 
                                                     </div>
 
-                    <div classNAme="text-lg w-full font-bold">
-                        <p>This is where the title goes
+                    <div classNAme="video-text text-lg w-full font-bold">
+                        <p>{title}
                         </p>
 
                     </div>
@@ -88,21 +97,11 @@ const showDialog = () => {
             </div>
             
         </div>
-        {
-            <div className={`${height<310 &&"hidden"} absolute  bottom-0 rounded-lg border-b border-b-zinc-300 dark:border-b-mildDarkMode w-[220px] md:w-[316px] ml-[2px] h-20 bg-gradient-to-t from-zinc-50 dark:from-mildDarkMode to-transparent pointer-events-none`}>
+   :
 
-           {/*   <p className="z-50 items-center text-center justify-center pt-12 flex  mx-auto">
-                <span className="text-green-400 underline rounded-full px-2 py-2 text-xs font-bold">Show More
-                </span>
-                </p>   */}
-            </div> 
-            }
-
-
-            {openDialog && <Dialog className="bg-zinc-50" open={openDialog}
-           >
-            <CloseIcon onClick={() =>setOpenDialog(false)}></CloseIcon>
-                <div className="w-[600px] p-20"  onBlur={() => setOpenDialog(false)}>
+            <div>
+            <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer" onClick={() =>setOpenDialog(false)}></CloseIcon>
+                <div className="w-[600px] py-10 px-10 mt-4"  onBlur={() => setOpenDialog(false)}>
 {source.source_type==="yt"&&
                 <iframe
                 className="w-[430px] h-[200px] items-center mx-auto mb-10"
@@ -114,16 +113,20 @@ const showDialog = () => {
                         frameBorder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     ></iframe>}
-<p className={`text-green-400 mt-4 mb-4`} >
+<p className={`text-green-400 mt-4 mb-4 px-10`} >
 
 <TextSnippetIcon/>  Passage
 </p>
+<p className="px-10">
 {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."}
+</p>
 
                 
                 
                 </div>
-                </Dialog>}
+                </div>
+                
+            }
         </div>
     )
 }

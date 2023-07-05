@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef } from 'react';
 import {Button, Spinner} from "@material-tailwind/react";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +7,8 @@ import TypeIt from 'typeit-react';
 import SourceCard from './SourceCard';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import Dialog from '@mui/material/Dialog';
+
 import { Carousel } from '@trendyol-js/react-carousel';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -20,45 +22,25 @@ export default function PlaylistChat({data,setData,currentUser}) {
     const [isCleared, setIsCleared] = useState(false)
     const [inputError, setinputError] = useState(false)
     const [answerData, setAnswerData] = useState("")
+    const [selectedSourceCard, setSelectedSourceCard] = useState("")
+    const [openDialog, setOpenDialog] = useState(false);
+    const [tracks, setTracks] = useState([data.tracks!==undefined ? data.tracks : []])
     const [i, setI] = useState(0)
     const navigate = useNavigate()
-    const [answerReady, setAnswerReady] = useState(false)
+    const ref = useRef();
     const title = data.name
     const description = data.description
-    const tracks = data.tracks
+ 
+    
     const playlistUserID = data.user_id
     
     const playlistID = data.uid
-   let items = []
-/*    let speed = 20
-    
-    const [visibleWords, setVisibleWords] = useState([]);
-    let words = ""
-    if (answerData.answer !== undefined && answerData.answer.length>0){
-        words = answerData.answer.split(" ")
+   
+
+    if(localStorage.getItem("playlistEdited")==="true"){
+        localStorage.setItem("playlistEdited","false")
+        window.location.reload()
     }
-    
-    useEffect(() => {
-
-
-      const intervalId = setInterval(() => {
-        if (i < words.length) {
-        setI(i+1)
-          setVisibleWords([...visibleWords, words[i]]);
-          console.log(visibleWords)
-        } else {
-            if(answerReady===false){
-          setAnswerReady(true)
-          setI(0)
-          setVisibleWords([])
-          clearInterval(intervalId);
-             } }
-      }, speed);
-  
-      return () => clearInterval(intervalId);  // Clean up on unmount
-    }, [words, speed]);
- */
-
 //remove cursor for trendyol carousel gaps
 const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
 if(elements){
@@ -66,14 +48,12 @@ if(elements){
         element.classList.add('cursor-default');
       });
 }
-if(answerData.sources!==undefined){
-   items =  answerData.sources.map((source) => <SourceCard source={source} />)
-}
+
 
 
 
 const handleSubmit = () => {
-    
+    setAnswerData("")
     setIsLoadingInside(true)
      axios.post
     (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistID}/question`,
@@ -128,6 +108,11 @@ const handleEdit = () => {
     navigate(`/playlist/editPlaylist/${data.uid}`)
 }
 
+
+
+
+
+
     return(
         <div className=" w-[1000px] max-w-[1000px] grow mx-auto pb-20">
             <div className="grid grid-cols-3 mt-20 w-full ml-10">
@@ -158,7 +143,7 @@ const handleEdit = () => {
                         type="text"
                         id="questionAnswering"
                         placeholder="Ask anything to your knowledge hub..."
-                        className="pr-10 placeholder:italic peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
+                        className="pr-10 placeholder:italic peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
                 
                     {inputValue.length > 0 ? (
                         <div
@@ -287,7 +272,7 @@ const handleEdit = () => {
                                             <ArrowForwardIosIcon className="cursor-pointer text-zinc-800"/>
                                             </div>} 
                                    className="cursor-default" show={2.5} slide={1} transition={0.5}>
-                            {answerData.sources.map((source) => <SourceCard source={source} />)}
+                            {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
                                     
                                    </Carousel>
                                    :
@@ -298,12 +283,24 @@ const handleEdit = () => {
                                          rightArrow={<div className="mt-40 pl-2 w-8">
                                          <ArrowForwardIosIcon className="cursor-pointer text-zinc-800"/>
                                          </div>} className="cursor-default" show={1.5} slide={1} transition={0.5}>
-                                   {answerData.sources.map((source) => <SourceCard source={source} />)}
-                                           
+                                   {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)} 
                                           </Carousel>
                                 
                                 )
                             }
+
+                           <Dialog open={openDialog} onClose={() => setOpenDialog(false)} >
+                            {answerData.sources!==undefined && answerData.sources.map((source) => 
+                          
+                              <div ref={ref}>
+                                {source===selectedSourceCard &&
+                            <SourceCard forDialog={true} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
+                        }
+                            </div>
+                        
+                            )} 
+                               
+                            </Dialog>  
             </div>
             </div>
             </div>
