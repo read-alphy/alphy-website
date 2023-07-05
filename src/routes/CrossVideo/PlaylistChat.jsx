@@ -21,6 +21,7 @@ export default function PlaylistChat({data,setData,currentUser}) {
     const [inputError, setinputError] = useState(false)
     const [answerData, setAnswerData] = useState("")
     const [i, setI] = useState(0)
+    const navigate = useNavigate()
     const [answerReady, setAnswerReady] = useState(false)
     const title = data.name
     const description = data.description
@@ -123,6 +124,9 @@ const handleKeyDown = (event) => {
     }
 };
 
+const handleEdit = () => {
+    navigate(`/playlist/editPlaylist/${data.uid}`)
+}
 
     return(
         <div className=" w-[1000px] max-w-[1000px] grow mx-auto pb-20">
@@ -133,7 +137,10 @@ const handleKeyDown = (event) => {
           
             </div>
             <div className="col-span-1">
-                {currentUser.uid === playlistUserID && <EditIcon className="cursor-pointer" title={"Edit playlist"}/>}
+                {currentUser!==null && currentUser.uid === playlistUserID && 
+                
+                <EditIcon onClick={handleEdit} className="cursor-pointer" title={"Edit playlist"} />
+                }
                 
     
             </div>

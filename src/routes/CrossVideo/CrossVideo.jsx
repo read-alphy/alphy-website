@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PlaylistCreation from './PlaylistCreation';
 import {Button, Input, Textarea} from "@material-tailwind/react";
 import PlaylistChat from './PlaylistChat';
+import EditPlaylist from './EditPlaylist';
 
 
 
@@ -23,11 +24,16 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	let source_id
 	const {currentUser} = useAuth();
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
-	const [playlistTitle, setPlaylistTitle] = useState( `New Knowledge Hub`);
+	
 	const [called, setCalled] = useState(false);
 	const [sourceIDsPlaylist, setSourceIDsPlaylist] = useState([]);
 	const [dataPlaylist, setDataPlaylist] = useState([]);
-	const [playlistDescription, setPlaylistDescription] = useState("Set a description for your playlist...");
+	const [data, setData] = useState([]);
+	const [playlistInfo, setPlaylistInfo] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [playlistDescription, setPlaylistDescription] = useState("");
+	const [playlistTitle, setPlaylistTitle] = useState("");
+
 	useEffect(() => {
 		if(!windowSizeChecked){
 			if(window.innerWidth<768){
@@ -37,16 +43,24 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	}
 })
 //console log sourceIDsplaylist type
-
-
 const isCreatePlaylist = location.pathname.split('/')[2]==="createPlaylist"
+const isEditPlaylist = location.pathname.split('/')[2]==="editPlaylist"
+const isPlaylist = location.pathname.split('/')[1]==="playlist" && location.pathname.split('/')[2]!=="editPlaylist" && location.pathname.split('/')[2]!=="createPlaylist"
 
 useEffect(() => {
-	if(!isCreatePlaylist && !called){
+	if((isPlaylist || isEditPlaylist) && !called){
 		setIsLoading(true)
-		source_id = location.pathname.split('/')[2]
+		source_id = isPlaylist ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
+		
 		axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}`).then((response) => {
+			
 			setData(response.data)
+			setPlaylistInfo(response.data)
+			setPlaylistDescription(response.data.description)
+			setPlaylistTitle(response.data.name)
+			setDataPlaylist(response.data.tracks)
+			let sources = response.data.tracks.map((item) => item.source_id)
+			setSourceIDsPlaylist([...sources])
 			setIsLoading(false)
 			setCalled(true)
 		}
@@ -65,7 +79,7 @@ const handlePlaylist= () => {
 	// disallow creating if there is a limit on the number of videos to include in a playlist
 	// disallow creating if the user is not logged in
 
-
+	if(isCreatePlaylist){
 	axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
 		"name": playlistTitle,
 		"user_id": currentUser.uid,
@@ -77,22 +91,21 @@ const handlePlaylist= () => {
 	navigate(`/playlist/${response.data.uid}`)
 })
 }
-	
+else if(isEditPlaylist){
+	axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistInfo.uid}`, {
+		"name": playlistTitle,
+		"user_id": currentUser.uid,
+		"description": playlistDescription,
+		"sources": [...dataPlaylist],
+}).then((response) => {
+	setTimeout(() => {
+	navigate(`/playlist/${response.data.uid}`)
+	}, 3000)
 
-
+})
+}
+}
 	
-	
-
-	const [data, setData] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-
-	
-	
-	
-
-	
-
-
 
 
 	const handleCollapse = () => {
@@ -127,9 +140,9 @@ const handlePlaylist= () => {
 				<button onClick={handleCollapse }>
 
 		
-<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
+			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
 
 			</button			>
 			</div> 
@@ -154,19 +167,20 @@ const handlePlaylist= () => {
 						}}`}
 				>
 
-{isCreatePlaylist ? <PlaylistCreation userPlaylists={userPlaylists} playlistDescription={playlistDescription} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist}  playlistTitle={playlistTitle} setPlaylistDescription={setPlaylistDescription} setPlaylistTitle={setPlaylistTitle} sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist}/>
+				{isCreatePlaylist && <PlaylistCreation userPlaylists={userPlaylists} playlistDescription={playlistDescription} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist}  playlistTitle={playlistTitle} setPlaylistDescription={setPlaylistDescription} setPlaylistTitle={setPlaylistTitle} sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist}/>}
 
-: isLoading ? null :<PlaylistChat data={data} setData={setData} currentUser={currentUser}/>}
+				{(!isCreatePlaylist && !isEditPlaylist) ? isLoading ? null :<PlaylistChat data={data} setData={setData} currentUser={currentUser}/> : null}
+				{isEditPlaylist && <EditPlaylist playlistInfo={playlistInfo} setPlaylistInfo={setPlaylistInfo} userPlaylists={userPlaylists} playlistDescription={playlistDescription} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist}  playlistTitle={playlistTitle} setPlaylistDescription={setPlaylistDescription} setPlaylistTitle={setPlaylistTitle} sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist}/>}
 							
 					
 
 				</div>
 			</div>
-			{isCreatePlaylist && 
-			<div className="z-50 absolute bottom-0 w-full flex h-[40px]">
-            <div className="flex justify-end items-center flex-grow mr-40 pb-40">
+			{isCreatePlaylist || isEditPlaylist &&  
+			<div className="z-50 absolute bottom-0 w-full flex h-[40px] bg-whiteLike dark:bg-darkMode lg:bg-transparent dark:lg:bg-transparent ">
+            <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
 				
-            <Button size="lg" className="bg-green-400 px-5" onClick={handlePlaylist}>Create Playlist</Button>
+            <Button size={window.innerWidth>1000 ? "lg" : 	`md`} className="bg-green-400 px-5" onClick={handlePlaylist}>{isCreatePlaylist ? "Create" : "Save"} Playlist</Button>
 			
             </div>
         </div>

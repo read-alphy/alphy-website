@@ -242,6 +242,12 @@ if (currentUser && creditcalled!==true) {
 								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists}/>
 							
 							}> </Route>
+
+							<Route path="/playlist/editPlaylist/:playlist_ID" element={
+								
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists}/>
+							
+							}> </Route>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
