@@ -113,7 +113,7 @@ const Auth = ({setShowWelcomeForm, showWelcomeForm}) => {
 					setError("Oops! Incorrect email or password.");
 				}
 				else{
-				
+				localStorage.setItem("logged in","true")
 				navigate('/');
 				setIsSubmitting(false)
 			}
@@ -138,7 +138,7 @@ const Auth = ({setShowWelcomeForm, showWelcomeForm}) => {
 		e.preventDefault();
 		auth.loginWithGoogle()
 			.then(() => {
-
+				localStorage.setItem("logged in","true")
 				navigate('/');
 			} 
 			)
@@ -235,83 +235,7 @@ const Auth = ({setShowWelcomeForm, showWelcomeForm}) => {
 	return (
 
 	<div className="flex flex-col items-center justify-center h-[60vh] mt-10 mx-auto items-center w-[300px]">
-		{/* 
-			<h1 className="text-4xl font-bold mb-8">{isRegister ? 'Register' : 'Login'}</h1>
-			{error && <div className="text-red-500 mb-4">{error}</div>}
-			<form className="w-full max-w-sm" onSubmit={isRegister ? handleRegisterWithEmail : handleLoginWithEmail}>
-				<div className="mb-4">
-					<label className="block text-gray-700 dark:text-zinc-300 font-bold mb-2" htmlFor="email">
-						Email
-					</label>
-					<input
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-300 leading-tight focus:outline-none focus:shadow-outline"
-						id="email"
-						type="email"
-						placeholder="Email"
-						value={email}
-						onChange={handleEmailChange}
-						required
-					/>
-				</div>
-				<div className="mb-4">
-					<label className="block text-gray-700 dark:text-zinc-300 font-bold mb-2" htmlFor="password">
-						Password
-					</label>
-					<input
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-300 leading-tight focus:outline-none focus:shadow-outline"
-						id="password"
-						type="password"
-						placeholder="Password"
-						value={password}
-						onChange={handlePasswordChange}
-						required
-					/>
-				</div>
-				{isRegister && (
-					<div className="mb-4">
-						<label className="block text-gray-700 dark:text-zinc-300 font-bold mb-2" htmlFor="confirmPassword">
-							Confirm Password
-						</label>
-						<input
-							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-300 leading-tight focus:outline-none focus:shadow-outline"
-							id="confirmPassword"
-							type="password"
-							placeholder="Confirm Password"
-							required
-						/>
-					</div>
-				)}
-				<button
-					className="bg-green-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-					type="submit"
-				>
-					{isRegister ? 'Register' : 'Login'} with Email
-				</button>
-				<button
-					className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
-					onClick={handleLoginWithGoogle}
-				>
-					<FaGoogle className="inline-block mr-2" />
-					Login with Google
-				</button>
-			</form>
-			<div className="mt-8 flex justify-center">
-				
-				{/* <button
-					className="bg-green-400 hover:bg-blue-700 text-white
-              font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-					onClick={handleLoginWithTwitter}
-				>
-					<FaTwitter className="inline-block mr-2" />
-					Login with Twitter
-				</button> 
-			</div>
-			<div className="mt-4">
-				<Link className="text-zinc-200 hover:text-zinc-200" to={isRegister ? '/auth' : '/auth/register'}>
-					{isRegister ? 'Already have an account? Login here.' : "Don't have an account? Register here."}
-				</Link>
-			</div>
- */}
+		
 {
 verificationMessage==false ?
 (resetPassword=== false ? 

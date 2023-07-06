@@ -105,11 +105,7 @@ export default function Account({ credit,hasActiveSub}) {
 
 
 
-    const handleLoginWithGoogle = () => {
-        auth.loginWithGoogle().then(() => {
-            window.location.reload()
-        })
-    };
+
 
     return (
         <div className="dark:bg-darkMode ">

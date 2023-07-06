@@ -19,9 +19,7 @@ import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
-import WelcomeForm from './components/WelcomeForm';
-import { set } from 'lodash';
-
+import CrossVideo from './routes/CrossVideo/CrossVideo';
 
 
 
@@ -51,6 +49,7 @@ function App() {
 	const [contentName, setContentName] = useState("")
 	const [collapsed, setCollapsed] = useState(false);
 	const [idToken, setIdToken] = useState("")
+	const [userPlaylists, setUserPlaylists] = useState([])
 	
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
@@ -64,15 +63,13 @@ function App() {
 
 
 useEffect(() => {
-
-	
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
 		auth.handleVerifyEmail(oobCode)
 		.then((resp) => {
 			setShowWelcomeForm(true)
-			//window.location.reload()
+			localStorage.setItem("logged in","true")
 		}
 		)	
 	}
@@ -85,14 +82,17 @@ useEffect(() => {
 		
 	if (currentUser !== null && called === false) {
 		var userId = localStorage.getItem("userId")
-	
+		localStorage.setItem("logged in","true")
+
 		setIdToken(currentUser.accessToken)
 		
 		if(userId===null){
 		localStorage.setItem('userId', currentUser.uid)
 		}
-
+		setTimeout (() => {
 		getCustomerInfo(currentUser)
+		}, 500)
+		setCalled(true)
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
 		const registerRecently= parseInt(createdAt) - parseInt(lastLoginAt)
@@ -102,9 +102,15 @@ useEffect(() => {
 			setShowWelcomeForm(true)
 			localStorage.setItem('welcomeForm', 'false')
 		}
+
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
+			setUserPlaylists(response.data)
+		})
 	}
+	
 
 }, 1000)
+
 
 
 if (currentUser && creditcalled!==true) {
@@ -132,6 +138,7 @@ if (currentUser && creditcalled!==true) {
 })
 
 	const getCustomerInfo = async (currentUser) => {
+		
         const idToken = await currentUser.getIdToken().then((idToken) => {
 
         axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
@@ -144,7 +151,6 @@ if (currentUser && creditcalled!==true) {
             
             .then(r => {
 				
-			
                 if (r.data.length>0) {
                     setCalled(true)
                     setHasActiveSub(true)
@@ -209,7 +215,7 @@ if (currentUser && creditcalled!==true) {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} />} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userPlaylists={userPlaylists}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
@@ -229,26 +235,32 @@ if (currentUser && creditcalled!==true) {
 									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
 								}
 							/>
+
+							<Route path="/playlist/:playlist_ID" element={
+							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} />
+							}></Route>
+								<Route path="/playlist/createPlaylist" element={
+								
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists} />
+							
+							}> </Route>
+
+							<Route path="/playlist/editPlaylist/:playlist_ID" element={
+								
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists} setUserPlaylists={setUserPlaylists}/>
+							
+							}> </Route>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth/>}></Route>
-							
-
-							
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>} /> 
-							
-							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>} />
-
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>}/> 
+							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>}/>
 							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
-							<Route path="/plans/checkout/success" element={<Success />}></Route>
-							{/* <Route path="/prices" element={<Prices />} /> */}
-							{/* <Route path="/checkout" element={<CheckOut />} /> */}
-							
-
-							<Route path="*" element={<NotFound to="/404"/>} />
-							<Route path="/404" element={<NotFound />} />
+							<Route path="/plans/checkout/success" element={<Success/>}></Route>
+							<Route path="*" element={<NotFound to="/404"/>}/>
+							<Route path="/404" element={<NotFound />}/>
 						</Routes>
 
 						{location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null}

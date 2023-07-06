@@ -1,22 +1,26 @@
 import React, { Fragment, useState, useRef, useCallback } from 'react';
 import { useEffect } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import FeedItem from '../Article_components/FeedTabs/FeedItem';
+import FeedItem from '../ArticleComponents/FeedTabs/FeedItem';
 import axios from 'axios';
-import SkeletonItem from '../Article_components/FeedTabs/SkeletonItem';
+import SkeletonItem from '../ArticleComponents/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { set } from 'lodash';
 import Robot from "../../img/cute robot grey.png"
-import SeriousRobot from "../../img/serious_robot.png"
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {
 	Button, Popover,
 	PopoverHandler,
 	PopoverContent,
-Carousel
 
 } from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
+import PlaylistCard from './PlaylistCard';
+import PlaylistCreationCard from './PlaylistCreationCard';
+import { Carousel } from '@trendyol-js/react-carousel';
 
 
 
@@ -28,22 +32,22 @@ function WelcomeFeed(props) {
 	const [hasMore, setHasMore] = useState(false);
 	/*const const { currentUser } = useAuth(); */
 	const currentUser = props.currentUser;
+	
 
 	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(false);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
 	const [dataPersonal, setDataPersonal] = useState([]);
-	const [global, setGlobal] = useState(false);
+	const [global, setGlobal] = useState(localStorage.getItem("logged in") ==="true" ? false : true);
 	const [submitted, setSubmitted] = useState(false);
-	const [called, setCalled] = useState(false);
+	const [called, setCalled] 	= useState(false);
 	const [ready, setReady] = useState(false)
 	const [myUploads, setMyUploads] = useState(false)
 	const [offsetUploads, setOffsetUploads] = useState(0);
 	const [hasMoreUploads, setHasMoreUploads] = useState(false);
 	const [dataUploads, setDataUploads] = useState([]);
 	const [isLoadingUploads, setIsLoadingUploads] = useState(true);
-	const [firstTimeUploads, setFirstTimeUploads] = useState(true);
 
 	const [uploadProgress, setUploadProgress] = useState(0)
 	const [uploadDuration, setUploadDuration] = useState("")
@@ -56,18 +60,21 @@ function WelcomeFeed(props) {
 	const [hasMoreBookmarks, setHasMoreBookmarks] = useState(false);
 	const [dataBookmarks, setDataBookmarks] = useState([]);
 	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
-	const [firstTimeBookmarks, setFirstTimeBookmarks] = useState(true);
-	const [myWorks, setMyWorks] = useState(true);
+	const [myWorks, setMyWorks] = useState(localStorage.getItem("logged in") ==="true" ? true : false);
+	const [playlists, setPlaylists] = useState(false)
+
+	const [dataGlobalPlaylists , setDataGlobalPlaylists] = useState([])
+	const [isLoadingGlobalPlaylists, setIsLoadingGlobalPlaylists] = useState(true);
 
 
 
 
 
-
+	console.log(dataPersonal)
 
 	let calledAndEmpty = true
 
-
+	
 
 	const navigate = useNavigate();
 	const audioRef = useRef(null);
@@ -161,9 +168,11 @@ function WelcomeFeed(props) {
 
 
 	useEffect(() => {
+		if (called === false) {
 		setTimeout(() => {
 			setReady(true)
 		}, 2000);
+		}
 
 
 	}, [])
@@ -186,6 +195,7 @@ function WelcomeFeed(props) {
 			setGlobal(true)
 			setMyWorks(false)
 			setMyUploads(false)
+			setPlaylists(false)
 			setMyBookmarks(false)
 			localStorage.setItem("feedTab", "global")
 		
@@ -199,6 +209,7 @@ function WelcomeFeed(props) {
 			setMyWorks(true)
 			setMyUploads(false)
 			setMyBookmarks(false)
+			setPlaylists(false)
 			localStorage.setItem("feedTab", "my_works")
 
 			
@@ -211,6 +222,7 @@ function WelcomeFeed(props) {
 		else if (state == "my_uploads") {
 			setGlobal(false)
 			setMyWorks(false)
+			setPlaylists(false)
 			setMyUploads(true)
 			setMyBookmarks(false)
 			localStorage.setItem("feedTab", "my_uploads")
@@ -223,11 +235,23 @@ function WelcomeFeed(props) {
 			setGlobal(false)
 			setMyWorks(false)
 			setMyUploads(false)
+			setPlaylists(false)
 			setMyBookmarks(true)
 			localStorage.setItem("feedTab", "my_bookmarks")
 
 			setOffsetBookmarks(0)
 			getDataBookmarks(0, true, true);
+
+		}
+
+		else if (state == "playlists") {
+			setGlobal(false)
+			setMyWorks(false)
+			setMyUploads(false)
+			setMyBookmarks(false)
+			setPlaylists(true)
+			getDataGlobalPlaylists(0, true, true);
+			//localStorage.setItem("feedTab", "playlists")
 
 		}
 
@@ -260,6 +284,7 @@ function WelcomeFeed(props) {
 	};
 
 	const getDataPersonal = (offset, firstTime, hasMorePersonal) => {
+		
 		if (!hasMorePersonal) {
 			return;
 		}
@@ -297,6 +322,8 @@ function WelcomeFeed(props) {
 					});
 		};
 	};
+
+
 	const getDataBookmarks = (offsetBookmarks, firstTime, hasMoreBookmarks) => {
 		if (!hasMoreBookmarks) {
 			return;
@@ -335,6 +362,8 @@ function WelcomeFeed(props) {
 					});
 		};
 	};
+
+
 	const getDataUploads = (offsetUploads, firstTimeUploads, hasMoreUploads) => {
 		if (!hasMoreUploads) {
 			return;
@@ -373,6 +402,38 @@ function WelcomeFeed(props) {
 					}))
 		};
 	};
+
+	const getDataGlobalPlaylists = (offsetGlobalPlaylists, firstTime, hasMoreGlobalPlaylists) => {
+		if(!hasMoreGlobalPlaylists){
+			return;
+		}
+		setIsLoadingGlobalPlaylists(true);
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?limit=${limit}&offset=${offsetGlobalPlaylists}`)
+		.then((response) => {
+
+			if(firstTime){
+				setDataGlobalPlaylists(response.data);
+			}
+			else{
+				setDataGlobalPlaylists([...dataGlobalPlaylists, ...response.data]);
+			}
+			setIsLoadingGlobalPlaylists(false);
+			setTimeout(() => {
+				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
+				if(elements){
+					elements.forEach(element => {
+						element.classList.add('cursor-default');
+					});
+			}
+				}, 500);
+
+		})
+		.catch((error) => {
+			setIsLoadingGlobalPlaylists(false);
+		}
+		)
+	}
+
 	const loadMore = () => {
 		if (global) {
 			setOffset(offset + limit);
@@ -399,25 +460,27 @@ function WelcomeFeed(props) {
 
 		handleFileUploadByDrop(acceptedFiles);
 	}, []);
-
-	const handleKeyDown = (event) => {
-		if (event.key === 'Enter') {
-			;
-		}
-	};
-
-	if (called === false) {
+	
+	
+	if (called === false && search.length===0) {
+		
 		setTimeout(() => {
+			if(myWorks){		
 			getDataPersonal(0, true, true);
-
-			setCalled(true);
+		}
+		else{
+			getData(0, true, true);
+		}
+			
 		}, 1000);
+		getDataGlobalPlaylists(0, true, true);
+		setCalled(true);
 
 	}
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
 	return (
-		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl ">
+		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl dark:drop-shadow-xl">
 			{/* 			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
 				Explore the videos other users unlocked with Alphy
 			</h2> */}
@@ -425,40 +488,45 @@ function WelcomeFeed(props) {
 
 
 			<div class="text-sm font-light text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700 ">
-				<ul class="flex flex-row pt-4 overflow-x-scroll w-full">
+				<ul class="flex flex-row pt-4 overflow-x-hidden">
 					
-				
-					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
+			
+								
+					
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("my_works")} class={`inline-block p-1 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
 					</li>
-					<li class="w-1/4 sm:w-1/4 lg:w-[150px]">
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("my_uploads")} class={`relative infline-flex p-1 py-4 sm:p-4  ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
 
 							<span> My Uploads </span>
-							<div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div>
+							
 						</button>
 
 
 					</li>
-					<li class=" w-1/4 sm:w-1/4 lg:w-[150px]">
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("my_bookmarks")} class={`inline-block p-1 sm:p-4 py-4  ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
 					</li>
 
-					 <li class="w-1/4 sm:w-1/4 lg:w-[150px]">
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
+						<button onClick={() => navigateFeeds("playlists")} class={`inline-block p-1 py-4 sm:p-4 ${playlists ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Playlists</button>
+						{/* <div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div> */}
+					</li>
 
-					
 
 
 				</ul>
 			</div>
 
 			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] min-h-[40vh]">
-				{myUploads ? null :
+				{myUploads ||playlists ? null :
 					<form
 						className="flex items-center"
-						onKeyDown={handleKeyDown}
+						
 						onSubmit={(e) => {
 							e.preventDefault();
 
@@ -501,13 +569,13 @@ function WelcomeFeed(props) {
 							<div class="relative w-full min-w-[200px] h-11 ">
 								<input
 									ref={searchInputRef}
-
+									
 									onChange={(e) => {
 										setSearch(e.target.value);
 									}}
 									placeholder="Search our database..."
 									className=" peer w-full h-full bg-white dark:bg-darkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000" />
-								{/* <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-000 before:border-green-400 peer-focus:before:!border-blue-000 after:border-green-400 peer-focus:after:!border-blue-000">Search our database...</label> */}
+							
 
 							</div>
 
@@ -858,7 +926,7 @@ function WelcomeFeed(props) {
 								{dataUploads.length > 10 &&
 									<form
 										className="flex items-center"
-										onKeyDown={handleKeyDown}
+										
 										onSubmit={(e) => {
 											e.preventDefault();
 
@@ -895,7 +963,7 @@ function WelcomeFeed(props) {
 													}}
 													placeholder="Search our database..."
 													className=" peer w-full h-full bg-white dark:bg-darkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000" />
-												{/* <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-000 before:border-green-400 peer-focus:before:!border-blue-000 after:border-green-400 peer-focus:after:!border-blue-000">Search our database...</label> */}
+												
 
 											</div>
 
@@ -962,9 +1030,68 @@ function WelcomeFeed(props) {
 
 					</div>
 				}
+{playlists && props.userPlaylists!== undefined && props.userPlaylists.length>0 &&
+	<div className="">
+		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Playlists
+		<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => navigate("/playlist/createPlaylist")}/>
+		</p>
 
+		
+		<Carousel 
+		show={`${window.innerWidth>1000 ? 4.2 : 3.2}`} slide={1} transition={0.5}
+			infinite={true}
+			leftArrow={
+				<div className=" mt-24 pr-4 w-8">
+				<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
+				</div>} 
+			
+			rightArrow={
+						<div className="mt-24 pl-2 w-8">
+					<ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
+					</div>} 
+					
+					>
+						
+		{props.userPlaylists.map((item, index) => 
+		<div className="flex flex-row">
+			
+		
+		
+		<PlaylistCard key={index} item={item} index={index} currentUser={currentUser}/>
+		</div>
+	
+	)}
+		</Carousel>
+		{<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+
+		{<div>
+		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Playlists</p>
+					<Carousel 
+					show={`${window.innerWidth>1000 ? 4.2 : 3}`} slide={3} transition={0.5}
+						infinite={true}
+						leftArrow={
+							<div className=" mt-24 pr-4 w-8">
+							<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
+							</div>} 
+						
+						rightArrow={
+									<div className="mt-24 pl-2 w-8">
+								<ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
+								</div>} 
+								
+								>
+					{dataGlobalPlaylists.map((item, index) => 
+					
+					<PlaylistCard key={index} item={item}/>
+					)}
+					</Carousel>
+					</div>
+				
+		}
 			</div>
+}
 
+</div>
 
 
 		</div>
