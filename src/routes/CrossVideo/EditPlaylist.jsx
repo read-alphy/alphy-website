@@ -4,7 +4,8 @@ import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import PlaylistBot from "../../img/playlist_bot.png"
+import { useNavigate,useLocation  } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect } from 'react';
@@ -29,10 +30,16 @@ export default function EditPlaylist({ playlistInfo,setPlaylistInfo,playlistDesc
     const [initialCall, setInitialCall] = useState(true);
     const [editBasicInfo, setEditBasicInfo] = useState(false);
     const {currentUser} = useAuth();
+    const location = useLocation();
 
+    
     useEffect   (() => {
+        
         if(currentUser!==null && playlistInfo!==undefined && currentUser.uid !== playlistInfo.user_id){
+            /* if(location.state?.referrer !=="/"){
             navigate("/404")
+            } */
+            /* navigate("/404") */
         }
 
    

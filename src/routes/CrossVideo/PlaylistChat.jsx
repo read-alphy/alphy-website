@@ -5,8 +5,6 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import TypeIt from 'typeit-react';
 import SourceCard from './SourceCard';
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
 import Dialog from '@mui/material/Dialog';
 
 import { Carousel } from '@trendyol-js/react-carousel';
@@ -132,7 +130,7 @@ const handleEdit = () => {
 
             </div>
             <div className="ml-10">
-				<div className="flex items-center pl-1 pr-1 mt-6 xl:mt-8 max-w-[900px] ">
+				<div className="flex items-center pr-1 mt-6 xl:mt-8 max-w-[900px] ">
                 <div className="relative w-full min-w-[40vw] ">
 
                     
@@ -245,7 +243,6 @@ const handleEdit = () => {
 
                                   {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                                     </div>
-
 				)}
 
                             
@@ -264,12 +261,12 @@ const handleEdit = () => {
                                    infinite={true}
                                    leftArrow={
                                         <div className="mt-40 pr-4 w-8">
-                                        <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800"/>
+                                        <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                         </div>} 
                                    
                                    rightArrow={
                                                 <div className="mt-40 pl-2 w-8">
-                                            <ArrowForwardIosIcon className="cursor-pointer text-zinc-800"/>
+                                            <ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                             </div>} 
                                    className="cursor-default" show={2.5} slide={1} transition={0.5}>
                             {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
@@ -278,10 +275,10 @@ const handleEdit = () => {
                                    :
                                    <Carousel leftArrow={
                                     <div className="mt-40 pr-4 w-8">
-                                        <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800"/>
+                                        <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                         </div>} 
                                          rightArrow={<div className="mt-40 pl-2 w-8">
-                                         <ArrowForwardIosIcon className="cursor-pointer text-zinc-800"/>
+                                         <ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                          </div>} className="cursor-default" show={1.5} slide={1} transition={0.5}>
                                    {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)} 
                                           </Carousel>

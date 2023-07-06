@@ -90,15 +90,11 @@ function Navbar({ collapsed, setCollapsed }) {
 			auth.logout();
 			setCollapsed(true);
 			window.location.reload()
+			localStorage.setItem("logged in","false")
 		} catch (error) {
 			console.log(error);
 		}
 	};
-
-	const handleSignIn = () => {
-		// navigate('/auth');
-	};
-
 
 	// boolean to check if the user is in the /yt/id or /sp/id
 	const isYt = useLocation().pathname.includes('/yt');

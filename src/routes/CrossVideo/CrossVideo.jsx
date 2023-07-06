@@ -6,19 +6,17 @@ import PlaylistCreation from './PlaylistCreation';
 import {Button, Input, Textarea} from "@material-tailwind/react";
 import PlaylistChat from './PlaylistChat';
 import EditPlaylist from './EditPlaylist';
-
-
-
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import SaveIcon from '@mui/icons-material/Save';
+import Dialog from '@mui/material/Dialog';
 import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
-
-
 import { Helmet } from "react-helmet";
 
 
 
-function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken,userPlaylists}) {
+
+function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken,userPlaylists,setUserPlaylists}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -33,6 +31,7 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [isLoading, setIsLoading] = useState(false);
 	const [playlistDescription, setPlaylistDescription] = useState("");
 	const [playlistTitle, setPlaylistTitle] = useState("");
+	const [deleteDialog, setDeleteDialog] = useState(false);
 
 	useEffect(() => {
 		if(!windowSizeChecked){
@@ -56,7 +55,12 @@ useEffect(() => {
 			
 			setData(response.data)
 			setPlaylistInfo(response.data)
+			if(response.data.description==="null"){
+				setPlaylistDescription("")
+			}
+			else{		
 			setPlaylistDescription(response.data.description)
+		}
 			setPlaylistTitle(response.data.name)
 			setDataPlaylist(response.data.tracks)
 			let sources = response.data.tracks.map((item) => item.source_id)
@@ -105,8 +109,19 @@ else if(isEditPlaylist){
 })
 }
 }
-	
 
+
+const handleDeletePlaylist = () => {
+	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistInfo.uid}`).then((response) => {
+		const index = userPlaylists.indexOf(playlistInfo)
+		userPlaylists.splice(index,1)
+		setUserPlaylists([...userPlaylists])
+
+		navigate(`/`)
+		
+
+		})
+		}
 
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
@@ -176,13 +191,27 @@ else if(isEditPlaylist){
 
 				</div>
 			</div>
-			{isCreatePlaylist || isEditPlaylist &&  
-			<div className="z-50 absolute bottom-0 w-full flex h-[40px] bg-whiteLike dark:bg-darkMode lg:bg-transparent dark:lg:bg-transparent ">
+			{(isCreatePlaylist || isEditPlaylist) &&  
+			<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed &&window.innerWidth<1000 &&"hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
-				
-            <Button size={window.innerWidth>1000 ? "lg" : 	`md`} className="bg-green-400 px-5" onClick={handlePlaylist}>{isCreatePlaylist ? "Create" : "Save"} Playlist</Button>
+			{isEditPlaylist && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
+            <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-green-400 px-5" onClick={handlePlaylist}><SaveIcon className="mr-2"/>{isCreatePlaylist ? "Create" : "Save"}</Button>
 			
             </div>
+		{deleteDialog &&
+			<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
+				
+				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode rounded-lg items-center text-center justify-center drop-shadow-sm flex-col">
+					<p className="mb-10">You are about to delete this playlist. Would you like to continue?</p>
+					<div className="flex flex-row">
+						<p className="text-green-400 cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
+						<div className="border-r h-full mr-4 ml-4"></div>
+						<p className="text-red-400 cursor-pointer" size="sm" onClick={handleDeletePlaylist}>Delete</p>
+					</div>
+				</div>
+			
+			</Dialog>
+			}
         </div>
 }
 		</div>

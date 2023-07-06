@@ -144,7 +144,7 @@ export default function Welcome({hasActiveSub,credit}) {
 							setLoading(false);
 							setFailed(false)
 							setInputValue('');
-							navigate(`/${video_source}/${videoId}`)
+								navigate(`/${video_source}/${videoId}`)
 							/* 							if (response.status === 200 || response.status === 201 || response.status === 202) {
 															toast.success(
 																'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
@@ -314,7 +314,7 @@ export default function Welcome({hasActiveSub,credit}) {
 						<div>
 							     
 								 <a href="/u/login">
-						<Button  className="bg-zinc-700 px-6 lg:px-10 py-3 dark:bg-green-400 dark:text-zinc-300 text-sm lg:text-[15px]  ">Sign in to submit</Button></a>
+						<Button  className="bg-zinc-700 px-6 xl:px-10 py-3 dark:bg-green-400 dark:text-zinc-300 text-sm lg:text-[15px]  ">Sign in to submit</Button></a>
 						
 						{/* <a
 							className="w-2/3 border-2 border-blueLike px-8 text-center bg-blueLike text-whiteLike py-3 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-90"

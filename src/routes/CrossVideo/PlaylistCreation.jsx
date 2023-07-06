@@ -113,7 +113,7 @@ const handleKeyDown = (event) => {
 
             <input value={playlistTitle}
             placeholder="Set a title..."
-							onChange={(event) => setPlaylistTitle(event.target.value)} className="w-full text-l px-2 h-[50px] bg-white border border-zinc-400 focus:border-green-400 focus:outline-none focus:ring-0 rounded-lg"/>
+							onChange={(event) => setPlaylistTitle(event.target.value)} className="w-full text-l px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-400 focus:border-green-400 focus:outline-none focus:ring-0 rounded-lg"/>
 						
 						 </div>
 
@@ -125,7 +125,7 @@ const handleKeyDown = (event) => {
 </div>  
 <div className="w-full">
 <p className="text-zinc-700 dark:text-zinc-300 mb-2 mt-16 ml-1">Description</p>
-                <textarea className={`min-h-[120px] rounded-lg bg-white border-zinc-400  resize-none text-sm w-full text-top focus:border-green-400 focus:outline-none focus:ring-0`} 
+                <textarea className={`min-h-[120px] rounded-lg bg-white border-zinc-400 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-green-400 focus:outline-none focus:ring-0`} 
                 value={playlistDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
                 placeholder="Set a description for your playlist..."

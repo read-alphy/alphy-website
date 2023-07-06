@@ -63,15 +63,13 @@ function App() {
 
 
 useEffect(() => {
-
-	
 	if(verification){
 		const url = window.location.href;
 		const oobCode = urlParams.get('oobCode');
 		auth.handleVerifyEmail(oobCode)
 		.then((resp) => {
 			setShowWelcomeForm(true)
-			//window.location.reload()
+			localStorage.setItem("logged in","true")
 		}
 		)	
 	}
@@ -84,14 +82,17 @@ useEffect(() => {
 		
 	if (currentUser !== null && called === false) {
 		var userId = localStorage.getItem("userId")
-	
+		localStorage.setItem("logged in","true")
+
 		setIdToken(currentUser.accessToken)
 		
 		if(userId===null){
 		localStorage.setItem('userId', currentUser.uid)
 		}
-
+		setTimeout (() => {
 		getCustomerInfo(currentUser)
+		}, 500)
+		setCalled(true)
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
 		const registerRecently= parseInt(createdAt) - parseInt(lastLoginAt)
@@ -103,7 +104,6 @@ useEffect(() => {
 		}
 
 		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
-			
 			setUserPlaylists(response.data)
 		})
 	}
@@ -138,6 +138,7 @@ if (currentUser && creditcalled!==true) {
 })
 
 	const getCustomerInfo = async (currentUser) => {
+		
         const idToken = await currentUser.getIdToken().then((idToken) => {
 
         axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
@@ -150,7 +151,6 @@ if (currentUser && creditcalled!==true) {
             
             .then(r => {
 				
-			
                 if (r.data.length>0) {
                     setCalled(true)
                     setHasActiveSub(true)
@@ -239,13 +239,13 @@ if (currentUser && creditcalled!==true) {
 							}></Route>
 								<Route path="/playlist/createPlaylist" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists}/>
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists} />
 							
 							}> </Route>
 
 							<Route path="/playlist/editPlaylist/:playlist_ID" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists}/>
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists} setUserPlaylists={setUserPlaylists}/>
 							
 							}> </Route>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
@@ -253,21 +253,12 @@ if (currentUser && creditcalled!==true) {
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth/>}></Route>
-							
-
-							
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>} /> 
-							
-							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>} />
-
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>}/> 
+							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>}/>
 							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
-							<Route path="/plans/checkout/success" element={<Success />}></Route>
-							{/* <Route path="/prices" element={<Prices />} /> */}
-							{/* <Route path="/checkout" element={<CheckOut />} /> */}
-							
-								
-							<Route path="*" element={<NotFound to="/404"/>} />
-							<Route path="/404" element={<NotFound />} />
+							<Route path="/plans/checkout/success" element={<Success/>}></Route>
+							<Route path="*" element={<NotFound to="/404"/>}/>
+							<Route path="/404" element={<NotFound />}/>
 						</Routes>
 
 						{location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null}
