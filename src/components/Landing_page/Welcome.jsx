@@ -45,8 +45,6 @@ export default function Welcome({hasActiveSub,credit}) {
 		
 	};	
 
-
-
 	// set the popover content element
 	const $targetEl = document.getElementById('popoverDescription');
 
