@@ -191,12 +191,12 @@ if (currentUser && creditcalled!==true) {
 							</div>
 							</div>
 							} */}
-							<HelmetProvider>
+							
 		<Helmet>
 			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
 			<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
 		</Helmet> 
-		</HelmetProvider>
+		
 			<Elements stripe={stripePromise}>
 				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
 					<>

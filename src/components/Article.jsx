@@ -13,7 +13,7 @@ import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
-import { HelmetProvider } from 'react-helmet-async';
+
 
 
 function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken}) {
@@ -224,7 +224,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 
 			</button			>
 			</div> */}
-			<HelmetProvider>
+			
 			<Helmet>
 				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
@@ -241,7 +241,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 				/>
 				<meta property="og:url" content={location.href} />
 			</Helmet>  
-			</HelmetProvider>
+			
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
