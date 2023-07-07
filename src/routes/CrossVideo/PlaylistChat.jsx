@@ -1,12 +1,12 @@
 import React from 'react';
 import {useState, useEffect, useRef } from 'react';
-import {Button, Spinner} from "@material-tailwind/react";
+import {Button, Spinner, button} from "@material-tailwind/react";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import TypeIt from 'typeit-react';
 import SourceCard from './SourceCard';
 import Dialog from '@mui/material/Dialog';
-
+import Chip from '@mui/material/Chip';
 import { Carousel } from '@trendyol-js/react-carousel';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -22,6 +22,7 @@ export default function PlaylistChat({data,setData,currentUser}) {
     const [answerData, setAnswerData] = useState("")
     const [selectedSourceCard, setSelectedSourceCard] = useState("")
     const [openDialog, setOpenDialog] = useState(false);
+    
     const [tracks, setTracks] = useState([data.tracks!==undefined ? data.tracks : []])
     const [i, setI] = useState(0)
     const navigate = useNavigate()
@@ -33,6 +34,7 @@ export default function PlaylistChat({data,setData,currentUser}) {
     const playlistUserID = data.user_id
     
     const playlistID = data.uid
+    const buttonRef = useRef(null);
 
 
 
@@ -65,7 +67,7 @@ const handleSubmit = () => {
         },
     }
     ).then((response) => {
-    console.log(response.data)
+    
     setAnswerData(response.data)
     setIsLoadingInside(false)
     setinputError(false)
@@ -108,6 +110,12 @@ const handleEdit = () => {
 }
 
 
+const handleAskPremadeQuestion = (event) => {
+    setInputValue(event.target.innerText)
+    setTimeout(() => {
+    buttonRef.current.click()
+    }, 200);
+}
 
 
 
@@ -177,7 +185,7 @@ const handleEdit = () => {
                     <Button type="submit"
                         onClick={handleSubmit}
                         id="questionButton"
-
+                        ref={buttonRef}
                         className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
 
                         {isLoadingInside ? <Spinner className="h-4 w-4" /> :
@@ -192,8 +200,19 @@ const handleEdit = () => {
 
 
             <div >
+                {(playlistID==="eNb1f_M" && (answerData=="" || isLoadingInside===true)) &&
+                <div className="px-5 mt-10 ">
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>İyi bir uyku düzeni için ne yapmalıyım?</button>
+            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>C vitamininin yararları nelerdir?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>İnsülin direnci nasıl sağlık riskleri bulundurur?</button>
+            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Kanser hastalığına karşı ne gibi önlemler alabilirim?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Bayramın bizim için önemi nedir?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Yüksek tansiyonun kalp ve damarlar üzerindeki etkileri nelerdir?</button>
+            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Uzun bir ömür sürmek ve yaşlanmayı geciktirmek için neler yapabilirim?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Daha sağlıklı bir yaşam sürmenin yollarını bana madde madde açıkla.</button>
 
-                
+            </div>
+        }
             {isLoadingInside ? (
 					<div
 						className="loading mt-5 mb-10 ml-10 w-[900px]"
