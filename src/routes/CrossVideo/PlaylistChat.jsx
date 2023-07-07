@@ -33,7 +33,8 @@ export default function PlaylistChat({data,setData,currentUser}) {
     const playlistUserID = data.user_id
     
     const playlistID = data.uid
-   
+
+
 
     if(localStorage.getItem("playlistEdited")==="true"){
         localStorage.setItem("playlistEdited","false")
@@ -64,7 +65,7 @@ const handleSubmit = () => {
         },
     }
     ).then((response) => {
-    
+    console.log(response.data)
     setAnswerData(response.data)
     setIsLoadingInside(false)
     setinputError(false)
@@ -207,7 +208,7 @@ const handleEdit = () => {
 						{/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
 						<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
 							getBeforeInit={(instance) => {
-								instance.type("Going through the recording to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
+								instance.type("Going through the knowledgebase to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
 
 								// Remember to return it!
 								return instance;
@@ -228,17 +229,9 @@ const handleEdit = () => {
                         
                         <QuestionAnswerIcon className="text-green-400 mr-1"/>
                         Answer</p>
-                                                   {/*  <TypeIt className="mb-3 text-md"
-
-                                                        options={{
-                                                            strings: answerData.answer.split('\n'),
-                                                            html: true,
-                                                            speed: 1,
-                                                            cursorChar: "",
-                                                        }}
-
-									/>  */}
-                                    {<p dangerouslySetInnerHTML={{ __html: answerData.answer }}/> } 
+                                            
+                                    {<p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
+                                 }}/> } 
                                     
 
                                   {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
@@ -254,7 +247,7 @@ const handleEdit = () => {
                                     <div className="flex flex-row">
                                         
                      
-                                   {answerData.sources!==undefined && isLoadingInside===false && 
+                                   {(answerData.sources!==undefined && isLoadingInside===false) && 
                                    (
                                    window.innerWidth>1000 ?
                                    <Carousel 

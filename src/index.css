@@ -42,10 +42,12 @@ body {
 
 .answer-area li {
 	font-weight: 400;
-	margin: 10px;
+	
 	list-style: square;
 
 }
+
+
 
 .answer-area p {
 	padding-bottom: 5px;

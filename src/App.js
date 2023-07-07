@@ -103,7 +103,7 @@ useEffect(() => {
 			localStorage.setItem('welcomeForm', 'false')
 		}
 
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/`).then((response) => {
 			setUserPlaylists(response.data)
 		})
 	}
