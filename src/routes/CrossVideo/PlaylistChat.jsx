@@ -251,7 +251,7 @@ const handleEdit = () => {
                                    (
                                    window.innerWidth>1000 ?
                                    <Carousel 
-                                   infinite={true}
+                                   infinite={false}
                                    leftArrow={
                                         <div className="mt-40 pr-4 w-8">
                                         <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
@@ -262,11 +262,13 @@ const handleEdit = () => {
                                             <ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                             </div>} 
                                    className="cursor-default" show={2.5} slide={1} transition={0.5}>
-                            {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
+                            {answerData.sources.map((source,index) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
                                     
                                    </Carousel>
                                    :
-                                   <Carousel leftArrow={
+                                   <Carousel 
+                                   infinite={false}
+                                   leftArrow={
                                     <div className="mt-40 pr-4 w-8">
                                         <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                         </div>} 
