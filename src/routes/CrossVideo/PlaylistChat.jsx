@@ -32,7 +32,7 @@ export default function PlaylistChat({data,setData,currentUser}) {
  
     
     const playlistUserID = data.user_id
-    
+    const playlistImageLink = data.thumbnail_url
     const playlistID = data.uid
     const buttonRef = useRef(null);
 
@@ -122,8 +122,10 @@ const handleAskPremadeQuestion = (event) => {
 
     return(
         <div className=" w-[1000px] max-w-[1000px] grow mx-auto pb-20">
-            <div className="grid grid-cols-3 mt-20 w-full ml-10">
+            <div className="grid grid-cols-4 mt-20 w-full ml-10">
+            <img width={200} src={playlistImageLink}></img>
                 <div className="col-span-1">
+                
             <p className="text-xl text-zinc-700 dark:text-zinc-300">{title}</p>
             <p className="text-md text-zinc-400 dark:text-zinc-500">{description}</p>
           
@@ -131,7 +133,7 @@ const handleAskPremadeQuestion = (event) => {
             <div className="col-span-1">
                 {currentUser!==null && currentUser.uid === playlistUserID && 
                 
-                <EditIcon onClick={handleEdit} className="cursor-pointer" title={"Edit playlist"} />
+                <EditIcon fontSize="small" onClick={handleEdit} className="cursor-pointer text-zinc-600 dark:text-zinc-300" title={"Edit playlist"} />
                 }
                 
     
