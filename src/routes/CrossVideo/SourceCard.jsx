@@ -38,9 +38,9 @@ const showDialog = () => {
     };
 
     return(
-        <div className="container">
+        <div className="dark:bg-mildDarkmode">
             {!forDialog ? 
-        <div onClick={showDialog} className="rounded-lg border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkMode w-[240px] h-[220px] md:w-[320px] md:h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
+        <div onClick={showDialog} className="rounded-lg border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkmode w-[240px] h-[220px] md:w-[320px] md:h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
             <div className=" flex flex-row mt-4">
                     <div className={`min-w-[100px] max-w-[100px] mr-3 `}>
                                                 <div

@@ -286,7 +286,7 @@ const handleEdit = () => {
                                 )
                             }
 
-                           <Dialog open={openDialog} onClose={() => setOpenDialog(false)} >
+                           <Dialog  open={openDialog} onClose={() => setOpenDialog(false)} >
                             {answerData.sources!==undefined && answerData.sources.map((source) => 
                           
                               <div ref={ref}>
