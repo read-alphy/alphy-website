@@ -470,9 +470,9 @@ function WelcomeFeed(props) {
 		else{
 			getData(0, true, true);
 		}
-		getDataGlobalPlaylists(0, true, true);
-		}, 1000);
 		
+		}, 1000);
+		getDataGlobalPlaylists(0, true, true);
 		setCalled(true);
 
 	}

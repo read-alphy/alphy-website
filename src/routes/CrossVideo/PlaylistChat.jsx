@@ -152,7 +152,7 @@ const handleAskPremadeQuestion = (event) => {
                         type="text"
                         id="questionAnswering"
                         placeholder="Ask anything to your knowledge hub..."
-                        className="pr-10 placeholder:italic peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
+                        className="pr-10 placeholder:italic peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
                 
                     {inputValue.length > 0 ? (
                         <div
