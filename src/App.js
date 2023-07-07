@@ -103,7 +103,7 @@ useEffect(() => {
 			localStorage.setItem('welcomeForm', 'false')
 		}
 
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/`).then((response) => {
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
 			setUserPlaylists(response.data)
 		})
 	}
@@ -179,6 +179,7 @@ if (currentUser && creditcalled!==true) {
 
 		
 		<div className="App bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
+
 	{/* 		{showWelcomeForm && 
 					<div className="fixed inset-0 z-50 flex items-center justify-center ">
 								<div className="fixed inset-0 bg-black opacity-80"></div>

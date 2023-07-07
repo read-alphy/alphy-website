@@ -70,8 +70,7 @@ function WelcomeFeed(props) {
 
 
 
-	console.log(dataPersonal)
-
+	
 	let calledAndEmpty = true
 
 	
@@ -471,9 +470,9 @@ function WelcomeFeed(props) {
 		else{
 			getData(0, true, true);
 		}
-			
-		}, 1000);
 		getDataGlobalPlaylists(0, true, true);
+		}, 1000);
+		
 		setCalled(true);
 
 	}
@@ -1030,13 +1029,20 @@ function WelcomeFeed(props) {
 
 					</div>
 				}
-{playlists && props.userPlaylists!== undefined && props.userPlaylists.length>0 &&
+{playlists && 
+
+
+
 	<div className="">
+		{currentUser &&
+		<div>
+	
 		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Playlists
 		<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => navigate("/playlist/createPlaylist")}/>
 		</p>
 
-		
+		{props.userPlaylists!== undefined && props.userPlaylists.length>0 &&
+		<div>
 		<Carousel 
 		show={`${window.innerWidth>1000 ? 4.2 : 3.2}`} slide={1} transition={0.5}
 			infinite={true}
@@ -1062,7 +1068,13 @@ function WelcomeFeed(props) {
 	
 	)}
 		</Carousel>
-		{<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+		
+		</div>
+		
+}
+
+<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
+</div>}
 
 		{<div>
 		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Playlists</p>
