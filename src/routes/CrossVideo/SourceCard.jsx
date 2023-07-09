@@ -134,7 +134,7 @@ const showDialog = () => {
     return(
         <div className="dark:bg-mildDarkmode">
             {!forDialog ? 
-        <div onClick={showDialog} className="rounded-lg border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkmode w-[240px]  sm:w-[360px] h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
+        <div onClick={showDialog} className="rounded-lg border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkMode w-[240px]  sm:w-[360px] h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
             <div className=" flex flex-row mt-4">
                     <div className={`min-w-[120px] max-w-[120px] mr-3 min-h-[60px] max-h-[60px] overflow-hidden`}>
                                                 <div
@@ -151,7 +151,7 @@ const showDialog = () => {
 
 
                                                     </div>
-
+                                                    
                     <div classNAme=" text-lg w-full font-bold min-h-[80px] max-h-[80px] overflow-y-hidden">
                         <p>{displayTitle}
                         {((displayTitle[displayTitle.length - 1] === "." || displayTitle.substring(displayTitle.length - 1) === "?") || (displayTitle[displayTitle.length - 1] === ",") || (displayTitle[displayTitle.length - 1] === "!") || (displayTitle[displayTitle.length - 1] === ":") || (displayTitle[displayTitle.length - 1] === "...")) ? "" : "..."}
