@@ -22,14 +22,17 @@ export default function PlaylistChat({data,setData,currentUser}) {
     const [answerData, setAnswerData] = useState("")
     const [selectedSourceCard, setSelectedSourceCard] = useState("")
     const [openDialog, setOpenDialog] = useState(false);
+    const [fullWidth, setFullWidth] = useState(true);
     
     const [tracks, setTracks] = useState([data.tracks!==undefined ? data.tracks : []])
     const [i, setI] = useState(0)
     const navigate = useNavigate()
+    const [expanded, setExpanded] = useState(false);
     const ref = useRef();
     const title = data.name
     const description = data.description
- 
+    
+    let displayText
     
     const playlistUserID = data.user_id
     const playlistImageLink = data.thumbnail_url
@@ -115,32 +118,44 @@ const handleAskPremadeQuestion = (event) => {
     setTimeout(() => {
     buttonRef.current.click()
     }, 200);
+} 
+
+if(description!==undefined){
+ displayText = expanded ? description : `${description.slice(0, 50)}...`;
 }
-
-
+const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
 
 
     return(
-        <div className=" w-[1000px] max-w-[1000px] grow mx-auto pb-20">
-            <div className="grid grid-cols-4 mt-20 w-full ml-10">
-            <img width={200} src={playlistImageLink}></img>
-                <div className="col-span-1">
-                
-            <p className="text-xl text-zinc-700 dark:text-zinc-300">{title}</p>
-            <p className="text-md text-zinc-400 dark:text-zinc-500">{description}</p>
+        <div className="lg:w-[1000px] max-w-[1000px] grow mx-auto pb-20">
+            <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10">
+            
+                <div className="col-span-4 sm:col-span-3 flex flex-row">
+                <img className={`${"hidden" } sm:block w-[200px]`} src={playlistImageLink}/>
+                <div className="sm:ml-6 ">
+            <p className="text-xl text-zinc-700 dark:text-zinc-300 ">{title}</p>
+            {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
+            <p className={`text-md text-zinc-400 dark:text-zinc-500 ${"hidden sm:block"} `} >{description}</p>
+
+            </div>
           
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 sm:ml-6">
                 {currentUser!==null && currentUser.uid === playlistUserID && 
                 
-                <EditIcon fontSize="small" onClick={handleEdit} className="cursor-pointer text-zinc-600 dark:text-zinc-300" title={"Edit playlist"} />
+                <div className="flex flex-row" >
+                    <p  onClick={handleEdit} className="cursor-pointer text-zinc-600 dark:text-zinc-300 underline" >Edit</p>
+                     <EditIcon onClick={handleEdit} fontSize="small"   className="cursor-pointer text-zinc-600 dark:text-zinc-300 pl-1 pt-1"   title={"Edit playlist"} />
+                </div>
                 }
                 
     
             </div>
 
             </div>
-            <div className="ml-10">
+            <div className="sm:ml-10">
 				<div className="flex items-center pr-1 mt-6 xl:mt-8 max-w-[900px] ">
                 <div className="relative w-full min-w-[40vw] ">
 
@@ -151,8 +166,8 @@ const handleAskPremadeQuestion = (event) => {
                         onKeyDown={handleKeyDown}
                         type="text"
                         id="questionAnswering"
-                        placeholder="Ask anything to your knowledge hub..."
-                        className="pr-10 placeholder:italic peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
+                        placeholder={`Start asking...`}
+                        className="pr-10 placeholder:italic focus:ring-0 focus:outline-none peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-green-400 sm:border-zinc-300 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
                 
                     {inputValue.length > 0 ? (
                         <div
@@ -180,44 +195,46 @@ const handleAskPremadeQuestion = (event) => {
                     ) : null}
                 </div>
 
-                {window.innerWidth > 420
-
-                    &&
-
+                
+                        <div className={`hidden xs:block`}>
                     <Button type="submit"
                         onClick={handleSubmit}
                         id="questionButton"
                         ref={buttonRef}
-                        className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
+                        className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""} ${window.innerWidth < 420 && " hidden"}`}>
 
                         {isLoadingInside ? <Spinner className="h-4 w-4" /> :
                             <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         }
-                    </Button>}
-
+                    </Button>
+                    </div>
             </div>
             </div>
+{/* 
+<div className="items-center text-center mt-2 text-zinc-700 dark:text-zinc-300 opacity-80">
+    AI-enabled search and chat by Alphy
+</div> */}
+            <div className="mt-10" >
+                {(playlistID==="eNb1f_M" && (answerData=="" && isLoadingInside===false)) &&
 
-
-            <div >
-                {(playlistID==="eNb1f_M" && (answerData=="" || isLoadingInside===true)) &&
-                <div className="px-5 mt-10 ">
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>İyi bir uyku düzeni için ne yapmalıyım?</button>
-            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>C vitamininin yararları nelerdir?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>İnsülin direnci nasıl sağlık riskleri bulundurur?</button>
-            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Kanser hastalığına karşı ne gibi önlemler alabilirim?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Bayramın bizim için önemi nedir?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Yüksek tansiyonun kalp ve damarlar üzerindeki etkileri nelerdir?</button>
-            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Uzun bir ömür sürmek ve yaşlanmayı geciktirmek için neler yapabilirim?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4" onClick={handleAskPremadeQuestion}>Daha sağlıklı bir yaşam sürmenin yollarını bana madde madde açıkla.</button>
+                <div className="sm:px-5 mt-10 ">
+                {<div class={`${answerData.length>0 &&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>İyi bir uyku düzeni için ne yapmalıyım?</button>
+            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>C vitamininin yararları nelerdir?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>İnsülin direnci nasıl sağlık riskleri bulundurur?</button>
+            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Kanser hastalığına karşı ne gibi önlemler alabilirim?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Bayramın bizim için önemi nedir?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Yüksek tansiyonun kalp ve damarlar üzerindeki etkileri nelerdir?</button>
+            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Uzun bir ömür sürmek ve yaşlanmayı geciktirmek için neler yapabilirim?</button>
+            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Daha sağlıklı bir yaşam sürmenin yollarını bana madde madde açıkla.</button>
 
             </div>
         }
             {isLoadingInside ? (
 					<div
-						className="loading mt-5 mb-10 ml-10 w-[900px]"
+						className="loading mt-5 mb-10 ml-10 lg:w-[900px]"
 						style={{
 							display: 'flex',
 							justifyContent: 'center',
@@ -245,7 +262,7 @@ const handleAskPremadeQuestion = (event) => {
 					</div>
 				) : (
 					answerData.answer!==undefined && 
-                <div id="answer-area" className="answer-area text-l max-w-[900px] ml-10 mt-10 ">
+                <div id="answer-area" className="answer-area text-l max-w-[900px] ml-2 sm:ml-10 mt-10 ">
                     <p className="text-green-400 text-l">
                         
                         <QuestionAnswerIcon className="text-green-400 mr-1"/>
@@ -269,8 +286,8 @@ const handleAskPremadeQuestion = (event) => {
                                         
                      
                                    {(answerData.sources!==undefined && isLoadingInside===false) && 
-                                   (
-                                   window.innerWidth>1000 ?
+                                (
+                                   window.innerWidth>768 ?
                                    <Carousel 
                                    infinite={false}
                                    leftArrow={
@@ -289,25 +306,26 @@ const handleAskPremadeQuestion = (event) => {
                                    :
                                    <Carousel 
                                    infinite={false}
+                                   
                                    leftArrow={
-                                    <div className="mt-40 pr-4 w-8">
+                                    <div className="mt-40 pr-4 w-4">
                                         <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                         </div>} 
-                                         rightArrow={<div className="mt-40 pl-2 w-8">
+                                         rightArrow={<div className="mt-40 pl-2 w-4">
                                          <ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
-                                         </div>} className="cursor-default" show={1.5} slide={1} transition={0.5}>
+                                         </div>} className="cursor-default" show={1.6} slide={1} transition={0.5}>
                                    {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)} 
                                           </Carousel>
                                 
                                 )
                             }
 
-                           <Dialog  open={openDialog} onClose={() => setOpenDialog(false)} >
+                           <Dialog   maxWidth={"sm"} fullWidth={fullWidth} open={openDialog} onClose={() => setOpenDialog(false)} >
                             {answerData.sources!==undefined && answerData.sources.map((source) => 
                           
                               <div ref={ref}>
                                 {source===selectedSourceCard &&
-                            <SourceCard forDialog={true} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
+                            <SourceCard forDialog={true} setFullWidth={setFullWidth} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
                         }
                             </div>
                         

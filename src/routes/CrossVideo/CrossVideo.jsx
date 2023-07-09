@@ -52,7 +52,7 @@ useEffect(() => {
 		source_id = isPlaylist ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}`).then((response) => {
-			
+			setCollapsed(true)
 			setData(response.data)
 			setPlaylistInfo(response.data)
 			if(response.data.description==="null"){
