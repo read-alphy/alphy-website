@@ -15,16 +15,72 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
   const setOpenDialogInside = setOpenDialog
     const startTime= Math.floor(source.start)
     const [expanded, setExpanded] = useState(false);
+    const [called, setCalled] = useState(false);
+    const [sourceText, setSourceText] = useState("")
 
     let displayText
-    let transcript
+    
+    
+    let transcript=""
+    
+    useEffect (() => {
+        if(called===false){
+            transcriptParser()
+            
+    setCalled(true)}
+    })
+
+    
+
+     const transcriptParser =  () => {
+            const sentences = source.text.split(/(?<=[.!?])\s+/);
+            let nothing = '';
+			let count = 0;
+			
+
+			for (let i = 0; i < sentences.length; i++) {
+                
+				count = count + 1;
+
+				nothing = nothing + '' + sentences[i];
+				if (
+					(count > 4 || count >= sentences.length)
+				) {
+                    
+					transcript = transcript + nothing + "\n";
+                    
+					
+					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${sentences[i].endTime.substring(0, sentences[i].endTime.length - 4)} <a/>`
+					count = 0;
+					nothing = '';
+				}
+				// in case missing punctuation, push it anyway
+				else if (count > 6) {
+                    transcript = transcript + nothing + "\n";
+					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${sentences[i].endTime.substring(0, sentences[i].endTime.length - 4)} <a/>`
+					count = 0;
+					nothing = '';
+
+				}
+				else if (i === sentences.length - 1) {
+					transcript = transcript + nothing + "\n";
+					count = 0;
+					nothing = '';
+				}
+
+
+			}
+
+           setSourceText(transcript) 
+		} 
+
 
     if(source.text!==undefined){
         if(window.innerWidth>768){
-        displayText = expanded ? source.text : `${source.text[299]===" "? source.text.slice(0, 299) : source.text.slice(0, 300)}`;
+        displayText = expanded ? transcript : `${source.text[299]===" "? source.text.slice(0, 299) : source.text.slice(0, 300)}`;
     }
         else{
-        displayText = expanded ? source.text : `${source.text[139]===" "? source.text.slice(0, 139) : source.text.slice(0, 140)}`;
+        displayText = expanded ? transcript : `${source.text[139]===" "? source.text.slice(0, 139) : source.text.slice(0, 140)}`;
     }
     }
     
@@ -84,51 +140,6 @@ const showDialog = () => {
           window.removeEventListener("resize", handleResize);
         };
       }, [setFullWidth]);
-    
-    /*   async function transcriptParser() {
-
-
-			let nothing = '';
-			let count = 0;
-
-			transcript.push('00:00:00');
-
-
-
-			for (let i = 0; i < srt_array.length; i++) {
-				count = count + 1;
-
-				nothing = nothing + ' ' + srt_array[i].text;
-				if (
-					(count > 6 || count >= srt_array.length) &&
-					srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
-				) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-				}
-				// in case missing punctuation, push it anyway
-				else if (count > 12) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-
-				}
-				else if (i === srt_array.length - 1) {
-
-					transcript.push(nothing);
-					count = 0;
-					nothing = '';
-				}
-
-
-			}
-		}
-    } */
 
 
     return(
@@ -151,7 +162,7 @@ const showDialog = () => {
 
 
                                                     </div>
-                                                    
+
                     <div classNAme=" text-lg w-full font-bold min-h-[80px] max-h-[80px] overflow-y-hidden">
                         <p>{displayTitle}
                         {((displayTitle[displayTitle.length - 1] === "." || displayTitle.substring(displayTitle.length - 1) === "?") || (displayTitle[displayTitle.length - 1] === ",") || (displayTitle[displayTitle.length - 1] === "!") || (displayTitle[displayTitle.length - 1] === ":") || (displayTitle[displayTitle.length - 1] === "...")) ? "" : "..."}
@@ -219,7 +230,7 @@ const showDialog = () => {
 <TextSnippetIcon/>  Passage
 </p>
 <p className="px-2 sm:px-10">
-{source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."}
+{transcript}
 </p>
 
                 

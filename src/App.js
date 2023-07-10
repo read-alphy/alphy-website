@@ -76,7 +76,7 @@ useEffect(() => {
 	setTimeout (() => {
 		var userId = localStorage.getItem("userId")
 		
-		if(userId===null || userId!==currentUser.uid){
+		if(userId===null || (currentUser!==undefined &&userId!==currentUser.uid)){
 			localStorage.setItem('userId', currentUser.uid)
 		}
 		
