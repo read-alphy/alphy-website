@@ -14,7 +14,7 @@ export default function PlaylistCard({item,index,currentUser}){
 
     if(item.description!==undefined){
       
-        displayText = expanded ? item.description : `${item.description[69]===" "? item.description.slice(0, 69)  : item.description.slice(0, 70)}...`;
+        displayText = expanded ? item.description : `${item.description[69]===" "? item.description.slice(0, 59)  : item.description.slice(0, 60)}...`;
 
 
 
@@ -34,16 +34,15 @@ export default function PlaylistCard({item,index,currentUser}){
       };
     return(
     <div className="">
-      
         <div className="rounded-md cursor-pointer border dark:border-zinc-700 dark:bg-darkMode h-[300px] w-[240px] justify-center items-center  mt-5"
         onClick={handleComponentClick}
        >
       <div>
 
-            <div className="px-4 ml-4">
+            <div className="px-4 ml-4 pb-4">
                 <div className="">
                     {item.uid === "eNb1f_M" &&
-                    <div className="mt-8">
+                    <div className="mt-4">
                     <img width={160} src={item.thumbnail_url}/>
                     </div>}
             <div className="mt-4 ">

@@ -76,7 +76,7 @@ useEffect(() => {
 	setTimeout (() => {
 		var userId = localStorage.getItem("userId")
 		
-		if(userId===null || (currentUser!==undefined &&userId!==currentUser.uid)){
+		if(userId===null || (currentUser!==undefined && currentUser.uid!== null &&userId!==currentUser.uid)){
 			localStorage.setItem('userId', currentUser.uid)
 		}
 		
@@ -220,19 +220,19 @@ if (currentUser && creditcalled!==true) {
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userPlaylists={userPlaylists}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userPlaylists={userPlaylists}/>
 								}
 							/>
 							<Route
 								path="/up/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userPlaylists={userPlaylists}/>
 								}
 							/>
 

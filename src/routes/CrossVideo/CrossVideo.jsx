@@ -12,6 +12,7 @@ import Dialog from '@mui/material/Dialog';
 import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
+import { set } from 'lodash';
 
 
 
@@ -92,6 +93,7 @@ const handlePlaylist= () => {
 
 
 }).then((response) => {
+	setUserPlaylists([...userPlaylists, response.data])
 	navigate(`/playlist/${response.data.uid}`)
 	
 })

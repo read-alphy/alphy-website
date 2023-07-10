@@ -9,7 +9,8 @@ import working from './working.svg';
 
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
 import { useAuth } from "../../../hooks/useAuth"
@@ -20,7 +21,7 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import * as Selection from 'selection-popover'
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import {
 	Popover,
@@ -32,6 +33,8 @@ import {
 
 
 export default function Content(props) {
+
+	
 
 
 	const [loading, setLoading] = useState(false);
@@ -53,7 +56,9 @@ export default function Content(props) {
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const [askText, setAskText] = useState("");
 	const[selectionCall, setSelectionCall] = useState(false);
+	const [openPlaylistPopover,setOpenPlaylistPopover] = useState(false);
 	const [selectionPrompt, setSelectionPrompt] = useState("normal");
+	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
 	
 	const [inputValue, setInputValue] = useState("");
 	const { currentUser } = useAuth()
@@ -63,7 +68,7 @@ export default function Content(props) {
 	const inputRef = useRef(null);
 	const contentRef = useRef(null);
 
-	
+	const userPlaylistNames= props.userPlaylists.map(item => [item.name,item.uid])
 	
 	const ITEM_HEIGHT = 48;
 	const ITEM_PADDING_TOP = 8;
@@ -599,6 +604,25 @@ const handleBookmark = async () => {
 		
 	}
 
+	const handleAddToPlaylist = (playlistUID) => {
+		let playlistTracks = []
+		const newSource = {
+			"source_id":data.source_id,
+			"source_type":data.source_type, 
+		}
+		const neww=[...props.userPlaylists,newSource]
+		 axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistUID}`).then	((response) => {
+			axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistUID}`, {
+		"user_id": currentUser.uid,
+		"sources": [...response.data.tracks,newSource],
+	})
+	setMainPopoverOpen(false)
+	}).then(() => {
+
+	 	
+ })
+	}
+
 return (
 		<div ref={ref} className={`md:max-w-[90vw]  scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
 			
@@ -613,8 +637,8 @@ return (
 							</h1>
 
 							<div className="flex flex-row justify-end mx-auto ">
-								<Popover >
-									<PopoverHandler>
+								<Popover open={mainPopoverOpen}>
+									<PopoverHandler onClick={() => setMainPopoverOpen(!mainPopoverOpen)}>
 										<div className="hidden lg:flex mt-8">
 
 											<svg className="cursor-pointer" width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -631,29 +655,52 @@ return (
 												{data.source_type === 'yt' &&
 													<a target="_blank" className="flex flex-row  xl:hidden mb-5 mt-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 														<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
-														<p className="text-zinc-700 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md">Click to watch</p>
+														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center  text-md">Click to watch</p>
 													</a>
 												}{data.source_type === "sp" &&
 													<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-														<img className="mr-2 ml-2" src={TwitterLogo} width={20} />
-														<p className="font-medium items-center text-md">Click to listen</p>
+														<img className="mr-2 ml-1" src={TwitterLogo} width={20} />
+														<p className=" items-center text-md text-zinc-600 dark:text-zinc-300">Click to listen</p>
 													</a>
 												}
 												
-												<div class=" xl:hidden border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+												
+
+													<Popover placement="right">
+														<PopoverHandler>
+														<button onClick={() => setOpenPlaylistPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Playlist</p></button>
+														</PopoverHandler>
+														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
+											
+													
+													{userPlaylistNames.map(item => 
+														
+																	<MenuItem onClick={() => handleAddToPlaylist(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																		<p>{item[0]}</p> 
+																	</MenuItem>
+																
+														
+
+																)}
+
+														</PopoverContent>
+													</Popover>
+
+
+												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
 												<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
 													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
 														
-														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>}
-														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" stroke-linecap="round" stroke-linejoin="round"></path>
-	</svg>}
+														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&
+														<BookmarkRemoveIcon/>
+}
+														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&
+														<BookmarkAddIcon/>}
 	
 	{currentUser && props.isBookmarked ===true && (currentUser && data && data.submitter_id!==currentUser.uid) && <span className="ml-2">Remove Bookmark</span>}
-	{currentUser && props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&  <span className="ml-2">Add Bookmark</span>}
+	{currentUser && props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&  <span className="ml-2">Add To Bookmarks</span>}
 	</p>
 												</div>
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) &&
@@ -778,28 +825,52 @@ return (
 								<div	>
 									{data.source_type === 'yt' &&
 										<a target="_blank" className="flex flex-row mb-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
-											<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
-														<p className="text-zinc-700 dark:text-zinc-200 items-center pt-1 text-center font-medium text-md opacity-80">Click to watch</p>
+											<img className="-ml-2" src="/youtubeicon.png" width={40} />
+														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center text-md ">Click to watch</p>
 										</a>
 									}{data.source_type === "sp" &&
 										<a className="flex flex-row mb-5 mt-3  " target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-											<img className="ml-2" src={TwitterLogo} width={20} />
-											<p className=" text-zinc-700 dark:text-zinc-200 opacity-80 font-medium items-center text-md">Click to listen</p>
+											<img className="ml-1" src={TwitterLogo} width={20} />
+											<p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md">Click to listen</p>
 										</a>
 									}
-									<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
+										<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+												
+
+												<Popover placement="right">
+													<PopoverHandler>
+													<button onClick={() => setOpenPlaylistPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Playlist</p></button>
+													</PopoverHandler>
+													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
+										
+												
+												{userPlaylistNames.map(item => 
+													
+																<MenuItem onClick={() => handleAddToPlaylist(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																	<p>{item[0]}</p> 
+																</MenuItem>
+															
+													
+
+															)}
+
+													</PopoverContent>
+												</Popover>
+
+												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
 									
 									{(currentUser && data && data.submitter_id!==currentUser.uid) &&
 									<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
 													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
 														
-														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>}
-														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&<svg className="w-8 text-zinc-700 opacity-80 dark:text-zinc-200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" stroke-linecap="round" stroke-linejoin="round"></path>
-	</svg>}
+														{
+														currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&
+														<BookmarkRemoveIcon/>}
+														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&
+														
+														<BookmarkAddIcon/>
+														}
 	
 	{currentUser && props.isBookmarked ===true &&  <span className="ml-2">Remove Bookmark</span>}
 	{currentUser && props.isBookmarked===false &&    <span className="ml-2">Add Bookmark</span>}

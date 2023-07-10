@@ -16,7 +16,7 @@ import { Helmet } from "react-helmet";
 
 
 
-function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken}) {
+function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,userPlaylists}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -245,9 +245,10 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 				<button onClick={handleCollapse }>
 
 		
-<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
+			<svg className={` ${!collapsed && "rotate-180"} opacity-30 dark:opacity-80 `}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		
 
 			</button			>
 			</div> 
@@ -271,7 +272,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked}/>} 
+					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userPlaylists={userPlaylists}/>} 
 					
 
 				</div>

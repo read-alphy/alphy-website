@@ -216,7 +216,7 @@ const toggleExpand = () => {
 <div className="items-center text-center mt-2 text-zinc-700 dark:text-zinc-300 opacity-80">
     AI-enabled search and chat by Alphy
 </div> */}
-            <div className="mt-10" >
+            <div className="mt-10 animate-bounce-slow" >
                 {(playlistID==="eNb1f_M" && (answerData=="" && isLoadingInside===false)) &&
 
                 <div className="sm:px-5 mt-10 ">
