@@ -479,6 +479,16 @@ function WelcomeFeed(props) {
 	}
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+
+	const handleCreatePlaylist = () => {
+		if(props.hasActiveSub){
+		navigate("/archipelago/createArchipelago")
+		}
+		else{
+			setErrorMessage(true)
+		}
+	}
+
 	return (
 		<div className="main-page-feed-section container xl:max-w-[1280px] mx-auto w-full drop-shadow-2xl dark:drop-shadow-xl">
 			{/* 			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
@@ -1038,9 +1048,21 @@ function WelcomeFeed(props) {
 		{currentUser &&
 		<div>
 	
-		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Archipelagos
-		<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => navigate("/archipelago/createArchipelago")}/>
+	<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Archipelagos
+		<Popover placement="right">
+		<PopoverHandler>
+				
+				<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
+				
+				</PopoverHandler>
+				<PopoverContent>
+					<p>
+						Go Premium to create archipelagos.
+					</p>
+				</PopoverContent>
+		</Popover>
 		</p>
+
 
 		{props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
 		<div>
@@ -1069,10 +1091,17 @@ function WelcomeFeed(props) {
 	
 	)}
 		</Carousel>
+
 		
 		</div>
-		
 }
+
+{props.hasActiveSub!==true &&
+		<div className=" ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
+		<p>You need to be on a Premium account to create archipelagos. Meanwhile, feel free to enjoy our curated lists.</p>
+		</div>
+}
+
 
 <div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
 </div>}

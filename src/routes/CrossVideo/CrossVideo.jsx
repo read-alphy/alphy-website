@@ -3,16 +3,18 @@ import SideFeed from '../../components/ArticleComponents/SideFeed';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ArchipelagoCreation from './ArchipelagoCreation';
-import {Button, Input, Textarea} from "@material-tailwind/react";
+import {Button, Spinner, Input, Textarea} from "@material-tailwind/react";
 import ArchipelagoChat from './ArchipelagoChat';
 import EditArchipelago from './EditArchipelago';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import Dialog from '@mui/material/Dialog';
 import { useAuth } from '../../hooks/useAuth';
+import Loading from '../../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import { set } from 'lodash';
+
 
 
 
@@ -29,7 +31,7 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [dataArchipelago, setDataArchipelago] = useState([]);
 	const [data, setData] = useState([]);
 	const [archipelagoInfo, setArchipelagoInfo] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [archipelagoDescription, setArchipelagoDescription] = useState("");
 	const [archipelagoTitle, setArchipelagoTitle] = useState("");
 	const [deleteDialog, setDeleteDialog] = useState(false);
@@ -41,6 +43,7 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 			}
 			setWindowSizeChecked(true)
 	}
+	
 })
 //console log sourceIDsarchipelago type
 const isCreateArchipelago = location.pathname.split('/')[2]==="createArchipelago"
@@ -183,11 +186,11 @@ const handleDeleteArchipelago = () => {
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-
-				{isCreateArchipelago && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
+					{ isLoading && <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />}
+				{isCreateArchipelago && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
 
 				{(!isCreateArchipelago && !isEditArchipelago) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser}/> : null}
-				{isEditArchipelago && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
+				{isEditArchipelago && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
 							
 					
 
@@ -196,8 +199,8 @@ const handleDeleteArchipelago = () => {
 			{(isCreateArchipelago || isEditArchipelago) &&  
 			<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed &&window.innerWidth<1000 &&"hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
-			{isEditArchipelago && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
-            <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-green-400 px-5" onClick={handleArchipelago}><SaveIcon className="mr-2"/>{isCreateArchipelago ? "Create" : "Save"}</Button>
+			{isEditArchipelago && hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
+            {hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-green-400 px-5" onClick={handleArchipelago}><SaveIcon className="mr-2"/>{isCreateArchipelago ? "Create" : "Save"}</Button>}
 			
             </div>
 		{deleteDialog &&

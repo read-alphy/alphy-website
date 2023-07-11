@@ -29,6 +29,7 @@ export default function ArchipelagoCreation({archipelagoDescription , archipelag
     const [editBasicInfo, setEditBasicInfo] = useState(false);
     const {currentUser} = useAuth();
 
+ 
 
     const getData = (offset, firstTime, hasMore) => {
     

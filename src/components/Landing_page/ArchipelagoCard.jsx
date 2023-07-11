@@ -13,8 +13,12 @@ export default function ArchipelagoCard({item,index,currentUser}){
     
 
     if(item.description!==undefined){
-      
-        displayText = expanded ? item.description : `${item.description[69]===" "? item.description.slice(0, 59)  : item.description.slice(0, 60)}...`;
+      if(item.thumbnail_url!==null){
+        displayText = expanded ? item.description : `${item.description[69]===" "? item.description.slice(0, 69)  : item.description.slice(0, 70)}${item.description.length>70 ? "..." : ""}`;
+      }
+        else{
+            displayText = expanded ? item.description : `${item.description[69]===" "? item.description.slice(0, 69)  : item.description.slice(0, 70)}${item.description.length>70 ? "..." : ""}`;
+        }
 
 
 
@@ -34,18 +38,22 @@ export default function ArchipelagoCard({item,index,currentUser}){
       };
     return(
     <div className="">
-        <div className="rounded-md cursor-pointer border dark:border-zinc-700 dark:bg-darkMode h-[300px] w-[240px] justify-center items-center  mt-5"
+        <div className="rounded-lg cursor-pointer border  dark:bg-darkMode bg-white hover:drop-shadow-sm hover:-translate-y-2 my-2 duration-300 transition ease-in-out dark:border-zinc-800 dark:bg-darkMode dark:hover:drop-shadow-md dark:transition dark:duration-300 dark:ease-in-out h-[300px] w-[240px] justify-center items-center  mt-5"
         onClick={handleComponentClick}
        >
       <div>
 
             <div className="px-4 ml-4 pb-4">
                 <div className="">
-                    {item.uid === "eNb1f_M" &&
+                    {item.thumbnail_url !== null ?
                     <div className="mt-4">
                     <img width={160} src={item.thumbnail_url}/>
-                    </div>}
-            <div className="mt-4 ">
+                    </div>
+                    :
+                    <div className="mt-4">
+                        
+                        </div>}
+            <div className={` ${item.thumbnail_url!==null ? "mt-4" : "mt-4"}`}  >
                 <SmartToyIcon className="text-green-400 "/>
                 {currentUser!==undefined && item.user_id === currentUser.uid && 
                 
