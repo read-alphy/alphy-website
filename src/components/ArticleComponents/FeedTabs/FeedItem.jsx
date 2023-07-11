@@ -8,7 +8,7 @@ import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { set } from 'lodash';
 
-const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromPlaylist, dataPlaylist,setDataPlaylist,sourceIDsPlaylist,setSourceIDsPlaylist}) => {
+const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago}) => {
 	const source_id = item.source_id;
 	
 	let formattedDate = ""
@@ -51,33 +51,33 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromPla
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
-				<a href={fromPlaylist===undefined && `/${item.source_type}/${source_id}`} >
+				<a href={fromArchipelago===undefined && `/${item.source_type}/${source_id}`} >
 					<div className="flex w-full ">
 						<div
-							className={`grid ${fromPlaylist==="playlist" ? "grid-cols-4 cursor-default" : "grid-cols-3"} ${fromPlaylist===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataPlaylist!==undefined && dataPlaylist.includes(item) && fromPlaylist==="search") || (sourceIDsPlaylist!==undefined && sourceIDsPlaylist.includes(item.source_id)))&&  "border-4 border-green-400"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
+							className={`grid ${fromArchipelago==="archipelago" ? "grid-cols-4 cursor-default" : "grid-cols-3"} ${fromArchipelago===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataArchipelago!==undefined && dataArchipelago.includes(item) && fromArchipelago==="search") || (sourceIDsArchipelago!==undefined && sourceIDsArchipelago.includes(item.source_id)))&&  "border-4 border-green-400"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
 							onClick={() => {
 
 
 								// navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
 
-								if(fromPlaylist===undefined){ setCollapsed(true)}
+								if(fromArchipelago===undefined){ setCollapsed(true)}
 								else{
 								
-								if(fromPlaylist==="search"){
+								if(fromArchipelago==="search"){
 
-									if(dataPlaylist.includes(item) || sourceIDsPlaylist.includes(item.source_id)){
+									if(dataArchipelago.includes(item) || sourceIDsArchipelago.includes(item.source_id)){
 										
-										const index = dataPlaylist.indexOf(item)
-										dataPlaylist.splice(index,1)
-										setDataPlaylist([...dataPlaylist])
-										const index2 = sourceIDsPlaylist.indexOf(item.source_id)
-										sourceIDsPlaylist.splice(index2,1)
-										setSourceIDsPlaylist([...sourceIDsPlaylist])
+										const index = dataArchipelago.indexOf(item)
+										dataArchipelago.splice(index,1)
+										setDataArchipelago([...dataArchipelago])
+										const index2 = sourceIDsArchipelago.indexOf(item.source_id)
+										sourceIDsArchipelago.splice(index2,1)
+										setSourceIDsArchipelago([...sourceIDsArchipelago])
 
 									}
 									else{
-										setDataPlaylist([...dataPlaylist,item])
-										setSourceIDsPlaylist([...sourceIDsPlaylist,item.source_id])
+										setDataArchipelago([...dataArchipelago,item])
+										setSourceIDsArchipelago([...sourceIDsArchipelago,item.source_id])
 									}
 								}
 							
@@ -100,10 +100,10 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromPla
 								></div>
 							</div>
 
-							<div className={`col-span-2 ${!fromPlaylist && "lg:col-span-1"} justify-start text-xs`} >
+							<div className={`col-span-2 ${!fromArchipelago && "lg:col-span-1"} justify-start text-xs`} >
 							
 								
-								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) || (fromPlaylist==="playlist" && item.source!==undefined && item.source.complete===true)? null : (
+								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) || (fromArchipelago==="archipelago" && item.source!==undefined && item.source.complete===true)? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
 								<div className={`text-sm video-text text-black dark:text-zinc-300 font-normal`} >
@@ -119,19 +119,19 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromPla
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 							</div>
 
-{fromPlaylist==="playlist" &&
+{fromArchipelago==="archipelago" &&
 							<div className="justify-center items-center flex">
 								<RemoveCircleOutlineIcon
 								className="cursor-pointer"
 								onClick={ () => {
-									if(dataPlaylist.includes(item)){
-										const index = dataPlaylist.indexOf(item)
-										dataPlaylist.splice(index,1)
-										setDataPlaylist([...dataPlaylist])
+									if(dataArchipelago.includes(item)){
+										const index = dataArchipelago.indexOf(item)
+										dataArchipelago.splice(index,1)
+										setDataArchipelago([...dataArchipelago])
 
-										const index2 = sourceIDsPlaylist.indexOf(item.source_id)
-										sourceIDsPlaylist.splice(index2,1)
-										setSourceIDsPlaylist([...sourceIDsPlaylist])
+										const index2 = sourceIDsArchipelago.indexOf(item.source_id)
+										sourceIDsArchipelago.splice(index2,1)
+										setSourceIDsArchipelago([...sourceIDsArchipelago])
 									}
 								
 								}	

@@ -16,7 +16,7 @@ import { Helmet } from "react-helmet";
 
 
 
-function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,userPlaylists}) {
+function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,userArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -272,7 +272,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userPlaylists={userPlaylists}/>} 
+					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos}/>} 
 					
 
 				</div>

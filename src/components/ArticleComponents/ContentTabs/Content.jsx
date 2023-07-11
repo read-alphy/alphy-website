@@ -56,7 +56,7 @@ export default function Content(props) {
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const [askText, setAskText] = useState("");
 	const[selectionCall, setSelectionCall] = useState(false);
-	const [openPlaylistPopover,setOpenPlaylistPopover] = useState(false);
+	const [openArchipelagoPopover,setOpenArchipelagoPopover] = useState(false);
 	const [selectionPrompt, setSelectionPrompt] = useState("normal");
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
 	
@@ -68,7 +68,7 @@ export default function Content(props) {
 	const inputRef = useRef(null);
 	const contentRef = useRef(null);
 
-	const userPlaylistNames= props.userPlaylists.map(item => [item.name,item.uid])
+	const userArchipelagoNames= props.userArchipelagos.map(item => [item.name,item.uid])
 	
 	const ITEM_HEIGHT = 48;
 	const ITEM_PADDING_TOP = 8;
@@ -604,15 +604,15 @@ const handleBookmark = async () => {
 		
 	}
 
-	const handleAddToPlaylist = (playlistUID) => {
-		let playlistTracks = []
+	const handleAddToArchipelago = (archipelagoUID) => {
+		let archipelagoTracks = []
 		const newSource = {
 			"source_id":data.source_id,
 			"source_type":data.source_type, 
 		}
-		const neww=[...props.userPlaylists,newSource]
-		 axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistUID}`).then	((response) => {
-			axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistUID}`, {
+		const neww=[...props.userArchipelagos,newSource]
+		 axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/archipelagos/${archipelagoUID}`).then	((response) => {
+			axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/archipelagos/${archipelagoUID}`, {
 		"user_id": currentUser.uid,
 		"sources": [...response.data.tracks,newSource],
 	})
@@ -669,14 +669,14 @@ return (
 
 													<Popover placement="right">
 														<PopoverHandler>
-														<button onClick={() => setOpenPlaylistPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Playlist</p></button>
+														<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Archipelago</p></button>
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
 													
-													{userPlaylistNames.map(item => 
+													{userArchipelagoNames.map(item => 
 														
-																	<MenuItem onClick={() => handleAddToPlaylist(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																	<MenuItem onClick={() => handleAddToArchipelago(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
 																		<p>{item[0]}</p> 
 																	</MenuItem>
 																
@@ -839,14 +839,14 @@ return (
 
 												<Popover placement="right">
 													<PopoverHandler>
-													<button onClick={() => setOpenPlaylistPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Playlist</p></button>
+													<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Archipelago</p></button>
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										
 												
-												{userPlaylistNames.map(item => 
+												{userArchipelagoNames.map(item => 
 													
-																<MenuItem onClick={() => handleAddToPlaylist(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																<MenuItem onClick={() => handleAddToArchipelago(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
 																	<p>{item[0]}</p> 
 																</MenuItem>
 															

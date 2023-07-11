@@ -19,8 +19,8 @@ import {
 
 } from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
-import PlaylistCard from './PlaylistCard';
-import PlaylistCreationCard from './PlaylistCreationCard';
+import ArchipelagoCard from './ArchipelagoCard';
+import ArchipelagoCreationCard from './ArchipelagoCreationCard';
 import { Carousel } from '@trendyol-js/react-carousel';
 
 
@@ -62,10 +62,10 @@ function WelcomeFeed(props) {
 	const [dataBookmarks, setDataBookmarks] = useState([]);
 	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
 	const [myWorks, setMyWorks] = useState(localStorage.getItem("logged in") ==="true" ? true : false);
-	const [playlists, setPlaylists] = useState(false)
+	const [archipelagos, setArchipelagos] = useState(false)
 
-	const [dataGlobalPlaylists , setDataGlobalPlaylists] = useState([])
-	const [isLoadingGlobalPlaylists, setIsLoadingGlobalPlaylists] = useState(true);
+	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
+	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
 
 
 
@@ -195,7 +195,7 @@ function WelcomeFeed(props) {
 			setGlobal(true)
 			setMyWorks(false)
 			setMyUploads(false)
-			setPlaylists(false)
+			setArchipelagos(false)
 			setMyBookmarks(false)
 			localStorage.setItem("feedTab", "global")
 		
@@ -209,7 +209,7 @@ function WelcomeFeed(props) {
 			setMyWorks(true)
 			setMyUploads(false)
 			setMyBookmarks(false)
-			setPlaylists(false)
+			setArchipelagos(false)
 			localStorage.setItem("feedTab", "my_works")
 
 			
@@ -222,7 +222,7 @@ function WelcomeFeed(props) {
 		else if (state == "my_uploads") {
 			setGlobal(false)
 			setMyWorks(false)
-			setPlaylists(false)
+			setArchipelagos(false)
 			setMyUploads(true)
 			setMyBookmarks(false)
 			localStorage.setItem("feedTab", "my_uploads")
@@ -235,7 +235,7 @@ function WelcomeFeed(props) {
 			setGlobal(false)
 			setMyWorks(false)
 			setMyUploads(false)
-			setPlaylists(false)
+			setArchipelagos(false)
 			setMyBookmarks(true)
 			localStorage.setItem("feedTab", "my_bookmarks")
 
@@ -244,14 +244,14 @@ function WelcomeFeed(props) {
 
 		}
 
-		else if (state == "playlists") {
+		else if (state == "archipelagos") {
 			setGlobal(false)
 			setMyWorks(false)
 			setMyUploads(false)
 			setMyBookmarks(false)
-			setPlaylists(true)
-			getDataGlobalPlaylists(0, true, true);
-			//localStorage.setItem("feedTab", "playlists")
+			setArchipelagos(true)
+			getDataGlobalArchipelagos(0, true, true);
+			//localStorage.setItem("feedTab", "archipelagos")
 
 		}
 
@@ -403,21 +403,21 @@ function WelcomeFeed(props) {
 		};
 	};
 
-	const getDataGlobalPlaylists = (offsetGlobalPlaylists, firstTime, hasMoreGlobalPlaylists) => {
-		if(!hasMoreGlobalPlaylists){
+	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
+		if(!hasMoreGlobalArchipelagos){
 			return;
 		}
-		setIsLoadingGlobalPlaylists(true);
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?limit=${limit}&offset=${offsetGlobalPlaylists}`)
+		setIsLoadingGlobalArchipelagos(true);
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?limit=${limit}&offset=${offsetGlobalArchipelagos}`)
 		.then((response) => {
 
 			if(firstTime){
-				setDataGlobalPlaylists(response.data);
+				setDataGlobalArchipelagos(response.data);
 			}
 			else{
-				setDataGlobalPlaylists([...dataGlobalPlaylists, ...response.data]);
+				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
 			}
-			setIsLoadingGlobalPlaylists(false);
+			setIsLoadingGlobalArchipelagos(false);
 			setTimeout(() => {
 				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
 				if(elements){
@@ -429,7 +429,7 @@ function WelcomeFeed(props) {
 
 		})
 		.catch((error) => {
-			setIsLoadingGlobalPlaylists(false);
+			setIsLoadingGlobalArchipelagos(false);
 		}
 		)
 	}
@@ -473,7 +473,7 @@ function WelcomeFeed(props) {
 		}
 		
 		}, 1000);
-		getDataGlobalPlaylists(0, true, true);
+		getDataGlobalArchipelagos(0, true, true);
 		setCalled(true);
 
 	}
@@ -513,7 +513,7 @@ function WelcomeFeed(props) {
 						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
 					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("playlists")} class={`inline-block p-1 py-4 sm:p-4 ${playlists ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Playlists</button>
+						<button onClick={() => navigateFeeds("archipelagos")} class={`inline-block p-1 py-4 sm:p-4 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Archipelagos</button>
 						{/* <div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div> */}
 					</li>
 
@@ -523,7 +523,7 @@ function WelcomeFeed(props) {
 			</div>
 
 			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] min-h-[40vh]">
-				{myUploads ||playlists ? null :
+				{myUploads ||archipelagos ? null :
 					<form
 						className="flex items-center"
 						
@@ -1030,7 +1030,7 @@ function WelcomeFeed(props) {
 
 					</div>
 				}
-{playlists && 
+{archipelagos && 
 
 
 
@@ -1038,11 +1038,11 @@ function WelcomeFeed(props) {
 		{currentUser &&
 		<div>
 	
-		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Playlists
-		<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => navigate("/playlist/createPlaylist")}/>
+		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Archipelagos
+		<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => navigate("/archipelago/createArchipelago")}/>
 		</p>
 
-		{props.userPlaylists!== undefined && props.userPlaylists.length>0 &&
+		{props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
 		<div>
 		<Carousel 
 		show={`${window.innerWidth>1000 ? 4.2 : 3.2}`} slide={1} transition={0.5}
@@ -1059,12 +1059,12 @@ function WelcomeFeed(props) {
 					
 					>
 						
-		{props.userPlaylists.map((item, index) => 
+		{props.userArchipelagos.map((item, index) => 
 		<div className="flex flex-row">
 			
 		
 		
-		<PlaylistCard key={index} item={item} index={index} currentUser={currentUser}/>
+		<ArchipelagoCard key={index} item={item} index={index} currentUser={currentUser}/>
 		</div>
 	
 	)}
@@ -1078,7 +1078,7 @@ function WelcomeFeed(props) {
 </div>}
 
 		{<div>
-		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Playlists</p>
+		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Archipelagos</p>
 					<Carousel 
 					show={`${window.innerWidth>1000 ? 4.2 : 3}`} slide={3} transition={0.5}
 						infinite={true}
@@ -1093,9 +1093,9 @@ function WelcomeFeed(props) {
 								</div>} 
 								
 								>
-					{dataGlobalPlaylists.map((item, index) => 
+					{dataGlobalArchipelagos.map((item, index) => 
 					
-					<PlaylistCard key={index} item={item}/>
+					<ArchipelagoCard key={index} item={item}/>
 					)}
 					</Carousel>
 					</div>

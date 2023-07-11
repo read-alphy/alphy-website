@@ -19,8 +19,27 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
     let displayText
     let transcript
     
-
+    let sentences
+    let groupedText
+    
     if(source.text!==undefined){
+        const sentenceRegex = /(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
+        sentences = source.text.split(sentenceRegex);
+        const groups = sentences.reduce((acc, sentence, index) => {
+            const groupIndex = Math.floor(index / 3);
+            if (!acc[groupIndex]) {
+                acc[groupIndex] = [];
+            }
+            acc[groupIndex].push(sentence);
+            return acc;
+        }, []);
+        const groupedSentences = groups.map(group => group.join(' '));
+        groupedText = groupedSentences.join('<br/> <br/>');
+        groupedText = `${groupedText[0] === groupedText[0].toUpperCase() ? "" : "..."}${groupedText}${((groupedText[groupedText.length - 1] === "." || groupedText.substring(groupedText.length - 1) === "?") || (groupedText[groupedText.length - 1] === ",") || (groupedText[groupedText.length - 1] === "!") || (groupedText[groupedText.length - 1] === ":") || (groupedText[groupedText.length - 1] === "...")) ? "" : "..."}`
+
+
+        
+        
         if(window.innerWidth>768){
         displayText = expanded ? source.text : `${source.text[299]===" "? source.text.slice(0, 299) : source.text.slice(0, 300)}`;
     }
@@ -72,11 +91,13 @@ const showDialog = () => {
 
       useEffect(() => {
         const handleResize = () => {
+            if(setFullWidth){
           if (window.innerWidth < 600) {
             setFullWidth(true);
           } else {
             setFullWidth(false);
           }
+        }
         };
     
         window.addEventListener("resize", handleResize);
@@ -219,8 +240,8 @@ const showDialog = () => {
 
 <TextSnippetIcon/>  Passage
 </p>
-<p className="px-2 sm:px-10">
-{source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."}
+<p className="px-2 sm:px-10" dangerouslySetInnerHTML={{__html:groupedText}}>
+
 </p>
 
                 

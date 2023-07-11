@@ -2,10 +2,10 @@ import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from '
 import SideFeed from '../../components/ArticleComponents/SideFeed';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import PlaylistCreation from './PlaylistCreation';
+import ArchipelagoCreation from './ArchipelagoCreation';
 import {Button, Input, Textarea} from "@material-tailwind/react";
-import PlaylistChat from './PlaylistChat';
-import EditPlaylist from './EditPlaylist';
+import ArchipelagoChat from './ArchipelagoChat';
+import EditArchipelago from './EditArchipelago';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import Dialog from '@mui/material/Dialog';
@@ -17,7 +17,7 @@ import { set } from 'lodash';
 
 
 
-function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken,userPlaylists,setUserPlaylists}) {
+function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken,userArchipelagos,setUserArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -25,13 +25,13 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 	const [called, setCalled] = useState(false);
-	const [sourceIDsPlaylist, setSourceIDsPlaylist] = useState([]);
-	const [dataPlaylist, setDataPlaylist] = useState([]);
+	const [sourceIDsArchipelago, setSourceIDsArchipelago] = useState([]);
+	const [dataArchipelago, setDataArchipelago] = useState([]);
 	const [data, setData] = useState([]);
-	const [playlistInfo, setPlaylistInfo] = useState([]);
+	const [archipelagoInfo, setArchipelagoInfo] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [playlistDescription, setPlaylistDescription] = useState("");
-	const [playlistTitle, setPlaylistTitle] = useState("");
+	const [archipelagoDescription, setArchipelagoDescription] = useState("");
+	const [archipelagoTitle, setArchipelagoTitle] = useState("");
 	const [deleteDialog, setDeleteDialog] = useState(false);
 
 	useEffect(() => {
@@ -42,30 +42,30 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 			setWindowSizeChecked(true)
 	}
 })
-//console log sourceIDsplaylist type
-const isCreatePlaylist = location.pathname.split('/')[2]==="createPlaylist"
-const isEditPlaylist = location.pathname.split('/')[2]==="editPlaylist"
-const isPlaylist = location.pathname.split('/')[1]==="playlist" && location.pathname.split('/')[2]!=="editPlaylist" && location.pathname.split('/')[2]!=="createPlaylist"
+//console log sourceIDsarchipelago type
+const isCreateArchipelago = location.pathname.split('/')[2]==="createArchipelago"
+const isEditArchipelago = location.pathname.split('/')[2]==="editArchipelago"
+const isArchipelago = location.pathname.split('/')[1]==="archipelago" && location.pathname.split('/')[2]!=="editArchipelago" && location.pathname.split('/')[2]!=="createArchipelago"
 
 useEffect(() => {
-	if((isPlaylist || isEditPlaylist) && !called){
+	if((isArchipelago || isEditArchipelago) && !called){
 		setIsLoading(true)
-		source_id = isPlaylist ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
+		source_id = isArchipelago ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}`).then((response) => {
 			setCollapsed(true)
 			setData(response.data)
-			setPlaylistInfo(response.data)
+			setArchipelagoInfo(response.data)
 			if(response.data.description==="null"){
-				setPlaylistDescription("")
+				setArchipelagoDescription("")
 			}
 			else{		
-			setPlaylistDescription(response.data.description)
+			setArchipelagoDescription(response.data.description)
 		}
-			setPlaylistTitle(response.data.name)
-			setDataPlaylist(response.data.tracks)
+			setArchipelagoTitle(response.data.name)
+			setDataArchipelago(response.data.tracks)
 			let sources = response.data.tracks.map((item) => item.source_id)
-			setSourceIDsPlaylist([...sources])
+			setSourceIDsArchipelago([...sources])
 			setIsLoading(false)
 			setCalled(true)
 		}
@@ -76,48 +76,48 @@ useEffect(() => {
 
 
 
-const handlePlaylist= () => {
+const handleArchipelago= () => {
 
 
-	// disallow creating if dataplaylist is empty
-	// disallow creating if there is a limit on the number of playlists
-	// disallow creating if there is a limit on the number of videos to include in a playlist
+	// disallow creating if dataarchipelago is empty
+	// disallow creating if there is a limit on the number of archipelagos
+	// disallow creating if there is a limit on the number of videos to include in a archipelago
 	// disallow creating if the user is not logged in
 
-	if(isCreatePlaylist){
+	if(isCreateArchipelago){
 	axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
-		"name": playlistTitle,
+		"name": archipelagoTitle,
 		"user_id": currentUser.uid,
-		"description": playlistDescription,
-		"sources": [...dataPlaylist],
+		"description": archipelagoDescription,
+		"sources": [...dataArchipelago],
 
 
 }).then((response) => {
-	setUserPlaylists([...userPlaylists, response.data])
-	navigate(`/playlist/${response.data.uid}`)
+	setUserArchipelagos([...userArchipelagos, response.data])
+	navigate(`/archipelago/${response.data.uid}`)
 	
 })
 }
-else if(isEditPlaylist){
-	axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistInfo.uid}`, {
-		"name": playlistTitle,
+else if(isEditArchipelago){
+	axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
+		"name": archipelagoTitle,
 		"user_id": currentUser.uid,
-		"description": playlistDescription,
-		"sources": [...dataPlaylist],
+		"description": archipelagoDescription,
+		"sources": [...dataArchipelago],
 }).then((response) => {
-	navigate(`/playlist/${response.data.uid}`)
-	localStorage.setItem("playlistEdited", "true")
+	navigate(`/archipelago/${response.data.uid}`)
+	localStorage.setItem("archipelagoEdited", "true")
 
 })
 }
 }
 
 
-const handleDeletePlaylist = () => {
-	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistInfo.uid}`).then((response) => {
-		const index = userPlaylists.indexOf(playlistInfo)
-		userPlaylists.splice(index,1)
-		setUserPlaylists([...userPlaylists])
+const handleDeleteArchipelago = () => {
+	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`).then((response) => {
+		const index = userArchipelagos.indexOf(archipelagoInfo)
+		userArchipelagos.splice(index,1)
+		setUserArchipelagos([...userArchipelagos])
 
 		navigate(`/`)
 		
@@ -184,31 +184,31 @@ const handleDeletePlaylist = () => {
 						}}`}
 				>
 
-				{isCreatePlaylist && <PlaylistCreation userPlaylists={userPlaylists} playlistDescription={playlistDescription} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist}  playlistTitle={playlistTitle} setPlaylistDescription={setPlaylistDescription} setPlaylistTitle={setPlaylistTitle} sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist}/>}
+				{isCreateArchipelago && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
 
-				{(!isCreatePlaylist && !isEditPlaylist) ? isLoading ? null :<PlaylistChat data={data} setData={setData} currentUser={currentUser}/> : null}
-				{isEditPlaylist && <EditPlaylist playlistInfo={playlistInfo} setPlaylistInfo={setPlaylistInfo} userPlaylists={userPlaylists} playlistDescription={playlistDescription} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist}  playlistTitle={playlistTitle} setPlaylistDescription={setPlaylistDescription} setPlaylistTitle={setPlaylistTitle} sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist}/>}
+				{(!isCreateArchipelago && !isEditArchipelago) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser}/> : null}
+				{isEditArchipelago && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
 							
 					
 
 				</div>
 			</div>
-			{(isCreatePlaylist || isEditPlaylist) &&  
+			{(isCreateArchipelago || isEditArchipelago) &&  
 			<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed &&window.innerWidth<1000 &&"hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
-			{isEditPlaylist && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
-            <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-green-400 px-5" onClick={handlePlaylist}><SaveIcon className="mr-2"/>{isCreatePlaylist ? "Create" : "Save"}</Button>
+			{isEditArchipelago && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
+            <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-green-400 px-5" onClick={handleArchipelago}><SaveIcon className="mr-2"/>{isCreateArchipelago ? "Create" : "Save"}</Button>
 			
             </div>
 		{deleteDialog &&
 			<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
 				
 				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode rounded-lg items-center text-center justify-center drop-shadow-sm flex-col">
-					<p className="mb-10">You are about to delete this playlist. Would you like to continue?</p>
+					<p className="mb-10">You are about to delete this archipelago. Would you like to continue?</p>
 					<div className="flex flex-row">
 						<p className="text-green-400 cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
 						<div className="border-r h-full mr-4 ml-4"></div>
-						<p className="text-red-400 cursor-pointer" size="sm" onClick={handleDeletePlaylist}>Delete</p>
+						<p className="text-red-400 cursor-pointer" size="sm" onClick={handleDeleteArchipelago}>Delete</p>
 					</div>
 				</div>
 			

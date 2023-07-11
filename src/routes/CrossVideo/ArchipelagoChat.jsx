@@ -11,10 +11,11 @@ import { Carousel } from '@trendyol-js/react-carousel';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function PlaylistChat({data,setData,currentUser}) {
+export default function ArchipelagoChat({data,setData,currentUser}) {
     const [inputValue, setInputValue] = useState("")
     const [isLoadingInside, setIsLoadingInside] = useState(false)
     const [isCleared, setIsCleared] = useState(false)
@@ -34,15 +35,16 @@ export default function PlaylistChat({data,setData,currentUser}) {
     
     let displayText
     
-    const playlistUserID = data.user_id
-    const playlistImageLink = data.thumbnail_url
-    const playlistID = data.uid
+    
+    const archipelagoUserID = data.user_id
+    const archipelagoImageLink = data.thumbnail_url
+    const archipelagoID = data.uid
     const buttonRef = useRef(null);
 
 
 
-    if(localStorage.getItem("playlistEdited")==="true"){
-        localStorage.setItem("playlistEdited","false")
+    if(localStorage.getItem("archipelagoEdited")==="true"){
+        localStorage.setItem("archipelagoEdited","false")
         window.location.reload()
     }
 //remove cursor for trendyol carousel gaps
@@ -54,13 +56,11 @@ if(elements){
 }
 
 
-
-
 const handleSubmit = () => {
     setAnswerData("")
     setIsLoadingInside(true)
      axios.post
-    (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${playlistID}/question`,
+    (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoID}/question`,
     inputValue,
     
     
@@ -72,6 +72,7 @@ const handleSubmit = () => {
     ).then((response) => {
     
     setAnswerData(response.data)
+    
     setIsLoadingInside(false)
     setinputError(false)
 
@@ -109,7 +110,7 @@ const handleKeyDown = (event) => {
 };
 
 const handleEdit = () => {
-    navigate(`/playlist/editPlaylist/${data.uid}`)
+    navigate(`/archipelago/editArchipelago/${data.uid}`)
 }
 
 
@@ -133,7 +134,7 @@ const toggleExpand = () => {
             <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10">
             
                 <div className="col-span-4 sm:col-span-3 flex flex-row">
-                <img className={`${"hidden" } sm:block w-[200px]`} src={playlistImageLink}/>
+                <img className={`${"hidden" } sm:block w-[200px]`} src={archipelagoImageLink}/>
                 <div className="sm:ml-6 ">
             <p className="text-xl text-zinc-700 dark:text-zinc-300 ">{title}</p>
             {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
@@ -143,11 +144,11 @@ const toggleExpand = () => {
           
             </div>
             <div className="col-span-1 sm:ml-6">
-                {currentUser!==null && currentUser.uid === playlistUserID && 
+                {currentUser!==null && currentUser.uid === archipelagoUserID && 
                 
                 <div className="flex flex-row" >
                     <p  onClick={handleEdit} className="cursor-pointer text-zinc-600 dark:text-zinc-300 underline" >Edit</p>
-                     <EditIcon onClick={handleEdit} fontSize="small"   className="cursor-pointer text-zinc-600 dark:text-zinc-300 pl-1 pt-1"   title={"Edit playlist"} />
+                     <EditIcon onClick={handleEdit} fontSize="small"   className="cursor-pointer text-zinc-600 dark:text-zinc-300 pl-1 pt-1"   title={"Edit archipelago"} />
                 </div>
                 }
                 
@@ -156,6 +157,7 @@ const toggleExpand = () => {
 
             </div>
             <div className="sm:ml-10">
+                <div>
 				<div className="flex items-center pr-1 mt-6 xl:mt-8 max-w-[900px] ">
                 <div className="relative w-full min-w-[40vw] ">
 
@@ -210,14 +212,16 @@ const toggleExpand = () => {
                         }
                     </Button>
                     </div>
-            </div>
+                    </div>
+
+             </div>
             </div>
 {/* 
 <div className="items-center text-center mt-2 text-zinc-700 dark:text-zinc-300 opacity-80">
     AI-enabled search and chat by Alphy
 </div> */}
             <div className="mt-10 animate-bounce-slow" >
-                {(playlistID==="eNb1f_M" && (answerData=="" && isLoadingInside===false)) &&
+                {(archipelagoID==="eNb1f_M" && (answerData=="" && isLoadingInside===false)) &&
 
                 <div className="sm:px-5 mt-10 ">
                 {<div class={`${answerData.length>0 &&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
@@ -271,6 +275,10 @@ const toggleExpand = () => {
                                     {<p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
                                  }}/> } 
                                     
+                                    <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
+                        Always check the sources before quoting. AI may not be 100% accurate.
+
+                    </div>
 
                                   {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                                     </div>

@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import {Button, Input, Textarea} from "@material-tailwind/react";
 import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import PlaylistBot from "../../img/playlist_bot.png"
-
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
+
+import { useNavigate,useLocation  } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect } from 'react';
 import { set } from 'lodash';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 
-
-export default function PlaylistCreation({playlistDescription , playlistTitle, setPlaylistDescription, setPlaylistTitle,sourceIDsPlaylist, setSourceIDsPlaylist, dataPlaylist, setDataPlaylist}){
+export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,archipelagoDescription , archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago}){
     const [inputValue, setInputValue] = useState("");
+
     
+
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
     const [hasMore, setHasMore] = useState(false);  
@@ -25,12 +26,24 @@ export default function PlaylistCreation({playlistDescription , playlistTitle, s
     const [searched, setSearched] = useState(false);
     const [typing, setTyping] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-
-    
+    const navigate= useNavigate();
+    const [initialCall, setInitialCall] = useState(true);
     const [editBasicInfo, setEditBasicInfo] = useState(false);
     const {currentUser} = useAuth();
+    const location = useLocation();
 
+    
+    useEffect   (() => {
+        
+        if(currentUser!==null && archipelagoInfo!==undefined && currentUser.uid !== archipelagoInfo.user_id){
+            /* if(location.state?.referrer !=="/"){
+            navigate("/404")
+            } */
+            /* navigate("/404") */
+        }
 
+   
+    })
     const getData = (offset, firstTime, hasMore) => {
     
         
@@ -97,40 +110,33 @@ const handleKeyDown = (event) => {
 	};
     return(
         <div className="px-4 sm:px-20 lg:px-0 lg:grid lg:grid-cols-5 lg:w-[70vw] lg:mt-10 ">
-        <div className="col-span-2 flex justify-start  min-w-[300px]">
-            <div className=" w-full min-w-[300px] ">
-            <div className="flex flex-col ">
-            
+            <div className="col-span-2 flex justify-start  min-w-[300px]">
+                <div className=" w-full min-w-[300px] ">
+            <div className="flex  flex-col ">
             <div className="mt-10 lg:mt-0 ">
-                <a className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition"  href={`/`}>
+                <a className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition"  href={`/archipelago/${archipelagoInfo.uid}`}>
                 <KeyboardArrowLeftIcon fontSize="small" className=""/>
                 <span className="">Go Back</span>
                 </a></div>
-                <div className=" flex flex-row w-full items-center">
+            <div className=" flex flex-row w-full items-center">
+
             <div class="relative w-full min-w-[200px] h-12 mt-10 ">
             
-            <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1">Title</p>
-
-            <input value={playlistTitle}
+                <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1">Title</p>
+            <input value={archipelagoTitle}
             placeholder="Set a title..."
-							onChange={(event) => setPlaylistTitle(event.target.value)} className="w-full text-l px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-400 focus:border-green-400 focus:outline-none focus:ring-0 rounded-lg"/>
-						
+							onChange={(event) => setArchipelagoTitle(event.target.value)} className="w-full text-l dark:bg-mildDarkMode px-2 h-[50px] bg-white border border-zinc-400 focus:border-green-400 focus:outline-none focus:ring-0 rounded-lg"/>
 						 </div>
-
-               {/*  <EditIcon className="items-center opacity-20 ml-5 cursor-pointer" fontSize="small"
-                onClick={() => {
-                    setEditBasicInfo(true);
-                }}/> */}
   
 </div>  
 <div className="w-full">
 <p className="text-zinc-700 dark:text-zinc-300 mb-2 mt-16 ml-1">Description</p>
-                <textarea className={`min-h-[120px] rounded-lg bg-white border-zinc-400 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-green-400 focus:outline-none focus:ring-0`} 
-                value={playlistDescription}
+                <textarea className={`min-h-[120px] rounded-lg bg-white dark:bg-mildDarkMode border-zinc-400  resize-none text-sm w-full text-top focus:border-green-400 focus:outline-none focus:ring-0`} 
+                value={archipelagoDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
-                placeholder="Set a description for your playlist..."
+                placeholder="Set a description for your archipelago..."
                 onBlur={() => setEditBasicInfo(false)}
-                onChange={(event) => setPlaylistDescription(event.target.value)}
+                onChange={(event) => setArchipelagoDescription(event.target.value)}
                  >
                 
 				</textarea>
@@ -168,14 +174,30 @@ const handleKeyDown = (event) => {
 							}} className="col-span-1 ml-4 bg-green-400 dark:bg-green-400 dark:text-zinc-300 text-sm w-12 items-center text-center flex justify-center ">
                                 <SearchIcon fontSize="small"/></Button> */}
                          </div>
-<div className="playlist-search max-h-[80vh] overflow-y-scroll mt-5">
+<div className="archipelago-search max-h-[80vh] overflow-y-scroll mt-5">
                          {isLoading
 								? data.length > 0
 									? data
-										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromPlaylist={"search"} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist} sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist}/>)
+										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromArchipelago={"search"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>)
 										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
-								: data.map((item, index) => <FeedItem key={index + 1000} item={item} fromPlaylist={"search"} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist}sourceIDsPlaylist = {sourceIDsPlaylist} setSourceIDsPlaylist={setSourceIDsPlaylist} />)}
+								: data.map((item, index) => <FeedItem key={index + 1000} item={item} fromArchipelago={"search"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} />)
+                                }
+                                {
+                                    data.length==0 && 
+                                    <div> 
+                           <div>
+                    <p className="mt-5 mb-5 text-zinc-600 dark:text-zinc-300 flex flex-col"> 
+           <span>         Expand the scope of your knowledge hub by adding new content from the search bar.</span>
+                    <span className="mt-2">
+    If you can't find what you are looking for, you can submit new content from the <a className="text-green-400 underline" href="/">main page</a>.
+    </span>
+                    </p>
+                    
+                    </div>
+
+                                    </div>
+                                }
 						</div>
 						{hasMore && (
 							<div className="w-full flex justify-center">
@@ -189,20 +211,13 @@ const handleKeyDown = (event) => {
 								}
 							</div>
 						)}
-                        {data.length ===0 &&
-                             <p className="mt-5 mb-5 text-zinc-600 dark:text-zinc-300 flex flex-col"> 
-                             <span>         Expand the scope of your knowledge hub by adding new content from the search bar.</span>
-                                      <span className="mt-2">
-                      If you can't find what you are looking for, you can submit new content from the <a className="text-green-400 underline" href="/">main page</a>.
-                      </span>
-                                      </p>
+                        {
+                            
                         }
                
 
 
-<div>
-    
-</div>
+                    
 
                 </div>
             </div>
@@ -211,17 +226,17 @@ const handleKeyDown = (event) => {
             
                 <div className=" lg:border-l w-full lg:px-10 mx-auto">
                 <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">Knowledge Hub</p>
-     <p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>  
-        
+                {<p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>}
 
 
        
-                {dataPlaylist.length > 0
-									?  dataPlaylist
-										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromPlaylist={"playlist"} dataPlaylist={dataPlaylist} setDataPlaylist={setDataPlaylist} />
+                {dataArchipelago.length > 0
+									?  dataArchipelago
+										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromArchipelago={"archipelago"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} />
                                         )				
                                         :
-                                       null
+                                       
+                                        null
                 }
 
 

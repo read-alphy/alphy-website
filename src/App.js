@@ -49,7 +49,7 @@ function App() {
 	const [contentName, setContentName] = useState("")
 	const [collapsed, setCollapsed] = useState(false);
 	const [idToken, setIdToken] = useState("")
-	const [userPlaylists, setUserPlaylists] = useState([])
+	const [userArchipelagos, setUserArchipelagos] = useState([])
 	
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
@@ -104,7 +104,7 @@ useEffect(() => {
 		}
 
 		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
-			setUserPlaylists(response.data)
+			setUserArchipelagos(response.data)
 		})
 	}
 	
@@ -215,39 +215,39 @@ if (currentUser && creditcalled!==true) {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userPlaylists={userPlaylists}/>} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userPlaylists={userPlaylists}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userPlaylists={userPlaylists}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
 								}
 							/>
 							<Route
 								path="/up/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userPlaylists={userPlaylists}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
 								}
 							/>
 
-							<Route path="/playlist/:playlist_ID" element={
+							<Route path="/archipelago/:archipelago_ID" element={
 							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} />
 							}></Route>
-								<Route path="/playlist/createPlaylist" element={
+								<Route path="/archipelago/createArchipelago" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists} />
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} />
 							
 							}> </Route>
 
-							<Route path="/playlist/editPlaylist/:playlist_ID" element={
+							<Route path="/archipelago/editArchipelago/:archipelago_ID" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userPlaylists={userPlaylists} setUserPlaylists={setUserPlaylists}/>
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos}/>
 							
 							}> </Route>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />

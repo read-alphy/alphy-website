@@ -30,13 +30,13 @@ body {
 	display: none; /* Chrome, Safari, and Opera */
   }
 
-  .playlist-search{
+  .archipelago-search{
 	scrollbar-width: none; /* Firefox */
 	-ms-overflow-style: none; /* Internet Explorer and Edge */
 
   }
 
-  .playlist-search::-webkit-scrollbar {
+  .archipelago-search::-webkit-scrollbar {
 	display: none; /* Chrome, Safari, and Opera */
   }
 

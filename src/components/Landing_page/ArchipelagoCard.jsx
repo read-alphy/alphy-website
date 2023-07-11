@@ -5,7 +5,7 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import EditIcon from '@mui/icons-material/Edit';
 
 
-export default function PlaylistCard({item,index,currentUser}){
+export default function ArchipelagoCard({item,index,currentUser}){
     
     const [expanded, setExpanded] = useState(false);
 
@@ -23,13 +23,13 @@ export default function PlaylistCard({item,index,currentUser}){
     
 
     const handleComponentClick = () => {
-        navigate(`/playlist/${item.uid}`)
+        navigate(`/archipelago/${item.uid}`)
       };
     
       const handleIconClick = (event) => {
         event.stopPropagation();
         setTimeout(() => {
-        navigate(`/playlist/editPlaylist/${item.uid}`);
+        navigate(`/archipelago/editArchipelago/${item.uid}`);
         }, 100);
       };
     return(

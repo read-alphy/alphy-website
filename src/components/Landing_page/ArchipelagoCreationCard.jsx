@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 
 
-export default function PlaylistCreationCard({item,index}){
+export default function ArchipelagoCreationCard({item,index}){
     
 
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function PlaylistCreationCard({item,index}){
                     <SmartToyIcon className="text-green-400 mt-8"/>
                     </div>
                 <p className="text-zinc-700 dark:text-zinc-200 text-l mt-16">
-                    Create a Playlist
+                    Create a Archipelago
                 </p>
             
                 </div>
