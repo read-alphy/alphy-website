@@ -191,7 +191,7 @@ const handleKeyDown = (event) => {
 						)}
                         {data.length ===0 &&
                              <p className="mt-5 mb-5 text-zinc-600 dark:text-zinc-300 flex flex-col"> 
-                             <span>         Expand the scope of your knowledge hub by adding new content from the search bar.</span>
+                             <span>         Expand the scope of your archipelago by adding new content from the search bar.</span>
                                       <span className="mt-2">
                       If you can't find what you are looking for, you can submit new content from the <a className="text-green-400 underline" href="/">main page</a>.
                       </span>
@@ -210,7 +210,8 @@ const handleKeyDown = (event) => {
             <div className="col-span-3 grid-row-2 flex justify-start  lg:p-10 drop-shadow-sm">
             
                 <div className=" lg:border-l w-full lg:px-10 mx-auto">
-                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">Knowledge Hub</p>
+                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Archipelago"}</p>
+                {archipelagoDescription.length>0 && <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80">{archipelagoDescription}</p>}
      <p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>  
         
 

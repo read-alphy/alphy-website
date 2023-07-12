@@ -134,7 +134,7 @@ const toggleExpand = () => {
             <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10">
             
                 <div className="col-span-4 sm:col-span-3 flex flex-row">
-                <img className={`${"hidden" } sm:block w-[200px]`} src={archipelagoImageLink}/>
+                {archipelagoImageLink && <img className={`${"hidden" } sm:block w-[200px]`} src={archipelagoImageLink}/>}
                 <div className="sm:ml-6 ">
             <p className="text-xl text-zinc-700 dark:text-zinc-300 ">{title}</p>
             {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
@@ -250,7 +250,7 @@ const toggleExpand = () => {
 						{/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
 						<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
 							getBeforeInit={(instance) => {
-								instance.type("Going through the knowledgebase to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
+								instance.type("Going through the archipelago to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
 
 								// Remember to return it!
 								return instance;

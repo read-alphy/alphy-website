@@ -12,6 +12,7 @@ import { Button, Spinner } from "@material-tailwind/react";
 
 
 
+
 export default function QuestionAnswering(props) {
 	// console.log(props.props, props.key_qa)
 	const windowSize = useWindowSize();
@@ -442,6 +443,7 @@ export default function QuestionAnswering(props) {
 																				:
 																				<a target="_blank" href={props.data.source_type === "yt" ? `https://youtu.be/${props.data.source_id}?t=0` : ""} className="underline">00:00:00</a>
 																		}
+
 
 
 																		<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}

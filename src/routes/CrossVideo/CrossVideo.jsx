@@ -19,10 +19,11 @@ import { set } from 'lodash';
 
 
 
-function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken,userArchipelagos,setUserArchipelagos}) {
+function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken,userArchipelagos,setUserArchipelagos},props) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
+	
 	const {currentUser} = useAuth();
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
@@ -35,6 +36,7 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [archipelagoDescription, setArchipelagoDescription] = useState("");
 	const [archipelagoTitle, setArchipelagoTitle] = useState("");
 	const [deleteDialog, setDeleteDialog] = useState(false);
+	const [subCalled, setSubCalled] = useState(false);
 
 	useEffect(() => {
 		if(!windowSizeChecked){
@@ -52,25 +54,27 @@ const isArchipelago = location.pathname.split('/')[1]==="archipelago" && locatio
 
 useEffect(() => {
 	if((isArchipelago || isEditArchipelago) && !called){
-		setIsLoading(true)
 		source_id = isArchipelago ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}`).then((response) => {
 			setCollapsed(true)
+			
 			setData(response.data)
 			setArchipelagoInfo(response.data)
-			if(response.data.description==="null"){
-				setArchipelagoDescription("")
-			}
-			else{		
-			setArchipelagoDescription(response.data.description)
-		}
+						if(response.data.description==="null"){
+							setArchipelagoDescription("")
+						}
+						else{		
+						setArchipelagoDescription(response.data.description)
+					}
 			setArchipelagoTitle(response.data.name)
 			setDataArchipelago(response.data.tracks)
 			let sources = response.data.tracks.map((item) => item.source_id)
 			setSourceIDsArchipelago([...sources])
 			setIsLoading(false)
 			setCalled(true)
+
+
 		}
 		)
 	}
@@ -78,6 +82,27 @@ useEffect(() => {
 })
 
 
+useEffect (() => {
+	if(hasActiveSub!==true){
+	setTimeout (() => {
+		setSubCalled(true)
+	}, 3000);
+		}
+		else{
+			setSubCalled(true)
+		}
+		
+	})
+
+if(subCalled){
+	if(isCreateArchipelago && (hasActiveSub===undefined || hasActiveSub===false)){
+		navigate("/")
+	}
+	else if(hasActiveSub===true){
+		setIsLoading(false)
+		setSubCalled(false)
+	}
+}
 
 const handleArchipelago= () => {
 
@@ -96,7 +121,7 @@ const handleArchipelago= () => {
 
 
 }).then((response) => {
-	setUserArchipelagos([...userArchipelagos, response.data])
+	props.setUserArchipelagos([...userArchipelagos, response.data])
 	navigate(`/archipelago/${response.data.uid}`)
 	
 })

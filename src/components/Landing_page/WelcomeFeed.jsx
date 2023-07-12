@@ -481,7 +481,7 @@ function WelcomeFeed(props) {
 
 
 	const handleCreatePlaylist = () => {
-		if(props.hasActiveSub){
+		if(props.hasActiveSub===true){
 		navigate("/archipelago/createArchipelago")
 		}
 		else{
@@ -1047,12 +1047,16 @@ function WelcomeFeed(props) {
 	<div className="">
 		{currentUser &&
 		<div>
-	
+	{props.hasActiveSub===true ? 
+	<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Archipelagos
+	<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
+	</p>
+	:
 	<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Archipelagos
 		<Popover placement="right">
 		<PopoverHandler>
 				
-				<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
+		<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
 				
 				</PopoverHandler>
 				<PopoverContent>
@@ -1061,9 +1065,9 @@ function WelcomeFeed(props) {
 					</p>
 				</PopoverContent>
 		</Popover>
+		
 		</p>
-
-
+}
 		{props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
 		<div>
 		<Carousel 

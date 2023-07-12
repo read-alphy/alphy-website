@@ -76,7 +76,7 @@ useEffect(() => {
 	setTimeout (() => {
 		var userId = localStorage.getItem("userId")
 		
-		if(userId===null || (currentUser!==undefined && currentUser.uid!== null &&userId!==currentUser.uid)){
+		if(userId===null || (currentUser!==undefined && currentUser!==null && currentUser.uid!== null &&userId!==currentUser.uid)){
 			localStorage.setItem('userId', currentUser.uid)
 		}
 		
@@ -237,17 +237,17 @@ if (currentUser && creditcalled!==true) {
 							/>
 
 							<Route path="/archipelago/:archipelago_ID" element={
-							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} />
+							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} />
 							}></Route>
 								<Route path="/archipelago/createArchipelago" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} />
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} />
 							
 							}> </Route>
 
 							<Route path="/archipelago/editArchipelago/:archipelago_ID" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos}/>
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub}/>
 							
 							}> </Route>
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
