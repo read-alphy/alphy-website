@@ -51,7 +51,8 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
     
    
     const navigate = useNavigate();
-    const title = tracks[0] ? tracks[0].find((track) => track.source_id === source.source_id).source.title : null
+    
+    const title = tracks[0]!==undefined ? tracks[0].find((track) => track.source_id === source.source_id).source.title : null
 
     let displayTitle
     if(title){

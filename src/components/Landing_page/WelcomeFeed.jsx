@@ -1100,7 +1100,7 @@ function WelcomeFeed(props) {
 		</div>
 }
 
-{props.hasActiveSub!==true &&
+{props.hasActiveSub===false &&
 		<div className=" ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
 		<p>You need to be on a Premium account to create archipelagos. Meanwhile, feel free to enjoy our curated lists.</p>
 		</div>

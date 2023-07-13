@@ -246,23 +246,23 @@ const toggleExpand = () => {
                         Answer</p> : null}
             {isLoadingInside &&
             <div className="opacity-60 dark:opacity-100">
-                <div className="hidden dark:block opacity-60">
-                        <Box sx={{ width: 800 }}>
+                <div className="hidden dark:block opacity-60 w-full pr-3 lg:px-0 lg:w-[900px]">
+                        <Box sx={{ width: 900 }}>
                         <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
                         <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
                         <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
                         <Skeleton sx={{bgcolor:"#71717a"}} animation="wave" height={80}/>
                         </Box>
                         </div>
-                <div className="dark:hidden ">
-                <Box sx={{ width: 800 }}>
+                <div className="dark:hidden w-full pr-3 lg:px-0 lg:w-[900px]">
+                 
+                 <Box fullWidth>
                 <Skeleton sx={{bgcolor:"dark:#fff"}} animation="wave"/>
                 <Skeleton  animation="wave"/>
                 <Skeleton  animation="wave"/>
                 <Skeleton  animation="wave" height={80}/>
                 </Box>
                 </div>
-
                 </div>
 }
                              
@@ -291,7 +291,7 @@ const toggleExpand = () => {
                      
                                    {(answerData.sources!==undefined && isLoadingInside===false) && 
                                 (
-                                   window.innerWidth>768 ?
+                                   window.innerWidth>900 ?
                                    <Carousel 
                                    infinite={false}
                                    leftArrow={
