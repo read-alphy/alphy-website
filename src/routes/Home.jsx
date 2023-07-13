@@ -56,6 +56,8 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
 			} */}
 			<About />
+			
+
 			<FeedbackForm />
 
 		</div>

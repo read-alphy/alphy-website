@@ -14,6 +14,8 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import EditIcon from '@mui/icons-material/Edit';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 export default function ArchipelagoChat({data,setData,currentUser}) {
     const [inputValue, setInputValue] = useState("")
@@ -236,54 +238,48 @@ const toggleExpand = () => {
 
             </div>
         }
-            {isLoadingInside ? (
-					<div
-						className="loading mt-5 mb-10 ml-10 lg:w-[900px]"
-						style={{
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							height: '20vh',
-						}}
-					>
-
-						{/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
-						<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
-							getBeforeInit={(instance) => {
-								instance.type("Going through the archipelago to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
-
-								// Remember to return it!
-								return instance;
-							}}
-
-							options={{
-								loop: true,
-								html: true,
-								speed: 10,
-								cursorChar: "",
-							}}
-						/>
-					</div>
-				) : (
-					answerData.answer!==undefined && 
+            
                 <div id="answer-area" className="answer-area text-l max-w-[900px] ml-2 sm:ml-10 mt-10 ">
-                    <p className="text-green-400 text-l">
-                        
+                    
+                    {isLoadingInside || answerData.answer!==undefined ?<p className="text-green-400 text-l"> 
                         <QuestionAnswerIcon className="text-green-400 mr-1"/>
-                        Answer</p>
-                                            
-                                    {<p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
-                                 }}/> } 
+                        Answer</p> : null}
+            {isLoadingInside &&
+            <div className="opacity-60 dark:opacity-100">
+                <div className="hidden dark:block opacity-60">
+                        <Box sx={{ width: 800 }}>
+                        <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
+                        <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
+                        <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
+                        <Skeleton sx={{bgcolor:"#71717a"}} animation="wave" height={80}/>
+                        </Box>
+                        </div>
+                <div className="dark:hidden ">
+                <Box sx={{ width: 800 }}>
+                <Skeleton sx={{bgcolor:"dark:#fff"}} animation="wave"/>
+                <Skeleton  animation="wave"/>
+                <Skeleton  animation="wave"/>
+                <Skeleton  animation="wave" height={80}/>
+                </Box>
+                </div>
+
+                </div>
+}
+                             
+                            {answerData.answer!==undefined &&
+                             <div>       
+                                    <p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
+                                 }}/> 
                                     
                                     <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
                         Always check the sources before quoting. AI may not be 100% accurate.
-
+</div>
                     </div>
 
-                                  {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
-                                    </div>
-				)}
-
+                                }       
+                                
+        </div>
+                {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                             
                                     <p className={`text-green-400 ml-10 mt-4 mb-4 ${answerData.length===0 && "hidden"}`} >
 

@@ -22,6 +22,7 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
     let sentences
     let groupedText
     
+    
     if(source.text!==undefined){
         const sentenceRegex = /(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
         sentences = source.text.split(sentenceRegex);
