@@ -1068,7 +1068,11 @@ function WelcomeFeed(props) {
 		
 		</p>
 }
-		{props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
+		{props.hasActiveSub === true
+
+		?
+		
+		props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
 		<div>
 		<Carousel 
 		show={`${window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
@@ -1099,13 +1103,14 @@ function WelcomeFeed(props) {
 
 		
 		</div>
-}
 
-{props.hasActiveSub===false &&
+		:
+
 		<div className=" ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
 		<p>You need to be on a Premium account to create archipelagos. Meanwhile, feel free to enjoy our curated lists.</p>
 		</div>
 }
+
 
 
 <div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
