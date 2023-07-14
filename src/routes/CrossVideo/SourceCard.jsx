@@ -16,7 +16,7 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
     const startTime= Math.floor(source.start)
     const [expanded, setExpanded] = useState(false);
 
-    let displayText
+    let displayText =""
     let transcript
     
     let sentences
@@ -52,12 +52,12 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
    
     const navigate = useNavigate();
     let title = ""
-    if(tracks[0]!==undefined && tracks[0].find((track) => track.source_id === source.source_id) !== undefined){
+    if(tracks!==undefined && tracks[0]!==undefined && tracks[0].find((track) => track.source_id === source.source_id) !== undefined){
     title =   tracks[0].find((track) => track.source_id === source.source_id).source.title
 
 }
 
-    let displayTitle
+    let displayTitle = ""
     if(title){
         if(window.innerWidth>600){
         displayTitle = expanded ? title : `${title[29]===" "? title.slice(0, 29) : title.slice(0, 30)}`;
