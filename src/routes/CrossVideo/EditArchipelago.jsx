@@ -145,7 +145,7 @@ const handleKeyDown = (event) => {
                 
                 </div>
                 <div class=" mt-10 border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
-                <p className="mt-4 lg:mt-10 mb-6 text-zinc-700 dark:text-zinc-300 ml-1">Curate your knowledge hub</p>
+                <p className="mt-4 lg:mt-10 mb-6 text-zinc-700 dark:text-zinc-300 ml-1">Curate your archipelago</p>
                 <div className="w-full grid grid-cols-5 lg:grid-cols-6 ">
 				<div class="col-span-5 lg:col-span-6 relative w-full min-w-[200px] h-12">
                     
@@ -188,7 +188,7 @@ const handleKeyDown = (event) => {
                                     <div> 
                            <div>
                     <p className="mt-5 mb-5 text-zinc-600 dark:text-zinc-300 flex flex-col"> 
-           <span>         Expand the scope of your knowledge hub by adding new content from the search bar.</span>
+           <span>         Expand the scope of your archipelago by adding new content from the search bar.</span>
                     <span className="mt-2">
     If you can't find what you are looking for, you can submit new content from the <a className="text-green-400 underline" href="/">main page</a>.
     </span>
@@ -225,7 +225,8 @@ const handleKeyDown = (event) => {
             <div className="col-span-3 grid-row-2 flex justify-start  lg:p-10 drop-shadow-sm">
             
                 <div className=" lg:border-l w-full lg:px-10 mx-auto">
-                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">Knowledge Hub</p>
+                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Archipelago"}</p>
+                {archipelagoDescription.length>0 && <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80">{archipelagoDescription}</p>}
                 {<p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>}
 
 

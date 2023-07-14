@@ -45,14 +45,17 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
         displayText = expanded ? source.text : `${source.text[299]===" "? source.text.slice(0, 299) : source.text.slice(0, 300)}`;
     }
         else{
-        displayText = expanded ? source.text : `${source.text[139]===" "? source.text.slice(0, 139) : source.text.slice(0, 140)}`;
+        displayText = expanded ? source.text : `${source.text[119]===" "? source.text.slice(0, 119) : source.text.slice(0, 120)}`;
     }
     }
     
    
     const navigate = useNavigate();
-    
-    const title = tracks[0]!==undefined ? tracks[0].find((track) => track.source_id === source.source_id).source.title : null
+    let title = ""
+    if(tracks[0]!==undefined && tracks[0].find((track) => track.source_id === source.source_id) !== undefined){
+    title =   tracks[0].find((track) => track.source_id === source.source_id).source.title
+
+}
 
     let displayTitle
     if(title){
@@ -109,54 +112,10 @@ const showDialog = () => {
         };
       }, [setFullWidth]);
     
-    /*   async function transcriptParser() {
-
-
-			let nothing = '';
-			let count = 0;
-
-			transcript.push('00:00:00');
-
-
-
-			for (let i = 0; i < srt_array.length; i++) {
-				count = count + 1;
-
-				nothing = nothing + ' ' + srt_array[i].text;
-				if (
-					(count > 6 || count >= srt_array.length) &&
-					srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
-				) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-				}
-				// in case missing punctuation, push it anyway
-				else if (count > 12) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-
-				}
-				else if (i === srt_array.length - 1) {
-
-					transcript.push(nothing);
-					count = 0;
-					nothing = '';
-				}
-
-
-			}
-		}
-    } */
 
 
     return(
-        <div className="dark:bg-mildDarkmode">
+        <div className="">
             {!forDialog ? 
         <div onClick={showDialog} className="rounded-lg border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkMode w-[240px]  sm:w-[360px] h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer">
             <div className=" flex flex-row mt-4">
@@ -225,8 +184,8 @@ const showDialog = () => {
    :
 
             <div className="w-full">
-            <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer" onClick={() =>setOpenDialog(false)}></CloseIcon>
-                <div className="sm:w-[600px] py-10 px-4 sm:px-10 mt-4"  onBlur={() => setOpenDialog(false)}>
+            <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer text-zinc-700 dark:text-zinc-300" onClick={() =>setOpenDialog(false)}></CloseIcon>
+                <div className="sm:w-[600px] py-10 px-4 sm:px-10 "  onBlur={() => setOpenDialog(false)}>
 {source.source_type==="yt"&&
                 <iframe
                 className="sm:w-[430px] h-[200px] items-center mx-auto mb-10"
@@ -242,7 +201,7 @@ const showDialog = () => {
 
 <TextSnippetIcon/>  Passage
 </p>
-<p className="px-2 sm:px-10" dangerouslySetInnerHTML={{__html:groupedText}}>
+<p className="px-2 sm:px-10 text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{__html:groupedText}}>
 
 </p>
 

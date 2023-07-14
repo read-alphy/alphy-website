@@ -1048,7 +1048,7 @@ function WelcomeFeed(props) {
 		{currentUser &&
 		<div>
 	{props.hasActiveSub===true ? 
-	<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Archipelagos
+	<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Archipelagos
 	<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
 	</p>
 	:
@@ -1071,7 +1071,8 @@ function WelcomeFeed(props) {
 		{props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
 		<div>
 		<Carousel 
-		show={`${window.innerWidth>1000 ? 4.2 : 3.2}`} slide={1} transition={0.5}
+		show={`${window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
+			window.innerWidth>600 ? 2.2: 1.2}`} slide={1} transition={0.5}
 			infinite={true}
 			leftArrow={
 				<div className=" mt-24 pr-4 w-8">
@@ -1111,9 +1112,12 @@ function WelcomeFeed(props) {
 </div>}
 
 		{<div>
-		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Archipelagos</p>
+		<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Archipelagos</p>
 					<Carousel 
-					show={`${window.innerWidth>1000 ? 4.2 : 3}`} slide={3} transition={0.5}
+					show={`${
+						window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
+			window.innerWidth>600 ? 2.2: 1.2
+					}`} slide={3} transition={0.5}
 						infinite={true}
 						leftArrow={
 							<div className=" mt-24 pr-4 w-8">

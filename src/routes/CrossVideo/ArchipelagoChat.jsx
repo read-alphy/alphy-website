@@ -16,8 +16,10 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import EditIcon from '@mui/icons-material/Edit';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function ArchipelagoChat({data,setData,currentUser}) {
+export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago}) {
     const [inputValue, setInputValue] = useState("")
     const [isLoadingInside, setIsLoadingInside] = useState(false)
     const [isCleared, setIsCleared] = useState(false)
@@ -26,6 +28,8 @@ export default function ArchipelagoChat({data,setData,currentUser}) {
     const [selectedSourceCard, setSelectedSourceCard] = useState("")
     const [openDialog, setOpenDialog] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
+    const [showTrackDetails, setShowTrackDetails] = useState(false)
+    const [elementCalled, setElementCalled] = useState(false)
     
     const [tracks, setTracks] = useState([data.tracks!==undefined ? data.tracks : []])
     const [i, setI] = useState(0)
@@ -35,7 +39,7 @@ export default function ArchipelagoChat({data,setData,currentUser}) {
     const title = data.name
     const description = data.description
     
-    let displayText
+    let displayText=""
     
     
     const archipelagoUserID = data.user_id
@@ -51,10 +55,11 @@ export default function ArchipelagoChat({data,setData,currentUser}) {
     }
 //remove cursor for trendyol carousel gaps
 const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
-if(elements){
+if(elements && elementCalled===false){
     elements.forEach(element => {
         element.classList.add('cursor-default');
       });
+      setElementCalled(true)
 }
 
 
@@ -97,6 +102,8 @@ const handleSubmit = () => {
 
 } 
 
+
+
 const handleClear = () => {
     setIsCleared(true);
     setIsLoadingInside(false);
@@ -123,29 +130,40 @@ const handleAskPremadeQuestion = (event) => {
     }, 200);
 } 
 
-if(description!==undefined){
+if(description!==undefined ){
  displayText = expanded ? description : `${description.slice(0, 50)}...`;
 }
 const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
+  
 
     return(
         <div className="lg:w-[1000px] max-w-[1000px] grow mx-auto pb-20">
-            <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10">
+            <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10 px-3 " >
             
                 <div className="col-span-4 sm:col-span-3 flex flex-row">
-                {archipelagoImageLink && <img className={`${"hidden" } sm:block w-[200px]`} src={archipelagoImageLink}/>}
-                <div className="sm:ml-6 ">
+                {archipelagoImageLink && <img className={`${"hidden" } sm:block w-[200px] sm:mr-4`} src={archipelagoImageLink}/>}
+                <div className="ml-2">
             <p className="text-xl text-zinc-700 dark:text-zinc-300 ">{title}</p>
             {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
             <p className={`text-md text-zinc-400 dark:text-zinc-500 ${"hidden sm:block"} `} >{description}</p>
+            <div className="flex">
+            <p  className="cursor-pointer underline text-zinc-600 dark:text-zinc-300"onClick={() => setShowTrackDetails(true)}>More Details...</p>
+            </div>
 
-            </div>
-          
-            </div>
-            <div className="col-span-1 sm:ml-6">
+            <Dialog fullWidth={"true"} maxWidth={"md"} open={showTrackDetails} onClose={() => setShowTrackDetails(false)}>
+                <div className="pt-10 pb-20 bg-white dark:bg-mildDarkMode">
+                <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer dark:text-zinc-300" onClick={() =>setShowTrackDetails(false)}></CloseIcon>
+                    <div className="mb-10 px-4 sm:px-10">
+                    <p className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</p>
+                    {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
+                    <p className={`text-md text-zinc-400 dark:text-zinc-500 ${"hidden sm:block"} lg:max-w-[700px]`} >{description}</p>
+                    
+                    <div className= "flex flex-row mt-5">
+                    <p className="text-zinc-500 dark:text-zinc-500 text-md ">{dataArchipelago.length} items</p>
+                    <div className="ml-5">
                 {currentUser!==null && currentUser.uid === archipelagoUserID && 
                 
                 <div className="flex flex-row" >
@@ -154,11 +172,47 @@ const toggleExpand = () => {
                 </div>
                 }
                 
+                
     
             </div>
-
             </div>
-            <div className="sm:ml-10">
+
+            <div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-10 mt-10 dark:opacity-40"></div>
+
+                    </div>
+                    <div className="w-full px-3 sm:px-8 ">
+                    <p className="text-zinc-700 dark:text-zinc-300 text-lg">Item List</p>
+                    <div
+							className={`
+							grid grid-cols-1 mt-10
+							${dataArchipelago.length === 1
+										? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
+										: 'lg:grid-cols-2 xl:grid-cols-2'
+								}
+							gap-4 
+							`}
+						>
+                {dataArchipelago.length > 0
+                                        ?  dataArchipelago
+                                            .map((item, index) => 
+                                            <div className="hover:bg-zinc-100 dark:hover:bg-zinc-700">
+                                                <FeedItem  index={index} item={item} mainFeedInput={inputValue} fromArchipelago={"archipelago"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} forDetail={true}/>
+                                                </div>
+                                            )				
+                                            :
+                                        
+                                            null
+                    }
+                    </div>
+                    </div>
+                    </div>
+            </Dialog>
+            </div>
+          
+            </div>
+        
+            </div>
+            <div className="sm:ml-10 px-3 ">
                 <div>
 				<div className="flex items-center pr-1 mt-6 xl:mt-8 max-w-[900px] ">
                 <div className="relative w-full min-w-[40vw] ">
@@ -222,7 +276,7 @@ const toggleExpand = () => {
 <div className="items-center text-center mt-2 text-zinc-700 dark:text-zinc-300 opacity-80">
     AI-enabled search and chat by Alphy
 </div> */}
-            <div className="mt-10 animate-bounce-slow" >
+            <div className="mt-10 animate-bounce-slow px-3 " >
                 {(archipelagoID==="eNb1f_M" && (answerData=="" && isLoadingInside===false)) &&
 
                 <div className="sm:px-5 mt-10 ">
@@ -304,7 +358,7 @@ const toggleExpand = () => {
                                             <ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                             </div>} 
                                    className="cursor-default" show={2.5} slide={1} transition={0.5}>
-                            {answerData.sources.map((source,index) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
+                            {answerData.sources.map((source,index) => <SourceCard forDialog={false} source={source} see the content={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
                                     
                                    </Carousel>
                                    :
@@ -312,12 +366,12 @@ const toggleExpand = () => {
                                    infinite={false}
                                    
                                    leftArrow={
-                                    <div className="mt-40 pr-4 w-4">
+                                    <div className="mt-40 pr-4 w-6 sm:w-8">
                                         <ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                         </div>} 
-                                         rightArrow={<div className="mt-40 pl-2 w-4">
+                                         rightArrow={<div className="mt-40 pl-2 w-6 sm:w-8">
                                          <ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
-                                         </div>} className="cursor-default" show={1.6} slide={1} transition={0.5}>
+                                         </div>} className="cursor-default" show={window.innerWidth>420 ? 1.6 : 1.2} slide={1} transition={0.5}>
                                    {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)} 
                                           </Carousel>
                                 
@@ -338,6 +392,8 @@ const toggleExpand = () => {
                             </Dialog>  
             </div>
             </div>
+
+          
             </div>
     )
 

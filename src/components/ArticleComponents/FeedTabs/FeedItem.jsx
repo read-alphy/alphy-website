@@ -8,7 +8,7 @@ import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { set } from 'lodash';
 
-const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago}) => {
+const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago,forDetail}) => {
 	const source_id = item.source_id;
 	
 	let formattedDate = ""
@@ -19,7 +19,7 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromArc
 		formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
 	}
 
-	
+
 
 	let imageUrl;
 	if (item.source_type === 'yt') {
@@ -51,10 +51,10 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromArc
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
-				<a href={fromArchipelago===undefined && `/${item.source_type}/${source_id}`} >
+				<a href={fromArchipelago===undefined || forDetail===true && `/${item.source_type}/${source_id}`} >
 					<div className="flex w-full ">
 						<div
-							className={`grid ${fromArchipelago==="archipelago" ? "grid-cols-4 cursor-default" : "grid-cols-3"} ${fromArchipelago===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataArchipelago!==undefined && dataArchipelago.includes(item) && fromArchipelago==="search") || (sourceIDsArchipelago!==undefined && sourceIDsArchipelago.includes(item.source_id)))&&  "border-4 border-green-400"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
+							className={`grid ${fromArchipelago==="archipelago" && forDetail!==true ? "grid-cols-4 cursor-default" : "grid-cols-3"} ${fromArchipelago===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataArchipelago!==undefined && dataArchipelago.includes(item) && fromArchipelago==="search") || (sourceIDsArchipelago!==undefined && sourceIDsArchipelago.includes(item.source_id)))&&  "border-4 border-green-400"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
 							onClick={() => {
 
 
@@ -86,9 +86,14 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromArc
 							}}
 							target="_blank"
 						>
-							<div className={`col-span-1  min-w-[50px] max-w-[300px] mr-3`}>
+							<div className={`col-span-1  min-w-[100px] max-w-[300px] mr-3 `}>
+								{forDetail===true ? 
+								<div className="flex flex-row">
+								<div className="text-center items-center flex justify-center mr-4 text-zinc-700 dark:text-zinc-400">
+									{index+1}
+								</div>
 								<div
-									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
+									className="flex w-full items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
 									style={{
 										backgroundImage: `url(${imageUrl})`,
 										paddingBottom: '50%',
@@ -97,10 +102,27 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromArc
 										backgroundSize: 'cover',
 
 									}}
+									
 								></div>
+								</div>
+								:
+							
+								<div
+									className="flex w-full items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
+									style={{
+										backgroundImage: `url(${imageUrl})`,
+										paddingBottom: '50%',
+										backgroundPosition: 'center',
+										backgroundRepeat: 'no-repeat',
+										backgroundSize: 'cover',
+
+									}}
+									
+								></div>
+								}
 							</div>
 
-							<div className={`col-span-2 ${!fromArchipelago && "lg:col-span-1"} justify-start text-xs`} >
+							<div className={`col-span-2 ${!fromArchipelago  && "lg:col-span-1"} ml-10 ${window.innerWidth>400 && window.innerWidth<500 &&"ml-5"} xs:ml-6 sm:ml-0 justify-start text-xs`} >
 							
 								
 								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) || (fromArchipelago==="archipelago" && item.source!==undefined && item.source.complete===true)? null : (
@@ -119,7 +141,7 @@ const FeedItem = ({item, setCollapsed, myBookmarks, currentUser,sideFeed,fromArc
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 							</div>
 
-{fromArchipelago==="archipelago" &&
+{fromArchipelago==="archipelago" && forDetail!==true &&
 							<div className="justify-center items-center flex">
 								<RemoveCircleOutlineIcon
 								className="cursor-pointer"
