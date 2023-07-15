@@ -233,7 +233,7 @@ const handleDeleteArchipelago = () => {
 			<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
 				
 				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode rounded-lg items-center text-center justify-center drop-shadow-sm flex-col">
-					<p className="mb-10">You are about to delete this archipelago. Would you like to continue?</p>
+					<p className="mb-10">You are about to delete this arc. Would you like to continue?</p>
 					<div className="flex flex-row">
 						<p className="text-green-400 cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
 						<div className="border-r h-full mr-4 ml-4"></div>

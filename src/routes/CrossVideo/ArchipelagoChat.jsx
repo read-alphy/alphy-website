@@ -31,7 +31,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const [showTrackDetails, setShowTrackDetails] = useState(false)
     const [elementCalled, setElementCalled] = useState(false)
     
-    const [tracks, setTracks] = useState([data.tracks!==undefined ? data.tracks : []])
+    const [tracks, setTracks] = useState([])
     const [i, setI] = useState(0)
     const navigate = useNavigate()
     const [expanded, setExpanded] = useState(false);
@@ -40,7 +40,10 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const description = data.description
     
     let displayText=""
-    
+    if(tracks.length===0 && data.tracks!==undefined){
+        setTracks(data.tracks)
+        
+    }
     
     const archipelagoUserID = data.user_id
     const archipelagoImageLink = data.thumbnail_url
@@ -358,7 +361,7 @@ const toggleExpand = () => {
                                             <ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
                                             </div>} 
                                    className="cursor-default" show={2.5} slide={1} transition={0.5}>
-                            {answerData.sources.map((source,index) => <SourceCard forDialog={false} source={source} see the content={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
+                            {answerData.sources.map((source,index) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)}
                                     
                                    </Carousel>
                                    :

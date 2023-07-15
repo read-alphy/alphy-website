@@ -23,6 +23,7 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
     let groupedText
     
     
+    
     if(source.text!==undefined){
         const sentenceRegex = /(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
         sentences = source.text.split(sentenceRegex);
@@ -52,8 +53,8 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
    
     const navigate = useNavigate();
     let title = ""
-    if(tracks!==undefined && tracks[0]!==undefined && tracks[0].find((track) => track.source_id === source.source_id) !== undefined){
-    title =   tracks[0].find((track) => track.source_id === source.source_id).source.title
+    if(tracks.length!==0 && tracks[0]!==undefined && tracks.find((track) => track.source_id === source.source_id) !== undefined){
+        title = tracks.find((track) => track.source_id === source.source_id).source.title
 
 }
 
@@ -137,7 +138,7 @@ const showDialog = () => {
 
                     <div classNAme=" text-lg w-full font-bold min-h-[80px] max-h-[80px] overflow-y-hidden">
                         <p>{displayTitle}
-                        {((displayTitle[displayTitle.length - 1] === "." || displayTitle.substring(displayTitle.length - 1) === "?") || (displayTitle[displayTitle.length - 1] === ",") || (displayTitle[displayTitle.length - 1] === "!") || (displayTitle[displayTitle.length - 1] === ":") || (displayTitle[displayTitle.length - 1] === "...")) ? "" : "..."}
+                        
                         </p>
 
                     </div>
