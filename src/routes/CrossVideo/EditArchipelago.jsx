@@ -203,7 +203,7 @@ const handleKeyDown = (event) => {
 							<div className="w-full flex justify-center">
 								{
 									<button
-										className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold underline"
+										className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold underline pb-3"
 										onClick={loadMore}
 									>
 										{'Load more'}

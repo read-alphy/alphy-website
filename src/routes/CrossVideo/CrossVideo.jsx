@@ -123,7 +123,9 @@ const handleArchipelago= () => {
 
 }).then((response) => {
 	setUserArchipelagos([...userArchipelagos, response.data])
+	setTimeout (() => {
 	navigate(`/archipelago/${response.data.uid}`)
+	}, 2000);
 	
 })
 }
