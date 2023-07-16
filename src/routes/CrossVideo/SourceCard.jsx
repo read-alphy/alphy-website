@@ -61,10 +61,20 @@ export default function SourceCard({source, tracks, setFullWidth, setSelectedSou
     let displayTitle = ""
     if(title){
         if(window.innerWidth>600){
-        displayTitle = expanded ? title : `${title[29]===" "? title.slice(0, 29) : title.slice(0, 30)}`;
+            if(title.length>30){
+        displayTitle = expanded ? title : `${title[29]===" "? title.slice(0, 29) : title.slice(0, 30)}...`;
     }
     else{
+        displayTitle = title
+    }
+    }
+    else{
+        if(title.length>20){
         displayTitle = expanded ? title : `${title[19]===" "? title.slice(0, 19) : title.slice(0, 20)}`;
+        }
+        else{
+            displayTitle = title
+        }
     }
     }
 
