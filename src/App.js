@@ -241,7 +241,7 @@ if (currentUser && creditcalled!==true) {
 							}></Route>
 								<Route path="/archipelago/createArchipelago" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} />
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} />
 							
 							}> </Route>
 
