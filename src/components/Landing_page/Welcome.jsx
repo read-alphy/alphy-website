@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Popover } from 'flowbite';
 import { Button} from "@material-tailwind/react";
-
+import AddIcon from '@mui/icons-material/Add';
+import PublishIcon from '@mui/icons-material/Publish';
 
 export default function Welcome({hasActiveSub,credit}) {
 	
@@ -21,6 +22,7 @@ export default function Welcome({hasActiveSub,credit}) {
 	const [loading, setLoading] = useState(false);
 	const { currentUser } = useAuth();
 	const [showToaster, setShowToaster] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 /* 	const [credit, setCredit] = useState(0);
  */	
 	const[called, setCalled] = useState(false)
@@ -73,7 +75,8 @@ export default function Welcome({hasActiveSub,credit}) {
 			)
 		) {
 			setInputValue('');
-			toast.error('Please provide a link to a YouTube video or Twitter Spaces.');
+			setErrorMessage('Please provide a link to a YouTube video or Twitter Spaces.')
+			setFailed(true)
 			return;
 		}
 		else {
@@ -112,7 +115,7 @@ export default function Welcome({hasActiveSub,credit}) {
 				video_source = "sp"
 				}
 				else{
-					toast.error('Please switch to the premium plan to transcribe Twitter Spaces. See Account page for more detail.');
+					setErrorMessage('Please switch to the premium plan to transcribe Twitter Spaces. See Account page for more detail.');
 					return;
 				}
 
@@ -137,37 +140,31 @@ export default function Welcome({hasActiveSub,credit}) {
 							},
 						)
 						.then((response) => {
-							
-
+							setErrorMessage("")
 							setLoading(false);
 							setFailed(false)
 							setInputValue('');
 								navigate(`/${video_source}/${videoId}`)
-							/* 							if (response.status === 200 || response.status === 201 || response.status === 202) {
-															toast.success(
-																'Succesfully submitted the content! \n\n We will send you an email when the article is ready.',
-																{ duration: 3000 },
-															);
-														} else {
-															toast.error('There was an error submitting the form. Please try again.', {
-																duration: 3000,
-															});
-														} */
+
 						}).
 						catch((error) => {
 							if(hasActiveSub){
-							toast('There was an error submitting the form. \n\n You are on the Premium Plan. Make sure you have enough credits for the submission.', {
-								duration: 5000,
-								icon: '⚠️',
-							});
+								setErrorMessage("There was an error submitting the form. You are on the Premium Plan. Make sure you have enough credits for the submission.")
+					
 						}
 						else{	
-							console.log(error)
-							
-							toast('There was an error submitting the form. \n \n You are on the Basic Plan. Make sure the content you are submitting is shorter than 1 hour and conforms with our content popularity limits.', {
-								duration: 6000,
-								icon: '⚠️',
-							});
+								if(error.response.data.detail=="Video not popular enough for free users")
+								{
+									setErrorMessage("You are on the Basic plan. Make sure the content you are submitting has more than 10,000 views.")
+								}
+								else if(error.response.data.detail=="Video too long for free users"){
+
+									setErrorMessage("You are on the Basic plan. Make sure the content you are submitting doesn't exceed 1 hour.")
+								}
+								else {
+									setErrorMessage("There was an error submitting the form. Please try again.")
+								}
+				
 						}
 							setFailed(true)
 							setInputValue('');
@@ -288,9 +285,14 @@ export default function Welcome({hasActiveSub,credit}) {
 							className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-green-400  dark:focus:border-l-green-400 dark:focus:border-b-green-400 focus:border-green-400"/>
 							<label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-green-400 before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-green-400 after:border-blue-gray-200 peer-focus:after:!border-green-400">Insert a link to start</label>
 
-							
+							<div className="sm:hidden">
+							<Button size="sm" className="!absolute right-1 top-1 rounded bg-green-400" onClick={(e) => {
+								handleSubmit();
+							}}> <PublishIcon fontSize="medium"/></Button>
+							</div>
 						 </div>
-				<div className={`sm:col-span-1 mt-5 sm:mt-0 flex ml-5 justify-center md:justify-self-start items-center ${currentUser ? "" : ""}`}>
+
+				<div className={`hidden sm:block sm:col-span-1 mt-5 sm:mt-0 flex ml-5 justify-center md:justify-self-start items-center ${currentUser ? "" : ""}`}>
 					{currentUser ? (
 						<div>
 						{/* <button
@@ -326,7 +328,13 @@ export default function Welcome({hasActiveSub,credit}) {
 					)}
 				</div>
 				</div>
+				{failed && 
+			<div className="mx-auto mt-5 text-sm text-red-400 ml-2">
+				{errorMessage}
 			</div>
+			}
+			</div>
+			
 		</div>
 	);
 }

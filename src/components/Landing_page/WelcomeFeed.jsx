@@ -1106,7 +1106,7 @@ function WelcomeFeed(props) {
 
 		:
 
-		<div className=" ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
+		<div className="lg:ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
 		<p>You need to be on a Premium account to create an arc. Meanwhile, feel free to enjoy our curated lists.</p>
 		</div>
 }
@@ -1117,7 +1117,7 @@ function WelcomeFeed(props) {
 </div>}
 
 		{<div>
-		<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Arcs</p>
+		<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Archipelagos</p>
 					<Carousel 
 					show={`${
 						window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 

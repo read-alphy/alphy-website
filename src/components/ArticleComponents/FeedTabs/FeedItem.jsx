@@ -46,12 +46,13 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 	}
 
 
+
 	return (
 		<div className={`grid border-b-0 w-full md:w-full `}>
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
-				<a href={fromArchipelago===undefined || forDetail===true && `/${item.source_type}/${source_id}`} >
+				<a href={(fromArchipelago===undefined || forDetail===true) && `/${item.source_type}/${source_id}`} >
 					<div className="flex w-full ">
 						<div
 							className={`grid ${fromArchipelago==="archipelago" && forDetail!==true ? "grid-cols-4 cursor-default" : "grid-cols-3"} ${fromArchipelago===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataArchipelago!==undefined && dataArchipelago.includes(item) && fromArchipelago==="search") || (sourceIDsArchipelago!==undefined && sourceIDsArchipelago.includes(item.source_id)))&&  "border-4 border-green-400"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}

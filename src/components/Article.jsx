@@ -23,7 +23,8 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 	const {currentUser} = useAuth();
 	const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	const [isBookmarked, setIsBookmarked] = useState(false);
-	
+	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [called, setCalled] = useState(false);
 	
@@ -53,19 +54,19 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 	
 	
 
-	const [data, setData] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	
 
 	const metaTag = document.querySelector('meta[name="twitter:title"]');
 	if (metaTag) {
 		metaTag.setAttribute('content', data.title);
 	}
-	const fetchData = async (url) => {
+	const fetchData = async (url,constantFetch) => {
 		
 		
 		try {
-			
+			if(!constantFetch){
 			setIsLoading(true);
+		}
 			
 			const response = await axios.get(url
 				).then(
@@ -129,12 +130,13 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 					}
 
 
-	const fetchDataUpload = async (url) => {
+	const fetchDataUpload = async (url, constantFetch) => {
 	
 	
 		try {
-			
+			if(constantFetch===false){
 			setIsLoading(true);
+		}
 			
 			const response = await axios.get(url,
 				{
@@ -180,24 +182,60 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 
 	const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
 /* 	const url_bookmark= `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}/bookmark`
- */	if (called===false){
-		if (source_type==="up" && data.length===0 && currentUser!==null){
-			setCalled(true)
-			fetchDataUpload(url);
+ */	
+if(called===false){
+	if (source_type==="up" && data.length===0 && currentUser!==null){
+		setCalled(true)
+		fetchDataUpload(url,false);
+				
+	}
+	if (source_type!=="up" && data.length===0 && currentUser!==null){
+		setCalled(true)
+		fetchData(url,false);
+
+	}
+	else if (source_type!=="up" && data.length===0 && currentUser===null){
+		setCalled(true)
+		fetchData(url,false);
+	}
+}
+
+
+
+
+			useEffect(() => {
+				let interval;
+		
 			
 				
-				
-		}
-		if (source_type!=="up" && data.length===0 && currentUser!==null){
-			setCalled(true)
-			fetchData(url);
+	const intervalFetch =() => {
+	if (data!==undefined && data.complete!==true){
 		
+				if (source_type==="up" && data.length===0 && currentUser!==null){
+					setCalled(true)
+					fetchDataUpload(url,true);
+							
+				}
+				if (source_type!=="up" && data.length===0 && currentUser!==null){
+					setCalled(true)
+					fetchData(url,true);
+				
+				}
+				else if (source_type!=="up" && data.length===0 && currentUser===null){
+					setCalled(true)
+						fetchData(url,true);
+				}
+			}
+
 		}
-		else if (source_type!=="up" && data.length===0 && currentUser===null){
-			setCalled(true)
-			fetchData(url);
-		}
-	}
+				interval = setInterval(intervalFetch, 5000);
+			
+				return () => {
+				  // Clean up the interval when the component unmounts
+				  clearInterval(interval);
+				};
+			  }, []);
+			
 
 	useEffect(() => {
 		if (currentUser!==null){
