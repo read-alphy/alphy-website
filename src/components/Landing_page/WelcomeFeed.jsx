@@ -11,6 +11,7 @@ import Robot from "../../img/cute robot grey.png"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
 
 import {
 	Button, Popover,
@@ -1045,14 +1046,43 @@ function WelcomeFeed(props) {
 
 
 	<div className="">
+		<div className="lg:ml-10 mt-10">
+			<div className="flex flex-row">
+		<p className="text-lg text-zinc-700 dark:text-zinc-300">Welcome to Arcs!</p>
+		<Popover>
+		<PopoverHandler>
+			<div className="flex flex-row">
+		
+		<HelpOutlineRoundedIcon fontSize="small" className="ml-2 cursor-pointer pt-1 "/>
+		</div>
+				
+				</PopoverHandler>
+				<PopoverContent>
+					<div className="max-w-[400px] flex flex-col">
+						<p className="text-lg text-zinc-700 dark:text-zinc-300 underline"> 
+					What is an Arc?
+					</p>
+				<p className="text-sm text-zinc-500 dark:text-zinc-400 ">An Arc (short for archipelago) is a personalized AI assistant that you can use to connect multiple videos and recordings together. <br/> <br/> 
+				Building your is Arc similar to building a playlist. Choose the content you want to put an assistant on and Alphy powers them all with its AI, enabling you to sift through hundreds of hours of audiovisual content from one single search bar.  </p>
+				</div>
+				</PopoverContent>
+		</Popover>
+		</div>
+		<p className="text-sm text-zinc-500 dark:text-zinc-400">Plug Alphy's AI to hundreds of videos and create your own search engine!</p>	
+		
+		
+		
+		</div>
+		<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
+
 		{currentUser &&
 		<div>
 	{props.hasActiveSub===true ? 
-	<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
+	<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
 	<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
 	</p>
 	:
-	<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
+	<p className=" mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
 		<Popover placement="right">
 		<PopoverHandler>
 				
@@ -1107,7 +1137,7 @@ function WelcomeFeed(props) {
 		:
 
 		<div className="lg:ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
-		<p>You need to be on a Premium account to create an arc. Meanwhile, feel free to enjoy our curated lists.</p>
+		<p className="text-zinc-500 dark:text-zinc-400">You need to be on a Premium account to create an arc. Meanwhile, feel free to enjoy our curated lists.</p>
 		</div>
 }
 
@@ -1117,7 +1147,7 @@ function WelcomeFeed(props) {
 </div>}
 
 		{<div>
-		<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Arcs</p>
+		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Arcs</p>
 					<Carousel 
 					show={`${
 						window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 

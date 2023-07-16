@@ -122,7 +122,7 @@ const handleArchipelago= () => {
 
 
 }).then((response) => {
-	props.setUserArchipelagos([...userArchipelagos, response.data])
+	setUserArchipelagos([...userArchipelagos, response.data])
 	navigate(`/archipelago/${response.data.uid}`)
 	
 })

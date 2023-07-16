@@ -47,7 +47,7 @@ export default function About() {
 		        </AccordionHeader>
         <AccordionBody className="text-md">
 		<p>
-					• <strong className="font-semibold"> Give life to the content with AI: </strong>  Alphy's search bot allows you to ask questions a video or recording to get the most relevant answers presented by the
+					• <strong className="font-semibold"> Give life to the audiovisual content with AI: </strong>  Alphy's search bot allows you to ask questions a video or recording to get the most relevant answers presented by the
 					content.
 					</p>
 					
@@ -86,8 +86,7 @@ export default function About() {
 					ready.
 
 					</p>
-					
-
+				
 					<p className="mt-2">
 					• Once the content is processed, it is public. Anyone can read it.
 					</p>
@@ -95,7 +94,18 @@ export default function About() {
 				</p>
         </AccordionBody>
       </Accordion>
-	  
+	  <Accordion open={open === 4}>
+        <AccordionHeader onClick={() => handleOpen(4)}>
+		What are Arcs?
+		        </AccordionHeader>
+        <AccordionBody className="text-md">
+		<p>
+					An Arc, short for archipelago, is a collection of content that is connected together with an AI-assisted search engine. You can create multiple Arcs with different scopes and levels of depth, focusing on specific subjects, creators, or topics. An Arc will be your own personal knowledge base that you can use to search for information and share with others.
+					</p>
+					
+				
+        </AccordionBody>
+      </Accordion>
     </Fragment>
 
 			</div>
