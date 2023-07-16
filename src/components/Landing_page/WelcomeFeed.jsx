@@ -1117,7 +1117,7 @@ function WelcomeFeed(props) {
 </div>}
 
 		{<div>
-		<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Archipelagos</p>
+		<p className="ml-8 mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Arcs</p>
 					<Carousel 
 					show={`${
 						window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
