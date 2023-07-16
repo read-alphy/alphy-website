@@ -37,6 +37,7 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [archipelagoTitle, setArchipelagoTitle] = useState("");
 	const [deleteDialog, setDeleteDialog] = useState(false);
 	const [subCalled, setSubCalled] = useState(false);
+	const [errorMessage, setErrorMessage] = useState(false);
 
 
 	useEffect(() => {
@@ -112,35 +113,39 @@ const handleArchipelago= () => {
 	// disallow creating if there is a limit on the number of archipelagos
 	// disallow creating if there is a limit on the number of videos to include in a archipelago
 	// disallow creating if the user is not logged in
-
-	if(isCreateArchipelago){
-	axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
-		"name": archipelagoTitle,
-		"user_id": currentUser.uid,
-		"description": archipelagoDescription,
-		"sources": [...dataArchipelago],
-
-
-}).then((response) => {
-	setUserArchipelagos([...userArchipelagos, response.data])
-	setTimeout (() => {
-	navigate(`/archipelago/${response.data.uid}`)
-	}, 2000);
-	
-})
+if(dataArchipelago.length===0){
+	setErrorMessage(true)
 }
-else if(isEditArchipelago){
-	axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
-		"name": archipelagoTitle,
-		"user_id": currentUser.uid,
-		"description": archipelagoDescription,
-		"sources": [...dataArchipelago],
-}).then((response) => {
-	navigate(`/archipelago/${response.data.uid}`)
-	localStorage.setItem("archipelagoEdited", "true")
+else{
+					if(isCreateArchipelago){
+					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
+						"name": archipelagoTitle,
+						"user_id": currentUser.uid,
+						"description": archipelagoDescription,
+						"sources": [...dataArchipelago],
 
-})
-}
+
+				}).then((response) => {
+					setUserArchipelagos([...userArchipelagos, response.data])
+					setTimeout (() => {
+					navigate(`/archipelago/${response.data.uid}`)
+					}, 2000);
+					
+				})
+				}
+				else if(isEditArchipelago){
+					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
+						"name": archipelagoTitle,
+						"user_id": currentUser.uid,
+						"description": archipelagoDescription,
+						"sources": [...dataArchipelago],
+				}).then((response) => {
+					navigate(`/archipelago/${response.data.uid}`)
+					localStorage.setItem("archipelagoEdited", "true")
+
+				})
+				}
+			}
 }
 
 
@@ -215,10 +220,10 @@ const handleDeleteArchipelago = () => {
 						}}`}
 				>
 					{ isLoading && <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />}
-				{isCreateArchipelago && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
+				{isCreateArchipelago && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
 
 				{(!isCreateArchipelago && !isEditArchipelago) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
-				{isEditArchipelago && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>}
+				{isEditArchipelago && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
 							
 					
 

@@ -1049,7 +1049,7 @@ function WelcomeFeed(props) {
 		<div className="lg:ml-10 mt-10">
 			<div className="flex flex-row">
 		<p className="text-lg text-zinc-700 dark:text-zinc-300">Welcome to Arcs!</p>
-		<Popover>
+		<Popover className="">
 		<PopoverHandler>
 			<div className="flex flex-row">
 		
@@ -1057,7 +1057,7 @@ function WelcomeFeed(props) {
 		</div>
 				
 				</PopoverHandler>
-				<PopoverContent>
+				<PopoverContent className=" dark:bg-mildDarkMode dark:border-zinc-700">
 					<div className="max-w-[400px] flex flex-col">
 						<p className="text-lg text-zinc-700 dark:text-zinc-300 underline"> 
 					What is an Arc?
