@@ -100,7 +100,8 @@ export default function About() {
 		        </AccordionHeader>
         <AccordionBody className="text-md">
 		<p>
-					An Arc, short for archipelago, is a collection of content that is connected together with an AI-assisted search engine. You can create multiple Arcs with different scopes and levels of depth, focusing on specific subjects, creators, or topics. An Arc will be your own personal knowledge base that you can use to search for information and share with others.
+					
+		An Arc, derived from 'archipelago,' serves as a comprehensive collection of interconnected content, enhanced by an AI-assisted search engine. With Arc, you can create multiple distinct collections, each tailored to specific subjects, creators, or topics. This enables you to cultivate a personalized knowledge base, allowing you to effortlessly search for information on thousands of hours of content from one place and seamlessly share it with others.
 					</p>
 					
 				
