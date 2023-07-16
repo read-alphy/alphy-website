@@ -503,10 +503,10 @@ function WelcomeFeed(props) {
 			
 								
 					
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("my_works")} class={`inline-block p-1 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
 					</li>
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("my_uploads")} class={`relative infline-flex p-1 py-4 sm:p-4  ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
 
 							<span> My Uploads </span>
@@ -515,14 +515,14 @@ function WelcomeFeed(props) {
 
 
 					</li>
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("my_bookmarks")} class={`inline-block p-1 sm:p-4 py-4  ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
 					</li>
 
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-2"} lg:w-[120px]`} >
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("archipelagos")} class={`inline-block p-1 py-4 sm:p-4 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Arcs</button>
 						{/* <div class="absolute inline-flex items-center justify-center w-10 h-6 text-xs font-semibold text-white bg-green-400 rounded-full -top-2 -right-3">New!</div> */}
 					</li>
@@ -1077,7 +1077,7 @@ function WelcomeFeed(props) {
 		<Carousel 
 		show={`${window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
 			window.innerWidth>600 ? 2.2: 1.2}`} slide={1} transition={0.5}
-			infinite={true}
+			infinite={false}
 			leftArrow={
 				<div className=" mt-24 pr-4 w-8">
 				<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
@@ -1122,8 +1122,8 @@ function WelcomeFeed(props) {
 					show={`${
 						window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
 			window.innerWidth>600 ? 2.2: 1.2
-					}`} slide={3} transition={0.5}
-						infinite={true}
+					}`} slide={1} transition={0.5}
+						infinite={false}
 						leftArrow={
 							<div className=" mt-24 pr-4 w-8">
 							<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>

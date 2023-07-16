@@ -257,7 +257,7 @@ export default function QuestionAnswering(props) {
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
-		<div id="q_and_a" className={` md:min-h-[600px] lg:w-[800px] xl:w-[500px] 2xl:w-[600px] 3xl:w-full bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
+		<div id="q_and_a" className={` md:min-h-[600px] lg:w-[800px] xl:w-[500px] 2xl:w-[500px] 3xl:w-full bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
 
 
 			<p className="mb-4 font-light_ text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
