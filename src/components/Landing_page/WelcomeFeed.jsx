@@ -403,13 +403,14 @@ function WelcomeFeed(props) {
 					}))
 		};
 	};
-
+	
+	
 	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
 		if(!hasMoreGlobalArchipelagos){
 			return;
 		}
 		setIsLoadingGlobalArchipelagos(true);
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?limit=${limit}&offset=${offsetGlobalArchipelagos}`)
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
 		.then((response) => {
 
 			if(firstTime){
