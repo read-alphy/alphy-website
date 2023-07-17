@@ -1108,7 +1108,7 @@ function WelcomeFeed(props) {
 		<Carousel 
 		show={`${window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
 			window.innerWidth>600 ? 2.2: 1.2}`} slide={1} transition={0.5}
-			infinite={false}
+			infinite={true}
 			leftArrow={
 				<div className=" mt-24 pr-4 w-8">
 				<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
@@ -1154,7 +1154,7 @@ function WelcomeFeed(props) {
 						window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
 			window.innerWidth>600 ? 2.2: 1.2
 					}`} slide={1} transition={0.5}
-						infinite={false}
+						infinite={true}
 						leftArrow={
 							<div className=" mt-24 pr-4 w-8">
 							<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
