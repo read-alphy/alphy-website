@@ -38,7 +38,7 @@ export default function ArchipelagoCard({item,index,currentUser}){
       };
     return(
     <div className="">
-        <div className="rounded-lg cursor-pointer border  dark:bg-darkMode bg-white hover:drop-shadow-sm hover:-translate-y-2 my-2 duration-300 transition ease-in-out dark:border-zinc-800 dark:bg-darkMode dark:hover:drop-shadow-md dark:transition dark:duration-300 dark:ease-in-out h-[300px] w-[240px] justify-center items-center  mt-5"
+        <div className="rounded-lg cursor-pointer border  dark:bg-darkMode bg-white hover:drop-shadow-sm hover:-translate-y-2 my-2 duration-300 transition ease-in-out dark:border-zinc-800 dark:bg-darkMode dark:hover:drop-shadow-md dark:transition dark:duration-300 dark:ease-in-out  w-[240px] h-[400px] justify-center items-center  mt-5"
         onClick={handleComponentClick}
        >
       <div>

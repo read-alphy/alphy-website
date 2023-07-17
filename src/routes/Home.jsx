@@ -1,6 +1,7 @@
 import React from 'react';
 import WelcomeFeed from '../components/Landing_page/WelcomeFeed';
 import Welcome from '../components/Landing_page/Welcome';
+import CuratedCarousel from '../components/Landing_page/CuratedCarousel';
 import About from '../components/Landing_page/About';
 import FeedbackForm from '../components/FeedbackForm';
 import { useEffect } from 'react';
@@ -8,12 +9,16 @@ import { Helmet } from "react-helmet";
 import { useAuth } from '../hooks/useAuth';
 import { useState } from 'react';
 import WelcomePopup from '../components/Landing_page/WelcomePopup.jsx';
+import axios from 'axios';
+
 
 
 function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 	const urlParams = new URLSearchParams(window.location.search);
-
+	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
+	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
 	const resetPassword = (urlParams.get('mode')=="resetPassword");
+	const limit = 20
 	
 
 	/* const { currentUser } = useAuth(); */
@@ -34,6 +39,39 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 
 
 	}, []);
+
+	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
+		if(!hasMoreGlobalArchipelagos){
+			return;
+		}
+		setIsLoadingGlobalArchipelagos(true);
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
+		.then((response) => {
+
+			if(firstTime){
+				setDataGlobalArchipelagos(response.data);
+			}
+			else{
+				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
+			}
+			setIsLoadingGlobalArchipelagos(false);
+			setTimeout(() => {
+				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
+				if(elements){
+					elements.forEach(element => {
+						element.classList.add('cursor-default');
+					});
+			}
+				}, 500);
+
+		})
+		.catch((error) => {
+			setIsLoadingGlobalArchipelagos(false);
+		}
+		)
+	}
+
+
 	return (
 		<div className="mx-auto md:w-800 w-full bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
@@ -51,10 +89,13 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 				<meta content="../../public/homepage.png" property="og:image" />
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
-			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos}/>
-{/* 			{showMessage &&
-				<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
-			} */}
+		{/* 	{dataGlobalArchipelagos.length>0 &&
+			<CuratedCarousel dataGlobalArchipelagos={dataGlobalArchipelagos}/>
+		} */}
+			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}/>
+								{/* 			{showMessage &&
+												<WelcomePopup showMessage={showMessage} setShowMessage={setShowMessage} />
+											} */}
 			<About />
 			
 

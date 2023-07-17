@@ -65,8 +65,7 @@ function WelcomeFeed(props) {
 	const [myWorks, setMyWorks] = useState(localStorage.getItem("logged in") ==="true" ? true : false);
 	const [archipelagos, setArchipelagos] = useState(false)
 
-	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
-	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
+
 
 
 
@@ -251,7 +250,7 @@ function WelcomeFeed(props) {
 			setMyUploads(false)
 			setMyBookmarks(false)
 			setArchipelagos(true)
-			getDataGlobalArchipelagos(0, true, true);
+			props.getDataGlobalArchipelagos(0, true, true);
 			//localStorage.setItem("feedTab", "archipelagos")
 
 		}
@@ -405,37 +404,7 @@ function WelcomeFeed(props) {
 	};
 	
 	
-	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
-		if(!hasMoreGlobalArchipelagos){
-			return;
-		}
-		setIsLoadingGlobalArchipelagos(true);
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
-		.then((response) => {
-
-			if(firstTime){
-				setDataGlobalArchipelagos(response.data);
-			}
-			else{
-				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
-			}
-			setIsLoadingGlobalArchipelagos(false);
-			setTimeout(() => {
-				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
-				if(elements){
-					elements.forEach(element => {
-						element.classList.add('cursor-default');
-					});
-			}
-				}, 500);
-
-		})
-		.catch((error) => {
-			setIsLoadingGlobalArchipelagos(false);
-		}
-		)
-	}
-
+	
 	const loadMore = () => {
 		if (global) {
 			setOffset(offset + limit);
@@ -475,7 +444,7 @@ function WelcomeFeed(props) {
 		}
 		
 		}, 1000);
-		getDataGlobalArchipelagos(0, true, true);
+		props.getDataGlobalArchipelagos(0, true, true);
 		setCalled(true);
 
 	}
@@ -1166,7 +1135,7 @@ function WelcomeFeed(props) {
 								</div>} 
 								
 								>
-					{dataGlobalArchipelagos.map((item, index) => 
+					{props.dataGlobalArchipelagos.map((item, index) => 
 					
 					<ArchipelagoCard key={index} item={item}/>
 					)}
