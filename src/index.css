@@ -30,6 +30,17 @@ body {
 	display: none; /* Chrome, Safari, and Opera */
   }
 
+  
+  .carousel-area{
+	
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; 
+  }
+  .carousel-area::-webkit-scrollbar
+  {
+	  display: none;
+  }
+
   .archipelago-search{
 	scrollbar-width: none; /* Firefox */
 	-ms-overflow-style: none; /* Internet Explorer and Edge */
