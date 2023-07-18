@@ -84,9 +84,9 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 					property="og:description" />
 				<meta property="og:title" content={`Alphy: Unlock the Information in Audiovisual Content.`} />
 				<meta name="twitter:description" content="Transcribe, summarize, and question audiovisual content with the help of AI. Try Alphy for free!" />
-				<meta name="twitter:image" content="../../public/homepage.png" />
+				<meta name="twitter:image" content="https://i.ibb.co/RBH2C63/homepage.png" />
 				<meta property="og:url" content="https://alphy.app/" />
-				<meta content="../../public/homepage.png" property="og:image" />
+				<meta content="https://i.ibb.co/RBH2C63/homepage.png" property="og:image" />
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
 			{dataGlobalArchipelagos.length>0 &&
