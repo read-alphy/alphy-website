@@ -29,7 +29,7 @@ const handleNavigateToArchipelago = () => {
 navigate(`/archipelago/${props.item.uid}`)
 }
     return(
-<div onClick={() =>handleNavigateToArchipelago()} className="relative min-w-[150px] md:min-w-[220px] md:w-64  rounded-md overflow-hidden shadow-md cursor-pointer">
+<div onClick={() =>handleNavigateToArchipelago()} className="relative min-w-[150px] max-w-[150px] md:min-w-[220px] md:max-w-[150px] md:w-64  rounded-md overflow-hidden shadow-md cursor-pointer">
 
     
                 <img src={props.item.thumbnail_url}/>

@@ -39,7 +39,7 @@ function WelcomeFeed(props) {
 	const [inputValue, setInputValue] = useState('');
 	const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [hasMorePersonal, setHasMorePersonal] = useState(false);
-	const [isLoadingPersonal, setIsLoadingPersonal] = useState(true);
+	const [isLoadingPersonal, setIsLoadingPersonal] = useState(localStorage.getItem("logged in") ==="true" ? false : true);
 	const [dataPersonal, setDataPersonal] = useState([]);
 	const [global, setGlobal] = useState(localStorage.getItem("logged in") ==="true" ? false : true);
 	const [submitted, setSubmitted] = useState(false);
