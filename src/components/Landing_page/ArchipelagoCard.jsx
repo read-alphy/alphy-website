@@ -23,6 +23,8 @@ export default function ArchipelagoCard({item,index,currentUser}){
 
 
 }
+
+
     const navigate = useNavigate();
     
 

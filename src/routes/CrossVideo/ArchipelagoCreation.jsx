@@ -210,7 +210,7 @@ const handleKeyDown = (event) => {
             <div className="col-span-3 grid-row-2 flex justify-start  lg:p-10 drop-shadow-sm">
             
                 <div className=" lg:border-l w-full lg:px-10 mx-auto">
-                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Archipelago"}</p>
+                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Arc"}</p>
                 {archipelagoDescription.length>0 && <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80">{archipelagoDescription}</p>}
      <p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>  
      {errorMessage && dataArchipelago.length===0 && <p className="mt-4 ml-2 mb-5 text-md text-red-500 dark:text-red-400 opacity-80">An Arc cannot be empty. Please add an item to continue.</p>}
