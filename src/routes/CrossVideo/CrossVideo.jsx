@@ -38,6 +38,7 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [deleteDialog, setDeleteDialog] = useState(false);
 	const [subCalled, setSubCalled] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
+	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
 
 	useEffect(() => {
@@ -81,7 +82,11 @@ useEffect(() => {
 
 
 		}
-		)
+		).catch((error) => {
+			console.log(error)
+			navigate("/404")
+		})	
+
 	}
 
 })
@@ -123,7 +128,7 @@ if(dataArchipelago.length===0){
 else{
 					if(isCreateArchipelago){
 					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
-						"name": archipelagoTitle,
+						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
 						"description": archipelagoDescription,
 						"sources": [...dataArchipelago],
@@ -138,15 +143,16 @@ else{
 				})
 				}
 				else if(isEditArchipelago){
+					setIsLoadingSubmit(true)
 					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
-						"name": archipelagoTitle,
+						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
 						"description": archipelagoDescription,
 						"sources": [...dataArchipelago],
 				}).then((response) => {
 					navigate(`/archipelago/${response.data.uid}`)
 					localStorage.setItem("archipelagoEdited", "true")
-
+					setIsLoadingSubmit(false)
 				})
 				}
 			}
@@ -237,8 +243,20 @@ const handleDeleteArchipelago = () => {
 			<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed &&window.innerWidth<1000 &&"hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
 			
-			{isEditArchipelago && hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
-            {hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-green-400 px-5" onClick={handleArchipelago}><SaveIcon className="mr-2"/>{isCreateArchipelago ? "Create" : "Save"}</Button>}
+			{isEditArchipelago && hasActiveSub && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
+            {hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-green-400 px-5 ${
+				isLoadingSubmit && "bg-green-300 pointer-events-none min-w-[106.533px]" }`}  onClick={handleArchipelago}>
+				{
+				isLoadingSubmit ? 
+				
+				<Spinner color="white" size={window.innerWidth>1000 ? "lg" :`md`} className="flex mx-auto"/>
+
+				: 
+				<div>
+				<SaveIcon className="mr-2"/>{isCreateArchipelago ? "Create" : "Save"}
+				</div>
+			}
+				</Button>}
 			
             </div>
 		{deleteDialog &&

@@ -65,7 +65,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
 
 
     const archipelagoUserID = data.user_id
-    const archipelagoImageLink = `${data.thumbnail_url}`
+    const archipelagoImageLink = `${data.thumbnail_url ? data.thumbnail_url : ""}`
     const archipelagoID = data.uid
     const buttonRef = useRef(null);
 
@@ -164,7 +164,7 @@ const toggleExpand = () => {
             <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10 px-3 " >
             
                 <div className="col-span-4 sm:col-span-3 flex flex-row">
-                {archipelagoImageLink && <img className={`${"hidden" } sm:block w-[200px] sm:mr-4`} src={archipelagoImageLink}/>}
+                {archipelagoImageLink.length>0 && <img className={`${"hidden" } sm:block w-[200px] sm:mr-4`} src={archipelagoImageLink}/>}
                 <div className="ml-2">
             <p className="text-xl text-zinc-700 dark:text-zinc-300 ">{title}</p>
             {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}

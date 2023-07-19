@@ -10,7 +10,7 @@ export default function ArchipelagoCard({item,index,currentUser}){
     const [expanded, setExpanded] = useState(false);
 
     let displayText
-    console.log(item)
+
 
     if(item.description!==undefined){
       if(item.thumbnail_url!==null){
