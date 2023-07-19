@@ -18,6 +18,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import CloseIcon from '@mui/icons-material/Close';
+import QuizIcon from '@mui/icons-material/Quiz';
 
 export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago}) {
     const [inputValue, setInputValue] = useState("")
@@ -30,7 +31,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const [fullWidth, setFullWidth] = useState(true);
     const [showTrackDetails, setShowTrackDetails] = useState(false)
     const [elementCalled, setElementCalled] = useState(false)
-    
+    const [selectedQuestions, setSelectedQuestions] = useState([]);
     const [tracks, setTracks] = useState([])
     const [i, setI] = useState(0)
     const navigate = useNavigate()
@@ -45,6 +46,24 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
         
     }
     
+    const selectedItems = [];
+    while (data!==undefined && data.questions!==undefined&& selectedItems.length < 5) {
+      const randomIndex = Math.floor(Math.random() * data.questions.length);
+      const randomItem = data.questions[randomIndex];
+      if (!selectedItems.includes(randomItem)) {
+        selectedItems.push(randomItem);
+        
+      }
+    }
+    if(selectedItems.length==5 && i ==0){
+        setSelectedQuestions(selectedItems);
+        setI(1)
+    }
+
+
+      
+
+
     const archipelagoUserID = data.user_id
     const archipelagoImageLink = data.thumbnail_url
     const archipelagoID = data.uid
@@ -275,23 +294,27 @@ const toggleExpand = () => {
 
              </div>
             </div>
-{/* 
-<div className="items-center text-center mt-2 text-zinc-700 dark:text-zinc-300 opacity-80">
-    AI-enabled search and chat by Alphy
-</div> */}
+
             <div className="mt-10 animate-bounce-slow px-3 " >
-                {(archipelagoID==="eNb1f_M" && (answerData=="" && isLoadingInside===false)) &&
+                {((answerData=="" && isLoadingInside===false)) &&
 
                 <div className="sm:px-5 mt-10 ">
                 {<div class={`${answerData.length>0 &&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>İyi bir uyku düzeni için ne yapmalıyım?</button>
-            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>C vitamininin yararları nelerdir?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>İnsülin direnci nasıl sağlık riskleri bulundurur?</button>
-            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Kanser hastalığına karşı ne gibi önlemler alabilirim?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Bayramın bizim için önemi nedir?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Yüksek tansiyonun kalp ve damarlar üzerindeki etkileri nelerdir?</button>
-            <button  className="bg-white border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Uzun bir ömür sürmek ve yaşlanmayı geciktirmek için neler yapabilirim?</button>
-            <button  className="bg-transparent border dark:bg-darkMode text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md ml-4 mt-4 dark:border-zinc-700" onClick={handleAskPremadeQuestion}>Daha sağlıklı bir yaşam sürmenin yollarını bana madde madde açıkla.</button>
+<p className="flex flex-row mb-5 sm:ml-6"> 
+<QuizIcon className="text-green-400 mr-2"/>
+<span className="text-zinc-600 dark:text-zinc-200">Popular Questions</span>
+</p>
+                {selectedQuestions.length>0 && selectedQuestions.map((question,index) =>
+                (
+                    index%2==0 ? 
+        
+                <button  className="bg-stone-50 border dark:bg-darkMode hover:scale-105 duration-300 transition ease-in-out text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
+
+                :
+                <button  className="bg-white border dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 hover:scale-105 duration-300 transition ease-in-out rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
+                ))}
+
+
 
             </div>
         }
