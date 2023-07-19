@@ -39,9 +39,20 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [subCalled, setSubCalled] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+	const isCreateArc = location.pathname.split('/')[2]==="createArc"
+	const isEditArc = location.pathname.split('/')[2]==="editArc"
+	const isArchipelago = location.pathname.split('/')[1]==="archipelago" && location.pathname.split('/')[2]!=="editArchipelago" && location.pathname.split('/')[2]!=="createArchipelago"
+	const isArc = location.pathname.split('/')[1]==="archipelago"
+	
 
 
 	useEffect(() => {
+		if(isArchipelago){
+			const newPathname = location.pathname.replace("archipelago", "arc")
+			
+
+			navigate(newPathname);
+		}
 		if(!windowSizeChecked){
 			if(window.innerWidth<768){
 			setCollapsed(true)
@@ -54,13 +65,10 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	
 })
 //console log sourceIDsarchipelago type
-const isCreateArchipelago = location.pathname.split('/')[2]==="createArchipelago"
-const isEditArchipelago = location.pathname.split('/')[2]==="editArchipelago"
-const isArchipelago = location.pathname.split('/')[1]==="archipelago" && location.pathname.split('/')[2]!=="editArchipelago" && location.pathname.split('/')[2]!=="createArchipelago"
 
 useEffect(() => {
-	if((isArchipelago || isEditArchipelago) && !called){
-		source_id = isArchipelago ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
+	if((isArc || isEditArc) && !called){
+		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
 			setCollapsed(true)
@@ -105,7 +113,7 @@ useEffect (() => {
 	})
 
 if(!subCalled){
-	if(isCreateArchipelago && (hasActiveSub===undefined || hasActiveSub===false)){
+	if(isCreateArc && (hasActiveSub===undefined || hasActiveSub===false)){
 		navigate("/")
 	}
 	else if(hasActiveSub===true){
@@ -126,7 +134,7 @@ if(dataArchipelago.length===0){
 	return
 }
 else{
-					if(isCreateArchipelago){
+					if(isCreateArc){
 					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
@@ -137,12 +145,12 @@ else{
 				}).then((response) => {
 					setUserArchipelagos([...userArchipelagos, response.data])
 					setTimeout (() => {
-					navigate(`/archipelago/${response.data.uid}`)
+					navigate(`/arc/${response.data.uid}`)
 					}, 2000);
 					
 				})
 				}
-				else if(isEditArchipelago){
+				else if(isEditArc){
 					setIsLoadingSubmit(true)
 					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
@@ -150,7 +158,7 @@ else{
 						"description": archipelagoDescription,
 						"sources": [...dataArchipelago],
 				}).then((response) => {
-					navigate(`/archipelago/${response.data.uid}`)
+					navigate(`/arc/${response.data.uid}`)
 					localStorage.setItem("archipelagoEdited", "true")
 					setIsLoadingSubmit(false)
 				})
@@ -230,20 +238,20 @@ const handleDeleteArchipelago = () => {
 						}}`}
 				>
 					{ isLoading && <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />}
-				{isCreateArchipelago && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
+				{isCreateArc && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
 
-				{(!isCreateArchipelago && !isEditArchipelago) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
-				{isEditArchipelago && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
+				{(!isCreateArc && !isEditArc) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
+				{isEditArc && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
 							
 					
 
 				</div>
 			</div>
-			{(isCreateArchipelago || isEditArchipelago) &&  
+			{(isCreateArc || isEditArc) &&  
 			<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed &&window.innerWidth<1000 &&"hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
 			
-			{isEditArchipelago && hasActiveSub && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
+			{isEditArc && hasActiveSub && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
             {hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-green-400 px-5 ${
 				isLoadingSubmit && "bg-green-300 pointer-events-none min-w-[106.533px]" }`}  onClick={handleArchipelago}>
 				{
@@ -253,7 +261,7 @@ const handleDeleteArchipelago = () => {
 
 				: 
 				<div>
-				<SaveIcon className="mr-2"/>{isCreateArchipelago ? "Create" : "Save"}
+				<SaveIcon className="mr-2"/>{isCreateArc ? "Create" : "Save"}
 				</div>
 			}
 				</Button>}

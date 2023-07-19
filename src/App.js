@@ -250,6 +250,23 @@ if (currentUser && creditcalled!==true) {
 								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub}/>
 							
 							}> </Route>
+
+				<Route path="/arc/:arc_ID" element={
+							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} />
+							}></Route>
+								<Route path="/arc/createArc" element={
+								
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} />
+							
+							}> </Route>
+
+							<Route path="/arc/editArc/:archipelago_ID" element={
+								
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub}/>
+							
+							}> </Route>
+
+							
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>

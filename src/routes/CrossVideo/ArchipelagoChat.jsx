@@ -139,7 +139,7 @@ const handleKeyDown = (event) => {
 };
 
 const handleEdit = () => {
-    navigate(`/archipelago/editArchipelago/${data.uid}`)
+    navigate(`/arc/editArc/${data.uid}`)
 }
 
 

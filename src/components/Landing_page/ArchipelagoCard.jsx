@@ -27,13 +27,13 @@ export default function ArchipelagoCard({item,index,currentUser}){
     
 
     const handleComponentClick = () => {
-        navigate(`/archipelago/${item.uid}`)
+        navigate(`/arc/${item.uid}`)
       };
     
       const handleIconClick = (event) => {
         event.stopPropagation();
         setTimeout(() => {
-        navigate(`/archipelago/editArchipelago/${item.uid}`);
+        navigate(`/arc/editArc/${item.uid}`);
         }, 100);
       };
     return(

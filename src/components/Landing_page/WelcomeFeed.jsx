@@ -453,7 +453,7 @@ function WelcomeFeed(props) {
 
 	const handleCreatePlaylist = () => {
 		if(props.hasActiveSub===true){
-		navigate("/archipelago/createArchipelago")
+		navigate("/arc/createArc")
 		}
 		else{
 			setErrorMessage(true)
