@@ -65,7 +65,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
 
 
     const archipelagoUserID = data.user_id
-    const archipelagoImageLink = `${process.env.REACT_APP_THUMBNAILS_URL}/${data.thumbnail_url}`
+    const archipelagoImageLink = `${data.thumbnail_url}`
     const archipelagoID = data.uid
     const buttonRef = useRef(null);
 

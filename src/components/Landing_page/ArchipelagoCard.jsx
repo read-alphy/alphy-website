@@ -10,7 +10,7 @@ export default function ArchipelagoCard({item,index,currentUser}){
     const [expanded, setExpanded] = useState(false);
 
     let displayText
-    
+    console.log(item)
 
     if(item.description!==undefined){
       if(item.thumbnail_url!==null){
@@ -47,7 +47,7 @@ export default function ArchipelagoCard({item,index,currentUser}){
                 <div className="">
                     {item.thumbnail_url !== null ?
                     <div className="mt-4">
-                    <img width={160} src={`${process.env.REACT_APP_THUMBNAILS_URL}/${item.thumbnail_url}`}/>
+                    <img width={160} src={item.thumbnail_url}/>
                     </div>
                     :
                     <div className="mt-4">
