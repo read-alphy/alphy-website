@@ -41,8 +41,8 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 	const isCreateArc = location.pathname.split('/')[2]==="createArc"
 	const isEditArc = location.pathname.split('/')[2]==="editArc"
-	const isArchipelago = location.pathname.split('/')[1]==="arc" && location.pathname.split('/')[2]!=="editArc" && location.pathname.split('/')[2]!=="createArc"
-	const isArc = location.pathname.split('/')[1]==="archipelago"
+	const isArc = location.pathname.split('/')[1]==="arc" && location.pathname.split('/')[2]!=="editArc" && location.pathname.split('/')[2]!=="createArc"
+	const isArchipelago = location.pathname.split('/')[1]==="archipelago"
 	
 
 
