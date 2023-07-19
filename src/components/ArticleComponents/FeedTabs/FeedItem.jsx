@@ -20,7 +20,6 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 	}
 
 
-
 	let imageUrl;
 	if (item.source_type === 'yt') {
 		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;

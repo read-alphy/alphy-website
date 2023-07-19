@@ -165,7 +165,7 @@ const toggleExpand = () => {
                     <p className={`text-md text-zinc-400 dark:text-zinc-500 ${"hidden sm:block"} lg:max-w-[700px]`} >{description}</p>
                     
                     <div className= "flex flex-row mt-5">
-                    <p className="text-zinc-500 dark:text-zinc-500 text-md ">{dataArchipelago.length} items</p>
+                    <p className="text-zinc-500 dark:text-zinc-500 text-md ">{dataArchipelago!==null && dataArchipelago.length} items</p>
                     <div className="ml-5">
                 {currentUser!==null && currentUser.uid === archipelagoUserID && 
                 

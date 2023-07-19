@@ -611,8 +611,8 @@ const handleBookmark = async () => {
 			"source_type":data.source_type, 
 		}
 		const neww=[...props.userArchipelagos,newSource]
-		 axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/archipelagos/${archipelagoUID}`).then	((response) => {
-			axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/archipelagos/${archipelagoUID}`, {
+		 axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}?nof_questions=10&tracks=true`).then	((response) => {
+			axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`, {
 		"user_id": currentUser.uid,
 		"sources": [...response.data.tracks,newSource],
 	})
