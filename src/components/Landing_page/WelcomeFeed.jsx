@@ -16,7 +16,7 @@ import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
 import {
 	Button, Popover,
 	PopoverHandler,
-	PopoverContent,
+	PopoverContent,Spinner
 
 } from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
@@ -284,13 +284,13 @@ function WelcomeFeed(props) {
 	};
 
 	const getDataPersonal = (offset, firstTime, hasMorePersonal) => {
+		setIsLoadingPersonal(true)
 		
 		if (!hasMorePersonal) {
 			return;
 		}
-		setIsLoadingPersonal(true);
+		
 		if (currentUser) {
-			setIsLoadingPersonal(true)
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
 					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
@@ -300,15 +300,19 @@ function WelcomeFeed(props) {
 					}
 				})
 					.then((response) => {
+						
 						setHasMorePersonal(!(response.data.length < limit));
 
 						if (response.data.length > 0) {
 							calledAndEmpty = false
 						}
-
+						
 
 						if (firstTime) {
 							setDataPersonal(response.data);
+							
+							
+							
 
 
 						} else {
@@ -434,18 +438,22 @@ function WelcomeFeed(props) {
 	
 	
 	if (called === false && search.length===0) {
-		
-		setTimeout(() => {
-			if(myWorks){		
+		if(myWorks){
+			if(currentUser){	
 			getDataPersonal(0, true, true);
-		}
+			props.getDataGlobalArchipelagos(0, true, true);
+			setCalled(true);
+
+			}
+	}
 		else{
 			getData(0, true, true);
+			props.getDataGlobalArchipelagos(0, true, true);
+			setCalled(true);
 		}
 		
-		}, 1000);
-		props.getDataGlobalArchipelagos(0, true, true);
-		setCalled(true);
+		
+
 
 	}
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -494,9 +502,9 @@ function WelcomeFeed(props) {
 						<button onClick={() => navigateFeeds("global")} class={`inline-block p-1 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
 					
-					{/* <li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("archipelagos")} class={`inline-block p-1 py-4 sm:p-4 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Arcs</button>
-					</li> */}
+					</li> 
 
 
 
@@ -632,9 +640,9 @@ function WelcomeFeed(props) {
 							className={`
 							grid grid-cols-1 mt-10
 							${isLoadingPersonal
-									? 'lg:grid-cols-2 xl:grid-cols-2'
-									: data.length === 1
-										? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
+										? 'lg:grid-cols-2 xl:grid-cols-2'
+										: data.length === 1
+											? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
 										: 'lg:grid-cols-2 xl:grid-cols-2'
 								}
 							gap-4
@@ -651,7 +659,7 @@ function WelcomeFeed(props) {
 									: [...Array(10)].map((item, index) => {
 										<div>
 
-											<SkeletonItem key={index} />
+											<Spinner/>
 
 										</div>
 									})

@@ -14,7 +14,7 @@ import { Button, Spinner } from "@material-tailwind/react";
 
 
 export default function QuestionAnswering(props) {
-	// console.log(props.props, props.key_qa)
+
 	const windowSize = useWindowSize();
 	const QARef = useRef(null);
 	const location = useLocation();

@@ -195,6 +195,10 @@ if (currentUser && creditcalled!==true) {
 		<Helmet>
 			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
 			<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
+			<meta content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" property="og:description"/>
+
+			<meta property="og:title" content="Alphy: Unlock the information in audiovisual content" />
+  			<meta name="twitter:title" content="Alphy: Unlock the Information in Audiovisual Content" />
 		</Helmet> 
 		
 			<Elements stripe={stripePromise}>
@@ -237,32 +241,32 @@ if (currentUser && creditcalled!==true) {
 							/>
 
 							<Route path="/archipelago/:archipelago_ID" element={
-							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} />
+							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} />
 							}></Route>
 								<Route path="/archipelago/createArchipelago" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} />
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 							<Route path="/archipelago/editArchipelago/:archipelago_ID" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub}/>
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 				<Route path="/arc/:arc_ID" element={
-							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} />
+							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} setContentName={setContentName} />
 							}></Route>
 								<Route path="/arc/createArc" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} />
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 							<Route path="/arc/editArc/:archipelago_ID" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub}/>
+								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 

@@ -13,13 +13,13 @@ import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-import { set } from 'lodash';
+import jsonData from "./arcs_and_thumbnails.json"
 
 
 
 
 
-function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,idToken,userArchipelagos,setUserArchipelagos},props) {
+function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,idToken,userArchipelagos,setUserArchipelagos,contentName, setContentName}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -39,32 +39,44 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,setCont
 	const [subCalled, setSubCalled] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+	const [helmetThumbnail, setHelmetThumbnail] = useState("");
 	const isCreateArc = location.pathname.split('/')[2]==="createArc"
 	const isEditArc = location.pathname.split('/')[2]==="editArc"
 	const isArc = location.pathname.split('/')[1]==="arc" && location.pathname.split('/')[2]!=="editArc" && location.pathname.split('/')[2]!=="createArc"
 	const isArchipelago = location.pathname.split('/')[1]==="archipelago"
-	
 
+	let item_thumbnail
+	let item_name
+	if(isArc || isEditArc){
+	const item = jsonData.find(t => t.arc_id === location.pathname.split('/')[2]);
+	if(item!==undefined) {
+		item_thumbnail=item.thumbnail_url
+		item_name=item.name
+}
+
+}
 
 	useEffect(() => {
+	
 		if(isArchipelago){
 			const newPathname = location.pathname.replace("archipelago", "arc")
-			
-
 			navigate(newPathname);
 		}
+
+		
+		
 		if(!windowSizeChecked){
 			if(window.innerWidth<768){
 			setCollapsed(true)
 			}
 			setWindowSizeChecked(true)
 	}
+	
+
 	if(dataArchipelago!==null && dataArchipelago.length>1){
 		setErrorMessage(false)
 	}
-	
 })
-//console log sourceIDsarchipelago type
 
 useEffect(() => {
 	if((isArc || isEditArc) && !called){
@@ -82,6 +94,7 @@ useEffect(() => {
 						setArchipelagoDescription(response.data.description)
 					}
 			setArchipelagoTitle(response.data.name)
+			setContentName(response.data.name)
 			setDataArchipelago(response.data.tracks)
 			let sources = response.data.tracks.map((item) => item.source_id)
 			setSourceIDsArchipelago([...sources])
@@ -135,6 +148,7 @@ if(dataArchipelago.length===0){
 }
 else{
 					if(isCreateArc){
+						setIsLoadingSubmit(true)
 					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
@@ -187,17 +201,20 @@ const handleDeleteArchipelago = () => {
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
-				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
+				<title>{item_name!==undefined && item_name.length>0 ? item_name : (archipelagoTitle.length>0 ? `${archipelagoTitle}` : "Alphy")} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
-				<meta property="og:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
-				<meta name="twitter:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
+				<meta property="og:title" content={item_name!==undefined &&item_name.length>0 ? `Ask AI -  ${item_name}` : "Alphy"} />
+				<meta name="twitter:title" content={item_name!==undefined &&item_name.length>0  ? `Ask AI - ${item_name}` : "Alphy"} />
 
-				<meta property="og:description" content={data.title!==undefined ? `Ask questions to ${data.title}` : "Ask questions to the content"}
+			<meta property="og:description" content={item_name!==undefined &&item_name.length>0  ? `Search and ask questions to ${item_name} with the help of AI!` : "Search and ask questions to Arcs with the help of AI!"}
 				/>
-				<meta name="description" content={data.title!== undefined? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"} />
-				<meta name="twitter:description" content={data.title!== undefined ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
+				<meta name="description" content={item_name!==undefined && item_name.length>0 ? `Search and ask questions to ${item_name} with the help of AI!` : "Search and ask questions to Arcs with the help of AI!"} />
+				<meta name="twitter:description" content={item_name!==undefined &&item_name.length>0 ? `Search and ask questions to ${item_name} with the help of AI!` : "Search and ask questions to Arcs with the help of AI!"}
 				/>
 				<meta property="og:url" content={location.href} />
+				 <meta property="og:image" content={item_thumbnail!==undefined && item_thumbnail.length>0 ? item_thumbnail : `https://i.ibb.co/RBH2C63/homepage.png`} />
+				
+				<meta name="twitter:image" content={item_thumbnail!==undefined &&item_thumbnail.length>0 ?  item_thumbnail :`https://i.ibb.co/RBH2C63/homepage.png`} />
 			</Helmet>  
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
