@@ -44,7 +44,10 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     if(tracks.length===0 && data.tracks!==undefined){
         setTracks(data.tracks)
         
+        
     }
+
+    
     
     const selectedItems = [];
     while (data!==undefined && data.questions!==undefined&& selectedItems.length < 5) {
