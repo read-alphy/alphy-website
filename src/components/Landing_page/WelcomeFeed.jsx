@@ -503,7 +503,7 @@ function WelcomeFeed(props) {
 					</li>
 					
 					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("archipelagos")} class={`inline-block p-1 py-4 sm:p-4 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Arcs</button>
+						<button onClick={() => navigateFeeds("archipelagos")} class={`inline-block p-1 py-4 sm:p-4 sm:mr-10 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Arcs</button>
 					</li> 
 
 
