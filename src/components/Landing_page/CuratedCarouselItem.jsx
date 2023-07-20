@@ -36,7 +36,7 @@ navigate(`/arc/${props.item.uid}`)
     
                 <img src={props.item.thumbnail_url}/>
             
-            <div className={` ${!isHovered ?"opacity-0" : "opacity-100 transition duration-300 ease-in-out" } rounded-md  absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
+            <div className={` ${!isHovered && props.item.thumbnail_url!==null ?"opacity-0" : "opacity-100 transition duration-300 ease-in-out" } rounded-md  absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
                 <div className="flex flex-col py-2 px-4 ">
           <p className="text-white bg-opacity-100 text-sm md:text-lg mb-5">{props.item.name}</p>
           <p className=" text-white bg-opacity-100 text-xs md:text-sm">{description}</p>
