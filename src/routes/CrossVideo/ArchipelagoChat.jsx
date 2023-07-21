@@ -24,7 +24,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const [inputValue, setInputValue] = useState("")
     const [isLoadingInside, setIsLoadingInside] = useState(false)
     const [isCleared, setIsCleared] = useState(false)
-    const [inputError, setinputError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(false)
     const [answerData, setAnswerData] = useState("")
     const [selectedSourceCard, setSelectedSourceCard] = useState("")
     const [openDialog, setOpenDialog] = useState(false);
@@ -87,13 +87,22 @@ if(elements && elementCalled===false){
 
 
 const handleSubmit = () => {
+    if(currentUser===null){
+        setErrorMessage(true)
+        return
+    }
+    else{
+    
+if(inputValue.length===0){
+    return
+}
+else{
     setAnswerData("")
     setIsLoadingInside(true)
      axios.post
     (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoID}/question`,
     inputValue,
-    
-    
+
     {headers: {
         'accept': 'application/json',
         'Content-Type': 'text/plain'
@@ -104,7 +113,7 @@ const handleSubmit = () => {
     setAnswerData(response.data)
     
     setIsLoadingInside(false)
-    setinputError(false)
+    setErrorMessage(false)
 
     setTimeout(() => {
     const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
@@ -118,10 +127,11 @@ const handleSubmit = () => {
 
 
 }).catch((error) => {
-    setinputError(true)
+    
     setIsLoadingInside(false)
 })
-
+}
+}
 
 } 
 
@@ -132,7 +142,7 @@ const handleClear = () => {
     setIsLoadingInside(false);
     setInputValue('');
     setAnswerData('');
-    setinputError(false);
+    setErrorMessage(false);
 };
 
 const handleKeyDown = (event) => {
@@ -294,6 +304,11 @@ const toggleExpand = () => {
                     </div>
 
              </div>
+             {errorMessage &&
+             <div className="mt-4 text-zinc-500 dark:text-zinc-400">
+    <p>Please <a href="/u/login" className="underline text-green-400">sign in</a> to start asking questions.</p> 
+</div>
+}
             </div>
 
             <div className="mt-10 animate-bounce-slow px-3 " >
