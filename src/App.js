@@ -20,6 +20,7 @@ import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
 import CrossVideo from './routes/CrossVideo/CrossVideo';
+import Hub from './routes/Hub/Hub';
 
 
 
@@ -39,7 +40,7 @@ const firebaseConfig = {
 
 function App() {
 	const auth = useAuth()
-	const { currentUser, applyActionCode } = useAuth();
+	const { currentUser } = useAuth();
 	const [hasActiveSub, setHasActiveSub] = useState(false)
 	const [called, setCalled] = useState(false)
 	const [credit, setCredit] = useState(0)
@@ -269,6 +270,10 @@ if (currentUser && creditcalled!==true) {
 								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
+
+							<Route path="/hub"
+								element={<Hub currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
 
 							
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />

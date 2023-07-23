@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useRef, useCallback } from 'react';
 import { useEffect } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import FeedItem from '../ArticleComponents/FeedTabs/FeedItem';
+import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import axios from 'axios';
-import SkeletonItem from '../ArticleComponents/FeedTabs/SkeletonItem';
+import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { set } from 'lodash';
@@ -20,13 +20,12 @@ import {
 
 } from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
-import ArchipelagoCard from './ArchipelagoCard';
-import ArchipelagoCreationCard from './ArchipelagoCreationCard';
+import ArchipelagoCard from '../../components/Landing_page/ArchipelagoCard';
 import { Carousel } from '@trendyol-js/react-carousel';
 
 
 
-function WelcomeFeed(props) {
+function HubFeed(props) {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
@@ -50,7 +49,6 @@ function WelcomeFeed(props) {
 	const [hasMoreUploads, setHasMoreUploads] = useState(false);
 	const [dataUploads, setDataUploads] = useState([]);
 	const [isLoadingUploads, setIsLoadingUploads] = useState(true);
-
 	const [uploadProgress, setUploadProgress] = useState(0)
 	const [uploadDuration, setUploadDuration] = useState("")
 	const [uploadTitle, setUploadTitle] = useState("")
@@ -69,7 +67,6 @@ function WelcomeFeed(props) {
 
 
 
-	
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -300,7 +297,7 @@ function WelcomeFeed(props) {
 			setMyUploads(false)
 			setMyBookmarks(false)
 			setArchipelagos(true)
-			props.getDataGlobalArchipelagos(0, true, true);
+			
 			//localStorage.setItem("feedTab", "archipelagos")
 
 		}
@@ -491,14 +488,14 @@ function WelcomeFeed(props) {
 		if(myWorks){
 			if(currentUser){	
 			getDataPersonal(0, true, true);
-			props.getDataGlobalArchipelagos(0, true, true);
+			
 			setCalled(true);
 
 			}
 	}
 		else{
 			getData(0, true, true);
-			props.getDataGlobalArchipelagos(0, true, true);
+			
 			setCalled(true);
 		}
 		
@@ -519,14 +516,14 @@ function WelcomeFeed(props) {
 	}
 
 	return (
-		<div className="main-page-feed-section container xl:max-w-[1000px] 2xl:max-w-[1280px] mx-auto w-full drop-shadow-xl dark:drop-shadow-xl">
+		<div className="main-page-feed-section container  xl:max-w-[1000px] 2xl:max-w-[1280px] w-full mt-20">
 			{/* 			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
 				Explore the videos other users unlocked with Alphy
 			</h2> */}
 
 
 
-			<div class="text-sm font-light text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700 ">
+			<div class="text-sm font-light text-center text-gray-500  dark:text-zinc-300  ">
 				<ul class="flex flex-row pt-4 overflow-x-hidden">
 					
 			
@@ -561,7 +558,7 @@ function WelcomeFeed(props) {
 				</ul>
 			</div>
 
-			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode border-[1px] dark:border-none  rounded-[10px] sm:p-[40px] p-[10px] min-h-[40vh]">
+			<div className=" bg-zinc-50 dark:bg-darkMode dark:bg-mildDarkMode  sm:p-[40px] p-[10px] min-h-[40vh]">
 				{myUploads ||archipelagos ? null :
 					<form
 						className="flex items-center"
@@ -624,10 +621,10 @@ function WelcomeFeed(props) {
 							className={`
 							grid grid-cols-1 mt-10
 							${isLoading
-									? 'lg:grid-cols-2 xl:grid-cols-2'
+									? 'lg:grid-cols-3 xl:grid-cols-4'
 									: data.length === 1
 										? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
-										: 'lg:grid-cols-3 xl:grid-cols-3'
+										: 'lg:grid-cols-3 xl:grid-cols-4'
 								}
 							gap-4
 							`}
@@ -662,10 +659,10 @@ function WelcomeFeed(props) {
 							className={`
 							grid grid-cols-1 mt-10
 							${isLoadingPersonal
-										? 'lg:grid-cols-2 xl:grid-cols-2'
+										? 'lg:grid-cols-3 xl:grid-cols-4'
 										: data.length === 1
 											? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
-										: 'lg:grid-cols-3 xl:grid-cols-3'
+										: 'lg:grid-cols-3 xl:grid-cols-4'
 								}
 							gap-4
 							`}
@@ -715,16 +712,16 @@ function WelcomeFeed(props) {
 
 					</div>}
 
-				{myBookmarks &&
+				{ myBookmarks &&
 					<div className="main-page-feed  w-full">
 						<div
 							className={`
 							grid grid-cols-1 mt-10
 							${isLoadingPersonal
-									? 'lg:grid-cols-2 xl:grid-cols-2'
+									? 'lg:grid-cols-3 xl:grid-cols-4'
 									: data.length === 1
 										? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
-										: 'lg:grid-cols-3 xl:grid-cols-3'
+										: 'lg:grid-cols-3 xl:grid-cols-4'
 								}
 							gap-4
 							`}
@@ -1046,34 +1043,10 @@ function WelcomeFeed(props) {
 
 
 	<div className="">
-		<div className="lg:ml-10 mt-10">
-			<div className="flex flex-row">
-		<p className="text-lg text-zinc-700 dark:text-zinc-300">Welcome to Arcs!</p>
-		<Popover className="">
-		<PopoverHandler>
-			<div className="flex flex-row">
-		
-		<HelpOutlineRoundedIcon fontSize="small" className="ml-2 cursor-pointer pt-1 "/>
-		</div>
-				
-				</PopoverHandler>
-				<PopoverContent className=" dark:bg-mildDarkMode dark:border-zinc-700">
-					<div className="max-w-[400px] flex flex-col">
-						<p className="text-lg text-zinc-700 dark:text-zinc-300 underline"> 
-					What is an Arc?
-					</p>
-				<p className="text-sm text-zinc-500 dark:text-zinc-400 ">An Arc (short for archipelago) is a personalized AI assistant that you can use to connect multiple videos and recordings together. <br/> <br/> 
-				Building your is Arc similar to building a playlist. Choose the content you want to put an assistant on and Alphy powers them all with its AI, enabling you to sift through hundreds of hours of audiovisual content from one single search bar.  </p>
-				</div>
-				</PopoverContent>
-		</Popover>
-		</div>
-		<p className="text-sm text-zinc-500 dark:text-zinc-400">Plug Alphy's AI to hundreds of videos and create your own search engine!</p>	
+
 		
 		
 		
-		</div>
-		<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
 
 		{currentUser &&
 		<div>
@@ -1143,10 +1116,10 @@ function WelcomeFeed(props) {
 
 
 
-<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
+
 </div>}
 
-		{<div>
+		{/* {<div>
 		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Arcs</p>
 					<Carousel 
 					show={`${
@@ -1165,14 +1138,14 @@ function WelcomeFeed(props) {
 								</div>} 
 								
 								>
-					{props.dataGlobalArchipelagos.map((item, index) => 
+					 {props.dataGlobalArchipelagos.map((item, index) => 
 					
 					<ArchipelagoCard key={index} item={item}/>
-					)}
+					)} 
 					</Carousel>
 					</div>
 				
-		}
+		} */}
 			</div>
 }
 
@@ -1183,4 +1156,4 @@ function WelcomeFeed(props) {
 	);
 }
 
-export default WelcomeFeed;
+export default HubFeed;

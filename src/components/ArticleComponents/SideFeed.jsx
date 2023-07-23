@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useEffect } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import FeedItem from './FeedTabs/FeedItem';
@@ -14,7 +14,8 @@ import {
 	Button,
 	Input
 } from "@material-tailwind/react";
-
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
 
 function SideFeed(props) {
 
@@ -50,8 +51,11 @@ function SideFeed(props) {
 	const [firstTimeBookmarks, setFirstTimeBookmarks] = useState(true);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchMemory, setSearchMemory] = useState("");
+	const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(false);
+	const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
 
-
+	const [showSearch, setShowSearch] = useState(false);
+	const carouselRef = useRef(null);
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -430,18 +434,76 @@ function SideFeed(props) {
 		setCalled(true);
 	}
 
+	useEffect(() => {
+        const handleScroll = () => {
+          if (carouselRef.current) {
+            const container = carouselRef.current;
+            const isScrollEnd = container.scrollLeft + container.clientWidth === container.scrollWidth;
+            setIsForwardArrowVisible(!isScrollEnd);
+            setIsBackwardArrowVisible(container.scrollLeft > 0);
+
+    
+          }
+        };
+    
+        // Attach scroll event listener
+        if (carouselRef.current) {
+          carouselRef.current.addEventListener('scroll', handleScroll);
+        }
+
+        // Clean up the event listener on component unmount
+        return () => {
+          if (carouselRef.current) {
+            carouselRef.current.removeEventListener('scroll', handleScroll);
+          }
+        };
+      }, []);
+    
+      const scrollForward = () => {
+        if (carouselRef.current) {
+            const container = carouselRef.current;
+          
+   
+            
+            
+            const scrollAmount = 300; 
+
+          carouselRef.current.scrollLeft += scrollAmount;
+        }
+      };
+    
+      const scrollBackward = () => {
+        if (carouselRef.current) {
+            const container = carouselRef.current;
+            
+            const scrollAmount =  300; 
+          carouselRef.current.scrollLeft -= scrollAmount;
+        }
+      };
 
 	return (
 		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 lg:bg-zinc-100">
 
-{/* <div>
-	<button className="px-10 py-3 bg-green-400 rounded-lg drop-shadow-sm" onClick={() => props.setActionsHub(true)}>Actions Hub</button>
+<div className="mt-10">
+	<a className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href="/hub">
+		
+		<HomeIcon className="mr-3"/>
+		<p>
+		Actions Hub
+		</p></a>
+		<a onClick={()=>setShowSearch(true)} className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href="/hub">
+		
+		<SearchIcon className="mr-3"/>
+		<p>
+		Search
+		</p></a>
 	
 </div>
- */}
+
+<div class="border-b border-zinc-200 dark:border-zinc-700 mx-auto items-center flex mt-5 dark:opacity-40"></div>
 
 			<form
-				className="flex items-center h-[10vh] min-h-[50px] pt-12 max-w-[95%] drop-shadow-sm "
+				className={`flex items-center h-[10vh] min-h-[50px] pt-12 max-w-[95%] drop-shadow-sm  ${"hidden"}`}
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
@@ -557,6 +619,25 @@ function SideFeed(props) {
 
 
 
+			<div className="flex flex-row overflow-x-scroll scroll-smooth carousel-area  w-full lg:max-w-[250px] 3xl:max-w-[330px] mt-2" ref={carouselRef}>
+
+							<button className="  mb-5  ml-4 bg-zinc-200 rounded-md px-6 py-2 whitespace-nowrap" onClick={navigateFeeds} value="my_works">
+								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg" >My Works</span>
+							</button>
+							<button className="  mb-5  ml-4 bg-zinc-200 rounded-md px-6 py-2 whitespace-nowrap" onClick={navigateFeeds} value="my_uploads">
+								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg">My Uploads</span>
+							</button>
+							<button className=" mb-5  ml-4 bg-zinc-200 rounded-md px-6 py-2 whitespace-nowrap" onClick={navigateFeeds} value="my_bookmarks">
+								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg">My Bookmarks</span>
+							</button>
+							<button className="  mb-5  ml-4 bg-zinc-200 rounded-md px-4 py-2 whitespace-nowrap" onClick={navigateFeeds} value="global">
+								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg">Global</span>
+							</button>
+							
+							
+						</div>
+
+{/* 
 				<Menu placement="bottom-start" className="pl-2 dark:bg-mildDarkMode" >
 					<MenuHandler>
 						<div className="flex-row flex border-b  dark:border-b-zinc-700 w-full lg:max-w-[250px] lg:3xl:max-w-[330px] dark:bg-mildDarkMode">
@@ -565,8 +646,6 @@ function SideFeed(props) {
 								{myWorks && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Works</span>}
 								{myBookmarks && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Bookmarks</span>}
 								{myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Uploads</span>}
-
-
 							</button>
 							<svg class={`w-6 h-6 mr-2 shrink-0 flex justify-right justify-space-between`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 						</div>
@@ -585,7 +664,7 @@ function SideFeed(props) {
 							Global
 						</MenuItem>
 					</MenuList>
-				</Menu>
+				</Menu> */}
 
 
 

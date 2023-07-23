@@ -4,7 +4,7 @@ import './FeedItem.css';
 
 const SkeletonItem = () => {
 	return (
-		<div className={'grid border-b-0'}>
+		<div className={'grid border-b-0 '}>
 			<div className="flex w-full">
 				<div className="flex flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  hover:scale-105 transform hover:translate-x-2 hover:translate-y-2 mr-auto ml-auto">
 					<div className="w-1/2 min-w-[150px] max-w-[300px] mr-3 ">
