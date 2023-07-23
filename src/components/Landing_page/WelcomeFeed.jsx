@@ -64,15 +64,65 @@ function WelcomeFeed(props) {
 	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
 	const [myWorks, setMyWorks] = useState(localStorage.getItem("logged in") ==="true" ? true : false);
 	const [archipelagos, setArchipelagos] = useState(false)
-
-
-
-
+	const [searchQuery, setSearchQuery] = useState("");
+	const [searchMemory, setSearchMemory] = useState("")
 
 
 
 	
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+		  setSearchQuery(search);
+		  
+		}, 500); // delay of 500ms
+	
+		return () => clearTimeout(timer); // this will clear the timer if the user keeps typing before the 500ms has passed
+	  }, [search]);
+	
+	
+	  useEffect(() => {
+		if (searchQuery || (searchQuery === "" && searchMemory !== "")) {
+  
+		  handleSearch();
+		
+		}
+		
+	 }, [searchQuery]);	
+
+	
 	let calledAndEmpty = true
+
+	const handleSearch = () => {
+		setSearchMemory(search)
+		localStorage.setItem('search', search);
+		if (searchInputRef.current.value.length === 0) {
+			setSearch('');
+		}
+		if (global) {
+			setOffset(0);
+			getData(0, true, true);
+
+		}
+		else if (myWorks) {
+
+			setCalled(false)
+			setOffsetPersonal(0)
+			getDataPersonal(0, true, true);
+
+		}
+		else if ( myUploads) {
+			setCalled(false)
+			setOffsetUploads(0)
+			getDataUploads(0, true, true, search);
+		}
+		else if ( myBookmarks ) {
+			setCalled(false)
+			setOffsetBookmarks(0)
+			getDataBookmarks(0, true, true, search);
+		}
+
+		setSubmitted(true)}
 
 	
 
@@ -519,34 +569,6 @@ function WelcomeFeed(props) {
 						onSubmit={(e) => {
 							e.preventDefault();
 
-							localStorage.setItem('search', search);
-							if (searchInputRef.current.value.length === 0) {
-								setSearch('');
-							}
-							if (global) {
-								setOffset(0);
-								getData(0, true, true);
-
-							}
-							else if (myWorks) {
-
-								setCalled(false)
-								setOffsetPersonal(0)
-								getDataPersonal(0, true, true);
-
-							}
-							else if ( myUploads) {
-								setCalled(false)
-								setOffsetUploads(0)
-								getDataUploads(0, true, true, search);
-							}
-							else if ( myBookmarks ) {
-								setCalled(false)
-								setOffsetBookmarks(0)
-								getDataBookmarks(0, true, true, search);
-							}
-
-							setSubmitted(true)
 						}}
 					>
 						<label htmlFor="voice-search" className="sr-only">

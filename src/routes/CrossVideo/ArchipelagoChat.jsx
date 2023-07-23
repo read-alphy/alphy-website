@@ -315,10 +315,10 @@ const toggleExpand = () => {
                 {((answerData=="" && isLoadingInside===false)) &&
 
                 <div className="sm:px-5 mt-10 ">
-                {<div class={`${answerData.length>0 &&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+                {<div class={`${(answerData.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
 <p className="flex flex-row mb-5 sm:ml-6"> 
 <QuizIcon className="text-green-400 mr-2"/>
-<span className="text-zinc-600 dark:text-zinc-200">Popular Questions</span>
+<span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
 </p>
                 {selectedQuestions.length>0 && selectedQuestions.map((question,index) =>
                 (

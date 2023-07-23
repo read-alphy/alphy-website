@@ -669,7 +669,7 @@ return (
 
 													<Popover placement="right">
 														<PopoverHandler>
-														<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Archipelago</p></button>
+														<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Arc</p></button>
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
@@ -839,7 +839,7 @@ return (
 
 												<Popover placement="right">
 													<PopoverHandler>
-													<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Archipelago</p></button>
+													<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-400"/> <p className="ml-2">Add To Arc</p></button>
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										

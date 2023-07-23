@@ -25,6 +25,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 	const [isBookmarked, setIsBookmarked] = useState(false);
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [actionsHub, setActionsHub] = useState(false);
 
 	const [called, setCalled] = useState(false);
 	
@@ -35,8 +36,9 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 		if(!windowSizeChecked){
 			if(window.innerWidth<768){
 			setCollapsed(true)
-			}
 			setWindowSizeChecked(true)
+			}
+			
 	}
 })
 
@@ -291,16 +293,16 @@ if(called===false){
 
 			</div>
 			}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px] `}>
+			{collapsed=== false && <div className={` hidden lg:flex mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px] `}>
 				
-				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
+				<SideFeed setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub}/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden mt-[14vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden mt-[10vh] w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen"><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
+						<div className="h-screen"><SideFeed setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub} /></div>
 					</div>
 				</div>
 
@@ -308,7 +310,7 @@ if(called===false){
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos}/>} 
+					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub}/>} 
 					
 
 				</div>

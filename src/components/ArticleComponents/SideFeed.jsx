@@ -48,10 +48,27 @@ function SideFeed(props) {
 	const [dataBookmarks, setDataBookmarks] = useState([]);
 	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
 	const [firstTimeBookmarks, setFirstTimeBookmarks] = useState(true);
+	const [searchQuery, setSearchQuery] = useState("");
+	const [searchMemory, setSearchMemory] = useState("");
 
 
 
-
+	useEffect(() => {
+		const timer = setTimeout(() => {
+		  setSearchQuery(search);
+		}, 500); // delay of 500ms
+	
+		return () => clearTimeout(timer); // this will clear the timer if the user keeps typing before the 500ms has passed
+	  }, [search]);
+	
+	
+	  useEffect(() => {
+		if (searchQuery || (searchQuery === "" && searchMemory !== "")) {
+		  // Call the search API/function here. Your backend code goes here.
+		  // fetch(`api/search?query=${searchQuery}`)...
+		  handleSearch();
+		}
+	 }, [searchQuery]);							
 
 
 	const getDataPersonal = (offsetPersonal, firstTimePersonal, hasMorePersonal, search_input) => {
@@ -259,8 +276,10 @@ function SideFeed(props) {
 
 
 	const handleSearch = () => {
+		setSearchMemory(search)
 		
-		if(global) {getData(0, true, true, search);}
+		if(global) {getData(0, true, true, search);
+		}
 		else if(myWorks) {getDataPersonal(0, true, true, search);}
 		else if(myUploads===true) {getDataUploads(0, true, true, search);}
 		else if(myBookmarks===true) {getDataBookmarks(0, true, true, search);}
@@ -413,10 +432,16 @@ function SideFeed(props) {
 
 
 	return (
-		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 md:bg-zinc-100">
+		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 lg:bg-zinc-100">
+
+{/* <div>
+	<button className="px-10 py-3 bg-green-400 rounded-lg drop-shadow-sm" onClick={() => props.setActionsHub(true)}>Actions Hub</button>
+	
+</div>
+ */}
 
 			<form
-				className="flex items-center h-[10vh] min-h-[50px] pt-5  md:pt-10 max-w-[95%] drop-shadow-sm "
+				className="flex items-center h-[10vh] min-h-[50px] pt-12 max-w-[95%] drop-shadow-sm "
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
@@ -450,7 +475,7 @@ function SideFeed(props) {
 						}}
 
 						id="simple-search"
-						className="ml-2 pr-10 bg-zinc-50 dark:bg-darkMode  rounded-full border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
+						className="ml-2 pr-10 border-zinc-200 lg:bg-zinc-50 dark:bg-darkMode  rounded-full lg:border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
 						placeholder={'Search...'}
 
 					/>
@@ -534,7 +559,7 @@ function SideFeed(props) {
 
 				<Menu placement="bottom-start" className="pl-2 dark:bg-mildDarkMode" >
 					<MenuHandler>
-						<div className="flex-row flex border-b  dark:border-b-zinc-700 w-full md:max-w-[250px] md:3xl:max-w-[330px] dark:bg-mildDarkMode">
+						<div className="flex-row flex border-b  dark:border-b-zinc-700 w-full lg:max-w-[250px] lg:3xl:max-w-[330px] dark:bg-mildDarkMode">
 							<button className="bg-transparent  w-full lg:max-w-[250px] 3xl:max-w-[330px] flex  mb-5  ml-4" >
 								{global && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Global</span>}
 								{myWorks && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Works</span>}
@@ -569,7 +594,7 @@ function SideFeed(props) {
 
 			<div className="flex mt-4">
 				{/* <div className="h-[80vh] overflow-y-scroll pl-1 pr-5" onScroll={handleScroll}> */}
-				<div className="side-feed h-[68vh] w-full  md:h-[77vh] overflow-y-scroll pl-1 md:pr-5" ref={feedRef2} onScroll={handleScroll}>
+				<div className="side-feed h-[75vh] w-full  sm:h-[77vh] overflow-y-scroll pl-1 md:pr-5" ref={feedRef2} onScroll={handleScroll}>
 					<div className="items " ref={feedRef} >
 						{global &&
 							(isLoading

@@ -9,7 +9,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useLocation } from 'react-router-dom';
 import { Button, Spinner } from "@material-tailwind/react";
-
+import SourceCardForDetail from './SourceCardForDetail';
 
 
 
@@ -18,7 +18,8 @@ export default function QuestionAnswering(props) {
 	const windowSize = useWindowSize();
 	const QARef = useRef(null);
 	const location = useLocation();
-	
+	let sentences
+    let groupedText
 	const [collapseIndex, setCollapseIndex] = useState(0);
 
 	const [answerData, setAnswerData] = useState('');
@@ -254,6 +255,24 @@ export default function QuestionAnswering(props) {
 		}
 	};
 
+	const handleLength = (text) => {
+		const sentenceRegex = /(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
+        sentences = text.split(sentenceRegex);
+        const groups = sentences.reduce((acc, sentence, index) => {
+            const groupIndex = Math.floor(index / 2);
+            if (!acc[groupIndex]) {
+                acc[groupIndex] = [];
+            }
+            acc[groupIndex].push(sentence);
+            return acc;
+        }, []);
+        const groupedSentences = groups.map(group => group.join(' '));
+        groupedText = groupedSentences.join('<br/> <br/>');
+        groupedText = `${groupedText[0] === groupedText[0].toUpperCase() ? "" : "..."}${groupedText}${((groupedText[groupedText.length - 1] === "." || groupedText.substring(groupedText.length - 1) === "?") || (groupedText[groupedText.length - 1] === ",") || (groupedText[groupedText.length - 1] === "!") || (groupedText[groupedText.length - 1] === ":") || (groupedText[groupedText.length - 1] === "...")) ? "" : "..."}`
+
+
+		return groupedText
+	}
 
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
@@ -408,12 +427,13 @@ export default function QuestionAnswering(props) {
 
 												{baseSources ? (
 													<div className="mt-10">
-														<div>
+														<div className="">
 															<h1 className="mb-4 text-xl font-normal text-zinc-700 dark:text-zinc-300"> Sources from the video sorted by relevance</h1>
 
+									<div className=" ">
 															{props.key_qa[item]
 																? props.key_qa[item].sources.map((source, index) => (
-																	<p className=" text-zinc-700 dark:text-zinc-300" key={index}>
+																	<p className="text-green-400 font-bold border border-zinc-300 rounded-lg p-5 drop-shadow-sm mb-5" key={index}>
 
 																		{source.start && source.end ? (
 																			window.innerWidth > 999 && props.data.source_type == "yt" ?
@@ -446,11 +466,19 @@ export default function QuestionAnswering(props) {
 
 
 
-																		<br /> <br /> {source.text[0] === source.text[0].toUpperCase() ? "" : "..."}{source.text}{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
+																		<br /> <br /> 
+																		
+																		{
+																		<p className="text-zinc-700 dark:text-zinc-300  font-normal" dangerouslySetInnerHTML={{__html:handleLength(source.text)}}/>
+
+																		
+																		}
+																		
 
 																	</p>
 																))
 																: null}
+																</div>
 														</div>
 														<button
 															className={`cursor-pointer  justify-end  mt-10 mx-auto flex`}

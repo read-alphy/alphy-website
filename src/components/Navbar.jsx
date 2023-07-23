@@ -215,7 +215,7 @@ function Navbar({ collapsed, setCollapsed }) {
 					}`}
 			>
 				<div className="text-center mx-auto items-center">
-					<div className="overflow-y-auto z-40  text-sm mx-auto items-center justify-center flex flex-row">
+					<div className="overflow-y-hidden z-40  text-sm mx-auto items-center justify-center flex flex-row">
 						<div className="flex mx-auto flex-row min-w-[300px]">
 						{/* 	<div className="flex flex-row">
 								<div className="justify-center items-center flex ml-4">

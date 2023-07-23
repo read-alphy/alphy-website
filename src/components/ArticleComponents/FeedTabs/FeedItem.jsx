@@ -122,7 +122,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 								}
 							</div>
 
-							<div className={`col-span-2 ${!fromArchipelago  && "lg:col-span-1"} ml-10 ${window.innerWidth>400 && window.innerWidth<500 &&"ml-5"} xs:ml-6 sm:ml-0 justify-start text-xs`} >
+							<div className={`col-span-2 ${!fromArchipelago  && "lg:col-span-1"}  ${window.innerWidth>400 && window.innerWidth<500 &&"ml-5"} xs:ml-0 sm:ml-0 justify-start text-xs`} >
 							
 								
 								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) || (fromArchipelago==="archipelago" && item.source!==undefined && item.source.complete===true)? null : (
