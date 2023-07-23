@@ -20,8 +20,13 @@ export default function CuratedCarouselItem(props) {
 
     
 let description=""
-if(props.item.description!==undefined && props.item.description.length > 50){
-   description = `${props.item.description[29]===" "? props.item.description.slice(0, 49) : props.item.description.slice(0, 50)}...`;
+if(props.item.description!==undefined && props.item.description.length > 50 ){
+  if(window.innerWidth < 600){
+   description = `${props.item.description[49]===" "? props.item.description.slice(0, 49) : props.item.description.slice(0, 50)}...`;
+  }
+  else {
+description = `${props.item.description[69]===" "? props.item.description.slice(0, 69) : props.item.description.slice(0, 70)}...`;
+  }
 }
 else{
     description = props.item.description
