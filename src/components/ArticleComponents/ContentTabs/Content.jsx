@@ -605,7 +605,7 @@ const handleBookmark = async () => {
 	}
 
 	const handleAddToArchipelago = (archipelagoUID) => {
-		let archipelagoTracks = []
+		
 		const newSource = {
 			"source_id":data.source_id,
 			"source_type":data.source_type, 
