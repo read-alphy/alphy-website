@@ -41,16 +41,14 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const description = data.description
     
     let displayText=""
-    if(tracks.length===0 && data.tracks!==undefined){
+    if(tracks.length===0 && data.tracks!==undefined && data.tracks.length!==0){
         setTracks(data.tracks)
-        
-        
     }
 
     
     
     const selectedItems = [];
-    while (data!==undefined && data.questions!==undefined&& selectedItems.length < 5) {
+    while (data!==undefined && data.questions!==undefined&& data.questions.length!==0 && selectedItems.length < 5) {
       const randomIndex = Math.floor(Math.random() * data.questions.length);
       const randomItem = data.questions[randomIndex];
       if (!selectedItems.includes(randomItem)) {

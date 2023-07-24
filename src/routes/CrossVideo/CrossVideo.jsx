@@ -83,6 +83,7 @@ useEffect(() => {
 		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
+			
 			setCollapsed(true)
 			
 			setData(response.data)
@@ -100,10 +101,11 @@ useEffect(() => {
 			setSourceIDsArchipelago([...sources])
 			setIsLoading(false)
 			setCalled(true)
-
+	
 
 		}
 		).catch((error) => {
+			setCalled(true)
 			console.log(error)
 			navigate("/404")
 		})	
