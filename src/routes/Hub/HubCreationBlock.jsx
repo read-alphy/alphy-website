@@ -2,6 +2,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ChatIcon from '@mui/icons-material/Chat';
+import LinkIcon from '@mui/icons-material/Link';
 
 export default function HubCreationBlock(){
 
@@ -22,8 +23,9 @@ export default function HubCreationBlock(){
                         Submit a link to a YouTube video or Twitter Spaces to process it with Alphy.
                        </p>
                        <div className="flex-row flex mt-5">
-                            <YouTubeIcon fontSize="large" className="text-emerald-200"/>
-                            <TwitterIcon fontSize="large" className="text-emerald-200"/>
+                            {/* <YouTubeIcon fontSize="large" className="text-emerald-200"/>
+                            <TwitterIcon fontSize="large" className="text-emerald-200"/> */}
+                            <LinkIcon fontSize="large" className="text-emerald-200"/>
                        </div>
                        <button className="mt-5 px-5 py-2 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-emerald-200 to-yellow-200 rounded-md text-white mb-5">
                         Submit
@@ -48,9 +50,9 @@ export default function HubCreationBlock(){
                 </div>
                 <div className="border border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-sm hover:drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
                     <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
-                    <p className="text-red-300 text-lg font-semibold">
+                        <p className="text-red-300 text-lg font-semibold">
                             Create an Arc
-                            </p>
+                        </p>
                             <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5">
                         Create a customizable search engine on multiple audiovisual content.
                         </p>
