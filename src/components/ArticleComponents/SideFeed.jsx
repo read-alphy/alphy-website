@@ -16,6 +16,8 @@ import {
 } from "@material-tailwind/react";
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 function SideFeed(props) {
 
@@ -51,7 +53,7 @@ function SideFeed(props) {
 	const [firstTimeBookmarks, setFirstTimeBookmarks] = useState(true);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchMemory, setSearchMemory] = useState("");
-	const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(false);
+	const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(true);
 	const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
 
 	const [showSearch, setShowSearch] = useState(false);
@@ -187,6 +189,7 @@ function SideFeed(props) {
 
 
 	const navigateFeeds = (state) => {
+		
 		
 
 		if (state.target.value == "global") {
@@ -484,26 +487,26 @@ function SideFeed(props) {
 	return (
 		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 lg:bg-zinc-100">
 
-<div className="mt-10">
+<div className="pt-10">
 	<a className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href="/hub">
 		
 		<HomeIcon className="mr-3"/>
 		<p>
 		Actions Hub
 		</p></a>
-		<a onClick={()=>setShowSearch(true)} className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href="/hub">
+		<button onClick={()=>setShowSearch(!showSearch)} className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href="/hub">
 		
 		<SearchIcon className="mr-3"/>
 		<p>
 		Search
-		</p></a>
+		</p></button>
 	
 </div>
 
 <div class="border-b border-zinc-200 dark:border-zinc-700 mx-auto items-center flex mt-5 dark:opacity-40"></div>
 
 			<form
-				className={`flex items-center h-[10vh] min-h-[50px] pt-12 max-w-[95%] drop-shadow-sm  ${"hidden"}`}
+				className={`flex items-center h-[10vh] min-h-[50px] pt-12 max-w-[95%] drop-shadow-sm  ${showSearch ? "block" : "hidden"}`}
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
@@ -537,7 +540,7 @@ function SideFeed(props) {
 						}}
 
 						id="simple-search"
-						className="ml-2 pr-10 border-zinc-200 lg:bg-zinc-50 dark:bg-darkMode  rounded-full lg:border-whiteLike text-zinc-500  text-gray-900 text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
+						className="ml-2 pr-10 border-zinc-200 lg:bg-zinc-50 dark:bg-darkMode dark:Text-white rounded-full lg:border-whiteLike text-zinc-500  text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
 						placeholder={'Search...'}
 
 					/>
@@ -618,23 +621,37 @@ function SideFeed(props) {
 
 
 
-
-			<div className="flex flex-row overflow-x-scroll scroll-smooth carousel-area  w-full lg:max-w-[250px] 3xl:max-w-[330px] mt-2" ref={carouselRef}>
-
-							<button className="  mb-5  ml-4 bg-zinc-200 rounded-md px-6 py-2 whitespace-nowrap" onClick={navigateFeeds} value="my_works">
-								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg" >My Works</span>
+<div className="relative">
+			<div className="flex flex-row overflow-x-scroll scroll-smooth carousel-area  w-full lg:max-w-[230px] 3xl:max-w-[310px] mt-2 " ref={carouselRef}>
+			<button onClick={scrollBackward}  type="button" className={`left-arrow absolute max-h-[30px] top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
+          isBackwardArrowVisible ? '' : 'hidden'
+        }`}>
+        <div className="max-h-[50px] min-h-[50px] mt-1 pt-3 items-center bg-zinc-100 dark:bg-mildDarkMode hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                    <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
+                    </div>
+        </button>
+		<button className={`mb-5  ml-4 ${myWorks ? "bg-zinc-800 text-white dark:bg-zinc-100 dark:text-zinc-700 " :"bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 text-zinc-600"} rounded-md px-6 py-2 whitespace-nowrap`} onClick={navigateFeeds} value="my_works">
+							<span className={`font-sans rounded-lg pointer-events-none`}>My Works</span>
 							</button>
-							<button className="  mb-5  ml-4 bg-zinc-200 rounded-md px-6 py-2 whitespace-nowrap" onClick={navigateFeeds} value="my_uploads">
-								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg">My Uploads</span>
+							<button className={`mb-5  ml-4 ${myUploads ? "bg-zinc-800 text-white dark:bg-zinc-100 dark:text-zinc-700 " :"bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 text-zinc-600"} rounded-md px-6 py-2 whitespace-nowrap`} onClick={navigateFeeds} value="my_uploads">
+								 <span className={`font-sans rounded-lg pointer-events-none`}>My Uploads</span>
 							</button>
-							<button className=" mb-5  ml-4 bg-zinc-200 rounded-md px-6 py-2 whitespace-nowrap" onClick={navigateFeeds} value="my_bookmarks">
-								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg">My Bookmarks</span>
+							<button className={`mb-5  ml-4 ${myBookmarks ? "bg-zinc-800 text-white dark:bg-zinc-100 dark:text-zinc-700 " :"bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 text-zinc-600"} rounded-md px-6 py-2 whitespace-nowrap`}  onClick={navigateFeeds} value="my_bookmarks">
+							<span className={`font-sans rounded-lg pointer-events-none`}>My Bookmarks</span>
 							</button>
-							<button className="  mb-5  ml-4 bg-zinc-200 rounded-md px-4 py-2 whitespace-nowrap" onClick={navigateFeeds} value="global">
-								 <span className="font-semibold dark:text-zinc-300 text-zinc-600 rounded-lg">Global</span>
+							<button className={`mb-5  ml-4 ${global ? "bg-zinc-800 text-white dark:bg-zinc-100 dark:text-zinc-700 " :"bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 text-zinc-600"} rounded-md px-6 py-2 whitespace-nowrap`}  onClick={navigateFeeds} value="global">
+							<span className={`font-sans rounded-lg pointer-events-none`}>Global</span>
 							</button>
-							
-							
+						
+						</div>
+						<button type="button" className={`right-arrow cursor-default absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
+          isForwardArrowVisible ? '' : 'hidden'
+        }`}>
+        <div className="max-h-[50px] min-h-[50px] mb-2  pt-2 items-center bg-zinc-100 dark:bg-mildDarkMode hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                    <ArrowForwardIosIcon onClick={scrollForward} className="cursor-pointer text-zinc-600 p-1 " />
+                    </div>
+					
+        </button>
 						</div>
 
 {/* 

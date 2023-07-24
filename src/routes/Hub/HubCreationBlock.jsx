@@ -20,7 +20,7 @@ export default function HubCreationBlock(){
 
                        </p>
                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5">
-                        Submit a link to a YouTube video or Twitter Spaces to process it with Alphy.
+                        Submit a link to a YouTube video or Twitter Spaces to unlock with Alphy.
                        </p>
                        <div className="flex-row flex mt-5">
                             {/* <YouTubeIcon fontSize="large" className="text-emerald-200"/>
@@ -38,7 +38,7 @@ export default function HubCreationBlock(){
                                 Upload a Recording
                                 </p>
                                 <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5">
-                            Import an audio file from your device to transcribe, summarize, and question.
+                            Import an audio file from your device to transcribe, summarize, and question with Alphy.
                             </p>
                                 <CloudUploadIcon fontSize="large" className="text-indigo-300 mt-5"/>
                                 <button className="mt-5 px-5 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 mb-5 rounded-md text-white"
@@ -54,7 +54,7 @@ export default function HubCreationBlock(){
                             Create an Arc
                         </p>
                             <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5">
-                        Create a customizable search engine on multiple audiovisual content.
+                        Create your own AI-assisted search engine on countless hours of audiovisual content.
                         </p>
                             <ChatIcon fontSize="large" className="text-yellow-300 mt-5"/>
                             <button className="mt-5 px-5 py-2 bg-gradient-to-b from-red-200 via-red-300 to-yellow-200 mb-5 rounded-md text-white"
