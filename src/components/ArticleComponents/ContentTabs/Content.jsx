@@ -1048,10 +1048,10 @@ return (
 											<Selection.Portal>
       <Selection.Content>
 		
-			<Button className="bg-green-400 mt-2 mb-2 text-zinc-800 dark:text-zinc-800 rounded-lg" onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
+			<Button className="rounded-xl bg-green-300 mt-2 mb-2 text-white dark:text-zinc-800" onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
 					
 		
-			 <Selection.Arrow className="text-zinc-300"/>
+			 <Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
 
       </Selection.Content>
     </Selection.Portal>
