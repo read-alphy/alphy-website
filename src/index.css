@@ -243,6 +243,47 @@ MAIN PAGE
 	display: none;
 }
 
+/* style.css */
+
+/* style.css */
+
+.hiddenDropdown {
+	transition: max-height 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+  }
+  
+  .visibleDropdown {
+	transition: max-height 0.3s ease-in, opacity 0.3s ease-in, transform 0.3s ease-in;
+	max-height: 30vh; /* you need to set this to a value that's always greater than the content height */
+	opacity: 1;
+  }
+
+ /* style.css */
+
+.hiddenDrawer {
+	transition: transform 0.5s ease-out;
+	transform: translateX(-100%);
+	width: 250px; /* Adjust as needed */
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	overflow: auto;  }
+  
+  .visibleDrawer {
+	transition: transform 0.5s ease-in;
+	transform: translateX(0);
+	width: 250px; /* Adjust as needed */
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	overflow: auto;  }
+  
+  
+  
 .scrolling {
 	overflow-y: scroll;
 	scrollbar-width: none;

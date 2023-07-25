@@ -18,6 +18,9 @@ module.exports = {
 		darkMode: 'class',
 
 		extend: {
+			transitionProperty: {
+				'height': 'height',
+			  },
 			keyframes: {
 				highlight: {
 					'0%': {

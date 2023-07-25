@@ -109,7 +109,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		className={`flex dropshadow-l justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 			}`}
 	>
-		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp || isArc || isHub) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px]`}>
+		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp || isArc || isHub) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] min-w-[330px] max-w-[330px]`}>
 			{collapsed==true	 && (isYt || isSp || isUp || isArc || isHub) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
 			<Link to="/" className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
@@ -120,8 +120,8 @@ function Navbar({ collapsed, setCollapsed }) {
 				</div>
 			</Link>
 			{isYt || isSp || isUp || isArc || isHub ? 
-				<div className={`hidden lg:flex 3xl:ml-40 lg:ml-20 pr-4 ${collapsed ? " lg:hidden bg-zinc-50 dark:bg-darkMode" : " bg-zinc-100 dark:bg-mildDarkMode  justify-end  "}  `}>
-				<button onClick={() =>setCollapsed(!collapsed) }>
+				<div onClick={() =>setCollapsed(!collapsed) } className={`hidden lg:flex rounded-full bg-opacity-0 hover:bg-opacity-60 hover:bg-zinc-200 dark:hover:bg-zinc-700 ml-40  mr-4 p-1 transition duration-300 ease-in-out ${collapsed ? " lg:hidden bg-zinc-50 dark:bg-darkMode" : " bg-zinc-100 dark:bg-mildDarkMode  justify-end  "}  `}>
+				<button >
 
 					
 <svg className={`${!collapsed && "rotate-180"} opacity-50 hover:opacity-40 duration-200 ease-in-out transform`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

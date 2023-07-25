@@ -12,7 +12,11 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
-
+import PublicIcon from '@mui/icons-material/Public';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import AudioFileIcon from '@mui/icons-material/AudioFile';
+import PodcastsIcon from '@mui/icons-material/Podcasts';
+import ChatIcon from '@mui/icons-material/Chat';
 import {
 	Button, Popover,
 	PopoverHandler,
@@ -516,52 +520,55 @@ function HubFeed(props) {
 	}
 
 	return (
-		<div className="main-page-feed-section container  xl:max-w-[1000px] 2xl:max-w-[1280px] w-full mt-20">
-			{/* 			<h2 className="text-gray-700 dark:text-zinc-300 pl-3 md:pl-0 text-2xl mx-auto pb-3 font-semibold">
-				Explore the videos other users unlocked with Alphy
-			</h2> */}
-
-
-
-			<div class="text-sm font-light text-center text-gray-500  dark:text-zinc-300  ">
-				<ul class="flex flex-row pt-4 overflow-x-hidden">
+		<div className="main-page-feed-section container  xl:max-w-[1000px] 2xl:max-w-[1280px] w-full mt-20 mx-auto md:pl-20 md:ml-10  drop-shadow-lg  rounded-lg ">
+		<div class="text-sm font-light text-center text-gray-500 bg-white dark:text-zinc-300 dark:bg-mildDarkMode">
+			 	<ul class="flex flex-row pt-4 overflow-x-hidden pl-5">
 					
-			
-								
-					
+				  
+
+
+
 					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("my_works")} class={`inline-block p-2 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
+						<button onClick={() => navigateFeeds("my_works")} class={`flex flex-col items-center p-2 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+						<PodcastsIcon />
+							<span>Submissions</span>
+							</button>
+					</li>
+
+					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
+						<button onClick={() => navigateFeeds("my_bookmarks")} class={`flex flex-col items-center p-2 sm:p-4 py-4  ${myBookmarks ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+						<BookmarksIcon/>
+						<span>Bookmarked</span>
+							</button>
 					</li>
 					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("my_uploads")} class={`relative infline-flex p-2 py-4 sm:p-4  ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
-
-							<span> My Uploads </span>
-							
+						<button onClick={() => navigateFeeds("my_uploads")} class={`flex flex-col items-center p-2 py-4 sm:p-4  ${myUploads ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+					<AudioFileIcon/>
+							<span>Uploads </span>
 						</button>
-
-
-					</li>
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("my_bookmarks")} class={`inline-block p-2 sm:p-4 py-4  ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
 					</li>
 
+
 					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("global")} class={`inline-block p-2 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+						<button onClick={() => navigateFeeds("global")} class={`flex flex-col items-center p-2 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+							<PublicIcon/>
+							<span>Global </span>
+							</button>
 					</li>
 					
 					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("archipelagos")} class={`inline-block p-2 py-4 sm:p-4 sm:mr-10 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Arcs</button>
+						<button onClick={() => navigateFeeds("archipelagos")} class={`flex flex-col items-center p-2 py-4 sm:p-4 sm:mr-10  ${archipelagos ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+							<ChatIcon/>
+							<span>Arcs</span>
+							</button>
 					</li> 
-
-
-
-				</ul>
+				</ul> 
 			</div>
 
-			<div className=" bg-[#F6F9FC] p-[10px] drop-shadow-lg  rounded-lg dark:bg-darkMode dark:bg-mildDarkMode mt-10 min-h-[40vh]">
+			<div className="  p-[10px] bg-white dark:bg-darkMode dark:bg-mildDarkMode min-h-[60vh] pl-5 ">
 				{myUploads ||archipelagos ? null :
 					<form
-						className="flex items-center"
+						className="flex items-center mt-10"
 						
 						onSubmit={(e) => {
 							e.preventDefault();
@@ -789,8 +796,8 @@ function HubFeed(props) {
 
 
 						{dataUploads.length > 0 &&
-							<div className={`${file !== null ? "md:mt-20 mt-10" : ""}`}>
-								<p className="text-zinc-600 dark:text-zinc-300 font-sans text-xl mb-5">Your Previous Works</p>
+							<div className={`md:px-10 mt-5`}>
+								<p className="text-zinc-600 dark:text-zinc-300 font-sans text-xl mb-5">Previous Uploads</p>
 								
 
 								{dataUploads.length > 10 &&
@@ -865,17 +872,18 @@ function HubFeed(props) {
 							</div>}
 						{/* temporary */}
 						<div
+						className="md:px-10"
 						>
 
 							{isLoadingUploads
 								? dataUploads.length > 0
 									?
-									dataUploads.map((item, index) => { <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									dataUploads.map((item, index) => { <FeedItem currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => {/* <SkeletonItem key={index + 500} /> */}))
 
 									: [...Array(10)].map((item, index) => {
 										<div>
 
-											<SkeletonItem key={index} />
+											{/* <SkeletonItem key={index} /> */}
 
 										</div>
 									})

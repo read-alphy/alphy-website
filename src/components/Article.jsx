@@ -283,7 +283,7 @@ if(called===false){
 				<button onClick={handleCollapse }>
 
 		
-			<svg className={` ${!collapsed && "rotate-180"} opacity-30 dark:opacity-80 `}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<svg className={` ${!collapsed && "rotate-180"} opacity-30 p-1 rounded-full bg-opacity-0 hover:bg-opacity-60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition duration-300 ease-in-out dark:opacity-80 `}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
 			</svg>
 		
@@ -293,7 +293,7 @@ if(called===false){
 
 			</div>
 			}
-			{collapsed=== false && <div className={` hidden lg:flex mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px] `}>
+			{collapsed=== false && <div className={`hidden lg:flex mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-darkMode `}>
 				
 				<SideFeed setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub}/></div>}
 				

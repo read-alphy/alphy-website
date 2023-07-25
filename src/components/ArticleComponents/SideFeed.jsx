@@ -492,7 +492,7 @@ function SideFeed(props) {
 		
 		<HomeIcon className="mr-3"/>
 		<p>
-		Actions Hub
+		Main Hub
 		</p></a>
 		<button onClick={()=>setShowSearch(!showSearch)} className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href="/hub">
 		
@@ -505,7 +505,8 @@ function SideFeed(props) {
 
 
 			<form
-				className={`flex items-center h-[10vh] min-h-[50px] pt-12 max-w-[95%] drop-shadow-sm  ${showSearch ? "block" : "hidden"}`}
+				className={`flex items-center h-[10vh] min-h-[40px]  max-w-[95%] drop-shadow-sm ${
+					showSearch ? "visibleDropdown" : "hiddenDropdown"}`}
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOffset(0);
@@ -525,9 +526,9 @@ function SideFeed(props) {
 				}}
 			>
 				<label htmlFor="simple-search" className="sr-only">
-					Search
+					Start searching
 				</label>
-				<div className="relative w-full mb-10 ">
+				<div className="relative w-full mb-5 ">
 					<input
 						value={search.length === 0 ? localStorage.getItem("search") : search}
 						title={search}
@@ -539,8 +540,8 @@ function SideFeed(props) {
 						}}
 
 						id="simple-search"
-						className="ml-2 pr-10 border-zinc-200 lg:bg-zinc-50 dark:bg-darkMode dark:Text-white rounded-full lg:border-whiteLike text-zinc-500  text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
-						placeholder={'Search...'}
+						className="ml-2 pr-10 border-zinc-200 lg:bg-zinc-50 dark:bg-darkMode dark:Text-white rounded-lg focus:border-zinc-300 dark:focus:border-zinc-600 lg:border-whiteLike text-zinc-500  text-sm focus:outline-none focus:border-slate-50 focus:ring-slate-50 dark:border-darkMode dark:focus:ring-darkMode dark:focus:border-darkMode block w-full pl-4 p-3 "
+						placeholder={`Start searching ${global ? "our database": (myWorks ? "your works" :  (myBookmarks ? "your bookmarks" : "your uploads"))}...`}
 
 					/>
 
@@ -622,7 +623,7 @@ function SideFeed(props) {
 
 
 <div className="relative">
-			<div className="flex flex-row overflow-x-scroll scroll-smooth carousel-area  w-full lg:max-w-[230px] 3xl:max-w-[310px] mt-2 " ref={carouselRef}>
+			<div className="flex flex-row overflow-x-scroll scroll-smooth carousel-area lg:max-w-[230px] 3xl:max-w-[310px] mt-2 " ref={carouselRef}>
 			<button onClick={scrollBackward}  type="button" className={`left-arrow absolute max-h-[30px] top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
           isBackwardArrowVisible ? '' : 'hidden'
         }`}>
@@ -714,9 +715,9 @@ function SideFeed(props) {
 												</div>
 											)
 										)
-										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+										.concat([...Array(10)].map((item, index) => {/* <SkeletonItem key={index + 500} /> */}))
 
-									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
+									: [...Array(10)].map((item, index) => {/* <SkeletonItem key={index} /> */})
 								: data.map((item, index) => (
 
 									<div onClick={props.Collapser} className="null">
@@ -748,9 +749,9 @@ function SideFeed(props) {
 												</div>
 											)
 										)
-										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+										.concat([...Array(10)].map((item, index) => {/* <SkeletonItem key={index + 500} /> */}))
 
-									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
+									: [...Array(10)].map((item, index) => {/* <SkeletonItem key={index} /> */})
 								: dataPersonal.map((item, index) => (
 									<div onClick={props.Collapser} className="null">
 										
@@ -800,9 +801,9 @@ function SideFeed(props) {
 												</div>
 											)
 										)
-										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+										.concat([...Array(10)].map((item, index) => {/* <SkeletonItem key={index + 500} /> */}))
 
-									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
+									: /* [...Array(10)].map((item, index) => <SkeletonItem key={index}/>) */ null
 								: dataBookmarks.map((item, index) => (
 									<div onClick={props.Collapser} className="null">
 										<FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} setCollapsed={props.setCollapsed} />
@@ -850,7 +851,7 @@ function SideFeed(props) {
 								(isLoadingUploads
 								? dataUploads.length > 0
 									?
-									dataUploads.map((item, index) => { <FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
+									dataUploads.map((item, index) => { <FeedItem sideFeed={true} currentUser={currentUser} myBookmarks={myBookmarks} key={index} item={item} /> }).concat([...Array(10)].map((item, index) =>/*  <SkeletonItem key={index + 500} /> */null))
 
 									: [...Array(10)].map((item, index) => {
 										<div>

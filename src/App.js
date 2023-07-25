@@ -84,16 +84,17 @@ useEffect(() => {
 	if (currentUser !== null && called === false) {
 		var userId = localStorage.getItem("userId")
 		localStorage.setItem("logged in","true")
-
 		setIdToken(currentUser.accessToken)
 		
 		if(userId===null){
-		localStorage.setItem('userId', currentUser.uid)
+			localStorage.setItem('userId', currentUser.uid)
 		}
+		if(!called){
 		setTimeout (() => {
-		getCustomerInfo(currentUser)
+				getCustomerInfo(currentUser)
 		}, 500)
-		setCalled(true)
+		}
+		
 		const createdAt = currentUser.metadata.createdAt
 		const lastLoginAt = currentUser.metadata.lastLoginAt
 		const registerRecently= parseInt(createdAt) - parseInt(lastLoginAt)
@@ -272,7 +273,7 @@ if (currentUser && creditcalled!==true) {
 							}> </Route>
 
 							<Route path="/hub"
-								element={<Hub currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
 							

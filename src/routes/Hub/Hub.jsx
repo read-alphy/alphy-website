@@ -16,7 +16,7 @@ import HubContent from './HubContent';
 
 
 
-function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, setContentName,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -55,26 +55,28 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, se
 
 useEffect (() => {
 	if(hasActiveSub!==true){
-	setTimeout (() => {
-		setSubCalled(true)
-	}, 3000);
+				setTimeout (() => {
+					setSubCalled(true)
+				}, 2000);
 		}
 		else{
 			setSubCalled(true)
+			setIsLoading(false)
 		}
 		
 	})
 
-if(!subCalled){
+
+/* if(!subCalled){
 	if((hasActiveSub===undefined || hasActiveSub===false)){
-		//navigate("/")
+		
 	}
 	else if(hasActiveSub===true){
 		setIsLoading(false)
-		setSubCalled(true)
+		
 	}
 }
-
+ */
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
 		
@@ -106,7 +108,7 @@ if(!subCalled){
 
 			</div>
 			}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px] `}>
+			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] `}>
 				
 				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
 				
@@ -123,7 +125,7 @@ if(!subCalled){
 					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : <HubContent data={data} hasActiveSub={hasActiveSub} currentUser={currentUser} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} />}
+					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : <HubContent data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} />}
 					
 
 

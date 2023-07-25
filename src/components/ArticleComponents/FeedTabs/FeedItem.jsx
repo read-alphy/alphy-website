@@ -147,11 +147,11 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							<div className={`col-span-1  min-w-[100px] max-w-[300px] mr-3 `}>
 								{forDetail===true ? 
 								<div className="flex flex-row">
-								<div className="text-center items-center flex justify-center mr-4 text-zinc-700 dark:text-zinc-400">
+								<div className="flex mr-4 text-zinc-700 dark:text-zinc-400">
 									{index+1}
 								</div>
 								<div
-									className="flex w-full items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
+									className="flex w-full  h-0 dark:opacity-80  rounded-md bg-gray-600"
 									style={{
 										backgroundImage: `url(${imageUrl})`,
 										paddingBottom: '50%',
@@ -166,7 +166,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 								:
 							
 								<div
-									className="flex w-full items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
+									className="flex w-full  h-0 dark:opacity-80  rounded-md bg-gray-600"
 									style={{
 										backgroundImage: `url(${imageUrl})`,
 										paddingBottom: '50%',

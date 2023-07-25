@@ -239,7 +239,7 @@ const handleDeleteArchipelago = () => {
 
 			</div>
 			}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 w-[250px] min-w-[250px] 3xl:w-[330px] 3xl:min-w-[330px] `}>
+			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] `}>
 				
 				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
 				
