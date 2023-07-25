@@ -14,12 +14,12 @@ export default function HubCreationBlock(){
             </p>
 
             <div className="flex flex-row gap-20 w-full px-10">
-                <div className="border border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-sm hover:drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+                <div className=" bg-[#F6F9FC] dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
                     <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
                        <p className="text-emerald-300 text-lg font-semibold "> Submit a Link
 
                        </p>
-                       <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5">
+                       <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
                         Submit a link to a YouTube video or Twitter Spaces to unlock with Alphy.
                        </p>
                        <div className="flex-row flex mt-5">
@@ -32,12 +32,12 @@ export default function HubCreationBlock(){
                        </button>
                     </div>
                 </div>
-                <div className="border border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-sm hover:drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+                <div className=" bg-[#F6F9FC] dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
                     <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
                          <p className="text-indigo-400 text-lg font-semibold">
                                 Upload a Recording
                                 </p>
-                                <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5">
+                                <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center ">
                             Import an audio file from your device to transcribe, summarize, and question with Alphy.
                             </p>
                                 <CloudUploadIcon fontSize="large" className="text-indigo-300 mt-5"/>
@@ -48,12 +48,12 @@ export default function HubCreationBlock(){
                     </div>
 
                 </div>
-                <div className="border border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-sm hover:drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+                <div className=" bg-[#F6F9FC] dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
                     <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
                         <p className="text-red-300 text-lg font-semibold">
                             Create an Arc
                         </p>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5">
+                            <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
                         Create your own AI-assisted search engine on countless hours of audiovisual content.
                         </p>
                             <ChatIcon fontSize="large" className="text-yellow-300 mt-5"/>

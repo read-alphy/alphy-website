@@ -10,7 +10,6 @@ import { set } from 'lodash';
 
 const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago,forDetail}) => {
 	const source_id = item.source_id;
-	
 	let formattedDate = ""
 	const inputDate = item!==undefined && item.added_ts!==undefined &&  item.added_ts.substring(0, 10)
 	const [removed,setRemoved] = useState(false)
@@ -19,7 +18,6 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 		formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
 	}
 
-
 	let imageUrl;
 	if (item.source_type === 'yt') {
 		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
@@ -27,6 +25,66 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 		imageUrl = Twitter;
 	}
 
+	
+	const language_codes = {
+		"af": "Afrikaans",
+		"ar": "العربية",
+		"hy": "Հայերեն",
+		"az": "Azərbaycan dili",
+		"be": "Беларуская",
+		"bs": "Bosanski",
+		"bg": "Български",
+		"ca": "Català",
+		"zh": "中文",
+		"hr": "Hrvatski",
+		"cs": "Čeština",
+		"da": "Dansk",
+		"nl": "Nederlands",
+		"en": "English",
+		"et": "Eesti",
+		"fi": "Suomi",
+		"fr": "Français",
+		"gl": "Galego",
+		"de": "Deutsch",
+		"el": "Ελληνικά",
+		"he": "עברית",
+		"hi": "हिन्दी",
+		"hu": "Magyar",
+		"is": "Íslenska",
+		"id": "Bahasa Indonesia",
+		"it": "Italiano",
+		"ja": "日本語",
+		"kn": "ಕನ್ನಡ",
+		"kk": "Қазақ",
+		"ko": "한국어",
+		"lv": "Latviešu",
+		"lt": "Lietuvių",
+		"mk": "Македонски",
+		"ms": "Bahasa Melayu",
+		"mr": "मराठी",
+		"mi": "Māori",
+		"ne": "नेपाली",
+		"no": "Norsk",
+		"fa": "فارسی",
+		"pl": "Polski",
+		"pt": "Português",
+		"ro": "Română",
+		"ru": "Русский",
+		"sr": "Српски",
+		"sk": "Slovenčina",
+		"sl": "Slovenščina",
+		"es": "Español",
+		"sw": "Kiswahili",
+		"sv": "Svenska",
+		"tl": "Tagalog",
+		"ta": "தமிழ்",
+		"th": "ไทย",
+		"tr": "Türkçe",
+		"uk": "Українська",
+		"ur": "اردو",
+		"vi": "Tiếng Việt",
+		"cy": "Cymraeg"
+	}
 	const removeBookmark =  () => {
 		axios.patch(
 			`${process.env.REACT_APP_API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
@@ -137,6 +195,20 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 									{item.creator_name}
 									{item.source !==undefined && item.source.creator_name}
 									</div>
+								<div className="font-light text-zinc-400 dark:text-zinc-300 flex flex-row">
+									
+									{item.summaries!==undefined &&
+							
+									item.summaries.map ((summary,index) => (
+										
+										<div className={index!==0 && "ml-1"}>
+											{language_codes[summary.lang]}
+											{index!==item.summaries.length-1 && ","}
+										</div>
+									))
+									}
+									
+									</div>
 
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 							</div>
@@ -195,28 +267,49 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							</div>
 							</a>
 
-							<div className="col-span-2 lg:col-span-1 text-xs h-full">
-								<div className={`flex justify-end mr-5	 mb-5 ${sideFeed==true && "mr-0 mb-0"}`}>
-
-								{removed?
-								<ReplayIcon onClick={removeBookmark} className="cursor-pointer"/>
-								
-							  :
-							  <BookmarkRemoveIcon onClick={removeBookmark} className="cursor-pointer"/>
-									}
-									</div>
+							<div className="col-span-2 lg:col-span-1  text-xs h-full">
+									<div className="grid grid-cols-6">
+							<div className="col-span-5">
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
-								<a className="cursor-pointer" href={`/${item.source_type}/${source_id}`} >
+
+							<a className="cursor-pointer" href={`/${item.source_type}/${source_id}`} >
 								<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">
 							
 									{item.title}
 									</div>
 								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
+								<div className="font-light text-zinc-400 dark:text-zinc-300 flex flex-row">
+									
+									{item.summaries!==undefined &&
+							
+									item.summaries.map ((summary,index) => (
+										
+										<div className={index!==0 && "ml-1"}>
+											{language_codes[summary.lang]}
+											{index!==item.summaries.length-1 && ","}
+										</div>
+									))
+									}
+								
+									
+									</div>
+									
 								</a>
+								</div>
+								
+									<div className={`col-span-1 flex justify-end  ${sideFeed==true && "mr-0 mb-0"}`}>
 
-								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
+									{removed?
+									<ReplayIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>
+									
+								:
+								<BookmarkRemoveIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>
+										}
+										</div>
+										</div>
+								
 							</div>
 							
 						</div>

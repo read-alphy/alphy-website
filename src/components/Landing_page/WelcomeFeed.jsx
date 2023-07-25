@@ -235,7 +235,7 @@ function WelcomeFeed(props) {
 			localStorage.setItem('search', '');
 		}
 	});
-	const temp = 16;
+	const temp = 15;
 	const limit = temp;
 	const searchInputRef = React.useRef(null);
 

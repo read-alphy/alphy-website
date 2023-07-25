@@ -90,7 +90,7 @@ if(!subCalled){
 					}`}
 			></div>
 			
-			<div className="flex flex-row ">
+			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
 				{collapsed==true && 
 			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
 			<div className={`hidden md:flex `}>
