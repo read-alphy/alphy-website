@@ -520,14 +520,50 @@ function HubFeed(props) {
 	}
 
 	return (
-		<div className="main-page-feed-section container  xl:max-w-[1000px] 2xl:max-w-[1280px] w-full mt-20 mx-auto md:pl-20 md:ml-10  drop-shadow-lg  rounded-lg ">
-		<div class="text-sm font-light text-center text-gray-500 bg-white dark:text-zinc-300 dark:bg-mildDarkMode">
-			 	<ul class="flex flex-row pt-4 overflow-x-hidden pl-5">
-					
-				  
+		<div className="main-page-feed-section  xl:min-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1280px] 2xl:min-w-[1280px] w-full mt-20 mx-auto md:pl-20 md:ml-10  flex flex-row">
+				<div class="text-sm font-light text-center text-gray-500  dark:text-zinc-300 dark:bg-mildDarkMode flex flex-col">
+							<div className="bg-zinc-100 md:min-w-[100px] h-full">
+									<ul class="flex flex-col pt-4 overflow-x-hidden items-center mx-auto gap-10">
+									<li class={`mt-2`} >
+											<button onClick={() => navigateFeeds("my_works")} class={`flex flex-col  ${myWorks ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+											<PodcastsIcon />
+												
+												</button>
+										</li>
+
+										<li class={`mt-2`} >
+											<button onClick={() => navigateFeeds("my_bookmarks")} class={`flex flex-col items-center  ${myBookmarks ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+											<BookmarksIcon/>
+											
+												</button>
+										</li>
+										<li class={`mt-2`} >
+											<button onClick={() => navigateFeeds("my_uploads")} class={`flex flex-col items-center  ${myUploads ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+										<AudioFileIcon/>
+												
+											</button>
+										</li>
 
 
+										<li class={`mt-2`} >
+											<button onClick={() => navigateFeeds("global")} class={`flex flex-col items-center  ${global ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+												<PublicIcon/>
+												
+												</button>
+										</li>
+										
+										<li class={`mt-2`} >
+											<button onClick={() => navigateFeeds("archipelagos")} class={`flex flex-col items-center  ${archipelagos ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+												<ChatIcon/>
+												
+												</button>
+										</li> 
+									</ul> 
+								</div>
+						</div>
 
+
+			 	{/* <ul class="flex flex-row pt-4 overflow-x-hidden pl-5">
 					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
 						<button onClick={() => navigateFeeds("my_works")} class={`flex flex-col items-center p-2 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-light border-green-400" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
 						<PodcastsIcon />
@@ -563,12 +599,16 @@ function HubFeed(props) {
 							</button>
 					</li> 
 				</ul> 
-			</div>
+				</div> */}
 
-			<div className="  p-[10px] bg-white dark:bg-darkMode dark:bg-mildDarkMode min-h-[60vh] pl-5 ">
-				{myUploads ||archipelagos ? null :
+				
+
+			
+
+		<div className=" p-[10px] bg-white dark:bg-darkMode dark:bg-mildDarkMode min-h-[60vh] pl-5 ">
+			{archipelagos ? null :
 					<form
-						className="flex items-center mt-10"
+						className="flex items-center pt-4"
 						
 						onSubmit={(e) => {
 							e.preventDefault();
@@ -581,7 +621,7 @@ function HubFeed(props) {
 						<div className="relative  ">
 
 
-							<div class="relative  min-w-[200px] h-11 ">
+							<div class="relative h-11 ">
 								<input
 									ref={searchInputRef}
 									
@@ -589,7 +629,7 @@ function HubFeed(props) {
 										setSearch(e.target.value);
 									}}
 									placeholder="Start searching..."
-									className=" pl-10 peer min-w-[300px] h-full bg-white dark:bg-darkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000" />
+									className=" pl-10 peer md:min-w-[300px] xl:min-w-[500px] h-full border-zinc-500 bg-white dark:bg-darkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000" />
 								<div
 						
 						className="cursor-pointer absolute inset-y-0 left-0 flex items-center pl-3 "
@@ -621,7 +661,7 @@ function HubFeed(props) {
 					</form>
 				}
 
-				<div className={`buttons flex justify-between mt-2 `}></div>
+								<div className={`buttons flex justify-between mt-2 `}></div>
 
 				{global &&
 					<div className="main-page-feed  w-full">
@@ -779,98 +819,11 @@ function HubFeed(props) {
 
 					</div>}
 
-				{
+					{
 					myUploads &&
 
 					<div className="">
-
-
-
-
 						
-						
-							
-
-
-
-
-
-						{dataUploads.length > 0 &&
-							<div className={`md:px-10 mt-5`}>
-								<p className="text-zinc-600 dark:text-zinc-300 font-sans text-xl mb-5">Previous Uploads</p>
-								
-
-								{dataUploads.length > 10 &&
-									<form
-										className="flex items-center"
-										
-										onSubmit={(e) => {
-											e.preventDefault();
-
-											localStorage.setItem('search', search);
-											if (searchInputRef.current.value.length === 0) {
-												setSearch('');
-											}
-											if (global == true) {
-												setOffset(0);
-												getData(0, true, true);
-
-											}
-											else {
-
-												setCalled(false)
-												setOffsetPersonal(0)
-												getDataPersonal(0, true, true);
-
-											}
-											setSubmitted(true)
-										}}
-									>
-										<label htmlFor="voice-search" className="sr-only">
-											Search
-										</label>
-										<div className="relative w-full  ">
-
-											<div class="relative min-w-[200px] h-11 ">
-												<input
-													ref={searchInputRef}
-
-													onChange={(e) => {
-														setSearch(e.target.value);
-													}}
-													placeholder="Start searching..."
-													className=" peer  w-[250px] h-full bg-white dark:bg-darkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000" />
-												
-
-											</div>
-
-
-										</div>
-
-										<Button type="submit"
-											className="bg-zinc-700 text-[15px] ml-2 lg:ml-4 ">
-
-
-											<svg
-												aria-hidden="true"
-												className="w-5 h-4"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth="2"
-													d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-												></path>
-											</svg>
-										</Button>
-									</form>
-								}
-							</div>}
-						{/* temporary */}
 						<div
 						className="md:px-10"
 						>
@@ -907,119 +860,93 @@ function HubFeed(props) {
 						}
 
 					</div>
-				}
-{archipelagos && 
+					}
+							{archipelagos && 
 
 
 
-	<div className="">
+								<div className="">
 
-		
-		
-		
+									
+									
+									
 
-		{currentUser &&
-		<div>
-	{props.hasActiveSub===true ? 
-	<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
-	<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
-	</p>
-	:
-	<p className=" mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
-		<Popover placement="right">
-		<PopoverHandler>
-				
-		<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
-				
-				</PopoverHandler>
-				<PopoverContent>
-					<p>
-						Go Premium to create an arc.
-					</p>
-				</PopoverContent>
-		</Popover>
-		
-		</p>
-}
-		{props.hasActiveSub === true
+									{currentUser &&
+									<div>
+								{props.hasActiveSub===true ? 
+								<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
+								<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
+								</p>
+								:
+								<p className=" mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Your Arcs
+									<Popover placement="right">
+									<PopoverHandler>
+											
+									<AddCircleIcon className="ml-4 cursor-pointer pb-1" onClick={() => handleCreatePlaylist()}/>
+											
+											</PopoverHandler>
+											<PopoverContent>
+												<p>
+													Go Premium to create an arc.
+												</p>
+											</PopoverContent>
+									</Popover>
+									
+									</p>
+							}
+									{props.hasActiveSub === true
 
-		?
-		
-		props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
-		<div>
-		<Carousel 
-		show={`${window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
-			window.innerWidth>600 ? 2.2: 1.2}`} slide={1} transition={0.5}
-			infinite={true}
-			leftArrow={
-				<div className=" mt-24 pr-4 w-8">
-				<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
-				</div>} 
-			
-			rightArrow={
-						<div className="mt-24 pl-2 w-8">
-					<ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
-					</div>} 
-					
-					>
-						
-		{props.userArchipelagos.map((item, index) => 
-		<div className="flex flex-row">
-			
-		
-		
-		<ArchipelagoCard key={index} item={item} index={index} currentUser={currentUser}/>
-		</div>
-	
-	)}
-		</Carousel>
-
-		
-		</div>
-
-		:
-
-		<div className="lg:ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
-		<p className="text-zinc-500 dark:text-zinc-400">You need to be on a Premium account to create an arc. Meanwhile, feel free to enjoy our curated lists.</p>
-		</div>
-}
-
-
-
-
-</div>}
-
-		{/* {<div>
-		<p className="mt-4 text-zinc-700 dark:text-zinc-300 text-lg lg:ml-10">Global Arcs</p>
-					<Carousel 
-					show={`${
-						window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
-			window.innerWidth>600 ? 2.2: 1.2
-					}`} slide={1} transition={0.5}
-						infinite={true}
-						leftArrow={
-							<div className=" mt-24 pr-4 w-8">
-							<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
-							</div>} 
-						
-						rightArrow={
-									<div className="mt-24 pl-2 w-8">
-								<ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
-								</div>} 
+									?
+									
+									props.userArchipelagos!== undefined && props.userArchipelagos.length>0 &&
+									<div>
+									<Carousel 
+									show={`${window.innerWidth>1000 ? (window.innerWidth>1280 ? 4.2 : 3.2) : 
+										window.innerWidth>600 ? 2.2: 1.2}`} slide={1} transition={0.5}
+										infinite={true}
+										leftArrow={
+											<div className=" mt-24 pr-4 w-8">
+											<ArrowBackIosNewIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
+											</div>} 
+										
+										rightArrow={
+													<div className="mt-24 pl-2 w-8">
+												<ArrowForwardIosIcon className="cursor-pointer text-zinc-800 dark:text-zinc-300"/>
+												</div>} 
+												
+												>
+													
+									{props.userArchipelagos.map((item, index) => 
+									<div className="flex flex-row">
+										
+									
+									
+									<ArchipelagoCard key={index} item={item} index={index} currentUser={currentUser}/>
+									</div>
 								
-								>
-					 {props.dataGlobalArchipelagos.map((item, index) => 
-					
-					<ArchipelagoCard key={index} item={item}/>
-					)} 
-					</Carousel>
-					</div>
-				
-		} */}
-			</div>
-}
+								)}
+									</Carousel>
 
-</div>
+									
+									</div>
+
+									:
+
+									<div className="lg:ml-10 text-zinc-700 dark:text-zinc-300 mt-20 mb-20">
+									<p className="text-zinc-500 dark:text-zinc-400">You need to be on a Premium account to create an arc. Meanwhile, feel free to enjoy our curated lists.</p>
+									</div>
+							}
+
+
+
+
+							</div>}
+
+						
+										</div>
+								}
+
+				</div>
 
 
 		</div>

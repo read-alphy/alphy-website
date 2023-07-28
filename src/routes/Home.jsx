@@ -92,7 +92,7 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 			{dataGlobalArchipelagos.length>0 &&
 			<CuratedCarousel dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>
 		}
-												<div class=" w-full h-full container xl:max-w-[1000px] 2xl:max-w-[1280px] border-b border-gray-300 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+												{/* <div class=" w-full h-full container xl:max-w-[1000px] 2xl:max-w-[1280px] border-b border-gray-300 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div> */}
 
 			<WelcomeFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}/>
 								{/* 			{showMessage &&

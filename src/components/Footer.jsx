@@ -37,7 +37,7 @@ function Footer() {
 						<br />
 						Feel free to reach us through{' '}
 						<a href="mailto:support@alphy.app">
-							<span className="text-green-400 hover:text-green-300 cursor-pointer "> support@alphy.app</span>{' '}
+							<span className="text-green-300 hover:text-green-300 cursor-pointer "> support@alphy.app</span>{' '}
 						</a>
 						or ping us on our Discord for any questions and feedback.
 					</p>

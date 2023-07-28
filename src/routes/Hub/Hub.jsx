@@ -57,6 +57,7 @@ useEffect (() => {
 	if(hasActiveSub!==true){
 				setTimeout (() => {
 					setSubCalled(true)
+					setIsLoading(false)
 				}, 2000);
 		}
 		else{

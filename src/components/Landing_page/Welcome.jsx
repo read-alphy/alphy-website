@@ -11,6 +11,8 @@ import { Popover } from 'flowbite';
 import { Button} from "@material-tailwind/react";
 import AddIcon from '@mui/icons-material/Add';
 import PublishIcon from '@mui/icons-material/Publish';
+import CreationBlock from "./CreationBlock"
+
 
 export default function Welcome({hasActiveSub,credit}) {
 	
@@ -193,7 +195,7 @@ export default function Welcome({hasActiveSub,credit}) {
 			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
 				}`}
 		>			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-40 xl:px-56 text-center">
-				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-400 select-none drag-none mx-auto">
+				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-300 select-none drag-none mx-auto">
 					<div className="first flex justify-center pb-3 ">
 						<div className="">Transcribe</div>
 					</div>
@@ -206,22 +208,29 @@ export default function Welcome({hasActiveSub,credit}) {
 					<div className="forth  flex justify-center pb-3">
 						<div className="">Transcribe</div>
 					</div>
-				</section> 
-				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">audiovisual content and 10x your learning, research, and creativity</p>
+				</section>  
+				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">  and 10x your learning, research, and creativity</p>
 				
 				
 			</div>
+			
+			
 			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-l md:text-[18px] lg:text-xl text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				
+				{/* Alphy is here to help you unlock the information in audiovisual content */}
+
+				Power
+				
 				Submit a link to a YouTube video or Twitter Spaces, or upload an audio file, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
-				notify you with email when it's ready!{' '}
+				notify you with email when it's ready!
 			</p>
 
+ 
+<div className="md:ml-20">
+			<CreationBlock hasActiveSub={hasActiveSub} currentUser={currentUser} credit={credit}/>
+			</div>
 
-
-
-
-			<Toaster />
+			{/* <Toaster />
 
 			<div className="items-center container justify-center w-full mx-auto md:ml-10 lg:ml-40 xl:ml-60">
 
@@ -247,7 +256,7 @@ export default function Welcome({hasActiveSub,credit}) {
 							<div className="p-3 space-y-2">
 								<p className="font-semibold text-l text-zinc-700 dark:text-zinc-200"><span >Basic Plan</span>:</p>
 								<p></p>
-								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
+								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. 
 								<p> • Make sure it has more than <strong >10,000 views</strong>.</p>
 								<p> • Alphy might fail to process content with location limits.</p>
 								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3"><span className="text-green-400">Premium Plan</span>:</p>
@@ -295,15 +304,7 @@ export default function Welcome({hasActiveSub,credit}) {
 				<div className={`hidden sm:block sm:col-span-1 mt-5 sm:mt-0 flex ml-5 justify-center md:justify-self-start items-center ${currentUser ? "" : ""}`}>
 					{currentUser ? (
 						<div>
-						{/* <button
-							className="w-1/3 border-2 border-blueLike px-8 bg-blueLike text-whiteLike py-3 mt-6 rounded-full lg:mt-10 md:w-1/3 lg:w-auto hover:opacity-90 transition duration-200 ease-in-out"
-							type="submit"
-							onClick={(e) => {
-								handleSubmit();
-							}}
-						>
-							Submit
-						</button> */}
+				
 						
 						<Button type="submit"
 							onClick={(e) => {
@@ -316,24 +317,18 @@ export default function Welcome({hasActiveSub,credit}) {
 								 <a href="/u/login">
 						<Button  className="bg-zinc-700 px-6 xl:px-10 py-3 dark:bg-green-400 dark:text-zinc-300 text-sm lg:text-[15px]  ">Sign in to submit</Button></a>
 						
-						{/* <a
-							className="w-2/3 border-2 border-blueLike px-8 text-center bg-blueLike text-whiteLike py-3 mt-6 duration-300 rounded-full lg:mt-10 md:w-auto lg:w-auto hover:opacity-90"
-							type="submit"
-							href="/u/login"
-						>
-							Sign In To Submit
-						</a> */}
+						
 					
 						</div>
 					)}
 				</div>
 				</div>
-				{failed && 
-			<div className="mx-auto mt-5 text-sm text-red-400 ml-2">
-				{errorMessage}
-			</div>
-			}
-			</div>
+									{failed && 
+								<div className="mx-auto mt-5 text-sm text-red-400 ml-2">
+									{errorMessage}
+								</div>
+								}
+			</div> */}
 			
 		</div>
 	);

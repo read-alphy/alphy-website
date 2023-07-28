@@ -190,8 +190,6 @@ function SideFeed(props) {
 
 	const navigateFeeds = (state) => {
 		
-		
-
 		if (state.target.value == "global") {
 			setGlobal(true)
 			setMyWorks(false)

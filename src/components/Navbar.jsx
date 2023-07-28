@@ -7,6 +7,8 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
 import Logo from "../img/logo.png"
 import LogoBlack from "../img/logo-inverted.png"
+import HomeIcon from '@mui/icons-material/Home';
+
 
 function Navbar({ collapsed, setCollapsed }) {
 	const auth = useAuth();
@@ -136,8 +138,18 @@ function Navbar({ collapsed, setCollapsed }) {
 		<div className={`flex dark:bg-darkMode`}>
 			<div >
 				<div className="flex flex-row mt-6 dark:text-gray-300 dark:bg-darkMode">
-				 <a className="mr-4 hidden lg:block" href="https://www.producthunt.com/posts/alphy-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a> 
+				 {/* <a className="mr-4 hidden lg:block" href="https://www.producthunt.com/posts/alphy-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a>  */}
+				{/*  {currentUser && 
 				 
+				 <a className="hidden  lg:block lg:flex mr-6 pt-2 flex flex-row  text-zinc-600 font-[500] drop-shadow-md px-2  bg-gradient-to-r from-teal-200 to-lime-200 rounded-lg dark:text-zinc-300 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href={`/hub`}>
+		
+						<HomeIcon className="mr-1 pb-1 text-zinc-600"/>
+						<p className="">
+						Main Hub
+						</p>
+				</a>
+
+				} */}
 					<div
 					
 						type="button"
@@ -218,16 +230,12 @@ function Navbar({ collapsed, setCollapsed }) {
 				<div className="text-center mx-auto items-center">
 					<div className="overflow-y-hidden z-40  text-sm mx-auto items-center justify-center flex flex-row">
 						<div className="flex mx-auto flex-row min-w-[300px]">
-						{/* 	<div className="flex flex-row">
-								<div className="justify-center items-center flex ml-4">
-									<div
-										className="mr-2 font-normal text-blueLike dark:bg-darkMode dark:text-zinc-300 cursor-pointer"
-										onClick={() => handleScroll('about')}
-									>
-										About
-									</div>
-								</div>
-							</div> */}
+						<a className=" pt-2 flex flex-row  text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href={`/hub`}>
+		
+													
+													<p className="">
+													Main Hub
+													</p></a>
 
 							<div className=" flex m-1 ml-6 text-center justify-center text-sm">
 								<div className="mr-4 mx-auto items-center hidden xs:flex">
