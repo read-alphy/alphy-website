@@ -624,7 +624,7 @@ function SideFeed(props) {
 
 
 <div className="relative">
-			<div className="flex flex-row overflow-x-scroll scroll-smooth carousel-area lg:max-w-[230px] 3xl:max-w-[310px] mt-2 " ref={carouselRef}>
+			<div className="flex flex-row overflow-x-scroll scroll-smooth carousel-area lg:max-w-[300px] 3xl:max-w-[310px] mt-2 " ref={carouselRef}>
 			<button onClick={scrollBackward}  type="button" className={`left-arrow absolute max-h-[30px] top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
           isBackwardArrowVisible ? '' : 'hidden'
         }`}>
