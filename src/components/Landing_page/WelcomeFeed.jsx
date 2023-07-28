@@ -932,6 +932,14 @@ function WelcomeFeed(props) {
 						)
 
 						}
+{dataUploads.length==0 && 
+	<div className="mx-auto items-center justify-center flex flex-col">
+	<p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-5 mb-5 w-full  col-span-2">
+		Looks like you haven't submitted any content yet. Upgrade to <a className="underline text-greenColor" href="/account">Premium</a> to start using Alphy on your local files.</p> 
+
+	<img className="opacity-50 dark:opacity-70" width={400} src={Robot}></img>
+	</div>}
+						
 
 					</div>
 				}
