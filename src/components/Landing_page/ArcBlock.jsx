@@ -24,7 +24,7 @@ export default function ArcBlock({dataGlobalArchipelagos, setDataGlobalArchipela
              <div>
                         <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l  mb-5 w-full  col-span-2">You need to go <a className="text-red-300 underline font-bold" href="/plans">premium</a> to create your own Arcs.</p></div>
 
-                        <p className="text-zinc-600 dark:text-zinc-400 mb-4">Meanwhile, feel free to check out Arcs by Alphy </p>
+                        <p className="text-zinc-500 dark:text-zinc-400 mb-4">Meanwhile, feel free to check out Arcs by Alphy </p>
                         <CuratedCarousel dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} arcDialog={true}/>
             </div>
 

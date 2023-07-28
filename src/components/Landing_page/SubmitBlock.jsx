@@ -7,7 +7,7 @@ export default function SubmitBlock({currentUser, hasActiveSub, credit, handleSu
 
 
     return(
-        <div className="p-10 sm:pt-20 text-zinc-700 h-full sm:h-[50vh] dark:text-zinc-300 bg-white dark:bg-mildDarkMode  items-center  justify-center sm:px-20">                                               
+        <div className="p-10 sm:pt-20 text-zinc-700 h-full sm:h-[70vh] dark:text-zinc-300 bg-white dark:bg-mildDarkMode  items-center  justify-center sm:px-20">                                               
         <p className="dark:text-zinc-300 text-zinc-700 mb-4 text-lg px-1">
                Submit your link below</p>
         <div className=" sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5 ">
