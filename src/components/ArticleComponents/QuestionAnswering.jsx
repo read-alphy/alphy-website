@@ -303,7 +303,7 @@ export default function QuestionAnswering(props) {
 							type="text"
 							id="questionAnswering"
 							placeholder="Ask anything to the transcript..."
-							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
+							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
 					
 					
 
@@ -344,7 +344,7 @@ export default function QuestionAnswering(props) {
 							onClick={fetchData}
 							id="questionButton"
 
-							className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
+							className={`bg-greenColor text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
 
 							{isLoadingInside ? <Spinner className="h-4 w-4" /> :
 								<svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -433,7 +433,7 @@ export default function QuestionAnswering(props) {
 									<div className=" ">
 															{props.key_qa[item]
 																? props.key_qa[item].sources.map((source, index) => (
-																	<p className="text-green-400 font-bold border border-zinc-300 rounded-lg p-5 drop-shadow-sm mb-5" key={index}>
+																	<p className="text-greenColor font-bold border border-zinc-300 rounded-lg p-5 drop-shadow-sm mb-5" key={index}>
 
 																		{source.start && source.end ? (
 																			window.innerWidth > 999 && props.data.source_type == "yt" ?

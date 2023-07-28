@@ -145,7 +145,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
 
     return(
         <div className="mt-10 md:pl-20">
-            <p className="px-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-green-400 text-xl mb-10 font-bold">
+            <p className="px-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-greenColor text-xl mb-10 font-bold">
                 It's your hub: create, discover, and share.
             </p>
 
@@ -224,8 +224,8 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
                                         onChange={(event) => setInputValue(event.target.value)}
                                         placeholder=" "
 
-                                        className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-green-400  dark:focus:border-l-green-400 dark:focus:border-b-green-400 focus:border-green-400"/>
-                                        <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-green-400 before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-green-400 after:border-blue-gray-200 peer-focus:after:!border-green-400">Insert the link to YouTube video or Twitter Space</label>
+                                        className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor"/>
+                                        <label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">Insert the link to YouTube video or Twitter Space</label>
 
                                         <div className="sm:hidden">
                                         <Button size="sm" className="!absolute right-1 top-1 rounded bg-green-300" onClick={(e) => {
@@ -275,7 +275,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
             <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • The video you are submitting should have more than <strong >10,000 views</strong>.</p>
             <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2"> Alphy might fail to process content with location limits.</p>
 
-            <p className="mt-4 text-sm"> Switch to a <a href="/u/account" className="text-green-400 text-sm underline"> paid plan </a>for limitless submissions and free Twitter Spaces transcription.</p>
+            <p className="mt-4 text-sm"> Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions and free Twitter Spaces transcription.</p>
             </div>
          :   
          <div>
@@ -283,7 +283,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
             <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200 mb-2 ml-1">You are on Premium Plan</p>
             <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No duration limit applied.</p>
             <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No view limit applied. </p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You have access to <span className="text-green-400">unlimited Twitter Spaces transcription</span>.</p>
+            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You have access to <span className="text-greenColor">unlimited Twitter Spaces transcription</span>.</p>
             <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2">  Alphy might fail to process content with location limits.</p>
             </div>
         }

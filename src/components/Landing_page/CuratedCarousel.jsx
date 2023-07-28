@@ -12,7 +12,9 @@ export default function CuratedCarousel(props) {
     const leftButtonRef = useRef(null);
     const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(true);
     const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
-    
+    let shuffledData = []
+
+ 
     useEffect(() => {
         const handleScroll = () => {
           if (carouselRef.current) {
@@ -65,7 +67,8 @@ export default function CuratedCarousel(props) {
   return (
     <div className="w-full h-full container xl:max-w-[1000px] 2xl:max-w-[1280px] mx-auto pb-20">
         <p className="mb-6 text-zinc-700 dark:text-zinc-300 ml-4 sm:ml-10 sm:mb-10 text-xl font-semibold">
-            Converse with the best.
+            Converse with the best. Discover all Arcs.
+
         </p>
 
 <div className="relative ">
@@ -77,7 +80,10 @@ export default function CuratedCarousel(props) {
                     </div>
         </button>
 <div className="flex flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area" ref={carouselRef}>
-{props.dataGlobalArchipelagos.map((item, index) => (
+{
+
+
+props.dataGlobalArchipelagos.map((item, index) => (
           <CuratedCarouselItem key={index} item={item} />
         ))}
      

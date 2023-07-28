@@ -253,7 +253,7 @@ const handleDeleteArchipelago = () => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
 					{ isLoading && <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />}
@@ -271,7 +271,7 @@ const handleDeleteArchipelago = () => {
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
 			
 			{isEditArc && hasActiveSub && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
-            {hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-green-400 px-5 ${
+            {hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-greenColor px-5 ${
 				isLoadingSubmit && "bg-green-300 pointer-events-none min-w-[106.533px]" }`}  onClick={handleArchipelago}>
 				{
 				isLoadingSubmit ? 
@@ -292,7 +292,7 @@ const handleDeleteArchipelago = () => {
 				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode rounded-lg items-center text-center justify-center drop-shadow-sm flex-col">
 					<p className="mb-10">You are about to delete this arc. Would you like to continue?</p>
 					<div className="flex flex-row">
-						<p className="text-green-400 cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
+						<p className="text-greenColor cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
 						<div className="border-r h-full mr-4 ml-4"></div>
 						<p className="text-red-400 cursor-pointer" size="sm" onClick={handleDeleteArchipelago}>Delete</p>
 					</div>

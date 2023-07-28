@@ -36,6 +36,7 @@ const handleNavigateToArchipelago = () => {
 navigate(`/arc/${props.item.uid}`)
 }
     return(
+      <a href={`/arc/${props.item.uid}`}>
 <div onClick={() =>handleNavigateToArchipelago()} className="relative min-w-[150px] max-w-[150px] md:min-w-[220px] md:max-w-[150px] md:w-64  rounded-md overflow-hidden shadow-md cursor-pointer">
 
     
@@ -57,5 +58,6 @@ navigate(`/arc/${props.item.uid}`)
         onMouseLeave={handleMouseLeave}
       ></div>
             </div>
+            </a>
     )
 }

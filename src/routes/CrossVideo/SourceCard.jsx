@@ -189,7 +189,7 @@ const showDialog = () => {
                 </p>
 
             </div>
-            <p className="absolute bottom-0 text-green-400 mb-2">Click to see more</p>
+            <p className="absolute bottom-0 text-greenColor mb-2">Click to see more</p>
             
         </div>
    :
@@ -208,7 +208,7 @@ const showDialog = () => {
                         frameBorder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     ></iframe>}
-<p className={`text-green-400 mt-4 mb-4 px-2 sm:px-10`} >
+<p className={`text-greenColor mt-4 mb-4 px-2 sm:px-10`} >
 
 <TextSnippetIcon/>  Passage
 </p>

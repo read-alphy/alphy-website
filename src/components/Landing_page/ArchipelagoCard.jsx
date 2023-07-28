@@ -56,7 +56,7 @@ export default function ArchipelagoCard({item,index,currentUser}){
                         
                         </div>}
             <div className={` ${item.thumbnail_url!==null ? "mt-4" : "mt-4"}`}  >
-                {(item.thumbnail_url===undefined || item.thumbnail_url===null) &&  <SmartToyIcon className="text-green-400 "/>}
+                {(item.thumbnail_url===undefined || item.thumbnail_url===null) &&  <SmartToyIcon className="text-greenColor "/>}
                 {currentUser!==undefined && item.user_id === currentUser.uid && 
                 
                 <EditIcon className="cursor-pointer ml-2 dark:text-zinc-400 text-zinc-500" onClick={handleIconClick}/>}

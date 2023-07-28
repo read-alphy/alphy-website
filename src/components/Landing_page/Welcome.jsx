@@ -192,10 +192,10 @@ export default function Welcome({hasActiveSub,credit}) {
 
 	return (
 		<div
-			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden' : ''
+			className={`container xl:max-w-[1280px] px-4 mx-auto py-10 sm:py-18 lg:py-28 ${loading ? 'max-h-[90vh] overflow-x-hidden overflow-y-hidden ' : ''
 				}`}
 		>			<div className="flex flex-col justify-center text-bordoLike dark:text-zinc-300 dark:bg-darkMode dark:text-zinc-500 font-semibold font-noto lg:text-5xl md:text-4xl text-3xl lg:px-40 xl:px-56 text-center">
-				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-green-300 select-none drag-none mx-auto">
+				<section className="animation1 block justify-center lg:h-[4rem] md:h-[3rem] h-[2.5rem] text-greenColor select-none drag-none mx-auto">
 					<div className="first flex justify-center pb-3 ">
 						<div className="">Transcribe</div>
 					</div>
@@ -208,8 +208,8 @@ export default function Welcome({hasActiveSub,credit}) {
 					<div className="forth  flex justify-center pb-3">
 						<div className="">Transcribe</div>
 					</div>
-				</section>  
-				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">  and 10x your learning, research, and creativity</p>
+				</section> 
+				<p className="dark:text-zinc-200 lg:text-4xl md:text-3xl text-2xl">audiovisual content and 10x your learning, research, and creativity</p>
 				
 				
 			</div>
@@ -218,10 +218,8 @@ export default function Welcome({hasActiveSub,credit}) {
 			<p className="text-zinc-600 dark:bg-darkMode dark:text-zinc-300 text-l md:text-[18px] lg:text-xl text-center mb-10 mt-10 md:pr-10 md:pl-10 lg:pr-20 lg:pl-20">
 				
 				{/* Alphy is here to help you unlock the information in audiovisual content */}
-
-				Power
 				
-				Submit a link to a YouTube video or Twitter Spaces, or upload an audio file, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
+				Submit a link to a conversation, or import an audio file, and Alphy will transcribe, summarize, and prepare the content for questioning within minutes. We will
 				notify you with email when it's ready!
 			</p>
 
@@ -259,10 +257,10 @@ export default function Welcome({hasActiveSub,credit}) {
 								<p> • Make sure the content you are submitting doesn't exceed <strong>1 hour</strong>. 
 								<p> • Make sure it has more than <strong >10,000 views</strong>.</p>
 								<p> • Alphy might fail to process content with location limits.</p>
-								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3"><span className="text-green-400">Premium Plan</span>:</p>
+								<p className="font-semibold text-l dark:text-zinc-300 text-gray-900 pt-3"><span className="text-greenColor">Premium Plan</span>:</p>
 								<p>• No duration limit.</p>
 								<p>• No view limit. </p>
-								<p>• You have access to <span className="text-green-400">unlimited Twitter Spaces transcription</span>.</p>
+								<p>• You have access to <span className="text-greenColor">unlimited Twitter Spaces transcription</span>.</p>
 								<p> • Alphy might fail to process content with location limits.</p>
 								<p className="pt-2">Check the <a className="underline font-semibold" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"}</a> page for more info about Premium benefits.</p>
 						
@@ -271,7 +269,7 @@ export default function Welcome({hasActiveSub,credit}) {
 								</p>
 
 
-								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-green-400 hover:text-green-300">Reach us if you have any questions <svg className="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></a>
+								<a href="https://twitter.com/alphyapp" className="flex pt-2 items-center font-medium text-greenColor hover:text-green-300">Reach us if you have any questions <svg className="w-4 h-4 ml-1 pt-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></a>
 							</div>
 							<div className="popover-arrow" role="presentation"></div>
 						</div>
@@ -291,11 +289,11 @@ export default function Welcome({hasActiveSub,credit}) {
 							onChange={(event) => setInputValue(event.target.value)}
 							placeholder=" "
 
-							className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-green-400  dark:focus:border-l-green-400 dark:focus:border-b-green-400 focus:border-green-400"/>
-							<label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-green-400 before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-green-400 after:border-blue-gray-200 peer-focus:after:!border-green-400">Insert a link to process with Alphy</label>
+							className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor"/>
+							<label class="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">Insert a link to process with Alphy</label>
 
 							<div className="sm:hidden">
-							<Button size="sm" className="!absolute right-1 top-1 rounded bg-green-400" onClick={(e) => {
+							<Button size="sm" className="!absolute right-1 top-1 rounded bg-greenColor" onClick={(e) => {
 								handleSubmit();
 							}}> <PublishIcon fontSize="medium"/></Button>
 							</div>
@@ -309,13 +307,13 @@ export default function Welcome({hasActiveSub,credit}) {
 						<Button type="submit"
 							onClick={(e) => {
 								handleSubmit();
-							}} className="bg-zinc-700 px-6 lg:px-10 dark:bg-green-400 dark:text-zinc-300 px-10 py-3  text-sm lg:text-[15px] ">Submit</Button>
+							}} className="bg-zinc-700 px-6 lg:px-10 dark:bg-greenColor dark:text-zinc-300 px-10 py-3  text-sm lg:text-[15px] ">Submit</Button>
 						</div>
 					) : (
 						<div>
 							     
 								 <a href="/u/login">
-						<Button  className="bg-zinc-700 px-6 xl:px-10 py-3 dark:bg-green-400 dark:text-zinc-300 text-sm lg:text-[15px]  ">Sign in to submit</Button></a>
+						<Button  className="bg-zinc-700 px-6 xl:px-10 py-3 dark:bg-greenColor dark:text-zinc-300 text-sm lg:text-[15px]  ">Sign in to submit</Button></a>
 						
 						
 					

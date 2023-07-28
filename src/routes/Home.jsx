@@ -22,7 +22,14 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 	
 
 	/* const { currentUser } = useAuth(); */
-	
+	function shuffleArray(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			let j = Math.floor(Math.random() * (i + 1));
+			let temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+	}
 
 	useEffect(() => {
 		if(resetPassword){
@@ -49,9 +56,11 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 		.then((response) => {
 
 			if(firstTime){
+				shuffleArray(response.data)
 				setDataGlobalArchipelagos(response.data);
 			}
 			else{
+				shuffleArray(response.data)
 				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
 			}
 			setIsLoadingGlobalArchipelagos(false);

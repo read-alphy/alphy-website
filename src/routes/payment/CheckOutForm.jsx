@@ -130,7 +130,7 @@ export default function CheckOutForm({ clientSecret }) {
                     },
                 }}
             /> */}
-            <button className={`items-center w-full ${isLoading ? "bg-green-200 pointer-events-none" : "bg-green-400"} ${paymentIntent.length > 0 ? "pointer-events-none" : ""} text-whiteLike rounded-md mt-5 min-h-[40px] text-center`} disabled={isLoading || !stripe || !elements} id="submit">
+            <button className={`items-center w-full ${isLoading ? "bg-green-200 pointer-events-none" : "bg-greenColor"} ${paymentIntent.length > 0 ? "pointer-events-none" : ""} text-whiteLike rounded-md mt-5 min-h-[40px] text-center`} disabled={isLoading || !stripe || !elements} id="submit">
                 <span id="button-text" className="">
                     {isLoading ?
                         <svg

@@ -92,7 +92,7 @@ module.exports = {
 				sideColor: '#000',
 				darker: '#03001C',
 				darkMode:"#191919",
-
+				greenColor:"#86efac",
 				// palette - sunset
 				bordoLike: '#20262E',
 				purpleLike: '#20262E',

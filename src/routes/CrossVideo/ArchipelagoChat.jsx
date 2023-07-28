@@ -256,7 +256,7 @@ const toggleExpand = () => {
                         type="text"
                         id="questionAnswering"
                         placeholder={`Start asking...`}
-                        className="pr-10 placeholder:italic focus:ring-0 focus:outline-none peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-green-400 sm:border-zinc-300 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-green-400 dark:focus:border-green-400" />
+                        className="pr-10 placeholder:italic focus:ring-0 focus:outline-none peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-greenColor sm:border-zinc-300 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
                 
                     {inputValue.length > 0 ? (
                         <div
@@ -290,7 +290,7 @@ const toggleExpand = () => {
                         onClick={handleSubmit}
                         id="questionButton"
                         ref={buttonRef}
-                        className={`bg-green-400 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""} ${window.innerWidth < 420 && " hidden"}`}>
+                        className={`bg-greenColor text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""} ${window.innerWidth < 420 && " hidden"}`}>
 
                         {isLoadingInside ? <Spinner className="h-4 w-4" /> :
                             <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -304,7 +304,7 @@ const toggleExpand = () => {
              </div>
              {errorMessage &&
              <div className="mt-4 text-zinc-500 dark:text-zinc-400">
-    <p>Please <a href="/u/login" className="underline text-green-400">sign in</a> to start asking questions.</p> 
+    <p>Please <a href="/u/login" className="underline text-greenColor">sign in</a> to start asking questions.</p> 
 </div>
 }
             </div>
@@ -315,7 +315,7 @@ const toggleExpand = () => {
                 <div className="sm:px-5 mt-10 ">
                 {<div class={`${(answerData.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
 <p className="flex flex-row mb-5 sm:ml-6"> 
-<QuizIcon className="text-green-400 mr-2"/>
+<QuizIcon className="text-greenColor mr-2"/>
 <span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
 </p>
                 {selectedQuestions.length>0 && selectedQuestions.map((question,index) =>
@@ -335,8 +335,8 @@ const toggleExpand = () => {
             
                 <div id="answer-area" className="answer-area text-l max-w-[900px] ml-2 sm:ml-10 mt-10 ">
                     
-                    {isLoadingInside || answerData.answer!==undefined ?<p className="text-green-400 text-l"> 
-                        <QuestionAnswerIcon className="text-green-400 mr-1"/>
+                    {isLoadingInside || answerData.answer!==undefined ?<p className="text-greenColor text-l"> 
+                        <QuestionAnswerIcon className="text-greenColor mr-1"/>
                         Answer</p> : null}
             {isLoadingInside &&
             <div className="opacity-60 dark:opacity-100">
@@ -375,7 +375,7 @@ const toggleExpand = () => {
         </div>
                 {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                             
-                                    <p className={`text-green-400 ml-10 mt-4 mb-4 ${answerData.length===0 && "hidden"}`} >
+                                    <p className={`text-greenColor ml-10 mt-4 mb-4 ${answerData.length===0 && "hidden"}`} >
 
                                           <TextSnippetIcon/>  Passages
                                 </p>

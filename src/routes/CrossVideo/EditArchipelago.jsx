@@ -125,13 +125,13 @@ const handleKeyDown = (event) => {
                 <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1">Title</p>
             <input value={archipelagoTitle}
             placeholder="Set a title..."
-							onChange={(event) => setArchipelagoTitle(event.target.value)} className="w-full text-l dark:bg-mildDarkMode px-2 h-[50px] bg-white border border-zinc-400 focus:border-green-400 focus:outline-none focus:ring-0 rounded-lg"/>
+							onChange={(event) => setArchipelagoTitle(event.target.value)} className="w-full text-l dark:bg-mildDarkMode px-2 h-[50px] bg-white border border-zinc-400 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"/>
 						 </div>
   
 </div>  
 <div className="w-full">
 <p className="text-zinc-700 dark:text-zinc-300 mb-2 mt-16 ml-1">Description</p>
-                <textarea className={`min-h-[120px] rounded-lg bg-white dark:bg-mildDarkMode border-zinc-400  resize-none text-sm w-full text-top focus:border-green-400 focus:outline-none focus:ring-0`} 
+                <textarea className={`min-h-[120px] rounded-lg bg-white dark:bg-mildDarkMode border-zinc-400  resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`} 
                 value={archipelagoDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
                 placeholder="Set a description for your archipelago..."
@@ -154,11 +154,11 @@ const handleKeyDown = (event) => {
 							onChange={(event) => setInputValue(event.target.value)}
 							placeholder=" "
                             onKeyDown= {handleKeyDown}
-							className="peer w-full  lg:w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-green-400  dark:focus:border-l-green-400 dark:focus:border-b-green-400 focus:border-green-400 pl-8">
+							className="peer w-full  lg:w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor pl-8">
 
 
                             </input>
-                            <label class={`${inputValue.length===0 ? "pl-6": ""}  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-green-400 before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-green-400 after:border-blue-gray-200 peer-focus:after:!border-green-400`}>Search from our database...</label>
+                            <label class={`${inputValue.length===0 ? "pl-6": ""}  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor`}>Search from our database...</label>
                         <div class="grid place-items-center absolute text-blue-gray-500 top-2/4 left-3 -translate-y-2/4 w-5 h-5">
                         <SearchIcon className="text-zinc-400" fontSize="small"/>
                         </div>
@@ -171,7 +171,7 @@ const handleKeyDown = (event) => {
                          size="sm"
 							onClick={(e) => {
 								handleSubmit();
-							}} className="col-span-1 ml-4 bg-green-400 dark:bg-green-400 dark:text-zinc-300 text-sm w-12 items-center text-center flex justify-center ">
+							}} className="col-span-1 ml-4 bg-greenColor dark:bg-greenColor dark:text-zinc-300 text-sm w-12 items-center text-center flex justify-center ">
                                 <SearchIcon fontSize="small"/></Button> */}
                          </div>
 <div className="archipelago-search max-h-[80vh] overflow-y-scroll mt-5">
@@ -188,9 +188,9 @@ const handleKeyDown = (event) => {
                                     <div> 
                            <div>
                     <p className="mt-5 mb-5 text-zinc-600 dark:text-zinc-300 flex flex-col"> 
-           <span>         Expand the scope of your archipelago by adding new content from the search bar.</span>
+           <span>         Expand the scope of your arc by adding new content from the search bar.</span>
                     <span className="mt-2">
-    If you can't find what you are looking for, you can submit new content from the <a className="text-green-400 underline" href="/">main page</a>.
+    If you can't find what you are looking for, you can submit new content from the <a className="text-greenColor underline" href="/">main page</a>.
     </span>
                     </p>
                     
