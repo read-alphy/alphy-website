@@ -272,9 +272,9 @@ if (currentUser && creditcalled!==true) {
 							
 							}> </Route>
 
-							<Route path="/hub"
+							{/* <Route path="/hub"
 								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
-							</Route>
+							</Route> */}
 
 							
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />

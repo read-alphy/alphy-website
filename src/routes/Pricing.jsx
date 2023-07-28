@@ -140,7 +140,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                     <div className="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
 
 
-                                        <h5 className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</h5>
+                                        <h5 className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Basic</h5>
                                         {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
                                         <div className="flex items-baseline text-gray-900 dark:text-white">
                                             {/* <span className="text-3xl font-semibold">$</span> */}
@@ -356,7 +356,7 @@ export default function Pricing({ stripePromise,hasActiveSub }) {
                                 {hasActiveSub ? <div className="items-center flex flex-row justify-center"><a className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-10" target="_blank" href="https://billing.stripe.com/p/login/test_fZecNT7855nQ2Y0aEE">Change your billing plan or cancel subscription</a> </div> : null}
                                 <div className="w-full md:min-w-[400px] items-center mx-auto max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 mb-10">
 
-                                    <h5 className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Free</h5>
+                                    <h5 className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Basic</h5>
                                     {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Wanderers</h5> */}
                                     <div className="flex items-baseline text-gray-900 dark:text-white">
                                         {/* <span className="text-3xl font-semibold">$</span> */}

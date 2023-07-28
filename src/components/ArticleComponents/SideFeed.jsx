@@ -18,6 +18,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Navbar from '../Navbar';
 
 function SideFeed(props) {
 
@@ -484,14 +485,16 @@ function SideFeed(props) {
 
 	return (
 		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 lg:bg-zinc-100">
-
+				<div className="lg:hidden">
+					<Navbar collapsed={props.collapsed} setCollapsed={props.setCollapsed}/>
+				</div>
 <div className="pt-10">
-	<a className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href={`/hub`}>
+	{/* <a className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href={`/hub`}>
 		
 		<HomeIcon className="mr-3"/>
 		<p>
 		Main Hub
-		</p></a>
+		</p></a> */}
 		<button onClick={()=>setShowSearch(!showSearch)} className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href="/hub">
 		
 		<SearchIcon className="mr-3"/>
@@ -625,7 +628,7 @@ function SideFeed(props) {
 			<button onClick={scrollBackward}  type="button" className={`left-arrow absolute max-h-[30px] top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
           isBackwardArrowVisible ? '' : 'hidden'
         }`}>
-        <div className="max-h-[50px] min-h-[50px] mt-1 pt-3 items-center  bg-zinc-50 xs:bg-zinc-100 xs:dark:bg-mildDarkMode hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+        <div className="max-h-[50px] min-h-[50px] mt-1 pt-3 items-center  bg-zinc-50 xs:bg-zinc-100 dark:bg-mildDarkMode hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
                     <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
                     </div>
         </button>
@@ -646,7 +649,7 @@ function SideFeed(props) {
 						<button type="button" className={`xs:hidden right-arrow cursor-default absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
           isForwardArrowVisible ? 'lg:flex' : 'hidden'
         } `}>
-        <div className="max-h-[50px] min-h-[50px] mb-2  pt-2 items-center bg-zinc-50 xs:bg-zinc-100 xs:dark:bg-mildDarkMode hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+        <div className="max-h-[50px] min-h-[50px] mb-2  pt-2 items-center bg-zinc-50 xs:bg-zinc-100 dark:bg-mildDarkMode hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
                     <ArrowForwardIosIcon onClick={scrollForward} className="cursor-pointer text-zinc-600 p-1 " />
                     </div>
 					

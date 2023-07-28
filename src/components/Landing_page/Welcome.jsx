@@ -14,7 +14,7 @@ import PublishIcon from '@mui/icons-material/Publish';
 import CreationBlock from "./CreationBlock"
 
 
-export default function Welcome({hasActiveSub,credit}) {
+export default function Welcome({hasActiveSub,credit, dataGlobalArchipelagos, setDataGlobalArchipelagos}) {
 	
 
 	
@@ -224,8 +224,8 @@ export default function Welcome({hasActiveSub,credit}) {
 			</p>
 
  
-<div className="md:ml-20">
-			<CreationBlock hasActiveSub={hasActiveSub} currentUser={currentUser} credit={credit}/>
+<div className="xl:ml-20">
+			<CreationBlock hasActiveSub={hasActiveSub} currentUser={currentUser} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>
 			</div>
 
 			{/* <Toaster />

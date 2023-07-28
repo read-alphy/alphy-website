@@ -97,7 +97,7 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 				<meta property="og:url" content="https://alphy.app/" />
 				<meta content="https://i.ibb.co/RBH2C63/homepage.png" property="og:image" />
 			</Helmet>
-			<Welcome hasActiveSub={hasActiveSub} credit={credit} />
+			<Welcome hasActiveSub={hasActiveSub} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>
 			{dataGlobalArchipelagos.length>0 &&
 			<CuratedCarousel dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>
 		}

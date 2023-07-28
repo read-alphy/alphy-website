@@ -782,7 +782,7 @@ function WelcomeFeed(props) {
 
 
 
-						<div className="mt-5 mb-5  ">
+						{/* <div className="mt-5 mb-5  ">
 
 							<Popover placement="bottom-start">
 								<p className="text-l lg:text-xl text-zinc-700 dark:text-zinc-200 flex flex-col sm:flex-row font-sans">Now you can use Alphy on your audio files, privately.
@@ -791,7 +791,7 @@ function WelcomeFeed(props) {
 
 									<PopoverHandler>
 										<div>{' '}<p className="font-sans underline cursor-pointer mt-2 sm:mt-0 sm:ml-2"> Learn more.</p>
-											{/* <svg className="w-5 h-5 ml-1 pt-1 cursor-pointer dark:text-zinc-300 text-gray-400 hover:dark:text-zinc-300 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg> */}
+											
 										</div>
 
 									</PopoverHandler>
@@ -816,114 +816,8 @@ function WelcomeFeed(props) {
 
 								</PopoverContent>
 							</Popover>
-						</div>
-						<div class="border-b border-gray-200  flex mt-5 mb-5  dark:opacity-40 items-center  "></div>
-						{file === null ?
-
-							(
-								props.hasActiveSub === true
-									?
-									<div  class="flex items-center justify-center w-full">
-										<label {...getRootProps()}  for="dropzone-file" class={`flex flex-col items-center justify-center w-full h-60 border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
-											<div   class={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${isDragActive ? "" : ""}`} >
-												{!isDragActive ?
-													<div className="items-center justify-center flex flex-col">
-														{!errorMessage ? 
-														<div className="items-center justify-center flex flex-col">
-														<svg aria-hidden="true" class="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-														
-														<p class="mb-2 text-sm text-zinc-700 dark:text-zinc-200"><span className="font-semibold">Click to upload an audio file</span> or drag and drop.</p>
-														<p class="text-xs text-zinc-600 dark:text-zinc-200"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
-														</div>
-														:
-														<div className="items-center justify-center flex flex-col">
-														<p class="mb-2 text-sm text-red-500"><span className="">Please make sure you submit one of the following file types!</span></p>
-														<p class="text-xs text-zinc-600 dark:text-zinc-200"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
-														</div>
-													}
-
-													</div> :
-
-													<div className="items-center justify-center flex flex-col items-center">
-															<svg className="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-200 items-center flex" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-														<p class="mb-2 text-sm text-zinc-600 dark:text-zinc-200 font-sans">
-													
-															<strong>Drop your file here. </strong></p>
-													</div>
-												}
-											</div>
-
-											<input {...getInputProps()} className="" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
-											<input  onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
-
-
-											<audio className="hidden" ref={audioRef} controls />
-										</label>
-									</div>
-
-									:
-									<div>
-										<div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-10 mb-5 w-full  col-span-2">You need to go <a className="text-greenColor underline" href="/plans">premium</a> to upload personal files.</p></div>
-									</div>
-
-
-							)
-							:
-							<div className="rounded-xl dark:border-darkMode bg-white dark:bg-darkMode p-10 drop-shadow-sm dark:drop-shadow-sm font-semibold ">
-								<p className={`flex flex-row font-sans text-zinc-700 dark:text-zinc-200  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Process another file instead"}
-									<svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 && !errorMessage ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-										<title className="font-bold">Clear</title>
-										<path clipRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" fillRule="evenodd"></path>
-									</svg>
-								</p>
-								<div className="lg:flex lg:flex-row lg:grid lg:grid-cols-5">
-
-									<p className="lg:col-span-2 flex  items-center font-sans text-zinc-700 dark:text-zinc-200 mt-8 lg:mt-0 "> {uploadTitle}</p>
-									{/* 					<p className="text-sm text-zinc-600 dark:text-zinc-300 "> 
-			
-						Duration: {Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes
-
-						</p> */}
-									{/*  */}
-									<div className="lg:col-span-2 mt-2 ">
-										<div className="lg:grid lg:grid-cols-3">
-											<div className="lg:col-span-3 hidden lg:flex  lg:justify-center lg:mt-2 ">
-												{/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"}`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} /> */}
-
-												<div class={`${uploadProgress === 0 && "hidden"} w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700 mt-2`} >
-													<div class={`bg-greenColor h-3 rounded-full `} style={{ width: uploadProgress + "%" }}></div>
-												</div>
-
-												{/*  */}					{fileUploading === false && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans w-full flex justify-center lg:mt-2">Click continue to process the file...</p>}
-												{/* <Progress className={`${uploadProgress>0 && "hidden"}`}color="gray" size="lg" value={100} label={0} /> */}
-											</div>
-											{/* 	<div className="sm:col-span-1 text-sm flex justify-center font-sans  text-zinc-700 dark:text-zinc-200">
-					{Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes
 						</div> */}
-										</div>
-									</div>
-
-									<div className="col-span-1 flex flex-col lg:flex-row lg:items-center lg:justify-center  lg:margin-auto">
-
-										{fileUploading === 0 && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans my-4 lg:hidden">Click continue to process the file...</p>}
-										<div class={`${uploadProgress === 0 && "hidden"} my-4 lg:hidden w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700`} >
-											<div class={`bg-greenColor h-3 rounded-full w-[${uploadProgress}%]`} style={{ width: uploadProgress + "%" }}></div>
-										</div>
-										{/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
- */}
-										{fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className={`text-sm font-sans ${errorMessage ? "text-red-400 dark:text-400" : "text-zinc-600 dark:text-zinc-300"}`}>{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-greenColor lg:ml-10 normal-case max-w-[100px] my-4">Continue</Button></div>}
-
-									</div>
-
-
-
-
-								</div>
-
-							</div>
-						}
+						
 
 
 

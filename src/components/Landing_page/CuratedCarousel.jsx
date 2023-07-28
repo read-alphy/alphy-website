@@ -66,11 +66,11 @@ export default function CuratedCarousel(props) {
 
   return (
     <div className="w-full h-full container xl:max-w-[1000px] 2xl:max-w-[1280px] mx-auto pb-20">
+      {props.arcDialog!==true &&
         <p className="mb-6 text-zinc-700 dark:text-zinc-300 ml-4 sm:ml-10 sm:mb-10 text-xl font-semibold">
-            Converse with the best. Discover all Arcs.
-
+            Converse with the best.
         </p>
-
+      }
 <div className="relative ">
 <button onClick={scrollBackward} ref = {leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
           isBackwardArrowVisible ? '' : 'hidden'

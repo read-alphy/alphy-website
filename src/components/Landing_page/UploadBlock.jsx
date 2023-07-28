@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 
 export default function UploadBlock({currentUser, hasActiveSub, credit}) {
@@ -119,17 +120,22 @@ export default function UploadBlock({currentUser, hasActiveSub, credit}) {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
     return(
-        <div className="dark:bg-mildDarkMode min-h-[50vh] max-h-[50vh] p-20 py-16">
+        <div className="dark:bg-mildDarkMode h-[full] sm:min-h-[70vh] sm:max-h-[70vh] p-10  sm:p-20 sm:py-16">
             <div className="pb-10 ">
+            <div className="flex mx-auto   text-indigo-400 text-sm font-bold mb-10">
+                <VerifiedIcon className="mr-1"/>
+                    PREMIUM
+                </div>
                     <p className="dark:text-zinc-300 text-zinc-700 mb-4 text-lg">Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
                     </p>
                     <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md">As we value your privacy, we delete your audio files after transcription, and we make sure Alphy's summary, transcription, and chatbot are only accessible to you and no one else.
                     </p>
+                   
+                   {currentUser &&
                     <span className="text-sm mt-4 text-gray-600 dark:text-zinc-300 "> 
-                    
-                    <a href="/account" className="underline">Remaining Credits : {Math.floor(credit)} minutes </a> 
-                    
+                    <a href="/account" className="underline">Remaining Credits : {Math.floor(credit)} minutes </a>     
                 </span> 
+                }
     </div>
 
 
@@ -142,10 +148,10 @@ export default function UploadBlock({currentUser, hasActiveSub, credit}) {
                         <label {...getRootProps()}  for="dropzone-file" class={`flex flex-col items-center justify-center w-full border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
                             <div   class={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${isDragActive ? "" : ""}`} >
                                 {!isDragActive ?
-                                    <div className="items-center justify-center flex flex-col">
+                                    <div className="items-center justify-center flex flex-col px-2">
                                         {!errorMessage ? 
                                         <div className="items-center justify-center flex flex-col">
-                                        <CloudUploadIcon fontSize="large" className="text-green-300 mb-4 "/>
+                                        <CloudUploadIcon fontSize="large" className="text-indigo-400 mb-4 "/>
                                         
                                         <p class="mb-2 text-sm text-zinc-700 dark:text-zinc-200"><span className="font-semibold">Click to upload an audio file</span> or drag and drop.</p>
                                         <p class="text-xs text-zinc-600 dark:text-zinc-200"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
@@ -180,7 +186,7 @@ export default function UploadBlock({currentUser, hasActiveSub, credit}) {
 
                     :
                     <div>
-                        <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-center text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l mt-10 mb-5 w-full  col-span-2">You need to go <a className="text-greenColor underline" href="/plans">premium</a> to upload personal files.</p></div>
+                        <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l  mb-5 w-full  col-span-2">You need to go <a className="text-indigo-400 underline font-bold" href="/plans">premium</a> to upload personal files.</p></div>
                     </div>
 
 
@@ -208,7 +214,7 @@ export default function UploadBlock({currentUser, hasActiveSub, credit}) {
                                 {/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"}`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} /> */}
 
                                 <div class={`${uploadProgress === 0 && "hidden"} w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700 mt-2`} >
-                                    <div class={`bg-greenColor h-3 rounded-full `} style={{ width: uploadProgress + "%" }}></div>
+                                    <div class={`bg-indigo-400 h-3 rounded-full `} style={{ width: uploadProgress + "%" }}></div>
                                 </div>
 
                                 {/*  */}					{fileUploading === false && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans w-full flex justify-center lg:mt-2">Click continue to process the file...</p>}
@@ -224,11 +230,11 @@ export default function UploadBlock({currentUser, hasActiveSub, credit}) {
 
                         {fileUploading === 0 && <p className="text-sm  text-zinc-700 dark:text-zinc-200 italic font-sans my-4 lg:hidden">Click continue to process the file...</p>}
                         <div class={`${uploadProgress === 0 && "hidden"} my-4 lg:hidden w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700`} >
-                            <div class={`bg-greenColor h-3 rounded-full w-[${uploadProgress}%]`} style={{ width: uploadProgress + "%" }}></div>
+                            <div class={`bg-indigo-400 h-3 rounded-full w-[${uploadProgress}%]`} style={{ width: uploadProgress + "%" }}></div>
                         </div>
                         {/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
 */}
-                        {fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className={`text-sm font-sans ${errorMessage ? "text-red-400 dark:text-400" : "text-zinc-600 dark:text-zinc-300"}`}>{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-greenColor lg:ml-10 normal-case max-w-[100px] my-4 text-zinc-700">Continue</Button></div>}
+                        {fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className={`text-sm font-sans ${errorMessage ? "text-red-400 dark:text-400" : "text-zinc-600 dark:text-zinc-300"}`}>{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-indigo-400 lg:ml-10 normal-case max-w-[100px] my-4 text-zinc-700">Continue</Button></div>}
 
                     </div>
 
