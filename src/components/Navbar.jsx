@@ -111,7 +111,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		className={`flex dropshadow-l justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
 			}`}
 	>
-		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp || isArc || isHub) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[330px] sm:max-w-[330px]`}>
+		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp || isArc || isHub) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[330px] sm:max-w-[330px] dark:sm:min-w-[330px] dark:sm:max-w-[330px]`}>
 			{collapsed==true	 && (isYt || isSp || isUp || isArc || isHub) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
 			<Link to="/" className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">

@@ -109,7 +109,7 @@ useEffect (() => {
 
 			</div>
 			}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] `}>
+			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-mildDarkMode`}>
 				
 				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
 				
