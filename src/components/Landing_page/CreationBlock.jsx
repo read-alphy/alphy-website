@@ -231,8 +231,8 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
                             Create an Arc
                         </p>
                         <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
-                        {window.innerWidth>600 ? "Create your own AI-assisted search engine on countless hours of audiovisual content."
-                        : "Create your AI assistants"}
+                        {window.innerWidth>600 ? "Build your own AI-assisted search engine on countless hours of audiovisual content."
+                        : "Build your AI assistants"}
                         </p>
                         
                     
@@ -270,7 +270,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
                         <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
                             
                             {!mobileWindow ? "Submit a link to a YouTube video or Twitter Space to unlock with Alphy"
-                            : "Use Alphy on online discussions"}
+                            : "Use Alphy on a YouTube video or Twitter Space"}
                         </p>
                         <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
                                 <LinkIcon fontSize={window.innerWidth>600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2"/>
@@ -288,7 +288,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
                                     </p>
                                     <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
                                     {!mobileWindow ? " Import an audio file from your device to transcribe, summarize, and question privately"
-                            : "Process a file from your device"}
+                            : "Process an audio file from your device"}
                                
                                 </p>
                                 <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
@@ -307,8 +307,8 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
                                 Create an Arc
                             </p>
                             <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 ">
-                            {!mobileWindow ? "Create your own AI-assisted search engine on countless hours of audiovisual content."
-                            : "Create an AI assistant"}
+                            {!mobileWindow ? "Build your own AI-assisted search engine as effortlessly as building a playlist."
+                            : "Create an AI assistant as simply as creating a playlist"}
                             </p>
                             
                         
