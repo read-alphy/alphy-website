@@ -15,7 +15,7 @@ export default function ArcBlock({dataGlobalArchipelagos, setDataGlobalArchipela
                     PREMIUM
         </div>
 
-        <p className="dark:text-zinc-300 text-zinc-700 mb-4 text-lg">Combine online or local audiovisual content with your own search engine.
+        <p className="dark:text-zinc-300 text-zinc-700 mb-4 text-lg">Combine online or local audiovisual content with your own AI-assisted search engine.
                     </p>
                     <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md">
                    Arcs are collections of audiovisual content linked together with an AI assistant that allows you to ask questions to hundreds of hours of audiovisual content of your choice.
