@@ -72,11 +72,11 @@ export default function SubmitBlock({currentUser, hasActiveSub, credit, handleSu
 
 currentUser ?
 <div>
-<p className="font-semibold text-lg text-zinc-700 dark:text-zinc-200">You are on Basic Plan</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 mt-3 text-md"> • You can only submit YouTube videos.</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-md"> • You can submit up to <strong>1 hour</strong> of content. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-md"> • The video you are submitting should have more than <strong >10,000 views</strong>.</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-md"> Alphy might fail to process content with location limits.</p>
+<p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on Basic Plan</p>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 mt-3 text-sm"> • You can only submit YouTube videos.</p>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm"> • You can submit up to <strong>1 hour</strong> of content. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm"> • The video you are submitting should have more than <strong >10,000 views</strong>.</p>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm"> Alphy might fail to process content with location limits.</p>
 
 <p className="mt-4 text-sm"> Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions and free Twitter Spaces transcription.</p>
 </div>
