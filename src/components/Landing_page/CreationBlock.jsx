@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 
 import { Button} from "@material-tailwind/react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -29,6 +29,14 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
     const [arcDialog, setArcDialog] = useState(false);
 
     const navigate = useNavigate(); 
+    const inputRef = useRef(null)
+
+    const handleButtonClick = () => {
+        // current property is referring to the actual input element
+        
+        inputRef.current.focus();
+        
+      };
     
     useEffect(() => {
         function handleResize() {
@@ -186,7 +194,11 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
 
                 
                 <div className="bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
-                          onClick={() => setSubmitDialog(true)}>
+                          
+                          onClick={() => {
+                            setSubmitDialog(true)
+                            handleButtonClick()
+                        }}>
                          
                             
                     <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
@@ -262,7 +274,10 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
             <p className="mb-10 text-xl font-semibold text-zinc-600 dark:text-zinc-300 text-center">Start discovering Alphy's capabilities</p>
             <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
                     <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
-                            onClick={() => setSubmitDialog(true)}>
+                            onClick={() => {
+                                setSubmitDialog(true)
+                                handleButtonClick()
+                            }}>
                         <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
                         <p className="text-emerald-300 text-lg font-semibold text-center row-span-1"> Submit a Link
 
@@ -329,8 +344,11 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
                             
 
             {submitDialog &&
-			<Dialog maxWidth="md" fullWidth="true" open={submitDialog} onClose={() => setSubmitDialog(false)} >
-                         <SubmitBlock currentUser={currentUser} hasActiveSub={hasActiveSub} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage}/>
+			<Dialog maxWidth="md" fullWidth="true" open={submitDialog} onClose={() => {
+                setSubmitDialog(false)
+                setErrorMessage("")
+            }} >
+                         <SubmitBlock currentUser={currentUser} hasActiveSub={hasActiveSub} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef}/>
 
 			</Dialog>
 			}
