@@ -172,42 +172,6 @@ function HubFeed(props) {
 		};
 	}
 
-	const handlePostUpload = () => {
-		setFileUploading(true)
-
-		axios
-			.post(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/upload`, file,
-				{
-
-					headers: {
-						'Content-Type': 'multipart/form-data',
-						'id-token': currentUser.accessToken
-					},
-					onUploadProgress: (progressEvent) => {
-						const progress = Math.round(
-							(progressEvent.loaded * 100) / progressEvent.total
-						);
-
-						setUploadProgress(progress);
-
-					}
-				}
-			).then((response) => {
-				// Handle the response after successful upload
-				const responsed = response.data
-
-				navigate("/up/" + responsed.source_id)
-				//page'e navige et
-			})
-			.catch((error) => {
-				
-				setErrorMessage(true)
-				handleFileUploadClear()
-				// Handle any errors that occur during upload
-				console.error(error);
-			});
-	};
 
 	const handleFileUploadClear = () => {
 		setFile(null)

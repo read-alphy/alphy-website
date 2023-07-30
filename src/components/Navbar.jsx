@@ -76,16 +76,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		metaTag.setAttribute('content', 'https://i.ibb.co/RBH2C63/homepage.png');
 	}
 
-	const handleLoginWithGoogle = () => {
-		auth.loginWithGoogle();
-		setCollapsed(true)
-			.then(() => {
-				window.location.reload()
-			})
-			.catch((error) => {
-				console.log(error.message);
-			});
-	};
+
 
 	const handleSignOut = async () => {
 		try {
@@ -94,7 +85,8 @@ function Navbar({ collapsed, setCollapsed }) {
 			window.location.reload()
 			localStorage.setItem("logged in","false")
 		} catch (error) {
-			console.log(error);
+			console.log("sign out error",error)
+		
 		}
 	};
 

@@ -19,12 +19,12 @@ import jsonData from "./arcs_and_thumbnails.json"
 
 
 
-function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,idToken,userArchipelagos,setUserArchipelagos,contentName, setContentName}) {
+function CrossVideo({ currentUser, collapsed, setCollapsed, hasActiveSub,idToken,userArchipelagos,setUserArchipelagos,contentName, setContentName}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
 	
-	const {currentUser} = useAuth();
+	
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 	const [called, setCalled] = useState(false);
@@ -79,13 +79,21 @@ function CrossVideo({ source_type, collapsed, setCollapsed, hasActiveSub,idToken
 })
 
 useEffect(() => {
-	if((isArc || isEditArc) && !called){
-		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
+	if((isArc || isEditArc) && data.length===0 && called!==true){
+	handleArcInfo()
+	}
+},[])
+
+
+const handleArcInfo = async () => {
+	if((isArc || isEditArc) && data.length===0 && called!==true){
+		setIsLoading(true)
 		
-		axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
-			
+		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
+		try {
+			const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
+			setCalled(true)
 			setCollapsed(true)
-			
 			setData(response.data)
 			setArchipelagoInfo(response.data)
 						if(response.data.description==="null"){
@@ -100,26 +108,31 @@ useEffect(() => {
 			let sources = response.data.tracks.map((item) => item.source_id)
 			setSourceIDsArchipelago([...sources])
 			setIsLoading(false)
-			setCalled(true)
+			
 	
 
 		}
-		).catch((error) => {
+		)
+	}
+		catch(error) {
+			setIsLoading(false)
 			setCalled(true)
-			console.log(error)
-			navigate("/404")
-		})	
+			console.log("arcChat error",error)
+			if( axios.isCancel(error)){
+				console.log('Request cancelled');
+			}
+		
+			/* navigate("/404") */
+		}
 
 	}
-
-})
-
+}
 
 useEffect (() => {
-	if(hasActiveSub!==true){
+if(hasActiveSub!==true){
 	setTimeout (() => {
 		setSubCalled(true)
-	}, 3000);
+	}, 2500);
 		}
 		else{
 			setSubCalled(true)
@@ -127,12 +140,12 @@ useEffect (() => {
 		
 	})
 
-if(!subCalled){
-	if(isCreateArc && (hasActiveSub===undefined || hasActiveSub===false)){
+if(!subCalled && isCreateArc){
+	if((hasActiveSub===undefined || hasActiveSub===false)){
 		navigate("/")
 	}
 	else if(hasActiveSub===true){
-		setIsLoading(false)
+		
 		setSubCalled(true)
 	}
 }
@@ -150,6 +163,7 @@ if(dataArchipelago.length===0){
 }
 else{
 					if(isCreateArc){
+						
 						setIsLoadingSubmit(true)
 					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
@@ -202,6 +216,7 @@ const handleDeleteArchipelago = () => {
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
+			
 			<Helmet>
 				<title>{item_name!==undefined && item_name.length>0 ? item_name : (archipelagoTitle.length>0 ? `${archipelagoTitle}` : "Alphy")} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>

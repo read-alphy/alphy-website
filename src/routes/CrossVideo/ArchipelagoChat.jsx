@@ -63,7 +63,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
 
 
       
-
+    
 
     const archipelagoUserID = data.user_id
     const archipelagoImageLink = `${data.thumbnail_url ? data.thumbnail_url : ""}`
@@ -71,6 +71,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const buttonRef = useRef(null);
 
     if(localStorage.getItem("archipelagoEdited")==="true"){
+        
         localStorage.setItem("archipelagoEdited","false")
         window.location.reload()
     }
@@ -125,7 +126,7 @@ else{
 
 
 }).catch((error) => {
-    
+    console.log("question error",error)
     setIsLoadingInside(false)
 })
 }

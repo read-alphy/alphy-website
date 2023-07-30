@@ -113,10 +113,12 @@ useEffect(() => {
 
 }, 1000)
 
-
+let i = 0
 
 if (currentUser && creditcalled!==true) {
+	if (i===0){
 	currentUser.getIdToken().then((idToken) => {
+		i=i+1
 		axios
 			.get(
 				`${process.env.REACT_APP_API_URL}/payments/credit`,
@@ -134,9 +136,13 @@ if (currentUser && creditcalled!==true) {
 			})
 			.catch((error) => {
 				console.error(error)
+				
+				
 			});
-	});
-} 
+	}
+);
+
+}} 
 })
 
 	const getCustomerInfo = async (currentUser) => {
@@ -243,32 +249,32 @@ if (currentUser && creditcalled!==true) {
 							/>
 
 							<Route path="/archipelago/:archipelago_ID" element={
-							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} />
+							<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} />
 							}></Route>
 								<Route path="/archipelago/createArchipelago" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 							<Route path="/archipelago/editArchipelago/:archipelago_ID" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 				<Route path="/arc/:arc_ID" element={
-							<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} setContentName={setContentName} />
+							<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} setContentName={setContentName} />
 							}></Route>
 								<Route path="/arc/createArc" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 							<Route path="/arc/editArc/:archipelago_ID" element={
 								
-								<CrossVideo collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
