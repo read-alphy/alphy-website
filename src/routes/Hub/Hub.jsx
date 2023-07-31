@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
-import SideFeed from '../../components/ArticleComponents/SideFeed';
+import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {Button, Spinner, Input, Textarea} from "@material-tailwind/react";
@@ -111,14 +111,14 @@ useEffect (() => {
 			}
 			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-mildDarkMode`}>
 				
-				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
+				<SideFeedReworked setCollapsed={setCollapsed} source_id={source_id} /></div>}
 				
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen"><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
+						<div className="h-screen"><SideFeedReworked setCollapsed={setCollapsed} source_id={source_id} /></div>
 					</div>
 				</div>
 

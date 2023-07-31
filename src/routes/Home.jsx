@@ -13,23 +13,11 @@ import axios from 'axios';
 
 
 
-function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
+function Home({hasActiveSub,currentUser,credit,userArchipelagos,dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const urlParams = new URLSearchParams(window.location.search);
-	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
-	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
-	const resetPassword = (urlParams.get('mode')=="resetPassword");
-	const limit = 20
-	
 
-	/* const { currentUser } = useAuth(); */
-	function shuffleArray(array) {
-		for (let i = array.length - 1; i > 0; i--) {
-			let j = Math.floor(Math.random() * (i + 1));
-			let temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-		}
-	}
+	const resetPassword = (urlParams.get('mode')=="resetPassword");
+
 
 	useEffect(() => {
 		if(resetPassword){
@@ -47,38 +35,7 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos}) {
 
 	}, []);
 
-	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
-		if(!hasMoreGlobalArchipelagos){
-			return;
-		}
-		setIsLoadingGlobalArchipelagos(true);
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
-		.then((response) => {
-
-			if(firstTime){
-				shuffleArray(response.data)
-				setDataGlobalArchipelagos(response.data);
-			}
-			else{
-				shuffleArray(response.data)
-				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
-			}
-			setIsLoadingGlobalArchipelagos(false);
-			setTimeout(() => {
-				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
-				if(elements){
-					elements.forEach(element => {
-						element.classList.add('cursor-default');
-					});
-			}
-				}, 500);
-
-		})
-		.catch((error) => {
-			setIsLoadingGlobalArchipelagos(false);
-		}
-		)
-	}
+	
 
 
 	return (

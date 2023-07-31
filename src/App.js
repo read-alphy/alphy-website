@@ -51,7 +51,8 @@ function App() {
 	const [collapsed, setCollapsed] = useState(false);
 	const [idToken, setIdToken] = useState("")
 	const [userArchipelagos, setUserArchipelagos] = useState([])
-	
+	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
+	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
 
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
@@ -61,7 +62,9 @@ function App() {
 		`${process.env.REACT_APP_STRIPE_PK}`
 	);
 
-
+useEffect(() => {
+	getDataGlobalArchipelagos(0, true, true)
+}, [])
 
 useEffect(() => {
 	if(verification){
@@ -173,8 +176,50 @@ if (currentUser && creditcalled!==true) {
 		})
 
     }
+	const limit = 20
+	
 
+	/* const { currentUser } = useAuth(); */
+	function shuffleArray(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			let j = Math.floor(Math.random() * (i + 1));
+			let temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+	}
+	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
+		if(!hasMoreGlobalArchipelagos){
+			return;
+		}
+		setIsLoadingGlobalArchipelagos(true);
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
+		.then((response) => {
 
+			if(firstTime){
+				shuffleArray(response.data)
+				setDataGlobalArchipelagos(response.data);
+			}
+			else{
+				shuffleArray(response.data)
+				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
+			}
+			setIsLoadingGlobalArchipelagos(false);
+			setTimeout(() => {
+				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
+				if(elements){
+					elements.forEach(element => {
+						element.classList.add('cursor-default');
+					});
+			}
+				}, 500);
+
+		})
+		.catch((error) => {
+			setIsLoadingGlobalArchipelagos(false);
+		}
+		)
+	}
 	const location = useLocation();
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
@@ -227,7 +272,7 @@ if (currentUser && creditcalled!==true) {
 
 						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos}/>} />
+							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
 							<Route
 								path="/yt/:article_ID"
@@ -278,9 +323,9 @@ if (currentUser && creditcalled!==true) {
 							
 							}> </Route>
 
-							{/* <Route path="/hub"
-								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
-							</Route> */}
+							<Route path="/hub"
+								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
 
 							
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
