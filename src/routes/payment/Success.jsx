@@ -11,7 +11,7 @@ export default function Success() {
             navigate('/')
         }, 3000)
     })
-
+    window.rewardful('convert', { email:  currentUser.email});
     return (
         <div>
             {currentUser ?
@@ -19,6 +19,8 @@ export default function Success() {
                     🎉 Thank you! You have now subscribed to Alphy Premium!
                 </div>
                 : null}
+
+                
         </div>
     )
 }
