@@ -21,6 +21,9 @@ import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
 import CrossVideo from './routes/CrossVideo/CrossVideo';
 import Hub from './routes/Hub/Hub';
+import MyHub from './routes/Hub/MyHub';
+import SubmitPage from "./routes/Hub/SubmitPage"
+
 
 
 
@@ -323,11 +326,15 @@ if (currentUser && creditcalled!==true) {
 							
 							}> </Route>
 
-							<Route path="/hub"
+							<Route path="/discover"
 								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
-							<Route path="/u/myHub"
-								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+					
+							<Route path="/myhub"
+								element={<MyHub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
+							<Route path="/submit"
+								element={<SubmitPage credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
 							
@@ -336,15 +343,15 @@ if (currentUser && creditcalled!==true) {
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth/>}></Route>
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken}/>}/> 
-							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>}/>
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
+							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
 							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
 							<Route path="/plans/checkout/success" element={<Success/>}></Route>
 							<Route path="*" element={<NotFound to="/404"/>}/>
 							<Route path="/404" element={<NotFound />}/>
 						</Routes>
 
-						{location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null}
+						{/* {location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null} */}
 
 					</>
 

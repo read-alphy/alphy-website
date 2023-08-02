@@ -29,6 +29,10 @@ export default function ArchipelagoCreation({archipelagoDescription , archipelag
     const [editBasicInfo, setEditBasicInfo] = useState(false);
     const {currentUser} = useAuth();
 
+
+    const handleGoBack = () => {
+        window.history.back(); // Go back to the previous page
+      };
  
 
     const getData = (offset, firstTime, hasMore) => {
@@ -102,7 +106,7 @@ const handleKeyDown = (event) => {
             <div className="flex flex-col ">
             
             <div className="mt-10 lg:mt-0 ">
-                <a className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition"  href={`/`}>
+                <a onClick={()=>handleGoBack()} className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition">
                 <KeyboardArrowLeftIcon fontSize="small" className=""/>
                 <span className="">Go Back</span>
                 </a></div>

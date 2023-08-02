@@ -1,10 +1,29 @@
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ReplayIcon from '@mui/icons-material/Replay';
+import axios from 'axios';
 
-export default function BookmarkFeedItem ({item, index, source_id, imageUrl, language_codes, removeBookmark, removed, sideFeed, setCollapsed})
+export default function BookmarkFeedItem ({item, index, source_id, imageUrl, language_codes, currentUser, setRemoved, removed, sideFeed, setCollapsed})
 {
 
-    console.log(removed)
+    
+
+	const removeBookmark =  () => {
+		
+		axios.patch(
+			`${process.env.REACT_APP_API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
+			{},
+	{
+						headers: {
+							'accept': 'application/json',
+							'id-token': currentUser.accessToken	,
+						}
+						}
+			
+			).then((response) => {
+				console.log("removed", removed)
+				setRemoved(!removed)
+			})
+	}
     return(
         <div className="flex w-full ">
 						<div
@@ -13,8 +32,6 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 
 
 								// navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
-
-							setCollapsed(sideFeed!==true && true)
 							}}
 							target="_blank"
 						>
@@ -34,18 +51,10 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 							</div>
 							</a>
 
-					<div className="text-xs h-full">
+					<div className="text-xs h-full mt-2">
 						<div className="grid grid-cols-6">
-							<div className="">
-                            <div className={`flex justify-end  ${sideFeed==true && "mr-0 mb-0"}`}>
-
-                                                        {removed?
-                                                        <ReplayIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>
-
-                                                        :
-                                                        <BookmarkRemoveIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>
-                                                            }
-                                                            </div>
+							<div className="col-span-5">
+                           
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
@@ -75,13 +84,13 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 								</a>
 								</div>
 								
-									<div className={`flex justify-end  ${sideFeed==true && "mr-0 mb-0"}`}>
+									<div className={`flex justify-end  ${sideFeed==true && "mr-0 mb-0"} col-span-1 pr-4`}>
 
-									{removed?
+								{removed?
 									<ReplayIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>
 									
 								:
-								<BookmarkRemoveIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>
+									<BookmarkRemoveIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>
 										}
 										</div>
 										</div>

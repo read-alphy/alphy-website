@@ -6,6 +6,10 @@ import Loading from '../../components/Loading';
 import CuratedCarouselItem from '../../components/LandingPage/CuratedCarouselItem';
 import AddIcon from '@mui/icons-material/Add';
 import { set } from 'lodash';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+
 
 export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow}){
 
@@ -43,7 +47,12 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
     const [submitted, setSubmitted] = useState(false);
 
     
-
+    const carouselRef = useRef(null);
+    const rightButtonRef = useRef(null);
+    const leftButtonRef = useRef(null);
+    const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(true);
+    const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
+    let shuffledData = []
 
     const limit=1000
     let calledAndEmpty
@@ -212,14 +221,77 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
         setSubmitLayout(false)
     }
     }
+
+   
+
+  
+    useEffect(() => {
+        const handleScroll = () => {
+          if (carouselRef.current) {
+            const container = carouselRef.current;
+            const isScrollEnd = container.scrollLeft + container.clientWidth === container.scrollWidth;
+            setIsForwardArrowVisible(!isScrollEnd);
+            setIsBackwardArrowVisible(container.scrollLeft > 0);
+
+    
+          }
+        };
+    
+        // Attach scroll event listener
+        if (carouselRef.current) {
+          carouselRef.current.addEventListener('scroll', handleScroll);
+        }
+
+        // Clean up the event listener on component unmount
+        return () => {
+          if (carouselRef.current) {
+            carouselRef.current.removeEventListener('scroll', handleScroll);
+          }
+        };
+      }, []);
+    
+      const scrollForward = () => {
+        if (carouselRef.current) {
+            const container = carouselRef.current;
+          
+   
+            
+            
+            const scrollAmount = 300; 
+
+          carouselRef.current.scrollLeft += scrollAmount;
+        }
+      };
+    
+      const scrollBackward = () => {
+        if (carouselRef.current) {
+            const container = carouselRef.current;
+            
+            const scrollAmount =  300; 
+          carouselRef.current.scrollLeft -= scrollAmount;
+        }
+      };
+
+
+
     
     return(
-        <div className="xl:max-w-[1200px] lg:ml-20">
+        <div className="xl:max-w-[1200px] lg:ml-20 ">
 
-        <p className="text-zinc-600 dark:text-zinc-300 text-xl xl:text-2xl">My Arcs</p>
+            
+                        
+              {currentUser &&   <p className="text-2xl text-zinc-600 dark:text-zinc-300 font-bold">
+                    
+                    Welcome to Your Hub!
+                </p>
+                }
+
+            {currentUser ? 
+<div className="mt-10">
+        <p className="text-zinc-600 dark:text-zinc-300 text-xl">Arcs</p>
             <div className="flex flex-row mt-10 ">  
 
-            <a href="/arc/createArc" className="min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700   items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+            <a href="/arc/createArc" className="min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] drop-shadow-lgborder mr-5  border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700   items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
 												<div >
 													<AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
@@ -229,13 +301,70 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
 
 		    </a>        
+
+            
                     {
                             userArchipelagos.length>0 &&
-                            userArchipelagos.map((item,index)=> 
-                            <div className="ml-5">
-                                    <CuratedCarouselItem currentUser={currentUser} key={index} item={item} forFeed={true} expandedLayout={true}/>
-                                    </div>
-                                )
+
+                                <div className="xl:min-w-[1200px]  xl:max-w-[1200px]">				
+
+											
+
+								
+									<div className="main-page-feed  w-full">
+									
+
+                                                                <div className="w-full h-full container xl:max-w-[800px] 2xl:max-w-[1080px]  ">
+
+                                                                    <div className="relative ">
+                                                                    <button onClick={scrollBackward} ref = {leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
+                                                                            isBackwardArrowVisible ? '' : 'hidden'
+                                                                            }`}>
+                                                                            <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                                                        <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
+                                                                                        </div>
+                                                                            </button>
+                                                                    <div className="flex flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area min-h-[400px]" ref={carouselRef}>
+                                                                    {
+
+
+                                                                    userArchipelagos.map((item, index) => (
+                                                                        <CuratedCarouselItem currentUser={currentUser} key={index} item={item} forFeed={true} expandedLayout={true}/>
+                                                                        ))}
+                                                                        
+                                                                            </div>
+                                                                        <button onClick={scrollForward} ref={rightButtonRef} type="button" className={`right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
+                                                                            isForwardArrowVisible ? '' : 'hidden'
+                                                                            }`}>
+                                                                            <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                                                        <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 p-1 " />
+                                                                                        </div>
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+
+									
+
+										{/* {hasMore && (
+											<div className="w-full flex justify-center">
+												{
+													<button
+														className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline"
+														onClick={loadMore}
+													>
+														{'Load more'}
+													</button>
+												}
+											</div>
+										)} */}
+										
+									</div>
+
+
+
+							
+
+								</div>
                         }
             </div>
 
@@ -336,7 +465,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
         <div className="mb-20">
             <div className="flex flex-row mt-20">
               
-                <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">My Works</p>
+                <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Submissions</p>
             
 
                  {/*    <button onClick={()=>setShowTab("myBookmarks")} className="mb-4 ml-2">
@@ -415,13 +544,13 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 <div className="min-h-[300px]">
 
         <div className="">
-        <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">My Bookmarks</p>
+        <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Bookmarks</p>
             <div>
             {dataBookmarks.length>0 ?
                         <div className="grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                                     {searchKeyword(dataBookmarks).map((item, index) => (
                                             (index<offsetBookmarks+10) &&
-                                            <HubFeedItem item={item} index={index} />
+                                            <HubFeedItem item={item} index={index} myBookmarks={true} currentUser={currentUser}/>
                                         
                                     ))}
                                         </div>
@@ -466,7 +595,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
         <div className="mt-20">
             <p className="mb-4">
-            <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">My Uploads</p>
+            <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Uploads</p>
             </p>
             {dataUploads.length>0 ?
                             <div className="grid grid-cols-4 xl:grid-cols-5">
@@ -501,7 +630,19 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                     }
       
             </div>
-            
+            </div>
+            :
+            <div>
+                  <button onClick={() => handleHubNavigation("global")} className="text-zinc-700 dark:text-zinc-300 text-lg mt-20">
+							<KeyboardArrowLeftIcon fontSize="small" className=""/>
+							<span className="">Go Back</span>
+            </button>
+            <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20">
+					 <a href="/u/login" className="dark:text-greenColor text-green-400 underline">Sign in</a> or <a href="/u/register" className="dark:text-greenColor text-green-400 underline"> create an account</a> to access this page. 
+			</div>
+            </div>
+}
         </div>
+       
     )
 }

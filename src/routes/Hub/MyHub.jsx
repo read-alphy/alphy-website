@@ -35,8 +35,8 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 	const [helmetThumbnail, setHelmetThumbnail] = useState("");
-	const [globalLayout, setGlobalLayout] = useState(true);
-	const [userLayout, setUserLayout] = useState(false);
+	const [globalLayout, setGlobalLayout] = useState(false);
+	const [userLayout, setUserLayout] = useState(true);
 	const [submitLayout, setSubmitLayout] = useState(false);
 	const [mainShow, setMainShow] = useState("default");
 

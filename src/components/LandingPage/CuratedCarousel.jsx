@@ -14,7 +14,7 @@ export default function CuratedCarousel(props) {
     const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
     let shuffledData = []
 
- 
+  
     useEffect(() => {
         const handleScroll = () => {
           if (carouselRef.current) {

@@ -108,6 +108,9 @@ const handleKeyDown = (event) => {
 			getData(0, true, true);
 		}
 	};
+
+
+
     return(
         <div className="px-4 sm:px-20 lg:px-0 lg:grid lg:grid-cols-5 lg:w-[70vw] lg:mt-10 ">
             <div className="col-span-2 flex justify-start  min-w-[300px]">

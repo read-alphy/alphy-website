@@ -17,7 +17,7 @@ export default function CuratedCarouselItem(props) {
     };
 
     
-    console.log(props.item)
+
 
     
 let description=""

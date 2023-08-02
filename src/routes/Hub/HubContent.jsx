@@ -15,7 +15,7 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
         <div className="">
             {/* <HubCreationBlock currentUser={currentUser} hasActiveSub={hasActiveSub} credit={credit}/> */}
             {globalLayout &&
-                mainShow=="default" ?
+                (mainShow=="default" ?
                     <div>
                         <HubArcFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                         mainShow={mainShow} setMainShow={setMainShow}  />
@@ -23,19 +23,24 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
                         mainShow={mainShow} setMainShow={setMainShow} />
                     </div>
                     :
-                (mainShow =="arcs" ?
-                <div className="min-h-[90vh]">
-                    <HubArcFeed 
-                    currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
-                    mainShow={mainShow} setMainShow={setMainShow} />
-                </div>
-                :
-                <div className="min-h-[90vh]">
-                    <HubSourceFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+                (
+                    <div>
+                    {mainShow =="arcs" &&
+                    <div className="min-h-[90vh]">
+                        <HubArcFeed 
+                        currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                         mainShow={mainShow} setMainShow={setMainShow} />
+                    </div>
+                    }
+                        {mainShow==="sources" &&
+                            <div className="min-h-[90vh]">
+                                <HubSourceFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+                                    mainShow={mainShow} setMainShow={setMainShow} />
+                            </div>
+                        }
                 </div>
 
-                )
+                ))
             
             }
             

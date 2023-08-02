@@ -3,7 +3,7 @@ import SideFeed from './ArticleComponents/SideFeed';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './ArticleComponents/ContentTabs/Content';
-
+import MicIcon from '@mui/icons-material/Mic';
 
 
 import Twitter from '..//img/twitter_spaces.png';
@@ -254,8 +254,7 @@ if(called===false){
 
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
-		
-			
+	
 			<Helmet>
 				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
@@ -293,9 +292,9 @@ if(called===false){
 
 			</div>
 			}
-			{collapsed=== false && <div className={`hidden lg:flex mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-mildDarkMode `}>
+				{/* 	ü{collapsed=== false && <div className={`hidden lg:flex mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-mildDarkMode `}>
 				
-				<SideFeed setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub}/></div>}
+				<SideFeed setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub}/></div>} */}
 				
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'

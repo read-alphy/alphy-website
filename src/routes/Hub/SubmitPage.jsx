@@ -16,7 +16,7 @@ import HubContent from './HubContent';
 
 
 
-function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -35,9 +35,9 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 	const [helmetThumbnail, setHelmetThumbnail] = useState("");
-	const [globalLayout, setGlobalLayout] = useState(true);
+	const [globalLayout, setGlobalLayout] = useState(false);
 	const [userLayout, setUserLayout] = useState(false);
-	const [submitLayout, setSubmitLayout] = useState(false);
+	const [submitLayout, setSubmitLayout] = useState(true);
 	const [mainShow, setMainShow] = useState("default");
 
 
@@ -166,4 +166,4 @@ useEffect (() => {
 }
 
 
-export default Hub;
+export default SubmitPage;

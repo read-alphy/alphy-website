@@ -82,38 +82,21 @@ const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFe
 		"vi": "Tiếng Việt",
 		"cy": "Cymraeg"
 	}
-	const removeBookmark =  () => {
-		axios.patch(
-			`${process.env.REACT_APP_API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
-			{},
-	{
-						headers: {
-							'accept': 'application/json',
-							'id-token': currentUser.accessToken	,
-						}
-						}
-			
-			).then((response) => {
-			
-				setRemoved(!removed)
-			})
-	}
-
+	
 
 	return (
-		<div className={`grid border-b-0 w-full md:w-full `}>
+		<div className={`grid border-b-0 w-full md:w-full  `}>
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
 				<MyWorksFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes}/>
 				:
 
-				<BookmarkFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} removeBookmark={removeBookmark} removed={removed}/>
+				<BookmarkFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} removed={removed} setRemoved={setRemoved} currentUser={currentUser}/>
 
 				:
-
+			
 				<MyUploadsFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} setCollapsed={setCollapsed} sideFeed={sideFeed} formattedDate={formattedDate}/>
-
 
 			}
 		</div>
