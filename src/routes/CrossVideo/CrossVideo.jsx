@@ -141,10 +141,8 @@ if(hasActiveSub!==true){
 	})
 
 if(!subCalled && isCreateArc){
-	if((hasActiveSub===undefined || hasActiveSub===false)){
-		navigate("/")
-	}
-	else if(hasActiveSub===true){
+	
+	if(hasActiveSub===true){
 		
 		setSubCalled(true)
 	}
