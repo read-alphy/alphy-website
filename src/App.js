@@ -336,7 +336,7 @@ if (currentUser && creditcalled!==true) {
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth/>}></Route>
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>}/> 
+							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken}/>}/> 
 							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>}/>
 							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
 							<Route path="/plans/checkout/success" element={<Success/>}></Route>

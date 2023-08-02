@@ -23,12 +23,18 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
                         mainShow={mainShow} setMainShow={setMainShow} />
                     </div>
                     :
-                (mainShow =="arcs" &&
+                (mainShow =="arcs" ?
                 <div className="min-h-[90vh]">
                     <HubArcFeed 
                     currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                     mainShow={mainShow} setMainShow={setMainShow} />
                 </div>
+                :
+                <div className="min-h-[90vh]">
+                    <HubSourceFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+                        mainShow={mainShow} setMainShow={setMainShow} />
+                </div>
+
                 )
             
             }

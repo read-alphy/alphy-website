@@ -26,7 +26,7 @@ let userStripeId = ""
 
 
 
-export default function Account({ credit,hasActiveSub}) {
+export default function Account({ credit,hasActiveSub,idToken}) {
     
     const { currentUser } = useAuth();
     
@@ -102,7 +102,38 @@ export default function Account({ credit,hasActiveSub}) {
     }, [currentUser]);
 
 
+function handleStripeTrialCall(type){
+    if(type==="get"){
+            console.log("get")
+            axios.get(`http://localhost:3001/payments/subscription?refresh_firebase=false&refresh_stripe=false`,
+            {
+                headers: {
+                    'id-token': idToken,
+                },
+            }
+            
+            ).then((response) => {
+                console.log(response)
+            })
+    }
 
+    else if(type==="post")
+        {
+        console.log("post")
+        axios.post("http://localhost:3001/payments/subscription?subscription_type=basic&refresh_firebase=false&refresh_stripe=false",
+        {
+            headers: {
+                'id-token': idToken,
+            },
+        }
+
+        ).then((response) => {
+            console.log(response)
+        })
+    }
+
+
+}
 
 
 
@@ -112,11 +143,19 @@ export default function Account({ credit,hasActiveSub}) {
             {isLoaded ?
 
                 <div className="dark:bg-darkMode">
+                    <div className="mx-auto max-w-[200px] min-w-[200px] flex-row flex">
+                    <Button onClick={() => handleStripeTrialCall("get")} className="text-white dark:text-zinc-700 bg-greenColor transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-white text-[16px]">
+                        Get
+                    </Button>
+                    <Button onClick={() => handleStripeTrialCall("post")} className=" ml-10 text-white dark:text-zinc-700 bg-indigo-400 transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-white text-[16px]">
+                        post
+                    </Button>
+                    </div>
+
+
 
                     {
                         windowSize.width > 999 ?
-
-
                             <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
                                      <div className="items-center margin-auto justify-center flex flex-col">
                         {currentUser ? 
