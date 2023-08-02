@@ -141,10 +141,10 @@ if(hasActiveSub!==true){
 	})
 
 if(!subCalled && isCreateArc){
-	if((hasActiveSub===undefined || hasActiveSub===false)){
+	/* if((hasActiveSub===undefined || hasActiveSub===false)){
 		navigate("/")
-	}
-	else if(hasActiveSub===true){
+	} */
+	if(hasActiveSub===true){
 		
 		setSubCalled(true)
 	}
@@ -271,8 +271,13 @@ const handleDeleteArchipelago = () => {
 					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{ isLoading && <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />}
+					
 				{isCreateArc && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
+				{isCreateArc && !hasActiveSub &&
+				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-40">
+					You need to be on the <a href="/account" className="dark:text-greenColor text-green-400 underline">Premium Plan</a> to access this page. 
+					</div>
+				}
 
 				{(!isCreateArc && !isEditArc) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
 				{isEditArc && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}

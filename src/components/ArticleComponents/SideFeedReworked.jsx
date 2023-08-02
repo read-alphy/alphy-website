@@ -155,7 +155,19 @@ function SideFeed(props) {
 
 	}, []);
 
+	const handleNavigation = (type) => {
+		if (type === "user") {
+		props.setGlobalLayout(false)
+		props.setSubmitLayout(false)
+		props.setUserLayout(true)
+		}
 
+		if (type === "submit") {
+			props.setGlobalLayout(false)
+			props.setUserLayout(false)
+			props.setSubmitLayout(true)
+		}
+	}
 	
 
 	useEffect(() => {
@@ -163,9 +175,7 @@ function SideFeed(props) {
           if (carouselRef.current) {
             const container = carouselRef.current;
             const isScrollEnd = container.scrollLeft + container.clientWidth === container.scrollWidth;
-    
 
-    
           }
         };
     
@@ -183,7 +193,7 @@ function SideFeed(props) {
       }, []);
 
 	return (
-		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 lg:bg-zinc-100 ">
+		<div id="side-feed" className="dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 lg:bg-zinc-100 min-h-[92vh]">
 				<div className="lg:hidden">
 					<Navbar collapsed={props.collapsed} setCollapsed={props.setCollapsed}/>
 				</div>
@@ -195,36 +205,36 @@ function SideFeed(props) {
 				Main Hub
 				</p></a> */}
 			<div className="flex flex-col w-full justify-start px-5">
-				<button className="text-zinc-500 dark:text-zinc-300 flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
+				<button onClick={() => handleNavigation("submit")} className="text-white dark:text-zinc-700 bg-green-300 rounded-lg px-5 drop-shadow-lg max-w-[180px] flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
 				<AddIcon className="mr-3"/>
-					<p>Submit</p>
+					<p>New</p>
 				</button>
-				<button className="text-zinc-500 dark:text-zinc-300 flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
+				{/* <button className="text-zinc-500 dark:text-zinc-300 flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
 				<ChatIcon className="mr-3 mt-1" fontSize="small"/>
 					<p className="">Create an Arc</p>
 					
-				</button>
+				</button> */}
 
-				<button className="text-zinc-500 dark:text-zinc-300 flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
+				<button onClick={() => handleNavigation("user")} className="text-zinc-500 dark:text-zinc-300 flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
 				<InventoryIcon className="mr-3 mt-1" fontSize="small"/>
-					<p className="">My Work</p>
+					<p className="">My Hub</p>
 					
 				</button>
 
-				<button className="text-zinc-500 dark:text-zinc-300 flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
+				<button  className="text-zinc-500 dark:text-zinc-300 flex flex-row py-3 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out">
 				<BookmarksIcon className="mr-3 mt-1" fontSize="small"/>
-					<p className="">My Bookmarks</p>
+					<p className="">Global</p>
 					
 				</button>
 
 			</div>
 
-		<button onClick={()=>setShowSearch(!showSearch)} className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out" href="/hub">
+	{/* 	<button onClick={()=>setShowSearch(!showSearch)} className="px-5 py-3 flex flex-row text-zinc-500 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out" href="/hub">
 		
 		<SearchIcon className="mr-3"/>
 		<p>
 		Search
-		</p></button>
+		</p></button> */}
 	
 </div>
 

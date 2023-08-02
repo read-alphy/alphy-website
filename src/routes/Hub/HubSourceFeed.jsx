@@ -6,7 +6,7 @@ import axios from 'axios';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
 
-import ArchipelagoCard from '../../components/Landing_page/ArchipelagoCard';
+import ArchipelagoCard from '../../components/LandingPage/ArchipelagoCard';
 import { Carousel } from '@trendyol-js/react-carousel';
 
 
@@ -139,18 +139,13 @@ function HubSourceFeed(props) {
 
 
 	return (
-		<div className="main-page-feed-section  xl:min-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1280px] 2xl:min-w-[1280px] w-full mt-20 mx-auto md:pl-20 md:ml-10  flex flex-row">
-			
+		<div className="main-page-feed-section  xl:min-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1280px] 2xl:min-w-[1280px] w-full mx-auto md:pl-20 md:ml-10  flex flex-row">
+
+		<div className=" p-[10px] min-h-[60vh] pl-5 ">
+		<p className="text-zinc-700 dark:text-zinc-300 text-lg font-semibold text-xl xl:text-2xl">Read transcripts, summaries, and ask questions to more than 4000 hours of content.	 <a>Discover all {">"} </a></p>
+		
 
 
-			
-
-				
-
-			
-
-		<div className=" p-[10px] bg-white dark:bg-darkMode dark:bg-mildDarkMode min-h-[60vh] pl-5 ">
-			
 					<form
 						className="flex items-center pt-4"
 						

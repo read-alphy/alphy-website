@@ -35,14 +35,16 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 	const [helmetThumbnail, setHelmetThumbnail] = useState("");
+	const [globalLayout, setGlobalLayout] = useState(true);
+	const [userLayout, setUserLayout] = useState(false);
+	const [submitLayout, setSubmitLayout] = useState(false);
+	const [mainShow, setMainShow] = useState("default");
 
 
 
 	useEffect(() => {
-	
 
-		
-		
+
 		if(!windowSizeChecked){
 			if(window.innerWidth<768){
 			setCollapsed(true)
@@ -111,14 +113,24 @@ useEffect (() => {
 			}
 			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-mildDarkMode`}>
 				
-				<SideFeedReworked setCollapsed={setCollapsed} source_id={source_id} /></div>}
+				<SideFeedReworked 
+				
+				setCollapsed={setCollapsed} source_id={source_id} 
+				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+				/></div>}
 				
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen"><SideFeedReworked setCollapsed={setCollapsed} source_id={source_id} /></div>
+						<div className="h-screen">
+							<SideFeedReworked 
+							setCollapsed={setCollapsed} source_id={source_id} 
+							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+							/>
+							
+							</div>
 					</div>
 				</div>
 
@@ -126,7 +138,13 @@ useEffect (() => {
 					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
 						}}`}
 				>
-					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : <HubContent data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} />}
+					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
+					<HubContent
+					data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
+					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+					mainShow={mainShow} setMainShow={setMainShow}
+					/>}
 					
 
 

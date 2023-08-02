@@ -326,6 +326,9 @@ if (currentUser && creditcalled!==true) {
 							<Route path="/hub"
 								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
+							<Route path="/u/myHub"
+								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
 
 							
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />

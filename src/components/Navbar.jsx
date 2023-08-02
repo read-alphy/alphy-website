@@ -113,6 +113,8 @@ function Navbar({ collapsed, setCollapsed }) {
 	
 				</div>
 			</Link>
+
+
 			{isYt || isSp || isUp || isArc || isHub ? 
 				<div onClick={() =>setCollapsed(!collapsed) } className={`hidden lg:flex rounded-full bg-opacity-0 hover:bg-opacity-60 hover:bg-zinc-200 dark:hover:bg-zinc-700 ml-40  mr-4 p-1 transition duration-300 ease-in-out ${collapsed ? " lg:hidden bg-zinc-50 dark:bg-darkMode" : " bg-zinc-100 dark:bg-mildDarkMode  justify-end  "}  `}>
 				<button >
@@ -124,10 +126,11 @@ function Navbar({ collapsed, setCollapsed }) {
 
 			</button		>
 			</div>
-			: null}
+			: null} 
 		</div>
 
 		<div className={`flex dark:bg-darkMode`}>
+			
 			<div >
 				<div className="flex flex-row mt-6 dark:text-gray-300 dark:bg-darkMode">
 				 {/* <a className="mr-4 hidden lg:block" href="https://www.producthunt.com/posts/alphy-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a>  */}

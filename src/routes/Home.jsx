@@ -1,14 +1,14 @@
 import React from 'react';
-import WelcomeFeed from '../components/Landing_page/WelcomeFeed';
-import Welcome from '../components/Landing_page/Welcome';
-import CuratedCarousel from '../components/Landing_page/CuratedCarousel';
-import About from '../components/Landing_page/About';
+import WelcomeFeed from '../components/LandingPage/WelcomeFeed';
+import Welcome from '../components/LandingPage/Welcome';
+import CuratedCarousel from '../components/LandingPage/CuratedCarousel';
+import About from '../components/LandingPage/About';
 import FeedbackForm from '../components/FeedbackForm';
 import { useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { useAuth } from '../hooks/useAuth';
 import { useState } from 'react';
-import WelcomePopup from '../components/Landing_page/WelcomePopup.jsx';
+import WelcomePopup from '../components/LandingPage/WelcomePopup.jsx';
 import axios from 'axios';
 
 
