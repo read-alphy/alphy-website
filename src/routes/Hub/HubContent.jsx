@@ -8,8 +8,8 @@ import HubUserPage from "./HubUserPage.jsx"
 
 
 export default function HubContent({currentUser,hasActiveSub,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos,
-         getDataGlobalArchipelagos, credit, globalLayout, submitLayout,
-          userLayout, setMainShow, mainShow}){
+         getDataGlobalArchipelagos, credit, globalLayout,setGlobalLayout, submitLayout, setSubmitLayout,
+          userLayout, setUserLayout, setMainShow, mainShow}){
     
     return(
         <div className="">
@@ -44,7 +44,7 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
             {userLayout &&
                 <HubUserPage
                 currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
-                mainShow={mainShow} setMainShow={setMainShow} credit={credit}
+                mainShow={mainShow} setMainShow={setMainShow} credit={credit} setGlobalLayout={setGlobalLayout} setUserLayout={setUserLayout} setSubmitLayout={setSubmitLayout}
                 />
             }
         </div>

@@ -17,7 +17,7 @@ export default function CuratedCarouselItem(props) {
     };
 
     
-    
+    console.log(props.item)
 
     
 let description=""
@@ -30,7 +30,12 @@ description = `${props.item.description[69]===" "? props.item.description.slice(
   }
 }
 else{
+  if(props.item.description!== undefined && props.item.description.length === 0)
+  { description = "No description."
+      }
+  else {
     description = props.item.description
+  }
 }
 
     return(

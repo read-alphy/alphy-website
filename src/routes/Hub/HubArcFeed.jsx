@@ -263,14 +263,15 @@ function HubArcFeed(props) {
 								
 				<div>
 					<div className="main-page-feed  xl:max-w-[1400px]">
+					<button onClick={handleShowMain} className="text-zinc-700 dark:text-zinc-300 text-lg mb-10">
+							<KeyboardArrowLeftIcon fontSize="small" className=""/>
+							<span className="">Go Back</span>
+                	</button>
 						<p className="mb-10 text-xl lg:text-2xl text-zinc-700 dark:text-zinc-200 font-semibold">
 							Ask questions to the best with Arcs. For Free
 						</p>
 
-					<button onClick={handleShowMain} className="text-zinc-700 dark:text-zinc-300 text-lg mb-5">
-							<KeyboardArrowLeftIcon fontSize="small" className=""/>
-							<span className="">Go Back</span>
-                	</button>
+					
 							<div
 											className={`grid grid-cols-2 xs:pl-10 sm:pl-0 xs:gap-6 sm:gap-0 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 `}
 										>

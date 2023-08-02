@@ -5,8 +5,9 @@ import HubFeedItem from "./HubFeedItemElements/HubFeedItem"
 import Loading from '../../components/Loading';
 import CuratedCarouselItem from '../../components/LandingPage/CuratedCarouselItem';
 import AddIcon from '@mui/icons-material/Add';
+import { set } from 'lodash';
 
-export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipelagos}){
+export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow}){
 
     const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -199,18 +200,30 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 		);
 	}
 
+    function handleHubNavigation(type) {
+        if(type=="submit"){
+        setUserLayout(false)
+        setGlobalLayout(false)
+        setSubmitLayout(true)
+    }
+    else if(type=="global"){
+        setUserLayout(false)
+        setGlobalLayout(true)
+        setSubmitLayout(false)
+    }
+    }
     
     return(
         <div className="xl:max-w-[1200px] lg:ml-20">
 
-        My Arcs
+        <p className="text-zinc-600 dark:text-zinc-300 text-xl xl:text-2xl">My Arcs</p>
             <div className="flex flex-row mt-10 ">  
 
-            <a href="/arc/createArc" className="min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700  ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+            <a href="/arc/createArc" className="min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700   items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
 												<div >
 													<AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-													<p className="text-zinc-600 dark:text-zinc-300 text-xl">Create Your Arc</p>
+													<p className="text-zinc-600 dark:text-zinc-300 text-xl">Create An Arc</p>
 
 												</div>
 
@@ -320,11 +333,11 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 				
 
 
-        <div>
+        <div className="mb-20">
             <div className="flex flex-row mt-20">
-                <button onClick={()=>setShowTab("myWorks")} className="mb-4 ml-2">
-                    My Works
-                </button>
+              
+                <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">My Works</p>
+            
 
                  {/*    <button onClick={()=>setShowTab("myBookmarks")} className="mb-4 ml-2">
                                 My Bookmarks
@@ -348,18 +361,22 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                                             (called ?
 
 
-                                                <div className="text-zinc-600 dark:text-zinc-300">
+                                                <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
                     
                                                
-                                                        <div href="/arc/createArc" className="min-h-[240px] max-h-[240px] min-w-[180px] max-w-[180px] border border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700  ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                                                      {/*   <div href="/arc/createArc" className="min-h-[240px] max-h-[240px] min-w-[180px] max-w-[180px] border border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700  ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                                         <div >
                                                             <AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-                                                            <p className="text-zinc-600 dark:text-zinc-300 text-xl">Create Your Arc</p>
+                                                            <p className="text-zinc-600 dark:text-zinc-300 text-xl">Submit a link</p>
 
                                                         </div>
 
 
+                                                        </div> */}
+
+                                                        <div>
+                                                        You don't have any submissions. Process your first online conversation <button className="underline dark:text-greenColor text-green-400 cursor-pointer" onClick={() => handleHubNavigation("submit")}>here.</button>
                                                         </div>
                                                         
                                                 </div>
@@ -372,7 +389,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                               
                                 </div>
                         <div>
-                                {offsetPersonal<dataPersonal.length && dataPersonal.length>0 && searchKeyword(dataPersonal).length>0 && (
+                                {offsetPersonal<dataPersonal.length && dataPersonal.length>10 && searchKeyword(dataPersonal).length>0 && (
                                                             <div className="w-full flex justify-center">
                                                                 {
                                                                     <button
@@ -398,23 +415,22 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 <div className="min-h-[300px]">
 
         <div className="">
-            My Bookmarks
+        <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">My Bookmarks</p>
             <div>
-            
+            {dataBookmarks.length>0 ?
                         <div className="grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                            
-                            {dataBookmarks.length>0 ?
-                                        searchKeyword(dataBookmarks).map((item, index) => (
-                                                (index<offsetBookmarks+10) &&
-                                                <HubFeedItem item={item} index={index} />
-                                            
-                                        ))
+                                    {searchKeyword(dataBookmarks).map((item, index) => (
+                                            (index<offsetBookmarks+10) &&
+                                            <HubFeedItem item={item} index={index} />
+                                        
+                                    ))}
+                                        </div>
                             :
                             (
                             called ?
-                            <div>
+                            <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
 
-                            You don't have any bookmarks.
+                            You don't have any bookmarks. <a onClick={() => handleHubNavigation("global")} className="text-indigo-400 underline">Discover</a> the content other users unlocked with Alphy.
 
                             </div>
                             :
@@ -422,7 +438,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
                             )
                             }
-                        </div>
+                        
 
 
                     {/* 
@@ -449,18 +465,41 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
 
         <div className="mt-20">
-            <p className="mb-4 ml-2">
-                My Uploads
+            <p className="mb-4">
+            <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">My Uploads</p>
             </p>
-            <div className="grid grid-cols-4 xl:grid-cols-5">
+            {dataUploads.length>0 ?
+                            <div className="grid grid-cols-4 xl:grid-cols-5">
 
-                    {called || dataUploads.length>0 ?
-                                    searchKeyword(dataUploads).map((item, index) => (
-                                        <HubFeedItem item={item} index={index} />
-                                    ))
-                    :<Loading/>
+                                
+                                                    {searchKeyword(dataUploads).map((item, index) => (
+                                                        <HubFeedItem item={item} index={index} />
+                                                    ))}
+                            </div>
+                    :
+
+                    (
+                        called ?
+                        <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
+
+                       {!hasActiveSub && called && 
+                        
+                        <p>You don't have any uploads. Upgrade to <a className="underline dark:text-greenColor text-green-400 cursor-pointer">premium plan</a> to process local files.
+                        </p>}
+
+                        {hasActiveSub && called && 
+                        
+                        <p>You don't have any uploads. <button onClick={() => handleHubNavigation("submit")} className="underline dark:text-greenColor text-green-400 cursor-pointer">Process your first file now!</button>
+                        </p>}
+
+                        </div>
+                        :
+                        <Loading/>
+
+                        )
+
                     }
-        </div>
+      
             </div>
             
         </div>
