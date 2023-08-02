@@ -23,7 +23,6 @@ function SideFeed(props) {
 	const carouselRef = useRef(null);
 
 
-	
 
 
 	const temp = 10;

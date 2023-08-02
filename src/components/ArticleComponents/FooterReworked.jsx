@@ -45,7 +45,7 @@ export default function FooterReworked(currentUser){
         <div className="w-full mx-auto mb-4">
         <div className="mb-6">
             <div className="flex flex-col">
-        {currentUser.length>0 ? 
+        {localStorage.getItem("logged in")==="true" ? 
         
         <a className="text-zinc-400 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " href="/account">
             {/* <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> */}

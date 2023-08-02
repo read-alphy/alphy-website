@@ -23,6 +23,7 @@ import CrossVideo from './routes/CrossVideo/CrossVideo';
 import Hub from './routes/Hub/Hub';
 import MyHub from './routes/Hub/MyHub';
 import SubmitPage from "./routes/Hub/SubmitPage"
+import WelcomeForm from './components/WelcomeForm';
 
 
 
@@ -236,7 +237,7 @@ if (currentUser && creditcalled!==true) {
 		
 		<div className="App bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
 
-	{/* 		{showWelcomeForm && 
+	{showWelcomeForm && 
 					<div className="fixed inset-0 z-50 flex items-center justify-center ">
 								<div className="fixed inset-0 bg-black opacity-80"></div>
 								<div className="z-10 bg-white rounded-md shadow-lg w-full max-w-lg ">
@@ -246,7 +247,7 @@ if (currentUser && creditcalled!==true) {
 							</div>	
 							</div>
 							</div>
-							} */}
+							} 
 							
 		<Helmet>
 			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
@@ -340,9 +341,9 @@ if (currentUser && creditcalled!==true) {
 							
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
-							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
-							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
-							<Route path="/u/resetpassword" element={<Auth/>}></Route>
+							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
 							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
 							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
