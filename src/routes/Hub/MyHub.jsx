@@ -96,7 +96,7 @@ useEffect (() => {
 			></div>
 			
 			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
-				{collapsed==true && 
+				{/* {collapsed==true && 
 			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
 			<div className={`hidden md:flex `}>
 				<button onClick={handleCollapse }>
@@ -110,7 +110,7 @@ useEffect (() => {
 			</div> 
 
 			</div>
-			}
+			} */}
 			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[270px] max-w-[270px] dark:bg-mildDarkMode`}>
 				
 				<SideFeedReworked 

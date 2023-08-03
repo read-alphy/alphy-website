@@ -13,7 +13,7 @@ import NotFoundInfo from './NotFoundInfo';
 
 
 
-function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function NotFound({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -74,8 +74,8 @@ useEffect (() => {
 			></div>
 			
 			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
-				{collapsed==true && 
-			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
+				
+		{/* 	<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
 			<div className={`hidden md:flex `}>
 				<button onClick={handleCollapse }>
 
@@ -87,13 +87,13 @@ useEffect (() => {
 			</button			>
 			</div> 
 
-			</div>
-			}
-			{<div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[270px] max-w-[270px] dark:bg-mildDarkMode`}>
+			</div> */}
+		
+			{<div className={`hidden lg:block`}>
 				
 				<SideFeedReworked 
 				
-				setCollapsed={setCollapsed} source_id={source_id} 
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				
 				/></div>}
 				
@@ -104,7 +104,7 @@ useEffect (() => {
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
 							<SideFeedReworked 
-							setCollapsed={setCollapsed} source_id={source_id} 
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 							
 							/>
 							
@@ -135,4 +135,4 @@ useEffect (() => {
 }
 
 
-export default Auth;
+export default NotFound;

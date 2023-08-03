@@ -274,7 +274,7 @@ if (currentUser && creditcalled!==true) {
 				) : (
 					<>
 
-						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
+						{/* <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> */}
 						<Routes>
 							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} />
 							{/* <Route path="/auth/*" element={<Auth />} /> */}
@@ -346,10 +346,10 @@ if (currentUser && creditcalled!==true) {
 							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
 							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
-							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
-							<Route path="/plans/checkout/success" element={<Success/>}></Route>
-							<Route path="*" element={<NotFound to="/404"/>}/>
-							<Route path="/404" element={<NotFound />}/>
+							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/plans/checkout/success" element={<Success collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="*" element={<NotFound to="/404" collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
+							<Route path="/404" element={<NotFound collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
 						</Routes>
 
 						{/* {location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null} */}
