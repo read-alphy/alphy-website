@@ -85,52 +85,52 @@ if(elements && elementCalled===false){
 }
 
 
+
 const handleSubmit = () => {
-    if(currentUser===null){
+    if(currentUser===null && selectedQuestions.includes(inputValue)===false){
         setErrorMessage(true)
         return
     }
     else{
-    
-if(inputValue.length===0){
-    return
-}
-else{
-    setAnswerData("")
-    setIsLoadingInside(true)
-     axios.post
-    (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoID}/question`,
-    inputValue,
+            if(inputValue.length===0){
+                return
+            }
+            else{
+                setAnswerData("")
+                setIsLoadingInside(true)
+                axios.post
+                (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoID}/question`,
+                inputValue,
 
-    {headers: {
-        'accept': 'application/json',
-        'Content-Type': 'text/plain'
-        },
-    }
-    ).then((response) => {
-    
-    setAnswerData(response.data)
-    
-    setIsLoadingInside(false)
-    setErrorMessage(false)
+                {headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'text/plain'
+                    },
+                }
+                ).then((response) => {
+                
+                setAnswerData(response.data)
+                
+                setIsLoadingInside(false)
+                setErrorMessage(false)
 
-    setTimeout(() => {
-    const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
-    if(elements){
-        elements.forEach(element => {
-            element.classList.add('cursor-default');
-        });
-}
-    }, 500);
-    
+                setTimeout(() => {
+                const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
+                if(elements){
+                    elements.forEach(element => {
+                        element.classList.add('cursor-default');
+                    });
+            }
+                }, 500);
+                
 
 
-}).catch((error) => {
-    console.log("question error",error)
-    setIsLoadingInside(false)
-})
-}
-}
+            }).catch((error) => {
+                console.log("question error",error)
+                setIsLoadingInside(false)
+            })
+            }
+            }
 
 } 
 
@@ -172,7 +172,7 @@ const toggleExpand = () => {
   
 
     return(
-        <div className="lg:w-[1000px] max-w-[1000px] grow mx-auto pb-20">
+        <div className="lg:w-[1000px] max-w-[1000px] grow mx-auto pt-10 pb-20">
             <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10 px-3 " >
             
                 <div className="col-span-4 sm:col-span-3 flex flex-row">

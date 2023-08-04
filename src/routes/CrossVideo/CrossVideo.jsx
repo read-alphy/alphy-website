@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
-import SideFeed from '../../components/ArticleComponents/SideFeed';
+import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ArchipelagoCreation from './ArchipelagoCreation';
@@ -24,7 +24,8 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, hasActiveSub,idToken
 	const navigate = useNavigate();
 	let source_id
 	
-	
+
+
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 	const [called, setCalled] = useState(false);
@@ -85,6 +86,7 @@ useEffect(() => {
 },[])
 
 
+
 const handleArcInfo = async () => {
 	if((isArc || isEditArc) && data.length===0 && called!==true){
 		setIsLoading(true)
@@ -92,6 +94,7 @@ const handleArcInfo = async () => {
 		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		try {
 			const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
+			
 			setCalled(true)
 			setCollapsed(true)
 			setData(response.data)
@@ -239,36 +242,21 @@ const handleDeleteArchipelago = () => {
 			></div>
 			
 			<div className="flex flex-row ">
-				{collapsed==true && 
-			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
-			<div className={`hidden md:flex `}>
-				<button onClick={handleCollapse }>
-
-		
-			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-			</svg>
-
-			</button			>
-			</div> 
-
-			</div>
-			}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-mildDarkMode`}>
+			{<div className={`hidden lg:block `}>
 				
-				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
+				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} dataArchipelago={dataArchipelago}/></div>}
 				
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen"><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
+						<div className="h-screen"><SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id}  dataArchipelago={dataArchipelago} /></div>
 					</div>
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[100vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none  overflow-hidden'
 						}}`}
 				>
 					

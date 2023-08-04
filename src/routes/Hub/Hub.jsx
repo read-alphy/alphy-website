@@ -86,7 +86,7 @@ useEffect (() => {
 	}
 
 	return (
-		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
+		<div className="scrolling dark:bg-darkMode dark:text-zinc-300 ">
 			<Helmet>
 			
 			</Helmet>  
@@ -111,7 +111,7 @@ useEffect (() => {
 
 			</div>
 			} */}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[270px] max-w-[270px] dark:bg-mildDarkMode`}>
+			{<div className={` hidden lg:block `}>
 				
 				<SideFeedReworked 
 				
@@ -135,7 +135,7 @@ useEffect (() => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} w-full  ${collapsed ? 'hidden' : 'blur-sm sm:blur-none max-h-[100vh] overflow-hidden'
 						}}`}
 				>
 					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 

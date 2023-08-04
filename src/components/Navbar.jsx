@@ -11,7 +11,7 @@ import HomeIcon from '@mui/icons-material/Home';
 
 
 function Navbar({ collapsed, setCollapsed }) {
-	const auth = useAuth();
+	
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { currentUser, logout } = useAuth();

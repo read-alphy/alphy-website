@@ -6,6 +6,7 @@ import { useState, useEffect} from 'react';
 import FeedbackForm from '../FeedbackForm';
 import PersonIcon from '@mui/icons-material/Person';
 import FeedbackIcon from '@mui/icons-material/Feedback';
+import {Link} from "react-router-dom"
 
 
 export default function FooterReworked({currentUser,collapsed,setCollapsed}){
@@ -51,29 +52,25 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                                   <div className="flex flex-col">
                               {localStorage.getItem("logged in")==="true" ? 
                               
-                              <a className="text-zinc-400 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " href="/account">
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " to="/account">
                                   {/* <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> */}
                                   <span>Account</span>
-                                  </a>:
+                                  </Link>:
 
-                                  <a className="text-zinc-400 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " href="/plans">
-                                    <span>Plans</span></a>
+                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " to="/plans">
+                                    <span>Plans</span></Link>
                                   
                                   }
                                 </div> 
                             
                                 <div className="mt-6 pl-10">
-                                  <a className="text-zinc-400 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>Reach Us</a>
+                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>Reach Us</Link>
                               </div>
                               <div className="mt-6 pl-10">
-                              <a className="text-zinc-400 dark:text-zinc-300 text-sm     w-full cursor-pointer w-[120px]" href="/FAQ ">FAQ</a>
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm     w-full cursor-pointer w-[120px]" to="/FAQ ">FAQ</Link>
                               </div>
                               </div>
-                              <div className="pl-10 mt-6 flex flex-row">
-                              <a className="text-zinc-400 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" href="/privacypolicy">Privacy Policy</a>
-                              
-                              </div>
-                                      <div className="pl-10 mt-6 text-sm cursor-pointer text-zinc-400 dark:text-zinc-300">
+                              <div className="pl-10 mt-6 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
                                                                           {localStorage.getItem('theme') === 'light' ? (
                                                                               <div onClick={handleDarkMode} className="flex flex-row">
                                                                               
@@ -90,19 +87,24 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                                                   <p>Dark</p>
                                                   </div>}
                                           </div>
+                              <div className="pl-10 mt-6 flex flex-row">
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" to="/privacypolicy">Privacy Policy</Link>
+                              
+                              </div>
+                                     
                               <div class="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 
                               <div className="grid grid-cols-3 justify-items-center px-2 mb-8">
-                                  <a href="https://twitter.com/alphyapp" className="cursor-pointer">
+                                  <Link to="https://twitter.com/alphyapp" className="cursor-pointer">
                                   <TwitterIcon fontSize="small" className="text-[#ced4da]"/>
-                                  </a>
-                                  <a href="mailto:support@alphy.app" className="cursor-pointer">
+                                  </Link>
+                                  <Link to="mailto:support@alphy.app" className="cursor-pointer">
                                   <EmailIcon fontSize="small" className="text-[#ced4da]"/>
-                                  </a>
+                                  </Link>
                                   <div>
-                                  <a href="https://discord.gg/N4CkQhCVv2" >
+                                  <Link to="https://discord.gg/N4CkQhCVv2" >
                                       <img src={DiscordIcon} className="mt-1" />
-                                  </a>
+                                  </Link>
                               </div>
                               </div>
                           </div>
@@ -135,22 +137,22 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                                   <div className="flex flex-col">
                               {localStorage.getItem("logged in")==="true" ? 
                               
-                              <a className="text-zinc-400 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " href="/account">
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " to="/account">
                                    <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> 
                                   
-                                  </a>:
+                                  </Link>:
 
-                                  <a className="text-zinc-400 dark:text-zinc-300 text-sm w-full cursor-pointer w-full  " href="/plans">
+                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full  " to="/plans">
                                     <PersonIcon className="text-zinc-500  dark:text-zinc-300 mr-2" fontSize="medium"/> 
-                                    </a>
+                                    </Link>
                                   
                                   }
                                 </div> 
                             
                                 <div className="mt-6">
-                                  <a className="text-zinc-400 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>
+                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>
                                     
-                                  <FeedbackIcon fontSize="small" className="text-zinc-500  dark:text-zinc-300"/> </a>
+                                  <FeedbackIcon fontSize="small" className="text-zinc-500  dark:text-zinc-300"/> </Link>
                               </div>
                              
                               </div>

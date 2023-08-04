@@ -10,6 +10,7 @@ import Google from "../img/google.png"
 
 
 
+
 const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -37,7 +38,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 	
 	
 	useEffect(() => {
-/* 		if (window.location.href=="http://localhost:3000/u/resetpassword" && resetPassword ===false){
+/* 		if (window.location.to=="http://localhost:3000/u/resetpassword" && resetPassword ===false){
 			navigate('/u/login')
 		} */
 		if (auth.currentUser && resetPassword===false) {
@@ -279,9 +280,9 @@ verificationMessage==false ?
 		<div className="mt-4">
 
 							{isRegister ===false ? 
-							<div className="text-zinc-600 dark:text-zinc-300 text-sm" ><p><a href="/u/resetpassword" className="underline cursor-pointer"> Forgot your password?</a></p> </div>:null}
+							<div className="text-zinc-600 dark:text-zinc-300 text-sm" ><p><Link to="/u/resetpassword" className="underline cursor-pointer"> Forgot your password?</Link></p> </div>:null}
 					{isRegister ? 
-							<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm "> Already have an account? Login <a href="/u/login" className="text-greenColor">here.</a></p> </div>:<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm">Don't have an account? <a href="/u/register" className="text-greenColor">Register now.</a></p> </div>}
+							<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm "> Already have an account? Login <Link to="/u/login" className="text-greenColor">here.</Link></p> </div>:<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm">Don't have an account? <Link to="/u/register" className="text-greenColor">Register now.</Link></p> </div>}
 					</div>
 
 		</div>
@@ -363,7 +364,7 @@ verificationMessage==false ?
   <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
 		<p className="mx-auto text-center mt-4 text-zinc-600">
-							Password reset successfully. <a className="underline" href="/u/login"> Login</a> to continue.
+							Password reset successfully. <Link className="underline" to="/u/login"> Login</Link> to continue.
 							</p></div>}
 					
 

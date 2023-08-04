@@ -4,11 +4,7 @@ import { useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import ExploreIcon from '@mui/icons-material/Explore';
 import AddIcon from '@mui/icons-material/Add';
-import ChatIcon from '@mui/icons-material/Chat';
-import SearchIcon from '@mui/icons-material/Search';
-import Navbar from '../Navbar';
 import FeedItem from './FeedTabs/FeedItem';
-import PublicIcon from '@mui/icons-material/Public';
 import HubIcon from '@mui/icons-material/Hub';
 import FooterReworked from "./FooterReworked"
 import { useNavigate } from 'react-router-dom'
@@ -16,9 +12,10 @@ import LoginIcon from '@mui/icons-material/Login';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import Logo from "../../img/logo.png"
 import LogoBlack from "../../img/logo-inverted.png"
+import { Link } from 'react-router-dom';
 
 
-function SideFeed({collapsed,setCollapsed,userLayout,submitLayout,globalLayout}) {
+function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,globalLayout, dataArchipelago}) {
 	
 	
 	const { currentUser } = useAuth();
@@ -28,14 +25,17 @@ function SideFeed({collapsed,setCollapsed,userLayout,submitLayout,globalLayout})
 	const carouselRef = useRef(null);
 	
 
-
-
+	
+	
+	
 	const temp = 10;
 	const limit = temp;
 
 	useEffect(() => {
 		setTimeout(() => {
 			setCalled(true);
+			
+			
 		}, 1000);
 	}, []);
 
@@ -71,14 +71,14 @@ function SideFeed({collapsed,setCollapsed,userLayout,submitLayout,globalLayout})
 			<div>
 							<div className={`flex items-center font-bold pt-10`}>
 
-									<a href="/" className="text-zinc-8 00 dark:text-gray-200 pl-8 ">
+									<Link to="/" className="text-zinc-800 dark:text-gray-200 pl-8 ">
 									<div className="flex-row flex">
 									<img src={Logo} width={40} className="hidden dark:block"></img>
 									<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-									<h1 className="ml-2 text-2xl">ALPHY</h1>
+									<h1 className="ml-2 text-2xl ">ALPHY</h1>
 						
 									</div>
-								</a>
+								</Link>
 										
 										<LastPageIcon onClick={()=> setCollapsed(true)} fontSize="large" className="rotate-180 ml-16 hidden lg:block text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1"/>
 									</div>
@@ -86,37 +86,46 @@ function SideFeed({collapsed,setCollapsed,userLayout,submitLayout,globalLayout})
 							<div className="pt-10 md:pl-5">
 
 								<div className="flex flex-col w-full justify-start px-5">
-									<a href="/submit" className={`text-zinc-700 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-lg  scale-105 transform"}   bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg px-2 text-md max-w-[120px] flex flex-row py-2`} >
+									<Link to="/submit" className={`text-zinc-700 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-lg  scale-105 transform"}   bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg px-2 text-md max-w-[120px] flex flex-row py-2`} >
 									<AddIcon className="mr-3"/>
 										<p>New</p>
-									</a>
+									</Link>
 							
 
-									<a href="/myhub" className={` flex flex-row py-3 mt-6  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<Link to="/myhub" className={` flex flex-row py-3 mt-6  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 									<HubIcon className="mr-3 " fontSize="medium"/>
 										<p className="">My Hub</p>
 										
-									</a>
+									</Link>
 
-									<a href="/discover"  className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<Link to="/"  className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 									<ExploreIcon className="mr-3" fontSize="medium"/>
 										<p className="">Discover</p>
 										
-									</a>
+									</Link>
 									{
 									localStorage.getItem("logged in")==="true" ?   (
 											null
 										) : (
-											<a
+											<Link
 											className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
-											href="/u/login"
+											to="/u/login"
 										><LoginIcon className="mr-3" fontSize="medium"/>
 										<p className="">Sign In</p>
-										</a>
+										</Link>
 									)}
 								</div>
 
 					</div>
+
+					{( dataArchipelago!==undefined && dataArchipelago.length>0)
+					
+					?
+					dataArchipelago.map((item, index) => {
+						<FeedItem sideFeed={true} key={index} item={item} setCollapsed={setCollapsed} />
+					})
+					:null
+					}
 
 					<div className="absolute bottom-0 w-full">
 								<FooterReworked/>
@@ -147,34 +156,34 @@ function SideFeed({collapsed,setCollapsed,userLayout,submitLayout,globalLayout})
 
 								<div className="flex flex-col w-full justify-start ">
 									<div className="pl-2">
-									<a href="/submit" className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-zinc-200   p-2 py-2 text-md`} >
+									<Link to="/submit" className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-zinc-200   p-2 py-2 text-md`} >
 									<AddIcon className=""/>
 										
-									</a>
+									</Link>
 									</div>
 							
 
-									<a href="/myhub" className={` pl-4 flex flex-row py-3 mt-6  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<Link to="/myhub" className={` pl-4 flex flex-row py-3 mt-6  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 									<HubIcon className="mr-3 " fontSize="medium"/>
 										
 										
-									</a>
+									</Link>
 
-									<a href="/discover"  className={` pl-4 ${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<Link to="/"  className={` pl-4 ${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 									<ExploreIcon className="mr-3" fontSize="medium"/>
 										
 										
-									</a>
+									</Link>
 									{
 									localStorage.getItem("logged in")==="true" ?   (
 											null
 										) : (
-											<a
+											<Link
 											className="pl-4 text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
-											href="/u/login"
+											to="/u/login"
 										><LoginIcon className="mr-3" fontSize="medium"/>
 										
-										</a>
+										</Link>
 									)}
 								</div>
 
@@ -195,4 +204,4 @@ function SideFeed({collapsed,setCollapsed,userLayout,submitLayout,globalLayout})
 
 	);
 }
-export default SideFeed;
+export default SideFeedReworked;

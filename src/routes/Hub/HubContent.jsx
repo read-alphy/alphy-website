@@ -12,7 +12,7 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
           userLayout, setUserLayout, setMainShow, mainShow}){
     
     return(
-        <div className="">
+        <div className="pt-20">
             {/* <HubCreationBlock currentUser={currentUser} hasActiveSub={hasActiveSub} credit={credit}/> */}
             {globalLayout &&
                 (mainShow=="default" ?

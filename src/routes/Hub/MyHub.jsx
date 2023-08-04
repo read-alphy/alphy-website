@@ -111,11 +111,11 @@ useEffect (() => {
 
 			</div>
 			} */}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[270px] max-w-[270px] dark:bg-mildDarkMode`}>
+			{<div className={`hidden lg:block`}>
 				
 				<SideFeedReworked 
 				
-				setCollapsed={setCollapsed} source_id={source_id} 
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
 				/></div>}
 				

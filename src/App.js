@@ -5,7 +5,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './routes/Home';
 import Article from './components/Article';
 import Footer from './components/Footer';
-import PrivacyPolicy from './components/PrivacyPolicy';
+import PrivacyPolicy from './routes/PrivacyPolicy';
 import NotFound from './routes/NotFound';
 import image from './img/robot.png';
 import { useAuth } from './hooks/useAuth';
@@ -22,6 +22,7 @@ import Auth from './routes/Auth';
 import CrossVideo from './routes/CrossVideo/CrossVideo';
 import Hub from './routes/Hub/Hub';
 import MyHub from './routes/Hub/MyHub';
+import FAQ from "./routes/FAQ"
 import SubmitPage from "./routes/Hub/SubmitPage"
 import WelcomeForm from './components/WelcomeForm';
 
@@ -274,10 +275,12 @@ if (currentUser && creditcalled!==true) {
 				) : (
 					<>
 
-						{/* <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> */}
+						 <div className="lg:hidden">
+						 <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> 
+						 </div>
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} />
-							{/* <Route path="/auth/*" element={<Auth />} /> */}
+							{/* <Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} /> */}
+							
 							<Route
 								path="/yt/:article_ID"
 								element={
@@ -327,7 +330,7 @@ if (currentUser && creditcalled!==true) {
 							
 							}> </Route>
 
-							<Route path="/discover"
+							<Route path="/"
 								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 					
@@ -338,9 +341,8 @@ if (currentUser && creditcalled!==true) {
 								element={<SubmitPage credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
-							
+							<Route path="/FAQ" element= {<FAQ/>} />
 							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
-
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
@@ -350,6 +352,7 @@ if (currentUser && creditcalled!==true) {
 							<Route path="/plans/checkout/success" element={<Success collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="*" element={<NotFound to="/404" collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
 							<Route path="/404" element={<NotFound collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
+
 						</Routes>
 
 						{/* {location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null} */}

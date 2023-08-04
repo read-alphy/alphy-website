@@ -8,6 +8,19 @@
 	font-family: 'Roboto', sans-serif;
 	
 }
+:root {
+	--background-color: #ffffff; /* Light theme */
+	--text-color: #000000; /* Light theme */
+  }
+  
+  .dark-theme {
+	--background-color: #121212; /* Dark theme */
+	--text-color: #ffffff; /* Dark theme */
+  }
+  
+	
+
+  
 html {
     overflow: hidden;
     height: 100%;
@@ -19,7 +32,10 @@ body {
 	width: 100vw;
 	overflow-x: hidden;
 	overscroll-behavior: none;
-}
+	background-color: var(--background-color);
+	color: var(--text-color);
+  }
+	
 .side-feed {
 	/* Hide the scrollbar */
 	scrollbar-width: none; /* Firefox */

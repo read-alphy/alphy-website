@@ -17,91 +17,120 @@ export default function About() {
 		
 		<div className="mx-auto md:w-800 w-full flex justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-zinc-50" id="about">
 			<div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">	
-			<h1 className="text-2xl mb-5 underline font-semibold">About</h1>
+			<h1 className="text-2xl mb-5 underline font-semibold">About Alphy</h1>
 			<Fragment>
-      <Accordion open={open === 1}>
+      <Accordion open={true}>
         <AccordionHeader onClick={() => handleOpen(1)}>
 		What is Alphy?
         </AccordionHeader>
         <AccordionBody className="text-md dark:text-zinc-300">
 		<p className="text-l dark:text-zinc-300">
 					
-					Alphy is an AI tool that helps users meaningfully interact with online audiovisual content with the
-					help of artificial intelligence. Upon submitting the link for a YouTube video or Twitter Spaces, Alphy gives you:
-					<ol className="dark:text-zinc-300">
-						<li className="pt-3 dark:text-zinc-300">
-							<strong> • A highly accurate transcript </strong> of the content with timestamps, ready to use on your videos.
-						</li>
-						<li className="pt-3 dark:text-zinc-300">
-							<strong> • An AI-powered chatbot generated on top of the content </strong> so that you can ask questions and get AI-generated answers, unlocking an immense information capture for the viewers.
-						</li>
-						<li className="pt-3 dark:text-zinc-300">
-							<strong> • The summary and TL:DR of the content</strong> for you to cut down on time to get the most relevant information.</li>
-					</ol>
+					Alphy is your AI assistant for meaningful interaction with audiovisual content. 
+					We combine latest speech-to-text technologies and large language models to transcribe, summarize, and let users create contextually aware search engines on top of videos and recordings. 
+					<br/><br/>
+					Our goal is to make the information in audiovisual content as easily accessible as text-based content.
 				</p>
         </AccordionBody>
       </Accordion>
-      <Accordion open={open === 2}>
-        <AccordionHeader onClick={() => handleOpen(2)}>
-		What can you do with Alphy?
-		        </AccordionHeader>
-        <AccordionBody className="text-md">
-		<p>
-					• <strong className="font-semibold"> Give life to the audiovisual content with AI: </strong>  Alphy's search bot allows you to ask questions a video or recording to get the most relevant answers presented by the
-					content.
-					</p>
-					
-					<p className="pt-2">
-					• <strong className="font-semibold">Summarize to save time: </strong> Alphy distills the essence of lengthy content into concise summaries, putting the knowledge you need right at your fingertips.
-					</p>
-					
-					<p className="mt-2">
-					• <strong className="font-semibold">Transcribe with precision: </strong>Alphy's AI-powered transcription service effortlessly converts any audiovisual content into meticulously accurate text, saving you time and effort. 
-					</p>
-        </AccordionBody>
-      </Accordion>
-      <Accordion open={open === 3}>
+
+	  <Accordion className="mt-6" open={true}>
         <AccordionHeader onClick={() => handleOpen(3)}>
-		How to use the product?
+		How does Alphy work?
         </AccordionHeader>
-        <AccordionBody className="text-md">
-		<p className="text-l mt-2">
-					<p className="">
-					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to
-					Alphy.
-					</p>
-					<p className="mt-2">
-					• Make sure that the content you are submitting doesn't have any location limits. Otherwise, Alphy might not be able to process it. 
-					</p>
-					<p className="mt-2">
-					• Check out your <a href="/plans" className="underline">plan</a> details to discover Alphy's capablities.
-					</p>
-
-					{/*                     <br></br>
-                    • There is a limit on the number of submissions you can make a day to decrease the bloat.
-                    <br></br> */}
-
-				<p className="mt-2">
-					• Transcription process may take some time. We will notify you via email when your work is
-					ready.
-
-					</p>
-				
-					<p className="mt-2">
-					• Once the content is processed, it is public. Anyone can read it.
-					</p>
-					
+        <AccordionBody className="text-md dark:text-zinc-400">
+		<p className="">
+					Upon submitting a link or uploading a recording, Alphy creates the transcription, summary, key takeaways, and a mini AI assistant for the content.
+					<br/><br/>
+					Then you can combine these content as effortlessly as building a playlist and create your AI-assisted search engine (we call it Arc) that will answer your questions based on the corpus of content you have curated.
 				</p>
         </AccordionBody>
       </Accordion>
-	  <Accordion open={open === 4}>
+
+      <Accordion className="mt-6" open={true}>
+        <AccordionHeader onClick={() => handleOpen(2)}>
+			What kind of audiovisual content can I use Alphy with?
+		        </AccordionHeader>
+        <AccordionBody className="text-md dark:text-zinc-400">
+		<p>
+		You can use Alphy to transcribe, summarize, and question YouTube videos, Twitter Spaces, and your local audio files (.mp3, .m4a, .mpga, .mpeg, .wav, or .webm)
+					</p>
+        </AccordionBody>
+      </Accordion>
+	  
+	  <Accordion className="mt-6" open={true}>
+        <AccordionHeader onClick={() => handleOpen(4)}>
+		How does private audio processing work? Is my data safe?
+		        </AccordionHeader>
+        <AccordionBody className="text-md dark:text-zinc-400">
+				<p>
+					Alphy processes the files you upload from your device the same way it processes YouTube and Twitter Space links, but keeps the end result private. We don't show it on Discover and no one else other than you can access it.
+					<br/><br/>
+					We don't keep your audio files. We process your audio files on the fly and delete them after processing. You can request to delete the end result by reaching us at <a className="underline" href="mailto:support@alphy.app">support@alphy.app</a>
+					
+					</p>
+					
+				
+        </AccordionBody>
+      </Accordion>
+	  <Accordion className="mt-6" open={true}>
         <AccordionHeader onClick={() => handleOpen(4)}>
 		What are Arcs?
 		        </AccordionHeader>
-        <AccordionBody className="text-md">
+        <AccordionBody className="text-md dark:text-zinc-400">
 		<p>
 					
-		An Arc, derived from 'archipelago,' serves as a comprehensive collection of interconnected content, enhanced by an AI-assisted search engine. With Arc, you can create multiple distinct collections, each tailored to specific subjects, creators, or topics. This enables you to cultivate a personalized knowledge base, allowing you to effortlessly search for information on thousands of hours of content from one place and seamlessly share it with others.
+		An Arc, derived from 'archipelago,' is Alphy's AI-assisted contextually aware search engines on audiovisual content. They serve as a comprehensive collection of interconnected content, enhanced by AI. 
+		
+		<br/><br/>
+		With Arcs, you can create multiple distinct collections, each tailored to specific subjects, creators, or topics. This enables you to cultivate a personalized knowledge base and effortlessly search for information on thousands of hours of content from one place and seamlessly share it with others.
+					</p>
+					
+				
+        </AccordionBody>
+      </Accordion>
+
+	  <div id="about" className="container w-5/6 max-w-4xl mt-20  text-l lg:text-l">	
+			<h1 className="text-2xl mb-5 underline font-semibold">Subscription & Billing</h1>
+			</div>
+			<Accordion className="mt-6" open={true}>
+        <AccordionHeader onClick={() => handleOpen(4)}>
+		What does Premium offer?
+		        </AccordionHeader>
+        <AccordionBody className="text-md dark:text-zinc-400">
+				<p>
+					See <a className="underline text-green-300" href="/plans">here</a> to learn detailed info about Alphy Premium.
+
+					</p>
+					
+				
+        </AccordionBody>
+      </Accordion>
+
+			<Accordion className="mt-6" open={true}>
+        <AccordionHeader onClick={() => handleOpen(4)}>
+		Do my credits roll over?
+		        </AccordionHeader>
+        <AccordionBody className="text-md dark:text-zinc-400">
+		<p>
+					
+		If you are using the free version, you have 2 hours of free transcription in total. In premium, you get 10 hours of transcription credits every month (on top of your 2 hours of credit). If you don't use your credits, they will roll over to the next month. You can accumulate up to 30 hours of transcription credits.
+		
+					</p>
+					
+				
+        </AccordionBody>
+      </Accordion>
+
+	  <Accordion className="mt-6" open={true}>
+        <AccordionHeader onClick={() => handleOpen(4)}>
+		What happens to my credits if I cancel my subscriptions?
+		        </AccordionHeader>
+        <AccordionBody className="text-md dark:text-zinc-400">
+		<p>
+					
+		If you want to cancel your subscription, you can do so at any time. Your credits will still be yours. However you will only be able to access premium benefits until the end of the billing period.
+		
 					</p>
 					
 				
@@ -109,80 +138,10 @@ export default function About() {
       </Accordion>
     </Fragment>
 
+	
 			</div>
-		
-		{/* <div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">
-				<h1 className="text-2xl  font-semibold">About</h1>
-				<br></br>
 
-				<h2 className="lg:text-l underline font-semibold mb-2"> What is Alphy?</h2>
-
-				<p className="text-l">
-					
-					Alphy aims to help users meaningfully interact with online audiovisual content with the
-					help of artificial intelligence. Upon submitting the link for a YouTube video or Twitter Spaces, Alphy gives you:
-					<ol className="">
-						<li className="pt-3">
-							<strong> • A highly accurate transcript </strong> of the content with timestamps, ready to use on your videos.
-						</li>
-						<li className="pt-3">
-							<strong> • An AI-powered chatbot generated on top of the content </strong> so that you can ask questions and get AI-generated answers, unlocking an immense information capture for the viewers.
-						</li>
-						<li className="pt-3">
-							<strong> • The summary and TL:DR of the content</strong> for you to cut down on time to get the most relevant information.</li>
-					</ol>
-				</p>
-
-				<br></br>
-				<h2 className="lg:text-l  underline font-semibold"> What can you do with it?</h2>
-
-				<p className="text-l mt-2">
-					<p>
-					• You can ask questions to a video or recording to get the most relevant answers presented by the
-					content.
-					</p>
-					
-					<p className="pt-2">
-					• You can get a detailed summary of the content as well as a TL:DR version of that summary
-					that lays out the key takeaways of the video.
-					</p>
-					
-					<p className="mt-2">
-					• You can access high quality transcripts that are far more accurate than the ones autiomatically generated by YouTube and Twitter.
-					</p>
-					
-
-				</p>
-
-				<br></br>
-				<h1 className="text-l underline font-semibold">How to use the product?</h1>
-				
-				<p className="text-l mt-2">
-					<p className="">
-					• You make a work request by signing in and submitting a YouTube video or Twitter Spaces link to
-					Alphy.
-					</p>
-					<p className="mt-2">
-					• Make sure to check the <a href="/plans" className="underline">plan details</a> to learn more about your current limits.
-					</p>
-
-				
-
-				<p className="mt-2">
-					• Transcription process may take some time. We will notify you via email when your work is
-					ready.
-
-					</p>
-					
-
-					<p className="mt-2">
-					• Once the content is processed, it is public. Anyone can read it.
-					</p>
-					
-				</p>
-				<br></br>
-				<br></br>
-			</div> */}
+			
 		</div>
 	);
 }

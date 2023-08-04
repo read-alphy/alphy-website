@@ -6,14 +6,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-import AuthInfo from './AuthInfo';
+
+import PrivacyPolicyInfo from "./PrivacyPolicyInfo";
 
 
 
 
-
-
-function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function PrivacyPolicy({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -24,7 +23,7 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [subCalled, setSubCalled] = useState(false);
 
@@ -74,8 +73,8 @@ useEffect (() => {
 			></div>
 			
 			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
-				{/* {collapsed==true && 
-			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
+				
+		{/* 	<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
 			<div className={`hidden md:flex `}>
 				<button onClick={handleCollapse }>
 
@@ -87,8 +86,8 @@ useEffect (() => {
 			</button			>
 			</div> 
 
-			</div>
-			} */}
+			</div> */}
+		
 			{<div className={`hidden lg:block`}>
 				
 				<SideFeedReworked 
@@ -113,11 +112,11 @@ useEffect (() => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[100vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none overflow-hidden'
 						}}`}
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
-					<AuthInfo
+					<PrivacyPolicyInfo
 					hasActiveSub={hasActiveSub} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
 					/>}
 					
@@ -135,4 +134,4 @@ useEffect (() => {
 }
 
 
-export default Auth;
+export default PrivacyPolicy;

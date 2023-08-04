@@ -7,6 +7,7 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { set } from 'lodash';
+import {Link} from "react-router-dom"
 
 const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago,forDetail}) => {
 	const source_id = item.source_id;
@@ -109,7 +110,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
-				<a href={(fromArchipelago===undefined || forDetail===true) && `/${item.source_type}/${source_id}`} >
+				<Link to={(fromArchipelago===undefined || forDetail===true) && `/${item.source_type}/${source_id}`} >
 					<div className="flex w-full ">
 						<div
 							className={`grid ${fromArchipelago==="archipelago" && forDetail!==true ? "grid-cols-4 cursor-default" : "grid-cols-3"} ${fromArchipelago===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataArchipelago!==undefined && dataArchipelago.includes(item) && fromArchipelago==="search") || (sourceIDsArchipelago!==undefined && sourceIDsArchipelago.includes(item.source_id)))&&  "border-4 border-greenColor"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
@@ -235,7 +236,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							}
 						</div>
 					</div>
-				</a>
+				</Link>
 
 				:
 
@@ -251,7 +252,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							}}
 							target="_blank"
 						>
-							<a href={`/${item.source_type}/${source_id}`} >
+							<Link to={`/${item.source_type}/${source_id}`} >
 							<div className={`col-span-1 min-w-[100px] min-w-[100px] max-w-[300px] mr-3 cursor-pointer`}>
 								<div
 									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
@@ -265,7 +266,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 									}}
 								></div>
 							</div>
-							</a>
+							</Link>
 
 							<div className="col-span-2 lg:col-span-1  text-xs h-full">
 									<div className="grid grid-cols-6">
@@ -274,7 +275,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
 
-							<a className="cursor-pointer" href={`/${item.source_type}/${source_id}`} >
+							<Link className="cursor-pointer" to={`/${item.source_type}/${source_id}`} >
 								<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">
 							
 									{item.title}
@@ -296,7 +297,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 									
 									</div>
 									
-								</a>
+								</Link>
 								</div>
 								
 									<div className={`col-span-1 flex justify-end  ${sideFeed==true && "mr-0 mb-0"}`}>
@@ -319,7 +320,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 
 				:
 
-				<a href={`/${item.source_type}/${source_id}`} >
+				<Link to={`/${item.source_type}/${source_id}`} >
 					<div className="flex w-full hover:opacity-70 duration-200 transform ease-in*out">
 						<div
 							className={`flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full py-4 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
@@ -344,7 +345,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							</div>
 						</div>
 					</div>
-				</a>
+				</Link>
 
 
 			}
