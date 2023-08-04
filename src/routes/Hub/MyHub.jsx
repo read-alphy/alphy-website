@@ -28,7 +28,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 	
 	const [data, setData] = useState([]);
 	
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [deleteDialog, setDeleteDialog] = useState(false);
 	const [subCalled, setSubCalled] = useState(false);
@@ -55,19 +55,6 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 })
 
 
-useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
-			setSubCalled(true)
-			setIsLoading(false)
-		}
-		
-	})
 
 
 /* if(!subCalled){

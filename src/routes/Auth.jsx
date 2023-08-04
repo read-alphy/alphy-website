@@ -24,7 +24,7 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [subCalled, setSubCalled] = useState(false);
 
@@ -43,19 +43,6 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
 })
 
 
-useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
-			setSubCalled(true)
-			setIsLoading(false)
-		}
-		
-	})
 
 
 	const handleCollapse = () => {

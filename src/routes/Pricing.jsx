@@ -21,7 +21,7 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [subCalled, setSubCalled] = useState(false);
 
@@ -40,19 +40,6 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 })
 
 
-useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
-			setSubCalled(true)
-			setIsLoading(false)
-		}
-		
-	})
 
 
 /* if(!subCalled){
