@@ -115,7 +115,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 				}
 				else{
 				localStorage.setItem("logged in","true")
-				navigate('/');
+				navigate('/myhub');
 				setIsSubmitting(false)
 			}
 			})
@@ -140,7 +140,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 		auth.loginWithGoogle()
 			.then(() => {
 				localStorage.setItem("logged in","true")
-				navigate('/');
+				navigate('/myhub');
 			} 
 			)
 			.catch((error) => {

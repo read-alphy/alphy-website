@@ -1,6 +1,7 @@
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ReplayIcon from '@mui/icons-material/Replay';
 import axios from 'axios';
+import {Link} from "react-router-dom"
 
 export default function BookmarkFeedItem ({item, index, source_id, imageUrl, language_codes, currentUser, setRemoved, removed, sideFeed, setCollapsed})
 {
@@ -35,7 +36,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 							}}
 							target="_blank"
 						>
-							<a href={`/${item.source_type}/${source_id}`} >
+							<Link to={`/${item.source_type}/${source_id}`} >
 							<div className={` min-w-[100px] min-w-[100px] max-w-[300px] mr-3 cursor-pointer`}>
 								<div
 									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
@@ -49,7 +50,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 									}}
 								></div>
 							</div>
-							</a>
+							</Link>
 
 					<div className="text-xs h-full mt-2">
 						<div className="grid grid-cols-6">
@@ -59,7 +60,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
 
-							<a className="cursor-pointer" href={`/${item.source_type}/${source_id}`} >
+							<Link className="cursor-pointer" to={`/${item.source_type}/${source_id}`} >
 								<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">
 							
 									{item.title}
@@ -81,7 +82,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 									
 									</div>
 									
-								</a>
+								</Link>
 								</div>
 								
 									<div className={`flex justify-end  ${sideFeed==true && "mr-0 mb-0"} col-span-1 pr-4`}>

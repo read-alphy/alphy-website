@@ -1,12 +1,13 @@
 
 
+import {Link} from "react-router-dom"
 
 export default function MyWorksFeedItem({item,index, source_id,imageUrl,language_codes}){
 
 
 
     return(
-        <a href={ `/${item.source_type}/${source_id}`} >
+        <Link to={ `/${item.source_type}/${source_id}`} >
 					<div className="flex flex-col max-w-[250px]">
 						<div
 							className={`
@@ -73,7 +74,7 @@ export default function MyWorksFeedItem({item,index, source_id,imageUrl,language
 
 						</div>
 					</div>
-				</a>
+				</Link>
 
     )
 }

@@ -135,7 +135,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 		: 
 
 		<div>
-		<div>
+		<div className="">
 							<div className={`flex items-center font-bold pt-10 pl-2`}>
 
 									<button onClick={() => setCollapsed(false)} className="text-zinc-8 00 dark:text-gray-200 ">

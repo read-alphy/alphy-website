@@ -1,6 +1,7 @@
 import UploadFile from "../../../img/upload_file.png"
 import DarkUploadFile from "../../../img/dark_upload_file.png"
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import {Link} from "react-router-dom"
 
 
 export default function MyUploadsFeedItem({item, source_id, formattedDate, setCollapsed}){
@@ -8,7 +9,7 @@ export default function MyUploadsFeedItem({item, source_id, formattedDate, setCo
 
 
     return(
-        <a href={`/${item.source_type}/${source_id}`} >
+        <Link to={`/${item.source_type}/${source_id}`} >
 					<div className="flex w-full hover:opacity-70 duration-200 transform ease-in-out">
 						<div
 							className={`flex ${' '} ${'pointer-events-none'} flex-col items-center justify-start cursor-pointer w-full h-full py-4 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
@@ -36,6 +37,6 @@ export default function MyUploadsFeedItem({item, source_id, formattedDate, setCo
 							</div>
 						</div>
 					</div>
-				</a>
+				</Link>
     )
 }

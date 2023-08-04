@@ -135,18 +135,14 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                            <div className="pl-4 mb-6">
                               <div className="mb-6 ">
                                   <div className="flex flex-col">
-                              {localStorage.getItem("logged in")==="true" ? 
                               
-                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " to="/account">
+                              
+                              <Link className="text-zinc-600 dark:text-zinc-300 text-sm w-full cursor-pointer w-full" to={localStorage.getItem("logged in")==="true" ? "/account" : "/plans"}>
                                    <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> 
                                   
-                                  </Link>:
-
-                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full  " to="/plans">
-                                    <PersonIcon className="text-zinc-500  dark:text-zinc-300 mr-2" fontSize="medium"/> 
-                                    </Link>
+                                  </Link>
                                   
-                                  }
+                                  
                                 </div> 
                             
                                 <div className="mt-6">
