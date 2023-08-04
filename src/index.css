@@ -1002,8 +1002,8 @@ DIFFERENT SCREEN SIZES
 
 /* Icon 1 */
 #nav-icon3 {
-	width: 30px;
-	height: 24px;
+	width: 20px;
+	height: 16px;
 	position: relative;
 	/* margin: 50px auto; */
 	-webkit-transform: rotate(0deg);
@@ -1022,7 +1022,6 @@ DIFFERENT SCREEN SIZES
 	position: absolute;
 	height: 4px;
 	width: 100%;
-	background: #20262E;
 	border-radius: 2px;
 	opacity: 1;
 	left: 0;

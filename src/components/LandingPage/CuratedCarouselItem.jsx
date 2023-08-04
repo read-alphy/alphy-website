@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 export default function CuratedCarouselItem(props) {
 
@@ -39,7 +39,7 @@ else{
 }
 
     return(
-                <a href={`/arc/${props.item.uid}`}>
+                <Link to={`/arc/${props.item.uid}`}>
                   {props.expandedLayout !==true ? 
           <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed!==true && "md:min-w-[220px] md:max-w-[150px]"} md:w-64  rounded-md overflow-hidden shadow-md cursor-pointer`} >
 
@@ -95,7 +95,7 @@ else{
                             
                             <div className={` ${!isHovered && props.item.thumbnail_url!==null ?"opacity-0" : "opacity-100 transition duration-300 ease-in-out" }   absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
                                 <div className="flex flex-col py-2 px-4 ">
-                          <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-500 pt-2 max-w-[150px]`} >{props.item.name}</p>
+                          
                           <p className={`text-white bg-opacity-100 text-xs ${props.forFeed!==true && "md:text-sm"}`} >{props.item.description}</p>
                           </div>
                           
@@ -119,6 +119,6 @@ else{
 
                       </div>
                       }
-                      </a>
+                      </Link>
               )
 }

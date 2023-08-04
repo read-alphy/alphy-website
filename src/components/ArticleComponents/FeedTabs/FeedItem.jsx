@@ -27,6 +27,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 	}
 
 	
+	
 	const language_codes = {
 		"af": "Afrikaans",
 		"ar": "العربية",

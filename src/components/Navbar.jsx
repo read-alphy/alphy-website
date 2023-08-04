@@ -17,6 +17,8 @@ function Navbar({ collapsed, setCollapsed }) {
 	const { currentUser, logout } = useAuth();
 	const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+
 	useEffect(() => {
 		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 			document.documentElement.classList.add('dark')
@@ -28,6 +30,9 @@ function Navbar({ collapsed, setCollapsed }) {
 			if (window.innerWidth > 999) {
 				setCollapsed(false);
 			  }
+			else{
+				setCollapsed(true);
+			}
 		  };
 	  
 		  window.addEventListener('resize', handleResize);
@@ -95,14 +100,14 @@ function Navbar({ collapsed, setCollapsed }) {
 	>
 		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[270px] sm:max-w-[270px] dark:sm:min-w-[270px] dark:sm:max-w-[270px]`}>
 			{collapsed==true	 && (isArc) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
-			<Link to="/" className="dark:text-gray-200 pl-4 ">
+			<a href={"/"} className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>
 				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
 				<h1 className="ml-2 text-2xl">ALPHY</h1>
 	
 				</div>
-			</Link>
+			</a>
 
 
 			{isArc  ? 
@@ -134,12 +139,12 @@ function Navbar({ collapsed, setCollapsed }) {
 				<div
 					id={'nav-icon3'}
 					onClick={() => setCollapsed(!collapsed)}
-					className={`block cursor-pointer col-span-3 mr-5 lg:hidden ${collapsed ? ' ' : ' open '} dark:text-gray-200 dark:invert`}
+					className={`block cursor-pointer col-span-3 mr-5 lg:hidden ${collapsed ? ' ' : ' open '} `}
 				>
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
+					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
 				</div>
 			</div>
 		</div>

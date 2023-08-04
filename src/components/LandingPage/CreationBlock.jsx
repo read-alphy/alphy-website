@@ -206,7 +206,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
 
                        </p>
                        <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
-                        Submit a link to a YouTube video or Twitter Spaces to unlock with Alphy.
+                        Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
                        </p>
                        <div className="row-span-1 w-full justify-center items-center flex">
                             <LinkIcon fontSize={window.innerWidth>600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2"/>

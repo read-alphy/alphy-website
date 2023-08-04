@@ -65,11 +65,11 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 	  
 
 	return (
-		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 lg:bg-zinc-100 min-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"min-w-[270px] max-w-[270px]" } relative transition-all duration-300 ease-in-out`} >
+		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } relative transition-all duration-300 ease-in-out`} >
 
 			{!collapsed ? 
 			<div>
-							<div className={`flex items-center font-bold pt-10`}>
+							<div className={`flex items-center font-bold pt-10 relative`}>
 
 									<Link to="/" className="text-zinc-800 dark:text-gray-200 pl-8 ">
 									<div className="flex-row flex">
@@ -79,9 +79,24 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 						
 									</div>
 								</Link>
-										
-										<LastPageIcon onClick={()=> setCollapsed(true)} fontSize="large" className="rotate-180 ml-16 hidden lg:block text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1"/>
+										<div className="hidden sm:block">
+										<LastPageIcon onClick={()=> setCollapsed(true)} fontSize="large" className="rotate-180 ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1"/>
+										</div>
+
+			<div className="absolute right-0 mr-6">
+											<div
+												id={'nav-icon3'}
+												onClick={() => setCollapsed(!collapsed)}
+												className={` cursor-pointer sm:hidden ${collapsed ? ' ' : ' open '} text-zinc-500 dark:text-zinc-500`}
+											>
+												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+											</div>
 									</div>
+									</div>
+
 									
 							<div className="pt-10 md:pl-5">
 
@@ -121,15 +136,26 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					{( dataArchipelago!==undefined && dataArchipelago.length>0)
 					
 					?
-					dataArchipelago.map((item, index) => {
-						<FeedItem sideFeed={true} key={index} item={item} setCollapsed={setCollapsed} />
-					})
-					:null
+					<div>
+					<p className="text-zinc-700 dark:text-zinc-300 mt-10 ml-4 mb-2 underline text-l">Arc Items</p>
+					<div className="overflow-y-scroll max-h-[62vh] ">
+						
+						
+					{dataArchipelago.map((item, index) => 
+					
+						<FeedItem sideFeed={true} key={index} item={item.source} setCollapsed={setCollapsed} myBookmarks={false}  />
+				
+					)}
+
+					</div>
+					</div>
+
+					:<div className="absolute bottom-0 w-full">
+					<FooterReworked/>
+					</div>
 					}
 
-					<div className="absolute bottom-0 w-full">
-								<FooterReworked/>
-						</div>
+					
 
 		</div>
 		: 

@@ -1,5 +1,6 @@
 
 import React, { Fragment, useState, useRef, useEffect } from 'react';
+import {Link} from 'react-router-dom'
 import axios from 'axios';
 import HubFeedItem from "./HubFeedItemElements/HubFeedItem"
 import Loading from '../../components/Loading';
@@ -276,7 +277,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
     
     return(
-        <div className="xl:max-w-[1200px] lg:ml-20 ">
+        <div className="xl:max-w-[1200px] lg:ml-20 pt-20 p-4 sm:pl-10">
 
             
                         
@@ -291,17 +292,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
         <p className="text-zinc-600 dark:text-zinc-300 text-xl">Arcs</p>
             <div className="flex flex-row mt-10 ">  
 
-            <a href="/arc/createArc" className="min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] drop-shadow-lgborder mr-5  border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700   items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
-
-												<div >
-													<AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-													<p className="text-zinc-600 dark:text-zinc-300 text-xl">Create An Arc</p>
-
-												</div>
-
-
-		    </a>        
-
+           
             
                     {
                             userArchipelagos.length>0 &&
@@ -314,7 +305,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 									<div className="main-page-feed  w-full">
 									
 
-                                                                <div className="w-full h-full container xl:max-w-[800px] 2xl:max-w-[1080px]  ">
+                                                                <div className="w-full h-full container max-w-xs sm:max-w-xsSm md:max-w-[540px] lg:max-w-[620px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
 
                                                                     <div className="relative ">
                                                                     <button onClick={scrollBackward} ref = {leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
@@ -324,8 +315,19 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                                                                                         <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
                                                                                         </div>
                                                                             </button>
-                                                                    <div className="flex flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area min-h-[400px]" ref={carouselRef}>
-                                                                    {
+                                                                    <div className="grid grid-cols-2 xsSm:grid-cols-3 sm:gap-6 sm:grid-cols-3 md:flex md:grid-cols-none md:flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area md:min-h-[400px]" ref={carouselRef}>
+                                                                    <Link to="/arc/createArc" className="drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  md:min-h-[360px] md:max-h-[360px] md:min-w-[240px] md:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 ml-2 md:ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+
+                                                                    <div >
+                                                                        <AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
+                                                                        <p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl">Create An Arc</p>
+                                                                        <p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5">Connect multiple audio content with AI.</p>
+
+                                                                    </div>
+
+
+                                                                    </Link>
+                                                                        {
 
 
                                                                     userArchipelagos.map((item, index) => (
@@ -477,7 +479,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                 
                     
                     <div>            
-                    <div className="grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 
                             
                                             {dataPersonal.length>0 ?
@@ -547,7 +549,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
         <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Bookmarks</p>
             <div>
             {dataBookmarks.length>0 ?
-                        <div className="grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                                     {searchKeyword(dataBookmarks).map((item, index) => (
                                             (index<offsetBookmarks+10) &&
                                             <HubFeedItem item={item} index={index} myBookmarks={true} currentUser={currentUser}/>
@@ -598,7 +600,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
             <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Uploads</p>
             </p>
             {dataUploads.length>0 ?
-                            <div className="grid grid-cols-4 xl:grid-cols-5">
+                             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 ">
 
                                 
                                                     {searchKeyword(dataUploads).map((item, index) => (
@@ -613,7 +615,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
                        {!hasActiveSub && called && 
                         
-                        <p>You don't have any uploads. Upgrade to <a className="underline dark:text-greenColor text-green-400 cursor-pointer">premium plan</a> to process local files.
+                        <p>You don't have any uploads. Upgrade to <Link to="/account" className="underline dark:text-greenColor text-green-400 cursor-pointer">premium plan</Link> to process local files.
                         </p>}
 
                         {hasActiveSub && called && 
@@ -635,7 +637,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
             <div>
                   <button onClick={() => handleHubNavigation("global")} className="text-zinc-700 dark:text-zinc-300 text-lg mt-20">
 							<KeyboardArrowLeftIcon fontSize="small" className=""/>
-							<span className="">Go Back</span>
+							<span className="text-sm">Go Back</span>
             </button>
             <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20">
 					 <a href="/u/login" className="dark:text-greenColor text-green-400 underline">Sign in</a> or <a href="/u/register" className="dark:text-greenColor text-green-400 underline"> create an account</a> to access this page. 

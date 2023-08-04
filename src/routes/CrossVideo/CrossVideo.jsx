@@ -96,7 +96,7 @@ const handleArcInfo = async () => {
 			const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
 			
 			setCalled(true)
-			setCollapsed(true)
+			
 			setData(response.data)
 			setArchipelagoInfo(response.data)
 						if(response.data.description==="null"){
@@ -256,7 +256,7 @@ const handleDeleteArchipelago = () => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[100vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none  overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					

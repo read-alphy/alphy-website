@@ -14,10 +14,10 @@ export default function HubSubmitPage({currentUser,hasActiveSub,userArchipelagos
 	
 
     return(
-        <div className="min-h-[90vh]">
+        <div className="">
 
 
-            <div className="mt-40">
+            <div className="">
             
             
             <HubCreationBlockReworked

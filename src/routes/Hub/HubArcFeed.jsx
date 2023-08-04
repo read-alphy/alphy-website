@@ -8,7 +8,7 @@ import CuratedCarouselItem from '../../components/LandingPage/CuratedCarouselIte
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@mui/icons-material/Add';
-
+import {Link} from 'react-router-dom'
 
 
 
@@ -153,11 +153,12 @@ function HubArcFeed(props) {
 
 
 	return (
-		<div className="main-page-feed-section   w-full mt-10 mx-auto md:pl-20 md:ml-10  flex flex-row">
+		<div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 xl:pl-20 2xl:pl-40 flex flex-row">
 			{props.mainShow==="default" ? 
 
-						<div className=" p-[10px] pl-5 xl:min-w-[1200px]  xl:max-w-[1200px]">
+						<div className=" p-[10px] pl-5 xl:min-w-[1200px]  xl:max-w-[1200px] ">
 						<p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-semibold">Learn from the best online sources with AI.</p>
+						
 									{/* <form
 										className="flex items-center pt-4"
 										
@@ -215,27 +216,35 @@ function HubArcFeed(props) {
 												<div className={`buttons flex justify-between mt-2 `}></div>
 
 								
-									<div className="main-page-feed  w-full">
+									<div className="main-page-feed  mx-auto md:mx-0 w-full container  md:max-w-[620px] lg:max-w-[620px] xl:max-w-[840px] 2xl:max-w-[1000px]">
 										<div
-											className={`relative flex flex-row overflow-hidden`}
+											className={`relative  grid grid-cols-2 xsSm:grid-cols-3 md:flex md:grid-cols-none md:flex-row overflow-x-hidden w-full`}
 										>
 											
 											{props.dataGlobalArchipelagos.length > 0
 													&& searchKeyword(props.dataGlobalArchipelagos)
 														.map((item, index) =>
-														<div className="mx-5 my-5">
+														index<6 && 
+														<div className="my-5 mx-2 md:mx-5 md:my-5">
 														<CuratedCarouselItem currentUser={currentUser} key={index} item={item} forFeed={true} expandedLayout={true}/>
 														</div>
+														
 														)}
 
-						<button  type="button" className={`bg-zinc-50 dark:bg-darkMode  cursor-default pl-4 right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full group focus:outline-none`}>
-								<div className="rounded-full bg-zinc-300 dark:bg-zinc-600 bg-opacity-40 p-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
-											<ArrowForwardIosIcon onClick={handleShowExpandedArcs} className="cursor-pointer text-zinc-600 dark:text-zinc-200 p-1 " />
+						<button  type="button" className={`hidden md:block bg-zinc-50 dark:bg-darkMode  cursor-default pl-4 right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full group focus:outline-none`}>
+								<div className="rounded-full  max-w-[40px] ml-3 bg-opacity-40 p-1 mb-20 md:mb-0 hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+											<ArrowForwardIosIcon fontSize="small" onClick={handleShowExpandedArcs} className="cursor-pointer text-zinc-600 dark:text-zinc-200 p-1 " />
 											
 											</div>
-											<p onClick={handleShowExpandedArcs} className=" cursor-pointer text-slate-700 dark:text-zinc-300  pl-2">Discover</p>
+											<p onClick={handleShowExpandedArcs} className=" cursor-pointer hidden md:block text-slate-600 dark:text-zinc-300 text-sm pl-2 pt-1">Discover</p>
 						</button>
 																</div>
+
+
+							<button onClick={handleShowExpandedArcs} type="button" className="md:hidden flex flex-row text-zinc-600 font-semibold dark:text-zinc-200 underline mt-6 ml-2 mb-10 " >
+								<p>See All Arcs</p>
+											<ArrowForwardIosIcon className="cursor-pointer text-zinc-600 dark:text-zinc-200 p-1 " />
+								</button>
 
 									
 
@@ -261,35 +270,36 @@ function HubArcFeed(props) {
 								</div>
 								:
 								
-				<div>
+				<div className="p-4">
 					<div className="main-page-feed  xl:max-w-[1400px]">
 					<button onClick={handleShowMain} className="text-zinc-700 dark:text-zinc-300 text-lg mb-10">
 							<KeyboardArrowLeftIcon fontSize="small" className=""/>
-							<span className="">Go Back</span>
+							<span className="text-sm">Go Back</span>
                 	</button>
 						<p className="mb-10 text-xl lg:text-2xl text-zinc-700 dark:text-zinc-200 font-semibold">
-							Ask questions to the best with Arcs. For Free
+							Discover All Arcs
 						</p>
 
 					
 							<div
-											className={`grid grid-cols-2 xs:pl-10 sm:pl-0 xs:gap-6 sm:gap-0 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 `}
+											className={`grid grid-cols-2 xsSm:grid-cols-3 xsSm:gap-6 sm:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 `}
 										>
 
-					<a href="/arc/createArc" className="min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700 mt-5 ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+					<Link to="/arc/createArc" className="drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  md:min-h-[360px] md:max-h-[360px] md:min-w-[240px] md:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 mt-5 ml-2 md:ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
 												<div >
 													<AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-													<p className="text-zinc-600 dark:text-zinc-300 text-xl">Create Your Arc</p>
+													<p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl">Create Your Arc</p>
+													<p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5">Connect multiple audio content with AI.</p>
 
 												</div>
 
 
-												</a>
+												</Link>
 											{props.dataGlobalArchipelagos.length > 0
 													&& searchKeyword(props.dataGlobalArchipelagos)
 														.map((item, index) =>
-														<div className="mx-5 my-5 col-span-1">
+														<div className="mx-2 my-5 md:mx-5 md:my-5 col-span-1">
 														<CuratedCarouselItem currentUser={currentUser} key={index} item={item} forFeed={true} expandedLayout={true}/>
 														</div>
 														

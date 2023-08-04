@@ -111,7 +111,7 @@ useEffect (() => {
 
 			</div>
 			} */}
-			{<div className={` hidden lg:block  `}>
+			{<div className={` hidden sm:block  `}>
 				
 				<SideFeedReworked 
 				
@@ -120,7 +120,7 @@ useEffect (() => {
 				/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg max-h-[100vh] bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg max-h-[100vh] bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
@@ -135,7 +135,7 @@ useEffect (() => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} w-full max-h-[100vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none  overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} w-full max-h-[90vh] sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 

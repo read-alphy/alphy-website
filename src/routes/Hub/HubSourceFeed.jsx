@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useRef, useCallback } from 'react';
 import { useEffect } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
+import HubFeedItem from './HubFeedItemElements/HubFeedItem';
 import axios from 'axios';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
 import { useNavigate } from 'react-router-dom';
@@ -139,9 +139,9 @@ function HubSourceFeed(props) {
 
 
 	return (
-		<div className="main-page-feed-section  xl:min-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1280px] 2xl:min-w-[1280px] w-full mx-auto md:pl-20 md:ml-10  flex flex-row">
+		<div className="main-page-feed-section  xl:min-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1280px] 2xl:min-w-[1280px] w-full mx-auto 2xl:mx-0 md:pl-10  lg:pl-16  xl:pl-20 2xl:pl-40   flex flex-row">
 
-		<div className=" p-[10px] min-h-[60vh] pl-5 ">
+		<div className=" p-[10px] mt-10 min-h-[60vh] pl-5 w-full">
 		<p className="text-zinc-700 dark:text-zinc-300 text-lg font-semibold text-xl xl:text-2xl"> Discover our database.</p>
 		
 
@@ -168,7 +168,7 @@ function HubSourceFeed(props) {
 										setSearch(e.target.value);
 									}}
 									placeholder="Start searching..."
-									className=" pl-10 peer md:min-w-[300px] xl:min-w-[500px] h-full border-zinc-500 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-blue-000 dark:focus:border-blue-000" />
+									className=" pl-10 peer min-w-[300px] xl:min-w-[500px] h-full border-zinc-500 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-blue-000 dark:focus:border-blue-000" />
 								<div
 						
 						className="cursor-pointer absolute inset-y-0 left-0 flex items-center pl-3 "
@@ -206,12 +206,12 @@ function HubSourceFeed(props) {
 					<div className="main-page-feed  w-full">
 						<div
 							className={`
-							grid grid-cols-1 mt-10
+							grid  mt-10
 							${isLoading
 								? 'grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
 								: data.length === 1
 									? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
-									: 'grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
+									: 'xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
 							}
 							gap-4
 							`}
@@ -219,10 +219,10 @@ function HubSourceFeed(props) {
 							{isLoading
 								? data.length > 0
 									? data
-										.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={false} key={index} item={item} mainFeedInput={inputValue} />)
+										.map((item, index) => <HubFeedItem currentUser={currentUser} myBookmarks={false} key={index} item={item} mainFeedInput={inputValue} />)
 										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
-								: data.map((item, index) => <FeedItem currentUser={currentUser} myBookmarks={false} key={index + 1000} item={item} />)}
+								: data.map((item, index) => <HubFeedItem currentUser={currentUser} myBookmarks={false} key={index + 1000} item={item} />)}
 						</div>
 						{hasMore && (
 							<div className="w-full flex justify-center">

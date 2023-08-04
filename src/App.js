@@ -275,7 +275,7 @@ if (currentUser && creditcalled!==true) {
 				) : (
 					<>
 
-						 <div className="lg:hidden">
+						 <div className="sm:hidden">
 						 <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> 
 						 </div>
 						<Routes>

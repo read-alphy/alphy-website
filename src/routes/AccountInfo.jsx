@@ -172,7 +172,7 @@ function handleStripeTrialCall(type){
 
 
                     {
-                        windowSize.width > 999 ?
+                        windowSize.width > 1000 ?
                             <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
                                      <div className="items-center margin-auto justify-center flex flex-col">
                         {currentUser ? 
@@ -223,6 +223,7 @@ function handleStripeTrialCall(type){
                                  <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-bold mb-10 mt-20">Manage Subscription </p>
                          
                                 { hasActiveSub ? <a className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
+                                
                                 <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch">
                                     <div className="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
 

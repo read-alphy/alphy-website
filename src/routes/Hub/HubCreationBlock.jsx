@@ -36,7 +36,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
 			)
 		 {
 			setInputValue('');
-			setErrorMessage('Please provide a link to a YouTube video or Twitter Spaces.')
+			setErrorMessage('Please provide a link to a YouTube video or Twitter Space.')
 			setFailed(true)
 			return;
 		}
@@ -157,7 +157,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
 
                        </p>
                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
-                        Submit a link to a YouTube video or Twitter Spaces to unlock with Alphy.
+                        Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
                        </p>
                        <div className="flex-row flex mt-5">
                          

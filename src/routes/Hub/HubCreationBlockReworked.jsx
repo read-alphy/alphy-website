@@ -68,7 +68,7 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
 			)
 		 {
 			setInputValue('');
-			setErrorMessage('Please provide a link to a YouTube video or Twitter Spaces.')
+			setErrorMessage('Please provide a link to a YouTube video or Twitter Space.')
 			setFailed(true)
 			return;
 		}
@@ -186,11 +186,11 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
     }
 
     return(
-        <div className="mt-10 mx-auto">
+        <div className="md:mt-10 mx-auto ">
              
             
              
-            <div className="hidden sm:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
+            <div className="hidden pt-20 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
 
             
         <div className="flex flex-col gap-10">
@@ -212,7 +212,7 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
 
                                     </p>
                                     <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
-                                        Submit a link to a YouTube video or Twitter Spaces to unlock with Alphy.
+                                        Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
                                     </p>
                                     <div className="row-span-1 w-full justify-center items-center flex">
                                             <LinkIcon fontSize={window.innerWidth>600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2"/>
@@ -278,18 +278,7 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
 
 
 
-        {mobileWindow &&
-            <div className="mx-auto w-full justify-center">
-                <button onClick={() => setCreationDialogMobile(true)} className=" max-w-[150px] mx-auto px-5 py-2 bg-green-300  mb-5 rounded-md text-white justify-center flex dark:text-zinc-700 dark:font-semibold transform hover:scale-105 transition duration-500 ease-in-out">
-                    Start Creating
-                </button>
-            </div>
-
-        }
-
-            {(creationDialogMobile && mobileWindow) &&
-            <Dialog maxWidth="md" fullWidth="true" open={creationDialogMobile} onClose={() => setCreationDialogMobile(false)} >
-        <div className="dark:bg-darkMode bg-white justify-center h-full py-10 px-5 items-center">
+        <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] pt-20">
 
             <p className="mb-10 text-xl font-semibold text-zinc-600 dark:text-zinc-300 text-center">Start discovering Alphy's capabilities</p>
             <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
@@ -359,8 +348,7 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
                     </div>
 
                     </div>
-                </Dialog>
-}
+     
                             
 
             {submitDialog &&

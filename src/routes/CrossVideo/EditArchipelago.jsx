@@ -119,7 +119,7 @@ const handleKeyDown = (event) => {
             <div className="mt-10 lg:mt-0 ">
                 <a className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition"  href={`/arc/${archipelagoInfo.uid}`}>
                 <KeyboardArrowLeftIcon fontSize="small" className=""/>
-                <span className="">Go Back</span>
+                <span className="text-sm">Go Back</span>
                 </a></div>
             <div className=" flex flex-row w-full items-center">
 
