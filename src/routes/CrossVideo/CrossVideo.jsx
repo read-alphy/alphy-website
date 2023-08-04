@@ -242,12 +242,12 @@ const handleDeleteArchipelago = () => {
 			></div>
 			
 			<div className="flex flex-row ">
-			{<div className={`hidden lg:block `}>
+			{<div className={`hidden sm:block `}>
 				
 				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} dataArchipelago={dataArchipelago}/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">

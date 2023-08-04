@@ -101,7 +101,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 							<div className="pt-10 md:pl-5">
 
 								<div className="flex flex-col w-full justify-start px-5">
-									<Link to="/submit" className={`text-zinc-700 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-lg  scale-105 transform"}   bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg px-2 text-md max-w-[120px] flex flex-row py-2`} >
+									<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-lg  scale-105 transform"}   bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[120px] flex flex-row `} >
 									<AddIcon className="mr-3"/>
 										<p>New</p>
 									</Link>
@@ -138,7 +138,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					?
 					<div>
 					<p className="text-zinc-700 dark:text-zinc-300 mt-10 ml-4 mb-2 underline text-l">Arc Items</p>
-					<div className="overflow-y-scroll max-h-[62vh] ">
+					<div className="overflow-y-scroll max-h-[55vh] overflow-x-hidden ">
 						
 						
 					{dataArchipelago.map((item, index) => 
@@ -182,7 +182,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 
 								<div className="flex flex-col w-full justify-start ">
 									<div className="pl-2">
-									<Link to="/submit" className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-zinc-200   p-2 py-2 text-md`} >
+									<Link to="/submit" className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-zinc-200 px-2 py-2.5 text-md`} >
 									<AddIcon className=""/>
 										
 									</Link>

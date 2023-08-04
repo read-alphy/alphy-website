@@ -96,7 +96,7 @@ useEffect (() => {
 
 			</div>
 			} */}
-			{<div className={`flex hidden lg:block mr-5 bg-zinc-100 dark:bg-mildDarkMode`}>
+			{<div className={`flex hidden sm:block mr-5 bg-zinc-100 dark:bg-mildDarkMode`}>
 				
 				<SideFeedReworked 
 				
@@ -105,7 +105,7 @@ useEffect (() => {
 				/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
