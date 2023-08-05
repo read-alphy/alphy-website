@@ -561,7 +561,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                             called ?
                             <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
 
-                            You don't have any bookmarks. <a onClick={() => handleHubNavigation("global")} className="text-indigo-400 underline">Discover</a> the content other users unlocked with Alphy.
+                            You don't have any bookmarks. <a onClick={() => handleHubNavigation("global")} className="text-indigo-400 underline cursor-pointer">Discover</a> the content other users unlocked with Alphy.
 
                             </div>
                             :

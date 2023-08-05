@@ -1054,7 +1054,7 @@ return (
 
 								<div  className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
 									{transcript.length > 0 ? (
-										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px]  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
+										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
 											<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
 												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto	">
@@ -1088,7 +1088,7 @@ return (
 	
 
   
-											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 " >
+											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200  " >
 
 												<Tabs>
 													<Tab eventKey="transcript" title="">
@@ -1360,9 +1360,9 @@ return (
 
 			<button
       onClick={handleScroll}
-      className={`lg:hidden absolute bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-full`}
+      className={`lg:hidden absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-600 text-white font-bold py-2 px-2 rounded-full`}
     >
-      <ArrowUpwardIcon className="text-zinc-300 dark:text-zinc-600" />
+      <ArrowUpwardIcon className="" />
     </button>
 		</div>
 	);
