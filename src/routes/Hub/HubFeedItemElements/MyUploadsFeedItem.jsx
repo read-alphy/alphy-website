@@ -22,7 +22,7 @@ export default function MyUploadsFeedItem({item, source_id, formattedDate, setCo
 							}}
 							target="_blank"
 						>
-								<div className="mb-10 bg-slate-200 min-w-[220px] max-w-[220px]  h-[140px] items-center flex justify-items-center justify-center ">
+								<div className="mb-10 bg-slate-200 dark:bg-slate-600 text-zinc-600 dark:text-zinc-300 min-w-[220px] max-w-[220px]  h-[140px] items-center flex justify-items-center justify-center ">
 									<LibraryMusicIcon fontSize="large"/>
 								</div>
 

@@ -153,7 +153,7 @@ function HubArcFeed(props) {
 
 
 	return (
-		<div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 xl:pl-20 2xl:pl-40 flex flex-row">
+		<div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 xl:pl-20	 2xl:pl-40 flex flex-row">
 			{props.mainShow==="default" ? 
 
 						<div className=" p-[10px] pl-5 xl:min-w-[1200px]  xl:max-w-[1200px] ">

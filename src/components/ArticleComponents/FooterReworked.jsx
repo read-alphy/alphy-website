@@ -146,7 +146,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                                 </div> 
                             
                                 <div className="mt-6">
-                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>
+                                  <Link className="text-zinc-300 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>
                                     
                                   <FeedbackIcon fontSize="small" className="text-zinc-500  dark:text-zinc-300"/> </Link>
                               </div>

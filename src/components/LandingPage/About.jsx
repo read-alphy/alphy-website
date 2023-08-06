@@ -19,8 +19,8 @@ export default function About() {
 			<div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">	
 			<h1 className="text-2xl mb-5 underline font-semibold">About Alphy</h1>
 			<Fragment>
-      <Accordion open={true}>
-        <AccordionHeader onClick={() => handleOpen(1)}>
+      <Accordion className="cursor-default" open={true}>
+        <AccordionHeader className="cursor-default" onClick={() => handleOpen(1)}>
 		What is Alphy?
         </AccordionHeader>
         <AccordionBody className="text-md dark:text-zinc-300">
@@ -35,10 +35,10 @@ export default function About() {
       </Accordion>
 
 	  <Accordion className="mt-6" open={true}>
-        <AccordionHeader onClick={() => handleOpen(3)}>
+        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(3)}>
 		How does Alphy work?
         </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-400">
+        <AccordionBody className="text-md dark:text-zinc-300">
 		<p className="">
 					Upon submitting a link or uploading a recording, Alphy creates the transcription, summary, key takeaways, and a mini AI assistant for the content.
 					<br/><br/>
@@ -48,10 +48,10 @@ export default function About() {
       </Accordion>
 
       <Accordion className="mt-6" open={true}>
-        <AccordionHeader onClick={() => handleOpen(2)}>
+        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(2)}>
 			What kind of audiovisual content can I use Alphy with?
 		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-400">
+        <AccordionBody className="text-md dark:text-zinc-300">
 		<p>
 		You can use Alphy to transcribe, summarize, and question YouTube videos, Twitter Spaces, and your local audio files (.mp3, .m4a, .mpga, .mpeg, .wav, or .webm)
 					</p>
@@ -59,10 +59,10 @@ export default function About() {
       </Accordion>
 	  
 	  <Accordion className="mt-6" open={true}>
-        <AccordionHeader onClick={() => handleOpen(4)}>
+        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(4)}>
 		How does private audio processing work? Is my data safe?
 		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-400">
+        <AccordionBody className="text-md dark:text-zinc-300">
 				<p>
 					Alphy processes the files you upload from your device the same way it processes YouTube and Twitter Space links, but keeps the end result private. We don't show it on Discover and no one else other than you can access it.
 					<br/><br/>
@@ -74,10 +74,10 @@ export default function About() {
         </AccordionBody>
       </Accordion>
 	  <Accordion className="mt-6" open={true}>
-        <AccordionHeader onClick={() => handleOpen(4)}>
+        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(4)}>
 		What are Arcs?
 		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-400">
+        <AccordionBody className="text-md dark:text-zinc-300">
 		<p>
 					
 		An Arc, derived from 'archipelago,' is Alphy's AI-assisted contextually aware search engines on audiovisual content. They serve as a comprehensive collection of interconnected content, enhanced by AI. 
@@ -94,10 +94,10 @@ export default function About() {
 			<h1 className="text-2xl mb-5 underline font-semibold">Subscription & Billing</h1>
 			</div>
 			<Accordion className="mt-6" open={true}>
-        <AccordionHeader onClick={() => handleOpen(4)}>
+        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(4)}>
 		What does Premium offer?
 		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-400">
+        <AccordionBody className="text-md dark:text-zinc-300">
 				<p>
 					See <a className="underline text-green-300" href="/plans">here</a> to learn detailed info about Alphy Premium.
 
@@ -108,10 +108,10 @@ export default function About() {
       </Accordion>
 
 			<Accordion className="mt-6" open={true}>
-        <AccordionHeader onClick={() => handleOpen(4)}>
+        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(4)}>
 		Do my credits roll over?
 		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-400">
+        <AccordionBody className="text-md dark:text-zinc-300">
 		<p>
 					
 		If you are using the free version, you have 2 hours of free transcription in total. In premium, you get 10 hours of transcription credits every month (on top of your 2 hours of credit). If you don't use your credits, they will roll over to the next month. You can accumulate up to 30 hours of transcription credits.
@@ -123,10 +123,10 @@ export default function About() {
       </Accordion>
 
 	  <Accordion className="mt-6" open={true}>
-        <AccordionHeader onClick={() => handleOpen(4)}>
+        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(4)}>
 		What happens to my credits if I cancel my subscriptions?
 		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-400">
+        <AccordionBody className="text-md dark:text-zinc-300">
 		<p>
 					
 		If you want to cancel your subscription, you can do so at any time. Your credits will still be yours. However you will only be able to access premium benefits until the end of the billing period.

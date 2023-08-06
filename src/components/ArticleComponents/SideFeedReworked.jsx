@@ -101,7 +101,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 							<div className="pt-10 md:pl-5">
 
 								<div className="flex flex-col w-full justify-start px-5">
-									<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-lg  scale-105 transform"}   bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[120px] flex flex-row `} >
+									<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-sm"}   bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[120px] flex flex-row `} >
 									<AddIcon className="mr-3"/>
 										<p>New</p>
 									</Link>
@@ -138,7 +138,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					?
 					<div>
 					<p className="text-zinc-700 dark:text-zinc-300 mt-10 ml-4 mb-2 underline text-l">Arc Items</p>
-					<div className="overflow-y-scroll max-h-[55vh] overflow-x-hidden ">
+					<div className="overflow-y-scroll max-h-[55vh] 2xl:max-h-[64vh] overflow-x-hidden ">
 						
 						
 					{dataArchipelago.map((item, index) => 
@@ -161,7 +161,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 		: 
 
 		<div>
-		<div className="">
+			<div className="">
 							<div className={`flex items-center font-bold pt-10 pl-2`}>
 
 									<button onClick={() => setCollapsed(false)} className="text-zinc-8 00 dark:text-gray-200 ">
@@ -187,18 +187,14 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 										
 									</Link>
 									</div>
-							
-
+						
 									<Link to="/myhub" className={` pl-4 flex flex-row py-3 mt-6  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 									<HubIcon className="mr-3 " fontSize="medium"/>
 										
 										
 									</Link>
-
 									<Link to="/"  className={` pl-4 ${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
-									<ExploreIcon className="mr-3" fontSize="medium"/>
-										
-										
+									<ExploreIcon className="mr-3" fontSize="medium"/>		
 									</Link>
 									{
 									localStorage.getItem("logged in")==="true" ?   (
@@ -212,7 +208,6 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 										</Link>
 									)}
 								</div>
-
 					</div>
 
 					<div className="absolute bottom-0 w-full">

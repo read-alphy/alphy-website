@@ -289,7 +289,7 @@ function handleStripeTrialCall(type){
  
                              
                               
-                           <div className="flex md:pl-10 lg:pl-20 xl:pl-40 gap-10 mx-auto items-center justify-center flex-col xl:flex-row max-w-[1200px]">    
+                           <div className="flex md:pl-10 lg:pl-20 xl:pl-40 xl:ml-10 gap-10 mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">    
 
                     <FreeCard currentUser={currentUser} hasActiveSub={hasActiveSub} triggers1={triggers1} openPopover1={openPopover1} setOpenPopover1={setOpenPopover1} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
                     <PremiumCard currentUser={currentUser} hasActiveSub={hasActiveSub} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
