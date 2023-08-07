@@ -1,127 +1,138 @@
-import React, { useState, useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import axios from "axios";
-import CheckOutForm from "./CheckOutForm";
-import { useAuth } from "../../hooks/useAuth";
-import Loading from "../../components/Loading";
-import { useNavigate } from "react-router-dom";
-import StripeBanner from "../../img/stripe_banner.svg";
+import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
+// import ArticleCreator from "./ArticleComponents/ArticleCreator"
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-// Make sure to call loadStripe outside of a component’s render to avoid
-// recreating the Stripe object on every render.
-// This is your test publishable API key.
-//const stripePromise = loadStripe("pk_live_51MeGOKJmF4J0rk0xzE0Cl6UmLItHqja1URuUZGHsfOpoATmt60o5CDG3rNXyHrvd28CCxUnb5biyLOMewIz0psQz00mEIfPVl6")
-const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`)
-
-
-export default function CheckOutPage() {
-    
-    const [clientSecret, setClientSecret] = useState("");
-    const { currentUser } = useAuth()
-    const [user, setUser] = useState("")
-    const [called, setCalled] = useState(false)
-    let userStripeId = ""
-    const navigate =  useNavigate()
-
-
-    useEffect(() => {  
-        if (clientSecret.length === 0 && currentUser !== null && called === false) {
-            setTimeout(() => {
-                /* getCustomerInfo() */
-                fetchData()
-                setCalled(true)
-
-            }, 2000)
-           
-
-
-        }
-
-    })
-
-  
-
-    const fetchData = async () => {
-        await currentUser.getIdToken().then((idToken) => {
-
-        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription`,{},
-            {
-                headers: {
-                    'id-token': idToken,
-                },
-            },
-        )
-            .then(r => {
-                const clientSecret = r.data[0].latest_invoice.payment_intent.client_secret  
-                setClientSecret(clientSecret)
-                setCalled(true)
-            }
-
-            )
-            .catch((error) => {
-                if(error.response.data.detail ==="Already subscribed")
-                {
-                    navigate("/plans")
-                }
-                
-            })
-        })
-
-    }
+import Loading from '../../components/Loading';
+import axios from 'axios';
+import { Helmet } from "react-helmet";
+import CheckOutPageInfo from './CheckOutPageInfo';
 
 
 
 
-let appearance
-
-    if(localStorage.getItem("theme")==="dark"){
-        appearance = {
-            theme: 'night',
-        }
-    }
-    else{
-    appearance = {
-        theme: 'stripe',
-    };
-}
-    const options = {
-        clientSecret,
-        appearance,
-    };
 
 
+export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+	const location = useLocation();
+	const navigate = useNavigate();
+	
 
-    return (
-        <div className="h-[110vh] dark:bg-darkMode bg-zinc-50">
-        <div className="mx-auto container items-center pt-10 max-h-[95vh]">
-            {/* <button onClick={fetchData}>Create</button> */}
+	let source_id
+	
+	
+    const [windowSizeChecked,setWindowSizeChecked] = useState(false);
+	
+
+	const [isLoading, setIsLoading] = useState(true);
+
+	const [subCalled, setSubCalled] = useState(false);
 
 
-            {clientSecret.length > 0 ? (
-                <div className="container max-w-[400px] mx-auto items-center ">
-                    <div className="mb-10 mt-20">
-                        <p className="text-xl mb-5">Alphy Monthly Subscription</p>
-                        <p className="text-zinc-500">$5.00 </p>
-                       
-                    </div>
-                    
-                  
 
-                    <Elements options={options} stripe={stripePromise}>
+	useEffect(() => {
 
-                        <CheckOutForm clientSecret={clientSecret} />
-                    </Elements>
-                    
 
-                </div>)
-                : (<Loading />
-                )}
+		if(!windowSizeChecked){
+			if(window.innerWidth<768){
+			setCollapsed(true)
+			}
+			setWindowSizeChecked(true)
+	}
+	
+})
 
-            {/* <button onClick={getCustomerInfo}>Get Current Data</button> */}
 
+useEffect (() => {
+	if(hasActiveSub!==true){
+				setTimeout (() => {
+					setSubCalled(true)
+					setIsLoading(false)
+				}, 2000);
+		}
+		else{
+			setSubCalled(true)
+			setIsLoading(false)
+		}
+		
+	})
+
+
+	const handleCollapse = () => {
+		setCollapsed(!collapsed)
+		
+	}
+
+	return (
+		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
+			<Helmet>
+			
+			</Helmet>  
+			<div
+				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
+					}`}
+			></div>
+			
+			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
+				
+		{/* 	<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
+			<div className={`hidden md:flex `}>
+				<button onClick={handleCollapse }>
+
+		
+			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+
+			</button			>
+			</div> 
+
+			</div> */}
+		
+			{<div className={`hidden sm:block`}>
+				
+				<SideFeedReworked 
+				
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
+				
+				/></div>}
+				
+				<div
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+						}`}
+				>
+					<div className="rounded-lg rounded-t-none shadow-lg">
+						<div className="h-screen">
+							<SideFeedReworked 
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
+							
+							/>
+							
+							</div>
+					</div>
+				</div>
+
+				<div
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[90vh] sm:max-h-[100vh] ${collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
+						}}`}
+				>
+					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
+					<CheckOutPageInfo
+					hasActiveSub={hasActiveSub} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
+					/>}
+					
+
+
+				</div>
+			</div>
+		
+			
+						
+		
         </div>
-        </div>
-    );
+	);
 
 }
+
+
+

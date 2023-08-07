@@ -16,7 +16,7 @@ import HubContent from './HubContent';
 
 
 
-function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function Hub({arcs, currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -38,12 +38,16 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 	const [globalLayout, setGlobalLayout] = useState(true);
 	const [userLayout, setUserLayout] = useState(false);
 	const [submitLayout, setSubmitLayout] = useState(false);
-	const [mainShow, setMainShow] = useState("default");
-
-
+	const [mainShow, setMainShow] = useState(arcs===true ? "arcs" : "default");
 
 	useEffect(() => {
 
+		if(location.pathname.includes("arcs")){
+			setMainShow("arcs")
+		}
+		else{
+			setMainShow("default")
+		}
 
 		if(!windowSizeChecked){
 			if(window.innerWidth<768){
@@ -53,6 +57,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 	}
 	
 })
+
 
 
 useEffect (() => {
@@ -140,7 +145,7 @@ useEffect (() => {
 				>
 					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<HubContent
-					data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					arcs={arcs}	data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
 					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
 					mainShow={mainShow} setMainShow={setMainShow}

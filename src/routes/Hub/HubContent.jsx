@@ -9,10 +9,10 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 
-export default function HubContent({currentUser,hasActiveSub,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos,
+export default function HubContent({arcs, currentUser,hasActiveSub,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos,
          getDataGlobalArchipelagos, credit, globalLayout,setGlobalLayout, submitLayout, setSubmitLayout,
-          userLayout, setUserLayout, setMainShow, mainShow}){
-    
+          userLayout, setUserLayout, setMainShow, mainShow, collapsed, setCollapsed}){
+    console.log(arcs)
     return(
         <div>
             {/* <HubCreationBlock currentUser={currentUser} hasActiveSub={hasActiveSub} credit={credit}/> */}
@@ -39,7 +39,7 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
                                     
                             </div>
                             
-                        <HubArcFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+                        <HubArcFeed  currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                         mainShow={mainShow} setMainShow={setMainShow}  />
                         <HubSourceFeed currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                         mainShow={mainShow} setMainShow={setMainShow} />
@@ -50,7 +50,7 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
                     {mainShow =="arcs" &&
                     <div className="min-h-[90vh]">
                         <HubArcFeed 
-                        currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+                         arcs={arcs} currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                         mainShow={mainShow} setMainShow={setMainShow} />
                     </div>
                     }
@@ -77,7 +77,7 @@ export default function HubContent({currentUser,hasActiveSub,userArchipelagos, d
             {userLayout &&
                 <HubUserPage
                 currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
-                mainShow={mainShow} setMainShow={setMainShow} credit={credit} setGlobalLayout={setGlobalLayout} setUserLayout={setUserLayout} setSubmitLayout={setSubmitLayout}
+                mainShow={mainShow} setMainShow={setMainShow} credit={credit} setGlobalLayout={setGlobalLayout} setUserLayout={setUserLayout} setSubmitLayout={setSubmitLayout} collapsed={collapsed} setCollapsed={setCollapsed}
                 />
             }
         </div>

@@ -10,9 +10,11 @@ import { set } from 'lodash';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import ChatIcon from '@mui/icons-material/Chat';
+import LinkIcon from '@mui/icons-material/Link';
 
-
-export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow}){
+export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow, collapsed, setCollapsed}){
 
     const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -277,11 +279,11 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
     
     return(
-        <div className="xl:max-w-[1200px] lg:ml-20 pt-20 p-4 sm:pl-10">
+        <div className="xl:max-w-[1200px] lg:ml-20 pt-20 p-4 md:ml-5 sm:pl-10">
 
             
                         
-              {currentUser &&   <p className="text-2xl text-zinc-600 dark:text-zinc-300 font-bold">
+              {currentUser &&   <p className="text-2xl text-zinc-600 dark:text-zinc-300 font-bold ">
                     
                     Welcome to Your Hub!
                 </p>
@@ -289,25 +291,25 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
             {currentUser ? 
 <div className="mt-10">
-        <p className="text-zinc-600 dark:text-zinc-300 text-xl">Arcs</p>
+        <p className="text-zinc-600 dark:text-zinc-300 text-xl ">Arcs</p>
             <div className="flex flex-row mt-10 ">  
 
            
             
-                    {
-                            userArchipelagos.length>0 &&
+                    
 
                                 <div className="xl:min-w-[1200px]  xl:max-w-[1200px]">				
 
 											
 
 								
-									<div className="main-page-feed  w-full">
+									<div className="w-full">
 									
 
-                                                                <div className="w-full h-full container max-w-xs sm:max-w-xsSm md:max-w-[540px] lg:max-w-[620px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
+                                                                <div className="w-full h-full container  lg:max-w-[620px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
 
                                                                     <div className="relative ">
+                                                                    {userArchipelagos.length>0 &&
                                                                     <button onClick={scrollBackward} ref = {leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
                                                                             isBackwardArrowVisible ? '' : 'hidden'
                                                                             }`}>
@@ -315,8 +317,9 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                                                                                         <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
                                                                                         </div>
                                                                             </button>
-                                                                    <div className="grid grid-cols-2 xsSm:grid-cols-3 sm:gap-6 sm:grid-cols-3 md:flex md:grid-cols-none md:flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area md:min-h-[400px]" ref={carouselRef}>
-                                                                    <Link to="/arc/createArc" className="drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  md:min-h-[360px] md:max-h-[360px] md:min-w-[240px] md:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 ml-2 md:ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                                                                            }
+                                                                    <div className={`grid grid-cols-2 xsSm:grid-cols-3 sm:gap-6 ${collapsed ? "sm:grid-cols-3" : "sm:grid-cols-2"}  lg:flex md:grid-cols-2 lg:flex-row lg:grid-cols-none gap-4 overflow-x-scroll scroll-smooth carousel-area md:min-h-[400px]`} ref={carouselRef}>
+                                                                    <Link to="/arc/createArc" className="mt-2 ml-2 drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  md:min-h-[360px] md:max-h-[360px] md:min-w-[240px] md:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700  items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                                                     <div >
                                                                         <AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
@@ -327,38 +330,30 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
 
                                                                     </Link>
-                                                                        {
-
-
+                                                                
+                                                                {
                                                                     userArchipelagos.map((item, index) => (
+                                                                        <div className="mt-2">
                                                                         <CuratedCarouselItem currentUser={currentUser} key={index} item={item} forFeed={true} expandedLayout={true}/>
+                                                                        </div>
                                                                         ))}
                                                                         
                                                                             </div>
+
+                                                                            {userArchipelagos.length>0 &&
                                                                         <button onClick={scrollForward} ref={rightButtonRef} type="button" className={`right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
-                                                                            isForwardArrowVisible ? '' : 'hidden'
+                                                                            isForwardArrowVisible ? 'hidden lg:block' : 'hidden'
                                                                             }`}>
                                                                             <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
                                                                                         <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 p-1 " />
                                                                                         </div>
                                                                             </button>
+                                                                            }
                                                                             </div>
                                                                         </div>
 
 									
 
-										{/* {hasMore && (
-											<div className="w-full flex justify-center">
-												{
-													<button
-														className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline"
-														onClick={loadMore}
-													>
-														{'Load more'}
-													</button>
-												}
-											</div>
-										)} */}
 										
 									</div>
 
@@ -367,102 +362,12 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 							
 
 								</div>
-                        }
+                       
             </div>
 
 
-                      {/*    
-                        {currentUser ? 
-                                                        <div>
-                                                            
-                                                                    <h1 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 ">Account Details</h1>
-
-                                                    <div className="grid grid-cols-3 mb-5">
-                                                                    <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm">
-                                                                        <p className="mb-2">Your Email</p>
-                                                                        <p className="mb-2">Password</p>
-                                                                        {credit!==null ?
-                                                                        <p className="mt-2">Remaining Credits</p> :null
-                                                                                }
-                                                                                <p className="mt-2">Plan</p>
-                                                                    </div> 
-                                                        <div class="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
-                                                                    <div className="col-span-1 text-black dark:text-zinc-200 text-sm">
-                                                                        <p className="mb-2">{currentUser.email}</p>
-                                                                        <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
-                                                                        {credit!==null ?
-                                                                        <p className="mt-2" >{Math.floor(credit)} minutes</p> :null
-                                                                                }
-                                                                                <p className="mt-2">{hasActiveSub ? "Premium" : "Basic"}</p>
-                                                                    </div>
-                                                    
-                                                    </div>
-                                                
-                                        
-
-
-                                                
-                                                    </div>
-                                                    :null} 
-                                                    
-                        */}
-
-
-
-            
-			{/* <form
-						className="flex items-center pt-4 mb-10"
-						
-						onSubmit={(e) => {
-							e.preventDefault();
-
-						}}
-					>
-						<label htmlFor="voice-search" className="sr-only">
-							Search
-						</label>
-						<div className="relative  ">
-
-
-							<div class="relative h-11 ">
-								<input
-																	
-									onChange={(e) => {
-										setSearch(e.target.value);
-									}}
-									placeholder="Start searching..."
-									className=" pl-10 peer md:min-w-[300px] xl:min-w-[500px] h-full border-zinc-500 bg-white dark:bg-darkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-darkMode focus:border-blue-000 dark:focus:border-blue-000" />
-								<div
-						
-						className="cursor-pointer absolute inset-y-0 left-0 flex items-center pl-3 "
-					>
-
-						<svg
-							width="20"
-							
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24 "
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								strokeLinecap={'round'}
-								strokeLinejoin={'round'}
-								strokeWidth={'2'}
-								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-							></path>
-						</svg>
-					</div>
-
-							</div>
-
-
-						</div>
-
-					
-			</form> */}
-				
-
+                   
+    <div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
 
         <div className="mb-20">
             <div className="flex flex-row mt-20">
@@ -479,9 +384,23 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                 
                     
                     <div>            
-                    <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                    <div className={`grid grid-cols-1 xs:grid-cols-2 ${collapsed ? "md:grid-cols-3" : "md:grid-cols-2 lg:grid-cols-3"} xl:grid-cols-4 2xl:grid-cols-5`} >
+                    
+                    {dataPersonal.length>0 &&
+                    <Link to="/submit" onClick={() => {
+                        localStorage.setItem("newItem", "link")
+                    }}className="md:mt-2 drop-shadow-lg  mb-6 xs:mb-0 ml-2 xs:ml-0 min-w-[200px] max-w-[200px]   h-[120px] xs:min-h-none xs:max-h-none border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
+                        <div >
+                            <LinkIcon fontSize = "medium" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
+                            <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l">Submit A Link</p>
                             
+
+                        </div>
+
+
+</Link>
+                            }
                                             {dataPersonal.length>0 ?
                                                             searchKeyword(dataPersonal).map((item, index) => (
                                                                 (index<offsetPersonal+10) &&
@@ -507,7 +426,9 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                                                         </div> */}
 
                                                         <div>
-                                                        You don't have any submissions. Process your first online conversation <button className="underline dark:text-greenColor text-green-400 cursor-pointer" onClick={() => handleHubNavigation("submit")}>here.</button>
+                                                        You don't have any submissions. Process your first online conversation <Link to="/submit" className="underline dark:text-greenColor text-green-400 cursor-pointer" onClick={() => {
+                                                            localStorage.setItem("newItem", "link")
+                                                        }}>here.</Link>
                                                         </div>
                                                         
                                                 </div>
@@ -541,7 +462,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                 
                 </div>
 
-      
+            <div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
 
 <div className="min-h-[300px]">
 
@@ -593,16 +514,32 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
          </div>
         
 
+         <div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
 
 
         <div className="mt-20">
             <p className="mb-4">
             <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Uploads</p>
             </p>
+            {
+           
+}
             {dataUploads.length>0 ?
-                             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 ">
+                             <div className={`grid grid-cols-1  xs:grid-cols-2 ${collapsed ? " md:grid-cols-2 lg:grid-cols-3" : "mg:grid-cols-2 lg:grid-cols-2"}  xl:grid-cols-4 pl-4`} >
 
-                                
+                                    <Link to="/submit" onClick={() => {
+                                                            localStorage.setItem("newItem", "upload")
+                                                        }}className="drop-shadow-lg  mb-4 xs:mb-0  xs:ml-0 min-w-[220px] max-w-[220px]  h-[140px] border border-2 bg-white dark:bg-mildDarkMode  border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+
+                                    <div >
+                                        <CloudUploadIcon fontSize = "medium" className="text-zinc-600 dark:text-zinc-400 mb-4 "/>
+                                        <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l ">Upload A Recording</p>
+                                        
+
+                                    </div>
+
+
+                                    </Link>
                                                     {searchKeyword(dataUploads).map((item, index) => (
                                                         <HubFeedItem item={item} index={index} />
                                                     ))}
@@ -620,7 +557,9 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
                         {hasActiveSub && called && 
                         
-                        <p>You don't have any uploads. <button onClick={() => handleHubNavigation("submit")} className="underline dark:text-greenColor text-green-400 cursor-pointer">Process your first file now!</button>
+                        <p>You don't have any uploads. <Link to={"/submit"} onClick={() => {
+                            localStorage.setItem("newItem", "upload")
+                        }} className="underline dark:text-greenColor text-green-400 cursor-pointer">Process your first file now!</Link>
                         </p>}
 
                         </div>

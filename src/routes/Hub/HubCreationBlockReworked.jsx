@@ -38,6 +38,18 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
         
       };
     
+    if(localStorage.getItem("newItem")!==null){
+        if(localStorage.getItem("newItem") === "link"){
+            setSubmitDialog(true)
+            localStorage.setItem("newItem", null)
+        }
+        else if(localStorage.getItem("newItem") === "upload"){
+            setUploadDialog(true)
+            localStorage.setItem("newItem", null)
+        }
+
+    }
+    
     useEffect(() => {
         function handleResize() {
           if (window.innerWidth < 600) {
@@ -194,7 +206,7 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
 
             
         <div className="flex flex-col gap-10">
-        <div className="text-xl text-zinc-600 font-sans dark:text-zinc-300 text-center mb-10">
+        <div className="text-xl text-stone-950  dark:text-zinc-300 text-center mb-10 font-bold">
                         Process New Content
                     </div>
                             
@@ -248,7 +260,7 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
 
         <div className="justify-center flex flex-col ">
                     
-        <div className="text-xl text-zinc-600 font-sans dark:text-zinc-300 text-center mb-10">
+        <div className="text-xl text-stone-950   font-bold dark:text-zinc-300 text-center mb-10">
                     Connect Audio with AI
                     </div>  
                 <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">
@@ -261,9 +273,9 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
                         {window.innerWidth>600 ? "Build your own AI-assisted search engine on countless hours of audiovisual content."
                         : "Build your AI assistants"}
                         </p>
-                        
+            
                     
-                        <div className="row-span-1 w-full justify-center items-center flex">
+                        <div className="row-span-1 w-full justify-center items-center flex mt-1">
                             <ChatIcon fontSize={window.innerWidth>600 ? "large" : "medium"} className="text-red-300 mx-auto mb-2 "/>
                             </div>
                          {/*    <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-semibold"

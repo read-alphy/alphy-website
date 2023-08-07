@@ -20,7 +20,7 @@ import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import CloseIcon from '@mui/icons-material/Close';
 import QuizIcon from '@mui/icons-material/Quiz';
 
-export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago}) {
+export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago,collapsed}) {
     const [inputValue, setInputValue] = useState("")
     const [isLoadingInside, setIsLoadingInside] = useState(false)
     const [isCleared, setIsCleared] = useState(false)
@@ -32,6 +32,8 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const [showTrackDetails, setShowTrackDetails] = useState(false)
     const [elementCalled, setElementCalled] = useState(false)
     const [selectedQuestions, setSelectedQuestions] = useState([]);
+    const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(true);
+    const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
     const [tracks, setTracks] = useState([])
     const [i, setI] = useState(0)
     const navigate = useNavigate()
@@ -40,6 +42,8 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const title = data.name
     const description = data.description
     
+    const carouselRef = useRef(null);
+
     let displayText=""
     if(tracks.length===0 && data.tracks!==undefined && data.tracks.length!==0){
         setTracks(data.tracks)
@@ -169,10 +173,56 @@ const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
-  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (carouselRef.current) {
+        const container = carouselRef.current;
+        const isScrollEnd = container.scrollLeft + container.clientWidth === container.scrollWidth;
+        setIsForwardArrowVisible(!isScrollEnd);
+        setIsBackwardArrowVisible(container.scrollLeft > 0);
+
+
+      }
+    };
+
+    // Attach scroll event listener
+    if (carouselRef.current) {
+      carouselRef.current.addEventListener('scroll', handleScroll);
+    }
+
+    // Clean up the event listener on component unmount
+    return () => {
+      if (carouselRef.current) {
+        carouselRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
+  const scrollForward = () => {
+    if (carouselRef.current) {
+        const container = carouselRef.current;
+      
+
+        
+        
+        const scrollAmount = window.innerWidth<640 ? 260 : 380; 
+
+      carouselRef.current.scrollLeft += scrollAmount;
+    }
+  };
+
+  const scrollBackward = () => {
+    if (carouselRef.current) {
+        const container = carouselRef.current;
+        
+        const scrollAmount =  300; 
+      carouselRef.current.scrollLeft -= scrollAmount;
+    }
+  };
+
 
     return(
-        <div className="lg:w-[1000px] max-w-[1000px] grow mx-auto pt-10 pb-20">
+        <div className={`${collapsed ?  "lg:w-[1000px] xl:max-w-[1000px]" : "lg:w-[600px] xl:w-[900px] 2xl:w-[1000px]"} grow mx-auto pt-10 pb-20 bg-zinc-50 dark:bg-mildDarkMode`} >
             <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10 px-3 " >
             
                 <div className="col-span-4 sm:col-span-3 flex flex-row">
@@ -381,10 +431,10 @@ const toggleExpand = () => {
                                           <TextSnippetIcon/>  Passages
                                 </p>
                                
-                                    <div className="flex flex-row">
+                               
                                         
                      
-                                   {(answerData.sources!==undefined && isLoadingInside===false) && 
+                               {/*     {(answerData.sources!==undefined && isLoadingInside===false) && 
                                 (
                                    window.innerWidth>900 ?
                                    <Carousel 
@@ -417,7 +467,74 @@ const toggleExpand = () => {
                                           </Carousel>
                                 
                                 )
-                            }
+                            } */}
+                            <div className="relative ">
+                          
+            {(answerData.sources!==undefined && isLoadingInside===false) && 
+            <div className="flex flex-col lg:flex-row ">
+                    <button onClick={scrollBackward} type="button" className={`left-arrow hidden md:block justify-center my-auto flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
+                                                                                        isBackwardArrowVisible ? '' : 'hidden'
+                                                                                        }`}>
+                                                                                        <div className="rounded-full  p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                                                                    <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
+                                                                                                    </div>
+                                                                                        </button>
+            
+            <div className={`   flex  flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area `} ref={carouselRef}>
+
+                                                                               
+                                                                                        
+                    {answerData.sources.map((source) => <SourceCard forDialog={false} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>)} 
+                                                                                    
+                                                                                        
+
+                                                                                        
+                                                                                   
+                                                                                        
+            </div>
+            
+                                                <button onClick={scrollForward}  type="button" className={` right-arrow hidden md:block my-auto flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
+                                                                                                                            isForwardArrowVisible ? 'block' : 'hidden'
+                                                                                                                            }`}>
+                                                                                                                            <div className="rounded-full p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                                                                                                        <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 p-1 " />
+                                                                                                                                        </div>
+                                                                                                                            </button>
+
+ <div className="flex flex-row mx-auto mt-6 md:hidden">
+    <button onClick={scrollBackward} type="button" className={`left-arrow justify-center my-auto flex items-center justify-center h-full cursor-pointer group focus:outline-none `}>
+                                                                                        <div className="rounded-full  p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                                                                    <ArrowBackIosNewIcon className={`${isBackwardArrowVisible ? "cursor-pointer text-zinc-500  ": " text-zinc-300 dark:text-zinc-700cursor-default"} p-1 `}  />
+                                                                                                    </div>
+                                                                                        </button>
+        <button onClick={scrollForward}  type="button" className={`  right-arrow my-auto flex items-center justify-center h-full cursor-pointer group focus:outline-none`}>
+                                                                                                        <div className="rounded-full p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                                                                        <ArrowForwardIosIcon className={`${isForwardArrowVisible ? "cursor-pointer text-zinc-500": "  text-zinc-300 dark:text-zinc-700 cursor-default"} p-1 `}  />
+                                                                                                                    </div>
+                                                                                                        </button>
+    </div>
+                                                                                       </div>
+
+
+
+            }
+             
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                            <Dialog   maxWidth={"sm"} fullWidth={fullWidth} open={openDialog} onClose={() => setOpenDialog(false)} >
                             {answerData.sources!==undefined && answerData.sources.map((source) => 
@@ -435,7 +552,6 @@ const toggleExpand = () => {
             </div>
 
           
-            </div>
     )
 
 }

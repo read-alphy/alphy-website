@@ -107,7 +107,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 
 
 	return (
-		<div className={`grid border-b-0 w-full md:w-full `}>
+		<div className={`grid border-b-0 w-full md:w-full ${sideFeed? "":""}`}>
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 

@@ -6,6 +6,7 @@ import {
     Button
 
   } from "@material-tailwind/react";
+  import {Link} from "react-router-dom"
 
 export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, currentUser, triggers, canceledAtPeriodEnd, themePopover})
 {
@@ -99,12 +100,12 @@ export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, cu
 
                 </ul>
             </div>
-            <a className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} href={
+            <Link className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} to={
                 (currentUser && !hasActiveSub) ? `/plans/checkout` : (canceledAtPeriodEnd ? "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE": "")}
 >
                 {currentUser ? <Button type="button" className={` bg-greenColor  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-zinc-700 justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div className="h-[44px]"></div>}
 
-            </a>
+            </Link>
 
 
 

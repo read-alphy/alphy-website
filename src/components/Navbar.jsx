@@ -100,14 +100,14 @@ function Navbar({ collapsed, setCollapsed }) {
 	>
 		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[270px] sm:max-w-[270px] dark:sm:min-w-[270px] dark:sm:max-w-[270px]`}>
 			{collapsed==true	 && (isArc) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
-			<a href={"/"} className="dark:text-gray-200 pl-4 ">
+			<Link to={"/"} className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>
 				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
 				<h1 className="ml-2 text-2xl">ALPHY</h1>
 	
 				</div>
-			</a>
+			</Link>
 
 
 			{isArc  ? 

@@ -13,6 +13,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import Logo from "../../img/logo.png"
 import LogoBlack from "../../img/logo-inverted.png"
 import { Link } from 'react-router-dom';
+import HubFeedItem from "../../routes/Hub/HubFeedItemElements/HubFeedItem"
 
 
 function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,globalLayout, dataArchipelago}) {
@@ -65,7 +66,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 	  
 
 	return (
-		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } relative transition-all duration-300 ease-in-out`} >
+		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } relative transition-all duration-300 ease-in-out`} >
 
 			{!collapsed ? 
 			<div>
@@ -132,27 +133,44 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 								</div>
 
 					</div>
-
 					{( dataArchipelago!==undefined && dataArchipelago.length>0)
 					
 					?
 					<div>
-					<p className="text-zinc-700 dark:text-zinc-300 mt-10 ml-4 mb-2 underline text-l">Arc Items</p>
-					<div className="overflow-y-scroll max-h-[55vh] 2xl:max-h-[64vh] overflow-x-hidden ">
-						
-						
-					{dataArchipelago.map((item, index) => 
-					
-						<FeedItem sideFeed={true} key={index} item={item.source} setCollapsed={setCollapsed} myBookmarks={false}  />
-				
-					)}
+					<div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-4" ></div>
+					<p className="text-zinc-700 dark:text-zinc-300 mt-10 ml-4 mb-2  text-l">Sources</p>
+					<div className="overflow-y-scroll max-h-[55vh] 2xl:max-h-[60vh]">
+						            
 
+					
+								<div className="overflow-x-hidden lg:hidden">
+									
+									
+								{dataArchipelago.map((item, index) => 
+								
+									<HubFeedItem sideFeed={true} key={index} item={item.source} setCollapsed={setCollapsed} myBookmarks={false}  />
+							
+								)}
+
+								</div>
+
+								<div className="overflow-x-hidden hidden lg:block">
+									
+									
+									{dataArchipelago.map((item, index) => 
+									
+										<FeedItem sideFeed={true} key={index} item={item.source} setCollapsed={setCollapsed} myBookmarks={false}  />
+								
+									)}
+	
+									</div>
 					</div>
 					</div>
 
 					:<div className="absolute bottom-0 w-full">
 					<FooterReworked/>
 					</div>
+
 					}
 
 					

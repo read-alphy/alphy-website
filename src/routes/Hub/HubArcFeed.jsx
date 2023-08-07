@@ -36,7 +36,7 @@ function HubArcFeed(props) {
 
 
 	
-
+	
 	useEffect(() => {
 		const timer = setTimeout(() => {
 		  setSearchQuery(search);
@@ -153,7 +153,7 @@ function HubArcFeed(props) {
 
 
 	return (
-		<div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 xl:pl-20	 2xl:pl-40 flex flex-row">
+		<div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 xl:pl-20 2xl:pl-40 flex flex-row overflow-hidden">
 			{props.mainShow==="default" ? 
 
 						<div className=" p-[10px] pl-5 xl:min-w-[1200px]  xl:max-w-[1200px] ">
@@ -231,22 +231,17 @@ function HubArcFeed(props) {
 														
 														)}
 
-						<button  type="button" className={`hidden md:block bg-zinc-50 dark:bg-darkMode  cursor-default pl-4 right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full group focus:outline-none`}>
-								<div className="rounded-full  max-w-[40px] ml-3 bg-opacity-40 p-1 mb-20 md:mb-0 hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
-											<ArrowForwardIosIcon fontSize="small" onClick={handleShowExpandedArcs} className="cursor-pointer text-zinc-600 dark:text-zinc-200 p-1 " />
-											
-											</div>
-											<p onClick={handleShowExpandedArcs} className=" cursor-pointer hidden md:block text-slate-600 dark:text-zinc-300 text-sm pl-2 pt-1">Discover</p>
-						</button>
+						
 																</div>
 
 
-							<button onClick={handleShowExpandedArcs} type="button" className="md:hidden flex flex-row text-zinc-600 font-semibold dark:text-zinc-200 underline mt-6 ml-2 mb-10 " >
-								<p>See All Arcs</p>
+							<Link to="/arcs" type="button" className="md:text-lg  flex flex-row text-zinc-600 font-semibold dark:text-zinc-200 underline mt-6 ml-2 mb-10 " >
+								<p >See All Arcs</p>
 											<ArrowForwardIosIcon className="cursor-pointer text-zinc-600 dark:text-zinc-200 p-1 " />
-								</button>
+								</Link>
 
 									
+								<div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-20 mb-10" ></div>
 
 										{/* {hasMore && (
 											<div className="w-full flex justify-center">
@@ -272,10 +267,12 @@ function HubArcFeed(props) {
 								
 				<div className="p-4">
 					<div className="main-page-feed  xl:max-w-[1400px]">
-					<button onClick={handleShowMain} className="text-zinc-700 dark:text-zinc-300 text-lg mb-10">
+						<div className="mb-10">
+					<Link to="/" className="text-zinc-700 dark:text-zinc-300 text-lg ">
 							<KeyboardArrowLeftIcon fontSize="small" className=""/>
 							<span className="text-sm">Go Back</span>
-                	</button>
+                	</Link>
+					</div>
 						<p className="mb-10 text-xl lg:text-2xl text-zinc-700 dark:text-zinc-200 font-semibold">
 							Discover All Arcs
 						</p>

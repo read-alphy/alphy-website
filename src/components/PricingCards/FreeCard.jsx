@@ -6,6 +6,7 @@ import {
     Button
 
   } from "@material-tailwind/react";
+import {Link} from "react-router-dom"
 
 export default function FreeCard({hasActiveSub,openPopover1,setOpenPopover1, currentUser, triggers1, canceledAtPeriodEnd, themePopover}){
 
@@ -86,8 +87,8 @@ export default function FreeCard({hasActiveSub,openPopover1,setOpenPopover1, cur
                     <Button type="button" className={` bg-zinc-600   font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-zinc-700 text-zinc-300" : "pointer-events-none text-zinc-700"} rounded-lg text-zinc-300 text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
                 </a>
                 :
-                <a href="/u/login" type="button"> 
-                <Button className="text-white bg-greenColor transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-zinc-700 text-[16px]">{currentUser ? "Active" : "Sign Up For Free"}</Button></a>
+                <Link to="/u/login" type="button"> 
+                <Button className="text-white bg-greenColor transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-zinc-700 text-[16px]">{currentUser ? "Active" : "Sign Up For Free"}</Button></Link>
             }
 
 

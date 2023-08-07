@@ -14,7 +14,7 @@ import Pricing from './routes/Pricing';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
-import Success from './routes/payment/Success';
+import Success from './routes/payment/SuccessInfo';
 import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
@@ -275,7 +275,8 @@ if (currentUser && creditcalled!==true) {
 				) : (
 					<>
 
-						 <div className="sm:hidden">
+						 <div className={`${location.pathname.split('/')[1]==="arc" && location.pathname.split('/')[2]!=="editArc" && location.pathname.split('/')[2]!=="createArc"
+? "md:hidden": "sm:hidden"}`}>
 						 <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> 
 						 </div>
 						<Routes>
@@ -331,7 +332,11 @@ if (currentUser && creditcalled!==true) {
 							}> </Route>
 
 							<Route path="/"
-								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+								element={<Hub arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
+							
+							<Route path="/arcs"
+								element={<Hub arcs={true} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 					
 							<Route path="/myhub"
