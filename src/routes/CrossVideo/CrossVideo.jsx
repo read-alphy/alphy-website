@@ -221,7 +221,7 @@ const handleDeleteArchipelago = () => {
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			
 			<Helmet>
-				<title>{item_name!==undefined && item_name.length>0 ? item_name : (archipelagoTitle.length>0 ? `${archipelagoTitle}` : "Alphy")} </title>
+			{/* 	<title>{item_name!==undefined && item_name.length>0 ? item_name : (archipelagoTitle.length>0 ? `${archipelagoTitle}` : "Alphy")} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
 				<meta property="og:title" content={item_name!==undefined &&item_name.length>0 ? `Ask AI -  ${item_name}` : "Alphy"} />
 				<meta name="twitter:title" content={item_name!==undefined &&item_name.length>0  ? `Ask AI - ${item_name}` : "Alphy"} />
@@ -234,7 +234,7 @@ const handleDeleteArchipelago = () => {
 				<meta property="og:url" content={location.href} />
 				 <meta property="og:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ? item_thumbnail : `https://i.ibb.co/RBH2C63/homepage.png`} />
 				
-				<meta name="twitter:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ?  item_thumbnail :`https://i.ibb.co/RBH2C63/homepage.png`} />
+				<meta name="twitter:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ?  item_thumbnail :`https://i.ibb.co/RBH2C63/homepage.png`} /> */}
 			</Helmet>  
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'

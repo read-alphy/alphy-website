@@ -256,8 +256,7 @@ if(called===false){
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
 	
 			<Helmet>
-				<title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
-				<meta name="twitter:card" content="summary_large_image"></meta>
+				{/* <title>{data.title!==undefined ? `${data.title}` : "Alphy"} </title>
 				<meta property="og:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
 				<meta name="twitter:title" content={data.title!==undefined ? `Alphy - ${data.title}` : "Alphy"} />
 
@@ -267,7 +266,7 @@ if(called===false){
 	
 				<meta name="twitter:description" content={data.title!== undefined ? `Read the summary and ask real questions to ${data.title}` : "Transcribe, summarize, and ask real questions to the content"}
 				/>
-				<meta property="og:url" content={location.href} />
+				<meta property="og:url" content={location.href} /> */}
 			</Helmet>  
 			
 			<div

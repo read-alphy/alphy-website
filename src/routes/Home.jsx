@@ -42,7 +42,7 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos,dataGlobalArchip
 		<div className="mx-auto md:w-800 w-full bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
 				{/* <title>{`Alphy, the next generation speech-to-meaning agent.`} </title> */}
-				<title>Alphy: Unlock the Information in Audiovisual Content </title>
+{/* 				<title>Alphy: Unlock the Information in Audiovisual Content </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
 				<meta property="og:title" content={`Alphy: Unlock the Information in Audiovisual Content.`} />
 				<meta name="description" content="Transcribe, summarize, and question audiovisual content with the help of AI. Try Alphy for free!" />
@@ -52,7 +52,7 @@ function Home({hasActiveSub,currentUser,credit,userArchipelagos,dataGlobalArchip
 				<meta name="twitter:description" content="Transcribe, summarize, and question audiovisual content with the help of AI. Try Alphy for free!" />
 				<meta name="twitter:image" content="https://i.ibb.co/RBH2C63/homepage.png" />
 				<meta property="og:url" content="https://alphy.app/" />
-				<meta content="https://i.ibb.co/RBH2C63/homepage.png" property="og:image" />
+				<meta content="https://i.ibb.co/RBH2C63/homepage.png" property="og:image" /> */}
 			</Helmet>
 			<Welcome hasActiveSub={hasActiveSub} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>
 			{dataGlobalArchipelagos.length>0 &&
