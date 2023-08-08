@@ -60,7 +60,14 @@ function App() {
 	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
 	const [clientSecret, setClientSecret] = useState("");
 
-	
+	if(localStorage.getItem("theme").length===0){
+		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+			localStorage.setItem("theme", "dark")
+		}
+		else{
+			localStorage.setItem("theme", "light")
+		}
+	}
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
 

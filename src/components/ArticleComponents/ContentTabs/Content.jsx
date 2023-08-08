@@ -79,7 +79,7 @@ export default function Content(props) {
 			PaperProps: {
 				style: {
 				maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-				backgroundColor: localStorage.getItem("theme")==="dark" ? "#1E1E1E" : "#fff",
+				 backgroundColor: localStorage.getItem("theme")==="dark" ? "#1E1E1E" : "#fff",
 				color: localStorage.getItem("theme")==="dark" ? "#e4e4e7" : "#3f3f46",
 				outline: "none",
 
