@@ -216,9 +216,9 @@ function HubArcFeed(props) {
 												<div className={`buttons flex justify-between mt-2 `}></div>
 
 								
-									<div className={`main-page-feed  mx-auto md:mx-0 w-full container  ${props.collapsed ? "md:max-w-[720px] lg:max-w-[800px]" : "md:max-w-[620px] lg:max-w-[620px]"}  xl:max-w-[840px] 2xl:max-w-[1000px]`} >
+									<div className={`main-page-feed  mx-auto md:mx-0 w-full container  ${props.collapsed ? "md:max-w-[800px] lg:max-w-[840px]" : "md:max-w-[620px] lg:max-w-[840px]"}  xl:max-w-[900px] 2xl:max-w-[1000px]`} >
 										<div
-											className={`relative  grid grid-cols-2 xsSm:grid-cols-3 md:flex md:grid-cols-none md:flex-row overflow-x-hidden w-full`}
+											className={`relative  grid grid-cols-2 xsSm:grid-cols-3 overflow-x-hidden w-full`}
 										>
 											
 											{props.dataGlobalArchipelagos.length > 0

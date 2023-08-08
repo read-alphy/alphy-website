@@ -8,7 +8,7 @@ export default function MyWorksFeedItem({item,index, source_id,imageUrl,language
 
     return(
         <Link to={ `/${item.source_type}/${source_id}`} >
-					<div className="flex flex-col max-w-[250px] ">
+					<div className="flex flex-col xs:max-w-[250px] ">
 						<div
 							className={`
 							
@@ -19,7 +19,7 @@ export default function MyWorksFeedItem({item,index, source_id,imageUrl,language
 							
 							target="_blank"
 						>
-							<div className={`  min-w-[240px] max-w-[240px]  xs:min-w-[100px] xs:max-w-[200px] mr-3 `}>
+							<div className={`  min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px] mr-3 `}>
 								<div
 									className="flex w-full  h-0 dark:opacity-80  rounded-md bg-gray-600"
 									style={{
@@ -38,7 +38,7 @@ export default function MyWorksFeedItem({item,index, source_id,imageUrl,language
 							
 							</div>
 
-							<div className={`xs:ml-0 sm:ml-0 justify-start text-xs min-w-[200px] max-w-[200px] xs:min-w-[200px] xs:max-w-[200px] mt-1`} >
+							<div className={`xs:ml-0 sm:ml-0 justify-start text-xs min-w-[300px] max-w-[300px] xs:min-w-[200px] xs:max-w-[200px] mt-1`} >
 							
 								
 								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) ? null : (

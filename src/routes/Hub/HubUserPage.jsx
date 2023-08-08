@@ -389,7 +389,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                     {dataPersonal.length>0 &&
                     <Link to="/submit" onClick={() => {
                         localStorage.setItem("newItem", "link")
-                    }}className="md:mt-2 drop-shadow-lg  mb-6 xs:mb-0 ml-2 xs:ml-0 min-w-[240px] max-w-[240px]  xs:min-w-[100px] xs:max-w-[200px]    h-[120px] xs:min-h-none xs:max-h-none border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                    }}className="md:mt-2 drop-shadow-lg  mb-6 xs:mb-0 ml-2 xs:ml-0 min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px]    h-[140px] xs:min-h-none xs:max-h-none border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                         <div >
                             <LinkIcon fontSize = "medium" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
@@ -529,7 +529,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
 
                                     <Link to="/submit" onClick={() => {
                                                             localStorage.setItem("newItem", "upload")
-                                                        }}className="drop-shadow-lg  mb-4 xs:mb-0  xs:ml-0 min-w-[240px] max-w-[240px]  xs:min-w-[100px] xs:max-w-[200px] h-[140px]  border border-2 bg-white dark:bg-mildDarkMode  border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                                                        }}className="drop-shadow-lg  mb-4 xs:mb-0  xs:ml-0 min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px] h-[140px]  border border-2 bg-white dark:bg-mildDarkMode  border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                     <div >
                                         <CloudUploadIcon fontSize = "medium" className="text-zinc-600 dark:text-zinc-400 mb-4 "/>

@@ -27,7 +27,7 @@ export default function MyUploadsFeedItem({item, source_id, formattedDate, setCo
 					<div className="flex w-full  duration-200 transform ease-in-out">
 						<div
 						>
-								<div className="transform hover:scale-105 transition duration-200 drop-shadow-lg mb-4 grid grid-rows-4 bg-slate-200 px-6 dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 min-w-[240px] max-w-[240px]  xs:min-w-[200px] xs:max-w-[200px]  h-[140px] items-center justify-items-center justify-center">
+								<div className="transform hover:scale-105 transition duration-200 drop-shadow-lg mb-4 grid grid-rows-4 bg-slate-200 px-6 dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 min-w-[320px] max-w-[320px]  xs:min-w-[200px] xs:max-w-[200px]  h-[140px] items-center justify-items-center justify-center">
 								
 								{/* <LibraryMusicIcon fontSize="small" className="text-slate-700 dark:text-zinc-400 row-span-1"/> */}
 								

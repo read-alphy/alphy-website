@@ -235,7 +235,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 
 	return (
 
-	<div className="flex flex-col items-center justify-center h-screen mt-40 sm:mt-10 mx-auto items-center w-[300px]">
+	<div className="flex flex-col sm:items-center sm:justify-center h-screen mt-40 sm:mt-10 mx-auto items-center w-[300px]">
 		
 {
 verificationMessage==false ?
@@ -316,7 +316,7 @@ verificationMessage==false ?
 			
 			oobCode === null ? 
 			<div className="mb-20 w-[300px]">
-				<h1 className="text-xl mb-8">Reset Password	</h1>
+				<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300">Reset Password	</h1>
 				<p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10">Enter your email address and we will send you a link to reset your password.</p>
 					<form onSubmit={sendResetPasswordMail}>
 					<div class="relative z-0 w-full mb-6 group">
@@ -354,7 +354,7 @@ verificationMessage==false ?
 				</div>
 				{error && <div className="text-red-500 text-sm mb-8 mt-5">{error}</div>}
 				
-					<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Reset Password</span>}</Button>
+					<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span className="text-zinc-700 dark:text-zinc-300">Reset Password</span>}</Button>
 					
 					</form>
 					</div>:

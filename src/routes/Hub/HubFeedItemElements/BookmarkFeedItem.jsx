@@ -37,7 +37,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 							target="_blank"
 						>
 							<Link to={`/${item.source_type}/${source_id}`} >
-							<div className={`min-w-[240px] max-w-[240px]  xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}>
+							<div className={`min-w-[320px] max-w-[320px]   xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}>
 								<div
 									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
 									style={{
