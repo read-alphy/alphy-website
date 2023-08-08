@@ -20,7 +20,7 @@ export default function HubContent({arcs, currentUser,hasActiveSub,userArchipela
             {/* <HubCreationBlock currentUser={currentUser} hasActiveSub={hasActiveSub} credit={credit}/> */}
             {globalLayout &&
                 (mainShow=="default" ?
-                    <div className="pt-10 md:pt-20 pb-10">
+                    <div className="pt-10 md:pt-20 pb-10 overflow-x-hidden ">
                       <div className="pl-4 sm:hidden mb-20 ">
 
                            <p className="text-zinc-700 dark:text-zinc-300 mb-5 mx-auto mt-4 text-xl font-semibold">Unlock audio with Alphy now.</p>

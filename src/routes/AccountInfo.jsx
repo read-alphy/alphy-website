@@ -25,6 +25,8 @@ export default function AccountInfo({ credit,hasActiveSub,currentUser}) {
     
     
     const navigate = useNavigate();
+
+    console.log(currentUser)
     
 
     
@@ -242,7 +244,7 @@ function handleStripeTrialCall(type){
 
                             :
 
-                            <div className="mb-20">
+                            <div className="mb-10">
                                 <div className="items-center margin-auto justify-center flex flex-col mt-20">
                                                 {currentUser ? 
                                                         <div className="px-4 sm:mx-0">
@@ -288,7 +290,7 @@ function handleStripeTrialCall(type){
                             </div>
                              :null}
                                 </div>
-                                <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-semibold md:mt-20 mb-10">Manage Subscription </p>
+                                <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-semibold mt-20 mb-10">Manage Subscription </p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">  
                                 { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
                                        </div> : null}

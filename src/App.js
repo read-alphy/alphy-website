@@ -351,7 +351,7 @@ console.log(currentUser)
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
+							<Route path="/account" element={<Account currentUser={currentUser} stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
 							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
 							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/plans/checkout/success" element={<Success collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
