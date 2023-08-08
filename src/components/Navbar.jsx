@@ -94,12 +94,12 @@ function Navbar({ collapsed, setCollapsed }) {
 	const isHub = useLocation().pathname.includes('/hub');
 
 	return (
-<div className={`items-center ${isYt || isSp || isUp || isArc || isHub ? "" : "mx32s-auto max-dasw-[1200px]"} justify-between dark:bg-darkMode pb-4	`}>
+<div className={`items-center ${isYt || isSp || isUp || isArc || isHub ? "" : ""} justify-between dark:bg-darkMode pb-2	`}>
 	<div
-		className={`flex  justify-between flex-row 	pt-4 top-0 z-40 text-blueLike bg-[#fafafa]   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} dark:bg-darkMode`}
+		className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-[#fafafa]   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} dark:bg-darkMode`}
 	>
-		<div className={`flex mt-4 font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[270px] sm:max-w-[270px] dark:sm:min-w-[270px] dark:sm:max-w-[270px]`}>
-			{collapsed==true	 && (isArc) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
+		<div className={`flex mt-4 font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} `}>
+			{collapsed==true	 && (isArc) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]"></div>}
 			<Link to={"/"} className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>
