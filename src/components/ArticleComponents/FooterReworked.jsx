@@ -9,7 +9,7 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import {Link} from "react-router-dom"
 
 
-export default function FooterReworked({currentUser,collapsed,setCollapsed}){
+export default function FooterReworked({currentUser,collapsed,setCollapsed, handleSignout}){
     const [openFeedbackDialog, setOpenFeedbackDialog] = useState(false);
     const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -32,6 +32,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
 			window.removeEventListener('resize', handleResize);
 		  };
 	}, []);
+  
 
     const handleDarkMode = () => {
 
@@ -48,7 +49,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
         <div className="w-full mx-auto mb-4">
           {!collapsed ? 
           <div>
-                              <div className="mb-6">
+                              <div className="mb-4">
                                   <div className="flex flex-col">
                               {localStorage.getItem("logged in")==="true" ? 
                               
@@ -63,14 +64,14 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                                   }
                                 </div> 
                             
-                                <div className="mt-6 pl-10">
+                                <div className="mt-4 pl-10">
                                   <Link className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>Reach Us</Link>
                               </div>
-                              <div className="mt-6 pl-10">
+                              <div className="mt-4 pl-10">
                               <Link className="text-zinc-500 dark:text-zinc-300 text-sm     w-full cursor-pointer w-[120px]" to="/FAQ ">FAQ</Link>
                               </div>
                               </div>
-                              <div className="pl-10 mt-6 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
+                              <div className="pl-10 mt-4 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
                                                                           {localStorage.getItem('theme') === 'light' ? (
                                                                               <div onClick={handleDarkMode} className=" grid grid-cols-3">
                                                                               
@@ -89,11 +90,16 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                                                   </svg>
                                                   </div>}
                                           </div>
-                              <div className="pl-10 mt-6 flex flex-row">
+                              <div className="pl-10 mt-4 flex flex-row">
                               <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" to="/privacypolicy">Privacy Policy</Link>
                               
+                              
                               </div>
-                             
+                              {(currentUser!==null && currentUser!==undefined) && 
+                              <div className="pl-10 mt-4 flex flex-row">
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" onClick={() => handleSignout()}>Sign Out</Link>
+                             </div>
+                             }
                                      
                               <div class="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 
@@ -141,7 +147,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                               
                               
                               <Link className="text-zinc-600 dark:text-zinc-300 text-sm w-full cursor-pointer w-full" to={localStorage.getItem("logged in")==="true" ? "/account" : "/plans"}>
-                                   <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> 
+                                   <PersonIcon className="text-zinc-500 dark:text-zinc-300 mr-2" fontSize="small"/> 
                                   
                                   </Link>
                                   

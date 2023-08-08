@@ -107,8 +107,10 @@ export default function FreeCard({hasActiveSub, currentUser,  canceledAtPeriodEn
                     <Button type="button" className={` bg-zinc-600   font-semibold ${hasActiveSub && !canceledAtPeriodEnd ? "bg-zinc-700  dark:bg-darkMode dark:bg-zinc-700 text-zinc-300" : "pointer-events-none text-zinc-700"} rounded-lg text-zinc-300 text-[14px] px-5 py-4 inline-flex justify-center w-full text-center`} >{currentUser ? (hasActiveSub && !canceledAtPeriodEnd  ? "Switch Back To Free" : "Active") : "Sign Up For Free"}</Button>
                 </a>
                 :
-                <Link to="/u/login" type="button"> 
+                <div className="w-full items-center">
+                <Link to="/u/login" type="button" className="items-center w-full"> 
                 <Button className="text-white bg-greenColor transition duration-200 ease-in focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-semibold rounded-lg  px-5 py-3 inline-flex justify-center w-full text-center text-zinc-700 text-[16px]">{currentUser ? "Active" : "Sign Up For Free"}</Button></Link>
+                </div>
             }
 
 

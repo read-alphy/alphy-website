@@ -37,7 +37,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 							target="_blank"
 						>
 							<Link to={`/${item.source_type}/${source_id}`} >
-							<div className={` min-w-[100px] min-w-[100px] max-w-[300px] mr-3 cursor-pointer`}>
+							<div className={`min-w-[240px] max-w-[240px]  xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}>
 								<div
 									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
 									style={{
@@ -53,8 +53,8 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 							</Link>
 
 					<div className="text-xs h-full mt-2">
-						<div className="grid grid-cols-6">
-							<div className="col-span-5">
+						<div className="grid grid-cols-3">
+							<div className="col-span-2">
                            
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
@@ -85,7 +85,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 								</Link>
 								</div>
 								
-									<div className={`flex justify-end  ${sideFeed==true && "mr-0 mb-0"} col-span-1 pr-4`}>
+									<div className={`flex  ${sideFeed==true && "mr-0 mb-0"} col-span-1 `}>
 
 								{removed?
 									<ReplayIcon onClick={removeBookmark} className="cursor-pointer text-zinc-600 dark:text-zinc-300"/>

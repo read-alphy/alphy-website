@@ -96,15 +96,15 @@ function Navbar({ collapsed, setCollapsed }) {
 	return (
 <div className={`items-center ${isYt || isSp || isUp || isArc || isHub ? "" : "mx32s-auto max-dasw-[1200px]"} justify-between dark:bg-darkMode	`}>
 	<div
-		className={`flex  justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fafafa]   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} dark:bg-darkMode`}
+		className={`flex  justify-between flex-row 	 pt-4 top-0 z-40 text-blueLike bg-[#fafafa]   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} dark:bg-darkMode`}
 	>
-		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[270px] sm:max-w-[270px] dark:sm:min-w-[270px] dark:sm:max-w-[270px]`}>
+		<div className={`flex mt-4 font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[270px] sm:max-w-[270px] dark:sm:min-w-[270px] dark:sm:max-w-[270px]`}>
 			{collapsed==true	 && (isArc) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
 			<Link to={"/"} className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>
 				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-				<h1 className="ml-2 text-2xl">ALPHY</h1>
+				<h1 className="ml-2 mt-1 text-2xl">ALPHY</h1>
 	
 				</div>
 			</Link>
@@ -141,10 +141,10 @@ function Navbar({ collapsed, setCollapsed }) {
 					onClick={() => setCollapsed(!collapsed)}
 					className={`block cursor-pointer col-span-3 mr-5 lg:hidden ${collapsed ? ' ' : ' open '} `}
 				>
-					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
-					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
-					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
-					<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
 				</div>
 			</div>
 		</div>

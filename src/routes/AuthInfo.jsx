@@ -235,7 +235,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 
 	return (
 
-	<div className="flex flex-col items-center justify-center h-[60vh] mt-10 mx-auto items-center w-[300px]">
+	<div className="flex flex-col items-center justify-center h-[60vh] mt-40 sm:mt-10 mx-auto items-center w-[300px]">
 		
 {
 verificationMessage==false ?

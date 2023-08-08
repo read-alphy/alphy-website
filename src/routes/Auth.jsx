@@ -53,8 +53,8 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
-			
-			</Helmet>  
+				<title>Alphy - Start Your Journey</title>
+			</Helmet>    
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
@@ -76,7 +76,7 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
 
 			</div>
 			} */}
-			{<div className={`hidden lg:block`}>
+			{<div className={`hidden sm:block`}>
 				
 				<SideFeedReworked 
 				
@@ -85,7 +85,7 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
 				/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">

@@ -21,9 +21,9 @@ let userStripeId = ""
 
 
 
-export default function AccountInfo({ credit,hasActiveSub,idToken}) {
+export default function AccountInfo({ credit,hasActiveSub,currentUser}) {
     
-    const { currentUser } = useAuth();
+    
     const navigate = useNavigate();
     
 
@@ -110,7 +110,7 @@ export default function AccountInfo({ credit,hasActiveSub,idToken}) {
         
     }, [currentUser]);
 
-
+/* 
 function handleStripeTrialCall(type){
     if(type==="get"){
             console.log("get")
@@ -142,7 +142,7 @@ function handleStripeTrialCall(type){
     }
 
 
-}
+} */
 
 
 
@@ -315,7 +315,7 @@ function handleStripeTrialCall(type){
                 :
                 <div className="h-screen w-screen  opacity-50 flex justify-center items-center text-center mx-auto pb-40 ">
                     <div className="mb-20">
-                        <ReactLoading type="spinningBubbles" color="blueLike" width={100} />
+                       
                     </div>
                 </div>
             }</div>

@@ -231,7 +231,7 @@ if (currentUser && creditcalled!==true) {
 
 	
 
-
+console.log(currentUser)
 
 	return (
 

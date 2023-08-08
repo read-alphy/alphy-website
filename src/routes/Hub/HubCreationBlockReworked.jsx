@@ -198,15 +198,15 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
     }
 
     return(
-        <div className="md:mt-10 mx-auto ">
+        <div className="md:mt-10 xl:mt-20 mx-auto ">
              
             
              
-            <div className="hidden pt-20 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
+            <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
 
             
         <div className="flex flex-col gap-10">
-        <div className="text-xl text-stone-950  dark:text-zinc-300 text-center mb-10 font-bold">
+        <div className="text-xl text-stone-900  dark:text-zinc-300 text-center mb-10 font-bold">
                         Process New Content
                     </div>
                             
@@ -260,7 +260,7 @@ export default function HubCreationBlockReworked({currentUser, hasActiveSub, cre
 
         <div className="justify-center flex flex-col ">
                     
-        <div className="text-xl text-stone-950   font-bold dark:text-zinc-300 text-center mb-10">
+        <div className="text-xl text-stone-900   font-bold dark:text-zinc-300 text-center mb-10">
                     Connect Audio with AI
                     </div>  
                 <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">

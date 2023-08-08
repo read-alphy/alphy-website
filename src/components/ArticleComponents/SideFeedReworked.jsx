@@ -24,7 +24,8 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 	const [called, setCalled] = useState(false);
 
 	const carouselRef = useRef(null);
-	
+	const auth = useAuth()
+	const navigate= useNavigate()
 
 	
 	
@@ -63,20 +64,29 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
         };
       }, []);
 
-	  
+	  const handleSignOut = async () => {
+		try {
+			auth.logout();
+			navigate("/")
+			localStorage.setItem("logged in","false")
+		} catch (error) {
+			console.log("sign out error",error)
+		
+		}
+	};
 
 	return (
-		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } relative transition-all duration-300 ease-in-out`} >
+		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } relative transition-all duration-300 ease-in-out`} >
 
 			{!collapsed ? 
-			<div>
-							<div className={`flex items-center font-bold pt-10 relative`}>
+			<div className="">
+							<div className={`flex items-center font-bold pt-8 relative`}>
 
-									<Link to="/" className="text-zinc-800 dark:text-gray-200 pl-8 ">
+									<Link to="/" className="text-zinc-800 dark:text-gray-200 pl-4 sm:pl-6 ">
 									<div className="flex-row flex">
 									<img src={Logo} width={40} className="hidden dark:block"></img>
 									<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-									<h1 className="ml-2 text-2xl ">ALPHY</h1>
+									<h1 className="ml-2 text-2xl mt-1 ">ALPHY</h1>
 						
 									</div>
 								</Link>
@@ -84,16 +94,16 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 										<LastPageIcon onClick={()=> setCollapsed(true)} fontSize="large" className="rotate-180 ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1"/>
 										</div>
 
-			<div className="absolute right-0 mr-6">
+			<div className="absolute right-0 mr-6 -mt-1">
 											<div
 												id={'nav-icon3'}
 												onClick={() => setCollapsed(!collapsed)}
 												className={` cursor-pointer sm:hidden ${collapsed ? ' ' : ' open '} text-zinc-500 dark:text-zinc-500`}
 											>
-												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
-												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
-												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
-												<span className="bg-zinc-500 dark:bg-zinc-200"></span>
+												<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+												<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+												<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+												<span className="bg-zinc-700 dark:bg-zinc-200"></span>
 											</div>
 									</div>
 									</div>
@@ -102,20 +112,20 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 							<div className="pt-10 md:pl-5">
 
 								<div className="flex flex-col w-full justify-start px-5">
-									<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-sm"}   bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[120px] flex flex-row `} >
-									<AddIcon className="mr-3"/>
+									<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-sm"}   text-sm sm:text-md bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[120px] flex flex-row `} >
+									<AddIcon fontSize="small" className="mr-3"/>
 										<p>New</p>
 									</Link>
 							
 
-									<Link to="/myhub" className={` flex flex-row py-3 mt-6  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
-									<HubIcon className="mr-3 " fontSize="medium"/>
+									<Link to="/myhub" className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<HubIcon className="mr-3 " fontSize="small"/>
 										<p className="">My Hub</p>
 										
 									</Link>
 
-									<Link to="/"  className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
-									<ExploreIcon className="mr-3" fontSize="medium"/>
+									<Link to="/"  className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<ExploreIcon className="mr-3" fontSize="small"/>
 										<p className="">Discover</p>
 										
 									</Link>
@@ -124,9 +134,9 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 											null
 										) : (
 											<Link
-											className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
+											className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
 											to="/u/login"
-										><LoginIcon className="mr-3 text-green-300 dark:text-green-200" fontSize="medium"/>
+										><LoginIcon className="mr-3 text-green-300 dark:text-green-200" fontSize="small"/>
 										<p className="text-green-300 dark:text-green-200">Sign In</p>
 										</Link>
 									)}
@@ -168,7 +178,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					</div>
 
 					:<div className="absolute bottom-0 w-full">
-					<FooterReworked/>
+					<FooterReworked collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut}/>
 					</div>
 
 					}
@@ -200,19 +210,19 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 
 								<div className="flex flex-col w-full justify-start ">
 									<div className="pl-2">
-									<Link to="/submit" className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-zinc-200 px-2 py-2.5 text-md`} >
-									<AddIcon className=""/>
+									<Link to="/submit" className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-zinc-200 px-2 py-2 dark:bg-zinc-300 text-md`} >
+									<AddIcon className="" fontSize="small"/>
 										
 									</Link>
 									</div>
 						
-									<Link to="/myhub" className={` pl-4 flex flex-row py-3 mt-6  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
-									<HubIcon className="mr-3 " fontSize="medium"/>
+									<Link to="/myhub" className={` pl-4 flex flex-row py-3 mt-6 text-zinc-500 dark:text-zinc-300	 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<HubIcon className="mr-3 " fontSize="small"/>
 										
 										
 									</Link>
-									<Link to="/"  className={` pl-4 ${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
-									<ExploreIcon className="mr-3" fontSize="medium"/>		
+									<Link to="/"  className={` pl-4 text-zinc-500 dark:text-zinc-300 flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+									<ExploreIcon className="mr-3" fontSize="small"/>		
 									</Link>
 									{
 									localStorage.getItem("logged in")==="true" ?   (
@@ -221,15 +231,15 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 											<Link
 											className="pl-4 text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
 											to="/u/login"
-										><LoginIcon className="mr-3" fontSize="medium"/>
+										><LoginIcon className="mr-3 text-green-300 dark:text-green-200" fontSize="small"/>
 										
 										</Link>
 									)}
 								</div>
 					</div>
 
-					<div className="absolute bottom-0 w-full">
-								<FooterReworked collapsed={collapsed} setCollapsed={setCollapsed}/>
+					<div className="items-end absolute bottom-0 w-full">
+								<FooterReworked collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut}/>
 						</div>
 
 		</div>

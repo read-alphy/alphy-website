@@ -66,8 +66,8 @@ useEffect (() => {
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
-			
-			</Helmet>  
+				<title>Alphy - FAQ</title>
+			</Helmet>
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
