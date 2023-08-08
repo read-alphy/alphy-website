@@ -190,10 +190,12 @@ function handleStripeTrialCall(type){
                                                                                 <p className="mt-2" >{Math.floor(credit)} minutes</p> :null
                                                                                         }
                                                                                         <p className="mt-2">{hasActiveSub ? "Premium" : "Basic"}</p>
-                                                                                        <div>
-                                                            <button className="mt-5 text-md font-semibold text-zinc-700 dark:text-zinc-200 cursor-pointer underline" onClick={handleSignOut}>
-                                                                Sign out</button>
-                                                                </div>
+                                                                                        {currentUser!==null && 
+                                                                                            <div>
+                                                                                            <button className="mt-5 text-md text-indigo-400  cursor-pointer underline" onClick={handleSignOut}>
+                                                                                                Sign out</button>
+                                                                                                </div>
+                                }
                                                                             </div>
                                                             
                                                             </div>
@@ -264,11 +266,17 @@ function handleStripeTrialCall(type){
                                                                         <p className="mt-5" >{Math.floor(credit)} minutes</p> :null
                                                                                 }
                                                                                 <p className="mt-5">{hasActiveSub ? "Premium" : "Basic"}</p>
+                                                                    {currentUser!==null && 
+                              <div>
+                              <button className="mt-5 text-md text-indigo-400 cursor-pointer underline" onClick={handleSignOut}>
+                                  Sign out</button>
+                                  </div>
+                                }
                                                                     </div>
                                                     
                                                     </div>
                                                 
-                   
+                                                   
 
                                {/*  {currentUser ? <div className="flex flex-col justify-center">  
                                 { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
@@ -280,7 +288,7 @@ function handleStripeTrialCall(type){
                             </div>
                              :null}
                                 </div>
-                                <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-semibold mt-20 mb-10">Manage Subscription </p>
+                                <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-semibold md:mt-20 mb-10">Manage Subscription </p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">  
                                 { hasActiveSub ? <a className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
                                        </div> : null}

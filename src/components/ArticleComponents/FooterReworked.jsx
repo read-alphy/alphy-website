@@ -93,6 +93,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed}){
                               <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" to="/privacypolicy">Privacy Policy</Link>
                               
                               </div>
+                             
                                      
                               <div class="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 

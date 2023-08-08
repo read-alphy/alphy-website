@@ -7,11 +7,31 @@ import {
 
   } from "@material-tailwind/react";
 import {Link} from "react-router-dom"
+import {useState} from "react"
 
-export default function FreeCard({hasActiveSub,openPopover1,setOpenPopover1, currentUser, triggers1, canceledAtPeriodEnd, themePopover}){
+export default function FreeCard({hasActiveSub, currentUser,  canceledAtPeriodEnd}){
+    const triggers1 = {
+        onMouseEnter: () => setOpenPopover1(true),
+        onMouseLeave: () => setOpenPopover1(false),
+      };
+
+      const[openPopover1, setOpenPopover1] = useState(false);
+      const themePopover = {
+        popover: {
+          styles: {
+            base: {
+              bg: "bg-zinc-50 dark:bg-mildDarkMode ",
+              color: "text-zinc-600 dark:text-zinc-200",
+              border:"border-2 border-zinc-100 dark:border-zinc-600",
+              
+            },
+          },
+        },
+        
+      };
 
     return(
-        <div className="col-span-1 md:min-w-[400px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
+        <div className="col-span-1 md:min-w-[400px] max-w-xs p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700  ">
 
 
         <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Basic</p>
@@ -22,7 +42,7 @@ export default function FreeCard({hasActiveSub,openPopover1,setOpenPopover1, cur
                 
             </div>
             <p className="mt-3 text-gray-400">Discover Alphy's capabilities </p>
-            <div className="h-[400px]">
+            <div className="h-[300px] xl:h-[400px]">
                 <ul role="list" className="space-y-5 my-7">
                     <li className="flex space-x-3">
 

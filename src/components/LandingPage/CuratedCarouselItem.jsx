@@ -110,7 +110,7 @@ else{
                 ></div>
                       </div>
                       
-                      <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-500 pt-2 max-w-[150px]`} >{props.item.name}</p>
+                      <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2 max-w-[150px]`} >{props.item.name}</p>
 
                       </div>
 

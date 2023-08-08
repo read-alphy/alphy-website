@@ -13,7 +13,7 @@ import FAQInfo from './FAQInfo';
 
 
 
-function FAQ({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function FAQ({currentUser, collapsed, setCollapsed, hasActiveSub, setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -89,7 +89,7 @@ useEffect (() => {
 
 			</div> */}
 		
-			{<div className={`hidden lg:block`}>
+			{<div className={`hidden sm:block`}>
 				
 				<SideFeedReworked 
 				
@@ -98,7 +98,7 @@ useEffect (() => {
 				/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">

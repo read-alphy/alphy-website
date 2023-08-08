@@ -222,7 +222,7 @@ const toggleExpand = () => {
 
 
     return(
-        <div className={`${collapsed ?  "lg:w-[1000px] xl:max-w-[1000px]" : "lg:w-[600px] xl:w-[900px] 2xl:w-[1000px]"} grow mx-auto pt-10 pb-20 bg-zinc-50 dark:bg-mildDarkMode`} >
+        <div className={`${collapsed ?  "lg:w-[1000px] xl:max-w-[1000px]" : "lg:w-[600px] xl:w-[900px] 2xl:w-[1000px]"} grow mx-auto pt-10 pb-20 `} >
             <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10 px-3 " >
             
                 <div className="col-span-4 sm:col-span-3 flex flex-row">

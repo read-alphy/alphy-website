@@ -126,8 +126,8 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 											<Link
 											className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
 											to="/u/login"
-										><LoginIcon className="mr-3" fontSize="medium"/>
-										<p className="">Sign In</p>
+										><LoginIcon className="mr-3 text-green-300 dark:text-green-200" fontSize="medium"/>
+										<p className="text-green-300 dark:text-green-200">Sign In</p>
 										</Link>
 									)}
 								</div>
@@ -143,7 +143,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 						            
 
 					
-								<div className="overflow-x-hidden lg:hidden">
+								<div className="overflow-x-hidden hidden md:block lg:hidden">
 									
 									
 								{dataArchipelago.map((item, index) => 
@@ -154,7 +154,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 
 								</div>
 
-								<div className="overflow-x-hidden hidden lg:block">
+								<div className="overflow-x-hidden md:hidden lg:block">
 									
 									
 									{dataArchipelago.map((item, index) => 

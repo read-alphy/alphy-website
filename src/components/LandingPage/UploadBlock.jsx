@@ -123,8 +123,8 @@ export default function UploadBlock({currentUser, hasActiveSub, credit}) {
         <div className="dark:bg-mildDarkMode h-[full] sm:min-h-[70vh] sm:max-h-[70vh] p-10  sm:p-20 sm:py-16">
             <div className="pb-10 ">
             <div className="flex mx-auto   text-indigo-400 text-sm font-bold mb-10">
-                <VerifiedIcon className="mr-1"/>
-                    PREMIUM
+                <VerifiedIcon className="mr-1 "/>
+                    <span>PREMIUM</span>
                 </div>
                     <p className="dark:text-zinc-300 text-zinc-700 mb-4 text-lg">Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
                     </p>

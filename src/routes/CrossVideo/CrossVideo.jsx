@@ -242,12 +242,12 @@ const handleDeleteArchipelago = () => {
 			></div>
 			
 			<div className="flex flex-row ">
-			{<div className={`hidden md:block `}>
+			{<div className={`hidden ${isArc ?"md:block":"sm:block" } `}>
 				
 				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} dataArchipelago={dataArchipelago}/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform md:hidden  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform ${isArc ?"md:hidden":"sm:hidden" }  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
@@ -262,8 +262,8 @@ const handleDeleteArchipelago = () => {
 					
 				{isCreateArc && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
 				{isCreateArc && !hasActiveSub &&
-				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-40">
-					You need to be on the <a href="/account" className="dark:text-greenColor text-green-400 underline">Premium Plan</a> to access this page. 
+				<div className="text-md text-zinc-700 dark:text-zinc-300 mx-auto mt-40 px-8">
+					You need to be on the <Link to="/account" className="dark:text-greenColor text-green-400 underline">Premium Plan</Link> to access this page. 
 					</div>
 				}
 

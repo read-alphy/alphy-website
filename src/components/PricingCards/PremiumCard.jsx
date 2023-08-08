@@ -8,11 +8,23 @@ import {
   } from "@material-tailwind/react";
   import {Link} from "react-router-dom"
 
-export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, currentUser, triggers, canceledAtPeriodEnd, themePopover})
+export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, currentUser, triggers, canceledAtPeriodEnd})
 {
-
+    const themePopover = {
+        popover: {
+          styles: {
+            base: {
+              bg: "bg-zinc-50 dark:bg-mildDarkMode",
+              color: "text-zinc-600 dark:text-zinc-200",
+              border:"border-2 border-zinc-100 dark:border-zinc-600",
+              
+            },
+          },
+        },
+        
+      };
     return(
-        <div className="col-span-2 max-w-sm md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
+        <div className="col-span-2 max-w-xs md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
         <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
             {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
             <div className="flex items-baseline text-gray-900 dark:text-white">
@@ -21,7 +33,7 @@ export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, cu
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span>
             </div>
             <p className="mt-3 text-gray-400">Level up your reach </p>
-            <div className="h-[400px]">
+            <div className={` h-[400px] ${currentUser=== null && "xl:h-[444px]"}`}>
                 <ul role="list" className="space-y-5 my-7">
                     <li className="flex space-x-3">
 
@@ -103,7 +115,7 @@ export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, cu
             <Link className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} to={
                 (currentUser && !hasActiveSub) ? `/plans/checkout` : (canceledAtPeriodEnd ? "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE": "")}
 >
-                {currentUser ? <Button type="button" className={` bg-greenColor  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-zinc-700 justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div className="h-[44px]"></div>}
+                {currentUser ? <Button type="button" className={` bg-greenColor  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-zinc-700 justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div className={`h-[44px] ${currentUser?"block":"hidden"}`}></div>}
 
             </Link>
 
