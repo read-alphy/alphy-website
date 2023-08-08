@@ -13,9 +13,10 @@ import CheckOutPageInfo from './CheckOutPageInfo';
 
 
 
-export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, clientSecret, setClientSecret}) {
+export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const [clientSecret, setClientSecret] = useState("");
 	
 
 	let source_id
@@ -93,7 +94,7 @@ useEffect (() => {
 				
 				<SideFeedReworked 
 				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
 				
 				/></div>}
 				
@@ -105,7 +106,7 @@ useEffect (() => {
 						<div className="h-screen">
 							<SideFeedReworked 
 							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
-							
+							hasActiveSub={hasActiveSub}
 							/>
 							
 							</div>

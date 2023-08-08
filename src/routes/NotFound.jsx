@@ -93,7 +93,7 @@ useEffect (() => {
 				
 				<SideFeedReworked 
 				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
 				
 				/></div>}
 				
@@ -104,7 +104,7 @@ useEffect (() => {
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
 							<SideFeedReworked 
-							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
 							
 							/>
 							

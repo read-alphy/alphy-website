@@ -98,6 +98,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 				
 				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+				hasActiveSub={hasActiveSub}
 				/></div>}
 				
 				<div
@@ -109,6 +110,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 							<SideFeedReworked 
 							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+							hasActiveSub={hasActiveSub}
 							/>
 							
 							</div>

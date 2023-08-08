@@ -7,9 +7,9 @@ import FeedbackForm from '../FeedbackForm';
 import PersonIcon from '@mui/icons-material/Person';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import {Link} from "react-router-dom"
+import VerifiedIcon from '@mui/icons-material/Verified';
 
-
-export default function FooterReworked({currentUser,collapsed,setCollapsed, handleSignout}){
+export default function FooterReworked({currentUser,collapsed,setCollapsed, handleSignout,hasActiveSub}){
     const [openFeedbackDialog, setOpenFeedbackDialog] = useState(false);
     const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -20,7 +20,6 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
 		  } else {
 			document.documentElement.classList.remove('dark')
 		  }
-
 		  const handleResize = () => {
 			setWindowWidth(window.innerWidth);
 		  };
@@ -49,29 +48,48 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
         <div className="w-full mx-auto mb-4">
           {!collapsed ? 
           <div>
-                              <div className="mb-4">
+                              <div className="">
                                   <div className="flex flex-col">
+                                    {hasActiveSub===false && 
+                                    <div className="mb-6 hidden xl:block">
+                                    <p className = "text-zinc-700 dark:text-zinc-200 text-md  w-full w-full pl-10 mb-5 ">Try Premium</p>
+                                    <p className = "text-zinc-500 dark:text-zinc-300 text-sm w-full w-full pl-10 ">Extra transcription credits, multi-language access, local audio processing, and unlimited Arc creation</p>
+                                    <Link to="/plans" className=" text-xs w-full cursor-pointer w-full pl-10 mt-5 text-greenColor">Learn More > </Link>
+                                    </div>
+                                    }
+
+                                {hasActiveSub===true && 
+                                    <div className="mb-6  flex flex-row w-full pl-6 md:pl-10">
+                                           
+                                          <p className = "text-indigo-400 text-md  "> 
+                                          <span className="mt-1">Premium
+                                                      </span>
+                                                      <VerifiedIcon fontSize="small" className=" ml-2 text-indigo-400 "/>
+                                          </p>
+                                    
+                                    </div>
+                                    }
                               {localStorage.getItem("logged in")==="true" ? 
                               
-                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " to="/account">
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 " to="/account">
                                   {/* <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> */}
                                   <span>Account</span>
                                   </Link>:
 
-                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-10 " to="/plans">
+                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-fullpl-6 md:pl-10 " to="/plans">
                                     <span>Plans</span></Link>
                                   
                                   }
                                 </div> 
                             
-                                <div className="mt-4 pl-10">
+                                <div className="mt-2 lg:mt-4 pl-6 md:pl-10">
                                   <Link className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>Reach Us</Link>
                               </div>
-                              <div className="mt-4 pl-10">
+                              <div className=" mt-2 lg:mt-4 pl-6 md:pl-10">
                               <Link className="text-zinc-500 dark:text-zinc-300 text-sm     w-full cursor-pointer w-[120px]" to="/FAQ ">FAQ</Link>
                               </div>
                               </div>
-                              <div className="pl-10 mt-4 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
+                              <div className="pl-6 md:pl-10 mt-2 lg:mt-4 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
                                                                           {localStorage.getItem('theme') === 'light' ? (
                                                                               <div onClick={handleDarkMode} className=" grid grid-cols-3">
                                                                               
@@ -90,13 +108,13 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                                   </svg>
                                                   </div>}
                                           </div>
-                              <div className="pl-10 mt-4 flex flex-row">
+                              <div className="pl-6 md:pl-10 mt-2 lg:mt-4 flex flex-row">
                               <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" to="/privacypolicy">Privacy Policy</Link>
                               
                               
                               </div>
                               {(currentUser!==null && currentUser!==undefined) && 
-                              <div className="pl-10 mt-4 flex flex-row">
+                              <div className="pl-6 md:pl-10 mt-2 lg:mt-4 flex flex-row">
                               <button className="text-zinc-500 dark:text-zinc-300 text-sm cursor-pointer" onClick={() => handleSignout()}>Sign Out</button>
                              </div>
                              }

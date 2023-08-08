@@ -105,6 +105,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentN
 				
 				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+				hasActiveSub={hasActiveSub}
 				/></div>
 				
 				<div
@@ -116,6 +117,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentN
 							<SideFeedReworked 
 							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+							hasActiveSub={hasActiveSub}
 							/>
 							
 							</div>

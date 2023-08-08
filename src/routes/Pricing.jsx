@@ -87,7 +87,7 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 				
 				<SideFeedReworked 
 				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
 				
 				/></div>}
 				
@@ -98,7 +98,7 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
 							<SideFeedReworked 
-							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
 							
 							/>
 							

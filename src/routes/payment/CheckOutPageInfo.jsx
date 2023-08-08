@@ -88,13 +88,13 @@ let appearance
 
     return (
         <div className="h-[110vh] dark:bg-darkMode bg-zinc-50">
-        <div className="mx-auto container items-center pt-10 max-h-[95vh]">
+        <div className="mx-auto container items-center pt-10 max-h-[95vh] px-5">
             {/* <button onClick={fetchData}>Create</button> */}
 
 
             {(clientSecret!==undefined && clientSecret!==null) && clientSecret.length > 0 ? (
                 <div className="container max-w-[400px] mx-auto items-center ">
-                    <div className="mb-10 mt-20">
+                    <div className="mb-10 mt-8 md:mt-20">
                         <p className="text-xl mb-5">Alphy Monthly Subscription</p>
                         <p className="text-zinc-500">$5.00 </p>
                        

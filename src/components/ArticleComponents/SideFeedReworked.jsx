@@ -17,7 +17,7 @@ import HubFeedItem from "../../routes/Hub/HubFeedItemElements/HubFeedItem"
 import {useLocation} from 'react-router-dom';
 
 
-function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,globalLayout, dataArchipelago}) {
+function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,globalLayout, dataArchipelago,hasActiveSub}) {
 	
 	
 	const { currentUser } = useAuth();
@@ -180,7 +180,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					</div>
 
 					:<div className="absolute bottom-0 w-full">
-					<FooterReworked collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut}/>
+					<FooterReworked currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut} hasActiveSub={hasActiveSub}/>
 					</div>
 
 					}

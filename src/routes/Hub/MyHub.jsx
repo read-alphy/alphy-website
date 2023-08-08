@@ -104,6 +104,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 				
 				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+				hasActiveSub={hasActiveSub}
 				/></div>}
 				
 				<div
@@ -115,6 +116,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 							<SideFeedReworked 
 							setCollapsed={setCollapsed} source_id={source_id} 
 							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+							hasActiveSub={hasActiveSub}
 							/>
 							
 							</div>
