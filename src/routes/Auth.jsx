@@ -61,21 +61,7 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
 			></div>
 			
 			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
-				{/* {collapsed==true && 
-			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
-			<div className={`hidden md:flex `}>
-				<button onClick={handleCollapse }>
-
-		
-			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-			</svg>
-
-			</button			>
-			</div> 
-
-			</div>
-			} */}
+			
 			{<div className={`hidden sm:block`}>
 				
 				<SideFeedReworked 

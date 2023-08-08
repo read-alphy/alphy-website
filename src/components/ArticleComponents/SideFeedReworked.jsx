@@ -68,6 +68,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 		try {
 			auth.logout();
 			navigate("/")
+			window.location.reload()
 			localStorage.setItem("logged in","false")
 		} catch (error) {
 			console.log("sign out error",error)

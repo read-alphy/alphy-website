@@ -95,9 +95,9 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                               
                               
                               </div>
-                              {(currentUser!==null || currentUser!==undefined) && 
+                              {(currentUser!==null && currentUser!==undefined) && 
                               <div className="pl-10 mt-4 flex flex-row">
-                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" onClick={() => handleSignout()}>Sign Out</Link>
+                              <button className="text-zinc-500 dark:text-zinc-300 text-sm cursor-pointer" onClick={() => handleSignout()}>Sign Out</button>
                              </div>
                              }
                                      
