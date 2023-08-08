@@ -13,7 +13,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import ReactLoading from 'react-loading';
 import FreeCard from "../components/PricingCards/FreeCard";
 import PremiumCard from "../components/PricingCards/PremiumCard";
-  import SideFeedReworked from '../components/ArticleComponents/SideFeedReworked';
+import SideFeedReworked from '../components/ArticleComponents/SideFeedReworked';
+import Loading from '../components/Loading';
+
 
   
 
@@ -26,7 +28,7 @@ export default function AccountInfo({ credit,hasActiveSub,currentUser}) {
     
     const navigate = useNavigate();
 
-    console.log(currentUser)
+
     
 
     
@@ -85,7 +87,7 @@ export default function AccountInfo({ credit,hasActiveSub,currentUser}) {
         
 
         if (currentUser !== null && called === false) {
-            setTimeout(() => {
+            
                 try {
                     //getCustomerInfo(currentUser)
                     setTimeout(() => {
@@ -103,7 +105,7 @@ export default function AccountInfo({ credit,hasActiveSub,currentUser}) {
 
 
 
-            }, 1200)
+         
         
         }
         else{
@@ -315,11 +317,11 @@ function handleStripeTrialCall(type){
                 </div >
 
                 :
-                <div className="h-screen w-screen  opacity-50 flex justify-center items-center text-center mx-auto pb-40 ">
-                    <div className="mb-20">
-                       
-                    </div>
-                </div>
+                
+                <div className="mx-auto">
+                    <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />
+                   </div>
+               
             }</div>
             
     )

@@ -59,20 +59,10 @@ function Hub({arcs, currentUser, collapsed, setCollapsed, hasActiveSub,contentNa
 })
 
 
-
-useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
-			setSubCalled(true)
-			setIsLoading(false)
-		}
-		
-	})
+if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
+	setSubCalled(true)
+	setIsLoading(false)
+}
 
 
 /* if(!subCalled){

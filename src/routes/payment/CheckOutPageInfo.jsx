@@ -15,9 +15,7 @@ import StripeBanner from "../../img/stripe_banner.svg";
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`)
 
 
-export default function CheckOutPageInfo() {
-    
-    const [clientSecret, setClientSecret] = useState("");
+export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
     const { currentUser } = useAuth()
     const [user, setUser] = useState("")
     const [called, setCalled] = useState(false)
@@ -26,9 +24,8 @@ export default function CheckOutPageInfo() {
 
 
     useEffect(() => {  
-        if (clientSecret.length === 0 && currentUser !== null && called === false) {
+        if ((clientSecret===null || clientSecret===undefined || clientSecret.length === 0) && currentUser !== null && called === false) {
             setTimeout(() => {
-                /* getCustomerInfo() */
                 fetchData()
                 setCalled(true)
 
@@ -60,10 +57,7 @@ export default function CheckOutPageInfo() {
 
             )
             .catch((error) => {
-                if(error.response.data.detail ==="Already subscribed")
-                {
-                    navigate("/plans")
-                }
+                console.log(error)
                 
             })
         })
@@ -98,7 +92,7 @@ let appearance
             {/* <button onClick={fetchData}>Create</button> */}
 
 
-            {clientSecret.length > 0 ? (
+            {(clientSecret!==undefined && clientSecret!==null) && clientSecret.length > 0 ? (
                 <div className="container max-w-[400px] mx-auto items-center ">
                     <div className="mb-10 mt-20">
                         <p className="text-xl mb-5">Alphy Monthly Subscription</p>

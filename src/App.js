@@ -58,7 +58,9 @@ function App() {
 	const [userArchipelagos, setUserArchipelagos] = useState([])
 	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
 	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
+	const [clientSecret, setClientSecret] = useState("");
 
+	
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
 
@@ -153,6 +155,12 @@ if (currentUser && creditcalled!==true) {
 }} 
 })
 
+
+
+
+
+
+
 	const getCustomerInfo = async (currentUser) => {
 		
         const idToken = await currentUser.getIdToken().then((idToken) => {
@@ -175,6 +183,7 @@ if (currentUser && creditcalled!==true) {
                 else {
                     setHasActiveSub(false)
                     setCalled(true)
+					fetchData()
 
                 }
             })
@@ -183,6 +192,37 @@ if (currentUser && creditcalled!==true) {
     }
 	const limit = 20
 	
+    const fetchData = async () => {
+        await currentUser.getIdToken().then((idToken) => {
+
+        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription`,{},
+            {
+                headers: {
+                    'id-token': idToken,
+                },
+            },
+        )
+            .then(r => {
+                const clientSecret = r.data[0].latest_invoice.payment_intent.client_secret  
+                setClientSecret(clientSecret)
+                setCalled(true)
+            }
+
+            )
+            .catch((error) => {
+             /*    if(error.response.data.detail ==="Already subscribed")
+                {
+                    setHasActiveSub(true)
+					setCalled(true)
+                }
+                 */
+
+				console.log(error)
+            })
+        })
+
+    }
+
 
 	/* const { currentUser } = useAuth(); */
 	function shuffleArray(array) {
@@ -231,7 +271,6 @@ if (currentUser && creditcalled!==true) {
 
 	
 
-console.log(currentUser)
 
 	return (
 
@@ -353,7 +392,7 @@ console.log(currentUser)
 							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/account" element={<Account currentUser={currentUser} stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
 							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
-							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed} clientSecret={clientSecret} setClientSecret={setClientSecret}/>}></Route>
 							<Route path="/plans/checkout/success" element={<Success collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="*" element={<NotFound to="/404" collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
 							<Route path="/404" element={<NotFound collapsed={collapsed} setCollapsed={setCollapsed}/>}/>

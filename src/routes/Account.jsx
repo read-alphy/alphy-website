@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import AccountInfo from './AccountInfo';
+import { set } from 'lodash';
 
 
 
@@ -42,20 +43,10 @@ function Account({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 	
 })
 
-
-useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
-			setSubCalled(true)
-			setIsLoading(false)
-		}
-		
-	})
+if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
+	setSubCalled(true)
+	setIsLoading(false)
+}
 
 
 	const handleCollapse = () => {
