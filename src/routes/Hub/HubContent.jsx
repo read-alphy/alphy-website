@@ -16,7 +16,7 @@ export default function HubContent({arcs, currentUser,hasActiveSub,userArchipela
           userLayout, setUserLayout, setMainShow, mainShow, collapsed, setCollapsed}){
     
     return(
-        <div>
+        <div className="pb-20">
             {/* <HubCreationBlock currentUser={currentUser} hasActiveSub={hasActiveSub} credit={credit}/> */}
             {globalLayout &&
                 (mainShow=="default" ?
