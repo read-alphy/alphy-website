@@ -6,7 +6,7 @@ import BookmarkFeedItem from './BookmarkFeedItem';
 import MyUploadsFeedItem from './MyUploadsFeedItem';
 
 const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago,forDetail}) => {
-	const source_id = item.source_id;
+	const source_id = item!==undefined ? item.source_id : "";
 	let formattedDate = ""
 	const inputDate = item!==undefined && item.added_ts!==undefined &&  item.added_ts.substring(0, 10)
 	const [removed,setRemoved] = useState(false)

@@ -145,7 +145,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 								</div>
 
 					</div>
-					{( dataArchipelago!==undefined && dataArchipelago.length>0 && location.pathname.includes("/arc/createArc")==false)
+					{( dataArchipelago!==undefined && dataArchipelago.length>0 && location.pathname.includes("/arc/createArc")==false && location.pathname.includes("/arc/editArc")==false)
 					
 					?
 					<div>
