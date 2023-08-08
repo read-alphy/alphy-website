@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
 import { useAuth } from "../../../hooks/useAuth"
@@ -38,6 +39,7 @@ export default function Content(props) {
 
 
 	const [loading, setLoading] = useState(false);
+	const [scrollUpButton, setScrollUpButton] = useState(false);
 	const windowSize = useWindowSize();
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
 	const [cautionaryTimeoutPassed, setCautionaryTimeoutPassed] = useState(false);
@@ -77,7 +79,7 @@ export default function Content(props) {
 			PaperProps: {
 				style: {
 				maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-				backgroundColor: localStorage.getItem("theme")==="dark" ? "#1E1E1E" : "#fff",
+				 backgroundColor: localStorage.getItem("theme")==="dark" ? "#1E1E1E" : "#fff",
 				color: localStorage.getItem("theme")==="dark" ? "#e4e4e7" : "#3f3f46",
 				outline: "none",
 
@@ -623,13 +625,40 @@ const handleBookmark = async () => {
  })
 	}
 
+
+	
+	  // Function to handle scroll and toggle visibility
+	  const handleScroll = () => {
+		const contentElement = document.getElementById('content');
+		if (contentElement) {
+		  contentElement.scrollIntoView({ behavior: 'smooth' });
+		}
+	  };
+
+	  const toggleVisibility = () => {
+		const bodyTextElement = document.getElementById('q_and_a');
+			if (bodyTextElement) {
+				const position = bodyTextElement.getBoundingClientRect();
+				if (position.top < window.innerHeight && position.bottom >= 0) {
+					setScrollUpButton(true);
+				} else {
+					setScrollUpButton(false);
+				}
+  }
+	  };
+
+	  useEffect(() => {
+		window.addEventListener('scroll', toggleVisibility);
+		return () => window.removeEventListener('scroll', toggleVisibility);
+	  }, []);
+
 return (
-		<div ref={ref} className={`md:max-w-[90vw]  scroll-smooth pb-10 lg:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden`}>
+		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 			
 
 
 			<div>
-				<div className="grid grid-cols-3 max-h-[90vh]">
+				<div className="grid grid-cols-3 ">
 					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && language == summary.lang ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						<div className="flex flex-row ">
 							<h1 className="col-span-2 mt-10 text-xl lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
@@ -641,7 +670,7 @@ return (
 									<PopoverHandler onClick={() => setMainPopoverOpen(!mainPopoverOpen)}>
 										<div className="hidden lg:flex mt-8">
 
-											<svg className="cursor-pointer" width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<svg className="cursor-pointer text-zinc-700 dark:text-zinc-300" width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 												<path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" stroke-linecap="round" stroke-linejoin="round"></path>
 												<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 											</svg>
@@ -1023,9 +1052,9 @@ return (
 							}
 							{transcript.length > 0 &&
 
-								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
+								<div  className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
 									{transcript.length > 0 ? (
-										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px]  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
+										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
 											<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
 												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto	">
@@ -1059,7 +1088,7 @@ return (
 	
 
   
-											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 " >
+											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200  " >
 
 												<Tabs>
 													<Tab eventKey="transcript" title="">
@@ -1080,7 +1109,7 @@ return (
 
 														{activeTab === 'tab1' && (
 
-															<div className="content-area text-l font-normal  max-w-screen-md overflow-auto  max-h-[110vh]">
+															<div className="content-area text-l font-normal  max-w-screen-md overflow-auto  h-full xl:max-h-[110vh]">
 																{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
 
@@ -1110,7 +1139,7 @@ return (
 															</div>
 														)}
 														{activeTab === 'tab2' && (
-															<div className="content-area text-l font-normal max-w-screen-md overflow-auto max-h-[100vh] ">
+															<div className="content-area text-l font-normal max-w-screen-md overflow-auto h-full xl:max-h-[110vh] ">
 
 																{isLoading ? (
 																	<Loading />
@@ -1329,7 +1358,12 @@ return (
 
 			</div>}
 
-
+			<button
+      onClick={handleScroll}
+      className={`lg:hidden absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-600 text-white font-bold py-2 px-2 rounded-full`}
+    >
+      <ArrowUpwardIcon className="" />
+    </button>
 		</div>
 	);
 }

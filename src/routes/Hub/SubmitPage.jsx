@@ -16,7 +16,7 @@ import HubContent from './HubContent';
 
 
 
-function Hub({arcs, currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -28,41 +28,34 @@ function Hub({arcs, currentUser, collapsed, setCollapsed, hasActiveSub,contentNa
 	
 	const [data, setData] = useState([]);
 	
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [deleteDialog, setDeleteDialog] = useState(false);
 	const [subCalled, setSubCalled] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 	const [helmetThumbnail, setHelmetThumbnail] = useState("");
-	const [globalLayout, setGlobalLayout] = useState(true);
+	const [globalLayout, setGlobalLayout] = useState(false);
 	const [userLayout, setUserLayout] = useState(false);
-	const [submitLayout, setSubmitLayout] = useState(false);
-	const [mainShow, setMainShow] = useState(arcs===true ? "arcs" : "default");
+	const [submitLayout, setSubmitLayout] = useState(true);
+	const [mainShow, setMainShow] = useState("default");
+
+
 
 	useEffect(() => {
 
-		if(location.pathname.includes("arcs")){
-			setMainShow("arcs")
-		}
-		else{
-			setMainShow("default")
-		}
 
 		if(!windowSizeChecked){
-			if(window.innerWidth<768){
+			if(window.innerWidth<1000){
 			setCollapsed(true)
 			}
 			setWindowSizeChecked(true)
-	}
+		}
 	
 })
 
 
-if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
-	setSubCalled(true)
-	setIsLoading(false)
-}
+
 
 
 /* if(!subCalled){
@@ -81,31 +74,45 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 	}
 
 	return (
-		<div className="scrolling dark:bg-darkMode dark:text-zinc-300 ">
+		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
-				<title>Alphy - Unlock Audiovisual Content</title>
-			</Helmet>  
+				<title>Alphy - Use Alphy</title>
+			</Helmet> 
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 			></div>
 			
 			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
-			
-			{<div className={` hidden sm:block  `}>
+				{/* {collapsed==true && 
+			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
+			<div className={`hidden md:flex `}>
+				<button onClick={handleCollapse }>
+
+		
+			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+
+			</button			>
+			</div> 
+
+			</div>
+			} */}
+		<div className={`flex hidden sm:block`}>
 				
 				<SideFeedReworked 
 				
 				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-				/></div>}
+				/></div>
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform overflow-y-scroll sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="">
+						<div className="h-screen">
 							<SideFeedReworked 
 							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
@@ -116,15 +123,15 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} w-full max-h-[90vh] sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  max-h-[90vh] sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
 						}}`}
 				>
 					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<HubContent
-					arcs={arcs}	data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
 					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-					mainShow={mainShow} setMainShow={setMainShow} collapsed={collapsed} setCollapsed={setCollapsed}
+					mainShow={mainShow} setMainShow={setMainShow}
 					/>}
 					
 
@@ -147,4 +154,4 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 }
 
 
-export default Hub;
+export default SubmitPage;

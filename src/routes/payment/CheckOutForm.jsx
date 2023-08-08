@@ -3,6 +3,8 @@ import { useAuth } from "../../hooks/useAuth";
 import {
     PaymentElement,
     LinkAuthenticationElement,
+    AddressElement,
+    ExpressCheckoutElement,
     useStripe,
     useElements,
     CardElement,
@@ -105,6 +107,7 @@ export default function CheckOutForm({ clientSecret }) {
     const paymentElementOptions = {
         layout: "tabs",
         clientSecret: clientSecret,
+
     }
 
     return (
@@ -116,8 +119,11 @@ export default function CheckOutForm({ clientSecret }) {
 
                 options={{ defaultValues: { email: currentUser ? currentUser.email : "" } }}
             />
+            <AddressElement
+            options={{mode:"billing"}}/>
 
             <PaymentElement id="payment-element" options={paymentElementOptions} />
+            
 
             {/*             <CardElement
                 options={{

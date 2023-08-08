@@ -6,14 +6,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-import NotFoundInfo from './NotFoundInfo';
+
+import PrivacyPolicyInfo from "./PrivacyPolicyInfo";
 
 
 
 
-
-
-function NotFound({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function PrivacyPolicy({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -24,7 +23,7 @@ function NotFound({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWel
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [subCalled, setSubCalled] = useState(false);
 
@@ -65,8 +64,8 @@ useEffect (() => {
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-				<Helmet>
-				<title>Alphy - Not Found :( </title>
+			<Helmet>
+				<title>Alphy - Our Privacy Policy</title>
 			</Helmet> 
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
@@ -113,11 +112,11 @@ useEffect (() => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[90vh] sm:max-h-[100vh] ${collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[90vh] sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
-					<NotFoundInfo
+					<PrivacyPolicyInfo
 					hasActiveSub={hasActiveSub} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
 					/>}
 					
@@ -135,4 +134,4 @@ useEffect (() => {
 }
 
 
-export default NotFound;
+export default PrivacyPolicy;

@@ -18,7 +18,7 @@ export default function FeedbackForm() {
 
 
 	return (
-		<div className="dark mx-auto mt-20 md:w-800 w-full pb-20 " id="feedback">
+		<div className="dark mx-auto  md:w-800 w-full  " id="feedback">
 			
 
 			{/* <iframe className="h-200" src={"https://tally.so/embed/nGKJKL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"}></iframe> */}

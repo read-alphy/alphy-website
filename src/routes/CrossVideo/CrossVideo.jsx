@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
-import SideFeed from '../../components/ArticleComponents/SideFeed';
+import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ArchipelagoCreation from './ArchipelagoCreation';
@@ -24,7 +24,8 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, hasActiveSub,idToken
 	const navigate = useNavigate();
 	let source_id
 	
-	
+
+
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 	const [called, setCalled] = useState(false);
@@ -85,6 +86,7 @@ useEffect(() => {
 },[])
 
 
+
 const handleArcInfo = async () => {
 	if((isArc || isEditArc) && data.length===0 && called!==true){
 		setIsLoading(true)
@@ -92,8 +94,9 @@ const handleArcInfo = async () => {
 		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		try {
 			const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
+			
 			setCalled(true)
-			setCollapsed(true)
+			
 			setData(response.data)
 			setArchipelagoInfo(response.data)
 						if(response.data.description==="null"){
@@ -141,8 +144,10 @@ if(hasActiveSub!==true){
 	})
 
 if(!subCalled && isCreateArc){
-	
-	if(hasActiveSub===true){
+	if((hasActiveSub===undefined || hasActiveSub===false)){
+		navigate("/")
+	}
+	else if(hasActiveSub===true){
 		
 		setSubCalled(true)
 	}
@@ -216,7 +221,7 @@ const handleDeleteArchipelago = () => {
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			
 			<Helmet>
-				<title>{item_name!==undefined && item_name.length>0 ? item_name : (archipelagoTitle.length>0 ? `${archipelagoTitle}` : "Alphy")} </title>
+			{/* 	<title>{item_name!==undefined && item_name.length>0 ? item_name : (archipelagoTitle.length>0 ? `${archipelagoTitle}` : "Alphy")} </title>
 				<meta name="twitter:card" content="summary_large_image"></meta>
 				<meta property="og:title" content={item_name!==undefined &&item_name.length>0 ? `Ask AI -  ${item_name}` : "Alphy"} />
 				<meta name="twitter:title" content={item_name!==undefined &&item_name.length>0  ? `Ask AI - ${item_name}` : "Alphy"} />
@@ -229,7 +234,7 @@ const handleDeleteArchipelago = () => {
 				<meta property="og:url" content={location.href} />
 				 <meta property="og:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ? item_thumbnail : `https://i.ibb.co/RBH2C63/homepage.png`} />
 				
-				<meta name="twitter:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ?  item_thumbnail :`https://i.ibb.co/RBH2C63/homepage.png`} />
+				<meta name="twitter:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ?  item_thumbnail :`https://i.ibb.co/RBH2C63/homepage.png`} /> */}
 			</Helmet>  
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
@@ -237,45 +242,26 @@ const handleDeleteArchipelago = () => {
 			></div>
 			
 			<div className="flex flex-row ">
-				{collapsed==true && 
-			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
-			<div className={`hidden md:flex `}>
-				<button onClick={handleCollapse }>
-
-		
-			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-			</svg>
-
-			</button			>
-			</div> 
-
-			</div>
-			}
-			{collapsed=== false && <div className={`flex hidden lg:block mr-5 bg-zinc-100 min-w-[330px] max-w-[330px] dark:bg-mildDarkMode`}>
+			{<div className={`hidden ${isArc ?"md:block":"sm:block" } `}>
 				
-				<SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>}
+				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} dataArchipelago={dataArchipelago}/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform ${isArc ?"md:hidden":"sm:hidden" }  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen"><SideFeed setCollapsed={setCollapsed} source_id={source_id} /></div>
+						<div className="h-screen"><SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id}  dataArchipelago={dataArchipelago} /></div>
 					</div>
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[92vh] ${collapsed ? 'hidden' : 'blur-sm sm:blur-none md:max-h-[90vh] max-h-[90vh] overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					
 				{isCreateArc && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
-				{isCreateArc && !hasActiveSub &&
-				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-40">
-					You need to be on the <a href="/account" className="dark:text-greenColor text-green-400 underline">Premium Plan</a> to access this page. 
-					</div>
-				}
+
 				{(!isCreateArc && !isEditArc) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
 				{isEditArc && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
 							

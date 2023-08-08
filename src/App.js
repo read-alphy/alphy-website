@@ -5,7 +5,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './routes/Home';
 import Article from './components/Article';
 import Footer from './components/Footer';
-import PrivacyPolicy from './components/PrivacyPolicy';
+import PrivacyPolicy from './routes/PrivacyPolicy';
 import NotFound from './routes/NotFound';
 import image from './img/robot.png';
 import { useAuth } from './hooks/useAuth';
@@ -14,13 +14,18 @@ import Pricing from './routes/Pricing';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
-import Success from './routes/payment/Success';
+import Success from './routes/payment/SuccessInfo';
 import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
 import CrossVideo from './routes/CrossVideo/CrossVideo';
 import Hub from './routes/Hub/Hub';
+import MyHub from './routes/Hub/MyHub';
+import FAQ from "./routes/FAQ"
+import SubmitPage from "./routes/Hub/SubmitPage"
+import WelcomeForm from './components/WelcomeForm';
+
 
 
 
@@ -51,8 +56,18 @@ function App() {
 	const [collapsed, setCollapsed] = useState(false);
 	const [idToken, setIdToken] = useState("")
 	const [userArchipelagos, setUserArchipelagos] = useState([])
-	
+	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
+	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
+	const [clientSecret, setClientSecret] = useState("");
 
+	if(localStorage.getItem("theme").length===0){
+		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+			localStorage.setItem("theme", "dark")
+		}
+		else{
+			localStorage.setItem("theme", "light")
+		}
+	}
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
 
@@ -61,7 +76,9 @@ function App() {
 		`${process.env.REACT_APP_STRIPE_PK}`
 	);
 
-
+useEffect(() => {
+	getDataGlobalArchipelagos(0, true, true)
+}, [])
 
 useEffect(() => {
 	if(verification){
@@ -145,6 +162,12 @@ if (currentUser && creditcalled!==true) {
 }} 
 })
 
+
+
+
+
+
+
 	const getCustomerInfo = async (currentUser) => {
 		
         const idToken = await currentUser.getIdToken().then((idToken) => {
@@ -167,14 +190,88 @@ if (currentUser && creditcalled!==true) {
                 else {
                     setHasActiveSub(false)
                     setCalled(true)
+					fetchData()
 
                 }
             })
 		})
 
     }
+	const limit = 20
+	
+    const fetchData = async () => {
+        await currentUser.getIdToken().then((idToken) => {
+
+        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription`,{},
+            {
+                headers: {
+                    'id-token': idToken,
+                },
+            },
+        )
+            .then(r => {
+                const clientSecret = r.data[0].latest_invoice.payment_intent.client_secret  
+                setClientSecret(clientSecret)
+                setCalled(true)
+            }
+
+            )
+            .catch((error) => {
+             /*    if(error.response.data.detail ==="Already subscribed")
+                {
+                    setHasActiveSub(true)
+					setCalled(true)
+                }
+                 */
+
+				console.log(error)
+            })
+        })
+
+    }
 
 
+	/* const { currentUser } = useAuth(); */
+	function shuffleArray(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			let j = Math.floor(Math.random() * (i + 1));
+			let temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+	}
+	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
+		if(!hasMoreGlobalArchipelagos){
+			return;
+		}
+		setIsLoadingGlobalArchipelagos(true);
+		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
+		.then((response) => {
+
+			if(firstTime){
+				shuffleArray(response.data)
+				setDataGlobalArchipelagos(response.data);
+			}
+			else{
+				shuffleArray(response.data)
+				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
+			}
+			setIsLoadingGlobalArchipelagos(false);
+			setTimeout(() => {
+				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
+				if(elements){
+					elements.forEach(element => {
+						element.classList.add('cursor-default');
+					});
+			}
+				}, 500);
+
+		})
+		.catch((error) => {
+			setIsLoadingGlobalArchipelagos(false);
+		}
+		)
+	}
 	const location = useLocation();
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
@@ -182,13 +279,12 @@ if (currentUser && creditcalled!==true) {
 	
 
 
-
 	return (
 
 		
 		<div className="App bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
 
-	{/* 		{showWelcomeForm && 
+	{showWelcomeForm && 
 					<div className="fixed inset-0 z-50 flex items-center justify-center ">
 								<div className="fixed inset-0 bg-black opacity-80"></div>
 								<div className="z-10 bg-white rounded-md shadow-lg w-full max-w-lg ">
@@ -198,12 +294,12 @@ if (currentUser && creditcalled!==true) {
 							</div>	
 							</div>
 							</div>
-							} */}
+							} 
 							
 		<Helmet>
 			<title>{contentName=== undefined || contentName.length===0? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
-			<meta name="description" content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" />
-			<meta content="Transcribe, summarize, and question YouTube videos and Twitter Spaces with the help of AI. Try Alphy for free!" property="og:description"/>
+			<meta name="description" content="Transcribe, question, and summarize audio with the help of AI. Try Alphy for free!" />
+			<meta content="Transcribe, question, and summarize audio with the help of AI. Try Alphy for free!"  property="og:description"/>
 
 			<meta property="og:title" content="Alphy: Unlock the information in audiovisual content" />
   			<meta name="twitter:title" content="Alphy: Unlock the Information in Audiovisual Content" />
@@ -225,10 +321,13 @@ if (currentUser && creditcalled!==true) {
 				) : (
 					<>
 
-						<Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
+						 <div className={`${location.pathname.split('/')[1]==="arc" && location.pathname.split('/')[2]!=="editArc" && location.pathname.split('/')[2]!=="createArc"
+? "md:hidden": "sm:hidden"}`}>
+						 <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> 
+						 </div>
 						<Routes>
-							<Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos}/>} />
-							{/* <Route path="/auth/*" element={<Auth />} /> */}
+							{/* <Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} /> */}
+							
 							<Route
 								path="/yt/:article_ID"
 								element={
@@ -278,25 +377,36 @@ if (currentUser && creditcalled!==true) {
 							
 							}> </Route>
 
-							{/* <Route path="/hub"
-								element={<Hub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
-							</Route> */}
-
+							<Route path="/"
+								element={<Hub arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
 							
-							<Route path="/privacypolicy" element={<PrivacyPolicy />} />
+							<Route path="/arcs"
+								element={<Hub arcs={true} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
+					
+							<Route path="/myhub"
+								element={<MyHub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
+							<Route path="/submit"
+								element={<SubmitPage credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
 
-							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
-							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>}></Route>
-							<Route path="/u/resetpassword" element={<Auth/>}></Route>
-							<Route path="/account" element={<Account stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub}/>}/> 
-							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub}/>}/>
-							<Route path="/plans/checkout" element={<CheckOutPage/>}></Route>
-							<Route path="/plans/checkout/success" element={<Success/>}></Route>
-							<Route path="*" element={<NotFound to="/404"/>}/>
-							<Route path="/404" element={<NotFound />}/>
+							<Route path="/FAQ" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
+							<Route path="/privacypolicy" element={<PrivacyPolicy collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
+							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/account" element={<Account currentUser={currentUser} stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
+							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
+							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed} clientSecret={clientSecret} setClientSecret={setClientSecret}/>}></Route>
+							<Route path="/plans/checkout/success" element={<Success collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="*" element={<NotFound to="/404" collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
+							<Route path="/404" element={<NotFound collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
+
 						</Routes>
 
-						{location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null}
+						{/* {location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null} */}
 
 					</>
 

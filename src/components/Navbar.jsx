@@ -11,12 +11,14 @@ import HomeIcon from '@mui/icons-material/Home';
 
 
 function Navbar({ collapsed, setCollapsed }) {
-	const auth = useAuth();
+	
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { currentUser, logout } = useAuth();
 	const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+
 	useEffect(() => {
 		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 			document.documentElement.classList.add('dark')
@@ -25,7 +27,12 @@ function Navbar({ collapsed, setCollapsed }) {
 		  }
 
 		  const handleResize = () => {
-			setWindowWidth(window.innerWidth);
+			if (window.innerWidth > 999) {
+				setCollapsed(false);
+			  }
+			else{
+				setCollapsed(true);
+			}
 		  };
 	  
 		  window.addEventListener('resize', handleResize);
@@ -78,17 +85,6 @@ function Navbar({ collapsed, setCollapsed }) {
 
 
 
-	const handleSignOut = async () => {
-		try {
-			auth.logout();
-			setCollapsed(true);
-			window.location.reload()
-			localStorage.setItem("logged in","false")
-		} catch (error) {
-			console.log("sign out error",error)
-		
-		}
-	};
 
 	// boolean to check if the user is in the /yt/id or /sp/id
 	const isYt = useLocation().pathname.includes('/yt');
@@ -98,22 +94,23 @@ function Navbar({ collapsed, setCollapsed }) {
 	const isHub = useLocation().pathname.includes('/hub');
 
 	return (
-<div className={`items-center ${isYt || isSp || isUp || isArc || isHub? "" : "mx-auto max-w-[1200px]"} justify-between dark:bg-darkMode`}>
+<div className={`items-center ${isYt || isSp || isUp || isArc || isHub ? "" : ""} justify-between dark:bg-darkMode pb-2	`}>
 	<div
-		className={`flex dropshadow-l justify-between flex-row 	 top-0 z-40 text-blueLike bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} ${collapsed ? ' ' : '  '
-			}`}
+		className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-[#fafafa]   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${isYt || isSp || isUp || isArc || isHub ? "h-[8vh] min-h-[40px]" : "h-[8vh] min-h-[40px]"} dark:bg-darkMode`}
 	>
-		<div className={`flex items-center font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && (isYt || isSp || isUp || isArc || isHub) && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} h-[10vh] min-h-[40px] sm:min-w-[330px] sm:max-w-[330px] dark:sm:min-w-[330px] dark:sm:max-w-[330px]`}>
-			{collapsed==true	 && (isYt || isSp || isUp || isArc || isHub) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]	h-[10vh]"></div>}
-			<Link to="/" className="dark:text-gray-200 pl-4 ">
+		<div className={`flex mt-4 font-bold ${collapsed==false && windowWidth>999 && "pl-4"} ${(windowWidth > 999 && !collapsed)  ? "bg-zinc-100 dark:bg-mildDarkMode" : ""} `}>
+			{collapsed==true	 && (isArc) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]"></div>}
+			<Link to={"/"} className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>
 				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-				<h1 className="ml-2 text-2xl">ALPHY</h1>
+				<h1 className="ml-2 mt-1 text-2xl">ALPHY</h1>
 	
 				</div>
 			</Link>
-			{isYt || isSp || isUp || isArc || isHub ? 
+
+
+			{isArc  ? 
 				<div onClick={() =>setCollapsed(!collapsed) } className={`hidden lg:flex rounded-full bg-opacity-0 hover:bg-opacity-60 hover:bg-zinc-200 dark:hover:bg-zinc-700 ml-40  mr-4 p-1 transition duration-300 ease-in-out ${collapsed ? " lg:hidden bg-zinc-50 dark:bg-darkMode" : " bg-zinc-100 dark:bg-mildDarkMode  justify-end  "}  `}>
 				<button >
 
@@ -124,88 +121,30 @@ function Navbar({ collapsed, setCollapsed }) {
 
 			</button		>
 			</div>
-			: null}
+			: null} 
 		</div>
 
-		<div className={`flex dark:bg-darkMode`}>
+		<div className={`flex `}>
+			
 			<div >
-				<div className="flex flex-row mt-6 dark:text-gray-300 dark:bg-darkMode">
-				 {/* <a className="mr-4 hidden lg:block" href="https://www.producthunt.com/posts/alphy-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a>  */}
-				{/*  {currentUser && 
-				 
-				 <a className="hidden  lg:block lg:flex mr-6 pt-2 flex flex-row  text-zinc-600 font-[500] drop-shadow-md px-2  bg-gradient-to-r from-teal-200 to-lime-200 rounded-lg dark:text-zinc-300 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href={`/hub`}>
-		
-						<HomeIcon className="mr-1 pb-1 text-zinc-600"/>
-						<p className="">
-						Main Hub
-						</p>
-				</a>
+				<div className="flex flex-row mt-6 dark:text-gray-300 ">
+				
 
-				} */}
-					<div
-					
-						type="button"
-						onClick={() => handleScroll('feedback')}
-						className={`hidden lg:block lg:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 lg:block pt-2`}
-					>
-						Reach Us
-					</div>
+				
 
+				
 					
-{/* 					<div
-						className="hidden lg:block lg:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 lg:block  pt-2"
-						onClick={() => handleScroll('about')}
-					>
-						{' '}
-						About{' '}
-					</div> */}
-					<div
-						type="button"
-						className={`hidden lg:block lg:flex cursor-pointer text-center font-normal mr-6 text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:text-gray-200 lg:block pt-2`}
-					>
-						{' '}
-						<Link to={currentUser ?"/account" : "/plans"} className="dark:text-gray-200">
-							{currentUser ? "Account" : "Plans"}
-						</Link>{' '}
-					</div>
-					<div className="hidden lg:block lg:flex font-normal mr-6 cursor-pointer">
-											{localStorage.getItem('theme') === 'dark' ? (
-										<svg className="mr-1 hover:text-zinc-50 duration-200 transition ease-in" onClick={handleDarkMode} width={30} aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" strokeLinecap="round" strokeLinejoin="round"></path>
-					</svg>):
-					<svg className="mr-2 hover:text-zinc-800 duration-200 transition ease-in" width={25} onClick={handleDarkMode} aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" strokeLinecap="round" strokeLinejoin="round"></path>
-					</svg>}
-					</div>
-					{currentUser ? (
-						<div className="hidden lg:block lg:block lg:flex  ">
-							<button
-								className="hidden lg:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2 cursor-pointer rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
-								onClick={handleSignOut}
-							>
-{/* 								<FaGoogle className="inline-block mr-2 mb-1" />
- */}								Sign Out
-							</button>
-						</div>
-					) : (
-						<a
-						className="hidden lg:block text-slate-600 dark:text-gray-200 hover:text-slate-400 duration-200 transition ease-in font-normal py-2  rounded focus:outline-none focus:shadow-outline mr-4 dark:hover:text-zinc-400"
-						href="/u/login"
-					>
-{/* 						<FaGoogle className="inline-block mr-2 mb-1" />
- */}						Sign In
-					</a>
-				)}
+					
 
 				<div
 					id={'nav-icon3'}
 					onClick={() => setCollapsed(!collapsed)}
-					className={`block cursor-pointer col-span-3 mr-5 lg:hidden ${collapsed ? ' ' : ' open '} dark:text-gray-200 dark:invert`}
+					className={`block cursor-pointer col-span-3 mr-5 lg:hidden ${collapsed ? ' ' : ' open '} `}
 				>
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
+					<span className="bg-zinc-700 dark:bg-zinc-200"></span>
 				</div>
 			</div>
 		</div>
@@ -216,69 +155,10 @@ function Navbar({ collapsed, setCollapsed }) {
 			
 			
 			<div
-				className={`w-screen   dark:bg-darkMode  transition origin-top-right transform lg:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
+				className={`w-screen   transition origin-top-right transform lg:hidden ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 			>
-				<div className="text-center mx-auto items-center">
-					<div className="overflow-y-hidden z-50  text-sm mx-auto items-center justify-center flex flex-row pb-4 lg:pb-0">
-						<div className="flex mx-auto flex-row min-w-[300px]">
-					{/* 	<a className=" pt-2 flex flex-row  text-blueLike dark:bg-darkMode dark:text-zinc-300 dark:hover:text-zinc-200 transition duration-300 ease-in-out " href={`/hub`}>
-		
-													
-													<p className="">
-													Main Hub
-													</p></a> */}
-
-							<div className=" flex m-1 ml-6 text-center justify-center text-sm">
-								<div className="mr-4 mx-auto items-center hidden xs:flex">
-							{/* <a  href="https://www.producthunt.com/posts/alphy?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alphy" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388247&theme=light"  width={160} height={40} /></a> */}
-							</div>
-								<div
-									type="button"
-									onClick={() => handleScroll('feedback')}
-									className={`cursor-pointer text-blueLike dark:bg-darkMode dark:text-zinc-300 font-normal items-center text-center mx-auto flex`}
-								>
-									Reach Us
-								</div>
-							</div>
-
-							<div className="flex m-1 ml-6 justify-center text-sm">
-								<div
-									type="button"
-
-									className={`cursor-pointer text-blueLike dark:bg-darkMode dark:text-zinc-300 font-normal items-center text-center mx-auto flex`}
-								>
-									<Link to="/plans">
-										{currentUser ? "Account" : "Plans"}
-									</Link>{' '}
-								</div>
-							</div>
-
-										<div className="flex font-normal ml-6 cursor-pointer">
-														{localStorage.getItem('theme') === 'dark' && !collapsed ? (
-													<svg className="mr-1 hover:text-zinc-50 duration-200 transition ease-in" onClick={handleDarkMode} width={25} aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-								<path d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" strokeLinecap="round" strokeLinejoin="round"></path>
-								</svg>):
-								<svg className="mr-2 hover:text-zinc-500 duration-200 transition ease-in" width={25} onClick={handleDarkMode} aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-								<path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" strokeLinecap="round" strokeLinejoin="round"></path>
-								</svg>}
-									</div>
-
-							<div className="flex">
-								<div className="justify-center items-center ml-auto mr-auto flex text-sm">
-									<a
-										className="bg-zinc-50 dark:bg-darkMode hover:text-opacity-90 duration-600 transition ease-in text-slate-500 font-normal py-2 px-4 rounded cursor-pointer "
-										onClick={currentUser && handleSignOut }
-										href={currentUser==null && '/u/login'}
-									>
-										{/* <FaGoogle className="inline-block mr-1 mb-1 w-1/6" /> */}
-										{currentUser ? 'Sign Out' : 'Sign In'}
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	);
