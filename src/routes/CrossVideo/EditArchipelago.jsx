@@ -227,7 +227,7 @@ const handleKeyDown = (event) => {
             
             <div className="col-span-3 grid-row-2 flex justify-start  lg:p-10 drop-shadow-sm">
             
-                <div className=" lg:border-l w-full lg:px-10 mx-auto">
+                <div className=" lg:border-l w-full lg:px-10 mx-auto lg:min-w-[450px]">
                 <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Archipelago"}</p>
                 {archipelagoDescription.length>0 && <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80">{archipelagoDescription}</p>}
                 {<p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>}
@@ -236,7 +236,7 @@ const handleKeyDown = (event) => {
        
                 {dataArchipelago.length > 0
 									?  dataArchipelago
-										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromArchipelago={"archipelago"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} />
+										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromArchipelago={"archipelago"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} forCreationPool={true}/>
                                         )				
                                         :
                                        

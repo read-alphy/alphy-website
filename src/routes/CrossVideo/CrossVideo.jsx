@@ -256,7 +256,7 @@ const handleDeleteArchipelago = () => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20  w-full max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20 pb-20 sm:pb-0 w-full sm:sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					

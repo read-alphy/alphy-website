@@ -14,6 +14,7 @@ import Logo from "../../img/logo.png"
 import LogoBlack from "../../img/logo-inverted.png"
 import { Link } from 'react-router-dom';
 import HubFeedItem from "../../routes/Hub/HubFeedItemElements/HubFeedItem"
+import {useLocation} from 'react-router-dom';
 
 
 function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,globalLayout, dataArchipelago}) {
@@ -22,7 +23,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 	const { currentUser } = useAuth();
 	const [firstTimePersonal, setFirstTimePersonal] = useState(true);
 	const [called, setCalled] = useState(false);
-
+	const location = useLocation();
 	const carouselRef = useRef(null);
 	const auth = useAuth()
 	const navigate= useNavigate()
@@ -144,7 +145,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 								</div>
 
 					</div>
-					{( dataArchipelago!==undefined && dataArchipelago.length>0)
+					{( dataArchipelago!==undefined && dataArchipelago.length>0 && location.pathname.includes("/arc/createArc")==false)
 					
 					?
 					<div>
