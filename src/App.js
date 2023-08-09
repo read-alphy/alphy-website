@@ -60,7 +60,7 @@ function App() {
 	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
 	const [clientSecret, setClientSecret] = useState("");
 
-	if(localStorage.getItem("theme").length===0){
+	if(localStorage.getItem("theme")!== null && localStorage.getItem("theme")!==undefined && localStorage.getItem("theme").length===0){
 		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
 			localStorage.setItem("theme", "dark")
 		}
@@ -96,7 +96,7 @@ useEffect(() => {
 	setTimeout (() => {
 		var userId = localStorage.getItem("userId")
 		
-		if(userId===null || (currentUser!==undefined && currentUser!==null && currentUser.uid!== null &&userId!==currentUser.uid)){
+		if(userId===null || (currentUser!==undefined && currentUser!==null && currentUser.uid!== null && userId!==currentUser.uid)){
 			localStorage.setItem('userId', currentUser.uid)
 		}
 		
