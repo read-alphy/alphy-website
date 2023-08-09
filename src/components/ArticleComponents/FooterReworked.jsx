@@ -54,7 +54,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                     <div className="mb-6 hidden xl:block">
                                     <p className = "text-zinc-600 dark:text-zinc-200 text-md  w-full w-full pl-10 mb-5 ">Try Premium</p>
                                     <p className = "text-zinc-500 dark:text-zinc-300 text-sm w-full w-full pl-10 ">Extra transcription credits, multi-language access, local audio processing, and unlimited Arc creation</p>
-                                    <Link to="/plans" className=" text-xs w-full cursor-pointer w-full pl-10 mt-5 text-greenColor">Learn More > </Link>
+                                    <Link to="/plans" className=" text-xs w-full cursor-pointer w-full pl-10 mt-5 text-green-400 dark:text-greenColor">Learn More > </Link>
                                     </div>
                                     }
 

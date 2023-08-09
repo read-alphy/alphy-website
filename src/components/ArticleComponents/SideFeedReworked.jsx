@@ -139,7 +139,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 											className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
 											to="/u/login"
 										><LoginIcon className="mr-3 text-green-300 dark:text-green-200" fontSize="small"/>
-										<p className="text-green-300 dark:text-green-200">Sign In</p>
+										<p className="text-green-400 dark:text-green-200">Sign In</p>
 										</Link>
 									)}
 								</div>
