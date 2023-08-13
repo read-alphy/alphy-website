@@ -67,8 +67,6 @@ function HubSourceFeed(props) {
 	
 
 
-
-
 	window.addEventListener('beforeunload', () => {
 		if (submitted === true) {
 			localStorage.setItem('search', search);
@@ -134,6 +132,12 @@ function HubSourceFeed(props) {
 
 	}
 	
+	useEffect(() => {
+		if (inputValue.length === 0) {
+		  getData(0,true,true); // Call the provided function when the input value is empty
+		}
+	  }, [inputValue, getData]); //
+
 
 
 
@@ -168,7 +172,7 @@ function HubSourceFeed(props) {
 										setSearch(e.target.value);
 									}}
 									placeholder="Start searching..."
-									className=" pl-10 peer min-w-[320px] max-w-[320px] xs:min-w-[330px] sm:min-w-[400px] xl:min-w-[600px] h-full border-zinc-500 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-blue-000 dark:focus:border-blue-000" />
+									className=" pl-10 peer min-w-[320px] max-w-[320px] xs:min-w-[380px] sm:min-w-[400px] xl:min-w-[600px] h-full border-zinc-500 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-blue-000 dark:focus:border-blue-000" />
 								<div
 						
 						className="cursor-pointer absolute inset-y-0 left-0 flex items-center pl-3 "
@@ -220,7 +224,6 @@ function HubSourceFeed(props) {
 								? data.length > 0
 									? data
 										.map((item, index) => <HubFeedItem currentUser={currentUser} myBookmarks={false} key={index} item={item} mainFeedInput={inputValue} />)
-										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: data.map((item, index) => <HubFeedItem currentUser={currentUser} myBookmarks={false} key={index + 1000} item={item} />)}
 						</div>

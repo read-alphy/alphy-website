@@ -343,13 +343,13 @@ if (currentUser && creditcalled!==true) {
 							}></Route>
 								<Route path="/arc/createArc" element={
 								
-								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName} credit={credit} setCreditCalled={setCreditCalled}/>
 							
 							}> </Route>
 
 							<Route path="/arc/editArc/:archipelago_ID" element={
 								
-								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} credit={credit} setCreditCalled={setCreditCalled}/>
 							
 							}> </Route>
 
@@ -365,7 +365,7 @@ if (currentUser && creditcalled!==true) {
 								element={<MyHub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 							<Route path="/submit"
-								element={<SubmitPage credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+								element={<SubmitPage credit={credit} setCreditCalled={setCreditCalled} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
 							<Route path="/FAQ" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />

@@ -86,7 +86,7 @@ function Auth({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcome
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[90vh] sm:sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  w-full max-h-[90vh] sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 

@@ -16,11 +16,13 @@ const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFe
 	}
 
 	let imageUrl;
-	if (item.source_type === 'yt') {
-		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
-	} else if (item.source_type === 'sp') {
-		imageUrl = Twitter;
-	}
+	if(item!==undefined){
+		if (item.source_type === 'yt') {
+			imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
+		} else if (item.source_type === 'sp') {
+			imageUrl = Twitter;
+		}
+}
 
 	
 	const language_codes = {
@@ -86,7 +88,7 @@ const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFe
 
 	return (
 		<div className={`grid border-b-0 w-full md:w-full  `}>
-			{item.source_type !== "up"
+			{item!==undefined && item.source_type !== "up"
 				?
 				!myBookmarks ? 
 				<MyWorksFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes}/>

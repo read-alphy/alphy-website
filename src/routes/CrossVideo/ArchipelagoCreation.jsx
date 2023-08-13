@@ -3,6 +3,7 @@ import {Button, Input, Textarea} from "@material-tailwind/react";
 import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import PublishIcon from '@mui/icons-material/Publish';
 
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
@@ -13,7 +14,7 @@ import { set } from 'lodash';
 
 
 
-export default function ArchipelagoCreation({archipelagoDescription , archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago,errorMessage}){
+export default function ArchipelagoCreation({archipelagoDescription , archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago,errorMessage,credit, setCreditCalled}){
     const [inputValue, setInputValue] = useState("");
     
     const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,14 @@ export default function ArchipelagoCreation({archipelagoDescription , archipelag
     const [searched, setSearched] = useState(false);
     const [typing, setTyping] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [submitInputValue, setSubmitInputValue] = useState('');
+    const [failed, setFailed] = useState(false);
+    const [errorMessageSubmit, setErrorMessageSubmit] = useState('');
+    const [searchCalled, setSearchCalled] = useState(false);
+    const [prevLength, setPrevLength] = useState(0);
+    const [firstTime, setFirstTime] = useState(true);
+
 
     
     const [editBasicInfo, setEditBasicInfo] = useState(false);
@@ -37,7 +46,7 @@ export default function ArchipelagoCreation({archipelagoDescription , archipelag
 
     const getData = (offset, firstTime, hasMore) => {
     
-        
+        setSearchCalled(false)
 		if (!hasMore) {
 			return;
 		}
@@ -58,6 +67,7 @@ export default function ArchipelagoCreation({archipelagoDescription , archipelag
 					setData([...data, ...response.data]);
 				}
 				setIsLoading(false);
+                setSearchCalled(true)
 			})
         }
         else{
@@ -70,12 +80,130 @@ export default function ArchipelagoCreation({archipelagoDescription , archipelag
 			setOffset(offset + limit);
 			getData(offset + limit, false, true);
     }
-    const handleSubmit = () => {
-        getData(0, true, true);
+
+
+
+
+
+    useEffect(() => {
+        if (prevLength > 0 && inputValue.length === 0) {
+          getData(0,true,true); // Call the provided function when the input value is empty
+        }
+        setPrevLength(inputValue.length);
+    }, [inputValue, getData, prevLength]); //
+ 
+    
+    const handleSubmit = (event, selectedOption) => {
+		
+        if(!(
+            inputValue.includes('https://www.youtube.com/watch') ||
+            inputValue.includes('https://youtu.be') ||
+            inputValue.includes('https://m.youtube.com') ||
+            inputValue.includes('https://twitter.com/i/spaces') ||
+            inputValue.includes('https://www.youtube.com/live')
+            )
+        )
+     {
+        setInputValue('');
+        setErrorMessageSubmit('Please provide a link to a YouTube video or Twitter Space.')
+        setFailed(true)
+        return;
+    }
+    else {
+        let videoId
+        let video_source
+        //check if video already exists
+        if (inputValue.includes('https://www.youtube.com')) {
+            
+            if(inputValue.includes('https://www.youtube.com/watch')){
+            videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
+            
+            }
+            else if(inputValue.includes('https://www.youtube.com/live') ){
+                videoId = inputValue.split('/').pop().split("?")[0];
+                
+            }
+            video_source = "yt"
+            
+        
     }
 
+        else if (inputValue.includes('https://youtu.be')) {
+            videoId = inputValue.split('/').pop().split("?")[0];
+            video_source = "yt"
+
+        }
+
+        else if (inputValue.includes('https://m.youtube.com')) {
+            videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
+            video_source = "yt"
+
+        }
+        else if (inputValue.includes('https://twitter.com/i/spaces')) {
+            
+            videoId = inputValue.split('/').pop().split("?")[0];
+            video_source = "sp"
+
+        }
 
 
+        if (currentUser) {
+            setLoading(true);
+            // get id token
+            currentUser.getIdToken().then((idToken) => {
+                
+            axios
+                    .post(
+                        `${process.env.REACT_APP_API_URL}/sources/`,
+                        {
+                            url: inputValue,
+                        },
+                        {
+                            headers: {
+                                'id-token': idToken,
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        setCreditCalled(false)
+                        setErrorMessageSubmit("")
+                        setLoading(false);
+                        setFailed(false)
+                        
+                        setDataArchipelago([...dataArchipelago,response.data])
+						setSourceIDsArchipelago([...sourceIDsArchipelago,response.data.source_id])
+                        setInputValue('');
+                        getData(0, true, true);
+                        
+                            /* navigate(`/${video_source}/${videoId}`) */
+
+                    }).
+                    catch((error) => {
+                        if(errorMessageSubmit.length===0){
+                      
+                            setErrorMessageSubmit("There was an error submitting the form. Make sure you have enough credits for the submission and try again.")
+                      
+                }
+                        setFailed(true)
+                        setSubmitInputValue('');
+                        setLoading(false);
+                        throw error;
+                    });
+            });
+        } else {
+            // sign in
+            // navigate('/auth');
+            setErrorMessageSubmit('Please sign in to submit content.');
+        }
+    }
+}
+
+useEffect (() => {
+    if(firstTime){
+        getData(0, true, true);
+        setFirstTime(false)
+    }
+},[])
 
 useEffect(() => {
     const timer = setTimeout(() => {
@@ -143,7 +271,8 @@ const handleKeyDown = (event) => {
                 
                 </div>
                 <div class=" mt-10 border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
-                <p className="mt-4 lg:mt-10 mb-6 text-zinc-700 dark:text-zinc-300 ml-1">Curate your knowledge hub</p>
+                <p className="mt-4 lg:mt-10 mb-2     text-zinc-700 dark:text-zinc-300 ml-1">Curate your knowledge hub</p>
+                <p className="mt-2 mb-6 text-zinc-600 dark:text-zinc-400 ml-1 text-sm">Search by keyword or paste a link.</p>
                 <div className="w-full grid grid-cols-5 lg:grid-cols-6 ">
 				<div class="col-span-5 lg:col-span-6 relative w-full min-w-[200px] h-12">
                     
@@ -173,13 +302,19 @@ const handleKeyDown = (event) => {
                                 <SearchIcon fontSize="small"/></Button> */}
                          </div>
 <div className="archipelago-search max-h-[80vh] overflow-y-scroll mt-5">
+    {
+        (inputValue.length>0 && searchCalled == true) &&
+        <p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300 flex flex-col text-sm"> 
+                                                Can't find what you are looking for? Paste the link for the content above to process it first.
+                                                </p>
+}
                          {isLoading
 								? data.length > 0
 									? data
 										.map((item, index) => <FeedItem  key={index} item={item} mainFeedInput={inputValue} fromArchipelago={"search"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago}/>)
 										.concat([...Array(10)].map((item, index) => <SkeletonItem key={index + 500} />))
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
-								: data.map((item, index) => <FeedItem key={index + 1000} item={item} fromArchipelago={"search"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} />)}
+								: data.map((item, index) => <FeedItem key={index + 1000} item={item} fromArchipelago={"search"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} />)}
 						</div>
 						{hasMore && (
 							<div className="w-full flex justify-center">
@@ -193,14 +328,37 @@ const handleKeyDown = (event) => {
 								}
 							</div>
 						)}
-                        {data.length ===0 &&
+                   {/*      {(data.length ===0 && inputValue.length===0) &&
                              <p className="mt-5 mb-5 text-zinc-600 dark:text-zinc-300 flex flex-col"> 
                              <span>         Expand the scope of your arc by adding new content from the search bar.</span>
-                                      <span className="mt-2">
-                      If you can't find what you are looking for, you can submit new content from the <a className="text-greenColor underline" href="/">main page</a>.
-                      </span>
+                                   
                                       </p>
-                        }
+                        } */}
+                        {
+                                  (inputValue.includes('https://www.youtube.com/watch') ||
+                                    inputValue.includes('https://youtu.be') ||
+                                    inputValue.includes('https://m.youtube.com') ||
+                                    inputValue.includes('https://twitter.com/i/spaces') ||
+                                    inputValue.includes('https://www.youtube.com/live'))
+            
+                                        &&
+
+                                    <div>
+                                
+                                <p className="mt-5 mb-5 text-sm text-zinc-600 dark:text-zinc-300 flex flex-col"> 
+                                    Remaining Credits : {Math.floor(credit)} minutes </p>
+                                <Button size="sm" type="submit"
+                                onClick={(e) => {
+                                    handleSubmit();
+                                }} className=" bg-green-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case">Submit</Button>
+                                
+                                {failed && 
+                                    <div className="mx-auto mt-5 text-sm text-red-400 ml-2">
+                                    {errorMessageSubmit}
+                        </div>
+                                     }
+                                 </div>
+            }
                
 
 
@@ -212,9 +370,10 @@ const handleKeyDown = (event) => {
             </div>
             
             <div className="col-span-3 grid-row-2 flex justify-start  lg:p-10 drop-shadow-sm">
-            
-                <div className=" lg:border-l w-full lg:px-10 mx-auto lg:min-w-[450px]">
-                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Arc"}</p>
+            												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+
+                <div className=" lg:border-l w-full lg:px-10 mx-auto lg:min-w-[550px]">
+                <p className="mt-20 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Arc"}</p>
                 {archipelagoDescription.length>0 && <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80">{archipelagoDescription}</p>}
      <p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>  
      {errorMessage && dataArchipelago.length===0 && <p className="mt-4 ml-2 mb-5 text-md text-red-500 dark:text-red-400 opacity-80">An Arc cannot be empty. Please add an item to continue.</p>}

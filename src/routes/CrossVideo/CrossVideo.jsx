@@ -19,7 +19,7 @@ import jsonData from "./arcs_and_thumbnails.json"
 
 
 
-function CrossVideo({ currentUser, collapsed, setCollapsed, hasActiveSub,idToken,userArchipelagos,setUserArchipelagos,contentName, setContentName}) {
+function CrossVideo({ currentUser, collapsed, setCollapsed, hasActiveSub,idToken,userArchipelagos,setUserArchipelagos,credit, setContentName,setCreditCalled}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -260,14 +260,14 @@ const handleDeleteArchipelago = () => {
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20 pb-20 sm:pb-0 w-full sm:sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} md:px-20 pb-20 sm:pb-0 w-full sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					
-				{isCreateArc && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
+				{isCreateArc && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage} credit={credit} setCreditCalled={setCreditCalled}/>}
 
 				{(!isCreateArc && !isEditArc) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
-				{isEditArc && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
+				{isEditArc && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage} credit={credit} setCreditCalled={setCreditCalled}/>}
 							
 					
 

@@ -11,7 +11,7 @@ import {Link} from "react-router-dom"
 import { useLocation } from 'react-router-dom';
 
 const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago,forDetail,forCreationPool}) => {
-	const source_id = item.source_id;
+	const source_id = item!==undefined && item.source_id;
 	let formattedDate = ""
 	const inputDate = item!==undefined && item.added_ts!==undefined &&  item.added_ts.substring(0, 10)
 	const [removed,setRemoved] = useState(false)
@@ -105,6 +105,13 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 			})
 	}
 
+	
+
+	const handleClick = (e) => {
+		if (fromArchipelago!==undefined && forDetail!==true) {
+		  e.preventDefault(); // This will prevent the link from navigating
+		}
+	  };
 
 
 	return (
@@ -112,10 +119,11 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 			{item.source_type !== "up"
 				?
 				!myBookmarks ? 
-				<Link to={(fromArchipelago===undefined || forDetail===true) && `/${item.source_type}/${source_id}`} >
+				<Link to={`/${item.source_type}/${source_id}` }
+				onClick={handleClick} >
 					<div className="flex w-full ">
 						<div
-							className={`grid ${fromArchipelago==="archipelago" && forDetail!==true ? "flex flex-col sm:grid-cols-4 cursor-default" : "grid-cols-3"} ${fromArchipelago===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataArchipelago!==undefined && dataArchipelago.includes(item) && fromArchipelago==="search") || (sourceIDsArchipelago!==undefined && sourceIDsArchipelago.includes(item.source_id)) && forCreationPool!==true)&&  "border-4 border-greenColor"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
+							className={`grid ${fromArchipelago==="archipelago" && forDetail!==true ? "grid-cols-3 sm:grid-cols-4 cursor-default" : "grid-cols-3"} ${fromArchipelago===undefined && "lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2"} flex ${((dataArchipelago!==undefined && dataArchipelago.includes(item) && fromArchipelago==="search") || (sourceIDsArchipelago!==undefined && sourceIDsArchipelago.includes(item.source_id)) && forCreationPool!==true)&&  "border-4 border-greenColor"} flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
 							onClick={() => {
 
 
@@ -128,12 +136,14 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 
 									if(dataArchipelago.includes(item) || sourceIDsArchipelago.includes(item.source_id)){
 										
-										const index = dataArchipelago.indexOf(item)
-										dataArchipelago.splice(index,1)
-										setDataArchipelago([...dataArchipelago])
-										const index2 = sourceIDsArchipelago.indexOf(item.source_id)
-										sourceIDsArchipelago.splice(index2,1)
-										setSourceIDsArchipelago([...sourceIDsArchipelago])
+
+										const newArchipelagoArray = dataArchipelago.filter(element => element.source_id !== item.source_id);
+										setDataArchipelago(newArchipelagoArray)
+
+								
+										const newSourceIDArray = sourceIDsArchipelago.filter(element => element !== item.source_id);
+										
+										setSourceIDsArchipelago(newSourceIDArray)
 
 									}
 									else{
@@ -147,7 +157,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							}}
 							target="_blank"
 						>
-							<div className={`col-span-1  ${location.pathname.includes("arc/createArc") ? "min-w-[80px]":"min-w-[100px]"} max-w-[300px] mr-3 `}>
+							<div className={`col-span-1  ${location.pathname.includes("arc/createArc") || location.pathname.includes("arc/editArc") ? `${fromArchipelago==="archipelago" ? "min-w-[80px]" : "min-w-[80px]"}`:"min-w-[100px]"} max-w-[300px] mr-3 `}>
 								{forDetail===true ? 
 								<div className="flex flex-row">
 								<div className="flex mr-4 text-zinc-700 dark:text-zinc-400">
@@ -169,7 +179,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 								:
 							
 								<div
-									className="flex w-full  h-0 dark:opacity-80  rounded-md bg-gray-600"
+									className="flex w-full  max-w-[220px] h-0 dark:opacity-80  rounded-md bg-gray-600"
 									style={{
 										backgroundImage: `url(${imageUrl})`,
 										paddingBottom: '50%',
@@ -183,27 +193,8 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 								
 								}
 							</div>
-							{fromArchipelago==="archipelago" && forDetail!==true &&
-									<div className="sm:hidden">
-										<RemoveCircleOutlineIcon
-										className="cursor-pointer"
-										onClick={ () => {
-											if(dataArchipelago.includes(item)){
-												const index = dataArchipelago.indexOf(item)
-												dataArchipelago.splice(index,1)
-												setDataArchipelago([...dataArchipelago])
-
-												const index2 = sourceIDsArchipelago.indexOf(item.source_id)
-												sourceIDsArchipelago.splice(index2,1)
-												setSourceIDsArchipelago([...sourceIDsArchipelago])
-											}
-										
-										}	
-										}
-										></RemoveCircleOutlineIcon>
-									</div>
-									}
-							<div className={`col-span-2 ${!fromArchipelago  && "lg:col-span-1"}  ${window.innerWidth>400 && window.innerWidth<500 &&"ml-5"} xs:ml-0 sm:ml-0 justify-start text-xs`} >
+						
+							<div className={`${fromArchipelago==="archipelago" ? "col-span-1 sm:col-span-2" : "col-span-2"} ${!fromArchipelago  && "lg:col-span-1"}  ${window.innerWidth>400 && window.innerWidth<500 &&"ml-5"} xs:ml-0 sm:ml-0 justify-start text-xs`} >
 							
 								
 								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) || (fromArchipelago==="archipelago" && item.source!==undefined && item.source.complete===true)? null : (
@@ -233,29 +224,36 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 									
 									</div>
 
-								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
+								
 							</div>
-
-{fromArchipelago==="archipelago" && forDetail!==true &&
-							<div className="justify-center items-center flex hidden sm:block">
+							<div className="col-span-1">
+							{fromArchipelago==="archipelago" && forDetail!==true &&
+							<div className="justify-center items-center flex">
 								<RemoveCircleOutlineIcon
 								className="cursor-pointer"
 								onClick={ () => {
-									if(dataArchipelago.includes(item)){
-										const index = dataArchipelago.indexOf(item)
-										dataArchipelago.splice(index,1)
-										setDataArchipelago([...dataArchipelago])
+									
+												
+										const newArchipelagoArray = dataArchipelago.filter(element => element.source_id !== item.source_id);
+										setDataArchipelago(newArchipelagoArray)
 
-										const index2 = sourceIDsArchipelago.indexOf(item.source_id)
-										sourceIDsArchipelago.splice(index2,1)
-										setSourceIDsArchipelago([...sourceIDsArchipelago])
-									}
+								
+										const newSourceIDArray = sourceIDsArchipelago.filter(element => element !== item.source_id);
+										
+										setSourceIDsArchipelago(newSourceIDArray)
+
+									
+								
 								
 								}	
 								}
-								></RemoveCircleOutlineIcon>
+								/>
 							</div>
 							}
+								</div>
+							
+
+		
 						</div>
 					</div>
 				</Link>
