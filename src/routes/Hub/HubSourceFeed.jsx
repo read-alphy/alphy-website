@@ -17,6 +17,7 @@ function HubSourceFeed(props) {
 	const [search, setSearch] = useState('');
 	const [offset, setOffset] = useState(0);
 	const [hasMore, setHasMore] = useState(false);
+	const [prevLength, setPrevLength] = useState(0);
 	/*const const { currentUser } = useAuth(); */
 	const currentUser = props.currentUser;
 	
@@ -131,13 +132,12 @@ function HubSourceFeed(props) {
 
 
 	}
-	
 	useEffect(() => {
-		if (inputValue.length === 0) {
-		  getData(0,true,true); // Call the provided function when the input value is empty
-		}
-	  }, [inputValue, getData]); //
-
+        if (prevLength > 0 && inputValue.length === 0) {
+          getData(0,true,true); // Call the provided function when the input value is empty
+        }
+        setPrevLength(inputValue.length);
+    }, [inputValue, getData, prevLength]); //
 
 
 

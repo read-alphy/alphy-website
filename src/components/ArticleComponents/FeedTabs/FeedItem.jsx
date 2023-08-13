@@ -343,7 +343,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 				<Link to={`/${item.source_type}/${source_id}`} >
 					<div className="flex w-full hover:opacity-70 duration-200 transform ease-in*out">
 						<div
-							className={`flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full py-4 rounded-md mb-2 transition duration-200 ease-in-out   sm:hover:scale-105 transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
+							className={`flex ${' '} ${'pointer-events-none'} flex-row items-center justify-start cursor-pointer w-full h-full py-4 rounded-md mb-2 transition duration-200 ease-in-out    transform sm:hover:translate-x-2 sm:hover:translate-y-2 mr-auto ml-auto`}
 							onClick={() => {
 
 

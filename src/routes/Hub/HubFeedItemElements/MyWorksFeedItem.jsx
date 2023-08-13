@@ -13,7 +13,7 @@ export default function MyWorksFeedItem({item,index, source_id,imageUrl,language
 							className={`
 							
 						 
-							sm:hover:scale-10 transform sm:hover:scale-105
+							transform sm:hover:scale-105
 							cursor-pointer 
 							 p-2 rounded-md mb-2 transition duration-200 ease-in-out`}
 							
