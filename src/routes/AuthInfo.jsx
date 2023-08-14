@@ -242,7 +242,7 @@ verificationMessage==false ?
 (resetPassword=== false ? 
 <div className="mb-20 w-[300px]">
 	
-	<iframe className="mt-[600px] h-[70vh] hidden" src={`https://tally.so/embed/mYRzAW=heyo?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+	
 		<div >
 			<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300">{isRegister ? 'Create an account' : 'Login'}	</h1>
 			

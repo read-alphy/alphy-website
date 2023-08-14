@@ -18,10 +18,8 @@ export default function FeedbackForm() {
 
 
 	return (
-		<div className="dark mx-auto  md:w-800 w-full  " id="feedback">
+		<div className="dark mx-auto  md:w-800 w-full mt-10 " id="feedback">
 			
-
-			{/* <iframe className="h-200" src={"https://tally.so/embed/nGKJKL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"}></iframe> */}
 			
 			<div className=" flex justify-center "></div>
 
@@ -30,14 +28,14 @@ export default function FeedbackForm() {
 				
 				 <iframe
 					className={`dark:text-whiteLike sm:w-5/6 max-w-4xl mb-20 md:ml-30 overflow-auto h-160`} 
-					src={`https://tally.so/embed/mKp7XX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
+					src={`https://tally.so/embed/wQedOk?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
 				></iframe>
 				
 				:
 				
 			 	<iframe
 					className={`hidden dark:block dark:text-whiteLike sm:w-5/6 max-w-4xl mb-20 md:ml-30 overflow-auto h-160`} 
-					src={"https://tally.so/embed/mKepZ7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"}
+					src={"https://tally.so/embed/wbjL6E?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"}
 				></iframe> 
 				
 					}

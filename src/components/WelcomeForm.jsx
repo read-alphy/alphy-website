@@ -70,8 +70,8 @@ const handleShowWelcomeMessage = () => {
             <div className="flex flex-row">
             
               <div>
-            <h1 className="text-xl font-semibold dark:text-zinc-600"> Welcome to Alphy!</h1>
-            <p className="mt-5 text-l dark:text-zinc-600">Please tell us a bit about yourself. It will only take 30 seconds.</p>
+            <h1 className="ml-1 text-xl text-zinc-700 font-semibold dark:text-zinc-300"> Welcome to Alphy!</h1>
+            <p className="ml-1 mt-5 text-l text-zinc-600 dark:text-zinc-300">Please tell us a bit about yourself. It will only take 30 seconds.</p>
             </div>
            
                     </div>
@@ -125,7 +125,11 @@ const handleShowWelcomeMessage = () => {
         <Button className="font-sans mt-10 bg-greenColor" type="submit">Submit</Button>
         </form> */}
 <div >
-        <iframe className="h-[530px] sm:w-[430px]" src={`https://tally.so/embed/nGKJKL?user_id=${currentUser!==null && currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=0`}></iframe>
+  {localStorage.getItem("theme")==="light" ? 
+        <iframe className="h-[600px] sm:w-[430px]" src={`https://tally.so/embed/mVQV4E?user_id=${currentUser!==null && currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=0`}></iframe>
+        :
+        <iframe className="h-[600px] sm:w-[430px]" src={`https://tally.so/embed/mDk5Mp?user_id=${currentUser!==null && currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=0`}></iframe>
+      }
         </div>
         </div>
 :
