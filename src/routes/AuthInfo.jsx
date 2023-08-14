@@ -32,7 +32,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm, oobCode}) => {
 
 		
 	
-	
+	console.log(oobCode)
 	
 	
 	
@@ -315,7 +315,7 @@ verificationMessage==false ?
 
 			:
 			
-			oobCode === null ? 
+			oobCode === null || oobCode===undefined  ? 
 			<div className="mb-20 w-[300px]">
 				<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300">Reset Password	</h1>
 				<p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10">Enter your email address and we will send you a link to reset your password.</p>
