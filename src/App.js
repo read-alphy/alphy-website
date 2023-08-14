@@ -80,6 +80,29 @@ useEffect(() => {
 	getDataGlobalArchipelagos(0, true, true)
 }, [])
 
+const resetPassword = (urlParams.get('mode')=="resetPassword");
+
+
+	useEffect(() => {
+		if(resetPassword && localStorage.getItem('resetPassword')!=="true"){
+			const url = window.location.href;
+			const [baseUrl, queryString] = url.split('?');
+			window.location.href = (`${baseUrl}u/resetpassword/?${queryString}`);
+			localStorage.setItem('resetPassword', 'true');
+		}
+
+
+		localStorage.setItem('search', '');
+		setTimeout(() => {
+			window.history.replaceState(null, null, window.location.pathname); // clears the anchor from the URL
+		}, 0);
+
+
+	}, []);
+
+
+
+
 useEffect(() => {
 	if(verification){
 		const url = window.location.href;

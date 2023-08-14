@@ -159,6 +159,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 			console.log(result)
 			setIsSubmitting(false)
 			setSuccessMessage(true)
+			localStorage.setItem('resetPassword', 'false');
 		}
 		)
 		.catch((error) => {
