@@ -337,7 +337,7 @@ verificationMessage==false ?
 				{successMessage=== false ? 
 				<div>
 				<h1 className="text-xl mb-8">Pick a New Password	</h1>
-				<p className="text-sm text-zinc-600 mb-10">You are about to reset your password. Please make sure your new password is longer than 8 characters.</p> 
+				<p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300">You are about to reset your password. Please make sure your new password is longer than 8 characters.</p> 
 					<form onSubmit={handlePasswordResetConfirmation}>
 {/* 					<div class="relative z-0 w-full mb-6 group">
 						<input value={email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
