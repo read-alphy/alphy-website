@@ -81,7 +81,7 @@ useEffect(() => {
 }, [])
 
 const resetPassword = (urlParams.get('mode')=="resetPassword");
-const oobCode = urlParams.get('oobCode');
+
 
 	useEffect(() => {
 		if(resetPassword){
@@ -394,7 +394,7 @@ if (currentUser && creditcalled!==true) {
 							<Route path="/privacypolicy" element={<PrivacyPolicy collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub}/>}></Route>
-							<Route path="/u/resetpassword" element={<Auth oobCode={oobCode} collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
+							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
 							<Route path="/account" element={<Account currentUser={currentUser} stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
 							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
 							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed}  hasActiveSub={hasActiveSub}/>}></Route>

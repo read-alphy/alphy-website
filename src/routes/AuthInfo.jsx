@@ -11,7 +11,7 @@ import Google from "../img/google.png"
 
 
 
-const AuthInfo = ({setShowWelcomeForm, showWelcomeForm, oobCode}) => {
+const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(null);
@@ -30,9 +30,9 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm, oobCode}) => {
 		setEmail(event.target.value);
 	};
 
-		
+	const oobCode = urlParams.get('oobCode');
 	
-	console.log(oobCode)
+	
 	
 	
 	
