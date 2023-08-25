@@ -1323,6 +1323,7 @@ return (
 
 					<div className="flex flex-col mb-20 mt-20 ">
 						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+
 							<span>
 							Alphy is doing its best to process this {data.source_type==="yt" ? "video" : "recording"}, it will be ready in a few minutes. Meanwhile, you can check out other videos.
 							<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
