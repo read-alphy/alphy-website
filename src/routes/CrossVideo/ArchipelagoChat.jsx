@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState, useEffect, useRef } from 'react';
-import {Button, Spinner, button} from "@material-tailwind/react";
+import {Button, Spinner} from "@material-tailwind/react";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import TypeIt from 'typeit-react';
@@ -49,25 +49,28 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
         setTracks(data.tracks)
     }
 
+
     
     
     const selectedItems = [];
-    while (data!==undefined && data.questions!==undefined&& data.questions.length!==0 && selectedItems.length < 5) {
-      const randomIndex = Math.floor(Math.random() * data.questions.length);
-      const randomItem = data.questions[randomIndex];
-      if (!selectedItems.includes(randomItem)) {
-        selectedItems.push(randomItem);
+    if(data!==undefined && data.questions!==undefined ){
+    while (data.questions.length!==0 &&
         
-      }
+        (data.questions.length>=5 && selectedItems.length < 5) || (data.questions.length<5 && selectedItems.length < data.questions.length)) { 
+                const randomIndex = Math.floor(Math.random() * data.questions.length);
+                const randomItem = data.questions[randomIndex];
+                if (!selectedItems.includes(randomItem)) {
+                    selectedItems.push(randomItem);
+                    
+                }
     }
-    if(selectedItems.length==5 && i ==0){
-        setSelectedQuestions(selectedItems);
-        setI(1)
-    }
+                if(selectedItems.length<=5 && i ==0){
+                    setSelectedQuestions(selectedItems);
+                    setI(1)
+                }
 
-
+            }
       
-    
 
     const archipelagoUserID = data.user_id
     const archipelagoImageLink = `${data.thumbnail_url ? data.thumbnail_url : ""}`
@@ -137,6 +140,7 @@ const handleSubmit = () => {
             }
 
 } 
+
 
 
 
@@ -220,6 +224,7 @@ const toggleExpand = () => {
     }
   };
 
+  
 
     return(
         <div className={`${collapsed ?  "lg:w-[1000px] xl:max-w-[1000px]" : "lg:w-[600px] xl:w-[900px] 2xl:w-[1000px]"} grow mx-auto pt-10 pb-20 `} >

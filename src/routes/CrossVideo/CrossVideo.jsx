@@ -19,10 +19,11 @@ import jsonData from "./arcs_and_thumbnails.json"
 
 
 
-function CrossVideo({ currentUser, collapsed, setCollapsed, hasActiveSub,idToken,userArchipelagos,setUserArchipelagos,credit, setContentName,setCreditCalled}) {
+function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArchipelagos,setUserArchipelagos,credit, setContentName,setCreditCalled}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
+	
 	
 
 
@@ -56,6 +57,9 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, hasActiveSub,idToken
 }
 
 }
+
+
+
 
 	useEffect(() => {
 	
@@ -92,6 +96,7 @@ const handleArcInfo = async () => {
 		setIsLoading(true)
 		
 		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
+		
 		try {
 			const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
 			
@@ -131,27 +136,8 @@ const handleArcInfo = async () => {
 	}
 }
 
-useEffect (() => {
-if(hasActiveSub!==true){
-	setTimeout (() => {
-		setSubCalled(true)
-	}, 2500);
-		}
-		else{
-			setSubCalled(true)
-		}
-		
-	})
 
-if(!subCalled && isCreateArc){
-	if((hasActiveSub===undefined || hasActiveSub===false)){
-		navigate("/")
-	}
-	else if(hasActiveSub===true){
-		
-		setSubCalled(true)
-	}
-}
+
 
 const handleArchipelago= () => {
 
@@ -165,8 +151,13 @@ if(dataArchipelago.length===0){
 	return
 }
 else{
+
+
+
+	try{
 					if(isCreateArc){
 						
+				
 						setIsLoadingSubmit(true)
 					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
@@ -175,10 +166,18 @@ else{
 						"sources": [...dataArchipelago],
 
 
-				}).then((response) => {
+				}
+				, {
+					headers: {
+						'id-token': currentUser.accessToken,
+					},
+				}
+				).then((response) => {
 					setUserArchipelagos([...userArchipelagos, response.data])
 					setTimeout (() => {
-					navigate(`/arc/${response.data.uid}`)
+					
+					navigate(`/myhub`)
+					setIsLoadingSubmit(false)
 					}, 2000);
 					
 				})
@@ -190,18 +189,50 @@ else{
 						"user_id": currentUser.uid,
 						"description": archipelagoDescription,
 						"sources": [...dataArchipelago],
-				}).then((response) => {
-					navigate(`/arc/${response.data.uid}`)
+				}
+				, {
+					headers: {
+						'id-token': currentUser.accessToken,
+					},
+				}
+				
+				
+				).then((response) => {
+					
+					navigate(`/myhub`)
 					localStorage.setItem("archipelagoEdited", "true")
 					setIsLoadingSubmit(false)
 				})
 				}
 			}
+		
+
+		catch(error) {
+			setIsLoadingSubmit(false)
+			console.log("arcChat error",error)
+			if( axios.isCancel(error)){
+				console.log('Request cancelled');
+			}
+			else if(error.response.status===400){
+				setErrorMessage(true)
+		}
+			}
+
+}
 }
 
 
 const handleDeleteArchipelago = () => {
-	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`).then((response) => {
+	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`,
+	
+	
+	{
+		headers: {
+			'id-token': currentUser.accessToken,
+		},
+	}
+	
+	).then((response) => {
 		const index = userArchipelagos.indexOf(archipelagoInfo)
 		userArchipelagos.splice(index,1)
 		setUserArchipelagos([...userArchipelagos])
@@ -212,30 +243,10 @@ const handleDeleteArchipelago = () => {
 		})
 		}
 
-	const handleCollapse = () => {
-		setCollapsed(!collapsed)
-		
-	}
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			
-			<Helmet>
-			{/* 	<title>{item_name!==undefined && item_name.length>0 ? item_name : (archipelagoTitle.length>0 ? `${archipelagoTitle}` : "Alphy")} </title>
-				<meta name="twitter:card" content="summary_large_image"></meta>
-				<meta property="og:title" content={item_name!==undefined &&item_name.length>0 ? `Ask AI -  ${item_name}` : "Alphy"} />
-				<meta name="twitter:title" content={item_name!==undefined &&item_name.length>0  ? `Ask AI - ${item_name}` : "Alphy"} />
-
-			<meta property="og:description" content={item_name!==undefined &&item_name.length>0  ? `Search and ask questions to ${item_name} with the help of AI!` : "Search and ask questions to Arcs with the help of AI!"}
-				/>
-				<meta name="description" content={item_name!==undefined && item_name.length>0 ? `Search and ask questions to ${item_name} with the help of AI!` : "Search and ask questions to Arcs with the help of AI!"} />
-				<meta name="twitter:description" content={item_name!==undefined && item_name.length>0 ? `Search and ask questions to ${item_name} with the help of AI!` : "Search and ask questions to Arcs with the help of AI!"}
-				/>
-				<meta property="og:url" content={location.href} />
-				 <meta property="og:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ? item_thumbnail : `https://i.ibb.co/RBH2C63/homepage.png`} />
-				
-				<meta name="twitter:image" content={item_thumbnail!==undefined && item_thumbnail!==null && item_thumbnail.length>0 ?  item_thumbnail :`https://i.ibb.co/RBH2C63/homepage.png`} /> */}
-			</Helmet>  
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
@@ -244,7 +255,7 @@ const handleDeleteArchipelago = () => {
 			<div className="flex flex-row ">
 			{<div className={`hidden ${isArc ?"md:block":"sm:block" } `}>
 				
-				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} dataArchipelago={dataArchipelago} hasActiveSub={hasActiveSub}
+				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} dataArchipelago={dataArchipelago} tier={tier}
 				
 				/></div>}
 				
@@ -254,7 +265,7 @@ const handleDeleteArchipelago = () => {
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen"><SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id}  dataArchipelago={dataArchipelago} 
-						hasActiveSub={hasActiveSub}
+						tier={tier}
 						/></div>
 					</div>
 				</div>
@@ -264,21 +275,102 @@ const handleDeleteArchipelago = () => {
 						}}`}
 				>
 					
-				{isCreateArc && hasActiveSub && <ArchipelagoCreation userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage} credit={credit} setCreditCalled={setCreditCalled}/>}
+				{
+				
+			
+
+				isCreateArc && 
+
+				(currentUser
+				
+					? 
+
+
+				
+					(
+					((tier==="free" && userArchipelagos.length<1) ||(tier==="basic" && userArchipelagos.length<3) || (tier==="premium")) 
+				
+				
+				?
+				<ArchipelagoCreation userArchipelagos={userArchipelagos} tier={tier} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage} credit={credit} setCreditCalled={setCreditCalled}/>
+				:
+
+				isLoadingSubmit===false ? 
+				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 flex flex-col">
+					<p>You've already have the maximum number of Arcs for your plan.</p>
+
+					<p className="mt-4"><Link to="/account" className="dark:text-greenColor text-green-400 underline ">Upgrade</Link> your plan to create more Arcs.</p>
+					
+	   			</div>
+
+				:null
+				
+				)
+
+				:
+
+				
+				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40">
+				<Link to="/u/login" className="dark:text-greenColor text-green-400 underline">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline"> create an account</Link> to access this page. 
+	   			</div>
+					)
+				
+				}
+
+
 
 				{(!isCreateArc && !isEditArc) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
-				{isEditArc && hasActiveSub && <EditArchipelago archipelagoInfo={archipelagoInfo} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage} credit={credit} setCreditCalled={setCreditCalled}/>}
+				
+				
+				
+				
+				{
+						
+				
+				isEditArc && 
+				
+				(currentUser ? 
+
+
+				<EditArchipelago archipelagoInfo={archipelagoInfo} tier={tier} setArchipelagoInfo={setArchipelagoInfo} userArchipelagos={userArchipelagos} archipelagoDescription={archipelagoDescription} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}  archipelagoTitle={archipelagoTitle} setArchipelagoDescription={setArchipelagoDescription} setArchipelagoTitle={setArchipelagoTitle} sourceIDsArchipelago = {sourceIDsArchipelago} setSourceIDsArchipelago={setSourceIDsArchipelago} errorMessage={errorMessage} setErrorMessage={setErrorMessage} credit={credit} setCreditCalled={setCreditCalled}/>
+
+				:
+
+				
+				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40">
+				<Link to="/u/login" className="dark:text-greenColor text-green-400 underline">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline"> create an account</Link> to access this page. 
+	   			</div>
+				
+				)
 							
-					
+				}					
 
 				</div>
 			</div>
-			{(isCreateArc || isEditArc) &&  
+			{
+			
+			(
+			
+				(
+				
+					isCreateArc &&
+					
+					((tier==="free" && userArchipelagos.length<1) ||(tier==="basic" && userArchipelagos.length<3) || (tier==="premium")) 
+
+				)
+
+				|| 
+				
+					isEditArc
+
+			)
+			
+				&&  
 			<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed &&window.innerWidth<1000 &&"hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
 			
-			{isEditArc && hasActiveSub && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-500 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
-            {hasActiveSub && <Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-greenColor px-5 ${
+			{isEditArc  && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-400 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
+            {<Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-greenColor px-5 ${
 				isLoadingSubmit && "bg-green-300 pointer-events-none min-w-[106.533px]" }`}  onClick={handleArchipelago}>
 				{
 				isLoadingSubmit ? 
@@ -296,7 +388,7 @@ const handleDeleteArchipelago = () => {
 		{deleteDialog &&
 			<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
 				
-				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode rounded-lg items-center text-center justify-center drop-shadow-sm flex-col">
+				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode items-center text-center justify-center drop-shadow-sm flex-col">
 					<p className="mb-10">You are about to delete this arc. Would you like to continue?</p>
 					<div className="flex flex-row">
 						<p className="text-greenColor cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>

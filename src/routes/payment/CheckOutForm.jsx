@@ -23,7 +23,7 @@ export default function CheckOutForm({ clientSecret }) {
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [paymentIntent, setPaymentIntent] = useState("");
-
+    
 
     useEffect(() => {
         if (!stripe) {
@@ -70,6 +70,7 @@ export default function CheckOutForm({ clientSecret }) {
 
         setIsLoading(true);
         try {
+           
             const result = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
@@ -119,9 +120,9 @@ export default function CheckOutForm({ clientSecret }) {
 
                 options={{ defaultValues: { email: currentUser ? currentUser.email : "" } }}
             />
-            <AddressElement
+{/*             <AddressElement
             options={{mode:"billing"}}/>
-
+ */}
             <PaymentElement id="payment-element" options={paymentElementOptions} />
             
 

@@ -14,7 +14,7 @@ import { Button} from "@material-tailwind/react";
 
 
 
-export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
+export default function HubCreationBlock({currentUser, tier, credit}){
     const [submitDialog, setSubmitDialog] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
@@ -71,7 +71,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
 
 			}
 			else if (inputValue.includes('https://twitter.com/i/spaces')) {
-				if (hasActiveSub){
+				if (tier==="basic" || tier==="premium"){
 				videoId = inputValue.split('/').pop().split("?")[0];
 				video_source = "sp"
 				}
@@ -110,7 +110,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
 						}).
 						catch((error) => {
                             if(errorMessage.length===0){
-							if(hasActiveSub){
+                                if (tier==="basic" || tier==="premium"){
 								setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
                             }
 						
@@ -260,22 +260,24 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit}){
         {currentUser && 
         <span className="text-sm pl-2 mb-2 text-gray-600 dark:text-zinc-300 mt-4"> 
         
-        <a href="/account" className="underline">{hasActiveSub ? "Premium Plan" : "Basic Plan"}</a> - Remaining Credits : {Math.floor(credit)} minutes 
+        <a href="/account" className="underline">
+            
+            {tier==="free" && "Starter Plan"}
+            {tier==="basic" && "Basic Plan"}
+            {tier==="premium" && "Premium Plan"}
+            </a> - Remaining Credits : {Math.floor(credit)} minutes 
         
     </span> }
 
     
         <div className="p-3 space-y-2 ">
 
-            {!hasActiveSub ? 
+            {tier==="free" ? 
             <div>
-            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on Basic Plan</p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You can only submit YouTube videos.</p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You can submit up to <strong>1 hour</strong> of content. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • The video you are submitting should have more than <strong >10,000 views</strong>.</p>
+            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on the Starter Plan</p>
+            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You can only submit YouTube videos. Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions and free Twitter Spaces transcription.</p>
             <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2"> Alphy might fail to process content with location limits.</p>
 
-            <p className="mt-4 text-sm"> Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions and free Twitter Spaces transcription.</p>
             </div>
          :   
          <div>

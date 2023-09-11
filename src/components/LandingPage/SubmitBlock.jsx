@@ -3,8 +3,10 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import {Button} from "@material-tailwind/react";
 import { useEffect } from 'react';
+import { Link} from 'react-router-dom';
 
-export default function SubmitBlock({currentUser, hasActiveSub, credit, handleSubmit, inputValue, setInputValue, errorMessage, failed,inputRef}){
+
+export default function SubmitBlock({currentUser, tier, credit, handleSubmit, inputValue, setInputValue, errorMessage, failed,inputRef}){
 
    
   useEffect(() => {
@@ -61,24 +63,42 @@ export default function SubmitBlock({currentUser, hasActiveSub, credit, handleSu
 {currentUser &&
             <span className="text-sm mb-2 mt-4 text-gray-600 dark:text-zinc-300 "> 
 
-            <a href="/account" className="underline">{hasActiveSub ? "Premium Plan" : "Basic Plan"}</a> - Remaining Credits : {Math.floor(credit)} minutes 
-
+<div className="flex-col flex">
+    <div className="flex flex-row">
+            <a href="/account" className="text-zinc-500 dark:text-zinc-400">
+                {tier==="free" && "Starter Plan"}
+                {tier==="basic" && "Basic Plan"}
+                {tier==="premium" && "Premium Plan"}
+                
+                </a>
+                <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
+                 <p className=" text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(credit)} minutes
+                 </p>
+    </div>
+                {(tier==="basic"||tier==="premium") &&
+                        <div  className="mt-4 flex flex-row">
+                        <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
+                        onClick={
+                            sessionStorage.setItem("creditPurchase", "true")
+                        }
+                        to="/account" className="text-green-300 font-semibold underline" >Buy here.</Link>
+                        </div>                
+                }
+    </div>
             </span> 
 
 }
 <div className=" space-y-2 mt-10 ">
 
-{!hasActiveSub ? 
+{tier==="free" ? 
 
 currentUser ?
 <div>
-<p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on Basic Plan</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 mt-3 text-sm"> • You can only submit YouTube videos.</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm"> • You can submit up to <strong>1 hour</strong> of content. </p>{/* <strong className="underline">1 hour</strong> if you are on a free tier, and <strong className="underline">4 hours</strong> if premium. Otherwise, you will get an error. </p> */}
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm"> • The video you are submitting should have more than <strong >10,000 views</strong>.</p>
+<p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on the Starter Plan</p>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 mt-3 text-sm"> You can only submit YouTube videos. Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a> to process Twitter Spaces.</p>
 <p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm"> Alphy might fail to process content with location limits.</p>
 
-<p className="mt-4 text-sm"> Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions and free Twitter Spaces transcription.</p>
+
 </div>
 :
 <div className="text-zinc-700 dark:text-zinc-300">

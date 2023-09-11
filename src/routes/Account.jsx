@@ -14,7 +14,7 @@ import { set } from 'lodash';
 
 
 
-function Account({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function Account({currentUser, collapsed, setCollapsed, tier,customerID, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -43,7 +43,7 @@ function Account({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 	
 })
 
-if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
+if((tier!== undefined || tier!==null) && subCalled===false){
 	setSubCalled(true)
 	setIsLoading(false)
 }
@@ -84,7 +84,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 				
 				<SideFeedReworked 
 				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 				
 				/></div>}
 				
@@ -95,7 +95,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
 							<SideFeedReworked 
-							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 							
 							/>
 							
@@ -109,7 +109,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<AccountInfo
-					hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser}	
+					tier={tier} credit={credit} currentUser={currentUser} customerID={customerID}
 					/>}
 					
 

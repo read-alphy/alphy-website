@@ -189,7 +189,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 		else{
 		auth.handlePasswordReset(oobCode,password)
 		.then((result) => {
-			console.log(result)
+			
 			setSuccessMessage(true)
 			setIsSubmitting(false)
 			

@@ -13,7 +13,7 @@ import NotFoundInfo from './NotFoundInfo';
 
 
 
-function NotFound({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function NotFound({currentUser, collapsed, setCollapsed, tier,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -24,7 +24,7 @@ function NotFound({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWel
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [subCalled, setSubCalled] = useState(false);
 
@@ -43,19 +43,6 @@ function NotFound({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWel
 })
 
 
-useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
-			setSubCalled(true)
-			setIsLoading(false)
-		}
-		
-	})
 
 
 	const handleCollapse = () => {
@@ -93,7 +80,7 @@ useEffect (() => {
 				
 				<SideFeedReworked 
 				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 				
 				/></div>}
 				
@@ -104,7 +91,7 @@ useEffect (() => {
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
 							<SideFeedReworked 
-							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 							
 							/>
 							
@@ -118,7 +105,7 @@ useEffect (() => {
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<NotFoundInfo
-					hasActiveSub={hasActiveSub} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
+					tier={tier} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
 					/>}
 					
 

@@ -14,7 +14,7 @@ import Pricing from './routes/Pricing';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
-import Success from './routes/payment/SuccessInfo';
+import Success from './routes/payment/Success';
 import Account from './routes/Account';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
@@ -46,8 +46,9 @@ const firebaseConfig = {
 function App() {
 	const auth = useAuth()
 	const { currentUser } = useAuth();
-	const [hasActiveSub, setHasActiveSub] = useState(false)
+
 	const [called, setCalled] = useState(false)
+	const [tier,setTier] = useState("free")
 	const [credit, setCredit] = useState(0)
 	const[creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
@@ -58,7 +59,7 @@ function App() {
 	const [userArchipelagos, setUserArchipelagos] = useState([])
 	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
 	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
-	const [clientSecret, setClientSecret] = useState("");
+	const [customerID, setCustomerID] = useState("");
 
 	if(localStorage.getItem("theme")!== null && localStorage.getItem("theme")!==undefined && localStorage.getItem("theme").length===0){
 		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
@@ -89,7 +90,6 @@ const resetPassword = (urlParams.get('mode')=="resetPassword");
 			if( location.pathname.includes("/u/resetpassword") === false){
 			const url = window.location.href;
 			const [baseUrl, queryString] = url.split('?');
-			console.log(baseUrl, queryString)
 			window.location.href = (`${baseUrl}u/resetpassword/?${queryString}`);
 			
 		}
@@ -154,41 +154,10 @@ useEffect(() => {
 
 }, 1000)
 
-let i = 0
 
-if (currentUser && creditcalled!==true) {
-	if (i===0){
-	currentUser.getIdToken().then((idToken) => {
-		i=i+1
-		axios
-			.get(
-				`${process.env.REACT_APP_API_URL}/payments/credit`,
-				{
-					headers: {
-						'id-token': idToken,
-					},
-				},
-			)
-			.then((response) => {
-				const [fixed, monthly] = response.data
-				setCredit(fixed + monthly)
-				setCreditCalled(true)
-				
-			})
-			.catch((error) => {
-				console.error(error)
-				
-				
-			});
-	}
-);
 
-}} 
+ 
 }, [currentUser, auth, creditcalled, called, verification]) 
-
-
-
-
 
 
 
@@ -199,7 +168,7 @@ if (currentUser && creditcalled!==true) {
 		
         const idToken = await currentUser.getIdToken().then((idToken) => {
 
-        axios.get(`${process.env.REACT_APP_API_URL}/payments/subscription`,
+        axios.get(`${process.env.REACT_APP_API_URL}/payments/status`,
         {
             headers: {
                 'id-token': idToken,
@@ -208,19 +177,17 @@ if (currentUser && creditcalled!==true) {
         )
             
             .then(r => {
-				
-                if (r.data.length>0) {
-                    setCalled(true)
-                    setHasActiveSub(true)
- 
-                }
-                else {
-                    setHasActiveSub(false)
-                    setCalled(true)
 			
-					
-
-                }
+				/* console.log(r.data) */
+				if(r.data.current_tier!== null){
+				setTier(r.data.current_tier)
+			}
+			
+					setCustomerID(r.data.customer_id)
+					setCredit(r.data.rem_mins_sub_credits[0] + r.data.rem_mins_sub_credits[1])
+					setCalled(true)
+ 
+             
             })
 		})
 
@@ -324,83 +291,83 @@ if (currentUser && creditcalled!==true) {
 						 <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> 
 						 </div>
 						<Routes>
-							{/* <Route path="/" element={<Home hasActiveSub={hasActiveSub} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} /> */}
+							{/* <Route path="/" element={<Home tier={tier} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} /> */}
 							
 							<Route
 								path="/yt/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'yt'} tier={tier} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
 								}
 							/>
 							<Route
 								path="/sp/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'sp'}  tier={tier} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
 								}
 							/>
 							<Route
 								path="/up/:article_ID"
 								element={
-									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'up'} tier={tier} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos}/>
 								}
 							/>
 
 							<Route path="/archipelago/:archipelago_ID" element={
-							<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} />
+							<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} contentName={contentName} setContentName={setContentName} />
 							}></Route>
 								<Route path="/archipelago/createArchipelago" element={
 								
-								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} tier={tier} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 							<Route path="/archipelago/editArchipelago/:archipelago_ID" element={
 								
-								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>
 							
 							}> </Route>
 
 				<Route path="/arc/:arc_ID" element={
-							<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} setContentName={setContentName} />
+							<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} setContentName={setContentName} />
 							}></Route>
 								<Route path="/arc/createArc" element={
 								
-								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} hasActiveSub={hasActiveSub} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName} credit={credit} setCreditCalled={setCreditCalled}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} tier={tier} setUserArchipelagos={setUserArchipelagos} contentName={contentName} setContentName={setContentName} credit={credit} setCreditCalled={setCreditCalled}/>
 							
 							}> </Route>
 
 							<Route path="/arc/editArc/:archipelago_ID" element={
 								
-								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName} credit={credit} setCreditCalled={setCreditCalled}/>
+								<CrossVideo currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName} credit={credit} setCreditCalled={setCreditCalled}/>
 							
 							}> </Route>
 
 							<Route path="/"
-								element={<Hub arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+								element={<Hub arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 							
 							<Route path="/arcs"
-								element={<Hub arcs={true} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+								element={<Hub arcs={true} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 					
 							<Route path="/myhub"
-								element={<MyHub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+								element={<MyHub credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 							<Route path="/submit"
-								element={<SubmitPage credit={credit} setCreditCalled={setCreditCalled} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} hasActiveSub={hasActiveSub} contentName={contentName} setContentName={setContentName}/>}>
+								element={<SubmitPage credit={credit} setCreditCalled={setCreditCalled} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
-							<Route path="/FAQ" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
-							<Route path="/privacypolicy" element={<PrivacyPolicy collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
-							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub}/>}></Route>
-							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} hasActiveSub={hasActiveSub}/>}></Route>
+							<Route path="/FAQ" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
+							<Route path="/privacypolicy" element={<PrivacyPolicy collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
+							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} tier={tier}/>}></Route>
+							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} tier={tier}/>}></Route>
 							<Route path="/u/resetpassword" element={<Auth collapsed={collapsed} setCollapsed={setCollapsed}/>}></Route>
-							<Route path="/account" element={<Account currentUser={currentUser} stripe={stripePromise} credit={credit} hasActiveSub={hasActiveSub} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed}/>}/> 
-							<Route path="/plans" element={<Pricing stripe={stripePromise} hasActiveSub={hasActiveSub} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
-							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed}  hasActiveSub={hasActiveSub}/>}></Route>
-							<Route path="/plans/checkout/success" element={<Success collapsed={collapsed} setCollapsed={setCollapsed}  hasActiveSub={hasActiveSub}/>}></Route>
-							<Route path="*" element={<NotFound to="/404" collapsed={collapsed} setCollapsed={setCollapsed}  hasActiveSub={hasActiveSub}/>}/>
-							<Route path="/404" element={<NotFound collapsed={collapsed} setCollapsed={setCollapsed}  hasActiveSub={hasActiveSub}/>}/>
+							<Route path="/account" element={<Account currentUser={currentUser} stripe={stripePromise} credit={credit} tier={tier} idToken={idToken} collapsed={collapsed} setCollapsed={setCollapsed} customerID={customerID}/>}/> 
+							<Route path="/plans" element={<Pricing stripe={stripePromise} tier={tier} collapsed={collapsed} setCollapsed={setCollapsed}/>}/>
+							<Route path="/plans/checkout" element={<CheckOutPage collapsed={collapsed} setCollapsed={setCollapsed}  tier={tier}/>}></Route>
+							<Route path="/plans/checkout/success" element={<Success collapsed={collapsed} setCollapsed={setCollapsed}  tier={tier}/>}></Route>
+							<Route path="*" element={<NotFound to="/404" collapsed={collapsed} setCollapsed={setCollapsed}  tier={tier}/>}/>
+							<Route path="/404" element={<NotFound collapsed={collapsed} setCollapsed={setCollapsed}  tier={tier}/>}/>
 
 						</Routes>
 

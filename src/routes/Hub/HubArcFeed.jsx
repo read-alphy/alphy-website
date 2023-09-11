@@ -268,7 +268,7 @@ function HubArcFeed(props) {
 				<div className="p-4">
 					<div className="main-page-feed  xl:max-w-[1400px]">
 						<div className="mb-10">
-					<Link to="/" className="text-zinc-700 dark:text-zinc-300 text-lg ">
+					<Link to="/" className="text-zinc-700 dark:text-zinc-300 text-lg  cursor-pointer">
 							<KeyboardArrowLeftIcon fontSize="small" className=""/>
 							<span className="text-sm">Go Back</span>
                 	</Link>

@@ -17,7 +17,7 @@ import HubFeedItem from "../../routes/Hub/HubFeedItemElements/HubFeedItem"
 import {useLocation} from 'react-router-dom';
 
 
-function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,globalLayout, dataArchipelago,hasActiveSub}) {
+function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,globalLayout, dataArchipelago,tier}) {
 	
 	
 	const { currentUser } = useAuth();
@@ -67,10 +67,11 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 
 	  const handleSignOut = async () => {
 		try {
+			localStorage.setItem("logged in","false")
 			auth.logout();
 			navigate("/")
 			window.location.reload()
-			localStorage.setItem("logged in","false")
+			
 		} catch (error) {
 			console.log("sign out error",error)
 		
@@ -169,18 +170,24 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 								<div className="overflow-x-hidden md:hidden lg:block">
 									
 									
-									{dataArchipelago.map((item, index) => 
+									{
+									
+									dataArchipelago.length>0 ? 
+									dataArchipelago.map((item, index) =>
+
+									
 									
 										<FeedItem sideFeed={true} key={index} item={item.source} setCollapsed={setCollapsed} myBookmarks={false}  />
 								
-									)}
+									)
+								:null}
 	
 									</div>
 					</div>
 					</div>
 
 					:<div className="absolute bottom-0 w-full">
-					<FooterReworked currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut} hasActiveSub={hasActiveSub}/>
+					<FooterReworked currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut} tier={tier}/>
 					</div>
 
 					}

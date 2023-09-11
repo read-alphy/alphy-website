@@ -19,13 +19,14 @@ import {
 
   } from "@material-tailwind/react";
   import FreeCard from "../components/PricingCards/FreeCard";
+  import BasicCard from "../components/PricingCards/BasicCard";
   import PremiumCard from "../components/PricingCards/PremiumCard";
 
 
 
 
 
-export default function Pricing({hasActiveSub }) {
+export default function Pricing({tier }) {
     
     const { currentUser } = useAuth();
     const windowSize = useWindowSize();
@@ -119,7 +120,7 @@ export default function Pricing({hasActiveSub }) {
     };
 
     return (
-        <div className="dark:bg-darkMode ">
+        <div className="dark:bg-darkMode  lg:mt-10 md:pl-10 lg:pl-20 xl:pl-20 pb-10">
             {isLoaded ?
 
                 <div className="dark:bg-darkMode">
@@ -140,10 +141,11 @@ export default function Pricing({hasActiveSub }) {
 
 
 
-                        <div className="flex md:pl-10 lg:pl-20 xl:pl-40 gap-10 mx-auto items-center justify-center flex-col xl:flex-row max-w-[1200px]">    
+                        <div className="flex gap-10 mx-auto items-center justify-center flex-col xl:flex-row max-w-[1200px]">    
 
-                        <FreeCard currentUser={currentUser} hasActiveSub={hasActiveSub} triggers1={triggers1} openPopover1={openPopover1} setOpenPopover1={setOpenPopover1} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
-                        <PremiumCard currentUser={currentUser} hasActiveSub={hasActiveSub} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
+                        <FreeCard currentUser={currentUser} tier={tier} triggers1={triggers1} openPopover1={openPopover1} setOpenPopover1={setOpenPopover1} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
+                        <BasicCard currentUser={currentUser} tier={tier} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
+                        <PremiumCard currentUser={currentUser} tier={tier} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
                                     </div>
                                    
 

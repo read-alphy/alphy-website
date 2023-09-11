@@ -1,15 +1,18 @@
-import {
-	Popover,
-	PopoverHandler,
-	PopoverContent,
-    ThemeProvider,
-    Button
+import {Button, Spinner} from "@material-tailwind/react";
+import {Link, useNavigate} from "react-router-dom"
+import Dialog from '@mui/material/Dialog';
+import { useState } from "react";
+import axios from "axios";
+import { set } from "lodash";
 
-  } from "@material-tailwind/react";
-  import {Link} from "react-router-dom"
 
-export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, currentUser, triggers, canceledAtPeriodEnd})
-{
+
+export default function PremiumCard({tier,openPopover,setOpenPopover, currentUser, triggers}){
+
+const [showUpgradeDialog, setShowUpgradeDialog] = useState(false);
+const [upgradeLoading, setUpgradeLoading] = useState(false);
+const navigate = useNavigate()
+
     const themePopover = {
         popover: {
           styles: {
@@ -23,28 +26,62 @@ export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, cu
         },
         
       };
+
+      const handleDialog = () => {
+        if(tier==="basic"){
+            setShowUpgradeDialog(true)
+        }
+        else{
+            navigate("/plans/checkout?sub=premium")
+        }
+    }
+            
+
+      const upgradePlan = async () => {
+        
+        setUpgradeLoading(true)
+        
+        await currentUser.getIdToken().then((idToken) => {
+
+        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=premium`,{},
+            {
+                headers: {
+                    'id-token': idToken,
+                },
+            },
+        )
+            .then(r => {
+                setUpgradeLoading(false)
+                window.location.reload()
+              
+            }
+
+            )
+            .catch((error) => {
+                console.log(error)
+                
+            })
+        })
+
+    }
     return(
-        <div className="col-span-2 max-w-xs md:min-w-[400px] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-800 dark:bg-zinc-900 dark:drop-shadow-xl dark:border-gray-700 ">
+        <div className="col-span-2  xs:max-w-[360px] xs:min-w-[270px] p-4 border border-gray-200 transform *-translate-y-2* rounded-lg drop-shadow-xl sm:p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-gray-700 dark:bg-gradient-to-br dark:drop-shadow-xl dark:border-gray-700 ">
         <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
             {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
             <div className="flex items-baseline text-gray-900 dark:text-white">
                 <span className="text-3xl font-semibold">$</span>
-                <span className="text-5xl font-extrabold tracking-tight">5</span>
+                <span className="text-5xl font-extrabold tracking-tight">12</span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-zinc-300">/month</span>
             </div>
-            <p className="mt-3 text-gray-400">Level up your reach </p>
-            <div className={` h-[400px] ${currentUser=== null && "xl:h-[444px]"}`}>
+            <p className="mt-3 text-gray-400">Experience audiovisual mastery </p>
+            <div className={`h-[460px]`}>
                 <ul role="list" className="space-y-5 my-7">
-                    <li className="flex space-x-3">
 
-                        {/* <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
-                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">___________________________ </span>
-                    </li>
-                    <li className="flex space-x-3">
-
-
-                        <span className="text-l font-normal leading-tight text-gray-500 dark:text-zinc-300">Everything on the Basic Plan plus:</span>
-                    </li>
+             
+                    
+                <Button  onClick={
+                    handleDialog
+                }    type="button" className={` bg-gradient-to-l from-green-100 to-green-300  transition duration-200 ease-in ${tier==="premium" ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-zinc-700 justify-center w-full text-center`} >{tier==="premium" ? "Active" : ("Go Premium")}</Button> 
 
                     <li className="flex space-x-3">
 
@@ -54,70 +91,137 @@ export default function PremiumCard({hasActiveSub,openPopover,setOpenPopover, cu
 
                     <li className="flex space-x-3">
                         <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No duration limit for submissions</span>
-                    </li>
-
-                    <li className="flex space-x-3">
-                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                         {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
                         <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
                     </li>
-                    
-                    <li className="flex space-x-3">
-                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                    {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Process local audio files</span>
-                </li>
+
                     <li className="flex space-x-3">
                         <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                         {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
 
-
-                        <Popover open={openPopover} handler={setOpenPopover }>
-                        <div className="flex flex-row">
-                            
-                                
                         <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Multi-language translation </span>
-                        
-                        <PopoverHandler {...triggers} >
-                        <svg className="w-5 h-5 pt-1 opacity-50 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path></svg>
-                        </PopoverHandler>
-<ThemeProvider value={themePopover}>
-                        <PopoverContent {...triggers}>
-                            <p className="">Generate summaries and ask questions to any content in over 50 languages, regardless of the language of the content.
-                            <br></br>
-                           </p>
-                        </PopoverContent>
-                        </ThemeProvider>
-                        </div>
-                        </Popover>
+                       
                     </li>
+                    <li className="flex space-x-3">
+                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                        {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Process Twitter Spaces </span>
+                    </li>
+                    <li className="flex space-x-3">
+                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Upload local audio files</span>
+                    </li>
+
                     
                     <li className="flex space-x-3">
                     <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                     {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
                     <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts</span>
                 </li>
-                                        
-                    <li className="flex space-x-3">
 
-            <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Free Twitter Spaces transcription</span>
-                        </li>   
-
-      {/*               <li className="flex space-x-3">
+                <li className="flex space-x-3">
                         <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts and summaries</span>
-                    </li> */}
+                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Create Unlimited Arcs</span>
+                    </li>
 
+                    
+                <li className="flex space-x-3">
+                    <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                    {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                    <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit topups</span>
+                </li>
+                    
                 </ul>
             </div>
-            <Link className={`${hasActiveSub &&!canceledAtPeriodEnd ? "pointer-events-none" : ""}`} to={
-                (currentUser && !hasActiveSub) ? `/plans/checkout` : (canceledAtPeriodEnd ? "https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE": "")}
->
-                {currentUser ? <Button type="button" className={` bg-greenColor  transition duration-200 ease-in ${hasActiveSub && !canceledAtPeriodEnd ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-semibold ]px-5 py-3 inline-flex text-zinc-700 justify-center w-full text-center`} >{hasActiveSub && !canceledAtPeriodEnd ? "Your Current Plan" : (canceledAtPeriodEnd ? "Renew Plan" : "Upgrade Plan")}</Button> : <div className={`h-[44px] ${currentUser?"block":"hidden"}`}></div>}
 
-            </Link>
+
+
+            <Dialog fullWidth={"true"} maxWidth={"sm"} open={showUpgradeDialog} onClose={() => setShowUpgradeDialog(false)}>
+                                                                        <div className="p-10 text-zinc-600 text-sm dark:text-zinc-300 dark:bg-mildDarkMode">
+                                                                            
+                                                                            <p className="text-lg font-normal ">
+                                                                               Upgrade to Premium Plan!
+                                                                            </p>
+                                                                            <div className="mb-6 mt-2 text-lg"> 
+                                                                                         $12/month
+                                                                            </div>
+                                                                            
+                                                                            
+                                                                            
+
+
+                                                                        <div className="flex flex-col ">
+                                                                              <ul role="list" className="space-y-5 my-7">
+
+                                                                        <li className="flex space-x-3">
+
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Extra 10 hours of prioritized transcription credits per month</span>
+                                                                                </li>
+
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
+                                                                                </li>
+
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Multi-language translation </span>
+
+                                                                                </li>
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Process Twitter Spaces </span>
+                                                                                </li>
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Upload local audio files</span>
+                                                                                </li>
+
+
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts</span>
+                                                                                </li>
+
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Create Unlimited Arcs</span>
+                                                                                </li>
+
+
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit topups</span>
+                                                                                </li>
+                                                                                </ul>
+
+                                                                            <div className="flex flex-col">
+                                                                            
+                                                                            <Button className={`bg-indigo-300 w-[200px] mt-6 py-3 ${(upgradeLoading) && "pointer-events-none opacity-60"}`}  size="md" onClick={upgradePlan}>
+                                                                                {upgradeLoading ? 
+                                                                                <Spinner color="gray" className="opacity-40 w-5 text-center margin-auto w-full"/> :
+                                                                                <p className="py-1 dark:text-zinc-800 text-md">Upgrade Now</p>
+                                                                            }
+                                                                                
+                                                                                </Button>
+                                                                                <p className="items-center margin-auto flex mt-4">
+                                                                                 You will be charged automatically.
+                                                                                 </p>
+                                                                            </div>
+                                                                        </div>   
+                                                                     </div>
+
+</Dialog>
+                                                                                     
+
+
 
 
 

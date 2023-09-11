@@ -5,7 +5,7 @@ import axios from "axios";
 import CheckOutForm from "./CheckOutForm";
 import { useAuth } from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import StripeBanner from "../../img/stripe_banner.svg";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -16,6 +16,7 @@ const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`)
 
 
 export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
+    const location = useLocation()
     const { currentUser } = useAuth()
     const [user, setUser] = useState("")
     const [called, setCalled] = useState(false)
@@ -23,9 +24,15 @@ export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
     const navigate =  useNavigate()
 
 
+	const searchParams = new URLSearchParams(location.search);
+  
+	const subValue = searchParams.get('sub') || "premium";
+
     useEffect(() => {  
+        
         if ((clientSecret===null || clientSecret===undefined || clientSecret.length === 0) && currentUser !== null && called === false) {
             setTimeout(() => {
+                
                 fetchData()
                 setCalled(true)
 
@@ -40,9 +47,10 @@ export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
   
 
     const fetchData = async () => {
+       
         await currentUser.getIdToken().then((idToken) => {
 
-        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription`,{},
+        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=${subValue}`,{},
             {
                 headers: {
                     'id-token': idToken,
@@ -50,7 +58,8 @@ export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
             },
         )
             .then(r => {
-                const clientSecret = r.data[0].latest_invoice.payment_intent.client_secret  
+                sessionStorage.setItem("subValue",subValue)
+                const clientSecret = r.data.latest_invoice.payment_intent.client_secret  
                 setClientSecret(clientSecret)
                 setCalled(true)
             }
@@ -95,8 +104,8 @@ let appearance
             {(clientSecret!==undefined && clientSecret!==null) && clientSecret.length > 0 ? (
                 <div className="container max-w-[400px] mx-auto items-center ">
                     <div className="mb-10 mt-8 md:mt-20">
-                        <p className="text-xl mb-5">Alphy Monthly Subscription</p>
-                        <p className="text-zinc-500">$5.00 </p>
+                        <p className="text-xl mb-5">{subValue==="basic" ? "Alphy Basic Subscription" : "Alphy Premium Subscription"}</p>
+                        <p className="text-zinc-500">{subValue==="basic" ? "$5.00/month" : "$12/month"} </p>
                        
                     </div>
                     

@@ -12,7 +12,7 @@ import PricingInfo from './PricingInfo';
 
 
 
-function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function Pricing({currentUser, collapsed, setCollapsed, tier,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -41,17 +41,6 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 
 
 
-
-/* if(!subCalled){
-	if((hasActiveSub===undefined || hasActiveSub===false)){
-		
-	}
-	else if(hasActiveSub===true){
-		setIsLoading(false)
-		
-	}
-}
- */
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
 		
@@ -87,7 +76,7 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 				
 				<SideFeedReworked 
 				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 				
 				/></div>}
 				
@@ -98,7 +87,7 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
 							<SideFeedReworked 
-							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 							
 							/>
 							
@@ -112,7 +101,7 @@ function Pricing({currentUser, collapsed, setCollapsed, hasActiveSub,contentName
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<PricingInfo
-					collapsed={collapsed} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser}
+					collapsed={collapsed} tier={tier} credit={credit} currentUser={currentUser}
 					/>}
 					
 

@@ -609,17 +609,7 @@ export default function QuestionAnswering(props) {
 
 								</div>
 								<div id="answer-area" className="answer-area text-md sm:text-l container">
-									<TypeIt className="mb-3"
-
-										options={{
-											strings: answerData.answer.split('\n'),
-											html: true,
-											speed: 0.1,
-											cursorChar: "",
-										}}
-									/>
-
-									{/* <p dangerouslySetInnerHTML={{ __html: answerData.answer.split('\n') }}></p> */}
+									<p dangerouslySetInnerHTML={{ __html: answerData.answer.split('\n') }}></p> 
 								</div>
 
 								<button

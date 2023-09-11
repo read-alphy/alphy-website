@@ -8,7 +8,7 @@ import HubCreationBlockReworked from "./HubCreationBlockReworked";
 
 
 
-export default function HubSubmitPage({currentUser,hasActiveSub,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos, mainShow, setMainShow,credit }){
+export default function HubSubmitPage({currentUser,tier,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos, mainShow, setMainShow,credit }){
     
 	
 	
@@ -21,7 +21,7 @@ export default function HubSubmitPage({currentUser,hasActiveSub,userArchipelagos
             
             
             <HubCreationBlockReworked
-            currentUser={currentUser} hasActiveSub={hasActiveSub} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+            currentUser={currentUser} tier={tier} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
             mainShow={mainShow} setMainShow={setMainShow} credit={credit}
             />
             </div>

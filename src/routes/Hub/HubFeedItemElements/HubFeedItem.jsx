@@ -88,18 +88,22 @@ const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFe
 
 	return (
 		<div className={`grid border-b-0 w-full md:w-full  `}>
-			{item!==undefined && item.source_type !== "up"
+			{item!==undefined ? 
+			
+				item.source_type !== "up"
 				?
+
 				!myBookmarks ? 
-				<MyWorksFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes}/>
-				:
+					<MyWorksFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes}/>
+					:
 
-				<BookmarkFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} removed={removed} setRemoved={setRemoved} currentUser={currentUser}/>
+					<BookmarkFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} removed={removed} setRemoved={setRemoved} currentUser={currentUser}/>
 
-				:
+					:
 			
 				<MyUploadsFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} setCollapsed={setCollapsed} sideFeed={sideFeed} formattedDate={formattedDate}/>
-
+				:
+				null
 			}
 		</div>
 	);

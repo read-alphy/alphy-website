@@ -13,7 +13,7 @@ import FAQInfo from './FAQInfo';
 
 
 
-function FAQ({currentUser, collapsed, setCollapsed, hasActiveSub, setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -43,20 +43,6 @@ function FAQ({currentUser, collapsed, setCollapsed, hasActiveSub, setShowWelcome
 })
 
 
-useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
-			setSubCalled(true)
-			setIsLoading(false)
-		}
-		
-	})
-
 
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
@@ -81,7 +67,7 @@ useEffect (() => {
 				
 				<SideFeedReworked 
 				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 				
 				/></div>}
 				
@@ -92,7 +78,7 @@ useEffect (() => {
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
 							<SideFeedReworked 
-							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} hasActiveSub={hasActiveSub}
+							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
 							
 							/>
 							
@@ -106,7 +92,7 @@ useEffect (() => {
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<FAQInfo
-					hasActiveSub={hasActiveSub} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
+					tier={tier} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
 					/>}
 					
 

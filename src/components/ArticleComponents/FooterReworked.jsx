@@ -9,7 +9,7 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import {Link} from "react-router-dom"
 import VerifiedIcon from '@mui/icons-material/Verified';
 
-export default function FooterReworked({currentUser,collapsed,setCollapsed, handleSignout,hasActiveSub}){
+export default function FooterReworked({currentUser,collapsed,setCollapsed, handleSignout,tier}){
     const [openFeedbackDialog, setOpenFeedbackDialog] = useState(false);
     const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -50,7 +50,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
           <div>
                               <div className="">
                                   <div className="flex flex-col">
-                                  {/*   {hasActiveSub===false && 
+                                  {/*   {tier===free && 
                                     <div className="mb-6 hidden xl:block">
                                     <p className = "text-zinc-600 dark:text-zinc-200 text-md  w-full w-full pl-10 mb-5 ">Try Premium</p>
                                     <p className = "text-zinc-500 dark:text-zinc-300 text-sm w-full w-full pl-10 ">Extra transcription credits, multi-language access, local audio processing, and unlimited Arc creation</p>
@@ -58,7 +58,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                     </div>
                                     }
  */}
-                                {hasActiveSub===true && 
+                                {tier==="premium" && 
                                     <div className="mb-6  flex flex-row w-full pl-6 md:pl-10">
                                            
                                           <p className = "text-indigo-400 text-md  "> 
@@ -76,7 +76,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                   <span>Account</span>
                                   </Link>:
 
-                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-fullpl-6 md:pl-10 " to="/plans">
+                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 " to="/plans">
                                     <span>Plans</span></Link>
                                   
                                   }

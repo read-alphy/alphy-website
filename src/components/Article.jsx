@@ -16,7 +16,7 @@ import { Helmet } from "react-helmet";
 
 
 
-function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContentName,userArchipelagos}) {
+function Article({ source_type, collapsed, setCollapsed, tier,setContentName,userArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -82,13 +82,14 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 				}
 
 			).catch((error) => {
-				
+				console.log("error1",error,constantFetch)
 				navigate('/404')
 			});
 
 		} catch (error) {
 			if (error.response?.status === 404) {
 				setIsLoading(false);
+				console.log("error2",error)
 				navigate('/404');
 			}
 			console.error(`Error fetching data: ${error}`);
@@ -164,6 +165,7 @@ function Article({ source_type, collapsed, setCollapsed, hasActiveSub,setContent
 		} catch (error) {
 			if (error.response?.status === 404) {
 				setIsLoading(false);
+				console.log("error3",error)
 				navigate('/404');
 			}
 			console.error(`Error fetching data: ${error}`);
@@ -211,6 +213,7 @@ if(called===false){
 			
 				
 	const intervalFetch =() => {
+
 	if (data!==undefined && data.complete!==true){
 		
 				if (source_type==="up" && data.length===0 && currentUser!==null){
@@ -278,14 +281,14 @@ if(called===false){
 				
 				 	{<div className={`hidden sm:flex `}>
 			
-				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub} hasActiveSub={hasActiveSub}/></div>} 
+				<SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub} tier={tier}/></div>} 
 				
 				<div
 					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
-						<div className="h-screen"><SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub} hasActiveSub={hasActiveSub} /></div>
+						<div className="h-screen"><SideFeedReworked collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} actionsHub={actionsHub} setActionsHub={setActionsHub} tier={tier} /></div>
 					</div>
 				</div>
 
@@ -293,7 +296,7 @@ if(called===false){
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto  h-full sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh]'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : <Content data={data} hasActiveSub={hasActiveSub} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub}/>} 
+					{isLoading || data.length ? <Loading /> : <Content data={data} tier={tier} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub}/>} 
 					
 
 				</div>

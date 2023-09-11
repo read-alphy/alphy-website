@@ -6,7 +6,7 @@ import {Link} from "react-router-dom"
 
 export default function MyUploadsFeedItem({item, source_id, formattedDate, setCollapsed}){
 	let displayText = "";
-	if(item.title!==undefined && item.title!==null){
+	if(item!==undefined && item.title!==undefined && item.title!==null){
 		
 		  if(item.title.length>70){
 			displayText =  `${item.title[69]===" "? item.title.slice(0, 69)  : item.title.slice(0, 70)}${item.title.length>40 ? "..." : ""}`;

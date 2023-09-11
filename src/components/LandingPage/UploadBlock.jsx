@@ -1,13 +1,13 @@
 import React, { useState, useRef, useCallback} from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 
-export default function UploadBlock({currentUser, hasActiveSub, credit}) {
+export default function UploadBlock({currentUser, tier, credit}) {
     const [uploadProgress, setUploadProgress] = useState(0)
 	const [uploadDuration, setUploadDuration] = useState("")
 	const [uploadTitle, setUploadTitle] = useState("")
@@ -131,18 +131,39 @@ export default function UploadBlock({currentUser, hasActiveSub, credit}) {
                     <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md">As we value your privacy, we delete your audio files after transcription, and we make sure Alphy's summary, transcription, and chatbot are only accessible to you and no one else.
                     </p>
                    
-                   {currentUser &&
-                    <span className="text-sm mt-4 text-gray-600 dark:text-zinc-300 "> 
-                    <a href="/account" className="underline">Remaining Credits : {Math.floor(credit)} minutes </a>     
-                </span> 
-                }
+                
     </div>
+
+    {tier==="premium" &&
+    <div className="flex-col flex">
+    <div className="flex flex-row">
+            <a href="/account" className="underline text-zinc-500 dark:text-zinc-400">
+                {tier==="free" && "Starter Plan"}
+                {tier==="basic" && "Basic Plan"}
+                {tier==="premium" && "Premium Plan"}
+                
+                </a>
+                <p className="ml-1 mr-1"> - </p>
+                 <p className="text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(credit)} minutes
+                 </p>
+    </div>
+               
+                <div  className="mt-4 flex flex-row">
+                <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
+                onClick={
+                    sessionStorage.setItem("creditPurchase", "true")
+                }
+                to="/account" className="text-green-300 font-semibold underline" >Buy here.</Link>
+                </div>                           
+                
+    </div>
+    }
 
 
         {file === null ?
 
             (
-                hasActiveSub === true
+                tier === "premium"
                     ?
                     <div  class="flex items-center justify-center w-full">
                         <label {...getRootProps()}  for="dropzone-file" class={`flex flex-col items-center justify-center w-full border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >

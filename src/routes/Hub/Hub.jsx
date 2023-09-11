@@ -16,7 +16,7 @@ import HubContent from './HubContent';
 
 
 
-function Hub({arcs, currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function Hub({arcs, currentUser, collapsed, setCollapsed, tier,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -32,9 +32,7 @@ function Hub({arcs, currentUser, collapsed, setCollapsed, hasActiveSub,contentNa
 
 	const [deleteDialog, setDeleteDialog] = useState(false);
 	const [subCalled, setSubCalled] = useState(false);
-	const [errorMessage, setErrorMessage] = useState(false);
-	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
-	const [helmetThumbnail, setHelmetThumbnail] = useState("");
+
 	const [globalLayout, setGlobalLayout] = useState(true);
 	const [userLayout, setUserLayout] = useState(false);
 	const [submitLayout, setSubmitLayout] = useState(false);
@@ -59,22 +57,12 @@ function Hub({arcs, currentUser, collapsed, setCollapsed, hasActiveSub,contentNa
 })
 
 
-if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
+if((tier!== undefined || tier!==null) && subCalled===false){
 	setSubCalled(true)
 	setIsLoading(false)
 }
 
 
-/* if(!subCalled){
-	if((hasActiveSub===undefined || hasActiveSub===false)){
-		
-	}
-	else if(hasActiveSub===true){
-		setIsLoading(false)
-		
-	}
-}
- */
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
 		
@@ -98,7 +86,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 				
 				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-				hasActiveSub={hasActiveSub}
+				tier={tier}
 				/></div>}
 				
 				<div
@@ -110,7 +98,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 							<SideFeedReworked 
 							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-							hasActiveSub={hasActiveSub}
+							tier={tier}
 							/>
 							
 							</div>
@@ -123,7 +111,7 @@ if((hasActiveSub!== undefined || hasActiveSub!==null) && subCalled===false){
 				>
 					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<HubContent
-					arcs={arcs}	data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					arcs={arcs}	data={data} tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
 					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
 					mainShow={mainShow} setMainShow={setMainShow} collapsed={collapsed} setCollapsed={setCollapsed}

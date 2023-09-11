@@ -7,14 +7,13 @@ import PublishIcon from '@mui/icons-material/Publish';
 
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
-import Divider from '@mui/material/Divider';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect } from 'react';
-import { set } from 'lodash';
+import { Link} from 'react-router-dom';
 
 
 
-export default function ArchipelagoCreation({archipelagoDescription , archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago,errorMessage,credit, setCreditCalled}){
+export default function ArchipelagoCreation({archipelagoDescription, tier,archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago,errorMessage,credit, setCreditCalled}){
     const [inputValue, setInputValue] = useState("");
     
     const [isLoading, setIsLoading] = useState(false);
@@ -234,9 +233,9 @@ const handleKeyDown = (event) => {
             <div className="flex flex-col ">
             
             <div className="mt-10 lg:mt-0 ">
-                <a onClick={()=>handleGoBack()} className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition">
+                <a onClick={()=>handleGoBack()} className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer">
                 <KeyboardArrowLeftIcon fontSize="small" className=""/>
-                <span className="text-sm">Go Back</span>
+                <span className="text-sm ">Go Back</span>
                 </a></div>
                 <div className=" flex flex-row w-full items-center">
             <div class="relative w-full min-w-[200px] h-12 mt-10 ">
@@ -344,9 +343,29 @@ const handleKeyDown = (event) => {
                                         &&
 
                                     <div>
-                                
-                                <p className="mt-5 mb-5 text-sm text-zinc-600 dark:text-zinc-300 flex flex-col"> 
-                                    Remaining Credits : {Math.floor(credit)} minutes </p>
+                               
+<div className="flex-col flex mb-6 text-sm">
+    <div className="flex flex-row ">
+            <a href="/account" className="text-zinc-500 dark:text-zinc-400">
+                {tier==="free" && "Starter Plan"}
+                {tier==="basic" && "Basic Plan"}
+                {tier==="premium" && "Premium Plan"}
+                
+                </a>
+                <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
+                 <p className=" text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(credit)} minutes
+                 </p>
+    </div>
+                {(tier==="basic"||tier==="premium") &&
+                       <div  className="mt-4 flex flex-row">
+                       <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
+                       onClick={
+                           sessionStorage.setItem("creditPurchase", "true")
+                       }
+                       to="/account" className="text-green-300 font-semibold underline" >Buy here.</Link>
+                       </div>                
+                }
+    </div>
                                 <Button size="sm" type="submit"
                                 onClick={(e) => {
                                     handleSubmit();

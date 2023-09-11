@@ -16,7 +16,7 @@ import HubContent from './HubContent';
 
 
 
-function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -55,19 +55,6 @@ function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentN
 })
 
 
-
-
-
-/* if(!subCalled){
-	if((hasActiveSub===undefined || hasActiveSub===false)){
-		
-	}
-	else if(hasActiveSub===true){
-		setIsLoading(false)
-		
-	}
-}
- */
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
 		
@@ -105,7 +92,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentN
 				
 				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-				hasActiveSub={hasActiveSub}
+				tier={tier}
 				/></div>
 				
 				<div
@@ -117,7 +104,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentN
 							<SideFeedReworked 
 							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-							hasActiveSub={hasActiveSub}
+							tier={tier}
 							/>
 							
 							</div>
@@ -130,7 +117,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, hasActiveSub,contentN
 				>
 					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300 " color="green" /> : 
 					<HubContent
-					data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					data={data} tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
 					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
 					mainShow={mainShow} setMainShow={setMainShow}

@@ -16,7 +16,7 @@ import HubContent from './HubContent';
 
 
 
-function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function Hub({currentUser, collapsed, setCollapsed, tier,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
@@ -55,18 +55,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 })
 
 
-
-
-/* if(!subCalled){
-	if((hasActiveSub===undefined || hasActiveSub===false)){
-		
-	}
-	else if(hasActiveSub===true){
-		setIsLoading(false)
-		
-	}
-}
- */
+ 
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
 		
@@ -104,7 +93,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 				
 				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
 				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-				hasActiveSub={hasActiveSub}
+				tier={tier}
 				/></div>}
 				
 				<div
@@ -116,7 +105,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 							<SideFeedReworked 
 							setCollapsed={setCollapsed} source_id={source_id} 
 							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-							hasActiveSub={hasActiveSub}
+							tier={tier}
 							/>
 							
 							</div>
@@ -129,7 +118,7 @@ function Hub({currentUser, collapsed, setCollapsed, hasActiveSub,contentName, cr
 				>
 					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<HubContent
-					data={data} hasActiveSub={hasActiveSub} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					data={data} tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
 					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
 					mainShow={mainShow} setMainShow={setMainShow} collapsed={collapsed} setCollapsed={setCollapsed}

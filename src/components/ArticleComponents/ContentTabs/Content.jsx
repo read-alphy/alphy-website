@@ -35,6 +35,18 @@ import {
 
 export default function Content(props) {
 
+	const trial_keywordlist=[
+		"Ethereum", "Solana", "Cosmos", "convergent evolution", "Mike Ippolito", "BlockWorks", 
+		"scalability trilemma", "validators", "decentralization", "MEV", "Miner Extractable Value", 
+		"rollups", "bridges", "Bitcoin", "solo stakers", "full node validation", "professional node operators",
+		"app chains", "super chains", "proof-of-stake", "consensus", "Atom", "Eigenlayer", 
+		"blockchain trilemma", "Ethereum Roll-ups", "OP Superchains", "sequencing effect", 
+		"product-market fit", "interoperability", "money", "sequencers", "Babylon", "Arbtrum", 
+		"Optimism", "price discovery", "Liquidity", "Permissionless Conference", "permissionlessness", "governance"
+	  ]
+	  
+	
+	
 	
 
 
@@ -1175,13 +1187,13 @@ return (
 
 
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.hasActiveSub === false || props.hasActiveSub == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.hasActiveSub === false || props.hasActiveSub == undefined ? " opacity-30" : ""} dark:invert`} src={DownloadStatic}></img></button>
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} dark:invert`} src={DownloadStatic}></img></button>
 																								</PopoverHandler>
 
 																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
 																									<ThemeProvider value={themePopover}>
 																										<PopoverContent background="indigo">
-																											{props.hasActiveSub == true && basicDataLoaded == true ?
+																											{props.tier !=undefined && props.tier!="free" && basicDataLoaded == true ?
 
 																												<div>
 																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
@@ -1195,7 +1207,7 @@ return (
 																												:
 
 																												<div className="px-3 cursor-pointer py-2 pointer-events-none ">
-																													<p className="">Go premium to download the transcript</p>
+																													<p className="">Upgrade your plan to download the transcript</p>
 																												</div>}
 																										</PopoverContent>
 																									</ThemeProvider>
@@ -1235,13 +1247,13 @@ return (
 
 
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.hasActiveSub === false || props.hasActiveSub == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.hasActiveSub === false || props.hasActiveSub == undefined ? " opacity-30" : ""} dark:invert`} src={DownloadStatic}></img></button>
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} dark:invert`} src={DownloadStatic}></img></button>
 																								</PopoverHandler>
 
 																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
 																									<ThemeProvider value={themePopover}>
 																										<PopoverContent background="indigo">
-																											{props.hasActiveSub == true && basicDataLoaded == true ?
+																											{props.tier!==undefined && props.tier != "free" && basicDataLoaded == true ?
 
 																												<div>
 																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
@@ -1255,7 +1267,7 @@ return (
 																												:
 
 																												<div className="px-3 cursor-pointer py-2 pointer-events-none ">
-																													<p className="">Go premium to download the transcript</p>
+																													<p className="">Upgrade your plan to download the transcript</p>
 																												</div>}
 																										</PopoverContent>
 																									</ThemeProvider>
@@ -1273,6 +1285,21 @@ return (
 																				<div key={index}>
 																					<br></br>
 																					{item}
+{/* 
+																		{item.split(/\s+/).map((word, idx) => {
+																						const cleanedWord = word.replace(/[^a-zA-Z]/g, ''); // remove punctuations for comparison
+																						
+																							return (
+																								
+																								<span key={idx} className={`${trial_keywordlist.includes(cleanedWord) && "bg-green-200"}`} >{word}{' '}</span>
+																								
+																								
+																							
+																								
+																							);
+																						
+																					
+																					})} */}
 																				</div>
 																			);
 																		}
@@ -1302,8 +1329,8 @@ return (
 
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
-									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.hasActiveSub == true ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
-										: <p>Go premium to request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"} </a> page for more detail</p>}
+									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.tier!==undefined && props.tier!=="free" ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
+										: <p>Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"} </a> page for more detail</p>}
 
 									{/* 	<div className="ml-4 mt-12">
 						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>

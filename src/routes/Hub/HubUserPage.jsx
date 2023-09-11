@@ -14,7 +14,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ChatIcon from '@mui/icons-material/Chat';
 import LinkIcon from '@mui/icons-material/Link';
 
-export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow, collapsed, setCollapsed}){
+export default function HubUserPage({currentUser,credit,tier,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow, collapsed, setCollapsed}){
 
     const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -550,12 +550,12 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
                         called ?
                         <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
 
-                       {!hasActiveSub && called && 
+                       {tier==="free" && called && 
                         
                         <p>You don't have any uploads. Upgrade to <Link to="/account" className="underline dark:text-greenColor text-green-400 cursor-pointer">premium plan</Link> to process local files.
                         </p>}
 
-                        {hasActiveSub && called && 
+                        {tier!=="free" && called && 
                         
                         <p>You don't have any uploads. <Link to={"/submit"} onClick={() => {
                             localStorage.setItem("newItem", "upload")
@@ -574,7 +574,7 @@ export default function HubUserPage({currentUser,credit,hasActiveSub,userArchipe
             </div>
             :
             <div>
-                  <button onClick={() => handleHubNavigation("global")} className="text-zinc-700 dark:text-zinc-300 text-lg mt-20">
+                  <button onClick={() => handleHubNavigation("global")} className="text-zinc-700 dark:text-zinc-300 text-lg mt-20 cursor-pointer">
 							<KeyboardArrowLeftIcon fontSize="small" className=""/>
 							<span className="text-sm">Go Back</span>
             </button>

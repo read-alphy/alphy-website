@@ -21,9 +21,9 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 	}
 	const location = useLocation();
 	let imageUrl;
-	if (item.source_type === 'yt') {
+	if (item!==undefined && item.source_type === 'yt') {
 		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
-	} else if (item.source_type === 'sp') {
+	} else if (item!==undefined && item.source_type === 'sp') {
 		imageUrl = Twitter;
 	}
 
@@ -115,8 +115,14 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 
 
 	return (
+		
 		<div className={`grid border-b-0 w-full md:w-full ${sideFeed? "":""}`}>
-			{item.source_type !== "up"
+
+
+			{
+			
+			
+			(item.source_type !== "up"
 				?
 				!myBookmarks ? 
 				<Link to={`/${item.source_type}/${source_id}` }
@@ -368,7 +374,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 				</Link>
 
 
-			}
+			)}
 		</div>
 	);
 };

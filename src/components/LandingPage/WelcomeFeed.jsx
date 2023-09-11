@@ -510,12 +510,9 @@ function WelcomeFeed(props) {
 
 
 	const handleCreatePlaylist = () => {
-		if(props.hasActiveSub===true){
+		
 		navigate("/arc/createArc")
-		}
-		else{
-			setErrorMessage(true)
-		}
+	
 	}
 
 	return (

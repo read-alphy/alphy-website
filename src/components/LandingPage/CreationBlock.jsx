@@ -17,7 +17,7 @@ import SubmitBlock from './SubmitBlock';
 
 
 
-export default function HubCreationBlock({currentUser, hasActiveSub, credit, dataGlobalArchipelagos, setDataGlobalArchipelagos}){
+export default function HubCreationBlock({currentUser, tier, credit, dataGlobalArchipelagos, setDataGlobalArchipelagos}){
     const [submitDialog, setSubmitDialog] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
@@ -103,7 +103,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
 
 			}
 			else if (inputValue.includes('https://twitter.com/i/spaces')) {
-				if (hasActiveSub){
+				if (tier==="basic" || tier==="premium"){
 				videoId = inputValue.split('/').pop().split("?")[0];
 				video_source = "sp"
 				}
@@ -142,7 +142,8 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
 						}).
 						catch((error) => {
                             if(errorMessage.length===0){
-							if(hasActiveSub){
+                                if (tier==="basic" || tier==="premium"){
+
 								setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
                             }
 						
@@ -176,13 +177,8 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
     }
 
     const handleArcNavigation = () => {
-        if(hasActiveSub){
+  
             navigate('/arc/createArc')
-        }
-        else{
-            setArcDialog(true)
-        }
-
     }
 
     return(
@@ -348,7 +344,7 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
                 setSubmitDialog(false)
                 setErrorMessage("")
             }} >
-                         <SubmitBlock currentUser={currentUser} hasActiveSub={hasActiveSub} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef}/>
+                         <SubmitBlock currentUser={currentUser} tier={tier} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef}/>
 
 			</Dialog>
 			}
@@ -356,12 +352,12 @@ export default function HubCreationBlock({currentUser, hasActiveSub, credit, dat
             {uploadDialog && 
             <Dialog maxWidth="md" fullWidth="true" open={uploadDialog} onClose={() => setUploadDialog(false)} >
 
-              <UploadBlock currentUser={currentUser} hasActiveSub={hasActiveSub} credit={credit}/>
+              <UploadBlock currentUser={currentUser} tier={tier} credit={credit}/>
                 </Dialog>}
 
             {arcDialog &&
             <Dialog maxWidth="md" fullWidth="true" open={arcDialog} onClose={() => setArcDialog(false)} >
-                <ArcBlock currentUser={currentUser} hasActiveSub={hasActiveSub} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>
+                <ArcBlock currentUser={currentUser} tier={tier} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>
             </Dialog>
 
             }

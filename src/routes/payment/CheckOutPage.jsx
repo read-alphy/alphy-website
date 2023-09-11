@@ -20,8 +20,8 @@ export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasA
 	
 
 	let source_id
-	
-	
+
+
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 
@@ -45,16 +45,10 @@ export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasA
 
 
 useEffect (() => {
-	if(hasActiveSub!==true){
-				setTimeout (() => {
-					setSubCalled(true)
-					setIsLoading(false)
-				}, 2000);
-		}
-		else{
+
 			setSubCalled(true)
 			setIsLoading(false)
-		}
+	
 		
 	})
 
