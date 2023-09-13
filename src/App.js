@@ -2,9 +2,7 @@ import Navbar from './components/Navbar';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Home from './routes/Home';
 import Article from './components/Article';
-import Footer from './components/Footer';
 import PrivacyPolicy from './routes/PrivacyPolicy';
 import NotFound from './routes/NotFound';
 import image from './img/robot.png';
@@ -291,7 +289,7 @@ useEffect(() => {
 						 <Navbar collapsed={collapsed} setCollapsed={setCollapsed} /> 
 						 </div>
 						<Routes>
-							{/* <Route path="/" element={<Home tier={tier} currentUser={currentUser} credit = {credit} userArchipelagos={userArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos}/>} /> */}
+						
 							
 							<Route
 								path="/yt/:article_ID"

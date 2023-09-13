@@ -136,10 +136,15 @@ export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,arc
 
         }
         else if (inputValue.includes('https://twitter.com/i/spaces')) {
-            
-            videoId = inputValue.split('/').pop().split("?")[0];
-            video_source = "sp"
-
+            if (tier==="basic" || tier==="premium"){
+				videoId = inputValue.split('/').pop().split("?")[0];
+				video_source = "sp"
+				}
+				else{
+                    setFailed(true)
+					setErrorMessageSubmit('Upgrade your plan to process Twitter Spaces. See Account page for more detail.');
+					return;
+				}
         }
 
 

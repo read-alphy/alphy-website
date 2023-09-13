@@ -122,7 +122,13 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 			{
 			
 			
-			(item.source_type !== "up"
+			(
+				
+				
+				
+				
+				
+				item.source_type !== "up"
 				?
 				!myBookmarks ? 
 				<Link to={`/${item.source_type}/${source_id}` }
@@ -374,6 +380,8 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 				</Link>
 
 
+			
+			
 			)}
 		</div>
 	);

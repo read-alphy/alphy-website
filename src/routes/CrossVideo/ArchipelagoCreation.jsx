@@ -140,8 +140,15 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
         }
         else if (inputValue.includes('https://twitter.com/i/spaces')) {
             
+        if (tier==="basic" || tier==="premium"){
             videoId = inputValue.split('/').pop().split("?")[0];
             video_source = "sp"
+            }
+            else{
+                setFailed(true) 
+                setErrorMessageSubmit('Upgrade your plan to process Twitter Spaces. See Account page for more detail.');
+                return;
+            }
 
         }
 
@@ -182,6 +189,10 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
                       
                             setErrorMessageSubmit("There was an error submitting the form. Make sure you have enough credits for the submission and try again.")
                       
+                }
+                else if(error.response.data.detail=="Not enough minutes"){
+
+                    setErrorMessageSubmit("You don't have enough credits.")
                 }
                         setFailed(true)
                         setSubmitInputValue('');

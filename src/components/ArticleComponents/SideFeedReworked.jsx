@@ -67,8 +67,8 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 
 	  const handleSignOut = async () => {
 		try {
-			localStorage.setItem("logged in","false")
 			auth.logout();
+			localStorage.setItem("logged in","false")
 			navigate("/")
 			window.location.reload()
 			

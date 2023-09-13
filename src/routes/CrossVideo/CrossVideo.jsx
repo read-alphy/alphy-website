@@ -24,7 +24,6 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArc
 	const navigate = useNavigate();
 	let source_id
 	
-	
 
 
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
@@ -41,6 +40,7 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArc
 	const [subCalled, setSubCalled] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+	const [isLoadingDelete,setIsLoadingDelete] = useState(false)
 	const [helmetThumbnail, setHelmetThumbnail] = useState("");
 	const isCreateArc = location.pathname.split('/')[2]==="createArc"
 	const isEditArc = location.pathname.split('/')[2]==="editArc"
@@ -83,15 +83,23 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArc
 	}
 })
 
+
+
 useEffect(() => {
 	if((isArc || isEditArc) && data.length===0 && called!==true){
-	handleArcInfo()
+		handleArcInfo()
+	}
+	else if((isArc || isEditArc) && sessionStorage.getItem("arcAction")==="true"){
+		console.log("hey")
+		sessionStorage.removeItem("arcAction")
+		window.location.reload()
 	}
 },[])
 
 
 
 const handleArcInfo = async () => {
+	sessionStorage.removeItem("arcAction")
 	if((isArc || isEditArc) && data.length===0 && called!==true){
 		setIsLoading(true)
 		
@@ -136,7 +144,10 @@ const handleArcInfo = async () => {
 	}
 }
 
-
+if(isArc && sessionStorage.getItem("arcAction")==="true"){
+	sessionStorage.removeItem("arcAction")
+	window.location.reload()
+}
 
 
 const handleArchipelago= () => {
@@ -173,10 +184,11 @@ else{
 					},
 				}
 				).then((response) => {
-					setUserArchipelagos([...userArchipelagos, response.data])
+
+					sessionStorage.setItem("arcAction", "true")
 					setTimeout (() => {
 					
-					navigate(`/myhub`)
+					navigate(`/arc/${response.data.uid}`)
 					setIsLoadingSubmit(false)
 					}, 2000);
 					
@@ -184,6 +196,7 @@ else{
 				}
 				else if(isEditArc){
 					setIsLoadingSubmit(true)
+					sessionStorage.setItem("arcAction", "true")
 					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
@@ -199,9 +212,12 @@ else{
 				
 				).then((response) => {
 					
-					navigate(`/myhub`)
-					localStorage.setItem("archipelagoEdited", "true")
+					sessionStorage.setItem("arcAction", "true")
+					setTimeout (() => {
+					
+					navigate(`/arc/${response.data.uid}`)
 					setIsLoadingSubmit(false)
+					}, 2000);
 				})
 				}
 			}
@@ -223,9 +239,9 @@ else{
 
 
 const handleDeleteArchipelago = () => {
+	setIsLoadingDelete(true)
+
 	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`,
-	
-	
 	{
 		headers: {
 			'id-token': currentUser.accessToken,
@@ -233,13 +249,18 @@ const handleDeleteArchipelago = () => {
 	}
 	
 	).then((response) => {
+		
 		const index = userArchipelagos.indexOf(archipelagoInfo)
 		userArchipelagos.splice(index,1)
 		setUserArchipelagos([...userArchipelagos])
-
+		
 		navigate(`/`)
 		
 
+		})
+		.catch((error) => {
+			console.log(error)
+			setIsLoadingDelete(false)
 		})
 		}
 
@@ -390,10 +411,21 @@ const handleDeleteArchipelago = () => {
 				
 				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode items-center text-center justify-center drop-shadow-sm flex-col">
 					<p className="mb-10">You are about to delete this arc. Would you like to continue?</p>
-					<div className="flex flex-row">
+					<div >
+						{isLoadingDelete ? 
+						
+						<div>
+							
+						<Spinner color="green" size="sm" className="flex mx-auto opacity-40 mb-2"/>
+						<p className="text-zinc-500 dark:text-zinc-600 italic">Deleting...</p>
+						</div>
+						 :
+						<div className="flex flex-row">
 						<p className="text-greenColor cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
 						<div className="border-r h-full mr-4 ml-4"></div>
 						<p className="text-red-400 cursor-pointer" size="sm" onClick={handleDeleteArchipelago}>Delete</p>
+						</div>
+					}
 					</div>
 				</div>
 			

@@ -65,7 +65,7 @@ const navigate = useNavigate()
 
     }
     return(
-        <div className="col-span-2  xs:max-w-[360px] xs:min-w-[270px] p-4 border border-gray-200 transform *-translate-y-2* rounded-lg drop-shadow-xl sm:p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-gray-700 dark:bg-gradient-to-br dark:drop-shadow-xl dark:border-gray-700 ">
+        <div className="col-span-2  xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 border border-gray-200 transform *-translate-y-2* rounded-lg drop-shadow-xl sm:p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-gray-700 dark:bg-gradient-to-br dark:drop-shadow-xl dark:border-gray-700 ">
         <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
             {/* <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
             <div className="flex items-baseline text-gray-900 dark:text-white">

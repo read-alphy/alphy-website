@@ -129,7 +129,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                   <EmailIcon fontSize="small" className="text-[#ced4da]"/>
                                   </a>
                                   <div>
-                                  <a href="https://discord.gg/N4CkQhCVv2" >
+                                  <a href="https://discord.gg/N4CkQhCVv2" target="_blank" >
                                       <img src={DiscordIcon} className="mt-1" />
                                   </a>
                               </div>

@@ -76,6 +76,7 @@ export default function HubCreationBlock({currentUser, tier, credit}){
 				video_source = "sp"
 				}
 				else{
+                    setFailed(true)
 					setErrorMessage('Please switch to the premium plan to transcribe Twitter Spaces. See Account page for more detail.');
 					return;
 				}
@@ -109,7 +110,9 @@ export default function HubCreationBlock({currentUser, tier, credit}){
 
 						}).
 						catch((error) => {
+                            console.log(error)
                             if(errorMessage.length===0){
+                                
                                 if (tier==="basic" || tier==="premium"){
 								setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
                             }
@@ -119,9 +122,9 @@ export default function HubCreationBlock({currentUser, tier, credit}){
 								{
 									setErrorMessage("Make sure the content you are submitting has more than 10,000 views.")
 								}
-								else if(error.response.data.detail=="Video too long for free users"){
+								else if(error.response.data.detail=="Not enough minutes"){
 
-									setErrorMessage("Make sure the content you are submitting doesn't exceed 1 hour.")
+									setErrorMessage("You don't have enough credits to submit this content.")
 								}
 								else {
 									setErrorMessage("There was an error submitting the form. Please try again.")

@@ -51,7 +51,7 @@ function Footer() {
 						support@alphy.app
 					</a>
 
-					<a href="https://discord.gg/N4CkQhCVv2" className="mb-5">
+					<a href="https://discord.gg/N4CkQhCVv2" className="mb-5" target="_blank">
 						Discord
 					</a>
 
