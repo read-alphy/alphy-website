@@ -98,8 +98,6 @@ const resetPassword = (urlParams.get('mode')=="resetPassword");
 	}, []);
 
 
-
-
 useEffect(() => {
 	if(verification){
 		const url = window.location.href;
@@ -239,7 +237,13 @@ useEffect(() => {
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 
-	
+
+
+	if(sessionStorage.getItem("refreshCredit")==="true"){
+		console.log("refreshing credit")
+		getCustomerInfo(currentUser)
+		sessionStorage.removeItem("refreshCredit")
+	}		
 
 
 	return (

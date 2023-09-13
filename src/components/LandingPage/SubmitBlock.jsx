@@ -4,10 +4,20 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import {Button} from "@material-tailwind/react";
 import { useEffect } from 'react';
 import { Link} from 'react-router-dom';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export default function SubmitBlock({currentUser, tier, credit, handleSubmit, inputValue, setInputValue, errorMessage, failed,inputRef}){
+const navigate = useNavigate()
 
+
+    const navigateCredit = () => {
+        sessionStorage.setItem("creditPurchase", "true")
+        navigate("/account")
+        
+    }
    
   useEffect(() => {
     inputRef.current.focus();
@@ -75,20 +85,12 @@ export default function SubmitBlock({currentUser, tier, credit, handleSubmit, in
                  <p className=" text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(credit)} minutes
                  </p>
     </div>
-                {(tier==="basic"||tier==="premium") &&
-                        <div  className="mt-4 flex flex-row">
-                        <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
-                        onClick={
-                            sessionStorage.setItem("creditPurchase", "true")
-                        }
-                        to="/account" className="text-green-300 font-semibold underline" >Buy here.</Link>
-                        </div>                
-                }
+              
     </div>
             </span> 
 
 }
-<div className=" space-y-2 mt-10 ">
+<div className=" space-y-2 mt-6 ">
 
 {tier==="free" ? 
 
@@ -106,19 +108,34 @@ currentUser ?
     </div>
 :   
 <div>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm">  Alphy might fail to process content with location limits.</p>
+<div class="border-b border-gray-100 mt-10 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 md:w-1/3"></div>
+{(tier==="basic"||tier==="premium") &&
+                        <div  className="mt-8 flex flex-col text-sm">
+                        <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> 
+                        
+                        <div>
+             <Button onClick={navigateCredit} size="sm" className="bg-indigo-300 text-white mt-4">
+                        
+                            <span className="mt-1 dark:text-zinc-800">Buy here</span>
+                    
+                    </Button>
+                    </div>
+                        
 
-{/* <p className="font-semibold text-lg text-zinc-700 dark:text-zinc-200 mb-2 ml-1">You are on Premium Plan</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 mt-3 text-md"> • No duration limit applied.</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-md"> • No view limit applied. </p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-md"> • You have access to <span className="text-greenColor">unlimited Twitter Spaces transcription</span>.</p> */}
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-md">  Alphy might fail to process content with location limits.</p>
+                
+                        </div> 
+                        
+                        
+                }
+
+
+
+
 </div>
 }
 
 
-
-
-
 </div>
 
 
@@ -128,12 +145,8 @@ currentUser ?
 
 </div>
 
-<div class="border-b border-gray-100 mt-10 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 md:w-1/3"></div>
 
-<div className="flex flex-row mt-5 justify-center mx-auto ml-4"> 
-<YouTubeIcon fontSize="large" className="text-emerald-200"/>
-<TwitterIcon fontSize="large" className="ml-4 text-emerald-200"/> 
-</div>
+
         </div>
 
     )

@@ -27,6 +27,7 @@ let userStripeId = ""
 export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEnd}) {
     
     
+    
     const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
@@ -150,7 +151,6 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
     
 }
 
-
     useEffect(() => {
         
 
@@ -264,7 +264,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                 
                                  <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-bold mb-10 mt-20">Manage Subscription </p>
                          
-                                { tier!=="free" ? <a className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
+                                { tier!=="free" ? <a className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change payment details or cancel subscription"}</a> : null}
                                 
                                 <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch">
                                    
@@ -326,7 +326,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
 
                                                                                 <div className="mt-4"> 
                                                                                 
-                                                                                    <Button size="sm" className="bg-indigo-300 text-white">
+                                                                                    <Button size="sm" className="bg-indigo-300 text-white" onClick={() => setCreditPurchaseDialog(true)}>
                                                                                     <AddCircleOutlineIcon  className="mr-2 dark:text-zinc-800" />
                                                                                         <span className="mt-1 dark:text-zinc-800">Buy Credits</span>
 
@@ -352,7 +352,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
 
                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-semibold mt-20 mb-10">Manage Subscription </p>
                                 {currentUser ? <div className="items-center flex flex-col justify-center">  
-                                { tier!=="free" ? <a className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change your billing plan or cancel subscription"}</a> : null}
+                                { tier!=="free" ? <a className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change payment details or cancel subscription"}</a> : null}
                                        </div> : null}
                                 </div>
                     }
@@ -368,7 +368,23 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
 
 
 
-                                <Dialog fullWidth={"true"} maxWidth={"sm"} open={creditPurchaseDialog} onClose={() => setCreditPurchaseDialog(false)}>
+                              
+
+
+                  
+                
+                </div >
+
+                :
+                
+                <div className="mx-auto">
+                    <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />
+                   </div>
+               
+            }
+            
+            
+            <Dialog fullWidth={"true"} maxWidth={"sm"} open={creditPurchaseDialog} onClose={() => setCreditPurchaseDialog(false)}>
                                                                         <div className="h-[400px] p-10 text-zinc-600 text-sm dark:text-zinc-300 dark:bg-mildDarkMode  text-center items-center">
                                                                             
                                                                             <p className="text-lg font-normal ">
@@ -419,19 +435,8 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                      </div>
 
 </Dialog>
-
-
-                  
-                
-                </div >
-
-                :
-                
-                <div className="mx-auto">
-                    <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />
-                   </div>
-               
-            }</div>
+            
+            </div>
             
     )
 }

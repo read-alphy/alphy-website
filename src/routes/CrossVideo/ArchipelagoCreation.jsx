@@ -171,6 +171,8 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
                         },
                     )
                     .then((response) => {
+                        sessionStorage.setItem("refreshCredit", "true")
+
                         setCreditCalled(false)
                         setErrorMessageSubmit("")
                         setLoading(false);
@@ -189,6 +191,9 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
                       
                             setErrorMessageSubmit("There was an error submitting the form. Make sure you have enough credits for the submission and try again.")
                       
+                }
+                else if (error.response.data.detail=="Free users cannot submit twitter spaces"){
+                    setErrorMessageSubmit("Upgrade your plan to process Twitter Spaces. See Account page for more detail.");
                 }
                 else if(error.response.data.detail=="Not enough minutes"){
 
@@ -255,7 +260,7 @@ const handleKeyDown = (event) => {
 
             <input value={archipelagoTitle}
             placeholder="Set a title..."
-							onChange={(event) => setArchipelagoTitle(event.target.value)} className="w-full text-l px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-400 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"/>
+							onChange={(event) => setArchipelagoTitle(event.target.value)} className="w-full text-l px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-200 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"/>
 						
 						 </div>
 
@@ -267,7 +272,7 @@ const handleKeyDown = (event) => {
 </div>  
 <div className="w-full">
 <p className="text-zinc-700 dark:text-zinc-300 mb-2 mt-16 ml-1">Description</p>
-                <textarea className={`min-h-[120px] rounded-lg bg-white border-zinc-400 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`} 
+                <textarea className={`min-h-[120px] rounded-lg bg-white border-zinc-200 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`} 
                 value={archipelagoDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
                 placeholder="Set a description for your archipelago..."
@@ -371,9 +376,9 @@ const handleKeyDown = (event) => {
                        <div  className="mt-4 flex flex-row">
                        <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
                        onClick={
-                           sessionStorage.setItem("creditPurchase", "true")
+                        () => sessionStorage.setItem("creditPurchase", "true")
                        }
-                       to="/account" className="text-green-300 font-semibold underline" >Buy here.</Link>
+                       to="/account" className="text-indigo-400 font-semibold underline" >Buy here.</Link>
                        </div>                
                 }
     </div>

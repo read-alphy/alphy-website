@@ -122,7 +122,7 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
 				else{
                     setFailed(true)
 					setErrorMessage('Upgrade your plan to process Twitter Spaces. See Account page for more detail.');
-					return;
+					return; 
 				}
 
 			}
@@ -146,6 +146,7 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
 							},
 						)
 						.then((response) => {
+                            sessionStorage.setItem("refreshCredit", "true")
 							setErrorMessage("")
 							setLoading(false);
 							setFailed(false)
@@ -169,6 +170,9 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
 
 									setErrorMessage("You don't have enough credits to submit this content.")
 								}
+                                else if (error.response.data.detail=="Free users cannot submit twitter spaces"){
+                                    setErrorMessage("Upgrade your plan to process Twitter Spaces. See Account page for more detail.");
+                                }
 								else {
 									setErrorMessage("There was an error submitting the form. Please try again.")
 								}

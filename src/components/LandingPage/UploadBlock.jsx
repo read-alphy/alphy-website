@@ -17,7 +17,11 @@ export default function UploadBlock({currentUser, tier, credit}) {
     const audioRef = useRef(null);
     const navigate = useNavigate()
 
-
+    const navigateCredit = () => {
+        sessionStorage.setItem("creditPurchase", "true")
+        navigate("/account")
+        
+    }
     
     const handleFileUpload = (event) => {
 
@@ -121,7 +125,7 @@ export default function UploadBlock({currentUser, tier, credit}) {
 
     return(
         <div className="dark:bg-mildDarkMode h-[full] sm:min-h-[70vh] sm:max-h-[70vh] p-10  sm:p-20 sm:py-16">
-            <div className="pb-10 ">
+            <div className="pb-4 ">
             <div className="flex mx-auto   text-indigo-400 text-sm font-bold mb-10">
                 <VerifiedIcon className="mr-1 "/>
                     <span>PREMIUM</span>
@@ -148,12 +152,28 @@ export default function UploadBlock({currentUser, tier, credit}) {
                  </p>
     </div>
                
-                <div  className="mt-4 flex flex-row">
-                <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
-                onClick={
-                    sessionStorage.setItem("creditPurchase", "true")
-                }
-                to="/account" className="text-green-300 font-semibold underline" >Buy here.</Link>
+              
+
+
+               
+                        <div  className="mb-8 mt-5 flex flex-col text-sm">
+                        <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> 
+                        
+                        <div>
+             <Button onClick={navigateCredit} size="sm" className="bg-indigo-300 text-white mt-4">
+                        
+                            <span className="mt-1 dark:text-zinc-800">Buy here</span>
+                    
+                    </Button>
+                   
+                        
+
+                
+                        </div> 
+                        
+                        
+               
+
                 </div>                           
                 
     </div>
@@ -207,7 +227,7 @@ export default function UploadBlock({currentUser, tier, credit}) {
 
                     :
                     <div>
-                        <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l  mb-5 w-full  col-span-2">You need to go <a className="text-indigo-400 underline font-bold" href="/plans">premium</a> to upload personal files.</p></div>
+                        <div className="flex flex-col  col-span-2 mx-auto items-center"><p className="text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l  mb-5 w-full  col-span-2">You need to go <Link className="text-indigo-400 underline font-bold" to="/account">premium</Link> to upload personal files.</p></div>
                     </div>
 
 
