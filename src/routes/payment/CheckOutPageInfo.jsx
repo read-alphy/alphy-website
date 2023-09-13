@@ -31,13 +31,9 @@ export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
     useEffect(() => {  
         
         if ((clientSecret===null || clientSecret===undefined || clientSecret.length === 0) && currentUser !== null && called === false) {
-            setTimeout(() => {
-                
+        
                 fetchData()
-                setCalled(true)
-
-            }, 2000)
-           
+                setCalled(true)         
 
 
         }
