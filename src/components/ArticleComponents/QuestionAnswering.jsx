@@ -303,7 +303,7 @@ export default function QuestionAnswering(props) {
 							type="text"
 							id="questionAnswering"
 							placeholder="Ask anything to the transcript..."
-							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
+							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal  outline-0   focus:outline-green-300 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
 					
 					
 

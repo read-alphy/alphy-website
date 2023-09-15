@@ -73,6 +73,9 @@ export default function Content(props) {
 	const [openArchipelagoPopover,setOpenArchipelagoPopover] = useState(false);
 	const [selectionPrompt, setSelectionPrompt] = useState("normal");
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
+	const [transcriptCalled, setTranscriptCalled] = useState(false);
+	const [transcript, setTranscript] = useState([]);
+	const [summaryArray, setSummaryArray] = useState([]);
 	
 	const [inputValue, setInputValue] = useState("");
 	const { currentUser } = useAuth()
@@ -126,12 +129,12 @@ export default function Content(props) {
 	const theme = localStorage.getItem("theme")
 
 	const ref = useRef(null);
-	let transcript = [];
+	
 
 
 
 
-	let summaryArray = '';
+	
 
 
 	const language_codes = {
@@ -362,9 +365,6 @@ const handleBookmark = async () => {
 
 		}, 2000);
 
-		if (transcript.length === 0 && data.transcript !== null) {
-			transcriptParser();
-		}
 		const scrollableDiv = ref.current;
 		scrollableDiv.addEventListener("scroll", checkScrollPosition);
 
@@ -411,20 +411,24 @@ const handleBookmark = async () => {
 
 	};
 
+async function summaryParser(){
+	if (summary !== undefined || summary !== null) {
+		if (summary.summary_prettified !== undefined && summary.summary_prettified !== null) {
+
+			setSummaryArray(summary.summary_prettified.split('\n'))
+		}
+		else {
+			setSummaryArray(summary.summary.split('\n'))
+
+		}
+}
+}
+
 	async function transcriptParser() {
+		let summaryArray = ''
+		let transcript = []
 
-
-		if (summary !== undefined || summary !== null) {
-
-
-			if (summary.summary_prettified !== undefined && summary.summary_prettified !== null) {
-
-				summaryArray = summary.summary_prettified.split('\n');
-			}
-			else {
-				summaryArray = summary.summary.split('\n');
-
-			}
+console.log("hey")
 
 
 
@@ -469,59 +473,30 @@ const handleBookmark = async () => {
 					transcript.push(nothing);
 					count = 0;
 					nothing = '';
-				}
+				
 
 
 			}
 		}
-		else {
+		
 
-			var parser = new srtParser2();
-
-			var srt_array = parser.fromSrt(transcript_raw);
-
-
-			let nothing = '';
-			let count = 0;
-
-			transcript.push('00:00:00');
-
-
-			for (let i = 0; i < srt_array.length; i++) {
-				count = count + 1;
-				nothing = nothing + ' ' + srt_array[i].text;
-				if (
-					(count > 6 || count >= srt_array.length) &&
-					srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
-				) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-				}
-
-				else if (count > 12) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-
-				}
-				else if (i === srt_array.length - 1) {
-					transcript.push(nothing);
-				}
-
-
-			}
-
-		}
+		setTranscript(transcript)
 		/* transcript_array = data.transcript_chunked.split("\n") */
 
 
 
 	}
+
+
+if (transcript.length === 0 && data.transcript !== null) {
+		transcriptParser();
+		
+	}	
+		
+
+if (summaryArray.length===0){
+	summaryParser();
+}
 
 
 	const handleDownload = (selection) => {
@@ -570,7 +545,7 @@ const handleBookmark = async () => {
 
 	};
 
-	transcriptParser();
+
 
 	useEffect(() => {
 		const handleSelection = () => {
@@ -1129,7 +1104,7 @@ return (
 																	<Loading />
 																) : summaryArray.length === 0 ? (
 																	<tr className="border-b-0">
-																		<td>Still waiting for the summary! Meanwhile, check the transcript.</td>
+																		<td className="pt-4">Still waiting for the summary! Meanwhile, check the transcript.</td>
 																	</tr>
 																) : (
 																	summaryArray.map((item, index) => {
