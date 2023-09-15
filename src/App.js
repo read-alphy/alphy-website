@@ -14,6 +14,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
 import Success from './routes/payment/Success';
 import Account from './routes/Account';
+import Home from './routes/Home';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
@@ -363,7 +364,11 @@ useEffect(() => {
 								element={<SubmitPage credit={credit} setCreditCalled={setCreditCalled} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
-							<Route path="/FAQ" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
+					{/* 		<Route path = "/home"
+							element={<Home arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
+							</Route> */}
+
+							<Route path="/about" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
 							<Route path="/privacypolicy" element={<PrivacyPolicy collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
 							<Route path="/u/login" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} tier={tier}/>}></Route>
 							<Route path="/u/register" element={<Auth showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} collapsed={collapsed} setCollapsed={setCollapsed} tier={tier}/>}></Route>

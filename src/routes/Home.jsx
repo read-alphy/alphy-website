@@ -6,14 +6,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-import FAQInfo from './FAQInfo';
+import HomeInfo from './HomeInfo';
 
 
 
 
 
 
-function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function Home({currentUser, collapsed, setCollapsed, tier,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -44,6 +44,7 @@ function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, sh
 
 
 
+
 	const handleCollapse = () => {
 		setCollapsed(!collapsed)
 		
@@ -51,9 +52,9 @@ function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, sh
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-			<Helmet>
-				<title>Alphy - About</title>
-			</Helmet>
+				<Helmet>
+				<title>Alphy </title>
+			</Helmet> 
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
@@ -61,9 +62,21 @@ function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, sh
 			
 			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
 				
-	
+		{/* 	<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
+			<div className={`hidden md:flex `}>
+				<button onClick={handleCollapse }>
+
 		
-			{<div className={`hidden sm:block`}>
+			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+
+			</button			>
+			</div> 
+
+			</div> */}
+		
+			{<div className={`hidden lg:block`}>
 				
 				<SideFeedReworked 
 				
@@ -72,7 +85,7 @@ function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, sh
 				/></div>}
 				
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform lg:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
@@ -91,7 +104,7 @@ function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, sh
 						}}`}
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
-					<FAQInfo
+					<HomeInfo
 					tier={tier} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos}
 					/>}
 					
@@ -109,4 +122,4 @@ function FAQ({currentUser, collapsed, setCollapsed, tier, setShowWelcomeForm, sh
 }
 
 
-export default FAQ;
+export default Home;

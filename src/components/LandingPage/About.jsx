@@ -26,10 +26,10 @@ export default function About() {
         <AccordionBody className="text-md dark:text-zinc-300">
 		<p className="text-l dark:text-zinc-300">
 					
-					Alphy is your AI assistant for meaningful interaction with audiovisual content. 
+					Alphy is your AI assistant for engaging deeply with audiovisual material.
 					We combine latest speech-to-text technologies and large language models to transcribe, summarize, and let users create contextually aware search engines on top of videos and recordings. 
 					<br/><br/>
-					Our goal is to make the information in audiovisual content as easily accessible as text-based content.
+					Our goal is to make the information in audiovisual content as readily available as written content.
 				</p>
         </AccordionBody>
       </Accordion>
@@ -64,10 +64,11 @@ export default function About() {
 		        </AccordionHeader>
         <AccordionBody className="text-md dark:text-zinc-300">
 				<p>
-					Alphy processes the files you upload from your device the same way it processes YouTube and Twitter Space links, but keeps the end result private. We don't show it on Discover and no one else other than you can access it.
-					<br/><br/>
-					We don't keep your audio files. We process your audio files on the fly and delete them after processing. You can request to delete the end result by reaching us at <a className="underline" href="mailto:support@alphy.app">support@alphy.app</a>
-					
+				When you upload files to Alphy, we handle them the same way as we do with your YouTube and Twitter Space submissions. The key difference is that your uploads are kept private, ensuring they remain accessible only to you.
+
+				<br/><br/>
+
+				We respect your privacy and do not retain your audio files. After real-time processing, they are deleted. If you ever want to remove the processed results, simply reach out to us at 
 					</p>
 					
 				
@@ -79,11 +80,12 @@ export default function About() {
 		        </AccordionHeader>
         <AccordionBody className="text-md dark:text-zinc-300">
 		<p>
-					
-		An Arc, derived from 'archipelago,' is Alphy's AI-assisted contextually aware search engines on audiovisual content. They serve as a comprehensive collection of interconnected content, enhanced by AI. 
-		
-		<br/><br/>
-		With Arcs, you can create multiple distinct collections, each tailored to specific subjects, creators, or topics. This enables you to cultivate a personalized knowledge base and effortlessly search for information on thousands of hours of content from one place and seamlessly share it with others.
+		An Arc represents Alphy's AI-enhanced search engine for audiovisual content. 
+
+			<br/><br/>
+
+		Using Arcs, you can effortlessly categorize and search through vast amounts of content, organized by specific subjects, creators, or topics. It's your personalized knowledge hub, allowing for swift searches across countless hours of material and easy sharing with others.
+				
 					</p>
 					
 				
@@ -99,7 +101,7 @@ export default function About() {
 		        </AccordionHeader>
         <AccordionBody className="text-md dark:text-zinc-300">
 				<p>
-					See <a className="underline text-green-300" href="/plans">here</a> to learn detailed info about Alphy Premium.
+					See <a className="underline text-green-300" href="/plans">here</a> to learn detailed info about Alphy's plans.
 
 					</p>
 					
@@ -107,20 +109,6 @@ export default function About() {
         </AccordionBody>
       </Accordion>
 
-			<Accordion className="mt-6" open={true}>
-        <AccordionHeader className="cursor-default"  onClick={() => handleOpen(4)}>
-		Do my credits roll over?
-		        </AccordionHeader>
-        <AccordionBody className="text-md dark:text-zinc-300">
-		<p>
-					
-		If you are using the free version, you have 2 hours of free transcription in total. In premium, you get 10 hours of transcription credits every month (on top of your 2 hours of credit). If you don't use your credits, they will roll over to the next month. You can accumulate up to 30 hours of transcription credits.
-		
-					</p>
-					
-				
-        </AccordionBody>
-      </Accordion>
 
 	  <Accordion className="mt-6" open={true}>
         <AccordionHeader className="cursor-default"  onClick={() => handleOpen(4)}>
@@ -129,7 +117,7 @@ export default function About() {
         <AccordionBody className="text-md dark:text-zinc-300">
 		<p>
 					
-		If you want to cancel your subscription, you can do so at any time. Your credits will still be yours. However you will only be able to access premium benefits until the end of the billing period.
+		If you want to cancel your subscription, you can do so at any time. You will be able to spend your credits until the end of your billing period.
 		
 					</p>
 					

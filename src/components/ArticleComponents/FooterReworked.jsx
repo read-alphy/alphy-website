@@ -86,7 +86,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                   <Link className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>Reach Us</Link>
                               </div>
                               <div className=" mt-2 lg:mt-4 pl-6 md:pl-10">
-                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm     w-full cursor-pointer w-[120px]" to="/FAQ ">FAQ</Link>
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm     w-full cursor-pointer w-[120px]" to="/about ">About Alphy</Link>
                               </div>
                               </div>
                               <div className="pl-6 md:pl-10 mt-2 lg:mt-4 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">

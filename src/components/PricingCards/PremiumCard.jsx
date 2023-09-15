@@ -163,15 +163,15 @@ const inputRef = useRef(null);
 
                             <PopoverHandler>
                                 
-                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300 underline  dashed cursor-pointer">GPT-4 Access</span>
+                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300 underline  dashedcursor-pointer">GPT-4 Access</span>
                             
                         </PopoverHandler>
                         <ThemeProvider value={themePopover}>
                         <PopoverContent>
                         
                             <p className="text-zinc-600 dark:text-zinc-300">
-                                Use the most advanced AI model to generate summaries, key takeaways, and questions.
-                                </p>
+                            Your submissions will be processed by the most advanced AI model on the market. 
+                            </p>
                                 
 
                         </PopoverContent>
