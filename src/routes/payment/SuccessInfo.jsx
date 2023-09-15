@@ -16,8 +16,17 @@ export default function Success() {
     return (
         <div>
             {currentUser ?
-                <div className="text-2xl  text-zinc-700 dark:text-zinc-300 container items-center  mx-auto mt-40 max-w-[1200px]">
-                    🎉 Thank you! You have now subscribed to Alphy!
+                <div className="px-6 md:ml-20 text-zinc-700 dark:text-zinc-300 container items-center  mx-auto mt-40 lg:max-w-[800px] xl:max-w-[1200px]">
+                    <p className="text-2xl md:text-3xl">🎉 Success! </p>
+                    <br></br> <br></br>
+                    <p className="text-lg md:text-xl" >
+                    You have now subscribed to Alphy!
+                    </p>
+                    
+                    <br></br> <br></br>
+                    <p className="text-lg md:text-xl" >
+                     You'll be redirected to the main page shortly.
+                     </p>
                 </div>
                 : null}
         </div>
