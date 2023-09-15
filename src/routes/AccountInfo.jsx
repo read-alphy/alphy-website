@@ -68,6 +68,9 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
         if (quantity === 0) {
           setQuantity(1);
         }
+        else if(quantity===""){
+            setQuantity(1);
+        }
       };
     
     const windowSize = useWindowSize();
@@ -401,7 +404,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                                             value={quantity} 
                                                                                             onChange={handleQuantityChange} 
                                                                                             onBlur={handleBlur}
-                                                                                            className="w-[70px] rounded-lg border border-gray-200 text-center dark:bg-mildDarkMode"
+                                                                                            className="w-[70px] rounded-lg border border-gray-200 text-center dark:bg-mildDarkMode focus:outline-none focus:ring-0 focus:border-indigo-400"
                                                                                         />
                                                                                     
                                                                                 <AddCircleIcon className="cursor-pointer mt-2 ml-2 opacity-60 text-zinc-300" onClick={handleIncrement}/>
