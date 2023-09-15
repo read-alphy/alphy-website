@@ -117,10 +117,14 @@ useEffect(() => {
 		if(userId===null || (currentUser!==undefined && currentUser!==null && currentUser.uid!== null && userId!==currentUser.uid)){
 			localStorage.setItem('userId', currentUser.uid)
 		}
+		if(currentUser){localStorage.setItem("logged in","true")}
+		else{
+			localStorage.setItem("logged in","false")
+		}
 		
 	if (currentUser !== null && called === false) {
 		var userId = localStorage.getItem("userId")
-		localStorage.setItem("logged in","true")
+		
 		setIdToken(currentUser.accessToken)
 		
 		if(userId===null){

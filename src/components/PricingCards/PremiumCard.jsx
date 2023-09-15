@@ -1,9 +1,10 @@
-import {Button, Spinner} from "@material-tailwind/react";
+import {Button, Spinner, 	Popover,
+	PopoverHandler, PopoverContent, ThemeProvider} from "@material-tailwind/react";
 import {Link, useNavigate} from "react-router-dom"
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import Dialog from '@mui/material/Dialog';
-import { useState } from "react";
+import { useState, useRef,useEffect} from "react";
 import axios from "axios";
-import { set } from "lodash";
 
 
 
@@ -11,7 +12,11 @@ export default function PremiumCard({tier,openPopover,setOpenPopover, currentUse
 
 const [showUpgradeDialog, setShowUpgradeDialog] = useState(false);
 const [upgradeLoading, setUpgradeLoading] = useState(false);
+const [couponCode, setCouponCode] = useState("")
+const [showCouponBox, setShowCouponBox] = useState(false)
+const [errorMessage, setErrorMessage] = useState("")
 const navigate = useNavigate()
+const inputRef = useRef(null);
 
     const themePopover = {
         popover: {
@@ -19,7 +24,7 @@ const navigate = useNavigate()
             base: {
               bg: "bg-zinc-50 dark:bg-mildDarkMode",
               color: "text-zinc-600 dark:text-zinc-200",
-              border:"border-2 border-zinc-100 dark:border-zinc-600",
+              
               
             },
           },
@@ -28,6 +33,7 @@ const navigate = useNavigate()
       };
 
       const handleDialog = () => {
+        if(currentUser){
         if(tier==="basic"){
             setShowUpgradeDialog(true)
         }
@@ -35,10 +41,20 @@ const navigate = useNavigate()
             navigate("/plans/checkout?sub=premium")
         }
     }
+    else{
+        navigate("/u/login")
+    }
+    }
+
+    const handleCouponCode = (e) => {
+        setCouponCode(e.target.value)
+    }
             
 
+
+
       const upgradePlan = async () => {
-        
+        setErrorMessage("")
         setUpgradeLoading(true)
         
         await currentUser.getIdToken().then((idToken) => {
@@ -59,11 +75,37 @@ const navigate = useNavigate()
             )
             .catch((error) => {
                 console.log(error)
+                setUpgradeLoading(false)
+                setErrorMessage("Something went wrong, please try again")
                 
             })
         })
 
     }
+
+    const handleUpgradeDialog = () => {
+        setShowUpgradeDialog(false)
+        setErrorMessage("")
+    }
+
+    const handleCouponBox = () => {
+        if(showCouponBox===false){
+                setShowCouponBox(true)
+                setTimeout(() => {
+                if(inputRef.current){
+                    inputRef.current.focus()
+                }
+                }, 100);
+    }
+        else{
+            setShowCouponBox(false)
+        }
+    
+    }
+
+
+
+    
     return(
         <div className="col-span-2  xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 border border-gray-200 transform *-translate-y-2* rounded-lg drop-shadow-xl sm:p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-gray-700 dark:bg-gradient-to-br dark:drop-shadow-xl dark:border-gray-700 ">
         <p className="mb-4 text-2xl font-medium text-gray-500 dark:text-zinc-300">Premium</p>
@@ -85,15 +127,10 @@ const navigate = useNavigate()
 
                     <li className="flex space-x-3">
 
-                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 mt-1 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                         <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Extra 10 hours of prioritized transcription credits per month</span>
                     </li>
 
-                    <li className="flex space-x-3">
-                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                        {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
-                    </li>
 
                     <li className="flex space-x-3">
                         <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
@@ -108,16 +145,41 @@ const navigate = useNavigate()
                         <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Process Twitter Spaces </span>
                     </li>
                     <li className="flex space-x-3">
-                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Upload local audio files</span>
-                    </li>
-
-                    
-                    <li className="flex space-x-3">
                     <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                     {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
                     <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts</span>
                 </li>
+                    <li className="flex space-x-3">
+                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Upload local audio files</span>
+                    </li>
+                    <li className="flex space-x-3">
+                        
+
+                        
+                            
+                        <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                        <Popover>
+
+                            <PopoverHandler>
+                                
+                        <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300 underline  dashed cursor-pointer">GPT-4 Access</span>
+                            
+                        </PopoverHandler>
+                        <ThemeProvider value={themePopover}>
+                        <PopoverContent>
+                        
+                            <p className="text-zinc-600 dark:text-zinc-300">
+                                Use the most advanced AI model to generate summaries, key takeaways, and questions.
+                                </p>
+                                
+
+                        </PopoverContent>
+                        </ThemeProvider>
+                        </Popover>
+                    </li>
+                    
+                 
 
                 <li className="flex space-x-3">
                         <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
@@ -136,34 +198,30 @@ const navigate = useNavigate()
 
 
 
-            <Dialog fullWidth={"true"} maxWidth={"sm"} open={showUpgradeDialog} onClose={() => setShowUpgradeDialog(false)}>
+            <Dialog fullWidth={"true"} maxWidth={"sm"} open={showUpgradeDialog} onClose={handleUpgradeDialog}>
                                                                         <div className="p-10 text-zinc-600 text-sm dark:text-zinc-300 dark:bg-mildDarkMode">
                                                                             
                                                                             <p className="text-lg font-normal ">
-                                                                               Upgrade to Premium Plan!
+                                                                               You are about to upgrade to Premium Plan
                                                                             </p>
                                                                             <div className="mb-6 mt-2 text-lg"> 
                                                                                          $12/month
                                                                             </div>
                                                                             
-                                                                            
-                                                                            
 
+
+                                                                         
+                                                                                        
 
                                                                         <div className="flex flex-col ">
                                                                               <ul role="list" className="space-y-5 my-7">
 
                                                                         <li className="flex space-x-3">
 
-                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                                                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Extra 10 hours of prioritized transcription credits per month</span>
                                                                                 </li>
 
-                                                                                <li className="flex space-x-3">
-                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                                                                                {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">No popularity limit</span>
-                                                                                </li>
 
                                                                                 <li className="flex space-x-3">
                                                                                 <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
@@ -177,17 +235,25 @@ const navigate = useNavigate()
                                                                                 {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
                                                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Process Twitter Spaces </span>
                                                                                 </li>
-                                                                                <li className="flex space-x-3">
-                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Upload local audio files</span>
-                                                                                </li>
-
 
                                                                                 <li className="flex space-x-3">
                                                                                 <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                                                                                 {/* <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
                                                                                 <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Download transcripts</span>
                                                                                 </li>
+
+                                                                                <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">Upload local audio files</span>
+                                                                                </li>
+
+                                                                               <li className="flex space-x-3">
+                                                                                <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                                                                <span className="text-base font-normal leading-tight text-gray-500 dark:text-zinc-300">GPT-4 Access</span>
+                                                                                </li>
+
+
+                                                                           
 
                                                                                 <li className="flex space-x-3">
                                                                                 <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
@@ -203,6 +269,19 @@ const navigate = useNavigate()
                                                                                 </ul>
 
                                                                             <div className="flex flex-col">
+                                                               {/*             <div>
+                                                                            <p onClick={handleCouponBox} className={`cursor-pointer text-indigo-400  font-semibold text-md underline mb-2 mt-6`} >Add promotion code</p>
+                                                                            </div>
+                                                                            <input 
+                                                                                        ref={inputRef}
+                                                                                            type="text" 
+                                                                                            value={couponCode} 
+                                                                                            onChange={handleCouponCode} 
+                                                                                            onBlur={() => setShowCouponBox(false)}
+                                                                                            placeholder="Enter your code here.."
+                                                                                            className={`${showCouponBox ? "min-w-[100px] max-w-[200px] opacity-100" :"min-w-[100px] max-w-[200px]  opacity-0 pointer-events-none"} transition duration-300  rounded-lg border border-indigo-300 focus:border-indigo-300 focus:outline-none focus:ring-indigo-300 text-sm`}
+                                                                                        />
+                                                                                        */}
                                                                             
                                                                             <Button className={`bg-indigo-300 w-[200px] mt-6 py-3 ${(upgradeLoading) && "pointer-events-none opacity-60"}`}  size="md" onClick={upgradePlan}>
                                                                                 {upgradeLoading ? 
@@ -211,9 +290,14 @@ const navigate = useNavigate()
                                                                             }
                                                                                 
                                                                                 </Button>
+                                                                                {errorMessage.length== 0 ? 
                                                                                 <p className="items-center margin-auto flex mt-4">
                                                                                  You will be charged automatically.
                                                                                  </p>
+                                                                                 :
+                                                                                 <p className="mt-4 text-red-400">
+                                                                                            {errorMessage}
+                                                                                 </p>}
                                                                             </div>
                                                                         </div>   
                                                                      </div>

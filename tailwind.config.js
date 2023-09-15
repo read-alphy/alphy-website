@@ -36,6 +36,7 @@ module.exports = {
 				}
 				
 			},
+			textDecoration: ['dashed'],
 			height: {
 				6.5: '1.675rem',
 				a4: '842px',
