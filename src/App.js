@@ -24,6 +24,7 @@ import MyHub from './routes/Hub/MyHub';
 import FAQ from "./routes/FAQ"
 import SubmitPage from "./routes/Hub/SubmitPage"
 import WelcomeForm from './components/WelcomeForm';
+import { set } from 'lodash';
 
 
 
@@ -59,6 +60,7 @@ function App() {
 	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
 	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
 	const [customerID, setCustomerID] = useState("");
+	const [userArcsCalled, setUserArcsCalled] = useState(false)
 
 	if(localStorage.getItem("theme")!== null && localStorage.getItem("theme")!==undefined && localStorage.getItem("theme").length===0){
 		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
@@ -147,9 +149,12 @@ useEffect(() => {
 			localStorage.setItem('welcomeForm', 'false')
 		}
 
+		if(userArcsCalled === false){
 		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
 			setUserArchipelagos(response.data)
+			setUserArcsCalled(true)
 		})
+		}
 	}
 	
 

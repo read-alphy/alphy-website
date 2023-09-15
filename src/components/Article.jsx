@@ -26,6 +26,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [actionsHub, setActionsHub] = useState(false);
+	const [bookmarkChecked, setBookmarkChecked] = useState(false);
 
 	const [called, setCalled] = useState(false);
 	
@@ -54,7 +55,6 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	}
 
 	
-	
 
 	
 
@@ -75,6 +75,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 				(response) => {
 					
 					if(response.data!==null && response.data!==undefined){
+						
 					setData(response.data);
 					setContentName(response.data.title)
 					
@@ -118,7 +119,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 							
 							if(response.data){
 								
-							
+							setBookmarkChecked(true)
 								setIsBookmarked(response.data.is_bookmark)
 							}
 						})
@@ -129,6 +130,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					
 					catch (error) {
 						console.log(error)
+						setBookmarkChecked(true)
 					}
 					}
 
@@ -188,6 +190,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 /* 	const url_bookmark= `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}/bookmark`
  */	
 if(called===false){
+	
 	if (source_type==="up" && data.length===0 && currentUser!==null){
 		setCalled(true)
 		fetchDataUpload(url,false);
@@ -201,49 +204,16 @@ if(called===false){
 	else if (source_type!=="up" && data.length===0 && currentUser===null){
 		setCalled(true)
 		fetchData(url,false);
+		
 	}
 }
 
 
 
-
-			useEffect(() => {
-				let interval;
 		
-			
-				
-	const intervalFetch =() => {
-
-	if (data!==undefined && data.complete!==true){
-		
-				if (source_type==="up" && data.length===0 && currentUser!==null){
-					setCalled(true)
-					fetchDataUpload(url,true);
-							
-				}
-				if (source_type!=="up" && data.length===0 && currentUser!==null){
-					setCalled(true)
-					fetchData(url,true);
-				
-				}
-				else if (source_type!=="up" && data.length===0 && currentUser===null){
-					setCalled(true)
-						fetchData(url,true);
-				}
-			}
-
-		}
-				interval = setInterval(intervalFetch, 5000);
-			
-				return () => {
-				  // Clean up the interval when the component unmounts
-				  clearInterval(interval);
-				};
-			  }, []);
-			
 
 	useEffect(() => {
-		if (currentUser!==null){
+		if (currentUser!==null && bookmarkChecked===false){
 			setTimeout(() => {
 				checkBookmark()
 			}, 1000);
@@ -254,6 +224,42 @@ if(called===false){
 		setCollapsed(!collapsed)
 		
 	}
+
+
+	
+
+	useEffect(() => {
+		let interval;		
+		const intervalFetch =() => {
+					if (data!==null && data.complete!==true && called===true){
+						
+						
+							if (source_type==="up" && data.length===0 && currentUser!==null){
+									
+									fetchDataUpload(url,true);
+											
+								}
+								else if (source_type!=="up" && data.length===0){
+									fetchData(url,true);
+
+								}
+
+							}
+
+							else{
+								return
+							}
+
+		}
+				interval = setInterval(intervalFetch, 5000);
+			
+				return () => {
+				// Clean up the interval when the component unmounts
+				clearInterval(interval);
+				};
+			}, [data]);
+
+
 
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
