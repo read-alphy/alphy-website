@@ -30,7 +30,7 @@ import {
 	PopoverContent,
 	ThemeProvider,
 	Button
-} from "@material-tailwind/react";
+} from "@material-tailwind/react";	
 
 
 export default function Content(props) {
@@ -198,14 +198,16 @@ export default function Content(props) {
 		"cy": "Cymraeg"
 	}
 
+	
 
 	if ((props.data !== undefined || props.data !== null) && contentSummaries.length == 0) {
 		contentSummaries = props.data.summaries
+		
 
 
-		if (contentSummaries !== undefined) {
+		if (contentSummaries !== undefined && contentSummaries.length>0 ) {
 
-			contentSummaries.map(summary => summary.summary !== null && languages.push(summary.lang));
+			contentSummaries.map(summary => (summary.summary !== undefined&& summary.summary!==null) && languages.push(summary.lang));
 
 
 			summary = contentSummaries.find(summary => summary.lang === language);
@@ -218,6 +220,7 @@ export default function Content(props) {
 
 
 		}
+		
 
 	}
 
@@ -411,24 +414,28 @@ const handleBookmark = async () => {
 
 	};
 
-async function summaryParser(){
-	if (summary !== undefined || summary !== null) {
-		if (summary.summary_prettified !== undefined && summary.summary_prettified !== null) {
 
+
+
+async function summaryParser(){
+	if (summary !== undefined && summary !== null && summary.summary!==undefined && summary.summary!==null) {
+		if (summary.summary_prettified !== undefined && summary.summary_prettified !== null) {
 			setSummaryArray(summary.summary_prettified.split('\n'))
 		}
 		else {
 			setSummaryArray(summary.summary.split('\n'))
-
 		}
-}
+
+	}
+
 }
 
 	async function transcriptParser() {
-		let summaryArray = ''
+
+	
 		let transcript = []
 
-console.log("hey")
+
 
 
 
@@ -490,11 +497,10 @@ console.log("hey")
 
 if (transcript.length === 0 && data.transcript !== null) {
 		transcriptParser();
-		
 	}	
 		
 
-if (summaryArray.length===0){
+if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 	summaryParser();
 }
 
@@ -646,7 +652,7 @@ return (
 
 			<div>
 				<div className="grid grid-cols-3 ">
-					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && language == summary.lang ? "xl:col-span-2" : "xl:col-span-3"}`} >
+					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						<div className="flex flex-row ">
 							<h1 className="col-span-2 mt-10 text-xl lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 								{data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
@@ -973,7 +979,7 @@ return (
 				</div>
 
 				<div id="content-area ">
-					{transcript.length > 0 && language == summary.lang
+					{transcript.length > 0 && (summary!==undefined && language == summary.lang)
 						?
 						<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 							{transcript.length > 0 &&
@@ -1215,14 +1221,10 @@ return (
 
 																						</a>
 
-																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`} >
-																							<Popover
-																							>
-
-
-
+																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`}>
+																							<Popover>
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} dark:invert`} src={DownloadStatic}></img></button>
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-50" : ""}`} src={DownloadStatic}></img></button>
 																								</PopoverHandler>
 
 																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
@@ -1251,7 +1253,7 @@ return (
 																							</Popover>
 
 																						</div>
-																						{/* 			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end  mr-4 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>} */}
+																					
 																					</div>
 
 																			);
@@ -1260,21 +1262,6 @@ return (
 																				<div key={index}>
 																					<br></br>
 																					{item}
-{/* 
-																		{item.split(/\s+/).map((word, idx) => {
-																						const cleanedWord = word.replace(/[^a-zA-Z]/g, ''); // remove punctuations for comparison
-																						
-																							return (
-																								
-																								<span key={idx} className={`${trial_keywordlist.includes(cleanedWord) && "bg-green-200"}`} >{word}{' '}</span>
-																								
-																								
-																							
-																								
-																							);
-																						
-																					
-																					})} */}
 																				</div>
 																			);
 																		}
