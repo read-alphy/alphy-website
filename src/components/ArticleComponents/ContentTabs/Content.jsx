@@ -211,6 +211,9 @@ export default function Content(props) {
 
 
 			summary = contentSummaries.find(summary => summary.lang === language);
+			
+			
+			
 
 			if (summary !== undefined && summary.length > 0 && summary.summary === null) {
 				setTranslationMessage(true)
@@ -246,10 +249,13 @@ export default function Content(props) {
 			} */
 		const selectedCode = event.target.value;
 		setLanguage(selectedCode);
-
+		
 
 	};
 
+	useEffect(() => {
+		summaryParser()
+	}, [language])
 
 	const requestTranslation = async () => {
 
@@ -503,6 +509,7 @@ if (transcript.length === 0 && data.transcript !== null) {
 if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 	summaryParser();
 }
+
 
 
 	const handleDownload = (selection) => {
