@@ -187,6 +187,7 @@ useEffect(() => {
 				/* console.log(r.data) */
 				if(r.data.current_tier!== null){
 				setTier(r.data.current_tier)
+				localStorage.setItem("tier", r.data.current_tier ? r.data.current_tier : "free")
 			}
 			
 					setCustomerID(r.data.customer_id)
