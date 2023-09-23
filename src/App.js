@@ -370,9 +370,9 @@ useEffect(() => {
 								element={<SubmitPage credit={credit} setCreditCalled={setCreditCalled} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
-					{/* 		<Route path = "/home"
-							element={<Home arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
-							</Route> */}
+					 		<Route path = "/home"
+									element={<Home arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
+							</Route>
 
 							<Route path="/about" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />
 							<Route path="/privacypolicy" element={<PrivacyPolicy collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />

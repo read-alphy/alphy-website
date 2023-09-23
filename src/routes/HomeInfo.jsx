@@ -21,14 +21,14 @@ const navigate = useNavigate();
 			 <br></br>   </h2>
 
 			 <p>
-			 Alphy is designed to help individuals search, learn, and interact with audiovisual content as effectively as possible using artificial intelligence. 
+			 
 			 </p>
 			<div className="flex flex-row pb-20 mb-20">
 				<Link to="/submit" type="button" className="text-bordoLike dark:bg-darkMode dark:text-zinc-300 mr-5 underline">Start Creating</Link>
 
 				<Link to="/" type="button" className="text-bordoLike dark:bg-darkMode dark:text-zinc-300 ml-5 underline">Discover</Link>
 
-				<Link to="/" type="button" className="text-bordoLike dark:bg-darkMode dark:text-zinc-300 ml-5 underline">Learn more about us</Link>
+				<Link to="/about" type="button" className="text-bordoLike dark:bg-darkMode dark:text-zinc-300 ml-5 underline">Learn more about us</Link>
 			</div>
 
 		</div>
