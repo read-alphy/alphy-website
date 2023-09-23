@@ -209,7 +209,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                                         <p className="mt-2">Plan</p>
                                                                             </div> 
                                                                 <div class="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
-                                                                            <div className="col-span-1 text-black dark:text-zinc-200 text-sm">
+                                                                            <div className="col-span-1 text-zinc-600 dark:text-zinc-200 text-sm">
                                                                                 <p className="mb-2">{currentUser.email}</p>
                                                                                 <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
                                                                                 {credit!==null ?

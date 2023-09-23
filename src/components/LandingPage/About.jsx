@@ -53,7 +53,7 @@ export default function About() {
 		        </AccordionHeader>
         <AccordionBody className="text-md dark:text-zinc-300">
 		<p>
-		You can use Alphy to transcribe, summarize, and question YouTube videos, Twitter Spaces, and your local audio files (.mp3, .m4a, .mpga, .mpeg, .wav, or .webm)
+		You can use Alphy to transcribe, summarize, and question YouTube videos, Twitter Spaces, and your local audio files (.mp3, .m4a, .mpga, .mpeg, .wav, or .webm).
 					</p>
         </AccordionBody>
       </Accordion>
@@ -68,7 +68,7 @@ export default function About() {
 
 				<br/><br/>
 
-				We respect your privacy and do not retain your audio files. After real-time processing, they are deleted. If you ever want to remove the processed results, simply reach out to us at 
+				We respect your privacy and do not retain your audio files. After real-time processing, they are deleted. If you ever want to remove the processed results, simply reach us at <span className="underline">support@alphy.app</span>.
 					</p>
 					
 				
@@ -84,7 +84,7 @@ export default function About() {
 
 			<br/><br/>
 
-		Using Arcs, you can effortlessly categorize and search through vast amounts of content, organized by specific subjects, creators, or topics. It's your personalized knowledge hub, allowing for swift searches across countless hours of material and easy sharing with others.
+		Using Arcs, you can categorize and search through vast amounts of audio content, organized by specific subjects, creators, or topics. It's like music playlists, but for learning from countless hours of material.
 				
 					</p>
 					
