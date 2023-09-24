@@ -235,16 +235,11 @@ if(called===false){
 					if (data!==null && data.complete!==true && called===true){
 						
 						
-							if (source_type==="up" && data.length===0 && currentUser!==null){
-									
+							if (source_type==="up" && data.complete!==true && currentUser!==null){
 									fetchDataUpload(url,true);
-											
 								}
-								else if (source_type!=="up" 
-								){
-
+								else if (source_type!=="up" && data.complete!==true){
 									fetchData(url,true);
-
 								}
 
 							}

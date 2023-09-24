@@ -6,7 +6,7 @@ import Twitter from '../../../img/twitter_spaces.png';
 import TwitterLogo from '../../../img/Twitter Logo Blue.svg';
 import Loading from '../../Loading';
 import working from './working.svg';
-
+import Dialog from '@mui/material/Dialog';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
@@ -23,7 +23,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import * as Selection from 'selection-popover'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-
+import AddIcon from '@mui/icons-material/Add';
 import {
 	Popover,
 	PopoverHandler,
@@ -73,9 +73,14 @@ export default function Content(props) {
 	const [openArchipelagoPopover,setOpenArchipelagoPopover] = useState(false);
 	const [selectionPrompt, setSelectionPrompt] = useState("normal");
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
+	const [mainPopoverOpenSmall, setMainPopoverOpenSmall] = useState(false);
 	const [transcriptCalled, setTranscriptCalled] = useState(false);
 	const [transcript, setTranscript] = useState([]);
 	const [summaryArray, setSummaryArray] = useState([]);
+	
+
+	const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] = useState(window.innerWidth <= 1000);
+
 	
 	const [inputValue, setInputValue] = useState("");
 	const { currentUser } = useAuth()
@@ -606,23 +611,50 @@ if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 		
 	}
 
-	const handleAddToArchipelago = (archipelagoUID) => {
+	const handleAddToArchipelago = (archipelagoUID,create) => {
 		
 		const newSource = {
 			"source_id":data.source_id,
 			"source_type":data.source_type, 
-		}
-		const neww=[...props.userArchipelagos,newSource]
-		 axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}?nof_questions=10&tracks=true`).then	((response) => {
-			axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`, {
-		"user_id": currentUser.uid,
-		"sources": [...response.data.tracks,newSource],
-	})
-	setMainPopoverOpen(false)
-	}).then(() => {
+			}
+			if(create===false){
+				axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}?nof_questions=10&tracks=true`).then	((response) => {
+					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`, {
+				"user_id": currentUser.uid,
+				"sources": [...response.data.tracks,newSource],
+			})
+			
+			setMainPopoverOpen(false)
+			}).then(() => {
 
-	 	
- })
+				
+		})
+					}
+
+		else if(create===true){
+			axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
+						"name": title,
+						"user_id": currentUser.uid,
+						"sources": [newSource],
+				}
+				, {
+					headers: {
+						'id-token': currentUser.accessToken,
+					},
+				})
+				.then((response) => {
+					setMainPopoverOpen(false)
+					const archipelagoUID = response.data.uid
+					navigate(`/arc/${archipelagoUID}`)
+				})
+				.catch((error) => {
+					console.log(error)
+					setMainPopoverOpen(false)
+				}
+				);
+
+
+		}
 	}
 
 
@@ -652,6 +684,28 @@ if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 		return () => window.removeEventListener('scroll', toggleVisibility);
 	  }, []);
 
+	  
+  useEffect(() => {
+	const handleResize = () => {
+		const currentWidth = window.innerWidth;
+		const newIsPastThreshold = currentWidth <= 1000;
+		
+  
+		if (isPastMainPopoverOpenThreshold !== newIsPastThreshold) {
+			
+		  setIsPastMainPopoverOpenThreshold(newIsPastThreshold);
+		  setMainPopoverOpenSmall(false)
+		  setMainPopoverOpen(false);
+		}
+	  };
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isPastMainPopoverOpenThreshold]);
+
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 			
@@ -666,7 +720,7 @@ return (
 							</h1>
 
 							<div className="flex flex-row justify-end mx-auto ">
-								<Popover open={mainPopoverOpen}>
+								<Popover open={mainPopoverOpen} onBlur = {() => setMainPopoverOpen(false)}>
 									<PopoverHandler onClick={() => setMainPopoverOpen(!mainPopoverOpen)}>
 										<div className="hidden lg:flex mt-8">
 
@@ -678,7 +732,7 @@ return (
 										</div>
 
 									</PopoverHandler>
-									<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
+									<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode"  >
 										<div className="">
 											<div className="">
 												{data.source_type === 'yt' &&
@@ -702,11 +756,14 @@ return (
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
-													
+														<MenuItem onClick={() => handleAddToArchipelago(0,true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex">
+															<AddIcon className="text-zinc-600 dark:text-zinc-300"/>
+														<p className="text-zinc-600 dark:text-zinc-300 pl-1">Create An Arc</p>
+															</MenuItem>
 													{userArchipelagoNames.map(item => 
 														
-																	<MenuItem onClick={() => handleAddToArchipelago(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
-																		<p>{item[0]}</p> 
+																	<MenuItem onClick={() => handleAddToArchipelago(item[1],false)} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																	<p className="text-zinc-600 dark:text-zinc-300">{item[0]}</p> 
 																	</MenuItem>
 																
 														
@@ -788,9 +845,9 @@ return (
 												
 											</div>
 
-											<Popover className="">
 
-												<PopoverHandler>
+
+												
 
 													<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
 
@@ -799,17 +856,17 @@ return (
 														</svg><p className="text-left">Report an issue</p>
 
 													</button>
-												</PopoverHandler>
-												<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+												
+												<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="dark:bg-mildDarkMode dark:border-zinc-500">
 													{currentUser ?
-														<div>
+														<div className="px-10">
 
 															<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
 															<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`} ></iframe>
 														</div> :
 														<p className="dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
-												</PopoverContent>
-											</Popover>
+												</Dialog>
+											
 										</div>
 									</PopoverContent>
 								</Popover>
@@ -838,8 +895,8 @@ return (
 					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
 
 
-						<Popover >
-							<PopoverHandler>
+					<Popover open={mainPopoverOpenSmall} onBlur = {() => setMainPopoverOpenSmall(false)}>
+									<PopoverHandler onClick={() => setMainPopoverOpenSmall(!mainPopoverOpenSmall)}>
 								<div className="lg:hidden mt-5">
 
 									<svg width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -872,11 +929,14 @@ return (
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										
-												
+													<MenuItem onClick={() => handleAddToArchipelago(0,true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex">
+															<AddIcon className="text-zinc-600 dark:text-zinc-300"/>
+														<p className="text-zinc-600 dark:text-zinc-300 pl-1">Create An Arc</p>
+															</MenuItem>
 												{userArchipelagoNames.map(item => 
 													
-																<MenuItem onClick={() => handleAddToArchipelago(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
-																	<p>{item[0]}</p> 
+																<MenuItem onClick={() => handleAddToArchipelago(item[1],false)} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																	<p className="text-zinc-600 dark:text-zinc-300">{item[0]}</p> 
 																</MenuItem>
 															
 													
@@ -952,26 +1012,26 @@ return (
 												</Box>
 
 									<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
-									<Popover className="">
-										<PopoverHandler>
-											<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+									
 
-												<svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-													<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
-												</svg><p className="text-left">Report an issue</p>
 
-											</button>
-										</PopoverHandler>
-										<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
-											{currentUser ?
-												<div>
+									<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
 
-													<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-													<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-												</div> :
-												<p className="dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
-										</PopoverContent>
-									</Popover>
+<svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+	<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg><p className="text-left">Report an issue</p>
+
+</button>
+
+<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="dark:bg-mildDarkMode dark:border-zinc-500">
+{currentUser ?
+<div className="px-10">
+
+	<iframe className="h-[640px] dark:hidden  md:min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+	<iframe className="h-[640px] hidden dark:block md:min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`} ></iframe>
+</div> :
+<p className="dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
+</Dialog>
 								</div>
 							</PopoverContent>
 						</Popover>
