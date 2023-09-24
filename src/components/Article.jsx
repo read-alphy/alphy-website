@@ -231,6 +231,7 @@ if(called===false){
 	useEffect(() => {
 		let interval;		
 		const intervalFetch =() => {
+
 					if (data!==null && data.complete!==true && called===true){
 						
 						
@@ -239,7 +240,9 @@ if(called===false){
 									fetchDataUpload(url,true);
 											
 								}
-								else if (source_type!=="up" && data.length===0){
+								else if (source_type!=="up" 
+								){
+
 									fetchData(url,true);
 
 								}
@@ -257,7 +260,7 @@ if(called===false){
 				// Clean up the interval when the component unmounts
 				clearInterval(interval);
 				};
-			}, [data]);
+			}, []);
 
 
 

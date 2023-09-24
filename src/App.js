@@ -251,7 +251,6 @@ useEffect(() => {
 
 
 	if(sessionStorage.getItem("refreshCredit")==="true"){
-		console.log("refreshing credit")
 		getCustomerInfo(currentUser)
 		sessionStorage.removeItem("refreshCredit")
 	}		

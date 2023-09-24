@@ -1117,7 +1117,7 @@ return (
 																	<Loading />
 																) : summaryArray.length === 0 ? (
 																	<tr className="border-b-0">
-																		<td className="pt-4">Still waiting for the summary! Meanwhile, check the transcript.</td>
+																		<td className="pt-4 pb-4 text-zinc-700 dark:text-zinc-200 ">Still waiting for the summary! Meanwhile, check the transcript.</td>
 																	</tr>
 																) : (
 																	summaryArray.map((item, index) => {
