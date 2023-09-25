@@ -857,7 +857,7 @@ return (
 
 													</button>
 												
-												<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="dark:bg-mildDarkMode dark:border-zinc-500">
+												<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className=" dark:border-zinc-500">
 													{currentUser ?
 														<div className="px-10 dark:bg-mildDarkMode dark:border-zinc-500">
 
@@ -1023,7 +1023,7 @@ return (
 
 </button>
 
-<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="dark:bg-mildDarkMode dark:border-zinc-500">
+<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="">
 {currentUser ?
 <div className="px-10 dark:bg-mildDarkMode dark:border-zinc-500">
 
