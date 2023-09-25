@@ -859,12 +859,12 @@ return (
 												
 												<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="dark:bg-mildDarkMode dark:border-zinc-500">
 													{currentUser ?
-														<div className="px-10">
+														<div className="px-10 dark:bg-mildDarkMode dark:border-zinc-500">
 
 															<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
 															<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`} ></iframe>
 														</div> :
-														<p className="dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
+														<p className="dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
 												</Dialog>
 											
 										</div>
@@ -1025,12 +1025,12 @@ return (
 
 <Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="dark:bg-mildDarkMode dark:border-zinc-500">
 {currentUser ?
-<div className="px-10">
+<div className="px-10 dark:bg-mildDarkMode dark:border-zinc-500">
 
 	<iframe className="h-[640px] dark:hidden  md:min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
 	<iframe className="h-[640px] hidden dark:block md:min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`} ></iframe>
 </div> :
-<p className="dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
+<p className=" dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
 </Dialog>
 								</div>
 							</PopoverContent>
