@@ -30,18 +30,6 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 	const [called, setCalled] = useState(false);
 	
-	
-
-
-	useEffect(() => {
-		if(!windowSizeChecked){
-			if(window.innerWidth<768){
-			setCollapsed(true)
-			setWindowSizeChecked(true)
-			}
-			
-	}
-})
 
 
 	
@@ -180,12 +168,6 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 	// if windows size is less than 768px then collapse the navbar
 	const { width } = useWindowSize();
-	useEffect(() => {
-/* 		if (width < 768) {
-			setCollapsed(true);
-		}
-		 */
-	}, [width]);
 
 
 	const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
@@ -222,10 +204,7 @@ if(called===false){
 		}
 	}, )
 
-	const handleCollapse = () => {
-		setCollapsed(!collapsed)
-		
-	}
+
 
 
 	

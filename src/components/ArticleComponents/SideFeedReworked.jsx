@@ -248,7 +248,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 								</div>
 					</div>
 
-					<div className="items-end absolute bottom-0 w-full">
+					<div className="items-end absolute bottom-0 w-full pb-4">
 								<FooterReworked collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut}/>
 						</div>
 

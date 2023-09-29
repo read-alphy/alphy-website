@@ -24,6 +24,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import * as Selection from 'selection-popover'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddIcon from '@mui/icons-material/Add';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import ClearIcon from '@mui/icons-material/Clear';
+import TwitterSpaces from "../../../img/twitter_spaces.png"
+import TwitterIcon from '@mui/icons-material/Twitter';
 import {
 	Popover,
 	PopoverHandler,
@@ -77,6 +81,7 @@ export default function Content(props) {
 	const [transcriptCalled, setTranscriptCalled] = useState(false);
 	const [transcript, setTranscript] = useState([]);
 	const [summaryArray, setSummaryArray] = useState([]);
+	const [showYouTubeFrame, setShowYouTubeFrame] = useState(true);
 	
 
 	const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] = useState(window.innerWidth <= 1000);
@@ -393,6 +398,7 @@ const handleBookmark = async () => {
 	// for question answering
 	const timestampChanger = (event) => {
 		setAutoplay(1);
+		setShowYouTubeFrame(true)
 		let formattedTimestamp = event.target.textContent;
 		const [hours, minutes, seconds] = formattedTimestamp.split(':');
 		setTimestamp(hours * 3600 + minutes * 60 + seconds.substring(0, 2) * 1)
@@ -411,6 +417,7 @@ const handleBookmark = async () => {
 		const [hours, minutes, seconds] = formattedTimestamp.split(':');
 
 		setTimestamp(hours * 3600 + minutes * 60 + seconds * 1);
+		setShowYouTubeFrame(true)
 	};
 
 	const handleReportIssue = () => {
@@ -706,6 +713,20 @@ if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
     };
   }, [isPastMainPopoverOpenThreshold]);
 
+
+  function handleShowYouTubeFrame (){
+
+	if(showYouTubeFrame){
+		setShowYouTubeFrame(false)
+		
+	}
+	else {
+		
+		setShowYouTubeFrame(true)
+
+	}
+  }
+
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 			
@@ -740,13 +761,7 @@ return (
 														<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
 														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center  text-md">Click to watch</p>
 													</a>
-												}{data.source_type === "sp" &&
-													<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-														<img className="mr-2 ml-1" src={TwitterLogo} width={20} />
-														<p className=" items-center text-md text-zinc-600 dark:text-zinc-300">Click to listen</p>
-													</a>
-												}
-												
+												}												
 												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 												
 
@@ -887,19 +902,22 @@ return (
 								
 
 							</div>
+
+						
+
 						</div>
 						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
 		
 					</div>
 
-					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
+					<div className="flex flex-col mt-5 ml-2 items-center  lg:hidden cursor-default">
 
 
 					<Popover open={mainPopoverOpenSmall} onBlur = {() => setMainPopoverOpenSmall(false)}>
 									<PopoverHandler onClick={() => setMainPopoverOpenSmall(!mainPopoverOpenSmall)}>
 								<div className="lg:hidden mt-5">
 
-									<svg width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<svg width={30} className="cursor-pointer" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 										<path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" stroke-linecap="round" stroke-linejoin="round"></path>
 										<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 									</svg>
@@ -1055,59 +1073,111 @@ return (
 								<div className={`grid-cols-2 w-full md:min-w-[500px]`}>
 									{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
-									<div className={`col-span-2 hidden ${data.source_type === "yt" ? "xl:flex" : ""}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
-										{data.source_type === "yt" &&
+									{showYouTubeFrame ===true && 
+
+									<div>
+									<div className={`hidden ${data.source_type === "yt" ? "lg:flex" : ""}  justify-center items-center `}>
+									{data.source_type === "yt" &&
 											(transcript.length > 0 || data.complete === true ?
+												<div>
+											
+												{/* <div id="drag-handle" ref={dragHandleRef}  className="fixed bottom-4 right-4 w-[300px] h-[200px] cursor-move z-[9999] bg-black opacity-20"></div>										 */}
+
 												<iframe
 													id="player"
+													
 													title="My YouTube Video "
+													className={`fixed bottom-24 right-4 w-[360px] h-[240px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`} 
 													src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
 													width="100%"
 													height="100%"
 													frameBorder="0"
 													allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 												></iframe>
+												
+												</div>
 												: null)
 
 
 										}
 
 									</div>
-									{/* <Loading /> */}
-									<div className={`col-span-2 ${data.source_type == "yt" && "md:mt-10"} drop-shadow-sm `}>
-										{summary.key_qa === undefined || summary.key_qa === null ? (
-											<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
-												<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
-
-													Generating questions... plugging in an AI assistant...
-
-													<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={140} alt="My SVG" />
 
 
-												</p>
-											</div>
+								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 w-[360px] h-[240px] z-50 ${data.source_type==="sp" ? "lg:flex" : " hidden"}`}>
+								<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
+									<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto"/>
+									<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline">
+										Listen to <span className="font-bold">"{title}"</span>  on Twitter
+									</p>
 
-
-										) : (
-											summary.key_qa && (
-												<QuestionAnswering
-													source_id={data.source_id}
-													source_type={data.source_type}
-													selectionCall={selectionCall}
-													setSelectionCall={setSelectionCall}
-													key_qa={summary.key_qa}
-													inputValue={inputValue}
-													setInputValue={setInputValue}
-													buttonRef={buttonRef}
-													inputRef={inputRef}
-													data={data}
-													transcript={transcript}
-													timestampChanger={timestampChanger}
-												/>
-											)
-										)}
+									</a>
 									</div>
 
+							</div>
+										}
+									
+									
+									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="yt" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
+										{showYouTubeFrame ? 
+										<ClearIcon fontSize="large" className="text-white "/>
+										:
+										<YouTubeIcon fontSize="large" className="text-white"/>
+										}
+									</button>
+
+									
+									
+									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="sp" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
+										{showYouTubeFrame ? 
+										<ClearIcon fontSize="large" className="text-white "/>
+										:
+										<TwitterIcon fontSize="large" className="text-white"/>
+										}
+									</button>
+
+
+
+								
+									
+									<div className={`col-span-2 ${data.source_type == "yt" && ""} drop-shadow-sm `}>
+									{summary.key_qa === undefined || summary.key_qa === null ? (
+										<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
+											<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
+
+												Generating questions... plugging in an AI assistant...
+
+												<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={140} alt="My SVG" />
+
+
+											</p>
+										</div>
+
+
+									) : (
+										summary.key_qa && (
+											<QuestionAnswering
+												source_id={data.source_id}
+												source_type={data.source_type}
+												selectionCall={selectionCall}
+												setSelectionCall={setSelectionCall}
+												key_qa={summary.key_qa}
+												inputValue={inputValue}
+												setInputValue={setInputValue}
+												buttonRef={buttonRef}
+												inputRef={inputRef}
+												data={data}
+												transcript={transcript}
+												timestampChanger={timestampChanger}
+											/>
+										)
+									)}
+								</div>
+
+									
+																		
+									
+									
 								</div>
 							}
 							{transcript.length > 0 &&
@@ -1133,11 +1203,16 @@ return (
 
 												</ul>
 											</div>
+
+
+
+
+
 											<Selection.Root>
 											<Selection.Portal>
       <Selection.Content>
 		
-			<Button className="rounded-xl bg-green-300 mt-2 mb-2 text-white dark:text-zinc-800" onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
+			<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-600 dark:text-zinc-800 " onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
 					
 		
 			 <Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
