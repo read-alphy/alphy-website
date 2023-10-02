@@ -322,7 +322,7 @@ export default function QuestionAnswering(props) {
 							type="text"
 							id="questionAnswering"
 							placeholder="Ask anything to the transcript..."
-							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal  outline-0   focus:outline-green-300 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
+							className="pr-10 text-zinc-600 dark:text-zinc-300 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode font-sans font-normal  outline-0 focus:ring-0 focus:outline-none disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 text-sm px-3 py-2.5 rounded-[7px] focus:border-green-200 dark:focus:border-green-200" />
 					
 					
 
@@ -430,12 +430,13 @@ export default function QuestionAnswering(props) {
 														See sources from the {props.data.source_type == "yt" ? "video" : "recording"}{' '}
 													</span>
 													<svg
-														className={`${baseSources ? 'hidden' : 'block'} `}
+														className={`${baseSources ? 'hidden' : 'block'} text-zinc-600 dark:text-zinc-300`}
 														aria-hidden="true"
 														fill="currentColor"
 														viewBox="0 0 24 24"
 														xmlns="http://www.w3.org/2000/svg"
 														width="30px"
+
 													>
 														<path
 															clipRule="evenodd"
@@ -509,7 +510,7 @@ export default function QuestionAnswering(props) {
 														>
 															<span className="text-zinc-600 dark:text-zinc-200 text-l pr-1">See less</span>
 															<svg
-																className=""
+																className="text-zinc-600 dark:text-zinc-300 "
 																aria-hidden="true"
 																fill="currentColor"
 																viewBox="0 0 24 24"
