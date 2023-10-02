@@ -18,7 +18,7 @@ export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTrig
     
     wsManager = new QaWsManager({
       apiInfo: {
-        apiHost: "backend-staging-2459.up.railway.app",
+        apiHost: "backend-production-33df.up.railway.app",
         ssl: true,
       },
       callbacks: {
