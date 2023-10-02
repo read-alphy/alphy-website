@@ -23,7 +23,7 @@ export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTrig
       },
       callbacks: {
         setSources: (sources) => {
-          
+          setIsLoadingInside(false)
        
           setAnswerData((prevData) => ({
             ...prevData,

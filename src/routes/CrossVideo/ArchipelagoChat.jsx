@@ -130,6 +130,7 @@ const handleSubmit = () => {
                                 setErrorMessage(false)
 
                         setTimeout(() => {
+                            
                                 const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
                         if(elements){
                                     elements.forEach(element => {
@@ -334,7 +335,7 @@ const toggleExpand = () => {
                                 width="20"
                                 onClick={handleClear}
 
-                                className="cursor-pointer"
+                                className="cursor-pointer "
                                 fill="none"
                                 stroke="currentColor"
                                 strokeWidth="2"
@@ -357,10 +358,10 @@ const toggleExpand = () => {
                         onClick={handleSubmit}
                         id="questionButton"
                         ref={buttonRef}
-                        className={`bg-greenColor text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""} ${window.innerWidth < 420 && " hidden"}`}>
+                        className={`bg-greenColor text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-70 pointer-events-none" : ""} ${window.innerWidth < 420 && " hidden"}`}>
 
                         {isLoadingInside ? <Spinner className="h-4 w-4" /> :
-                            <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg className="w-4 h-4 text-zinc-500" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         }
@@ -371,7 +372,7 @@ const toggleExpand = () => {
              </div>
              {errorMessage &&
              <div className="mt-4 text-zinc-500 dark:text-zinc-400">
-    <p>Please <a href="/u/login" className="underline text-greenColor">sign in</a> to start asking questions.</p> 
+    <p>Please <a href="/u/login" className="underline text-greenColor dark:text-green-200">sign in</a> to start asking questions.</p> 
 </div>
 }
             </div>
@@ -382,7 +383,7 @@ const toggleExpand = () => {
                 <div className="sm:px-5 mt-10 ">
                 {<div class={`${(answerData.answer.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
 <p className="flex flex-row mb-5 sm:ml-6"> 
-<QuizIcon className="text-greenColor mr-2"/>
+<QuizIcon className="text-greenColor dark:text-green-200 mr-2"/>
 <span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
 </p>
                 {selectedQuestions.length>0 && selectedQuestions.map((question,index) =>
@@ -402,8 +403,8 @@ const toggleExpand = () => {
             
                 <div id="answer-area" className="answer-area text-l max-w-[900px] ml-2 sm:ml-10 mt-10 ">
                     
-                    {isLoadingInside || answerData.answer!=="" ?<p className="text-greenColor text-l"> 
-                        <QuestionAnswerIcon className="text-greenColor mr-1"/>
+                    {isLoadingInside || answerData.answer!=="" ?<p className="text-greenColor dark:text-green-200 text-l"> 
+                        <QuestionAnswerIcon className="text-greenColor dark:text-green-200 mr-1"/>
                         Answer</p> : null}
             {isLoadingInside &&
             <div className="opacity-60 dark:opacity-100">
@@ -437,7 +438,7 @@ const toggleExpand = () => {
                                  </ReactMarkdown>
                                     
                             <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
-                                Always check the sources before quoting. AI may not be 100% accurate.
+                                Always check the passages before quoting. AI may not be 100% accurate.
                             </div>
                     </div>
 
@@ -446,7 +447,7 @@ const toggleExpand = () => {
         </div>
                 {<div class={`${answerData.answer.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                             
-                                    <p className={`text-greenColor ml-10 mt-4 mb-4 ${answerData.answer.length===0 && "hidden"}`} >
+                                    <p className={`text-greenColor dark:text-green-200  ml-10 mt-4 mb-4 ${answerData.answer.length===0 && "hidden"}`} >
 
                                           <TextSnippetIcon/>  Passages
                                 </p>
