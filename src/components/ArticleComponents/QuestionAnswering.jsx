@@ -47,6 +47,8 @@ export default function QuestionAnswering(props) {
 		setTriggerWs:setTriggerWs,
 		setIsLoadingInside: setIsLoadingInside,
 		isCleared:isCleared,
+		idToken:currentUser!==null ? currentUser.accessToken : null
+
 	})
 
 
@@ -361,10 +363,10 @@ export default function QuestionAnswering(props) {
 							onClick={fetchData}
 							id="questionButton"
 
-							className={`bg-greenColor text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
+							className={`bg-green-200 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
 
 							{isLoadingInside ? <Spinner className="h-4 w-4" /> :
-								<svg className="w-4 h-4 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<svg className="w-4 h-4 text-zinc-600 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 									<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
 								</svg>
 							}
@@ -451,7 +453,7 @@ export default function QuestionAnswering(props) {
 									<div className=" ">
 															{props.key_qa[item]
 																? props.key_qa[item].sources.map((source, index) => (
-																	<p className="text-greenColor font-bold border border-zinc-300 rounded-lg p-5 drop-shadow-sm mb-5" key={index}>
+																	<p className="text-greenColor font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5" key={index}>
 
 																		{source.start !== null && source.start !== undefined && source.end ? (
 																			window.innerWidth > 999 && props.data.source_type == "yt" ?
@@ -487,7 +489,7 @@ export default function QuestionAnswering(props) {
 																		<br /> <br /> 
 																		
 																		{
-																		<p className="text-zinc-700 dark:text-zinc-300  font-normal" dangerouslySetInnerHTML={{__html:handleLength(source.text)}}/>
+																		<p className="text-zinc-500 dark:text-zinc-400  font-normal" dangerouslySetInnerHTML={{__html:handleLength(source.text)}}/>
 
 																		
 																		}
@@ -561,7 +563,7 @@ export default function QuestionAnswering(props) {
 					>
 
 						{/* <ReactLoading type="balls" color="#a1a1aa" width={50}/> */}
-						<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-500"
+						<TypeIt className="mb-3 text-zinc-400 dark:text-zinc-400"
 							getBeforeInit={(instance) => {
 								instance.type("Going through the recording to answer your question...").pause(1200).delete(100).pause(200).type("Gathering up the relevant sources...").pause(1200).delete(100).pause(500).type("Creating a network of information to find the best paperclips in the world...").pause(800).delete(40).pause(700).type("help you get the answer as quickly as possible!").pause(600);
 
@@ -592,7 +594,7 @@ export default function QuestionAnswering(props) {
 								<div className="grid grid-cols-2 flex flex-row mb-4">
 
 
-									<h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700">Answer from Alphy
+									<h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -627,7 +629,7 @@ export default function QuestionAnswering(props) {
 
 								</div>
 								
-								<div id="answer-area" className="answer-area text-md sm:text-l container text-zinc-500">
+								<div id="answer-area" className="answer-area text-md sm:text-l container text-zinc-500 dark:text-zinc-300">
 								<ReactMarkdown>
 									{answerData.answer}
 									</ReactMarkdown>
@@ -686,7 +688,7 @@ export default function QuestionAnswering(props) {
 													</div> */}
 
 
-													<p className="mt-5" key={index}>
+													<p className="mt-5 text-zinc-500 dark:text-zinc-300" key={index}>
 														{source.text[0] === source.text[0].toUpperCase() ? "" : "..."}
 														{source.text}
 														{((source.text[source.text.length - 1] === "." || source.text.substring(source.text.length - 1) === "?") || (source.text[source.text.length - 1] === ",") || (source.text[source.text.length - 1] === "!") || (source.text[source.text.length - 1] === ":") || (source.text[source.text.length - 1] === "...")) ? "" : "..."} <br /> <br />{' '}
@@ -739,7 +741,7 @@ export default function QuestionAnswering(props) {
 								<div >
 									<div className={`grid grid-cols-2 flex flex-row mb-4 `}>
 
-										<h1 className="text-xl col-span-1 flex flex-row font-normal">Answer from Alphy
+										<h1 className="text-xl col-span-1 flex flex-row font-normal dark:text-zinc-400">Answer from Alphy
 
 											<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 												<title className="font-bold">Clear</title>
@@ -761,7 +763,7 @@ export default function QuestionAnswering(props) {
 											</svg>
 										</div>
 									</div>
-									<p id="answer-area" className="answer-area text-sm md:text-md text-zinc-500" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
+									<p id="answer-area" className="answer-area text-sm md:text-md text-zinc-500 dark:text-zinc-400" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
 								</div>
 
 								<button
@@ -794,7 +796,7 @@ export default function QuestionAnswering(props) {
 
 											{props.key_qa[baseQuestion]
 												? props.key_qa[baseQuestion].sources.map((source, index) => (
-													<p key={index}>
+													<p key={index} >
 
 														{source.start !== null && source.start !== undefined && source.end ? (
 															window.innerWidth > 999 && props.data.source_type == "yt" ?

@@ -146,7 +146,7 @@ const showDialog = () => {
 
                                                     </div>
 
-                    <div classNAme=" text-lg w-full font-bold min-h-[80px] max-h-[80px] overflow-y-hidden">
+                    <div className=" text-lg w-full font-sans min-h-[80px] max-h-[80px] overflow-y-hidden text-zinc-600 dark:text-zinc-200">
                         <p>{displayTitle}
                         
                         </p>
@@ -159,9 +159,9 @@ const showDialog = () => {
                     <img  src={Logo} className="w-[24px] h-[24px] sm:w-[24px] hidden dark:flex"/>
                     <img  src={LogoInverted} className="w-[24px] h-[24px] sm:w-[24px] dark:hidden"/>
                     </div>
-                    <p className="ml-2 text-sm sm:text-md">See more details on Alphy </p></a>
+                    <p className="ml-2 text-sm sm:text-md text-zinc-500 dark:text-zinc-300">See more details on Alphy </p></a>
                 <p className="mt-4">
-                <a className=" text-zinc-700 dark:text-zinc-300">
+                <a className=" text-zinc-500 dark:text-zinc-300">
 
 
                         {Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
@@ -180,7 +180,7 @@ const showDialog = () => {
                         </a>
                 </p>
             <p ref={myRef}
-        className={` mt-4 text-zinc-700 dark:text-zinc-300 text-md`} 
+        className={` mt-4 text-zinc-500 dark:text-zinc-300 text-md `} 
 
       >
                 {displayText[0] === displayText[0].toUpperCase() ? "" : "..."}{displayText}{((displayText[displayText.length - 1] === "." || displayText.substring(displayText.length - 1) === "?") || (displayText[displayText.length - 1] === ",") || (displayText[displayText.length - 1] === "!") || (displayText[displayText.length - 1] === ":") || (displayText[displayText.length - 1] === "...")) ? "" : "..."}
@@ -195,7 +195,7 @@ const showDialog = () => {
    :
 
             <div className="w-full">
-            <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer text-zinc-700 dark:text-zinc-300" onClick={() =>setOpenDialog(false)}></CloseIcon>
+            <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer text-zinc-500 dark:text-zinc-300" onClick={() =>setOpenDialog(false)}></CloseIcon>
                 <div className="sm:w-[600px] py-10 px-4 sm:px-10 "  onBlur={() => setOpenDialog(false)}>
 {source.source_type==="yt"&&
                 <iframe
@@ -212,7 +212,7 @@ const showDialog = () => {
 
 <TextSnippetIcon/>  Passage
 </p>
-<p className="px-2 sm:px-10 text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{__html:groupedText}}>
+<p className="px-2 sm:px-10 text-zinc-500 dark:text-zinc-300" dangerouslySetInnerHTML={{__html:groupedText}}>
 
 </p>
 

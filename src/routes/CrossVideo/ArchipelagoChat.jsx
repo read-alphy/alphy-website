@@ -19,13 +19,16 @@ import Box from '@mui/material/Box';
 import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import CloseIcon from '@mui/icons-material/Close';
 import QuizIcon from '@mui/icons-material/Quiz';
+import { useQaWsManager } from '../../components/ArticleComponents/QA_Streaming';
+import ReactMarkdown from "react-markdown";
+
 
 export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago,collapsed}) {
     const [inputValue, setInputValue] = useState("")
     const [isLoadingInside, setIsLoadingInside] = useState(false)
     const [isCleared, setIsCleared] = useState(false)
     const [errorMessage, setErrorMessage] = useState(false)
-    const [answerData, setAnswerData] = useState("")
+	const [answerData, setAnswerData] = useState({ answer: '', sources: [] });
     const [selectedSourceCard, setSelectedSourceCard] = useState("")
     const [openDialog, setOpenDialog] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
@@ -41,16 +44,28 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const ref = useRef();
     const title = data.name
     const description = data.description
-    
+    const [triggerWs, setTriggerWs] = useState(false);
+
     const carouselRef = useRef(null);
 
     let displayText=""
     if(tracks.length===0 && data.tracks!==undefined && data.tracks.length!==0){
         setTracks(data.tracks)
     }
-
-
     
+
+    useQaWsManager(
+		{question:inputValue, 
+		setAnswerData: setAnswerData,
+        arcId:data.uid,
+		triggerWs:triggerWs,
+		setTriggerWs:setTriggerWs,
+		setIsLoadingInside: setIsLoadingInside,
+		isCleared:isCleared,
+        idToken:currentUser!==null ? currentUser.accessToken : null
+	})
+
+
     
     const selectedItems = [];
     if(data!==undefined && data.questions!==undefined ){
@@ -94,49 +109,43 @@ if(elements && elementCalled===false){
 
 
 const handleSubmit = () => {
+
+    setIsCleared(false)
+    setErrorMessage(false)
+
     if(currentUser===null && selectedQuestions.includes(inputValue)===false){
         setErrorMessage(true)
         return
     }
     else{
+
             if(inputValue.length===0){
-                return
+                    return
             }
             else{
-                setAnswerData("")
-                setIsLoadingInside(true)
-                axios.post
-                (`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoID}/question`,
-                inputValue,
+                try{
+                    setAnswerData({ answer: '', sources: [] })     
+                    setTriggerWs(true)
+                    setIsLoadingInside(true)                    
+                                setErrorMessage(false)
 
-                {headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'text/plain'
-                    },
-                }
-                ).then((response) => {
-                
-                setAnswerData(response.data)
-                
-                setIsLoadingInside(false)
-                setErrorMessage(false)
+                        setTimeout(() => {
+                                const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
+                        if(elements){
+                                    elements.forEach(element => {
+                                        element.classList.add('cursor-default');
+                                    });
+                            }
+                                }, 500);
+                            }
 
-                setTimeout(() => {
-                const elements = document.querySelectorAll(".styles-module_item-container__a8zaY")
-                if(elements){
-                    elements.forEach(element => {
-                        element.classList.add('cursor-default');
-                    });
-            }
-                }, 500);
-                
-
-
-            }).catch((error) => {
-                console.log("question error",error)
-                setIsLoadingInside(false)
-            })
-            }
+                                        
+                            catch(error){
+                                console.log(error)
+                            }
+            
+        }
+        
             }
 
 } 
@@ -145,10 +154,11 @@ const handleSubmit = () => {
 
 
 const handleClear = () => {
+    setAnswerData({ answer: '', sources: [] });	
     setIsCleared(true);
+    setTriggerWs(false)
     setIsLoadingInside(false);
     setInputValue('');
-    setAnswerData('');
     setErrorMessage(false);
 };
 
@@ -165,9 +175,10 @@ const handleEdit = () => {
 
 const handleAskPremadeQuestion = (event) => {
     setInputValue(event.target.innerText)
+    setIsLoadingInside(true)
     setTimeout(() => {
     buttonRef.current.click()
-    }, 200);
+    }, 300);
 } 
 
 if(description!==undefined ){
@@ -312,7 +323,7 @@ const toggleExpand = () => {
                         type="text"
                         id="questionAnswering"
                         placeholder={`Start asking...`}
-                        className="pr-10 placeholder:italic focus:ring-0 focus:outline-none peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-greenColor sm:border-zinc-300 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
+                        className="pr-10 text-zinc-500 dark:text-zinc-300 placeholder:italic focus:ring-0 focus:outline-none peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-greenColor sm:border-zinc-300 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
                 
                     {inputValue.length > 0 ? (
                         <div
@@ -366,10 +377,10 @@ const toggleExpand = () => {
             </div>
 
             <div className="mt-10 animate-bounce-slow px-3 " >
-                {((answerData=="" && isLoadingInside===false)) &&
+                {((answerData.answer=="" && isLoadingInside===false)) &&
 
                 <div className="sm:px-5 mt-10 ">
-                {<div class={`${(answerData.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+                {<div class={`${(answerData.answer.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
 <p className="flex flex-row mb-5 sm:ml-6"> 
 <QuizIcon className="text-greenColor mr-2"/>
 <span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
@@ -378,10 +389,10 @@ const toggleExpand = () => {
                 (
                     index%2==0 ? 
         
-                <button  className="bg-stone-50 border dark:bg-darkMode hover:scale-105 duration-300 transition ease-in-out text-zinc-600 dark:text-zinc-300 rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
+                <button  className="bg-stone-50 border dark:bg-darkMode hover:scale-105 duration-300 transition ease-in-out text-zinc-500 dark:text-zinc-300 rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
 
                 :
-                <button  className="bg-white border dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 hover:scale-105 duration-300 transition ease-in-out rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
+                <button  className="bg-white border dark:bg-mildDarkMode text-zinc-500 dark:text-zinc-300 hover:scale-105 duration-300 transition ease-in-out rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
                 ))}
 
 
@@ -391,7 +402,7 @@ const toggleExpand = () => {
             
                 <div id="answer-area" className="answer-area text-l max-w-[900px] ml-2 sm:ml-10 mt-10 ">
                     
-                    {isLoadingInside || answerData.answer!==undefined ?<p className="text-greenColor text-l"> 
+                    {isLoadingInside || answerData.answer!=="" ?<p className="text-greenColor text-l"> 
                         <QuestionAnswerIcon className="text-greenColor mr-1"/>
                         Answer</p> : null}
             {isLoadingInside &&
@@ -416,22 +427,26 @@ const toggleExpand = () => {
                 </div>
 }
                              
-                            {answerData.answer!==undefined &&
-                             <div>       
-                                    <p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
-                                 }}/> 
+                            {answerData.answer!=="" &&
+                             <div className="text-zinc-500 dark:text-zinc-300">       
+                                    {/* <p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
+                                 }}/>  */}
+
+                                 <ReactMarkdown>
+                                    {answerData.answer}
+                                 </ReactMarkdown>
                                     
-                                    <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
-                        Always check the sources before quoting. AI may not be 100% accurate.
-</div>
+                            <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
+                                Always check the sources before quoting. AI may not be 100% accurate.
+                            </div>
                     </div>
 
                                 }       
                                 
         </div>
-                {<div class={`${answerData.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+                {<div class={`${answerData.answer.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                             
-                                    <p className={`text-greenColor ml-10 mt-4 mb-4 ${answerData.length===0 && "hidden"}`} >
+                                    <p className={`text-greenColor ml-10 mt-4 mb-4 ${answerData.answer.length===0 && "hidden"}`} >
 
                                           <TextSnippetIcon/>  Passages
                                 </p>
@@ -475,7 +490,7 @@ const toggleExpand = () => {
                             } */}
                             <div className="relative ">
                           
-            {(answerData.sources!==undefined && isLoadingInside===false) && 
+            {(answerData.sources!==undefined && answerData.sources.length!==0 && isLoadingInside===false) && 
             <div className="flex flex-col lg:flex-row ">
                     <button onClick={scrollBackward} type="button" className={`left-arrow hidden md:block justify-center my-auto flex items-center justify-center h-full cursor-pointer group focus:outline-none ${
                                                                                         isBackwardArrowVisible ? '' : 'hidden'
@@ -542,7 +557,7 @@ const toggleExpand = () => {
 
 
                            <Dialog   maxWidth={"sm"} fullWidth={fullWidth} open={openDialog} onClose={() => setOpenDialog(false)} >
-                            {answerData.sources!==undefined && answerData.sources.map((source) => 
+                            {answerData.sources!==undefined && answerData.sources.length!==0 && answerData.sources.map((source) => 
                           
                               <div ref={ref}>
                                 {source===selectedSourceCard &&

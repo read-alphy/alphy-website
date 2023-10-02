@@ -2,9 +2,9 @@
 import { useEffect } from 'react';
 import QaWsManager from './QaWsManager';
 
-export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTriggerWs, isCleared, setIsLoadingInside}) => {
+export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTriggerWs, isCleared, setIsLoadingInside,arcId,idToken}) => {
   let wsManager
-
+  
   useEffect(() => {
     if(isCleared){
       setAnswerData({answer:"",sources:[]})
@@ -15,6 +15,7 @@ export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTrig
     }
 
     setTriggerWs(false)
+    
     wsManager = new QaWsManager({
       apiInfo: {
         apiHost: "backend-staging-2459.up.railway.app",
@@ -22,6 +23,7 @@ export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTrig
       },
       callbacks: {
         setSources: (sources) => {
+          
        
           setAnswerData((prevData) => ({
             ...prevData,
@@ -42,8 +44,10 @@ export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTrig
           console.error(`Error in main: ${reason}`);
         }
       },
-      question,
-      source,
+      question:question,
+      source:source,
+      arcId:arcId,
+      idToken:idToken
     });
 
     
@@ -52,7 +56,7 @@ export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTrig
     setTimeout(() => {
       wsManager.close();
     }, 10000);
-  }, [question, source]); // Re-run the effect if `question` or `arcId` changes
+  }, [question, source, arcId,triggerWs]); // Re-run the effect if `question` or `arcId` or `source` changes
 
 
   
