@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from 'react';
-import './QA.css';
 import TypeIt from 'typeit-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useLocation } from 'react-router-dom';
 import { Button, Spinner } from "@material-tailwind/react";
 import SourceCardForDetail from './SourceCardForDetail';
-
+import { useQaWsManager } from './QA_Streaming';
+import ReactMarkdown from "react-markdown";
 
 
 export default function QuestionAnswering(props) {
@@ -22,7 +22,7 @@ export default function QuestionAnswering(props) {
     let groupedText
 	const [collapseIndex, setCollapseIndex] = useState(0);
 
-	const [answerData, setAnswerData] = useState('');
+	const [answerData, setAnswerData] = useState({ answer: '', sources: [] });
 	const [isLoadingInside, setIsLoadingInside] = useState(false);
 	const [answer, setAnswer] = useState(false);
 	
@@ -35,6 +35,21 @@ export default function QuestionAnswering(props) {
 	const [errorText, setErrorText] = useState('');
 	const { currentUser } = useAuth();
 	const [clicked, setClicked] = useState(false);
+	const [triggerWs, setTriggerWs] = useState(false);
+
+	
+		
+	useQaWsManager(
+		{question:props.inputValue, 
+		source: {source_type:props.data.source_type, source_id:props.data.source_id},
+		setAnswerData: setAnswerData,
+		triggerWs:triggerWs,
+		setTriggerWs:setTriggerWs,
+		setIsLoadingInside: setIsLoadingInside,
+		isCleared:isCleared,
+	})
+
+
 
 
 	function updateVariable(event) {
@@ -109,14 +124,19 @@ export default function QuestionAnswering(props) {
 		}
 	}
 
+
 	const handleClear = () => {
+		setAnswerData({ answer: '', sources: [] });	
 		setIsCleared(true);
+		setIsLoadingInside(false)
 		setShowBaseQA(false);
 		setShowUserQA(false);
 		props.setInputValue('');
-		setAnswerData('');
 		setinputError(false);
+		
+		
 	};
+
 
 	const handleBaseQA = (event) => {
 		setIsCleared(false);
@@ -149,10 +169,11 @@ export default function QuestionAnswering(props) {
 		props.setInputValue('');
 	};
 
+		
 
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
-			fetchData();
+			fetchData()
 		}
 	};
 
@@ -187,6 +208,7 @@ export default function QuestionAnswering(props) {
 		setShowBaseQA(false);
 		setShowUserQA(true);
 		setinputError(false);
+		setIsCleared(false)
 
 		let selectionInput
 		if (props.selectionPrompt === "simple"){
@@ -217,21 +239,10 @@ export default function QuestionAnswering(props) {
 					setIsLoadingInside(true);
 
 					setAnswer(false);
-					setAnswerData('');
+					setAnswerData({ answer: '', sources: [] });
 
-
-					axios
-						.post(
-							`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/${props.data.source_type}/${props.data.source_id
-							}/question`,
-							props.inputValue,
-						)
-						.then((response) => {
-							props.setSelectionCall(false)
-
-							setAnswerData(response.data);
-							setIsLoadingInside(false);
-						});
+				setTriggerWs(true)
+				
 				} catch (error) {
 					console.error(`Error fetching data: ${error}`);
 					props.setSelectionCall(false)
@@ -255,6 +266,8 @@ export default function QuestionAnswering(props) {
 		}
 	};
 
+
+
 	const handleLength = (text) => {
 		const sentenceRegex = /(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
         sentences = text.split(sentenceRegex);
@@ -277,6 +290,8 @@ export default function QuestionAnswering(props) {
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
 		<div id="q_and_a" className={` md:min-h-[600px] lg:w-[800px] xl:w-[500px] 2xl:w-[500px] 3xl:w-full bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
+
+		
 
 
 			<p className="mb-4 font-light_ text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
@@ -364,7 +379,7 @@ export default function QuestionAnswering(props) {
 
 				<div className="mt-10">
 
-					{isCleared && !isLoadingInside && answerData.length === 0 ? (
+					{isCleared && !isLoadingInside && answerData.answer.length === 0 ? (
 						<div>
 
 							<p className="mb-5 underline text-l font-normal text-zinc-700 dark:text-zinc-200">
@@ -393,10 +408,11 @@ export default function QuestionAnswering(props) {
 												</svg>
 											</div>
 											<div>
+												
 												<div>
-													<p id="answer-area" className="answer-area text-zinc-700 dark:text-zinc-300 font-normal text-md sm:text-l" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
+													<p id="answer-area" className="answer-area text-zinc-600 dark:text-zinc-300 font-normal text-md sm:text-l" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
 												</div>
-
+												
 
 											</div>
 
@@ -567,14 +583,14 @@ export default function QuestionAnswering(props) {
 
 
 
-				{answerData.length !== 0 && !showBaseQA && showUserQA ? (
+				{answerData.answer.length !== 0 && !showBaseQA && showUserQA ? (
 					<div className="text-zinc-600 dark:text-zinc-200 pb-10">
 						{answerData.answer ? (
 							<div  >
 								<div className="grid grid-cols-2 flex flex-row mb-4">
 
 
-									<h1 className="text-xl col-span-1 flex flex-row font-normal">Answer from Alphy
+									<h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700">Answer from Alphy
 
 
 										<svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -608,9 +624,13 @@ export default function QuestionAnswering(props) {
 
 
 								</div>
-								<div id="answer-area" className="answer-area text-md sm:text-l container">
-									<p dangerouslySetInnerHTML={{ __html: answerData.answer.split('\n') }}></p> 
+								
+								<div id="answer-area" className="answer-area text-md sm:text-l container text-zinc-500">
+								<ReactMarkdown>
+									{answerData.answer}
+									</ReactMarkdown>
 								</div>
+								
 
 								<button
 									className={`cursor-pointer justify-end mt-10 mx-auto flex`}
@@ -738,7 +758,7 @@ export default function QuestionAnswering(props) {
 											</svg>
 										</div>
 									</div>
-									<p id="answer-area" className="answer-area text-sm md:text-md" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
+									<p id="answer-area" className="answer-area text-sm md:text-md text-zinc-500" dangerouslySetInnerHTML={{ __html: props.key_qa[baseQuestion].answer }} />
 								</div>
 
 								<button

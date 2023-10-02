@@ -597,7 +597,7 @@ const handleBookmark = async () => {
 		let askInput
 
 		
-		askInput = "Expand on the following: '" + askText + "?'"
+		askInput ="Expand on the following:" + askText + "?'"
 		
 		setInputValue(askInput)
 		//setSelectionCall(true)
@@ -663,6 +663,44 @@ const handleBookmark = async () => {
 		window.addEventListener('scroll', toggleVisibility);
 		return () => window.removeEventListener('scroll', toggleVisibility);
 	  }, []);
+
+	  
+  useEffect(() => {
+	const handleResize = () => {
+		const currentWidth = window.innerWidth;
+		const newIsPastThreshold = currentWidth <= 1000;
+		
+  
+		if (isPastMainPopoverOpenThreshold !== newIsPastThreshold) {
+			
+		  setIsPastMainPopoverOpenThreshold(newIsPastThreshold);
+		  setMainPopoverOpenSmall(false)
+		  setMainPopoverOpen(false);
+		}
+	  };
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isPastMainPopoverOpenThreshold]);
+
+
+  function handleShowYouTubeFrame (){
+
+	if(showYouTubeFrame){
+		setShowYouTubeFrame(false)
+		
+	}
+	else {
+		
+		setShowYouTubeFrame(true)
+
+	}
+  }
+
+
 
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
@@ -997,6 +1035,28 @@ return (
 
 				</div>
 
+		{/* 	<div className="flex flex-col border border-gray-200 rounded-lg p-10 text-zinc-500 max-w-[750px]">
+			<h1 className="font-bold text-xl text-indigo-500 mb-5"> Blockworks Macro - Is Macro A Threat To Crypto? Jim Bianco, Mark Yusko, Jurrien Timmer at Permissionless 2023</h1>
+			
+			<p className="font-bold text-lg text-zinc-600">Opportunity 1 : Bitcoin Is Not At Its Fair Value</p>
+			<div className="flex flex-col gap-y-4">
+			<p className="mt-4">The fair value of Bitcoin based on network growth and real rates is estimated to be in the low 50,000s, while the current price is around 26,000, indicating potential undervaluation. The upcoming halving event in Bitcoin will also double the fair value, attracting more interest and potential price appreciation.</p>
+			<p className="font-semibold text-zinc-600">Implications</p> 
+			<p>The undervaluation of Bitcoin may lead to increased buying interest and accumulation, potentially driving up the price. This could also have positive implications for other cryptocurrencies as market sentiment towards digital assets improves.</p>
+</div>
+	<div className="flex flex-col gap-y-4">
+    <p className="mt-4 font-semibold text-zinc-600">Risk Assessment</p>
+    <p>There is a risk that the fair value estimation may not be accurate or that external factors could impact the price of Bitcoin independently of network growth and real rates. Volatility and regulatory uncertainties in the crypto market also pose risks.</p>
+	</div>
+	<div className="flex flex-col">
+    <p className="mt-4 font-semibold text-zinc-600">DYOR</p>
+	<p>To further research this opportunity, retail investors can analyze the network growth and real rates impact on Bitcoin's price, follow expert opinions on fair value estimations, and stay updated on news and developments related to the upcoming halving event.</p>
+	</div>
+
+	<p className="mt-6 text-indigo-500 underline">See timestamped sources from the discussion ></p>
+  
+				</div>
+ */}
 				<div id="content-area ">
 					{transcript.length > 0 && language == summary.lang
 						?
