@@ -6,7 +6,7 @@ import Twitter from '../../../img/twitter_spaces.png';
 import TwitterLogo from '../../../img/Twitter Logo Blue.svg';
 import Loading from '../../Loading';
 import working from './working.svg';
-
+import Dialog from '@mui/material/Dialog';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
@@ -23,14 +23,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import * as Selection from 'selection-popover'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-
+import AddIcon from '@mui/icons-material/Add';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import ClearIcon from '@mui/icons-material/Clear';
+import TwitterSpaces from "../../../img/twitter_spaces.png"
+import TwitterIcon from '@mui/icons-material/Twitter';
 import {
 	Popover,
 	PopoverHandler,
 	PopoverContent,
 	ThemeProvider,
 	Button
-} from "@material-tailwind/react";
+} from "@material-tailwind/react";	
 
 
 export default function Content(props) {
@@ -73,6 +77,15 @@ export default function Content(props) {
 	const [openArchipelagoPopover,setOpenArchipelagoPopover] = useState(false);
 	const [selectionPrompt, setSelectionPrompt] = useState("normal");
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
+	const [mainPopoverOpenSmall, setMainPopoverOpenSmall] = useState(false);
+	const [transcriptCalled, setTranscriptCalled] = useState(false);
+	const [transcript, setTranscript] = useState([]);
+	const [summaryArray, setSummaryArray] = useState([]);
+	const [showYouTubeFrame, setShowYouTubeFrame] = useState(true);
+	
+
+	const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] = useState(window.innerWidth <= 1000);
+
 	
 	const [inputValue, setInputValue] = useState("");
 	const { currentUser } = useAuth()
@@ -104,7 +117,7 @@ export default function Content(props) {
 
 	const data = props.data
 
-
+	
 	const title = data.title
 	const inputDate = data.added_ts !== undefined ? data.added_ts.substring(0, 10) : undefined;
 
@@ -126,12 +139,12 @@ export default function Content(props) {
 	const theme = localStorage.getItem("theme")
 
 	const ref = useRef(null);
-	let transcript = [];
+	
 
 
 
 
-	let summaryArray = '';
+	
 
 
 	const language_codes = {
@@ -195,17 +208,22 @@ export default function Content(props) {
 		"cy": "Cymraeg"
 	}
 
+	
 
 	if ((props.data !== undefined || props.data !== null) && contentSummaries.length == 0) {
 		contentSummaries = props.data.summaries
+		
 
 
-		if (contentSummaries !== undefined) {
+		if (contentSummaries !== undefined && contentSummaries.length>0 ) {
 
-			contentSummaries.map(summary => summary.summary !== null && languages.push(summary.lang));
+			contentSummaries.map(summary => (summary.summary !== undefined&& summary.summary!==null) && languages.push(summary.lang));
 
 
 			summary = contentSummaries.find(summary => summary.lang === language);
+			
+			
+			
 
 			if (summary !== undefined && summary.length > 0 && summary.summary === null) {
 				setTranslationMessage(true)
@@ -215,6 +233,7 @@ export default function Content(props) {
 
 
 		}
+		
 
 	}
 
@@ -240,10 +259,13 @@ export default function Content(props) {
 			} */
 		const selectedCode = event.target.value;
 		setLanguage(selectedCode);
-
+		
 
 	};
 
+	useEffect(() => {
+		summaryParser()
+	}, [language])
 
 	const requestTranslation = async () => {
 
@@ -362,9 +384,6 @@ const handleBookmark = async () => {
 
 		}, 2000);
 
-		if (transcript.length === 0 && data.transcript !== null) {
-			transcriptParser();
-		}
 		const scrollableDiv = ref.current;
 		scrollableDiv.addEventListener("scroll", checkScrollPosition);
 
@@ -379,6 +398,7 @@ const handleBookmark = async () => {
 	// for question answering
 	const timestampChanger = (event) => {
 		setAutoplay(1);
+		setShowYouTubeFrame(true)
 		let formattedTimestamp = event.target.textContent;
 		const [hours, minutes, seconds] = formattedTimestamp.split(':');
 		setTimestamp(hours * 3600 + minutes * 60 + seconds.substring(0, 2) * 1)
@@ -397,6 +417,7 @@ const handleBookmark = async () => {
 		const [hours, minutes, seconds] = formattedTimestamp.split(':');
 
 		setTimestamp(hours * 3600 + minutes * 60 + seconds * 1);
+		setShowYouTubeFrame(true)
 	};
 
 	const handleReportIssue = () => {
@@ -411,20 +432,28 @@ const handleBookmark = async () => {
 
 	};
 
+
+
+
+async function summaryParser(){
+	if (summary !== undefined && summary !== null && summary.summary!==undefined && summary.summary!==null) {
+		if (summary.summary_prettified !== undefined && summary.summary_prettified !== null) {
+			setSummaryArray(summary.summary_prettified.split('\n'))
+		}
+		else {
+			setSummaryArray(summary.summary.split('\n'))
+		}
+
+	}
+
+}
+
 	async function transcriptParser() {
 
+	
+		let transcript = []
 
-		if (summary !== undefined || summary !== null) {
 
-
-			if (summary.summary_prettified !== undefined && summary.summary_prettified !== null) {
-
-				summaryArray = summary.summary_prettified.split('\n');
-			}
-			else {
-				summaryArray = summary.summary.split('\n');
-
-			}
 
 
 
@@ -469,59 +498,30 @@ const handleBookmark = async () => {
 					transcript.push(nothing);
 					count = 0;
 					nothing = '';
-				}
+				
 
 
 			}
 		}
-		else {
+		
 
-			var parser = new srtParser2();
-
-			var srt_array = parser.fromSrt(transcript_raw);
-
-
-			let nothing = '';
-			let count = 0;
-
-			transcript.push('00:00:00');
-
-
-			for (let i = 0; i < srt_array.length; i++) {
-				count = count + 1;
-				nothing = nothing + ' ' + srt_array[i].text;
-				if (
-					(count > 6 || count >= srt_array.length) &&
-					srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
-				) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-				}
-
-				else if (count > 12) {
-					transcript.push(nothing);
-					transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
-					//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
-					count = 0;
-					nothing = '';
-
-				}
-				else if (i === srt_array.length - 1) {
-					transcript.push(nothing);
-				}
-
-
-			}
-
-		}
+		setTranscript(transcript)
 		/* transcript_array = data.transcript_chunked.split("\n") */
 
 
 
 	}
+
+
+if (transcript.length === 0 && data.transcript !== null) {
+		transcriptParser();
+	}	
+		
+
+if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
+	summaryParser();
+}
+
 
 
 	const handleDownload = (selection) => {
@@ -570,7 +570,7 @@ const handleBookmark = async () => {
 
 	};
 
-	transcriptParser();
+
 
 	useEffect(() => {
 		const handleSelection = () => {
@@ -618,23 +618,50 @@ const handleBookmark = async () => {
 		
 	}
 
-	const handleAddToArchipelago = (archipelagoUID) => {
+	const handleAddToArchipelago = (archipelagoUID,create) => {
 		
 		const newSource = {
 			"source_id":data.source_id,
 			"source_type":data.source_type, 
-		}
-		const neww=[...props.userArchipelagos,newSource]
-		 axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}?nof_questions=10&tracks=true`).then	((response) => {
-			axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`, {
-		"user_id": currentUser.uid,
-		"sources": [...response.data.tracks,newSource],
-	})
-	setMainPopoverOpen(false)
-	}).then(() => {
+			}
+			if(create===false){
+				axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}?nof_questions=10&tracks=true`).then	((response) => {
+					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`, {
+				"user_id": currentUser.uid,
+				"sources": [...response.data.tracks,newSource],
+			})
+			
+			setMainPopoverOpen(false)
+			}).then(() => {
 
-	 	
- })
+				
+		})
+					}
+
+		else if(create===true){
+			axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
+						"name": title,
+						"user_id": currentUser.uid,
+						"sources": [newSource],
+				}
+				, {
+					headers: {
+						'id-token': currentUser.accessToken,
+					},
+				})
+				.then((response) => {
+					setMainPopoverOpen(false)
+					const archipelagoUID = response.data.uid
+					navigate(`/arc/${archipelagoUID}`)
+				})
+				.catch((error) => {
+					console.log(error)
+					setMainPopoverOpen(false)
+				}
+				);
+
+
+		}
 	}
 
 
@@ -700,8 +727,6 @@ const handleBookmark = async () => {
 	}
   }
 
-
-
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 			
@@ -709,14 +734,14 @@ return (
 
 			<div>
 				<div className="grid grid-cols-3 ">
-					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && language == summary.lang ? "xl:col-span-2" : "xl:col-span-3"}`} >
+					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						<div className="flex flex-row ">
 							<h1 className="col-span-2 mt-10 text-xl lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 								{data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
 							</h1>
 
 							<div className="flex flex-row justify-end mx-auto ">
-								<Popover open={mainPopoverOpen}>
+								<Popover open={mainPopoverOpen} onBlur = {() => setMainPopoverOpen(false)}>
 									<PopoverHandler onClick={() => setMainPopoverOpen(!mainPopoverOpen)}>
 										<div className="hidden lg:flex mt-8">
 
@@ -728,7 +753,7 @@ return (
 										</div>
 
 									</PopoverHandler>
-									<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
+									<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode"  >
 										<div className="">
 											<div className="">
 												{data.source_type === 'yt' &&
@@ -736,13 +761,7 @@ return (
 														<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
 														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center  text-md">Click to watch</p>
 													</a>
-												}{data.source_type === "sp" &&
-													<a className="flex flex-row mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-														<img className="mr-2 ml-1" src={TwitterLogo} width={20} />
-														<p className=" items-center text-md text-zinc-600 dark:text-zinc-300">Click to listen</p>
-													</a>
-												}
-												
+												}												
 												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 												
 
@@ -752,11 +771,14 @@ return (
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
-													
+														<MenuItem onClick={() => handleAddToArchipelago(0,true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex">
+															<AddIcon className="text-zinc-600 dark:text-zinc-300"/>
+														<p className="text-zinc-600 dark:text-zinc-300 pl-1">Create An Arc</p>
+															</MenuItem>
 													{userArchipelagoNames.map(item => 
 														
-																	<MenuItem onClick={() => handleAddToArchipelago(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
-																		<p>{item[0]}</p> 
+																	<MenuItem onClick={() => handleAddToArchipelago(item[1],false)} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																	<p className="text-zinc-600 dark:text-zinc-300">{item[0]}</p> 
 																	</MenuItem>
 																
 														
@@ -838,9 +860,9 @@ return (
 												
 											</div>
 
-											<Popover className="">
 
-												<PopoverHandler>
+
+												
 
 													<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
 
@@ -849,17 +871,17 @@ return (
 														</svg><p className="text-left">Report an issue</p>
 
 													</button>
-												</PopoverHandler>
-												<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
+												
+												<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className=" dark:border-zinc-500">
 													{currentUser ?
-														<div>
+														<div className="px-10 dark:bg-mildDarkMode dark:border-zinc-500">
 
 															<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
 															<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`} ></iframe>
 														</div> :
-														<p className="dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
-												</PopoverContent>
-											</Popover>
+														<p className="dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
+												</Dialog>
+											
 										</div>
 									</PopoverContent>
 								</Popover>
@@ -880,19 +902,22 @@ return (
 								
 
 							</div>
+
+						
+
 						</div>
 						<p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
 		
 					</div>
 
-					<div className="flex flex-col mt-5 ml-2 items-center cursor-pointer lg:hidden ">
+					<div className="flex flex-col mt-5 ml-2 items-center  lg:hidden cursor-default">
 
 
-						<Popover >
-							<PopoverHandler>
+					<Popover open={mainPopoverOpenSmall} onBlur = {() => setMainPopoverOpenSmall(false)}>
+									<PopoverHandler onClick={() => setMainPopoverOpenSmall(!mainPopoverOpenSmall)}>
 								<div className="lg:hidden mt-5">
 
-									<svg width={30} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<svg width={30} className="cursor-pointer" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 										<path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" stroke-linecap="round" stroke-linejoin="round"></path>
 										<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 									</svg>
@@ -922,11 +947,14 @@ return (
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										
-												
+													<MenuItem onClick={() => handleAddToArchipelago(0,true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex">
+															<AddIcon className="text-zinc-600 dark:text-zinc-300"/>
+														<p className="text-zinc-600 dark:text-zinc-300 pl-1">Create An Arc</p>
+															</MenuItem>
 												{userArchipelagoNames.map(item => 
 													
-																<MenuItem onClick={() => handleAddToArchipelago(item[1])} className="text-zinc-700 dark:text-zinc-200"  value={item}>
-																	<p>{item[0]}</p> 
+																<MenuItem onClick={() => handleAddToArchipelago(item[1],false)} className="text-zinc-700 dark:text-zinc-200"  value={item}>
+																	<p className="text-zinc-600 dark:text-zinc-300">{item[0]}</p> 
 																</MenuItem>
 															
 													
@@ -1002,26 +1030,26 @@ return (
 												</Box>
 
 									<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
-									<Popover className="">
-										<PopoverHandler>
-											<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
+									
 
-												<svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-													<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
-												</svg><p className="text-left">Report an issue</p>
 
-											</button>
-										</PopoverHandler>
-										<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500">
-											{currentUser ?
-												<div>
+									<button className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70" onClick={handleReportIssue}>
 
-													<iframe className="h-[600px] dark:hidden md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-													<iframe className="h-[600px] hidden dark:block md:h-[640px] min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
-												</div> :
-												<p className="dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
-										</PopoverContent>
-									</Popover>
+<svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+	<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg><p className="text-left">Report an issue</p>
+
+</button>
+
+<Dialog maxWidth={"sm"} open={showReportIssue} onClose={()=>setShowReportIssue(false)} className="">
+{currentUser ?
+<div className="px-10 dark:bg-mildDarkMode dark:border-zinc-500">
+
+	<iframe className="h-[640px] dark:hidden  md:min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
+	<iframe className="h-[640px] hidden dark:block md:min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`} ></iframe>
+</div> :
+<p className=" dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
+</Dialog>
 								</div>
 							</PopoverContent>
 						</Popover>
@@ -1058,7 +1086,7 @@ return (
 				</div>
  */}
 				<div id="content-area ">
-					{transcript.length > 0 && language == summary.lang
+					{transcript.length > 0 && (summary!==undefined && language == summary.lang)
 						?
 						<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 							{transcript.length > 0 &&
@@ -1067,59 +1095,111 @@ return (
 								<div className={`grid-cols-2 w-full md:min-w-[500px]`}>
 									{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
-									<div className={`col-span-2 hidden ${data.source_type === "yt" ? "xl:flex" : ""}  justify-center items-center w-[95%] h-[400px]  h-inherit mx-auto pb-10 xl:pb-0`}>
-										{data.source_type === "yt" &&
+									{showYouTubeFrame ===true && 
+
+									<div>
+									<div className={`hidden ${data.source_type === "yt" ? "lg:flex" : ""}  justify-center items-center `}>
+									{data.source_type === "yt" &&
 											(transcript.length > 0 || data.complete === true ?
+												<div>
+											
+												{/* <div id="drag-handle" ref={dragHandleRef}  className="fixed bottom-4 right-4 w-[300px] h-[200px] cursor-move z-[9999] bg-black opacity-20"></div>										 */}
+
 												<iframe
 													id="player"
+													
 													title="My YouTube Video "
+													className={`fixed bottom-24 right-4 w-[360px] h-[240px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`} 
 													src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
 													width="100%"
 													height="100%"
 													frameBorder="0"
 													allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 												></iframe>
+												
+												</div>
 												: null)
 
 
 										}
 
 									</div>
-									{/* <Loading /> */}
-									<div className={`col-span-2 ${data.source_type == "yt" && "md:mt-10"} drop-shadow-sm `}>
-										{summary.key_qa === undefined || summary.key_qa === null ? (
-											<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
-												<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
-
-													Generating questions... plugging in an AI assistant...
-
-													<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={140} alt="My SVG" />
 
 
-												</p>
-											</div>
+								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 w-[360px] h-[240px] z-50 ${data.source_type==="sp" ? "lg:flex" : " hidden"}`}>
+								<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
+									<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto"/>
+									<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline">
+										Listen to <span className="font-bold">"{title}"</span>  on Twitter
+									</p>
 
-
-										) : (
-											summary.key_qa && (
-												<QuestionAnswering
-													source_id={data.source_id}
-													source_type={data.source_type}
-													selectionCall={selectionCall}
-													setSelectionCall={setSelectionCall}
-													key_qa={summary.key_qa}
-													inputValue={inputValue}
-													setInputValue={setInputValue}
-													buttonRef={buttonRef}
-													inputRef={inputRef}
-													data={data}
-													transcript={transcript}
-													timestampChanger={timestampChanger}
-												/>
-											)
-										)}
+									</a>
 									</div>
 
+							</div>
+										}
+									
+									
+									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="yt" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
+										{showYouTubeFrame ? 
+										<ClearIcon fontSize="large" className="text-white "/>
+										:
+										<YouTubeIcon fontSize="large" className="text-white"/>
+										}
+									</button>
+
+									
+									
+									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="sp" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
+										{showYouTubeFrame ? 
+										<ClearIcon fontSize="large" className="text-white "/>
+										:
+										<TwitterIcon fontSize="large" className="text-white"/>
+										}
+									</button>
+
+
+
+								
+									
+									<div className={`col-span-2 ${data.source_type == "yt" && ""} drop-shadow-sm `}>
+									{summary.key_qa === undefined || summary.key_qa === null ? (
+										<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
+											<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
+
+												Generating questions... plugging in an AI assistant...
+
+												<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={140} alt="My SVG" />
+
+
+											</p>
+										</div>
+
+
+									) : (
+										summary.key_qa && (
+											<QuestionAnswering
+												source_id={data.source_id}
+												source_type={data.source_type}
+												selectionCall={selectionCall}
+												setSelectionCall={setSelectionCall}
+												key_qa={summary.key_qa}
+												inputValue={inputValue}
+												setInputValue={setInputValue}
+												buttonRef={buttonRef}
+												inputRef={inputRef}
+												data={data}
+												transcript={transcript}
+												timestampChanger={timestampChanger}
+											/>
+										)
+									)}
+								</div>
+
+									
+																		
+									
+									
 								</div>
 							}
 							{transcript.length > 0 &&
@@ -1145,11 +1225,16 @@ return (
 
 												</ul>
 											</div>
+
+
+
+
+
 											<Selection.Root>
 											<Selection.Portal>
       <Selection.Content>
 		
-			<Button className="rounded-xl bg-green-300 mt-2 mb-2 text-white dark:text-zinc-800" onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
+			<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-600 dark:text-zinc-800 " onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
 					
 		
 			 <Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
@@ -1189,7 +1274,7 @@ return (
 																	<Loading />
 																) : summaryArray.length === 0 ? (
 																	<tr className="border-b-0">
-																		<td>Still waiting for the summary! Meanwhile, check the transcript.</td>
+																		<td className="pt-4 pb-4 text-zinc-700 dark:text-zinc-200 ">Still waiting for the summary! Meanwhile, check the transcript.</td>
 																	</tr>
 																) : (
 																	summaryArray.map((item, index) => {
@@ -1300,14 +1385,10 @@ return (
 
 																						</a>
 
-																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`} >
-																							<Popover
-																							>
-
-
-
+																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`}>
+																							<Popover>
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} dark:invert`} src={DownloadStatic}></img></button>
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-50" : ""}`} src={DownloadStatic}></img></button>
 																								</PopoverHandler>
 
 																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
@@ -1336,7 +1417,7 @@ return (
 																							</Popover>
 
 																						</div>
-																						{/* 			{index === 0 && <button className="flex ml-auto justify-end flex-row justify-end  mr-4 opacity-80 pt-4" onClick={handleDownload}>{downloading ? <img src={Download}></img> : <img title="Download transcript" src={DownloadStatic}></img>}</button>} */}
+																					
 																					</div>
 
 																			);
@@ -1345,21 +1426,6 @@ return (
 																				<div key={index}>
 																					<br></br>
 																					{item}
-{/* 
-																		{item.split(/\s+/).map((word, idx) => {
-																						const cleanedWord = word.replace(/[^a-zA-Z]/g, ''); // remove punctuations for comparison
-																						
-																							return (
-																								
-																								<span key={idx} className={`${trial_keywordlist.includes(cleanedWord) && "bg-green-200"}`} >{word}{' '}</span>
-																								
-																								
-																							
-																								
-																							);
-																						
-																					
-																					})} */}
 																				</div>
 																			);
 																		}

@@ -19,7 +19,9 @@
   }
   
 	
-
+  .backface-hidden {
+	backface-visibility: hidden;
+  }
   
 html {
     overflow: hidden;
@@ -703,23 +705,30 @@ CONTENT PAGE
   
 .summary-text h2{
 	
-	font-weight:600;
-	font-size: 16px;
+	font-weight:500;
+	font-size: 20px;
+	margin-top:30px;
+	font-family: 'Roboto'
+}
+.summary-text h1{
+	
+	font-weight:500;
+	font-size: 20px;
 	margin-top:30px;
 	font-family: 'Roboto'
 }
 
 .summary-text h3{
 	
-	font-weight:600;
-	font-size: 16px;
+	font-weight:500;
+	font-size: 20px;
 	margin-top:30px;
 	font-family: 'Roboto'
 }
 
 .summary-text h4{
-	font-weight:600;
-	font-size: 16px;
+	font-weight:500;
+	font-size: 20px;
 	margin-top:30px;
 	font-family: 'Roboto'
 }

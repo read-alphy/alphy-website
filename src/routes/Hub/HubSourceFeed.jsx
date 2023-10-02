@@ -146,7 +146,7 @@ function HubSourceFeed(props) {
 		<div className="main-page-feed-section  xl:min-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1280px] 2xl:min-w-[1280px] w-full mx-auto xl:mx-0 md:pl-10  lg:pl-16  xl:pl-20 2xl:pl-40   flex flex-row">
 
 		<div className=" p-[10px] mt-10 min-h-[60vh] pl-5 w-full">
-		<p className="text-zinc-700 dark:text-zinc-300 text-lg font-semibold text-xl xl:text-2xl"> Discover our database.</p>
+		<p className="text-zinc-700 dark:text-zinc-300 text-lg font-sans font-semibold text-xl xl:text-2xl"> Discover our database.</p>
 		
 
 

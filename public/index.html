@@ -61,7 +61,7 @@
   </script>
   <script type="text/javascript">
     var userId = localStorage.getItem('userId') !==null ? localStorage.getItem('userId') : "notLoggedIn";
-    
+    var tier = localStorage.getItem('tier') !== null ? localStorage.getItem('tier') : "free";
     
     (function (c, l, a, r, i, t, y) {
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
@@ -69,6 +69,7 @@
       t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
       y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
       c[a]("identify", userId);
+      c[a]("set", "tier", tier); // Assuming Clarity accepts custom attributes
     })(window, document, "clarity", "script", "fy8nzp2uqz");
     
 

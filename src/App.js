@@ -24,6 +24,7 @@ import MyHub from './routes/Hub/MyHub';
 import FAQ from "./routes/FAQ"
 import SubmitPage from "./routes/Hub/SubmitPage"
 import WelcomeForm from './components/WelcomeForm';
+import { set } from 'lodash';
 
 
 
@@ -59,6 +60,7 @@ function App() {
 	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
 	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
 	const [customerID, setCustomerID] = useState("");
+	const [userArcsCalled, setUserArcsCalled] = useState(false)
 
 	if(localStorage.getItem("theme")!== null && localStorage.getItem("theme")!==undefined && localStorage.getItem("theme").length===0){
 		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
@@ -147,9 +149,12 @@ useEffect(() => {
 			localStorage.setItem('welcomeForm', 'false')
 		}
 
+		if(userArcsCalled === false){
 		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
 			setUserArchipelagos(response.data)
+			setUserArcsCalled(true)
 		})
+		}
 	}
 	
 
@@ -182,6 +187,7 @@ useEffect(() => {
 				/* console.log(r.data) */
 				if(r.data.current_tier!== null){
 				setTier(r.data.current_tier)
+				localStorage.setItem("tier", r.data.current_tier ? r.data.current_tier : "free")
 			}
 			
 					setCustomerID(r.data.customer_id)
@@ -245,7 +251,6 @@ useEffect(() => {
 
 
 	if(sessionStorage.getItem("refreshCredit")==="true"){
-		console.log("refreshing credit")
 		getCustomerInfo(currentUser)
 		sessionStorage.removeItem("refreshCredit")
 	}		
@@ -364,8 +369,8 @@ useEffect(() => {
 								element={<SubmitPage credit={credit} setCreditCalled={setCreditCalled} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route>
 
-					{/* 		<Route path = "/home"
-							element={<Home arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
+					 		{/* <Route path = "/home"
+									element={<Home arcs={false} credit={credit} currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} dataGlobalArchipelagos={dataGlobalArchipelagos} userArchipelagos={userArchipelagos} setUserArchipelagos={setUserArchipelagos} tier={tier} contentName={contentName} setContentName={setContentName}/>}>
 							</Route> */}
 
 							<Route path="/about" element= {<FAQ collapsed={collapsed} setCollapsed={setCollapsed} tier={tier} showWelcomeForm={showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm}/>} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useR } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
@@ -27,12 +27,7 @@ function Navbar({ collapsed, setCollapsed }) {
 		  }
 
 		  const handleResize = () => {
-			if (window.innerWidth > 999) {
-				setCollapsed(false);
-			  }
-			else{
-				setCollapsed(true);
-			}
+
 		  };
 	  
 		  window.addEventListener('resize', handleResize);

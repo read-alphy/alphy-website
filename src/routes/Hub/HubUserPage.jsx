@@ -283,7 +283,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
             
                         
-              {currentUser &&   <p className="text-2xl text-zinc-600 dark:text-zinc-300 font-bold ">
+              {currentUser &&   <p className="text-2xl text-zinc-600 dark:text-zinc-300 font-sans font-semibold">
                     
                     Welcome to Your Hub!
                 </p>

@@ -157,7 +157,8 @@ function HubArcFeed(props) {
 			{props.mainShow==="default" ? 
 
 						<div className=" p-[10px] pl-5 xl:min-w-[1200px]  xl:max-w-[1200px] ">
-						<p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-semibold">Learn from the best online sources with Alphy's Arcs.</p>
+							
+						<p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-sans font-semibold">Learn from the best online sources with Alphy's Arcs.</p>
 						
 									{/* <form
 										className="flex items-center pt-4"

@@ -14,8 +14,6 @@ import HomeInfo from './HomeInfo';
 
 
 function Home({currentUser, collapsed, setCollapsed, tier,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
-	const location = useLocation();
-	const navigate = useNavigate();
 	
 
 	let source_id
@@ -92,7 +90,6 @@ function Home({currentUser, collapsed, setCollapsed, tier,setShowWelcomeForm, sh
 						<div className="h-screen">
 							<SideFeedReworked 
 							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} tier={tier}
-							
 							/>
 							
 							</div>

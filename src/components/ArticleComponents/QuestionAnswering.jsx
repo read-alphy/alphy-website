@@ -287,6 +287,8 @@ export default function QuestionAnswering(props) {
 		return groupedText
 	}
 
+
+	
 	return (
 		/* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
 		<div id="q_and_a" className={` md:min-h-[600px] lg:w-[800px] xl:w-[500px] 2xl:w-[500px] 3xl:w-full bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`} ref={QARef}>
@@ -318,7 +320,7 @@ export default function QuestionAnswering(props) {
 							type="text"
 							id="questionAnswering"
 							placeholder="Ask anything to the transcript..."
-							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
+							className="pr-10 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode text-blue-gray-700 font-sans font-normal  outline-0   focus:outline-green-300 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 focus:border text-sm px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
 					
 					
 
@@ -362,7 +364,7 @@ export default function QuestionAnswering(props) {
 							className={`bg-greenColor text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
 
 							{isLoadingInside ? <Spinner className="h-4 w-4" /> :
-								<svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<svg className="w-4 h-4 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 									<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
 								</svg>
 							}
@@ -451,7 +453,7 @@ export default function QuestionAnswering(props) {
 																? props.key_qa[item].sources.map((source, index) => (
 																	<p className="text-greenColor font-bold border border-zinc-300 rounded-lg p-5 drop-shadow-sm mb-5" key={index}>
 
-																		{source.start && source.end ? (
+																		{source.start !== null && source.start !== undefined && source.end ? (
 																			window.innerWidth > 999 && props.data.source_type == "yt" ?
 																				<a onClick={updateVariable} className="underline cursor-pointer">
 
@@ -662,10 +664,11 @@ export default function QuestionAnswering(props) {
 
 											{answerData.sources.map((source, index) => (
 												<div>
-
-													{source.start && source.end ? (
+											
+													{source.start !== null && source.start !== undefined && source.end ? (
 														window.innerWidth > 999 && props.data.source_type == "yt" ?
 															<a onClick={updateVariable} className="underline cursor-pointer">
+																
 
 																{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 															</a> : <a target="_blank" href={props.data.source_type === "yt" ? `https://youtu.be/${props.data.source_id}?t=${Math.floor(source.start)}` : ""} className="underline">
@@ -793,7 +796,7 @@ export default function QuestionAnswering(props) {
 												? props.key_qa[baseQuestion].sources.map((source, index) => (
 													<p key={index}>
 
-														{source.start && source.end ? (
+														{source.start !== null && source.start !== undefined && source.end ? (
 															window.innerWidth > 999 && props.data.source_type == "yt" ?
 																<a onClick={updateVariable} className="underline cursor-pointer">
 
