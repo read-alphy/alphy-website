@@ -413,8 +413,17 @@ export default function QuestionAnswering(props) {
 											</div>
 											<div>
 												
-												<div>
-													<p id="answer-area" className="answer-area text-zinc-600 dark:text-zinc-300 font-normal text-md sm:text-l" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
+												<div className="answer-area text-zinc-600 dark:text-zinc-300 font-normal text-md sm:text-l">
+													{
+														props.key_qa[item].answer[0] === "<" ?
+														<p id="answer-area" className="answer-area" dangerouslySetInnerHTML={{ __html: props.key_qa[item].answer }} />
+														:
+														<ReactMarkdown>
+															{props.key_qa[item].answer}
+														</ReactMarkdown>
+
+													}
+													
 												</div>
 												
 

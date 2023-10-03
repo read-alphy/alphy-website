@@ -35,7 +35,8 @@ import {
 	ThemeProvider,
 	Button
 } from "@material-tailwind/react";	
-
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import MemoryIcon from '@mui/icons-material/Memory';
 
 export default function Content(props) {
 
@@ -132,7 +133,7 @@ export default function Content(props) {
 	let contentSummaries = []
 	let languages = []
 	let summary = ""
-
+	let model_name=""
 
 
 	const transcript_raw = props.data.transcript;
@@ -221,6 +222,8 @@ export default function Content(props) {
 
 
 			summary = contentSummaries.find(summary => summary.lang === language);
+			model_name = summary.model_name
+			
 			
 			
 			
@@ -735,8 +738,36 @@ return (
 			<div>
 				<div className="grid grid-cols-3 ">
 					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
-						<div className="flex flex-row ">
-							<h1 className="col-span-2 mt-10 text-xl lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+						{model_name==="gpt-4" &&
+						<div className="relative flex flex-col">
+						<div className="relative flex flex-row group cursor-default">
+						  <WorkspacePremiumIcon className="text-indigo-500"/>
+						  <p className="text-indigo-500 ml-2">Premium Processing</p>
+						  <span className="absolute opacity-0 group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
+							This content was processed with advanced AI models accessible to Premium.
+						  </span>
+						</div>
+					  </div>				  
+					  
+								
+								}
+
+								{model_name==="gpt-3.5-turbo-16k" &&
+										<div className="relative flex flex-col">
+										<div className="relative flex flex-row group cursor-default">
+										<MemoryIcon className="text-gray-500"/>
+										<p className="text-gray-500 ml-2">Standard Processing</p>
+										<span className="absolute opacity-0 group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:bottom-full z-50 mb-2 ml-4">
+											This content was processed with standard AI models.
+										</span>
+										</div>
+									</div>		
+
+
+
+								}
+						<div className="flex flex-row ml-1">
+							<h1 className="col-span-2 mt-6 text-xl  lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 								{data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
 							</h1>
 
@@ -888,7 +919,7 @@ return (
 								
 							</div>
 						</div>
-						<div className="col-span-2   grid grid-cols-2 flex flex-row">
+						<div className="col-span-2  ml-1 grid grid-cols-2 flex flex-row">
 							<div className="col-span-1">
 
 								<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light_ flex flex-row">
@@ -900,7 +931,6 @@ return (
 
 								</h2>
 								
-
 							</div>
 
 						
@@ -1063,28 +1093,34 @@ return (
 
 				</div>
 
-		{/* 	<div className="flex flex-col border border-gray-200 rounded-lg p-10 text-zinc-500 max-w-[750px]">
-			<h1 className="font-bold text-xl text-indigo-500 mb-5"> Blockworks Macro - Is Macro A Threat To Crypto? Jim Bianco, Mark Yusko, Jurrien Timmer at Permissionless 2023</h1>
+			{/* <div className="flex flex-col border border-gray-200 rounded-lg p-10 text-zinc-500 max-w-[750px]">
+			<h1 className="font-bold text-xl text-red-400 mb-5"> Bankless - The Blockchain Trilemma - ETH Vs SOL Vs ATOM with Mike Ippolito</h1>
 			
-			<p className="font-bold text-lg text-zinc-600">Opportunity 1 : Bitcoin Is Not At Its Fair Value</p>
+			<p className="font-bold text-lg text-zinc-600">Opportunity 3 : Investing in Ethereum</p>
 			<div className="flex flex-col gap-y-4">
-			<p className="mt-4">The fair value of Bitcoin based on network growth and real rates is estimated to be in the low 50,000s, while the current price is around 26,000, indicating potential undervaluation. The upcoming halving event in Bitcoin will also double the fair value, attracting more interest and potential price appreciation.</p>
+			<p className="mt-4">The speaker regards Ethereum's model of prioritizing decentralized validators as pluses. Ethereum optimizes on allowing solo stakers to still validate the chain, hence enhanced security. This shows robustness and commitment to maintaining a decentralized network, which could translate to market strength and potential return on investment.</p>
 			<p className="font-semibold text-zinc-600">Implications</p> 
-			<p>The undervaluation of Bitcoin may lead to increased buying interest and accumulation, potentially driving up the price. This could also have positive implications for other cryptocurrencies as market sentiment towards digital assets improves.</p>
+			<p>Growth in Ethereum could potentially influence its layer 2 platforms, creating an upward wave in the sector. If Ethereum continues to scale and remain resilient, this could also attract more developers building around its ecosystem, which brings more value to Ethereum
+
+			</p>
 </div>
 	<div className="flex flex-col gap-y-4">
     <p className="mt-4 font-semibold text-zinc-600">Risk Assessment</p>
-    <p>There is a risk that the fair value estimation may not be accurate or that external factors could impact the price of Bitcoin independently of network growth and real rates. Volatility and regulatory uncertainties in the crypto market also pose risks.</p>
+    <p>
+	The risk lies in potential scalability issues and the highly contentious nature of changes in the Ethereum network. Slow transaction speeds and high gas fees during peak times could affect user experience negatively
+	</p>
 	</div>
 	<div className="flex flex-col">
     <p className="mt-4 font-semibold text-zinc-600">DYOR</p>
-	<p>To further research this opportunity, retail investors can analyze the network growth and real rates impact on Bitcoin's price, follow expert opinions on fair value estimations, and stay updated on news and developments related to the upcoming halving event.</p>
+	<p>Investors should review Ethereum's roadmap, its plans for addressing scalability, and its view on maintaining ecosystem decentralization. Explore Ethereum's reddit, twitter, EIPs and understand the updates in Ethereum 2.0.
+
+	</p>
 	</div>
 
-	<p className="mt-6 text-indigo-500 underline">See timestamped sources from the discussion ></p>
+	<p className="mt-6 text-red-400 underline">See timestamped sources from the discussion ></p>
   
-				</div>
- */}
+				</div> */}
+
 				<div id="content-area ">
 					{transcript.length > 0 && (summary!==undefined && language == summary.lang)
 						?
