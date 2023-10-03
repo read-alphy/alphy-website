@@ -1163,11 +1163,11 @@ return (
 									</div>
 
 
-								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 w-[360px] h-[240px] z-50 ${data.source_type==="sp" ? "lg:flex" : " hidden"}`}>
+								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type==="sp" ? "lg:flex" : " hidden"}`}>
 								<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 									<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto"/>
 									<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline">
-										Listen to <span className="font-bold">"{title}"</span>  on Twitter
+										Listen to <span className="font-bold pb-6 hyphenate">"{`${title}`.substring(0,90)} {title.length>90 && "..."}"</span>  on Twitter
 									</p>
 
 									</a>

@@ -113,6 +113,11 @@ ul {
 	padding-bottom: 2px
 }
 
+.hyphenate {
+	hyphens: auto;
+}
+
+
 /* 
 
 
