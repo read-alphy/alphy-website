@@ -37,6 +37,7 @@ import {
 } from "@material-tailwind/react";	
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import MemoryIcon from '@mui/icons-material/Memory';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function Content(props) {
 
@@ -1178,7 +1179,7 @@ return (
 									
 									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="yt" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
 										{showYouTubeFrame ? 
-										<ClearIcon fontSize="large" className="text-white "/>
+										<ArrowDownwardIcon fontSize="large" className="text-white "/>
 										:
 										<YouTubeIcon fontSize="large" className="text-white"/>
 										}
@@ -1188,7 +1189,7 @@ return (
 									
 									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="sp" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
 										{showYouTubeFrame ? 
-										<ClearIcon fontSize="large" className="text-white "/>
+										<ArrowDownwardIcon fontSize="large" className="text-white "/>
 										:
 										<TwitterIcon fontSize="large" className="text-white"/>
 										}
