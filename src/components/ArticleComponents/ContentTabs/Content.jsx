@@ -742,8 +742,8 @@ return (
 						{model_name==="gpt-4" &&
 						<div className="relative flex flex-col">
 						<div className="relative flex flex-row group cursor-default">
-						  <WorkspacePremiumIcon className="text-indigo-500"/>
-						  <p className="text-indigo-500 ml-2">Premium Processing</p>
+						  <WorkspacePremiumIcon className="text-indigo-400"/>
+						  <p className="text-indigo-400 ml-2">Premium Processing</p>
 						  <span className="absolute opacity-0 group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
 							This content was processed with advanced AI models accessible to Premium.
 						  </span>

@@ -184,7 +184,7 @@ export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,arc
                     catch((error) => {
                         if(errorMessageSubmit.length===0){
                       
-                            setErrorMessageSubmit("There was an error submitting the form. Make sure you have enough credits for the submission and try again.")
+                            setErrorMessageSubmit("There was an error submitting the form. Please check the link and your remaining credits and try again.")
                       
                 }
                 else if (error.response.data.detail=="Free users cannot submit twitter spaces"){

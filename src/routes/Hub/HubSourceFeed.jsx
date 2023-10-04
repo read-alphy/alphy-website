@@ -4,10 +4,8 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 import HubFeedItem from './HubFeedItemElements/HubFeedItem';
 import axios from 'axios';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
-import { useNavigate } from 'react-router-dom';
-
-import ArchipelagoCard from '../../components/LandingPage/ArchipelagoCard';
-import { Carousel } from '@trendyol-js/react-carousel';
+import {Link, useNavigate} from 'react-router-dom'
+import {Button, Spinner} from "@material-tailwind/react";
 
 
 
@@ -20,7 +18,7 @@ function HubSourceFeed(props) {
 	const [prevLength, setPrevLength] = useState(0);
 	/*const const { currentUser } = useAuth(); */
 	const currentUser = props.currentUser;
-	
+	const navigate = useNavigate();
 
 	const [inputValue, setInputValue] = useState('');
 
@@ -28,7 +26,14 @@ function HubSourceFeed(props) {
 	const [called, setCalled] 	= useState(false);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchMemory, setSearchMemory] = useState("")
+	const [loading, setLoading] = useState(false);
+	
 
+
+    const [submitInputValue, setSubmitInputValue] = useState('');
+    const [failed, setFailed] = useState(false);
+    const [errorMessageSubmit, setErrorMessageSubmit] = useState('');
+    
 
 
 
@@ -133,13 +138,130 @@ function HubSourceFeed(props) {
 
 	}
 	useEffect(() => {
-        if (prevLength > 0 && inputValue.length === 0) {
+        if (prevLength > 0 && search.length === 0) {
           getData(0,true,true); // Call the provided function when the input value is empty
         }
-        setPrevLength(inputValue.length);
-    }, [inputValue, getData, prevLength]); //
+        setPrevLength(search.length);
+    }, [search, getData, prevLength]); //
+
+	const handleSubmit = (event, selectedOption) => {
+		
+        if(!(
+            search.includes('https://www.youtube.com/watch') ||
+            search.includes('https://youtu.be') ||
+            search.includes('https://m.youtube.com') ||
+            search.includes('https://twitter.com/i/spaces') ||
+            search.includes('https://www.youtube.com/live')
+            )
+        )
+     {
+        setInputValue('');
+        setErrorMessageSubmit('Please provide a link to a YouTube video or Twitter Space.')
+        setFailed(true)
+        return;
+    }
+    else {
+        let videoId
+        let video_source
+        //check if video already exists
+        if (search.includes('https://www.youtube.com')) {
+            
+            if(search.includes('https://www.youtube.com/watch')){
+            videoId = search.split('/').pop().split('?v=')[1].split("&")[0];
+            
+            }
+            else if(search.includes('https://www.youtube.com/live') ){
+                videoId = search.split('/').pop().split("?")[0];
+                
+            }
+            video_source = "yt"
+            
+        
+    }
+
+        else if (search.includes('https://youtu.be')) {
+            videoId = search.split('/').pop().split("?")[0];
+            video_source = "yt"
+
+        }
+
+        else if (search.includes('https://m.youtube.com')) {
+            videoId = search.split('/').pop().split('?v=')[1].split("&")[0];
+            video_source = "yt"
+
+        }
+        else if (search.includes('https://twitter.com/i/spaces')) {
+            
+        if (props.tier==="basic" || props.tier==="premium"){
+            videoId = search.split('/').pop().split("?")[0];
+            video_source = "sp"
+            }
+            else{
+                setFailed(true) 
+                setErrorMessageSubmit('Upgrade your plan to process Twitter Spaces. See Account page for more detail.');
+                return;
+            }
+
+        }
 
 
+        if (currentUser) {
+            setLoading(true);
+            // get id token
+            currentUser.getIdToken().then((idToken) => {
+                
+            axios
+                    .post(
+                        `${process.env.REACT_APP_API_URL}/sources/`,
+                        {
+                            url: search,
+                        },
+                        {
+                            headers: {
+                                'id-token': idToken,
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        sessionStorage.setItem("refreshCredit", "true")
+
+                        
+                        setErrorMessageSubmit("")
+                        setLoading(false);
+                        setFailed(false)
+                        setSearch('');
+						getData(0, true, true);
+						navigate(`/${response.data.source_type}/${response.data.source_id}`)
+                        
+                        
+                            /* navigate(`/${video_source}/${videoId}`) */
+
+                    }).
+                    catch((error) => {
+                        if(errorMessageSubmit.length===0){
+                            setErrorMessageSubmit("There was an error submitting the form. Please check the link and your remaining credits and try again.")
+                      
+                }
+                else if (error.response && error.response.data.detail=="Free users cannot submit twitter spaces"){
+                    setErrorMessageSubmit("Upgrade your plan to process Twitter Spaces. See Account page for more detail.");
+                }
+                else if(error.response && error.response.data.detail=="Not enough minutes"){
+
+                    setErrorMessageSubmit("You don't have enough credits.")
+                }
+                        setFailed(true)
+                        setSubmitInputValue('');
+                        setLoading(false);
+                        throw error;
+                    });
+            });
+        } else {
+            // sign in
+            // navigate('/auth');
+            setErrorMessageSubmit('Please sign in to submit content.');
+        }
+    }
+}
 
 
 	return (
@@ -223,7 +345,7 @@ function HubSourceFeed(props) {
 							{isLoading
 								? data.length > 0
 									? data
-										.map((item, index) => <HubFeedItem currentUser={currentUser} myBookmarks={false} key={index} item={item} mainFeedInput={inputValue} />)
+										.map((item, index) => <HubFeedItem currentUser={currentUser} myBookmarks={false} key={index} item={item} mainFeedInput={search} />)
 									: [...Array(10)].map((item, index) => <SkeletonItem key={index} />)
 								: data.map((item, index) => <HubFeedItem currentUser={currentUser} myBookmarks={false} key={index + 1000} item={item} />)}
 						</div>
@@ -239,10 +361,84 @@ function HubSourceFeed(props) {
 								}
 							</div>
 						)}
+
+					
+
+						{data.length===0 && !isLoading && 
+
+							currentUser?
+                                  (search.includes('https://www.youtube.com/watch') ||
+                                    search.includes('https://youtu.be') ||
+                                    search.includes('https://m.youtube.com') ||
+                                    search.includes('https://twitter.com/i/spaces') ||
+                                    search.includes('https://www.youtube.com/live'))
+            
+                                        ?
+
+								<div>
+									<p className="mt-2 mb-4 text-zinc-500 dark:text-zinc-400 flex flex-col text-md"> 
+											Submit for processing
+								</p>
+
+
+									<div className="flex-col flex mb-6 text-sm">
+										<div className="flex flex-row ">
+												<a href="/account" className="text-zinc-500 dark:text-zinc-400">
+													{props.tier==="free" && "Starter Plan"}
+													{props.tier==="basic" && "Basic Plan"}
+													{props.tier==="premium" && "Premium Plan"}
+													
+													</a>
+													<p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
+													<p className=" text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(props.credit)} minutes
+													</p>
+										</div>
+												
+										</div>
+																	<Button size="sm" type="submit"
+																	onClick={(e) => {
+																		handleSubmit();
+																	}} className={`${loading ? "opacity-60 pointer-events-none":"opacity-100" } bg-green-200  dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case`} >
+																						
+																						{loading? 
+																						<Spinner color="gray" size={window.innerWidth>1000 ? "lg" :`md`} className="flex mx-auto opacity-30"/>
+																						:
+																		"Submit"}
+																		</Button>
+																	
+																	{failed && 
+																		<div className="mx-auto mt-5 text-sm text-red-400 ml-2">
+																		{errorMessageSubmit}
+															</div>
+																		}
+
+					{(props.tier==="basic"||props.tier==="premium") &&
+														<div  className="mt-8 flex flex-row text-sm">
+														<p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
+														onClick={
+															() => sessionStorage.setItem("creditPurchase", "true")
+														}
+														to="/account" className="text-indigo-400 font-semibold underline" >Buy here.</Link>
+														</div>                
+													}
+																	</div>
+												
+											
+											:
+
+											<p className="mt-2 mb-8 text-zinc-500 dark:text-zinc-400 flex flex-col text-md"> 
+								Can't find what you are looking for? Paste the link for the content above to process it.
+								</p>
+											
+											
+											:
+											
+											<p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300  text-sm"> 
+												<Link to="u/login" className="text-green-300 underline cursor-pointer">Sign in</Link> to submit content.
+											</p>
+											
+											}
 					</div>
-
-
-
 			
 
 				</div>

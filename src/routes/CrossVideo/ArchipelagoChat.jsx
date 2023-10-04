@@ -22,6 +22,8 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import { useQaWsManager } from '../../components/ArticleComponents/QA_Streaming';
 import ReactMarkdown from "react-markdown";
 
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 
 export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago,collapsed}) {
     const [inputValue, setInputValue] = useState("")
@@ -382,10 +384,17 @@ const toggleExpand = () => {
 
                 <div className="sm:px-5 mt-10 ">
                 {<div class={`${(answerData.answer.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
-<p className="flex flex-row mb-5 sm:ml-6"> 
-<QuizIcon className="text-greenColor dark:text-green-200 mr-2"/>
-<span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
-</p>
+                    <p className="flex flex-row mb-5 sm:ml-6"> 
+                    <QuizIcon className="text-greenColor dark:text-green-200 mr-2"/>
+                    <span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
+                    
+                    <RefreshIcon title="Refresh questions." className="ml-2 text-zinc-500 dark:text-zinc-300 cursor-pointer" onClick={() => {
+                        setSelectedQuestions("")
+                        setI(0)
+                        }}/>
+                    </p>
+
+                    
                 {selectedQuestions.length>0 && selectedQuestions.map((question,index) =>
                 (
                     index%2==0 ? 
