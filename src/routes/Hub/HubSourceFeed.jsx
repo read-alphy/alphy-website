@@ -433,6 +433,7 @@ function HubSourceFeed(props) {
 											
 											:
 											
+											data.length===0 && !isLoading &&
 											<p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300  text-sm"> 
 												<Link to="u/login" className="text-green-300 underline cursor-pointer">Sign in</Link> to submit content.
 											</p>
