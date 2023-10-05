@@ -99,7 +99,7 @@ function Navbar({ collapsed, setCollapsed }) {
 				<div className="flex-row flex">
 				<img src={Logo} width={40} className="hidden dark:block"></img>
 				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-				<h1 className="ml-2 mt-1 text-2xl">ALPHY</h1>
+				<h1 className="ml-2 mt-0.5 text-2xl">ALPHY</h1>
 	
 				</div>
 			</Link>

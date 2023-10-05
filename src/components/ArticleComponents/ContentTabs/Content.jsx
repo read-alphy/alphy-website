@@ -1163,7 +1163,7 @@ return (
 									</div>
 
 
-								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type==="sp" ? "lg:flex" : " hidden"}`}>
+								<div className={`bg-white hidden lg:block dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type==="sp" ? "lg:flex" : " hidden"}`}>
 								<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 									<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto"/>
 									<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline">
@@ -1310,8 +1310,8 @@ return (
 																{isLoading ? (
 																	<Loading />
 																) : summaryArray.length === 0 ? (
-																	<tr className="border-b-0">
-																		<td className="pt-4 pb-4 text-zinc-700 dark:text-zinc-200 ">Still waiting for the summary! Meanwhile, check the transcript.</td>
+																	<tr className="border-b-0 p-6 flex mx-auto justify-center items-center">
+																		<td className="pt-4 pb-4  text-md text-zinc-500 dark:text-zinc-400 ">Still waiting for the summary! Meanwhile, check the transcript.</td>
 																	</tr>
 																) : (
 																	summaryArray.map((item, index) => {

@@ -90,7 +90,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 									<div className="flex-row flex">
 									<img src={Logo} width={40} className="hidden dark:block"></img>
 									<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-									<h1 className="ml-2 text-2xl mt-1 ">ALPHY</h1>
+									<h1 className="ml-2 text-2xl mt-0.5 ">ALPHY</h1>
 						
 									</div>
 								</Link>
