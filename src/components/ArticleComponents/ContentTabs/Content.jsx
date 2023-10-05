@@ -83,7 +83,7 @@ export default function Content(props) {
 	const [transcriptCalled, setTranscriptCalled] = useState(false);
 	const [transcript, setTranscript] = useState([]);
 	const [summaryArray, setSummaryArray] = useState([]);
-	const [showYouTubeFrame, setShowYouTubeFrame] = useState(true);
+	const [showYouTubeFrame, setShowYouTubeFrame] = useState(props.data.source_type !== undefined && props.data.source_type==="sp"?false:true);
 	
 
 	const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] = useState(window.innerWidth <= 1000);
