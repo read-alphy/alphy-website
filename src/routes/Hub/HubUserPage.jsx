@@ -367,7 +367,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
 
                    
-    <div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
+    <div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
 
         <div className="mb-20">
             <div className="flex flex-row mt-20">
@@ -462,7 +462,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                 
                 </div>
 
-            <div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
+            <div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
 
 <div className="min-h-[300px]">
 
@@ -514,7 +514,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
          </div>
         
 
-         <div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
+         <div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-10 mb-10" ></div>
 
 
         <div className="mt-20">

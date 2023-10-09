@@ -286,7 +286,7 @@ function HubSourceFeed(props) {
 						<div className="relative  ">
 
 
-							<div class="relative h-11 ">
+							<div className="relative h-11 ">
 								<input
 									ref={searchInputRef}
 									

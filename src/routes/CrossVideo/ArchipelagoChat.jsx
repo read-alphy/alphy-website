@@ -19,7 +19,7 @@ import Box from '@mui/material/Box';
 import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
 import CloseIcon from '@mui/icons-material/Close';
 import QuizIcon from '@mui/icons-material/Quiz';
-import { useQaWsManager } from '../../components/ArticleComponents/QA_Streaming';
+import QaWsManager from '../../components/ArticleComponents/QaWsManager';
 import ReactMarkdown from "react-markdown";
 
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -56,17 +56,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     }
     
 
-    useQaWsManager(
-		{question:inputValue, 
-		setAnswerData: setAnswerData,
-        arcId:data.uid,
-		triggerWs:triggerWs,
-		setTriggerWs:setTriggerWs,
-		setIsLoadingInside: setIsLoadingInside,
-		isCleared:isCleared,
-        idToken:currentUser!==null ? currentUser.accessToken : null
-	})
-
+ 
 
     
     const selectedItems = [];
@@ -130,6 +120,56 @@ const handleSubmit = () => {
                     setTriggerWs(true)
                     setIsLoadingInside(true)                    
                                 setErrorMessage(false)
+
+
+                               /*  initializeQaWsManager(
+                                    {question:inputValue, 
+                                    setAnswerData: setAnswerData,
+                                    arcId:data.uid,
+                                    triggerWs:triggerWs,
+                                    setTriggerWs:setTriggerWs,
+                                    setIsLoadingInside: setIsLoadingInside,
+                                    isCleared:isCleared,
+                                    idToken:currentUser!==null ? currentUser.accessToken : null
+                                })
+                             */
+
+                                const wsManager = new QaWsManager({
+                                    apiInfo: {
+                                      apiHost: "backend-production-33df.up.railway.app",
+                                      ssl: true,
+                                    },
+                                    callbacks: {
+                                      setSources: (sources) => {
+                                        setIsLoadingInside(false)
+                                     
+                                        setAnswerData((prevData) => ({
+                                          ...prevData,
+                                          sources: sources,
+                                        }));
+                                        
+                                      },
+                                      setAnswer: (answer) => {
+                                        setIsLoadingInside(false)
+                                     
+                                        setAnswerData((prevData) => ({
+                                          ...prevData,
+                                          answer: answer,
+                                        }));
+                                        
+                                      },
+                                      onError: (reason) => {
+                                        console.error(`Error in main: ${reason}`);
+                                      }
+                                    },
+                                    question:inputValue,
+                                    arcId:data.uid,
+                                    idToken:currentUser.accessToken
+                                  });
+                
+                                  setTimeout(() => {
+                                    wsManager.close();
+                                }, 10000);
 
                         setTimeout(() => {
                             
@@ -278,7 +318,7 @@ const toggleExpand = () => {
             </div>
             </div>
 
-            <div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-10 mt-10 dark:opacity-40"></div>
+            <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-10 mt-10 dark:opacity-40"></div>
 
                     </div>
                     <div className="w-full px-3 sm:px-8 ">
@@ -383,7 +423,7 @@ const toggleExpand = () => {
                 {((answerData.answer=="" && isLoadingInside===false)) &&
 
                 <div className="sm:px-5 mt-10 ">
-                {<div class={`${(answerData.answer.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+                {<div className={`${(answerData.answer.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                     <p className="flex flex-row mb-5 sm:ml-6"> 
                     <QuizIcon className="text-greenColor dark:text-green-200 mr-2"/>
                     <span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
@@ -454,7 +494,7 @@ const toggleExpand = () => {
                                 }       
                                 
         </div>
-                {<div class={`${answerData.answer.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
+                {<div className={`${answerData.answer.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                             
                                     <p className={`text-greenColor dark:text-green-200  ml-10 mt-4 mb-4 ${answerData.answer.length===0 && "hidden"}`} >
 

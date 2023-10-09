@@ -620,7 +620,7 @@ function SideFeed(props) {
 
 			<div className="text-sm font-medium text-gray-500   w-full dark:text-zinc-300 dark:border-gray-700">
 
-			<div class="border-b border-zinc-200 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+			<div className="border-b border-zinc-200 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 
 
 <div className="relative">
@@ -666,7 +666,7 @@ function SideFeed(props) {
 								{myBookmarks && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">Bookmarks</span>}
 								{myUploads && <span className="font-sans dark:text-zinc-300 text-zinc-600 rounded-lg  ">My Uploads</span>}
 							</button>
-							<svg class={`w-6 h-6 mr-2 shrink-0 flex justify-right justify-space-between`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+							<svg className={`w-6 h-6 mr-2 shrink-0 flex justify-right justify-space-between`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 						</div>
 					</MenuHandler>
 					<MenuList className=" z-50 -mt-2 w-full lg:min-w-[250px] lg:max-w-[250px] 3xl:max-w-[330px] 3xl:min-w-[330px] bg:zinc-50 dark:bg-mildDarkMode  dark:border-2 dark:border-darkMode ">

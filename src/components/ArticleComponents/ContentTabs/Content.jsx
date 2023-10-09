@@ -40,58 +40,41 @@ import MemoryIcon from '@mui/icons-material/Memory';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function Content(props) {
+	const { currentUser } = useAuth()
+	const navigate = useNavigate()
 
-	const trial_keywordlist=[
-		"Ethereum", "Solana", "Cosmos", "convergent evolution", "Mike Ippolito", "BlockWorks", 
-		"scalability trilemma", "validators", "decentralization", "MEV", "Miner Extractable Value", 
-		"rollups", "bridges", "Bitcoin", "solo stakers", "full node validation", "professional node operators",
-		"app chains", "super chains", "proof-of-stake", "consensus", "Atom", "Eigenlayer", 
-		"blockchain trilemma", "Ethereum Roll-ups", "OP Superchains", "sequencing effect", 
-		"product-market fit", "interoperability", "money", "sequencers", "Babylon", "Arbtrum", 
-		"Optimism", "price discovery", "Liquidity", "Permissionless Conference", "permissionlessness", "governance"
-	  ]
-	  
-	
 	
 	
 
 
-	const [loading, setLoading] = useState(false);
-	const [scrollUpButton, setScrollUpButton] = useState(false);
-	const windowSize = useWindowSize();
+
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
-	const [cautionaryTimeoutPassed, setCautionaryTimeoutPassed] = useState(false);
+
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
-	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	const [showReportIssue, setShowReportIssue] = useState(false);
-	const [showRerportIssueError, setShowReportIssueError] = useState(false);
 	const [language, setLanguage] = useState(props.data.summaries !== undefined && props.data.summaries.length > 1 && props.data.lang !== undefined ? props.data.lang : 'en')
-	const [translationMessage, setTranslationMessage] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const [askText, setAskText] = useState("");
 	const[selectionCall, setSelectionCall] = useState(false);
-	const [openArchipelagoPopover,setOpenArchipelagoPopover] = useState(false);
-	const [selectionPrompt, setSelectionPrompt] = useState("normal");
+	
+
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
 	const [mainPopoverOpenSmall, setMainPopoverOpenSmall] = useState(false);
-	const [transcriptCalled, setTranscriptCalled] = useState(false);
 	const [transcript, setTranscript] = useState([]);
 	const [summaryArray, setSummaryArray] = useState([]);
 	const [showYouTubeFrame, setShowYouTubeFrame] = useState(props.data.source_type !== undefined && props.data.source_type==="sp"?false:true);
-	
-
 	const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] = useState(window.innerWidth <= 1000);
 
-	
+	const [summary, setSummary] = useState("")
+
 	const [inputValue, setInputValue] = useState("");
-	const { currentUser } = useAuth()
-	const navigate = useNavigate()
+
 
 	const buttonRef = useRef(null);
 	const inputRef = useRef(null);
@@ -122,31 +105,27 @@ export default function Content(props) {
 	
 	const title = data.title
 	const inputDate = data.added_ts !== undefined ? data.added_ts.substring(0, 10) : undefined;
-
 	let formattedDate = ""
+useEffect(() => {
+
 	if (inputDate !== undefined && formattedDate.length === 0) {
 		const parts = inputDate.split("-");
 		formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
 
 	}
+}, [inputDate])
 
 
 	let contentSummaries = []
 	let languages = []
-	let summary = ""
+	
 	let model_name=""
 
 
 	const transcript_raw = props.data.transcript;
-	const theme = localStorage.getItem("theme")
+
 
 	const ref = useRef(null);
-	
-
-
-
-
-	
 
 
 	const language_codes = {
@@ -211,35 +190,23 @@ export default function Content(props) {
 	}
 
 	
-
-	if ((props.data !== undefined || props.data !== null) && contentSummaries.length == 0) {
+useEffect(() => {
+	if ((props.data !== undefined && props.data !== null) && contentSummaries.length == 0) {
 		contentSummaries = props.data.summaries
-		
-
-
 		if (contentSummaries !== undefined && contentSummaries.length>0 ) {
-
 			contentSummaries.map(summary => (summary.summary !== undefined&& summary.summary!==null) && languages.push(summary.lang));
-
-
-			summary = contentSummaries.find(summary => summary.lang === language);
-			model_name = summary.model_name
-			
-			
-			
-			
-
+			setSummary(contentSummaries.find(summary => summary.lang === language))
+			if(summary!== undefined && summary!==null){
+				model_name = summary.model_name
+			}
 			if (summary !== undefined && summary.length > 0 && summary.summary === null) {
-				setTranslationMessage(true)
 				languagesWanted.push(language)
 			}
-
-
-
 		}
 		
 
 	}
+}, [props.data,language])
 
 	const reorderedLanguageCodes = {
 		...languages.reduce(
@@ -289,7 +256,7 @@ export default function Content(props) {
 			)
 				.then((response) => {
 					setLanguagesWanted([...languagesWanted, language])
-					setTranslationMessage(true)
+				
 					setTranslatingLanguage(language)
 
 				})
@@ -334,12 +301,12 @@ const handleBookmark = async () => {
 		const windowHeight = ref.current.clientHeight;
 
 		const scrollPosition = ref.current.scrollTop;
-
+/* 
 		if (scrollPosition >= 3 * windowHeight) {
 			setShowButton(true);
 		} else {
 			setShowButton(false);
-		}
+		} */
 	};
 
 
@@ -429,9 +396,8 @@ const handleBookmark = async () => {
 			if (currentUser !== null && currentUser !== undefined) {
 				setShowReportIssue(true);
 			}
-			else {
-				setShowReportIssueError(true)
-			}
+
+			
 		}
 
 	};
@@ -522,9 +488,11 @@ if (transcript.length === 0 && data.transcript !== null) {
 	}	
 		
 
-if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
-	summaryParser();
-}
+useEffect(() => {
+	if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
+		summaryParser();
+	}
+}, [summary])
 
 
 
@@ -682,11 +650,11 @@ if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 		const bodyTextElement = document.getElementById('q_and_a');
 			if (bodyTextElement) {
 				const position = bodyTextElement.getBoundingClientRect();
-				if (position.top < window.innerHeight && position.bottom >= 0) {
+			/* 	if (position.top < window.innerHeight && position.bottom >= 0) {
 					setScrollUpButton(true);
 				} else {
 					setScrollUpButton(false);
-				}
+				} */
   }
 	  };
 
@@ -731,12 +699,24 @@ if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 	}
   }
 
+
+/* useEffect(() => {
+
+	if(summary!==undefined && summary.complete== undefined && activeTabset===false){
+		setActiveTab("tab2")
+	
+	}
+	else if(summary!==undefined && summary.complete!== undefined && activeTabset===false){
+		setActiveTab("tab1")
+	}
+}, [summary])
+
+ */
+
+
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
-			
-
-
-			<div>
+				<div>
 				<div className="grid grid-cols-3 ">
 					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						{model_name==="gpt-4" &&
@@ -794,12 +774,12 @@ return (
 														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center  text-md">Click to watch</p>
 													</a>
 												}												
-												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 												
 
 													<Popover placement="right">
 														<PopoverHandler>
-														<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
+														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
@@ -821,7 +801,7 @@ return (
 													</Popover>
 
 
-												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
 												<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
 													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
@@ -837,15 +817,13 @@ return (
 	</p>
 												</div>
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) &&
-											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>}
+											<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>}
 
 							
 											</div>
 											<p className="mb-2 text-zinc-700 dark:text-zinc-300">Choose Language</p>
-											
 											<Box sx={{minWidth: 200}} className="">
 												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 " size="small">
-													
 													<Select
 													sx={{
 														border: "1px solid #e2e8f0",
@@ -857,7 +835,6 @@ return (
 													MenuProps={MenuProps}
 													className="text-zinc-700 dark:text-zinc-200"
 													>
-													
 													{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 
 (language === code ?
@@ -869,7 +846,7 @@ return (
 
 	(index === languages.length
 		?
-		<div class=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
 		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
 			{name}
@@ -888,7 +865,7 @@ return (
 												</Box>
 
 											<div className="mt-5">
-												<div class="border-b border-gray-100 mx-auto items-center flex dark:opacity-40"></div>
+												<div className="border-b border-gray-100 mx-auto items-center flex dark:opacity-40"></div>
 												
 											</div>
 
@@ -969,12 +946,12 @@ return (
 											<p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md">Click to listen</p>
 										</a>
 									}
-										<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+										<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 												
 
 												<Popover placement="right">
 													<PopoverHandler>
-													<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
+													<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										
@@ -995,7 +972,7 @@ return (
 													</PopoverContent>
 												</Popover>
 
-												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
 									
 									{(currentUser && data && data.submitter_id!==currentUser.uid) &&
 									<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
@@ -1016,7 +993,7 @@ return (
 												</div>
 												}
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) ?
-											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>:null}
+											<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>:null}
 									
 										<p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80">Choose Language</p>
 									
@@ -1042,7 +1019,7 @@ return (
 
 	(index === languages.length
 		?
-		<div class=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
 		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
 			{name}
@@ -1060,7 +1037,7 @@ return (
 												</FormControl>
 												</Box>
 
-									<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
+									<div className="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
 									
 
 
@@ -1123,7 +1100,7 @@ return (
 				</div> */}
 
 				<div id="content-area ">
-					{transcript.length > 0 && (summary!==undefined && language == summary.lang)
+					{transcript.length > 0  && ((summary!==undefined && summary.complete!==undefined && language == summary.lang) || (summary!== undefined && summary.complete===undefined)) 
 						?
 						<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 							{transcript.length > 0 &&
@@ -1269,17 +1246,17 @@ return (
 
 											<Selection.Root>
 											<Selection.Portal>
-      <Selection.Content>
-		
-			<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-600 dark:text-zinc-800 " onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
-					
-		
-			 <Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
+												<Selection.Content>
+													
+														<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-600 dark:text-zinc-800 " onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
+																
+													
+														<Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
 
-      </Selection.Content>
-    </Selection.Portal>
-    <Selection.Trigger>
-	
+												</Selection.Content>
+												</Selection.Portal>
+												<Selection.Trigger>
+												
 
   
 											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200  " >
@@ -1493,10 +1470,10 @@ return (
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.tier!==undefined && props.tier!=="free" ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
-										: <p>Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"} </a> page for more detail</p>}
+										: <p>Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "account" : "plans"}</a> page for more detail</p>}
 
 									{/* 	<div className="ml-4 mt-12">
-						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
+						<button type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
 					</div> */}
 								</p>
 							}

@@ -151,7 +151,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					
 					?
 					<div>
-					<div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-4" ></div>
+					<div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-4" ></div>
 					<p className="text-zinc-700 dark:text-zinc-300 mt-10 ml-4 mb-2  text-l">Sources</p>
 					<div className={`overflow-y-scroll ${collapsed ? "max-h-[55vh] 2xl:max-h-[66vh]" : "max-h-[65vh] 2xl:max-h-[66vh]"}`} >
 						            

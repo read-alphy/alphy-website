@@ -79,7 +79,7 @@ const handleShowWelcomeMessage = () => {
       {/*   <form onSubmit={(e) => changeMetadata(e)}>
           <div>
           <span> What kind of work do you do?</span>
-          <Select value={profession} variant="static" className={`select-option border border-gray-400 rounded-md h-10 text-md mt-5 focus:border-greenColor`} onChange= {handleProfession} required name="workType" id="workType" class="form-control">
+          <Select value={profession} variant="static" className={`select-option border border-gray-400 rounded-md h-10 text-md mt-5 focus:border-greenColor`} onChange= {handleProfession} required name="workType" id="workType" className="form-control">
           <Option className="hover:bg-zinc-50" value="">Select...</Option>
                 <Option className="hover:bg-zinc-50" value="academic">Academic Research</Option>
                 <Option className="hover:bg-zinc-50" value="education">Education</Option>
@@ -97,7 +97,7 @@ const handleShowWelcomeMessage = () => {
 
             <div className="mt-10">
             <p for="useCase">In what area do you think Alphy will support you the most?</p>
-        <Select  value={forWhat} variant="static" className={`select-option border border-gray-400 rounded-md h-10 text-md mt-5 focus:border-greenColor`} onChange={handleForWhat} required name="useCase" id="useCase" class="form-control">
+        <Select  value={forWhat} variant="static" className={`select-option border border-gray-400 rounded-md h-10 text-md mt-5 focus:border-greenColor`} onChange={handleForWhat} required name="useCase" id="useCase" className="form-control">
             <Option className="hover:bg-zinc-50" value="">Select...</Option>
             <Option className="hover:bg-zinc-50" value="learnNewThings">Learn A Skillset Faster</Option>
             <Option className="hover:bg-zinc-50" value="researchSupport">Support My Research</Option>
@@ -110,7 +110,7 @@ const handleShowWelcomeMessage = () => {
         </div>
         <div className="mt-10">
             <p for="useCase">Where did you hear from us?</p>
-        <Select  value={fromWhere} variant="static" className={`select-option border border-gray-400 rounded-md h-10 text-md mt-5 focus:border-greenColor`} onChange={handleFromWhere}  required name="useCase" id="useCase" class="form-control">
+        <Select  value={fromWhere} variant="static" className={`select-option border border-gray-400 rounded-md h-10 text-md mt-5 focus:border-greenColor`} onChange={handleFromWhere}  required name="useCase" id="useCase" className="form-control">
             <Option className="hover:bg-zinc-50" value="">Select...</Option>
             <Option className="hover:bg-zinc-50" value="twitter">Twitter</Option>
             <Option className="hover:bg-zinc-50" value="recommendation">Recommendation (friend, co-worker, community)</Option>

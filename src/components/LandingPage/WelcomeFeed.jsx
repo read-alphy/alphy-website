@@ -523,17 +523,17 @@ function WelcomeFeed(props) {
 
 
 
-			<div class="text-sm font-light text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700 ">
-				<ul class="flex flex-row pt-4 overflow-x-hidden">
+			<div className="text-sm font-light text-center text-gray-500  dark:text-zinc-300 dark:border-gray-700 ">
+				<ul className="flex flex-row pt-4 overflow-x-hidden">
 					
 			
 								
 					
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("my_works")} class={`inline-block p-2 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
+					<li className={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
+						<button onClick={() => navigateFeeds("my_works")} className={`inline-block p-2 sm:p-4 py-4  ${myWorks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light"} ${currentUser == null || dataPersonal.length == 0 ? "" : ""}  rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>My Works</button>
 					</li>
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("my_uploads")} class={`relative infline-flex p-2 py-4 sm:p-4  ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
+					<li className={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
+						<button onClick={() => navigateFeeds("my_uploads")} className={`relative infline-flex p-2 py-4 sm:p-4  ${myUploads ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>
 
 							<span> My Uploads </span>
 							
@@ -541,16 +541,16 @@ function WelcomeFeed(props) {
 
 
 					</li>
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("my_bookmarks")} class={`inline-block p-2 sm:p-4 py-4  ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
+					<li className={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
+						<button onClick={() => navigateFeeds("my_bookmarks")} className={`inline-block p-2 sm:p-4 py-4  ${myBookmarks ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Bookmarks</button>
 					</li>
 
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("global")} class={`inline-block p-2 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
+					<li className={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
+						<button onClick={() => navigateFeeds("global")} className={`inline-block p-2 py-4 sm:p-4 ${global ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Global</button>
 					</li>
 					
-					<li class={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
-						<button onClick={() => navigateFeeds("archipelagos")} class={`inline-block p-2 py-4 sm:p-4 sm:mr-10 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Arcs</button>
+					<li className={`${window.innerWidth>400 && "pr-4", window.innerWidth<400 && window.innerWidth>380 && "pr-3"} lg:w-[120px]`} >
+						<button onClick={() => navigateFeeds("archipelagos")} className={`inline-block p-2 py-4 sm:p-4 sm:mr-10 ${archipelagos ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-light border-greenColor" : "hover:text-gray-600 hover:border-gray-300 font-light "}   rounded-t-lg  dark:text-zinc-200 dark:border-blue-000`}>Arcs</button>
 					</li> 
 
 
@@ -574,7 +574,7 @@ function WelcomeFeed(props) {
 						<div className="relative w-full  ">
 
 
-							<div class="relative w-full min-w-[200px] h-11 ">
+							<div className="relative w-full min-w-[200px] h-11 ">
 								<input
 									ref={searchInputRef}
 									
@@ -800,7 +800,7 @@ function WelcomeFeed(props) {
 									<div>
 
 										<p className="mb-4">Premium users can transcribe, summarize, and question their own audio files in over 50 languages. </p>
-										<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+										<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 										<ol>
 											<li className="mb-2">1) Choose an audio file and upload to Alphy from below.</li>
 											<li className="mb-2">2) Alphy will process your file the same way it does with online content, providing you the transcript, summary, key takeaways, and a chatbot.</li>
@@ -823,7 +823,7 @@ function WelcomeFeed(props) {
 						{dataUploads.length > 0 &&
 							<div className={`${file !== null ? "md:mt-20 mt-10" : ""}`}>
 								<p className="text-zinc-600 dark:text-zinc-300 font-sans text-xl">Previous Works</p>
-								<div class="border-b border-gray-200  flex mt-5 dark:opacity-40 items-center w-2/12 "></div>
+								<div className="border-b border-gray-200  flex mt-5 dark:opacity-40 items-center w-2/12 "></div>
 
 								{dataUploads.length > 10 &&
 									<form
@@ -856,7 +856,7 @@ function WelcomeFeed(props) {
 										</label>
 										<div className="relative w-full  ">
 
-											<div class="relative w-full min-w-[200px] h-11 ">
+											<div className="relative w-full min-w-[200px] h-11 ">
 												<input
 													ref={searchInputRef}
 
@@ -972,7 +972,7 @@ function WelcomeFeed(props) {
 		
 		
 		</div>
-		<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
+		<div className={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
 
 		{currentUser &&
 		<div>
@@ -1042,7 +1042,7 @@ function WelcomeFeed(props) {
 
 
 
-<div class={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
+<div className={` mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>
 </div>}
 
 		{<div>

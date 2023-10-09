@@ -254,7 +254,7 @@ const handleKeyDown = (event) => {
                 <span className="text-sm ">Go Back</span>
                 </a></div>
                 <div className=" flex flex-row w-full items-center">
-            <div class="relative w-full min-w-[200px] h-12 mt-10 ">
+            <div className="relative w-full min-w-[200px] h-12 mt-10 ">
             
             <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1">Title</p>
 
@@ -285,11 +285,11 @@ const handleKeyDown = (event) => {
             
                 
                 </div>
-                <div class=" mt-10 border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+                <div className=" mt-10 border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
                 <p className="mt-4 lg:mt-10 mb-2     text-zinc-700 dark:text-zinc-300 ml-1">Curate your knowledge hub</p>
                 <p className="mt-2 mb-6 text-zinc-600 dark:text-zinc-400 ml-1 text-sm">Search by keyword or paste a link.</p>
                 <div className="w-full grid grid-cols-5 lg:grid-cols-6 ">
-				<div class="col-span-5 lg:col-span-6 relative w-full min-w-[200px] h-12">
+				<div className="col-span-5 lg:col-span-6 relative w-full min-w-[200px] h-12">
                     
 							<input 
 							value={inputValue}
@@ -300,8 +300,8 @@ const handleKeyDown = (event) => {
 
 
                             </input>
-                            <label class={`${inputValue.length===0 ? "pl-6": ""}  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor`}>Search from our database...</label>
-                        <div class="grid place-items-center absolute text-blue-gray-500 top-2/4 left-3 -translate-y-2/4 w-5 h-5">
+                            <label className={`${inputValue.length===0 ? "pl-6": ""}  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor`}>Search from our database...</label>
+                        <div className="grid place-items-center absolute text-blue-gray-500 top-2/4 left-3 -translate-y-2/4 w-5 h-5">
                         <SearchIcon className="text-zinc-400" fontSize="small"/>
                         </div>
                           
@@ -405,7 +405,7 @@ const handleKeyDown = (event) => {
             </div>
             
             <div className="col-span-3 grid-row-2 flex justify-start  lg:p-10 drop-shadow-sm">
-            												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+            												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 
                 <div className=" lg:border-l w-full lg:px-10 mx-auto lg:min-w-[550px]">
                 <p className="mt-20 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Arc"}</p>
