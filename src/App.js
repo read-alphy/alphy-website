@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar';
 import { useState } from 'react';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Article from './components/Article';
 import PrivacyPolicy from './routes/PrivacyPolicy';
@@ -72,10 +72,11 @@ function App() {
 	}
 	const verification = (urlParams.get('mode')=="verifyEmail");
 	
-	const stripePromise = useMemo(() => {
-		
-		return loadStripe(`${process.env.REACT_APP_STRIPE_PK}`);
-	  }, []);
+
+
+	const stripePromise = loadStripe(
+		`${process.env.REACT_APP_STRIPE_PK}`
+	);
 
 useEffect(() => {
 	getDataGlobalArchipelagos(0, true, true)
