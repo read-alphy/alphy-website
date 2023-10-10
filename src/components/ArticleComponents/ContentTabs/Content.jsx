@@ -62,6 +62,7 @@ export default function Content(props) {
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const [askText, setAskText] = useState("");
 	const[selectionCall, setSelectionCall] = useState(false);
+	const [modelName, setModelName] = useState("");
 	
 
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
@@ -119,7 +120,7 @@ useEffect(() => {
 	let contentSummaries = []
 	let languages = []
 	
-	let model_name=""
+	
 
 
 	const transcript_raw = props.data.transcript;
@@ -188,7 +189,12 @@ useEffect(() => {
 		"vi": "Tiếng Việt",
 		"cy": "Cymraeg"
 	}
-
+useEffect(() => {
+	if(summary!== undefined && summary!==null){
+		setModelName(summary.model_name)
+	}
+},[summary]
+)
 	
 useEffect(() => {
 	if ((props.data !== undefined && props.data !== null) && contentSummaries.length == 0) {
@@ -196,9 +202,7 @@ useEffect(() => {
 		if (contentSummaries !== undefined && contentSummaries.length>0 ) {
 			contentSummaries.map(summary => (summary.summary !== undefined&& summary.summary!==null) && languages.push(summary.lang));
 			setSummary(contentSummaries.find(summary => summary.lang === language))
-			if(summary!== undefined && summary!==null){
-				model_name = summary.model_name
-			}
+			
 			if (summary !== undefined && summary.length > 0 && summary.summary === null) {
 				languagesWanted.push(language)
 			}
@@ -719,7 +723,7 @@ return (
 				<div>
 				<div className="grid grid-cols-3 ">
 					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
-						{model_name==="gpt-4" &&
+						{modelName==="gpt-4" &&
 						<div className="relative flex flex-col">
 						<div className="relative flex flex-row group cursor-default">
 						  <WorkspacePremiumIcon className="text-indigo-400"/>
@@ -733,7 +737,7 @@ return (
 								
 								}
 
-								{model_name==="gpt-3.5-turbo-16k" &&
+								{modelName==="gpt-3.5-turbo-16k" &&
 										<div className="relative flex flex-col">
 										<div className="relative flex flex-row group cursor-default">
 										<MemoryIcon className="text-gray-500"/>
