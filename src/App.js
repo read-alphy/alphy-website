@@ -199,7 +199,7 @@ useEffect(() => {
 		})
 
     }
-	const limit = 20
+	const limit = 40
 	
 
 
