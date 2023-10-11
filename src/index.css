@@ -113,6 +113,9 @@ ul {
 	padding-bottom: 2px
 }
 
+span {
+	user-select: text;
+  }
 /* 
 
 

@@ -174,7 +174,7 @@ function HubArcFeed(props) {
 										<div className="relative  ">
 
 
-											<div class="relative h-11 ">
+											<div className="relative h-11 ">
 												<input
 													ref={searchInputRef}
 													
@@ -242,7 +242,7 @@ function HubArcFeed(props) {
 								</Link>
 
 									
-								<div class="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-20 mb-10" ></div>
+								<div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-20 mb-10" ></div>
 
 										{/* {hasMore && (
 											<div className="w-full flex justify-center">

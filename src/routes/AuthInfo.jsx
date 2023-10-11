@@ -248,26 +248,26 @@ verificationMessage==false ?
 			<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300">{isRegister ? 'Create an account' : 'Login'}	</h1>
 			
 		<form onSubmit={isRegister ? handleRegisterWithEmail : handleLoginWithEmail}>
-		<div class="relative z-0 w-full mb-6 group">
+		<div className="relative z-0 w-full mb-6 group">
 
 
-			<input value={email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-			<label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+			<input value={email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
+			<label for="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
 		</div>
-		<div class="relative z-0 w-full mb-6 group">
+		<div className="relative z-0 w-full mb-6 group">
 		
 
-			<input onChange={handlePasswordChange} type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-			<label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+			<input onChange={handlePasswordChange} type="password" name="floating_password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
+			<label for="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
 		
 		</div>
 		{isRegister ? 
-		<div class="relative z-0 w-full mb-6 group">
-			<input onChange={handleRepeatPasswordChange} type="password" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-			<label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+		<div className="relative z-0 w-full mb-6 group">
+			<input onChange={handleRepeatPasswordChange} type="password" name="repeat_password" id="floating_repeat_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
+			<label for="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
 		</div>
 		:null}
-		<div class="grid md:grid-cols-2 md:gap-6">
+		<div className="grid md:grid-cols-2 md:gap-6">
 
 		</div>
 		
@@ -289,9 +289,9 @@ verificationMessage==false ?
 		</div>
 		<div className="">
 		<div className="flex items-center mt-10 mb-10">
-				<div class="border-b border-gray-300 w-[200px] mr-3"></div>
+				<div className="border-b border-gray-300 w-[200px] mr-3"></div>
 				<span className="text-sm text-gray-400 font-light_">OR</span>
-				<div class="border-b border-gray-300 w-[200px] ml-3 "></div>
+				<div className="border-b border-gray-300 w-[200px] ml-3 "></div>
 		</div>
 
 		<button
@@ -320,9 +320,9 @@ verificationMessage==false ?
 				<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700">Reset Password	</h1>
 				<p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10">Enter your email address and we will send you a link to reset your password.</p>
 					<form onSubmit={sendResetPasswordMail}>
-					<div class="relative z-0 w-full mb-6 group">
-						<input value={auth.currentUser ? auth.currentUser.email : email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-						<label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+					<div className="relative z-0 w-full mb-6 group">
+						<input value={auth.currentUser ? auth.currentUser.email : email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
+						<label for="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
 					</div>
 					<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Send Link</span>}</Button>
 					</form>
@@ -339,19 +339,19 @@ verificationMessage==false ?
 				<h1 className="text-xl mb-8">Pick a New Password	</h1>
 				<p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300">You are about to reset your password. Please make sure your new password is longer than 8 characters.</p> 
 					<form onSubmit={handlePasswordResetConfirmation}>
-{/* 					<div class="relative z-0 w-full mb-6 group">
-						<input value={email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-						<label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+{/* 					<div className="relative z-0 w-full mb-6 group">
+						<input value={email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
+						<label for="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
 					</div> */}
 
-					<div class="relative z-0 w-full mb-6 group">
-							<input onChange={handlePasswordChange} type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-							<label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+					<div className="relative z-0 w-full mb-6 group">
+							<input onChange={handlePasswordChange} type="password" name="floating_password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
+							<label for="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
 						</div>
 		
-				<div class="relative z-0 w-full mb-6 group">
-					<input onChange={handleRepeatPasswordChange} type="password" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-					<label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+				<div className="relative z-0 w-full mb-6 group">
+					<input onChange={handleRepeatPasswordChange} type="password" name="repeat_password" id="floating_repeat_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
+					<label for="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
 				</div>
 				{error && <div className="text-red-500 text-sm mb-8 mt-5">{error}</div>}
 				

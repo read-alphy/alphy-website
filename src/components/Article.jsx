@@ -173,36 +173,38 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
 /* 	const url_bookmark= `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}/bookmark`
  */	
-if(called===false){
-	
-	if (source_type==="up" && data.length===0 && currentUser!==null){
-		setCalled(true)
-		fetchDataUpload(url,false);
-				
-	}
-	if (source_type!=="up" && data.length===0 && currentUser!==null){
-		setCalled(true)
-		fetchData(url,false);
-
-	}
-	else if (source_type!=="up" && data.length===0 && currentUser===null){
-		setCalled(true)
-		fetchData(url,false);
-		
-	}
-}
 
 
 
-		
 
 	useEffect(() => {
+		if(called===false && data.complete!==true){
+			
+	
+			if (source_type==="up" && data.length===0 && currentUser!==null){
+				setCalled(true)
+				fetchDataUpload(url,false);
+						
+			}
+			if (source_type!=="up" && data.length===0 && currentUser!==null){
+				setCalled(true)
+				fetchData(url,false);
+		
+			}
+			else if (source_type!=="up" && data.length===0 && currentUser===null){
+				setCalled(true)
+				fetchData(url,false);
+				
+			}
+		}
+
+		
 		if (currentUser!==null && bookmarkChecked===false){
 			setTimeout(() => {
 				checkBookmark()
 			}, 1000);
 		}
-	}, )
+	},[data] )
 
 
 

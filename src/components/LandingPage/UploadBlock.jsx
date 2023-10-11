@@ -185,22 +185,22 @@ export default function UploadBlock({currentUser, tier, credit}) {
             (
                 tier === "premium"
                     ?
-                    <div  class="flex items-center justify-center w-full">
-                        <label {...getRootProps()}  for="dropzone-file" class={`flex flex-col items-center justify-center w-full border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
-                            <div   class={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${isDragActive ? "" : ""}`} >
+                    <div  className="flex items-center justify-center w-full">
+                        <label {...getRootProps()}  for="dropzone-file" className={`flex flex-col items-center justify-center w-full border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `} >
+                            <div   className={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${isDragActive ? "" : ""}`} >
                                 {!isDragActive ?
                                     <div className="items-center justify-center flex flex-col px-2">
                                         {!errorMessage ? 
                                         <div className="items-center justify-center flex flex-col">
                                         <CloudUploadIcon fontSize="large" className="text-indigo-400 mb-4 "/>
                                         
-                                        <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-300"><span className="font-semibold">Click to upload an audio file</span> or drag and drop.</p>
-                                        <p class="text-xs text-zinc-600 dark:text-zinc-300"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
+                                        <p className="mb-2 text-sm text-zinc-500 dark:text-zinc-300"><span className="font-semibold">Click to upload an audio file</span> or drag and drop.</p>
+                                        <p className="text-xs text-zinc-600 dark:text-zinc-300"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
                                         </div>
                                         :
                                         <div className="items-center justify-center flex flex-col">
-                                        <p class="mb-2 text-sm text-red-500"><span className="">Please make sure you submit one of the following file types!</span></p>
-                                        <p class="text-xs text-zinc-600 dark:text-zinc-300"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
+                                        <p className="mb-2 text-sm text-red-500"><span className="">Please make sure you submit one of the following file types!</span></p>
+                                        <p className="text-xs text-zinc-600 dark:text-zinc-300"> We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM</p>
                                         </div>
                                     }
 
@@ -210,15 +210,15 @@ export default function UploadBlock({currentUser, tier, credit}) {
                                             <svg className="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-300 items-center flex" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
-                                        <p class="mb-2 text-sm text-zinc-600 dark:text-zinc-300 font-sans">
+                                        <p className="mb-2 text-sm text-zinc-600 dark:text-zinc-300 font-sans">
                                     
                                             <strong>Drop your file here. </strong></p>
                                     </div>
                                 }
                             </div>
 
-                            <input {...getInputProps()} className="" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
-                            <input  onChange={handleFileUpload} type="file" class="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+                            <input {...getInputProps()} className="" className="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+                            <input  onChange={handleFileUpload} type="file" className="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 
 
                             <audio className="hidden" ref={audioRef} controls />
@@ -254,8 +254,8 @@ export default function UploadBlock({currentUser, tier, credit}) {
                             <div className="lg:col-span-3 hidden lg:flex  lg:justify-center lg:mt-2 ">
                                 {/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"}`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} /> */}
 
-                                <div class={`${uploadProgress === 0 && "hidden"} w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700 mt-2`} >
-                                    <div class={`bg-indigo-400 h-3 rounded-full `} style={{ width: uploadProgress + "%" }}></div>
+                                <div className={`${uploadProgress === 0 && "hidden"} w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700 mt-2`} >
+                                    <div className={`bg-indigo-400 h-3 rounded-full `} style={{ width: uploadProgress + "%" }}></div>
                                 </div>
 
                                 {/*  */}					{fileUploading === false && <p className="text-sm  text-zinc-500 dark:text-zinc-300 italic font-sans w-full flex justify-center lg:mt-2">Click continue to process the file...</p>}
@@ -270,8 +270,8 @@ export default function UploadBlock({currentUser, tier, credit}) {
                     <div className="col-span-1 flex flex-col lg:flex-row lg:items-center lg:justify-center  lg:margin-auto">
 
                         {fileUploading === 0 && <p className="text-sm  text-zinc-500 dark:text-zinc-300 italic font-sans my-4 lg:hidden">Click continue to process the file...</p>}
-                        <div class={`${uploadProgress === 0 && "hidden"} my-4 lg:hidden w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700`} >
-                            <div class={`bg-indigo-400 h-3 rounded-full w-[${uploadProgress}%]`} style={{ width: uploadProgress + "%" }}></div>
+                        <div className={`${uploadProgress === 0 && "hidden"} my-4 lg:hidden w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700`} >
+                            <div className={`bg-indigo-400 h-3 rounded-full w-[${uploadProgress}%]`} style={{ width: uploadProgress + "%" }}></div>
                         </div>
                         {/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
 */}

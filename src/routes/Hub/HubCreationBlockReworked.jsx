@@ -258,7 +258,7 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
                         </div>
                 </div>
 
-        <div class=" mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
+        <div className=" mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
 
         <div className="justify-center flex flex-col ">
                     

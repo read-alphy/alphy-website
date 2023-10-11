@@ -90,7 +90,7 @@ useEffect(() => {
 		handleArcInfo()
 	}
 	else if((isArc || isEditArc) && sessionStorage.getItem("arcAction")==="true"){
-		console.log("hey")
+		
 		sessionStorage.removeItem("arcAction")
 		window.location.reload()
 	}

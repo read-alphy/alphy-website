@@ -118,10 +118,10 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                              </div>
                              }
                                      
-                              <div class="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
+                              <div className="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 
                               <div className="grid grid-cols-3 justify-items-center px-2 mb-8">
-                                  <a href="https://twitter.com/alphyapp" className="cursor-pointer">
+                                  <a href="https://twitter.com/alphyapp" className="cursor-pointer" target="_blank">
                                   <TwitterIcon fontSize="small" className="text-[#ced4da]"/>
                                   </a>
                                   <a href="mailto:support@alphy.app" className="cursor-pointer">

@@ -49,7 +49,7 @@ export default function HubContent({arcs, currentUser,tier,userArchipelagos, dat
                         <HubArcFeed  currentUser={currentUser} tier={tier} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                         mainShow={mainShow} setMainShow={setMainShow}  collapsed={collapsed}/>
                         <HubSourceFeed currentUser={currentUser} tier={tier} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
-                        mainShow={mainShow} setMainShow={setMainShow} />
+                        mainShow={mainShow} setMainShow={setMainShow} credit={credit}  />
                     </div>
                     :
                 (

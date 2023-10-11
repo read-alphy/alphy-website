@@ -35,61 +35,47 @@ import {
 	ThemeProvider,
 	Button
 } from "@material-tailwind/react";	
-
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import MemoryIcon from '@mui/icons-material/Memory';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function Content(props) {
+	const { currentUser } = useAuth()
+	const navigate = useNavigate()
 
-	const trial_keywordlist=[
-		"Ethereum", "Solana", "Cosmos", "convergent evolution", "Mike Ippolito", "BlockWorks", 
-		"scalability trilemma", "validators", "decentralization", "MEV", "Miner Extractable Value", 
-		"rollups", "bridges", "Bitcoin", "solo stakers", "full node validation", "professional node operators",
-		"app chains", "super chains", "proof-of-stake", "consensus", "Atom", "Eigenlayer", 
-		"blockchain trilemma", "Ethereum Roll-ups", "OP Superchains", "sequencing effect", 
-		"product-market fit", "interoperability", "money", "sequencers", "Babylon", "Arbtrum", 
-		"Optimism", "price discovery", "Liquidity", "Permissionless Conference", "permissionlessness", "governance"
-	  ]
-	  
-	
 	
 	
 
 
-	const [loading, setLoading] = useState(false);
-	const [scrollUpButton, setScrollUpButton] = useState(false);
-	const windowSize = useWindowSize();
+
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
-	const [cautionaryTimeoutPassed, setCautionaryTimeoutPassed] = useState(false);
+
 	const [activeTab, setActiveTab] = useState('tab1');
 	const [autoplay, setAutoplay] = useState(0);
 	const [timestamp, setTimestamp] = useState();
-	const [showButton, setShowButton] = useState(false);
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	const [showReportIssue, setShowReportIssue] = useState(false);
-	const [showRerportIssueError, setShowReportIssueError] = useState(false);
 	const [language, setLanguage] = useState(props.data.summaries !== undefined && props.data.summaries.length > 1 && props.data.lang !== undefined ? props.data.lang : 'en')
-	const [translationMessage, setTranslationMessage] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const [askText, setAskText] = useState("");
 	const[selectionCall, setSelectionCall] = useState(false);
-	const [openArchipelagoPopover,setOpenArchipelagoPopover] = useState(false);
-	const [selectionPrompt, setSelectionPrompt] = useState("normal");
+	const [modelName, setModelName] = useState("");
+	
+
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
 	const [mainPopoverOpenSmall, setMainPopoverOpenSmall] = useState(false);
-	const [transcriptCalled, setTranscriptCalled] = useState(false);
 	const [transcript, setTranscript] = useState([]);
 	const [summaryArray, setSummaryArray] = useState([]);
-	const [showYouTubeFrame, setShowYouTubeFrame] = useState(true);
-	
-
+	const [showYouTubeFrame, setShowYouTubeFrame] = useState(props.data.source_type !== undefined && props.data.source_type==="sp"?false:true);
 	const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] = useState(window.innerWidth <= 1000);
 
-	
+	const [summary, setSummary] = useState("")
+
 	const [inputValue, setInputValue] = useState("");
-	const { currentUser } = useAuth()
-	const navigate = useNavigate()
+
 
 	const buttonRef = useRef(null);
 	const inputRef = useRef(null);
@@ -120,31 +106,27 @@ export default function Content(props) {
 	
 	const title = data.title
 	const inputDate = data.added_ts !== undefined ? data.added_ts.substring(0, 10) : undefined;
-
 	let formattedDate = ""
+useEffect(() => {
+
 	if (inputDate !== undefined && formattedDate.length === 0) {
 		const parts = inputDate.split("-");
 		formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
 
 	}
+}, [inputDate])
 
 
 	let contentSummaries = []
 	let languages = []
-	let summary = ""
-
+	
+	
 
 
 	const transcript_raw = props.data.transcript;
-	const theme = localStorage.getItem("theme")
+
 
 	const ref = useRef(null);
-	
-
-
-
-
-	
 
 
 	const language_codes = {
@@ -207,35 +189,28 @@ export default function Content(props) {
 		"vi": "Tiếng Việt",
 		"cy": "Cymraeg"
 	}
-
+useEffect(() => {
+	if(summary!== undefined && summary!==null){
+		setModelName(summary.model_name)
+	}
+},[summary]
+)
 	
-
-	if ((props.data !== undefined || props.data !== null) && contentSummaries.length == 0) {
+useEffect(() => {
+	if ((props.data !== undefined && props.data !== null) && contentSummaries.length == 0) {
 		contentSummaries = props.data.summaries
-		
-
-
 		if (contentSummaries !== undefined && contentSummaries.length>0 ) {
-
 			contentSummaries.map(summary => (summary.summary !== undefined&& summary.summary!==null) && languages.push(summary.lang));
-
-
-			summary = contentSummaries.find(summary => summary.lang === language);
+			setSummary(contentSummaries.find(summary => summary.lang === language))
 			
-			
-			
-
 			if (summary !== undefined && summary.length > 0 && summary.summary === null) {
-				setTranslationMessage(true)
 				languagesWanted.push(language)
 			}
-
-
-
 		}
 		
 
 	}
+}, [props.data,language])
 
 	const reorderedLanguageCodes = {
 		...languages.reduce(
@@ -285,7 +260,7 @@ export default function Content(props) {
 			)
 				.then((response) => {
 					setLanguagesWanted([...languagesWanted, language])
-					setTranslationMessage(true)
+				
 					setTranslatingLanguage(language)
 
 				})
@@ -330,12 +305,12 @@ const handleBookmark = async () => {
 		const windowHeight = ref.current.clientHeight;
 
 		const scrollPosition = ref.current.scrollTop;
-
+/* 
 		if (scrollPosition >= 3 * windowHeight) {
 			setShowButton(true);
 		} else {
 			setShowButton(false);
-		}
+		} */
 	};
 
 
@@ -425,9 +400,8 @@ const handleBookmark = async () => {
 			if (currentUser !== null && currentUser !== undefined) {
 				setShowReportIssue(true);
 			}
-			else {
-				setShowReportIssueError(true)
-			}
+
+			
 		}
 
 	};
@@ -518,9 +492,11 @@ if (transcript.length === 0 && data.transcript !== null) {
 	}	
 		
 
-if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
-	summaryParser();
-}
+useEffect(() => {
+	if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
+		summaryParser();
+	}
+}, [summary])
 
 
 
@@ -678,11 +654,11 @@ if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 		const bodyTextElement = document.getElementById('q_and_a');
 			if (bodyTextElement) {
 				const position = bodyTextElement.getBoundingClientRect();
-				if (position.top < window.innerHeight && position.bottom >= 0) {
+			/* 	if (position.top < window.innerHeight && position.bottom >= 0) {
 					setScrollUpButton(true);
 				} else {
 					setScrollUpButton(false);
-				}
+				} */
   }
 	  };
 
@@ -727,16 +703,56 @@ if (summaryArray.length===0 && summary!==undefined && summary.summary!==null){
 	}
   }
 
+
+/* useEffect(() => {
+
+	if(summary!==undefined && summary.complete== undefined && activeTabset===false){
+		setActiveTab("tab2")
+	
+	}
+	else if(summary!==undefined && summary.complete!== undefined && activeTabset===false){
+		setActiveTab("tab1")
+	}
+}, [summary])
+
+ */
+
+
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
-			
-
-
-			<div>
+				<div>
 				<div className="grid grid-cols-3 ">
 					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
-						<div className="flex flex-row ">
-							<h1 className="col-span-2 mt-10 text-xl lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+						{modelName==="gpt-4" &&
+						<div className="relative flex flex-col">
+						<div className="relative flex flex-row group cursor-default">
+						  <WorkspacePremiumIcon className="text-indigo-400"/>
+						  <p className="text-indigo-400 ml-2">Premium Processing</p>
+						  <span className="absolute opacity-0 group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
+							This content was processed with advanced AI models accessible to Premium.
+						  </span>
+						</div>
+					  </div>				  
+					  
+								
+								}
+
+								{modelName==="gpt-3.5-turbo-16k" &&
+										<div className="relative flex flex-col">
+										<div className="relative flex flex-row group cursor-default">
+										<MemoryIcon className="text-gray-500"/>
+										<p className="text-gray-500 ml-2">Standard Processing</p>
+										<span className="absolute opacity-0 group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:bottom-full z-50 mb-2 ml-4">
+											This content was processed with standard AI models.
+										</span>
+										</div>
+									</div>		
+
+
+
+								}
+						<div className="flex flex-row ml-1">
+							<h1 className="col-span-2 mt-6 text-xl  lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 								{data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
 							</h1>
 
@@ -762,12 +778,12 @@ return (
 														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center  text-md">Click to watch</p>
 													</a>
 												}												
-												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 												
 
 													<Popover placement="right">
 														<PopoverHandler>
-														<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
+														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
@@ -789,7 +805,7 @@ return (
 													</Popover>
 
 
-												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
 												<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
 													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
@@ -805,15 +821,13 @@ return (
 	</p>
 												</div>
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) &&
-											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>}
+											<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>}
 
 							
 											</div>
 											<p className="mb-2 text-zinc-700 dark:text-zinc-300">Choose Language</p>
-											
 											<Box sx={{minWidth: 200}} className="">
 												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 " size="small">
-													
 													<Select
 													sx={{
 														border: "1px solid #e2e8f0",
@@ -825,7 +839,6 @@ return (
 													MenuProps={MenuProps}
 													className="text-zinc-700 dark:text-zinc-200"
 													>
-													
 													{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 
 (language === code ?
@@ -837,7 +850,7 @@ return (
 
 	(index === languages.length
 		?
-		<div class=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
 		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
 			{name}
@@ -856,7 +869,7 @@ return (
 												</Box>
 
 											<div className="mt-5">
-												<div class="border-b border-gray-100 mx-auto items-center flex dark:opacity-40"></div>
+												<div className="border-b border-gray-100 mx-auto items-center flex dark:opacity-40"></div>
 												
 											</div>
 
@@ -888,7 +901,7 @@ return (
 								
 							</div>
 						</div>
-						<div className="col-span-2   grid grid-cols-2 flex flex-row">
+						<div className="col-span-2  ml-1 grid grid-cols-2 flex flex-row">
 							<div className="col-span-1">
 
 								<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light_ flex flex-row">
@@ -900,7 +913,6 @@ return (
 
 								</h2>
 								
-
 							</div>
 
 						
@@ -938,12 +950,12 @@ return (
 											<p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md">Click to listen</p>
 										</a>
 									}
-										<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
+										<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 												
 
 												<Popover placement="right">
 													<PopoverHandler>
-													<button onClick={() => setOpenArchipelagoPopover()} className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
+													<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										
@@ -964,7 +976,7 @@ return (
 													</PopoverContent>
 												</Popover>
 
-												<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
 									
 									{(currentUser && data && data.submitter_id!==currentUser.uid) &&
 									<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
@@ -985,7 +997,7 @@ return (
 												</div>
 												}
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) ?
-											<div class="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>:null}
+											<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>:null}
 									
 										<p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80">Choose Language</p>
 									
@@ -1011,7 +1023,7 @@ return (
 
 	(index === languages.length
 		?
-		<div class=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
 		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
 			{name}
@@ -1029,7 +1041,7 @@ return (
 												</FormControl>
 												</Box>
 
-									<div class="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
+									<div className="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
 									
 
 
@@ -1063,30 +1075,36 @@ return (
 
 				</div>
 
-		{/* 	<div className="flex flex-col border border-gray-200 rounded-lg p-10 text-zinc-500 max-w-[750px]">
-			<h1 className="font-bold text-xl text-indigo-500 mb-5"> Blockworks Macro - Is Macro A Threat To Crypto? Jim Bianco, Mark Yusko, Jurrien Timmer at Permissionless 2023</h1>
+			{/* <div className="flex flex-col border border-gray-200 rounded-lg p-10 text-zinc-500 max-w-[750px]">
+			<h1 className="font-bold text-xl text-red-400 mb-5"> Bankless - The Blockchain Trilemma - ETH Vs SOL Vs ATOM with Mike Ippolito</h1>
 			
-			<p className="font-bold text-lg text-zinc-600">Opportunity 1 : Bitcoin Is Not At Its Fair Value</p>
+			<p className="font-bold text-lg text-zinc-600">Opportunity 3 : Investing in Ethereum</p>
 			<div className="flex flex-col gap-y-4">
-			<p className="mt-4">The fair value of Bitcoin based on network growth and real rates is estimated to be in the low 50,000s, while the current price is around 26,000, indicating potential undervaluation. The upcoming halving event in Bitcoin will also double the fair value, attracting more interest and potential price appreciation.</p>
+			<p className="mt-4">The speaker regards Ethereum's model of prioritizing decentralized validators as pluses. Ethereum optimizes on allowing solo stakers to still validate the chain, hence enhanced security. This shows robustness and commitment to maintaining a decentralized network, which could translate to market strength and potential return on investment.</p>
 			<p className="font-semibold text-zinc-600">Implications</p> 
-			<p>The undervaluation of Bitcoin may lead to increased buying interest and accumulation, potentially driving up the price. This could also have positive implications for other cryptocurrencies as market sentiment towards digital assets improves.</p>
+			<p>Growth in Ethereum could potentially influence its layer 2 platforms, creating an upward wave in the sector. If Ethereum continues to scale and remain resilient, this could also attract more developers building around its ecosystem, which brings more value to Ethereum
+
+			</p>
 </div>
 	<div className="flex flex-col gap-y-4">
     <p className="mt-4 font-semibold text-zinc-600">Risk Assessment</p>
-    <p>There is a risk that the fair value estimation may not be accurate or that external factors could impact the price of Bitcoin independently of network growth and real rates. Volatility and regulatory uncertainties in the crypto market also pose risks.</p>
+    <p>
+	The risk lies in potential scalability issues and the highly contentious nature of changes in the Ethereum network. Slow transaction speeds and high gas fees during peak times could affect user experience negatively
+	</p>
 	</div>
 	<div className="flex flex-col">
     <p className="mt-4 font-semibold text-zinc-600">DYOR</p>
-	<p>To further research this opportunity, retail investors can analyze the network growth and real rates impact on Bitcoin's price, follow expert opinions on fair value estimations, and stay updated on news and developments related to the upcoming halving event.</p>
+	<p>Investors should review Ethereum's roadmap, its plans for addressing scalability, and its view on maintaining ecosystem decentralization. Explore Ethereum's reddit, twitter, EIPs and understand the updates in Ethereum 2.0.
+
+	</p>
 	</div>
 
-	<p className="mt-6 text-indigo-500 underline">See timestamped sources from the discussion ></p>
+	<p className="mt-6 text-red-400 underline">See timestamped sources from the discussion ></p>
   
-				</div>
- */}
+				</div> */}
+
 				<div id="content-area ">
-					{transcript.length > 0 && (summary!==undefined && language == summary.lang)
+					{transcript.length > 0  && ((summary!==undefined && summary.complete!==undefined && language == summary.lang) || (summary!== undefined && summary.complete===undefined)) 
 						?
 						<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 							{transcript.length > 0 &&
@@ -1126,11 +1144,11 @@ return (
 									</div>
 
 
-								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 w-[360px] h-[240px] z-50 ${data.source_type==="sp" ? "lg:flex" : " hidden"}`}>
+								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type==="sp" ? "hidden lg:flex" : " hidden"}`}>
 								<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 									<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto"/>
 									<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline">
-										Listen to <span className="font-bold">"{title}"</span>  on Twitter
+										Listen to <span className="font-bold pb-6 hyphenate">"{`${title}`.substring(0,90)} {title.length>90 && "..."}"</span>  on Twitter
 									</p>
 
 									</a>
@@ -1142,7 +1160,7 @@ return (
 									
 									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="yt" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
 										{showYouTubeFrame ? 
-										<ClearIcon fontSize="large" className="text-white "/>
+										<ArrowDownwardIcon fontSize="large" className="text-white "/>
 										:
 										<YouTubeIcon fontSize="large" className="text-white"/>
 										}
@@ -1152,7 +1170,7 @@ return (
 									
 									<button onClick={handleShowYouTubeFrame}className={`z-50 fixed hidden ${data.source_type=="sp" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
 										{showYouTubeFrame ? 
-										<ClearIcon fontSize="large" className="text-white "/>
+										<ArrowDownwardIcon fontSize="large" className="text-white "/>
 										:
 										<TwitterIcon fontSize="large" className="text-white"/>
 										}
@@ -1232,17 +1250,17 @@ return (
 
 											<Selection.Root>
 											<Selection.Portal>
-      <Selection.Content>
-		
-			<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-600 dark:text-zinc-800 " onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
-					
-		
-			 <Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
+												<Selection.Content>
+													
+														<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-600 dark:text-zinc-800 " onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
+																
+													
+														<Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
 
-      </Selection.Content>
-    </Selection.Portal>
-    <Selection.Trigger>
-	
+												</Selection.Content>
+												</Selection.Portal>
+												<Selection.Trigger>
+												
 
   
 											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200  " >
@@ -1273,8 +1291,8 @@ return (
 																{isLoading ? (
 																	<Loading />
 																) : summaryArray.length === 0 ? (
-																	<tr className="border-b-0">
-																		<td className="pt-4 pb-4 text-zinc-700 dark:text-zinc-200 ">Still waiting for the summary! Meanwhile, check the transcript.</td>
+																	<tr className="border-b-0 p-6 flex mx-auto justify-center items-center">
+																		<td className="pt-4 pb-4  text-md text-zinc-500 dark:text-zinc-400 ">Still waiting for the summary! Meanwhile, check the transcript.</td>
 																	</tr>
 																) : (
 																	summaryArray.map((item, index) => {
@@ -1456,10 +1474,10 @@ return (
 								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.tier!==undefined && props.tier!=="free" ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
-										: <p>Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "Account" : "Plans"} </a> page for more detail</p>}
+										: <p>Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "account" : "plans"}</a> page for more detail</p>}
 
 									{/* 	<div className="ml-4 mt-12">
-						<button type="button" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
+						<button type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
 					</div> */}
 								</p>
 							}

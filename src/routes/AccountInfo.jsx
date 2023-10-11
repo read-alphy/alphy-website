@@ -208,7 +208,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                                         }
                                                                                         <p className="mt-2">Plan</p>
                                                                             </div> 
-                                                                <div class="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
+                                                                <div className="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
                                                                             <div className="col-span-1 text-zinc-600 dark:text-zinc-200 text-sm">
                                                                                 <p className="mb-2">{currentUser.email}</p>
                                                                                 <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
@@ -250,7 +250,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                             </div>
                                                             :null}
                                 </div>
-{/*                                 {currentUser && <div class="border-b border-gray-300 w-[50vw] mt-10 mb-20 mx-auto items-center flex"></div>}
+{/*                                 {currentUser && <div className="border-b border-gray-300 w-[50vw] mt-10 mb-20 mx-auto items-center flex"></div>}
 
  */}
                                 
@@ -297,7 +297,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                                 }
                                                                                 <p className="mt-2">Plan</p>
                                                                     </div> 
-                                                        {/* <div class="border-r border-gray-300 h-[10vh] col-span-1 mx-auto items-center flex"></div> */}
+                                                        {/* <div className="border-r border-gray-300 h-[10vh] col-span-1 mx-auto items-center flex"></div> */}
                                                                     <div className="col-span-2 text-black dark:text-zinc-200 text-sm ml-6">
                                                                         <p className="mb-3">{currentUser.email}</p>
                                                                         <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>

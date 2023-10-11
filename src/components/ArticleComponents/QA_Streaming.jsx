@@ -2,23 +2,22 @@
 import { useEffect } from 'react';
 import QaWsManager from './QaWsManager';
 
-export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTriggerWs, isCleared, setIsLoadingInside,arcId,idToken}) => {
+export const initializeQaWsManager = ({question, source,setAnswerData,triggerWs,setTriggerWs, isCleared, setIsLoadingInside,arcId,idToken}) => {
   let wsManager
   
-  useEffect(() => {
+
     if(isCleared){
       setAnswerData({answer:"",sources:[]})
     }
-
     if(triggerWs!==true){
       return
     }
 
-    setTriggerWs(false)
     
+    setTriggerWs(false)
     wsManager = new QaWsManager({
       apiInfo: {
-        apiHost: "backend-staging-2459.up.railway.app",
+        apiHost: "backend-production-33df.up.railway.app",
         ssl: true,
       },
       callbacks: {
@@ -50,13 +49,13 @@ export const useQaWsManager = ({question, source,setAnswerData,triggerWs,setTrig
       idToken:idToken
     });
 
-    
+   
 
     // Close the WebSocket connection after 10 seconds
     setTimeout(() => {
       wsManager.close();
     }, 10000);
-  }, [question, source, arcId,triggerWs]); // Re-run the effect if `question` or `arcId` or `source` changes
+  ; // Re-run the effect if `question` or `arcId` or `source` changes
 
 
   
