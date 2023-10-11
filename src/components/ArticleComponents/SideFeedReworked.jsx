@@ -80,7 +80,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 	};
 
 	return (
-		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } flex flex-col transition-all duration-300 ease-in-out overflow-y-hidden `} >
+		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `} >
 
 			{!collapsed ? 
 			<div className="flex flex-col flex-grow ">
