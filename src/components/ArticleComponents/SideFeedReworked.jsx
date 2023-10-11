@@ -80,10 +80,10 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 	};
 
 	return (
-		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } relative transition-all duration-300 ease-in-out`} >
+		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } flex flex-col transition-all duration-300 ease-in-out overflow-y-hidden `} >
 
 			{!collapsed ? 
-			<div className="">
+			<div className="flex flex-col flex-grow ">
 							<div className={`flex items-center font-bold pt-8 relative`}>
 
 									<Link to="/" className="text-zinc-800 dark:text-gray-200 pl-4 sm:pl-6 ">
@@ -187,7 +187,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					</div>
 					</div>
 
-					:<div className="absolute bottom-0 w-full">
+					:<div className="flex flex-grow justify-end items-end w-full">
 					<FooterReworked currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut} tier={tier}/>
 					</div>
 
@@ -248,7 +248,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 								</div>
 					</div>
 
-					<div className="items-end absolute bottom-0 w-full pb-4">
+					<div className="flex flex-grow justify-end items-end w-full mt-4 pb-4">
 								<FooterReworked collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut}/>
 						</div>
 

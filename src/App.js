@@ -183,7 +183,6 @@ useEffect(() => {
         )
             
             .then(r => {
-			
 				/* console.log(r.data) */
 				if(r.data.current_tier!== null){
 				setTier(r.data.current_tier)
@@ -193,8 +192,6 @@ useEffect(() => {
 					setCustomerID(r.data.customer_id)
 					setCredit(r.data.rem_mins_sub_credits[0] + r.data.rem_mins_sub_credits[1])
 					setCalled(true)
- 
-             
             })
 		})
 

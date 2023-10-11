@@ -80,7 +80,7 @@ if((tier!== undefined || tier!==null) && subCalled===false){
 			
 			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
 			
-			{<div className={` hidden sm:block  `}>
+			{<div className={` hidden sm:block `}>
 				
 				<SideFeedReworked 
 				
