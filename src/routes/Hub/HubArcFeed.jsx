@@ -9,10 +9,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@mui/icons-material/Add';
 import {Link} from 'react-router-dom'
-
-
-
-
+import { API_URL } from '../../constants';
 
 
 function HubArcFeed(props) {
@@ -95,7 +92,7 @@ function HubArcFeed(props) {
 
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${API_URL || 'http://localhost:3001'
 				}/sources/?q=${search}&offset=${offset}&limit=${limit}`
 			)
 			.then((response) => {

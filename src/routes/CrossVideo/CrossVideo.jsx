@@ -14,9 +14,7 @@ import Loading from '../../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import jsonData from "./arcs_and_thumbnails.json"
-
-
-
+import { API_URL } from '../../constants';
 
 
 function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArchipelagos,setUserArchipelagos,credit, setContentName,setCreditCalled}) {
@@ -106,7 +104,7 @@ const handleArcInfo = async () => {
 		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		try {
-			const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
+			const response = await axios.get(`${API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
 			
 			setCalled(true)
 			
@@ -170,7 +168,7 @@ else{
 						
 				
 						setIsLoadingSubmit(true)
-					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
+					axios.post(`${API_URL || 'http://localhost:3001'}/playlists/`, {	
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
 						"description": archipelagoDescription,
@@ -197,7 +195,7 @@ else{
 				else if(isEditArc){
 					setIsLoadingSubmit(true)
 					sessionStorage.setItem("arcAction", "true")
-					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
+					axios.patch( `${API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
 						"description": archipelagoDescription,
@@ -241,7 +239,7 @@ else{
 const handleDeleteArchipelago = () => {
 	setIsLoadingDelete(true)
 
-	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`,
+	axios.delete(`${API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`,
 	{
 		headers: {
 			'id-token': currentUser.accessToken,

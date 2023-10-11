@@ -2,6 +2,7 @@ import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ReplayIcon from '@mui/icons-material/Replay';
 import axios from 'axios';
 import {Link} from "react-router-dom"
+import { API_URL } from '../../../constants';
 
 export default function BookmarkFeedItem ({item, index, source_id, imageUrl, language_codes, currentUser, setRemoved, removed, sideFeed, setCollapsed})
 {
@@ -11,7 +12,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 	const removeBookmark =  () => {
 		
 		axios.patch(
-			`${process.env.REACT_APP_API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
+			`${API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
 			{},
 	{
 						headers: {

@@ -12,6 +12,7 @@ import SourceCardForDetail from './SourceCardForDetail';
 import {initializeQaWsManager}  from './QA_Streaming';
 import ReactMarkdown from "react-markdown";
 import QaWsManager from './QaWsManager';
+import { API_HOST, API_SSL } from '../../constants';
 
 
 export default function QuestionAnswering(props) {
@@ -238,8 +239,8 @@ export default function QuestionAnswering(props) {
 			
 				const wsManager = new QaWsManager({
 					apiInfo: {
-					  apiHost: "backend-production-33df.up.railway.app",
-					  ssl: true,
+						apiHost: API_HOST,
+						ssl: API_SSL,
 					},
 					callbacks: {
 					  setSources: (sources) => {

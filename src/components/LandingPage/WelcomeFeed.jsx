@@ -23,7 +23,7 @@ import { useDropzone } from 'react-dropzone';
 import ArchipelagoCard from './ArchipelagoCard';
 import ArchipelagoCreationCard from './ArchipelagoCreationCard';
 import { Carousel } from '@trendyol-js/react-carousel';
-
+import { API_URL } from '../../constants';
 
 
 function WelcomeFeed(props) {
@@ -176,7 +176,7 @@ function WelcomeFeed(props) {
 
 		axios
 			.post(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/upload`, file,
+				`${API_URL || 'http://localhost:3001'}/sources/upload`, file,
 				{
 
 					headers: {
@@ -317,7 +317,7 @@ function WelcomeFeed(props) {
 
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${API_URL || 'http://localhost:3001'
 				}/sources/?q=${search}&offset=${offset}&limit=${limit}`
 			)
 			.then((response) => {
@@ -343,7 +343,7 @@ function WelcomeFeed(props) {
 		if (currentUser) {
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/?q=${search}&offset=${offset}&limit=${limit}&only_my=submits`, {
 					headers: {
 						'id-token': idtoken,
@@ -387,7 +387,7 @@ function WelcomeFeed(props) {
 			setIsLoadingBookmarks(true)
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/?q=${search}&offset=${offsetBookmarks}&limit=${limit}&only_my=bookmarks`, {
 					headers: {
 						'id-token': idtoken,
@@ -433,7 +433,7 @@ function WelcomeFeed(props) {
 			currentUser.getIdToken().then((idtoken) =>
 
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/${search.length > 0 ? `?q=${search}&` : "?"}limit=${limit}&offset=${offsetUploads}&only_my=uploads`, {
 					headers: {
 						'id-token': idtoken,

@@ -5,7 +5,7 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import Dialog from '@mui/material/Dialog';
 import { useState, useRef,useEffect} from "react";
 import axios from "axios";
-
+import { API_URL } from "../../constants";
 
 
 export default function PremiumCard({tier,openPopover,setOpenPopover, currentUser, triggers}){
@@ -59,7 +59,7 @@ const inputRef = useRef(null);
         
         await currentUser.getIdToken().then((idToken) => {
 
-        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=premium`,{},
+        axios.post(`${API_URL}/payments/subscription?subscription_type=premium`,{},
             {
                 headers: {
                     'id-token': idToken,

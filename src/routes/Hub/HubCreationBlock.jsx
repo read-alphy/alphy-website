@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import PublishIcon from '@mui/icons-material/Publish';
 import { Button} from "@material-tailwind/react";
-
+import { API_URL } from '../../constants';
 
 
 
@@ -91,7 +91,7 @@ export default function HubCreationBlock({currentUser, tier, credit}){
 					
 				axios
 						.post(
-							`${process.env.REACT_APP_API_URL}/sources/`,
+							`${API_URL}/sources/`,
 							{
 								url: inputValue,
 							},

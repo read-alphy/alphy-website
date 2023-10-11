@@ -13,9 +13,10 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ChatIcon from '@mui/icons-material/Chat';
 import LinkIcon from '@mui/icons-material/Link';
+import { API_URL } from '../../constants';
+
 
 export default function HubUserPage({currentUser,credit,tier,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow, collapsed, setCollapsed}){
-
     const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState('');
@@ -70,7 +71,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 		if (currentUser) {
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/?q=${search}&offset=${offsetPersonal}&limit=${limit}&only_my=submits`, {
 					headers: {
 						'id-token': idtoken,
@@ -113,7 +114,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 			setIsLoadingBookmarks(true)
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/?q=${search}&offset=${offsetBookmarks}&limit=${limit}&only_my=bookmarks`, {
 					headers: {
 						'id-token': idtoken,
@@ -157,7 +158,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 			currentUser.getIdToken().then((idtoken) =>
 
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/${search.length > 0 ? `?q=${search}&` : "?"}limit=${limit}&offset=${offsetUploads}&only_my=uploads`, {
 					headers: {
 						'id-token': idtoken,

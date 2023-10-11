@@ -19,6 +19,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Navbar from '../Navbar';
+import { API_URL } from '../../constants';
 
 function SideFeed(props) {
 
@@ -92,7 +93,7 @@ function SideFeed(props) {
 			currentUser.getIdToken().then((idtoken) =>
 
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/${search_input.length > 0 ? `?q=${search_input}&` : "?"}limit=${limit}&offset=${offsetPersonal}&only_my=submits`, {
 					headers: {
 						'id-token': idtoken,
@@ -122,7 +123,7 @@ function SideFeed(props) {
 			setIsLoadingBookmarks(true)
 			currentUser.getIdToken().then((idtoken) =>
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/?q=${search}&offset=${offsetBookmarks}&limit=${limit}&only_my=bookmarks`, {
 					headers: {
 						'id-token': idtoken,
@@ -164,7 +165,7 @@ function SideFeed(props) {
 			currentUser.getIdToken().then((idtoken) =>
 
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/${search_input.length > 0 ? `?q=${search_input}&` : "?"}limit=${limit}&offset=${offsetUploads}&only_my=uploads`, {
 					headers: {
 						'id-token': idtoken,
@@ -261,7 +262,7 @@ function SideFeed(props) {
 
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${API_URL || 'http://localhost:3001'
 				}/sources/${search_input.length > 0 ? `?q=${search_input}&` : "?"}limit=${limit}&offset=${offset}`
 			)
 			.then((response) => {

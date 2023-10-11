@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { set } from 'lodash';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-
+import { API_URL } from '../../constants';
 
 
 export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,archipelagoDescription ,tier, archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago,errorMessage,credit, setCreditCalled}){
@@ -64,7 +64,7 @@ export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,arc
         if (/* inputValue.length>0 */ true) {
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${API_URL || 'http://localhost:3001'
 				}/sources/?q=${inputValue}&offset=${offset}&limit=${limit}`
 			)
 			.then((response) => {
@@ -155,7 +155,7 @@ export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,arc
                 
             axios
                     .post(
-                        `${process.env.REACT_APP_API_URL}/sources/`,
+                        `${API_URL}/sources/`,
                         {
                             url: inputValue,
                         },

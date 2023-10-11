@@ -25,13 +25,7 @@ import FAQ from "./routes/FAQ"
 import SubmitPage from "./routes/Hub/SubmitPage"
 import WelcomeForm from './components/WelcomeForm';
 import { set } from 'lodash';
-
-
-
-
-
-
-
+import {API_URL, STRIPE_PK, UNDER_CONSTRUCTION} from "./constants"
 
 
 const firebaseConfig = {	
@@ -71,12 +65,7 @@ function App() {
 		}
 	}
 	const verification = (urlParams.get('mode')=="verifyEmail");
-	
-
-
-	const stripePromise = loadStripe(
-		`${process.env.REACT_APP_STRIPE_PK}`
-	);
+	const stripePromise = loadStripe(STRIPE_PK);
 
 useEffect(() => {
 	getDataGlobalArchipelagos(0, true, true)
@@ -150,7 +139,7 @@ useEffect(() => {
 		}
 
 		if(userArcsCalled === false){
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
+		axios.get(`${API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
 			setUserArchipelagos(response.data)
 			setUserArcsCalled(true)
 		})
@@ -174,7 +163,7 @@ useEffect(() => {
 		
         const idToken = await currentUser.getIdToken().then((idToken) => {
 
-        axios.get(`${process.env.REACT_APP_API_URL}/payments/status`,
+        axios.get(`${API_URL}/payments/status`,
         {
             headers: {
                 'id-token': idToken,
@@ -217,7 +206,7 @@ useEffect(() => {
 			return;
 		}
 		setIsLoadingGlobalArchipelagos(true);
-		axios.get(`${process.env.REACT_APP_API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
+		axios.get(`${API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
 		.then((response) => {
 
 			if(firstTime){
@@ -283,7 +272,7 @@ useEffect(() => {
 		</Helmet> 
 		
 			<Elements stripe={stripePromise}>
-				{process.env.REACT_APP_UNDER_CONSTRUCTION === 'true' ? (
+				{UNDER_CONSTRUCTION === 'true' ? (
 					<>
 						<div className="sm:flex sm:flex-row items-center justify-center h-screen bg-[#2D3136]">
 							<img src={image} alt="robot" className="sm:w-1/2" />

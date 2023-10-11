@@ -6,7 +6,7 @@ import axios from 'axios';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
 import {Link, useNavigate} from 'react-router-dom'
 import {Button, Spinner} from "@material-tailwind/react";
-
+import { API_URL } from '../../constants';
 
 
 function HubSourceFeed(props) {
@@ -94,7 +94,7 @@ function HubSourceFeed(props) {
 
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${API_URL || 'http://localhost:3001'
 				}/sources/?q=${search}&offset=${offset}&limit=${limit}`
 			)
 			.then((response) => {
@@ -212,7 +212,7 @@ function HubSourceFeed(props) {
                 
             axios
                     .post(
-                        `${process.env.REACT_APP_API_URL}/sources/`,
+                        `${API_URL}/sources/`,
                         {
                             url: search,
                         },
