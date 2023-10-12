@@ -16,11 +16,10 @@ import { Helmet } from "react-helmet";
 
 
 
-function Article({ source_type, collapsed, setCollapsed, tier,setContentName,userArchipelagos}) {
+function Article({ source_type, collapsed, setCollapsed, tier,setContentName,userArchipelagos,currentUser}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
-	const {currentUser} = useAuth();
 	const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	const [isBookmarked, setIsBookmarked] = useState(false);
 	const [data, setData] = useState([]);
@@ -126,7 +125,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 
 	const fetchDataUpload = async (url, constantFetch) => {
-	
+		
 	
 		try {
 			if(constantFetch===false){
@@ -158,7 +157,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 			if (error.response?.status === 404) {
 				setIsLoading(false);
 				console.log("error3",error)
-				navigate('/404');
+				/* navigate('/404'); */
 			}
 			console.error(`Error fetching data: ${error}`);
 		} finally {
@@ -179,10 +178,13 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 	useEffect(() => {
 		if(called===false && data.complete!==true){
+
+
 			
-	
+			
 			if (source_type==="up" && data.length===0 && currentUser!==null){
 				setCalled(true)
+				
 				fetchDataUpload(url,false);
 						
 			}
@@ -204,7 +206,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 				checkBookmark()
 			}, 1000);
 		}
-	},[data] )
+	},[data,currentUser] )
 
 
 

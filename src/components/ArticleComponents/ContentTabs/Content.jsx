@@ -332,11 +332,13 @@ const handleBookmark = async () => {
 	const parts = url.split("/");
 	const upPart = parts[3];
 
-	setTimeout(() => {
+
+	useEffect(() => {
 		if (upPart === "up" && data.length === 0 && basicDataLoaded === true) {
-			navigate("/404")
+			/* navigate("/404") */
 		}
-	}, 1000);
+	
+	}, [basicDataLoaded,data])
 
 	useEffect(() => {
 
