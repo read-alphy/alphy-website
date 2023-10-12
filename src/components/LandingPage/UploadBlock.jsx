@@ -5,7 +5,7 @@ import {Button} from "@material-tailwind/react";
 import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import VerifiedIcon from '@mui/icons-material/Verified';
-
+import { API_URL } from '../../constants';
 
 export default function UploadBlock({currentUser, tier, credit}) {
     const [uploadProgress, setUploadProgress] = useState(0)
@@ -70,7 +70,7 @@ export default function UploadBlock({currentUser, tier, credit}) {
 
 		axios
 			.post(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/upload`, file,
+				`${API_URL || 'http://localhost:3001'}/sources/upload`, file,
 				{
 
 					headers: {

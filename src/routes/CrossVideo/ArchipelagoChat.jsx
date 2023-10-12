@@ -23,6 +23,7 @@ import QaWsManager from '../../components/ArticleComponents/QaWsManager';
 import ReactMarkdown from "react-markdown";
 
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { API_HOST, API_SSL } from '../../constants';
 
 
 export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago,collapsed}) {
@@ -136,8 +137,8 @@ const handleSubmit = () => {
 
                                 const wsManager = new QaWsManager({
                                     apiInfo: {
-                                      apiHost: "backend-production-33df.up.railway.app",
-                                      ssl: true,
+                                      apiHost: API_HOST,
+                                      ssl: API_SSL,
                                     },
                                     callbacks: {
                                       setSources: (sources) => {

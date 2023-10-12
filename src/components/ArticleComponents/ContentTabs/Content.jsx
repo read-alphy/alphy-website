@@ -38,6 +38,8 @@ import {
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import MemoryIcon from '@mui/icons-material/Memory';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { API_URL } from '../../../constants';
+
 
 export default function Content(props) {
 	const { currentUser } = useAuth()
@@ -247,7 +249,7 @@ useEffect(() => {
 		await currentUser.getIdToken().then((idToken) => {
 
 			axios.post(
-				`${process.env.REACT_APP_API_URL}/sources/${data.source_type}/${data.source_id}?lang=${language}`,
+				`${API_URL}/sources/${data.source_type}/${data.source_id}?lang=${language}`,
 				{
 					lang: language,
 				},
@@ -282,7 +284,7 @@ const handleBookmark = async () => {
 	await currentUser.getIdToken().then((idToken) => {
 		
 	axios.patch(
-		`${process.env.REACT_APP_API_URL}/sources/${data.source_type}/${data.source_id}/bookmark?bookmark=${changeBookmark}`,
+		`${API_URL}/sources/${data.source_type}/${data.source_id}/bookmark?bookmark=${changeBookmark}`,
 		{},
 {
 					headers: {
@@ -603,8 +605,8 @@ useEffect(() => {
 			"source_type":data.source_type, 
 			}
 			if(create===false){
-				axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}?nof_questions=10&tracks=true`).then	((response) => {
-					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`, {
+				axios.get(`${API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}?nof_questions=10&tracks=true`).then	((response) => {
+					axios.patch( `${API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`, {
 				"user_id": currentUser.uid,
 				"sources": [...response.data.tracks,newSource],
 			})
@@ -617,7 +619,7 @@ useEffect(() => {
 					}
 
 		else if(create===true){
-			axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
+			axios.post(`${API_URL || 'http://localhost:3001'}/playlists/`, {	
 						"name": title,
 						"user_id": currentUser.uid,
 						"sources": [newSource],

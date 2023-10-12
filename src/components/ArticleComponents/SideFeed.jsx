@@ -19,6 +19,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Navbar from '../Navbar';
+import { API_URL } from '../../constants';
 
 function SideFeed(props) {
 
@@ -92,7 +93,7 @@ function SideFeed(props) {
 			currentUser.getIdToken().then((idtoken) =>
 
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/${search_input.length > 0 ? `?q=${search_input}&` : "?"}limit=${limit}&offset=${offsetPersonal}&only_my=submits`, {
 					headers: {
 						'id-token': idtoken,
@@ -120,32 +121,31 @@ function SideFeed(props) {
 		setIsLoadingBookmarks(true);
 		if (currentUser) {
 			setIsLoadingBookmarks(true)
-			currentUser.getIdToken().then((idtoken) =>
-				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/sources/?q=${search}&offset=${offsetBookmarks}&limit=${limit}&only_my=bookmarks`, {
+			currentUser.getIdToken().then((idtoken) => {
+				const params = {
+					offset: offsetBookmarks,
+					limit,
+					only_my: "bookmarks"
+				}
+				if (search) {
+					params.search = search
+				}
+				axios.get(`${API_URL}/sources/`, {
+					params,
 					headers: {
 						'id-token': idtoken,
 					}
 				})
 					.then((response) => {
 						setHasMoreBookmarks(!(response.data.length < limit));
-
-
-
-
 						if (firstTimeBookmarks) {
 							setDataBookmarks(response.data);
-
-
 						} else {
 							setDataBookmarks([...dataBookmarks, ...response.data]);
 						}
 						setIsLoadingBookmarks(false);
-					})).catch((error) => {
+					})}).catch((error) => {
 						setIsLoadingBookmarks(false);
-
-
 					});
 		};
 	};
@@ -153,7 +153,6 @@ function SideFeed(props) {
 		if (!hasMoreUploads) {
 			return;
 		}
-
 
 		setIsLoadingUploads(true);
 
@@ -164,7 +163,7 @@ function SideFeed(props) {
 			currentUser.getIdToken().then((idtoken) =>
 
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/${search_input.length > 0 ? `?q=${search_input}&` : "?"}limit=${limit}&offset=${offsetUploads}&only_my=uploads`, {
 					headers: {
 						'id-token': idtoken,
@@ -261,7 +260,7 @@ function SideFeed(props) {
 
 		axios
 			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+				`${API_URL || 'http://localhost:3001'
 				}/sources/${search_input.length > 0 ? `?q=${search_input}&` : "?"}limit=${limit}&offset=${offset}`
 			)
 			.then((response) => {

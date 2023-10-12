@@ -13,6 +13,7 @@ import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
+import { API_URL } from '../constants';
 
 
 
@@ -94,7 +95,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 		await currentUser.getIdToken() 
 		.then((idToken) => {
 		
-		axios.get(`${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}/bookmark`,
+		axios.get(`${API_URL}/sources/${source_type}/${source_id}/bookmark`,
 					
 					{
 						headers: {
@@ -169,8 +170,8 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const { width } = useWindowSize();
 
 
-	const url = `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}`;
-/* 	const url_bookmark= `${process.env.REACT_APP_API_URL}/sources/${source_type}/${source_id}/bookmark`
+	const url = `${API_URL}/sources/${source_type}/${source_id}`;
+/* 	const url_bookmark= `${API_URL}/sources/${source_type}/${source_id}/bookmark`
  */	
 
 

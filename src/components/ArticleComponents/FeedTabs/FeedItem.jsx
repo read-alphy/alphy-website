@@ -9,6 +9,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { set } from 'lodash';
 import {Link} from "react-router-dom"
 import { useLocation } from 'react-router-dom';
+import { API_URL } from '../../../constants';
 
 const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago,forDetail,forCreationPool}) => {
 	const source_id = item!==undefined && item.source_id;
@@ -90,7 +91,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 	}
 	const removeBookmark =  () => {
 		axios.patch(
-			`${process.env.REACT_APP_API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
+			`${API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
 			{},
 	{
 						headers: {

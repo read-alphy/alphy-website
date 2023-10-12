@@ -6,7 +6,7 @@ import axios from 'axios';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
 import {Link, useNavigate} from 'react-router-dom'
 import {Button, Spinner} from "@material-tailwind/react";
-
+import { API_URL } from '../../constants';
 
 
 function HubSourceFeed(props) {
@@ -81,8 +81,7 @@ function HubSourceFeed(props) {
 			localStorage.setItem('search', '');
 		}
 	});
-	const temp = 16;
-	const limit = temp;
+	const limit = 16;
 	const searchInputRef = React.useRef(null);
 
 
@@ -93,9 +92,17 @@ function HubSourceFeed(props) {
 		setIsLoading(true);
 
 		axios
-			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/sources/?q=${search}&offset=${offset}&limit=${limit}`
+			.get(`${API_URL}/sources/`, {
+					params: {
+						q: search,
+						offset: offset,
+						limit,
+						// only_my: "submits" | "uploads" | "bookmarks",
+					},
+					// headers: { //TODO: this fails since we dont have the token yet.
+					// 	'id-token': idToken,
+					// }
+				}
 			)
 			.then((response) => {
 				setHasMore(!(response.data.length < limit));
@@ -109,33 +116,15 @@ function HubSourceFeed(props) {
 			})
 
 	};
-
-	
 	
 	const loadMore = () => {
-		
 			setOffset(offset + limit);
 			getData(offset + limit, false, true);
-	
-
-
-
 	};
-
-	
-	
 	
 	if (called === false && search.length===0) {
-
-		
 			getData(0, true, true);
-			
 			setCalled(true);
-	
-		
-		
-
-
 	}
 	useEffect(() => {
         if (prevLength > 0 && search.length === 0) {
@@ -212,7 +201,7 @@ function HubSourceFeed(props) {
                 
             axios
                     .post(
-                        `${process.env.REACT_APP_API_URL}/sources/`,
+                        `${API_URL}/sources/`,
                         {
                             url: search,
                         },

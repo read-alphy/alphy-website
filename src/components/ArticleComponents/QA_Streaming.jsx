@@ -1,6 +1,7 @@
 // QaWsManagerHook.js
 import { useEffect } from 'react';
 import QaWsManager from './QaWsManager';
+import { API_HOST, API_SSL } from '../../constants';
 
 export const initializeQaWsManager = ({question, source,setAnswerData,triggerWs,setTriggerWs, isCleared, setIsLoadingInside,arcId,idToken}) => {
   let wsManager
@@ -17,8 +18,8 @@ export const initializeQaWsManager = ({question, source,setAnswerData,triggerWs,
     setTriggerWs(false)
     wsManager = new QaWsManager({
       apiInfo: {
-        apiHost: "backend-production-33df.up.railway.app",
-        ssl: true,
+        apiHost: API_HOST,
+        ssl: API_SSL,
       },
       callbacks: {
         setSources: (sources) => {

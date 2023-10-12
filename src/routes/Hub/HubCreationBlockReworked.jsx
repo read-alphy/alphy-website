@@ -14,7 +14,7 @@ import UploadBlock from '../../components/LandingPage/UploadBlock';
 import SubmitBlock from '../../components/LandingPage/SubmitBlock';
 
 
-
+import { API_URL } from '../../constants';
 
 
 export default function HubCreationBlockReworked({currentUser, tier, credit, dataGlobalArchipelagos, setDataGlobalArchipelagos}){
@@ -135,7 +135,7 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
 					
 				axios
 						.post(
-							`${process.env.REACT_APP_API_URL}/sources/`,
+							`${API_URL}/sources/`,
 							{
 								url: inputValue,
 							},
