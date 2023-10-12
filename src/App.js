@@ -68,10 +68,12 @@ function App() {
 	const stripePromise = loadStripe(STRIPE_PK);
 
 useEffect(() => {
-	// TODO: this fires the request first without idToken, then with idToken.
-	// Not clear this is the best approach.
-	// It jumbles the playlists, take a look
-	getDataGlobalArchipelagos(0, true, true, idToken)
+	// TODO this delays the loading of the page, but it's necessary to get the user's idToken.
+	// Find a way to store idToken in local storage, minding the expiration behavior.
+	// Would improve performance throughout.
+	if (idToken) {
+		getDataGlobalArchipelagos(0, true, true, idToken)
+	}
 }, [idToken])
 
 const resetPassword = (urlParams.get('mode')=="resetPassword");
@@ -227,9 +229,7 @@ useEffect(() => {
 			},
 			headers,
 		})
-		// axios.get(`${API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
 		.then((response) => {
-
 			if(firstTime){
 				shuffleArray(response.data)
 				setDataGlobalArchipelagos(response.data);

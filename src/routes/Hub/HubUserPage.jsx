@@ -283,19 +283,8 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 <div className="mt-10">
         <p className="text-zinc-600 dark:text-zinc-300 text-xl ">Arcs</p>
             <div className="flex flex-row mt-10 ">  
-
-           
-            
-                    
-
                                 <div className="xl:min-w-[1200px]  xl:max-w-[1200px]">				
-
-											
-
-								
 									<div className="w-full">
-									
-
                                                                 <div className="w-full h-full container  lg:max-w-[620px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
 
                                                                     <div className="relative ">

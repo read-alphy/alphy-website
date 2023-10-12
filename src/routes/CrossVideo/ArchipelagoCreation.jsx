@@ -50,29 +50,28 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
 			return;
 		}
 		setIsLoading(true);
-        if (/* inputValue.length>0 */ true) {
-		axios
-			.get(
-				`${API_URL || 'http://localhost:3001'
-				}/sources/?q=${inputValue}&offset=${offset}&limit=${limit}`
-			)
-			.then((response) => {
-            
-				setHasMore(!(response.data.length < limit));
-                
-				if (firstTime) {
-					setData(response.data);
-				} else {
-					setData([...data, ...response.data]);
-				}
-				setIsLoading(false);
+        const params = {
+            offset,
+            limit,
+        };
+        if (inputValue) {
+            params.q = inputValue;
+        }
+        axios.get(
+            `${API_URL}/sources/`, {
+                params,
+            }
+        ).then((response) => {
+                setHasMore(!(response.data.length < limit));
+                if (firstTime) {
+                    setData(response.data);
+                } else {
+                    setData([...data, ...response.data]);
+                }
+                setIsLoading(false);
                 setSearchCalled(true)
-			})
-        }
-        else{
-            setData([])
-            setIsLoading(false);
-        }
+            })
+
 
 	};
     const loadMore = () => {

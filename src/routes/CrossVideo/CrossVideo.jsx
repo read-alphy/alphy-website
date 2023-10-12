@@ -13,7 +13,7 @@ import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-import jsonData from "./arcs_and_thumbnails.json"
+import jsonData from "./arcs_and_thumbnails.json" // TODO: replace with API call
 import { API_URL } from '../../constants';
 
 
