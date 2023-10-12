@@ -6,22 +6,16 @@ import { API_URL } from '../../../constants';
 
 export default function BookmarkFeedItem ({item, index, source_id, imageUrl, language_codes, currentUser, setRemoved, removed, sideFeed, setCollapsed})
 {
-
-    
-
 	const removeBookmark =  () => {
-		
-		axios.patch(
-			`${API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=${removed===false?false:true}`,
-			{},
-	{
-						headers: {
-							'accept': 'application/json',
-							'id-token': currentUser.accessToken	,
-						}
-						}
-			
-			).then((response) => {
+		axios.patch(`${API_URL}/sources/${item.source_type}/${item.source_id}/bookmark`, {
+			params: {
+				bookmark: !removed,
+			},
+			headers: {
+				'accept': 'application/json',
+				'id-token': currentUser.accessToken	,
+			}
+		}).then((response) => {
 				console.log("removed", removed)
 				setRemoved(!removed)
 			})
