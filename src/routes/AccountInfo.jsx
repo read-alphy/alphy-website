@@ -19,6 +19,8 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {Button, Spinner} from "@material-tailwind/react";
 import Dialog from '@mui/material/Dialog';
 import { Remove } from "@mui/icons-material";
+import { API_URL } from "../constants"
+
 
 let userStripeId = ""
 
@@ -122,7 +124,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
         setCreditPurchaseLoading(true)
         try{
         await currentUser.getIdToken().then((idToken) => {
-        axios.post(  `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/payments/credit?quantity=${quantity}`, {},
+        axios.post(  `${API_URL || 'http://localhost:3001'}/payments/credit?quantity=${quantity}`, {},
         {
             headers: {
                 'accept': 'application/json',

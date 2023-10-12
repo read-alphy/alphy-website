@@ -23,7 +23,7 @@ import { useDropzone } from 'react-dropzone';
 import ArchipelagoCard from './ArchipelagoCard';
 import ArchipelagoCreationCard from './ArchipelagoCreationCard';
 import { Carousel } from '@trendyol-js/react-carousel';
-
+import { API_URL } from '../../constants';
 
 
 function WelcomeFeed(props) {
@@ -176,7 +176,7 @@ function WelcomeFeed(props) {
 
 		axios
 			.post(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/sources/upload`, file,
+				`${API_URL || 'http://localhost:3001'}/sources/upload`, file,
 				{
 
 					headers: {
@@ -315,12 +315,19 @@ function WelcomeFeed(props) {
 		}
 		setIsLoading(true);
 
-		axios
-			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/sources/?q=${search}&offset=${offset}&limit=${limit}`
-			)
-			.then((response) => {
+		const params = {
+			offset,
+			limit,
+		}
+		if (search) {
+			params.search = search
+		}
+		axios.get(`${API_URL}/sources/`, {
+			params,
+			headers: {
+				'id-token': idtoken,
+			}
+		}).then((response) => {
 				setHasMore(!(response.data.length < limit));
 
 				if (firstTime) {
@@ -341,38 +348,34 @@ function WelcomeFeed(props) {
 		}
 		
 		if (currentUser) {
-			currentUser.getIdToken().then((idtoken) =>
-				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/sources/?q=${search}&offset=${offset}&limit=${limit}&only_my=submits`, {
+			currentUser.getIdToken().then((idtoken) => {
+				const params = {
+					offset,
+					limit,
+					only_my: "submits"
+				}
+				if (search) {
+					params.search = search
+				}
+				axios.get(`${API_URL}/sources/`, {
+					params,
 					headers: {
 						'id-token': idtoken,
 					}
-				})
-					.then((response) => {
-						
+				}).then((response) => {
 						setHasMorePersonal(!(response.data.length < limit));
-
 						if (response.data.length > 0) {
 							calledAndEmpty = false
 						}
-						
 
 						if (firstTime) {
 							setDataPersonal(response.data);
-							
-							
-							
-
-
 						} else {
 							setDataPersonal([...dataPersonal, ...response.data]);
 						}
 						setIsLoadingPersonal(false);
-					})).catch((error) => {
+					})}).catch((error) => {
 						setIsLoadingPersonal(false);
-
-
 					});
 		};
 	};
@@ -385,15 +388,21 @@ function WelcomeFeed(props) {
 		setIsLoadingBookmarks(true);
 		if (currentUser) {
 			setIsLoadingBookmarks(true)
-			currentUser.getIdToken().then((idtoken) =>
-				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-					}/sources/?q=${search}&offset=${offsetBookmarks}&limit=${limit}&only_my=bookmarks`, {
+			currentUser.getIdToken().then((idtoken) => {
+				const params = {
+					offset: offsetBookmarks,
+					limit,
+					only_my: "bookmarks"
+				}
+				if (search) {
+					params.search = search
+				}
+				axios.get(`${API_URL}/sources/`, {
+					params,
 					headers: {
 						'id-token': idtoken,
 					}
-				})
-					.then((response) => {
+				}).then((response) => {
 						setHasMoreBookmarks(!(response.data.length < limit));
 
 						if (response.data.length > 0) {
@@ -409,7 +418,7 @@ function WelcomeFeed(props) {
 							setDataBookmarks([...dataBookmarks, ...response.data]);
 						}
 						setIsLoadingBookmarks(false);
-					})).catch((error) => {
+					})}).catch((error) => {
 						setIsLoadingBookmarks(false);
 
 
@@ -433,7 +442,7 @@ function WelcomeFeed(props) {
 			currentUser.getIdToken().then((idtoken) =>
 
 				axios.get(
-					`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
+					`${API_URL || 'http://localhost:3001'
 					}/sources/${search.length > 0 ? `?q=${search}&` : "?"}limit=${limit}&offset=${offsetUploads}&only_my=uploads`, {
 					headers: {
 						'id-token': idtoken,

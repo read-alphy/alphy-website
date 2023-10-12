@@ -7,12 +7,13 @@ import { useAuth } from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
 import { useNavigate,useLocation } from "react-router-dom";
 import StripeBanner from "../../img/stripe_banner.svg";
+import { API_URL, STRIPE_PK } from "../../constants";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
-//const stripePromise = loadStripe("pk_live_51MeGOKJmF4J0rk0xzE0Cl6UmLItHqja1URuUZGHsfOpoATmt60o5CDG3rNXyHrvd28CCxUnb5biyLOMewIz0psQz00mEIfPVl6")
-const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`)
+//const stripePromise = loadStripe("pk_live_51...")
+const stripePromise = loadStripe(STRIPE_PK)
 
 
 export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
@@ -46,7 +47,7 @@ export default function CheckOutPageInfo({clientSecret,setClientSecret}) {
        
         await currentUser.getIdToken().then((idToken) => {
 
-        axios.post(`${process.env.REACT_APP_API_URL}/payments/subscription?subscription_type=${subValue}`,{},
+        axios.post(`${API_URL}/payments/subscription?subscription_type=${subValue}`,{},
             {
                 headers: {
                     'id-token': idToken,

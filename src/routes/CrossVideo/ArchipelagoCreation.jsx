@@ -10,7 +10,7 @@ import { useAuth } from '../../hooks/useAuth';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect } from 'react';
 import { Link} from 'react-router-dom';
-
+import { API_URL } from '../../constants';
 
 
 export default function ArchipelagoCreation({archipelagoDescription, tier,archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago,errorMessage,credit, setCreditCalled}){
@@ -50,29 +50,28 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
 			return;
 		}
 		setIsLoading(true);
-        if (/* inputValue.length>0 */ true) {
-		axios
-			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/sources/?q=${inputValue}&offset=${offset}&limit=${limit}`
-			)
-			.then((response) => {
-            
-				setHasMore(!(response.data.length < limit));
-                
-				if (firstTime) {
-					setData(response.data);
-				} else {
-					setData([...data, ...response.data]);
-				}
-				setIsLoading(false);
+        const params = {
+            offset,
+            limit,
+        };
+        if (inputValue) {
+            params.q = inputValue;
+        }
+        axios.get(
+            `${API_URL}/sources/`, {
+                params,
+            }
+        ).then((response) => {
+                setHasMore(!(response.data.length < limit));
+                if (firstTime) {
+                    setData(response.data);
+                } else {
+                    setData([...data, ...response.data]);
+                }
+                setIsLoading(false);
                 setSearchCalled(true)
-			})
-        }
-        else{
-            setData([])
-            setIsLoading(false);
-        }
+            })
+
 
 	};
     const loadMore = () => {
@@ -160,7 +159,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
                 
             axios
                     .post(
-                        `${process.env.REACT_APP_API_URL}/sources/`,
+                        `${API_URL}/sources/`,
                         {
                             url: inputValue,
                         },

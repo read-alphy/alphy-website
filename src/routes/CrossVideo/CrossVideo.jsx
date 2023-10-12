@@ -13,10 +13,8 @@ import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/Loading';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-import jsonData from "./arcs_and_thumbnails.json"
-
-
-
+import jsonData from "./arcs_and_thumbnails.json" // TODO: replace with API call
+import { API_URL } from '../../constants';
 
 
 function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArchipelagos,setUserArchipelagos,credit, setContentName,setCreditCalled}) {
@@ -106,28 +104,25 @@ const handleArcInfo = async () => {
 		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		try {
-			const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${source_id}?nof_questions=30&tracks=true`).then((response) => {
-			
-			setCalled(true)
-			
-			setData(response.data)
-			setArchipelagoInfo(response.data)
-						if(response.data.description==="null"){
-							setArchipelagoDescription("")
+			await axios.get(`${API_URL}/playlists/${source_id}`, {
+				nof_questions: 30,
+			}).then((response) => {
+				setCalled(true)
+				setData(response.data)
+				setArchipelagoInfo(response.data)
+							if(response.data.description==="null"){
+								setArchipelagoDescription("")
+							}
+							else{		
+							setArchipelagoDescription(response.data.description)
 						}
-						else{		
-						setArchipelagoDescription(response.data.description)
-					}
-			setArchipelagoTitle(response.data.name)
-			setContentName(response.data.name)
-			setDataArchipelago(response.data.tracks)
-			let sources = response.data.tracks.map((item) => item.source_id)
-			setSourceIDsArchipelago([...sources])
-			setIsLoading(false)
-			
-	
-
-		}
+				setArchipelagoTitle(response.data.name)
+				setContentName(response.data.name)
+				setDataArchipelago(response.data.tracks)
+				let sources = response.data.tracks.map((item) => item.source_id)
+				setSourceIDsArchipelago([...sources])
+				setIsLoading(false)
+			}
 		)
 	}
 		catch(error) {
@@ -162,21 +157,14 @@ if(dataArchipelago.length===0){
 	return
 }
 else{
-
-
-
 	try{
 					if(isCreateArc){
-						
-				
 						setIsLoadingSubmit(true)
-					axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/`, {	
+					axios.post(`${API_URL}/playlists/`, {	
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
 						"description": archipelagoDescription,
 						"sources": [...dataArchipelago],
-
-
 				}
 				, {
 					headers: {
@@ -197,7 +185,7 @@ else{
 				else if(isEditArc){
 					setIsLoadingSubmit(true)
 					sessionStorage.setItem("arcAction", "true")
-					axios.patch( `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`, {
+					axios.patch( `${API_URL}/playlists/${archipelagoInfo.uid}`, {
 						"name": archipelagoTitle.length>0 ? archipelagoTitle : "My Arc",
 						"user_id": currentUser.uid,
 						"description": archipelagoDescription,
@@ -208,8 +196,6 @@ else{
 						'id-token': currentUser.accessToken,
 					},
 				}
-				
-				
 				).then((response) => {
 					
 					sessionStorage.setItem("arcAction", "true")
@@ -221,8 +207,6 @@ else{
 				})
 				}
 			}
-		
-
 		catch(error) {
 			setIsLoadingSubmit(false)
 			console.log("arcChat error",error)
@@ -236,12 +220,10 @@ else{
 
 }
 }
-
-
 const handleDeleteArchipelago = () => {
 	setIsLoadingDelete(true)
 
-	axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/playlists/${archipelagoInfo.uid}`,
+	axios.delete(`${API_URL}/playlists/${archipelagoInfo.uid}`,
 	{
 		headers: {
 			'id-token': currentUser.accessToken,
@@ -253,21 +235,15 @@ const handleDeleteArchipelago = () => {
 		const index = userArchipelagos.indexOf(archipelagoInfo)
 		userArchipelagos.splice(index,1)
 		setUserArchipelagos([...userArchipelagos])
-		
 		navigate(`/`)
-		
-
 		})
 		.catch((error) => {
 			console.log(error)
 			setIsLoadingDelete(false)
 		})
 		}
-
-
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-			
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}

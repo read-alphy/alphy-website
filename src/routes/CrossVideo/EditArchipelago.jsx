@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { set } from 'lodash';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-
+import { API_URL } from '../../constants';
 
 
 export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,archipelagoDescription ,tier, archipelagoTitle, setArchipelagoDescription, setArchipelagoTitle,sourceIDsArchipelago, setSourceIDsArchipelago, dataArchipelago, setDataArchipelago,errorMessage,credit, setCreditCalled}){
@@ -61,16 +61,17 @@ export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,arc
 			return;
 		}
 		setIsLoading(true);
-        if (/* inputValue.length>0 */ true) {
-		axios
-			.get(
-				`${process.env.REACT_APP_API_URL || 'http://localhost:3001'
-				}/sources/?q=${inputValue}&offset=${offset}&limit=${limit}`
-			)
-			.then((response) => {
-            
+        const params = {
+            offset,
+            limit,
+        }
+        if (inputValue) {
+            params.q = inputValue;
+        }
+        axios.get(`${API_URL}/sources/`, {
+            params
+        }).then((response) => {
 				setHasMore(!(response.data.length < limit));
-                
 				if (firstTime) {
 					setData(response.data);
 				} else {
@@ -78,11 +79,6 @@ export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,arc
 				}
 				setIsLoading(false);
 			})
-        }
-        else{
-            setData([])
-            setIsLoading(false);
-        }
 
 	};
     const loadMore = () => {
@@ -155,7 +151,7 @@ export default function EditArchipelago({ archipelagoInfo,setArchipelagoInfo,arc
                 
             axios
                     .post(
-                        `${process.env.REACT_APP_API_URL}/sources/`,
+                        `${API_URL}/sources/`,
                         {
                             url: inputValue,
                         },
