@@ -81,8 +81,7 @@ function HubSourceFeed(props) {
 			localStorage.setItem('search', '');
 		}
 	});
-	const temp = 16;
-	const limit = temp;
+	const limit = 16;
 	const searchInputRef = React.useRef(null);
 
 
@@ -93,9 +92,17 @@ function HubSourceFeed(props) {
 		setIsLoading(true);
 
 		axios
-			.get(
-				`${API_URL || 'http://localhost:3001'
-				}/sources/?q=${search}&offset=${offset}&limit=${limit}`
+			.get(`${API_URL}/sources/`, {
+					params: {
+						q: search,
+						offset: offset,
+						limit,
+						// only_my: "submits" | "uploads" | "bookmarks",
+					},
+					// headers: { //TODO: this fails since we dont have the token yet.
+					// 	'id-token': idToken,
+					// }
+				}
 			)
 			.then((response) => {
 				setHasMore(!(response.data.length < limit));
@@ -109,33 +116,15 @@ function HubSourceFeed(props) {
 			})
 
 	};
-
-	
 	
 	const loadMore = () => {
-		
 			setOffset(offset + limit);
 			getData(offset + limit, false, true);
-	
-
-
-
 	};
-
-	
-	
 	
 	if (called === false && search.length===0) {
-
-		
 			getData(0, true, true);
-			
 			setCalled(true);
-	
-		
-		
-
-
 	}
 	useEffect(() => {
         if (prevLength > 0 && search.length === 0) {

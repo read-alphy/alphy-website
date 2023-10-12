@@ -57,8 +57,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
     const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(true);
     const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
     let shuffledData = []
-
-    const limit=1000
+    let limit = 16
     let calledAndEmpty
 
     
@@ -69,120 +68,110 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 		setIsLoadingPersonal(true)
 		
 		if (currentUser) {
-			currentUser.getIdToken().then((idtoken) =>
+			currentUser.getIdToken().then((idtoken) =>{
+                const params = {
+                    offset: offsetPersonal,
+                    limit,
+                    only_my: "submits"
+                }
+                // if (search !== "") {
+                //     params.q = search
+                // }
 				axios.get(
-					`${API_URL || 'http://localhost:3001'
-					}/sources/?q=${search}&offset=${offsetPersonal}&limit=${limit}&only_my=submits`, {
-					headers: {
-						'id-token': idtoken,
-					}
-				})
+					`${API_URL}/sources/`, {
+                        params,
+                        headers: {
+                            'id-token': idtoken,
+                        }
+                    })
 					.then((response) => {
-						
 						setHasMorePersonal(!(response.data.length < limit));
-
 						if (response.data.length > 0) {
 							calledAndEmpty = false
 						}
-						
-
 						if (firstTimePersonal) {
 							setDataPersonal(response.data);
-                            
-							
-							
-							
-
-
 						} else {
 							setDataPersonal([...dataPersonal, ...response.data]);
 						}
 						setIsLoadingPersonal(false);
-					})).catch((error) => {
+					})}).catch((error) => {
 						setIsLoadingPersonal(false);
-
-
 					});
 		};
 	};
-
 
 	const getDataBookmarks = (offsetBookmarks, firstTime, hasMoreBookmarks) => {
 
 		setIsLoadingBookmarks(true);
 		if (currentUser) {
 			setIsLoadingBookmarks(true)
-			currentUser.getIdToken().then((idtoken) =>
-				axios.get(
-					`${API_URL || 'http://localhost:3001'
-					}/sources/?q=${search}&offset=${offsetBookmarks}&limit=${limit}&only_my=bookmarks`, {
-					headers: {
-						'id-token': idtoken,
-					}
-				})
-					.then((response) => {
+			currentUser.getIdToken().then((idtoken) => {
+                const params = {
+                    offset: offsetBookmarks,
+                    limit,
+                    only_my: "bookmarks"
+                }
+                // if (search !== "") {
+                //     params.q = search
+                // }
+            axios.get(
+                `${API_URL}/sources/`, {
+                    params,
+                    headers: {
+                        'id-token': idtoken,
+                    }
+                }).then((response) => {
 						setHasMoreBookmarks(!(response.data.length < limit));
-
 						if (response.data.length > 0) {
 							calledAndEmpty = false
 						}
-
-
 						if (firstTime) {
 							setDataBookmarks(response.data);
-
-
 						} else {
 							setDataBookmarks([...dataBookmarks, ...response.data]);
 						}
 						setIsLoadingBookmarks(false);
-					})).catch((error) => {
+					})}).catch((error) => {
 						setIsLoadingBookmarks(false);
-
-
 					});
 		};
 	};
 
-
 	const getDataUploads = (offsetUploads, firstTimeUploads, hasMoreUploads) => {
-	
-
-
 		setIsLoadingUploads(true);
 
 		localStorage.setItem("search", search)
 
 		if (currentUser) {
 			setIsLoadingUploads(true)
-			currentUser.getIdToken().then((idtoken) =>
-
+			currentUser.getIdToken().then((idtoken) =>{
+                const params = {
+                    offset: offsetUploads,
+                    limit,
+                    only_my: "uploads"
+                }
+                // if (search !== "") {
+                //     params.q = search
+                // }
 				axios.get(
-					`${API_URL || 'http://localhost:3001'
-					}/sources/${search.length > 0 ? `?q=${search}&` : "?"}limit=${limit}&offset=${offsetUploads}&only_my=uploads`, {
-					headers: {
-						'id-token': idtoken,
-					}
-				})
-					.then((response) => {
-
-
+                    `${API_URL}/sources/`, {
+                        params,
+                        headers: {
+                            'id-token': idtoken,
+                        }
+                    }
+				).then((response) => {
 						setHasMoreUploads(!(response.data.length < limit));
-
-
 						if (firstTimeUploads) {
 							setDataUploads(response.data);
-
-
 						} else {
 							setDataUploads([...dataUploads, ...response.data]);
 						}
 						setIsLoadingUploads(false);
-					}))
+					})})
 		};
 	};
-
-
     
     if(currentUser!==null && called===false){
         console.log("calling")

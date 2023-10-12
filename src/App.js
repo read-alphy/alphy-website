@@ -68,8 +68,11 @@ function App() {
 	const stripePromise = loadStripe(STRIPE_PK);
 
 useEffect(() => {
-	getDataGlobalArchipelagos(0, true, true)
-}, [])
+	// TODO: this fires the request first without idToken, then with idToken.
+	// Not clear this is the best approach.
+	// It jumbles the playlists, take a look
+	getDataGlobalArchipelagos(0, true, true, idToken)
+}, [idToken])
 
 const resetPassword = (urlParams.get('mode')=="resetPassword");
 
@@ -139,7 +142,16 @@ useEffect(() => {
 		}
 
 		if(userArcsCalled === false){
-		axios.get(`${API_URL}/playlists/?user_id=${currentUser.uid}`).then((response) => {
+			axios.get(`${API_URL}/playlists/`, {
+				params: {
+					// limit: 20,
+					// offset: 0,
+					only_my: true,
+				},
+				headers: {
+					"id-token": currentUser.accessToken,
+				}
+		}).then((response) => {
 			setUserArchipelagos(response.data)
 			setUserArcsCalled(true)
 		})
@@ -188,9 +200,7 @@ useEffect(() => {
 		})
 
     }
-	const limit = 40
-	
-
+	const limit = 20
 
 	/* const { currentUser } = useAuth(); */
 	function shuffleArray(array) {
@@ -201,12 +211,23 @@ useEffect(() => {
 			array[j] = temp;
 		}
 	}
-	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
+	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos, idToken) => {
 		if(!hasMoreGlobalArchipelagos){
 			return;
 		}
 		setIsLoadingGlobalArchipelagos(true);
-		axios.get(`${API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
+		const headers = {};
+		if (idToken) {
+			headers['id-token'] = idToken;
+		}
+		axios.get(`${API_URL}/playlists/`, {
+			params: {
+				limit,
+				offset: offsetGlobalArchipelagos,
+			},
+			headers,
+		})
+		// axios.get(`${API_URL}/playlists/?user_id=dUfMZPwN8fcxoBtoYeBuR5ENiBD3&limit=${limit}&offset=${offsetGlobalArchipelagos}`)
 		.then((response) => {
 
 			if(firstTime){
