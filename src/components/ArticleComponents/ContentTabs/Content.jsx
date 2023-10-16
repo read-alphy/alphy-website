@@ -2,17 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import QuestionAnswering from '../QuestionAnswering';
 import srtParser2 from 'srt-parser-2';
 import { Tab, Tabs } from 'react-bootstrap';
-import Twitter from '../../../img/twitter_spaces.png';
 import TwitterLogo from '../../../img/Twitter Logo Blue.svg';
 import Loading from '../../Loading';
 import working from './working.svg';
 import Dialog from '@mui/material/Dialog';
 import axios from 'axios';
+import Switch from '@mui/material/Switch';
+import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { useWindowSize } from '../../../hooks/useWindowSize';
 import { saveAs } from 'file-saver'; // library to save file as blob
 import { useAuth } from "../../../hooks/useAuth"
 import DownloadStatic from '../../../img/download_static.png';
@@ -720,8 +720,49 @@ useEffect(() => {
 }, [summary])
 
  */
+const AntSwitch = styled(Switch)(({ theme }) => ({
+    width: 28,
+    height: 16,
+    padding: 0,
+    display: 'flex',
+    '&:active': {
+      '& .MuiSwitch-thumb': {
+        width: 15,
+      },
+      '& .MuiSwitch-switchBase.Mui-checked': {
+        transform: 'translateX(9px)',
+      },
+    },
+    '& .MuiSwitch-switchBase': {
+      padding: 2,
+      '&.Mui-checked': {
+        transform: 'translateX(12px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#bbf7d0',
+        },
+      },
+    },
+    '& .MuiSwitch-thumb': {
+      boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      transition: theme.transitions.create(['width'], {
+        duration: 200,
+      }),
+    },
+    '& .MuiSwitch-track': {
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor:
+        theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : '#71717a',
+      boxSizing: 'border-box',
+    },
+  }));
 
-
+  
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 				<div>
@@ -787,7 +828,7 @@ return (
 
 													<Popover placement="right">
 														<PopoverHandler>
-														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
+														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-200"/> <p className="ml-2">Add To Arc</p></button>
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
@@ -807,10 +848,43 @@ return (
 
 														</PopoverContent>
 													</Popover>
-
+												
+						{(data.source_type==="up" && (props.data!==undefined && props.data !== null && (currentUser!==null && props.data.submitter_id==currentUser.uid))) &&
+												<div>
 
 												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
-												<div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
+													
+
+
+												<div className="relative flex flex-row  group  cursor-default">
+																<div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center z-[9999]">
+																	
+																	<AntSwitch onChange={props.handleVisibility} defaultChecked={props.isVisible} disabled={props.tier!=="premium"}/>
+																	<span className="text-sm mx-2">{localStorage.getItem("isVisibleUpload")==="true" ? "Public" : "Private"}</span>
+														</div>
+										
+
+										{props.tier==="premium" &&
+                                        <span className="absolute opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
+                                            {props.isVisible ? "Toggle the visibility of this content. Switching to private makes it accessible only by you.":  "Toggle the visibility of this content. Switching to public makes it accessible by all."}
+                                        </span>
+                                    }
+									 {props.tier!=="premium" &&
+                                    <span className="absolute opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
+                                    This content is private. Switch to the Premium plan to make it publicly accessible.
+                                </span>}
+
+													</div>
+													
+													</div>		
+													
+													
+													
+													}
+
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
+												
+												<div className="flex flex-row mb-2	 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
 													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
 														
@@ -829,7 +903,7 @@ return (
 
 							
 											</div>
-											<p className="mb-2 text-zinc-700 dark:text-zinc-300">Choose Language</p>
+											<p className="mb-2 text-zinc-700 dark:text-zinc-300">Language</p>
 											<Box sx={{minWidth: 200}} className="">
 												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 " size="small">
 													<Select
@@ -911,12 +985,14 @@ return (
 								<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light_ flex flex-row">
 
 									{data.source_type !== "up" && data.creator_name}
-									{data.source_type === "up" && `Private Content - ${formattedDate}`}
-
-
+									{data.source_type === "up" && `Private Content`}
 
 								</h2>
 								
+							</div>
+
+							<div>
+							
 							</div>
 
 						
@@ -959,7 +1035,7 @@ return (
 
 												<Popover placement="right">
 													<PopoverHandler>
-													<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-greenColor"/> <p className="ml-2">Add To Arc</p></button>
+													<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-200"/> <p className="ml-2">Add To Arc</p></button>
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										
@@ -979,7 +1055,39 @@ return (
 
 													</PopoverContent>
 												</Popover>
+												{(data.source_type==="up" && (props.data!==undefined && props.data !== null && (currentUser!==null && props.data.submitter_id==currentUser.uid))) &&
+													
+												<div>
 
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
+													
+
+
+												<div className="relative flex flex-row  group  cursor-default">
+																<div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center z-[9999]">
+																	
+																	<AntSwitch onChange={props.handleVisibility} defaultChecked={props.isVisible} disabled={props.tier!=="premium"}/>
+																	<span className="text-sm mx-2">{localStorage.getItem("isVisibleUpload")==="true" ? "Public" : "Private"}</span>
+														</div>
+										
+
+										{props.tier==="premium" &&
+                                        <span className="absolute mt-6 opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
+                                            {props.isVisible ? "Toggle the visibility of this content. Switching to private makes it accessible only by you.":  "Toggle the visibility of this content. Switching to public makes it accessible by all."}
+                                        </span>
+                                    }
+									 {props.tier!=="premium" &&
+                                    <span className="absolute mt-6 opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
+                                    This content is private. Switch to the Premium plan to make it publicly accessible.
+                                </span>}
+
+													</div>
+													
+													</div>		
+													
+													
+													
+													}
 												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
 									
 									{(currentUser && data && data.submitter_id!==currentUser.uid) &&
@@ -1003,10 +1111,10 @@ return (
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) ?
 											<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>:null}
 									
-										<p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80">Choose Language</p>
+										<p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80">Language</p>
 									
 										<Box sx={{minWidth: 200}} className="">
-												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 " size="small">
+												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700  " size="small">
 													
 													<Select
 													value={language}

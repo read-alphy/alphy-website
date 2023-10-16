@@ -77,6 +77,8 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                 // if (search !== "") {
                 //     params.q = search
                 // }
+
+                
 				axios.get(
 					`${API_URL}/sources/`, {
                         params,
@@ -85,6 +87,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                         }
                     })
 					.then((response) => {
+                        
 						setHasMorePersonal(!(response.data.length < limit));
 						if (response.data.length > 0) {
 							calledAndEmpty = false
@@ -145,7 +148,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
 		if (currentUser) {
 			setIsLoadingUploads(true)
-			currentUser.getIdToken().then((idtoken) =>{
+			currentUser.getIdToken().then((idToken) =>{
                 const params = {
                     offset: offsetUploads,
                     limit,
@@ -158,10 +161,11 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                     `${API_URL}/sources/`, {
                         params,
                         headers: {
-                            'id-token': idtoken,
+                            'id-token': idToken,
                         }
                     }
 				).then((response) => {
+                    console.log(response)
 						setHasMoreUploads(!(response.data.length < limit));
 						if (firstTimeUploads) {
 							setDataUploads(response.data);
@@ -182,6 +186,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
         
         getDataUploads(0, true, hasMoreUploads);
         
+        
         setCalled(true)
     }
 
@@ -193,7 +198,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 	
 
 	};
-
+    
     function searchKeyword(array) {
 		return array.filter(item =>
 			item.title.toLowerCase().includes(search.toLowerCase())
@@ -529,12 +534,12 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                         called ?
                         <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
 
-                       {tier==="free" && called && 
+                       {data.length=== 0 && tier!=="premium" && called && 
                         
                         <p>You don't have any uploads. Upgrade to <Link to="/account" className="underline dark:text-greenColor text-green-400 cursor-pointer">premium plan</Link> to process local files.
                         </p>}
 
-                        {tier!=="free" && called && 
+                        {data.length===0 && tier==="premium" && called && 
                         
                         <p>You don't have any uploads. <Link to={"/submit"} onClick={() => {
                             localStorage.setItem("newItem", "upload")

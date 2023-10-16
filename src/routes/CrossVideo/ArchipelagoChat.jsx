@@ -1,13 +1,11 @@
 import React from 'react';
 import {useState, useEffect, useRef } from 'react';
-import {Button, Spinner} from "@material-tailwind/react";
+import {Button, Spinner, } from "@material-tailwind/react";
+import Switch from '@mui/material/Switch';
+import { styled } from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
-import TypeIt from 'typeit-react';
 import SourceCard from './SourceCard';
 import Dialog from '@mui/material/Dialog';
-import Chip from '@mui/material/Chip';
-import { Carousel } from '@trendyol-js/react-carousel';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -26,7 +24,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { API_HOST, API_SSL } from '../../constants';
 
 
-export default function ArchipelagoChat({data,setData,currentUser, dataArchipelago,setDataArchipelago,collapsed}) {
+export default function ArchipelagoChat({data,isVisible, setIsVisible, isPublic, setIsPublic, tier, handleVisibility,currentUser, dataArchipelago,setDataArchipelago,collapsed}) {
     const [inputValue, setInputValue] = useState("")
     const [isLoadingInside, setIsLoadingInside] = useState(false)
     const [isCleared, setIsCleared] = useState(false)
@@ -48,6 +46,7 @@ export default function ArchipelagoChat({data,setData,currentUser, dataArchipela
     const title = data.name
     const description = data.description
     const [triggerWs, setTriggerWs] = useState(false);
+    
 
     const carouselRef = useRef(null);
 
@@ -108,6 +107,7 @@ const handleSubmit = () => {
 
     if(currentUser===null && selectedQuestions.includes(inputValue)===false){
         setErrorMessage(true)
+        setIsLoadingInside(false)
         return
     }
     else{
@@ -119,6 +119,7 @@ const handleSubmit = () => {
                 try{
                     setAnswerData({ answer: '', sources: [] })     
                     setTriggerWs(true)
+                    const idToken = currentUser ? currentUser.accessToken : "123"
                     setIsLoadingInside(true)                    
                                 setErrorMessage(false)
 
@@ -165,7 +166,7 @@ const handleSubmit = () => {
                                     },
                                     question:inputValue,
                                     arcId:data.uid,
-                                    idToken:currentUser.accessToken
+                                    idToken:idToken
                                   });
                 
                                   setTimeout(() => {
@@ -280,6 +281,54 @@ const toggleExpand = () => {
   };
 
   
+  const label = { inputProps: { 'aria-label': `${true ? "Visible" : "Private"}` } };
+  const AntSwitch = styled(Switch)(({ theme }) => ({
+    width: 28,
+    height: 16,
+    padding: 0,
+    display: 'flex',
+    '&:active': {
+      '& .MuiSwitch-thumb': {
+        width: 15,
+      },
+      '& .MuiSwitch-switchBase.Mui-checked': {
+        transform: 'translateX(9px)',
+      },
+    },
+    '& .MuiSwitch-switchBase': {
+      padding: 2,
+      '&.Mui-checked': {
+        transform: 'translateX(12px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#bbf7d0',
+        },
+      },
+    },
+    '& .MuiSwitch-thumb': {
+      boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      transition: theme.transitions.create(['width'], {
+        duration: 200,
+      }),
+    },
+    '& .MuiSwitch-track': {
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor:
+        theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : '#71717a',
+      boxSizing: 'border-box',
+    },
+  }));
+
+  
+
+
+
+
 
     return(
         <div className={`${collapsed ?  "lg:w-[1000px] xl:max-w-[1000px]" : "lg:w-[600px] xl:w-[900px] 2xl:w-[1000px]"} grow mx-auto pt-10 pb-20 `} >
@@ -296,7 +345,7 @@ const toggleExpand = () => {
             </div>
 
             <Dialog fullWidth={"true"} maxWidth={"md"} open={showTrackDetails} onClose={() => setShowTrackDetails(false)}>
-                <div className="pt-10 pb-20 bg-white dark:bg-mildDarkMode">
+                <div className="pt-10 pb-20 bg-white dark:bg-mildDarkMode text-sm">
                 <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer dark:text-zinc-300" onClick={() =>setShowTrackDetails(false)}></CloseIcon>
                     <div className="mb-10 px-4 sm:px-10">
                     <p className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</p>
@@ -308,9 +357,41 @@ const toggleExpand = () => {
                     <div className="ml-5">
                 {currentUser!==null && currentUser.uid === archipelagoUserID && 
                 
-                <div className="flex flex-row" >
+                <div className="flex flex-row w-full space-between flex-grow" >
+                    <div className="flex-grow flex">
                     <p  onClick={handleEdit} className="cursor-pointer text-zinc-600 dark:text-zinc-300 underline" >Edit</p>
                      <EditIcon onClick={handleEdit} fontSize="small"   className="cursor-pointer text-zinc-600 dark:text-zinc-300 pl-1 pt-1"   title={"Edit archipelago"} />
+                     </div>
+                    
+                    
+                    
+                    
+                
+                <div className="relative flex flex-col ml-20">
+										<div className="relative flex flex-row  group  cursor-default">
+                                        <div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center">
+										<AntSwitch onChange={handleVisibility} defaultChecked={isVisible} disabled={tier!=="premium"}/>
+                                        <span className="text-sm mx-2">{localStorage.getItem("isVisible")==="true" ? "Public" : "Private"}</span>
+                                        </div>
+
+                            {tier==="premium" &&
+                                        <span className="absolute opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
+                                            {isVisible ?"Toggle the visibility of this arc. Switching to private makes it accessible only by you.":  "Toggle the visibility of this arc. Switching to public makes it accessible by all."}
+                                        </span>
+                                    }
+                                    {tier!=="premium" &&
+                                    <span className="absolute opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
+                                    This arc is private. Switch to the Premium plan to make it publicly accessible.
+                                </span>
+                                    
+                                    }
+
+				</div>
+</div>		
+                    
+                    
+                    
+                    
                 </div>
                 }
                 
@@ -592,20 +673,6 @@ const toggleExpand = () => {
              
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                            <Dialog   maxWidth={"sm"} fullWidth={fullWidth} open={openDialog} onClose={() => setOpenDialog(false)} >
                             {answerData.sources!==undefined && answerData.sources.length!==0 && answerData.sources.map((source) => 

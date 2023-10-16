@@ -23,8 +23,6 @@ import Hub from './routes/Hub/Hub';
 import MyHub from './routes/Hub/MyHub';
 import FAQ from "./routes/FAQ"
 import SubmitPage from "./routes/Hub/SubmitPage"
-import WelcomeForm from './components/WelcomeForm';
-import { set } from 'lodash';
 import {API_URL, STRIPE_PK, UNDER_CONSTRUCTION} from "./constants"
 
 
@@ -65,16 +63,20 @@ function App() {
 		}
 	}
 	const verification = (urlParams.get('mode')=="verifyEmail");
-	const stripePromise = loadStripe(STRIPE_PK);
+	
 
-useEffect(() => {
-	// TODO this delays the loading of the page, but it's necessary to get the user's idToken.
-	// Find a way to store idToken in local storage, minding the expiration behavior.
-	// Would improve performance throughout.
-	if (idToken) {
-		getDataGlobalArchipelagos(0, true, true, idToken)
-	}
-}, [idToken])
+
+	const stripePromise = loadStripe(
+		`${STRIPE_PK}`
+	);
+
+	useEffect(() => {
+		// TODO this delays the loading of the page, but it's necessary to get the user's idToken.
+		// Find a way to store idToken in local storage, minding the expiration behavior.
+		// Would improve performance throughout.
+			getDataGlobalArchipelagos(0, true, true, idToken)
+		
+	}, [idToken])
 
 const resetPassword = (urlParams.get('mode')=="resetPassword");
 
@@ -111,7 +113,7 @@ useEffect(() => {
 	setTimeout (() => {
 		var userId = localStorage.getItem("userId")
 		
-		if(userId===null || (currentUser!==undefined && currentUser!==null && currentUser.uid!== null && userId!==currentUser.uid)){
+		if(userId===null && (currentUser!==undefined && currentUser!==null && currentUser.uid!== null && userId!==currentUser.uid)){
 			localStorage.setItem('userId', currentUser.uid)
 		}
 		if(currentUser){localStorage.setItem("logged in","true")}
@@ -199,7 +201,9 @@ useEffect(() => {
 		})
 
     }
-	const limit = 20
+	const limit = 40
+	
+
 
 	/* const { currentUser } = useAuth(); */
 	function shuffleArray(array) {
@@ -210,22 +214,23 @@ useEffect(() => {
 			array[j] = temp;
 		}
 	}
-	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos, idToken) => {
+	const getDataGlobalArchipelagos = (offsetGlobalArchipelagos, firstTime, hasMoreGlobalArchipelagos) => {
 		if(!hasMoreGlobalArchipelagos){
 			return;
 		}
+		
 		setIsLoadingGlobalArchipelagos(true);
-		const headers = {};
-		if (idToken) {
-			headers['id-token'] = idToken;
-		}
 		axios.get(`${API_URL}/playlists/`, {
 			params: {
-				limit,
-				offset: offsetGlobalArchipelagos,
+			  user_id: 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3',
+			  limit: limit,
+			  offset: offsetGlobalArchipelagos
 			},
-			headers,
-		})
+			headers: {
+			  'accept': 'application/json',
+			  'id-token': idToken
+			}
+		  })
 		.then((response) => {
 			if(firstTime){
 				shuffleArray(response.data)

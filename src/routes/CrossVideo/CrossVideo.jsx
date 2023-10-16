@@ -15,6 +15,8 @@ import axios from 'axios';
 import { Helmet } from "react-helmet";
 import jsonData from "./arcs_and_thumbnails.json" // TODO: replace with API call
 import { API_URL } from '../../constants';
+import PrivateUseImage from "../../img/private_use_only.png"
+
 
 
 function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArchipelagos,setUserArchipelagos,credit, setContentName,setCreditCalled}) {
@@ -40,6 +42,12 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArc
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 	const [isLoadingDelete,setIsLoadingDelete] = useState(false)
 	const [helmetThumbnail, setHelmetThumbnail] = useState("");
+	const [isVisible, setIsVisible] = useState(false)
+	const [isPublic, setIsPublic] = useState(false)
+	const [authorizationError, setAuthorizationError] = useState(false)
+
+
+
 	const isCreateArc = location.pathname.split('/')[2]==="createArc"
 	const isEditArc = location.pathname.split('/')[2]==="editArc"
 	const isArc = location.pathname.split('/')[1]==="arc" && location.pathname.split('/')[2]!=="editArc" && location.pathname.split('/')[2]!=="createArc"
@@ -84,31 +92,53 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier,idToken,userArc
 
 
 useEffect(() => {
-	if((isArc || isEditArc) && data.length===0 && called!==true){
-		handleArcInfo()
-	}
-	else if((isArc || isEditArc) && sessionStorage.getItem("arcAction")==="true"){
+	
+	if((isArc || isEditArc) && sessionStorage.getItem("arcAction")==="true"){
 		
 		sessionStorage.removeItem("arcAction")
 		window.location.reload()
 	}
 },[])
 
+useEffect (() => {
+	
+	if((isArc || isEditArc) && data.length===0 && called!==true ){
+		
+		handleArcInfo()
+		
+	}
+},[currentUser])
+
 
 
 const handleArcInfo = async () => {
+	setAuthorizationError(false)
 	sessionStorage.removeItem("arcAction")
+	
 	if((isArc || isEditArc) && data.length===0 && called!==true){
 		setIsLoading(true)
+		const idToken =  currentUser!==null ? currentUser.accessToken : "123"
 		
 		source_id = isArc ? location.pathname.split('/')[2] : location.pathname.split('/')[3]
 		
 		try {
-			await axios.get(`${API_URL}/playlists/${source_id}`, {
-				nof_questions: 30,
-			}).then((response) => {
+
+			await axios.get(`${API_URL}/playlists/${source_id}?nof_questions=30`, 
+			{
+				headers: {
+					"accept": "application/json",
+					'id-token':idToken,
+				},
+			}
+			).then((response) => {
+				
+				setAuthorizationError(false)
 				setCalled(true)
 				setData(response.data)
+				console.log(response.data)
+				setIsVisible(response.data.is_visible)
+				localStorage.setItem("isVisible", response.data.is_visible)
+				setIsPublic(response.data.is_public)
 				setArchipelagoInfo(response.data)
 							if(response.data.description==="null"){
 								setArchipelagoDescription("")
@@ -127,10 +157,19 @@ const handleArcInfo = async () => {
 	}
 		catch(error) {
 			setIsLoading(false)
-			setCalled(true)
-			console.log("arcChat error",error)
+			/* setCalled(true) */
+			
 			if( axios.isCancel(error)){
 				console.log('Request cancelled');
+			}
+
+			if(error.response.data.detail = "You are not authorized to see this playlist."){
+				 setAuthorizationError(true)
+
+				
+			}
+			else{
+				console.log("arcChat error",error)
 			}
 		
 			/* navigate("/404") */
@@ -242,6 +281,39 @@ const handleDeleteArchipelago = () => {
 			setIsLoadingDelete(false)
 		})
 		}
+
+		const handleVisibility = () => {
+			const targetVisibility = !isVisible
+			localStorage.setItem("isVisible", isVisible)
+			try{
+				axios.patch(`${API_URL}/playlists/${archipelagoInfo.uid}/visibility?visibility=${targetVisibility}`, null, {
+					headers: {
+						'accept' : 'application/json',
+						'id-token': currentUser.accessToken,
+					},
+				}
+				).then((response) => {
+					localStorage.setItem("isVisible", targetVisibility)
+					setIsVisible(targetVisibility)
+					setIsPublic(targetVisibility)
+					console.log(response)
+				}
+				)
+
+			}
+			catch(error) {
+				console.log("arcChat error",error)
+				if( axios.isCancel(error)){
+					console.log('Request cancelled');
+				}
+				else if(error.response.status===400){
+					setErrorMessage(true)
+			}
+				}
+		}
+
+		
+
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			<div
@@ -316,7 +388,22 @@ const handleDeleteArchipelago = () => {
 
 
 
-				{(!isCreateArc && !isEditArc) ? isLoading ? null :<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}/> : null}
+				{(!isCreateArc && !isEditArc) ? isLoading ? <Loading/> :
+
+				(authorizationError?
+					<div className="mx-10 mx-auto mt-20 md:mt-40">
+						<div className="text-xl  text-zinc-700 dark:text-zinc-300 max-w-[600px]">
+						The arc you're trying to reach either doesn't exist or you don't have permission to access it. Check out arcs by Alphy <Link to="/arcs" className="dark:text-greenColor text-green-400 underline">here</Link>.
+						 </div>
+						 
+					</div>
+					:
+				<ArchipelagoChat data={data} setData={setData} currentUser={currentUser} 
+				dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago}
+				handleVisibility={handleVisibility} isVisible={isVisible} setIsVisible={setIsVisible}
+				isPublic={isPublic} setIsPublic={setIsPublic} tier={tier}/> )
+				
+				: null}
 				
 				
 				

@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './ArticleComponents/ContentTabs/Content';
 import MicIcon from '@mui/icons-material/Mic';
 
+import {Button} from "@material-tailwind/react";
 
 import Twitter from '..//img/twitter_spaces.png';
 
@@ -27,9 +28,11 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const [isLoading, setIsLoading] = useState(false);
 	const [actionsHub, setActionsHub] = useState(false);
 	const [bookmarkChecked, setBookmarkChecked] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
+	const [isPublic, setIsPublic] = useState(false);
 
 	const [called, setCalled] = useState(false);
-	
+	const [authorizationError, setAuthorizationError] = useState(false)
 
 
 	
@@ -126,8 +129,10 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 
 	const fetchDataUpload = async (url, constantFetch) => {
-		
-	
+		setAuthorizationError(false)
+	localStorage.setItem("isVisibleUpload", false)
+	const idToken = currentUser ? currentUser.accessToken : "123"
+
 		try {
 			if(constantFetch===false){
 			setIsLoading(true);
@@ -136,7 +141,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 			const response = await axios.get(url,
 				{
 					headers: {
-						'id-token': currentUser.accessToken	,
+						'id-token': idToken	,
 					}
 					}
 				).then(
@@ -145,12 +150,16 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
+					localStorage.setItem("isVisibleUpload", response.data.is_visible)
+
 					setContentName(response.data.title)
 				}
 				}
 
 			).catch((error) => {
-				console.log(error)	
+				if(error.response.data.detail === "Source is inaccessible"){
+					setAuthorizationError(true)
+				}
 				 
 			});
 
@@ -183,22 +192,18 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 			
 			
-			if (source_type==="up" && data.length===0 && currentUser!==null){
+			if (source_type==="up" && data.length===0){
 				setCalled(true)
 				
 				fetchDataUpload(url,false);
 						
 			}
-			if (source_type!=="up" && data.length===0 && currentUser!==null){
+			if (source_type!=="up" && data.length===0){
 				setCalled(true)
 				fetchData(url,false);
 		
 			}
-			else if (source_type!=="up" && data.length===0 && currentUser===null){
-				setCalled(true)
-				fetchData(url,false);
-				
-			}
+
 		}
 
 		
@@ -243,7 +248,35 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 				};
 			}, []);
 
-
+			const handleVisibility = () => {
+				const targetVisibility = !isVisible
+				localStorage.setItem("isVisibleUpload", isVisible)
+				
+				try{
+					axios.patch(`${API_URL}/sources/${data.source_type}/${data.source_id}/visibility?visibility=${targetVisibility}`, null, {
+						headers: {
+							'accept' : 'application/json',
+							'id-token': currentUser.accessToken,
+						},
+					}
+					).then((response) => {
+						
+						localStorage.setItem("isVisibleUpload", targetVisibility)
+						setIsVisible(targetVisibility)
+						setIsPublic(targetVisibility)
+						console.log(response)
+					}
+					)
+	
+				}
+				catch(error) {
+					console.log("arcChat error",error)
+					if( axios.isCancel(error)){
+						console.log('Request cancelled');
+					}
+					}
+			}
+	
 
 	return (
 		<div className="article dark:bg-darkMode dark:text-zinc-300">
@@ -286,7 +319,23 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto  h-full sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh]'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : <Content data={data} tier={tier} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub}/>} 
+					{isLoading || data.length ? <Loading /> : 
+					
+					authorizationError ? 
+					<div className="flex-col flex mx-10 mx-auto mt-20 md:mt-40">
+						<div className="text-xl max-w-[600px] text-zinc-700 dark:text-zinc-300 ">
+						The page you're trying to reach is either doesn't exist or you don't have permission to access it.
+						</div>
+						<Link to="/" className="underline mt-6 text-zinc-700 max-w-[150px]">Go Back</Link>
+					</div>
+
+					:
+					
+					<Content data={data} tier={tier} isVisible={isVisible} isPublic={isPublic} handleVisibility={handleVisibility} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub}/>
+					
+					
+					
+					} 
 					
 
 				</div>
