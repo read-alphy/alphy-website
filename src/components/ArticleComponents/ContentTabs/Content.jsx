@@ -860,7 +860,7 @@ return (
 																<div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center z-[9999]">
 																	
 																	<AntSwitch onChange={props.handleVisibility} defaultChecked={props.isVisible} disabled={props.tier!=="premium"}/>
-																	<span className="text-sm mx-2">{localStorage.getItem("isVisibleUpload")==="true" ? "Public" : "Private"}</span>
+																	<span className="text-sm mx-2">{props.isVisible===true ? "Public" : "Private"}</span>
 														</div>
 										
 
@@ -1056,7 +1056,7 @@ return (
 													</PopoverContent>
 												</Popover>
 												{(data.source_type==="up" && (props.data!==undefined && props.data !== null && (currentUser!==null && props.data.submitter_id==currentUser.uid))) &&
-													
+
 												<div>
 
 												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
@@ -1067,7 +1067,7 @@ return (
 																<div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center z-[9999]">
 																	
 																	<AntSwitch onChange={props.handleVisibility} defaultChecked={props.isVisible} disabled={props.tier!=="premium"}/>
-																	<span className="text-sm mx-2">{localStorage.getItem("isVisibleUpload")==="true" ? "Public" : "Private"}</span>
+																	<span className="text-sm mx-2">{props.isVisible===true ? "Public" : "Private"}</span>
 														</div>
 										
 
@@ -1382,7 +1382,11 @@ return (
 
 														{activeTab === "tab3" && (data ? summary.key_takeaways ? summary.key_takeaways.map((item, index) => {
 															return (
-																<p className="pb-2">{index + 1}) {item}</p>)
+																<p className="flex flex-row pb-2 ">{index+1}) 
+																<ReactMarkdown className="ml-1 ">{item}</ReactMarkdown>
+																</p>)
+
+
 														}) : (<p><p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 															Processing key takeaways...

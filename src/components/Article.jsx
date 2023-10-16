@@ -15,6 +15,7 @@ import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
 import { API_URL } from '../constants';
+import { set } from 'lodash';
 
 
 
@@ -131,6 +132,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const fetchDataUpload = async (url, constantFetch) => {
 		setAuthorizationError(false)
 	localStorage.setItem("isVisibleUpload", false)
+	
 	const idToken = currentUser ? currentUser.accessToken : "123"
 
 		try {
@@ -150,8 +152,9 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
+					setIsVisible(response.data.is_visible)
+					setIsPublic(response.data.is_visible)
 					localStorage.setItem("isVisibleUpload", response.data.is_visible)
-
 					setContentName(response.data.title)
 				}
 				}
@@ -169,7 +172,9 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 				console.log("error3",error)
 				/* navigate('/404'); */
 			}
-			console.error(`Error fetching data: ${error}`);
+			else{
+				navigate('/404')
+			}
 		} finally {
 			setIsLoading(false);
 		}
@@ -188,18 +193,18 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 	useEffect(() => {
 		if(called===false && data.complete!==true){
-
-
-			
-			
 			if (source_type==="up" && data.length===0){
+				if(data.length>0){
 				setCalled(true)
+				}
 				
 				fetchDataUpload(url,false);
 						
 			}
 			if (source_type!=="up" && data.length===0){
+				if(data.length>0){
 				setCalled(true)
+				}
 				fetchData(url,false);
 		
 			}
@@ -322,11 +327,11 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					{isLoading || data.length ? <Loading /> : 
 					
 					authorizationError ? 
-					<div className="flex-col flex mx-10 mx-auto mt-20 md:mt-40">
+					<div className="flex-col flex mx-10 md:mx-20 mx-auto mt-20 md:mt-40">
 						<div className="text-xl max-w-[600px] text-zinc-700 dark:text-zinc-300 ">
-						The page you're trying to reach is either doesn't exist or you don't have permission to access it.
+						The page you're trying to reach either doesn't exist or you don't have permission to access it.
 						</div>
-						<Link to="/" className="underline mt-6 text-zinc-700 max-w-[150px]">Go Back</Link>
+						<Link to="/myhub" className="underline mt-6 text-zinc-700 dark:text-zinc-300 max-w-[150px]">Back To My Hub</Link>
 					</div>
 
 					:
