@@ -7,9 +7,10 @@ import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 export default function MyWorksFeedItem({item,index, source_id,imageUrl,language_codes}){
 
 
-const model_name = item.summaries.find(item => item.lang==="en").model_name
-
-
+let model_name = ""
+if(item.summaries!==undefined && item.summaries.find(item => item.lang==="en")!==undefined){
+	model_name= item.summaries.find(item => item.lang==="en").model_name
+}
 
     return(
         <Link to={ `/${item.source_type}/${source_id}`} >
@@ -51,12 +52,7 @@ const model_name = item.summaries.find(item => item.lang==="en").model_name
 									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
 								<div className={`text-sm video-text text-black dark:text-zinc-300 font-normal`} >
-											{model_name==="gpt-4" && 
-											
-											<p className="text-indigo-400"> 
-											<span className="pt-1 text-xs">Premium</span>
-												</p>
-												}
+								
 									{item.title}
 									{item.source !==undefined && item.source.title}
 									</div>
@@ -78,7 +74,13 @@ const model_name = item.summaries.find(item => item.lang==="en").model_name
 									}
 									
 									</div>
-
+									{model_name==="gpt-4" && 
+									
+									<p className="text-indigo-400 ">
+										<WorkspacePremiumIcon fontSize="small" className="text-indigo-300 -ml-1"/>
+									<span className="pt-1 text-xs">Premium</span>
+										</p>
+										}
 								
 							</div>
 

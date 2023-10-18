@@ -71,7 +71,7 @@ export default function Content(props) {
 	const [mainPopoverOpenSmall, setMainPopoverOpenSmall] = useState(false);
 	const [transcript, setTranscript] = useState([]);
 	const [summaryArray, setSummaryArray] = useState([]);
-	const [showYouTubeFrame, setShowYouTubeFrame] = useState(props.data.source_type !== undefined && props.data.source_type==="sp"?false:true);
+	const [showYouTubeFrame, setShowYouTubeFrame] = useState(props.data.source_type !== undefined && props.data.source_type==="sp"?false: (localStorage.getItem("showYouTubeFrame")==="false"?false:true));
 	const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] = useState(window.innerWidth <= 1000);
 
 	const [summary, setSummary] = useState("")
@@ -698,11 +698,12 @@ useEffect(() => {
 
 	if(showYouTubeFrame){
 		setShowYouTubeFrame(false)
+		localStorage.setItem("showYouTubeFrame",false)
 		
 	}
 	else {
-		
 		setShowYouTubeFrame(true)
+		localStorage.setItem("showYouTubeFrame",true)
 
 	}
   }

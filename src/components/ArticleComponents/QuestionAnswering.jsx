@@ -13,6 +13,7 @@ import {initializeQaWsManager}  from './QA_Streaming';
 import ReactMarkdown from "react-markdown";
 import QaWsManager from './QaWsManager';
 import { API_HOST, API_SSL } from '../../constants';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 export default function QuestionAnswering(props) {
@@ -330,7 +331,7 @@ export default function QuestionAnswering(props) {
 		
 
 
-			<p className="mb-4 font-light_ text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want.</p>
+			<p className="mb-4 font-light_ text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want</p>
 
 			<div className="Md:pl-10 md:pr-10 ">
 
@@ -338,10 +339,10 @@ export default function QuestionAnswering(props) {
 
 
 				
-				<div className="flex items-center pl-1 pr-1">
+				<div className="flex flex-row items-center pl-1 pr-1">
 				
 
-					<div className="relative w-full ">
+					<div className="flex flex-row drop-shadow-md w-full flex-grow relative dark:bg-zinc-800  border border-black/10   dark:text-white rounded-xl dark:rounded-xl gizmo:rounded-2xl shadow-xs dark:shadow-xs dark:bg-zinc-700 bg-white">
 
 						
 						<input
@@ -354,16 +355,11 @@ export default function QuestionAnswering(props) {
 							type="text"
 							id="questionAnswering"
 							placeholder="Ask anything to the transcript..."
-							className="pr-10 text-zinc-600 dark:text-zinc-300 placeholder:italic peer w-full h-full bg-white dark:bg-darkMode dark:border-mildDarkMode font-sans font-normal  outline-0 focus:ring-0 focus:outline-none disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-zinc-200 text-sm px-3 py-2.5 rounded-[7px] focus:border-green-200 dark:focus:border-green-200" />
-					
-					
-
-
-
+							className="m-0 w-full  text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
 						{props.inputValue.length > 0 ? (
 							<div
 								onClick={handleClear}
-								className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "
+								className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-10 md:mr-14 dark:text-zinc-500 text-zinc-400 "
 							>
 								<svg
 									width="20"
@@ -384,26 +380,17 @@ export default function QuestionAnswering(props) {
 								</svg>
 							</div>
 						) : null}
-					</div>
 
-					{window.innerWidth > 400
-
-						&&
-
-						<Button type="submit"
-							ref={props.buttonRef}
-							onClick={fetchData}
-							id="questionButton"
-
-							className={`bg-green-200 text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-50 pointer-events-none" : ""}`}>
-
-							{isLoadingInside ? <Spinner className="h-4 w-4" /> :
-								<svg className="w-4 h-4 text-zinc-600 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<button onClick={fetchData} className="absolute  rounded-md absolute p-1 rounded-md  gizmo:md:bottom-2.5 md:p-2 md:right-3 bottom-2 md:bottom-3 right-2  bg-green-200">
+<svg className="w-4 h-4 text-zinc-600 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 									<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
 								</svg>
-							}
-						</Button>}
+					</button>
 
+					</div>
+
+
+						
 				</div>
 				{inputError && props.inputValue.length === 0 ? (
 					<div>
@@ -418,7 +405,7 @@ export default function QuestionAnswering(props) {
 					{isCleared && !isLoadingInside && answerData.answer.length === 0 ? (
 						<div>
 
-							<p className="mb-5 underline text-l font-normal text-zinc-700 dark:text-zinc-200">
+							<p className="mb-5 underline text-l font-normal text-zinc-600 dark:text-zinc-300">
 								{' '}
 								Questions by Alphy
 							</p>
