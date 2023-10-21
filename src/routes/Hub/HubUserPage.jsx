@@ -165,7 +165,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                         }
                     }
 				).then((response) => {
-                    console.log(response)
+                    
 						setHasMoreUploads(!(response.data.length < limit));
 						if (firstTimeUploads) {
 							setDataUploads(response.data);

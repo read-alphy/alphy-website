@@ -156,7 +156,7 @@ const AuthInfo = ({setShowWelcomeForm, showWelcomeForm}) => {
 		auth.resetPassword(email)
 
 		.then((result) => {
-			console.log(result)
+		
 			setIsSubmitting(false)
 			setSuccessMessage(true)
 			localStorage.setItem('resetPassword', 'false');

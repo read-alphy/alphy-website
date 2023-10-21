@@ -269,7 +269,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 						localStorage.setItem("isVisibleUpload", targetVisibility)
 						setIsVisible(targetVisibility)
 						setIsPublic(targetVisibility)
-						console.log(response)
+						
 					}
 					)
 	
