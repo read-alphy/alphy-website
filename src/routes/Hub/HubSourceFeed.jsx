@@ -105,6 +105,7 @@ function HubSourceFeed(props) {
 				}
 			)
 			.then((response) => {
+				
 				setHasMore(!(response.data.length < limit));
 
 				if (firstTime) {
@@ -113,7 +114,13 @@ function HubSourceFeed(props) {
 					setData([...data, ...response.data]);
 				}
 				setIsLoading(false);
-			})
+			}).catch((error) => {
+				console.log("hey2")
+				console.log(error)
+				setIsLoading(false);
+				throw error;
+			}
+		);
 
 	};
 	
