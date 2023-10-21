@@ -135,7 +135,7 @@ const handleArcInfo = async () => {
 				setAuthorizationError(false)
 				setCalled(true)
 				setData(response.data)
-				console.log(response.data)
+				
 				setIsVisible(response.data.is_visible)
 				localStorage.setItem("isVisible", response.data.is_visible)
 				setIsPublic(response.data.is_public)
@@ -296,7 +296,7 @@ const handleDeleteArchipelago = () => {
 					localStorage.setItem("isVisible", targetVisibility)
 					setIsVisible(targetVisibility)
 					setIsPublic(targetVisibility)
-					console.log(response)
+					
 				}
 				)
 

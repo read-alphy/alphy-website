@@ -1,7 +1,7 @@
 import PublishIcon from '@mui/icons-material/Publish';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import {Button} from "@material-tailwind/react";
+import {Button, Spinner} from "@material-tailwind/react";
 import { useEffect } from 'react';
 import { Link} from 'react-router-dom';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function SubmitBlock({currentUser, tier, credit, handleSubmit, inputValue, setInputValue, errorMessage, failed,inputRef}){
+
+export default function SubmitBlock({currentUser, tier, credit, handleSubmit, loading, inputValue, setInputValue, errorMessage, failed,inputRef}){
 const navigate = useNavigate()
 
 
@@ -55,7 +56,14 @@ const navigate = useNavigate()
                 <Button size="sm" type="submit"
                     onClick={(e) => {
                         handleSubmit();
-                    }} className=" bg-green-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case">Submit</Button>
+                    }} className={`bg-green-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case ${loading && "opacity-70 pointer-events-none"}`} >
+                        
+                        
+                        
+                        {loading ? <Spinner></Spinner> : <p>Submit</p> }
+                        
+                        
+                        </Button>
                 </div>
            
         </div>

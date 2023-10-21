@@ -156,7 +156,7 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
 						}).
 						catch((error) => {
                             console.log(error)
-                        
+                            setLoading(false)
 							if(tier==="basic" || tier==="premium"){
 								setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
                             }
@@ -198,7 +198,6 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
 
 
     }
-
     return(
         <div className="md:mt-10 xl:mt-20 mx-auto ">
              
@@ -370,7 +369,7 @@ export default function HubCreationBlockReworked({currentUser, tier, credit, dat
                 setSubmitDialog(false)
                 setErrorMessage("")
             }} >
-                         <SubmitBlock currentUser={currentUser} tier={tier} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef}/>
+                         <SubmitBlock loading={loading} currentUser={currentUser} tier={tier} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef}/>
 
 			</Dialog>
 			}

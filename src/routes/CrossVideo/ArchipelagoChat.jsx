@@ -19,7 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import QuizIcon from '@mui/icons-material/Quiz';
 import QaWsManager from '../../components/ArticleComponents/QaWsManager';
 import ReactMarkdown from "react-markdown";
-
+import LoopIcon from '@mui/icons-material/Loop';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { API_HOST, API_SSL } from '../../constants';
 
@@ -438,59 +438,59 @@ const toggleExpand = () => {
             <div className="sm:ml-10 px-3 ">
                 <div>
 				<div className="flex items-center pr-1 mt-6 xl:mt-8 max-w-[900px] ">
-                <div className="relative w-full min-w-[40vw] ">
+        <div className="flex flex-row drop-shadow-md w-full flex-grow relative dark:bg-zinc-800  border border-black/10   dark:text-white rounded-xl dark:rounded-xl gizmo:rounded-2xl shadow-xs dark:shadow-xs  bg-white">
 
-                    
-                    <input
-                        value={inputValue}
-                        onChange={(event) => setInputValue(event.target.value)}
-                        onKeyDown={handleKeyDown}
-                        type="text"
-                        id="questionAnswering"
-                        placeholder={`Start asking...`}
-                        className="pr-10 text-zinc-500 dark:text-zinc-300 placeholder:italic focus:ring-0 focus:outline-none peer w-full h-full bg-white  dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border border border-greenColor sm:border-zinc-300 focus:border text-md px-3 py-2.5 rounded-[7px] focus:border-greenColor dark:focus:border-greenColor" />
-                
-                    {inputValue.length > 0 ? (
-                        <div
-                            onClick={handleClear}
-                            className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 "
-                        >
-                            <svg
-                                width="20"
-                                onClick={handleClear}
+							
+<input
+  
+  value={inputValue}
+  onChange={(event) => setInputValue(event.target.value)}
+  onKeyDown={handleKeyDown}
+  title={inputValue}
+  type="text"
+  id="questionAnswering"
+  placeholder="Type your question here..."
+  className="m-0 w-full  text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-400 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
+        {inputValue.length > 0 ? (
+								<div
+									onClick={handleClear}
+									className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-10 md:mr-14 dark:text-zinc-500 text-zinc-400 "
+								>
+									<svg
+										width="20"
+										onClick={handleClear}
 
-                                className="cursor-pointer "
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M6 18L18 6M6 6l12 12"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                ></path>
-                            </svg>
-                        </div>
-                    ) : null}
-                </div>
+										className="cursor-pointer"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M6 18L18 6M6 6l12 12"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+									</svg>
+								</div>
+							) : null}
 
-                
-                        <div className={`hidden xs:block`}>
-                    <Button type="submit"
-                        onClick={handleSubmit}
-                        id="questionButton"
-                        ref={buttonRef}
-                        className={`bg-greenColor text-[15px] ml-2 lg:ml-4 ${isLoadingInside ? "opacity-70 pointer-events-none" : ""} ${window.innerWidth < 420 && " hidden"}`}>
+              
+	<button ref={buttonRef} onClick={handleSubmit} className={`absolute  rounded-md absolute p-1 rounded-md  gizmo:md:bottom-2.5 md:p-2 md:right-3 bottom-2 right-2 ${!isLoadingInside ? "pointer-events-none cursor-default  md:bottom-2 bg-transparent": "bg-green-200"}`} >
+    {!isLoadingInside ? 
+     <Spinner fontSize="small" className="opacity-40 p-1 cursor-default z-50" color="black"/>:
+	<svg className="w-4 h-4 text-zinc-600 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+                  
 
-                        {isLoadingInside ? <Spinner className="h-4 w-4" /> :
-                            <svg className="w-4 h-4 text-zinc-500" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        }
-                    </Button>
-                    </div>
+                 
+                  }
+						</button>
+
+              </div>
+                        
                     </div>
 
              </div>
@@ -510,7 +510,7 @@ const toggleExpand = () => {
                     <QuizIcon className="text-greenColor dark:text-green-200 mr-2"/>
                     <span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
                     
-                    <RefreshIcon title="Refresh questions." className="ml-2 text-zinc-500 dark:text-zinc-300 cursor-pointer" onClick={() => {
+                    <RefreshIcon title="Refresh questions." fontSize="small" className="ml-2 text-zinc-500 dark:text-zinc-300 cursor-pointer" onClick={() => {
                         setSelectedQuestions("")
                         setI(0)
                         }}/>
@@ -536,7 +536,18 @@ const toggleExpand = () => {
                     
                     {isLoadingInside || answerData.answer!=="" ?<p className="text-greenColor dark:text-green-200 text-l"> 
                         <QuestionAnswerIcon className="text-greenColor dark:text-green-200 mr-1"/>
-                        Answer</p> : null}
+                        Answer
+                        
+                        <LoopIcon className="ml-2 cursor-pointer text-zinc-500 dark:text-zinc-300" fontSize="small" onClick={() => {
+                          
+                          setAnswerData({ answer: '', sources: [] })
+                          setInputValue("")
+                        }
+                        }/>
+                        </p> 
+                        
+                        
+                        : null}
             {isLoadingInside &&
             <div className="opacity-60 dark:opacity-100">
                 <div className="hidden dark:block opacity-60 w-full pr-3 lg:px-0 lg:w-[900px]">

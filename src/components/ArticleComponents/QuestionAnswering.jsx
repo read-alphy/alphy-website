@@ -232,12 +232,10 @@ export default function QuestionAnswering(props) {
 			if (currentUser) {
 				try {
 					setIsLoadingInside(true);
-
 					setAnswer(false);
 					setAnswerData({ answer: '', sources: [] });
 
-				setTriggerWs(true)
-			
+				setTriggerWs(true)			
 				const wsManager = new QaWsManager({
 					apiInfo: {
 						apiHost: API_HOST,
@@ -342,52 +340,52 @@ export default function QuestionAnswering(props) {
 				<div className="flex flex-row items-center pl-1 pr-1">
 				
 
-					<div className="flex flex-row drop-shadow-md w-full flex-grow relative dark:bg-zinc-800  border border-black/10   dark:text-white rounded-xl dark:rounded-xl gizmo:rounded-2xl shadow-xs dark:shadow-xs dark:bg-zinc-700 bg-white">
+						<div className="flex flex-row drop-shadow-md w-full flex-grow relative dark:bg-zinc-800  border border-black/10   dark:text-white rounded-xl dark:rounded-xl gizmo:rounded-2xl shadow-xs dark:shadow-xs dark:bg-zinc-700 bg-white">
 
-						
-						<input
-							ref={props.inputRef}
-							value={props.inputValue}
-							onClick={() => handleClick(true)}
-							onChange={(event) => props.setInputValue(event.target.value)}
-							onKeyDown={handleKeyDown}
-							title={props.inputValue}
-							type="text"
-							id="questionAnswering"
-							placeholder="Ask anything to the transcript..."
-							className="m-0 w-full  text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
-						{props.inputValue.length > 0 ? (
-							<div
-								onClick={handleClear}
-								className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-10 md:mr-14 dark:text-zinc-500 text-zinc-400 "
-							>
-								<svg
-									width="20"
+							
+							<input
+								ref={props.inputRef}
+								value={props.inputValue}
+								onClick={() => handleClick(true)}
+								onChange={(event) => props.setInputValue(event.target.value)}
+								onKeyDown={handleKeyDown}
+								title={props.inputValue}
+								type="text"
+								id="questionAnswering"
+								placeholder="Ask anything to the transcript..."
+								className="m-0 w-full  text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
+							{props.inputValue.length > 0 ? (
+								<div
 									onClick={handleClear}
-
-									className="cursor-pointer"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
+									className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-10 md:mr-14 dark:text-zinc-500 text-zinc-400 "
 								>
-									<path
-										d="M6 18L18 6M6 6l12 12"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-								</svg>
-							</div>
-						) : null}
+									<svg
+										width="20"
+										onClick={handleClear}
 
-<button onClick={fetchData} className="absolute  rounded-md absolute p-1 rounded-md  gizmo:md:bottom-2.5 md:p-2 md:right-3 bottom-2 md:bottom-3 right-2  bg-green-200">
-<svg className="w-4 h-4 text-zinc-600 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-								</svg>
-					</button>
+										className="cursor-pointer"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M6 18L18 6M6 6l12 12"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+									</svg>
+								</div>
+							) : null}
 
-					</div>
+	<button onClick={fetchData} className="absolute  rounded-md absolute p-1 rounded-md  gizmo:md:bottom-2.5 md:p-2 md:right-3 bottom-2 md:bottom-3 right-2  bg-green-200">
+	<svg className="w-4 h-4 text-zinc-600 dark:text-zinc-700" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+						</button>
+
+						</div>
 
 
 						
