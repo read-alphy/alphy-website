@@ -48,8 +48,6 @@ export default function Content(props) {
 	
 	
 
-
-
 	const [isLoading, setIsLoading] = useState(props.data.transcript === undefined);
 
 	const [activeTab, setActiveTab] = useState('tab1');
@@ -1223,7 +1221,7 @@ return (
 							{transcript.length > 0 &&
 
 
-								<div className={`grid-cols-2 w-full md:min-w-[500px]`}>
+								<div className={`${summary.key_qa===undefined || summary.key_qa===null ? "hidden" : ""} grid-cols-2 w-full md:min-w-[500px]`}>
 									{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
 									{showYouTubeFrame ===true && 
@@ -1294,7 +1292,7 @@ return (
 								
 									
 									<div className={`col-span-2 ${data.source_type == "yt" && ""} drop-shadow-sm `}>
-									{summary.key_qa === undefined || summary.key_qa === null ? (
+									{summary.key_qa === undefined && summary.key_qa === null ? (
 										<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
 											<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
 
@@ -1335,7 +1333,7 @@ return (
 							}
 							{transcript.length > 0 &&
 
-								<div  className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6  mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
+								<div  className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6 max-w-[700px] mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
 									{transcript.length > 0 ? (
 										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
@@ -1388,7 +1386,20 @@ return (
 																</p>)
 
 
-														}) : (<p><p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+														}) : (
+														
+														summary.key_takeaways===undefined || summary.key_takeaways===null
+														
+														? 
+														
+														<p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+														This content doesn't have key takeaways. Check out the transcript!
+
+														</p> :
+
+
+														  <p>
+															<p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 
 															Processing key takeaways...
 
@@ -1396,21 +1407,26 @@ return (
 
 
 														</p>
-														</p>) : null)}
+														</p>
+														
+														) : null)}
 
 
 														{activeTab === 'tab1' && (
 
-															<div className="content-area text-l font-normal  max-w-screen-md overflow-auto  h-full xl:max-h-[110vh]">
+															<div className={`content-area text-l font-normal  max-w-screen-lg overflow-auto  h-full xl:max-h-[110vh]`}>
 																{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
 
 																{isLoading ? (
 																	<Loading />
 																) : summaryArray.length === 0 ? (
-																	<tr className="border-b-0 p-6 flex mx-auto justify-center items-center">
-																		<td className="pt-4 pb-4  text-md text-zinc-500 dark:text-zinc-400 ">Still waiting for the summary! Meanwhile, check the transcript.</td>
-																	</tr>
+																	
+																		<p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+												
+																			{summary.summary===undefined || summary.summary===null ? "This content doesn't have a summary. Check out the transcript!" : "Still waiting for the summary! Meanwhile, check the transcript."}
+																		</p>
+																	
 																) : (
 																	summaryArray.map((item, index) => {
 																		return (

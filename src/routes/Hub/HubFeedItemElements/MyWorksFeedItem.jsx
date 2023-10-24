@@ -49,7 +49,7 @@ if(item.summaries!==undefined && item.summaries.find(item => item.lang==="en")!=
 							
 								
 								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) ? null : (
-									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
+									item.summaries.length>0 && <div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
 								<div className={`text-sm video-text text-black dark:text-zinc-300 font-normal`} >
 								

@@ -115,7 +115,7 @@ function HubSourceFeed(props) {
 				}
 				setIsLoading(false);
 			}).catch((error) => {
-				console.log("hey2")
+				
 				console.log(error)
 				setIsLoading(false);
 				throw error;
