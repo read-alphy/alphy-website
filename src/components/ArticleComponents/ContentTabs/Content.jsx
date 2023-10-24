@@ -103,7 +103,7 @@ export default function Content(props) {
 
 	const data = props.data
 
-	console.log(props.data)
+	
 	const title = data.title
 	const inputDate = data.added_ts !== undefined ? data.added_ts.substring(0, 10) : undefined;
 	let formattedDate = ""
