@@ -103,7 +103,7 @@ export default function Content(props) {
 
 	const data = props.data
 
-	
+	console.log(props.data)
 	const title = data.title
 	const inputDate = data.added_ts !== undefined ? data.added_ts.substring(0, 10) : undefined;
 	let formattedDate = ""
@@ -1221,7 +1221,7 @@ return (
 							{transcript.length > 0 &&
 
 
-								<div className={`${summary.key_qa===undefined || summary.key_qa===null ? "hidden" : ""} grid-cols-2 w-full md:min-w-[500px]`}>
+								<div className={`${summary.key_qa===undefined ? "hidden" : ""} grid-cols-2 w-full md:min-w-[500px]`}>
 									{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
 									{showYouTubeFrame ===true && 
@@ -1292,7 +1292,7 @@ return (
 								
 									
 									<div className={`col-span-2 ${data.source_type == "yt" && ""} drop-shadow-sm `}>
-									{summary.key_qa === undefined && summary.key_qa === null ? (
+									{summary.key_qa !== undefined && summary.key_qa === null ? (
 										<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
 											<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
 
