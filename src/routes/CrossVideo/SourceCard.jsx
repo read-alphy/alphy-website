@@ -6,8 +6,8 @@ import {Button} from "@material-tailwind/react";
 import { Item } from '@radix-ui/react-accordion';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import CloseIcon from '@mui/icons-material/Close';
-import Logo from '../../img/logo.png';
-import LogoInverted from '../../img/logo-inverted.png';
+import Logo from '../../img/ALPHY_BG_REMOVED_LIGHT.png';
+import LogoInverted from '../../img/ALPHY_BG_REMOVED_DARK.png';
 import {useNavigate} from "react-router-dom"
 
 
@@ -154,12 +154,12 @@ const showDialog = () => {
                     </div>
 			</div>
             <div>
-                <a onClick={handleAlphyClick} className="underline mt-4 flex flex-row">
+                <a onClick={handleAlphyClick} className="underline mt-4 flex flex-row transform hover:scale-105 transition duration-300">
                     <div>
-                    <img  src={Logo} className="w-[24px] h-[24px] sm:w-[24px] hidden dark:flex"/>
-                    <img  src={LogoInverted} className="w-[24px] h-[24px] sm:w-[24px] dark:hidden"/>
+                    <img  src={Logo} className="w-[30px] h-[30px] hidden dark:flex"/>
+                    <img  src={LogoInverted} className="w-[30px] h-[30px]  dark:hidden"/>
                     </div>
-                    <p className="ml-2 text-sm sm:text-md text-zinc-500 dark:text-zinc-300">See more details on Alphy </p></a>
+                    <p className="ml-2 mt-1 text-sm sm:text-md text-zinc-500 dark:text-zinc-300">See more details on Alphy </p></a>
                 <p className="mt-4">
                 <a className=" text-zinc-500 dark:text-zinc-300">
 
@@ -189,7 +189,7 @@ const showDialog = () => {
                 </p>
 
             </div>
-            <p className="absolute bottom-0 text-greenColor mb-2">Click to see more</p>
+            <p className="absolute bottom-0 text-greenColor  mb-2">Click to see more</p>
             
         </div>
    :

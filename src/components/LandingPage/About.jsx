@@ -4,6 +4,8 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import Logo from "../../img/ALPHY_BG_REMOVED_LIGHT.png"
+import LogoBlack from "../../img/ALPHY_BG_REMOVED_DARK.png"
 
 
 export default function About() {
@@ -14,8 +16,19 @@ export default function About() {
 	  setOpen(open === value ? 0 : value);
 	};
 	return (
+		<div className="flex flex-col">
+
+			<div className="hidden sm:flex flex-row flex  md:w-800 w-full flex  justify-center dark:bg-darkMode dark:text-zinc-300 ">
+							<img src={Logo} width={70} className="hidden dark:block"></img>
+							<img src={LogoBlack} width={70} className="dark:hidden opacity-80 "></img>
+							<h1 className="ml-2 mt-4 text-4xl font-bold">ALPHY</h1>
+				</div>
+
+
 		
-		<div className="mx-auto md:w-800 w-full flex justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-zinc-50" id="about">
+		<div className="mx-auto md:w-800 w-full flex  justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-zinc-50" id="about">
+			
+
 			<div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">	
 			<h1 className="text-2xl mb-5 underline font-semibold">About Alphy</h1>
 			<Fragment>
@@ -128,7 +141,7 @@ export default function About() {
 
 	
 			</div>
-
+			</div>
 			
 		</div>
 	);

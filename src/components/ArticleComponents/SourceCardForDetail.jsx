@@ -6,8 +6,8 @@ import {Button} from "@material-tailwind/react";
 import { Item } from '@radix-ui/react-accordion';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import CloseIcon from '@mui/icons-material/Close';
-import Logo from '../../img/logo.png';
-import LogoInverted from '../../img/logo-inverted.png';
+import Logo from '../../img/ALPHY_BG_REMOVED_DARK.png';
+import LogoInverted from '../../img/ALPHY_BG_REMOVED_DARK.png';
 import {useNavigate} from "react-router-dom"
 
 

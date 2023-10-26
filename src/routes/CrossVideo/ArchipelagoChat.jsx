@@ -550,8 +550,8 @@ const toggleExpand = () => {
                         : null}
             {isLoadingInside &&
             <div className="opacity-60 dark:opacity-100">
-                <div className="hidden dark:block opacity-60 w-full pr-3 lg:px-0 lg:w-[900px]">
-                        <Box sx={{ width: 900 }}>
+                <div className="hidden dark:block opacity-60 w-full pr-3 lg:px-0 ">
+                        <Box >
                         <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
                         <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>
                         <Skeleton sx={{bgcolor:"#71717a"}} animation="wave"/>

@@ -5,8 +5,8 @@ import { useAuth } from '../hooks/useAuth';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { GoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
-import Logo from "../img/logo.png"
-import LogoBlack from "../img/logo-inverted.png"
+import Logo from "../img/ALPHY_BG_REMOVED_LIGHT.png"
+import LogoBlack from "../img/ALPHY_BG_REMOVED_DARK.png"
 import HomeIcon from '@mui/icons-material/Home';
 
 
@@ -97,9 +97,9 @@ function Navbar({ collapsed, setCollapsed }) {
 			{collapsed==true	 && (isArc) && <div onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]"></div>}
 			<Link to={"/"} className="dark:text-gray-200 pl-4 ">
 				<div className="flex-row flex">
-				<img src={Logo} width={40} className="hidden dark:block"></img>
-				<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-				<h1 className="ml-2 mt-0.5 text-2xl">ALPHY</h1>
+				<img src={Logo} width={50} className="hidden dark:block"></img>
+				<img src={LogoBlack} width={50} className="dark:hidden opacity-80 "></img>
+				<h1 className="ml-2 mt-2 text-2xl">ALPHY</h1>
 	
 				</div>
 			</Link>

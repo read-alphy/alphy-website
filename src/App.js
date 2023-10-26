@@ -46,7 +46,7 @@ function App() {
 	const urlParams = new URLSearchParams(window.location.search);
 	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
 	const [contentName, setContentName] = useState("")
-	const [collapsed, setCollapsed] = useState(false);
+	const [collapsed, setCollapsed] = useState(window.innerWidth<768 ? true : false);
 	const [idToken, setIdToken] = useState("")
 	const [userArchipelagos, setUserArchipelagos] = useState([])
 	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])

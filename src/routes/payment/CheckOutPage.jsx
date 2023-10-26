@@ -11,9 +11,7 @@ import CheckOutPageInfo from './CheckOutPageInfo';
 
 
 
-
-
-export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos}) {
+export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, stripePromise,userArchipelagos}) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [clientSecret, setClientSecret] = useState("");
@@ -113,6 +111,7 @@ useEffect (() => {
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> : 
 					<CheckOutPageInfo
+					stripePromise={stripePromise}
 					hasActiveSub={hasActiveSub} currentUser={currentUser} showWelcomeForm = {showWelcomeForm} setShowWelcomeForm={setShowWelcomeForm} userArchipelagos={userArchipelagos} clientSecret={clientSecret} setClientSecret={setClientSecret}
 					/>}
 					

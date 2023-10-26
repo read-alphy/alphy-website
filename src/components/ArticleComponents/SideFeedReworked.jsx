@@ -10,8 +10,8 @@ import FooterReworked from "./FooterReworked"
 import { useNavigate } from 'react-router-dom'
 import LoginIcon from '@mui/icons-material/Login';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import Logo from "../../img/logo.png"
-import LogoBlack from "../../img/logo-inverted.png"
+import Logo from "../../img/ALPHY_BG_REMOVED_LIGHT.png"
+import LogoBlack from "../../img/ALPHY_BG_REMOVED_DARK.png"
 import { Link } from 'react-router-dom';
 import HubFeedItem from "../../routes/Hub/HubFeedItemElements/HubFeedItem"
 import {useLocation} from 'react-router-dom';
@@ -90,11 +90,11 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 									<div className="flex-row flex">
 									<img src={Logo} width={40} className="hidden dark:block"></img>
 									<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
-									<h1 className="ml-2 text-2xl mt-0.5 ">ALPHY</h1>
+									<h1 className="ml-1 text-2xl mt-1 ">ALPHY</h1>
 						
 									</div>
 								</Link>
-										<div className="hidden sm:block">
+										<div className="hidden md:block">
 										<LastPageIcon onClick={()=> setCollapsed(true)} fontSize="large" className="rotate-180 ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1"/>
 										</div>
 
@@ -102,7 +102,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 											<div
 												id={'nav-icon3'}
 												onClick={() => setCollapsed(!collapsed)}
-												className={` cursor-pointer sm:hidden ${collapsed ? ' ' : ' open '} text-zinc-500 dark:text-zinc-500`}
+												className={` cursor-pointer md:hidden ${collapsed ? ' ' : ' open '} text-zinc-500 dark:text-zinc-500`}
 											>
 												<span className="bg-zinc-700 dark:bg-zinc-200"></span>
 												<span className="bg-zinc-700 dark:bg-zinc-200"></span>
@@ -200,15 +200,17 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 
 		<div>
 			<div className="">
-							<div className={`flex items-center font-bold pt-10 pl-2`}>
+							<div className={`flex items-center font-bold pt-10 pl-0.5`}>
 
-									<button onClick={() => setCollapsed(false)} className="text-zinc-8 00 dark:text-gray-200 ">
+									<button onClick={() => setCollapsed(false)} className="text-zinc-800 dark:text-gray-200 ">
 									<div className="flex-row flex">
-									<img src={Logo} width={40} className="hidden dark:block"></img>
-									<img src={LogoBlack} width={40} className="dark:hidden opacity-80 "></img>
+									<img src={Logo} width={50} className="hidden dark:block"></img>
+									<img src={LogoBlack} width={50} className="dark:hidden opacity-80 "></img>
 									
-									<div className="absolute z-50 ">
-										<LastPageIcon onClick={()=> setCollapsed(true)} fontSize="large" className="opacity-0 hover:opacity-100 ml-1 hover:text-zinc-100 hover:block text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-green-300 dark:hover:bg-zinc-700 hover:transition  hover:ease-in-out p-1"/>
+									<div className="absolute z-50 pl-1 pt-1">
+										<button className="opacity-0 hover:opacity-100 hover:text-zinc-100 dark:hover:text-zinc-100 hover:block text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-green-300 dark:hover:bg-green-300 hover:transition  hover:ease-in-out duration-300 p-1 ">
+										<LastPageIcon onClick={()=> setCollapsed(true)} fontSize="large" className=""/>
+										</button>
 									</div>
 									</div>
 								</button>

@@ -2,7 +2,6 @@ import React from 'react';
 import DiscordLogo from '../img/discord.svg';
 import TwitterLogo from '../img/twitter.svg';
 import Logo from "../img/logo.png"
-import LogoBlack from "../img/logo-inverted.png"
 function Footer() {
 	return (
 		/*         <div className='footer-main '>

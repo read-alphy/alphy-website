@@ -1221,7 +1221,7 @@ return (
 							{transcript.length > 0 &&
 
 
-								<div className={`${summary.key_qa===undefined ? "hidden" : ""} grid-cols-2 w-full md:min-w-[500px]`}>
+								<div className={`${props.data.summaries.length===0 ? "hidden" : ""} grid-cols-2 w-full md:min-w-[500px]`}>
 									{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
 									{showYouTubeFrame ===true && 
