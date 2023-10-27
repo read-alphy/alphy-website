@@ -188,6 +188,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 					</div>
 
 					:<div className="flex flex-grow justify-end items-end w-full">
+						
 					<FooterReworked currentUser={currentUser} collapsed={collapsed} setCollapsed={setCollapsed} handleSignout={handleSignOut} tier={tier}/>
 					</div>
 

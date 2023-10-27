@@ -8,9 +8,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-
+import {Button } from '@material-tailwind/react';
 import {Link} from "react-router-dom"
 import VerifiedIcon from '@mui/icons-material/Verified';
+import ChromeIcon from "../../img/chrome_icon.png"
 
 export default function FooterReworked({currentUser,collapsed,setCollapsed, handleSignout,tier}){
     const [openFeedbackDialog, setOpenFeedbackDialog] = useState(false);
@@ -53,6 +54,14 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
           <div>
                               <div className="">
                                   <div className="flex flex-col">
+                                  <div className=" pl-3 md:pl-6  mb-6">
+                                    <a href="https://chrome.google.com/webstore/detail/alphy/eifpdfgnodpopimeakmdebmfglimkdno" target="_blank">
+							<Button  className="flex flex-row normal-case text-zinc-500 dark:text-zinc-400 bg-white dark:bg-darkMode  font-normal items-center border border-zinc-200 dark:border-zinc-700 drop-shadow-sm px-2">
+              <img src={ChromeIcon} width={20}/>  
+              <span className="text-xs pl-2 ">Install our Chrome Extension</span>
+                 </Button>
+                 </a>
+							</div>
                                   {/*   {tier===free && 
                                     <div className="mb-6 hidden xl:block">
                                     <p className = "text-zinc-600 dark:text-zinc-200 text-md  w-full w-full pl-10 mb-5 ">Try Premium</p>
