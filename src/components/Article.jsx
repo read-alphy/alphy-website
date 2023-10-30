@@ -76,7 +76,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 			).catch((error) => {
 				console.log("error1",error,constantFetch)
-				if(constantFetch===false){
+				if(constantFetch===false && error.code!=="ERR_NETWORK"){
 				navigate('/404')
 				}
 			});
