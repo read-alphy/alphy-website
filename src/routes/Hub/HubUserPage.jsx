@@ -192,9 +192,9 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
     const loadMore = () => {	
 			setOffsetPersonal(offsetPersonal + 10);
-            if(offsetPersonal === limit){
+            
 			getDataPersonal(offsetPersonal + limit, false, true);
-        }
+        
 	
 
 	};
