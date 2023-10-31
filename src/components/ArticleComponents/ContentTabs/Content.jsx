@@ -575,7 +575,7 @@ useEffect(() => {
 		let askInput
 
 		
-		askInput ="Explain the following:" + askText + "?' Be very brief."
+		askInput ="Explain the following:" + askText + "?'"
 		
 		setInputValue(askInput)
 		//setSelectionCall(true)
