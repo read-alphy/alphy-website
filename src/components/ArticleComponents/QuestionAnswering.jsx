@@ -51,7 +51,7 @@ export default function QuestionAnswering(props) {
 
 
 
-
+	console.log(answerData)
 
 	function updateVariable(event) {
 
@@ -209,7 +209,9 @@ export default function QuestionAnswering(props) {
 	};
 
 	const formatAnswer = (answer, answerData) => {
-		const parts = answer.split(/\[(\d+)\]/g);
+		const regexPattern = /\]\./g;
+		const formattedRawAnswer = answer.replace(regexPattern, "].\n\n")
+		const parts = formattedRawAnswer.split(/\[(\d+)\]/g);
 
 		return parts.map((part, index) => {
 		  if (answerData.sources.hasOwnProperty(part-1)) {
@@ -357,7 +359,7 @@ export default function QuestionAnswering(props) {
 
 				  setTimeout(() => {
 					wsManager.close();
-				}, 10000);
+				}, 20000);
 
 
 				
@@ -497,7 +499,7 @@ export default function QuestionAnswering(props) {
 					{(isCleared && !isLoadingInside && answerData.answer.length === 0) && (
 
 						<BaseQuestions key_qa={props.key_qa} data={props.data} collapseIndex={collapseIndex} setCollapseIndex={setCollapseIndex} handleBaseQAaccordion={handleBaseQAaccordion}  setBaseSources = {setBaseSources} handleCopyToClipboard={handleCopyToClipboard} handleShareLink={handleShareLink} handleLength={handleLength} QARef={QARef}
-						baseSources={baseSources} updateVariable={updateVariable} DataArrayIcon={DataArrayIcon}/>	
+						baseSources={baseSources} updateVariable={updateVariable} DataArrayIcon={DataArrayIcon} formatAnswer={formatAnswer}/>	
 					) }
 
 

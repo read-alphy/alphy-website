@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown";
 
 
 
-export default function BaseQuestions({key_qa,data, setBaseSources, handleCopyToClipboard, handleShareLink, handleLength, QARef, updateVariable, baseSources, collapseIndex, setCollapseIndex, handleBaseQAaccordion    ,DataArrayIcon}){
+export default function BaseQuestions({key_qa,data, setBaseSources, handleCopyToClipboard, handleShareLink, handleLength, QARef, updateVariable, baseSources, collapseIndex, setCollapseIndex, handleBaseQAaccordion,formatAnswer ,DataArrayIcon}){
 
 
 
@@ -39,10 +39,9 @@ export default function BaseQuestions({key_qa,data, setBaseSources, handleCopyTo
 														key_qa[item].answer[0] === "<" ?
 														<p id="answer-area" className="answer-area" dangerouslySetInnerHTML={{ __html: key_qa[item].answer }} />
 														:
-														<ReactMarkdown>
-															<p dangerouslySetInnerHTML={ {__html: key_qa[item].answer} }/>
-															
-														</ReactMarkdown>
+														<div>
+															{formatAnswer(key_qa[item].answer, key_qa[item])} 
+                                                            </div>
 
 													}
 													

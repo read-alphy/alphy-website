@@ -172,7 +172,7 @@ const handleSubmit = () => {
                 
                                   setTimeout(() => {
                                     wsManager.close();
-                                }, 10000);
+                                }, 20000);
 
                         setTimeout(() => {
                             
@@ -331,7 +331,9 @@ const toggleExpand = () => {
 
 
 	const formatAnswer = (answer, answerData) => {
-		const parts = answer.split(/\[(\d+)\]/g);
+    const regexPattern = /\]\./g;
+		const formattedRawAnswer = answer.replace(regexPattern, "].\n\n")
+		const parts = formattedRawAnswer.split(/\[(\d+)\]/g);
 
 		return parts.map((part, index) => {
 		  if (answerData.sources.hasOwnProperty(part-1)) {
@@ -612,7 +614,7 @@ const toggleExpand = () => {
                                  }}/>  */}
 
                                  
-                                    <div>{formatAnswer(answerData.answer,answerData)}</div>
+                                    <div className="whitespace-pre-line">{formatAnswer(answerData.answer,answerData)}</div>
                                  
                                     
                             <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
