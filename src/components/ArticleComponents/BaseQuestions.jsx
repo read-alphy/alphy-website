@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown";
 
 
 
-export default function BaseQuestions({key_qa,data, setBaseSources, handleCopyToClipboard, handleShareLink, handleLength, QARef, updateVariable, baseSources, collapseIndex, setCollapseIndex, handleBaseQAaccordion,formatAnswer ,DataArrayIcon}){
+export default function BaseQuestions({key_qa,data, setBaseSources, singleSource, areaRefs, handleCopyToClipboard, handleShareLink, handleLength, showSource, updateVariable, baseSources, collapseIndex, handleShowAllSources, handleBaseQAaccordion,formatAnswer ,DataArrayIcon}){
 
 
 
@@ -49,12 +49,14 @@ export default function BaseQuestions({key_qa,data, setBaseSources, handleCopyTo
 											</div>
 											<div>
 
-                                                                        <button
+                                               <button
                                                 className={`cursor-pointer justify-end mt-10 flex flex-row bg-whiteLike hover:bg-zinc-100  transition duration-300 ease-in-out dark:bg-zinc-700 dark:hover:bg-zinc-600 px-2 py-2 rounded-lg`}
-                                                onClick={() => setBaseSources(!baseSources)}
+                                                onClick={handleShowAllSources}
                                             >
                                                 <span className={` text-zinc-600 dark:text-zinc-200 text-md pr-1`}>
-                                                {baseSources ? "Hide sources": "See all sources" } <DataArrayIcon fontSize="sm"/>
+
+                                              	  {(baseSources  && !singleSource)  ? "Hide sources": "See all sources" } <DataArrayIcon fontSize="sm"/>
+
                                                 </span>
                 
                 </button>
@@ -62,12 +64,12 @@ export default function BaseQuestions({key_qa,data, setBaseSources, handleCopyTo
 												{baseSources ? (
 													<div className="mt-10">
 														<div className="">
-															<h1 className="mb-4 text-xl font-normal text-zinc-700 dark:text-zinc-300"> Sources from the video sorted by relevance</h1>
+															
 
 									<div className=" ">
 															{key_qa[item]
 																? key_qa[item].sources.map((source, index) => (
-																	<p className=" font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5" key={index}>
+																	<p ref={areaRefs.current[index]} className={`${(singleSource===true && showSource!== index+1) && "hidden"} font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5`}  key={index}>
 
 																		{source.start !== null && source.start !== undefined && source.end ? (
 																			window.innerWidth > 999 && data.source_type == "yt" ?

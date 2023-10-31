@@ -249,6 +249,7 @@ export default function QuestionAnswering(props) {
 	  const handleShowSingleSource = (sourceNumber) => {
 		setSingleSource(true)
 		setAnswer(true)
+		setBaseSources(true)
 		setShowSource(parseInt(sourceNumber, 10));
 		setTimeout (() => {
 		handleScroll(sourceNumber-1)
@@ -283,12 +284,17 @@ export default function QuestionAnswering(props) {
 
 
 	const handleShowAllSources = () => {
-		
-		if(singleSource===true && answer===true){
+
+console.log(answer, baseSources, singleSource)
+		if(singleSource===true && (answer===true || baseSources===true)){
+			
 			setSingleSource(false)
+			
 		}
+
 		if(singleSource===false){
 			setAnswer(!answer)
+			setBaseSources(!baseSources)
 		}
 	}
 
@@ -512,7 +518,8 @@ export default function QuestionAnswering(props) {
 					{(isCleared && !isLoadingInside && answerData.answer.length === 0) && (
 
 						<BaseQuestions key_qa={props.key_qa} data={props.data} collapseIndex={collapseIndex} setCollapseIndex={setCollapseIndex} handleBaseQAaccordion={handleBaseQAaccordion}  setBaseSources = {setBaseSources} handleCopyToClipboard={handleCopyToClipboard} handleShareLink={handleShareLink} handleLength={handleLength} QARef={QARef}
-						baseSources={baseSources} updateVariable={updateVariable} DataArrayIcon={DataArrayIcon} formatAnswer={formatAnswer}/>	
+						baseSources={baseSources} updateVariable={updateVariable} DataArrayIcon={DataArrayIcon} formatAnswer={formatAnswer} areaRefs={areaRefs} singleSource={singleSource}
+						showSource = {showSource} handleShowAllSources = {handleShowAllSources}/>	
 					) }
 
 

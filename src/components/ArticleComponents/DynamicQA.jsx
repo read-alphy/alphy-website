@@ -51,7 +51,7 @@ export default function DynamicQA({answerData, areaRefs, answer, data, handleCle
                     onClick={handleShowAllSources}
                 >
                     <span className={` text-zinc-600 dark:text-zinc-200 text-md pr-1`}>
-                    {answer ? "Hide sources": "See all sources" } <DataArrayIcon fontSize="sm"/>
+                    {(answer && !singleSource) ? "Hide sources": "See all sources" } <DataArrayIcon fontSize="sm"/>
                     </span>
                 
                 </button>
