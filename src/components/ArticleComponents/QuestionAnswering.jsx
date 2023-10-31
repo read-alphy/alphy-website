@@ -51,7 +51,7 @@ export default function QuestionAnswering(props) {
 
 
 
-	console.log(answerData)
+	
 
 	function updateVariable(event) {
 
