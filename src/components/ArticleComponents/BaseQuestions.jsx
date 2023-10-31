@@ -1,14 +1,19 @@
 import ReactMarkdown from "react-markdown";
+import Markdown from "react-markdown";
 
 
 
 export default function BaseQuestions({key_qa,data, setBaseSources, singleSource, areaRefs, handleCopyToClipboard, handleShareLink, handleLength, showSource, updateVariable, baseSources, collapseIndex, handleShowAllSources, handleBaseQAaccordion,formatAnswer ,DataArrayIcon}){
 
 
+const oct31 = new Date('2023-10-31T00:00:00+00:00');
+const added_ts = new Date(data.added_ts);
+
+
 
     return(
         <div>
-                    <p className="mb-5 underline text-l font-normal text-zinc-600 dark:text-zinc-300">
+            <p className="mb-5 underline text-l font-normal text-zinc-600 dark:text-zinc-300">
 								{' '}
 								Questions by Alphy
 							</p>
@@ -35,15 +40,27 @@ export default function BaseQuestions({key_qa,data, setBaseSources, singleSource
 											</div>
 											<div>
 												<div className="answer-area text-zinc-600 dark:text-zinc-300 font-normal text-md sm:text-l">
-													{
-														key_qa[item].answer[0] === "<" ?
-														<p id="answer-area" className="answer-area" dangerouslySetInnerHTML={{ __html: key_qa[item].answer }} />
-														:
+													
+{added_ts > oct31 ? 
 														<div>
-															{formatAnswer(key_qa[item].answer, key_qa[item])} 
-                                                            </div>
+															
+																{formatAnswer(key_qa[item].answer, key_qa[item])} 
+															
+														
+                                                        </div>
 
-													}
+
+			:
+
+			<div>
+				<ReactMarkdown>
+				{key_qa[item].answer}
+				</ReactMarkdown>
+				</div>
+
+
+														}
+													
 													
 												</div>
 											</div>

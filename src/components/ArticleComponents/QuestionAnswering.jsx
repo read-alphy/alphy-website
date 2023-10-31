@@ -9,7 +9,6 @@ import { useLocation } from 'react-router-dom';
 import { Button, Spinner } from "@material-tailwind/react";
 import SourceCardForDetail from './SourceCardForDetail';
 import {initializeQaWsManager}  from './QA_Streaming';
-import ReactMarkdown from "react-markdown";
 import QaWsManager from './QaWsManager';
 import { API_HOST, API_SSL } from '../../constants';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -210,8 +209,6 @@ export default function QuestionAnswering(props) {
 
 	const formatAnswer = (answer, answerData) => {
 		const cleanedText = answer.replace(/\r?\n|\r/g, ' ');
-
-
 		const regexPattern = /\]\./g;    
 		const replaceEverySecondOccurrence = (text, pattern, replacement) => {
 		  let count = 0;
@@ -220,9 +217,6 @@ export default function QuestionAnswering(props) {
 			return count % 2 === 0 ? match.replace(pattern, replacement) : match;
 		  });
 		};
-		
-	
-	
 		const formattedRawAnswer = replaceEverySecondOccurrence(cleanedText,regexPattern,"].\n\n")
 		const parts = formattedRawAnswer.split(/\[(\d+)\]/g);
 
@@ -231,13 +225,11 @@ export default function QuestionAnswering(props) {
 
 			return (
 				<div className="relative inline-flex  group "> 
-					
-					
-			  <span key={index} className="underline text-xs text-green-300 cursor-pointer" onClick={() => handleShowSingleSource(part)}>
-				[{part}]
-			  </span>
-			  </div>
-			);
+					<span key={index} className="underline text-xs text-green-300 cursor-pointer" onClick={() => handleShowSingleSource(part)}>
+						[{part}]
+			  		</span>
+			  	</div>
+				);
 		  }
 		  return part;
 		});
@@ -285,7 +277,7 @@ export default function QuestionAnswering(props) {
 
 	const handleShowAllSources = () => {
 
-console.log(answer, baseSources, singleSource)
+
 		if(singleSource===true && (answer===true || baseSources===true)){
 			
 			setSingleSource(false)
