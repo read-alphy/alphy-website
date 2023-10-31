@@ -47,6 +47,7 @@ export default function ArchipelagoChat({data,isVisible, setIsVisible, isPublic,
     const description = data.description
     const [triggerWs, setTriggerWs] = useState(false);
     
+    
 
     const carouselRef = useRef(null);
 
@@ -329,6 +330,41 @@ const toggleExpand = () => {
 
 
 
+	const formatAnswer = (answer, answerData) => {
+		const parts = answer.split(/\[(\d+)\]/g);
+
+		return parts.map((part, index) => {
+		  if (answerData.sources.hasOwnProperty(part-1)) {
+
+			return (
+				<div className="relative inline-flex  group "> 
+					
+					
+			  <span key={index} className="underline text-xs text-green-300 cursor-pointer" onClick={() => handleShowSingleSource(part)}>
+				[{part}]
+			  </span>
+			  </div>
+			);
+		  }
+		  return part;
+		});
+	  };
+
+
+
+
+	  const handleShowSingleSource = (sourceNumber) => {
+      setSelectedSourceCard(answerData.sources[sourceNumber-1])
+
+      setTimeout (() => {
+      setOpenDialog(true)
+      }
+      , 300);
+
+      
+
+	};
+
 
     return(
         <div className={`${collapsed ?  "lg:w-[1000px] xl:max-w-[1000px]" : "lg:w-[600px] xl:w-[900px] 2xl:w-[1000px]"} grow mx-auto pt-10 pb-20 `} >
@@ -575,9 +611,9 @@ const toggleExpand = () => {
                                     {/* <p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
                                  }}/>  */}
 
-                                 <ReactMarkdown>
-                                    {answerData.answer}
-                                 </ReactMarkdown>
+                                 
+                                    <div>{formatAnswer(answerData.answer,answerData)}</div>
+                                 
                                     
                             <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
                                 Always check the passages before quoting. AI may not be 100% accurate.
@@ -688,7 +724,7 @@ const toggleExpand = () => {
                            <Dialog   maxWidth={"sm"} fullWidth={fullWidth} open={openDialog} onClose={() => setOpenDialog(false)} >
                             {answerData.sources!==undefined && answerData.sources.length!==0 && answerData.sources.map((source) => 
                           
-                              <div ref={ref}>
+                              <div ref={ref}>                                
                                 {source===selectedSourceCard &&
                             <SourceCard forDialog={true} setFullWidth={setFullWidth} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
                         }

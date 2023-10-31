@@ -180,7 +180,7 @@ const showDialog = () => {
                         </a>
                 </p>
             <p ref={myRef}
-        className={` mt-4 text-zinc-500 dark:text-zinc-300 text-md `} 
+        className={` mt-4 text-zinc-500 dark:text-zinc-300 text-md  pb-2`} 
 
       >
                 {displayText[0] === displayText[0].toUpperCase() ? "" : "..."}{displayText}{((displayText[displayText.length - 1] === "." || displayText.substring(displayText.length - 1) === "?") || (displayText[displayText.length - 1] === ",") || (displayText[displayText.length - 1] === "!") || (displayText[displayText.length - 1] === ":") || (displayText[displayText.length - 1] === "...")) ? "" : "..."}
@@ -189,7 +189,7 @@ const showDialog = () => {
                 </p>
 
             </div>
-            <p className="absolute bottom-0 text-greenColor mb-2">Click to see more</p>
+            <p className="absolute bottom-0 text-greenColor ">Click to see more</p>
             
         </div>
    :
