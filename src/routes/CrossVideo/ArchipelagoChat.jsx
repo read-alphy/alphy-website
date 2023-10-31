@@ -331,8 +331,18 @@ const toggleExpand = () => {
 
 
 	const formatAnswer = (answer, answerData) => {
-    const regexPattern = /\]\./g;
-		const formattedRawAnswer = answer.replace(regexPattern, "].\n\n")
+    const regexPattern = /\]\./g;    
+    const replaceEverySecondOccurrence = (text, pattern, replacement) => {
+      let count = 0;
+      return text.replace(new RegExp(pattern, 'g'), (match) => {
+        count++;
+        return count % 2 === 0 ? match.replace(pattern, replacement) : match;
+      });
+    };
+    
+
+
+		const formattedRawAnswer = replaceEverySecondOccurrence(answer,regexPattern,"].\n\n")
 		const parts = formattedRawAnswer.split(/\[(\d+)\]/g);
 
 		return parts.map((part, index) => {
