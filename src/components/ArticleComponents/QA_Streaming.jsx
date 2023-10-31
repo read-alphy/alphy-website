@@ -52,10 +52,10 @@ export const initializeQaWsManager = ({question, source,setAnswerData,triggerWs,
 
    
 
-    // Close the WebSocket connection after 10 seconds
+    // Close the WebSocket connection after 20 seconds
     setTimeout(() => {
       wsManager.close();
-    }, 10000);
+    }, 20000);
   ; // Re-run the effect if `question` or `arcId` or `source` changes
 
 

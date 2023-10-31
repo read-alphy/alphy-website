@@ -47,6 +47,7 @@ export default function ArchipelagoChat({data,isVisible, setIsVisible, isPublic,
     const description = data.description
     const [triggerWs, setTriggerWs] = useState(false);
     
+    
 
     const carouselRef = useRef(null);
 
@@ -171,7 +172,7 @@ const handleSubmit = () => {
                 
                                   setTimeout(() => {
                                     wsManager.close();
-                                }, 10000);
+                                }, 20000);
 
                         setTimeout(() => {
                             
@@ -328,6 +329,54 @@ const toggleExpand = () => {
 
 
 
+	const formatAnswer = (answer, answerData) => {
+    const cleanedText = answer.replace(/\r?\n|\r/g, ' ');
+    
+    const regexPattern = /\]\./g;    
+    const replaceEverySecondOccurrence = (text, pattern, replacement) => {
+      let count = 0;
+      return text.replace(new RegExp(pattern, 'g'), (match) => {
+        count++;
+        return count % 2 === 0 ? match.replace(pattern, replacement) : match;
+      });
+    };
+    
+
+
+		const formattedRawAnswer = replaceEverySecondOccurrence(cleanedText,regexPattern,"].\n\n")
+		const parts = formattedRawAnswer.split(/\[(\d+)\]/g);
+
+		return parts.map((part, index) => {
+		  if (answerData.sources.hasOwnProperty(part-1)) {
+
+			return (
+				<div className="relative inline-flex  group "> 
+					
+					
+			  <span key={index} className="underline text-xs text-green-300 cursor-pointer" onClick={() => handleShowSingleSource(part)}>
+				[{part}]
+			  </span>
+			  </div>
+			);
+		  }
+		  return part;
+		});
+	  };
+
+
+
+
+	  const handleShowSingleSource = (sourceNumber) => {
+      setSelectedSourceCard(answerData.sources[sourceNumber-1])
+
+      setTimeout (() => {
+      setOpenDialog(true)
+      }
+      , 300);
+
+      
+
+	};
 
 
     return(
@@ -575,9 +624,9 @@ const toggleExpand = () => {
                                     {/* <p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
                                  }}/>  */}
 
-                                 <ReactMarkdown>
-                                    {answerData.answer}
-                                 </ReactMarkdown>
+                                 
+                                    <div className="whitespace-pre-line">{formatAnswer(answerData.answer,answerData)}</div>
+                                 
                                     
                             <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
                                 Always check the passages before quoting. AI may not be 100% accurate.
@@ -688,7 +737,7 @@ const toggleExpand = () => {
                            <Dialog   maxWidth={"sm"} fullWidth={fullWidth} open={openDialog} onClose={() => setOpenDialog(false)} >
                             {answerData.sources!==undefined && answerData.sources.length!==0 && answerData.sources.map((source) => 
                           
-                              <div ref={ref}>
+                              <div ref={ref}>                                
                                 {source===selectedSourceCard &&
                             <SourceCard forDialog={true} setFullWidth={setFullWidth} source={source} tracks={tracks} setSelectedSourceCard={setSelectedSourceCard} selectedSourceCard={selectedSourceCard} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
                         }
