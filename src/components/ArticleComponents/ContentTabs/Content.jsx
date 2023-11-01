@@ -1486,9 +1486,9 @@ return (
 
 																								<PopoverHandler>
 																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
-																									<button className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-zinc-300 dark:text-white`}>
+																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
 																										
-																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray"/> :"Download Transcript" }
+																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70 pointer-events-none" color="gray"/> :"Download Transcript" }
 																										
 																										</button>
 																										</button>
@@ -1549,7 +1549,7 @@ return (
 																								<PopoverHandler>
 																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
 																										
-																									<button className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-zinc-300 dark:text-white`}>
+																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
 																										
 																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray"/> :"Download Transcript" }
 																										
