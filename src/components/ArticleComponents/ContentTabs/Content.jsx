@@ -33,7 +33,8 @@ import {
 	PopoverHandler,
 	PopoverContent,
 	ThemeProvider,
-	Button
+	Button,
+	Spinner
 } from "@material-tailwind/react";	
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import MemoryIcon from '@mui/icons-material/Memory';
@@ -320,7 +321,7 @@ const handleBookmark = async () => {
 				base: {
 					bg: "bg-white dark:bg-mildDarkMode",
 					color: "text-blue-gray-500 dark:text-zinc-200",
-					border: "border-0",
+					border: "border  dark:border-zinc-600",
 
 				},
 			},
@@ -1476,22 +1477,29 @@ return (
 
 
 
-																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`} >
+																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end `} >
 																							<Popover
+																							
 																							>
 
 
 
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} dark:invert`} src={DownloadStatic}></img></button>
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
+																									<button className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-zinc-300 dark:text-white`}>
+																										
+																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray"/> :"Download Transcript" }
+																										
+																										</button>
+																										</button>
 																								</PopoverHandler>
 
-																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
+																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white  rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
 																									<ThemeProvider value={themePopover}>
 																										<PopoverContent background="indigo">
 																											{props.tier !=undefined && props.tier!="free" && basicDataLoaded == true ?
 
-																												<div>
+																												<div className="">
 																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																														<p className="">Download as Plain Subtitles (.srt)</p>
 																													</div>
@@ -1539,7 +1547,15 @@ return (
 																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`}>
 																							<Popover>
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} > <img className={`${props.tier === "free" || props.tier == undefined ? " opacity-50" : ""}`} src={DownloadStatic}></img></button>
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
+																										
+																									<button className={`${props.tier === "free" || props.tier == undefined ? " opacity-30" : ""} bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-zinc-300 dark:text-white`}>
+																										
+																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray"/> :"Download Transcript" }
+																										
+																										</button>
+
+																										</button>
 																								</PopoverHandler>
 
 																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">

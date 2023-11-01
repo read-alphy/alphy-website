@@ -310,9 +310,9 @@ export default function QuestionAnswering(props) {
 		}
 
 
-		if (props.inputValue.length > 200) {
+		if (props.inputValue.length > 250) {
 			setinputError(true);
-			setErrorText('Your question is too long, please keep it under 200 characters.');
+			setErrorText('Your question is too long, please keep it under 250 characters.');
 			props.setInputValue('');
 			return;
 		} else if (props.inputValue.length === 0) {
