@@ -420,6 +420,7 @@ const handleBookmark = async () => {
 
 async function summaryParser(){
 	let activeSummary
+	
 	if (contentSummaries !== undefined && contentSummaries.length>0 ) {
 		activeSummary =  contentSummaries.find(summary => summary.lang === language)
 	}
