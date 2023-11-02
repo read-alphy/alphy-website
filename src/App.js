@@ -125,6 +125,7 @@ useEffect(() => {
 		var userId = localStorage.getItem("userId")
 		
 		setIdToken(currentUser.accessToken)
+		localStorage.setItem("idToken", currentUser.accessToken)
 		
 		if(userId===null){
 			localStorage.setItem('userId', currentUser.uid)

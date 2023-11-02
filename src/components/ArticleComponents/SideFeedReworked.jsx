@@ -70,6 +70,8 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 			
 			auth.logout();
 			localStorage.setItem("logged in","false")
+			localStorage.setItem("idToken", null)
+
 			navigate("/")
 			window.location.reload()
 			

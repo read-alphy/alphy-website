@@ -42,7 +42,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { API_URL } from '../../../constants';
 
 
-export default function Content(props) {
+export default function Content({language,setLanguage,handleLanguageChange, ...props}) {
 	const { currentUser } = useAuth()
 	const navigate = useNavigate()
 
@@ -57,13 +57,13 @@ export default function Content(props) {
 	const [downloading, setDownloading] = useState(false);
 	const [basicDataLoaded, setBasicDataLoaded] = useState(false);
 	const [showReportIssue, setShowReportIssue] = useState(false);
-	const [language, setLanguage] = useState(props.data.summaries !== undefined && props.data.summaries.length > 1 && props.data.lang !== undefined ? props.data.lang : 'en')
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [translatingLanguage, setTranslatingLanguage] = useState("");
 	const [languagesWanted, setLanguagesWanted] = useState([]);
 	const [askText, setAskText] = useState("");
 	const[selectionCall, setSelectionCall] = useState(false);
 	const [modelName, setModelName] = useState("");
+	const [languages, setLanguages] = useState([]);
 	
 
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
@@ -119,7 +119,7 @@ useEffect(() => {
 
 
 	let contentSummaries = []
-	let languages = []
+	
 	
 	
 
@@ -196,22 +196,31 @@ useEffect(() => {
 	}
 },[summary]
 )
-	
+
+
 useEffect(() => {
 	if ((props.data !== undefined && props.data !== null) && contentSummaries.length == 0) {
 		contentSummaries = props.data.summaries
+		let languagesToSet = []
 		if (contentSummaries !== undefined && contentSummaries.length>0 ) {
-			contentSummaries.map(summary => (summary.summary !== undefined&& summary.summary!==null) && languages.push(summary.lang));
-			setSummary(contentSummaries.find(summary => summary.lang === language))
+			contentSummaries.map(summary => languagesToSet.push(summary.lang));			
+			
+			
+			
 			
 			if (summary !== undefined && summary.length > 0 && summary.summary === null) {
 				languagesWanted.push(language)
 			}
 		}
-		
+
+		setLanguages(languagesToSet)
 
 	}
 }, [props.data,language])
+
+
+
+
 
 	const reorderedLanguageCodes = {
 		...languages.reduce(
@@ -228,19 +237,16 @@ useEffect(() => {
 	};
 
 
-	const handleLanguageChange = (event) => {
-		/* 	if(errorMessage ==true || translationMessage==true)
-			{
-				window.location.reload();
-			} */
-		const selectedCode = event.target.value;
-		setLanguage(selectedCode);
-		
 
-	};
+
+
+
+
 
 	useEffect(() => {
+		
 		summaryParser()
+
 	}, [language])
 
 	const requestTranslation = async () => {
@@ -413,12 +419,19 @@ const handleBookmark = async () => {
 
 
 async function summaryParser(){
-	if (summary !== undefined && summary !== null && summary.summary!==undefined && summary.summary!==null) {
-		if (summary.summary_prettified !== undefined && summary.summary_prettified !== null) {
-			setSummaryArray(summary.summary_prettified.split('\n'))
+	let activeSummary
+	if (contentSummaries !== undefined && contentSummaries.length>0 ) {
+		activeSummary =  contentSummaries.find(summary => summary.lang === language)
+	}
+
+	setSummary(activeSummary)
+
+	if (activeSummary !== undefined && activeSummary !== null && activeSummary.summary!==undefined && activeSummary.summary!==null) {
+		if (activeSummary.summary_prettified !== undefined && activeSummary.summary_prettified !== null) {
+			setSummaryArray(activeSummary.summary_prettified.split('\n'))
 		}
 		else {
-			setSummaryArray(summary.summary.split('\n'))
+			setSummaryArray(activeSummary.summary.split('\n'))
 		}
 
 	}
@@ -1389,7 +1402,7 @@ return (
 
 														}) : (
 														
-														summary.key_takeaways===undefined || summary.key_takeaways===null
+														summary===undefined || summary.length===0
 														
 														? 
 														
@@ -1425,7 +1438,7 @@ return (
 																	
 																		<p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 												
-																			{summary.summary===undefined || summary.summary===null ? "This content doesn't have a summary. Check out the transcript!" : "Still waiting for the summary! Meanwhile, check the transcript."}
+																			{summary===undefined || summary.length===0 ? "This content doesn't have a summary. Check out the transcript!" : "Still waiting for the summary! Meanwhile, check the transcript."}
 																		</p>
 																	
 																) : (
@@ -1653,7 +1666,7 @@ return (
 
 					</div> : null
 				}
-				{((summary != undefined && summary !== null && summary.summary == null && summary.lang !== "en" && language!=="en") || (languagesWanted.includes(language) == true && language!=="en")) && <div className="flex flex-col mb-20 mt-20 ">
+				{((summary != undefined && summary !== null && summary.summary == null && summary.lang !== "en" && language!=="en" && summary.summary===undefined) || (languagesWanted.includes(language) == true && language!=="en")) && <div className="flex flex-col mb-20 mt-20 ">
 					{data !== null &&
 						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
 

@@ -31,12 +31,13 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const [bookmarkChecked, setBookmarkChecked] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
 	const [isPublic, setIsPublic] = useState(false);
+	const [language, setLanguage] = useState(data.summaries !== undefined && data.summaries.length > 1 && data.lang !== undefined ? data.lang : 'en')
 
 	const [called, setCalled] = useState(false);
 	const [authorizationError, setAuthorizationError] = useState(false)
 
 
-	
+
 
 
 	if (location.pathname.split('/')[2].split("&q=")[0] !== undefined) {
@@ -133,8 +134,8 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 		setAuthorizationError(false)
 	localStorage.setItem("isVisibleUpload", false)
 	
-	const idToken = currentUser ? currentUser.accessToken : "123"
-
+	const idToken = localStorage.getItem("idToken").length>0 ? localStorage.getItem("idToken") : "123"
+	
 		try {
 			if(constantFetch===false){
 			setIsLoading(true);
@@ -148,7 +149,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					}
 				).then(
 				(response) => {
-					
+					console.log("heyo",response.data)
 					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
@@ -160,6 +161,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 				}
 
 			).catch((error) => {
+				console.log(error)
 				if(error.response.data.detail === "Source is inaccessible"){
 					setAuthorizationError(true)
 				}
@@ -194,17 +196,17 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	useEffect(() => {
 		if(called===false && data.complete!==true){
 			if (source_type==="up" && data.length===0){
-				if(data.length>0){
-				setCalled(true)
-				}
+				
+					setCalled(true)
+				
 				
 				fetchDataUpload(url,false);
 						
 			}
 			if (source_type!=="up" && data.length===0){
-				if(data.length>0){
+				
 				setCalled(true)
-				}
+				
 				fetchData(url,false);
 		
 			}
@@ -221,20 +223,36 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 
 
-
 	
+	const handleLanguageChange = (event) => {
+		/* 	if(errorMessage ==true || translationMessage==true)
+			{
+				window.location.reload();
+			} */
+		const selectedCode = event.target.value;
+		setLanguage(selectedCode);
+		
+
+	};
+
 
 	useEffect(() => {
 		let interval;		
 		const intervalFetch =() => {
-
-					if (data!==null && data.complete!==true && called===true){
+			let summaryComplete 
+			
+			if(data!==null && data.summaries!==undefined && data.summaries.find(item => item.lang === language) !== undefined){
+				summaryComplete = data.summaries.find(item => item.lang === language).complete
+				
+		
+			}
+		
+					if (data!==null && summaryComplete==false && called===true){
 						
-						
-							if (source_type==="up" && data.complete!==true && currentUser!==null){
+							if (source_type==="up" && summaryComplete==false){
 									fetchDataUpload(url,true);
 								}
-								else if (source_type!=="up" && data.complete!==true){
+								else if (source_type!=="up" && summaryComplete===false){
 									fetchData(url,true);
 								}
 
@@ -324,7 +342,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto  h-full sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh]'
 						}}`}
 				>
-					{isLoading || data.length ? <Loading /> : 
+				{isLoading || data.length ? <Loading /> : 
 					
 					authorizationError ? 
 					<div className="flex-col flex mx-10 md:mx-20 mx-auto mt-20 md:mt-40">
@@ -336,7 +354,9 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 
 					:
 					
-					<Content data={data} tier={tier} isVisible={isVisible} isPublic={isPublic} handleVisibility={handleVisibility} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub}/>
+					<Content data={data} tier={tier} isVisible={isVisible} isPublic={isPublic} handleVisibility={handleVisibility} isBookmarked={isBookmarked}
+					 setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub} language={language} setLanguage={setLanguage}
+					 handleLanguageChange ={handleLanguageChange}/>
 					
 					
 					
