@@ -149,7 +149,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					}
 				).then(
 				(response) => {
-					console.log("heyo",response.data)
+					
 					
 					if(response.data!==null && response.data!==undefined){
 					setData(response.data);
