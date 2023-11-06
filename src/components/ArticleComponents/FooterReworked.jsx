@@ -56,15 +56,15 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                   <div className="flex flex-col">
                                   <div className=" pl-3 md:pl-6  mb-6">
                                     <a href="https://chrome.google.com/webstore/detail/alphy/eifpdfgnodpopimeakmdebmfglimkdno" target="_blank">
-							<Button  className="flex flex-row normal-case text-zinc-500 dark:text-zinc-400 bg-white dark:bg-darkMode  font-normal items-center border border-zinc-200 dark:border-zinc-700 drop-shadow-sm px-2">
+							<Button  className="flex flex-row normal-case text-zinc-500 dark:text-zinc-400 bg-white dark:bg-darkMode  items-center border border-zinc-200 dark:border-zinc-700 drop-shadow-sm px-2">
               <img src={ChromeIcon} width={20}/>  
-              <span className="text-xs pl-2 ">Install our Chrome Extension</span>
+              <span className="text-xs pl-2  font-averta-regular ">Install our Chrome Extension</span>
                  </Button>
                  </a>
 							</div>
                                   {/*   {tier===free && 
                                     <div className="mb-6 hidden xl:block">
-                                    <p className = "text-zinc-600 dark:text-zinc-200 text-md  w-full w-full pl-10 mb-5 ">Try Premium</p>
+                                    <p className = "text-zinc-500 dark:text-zinc-200 text-md  w-full w-full pl-10 mb-5 ">Try Premium</p>
                                     <p className = "text-zinc-500 dark:text-zinc-300 text-sm w-full w-full pl-10 ">Extra transcription credits, multi-language access, local audio processing, and unlimited Arc creation</p>
                                     <Link to="/plans" className=" text-xs w-full cursor-pointer w-full pl-10 mt-5 text-green-400 dark:text-greenColor">Learn More > </Link>
                                     </div>
@@ -74,7 +74,7 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                     <div className="mb-6  flex flex-row w-full pl-6 md:pl-10">
                                            
                                           <p className = "text-indigo-400 text-md  "> 
-                                          <span className="mt-1">Premium
+                                          <span className="mt-1 font-averta-semibold">Premium
                                                       </span>
                                                       <VerifiedIcon fontSize="small" className=" ml-2 text-indigo-400 "/>
                                           </p>
@@ -85,20 +85,20 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                               
                               <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 " to="/account">
                                   {/* <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> */}
-                                  <span>Account</span>
+                                  <span className="font-averta-semibold">Account</span>
                                   </Link>:
 
                                   <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 " to="/plans">
-                                    <span>Plans</span></Link>
+                                    <span className="font-averta-semibold">Plans</span></Link>
                                   
                                   }
                                 </div> 
                             
                                 <div className="mt-2 lg:mt-4 pl-6 md:pl-10">
-                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>Reach Us</Link>
+                                  <Link className="text-zinc-500 dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]" onClick={()=>setOpenFeedbackDialog(true)}>Reach Us</Link>
                               </div>
                               <div className=" mt-2 lg:mt-4 pl-6 md:pl-10">
-                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm     w-full cursor-pointer w-[120px]" to="/about ">About Alphy</Link>
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm font-averta-semibold    w-full cursor-pointer w-[120px]" to="/about ">About Alphy</Link>
                               </div>
                               </div>
                               <div className="pl-6 md:pl-10 mt-2 lg:mt-4 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
@@ -106,24 +106,24 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                                                               <div onClick={handleDarkMode} className=" grid grid-cols-3">
                                                                               
                                              
-                                                  <p className=" pt-1 col-span-2  ">Light</p>
+                                                  <p className=" pt-1 col-span-2 font-averta-semibold ">Light</p>
                                                  <LightModeIcon className="col-span-1 pt-1  mr-2  ml-4 lg:ml-8 duration-200 transition ease-in duration-200"/>
                                                   </div>):
                                                   <div onClick={handleDarkMode} className="flex flex-row grid grid-cols-3">
                                                       
                                                       
-                                                      <p className=" pt-1 col-span-2  ">Dark</p>
+                                                      <p className=" pt-1 col-span-2 font-averta-semibold ">Dark</p>
                                                 < DarkModeIcon className="col-span-1 pt-1  mr-2 ml-4 lg:ml-8 duration-200 transition ease-in duration-200"/>
                                                   </div>}
                                           </div>
                               <div className="pl-6 md:pl-10 mt-2 lg:mt-4 flex flex-row">
-                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px]" to="/privacypolicy">Privacy Policy</Link>
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] font-averta-semibold" to="/privacypolicy">Privacy Policy</Link>
                               
                               
                               </div>
                               {(currentUser!==null && currentUser!==undefined) && 
                               <div className="pl-6 md:pl-10 mt-2 lg:mt-4 flex flex-row">
-                              <button className="text-zinc-500 dark:text-zinc-300 text-sm cursor-pointer" onClick={() => handleSignout()}>Sign Out</button>
+                              <button className="text-zinc-500 dark:text-zinc-300 text-sm cursor-pointer font-averta-semibold" onClick={() => handleSignout()}>Sign Out</button>
                              </div>
                              }
                                      
@@ -172,8 +172,8 @@ export default function FooterReworked({currentUser,collapsed,setCollapsed, hand
                                   <div className="flex flex-col">
                               
                               
-                              <Link className="text-zinc-600 dark:text-zinc-300 text-sm w-full cursor-pointer w-full" to={localStorage.getItem("logged in")==="true" ? "/account" : "/plans"}>
-                                   <PersonIcon className="text-zinc-600 dark:text-zinc-300 mr-2" fontSize="small"/> 
+                              <Link className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full" to={localStorage.getItem("logged in")==="true" ? "/account" : "/plans"}>
+                                   <PersonIcon className="text-zinc-500 dark:text-zinc-300 mr-2" fontSize="small"/> 
                                   
                                   </Link>
                                   

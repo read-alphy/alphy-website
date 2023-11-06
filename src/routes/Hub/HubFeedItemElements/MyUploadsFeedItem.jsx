@@ -33,16 +33,16 @@ export default function MyUploadsFeedItem({item, source_id, formattedDate, setCo
 								
 								<div className="text-md  text-slate-700 dark:text-zinc-300 font-sans break-all row-span-1 overflow-hidden">
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
-									<div className="font-light text-xs  ">📝 IN PROGRESS</div>
+									<div className="font-light text-xs font-averta-semibold ">📝 IN PROGRESS</div>
 								)}
 									
 									
 									 </div>
 
-									 <div className="row-span-2 break-all">{displayText}
+									 <div className="row-span-2 break-all font-averta-semibold">{displayText}
 								</div>
 								
-								<div className="font-light text-zinc-500 dark:text-zinc-300 text-xs row-span-1">Time added: {formattedDate}</div>
+								<div className="font-light text-zinc-500 dark:text-zinc-300 text-xs row-span-1 font-averta-semibold">Time added: {formattedDate}</div>
 								</div>
 
 							<div className="text-xs xs:mx-auto xs:items-center xs:text-center max-w-[150px] ">

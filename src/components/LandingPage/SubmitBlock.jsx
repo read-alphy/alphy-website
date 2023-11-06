@@ -26,7 +26,7 @@ const navigate = useNavigate()
 
     return(
         <div className="p-10 sm:pt-20 text-zinc-700 h-full sm:h-[70vh] dark:text-zinc-300 bg-white dark:bg-mildDarkMode  items-center  justify-center sm:px-20">                                               
-        <p className="dark:text-zinc-300 text-zinc-700 mb-4 text-lg px-1">
+        <p className="dark:text-zinc-300 text-zinc-700 mb-4 text-lg px-1 font-averta-semibold">
                Submit your link below</p>
         <div className=" sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5 ">
         <div className="sm:col-span-2 lg:col-span-3 relative w-full min-w-[200px] h-12">
@@ -37,12 +37,12 @@ const navigate = useNavigate()
                     placeholder=" "
 
                     className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-zinc-700 dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor"/>
-                    <label className="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">
+                    <label className=" font-averta-semibold text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">
                         {window.innerWidth<600 ?"Insert a link...": "Insert a link to a YouTube video or Twitter Space"}
                         </label>
 
                     <div className="sm:hidden">
-                    <Button size="sm" className="!absolute right-1 top-1 rounded bg-green-300" onClick={(e) => {
+                    <Button size="sm" className="!absolute right-1 top-1 rounded bg-green-300 font-averta-semibold" onClick={(e) => {
                         handleSubmit();
                     }}> <PublishIcon fontSize="medium"/></Button>
             </div>
@@ -60,7 +60,7 @@ const navigate = useNavigate()
                         
                         
                         
-                        {loading ? <Spinner></Spinner> : <p>Submit</p> }
+                        {loading ? <Spinner></Spinner> : <p className="font-averta-semibold">Submit</p> }
                         
                         
                         </Button>
@@ -83,14 +83,14 @@ const navigate = useNavigate()
 
 <div className="flex-col flex">
     <div className="flex flex-row">
-            <a href="/account" className="text-zinc-500 dark:text-zinc-400">
+            <a href="/account" className="text-zinc-500 dark:text-zinc-400 font-averta-semibold">
                 {tier==="free" && "Starter Plan"}
                 {tier==="basic" && "Basic Plan"}
                 {tier==="premium" && "Premium Plan"}
                 
                 </a>
                 <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
-                 <p className=" text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(credit)} minutes
+                 <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
                  </p>
     </div>
               
@@ -104,9 +104,9 @@ const navigate = useNavigate()
 
 currentUser ?
 <div>
-<p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on the Starter Plan</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 mt-3 text-sm"> You can only submit YouTube videos. Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a> to process Twitter Spaces.</p>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm"> Alphy might fail to process content with location limits.</p>
+<p className="font-semibold text-md text-zinc-700 dark:text-zinc-200 font-averta-semibold">You are on the Starter Plan</p>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 mt-3 text-sm font-averta-semibold"> You can only submit YouTube videos. Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a> to process Twitter Spaces.</p>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm font-averta-semibold"> Alphy might fail to process content with location limits.</p>
 
 
 </div>
@@ -116,14 +116,14 @@ currentUser ?
     </div>
 :   
 <div>
-<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm">  Alphy might fail to process content with location limits.</p>
+<p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm font-averta-semibold">  Alphy might fail to process content with location limits.</p>
 <div className="border-b border-gray-100 mt-10 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 md:w-1/3"></div>
-{(tier==="basic"||tier==="premium") &&
+{
                         <div  className="mt-8 flex flex-col text-sm">
-                        <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> 
+                        <p className={`text-zinc-500 dark:text-zinc-400 mr-2 ${(tier==="basic"||tier==="premium") ?"":"pointer-events-none opacity-80"} font-averta-semibold`}>Need more credits? </p> 
                         
                         <div>
-             <Button onClick={navigateCredit} size="sm" className="bg-indigo-300 text-white mt-4">
+             <Button onClick={navigateCredit} size="sm" className="bg-indigo-300 text-white mt-4 font-averta-semibold">
                         
                             <span className="mt-1 dark:text-zinc-800">Buy here</span>
                     

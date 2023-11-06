@@ -245,26 +245,26 @@ verificationMessage==false ?
 	
 	
 		<div >
-			<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300">{isRegister ? 'Create an account' : 'Login'}	</h1>
+			<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">{isRegister ? 'Create an account' : 'Login'}	</h1>
 			
 		<form onSubmit={isRegister ? handleRegisterWithEmail : handleLoginWithEmail}>
 		<div className="relative z-0 w-full mb-6 group">
 
 
 			<input value={email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-			<label for="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+			<label for="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold">Email address</label>
 		</div>
 		<div className="relative z-0 w-full mb-6 group">
 		
 
 			<input onChange={handlePasswordChange} type="password" name="floating_password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-			<label for="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+			<label for="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold">Password</label>
 		
 		</div>
 		{isRegister ? 
 		<div className="relative z-0 w-full mb-6 group">
 			<input onChange={handleRepeatPasswordChange} type="password" name="repeat_password" id="floating_repeat_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-			<label for="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+			<label for="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold">Confirm password</label>
 		</div>
 		:null}
 		<div className="grid md:grid-cols-2 md:gap-6">
@@ -272,7 +272,7 @@ verificationMessage==false ?
 		</div>
 		
 		
-		<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Submit</span>}</Button>
+		<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor font-averta-semibold`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Submit</span>}</Button>
 		
 
 		</form>
@@ -281,16 +281,16 @@ verificationMessage==false ?
 		<div className="mt-4">
 
 							{isRegister ===false ? 
-							<div className="text-zinc-600 dark:text-zinc-300 text-sm" ><p><Link to="/u/resetpassword" className="underline cursor-pointer"> Forgot your password?</Link></p> </div>:null}
+							<div className="text-zinc-600 dark:text-zinc-300 text-sm" ><p><Link to="/u/resetpassword" className="underline cursor-pointer font-averta-semibold"> Forgot your password?</Link></p> </div>:null}
 					{isRegister ? 
-							<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm "> Already have an account? Login <Link to="/u/login" className="text-greenColor">here.</Link></p> </div>:<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm">Don't have an account? <Link to="/u/register" className="text-greenColor">Register now.</Link></p> </div>}
+							<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold"> Already have an account? Login <Link to="/u/login" className="text-greenColor font-averta-semibold">here.</Link></p> </div>:<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold">Don't have an account? <Link to="/u/register" className="text-greenColor font-averta-semibold">Register now.</Link></p> </div>}
 					</div>
 
 		</div>
 		<div className="">
 		<div className="flex items-center mt-10 mb-10">
 				<div className="border-b border-gray-300 w-[200px] mr-3"></div>
-				<span className="text-sm text-gray-400 font-light_">OR</span>
+				<span className="text-sm text-gray-400 font-averta-semibold">OR</span>
 				<div className="border-b border-gray-300 w-[200px] ml-3 "></div>
 		</div>
 
@@ -301,7 +301,7 @@ verificationMessage==false ?
 							
 							<div className="flex flex-rows	">
 							<img src={Google} width={30}></img>
-							<span className=" ml-4 font-extral	text-zinc-700 dark:text-zinc-300 ">
+							<span className=" ml-4 font-extral	text-zinc-700 dark:text-zinc-300 font-averta-semibold">
 							
 							Continue with Google</span>
 							</div>
@@ -317,17 +317,17 @@ verificationMessage==false ?
 			
 			oobCode === null || oobCode===undefined  ? 
 			<div className="mb-20 w-[300px]">
-				<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700">Reset Password	</h1>
-				<p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10">Enter your email address and we will send you a link to reset your password.</p>
+				<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700 font-averta-semibold">Reset Password	</h1>
+				<p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold">Enter your email address and we will send you a link to reset your password.</p>
 					<form onSubmit={sendResetPasswordMail}>
 					<div className="relative z-0 w-full mb-6 group">
 						<input value={auth.currentUser ? auth.currentUser.email : email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-						<label for="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+						<label for="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold">Email address</label>
 					</div>
-					<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Send Link</span>}</Button>
+					<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor font-averta-semibold`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Send Link</span>}</Button>
 					</form>
-					{error &&  <div className="text-red-500 text-sm mb-8 mt-5">{error}</div>}
-					{successMessage &&  <div className="text-green-500 text-sm mb-8 mt-5">Email sent successfully</div>}
+					{error &&  <div className="text-red-500 text-sm mb-8 mt-5 font-averta-semibold">{error}</div>}
+					{successMessage &&  <div className="text-green-500 text-sm mb-8 mt-5 font-averta-semibold">Email sent successfully</div>}
 					
 				</div>
 
@@ -336,8 +336,8 @@ verificationMessage==false ?
 			<div className="mb-20 w-[300px]">
 				{successMessage=== false ? 
 				<div>
-				<h1 className="text-xl mb-8">Pick a New Password	</h1>
-				<p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300">You are about to reset your password. Please make sure your new password is longer than 8 characters.</p> 
+				<h1 className="text-xl mb-8 font-averta-semibold">Pick a New Password	</h1>
+				<p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300 font-averta-semibold">You are about to reset your password. Please make sure your new password is longer than 8 characters.</p> 
 					<form onSubmit={handlePasswordResetConfirmation}>
 {/* 					<div className="relative z-0 w-full mb-6 group">
 						<input value={email} onChange={handleEmailChange} type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
@@ -346,16 +346,16 @@ verificationMessage==false ?
 
 					<div className="relative z-0 w-full mb-6 group">
 							<input onChange={handlePasswordChange} type="password" name="floating_password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-							<label for="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+							<label for="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold">Password</label>
 						</div>
 		
 				<div className="relative z-0 w-full mb-6 group">
 					<input onChange={handleRepeatPasswordChange} type="password" name="repeat_password" id="floating_repeat_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-greenColor focus:outline-none focus:ring-0 focus:border-greenColor peer" placeholder=" " required />
-					<label for="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+					<label for="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold">Confirm password</label>
 				</div>
 				{error && <div className="text-red-500 text-sm mb-8 mt-5">{error}</div>}
 				
-					<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span className="text-zinc-700 dark:text-zinc-700">Reset Password</span>}</Button>
+					<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span className="text-zinc-700 dark:text-zinc-700 font-averta-semibold">Reset Password</span>}</Button>
 					
 					</form>
 					</div>:
@@ -364,8 +364,8 @@ verificationMessage==false ?
 							<svg className="items-center mx-auto text-green-500" width={60} fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
-		<p className="mx-auto text-center mt-4 text-zinc-600">
-							Password reset successfully. <Link className="underline" to="/u/login"> Login</Link> to continue.
+		<p className="mx-auto text-center mt-4 text-zinc-600 font-averta-semibold">
+							Password reset successfully. <Link className="underline font-averta-semibold" to="/u/login"> Login</Link> to continue.
 							</p></div>}
 					
 
@@ -374,10 +374,10 @@ verificationMessage==false ?
 			:
 
 			<div className="mb-20 w-[300px]">
-				<h1 className="text-xl mb-8">We've send a verification link to {email!==null ? email: "your email"}!</h1>
-				<p className="text-sm text-zinc-600 mb-10">Please follow the link to complete your registration. If you didn't get the email, try again from the link below.</p>
-				<Button onClick={handleResendVerificationEmail}  className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Resend Link</span>}</Button>
-				{successMessage && <div className="text-zinc-500 text-sm mb-8 mt-5">We've successMessage the verification email. Please check your inbox.</div>}
+				<h1 className="text-xl mb-8 font-averta-semibold">We've send a verification link to {email!==null ? email: "your email"}!</h1>
+				<p className="text-sm text-zinc-600 mb-10 font-averta-semibold">Please follow the link to complete your registration. If you didn't get the email, try again from the link below.</p>
+				<Button onClick={handleResendVerificationEmail}  className={`${isSubmitting ? "opacity-50 pointer-events-none" :""} bg-greenColor font-averta-semibold`}> {isSubmitting  ? <ReactLoading type="spin" width={17} height={17} color="#ffffff"/> : <span>Resend Link</span>}</Button>
+				{successMessage && <div className="text-zinc-500 text-sm mb-8 mt-5 font-averta-semibold">We've successMessage the verification email. Please check your inbox.</div>}
 				</div>
 			
 			}

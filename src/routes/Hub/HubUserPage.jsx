@@ -278,7 +278,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
             
                         
-              {currentUser &&   <p className="text-2xl text-zinc-600 dark:text-zinc-300 font-sans font-semibold">
+              {currentUser &&   <p className="text-2xl text-zinc-600 dark:text-zinc-300  font-averta-semibold">
                     
                     Welcome to Your Hub!
                 </p>
@@ -286,7 +286,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
             {currentUser ? 
 <div className="mt-10">
-        <p className="text-zinc-600 dark:text-zinc-300 text-xl ">Arcs</p>
+        <p className="text-zinc-600 dark:text-zinc-300 text-xl font-averta-semibold">Arcs</p>
             <div className="flex flex-row mt-10 ">  
                                 <div className="xl:min-w-[1200px]  xl:max-w-[1200px]">				
 									<div className="w-full">
@@ -307,8 +307,8 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
                                                                     <div >
                                                                         <AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-                                                                        <p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl">Create An Arc</p>
-                                                                        <p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5">Connect multiple audio content with AI.</p>
+                                                                        <p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl font-averta-semibold">Create An Arc</p>
+                                                                        <p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5 font-averta-regular">Connect multiple audio content with AI.</p>
 
                                                                     </div>
 
@@ -356,7 +356,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
         <div className="mb-20">
             <div className="flex flex-row mt-20">
               
-                <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Submissions</p>
+                <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10 font-averta-semibold">Submissions</p>
             
 
                  {/*    <button onClick={()=>setShowTab("myBookmarks")} className="mb-4 ml-2">
@@ -377,7 +377,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
                         <div >
                             <LinkIcon fontSize = "medium" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-                            <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l">Submit A Link</p>
+                            <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l font-averta-semibold">Submit A Link</p>
                             
 
                         </div>
@@ -409,10 +409,10 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
                                                         </div> */}
 
-                                                        <div>
-                                                        You don't have any submissions. Process your first online conversation <Link to="/submit" className="underline dark:text-greenColor text-green-400 cursor-pointer" onClick={() => {
+                                                        <div className="font-averta-regular">
+                                                        You don't have any submissions. Process your first online conversation <Link to="/submit" className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold" onClick={() => {
                                                             localStorage.setItem("newItem", "link")
-                                                        }}>here.</Link>
+                                                        }}>here</Link>.
                                                         </div>
                                                         
                                                 </div>
@@ -429,7 +429,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                                                             <div className="w-full flex justify-center">
                                                                 {
                                                                     <button
-                                                                        className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline"
+                                                                        className="justify-center flex text-blueLike dark:text-zinc-300 font-averta-semibold  mt-10 underline"
                                                                         onClick={loadMore}
                                                                     >
                                                                         {'Load more'}
@@ -451,7 +451,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 <div className="min-h-[300px]">
 
         <div className="">
-        <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">Bookmarks</p>
+        <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10 font-averta-semibold">Bookmarks</p>
             <div>
             {dataBookmarks.length>0 ?
                          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -464,9 +464,9 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
                             :
                             (
                             called ?
-                            <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
+                            <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh] font-averta-regular">
 
-                            You don't have any bookmarks. <Link to="/" className="text-indigo-400 underline cursor-pointer">Discover</Link> the content other users unlocked with Alphy.
+                            You don't have any bookmarks. <Link to="/" className="text-indigo-400 underline cursor-pointer font-averta-semibold">Discover</Link> the content other users unlocked with Alphy.
 
                             </div>
                             :
@@ -517,7 +517,7 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
                                     <div >
                                         <CloudUploadIcon fontSize = "medium" className="text-zinc-600 dark:text-zinc-400 mb-4 "/>
-                                        <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l ">Upload A Recording</p>
+                                        <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l font-averta-semibold">Upload A Recording</p>
                                         
 
                                     </div>
@@ -536,14 +536,14 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
 
                        {data.length=== 0 && tier!=="premium" && called && 
                         
-                        <p>You don't have any uploads. Upgrade to <Link to="/account" className="underline dark:text-greenColor text-green-400 cursor-pointer">premium plan</Link> to process local files.
+                        <p className="font-averta-regular ">You don't have any uploads. Upgrade to <Link to="/account" className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold">premium plan</Link> to process local files.
                         </p>}
 
                         {data.length===0 && tier==="premium" && called && 
                         
-                        <p>You don't have any uploads. <Link to={"/submit"} onClick={() => {
+                        <p className="font-averta-regular">You don't have any uploads. <Link to={"/submit"} onClick={() => {
                             localStorage.setItem("newItem", "upload")
-                        }} className="underline dark:text-greenColor text-green-400 cursor-pointer">Process your first file now!</Link>
+                        }} className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold">Process your first file now!</Link>
                         </p>}
 
                         </div>

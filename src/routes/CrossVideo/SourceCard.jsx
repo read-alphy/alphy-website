@@ -147,7 +147,7 @@ const showDialog = () => {
                                                     </div>
 
                     <div className=" text-lg w-full font-sans min-h-[80px] max-h-[80px] overflow-y-hidden text-zinc-600 dark:text-zinc-200">
-                        <p>{displayTitle}
+                        <p className="font-averta-semibold">{displayTitle}
                         
                         </p>
 
@@ -159,9 +159,9 @@ const showDialog = () => {
                     <img  src={Logo} className="w-[30px] h-[30px] hidden dark:flex"/>
                     <img  src={LogoInverted} className="w-[30px] h-[30px]  dark:hidden"/>
                     </div>
-                    <p className="ml-2 mt-1 text-sm sm:text-md text-zinc-500 dark:text-zinc-300">See more details on Alphy </p></a>
+                    <p className="ml-2 mt-1 text-sm sm:text-md text-zinc-500 dark:text-zinc-300 font-averta-semibold">See more details on Alphy </p></a>
                 <p className="mt-4">
-                <a className=" text-zinc-500 dark:text-zinc-300">
+                <a className=" text-zinc-500 dark:text-zinc-300 font-averta-semibold">
 
 
                         {Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
@@ -180,7 +180,7 @@ const showDialog = () => {
                         </a>
                 </p>
             <p ref={myRef}
-        className={` mt-4 text-zinc-500 dark:text-zinc-300 text-md  pb-2`} 
+        className={` mt-4 text-zinc-500 dark:text-zinc-300 text-md  pb-2 font-averta-regular`} 
 
       >
                 {displayText[0] === displayText[0].toUpperCase() ? "" : "..."}{displayText}{((displayText[displayText.length - 1] === "." || displayText.substring(displayText.length - 1) === "?") || (displayText[displayText.length - 1] === ",") || (displayText[displayText.length - 1] === "!") || (displayText[displayText.length - 1] === ":") || (displayText[displayText.length - 1] === "...")) ? "" : "..."}
@@ -189,7 +189,7 @@ const showDialog = () => {
                 </p>
 
             </div>
-            <p className="absolute bottom-0 text-greenColor ">Click to see more</p>
+            <p className="absolute bottom-0 text-greenColor font-averta-semibold  ">Click to see more</p>
             
         </div>
    :
@@ -208,11 +208,11 @@ const showDialog = () => {
                         frameBorder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     ></iframe>}
-<p className={`text-greenColor mt-4 mb-4 px-2 sm:px-10`} >
+<p className={`text-greenColor mt-4 mb-4 px-2 sm:px-10 font-averta-semibold`} >
 
 <TextSnippetIcon/>  Passage
 </p>
-<p className="px-2 sm:px-10 text-zinc-500 dark:text-zinc-300" dangerouslySetInnerHTML={{__html:groupedText}}>
+<p className="px-2 sm:px-10 text-zinc-500 dark:text-zinc-300 font-averta-regular" dangerouslySetInnerHTML={{__html:groupedText}}>
 
 </p>
 

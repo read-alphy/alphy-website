@@ -87,7 +87,7 @@ const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFe
 	
 
 	return (
-		<div className={`grid border-b-0 w-full md:w-full  `}>
+		<div className={`grid border-b-0 w-full md:w-full   `}>
 			{item!==undefined ? 
 			
 				item.source_type !== "up"

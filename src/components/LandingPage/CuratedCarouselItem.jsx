@@ -48,8 +48,8 @@ else{
                       
                       <div className={` ${!isHovered && props.item.thumbnail_url!==null ?"opacity-0" : "opacity-100 transition duration-300 ease-in-out" } rounded-md  absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
                           <div className="flex flex-col py-2 px-4 ">
-                    <p className={`text-white bg-opacity-100 text-sm ${props.forFeed!==true && "md:text-lg"} mb-5`} >{props.item.name}</p>
-                    <p className={`text-white bg-opacity-100 text-xs ${props.forFeed!==true && "md:text-sm"}`} >{description}</p>
+                    <p className={`text-white bg-opacity-100 text-sm ${props.forFeed!==true && "md:text-lg"} mb-5 font-averta-semibold`} >{props.item.name}</p>
+                    <p className={`text-white bg-opacity-100 text-xs ${props.forFeed!==true && "md:text-sm"} font-averta-regular`} >{description}</p>
                     </div>
                     
                   
@@ -78,8 +78,8 @@ else{
                   
                     
                       </div>
-                      <p className={` bg-opacity-100 text-lg text-zinc-600 dark:text-zinc-300 pt-2 ml-2`} >{props.item.name}</p>
-                      <p className={` bg-opacity-100 text-sm text-zinc-500 dark:text-zinc-500 pt-2 ml-2`} >{description}</p>
+                      <p className={` bg-opacity-100 text-lg text-zinc-600 dark:text-zinc-300 pt-2 ml-2 font-averta-semibold`} >{props.item.name}</p>
+                      <p className={` bg-opacity-100 text-sm text-zinc-500 dark:text-zinc-500 pt-2 ml-2 font-averta-regular`} >{description}</p>
 
                       </div>
 
@@ -96,7 +96,7 @@ else{
                             <div className={` ${!isHovered && props.item.thumbnail_url!==null ?"opacity-0" : "opacity-100 transition duration-300 ease-in-out" }   absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
                                 <div className="flex flex-col py-2 px-4 ">
                           
-                          <p className={`text-white bg-opacity-100 text-xs ${props.forFeed!==true && "md:text-sm"}`} >{props.item.description}</p>
+                          <p className={`text-white bg-opacity-100 text-xs ${props.forFeed!==true && "md:text-sm"} font-averta-regular`} >{props.item.description}</p>
                           </div>
                           
                   
@@ -110,7 +110,7 @@ else{
                 ></div>
                       </div>
                       
-                      <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2 max-w-[150px]`} >{props.item.name}</p>
+                      <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2 max-w-[150px] font-averta-semibold`} >{props.item.name}</p>
 
                       </div>
 

@@ -158,7 +158,7 @@ function HubArcFeed(props) {
 
 						<div className=" p-[10px] pl-5 xl:min-w-[1200px]  xl:max-w-[1200px] ">
 							
-						<p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-sans font-semibold">Learn from the best online sources with Alphy's Arcs.</p>
+						<p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-averta-semibold">Learn from the best online sources with Alphy's Arcs.</p>
 						
 									{/* <form
 										className="flex items-center pt-4"
@@ -237,7 +237,7 @@ function HubArcFeed(props) {
 
 
 							<Link to="/arcs" type="button" className="md:text-lg  flex flex-row text-zinc-600 font-semibold dark:text-zinc-200 underline mt-6 ml-2 mb-10 " >
-								<p >See All Arcs</p>
+								<p className="font-averta-semibold">See All Arcs</p>
 											<ArrowForwardIosIcon className="cursor-pointer text-zinc-600 dark:text-zinc-200 p-1 " />
 								</Link>
 
@@ -274,7 +274,7 @@ function HubArcFeed(props) {
 							<span className="text-sm">Go Back</span>
                 	</Link>
 					</div>
-						<p className="mb-10 text-xl lg:text-2xl text-zinc-700 dark:text-zinc-200 font-semibold">
+						<p className="mb-10 text-xl lg:text-2xl text-zinc-700 dark:text-zinc-200 font-averta-semibold ">
 							Discover All Arcs
 						</p>
 
@@ -287,8 +287,8 @@ function HubArcFeed(props) {
 
 												<div >
 													<AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-													<p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl">Create Your Arc</p>
-													<p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5">Connect multiple audio content with AI.</p>
+													<p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl font-averta-semibold">Create Your Arc</p>
+													<p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5 font-averta-regular">Connect multiple audio content with AI.</p>
 
 												</div>
 

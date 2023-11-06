@@ -130,6 +130,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					}
 
 
+					
 	const fetchDataUpload = async (url, constantFetch) => {
 		setAuthorizationError(false)
 	localStorage.setItem("isVisibleUpload", false)
@@ -347,10 +348,10 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					
 					authorizationError ? 
 					<div className="flex-col flex mx-10 md:mx-20 mx-auto mt-20 md:mt-40">
-						<div className="text-xl max-w-[600px] text-zinc-700 dark:text-zinc-300 ">
+						<div className="text-xl max-w-[600px] text-zinc-700 dark:text-zinc-300 font-averta-regular ">
 						The page you're trying to reach either doesn't exist or you don't have permission to access it.
 						</div>
-						<Link to="/myhub" className="underline mt-6 text-zinc-700 dark:text-zinc-300 max-w-[150px]">Back To My Hub</Link>
+						<Link to="/myhub" className="underline mt-6 text-zinc-700 dark:text-zinc-300 max-w-[150px] font-averta-semibold">Back To My Hub</Link>
 					</div>
 
 					:

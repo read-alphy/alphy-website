@@ -115,6 +115,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 	  };
 
 
+	  
 	return (
 		
 		<div className={`grid border-b-0 w-full md:w-full ${sideFeed? "":""}`}>
@@ -173,7 +174,7 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							<div className={`col-span-1  ${location.pathname.includes("arc/createArc") || location.pathname.includes("arc/editArc") ? `${fromArchipelago==="archipelago" ? "min-w-[80px]" : "min-w-[80px]"}`:"min-w-[100px]"} max-w-[300px] mr-3 `}>
 								{forDetail===true ? 
 								<div className="flex flex-row">
-								<div className="flex mr-4 text-zinc-700 dark:text-zinc-400">
+								<div className="flex mr-4 text-zinc-700 dark:text-zinc-400 font-averta-semibold">
 									{index+1}
 								</div>
 								<div
@@ -211,24 +212,24 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 							
 								
 								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) || (fromArchipelago==="archipelago" && item.source!==undefined && item.source.complete===true)? null : (
-									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
+									<div className=" text-purpleLike dark:text-zinc-300 font-averta-semibold">📝 IN PROGRESS</div>
 								)}
-								<div className={`text-sm video-text text-black dark:text-zinc-300 font-normal`} >
+								<div className={`text-sm video-text text-black dark:text-zinc-300 font-averta-semibold`} >
 							
 									{item.title}
 									{item.source !==undefined && item.source.title}
 									</div>
-								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">
+								<div className="font-averta-regular text-zinc-500 dark:text-zinc-300 ">
 									{item.creator_name}
 									{item.source !==undefined && item.source.creator_name}
 									</div>
-								<div className="font-light text-zinc-400 dark:text-zinc-300 flex flex-row">
+								<div className="font-averta-semibold text-zinc-400 dark:text-zinc-300 flex flex-row">
 									
 									{item.summaries!==undefined &&
 							
 									item.summaries.map ((summary,index) => (
 										
-										<div className={index!==0 && "ml-1"}>
+										<div className={index!==0 ? "ml-1 font-averta-semibold" : "font-averta-semibold"}>
 											{language_codes[summary.lang]}
 											{index!==item.summaries.length-1 && ","}
 										</div>
@@ -305,22 +306,22 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 									<div className="grid grid-cols-6">
 							<div className="col-span-5">
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
-									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
+									<div className=" text-purpleLike dark:text-zinc-300 font-averta-semibold">📝 IN PROGRESS</div>
 								)}
 
 							<Link className="cursor-pointer" to={`/${item.source_type}/${source_id}`} >
-								<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">
+								<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300  font-averta-semibold">
 							
 									{item.title}
 									</div>
-								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
-								<div className="font-light text-zinc-400 dark:text-zinc-300 flex flex-row">
+								<div className="_ text-zinc-500 dark:text-zinc-300 font-averta-regular">{item.creator_name}</div>
+								<div className=" text-zinc-400 dark:text-zinc-300 flex flex-row">
 									
 									{item.summaries!==undefined &&
 							
 									item.summaries.map ((summary,index) => (
 										
-										<div className={index!==0 && "ml-1"}>
+										<div className={index!==0 ? "ml-1 font-averta-semibold": "font-averta-semibold"}>
 											{language_codes[summary.lang]}
 											{index!==item.summaries.length-1 && ","}
 										</div>
@@ -369,10 +370,10 @@ const FeedItem = ({item,index, setCollapsed, myBookmarks, currentUser,sideFeed,f
 
 							<div className="text-xs">
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
-									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
+									<div className=" text-purpleLike dark:text-zinc-300 font-averta-semibold">📝 IN PROGRESS</div>
 								)}
-								<div className="text-sm  text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal underline">{item.title} </div>
-								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">Time added: {formattedDate}</div>
+								<div className="text-sm  text-black dark:bg-mildDarkMode dark:text-zinc-300  underline font-averta-semibold">{item.title} </div>
+								<div className="_ text-zinc-500 dark:text-zinc-300 font-averta-semibold">Time added: {formattedDate}</div>
 
 								{/* <div className="side-feed-date">{moment(item.source_ts).format('DD:MM:YYYY')}</div> */}
 							</div>

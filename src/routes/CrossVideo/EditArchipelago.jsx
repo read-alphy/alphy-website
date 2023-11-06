@@ -249,22 +249,22 @@ const handleKeyDown = (event) => {
             <div className="mt-10 lg:mt-0 ">
                 <a className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"  href={`/arc/${archipelagoInfo.uid}`}>
                 <KeyboardArrowLeftIcon fontSize="small" className=""/>
-                <span className="text-sm">Go Back</span>
+                <span className="text-sm font-averta-semibold">Go Back</span>
                 </a></div>
             <div className=" flex flex-row w-full items-center">
 
             <div className="relative w-full min-w-[200px] h-12 mt-10 ">
             
-                <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1">Title</p>
+                <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1 font-averta-semibold">Title</p>
             <input value={archipelagoTitle}
             placeholder="Set a title..."
-							onChange={(event) => setArchipelagoTitle(event.target.value)} className="w-full text-l dark:bg-mildDarkMode px-2 h-[50px] bg-white border border-zinc-200 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"/>
+							onChange={(event) => setArchipelagoTitle(event.target.value)} className="w-full font-averta-semibold text-l dark:bg-mildDarkMode px-2 h-[50px] bg-white border border-zinc-200 dark:border-zinc-700 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"/>
 						 </div>
   
 </div>  
 <div className="w-full">
 <p className="text-zinc-700 dark:text-zinc-300 mb-2 mt-16 ml-1">Description</p>
-                <textarea className={`min-h-[120px] rounded-lg bg-white dark:bg-mildDarkMode border-zinc-200  resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`} 
+                <textarea className={`min-h-[120px] font-averta-semibold rounded-lg bg-white dark:bg-mildDarkMode border-zinc-200  dark:border-zinc-700 resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`} 
                 value={archipelagoDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
                 placeholder="Set a description for your archipelago..."
@@ -278,8 +278,8 @@ const handleKeyDown = (event) => {
                 
                 </div>
                 <div className=" mt-10 mb-10 border-b border-zinc-300 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40"></div>
-                <p className="mt-4 lg:mt-10 mb-2     text-zinc-700 dark:text-zinc-300 ml-1">Curate your knowledge hub</p>
-                <p className="mt-2 mb-6 text-zinc-600 dark:text-zinc-400 ml-1 text-sm">Search by keyword or paste a link.</p>
+                <p className="mt-4 lg:mt-10 mb-2     text-zinc-700 dark:text-zinc-300 ml-1 font-averta-semibold">Curate your knowledge hub</p>
+                <p className="mt-2 mb-6 text-zinc-600 dark:text-zinc-400 ml-1 text-sm font-averta-semibold">Search by keyword or paste a link.</p>
                 <div className="w-full grid grid-cols-5 lg:grid-cols-6 ">
 				<div className="col-span-5 lg:col-span-6 relative w-full min-w-[200px] h-12">
                     
@@ -288,11 +288,11 @@ const handleKeyDown = (event) => {
 							onChange={(event) => setInputValue(event.target.value)}
 							placeholder=" "
                             onKeyDown= {handleKeyDown}
-							className="peer w-full  lg:w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor pl-8">
+							className="peer w-full  font-averta-semibold lg:w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor pl-8">
 
 
                             </input>
-                            <label className={`${inputValue.length===0 ? "pl-6": ""}  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor`}>Search from our database...</label>
+                            <label className={`${inputValue.length===0 ? "pl-6": ""} font-averta-semibold  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor pt-1 peer-focus:pt-0`}>Search from our database...</label>
                         <div className="grid place-items-center absolute text-blue-gray-500 top-2/4 left-3 -translate-y-2/4 w-5 h-5">
                         <SearchIcon className="text-zinc-400" fontSize="small"/>
                         </div>
@@ -312,7 +312,7 @@ const handleKeyDown = (event) => {
 
 {
         (inputValue.length>0) &&
-        <p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300 flex flex-col text-sm"> 
+        <p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300 flex flex-col text-sm font-averta-semibold"> 
                                                 Can't find what you are looking for? Paste the link for the content above to process it first.
                                                 </p>
 }
@@ -366,23 +366,23 @@ const handleKeyDown = (event) => {
                                     
                                     </a>
                                     <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
-                                    <p className=" text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(credit)} minutes
+                                    <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
                                     </p>
                         </div>
-                                    {(tier==="basic"||tier==="premium") &&
+                                    {
                                            <div  className="mt-4 flex flex-row">
-                                           <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> <Link 
+                                           <p className="text-zinc-500 dark:text-zinc-400 mr-2 font-averta-semibold">Need more credits? </p> <Link 
                                            onClick={
                                             () => sessionStorage.setItem("creditPurchase", "true")
                                            }
-                                           to="/account" className="text-indigo-400 font-semibold underline"  >Buy here.</Link>
+                                           to="/account" className={`${(tier==="basic"||tier==="premium") ?""  : "pointer-events-none opacity-80"} text-indigo-400 font-semibold underline font-averta-semibold`}  >Buy here.</Link>
                                            </div>              
                                     }
                         </div>
                                 <Button size="sm" type="submit"
                                 onClick={(e) => {
                                     handleSubmit();
-                                }} className=" bg-green-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case">Submit</Button>
+                                }} className=" bg-green-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case font-averta-semibold">Submit</Button>
                                 
                                 {failed && 
                                     <div className="mx-auto mt-5 text-sm text-red-400 ml-2">
@@ -407,10 +407,10 @@ const handleKeyDown = (event) => {
 
                 <div className=" lg:border-l w-full lg:px-10 mx-auto lg:min-w-[550px]">
                 <div className="lg:hidden border-t border-zinc-300 dark:border-zinc-700 mx-auto items-center flex mb-10 mt-10"></div>
-                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300">{archipelagoTitle.length>0 ? archipelagoTitle:"Archipelago"}</p>
-                {archipelagoDescription.length>0 && <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80">{archipelagoDescription}</p>}
-                {<p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80">Add or remove content to change the scope of your chat assistant.</p>}
-                {errorMessage && dataArchipelago.length===0 && <p className="mt-4 ml-2 mb-5 text-md text-red-500 dark:text-red-400 opacity-80">An Arc cannot be empty. Please add an item to continue.</p>}
+                <p className="mt-10 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300 font-averta-semibold">{archipelagoTitle.length>0 ? archipelagoTitle:"Archipelago"}</p>
+                {archipelagoDescription.length>0 && <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80 font-averta-semibold">{archipelagoDescription}</p>}
+                {<p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80 font-averta-semibold">Add or remove content to change the scope of your chat assistant.</p>}
+                {errorMessage && dataArchipelago.length===0 && <p className="mt-4 ml-2 mb-5 text-md text-red-500 dark:text-red-400 opacity-80 font-averta-semibol">An Arc cannot be empty. Please add an item to continue.</p>}
 
        
                 {dataArchipelago.length > 0

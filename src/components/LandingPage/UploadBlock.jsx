@@ -7,7 +7,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { API_URL } from '../../constants';
 
-export default function UploadBlock({currentUser, tier, credit}) {
+export default function     UploadBlock({currentUser, tier, credit}) {
     const [uploadProgress, setUploadProgress] = useState(0)
 	const [uploadDuration, setUploadDuration] = useState("")
 	const [uploadTitle, setUploadTitle] = useState("")
@@ -130,25 +130,25 @@ export default function UploadBlock({currentUser, tier, credit}) {
                 <VerifiedIcon className="mr-1 "/>
                     <span>PREMIUM</span>
                 </div>
-                    <p className="dark:text-zinc-300 text-zinc-500 mb-4 text-lg">Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
+                    <p className="dark:text-zinc-300 text-zinc-500 mb-4 text-lg font-averta-semibold">Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
                     </p>
-                    <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md">As we value your privacy, we delete your audio files after transcription, and we make sure Alphy's summary, transcription, and chatbot are only accessible to you and no one else.
+                    <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md font-averta-semibold">As we value your privacy, we delete your audio files after transcription, and we make sure Alphy's summary, transcription, and chatbot are only accessible to you and no one else.
                     </p>
                    
                 
     </div>
 
-    {tier==="premium" &&
+    
     <div className="flex-col flex">
     <div className="flex flex-row">
-            <a href="/account" className="underline text-zinc-500 dark:text-zinc-400">
+            <a href="/account" className="underline text-zinc-500 dark:text-zinc-400 font-averta-semibold">
                 {tier==="free" && "Starter Plan"}
                 {tier==="basic" && "Basic Plan"}
                 {tier==="premium" && "Premium Plan"}
                 
                 </a>
                 <p className="ml-1 mr-1"> - </p>
-                 <p className="text-zinc-500 dark:text-zinc-400"> Remaining Credits : {Math.floor(credit)} minutes
+                 <p className="text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
                  </p>
     </div>
                
@@ -157,12 +157,12 @@ export default function UploadBlock({currentUser, tier, credit}) {
 
                
                         <div  className="mb-8 mt-5 flex flex-col text-sm">
-                        <p className="text-zinc-500 dark:text-zinc-400 mr-2">Need more credits? </p> 
+                        <p className="text-zinc-500 dark:text-zinc-400 mr-2 font-averta-semibold">Need more credits? </p> 
                         
                         <div>
-             <Button onClick={navigateCredit} size="sm" className="bg-indigo-300 text-white mt-4">
+             <Button onClick={navigateCredit} size="sm" className={`bg-indigo-300 text-white mt-6 ${tier!=="premium" ? "pointer-events-none opacity-80" : ""}`}>
                         
-                            <span className="mt-1 dark:text-zinc-800">Buy here</span>
+                            <span className="mt-1 dark:text-zinc-800 font-averta-semibold">Buy here</span>
                     
                     </Button>
                    
@@ -177,7 +177,7 @@ export default function UploadBlock({currentUser, tier, credit}) {
                 </div>                           
                 
     </div>
-    }
+    
 
 
         {file === null ?
@@ -217,7 +217,7 @@ export default function UploadBlock({currentUser, tier, credit}) {
                                 }
                             </div>
 
-                            <input {...getInputProps()} className="" className="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
+                            <input {...getInputProps()} className="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
                             <input  onChange={handleFileUpload} type="file" className="hidden" accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga" />
 
 

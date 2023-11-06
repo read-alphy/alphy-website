@@ -786,8 +786,8 @@ return (
 						<div className="relative flex flex-col">
 						<div className="relative flex flex-row group cursor-default">
 						  <WorkspacePremiumIcon className="text-indigo-400"/>
-						  <p className="text-indigo-400 ml-2">Premium Processing</p>
-						  <span className="absolute opacity-0 group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
+						  <p className="text-indigo-400 ml-2 font-averta-semibold">Premium Processing</p>
+						  <span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
 							This content was processed with advanced AI models accessible to Premium.
 						  </span>
 						</div>
@@ -800,8 +800,8 @@ return (
 										<div className="relative flex flex-col">
 										<div className="relative flex flex-row group cursor-default">
 										<MemoryIcon className="text-gray-500"/>
-										<p className="text-gray-500 ml-2">Standard Processing</p>
-										<span className="absolute opacity-0 group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:bottom-full z-50 mb-2 ml-4">
+										<p className="text-gray-500 ml-2 font-averta-semibold">Standard Processing</p>
+										<span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:bottom-full z-50 mb-2 ml-4">
 											This content was processed with standard AI models.
 										</span>
 										</div>
@@ -811,7 +811,7 @@ return (
 
 								}
 						<div className="flex flex-row ml-1">
-							<h1 className="col-span-2 mt-6 text-xl  lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+							<h1 className="col-span-2 mt-6 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 								{data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
 							</h1>
 
@@ -834,7 +834,7 @@ return (
 												{data.source_type === 'yt' &&
 													<a target="_blank" className="flex flex-row  xl:hidden mb-5 mt-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 														<img className="mr-1 -ml-2" src="/youtubeicon.png" width={40} />
-														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center  text-md">Click to watch</p>
+														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center font-averta-semibold text-md">Click to watch</p>
 													</a>
 												}												
 												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
@@ -842,18 +842,18 @@ return (
 
 													<Popover placement="right">
 														<PopoverHandler>
-														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-200"/> <p className="ml-2">Add To Arc</p></button>
+														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300 font-averta-semibold"><AddCircleIcon className="text-green-200"/> <p className="ml-2">Add To Arc</p></button>
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
-														<MenuItem onClick={() => handleAddToArchipelago(0,true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex">
+														<MenuItem onClick={() => handleAddToArchipelago(0,true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex font-averta-semibold">
 															<AddIcon className="text-zinc-600 dark:text-zinc-300"/>
-														<p className="text-zinc-600 dark:text-zinc-300 pl-1">Create An Arc</p>
+														<p className="text-zinc-600 dark:text-zinc-300 pl-1 font-averta-semibold">Create An Arc</p>
 															</MenuItem>
 													{userArchipelagoNames.map(item => 
 														
 																	<MenuItem onClick={() => handleAddToArchipelago(item[1],false)} className="text-zinc-700 dark:text-zinc-200"  value={item}>
-																	<p className="text-zinc-600 dark:text-zinc-300">{item[0]}</p> 
+																	<p className="text-zinc-600 dark:text-zinc-300 font-averta-semibold">{item[0]}</p> 
 																	</MenuItem>
 																
 														
@@ -874,17 +874,17 @@ return (
 																<div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center z-[9999]">
 																	
 																	<AntSwitch onChange={props.handleVisibility} defaultChecked={props.isVisible} disabled={props.tier!=="premium"}/>
-																	<span className="text-sm mx-2">{props.isVisible===true ? "Public" : "Private"}</span>
+																	<span className="text-sm mx-2 font-averta-semibold">{props.isVisible===true ? "Public" : "Private"}</span>
 														</div>
 										
 
 										{props.tier==="premium" &&
-                                        <span className="absolute opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
+                                        <span className="absolute opacity-0 min-w-[200px] font-averta-semibold  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
                                             {props.isVisible ? "Toggle the visibility of this content. Switching to private makes it accessible only by you.":  "Toggle the visibility of this content. Switching to public makes it accessible by all."}
                                         </span>
                                     }
 									 {props.tier!=="premium" &&
-                                    <span className="absolute opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
+                                    <span className="absolute opacity-0 min-w-[200px] font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
                                     This content is private. Switch to the Premium plan to make it publicly accessible.
                                 </span>}
 
@@ -900,7 +900,7 @@ return (
 												
 												<div className="flex flex-row mb-2	 items-center hover:opacity-80 dark:hover:opacity-80 ">
 
-													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer">
+													<p onClick={handleBookmark} className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer font-averta-semibold">
 														
 														{currentUser && props.isBookmarked && (currentUser && data && data.submitter_id!==currentUser.uid) &&
 														<BookmarkRemoveIcon/>
@@ -908,8 +908,8 @@ return (
 														{props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&
 														<BookmarkAddIcon/>}
 	
-	{currentUser && props.isBookmarked ===true && (currentUser && data && data.submitter_id!==currentUser.uid) && <span className="ml-2">Remove Bookmark</span>}
-	{currentUser && props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&  <span className="ml-2">Add To Bookmarks</span>}
+	{currentUser && props.isBookmarked ===true && (currentUser && data && data.submitter_id!==currentUser.uid) && <span className="ml-2 font-averta-semibold">Remove Bookmark</span>}
+	{currentUser && props.isBookmarked===false &&  (currentUser && data && data.submitter_id!==currentUser.uid)  &&  <span className="ml-2 font-averta-semibold">Add To Bookmarks</span>}
 	</p>
 												</div>
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) &&
@@ -917,9 +917,9 @@ return (
 
 							
 											</div>
-											<p className="mb-2 text-zinc-700 dark:text-zinc-300">Language</p>
+											<p className="mb-2 text-zinc-700 dark:text-zinc-300 font-averta-semibold">Language</p>
 											<Box sx={{minWidth: 200}} className="">
-												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 " size="small">
+												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 font-averta-semibold " size="small">
 													<Select
 													sx={{
 														border: "1px solid #e2e8f0",
@@ -929,12 +929,12 @@ return (
 													onChange={handleLanguageChange}
 													displayEmpty
 													MenuProps={MenuProps}
-													className="text-zinc-700 dark:text-zinc-200"
+													className="text-zinc-700 dark:text-zinc-200 font-averta-semibold"
 													>
 													{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 
 (language === code ?
-	<MenuItem className="text-zinc-700 dark:text-zinc-200" key={code} value={code}>
+	<MenuItem className="text-zinc-700 dark:text-zinc-200 font-averta-semibold" key={code} value={code}>
 		{name}
 	</MenuItem>
 	:
@@ -944,7 +944,7 @@ return (
 		?
 		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
-		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
+		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"} font-averta-semibold`} key={code} value={code}>
 			{name}
 		</MenuItem>
 
@@ -973,7 +973,7 @@ return (
 
 														<svg className="w-5 h-5 pr-1 " aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 															<path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
-														</svg><p className="text-left">Report an issue</p>
+														</svg><p className="text-left font-averta-semibold">Report an issue</p>
 
 													</button>
 												
@@ -996,7 +996,7 @@ return (
 						<div className="col-span-2  ml-1 grid grid-cols-2 flex flex-row">
 							<div className="col-span-1">
 
-								<h2 className="mt-5 text-l text-left lg:col-span-3 lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-light_ flex flex-row">
+								<h2 className="mt-5 text-l text-left lg:col-span-3 font-averta-regular lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300  flex flex-row">
 
 									{data.source_type !== "up" && data.creator_name}
 									{data.source_type === "up" && `Private Content`}
@@ -1036,12 +1036,12 @@ return (
 									{data.source_type === 'yt' &&
 										<a target="_blank" className="flex flex-row mb-3" href={`https://www.youtube.com/watch?v=${data.source_id}`}>
 											<img className="-ml-2" src="/youtubeicon.png" width={40} />
-														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center text-md ">Click to watch</p>
+														<p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center text-md font-averta-semibold ">Click to watch</p>
 										</a>
 									}{data.source_type === "sp" &&
 										<a className="flex flex-row mb-5 mt-3  " target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 											<img className="ml-1" src={TwitterLogo} width={20} />
-											<p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md">Click to listen</p>
+											<p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Click to listen</p>
 										</a>
 									}
 										<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
@@ -1049,18 +1049,18 @@ return (
 
 												<Popover placement="right">
 													<PopoverHandler>
-													<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-200"/> <p className="ml-2">Add To Arc</p></button>
+													<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-200"/> <p className="ml-2 font-averta-semibold">Add To Arc</p></button>
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 										
 													<MenuItem onClick={() => handleAddToArchipelago(0,true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex">
 															<AddIcon className="text-zinc-600 dark:text-zinc-300"/>
-														<p className="text-zinc-600 dark:text-zinc-300 pl-1">Create An Arc</p>
+														<p className="text-zinc-600 dark:text-zinc-300 pl-1 font-averta-semibold">Create An Arc</p>
 															</MenuItem>
 												{userArchipelagoNames.map(item => 
 													
 																<MenuItem onClick={() => handleAddToArchipelago(item[1],false)} className="text-zinc-700 dark:text-zinc-200"  value={item}>
-																	<p className="text-zinc-600 dark:text-zinc-300">{item[0]}</p> 
+																	<p className="text-zinc-600 dark:text-zinc-300 font-averta-semibold">{item[0]}</p> 
 																</MenuItem>
 															
 													
@@ -1073,7 +1073,7 @@ return (
 
 												<div>
 
-												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
+												<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5 font-averta-semibold"></div>
 													
 
 
@@ -1091,7 +1091,7 @@ return (
                                         </span>
                                     }
 									 {props.tier!=="premium" &&
-                                    <span className="absolute mt-6 opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
+                                    <span className="absolute mt-6 opacity-0 min-w-[200px]  font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
                                     This content is private. Switch to the Premium plan to make it publicly accessible.
                                 </span>}
 
@@ -1125,23 +1125,23 @@ return (
 												{ (currentUser && data && data.submitter_id!==currentUser.uid) ?
 											<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>:null}
 									
-										<p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80">Language</p>
+										<p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80 font-averta-semibold">Language</p>
 									
 										<Box sx={{minWidth: 200}} className="">
-												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700  " size="small">
+												<FormControl  className="w-full text-zinc-200 dark:text-zinc-700 font-averta-semibold " size="small">
 													
 													<Select
 													value={language}
 													onChange={handleLanguageChange}
 													displayEmpty
 													MenuProps={MenuProps}
-													className="text-zinc-700 dark:text-zinc-200"
+													className="text-zinc-700 dark:text-zinc-200 font-averta-semibold"
 													>
 													
 													{Object.entries(reorderedLanguageCodes).map(([code, name], index) => (
 
 (language === code ?
-	<MenuItem className="text-zinc-700 dark:text-zinc-200" key={code} value={code}>
+	<MenuItem className="text-zinc-700 dark:text-zinc-200 font-averta-semibold" key={code} value={code}>
 		{name}
 	</MenuItem>
 	:
@@ -1151,7 +1151,7 @@ return (
 		?
 		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
-		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"}`} key={code} value={code}>
+		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"} font-averta-semibold`} key={code} value={code}>
 			{name}
 		</MenuItem>
 
@@ -1186,7 +1186,7 @@ return (
 	<iframe className="h-[640px] dark:hidden  md:min-w-[350px]" src={`https://tally.so/embed/wve4d8?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}></iframe>
 	<iframe className="h-[640px] hidden dark:block md:min-w-[350px]" src={`https://tally.so/embed/wMNL70?source_type=${data.source_type}&source_id=${data.source_id}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`} ></iframe>
 </div> :
-<p className=" dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200">Please <a className="text-greenColor underline" href="/u/login">sign in </a>to access the form.</p>}
+<p className=" dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200 font-averta-semibold">Please <a className="text-greenColor underline font-averta-semibold" href="/u/login">sign in </a>to access the form.</p>}
 </Dialog>
 								</div>
 							</PopoverContent>
@@ -1273,8 +1273,8 @@ return (
 								<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type==="sp" ? "hidden lg:flex" : " hidden"}`}>
 								<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 									<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto"/>
-									<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline">
-										Listen to <span className="font-bold pb-6 hyphenate">"{`${title}`.substring(0,90)} {title.length>90 && "..."}"</span>  on Twitter
+									<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
+										Listen to <span className="font-bold pb-6 hyphenate font-averta-semibold">"{`${title}`.substring(0,90)} {title.length>90 && "..."}"</span>  on Twitter
 									</p>
 
 									</a>
@@ -1309,7 +1309,7 @@ return (
 									<div className={`col-span-2 ${data.source_type == "yt" && ""} drop-shadow-sm `}>
 									{summary.key_qa !== undefined && summary.key_qa === null ? (
 										<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
-											<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center italic">
+											<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center italic ">
 
 												Generating questions... plugging in an AI assistant...
 
@@ -1353,14 +1353,14 @@ return (
 										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
 											<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
-												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto	">
-													<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-normal border-greenColor" : "hover:text-gray-600 hover:border-gray-300"}`} >
+												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto font-averta-semibold	">
+													<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2  font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
 														<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Key Takeaways</button>
 													</li>
-													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-normal border-greenColor" : "hover:text-gray-600 hover:border-gray-300"}`} >
+													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
 														<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Summary</button>
 													</li>
-													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-normal border-greenColor" : "hover:text-gray-600 hover:border-gray-300"}`} >
+													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
 														<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Transcript</button>
 													</li>
 													{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
@@ -1378,7 +1378,7 @@ return (
 											<Selection.Portal>
 												<Selection.Content>
 													
-														<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-600 dark:text-zinc-800 " onClick={handleAskAlphy}> Ask Alphy to learn more about it.</Button>
+														<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-800 dark:text-zinc-800 font-averta-semibold " onClick={handleAskAlphy}> Ask Alphy to learn more about it</Button>
 																
 													
 														<Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
@@ -1389,7 +1389,7 @@ return (
 												
 
   
-											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200  " >
+											<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 " >
 
 												<Tabs>
 													<Tab eventKey="transcript" title="">
@@ -1407,14 +1407,14 @@ return (
 														
 														? 
 														
-														<p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+														<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
 														This content doesn't have key takeaways. Check out the transcript!
 
 														</p> :
 
 
 														  <p>
-															<p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+															<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
 
 															Processing key takeaways...
 
@@ -1437,7 +1437,7 @@ return (
 																	<Loading />
 																) : summaryArray.length === 0 ? (
 																	
-																		<p className="text-l text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+																		<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
 												
 																			{summary===undefined || summary.length===0 ? "This content doesn't have a summary. Check out the transcript!" : "Still waiting for the summary! Meanwhile, check the transcript."}
 																		</p>
@@ -1500,7 +1500,7 @@ return (
 
 																								<PopoverHandler>
 																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
-																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
+																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm  font-averta-semibold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
 																										
 																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70 pointer-events-none" color="gray"/> :"Download Transcript" }
 																										
@@ -1508,17 +1508,17 @@ return (
 																										</button>
 																								</PopoverHandler>
 
-																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white  rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
+																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white font-averta-semibold  rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
 																									<ThemeProvider value={themePopover}>
 																										<PopoverContent background="indigo">
 																											{props.tier !=undefined && props.tier!="free" && basicDataLoaded == true ?
 
 																												<div className="">
-																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																														<p className="">Download as Plain Subtitles (.srt)</p>
 																													</div>
 
-																													<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																													<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																														<p>Download Formatted Transcript (.txt)</p>
 																													</div>
 																												</div>
@@ -1563,7 +1563,7 @@ return (
 																								<PopoverHandler>
 																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
 																										
-																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
+																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white font-averta-semibold`}>
 																										
 																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray"/> :"Download Transcript" }
 																										
@@ -1578,17 +1578,17 @@ return (
 																											{props.tier!==undefined && props.tier != "free" && basicDataLoaded == true ?
 
 																												<div>
-																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																														<p className="">Download as Plain Subtitles (.srt)</p>
 																													</div>
 
-																													<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																													<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
 																														<p>Download Formatted Transcript (.txt)</p>
 																													</div>
 																												</div>
 																												:
 
-																												<div className="px-3 cursor-pointer py-2 pointer-events-none ">
+																												<div className="px-3 cursor-pointer py-2 pointer-events-none font-averta-semibold ">
 																													<p className="">Upgrade your plan to download the transcript</p>
 																												</div>}
 																										</PopoverContent>
@@ -1604,7 +1604,7 @@ return (
 																			);
 																		} else if (index % 2 === 1 && index < transcript.length) {
 																			return (
-																				<div key={index}>
+																				<div className="" key={index}>
 																					<br></br>
 																					{item}
 																				</div>
@@ -1634,9 +1634,9 @@ return (
 						<div className="flex flex-col mb-20 mt-20 ">
 							{(errorMessage == true || (languagesWanted.includes(language) === true) || languages.includes(language) || (summary !== undefined && summary.summary !== undefined && summary.summary !== null && summary.summary.length > 0) || (contentSummaries !== undefined && contentSummaries.length > 1 && (contentSummaries[0].lang == language || contentSummaries[1].lang === language)) || language == "en") ? null :
 
-								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
 
-									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.tier!==undefined && props.tier!=="free" ? <p>Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
+									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.tier!==undefined && props.tier!=="free" ? <p className="font-averta-semibold">Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
 										: <p>Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "account" : "plans"}</a> page for more detail</p>}
 
 									{/* 	<div className="ml-4 mt-12">
@@ -1656,7 +1656,7 @@ return (
 				{data !== null && transcript.length === 0 && (language === "en") ?
 
 					<div className="flex flex-col mb-20 mt-20 ">
-						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
 
 							<span>
 							Alphy is doing its best to process this {data.source_type==="yt" ? "video" : "recording"}, it will be ready in a few minutes. Meanwhile, you can check out other videos.
@@ -1669,7 +1669,7 @@ return (
 				}
 				{((summary != undefined && summary !== null && summary.summary == null && summary.lang !== "en" && language!=="en" && summary.summary===undefined) || (languagesWanted.includes(language) == true && language!=="en")) && <div className="flex flex-col mb-20 mt-20 ">
 					{data !== null &&
-						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
 
 							Alphy is currently working hard to translate this  {data.source_type==="yt" ? "video" : "recording"} to {language_codes[language]}. Please come back in a few minutes!
 
@@ -1680,7 +1680,7 @@ return (
 				</div>}
 			</div>}
 			{errorMessage == true && <div className="flex flex-col mb-20 mt-20 ">
-				<p className="text-xl text-zinc-500 dark:text-zinc-200 font-light_ max-w-screen-md mx-auto p-3 text-center">
+				<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
 
 					There was an error with the request :( <br></br><br></br>Please refresh the page and try again. If the issue persists, please contact us at support@alphy.app
 

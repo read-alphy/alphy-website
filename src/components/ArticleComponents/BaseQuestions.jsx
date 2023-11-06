@@ -13,15 +13,15 @@ const added_ts = new Date(data.added_ts);
 
     return(
         <div>
-            <p className="mb-5 underline text-l font-normal text-zinc-600 dark:text-zinc-300">
+            <p className="mb-5 underline text-l font-averta-semibold text-zinc-600 dark:text-zinc-300">
 								{' '}
 								Questions by Alphy
 							</p>
 							{Object.keys(key_qa).map((item, index) => (
 								<div id="accordion-flush" data-active-classes="bg-white dark:bg-mildDarkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
 									<h2 id="accordion-flush-heading-1">
-										<button onClick={(event) => handleBaseQAaccordion(event, index, item)} type="button" className="flex items-center justify-between w-full py-5 font-medium text-left text-zinc-700 border-b border-gray-200 dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
-											<span>{item}</span>
+										<button onClick={(event) => handleBaseQAaccordion(event, index, item)} type="button" className="flex items-center justify-between w-full py-5 font-averta-semibold text-left text-zinc-700 border-b border-gray-200 dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+											<span className="font-averta-semibold">{item}</span>
 											<svg data-accordion-icon className={`w-6 h-6 ${index == collapseIndex && collapseIndex != -1 ? "rotate-180" : ""} shrink-0`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 										</button>
 									</h2>
@@ -42,7 +42,7 @@ const added_ts = new Date(data.added_ts);
 												<div className="answer-area text-zinc-600 dark:text-zinc-300 font-normal text-md sm:text-l">
 													
 {added_ts > oct31 ? 
-														<div>
+														<div className="">
 															
 																{formatAnswer(key_qa[item].answer, key_qa[item])} 
 															
@@ -70,7 +70,7 @@ const added_ts = new Date(data.added_ts);
                                                 className={`cursor-pointer justify-end mt-10 flex flex-row bg-whiteLike hover:bg-zinc-100  transition duration-300 ease-in-out dark:bg-zinc-700 dark:hover:bg-zinc-600 px-2 py-2 rounded-lg`}
                                                 onClick={handleShowAllSources}
                                             >
-                                                <span className={` text-zinc-600 dark:text-zinc-200 text-md pr-1`}>
+                                                <span className={` text-zinc-600 dark:text-zinc-200 text-md pr-1 font-averta-semibold`}>
 
                                               	  {(baseSources  && !singleSource)  ? "Hide sources": "See all sources" } <DataArrayIcon fontSize="sm"/>
 

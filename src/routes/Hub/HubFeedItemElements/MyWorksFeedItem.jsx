@@ -51,22 +51,22 @@ if(item.summaries!==undefined && item.summaries.find(item => item.lang==="en")!=
 								{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) ? null : (
 									item.summaries.length>0 && <div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
 								)}
-								<div className={`text-sm video-text text-black dark:text-zinc-300 font-normal`} >
+								<div className={`text-sm video-text text-black dark:text-zinc-300 font-averta-semibold`} >
 								
 									{item.title}
 									{item.source !==undefined && item.source.title}
 									</div>
-								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">
+								<div className="font-averta-semibold text-zinc-500 dark:text-zinc-300 ">
 									{item.creator_name}
 									{item.source !==undefined && item.source.creator_name}
 									</div>
-								<div className="font-light text-zinc-400 dark:text-zinc-300 flex flex-row">
+								<div className="font-averta-semibold text-zinc-400 dark:text-zinc-300 flex flex-row">
 									
 									{item.summaries!==undefined &&
 							
 									item.summaries.map ((summary,index) => (
 										
-										<div className={index!==0 && "ml-1"}>
+										<div className={index!==0 ? "ml-1 font-averta-semibold": "font-averta-semibold"}>
 											{language_codes[summary.lang]}
 											{index!==item.summaries.length-1 && ","}
 										</div>

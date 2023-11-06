@@ -386,29 +386,29 @@ const toggleExpand = () => {
                 <div className="col-span-4 sm:col-span-3 flex flex-row">
                 {archipelagoImageLink.length>0 && <img className={`${"hidden" } sm:block w-[200px] sm:mr-4`} src={archipelagoImageLink}/>}
                 <div className="ml-2">
-            <p className="text-xl text-zinc-700 dark:text-zinc-300 ">{title}</p>
-            {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
-            <p className={`text-md text-zinc-400 dark:text-zinc-500 ${"hidden sm:block"} `} >{description}</p>
+            <p className="text-xl text-zinc-700 dark:text-zinc-300 font-averta-semibold">{title}</p>
+            {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 font-averta-semibold ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
+            <p className={`text-md text-zinc-400 dark:text-zinc-500 font-averta-semibold ${"hidden sm:block"} `} >{description}</p>
             <div className="flex">
-            <p  className="cursor-pointer underline text-zinc-600 dark:text-zinc-300"onClick={() => setShowTrackDetails(true)}>More Details...</p>
+            <p  className="cursor-pointer underline text-zinc-600 dark:text-zinc-300 font-averta-semibold"onClick={() => setShowTrackDetails(true)}>More Details...</p>
             </div>
 
             <Dialog fullWidth={"true"} maxWidth={"md"} open={showTrackDetails} onClose={() => setShowTrackDetails(false)}>
                 <div className="pt-10 pb-20 bg-white dark:bg-mildDarkMode text-sm">
                 <CloseIcon className="right-0 absolute mr-4 mt-2 cursor-pointer dark:text-zinc-300" onClick={() =>setShowTrackDetails(false)}></CloseIcon>
                     <div className="mb-10 px-4 sm:px-10">
-                    <p className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</p>
+                    <p className="text-zinc-700 dark:text-zinc-300 text-lg font-averta-semibold">{title}</p>
                     {<p onClick={toggleExpand} className={`text-md text-zinc-400 dark:text-zinc-500 ${!expanded && "hover:opacity-80"} ${"sm:hidden"} cursor-pointer`} >{displayText}</p>}
-                    <p className={`text-md text-zinc-400 dark:text-zinc-500 ${"hidden sm:block"} lg:max-w-[700px]`} >{description}</p>
+                    <p className={`text-md text-zinc-400 dark:text-zinc-500 ${"hidden sm:block"} lg:max-w-[700px] font-averta-semibold`} >{description}</p>
                     
                     <div className= "flex flex-row mt-5">
-                    <p className="text-zinc-500 dark:text-zinc-500 text-md ">{dataArchipelago!==null && dataArchipelago.length} items</p>
+                    <p className="text-zinc-500 dark:text-zinc-500 text-md font-averta-semibold ">{dataArchipelago!==null && dataArchipelago.length} items</p>
                     <div className="ml-5">
                 {currentUser!==null && currentUser.uid === archipelagoUserID && 
                 
                 <div className="flex flex-row w-full space-between flex-grow" >
                     <div className="flex-grow flex">
-                    <p  onClick={handleEdit} className="cursor-pointer text-zinc-600 dark:text-zinc-300 underline" >Edit</p>
+                    <p  onClick={handleEdit} className="cursor-pointer text-zinc-600 dark:text-zinc-300 underline font-averta-semibold" >Edit</p>
                      <EditIcon onClick={handleEdit} fontSize="small"   className="cursor-pointer text-zinc-600 dark:text-zinc-300 pl-1 pt-1"   title={"Edit archipelago"} />
                      </div>
                     
@@ -420,16 +420,16 @@ const toggleExpand = () => {
 										<div className="relative flex flex-row  group  cursor-default">
                                         <div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center">
 										<AntSwitch onChange={handleVisibility} defaultChecked={isVisible} disabled={tier!=="premium"}/>
-                                        <span className="text-sm mx-2">{localStorage.getItem("isVisible")==="true" ? "Public" : "Private"}</span>
+                                        <span className="text-sm mx-2 font-averta-semibold">{localStorage.getItem("isVisible")==="true" ? "Public" : "Private"}</span>
                                         </div>
 
                             {tier==="premium" &&
-                                        <span className="absolute opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
+                                        <span className="absolute font-averta-semibold opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
                                             {isVisible ?"Toggle the visibility of this arc. Switching to private makes it accessible only by you.":  "Toggle the visibility of this arc. Switching to public makes it accessible by all."}
                                         </span>
                                     }
                                     {tier!=="premium" &&
-                                    <span className="absolute opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
+                                    <span className="absolute font-averta-semibold opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
                                     This arc is private. Switch to the Premium plan to make it publicly accessible.
                                 </span>
                                     
@@ -453,7 +453,7 @@ const toggleExpand = () => {
 
                     </div>
                     <div className="w-full px-3 sm:px-8 ">
-                    <p className="text-zinc-700 dark:text-zinc-300 text-lg">Item List</p>
+                    <p className="text-zinc-700 dark:text-zinc-300 text-lg font-averta-semibold">Item List</p>
                     <div
 							className={`
 							grid grid-cols-1 mt-10
@@ -467,7 +467,7 @@ const toggleExpand = () => {
                 {dataArchipelago.length > 0
                                         ?  dataArchipelago
                                             .map((item, index) => 
-                                            <div className="hover:bg-zinc-100 dark:hover:bg-zinc-700">
+                                            <div className="hover:bg-zinc-100 dark:hover:bg-zinc-700 font-averta-semibold">
                                                 <FeedItem  index={index} item={item} mainFeedInput={inputValue} fromArchipelago={"archipelago"} dataArchipelago={dataArchipelago} setDataArchipelago={setDataArchipelago} forDetail={true}/>
                                                 </div>
                                             )				
@@ -499,7 +499,7 @@ const toggleExpand = () => {
   type="text"
   id="questionAnswering"
   placeholder="Type your question here..."
-  className="m-0 w-full  text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-400 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
+  className="m-0 w-full  font-averta-semibold text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-400 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
         {inputValue.length > 0 ? (
 								<div
 									onClick={handleClear}
@@ -545,7 +545,7 @@ const toggleExpand = () => {
              </div>
              {errorMessage &&
              <div className="mt-4 text-zinc-500 dark:text-zinc-400">
-    <p>Please <a href="/u/login" className="underline text-greenColor dark:text-green-200">sign in</a> to start asking questions.</p> 
+    <p className="font-averta-semibold">Please <a href="/u/login" className="underline text-greenColor dark:text-green-200 font-averta-semibold">sign in</a> to start asking questions.</p> 
 </div>
 }
             </div>
@@ -557,7 +557,7 @@ const toggleExpand = () => {
                 {<div className={`${(answerData.answer.length>0 && selectedQuestions.length<0 )&&"hidden"} mt-20 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                     <p className="flex flex-row mb-5 sm:ml-6"> 
                     <QuizIcon className="text-greenColor dark:text-green-200 mr-2"/>
-                    <span className="text-zinc-600 dark:text-zinc-200">Suggested Questions</span>
+                    <span className="text-zinc-600 dark:text-zinc-200 font-averta-semibold">Suggested Questions</span>
                     
                     <RefreshIcon title="Refresh questions." fontSize="small" className="ml-2 text-zinc-500 dark:text-zinc-300 cursor-pointer" onClick={() => {
                         setSelectedQuestions("")
@@ -570,10 +570,10 @@ const toggleExpand = () => {
                 (
                     index%2==0 ? 
         
-                <button  className="bg-stone-50 border dark:bg-darkMode hover:scale-105 duration-300 transition ease-in-out text-zinc-500 dark:text-zinc-300 rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
+                <button  className="bg-stone-50 border dark:bg-darkMode hover:scale-105 duration-300 transition ease-in-out text-zinc-500 dark:text-zinc-300 rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm font-averta-semibold" onClick={handleAskPremadeQuestion}>{question}</button>
 
                 :
-                <button  className="bg-white border dark:bg-mildDarkMode text-zinc-500 dark:text-zinc-300 hover:scale-105 duration-300 transition ease-in-out rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm" onClick={handleAskPremadeQuestion}>{question}</button>
+                <button  className="bg-white border dark:bg-mildDarkMode text-zinc-500 dark:text-zinc-300 hover:scale-105 duration-300 transition ease-in-out rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm font-averta-semibold" onClick={handleAskPremadeQuestion}>{question}</button>
                 ))}
 
 
@@ -583,8 +583,8 @@ const toggleExpand = () => {
             
                 <div id="answer-area" className="answer-area text-l max-w-[900px] ml-2 sm:ml-10 mt-10 ">
                     
-                    {isLoadingInside || answerData.answer!=="" ?<p className="text-greenColor dark:text-green-200 text-l"> 
-                        <QuestionAnswerIcon className="text-greenColor dark:text-green-200 mr-1"/>
+                    {isLoadingInside || answerData.answer!=="" ?<p className="text-greenColor dark:text-green-200 text-l font-averta-semibold"> 
+                        <QuestionAnswerIcon className="text-greenColor dark:text-green-200 mr-1 "/>
                         Answer
                         
                         <LoopIcon className="ml-2 cursor-pointer text-zinc-500 dark:text-zinc-300" fontSize="small" onClick={() => {
@@ -625,10 +625,10 @@ const toggleExpand = () => {
                                  }}/>  */}
 
                                  
-                                    <div className="whitespace-pre-line">{formatAnswer(answerData.answer,answerData)}</div>
+                                    <div className="whitespace-pre-line font-averta-semibold">{formatAnswer(answerData.answer,answerData)}</div>
                                  
                                     
-                            <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20">
+                            <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20 font-averta-semibold">
                                 Always check the passages before quoting. AI may not be 100% accurate.
                             </div>
                     </div>
@@ -638,7 +638,7 @@ const toggleExpand = () => {
         </div>
                 {<div className={`${answerData.answer.length===0 &&"hidden"} mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40`} ></div>}
                             
-                                    <p className={`text-greenColor dark:text-green-200  ml-10 mt-4 mb-4 ${answerData.answer.length===0 && "hidden"}`} >
+                                    <p className={`text-greenColor dark:text-green-200  ml-10 mt-4 mb-4 font-averta-semibold ${answerData.answer.length===0 && "hidden"}`} >
 
                                           <TextSnippetIcon/>  Passages
                                 </p>

@@ -1,13 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url(https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold); 
+@import url(https://db.onlinewebfonts.com/c/b5d2107c7c6e775b13169eb51d8970c1?family=AvertaStd-Light); 
+@import url(https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=AvertaStd-Regular); 
 * {
 	padding: 0;
 	margin: 0;
 	font-family: 'Roboto', sans-serif;
 	
 }
+
+.font-averta-semibold{
+	font-family: 'AvertaStd-Semibold';
+
+}
+.font-averta-light{
+	font-family: 'AvertaStd-Light';
+
+}
+.font-averta-regular{
+	font-family: 'AvertaStd-Regular';
+
+}
+
 :root {
 	--background-color: #ffffff; /* Light theme */
 	--text-color: #000000; /* Light theme */

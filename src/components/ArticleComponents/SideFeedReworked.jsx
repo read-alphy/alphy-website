@@ -82,7 +82,7 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 	};
 
 	return (
-		<div id="side-feed" className={`dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `} >
+		<div id="side-feed" className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed? "min-w-[60px] max-w-[60px]" :"w-full lg:min-w-[270px] lg:max-w-[270px]" } flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `} >
 
 			{!collapsed ? 
 			<div className="flex flex-col flex-grow ">
@@ -120,19 +120,19 @@ function SideFeedReworked({collapsed,setCollapsed,userLayout,submitLayout,global
 								<div className="flex flex-col w-full justify-start px-5">
 									<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm ":"drop-shadow-sm"}   text-sm sm:text-md bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[120px] flex flex-row `} >
 									<AddIcon fontSize="small" className="mr-3"/>
-										<p>New</p>
+										<p className="font-averta-semibold">New</p>
 									</Link>
 							
 
 									<Link to="/myhub" className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${userLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 									<HubIcon className="mr-3 " fontSize="small"/>
-										<p className="">My Hub</p>
+										<p className="font-averta-semibold">My Hub</p>
 										
 									</Link>
 
 									<Link to="/"  className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200":"text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 									<ExploreIcon className="mr-3" fontSize="small"/>
-										<p className="">Discover</p>
+										<p className="font-averta-semibold">Discover</p>
 										
 									</Link>
 									{

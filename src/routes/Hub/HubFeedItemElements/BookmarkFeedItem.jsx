@@ -32,7 +32,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 							target="_blank"
 						>
 							<Link to={`/${item.source_type}/${source_id}`} >
-							<div className={`min-w-[320px] max-w-[320px]   xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}>
+							<div className={`min-w-[320px] max-w-[320px]  font-averta-semibold xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}>
 								<div
 									className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
 									style={{
@@ -52,22 +52,22 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 							<div className="col-span-2">
                            
 								{item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true || (item.summaries[1] !== undefined || item.summaries[0] !== undefined)) ? null : (
-									<div className="font-bold text-purpleLike dark:text-zinc-300">📝 IN PROGRESS</div>
+									<div className="font-bold text-purpleLike dark:text-zinc-300 font-averta-semibold">📝 IN PROGRESS</div>
 								)}
 
 							<Link className="cursor-pointer" to={`/${item.source_type}/${source_id}`} >
-								<div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300 font-normal">
+								<div className="text-sm font-averta-semibold video-text text-black  dark:text-zinc-300 font-normal">
 							
 									{item.title}
 									</div>
-								<div className="font-light_ text-zinc-500 dark:text-zinc-300 ">{item.creator_name}</div>
-								<div className="font-light text-zinc-400 dark:text-zinc-300 flex flex-row">
+								<div className=" text-zinc-500 dark:text-zinc-300 font-averta-semibold">{item.creator_name}</div>
+								<div className="font-averta-semibold text-zinc-400 dark:text-zinc-300 flex flex-row">
 									
 									{item.summaries!==undefined &&
 							
 									item.summaries.map ((summary,index) => (
 										
-										<div className={index!==0 && "ml-1"}>
+										<div className={index!==0 ? "ml-1 font-averta-semibold": "font-averta-semibold"}>
 											{language_codes[summary.lang]}
 											{index!==item.summaries.length-1 && ","}
 										</div>

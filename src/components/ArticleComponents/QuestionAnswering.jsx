@@ -428,7 +428,7 @@ export default function QuestionAnswering(props) {
 		
 
 
-			<p className="mb-4 font-light_ text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want</p>
+			<p className="mb-4 font-averta-semibold text-l text-zinc-500 dark:text-zinc-200">Chat with the content. In any language you want</p>
 
 			<div className="Md:pl-10 md:pr-10 ">
 
@@ -452,7 +452,7 @@ export default function QuestionAnswering(props) {
 								type="text"
 								id="questionAnswering"
 								placeholder="Ask anything to the transcript..."
-								className="m-0 w-full  text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
+								className="m-0 w-full  font-averta-semibold text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]" />
 							{props.inputValue.length > 0 ? (
 								<div
 									onClick={handleClear}

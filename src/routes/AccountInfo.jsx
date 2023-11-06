@@ -199,39 +199,39 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                         {currentUser ? 
                                                                 <div>
                                                                     
-                                                                            <h1 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 ">Account Details</h1>
+                                                                            <h1 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 font-averta-semibold ">Account Details</h1>
 
                                                             <div className="grid grid-cols-3 mb-5">
                                                                             <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm">
-                                                                                <p className="mb-2">Your Email</p>
-                                                                                <p className="mb-2">Password</p>
+                                                                                <p className="mb-2 font-averta-semibold">Your Email</p>
+                                                                                <p className="mb-2 font-averta-semibold">Password</p>
                                                                                 {credit!==null ?
-                                                                                <p className="mt-2">Remaining Credits</p> :null
+                                                                                <p className="mt-2 font-averta-semibold">Remaining Credits</p> :null
                                                                                         }
-                                                                                        <p className="mt-2">Plan</p>
+                                                                                        <p className="mt-2 font-averta-semibold">Plan</p>
                                                                             </div> 
                                                                 <div className="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
                                                                             <div className="col-span-1 text-zinc-600 dark:text-zinc-200 text-sm">
-                                                                                <p className="mb-2">{currentUser.email}</p>
-                                                                                <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
+                                                                                <p className="mb-2 font-averta-regular">{currentUser.email}</p>
+                                                                                <a href="/u/resetpassword" className="mb-2 underline font-averta-regular">Reset password</a>
                                                                                 {credit!==null ?
-                                                                                <p className="mt-2" >{Math.floor(credit)} minutes
+                                                                                <p className="mt-2 font-averta-regular" >{Math.floor(credit)} minutes
                                                                                 
                                                                                 
                                                                                 </p> :null
                                                                                         }
-                                                                                        <p className="mt-2">
+                                                                                        <p className="mt-2 font-averta-regular">
                                                                                             {tier==="free" && "Starter"}
                                                                                             {tier==="basic" && "Basic"}
                                                                                             {tier==="premium" && "Premium"}
                                                                                             </p>
-                                                                        {(tier==="basic" || tier==="premium") &&
+                                                                        {
 
                                                                     <div className="mt-4"> 
                                                                     
-                                                                        <Button size="sm" className="bg-indigo-300 text-white" onClick={() => setCreditPurchaseDialog(true)}>
+                                                                        <Button size="sm" className={`bg-indigo-300 text-white ${(tier==="basic" || tier==="premium") ? "": "pointer-events-none opacity-80"} font-averta-semibold`}  onClick={() => setCreditPurchaseDialog(true)}>
                                                                         <AddCircleOutlineIcon  className="mr-2 dark:text-zinc-800" />
-                                                                            <span className="mt-1 dark:text-zinc-800">Buy Credits</span>
+                                                                            <span className="mt-1 dark:text-zinc-800 font-averta-semibold">Buy Credits</span>
                                                                     
                                                                     </Button>
                                                                     
@@ -256,9 +256,9 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
 
  */}
                                 
-                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-bold mb-10 mt-20">Manage Subscription </p>
+                                 <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl  mb-10 mt-20 font-averta-semibold">Manage Subscription </p>
                          
-                                { tier!=="free" ? <a className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change payment details or cancel subscription"}</a> : null}
+                                { tier!=="free" ? <a className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-averta-semibold mb-4" target="_blank" href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"> {canceledAtPeriodEnd ?"We are sorry to see you go. You can enjoy the premium benefits until the next billing period and can renew your subscription anytime through this link." : "Change payment details or cancel subscription"}</a> : null}
                                 
                                 <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch">
                                    
@@ -288,41 +288,41 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                 {currentUser ? 
                                                         <div className="px-4 sm:mx-0">
                                                             
-                                                                    <h1 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 ">Account Details</h1>
+                                                                    <h1 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold ">Account Details</h1>
 
                                                     <div className="grid grid-cols-3 mb-5  ">
                                                                     <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm border-r border-gray-300 pr-4">
-                                                                        <p className="mb-3">Your Email</p>
-                                                                        <p className="mb-3">Password</p>
+                                                                        <p className="mb-3 font-averta-semibold">Your Email</p>
+                                                                        <p className="mb-3 font-averta-semibold">Password</p>
                                                                         {credit!==null ?
-                                                                        <p className="mt-2">Remaining <br></br>Credits</p> :null
+                                                                        <p className="mt-2 font-averta-semibold">Remaining <br></br>Credits</p> :null
                                                                                 }
-                                                                                <p className="mt-2">Plan</p>
+                                                                                <p className="mt-2 font-averta-semibold">Plan</p>
                                                                     </div> 
                                                         {/* <div className="border-r border-gray-300 h-[10vh] col-span-1 mx-auto items-center flex"></div> */}
                                                                     <div className="col-span-2 text-black dark:text-zinc-200 text-sm ml-6">
-                                                                        <p className="mb-3">{currentUser.email}</p>
-                                                                        <a href="/u/resetpassword" className="mb-2 underline">Reset password</a>
+                                                                        <p className="mb-3 font-averta-regular">{currentUser.email}</p>
+                                                                        <a href="/u/resetpassword" className="mb-2 underline font-averta-regular">Reset password</a>
                                                                         {credit!==null ?
-                                                                        <p className="mt-5" >{Math.floor(credit)} minutes
+                                                                        <p className="mt-5 font-averta-regular" >{Math.floor(credit)} minutes
                                                                      
                                                                         </p> :null
                                                                                 }
                                                                                 
-                                                                                <p className="mt-5">
+                                                                                <p className="mt-5 font-averta-regular">
                                                                                     
                                                                                 {tier==="free" && "Starter Plan"}
                                                                                             {tier==="basic" && "Basic Plan"}
                                                                                             {tier==="premium" && "Premium Plan"}
                                                                                     
                                                                                     </p>
-                                                                                    {(tier==="basic" || tier==="premium") &&
+                                                                                    {
 
                                                                                 <div className="mt-4"> 
                                                                                 
-                                                                                    <Button size="sm" className="bg-indigo-300 text-white" onClick={() => setCreditPurchaseDialog(true)}>
+                                                                                    <Button size="sm" className={`bg-indigo-300 text-white ${(tier==="basic" || tier==="premium") ? "": "pointer-events-none opacity-80"}`}  onClick={() => setCreditPurchaseDialog(true)}>
                                                                                     <AddCircleOutlineIcon  className="mr-2 dark:text-zinc-800" />
-                                                                                        <span className="mt-1 dark:text-zinc-800">Buy Credits</span>
+                                                                                        <span className="mt-1 dark:text-zinc-800 font-averta-semibold">Buy Credits</span>
 
                                                                                 </Button>
                                                                                 
@@ -381,17 +381,17 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
             <Dialog fullWidth={"true"} maxWidth={"sm"} open={creditPurchaseDialog} onClose={() => setCreditPurchaseDialog(false)}>
                                                                         <div className="h-[400px] p-10 text-zinc-600 text-sm dark:text-zinc-300 dark:bg-mildDarkMode  text-center items-center">
                                                                             
-                                                                            <p className="text-lg font-normal ">
+                                                                            <p className="text-lg font-averta-semibold ">
                                                                                 You are about to purchase extra credits.
                                                                             </p>
-                                                                            <p className="">
+                                                                            <p className=" font-averta-semibold">
                                                                               Update quantity to scale your minutes proportionally.
                                                                             </p>
 
                                                                             <div className="mt-6"> 
-                                                                            <p className="font-
+                                                                            <p className="font-averta-semibold
                                                                              text-lg"> ${quantity*5}</p>
-                                                                            <p>{quantity*300} minutes (={quantity*5} hours)</p>
+                                                                            <p className="font-averta-semibold">{quantity*300} minutes (={quantity*5} hours)</p>
                                                                             </div>
                                                                             
                                                                             
@@ -406,7 +406,7 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                                             value={quantity} 
                                                                                             onChange={handleQuantityChange} 
                                                                                             onBlur={handleBlur}
-                                                                                            className="w-[70px] rounded-lg border border-gray-200 text-center dark:bg-mildDarkMode focus:outline-none focus:ring-0 focus:border-indigo-400"
+                                                                                            className="w-[70px] rounded-lg border border-gray-200 font-averta-semibold text-center dark:bg-mildDarkMode focus:outline-none focus:ring-0 focus:border-indigo-400"
                                                                                         />
                                                                                     
                                                                                 <AddCircleIcon className="cursor-pointer mt-2 ml-2 opacity-60 text-zinc-300" onClick={handleIncrement}/>
@@ -418,11 +418,11 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                             <Button className={`bg-indigo-300 w-[200px] mt-6 py-3 ${(quantity<1  || creditPurchaseLoading) && "pointer-events-none opacity-60"}`}  size="md" onClick={buyCredit}>
                                                                                 {creditPurchaseLoading ? 
                                                                                 <Spinner color="gray" className="opacity-40 w-5 text-center margin-auto w-full"/> :
-                                                                                <p className="py-1 dark:text-zinc-800 text-md">Purchase</p>
+                                                                                <p className="py-1 dark:text-zinc-800 text-md font-averta-semibold">Purchase</p>
                                                                             }
                                                                                 
                                                                                 </Button>
-                                                                                <p className="items-center margin-auto flex mt-4">
+                                                                                <p className="items-center margin-auto flex mt-4 font-averta-regular">
                                                                                  You will be charged automatically.
                                                                                  </p>
                                                                         </div>   
