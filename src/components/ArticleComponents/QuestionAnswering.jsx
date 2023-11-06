@@ -225,7 +225,7 @@ export default function QuestionAnswering(props) {
 
 			return (
 				<div className="relative inline-flex  group "> 
-					<span key={index} className="underline text-xs text-green-300 cursor-pointer" onClick={() => handleShowSingleSource(part)}>
+					<span key={index} className="underline text-xs text-green-300 cursor-pointer font-averta-semibold ml-1" onClick={() => handleShowSingleSource(part)}>
 						[{part}]
 			  		</span>
 			  	</div>

@@ -69,7 +69,7 @@ if((tier!== undefined || tier!==null) && subCalled===false){
 	}
 
 	return (
-		<div className="scrolling dark:bg-darkMode dark:text-zinc-300 ">
+		<div className="scrolling dark:bg-darkMode dark:text-zinc-300 font-averta-semibold">
 			<Helmet>
 				<title>Alphy - Unlock Audiovisual Content</title>
 			</Helmet>  

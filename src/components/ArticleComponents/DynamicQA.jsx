@@ -50,7 +50,7 @@ export default function DynamicQA({answerData, areaRefs, answer, data, handleCle
                     className={`cursor-pointer justify-end mt-10 flex flex-row bg-whiteLike hover:bg-zinc-100  transition duration-300 ease-in-out dark:bg-zinc-700 dark:hover:bg-zinc-600 px-2 py-2 rounded-lg`}
                     onClick={handleShowAllSources}
                 >
-                    <span className={` text-zinc-600 dark:text-zinc-200 text-md pr-1`}>
+                    <span className={` text-zinc-600 dark:text-zinc-200 text-md pr-1 font-averta-semibold`}>
                     {(answer && !singleSource) ? "Hide sources": "See all sources" } <DataArrayIcon fontSize="sm"/>
                     </span>
                 

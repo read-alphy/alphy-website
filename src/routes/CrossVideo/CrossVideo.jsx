@@ -366,9 +366,9 @@ const handleDeleteArchipelago = () => {
 
 				isLoadingSubmit===false ? 
 				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 flex flex-col">
-					<p>You've already have the maximum number of Arcs for your plan.</p>
+					<p className="font-averta-semibold">You've already have the maximum number of Arcs for your plan.</p>
 
-					<p className="mt-4"><Link to="/account" className="dark:text-greenColor text-green-400 underline ">Upgrade</Link> your plan to create more Arcs.</p>
+					<p className="mt-4 font-averta-semibold"><Link to="/account" className="dark:text-greenColor text-green-400 underline font-averta-semibold ">Upgrade</Link> your plan to create more Arcs.</p>
 					
 	   			</div>
 
@@ -380,7 +380,7 @@ const handleDeleteArchipelago = () => {
 
 				
 				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40">
-				<Link to="/u/login" className="dark:text-greenColor text-green-400 underline">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline"> create an account</Link> to access this page. 
+				<Link to="/u/login" className="dark:text-greenColor text-green-400 underline font-averta-semibold">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline font-averta-semibold"> create an account</Link> to access this page. 
 	   			</div>
 					)
 				
@@ -392,8 +392,8 @@ const handleDeleteArchipelago = () => {
 
 				(authorizationError?
 					<div className="mx-10 mx-auto md:mx-20  mt-20 md:mt-40">
-						<div className="text-xl  text-zinc-700 dark:text-zinc-300 max-w-[600px]">
-						The arc you're trying to reach either doesn't exist or you don't have permission to access it. Check out arcs by Alphy <Link to="/arcs" className="dark:text-greenColor text-green-400 underline">here</Link>.
+						<div className="text-xl  text-zinc-700 dark:text-zinc-300 max-w-[600px] font-averta-semibold">
+						The arc you're trying to reach either doesn't exist or you don't have permission to access it. Check out arcs by Alphy <Link to="/arcs" className="dark:text-greenColor text-green-400 underline font-averta-semibold">here</Link>.
 						 </div>
 						 
 					</div>
@@ -421,8 +421,8 @@ const handleDeleteArchipelago = () => {
 				:
 
 				
-				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40">
-				<Link to="/u/login" className="dark:text-greenColor text-green-400 underline">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline"> create an account</Link> to access this page. 
+				<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 font-averta-semibold">
+				<Link to="/u/login" className="dark:text-greenColor text-green-400 underline font-averta-semibold">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline font-averta-semibold"> create an account</Link> to access this page. 
 	   			</div>
 				
 				)
@@ -453,8 +453,8 @@ const handleDeleteArchipelago = () => {
 			<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed &&window.innerWidth<1000 &&"hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
             <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
 			
-			{isEditArc  && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-400 px-5 mr-5" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
-            {<Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-greenColor px-5 ${
+			{isEditArc  && !isLoadingSubmit && <Button size={window.innerWidth>1000 ? "lg" :`md`} className="bg-red-400 px-5 mr-5 font-averta-semibold" onClick={() => setDeleteDialog(true)}> <DeleteIcon/> <span className="mt-1">Delete </span></Button>}		
+            {<Button size={window.innerWidth>1000 ? "lg" :`md`} className={`bg-greenColor px-5 font-averta-semibold ${
 				isLoadingSubmit && "bg-green-300 pointer-events-none min-w-[106.533px]" }`}  onClick={handleArchipelago}>
 				{
 				isLoadingSubmit ? 
@@ -473,20 +473,20 @@ const handleDeleteArchipelago = () => {
 			<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
 				
 				<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode items-center text-center justify-center drop-shadow-sm flex-col">
-					<p className="mb-10">You are about to delete this arc. Would you like to continue?</p>
+					<p className="mb-10 font-averta-semibold">You are about to delete this arc. Would you like to continue?</p>
 					<div >
 						{isLoadingDelete ? 
 						
 						<div>
 							
 						<Spinner color="green" size="sm" className="flex mx-auto opacity-40 mb-2"/>
-						<p className="text-zinc-500 dark:text-zinc-600 italic">Deleting...</p>
+						<p className="text-zinc-500 dark:text-zinc-600 italic font-averta-semibold">Deleting...</p>
 						</div>
 						 :
 						<div className="flex flex-row">
-						<p className="text-greenColor cursor-pointer" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
+						<p className="text-greenColor cursor-pointer font-averta-semibold" size="sm" onClick={() => setDeleteDialog(false)}>Cancel</p>
 						<div className="border-r h-full mr-4 ml-4"></div>
-						<p className="text-red-400 cursor-pointer" size="sm" onClick={handleDeleteArchipelago}>Delete</p>
+						<p className="text-red-400 cursor-pointer font-averta-semibold" size="sm" onClick={handleDeleteArchipelago}>Delete</p>
 						</div>
 					}
 					</div>

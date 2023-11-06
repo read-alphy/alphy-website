@@ -56,7 +56,7 @@ export default function BookmarkFeedItem ({item, index, source_id, imageUrl, lan
 								)}
 
 							<Link className="cursor-pointer" to={`/${item.source_type}/${source_id}`} >
-								<div className="text-sm font-averta-semibold video-text text-black  dark:text-zinc-300 font-normal">
+								<div className="text-sm font-averta-semibold video-text text-black 	 dark:text-zinc-300 font-normal">
 							
 									{item.title}
 									</div>

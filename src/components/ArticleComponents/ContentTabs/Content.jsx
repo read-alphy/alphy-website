@@ -416,7 +416,7 @@ const handleBookmark = async () => {
 	};
 
 
-
+console.log(summaryArray)
 
 async function summaryParser(){
 	let activeSummary
@@ -1515,17 +1515,17 @@ return (
 
 																												<div className="">
 																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																														<p className="">Download as Plain Subtitles (.srt)</p>
+																														<p className="font-averta-semibold">Download as Plain Subtitles (.srt)</p>
 																													</div>
 
 																													<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																														<p>Download Formatted Transcript (.txt)</p>
+																														<p className="font-averta-semibold">Download Formatted Transcript (.txt)</p>
 																													</div>
 																												</div>
 																												:
 
 																												<div className="px-3 cursor-pointer py-2 pointer-events-none ">
-																													<p className="">Upgrade your plan to download the transcript</p>
+																													<p className="font-averta-semibold">Upgrade your plan to download the transcript</p>
 																												</div>}
 																										</PopoverContent>
 																									</ThemeProvider>
@@ -1579,11 +1579,11 @@ return (
 
 																												<div>
 																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																														<p className="">Download as Plain Subtitles (.srt)</p>
+																														<p className=" font-averta-semibold">Download as Plain Subtitles (.srt)</p>
 																													</div>
 
 																													<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																														<p>Download Formatted Transcript (.txt)</p>
+																														<p className="font-averta-semibold">Download Formatted Transcript (.txt)</p>
 																													</div>
 																												</div>
 																												:

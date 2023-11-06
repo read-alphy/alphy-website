@@ -128,7 +128,7 @@ export default function Pricing({tier }) {
 
 
                             <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
-                                <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-3xl font-bold mb-20">Choose the best plan for you</p>
+                                <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-3xl font-averta-semibold mb-20">Choose the best plan for you</p>
                               
                             {/* <div className="items-center flex justify-center"><label className="relative inline-flex items-center ">
                             <input type="checkbox" value="" className="sr-only peer" onClick={handleDarkMode}/>
