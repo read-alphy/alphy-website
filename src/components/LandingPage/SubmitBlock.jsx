@@ -118,16 +118,35 @@ currentUser ?
 <div>
 <p className="dark:text-zinc-500 text-zinc-500 mb-3 text-sm font-averta-semibold">  Alphy might fail to process content with location limits.</p>
 <div className="border-b border-gray-100 mt-10 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 md:w-1/3"></div>
-{
-                        <div  className="mt-8 flex flex-col text-sm">
-                        <p className={`text-zinc-500 dark:text-zinc-400 mr-2 ${(tier==="basic"||tier==="premium") ?"":"pointer-events-none opacity-80"} font-averta-semibold`}>Need more credits? </p> 
+
+</div>
+}
+
+
+<div  className="mt-8 pt-8 flex flex-col text-sm">
+                        <p className={`text-zinc-500 dark:text-zinc-400 mr-2  font-averta-semibold`}>Need more credits? </p> 
+                        {tier==="free" 
+                        &&
+                    <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  mt-2 ">
                         
-                        <div>
-             <Button onClick={navigateCredit} size="sm" className="bg-indigo-300 text-white mt-4 font-averta-semibold">
+                         Upgrade to a paid plan to get credit topups.</span>
+                         }
                         
+                        <div className="flex flex-col ">
+                            <Button onClick={navigateCredit} size="sm" className={`bg-indigo-300 ${(tier==="basic"||tier==="premium") ?"":"pointer-events-none opacity-50"} text-white mt-4 w-[100px] font-averta-semibold`}>
+                                        
                             <span className="mt-1 dark:text-zinc-800">Buy here</span>
-                    
+
+                           
+                           {/*  <div className="relative flex flex-row group cursor-default">
+						  <WorkspacePremiumIcon className="text-indigo-400"/>
+						  <p className="text-indigo-400 ml-2 font-averta-semibold">Premium Processing</p>
+						  <span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
+							This content was processed with advanced AI models accessible to Premium.
+						  </span>
+						</div> */}
                     </Button>
+                   
                     </div>
                         
 
@@ -135,13 +154,12 @@ currentUser ?
                         </div> 
                         
                         
-                }
+              
 
 
 
 
-</div>
-}
+
 
 
 </div>

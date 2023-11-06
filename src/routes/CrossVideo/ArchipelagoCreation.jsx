@@ -286,7 +286,7 @@ const handleKeyDown = (event) => {
                 </div>
                 <div className=" mt-10 border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
                 <p className="mt-4 lg:mt-10 mb-2     text-zinc-700 dark:text-zinc-300 ml-1 font-averta-semibold">Curate your knowledge hub</p>
-                <p className="mt-2 mb-6 text-zinc-600 dark:text-zinc-400 ml-1 text-sm font-averta-semibold">Search by keyword or paste a link.</p>
+                <p className="mt-2 mb-6 text-zinc-600 dark:text-zinc-400 ml-1 text-sm font-averta-regular">Search by keyword or paste a link.</p>
                 <div className="w-full grid grid-cols-5 lg:grid-cols-6 ">
 				<div className="col-span-5 lg:col-span-6 relative w-full min-w-[200px] h-12">
                     
@@ -359,28 +359,7 @@ const handleKeyDown = (event) => {
 
                                     <div>
                                
-<div className="flex-col flex mb-6 text-sm">
-    <div className="flex flex-row ">
-            <a href="/account" className="text-zinc-500 dark:text-zinc-400">
-                {tier==="free" && "Starter Plan"}
-                {tier==="basic" && "Basic Plan"}
-                {tier==="premium" && "Premium Plan"}
-                
-                </a>
-                <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
-                 <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
-                 </p>
-    </div>
-                {
-                       <div  className="mt-4 flex flex-row">
-                       <p className="text-zinc-500 dark:text-zinc-400 mr-2 font-averta-semibold">Need more credits? </p> <Link 
-                       onClick={
-                        () => sessionStorage.setItem("creditPurchase", "true")
-                       }
-                       to="/account" className={`text-indigo-400 font-semibold underline font-averta-semibold ${(tier==="basic"||tier==="premium") ?"": "opacity-80 pointer-events-none"}`}   >Buy here.</Link>
-                       </div>                
-                }
-    </div>
+
                                 <Button size="sm" type="submit"
                                 onClick={(e) => {
                                     handleSubmit();
@@ -393,7 +372,56 @@ const handleKeyDown = (event) => {
                                      }
                                  </div>
             }
-               
+                 {
+                    
+                    (inputValue.includes('https://www.youtube.com/watch') ||
+                    inputValue.includes('https://youtu.be') ||
+                    inputValue.includes('https://m.youtube.com') ||
+                    inputValue.includes('https://twitter.com/i/spaces') ||
+                    inputValue.includes('https://www.youtube.com/live'))
+                    && 
+                       <div  className="mt-4 flex flex-col  mt-6">
+                        <div className="flex-col flex text-sm">
+                                        <div className="flex flex-row ">
+                                                <a href="/account" className="text-zinc-500 dark:text-zinc-400">
+                                                    {tier==="free" && "Starter Plan"}
+                                                    {tier==="basic" && "Basic Plan"}
+                                                    {tier==="premium" && "Premium Plan"}
+                                                    
+                                                    </a>
+                                                    <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
+                                                    <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
+                                                    </p>
+                                        </div>
+                                                
+                                        </div>
+                                                            <div className="flex flex-col">
+                            
+                       <p className="text-zinc-500 dark:text-zinc-400 mr-2 font-averta-semibold mt-2">Need more credits? </p>
+                       {tier==="free" 
+                        &&
+                    <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  ">
+                        
+                         Upgrade to a paid plan to get credit topups.</span>
+                         }
+                       </div>
+                        <Link 
+                       onClick={
+                        () => sessionStorage.setItem("creditPurchase", "true")
+                       }
+
+                       
+                      
+                      
+                      to="/account" className={`text-indigo-400 font-semibold text-sm  mt-4 underline font-averta-semibold ${(tier==="basic"||tier==="premium") ?"": "hidden"}`}   >Buy here.</Link>
+
+
+                      
+                       </div>
+                       
+                       
+
+                }
 
 
 <div>

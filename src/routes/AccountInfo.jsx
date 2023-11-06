@@ -227,14 +227,18 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                                             </p>
                                                                         {
 
-                                                                    <div className="mt-4"> 
+                                                                    <div className="mt-4 flex flex-col "> 
                                                                     
-                                                                        <Button size="sm" className={`bg-indigo-300 text-white ${(tier==="basic" || tier==="premium") ? "": "pointer-events-none opacity-80"} font-averta-semibold`}  onClick={() => setCreditPurchaseDialog(true)}>
+                                                                        <Button size="sm" className={`bg-indigo-300 text-white max-w-[150px] ${(tier==="basic" || tier==="premium") ? "": "pointer-events-none opacity-50"} font-averta-semibold`}  onClick={() => setCreditPurchaseDialog(true)}>
                                                                         <AddCircleOutlineIcon  className="mr-2 dark:text-zinc-800" />
-                                                                            <span className="mt-1 dark:text-zinc-800 font-averta-semibold">Buy Credits</span>
-                                                                    
+                                                                            <span className="mt-1 dark:text-zinc-800 font-averta-semibold">Buy Credits</span>                                                                    
                                                                     </Button>
-                                                                    
+                                                                    {tier==="free" 
+                        &&
+                    <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
+                        
+                         Upgrade to a paid plan to get credit topups.</span>
+                         }
                                                                     
                                                                     </div>}
 
@@ -318,14 +322,19 @@ export default function AccountInfo({ credit,tier,currentUser,canceledAtPeriodEn
                                                                                     </p>
                                                                                     {
 
-                                                                                <div className="mt-4"> 
+                                                                                <div className="mt-4 flex flex-col"> 
                                                                                 
-                                                                                    <Button size="sm" className={`bg-indigo-300 text-white ${(tier==="basic" || tier==="premium") ? "": "pointer-events-none opacity-80"}`}  onClick={() => setCreditPurchaseDialog(true)}>
+                                                                                    <Button size="sm" className={`bg-indigo-300 text-white max-w-[150px] ${(tier==="basic" || tier==="premium") ? "": "pointer-events-none opacity-50"}`}  onClick={() => setCreditPurchaseDialog(true)}>
                                                                                     <AddCircleOutlineIcon  className="mr-2 dark:text-zinc-800" />
                                                                                         <span className="mt-1 dark:text-zinc-800 font-averta-semibold">Buy Credits</span>
 
                                                                                 </Button>
-                                                                                
+                                                                                {tier==="free" 
+                        &&
+                    <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
+                        
+                         Upgrade to a paid plan to get credit topups.</span>
+                         }
                                                                                 </div>}
 
                                                                                 
