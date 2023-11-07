@@ -1446,8 +1446,8 @@ return (
 																	summaryArray.map((item, index) => {
 																		return (
 																			<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
-																				<div className="summary-text">
-																					<ReactMarkdown>
+																				<div className="summary-text font-averta-semibold">
+																					<ReactMarkdown >
 																						{item}
 																					</ReactMarkdown>
 																				</div>

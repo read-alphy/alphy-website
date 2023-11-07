@@ -21,6 +21,7 @@
 }
 .font-averta-regular{
 	font-family: 'AvertaStd-Regular';
+	font-weight:500
 
 }
 
@@ -693,13 +694,13 @@ CONTENT PAGE
 }
 
 .summary-text {
-	font-family: 'Roboto'
+	font-family: 'AvertaStd-Regular'
 }
 .summary-text code{
 
 	white-space: pre-wrap;
 	padding-left:10px;
-	font-family: 'Roboto'
+	font-family: 'AvertaStd-Regular'
 
 }
 
@@ -727,36 +728,46 @@ CONTENT PAGE
 	font-weight:500;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'Roboto'
+	font-family: 'AvertaStd-Semibold'
 }
 .summary-text h1{
 	
 	font-weight:500;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'Roboto'
+	font-family: 'AvertaStd-Semibold'
 }
-
+/* .summary-text p{
+	font-family : "AvertaStd-Regular";
+	font-weight:500
+} */
 .summary-text h3{
 	
 	font-weight:500;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'Roboto'
+	font-family: 'AvertaStd-Semibold'
 }
 
 .summary-text h4{
 	font-weight:500;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'Roboto'
+	font-family: 'AvertaStd-Semibold'
 }
 
 .summary-text h5{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family: 'Roboto'
+	font-family: 'AvertaStd-Semibold'
+}
+
+.summary-text strong{
+
+	font-family: 'AvertaStd-Semibold';
+	font-style:italic
+
 }
 
 .slick-arrow::before{
