@@ -1293,7 +1293,7 @@ return (
 													id="player"
 													ref={videoRef}
 													title="My YouTube Video "
-													className={`fixed bottom-24 right-4 w-[360px] h-[240px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`} 
+													className={`fixed bottom-24 right-4 w-[480px] h-[320px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`} 
 													src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
 													width="100%"
 													height="100%"
