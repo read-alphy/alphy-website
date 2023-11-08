@@ -39,10 +39,10 @@ const added_ts = new Date(data.added_ts);
 												</svg>
 											</div>
 											<div>
-												<div className="answer-area text-zinc-600 dark:text-zinc-300 font-normal text-md sm:text-l">
+												<div className="answer-area text-zinc-700 dark:text-zinc-300 font-normal text-md sm:text-l">
 													
 {added_ts > oct31 ? 
-														<div className=" ">
+														<div className=" font-averta-regular">
 															
 																{formatAnswer(key_qa[item].answer, key_qa[item])} 
 															

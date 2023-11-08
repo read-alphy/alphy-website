@@ -620,12 +620,12 @@ const toggleExpand = () => {
 }
                              
                             {answerData.answer!=="" &&
-                             <div className="text-zinc-500 dark:text-zinc-300">       
+                             <div className="text-zinc-700 dark:text-zinc-300">       
                                     {/* <p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
                                  }}/>  */}
 
                                  
-                                    <div className="whitespace-pre-line font-averta-semibold">{formatAnswer(answerData.answer,answerData)}</div>
+                                    <div className="whitespace-pre-line font-averta-regular">{formatAnswer(answerData.answer,answerData)}</div>
                                  
                                     
                             <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20 font-averta-semibold">

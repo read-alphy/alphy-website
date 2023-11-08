@@ -3,7 +3,9 @@
 @tailwind utilities;
 @import url(https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold); 
 @import url(https://db.onlinewebfonts.com/c/b5d2107c7c6e775b13169eb51d8970c1?family=AvertaStd-Light); 
-@import url(https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=AvertaStd-Regular); 
+@import url(https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=Bookerly); 
+@import url(https://db.onlinewebfonts.com/c/a67d98abe8980caaa1768b6e27b323c6?family=Typewriter); 
+
 * {
 	padding: 0;
 	margin: 0;
@@ -12,15 +14,15 @@
 }
 
 .font-averta-semibold{
-	font-family: 'AvertaStd-Semibold';
-
+	font-family: "Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+	font-weight:600
 }
 .font-averta-light{
 	font-family: 'AvertaStd-Light';
 
 }
 .font-averta-regular{
-	font-family: 'AvertaStd-Regular';
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji';
 	font-weight:500
 
 }
@@ -694,13 +696,22 @@ CONTENT PAGE
 }
 
 .summary-text {
-	font-family: 'AvertaStd-Regular'
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji';
+	
 }
+
+.summary-text p,li,ul,span,code,pre,ol{
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji';
+	font-weight:500
+
+
+}
+
 .summary-text code{
 
 	white-space: pre-wrap;
 	padding-left:10px;
-	font-family: 'AvertaStd-Regular'
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji'
 
 }
 
@@ -708,7 +719,11 @@ CONTENT PAGE
 	padding-left: 10px;
 	padding-top:5px;
 	padding-bottom:0px;
+
+
+
 }
+
 
 .or-area {
 	display: flex;
@@ -725,47 +740,49 @@ CONTENT PAGE
   
 .summary-text h2{
 	
-	font-weight:500;
+	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'AvertaStd-Semibold'
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji'
+	
 }
 .summary-text h1{
 	
-	font-weight:500;
+	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'AvertaStd-Semibold'
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji'
 }
 /* .summary-text p{
-	font-family : "AvertaStd-Regular";
+	font-family : "Bookerly";
 	font-weight:500
 } */
 .summary-text h3{
 	
-	font-weight:500;
+	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'AvertaStd-Semibold'
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji'
 }
 
 .summary-text h4{
-	font-weight:500;
+	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: 'AvertaStd-Semibold'
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji'
 }
 
 .summary-text h5{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family: 'AvertaStd-Semibold'
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji'
 }
 
 .summary-text strong{
 
-	font-family: 'AvertaStd-Semibold';
+	font-family: 'Courier, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji';
+	font-weight:600;
 	font-style:italic
 
 }

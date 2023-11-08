@@ -12,7 +12,7 @@ export default function DynamicQA({answerData, areaRefs, answer, data, handleCle
                 <div className="grid grid-cols-2 flex flex-row mb-4">
 
 
-                    <h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200">Answer from Alphy
+                    <h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200"> <span className=" font-averta-semibold" >Answer from Alphy</span>
 
 
                         <svg onClick={handleClear} className="ml-2 mt-1 cursor-pointer" width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@ export default function DynamicQA({answerData, areaRefs, answer, data, handleCle
                 
                 <div id="answer-area" className=" answer-area text-md sm:text-l container text-zinc-500 dark:text-zinc-300">
                 
-                <div className="whitespace-pre-line">{formatAnswer(answerData.answer, answerData)}</div>
+                <div className="whitespace-pre-line text-zinc-700 dark:text-zinc-200 font-averta-regular" >{formatAnswer(answerData.answer, answerData)}</div>
                     
                 
                 </div>

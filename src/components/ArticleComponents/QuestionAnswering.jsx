@@ -7,11 +7,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useLocation } from 'react-router-dom';
 import { Button, Spinner } from "@material-tailwind/react";
-import SourceCardForDetail from './SourceCardForDetail';
-import {initializeQaWsManager}  from './QA_Streaming';
 import QaWsManager from './QaWsManager';
 import { API_HOST, API_SSL } from '../../constants';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import BaseQuestions from './BaseQuestions';
 import QuestionLoading from './QuestionLoading';

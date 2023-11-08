@@ -158,7 +158,7 @@ export default function     UploadBlock({currentUser, tier, credit}) {
               
 
                
-    <div  className="mt-8 pt-8 flex flex-col text-sm">
+    <div  className="mt-8 mb-8  flex flex-col text-sm">
                         <p className={`text-zinc-500 dark:text-zinc-400 mr-2  font-averta-semibold`}>Need more credits? </p> 
                        
                     <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  mt-2 ">

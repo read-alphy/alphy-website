@@ -286,6 +286,7 @@ useEffect(() => {
 const handleBookmark = async () => {
 	const changeBookmark = !props.isBookmarked
 	
+	
 	await currentUser.getIdToken().then((idToken) => {
 		
 	axios.patch(
@@ -416,7 +417,7 @@ const handleBookmark = async () => {
 	};
 
 
-console.log(summaryArray)
+
 
 async function summaryParser(){
 	let activeSummary
@@ -776,6 +777,45 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
     },
   }));
 
+
+
+
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  const takeSnapshot = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    if (video && canvas) {
+      const context = canvas.getContext('2d');
+      const width = parseInt(video.offsetWidth, 10);
+      const height = parseInt(video.offsetHeight, 10);
+      
+      // Set canvas size to match the video
+      canvas.width = width;
+      canvas.height = height;
+      
+      // Draw the video frame to the canvas
+      context.drawImage(video, 0, 0, width, height);
+
+      // Convert the canvas to a data URL
+      const base64ImageData = canvas.toDataURL('image/jpeg');
+      const filename = `snap-${width}x${height}-${video.currentTime}.jpg`;
+
+      // Trigger a download
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = base64ImageData;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+
+
+
   
 return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
@@ -842,7 +882,7 @@ return (
 
 													<Popover placement="right">
 														<PopoverHandler>
-														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300 font-averta-semibold"><AddCircleIcon className="text-green-200"/> <p className="ml-2">Add To Arc</p></button>
+														<button  className="flex flex-row text-zinc-600 dark:text-zinc-300 font-averta-semibold"><AddCircleIcon className="text-green-200"/> <p className="ml-2 font-averta-semibold">Add To Arc</p></button>
 														</PopoverHandler>
 														<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 											
@@ -935,7 +975,7 @@ return (
 
 (language === code ?
 	<MenuItem className="text-zinc-700 dark:text-zinc-200 font-averta-semibold" key={code} value={code}>
-		{name}
+	<p className="font-averta-semibold">	{name}</p>
 	</MenuItem>
 	:
 
@@ -945,7 +985,7 @@ return (
 		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
 		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"} font-averta-semibold`} key={code} value={code}>
-			{name}
+			<p className="font-averta-semibold">{name}</p>
 		</MenuItem>
 
 	)
@@ -1142,7 +1182,7 @@ return (
 
 (language === code ?
 	<MenuItem className="text-zinc-700 dark:text-zinc-200 font-averta-semibold" key={code} value={code}>
-		{name}
+		<p className="font-averta-semibold">{name}</p>
 	</MenuItem>
 	:
 
@@ -1152,7 +1192,7 @@ return (
 		<div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
 		:
 		<MenuItem className={`${languages.includes(code) ? "" : "text-gray-300 dark:text-gray-500"} font-averta-semibold`} key={code} value={code}>
-			{name}
+			<p className="font-averta-semibold">{name}</p>
 		</MenuItem>
 
 	)
@@ -1228,7 +1268,7 @@ return (
 	<p className="mt-6 text-red-400 underline">See timestamped sources from the discussion ></p>
   
 				</div> */}
-
+      
 				<div id="content-area ">
 					{transcript.length > 0  && ((summary!==undefined && summary.complete!==undefined && language == summary.lang) || (summary!== undefined && summary.complete===undefined)) 
 						?
@@ -1248,10 +1288,10 @@ return (
 												<div>
 											
 												{/* <div id="drag-handle" ref={dragHandleRef}  className="fixed bottom-4 right-4 w-[300px] h-[200px] cursor-move z-[9999] bg-black opacity-20"></div>										 */}
-
+								
 												<iframe
 													id="player"
-													
+													ref={videoRef}
 													title="My YouTube Video "
 													className={`fixed bottom-24 right-4 w-[360px] h-[240px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`} 
 													src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
@@ -1260,6 +1300,8 @@ return (
 													frameBorder="0"
 													allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 												></iframe>
+											 <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+												
 												
 												</div>
 												: null)
@@ -1396,7 +1438,7 @@ return (
 
 														{activeTab === "tab3" && (data ? summary.key_takeaways ? summary.key_takeaways.map((item, index) => {
 															return (
-																<p className="flex flex-row pb-2 ">{index+1}) 
+																<p className="flex flex-row pb-2 summary-text ">{index+1}) 
 																<ReactMarkdown className="ml-1 ">{item}</ReactMarkdown>
 																</p>)
 
@@ -1485,7 +1527,7 @@ return (
 																							<br></br>
 
 
-																							<p className="text-md ">{item}{' '}</p>
+																							<p className="text-md summary-text ">{item}{' '}</p>
 
 																						</a>
 
@@ -1545,7 +1587,7 @@ return (
 																							target="_blank" href={data.source_type !== "up" ? "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}` : null}
 
 
-																							className={`${data.source_type === 'yt'
+																							className={`summary-text  ${data.source_type === 'yt'
 																								? 'lg:cursor-pointer lg:pointer-events-auto'
 																								: ''
 																								}  lg:pointer-events-auto lg:text-slate-900 dark:text-zinc-300 font-bold underline`}
@@ -1604,7 +1646,7 @@ return (
 																			);
 																		} else if (index % 2 === 1 && index < transcript.length) {
 																			return (
-																				<div className="" key={index}>
+																				<div className="summary-text " key={index}>
 																					<br></br>
 																					{item}
 																				</div>
