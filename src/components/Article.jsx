@@ -17,7 +17,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
-	const [windowSizeChecked,setWindowSizeChecked] = useState(false);
+	
 	const [isBookmarked, setIsBookmarked] = useState(false);
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +25,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const [bookmarkChecked, setBookmarkChecked] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
 	const [isPublic, setIsPublic] = useState(false);
-	const [language, setLanguage] = useState((data.summaries !== undefined && data.summaries.length > 1 && data.lang !== undefined && data.summaries[1].complete===true )? data.lang : 'en')
+	const [language, setLanguage] = useState((data.summaries !== undefined && data.summaries.length > 1 && data.lang !== undefined && data.summaries[1]!==undefined && data.summaries[1].complete===true )? data.lang : 'en')
 
 
 	
