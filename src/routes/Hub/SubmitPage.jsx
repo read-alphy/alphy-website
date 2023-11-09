@@ -101,7 +101,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 				>
 					{ 
 					<HubContent
-					data={data} tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
 					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
 					mainShow={mainShow} setMainShow={setMainShow}

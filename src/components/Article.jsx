@@ -1,21 +1,15 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import React, {  useState,  useEffect,  } from 'react';
 import SideFeedReworked from './ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './ArticleComponents/ContentTabs/Content';
-import MicIcon from '@mui/icons-material/Mic';
 
-import {Button} from "@material-tailwind/react";
-
-import Twitter from '..//img/twitter_spaces.png';
-
-import { useAuth } from '../hooks/useAuth';
 import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
 import { API_URL } from '../constants';
-import { set } from 'lodash';
+
 
 
 
