@@ -1,14 +1,12 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import React, {  useState,  useEffect } from 'react';
 import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {Button, Spinner, Input, Textarea} from "@material-tailwind/react";
-import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
+import {  useLocation, useNavigate } from 'react-router-dom';
+
 import Dialog from '@mui/material/Dialog';
-import { useAuth } from '../../hooks/useAuth';
+
 import Loading from '../../components/Loading';
-import axios from 'axios';
+
 import { Helmet } from "react-helmet";
 import HubContent from './HubContent';	
 
@@ -18,13 +16,13 @@ import HubContent from './HubContent';
 
 function Hub({arcs, currentUser, collapsed, setCollapsed, tier,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
 	const location = useLocation();
-	const navigate = useNavigate();
+	
 	let source_id
 	
 	
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
-	const [called, setCalled] = useState(false);
+
 	
 	const [data, setData] = useState([]);
 	
@@ -63,10 +61,6 @@ if((tier!== undefined || tier!==null) && subCalled===false){
 }
 
 
-	const handleCollapse = () => {
-		setCollapsed(!collapsed)
-		
-	}
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300 font-averta-semibold">
