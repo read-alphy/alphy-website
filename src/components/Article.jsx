@@ -64,7 +64,9 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 				(response) => {
 					
 					if(response.data!==null && response.data!==undefined){
-					setLanguage(response.data.lang)						
+						if(response.data.lang!==undefined && response.data.lang!==null) {
+							setLanguage(response.data.lang)	
+							}			
 					setData(response.data);
 					setContentName(response.data.title)
 					
@@ -149,7 +151,10 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					
 					
 					if(response.data!==null && response.data!==undefined){
+						
+						if(response.data.lang!==undefined && response.data.lang!==null) {
 						setLanguage(response.data.lang)	
+						}
 					setData(response.data);
 					setIsVisible(response.data.is_visible)
 					setIsPublic(response.data.is_visible)

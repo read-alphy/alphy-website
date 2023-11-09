@@ -242,7 +242,7 @@ useEffect(() => {
 
 
 
-
+	
 	useEffect(() => {
 		
 		summaryParser()
@@ -723,18 +723,6 @@ useEffect(() => {
   }
 
 
-/* useEffect(() => {
-
-	if(summary!==undefined && summary.complete== undefined && activeTabset===false){
-		setActiveTab("tab2")
-	
-	}
-	else if(summary!==undefined && summary.complete!== undefined && activeTabset===false){
-		setActiveTab("tab1")
-	}
-}, [summary])
-
- */
 const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
