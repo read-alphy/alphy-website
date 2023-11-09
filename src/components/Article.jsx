@@ -31,7 +31,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const [bookmarkChecked, setBookmarkChecked] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
 	const [isPublic, setIsPublic] = useState(false);
-	const [language, setLanguage] = useState(data.summaries !== undefined && data.summaries.length > 1 && data.lang !== undefined ? data.lang : 'en')
+	const [language, setLanguage] = useState((data.summaries !== undefined && data.summaries.length > 1 && data.lang !== undefined )? data.lang : 'en')
 
 	const [called, setCalled] = useState(false);
 	const [authorizationError, setAuthorizationError] = useState(false)
