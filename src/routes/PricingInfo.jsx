@@ -1,23 +1,16 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
-import { Carousel } from "react-responsive-carousel";
+
 import { useAuth } from '../hooks/useAuth';
-import { useWindowSize } from '../hooks/useWindowSize';
+
 import axios from 'axios';
 import { useState } from 'react';
-import { CardElement, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loadStripe } from "@stripe/stripe-js";
-import ReactLoading from 'react-loading';
-import {
-	Popover,
-	PopoverHandler,
-	PopoverContent,
-    ThemeProvider,
-    Button
 
-  } from "@material-tailwind/react";
+import ReactLoading from 'react-loading';
+
   import FreeCard from "../components/PricingCards/FreeCard";
   import BasicCard from "../components/PricingCards/BasicCard";
   import PremiumCard from "../components/PricingCards/PremiumCard";
@@ -29,22 +22,20 @@ import {
 export default function Pricing({tier }) {
     
     const { currentUser } = useAuth();
-    const windowSize = useWindowSize();
-    const [subscription, setSubscription] = useState(false);
+
     const [isLoaded, setIsLoaded] = useState(false);
     const [canceledAtPeriodEnd, setCanceledAtPeriodEnd] = useState(false);
 
     
     const [called, setCalled] = useState(false);
-    const [clientSecret, setClientSecret] = useState("");
-    const [credit, setCredit] = useState(null);
+    
     const auth = useAuth();
 
-    const stripe = useStripe();
-    const [subscriptionData, setSubscriptionData] = useState(null);
+    
+    
     const navigate = useNavigate()
     let userStripeId = "";
-    const [isDarkMode, setDarkMode] = useState(localStorage.theme || "light");
+    
 
     const [openPopover, setOpenPopover] = useState(false);
     const[openPopover1, setOpenPopover1] = useState(false);
@@ -108,16 +99,7 @@ export default function Pricing({tier }) {
     }, [currentUser]);
     
 
-  
 
-
-
-
-    const handleLoginWithGoogle = () => {
-        auth.loginWithGoogle().then(() => {
-            window.location.reload()
-        })
-    };
 
     return (
         <div className="dark:bg-darkMode  lg:mt-10 md:pl-10 lg:pl-20 xl:pl-20 pb-10">

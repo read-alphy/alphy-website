@@ -1,11 +1,9 @@
 import React, {  useState,  useEffect } from 'react';
 import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
-// import ArticleCreator from "./ArticleComponents/ArticleCreator"
 
 import Dialog from '@mui/material/Dialog';
 
 import Loading from '../../components/Loading';
-;
 import { Helmet } from "react-helmet";
 import HubContent from './HubContent';	
 

@@ -14,7 +14,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
 import Success from './routes/payment/Success';
 import Account from './routes/Account';
-import Home from './routes/Home';
+
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
@@ -50,7 +50,7 @@ function App() {
 	const [idToken, setIdToken] = useState("")
 	const [userArchipelagos, setUserArchipelagos] = useState([])
 	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
-	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
+	
 	const [customerID, setCustomerID] = useState("");
 	const [userArcsCalled, setUserArcsCalled] = useState(false)
 
@@ -220,7 +220,7 @@ useEffect(() => {
 			return;
 		}
 		
-		setIsLoadingGlobalArchipelagos(true);
+		
 		axios.get(`${API_URL}/playlists/`, {
 			params: {
 			  user_id: 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3',
@@ -241,7 +241,7 @@ useEffect(() => {
 				shuffleArray(response.data)
 				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
 			}
-			setIsLoadingGlobalArchipelagos(false);
+			
 			setTimeout(() => {
 				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
 				if(elements){
@@ -253,7 +253,7 @@ useEffect(() => {
 
 		})
 		.catch((error) => {
-			setIsLoadingGlobalArchipelagos(false);
+		console.log(error)
 		}
 		)
 	}

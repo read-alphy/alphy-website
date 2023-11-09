@@ -317,7 +317,7 @@ const handleKeyDown = (event) => {
                          </div>
 <div className="archipelago-search max-h-[80vh] overflow-y-scroll mt-5">
     {
-        (inputValue.length>0 && searchCalled == true) &&
+        (inputValue.length>0 && searchCalled === true) &&
         <p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300 flex flex-col text-sm font-averta-semibold"> 
                                                 Can't find what you are looking for? Paste the link for the content above to process it first.
                                                 </p>

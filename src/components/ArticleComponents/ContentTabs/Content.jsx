@@ -199,7 +199,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-	if ((props.data !== undefined && props.data !== null) && contentSummaries.length == 0) {
+	if ((props.data !== undefined && props.data !== null) && contentSummaries.length === 0) {
 		contentSummaries = props.data.summaries
 		let languagesToSet = []
 		if (contentSummaries !== undefined && contentSummaries.length>0 ) {
@@ -530,14 +530,14 @@ useEffect(() => {
 
 
 			if (activeTab === "tab2") {
-				if (selection == 1) {
+				if (selection === 1) {
 					const blob = new Blob([data.transcript], { type: 'text/srt' });
 
 					// save file as blob
 					saveAs(blob, `${data.creator_name}_${title}_Subtitles.srt`);
 
 				}
-				else if (selection == 2) {
+				else if (selection === 2) {
 					let text = ""
 					let stop = false
 					for (let i = 0; i < transcript.length; i++) {
@@ -821,7 +821,7 @@ return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 				<div>
 				<div className="grid grid-cols-3 ">
-					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
+					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language === summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						{modelName==="gpt-4" &&
 						<div className="relative flex flex-col">
 						<div className="relative flex flex-row group cursor-default">
@@ -1270,7 +1270,7 @@ return (
 				</div> */}
       
 				<div id="content-area ">
-					{transcript.length > 0  && ((summary!==undefined && summary.complete!==undefined && language == summary.lang) || (summary!== undefined && summary.complete===undefined)) 
+					{transcript.length > 0  && ((summary!==undefined && summary.complete!==undefined && language === summary.lang) || (summary!== undefined && summary.complete===undefined)) 
 						?
 						<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
 							{transcript.length > 0 &&
@@ -1348,7 +1348,7 @@ return (
 
 								
 									
-									<div className={`col-span-2 ${data.source_type == "yt" && ""} drop-shadow-sm `}>
+									<div className={`col-span-2 ${data.source_type === "yt" && ""} drop-shadow-sm `}>
 									{summary.key_qa !== undefined && summary.key_qa === null ? (
 										<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
 											<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center italic ">
@@ -1396,16 +1396,16 @@ return (
 
 											<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
 												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto font-averta-semibold	">
-													<li className={`w-1/3 md:w-4/12 ${activeTab == "tab3" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2  font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
+													<li className={`w-1/3 md:w-4/12 ${activeTab === "tab3" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2  font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
 														<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Key Takeaways</button>
 													</li>
-													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab1" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
+													<li className={` w-1/3 md:w-4/12 ${activeTab === "tab1" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
 														<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Summary</button>
 													</li>
-													<li className={` w-1/3 md:w-4/12 ${activeTab == "tab2" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
+													<li className={` w-1/3 md:w-4/12 ${activeTab === "tab2" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
 														<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Transcript</button>
 													</li>
-													{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab == "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+													{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab === "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
 											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-greenColor`}>Ask questions</button>
 										</li> */}
 
@@ -1541,8 +1541,8 @@ return (
 
 
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
-																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm  font-averta-semibold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier === undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
+																									<button className={`${props.tier === "free" || props.tier === undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm  font-averta-semibold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
 																										
 																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70 pointer-events-none" color="gray"/> :"Download Transcript" }
 																										
@@ -1553,7 +1553,7 @@ return (
 																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white font-averta-semibold  rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
 																									<ThemeProvider value={themePopover}>
 																										<PopoverContent background="indigo">
-																											{props.tier !=undefined && props.tier!="free" && basicDataLoaded == true ?
+																											{props.tier !=undefined && props.tier!="free" && basicDataLoaded === true ?
 
 																												<div className="">
 																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
@@ -1603,9 +1603,9 @@ return (
 																						<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`}>
 																							<Popover>
 																								<PopoverHandler>
-																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier == undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
+																									<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier === undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
 																										
-																									<button className={`${props.tier === "free" || props.tier == undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white font-averta-semibold`}>
+																									<button className={`${props.tier === "free" || props.tier === undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white font-averta-semibold`}>
 																										
 																										{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray"/> :"Download Transcript" }
 																										
@@ -1617,7 +1617,7 @@ return (
 																								<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
 																									<ThemeProvider value={themePopover}>
 																										<PopoverContent background="indigo">
-																											{props.tier!==undefined && props.tier != "free" && basicDataLoaded == true ?
+																											{props.tier!==undefined && props.tier != "free" && basicDataLoaded === true ?
 
 																												<div>
 																													<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
@@ -1674,7 +1674,7 @@ return (
 
 
 						<div className="flex flex-col mb-20 mt-20 ">
-							{(errorMessage == true || (languagesWanted.includes(language) === true) || languages.includes(language) || (summary !== undefined && summary.summary !== undefined && summary.summary !== null && summary.summary.length > 0) || (contentSummaries !== undefined && contentSummaries.length > 1 && (contentSummaries[0].lang == language || contentSummaries[1].lang === language)) || language == "en") 
+							{(errorMessage === true || (languagesWanted.includes(language) === true) || languages.includes(language) || (summary !== undefined && summary.summary !== undefined && summary.summary !== null && summary.summary.length > 0) || (contentSummaries !== undefined && contentSummaries.length > 1 && (contentSummaries[0].lang === language || contentSummaries[1].lang === language)) || language === "en") 
 							
 							? null :
 
@@ -1696,7 +1696,7 @@ return (
 
 			</div>
 
-			{basicDataLoaded == true && <div>
+			{basicDataLoaded === true && <div>
 				{data !== null && transcript.length === 0 && (language === "en") ?
 
 					<div className="flex flex-col mb-20 mt-20 ">
@@ -1711,7 +1711,7 @@ return (
 
 					</div> : null
 				}
-				{((summary != undefined && summary !== null && summary.summary == null && summary.lang !== "en" && language!=="en" && summary.summary===undefined) || (languagesWanted.includes(language) == true && language!=="en")) && <div className="flex flex-col mb-20 mt-20 ">
+				{((summary != undefined && summary !== null && summary.summary === null && summary.lang !== "en" && language!=="en" && summary.summary===undefined) || (languagesWanted.includes(language) === true && language!=="en")) && <div className="flex flex-col mb-20 mt-20 ">
 					{data !== null &&
 						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular  max-w-screen-md mx-auto p-3 text-center">
 
@@ -1723,7 +1723,7 @@ return (
 					}
 				</div>}
 			</div>}
-			{errorMessage == true && <div className="flex flex-col mb-20 mt-20 ">
+			{errorMessage === true && <div className="flex flex-col mb-20 mt-20 ">
 				<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
 
 					There was an error with the request :( <br></br><br></br>Please refresh the page and try again. If the issue persists, please contact us at support@alphy.app
