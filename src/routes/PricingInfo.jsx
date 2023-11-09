@@ -3,7 +3,7 @@ import "tailwindcss/tailwind.css";
 
 import { useAuth } from '../hooks/useAuth';
 
-import axios from 'axios';
+
 import { useState } from 'react';
 
 import { useEffect } from "react";
@@ -22,21 +22,11 @@ import ReactLoading from 'react-loading';
 export default function Pricing({tier }) {
     
     const { currentUser } = useAuth();
+    const navigate = useNavigate()
+
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [canceledAtPeriodEnd, setCanceledAtPeriodEnd] = useState(false);
-
-    
-    const [called, setCalled] = useState(false);
-    
-    const auth = useAuth();
-
-    
-    
-    const navigate = useNavigate()
-    let userStripeId = "";
-    
-
     const [openPopover, setOpenPopover] = useState(false);
     const[openPopover1, setOpenPopover1] = useState(false);
 
@@ -71,7 +61,7 @@ export default function Pricing({tier }) {
     useEffect(() => {
         // can be removed just for debugging
 
-        if (currentUser !== null && called === false) {
+        if (currentUser !== null) {
             navigate("/account")
             setTimeout(() => {
                 try {
@@ -125,9 +115,9 @@ export default function Pricing({tier }) {
 
                         <div className="flex gap-10 mx-auto items-center justify-center flex-col xl:flex-row max-w-[1200px]">    
 
-                        <FreeCard currentUser={currentUser} tier={tier} triggers1={triggers1} openPopover1={openPopover1} setOpenPopover1={setOpenPopover1} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
-                        <BasicCard currentUser={currentUser} tier={tier} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
-                        <PremiumCard currentUser={currentUser} tier={tier} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd}/>
+                        <FreeCard currentUser={currentUser} tier={tier} triggers1={triggers1} openPopover1={openPopover1} setOpenPopover1={setOpenPopover1} canceledAtPeriodEnd={canceledAtPeriodEnd} setCanceledAtPeriodEnd={setCanceledAtPeriodEnd}/>
+                        <BasicCard currentUser={currentUser} tier={tier} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd} setCanceledAtPeriodEnd={setCanceledAtPeriodEnd}/>
+                        <PremiumCard currentUser={currentUser} tier={tier} triggers={triggers} openPopover={openPopover} setOpenPopover={setOpenPopover} canceledAtPeriodEnd={canceledAtPeriodEnd} setCanceledAtPeriodEnd={setCanceledAtPeriodEnd}/>
                                     </div>
                                    
 

@@ -62,7 +62,7 @@ function App() {
 			localStorage.setItem("theme", "light")
 		}
 	}
-	const verification = (urlParams.get('mode')=="verifyEmail");
+	const verification = (urlParams.get('mode')==="verifyEmail");
 	
 
 
@@ -76,9 +76,9 @@ function App() {
 		// Would improve performance throughout.
 			getDataGlobalArchipelagos(0, true, true, idToken)
 		
-	}, [idToken])
+	}, [idToken, getDataGlobalArchipelagos])
 
-const resetPassword = (urlParams.get('mode')=="resetPassword");
+const resetPassword = (urlParams.get('mode')==="resetPassword");
 
 
 	useEffect(() => {
@@ -99,15 +99,16 @@ const resetPassword = (urlParams.get('mode')=="resetPassword");
 
 useEffect(() => {
 	if(verification){
-		const url = window.location.href;
+		
 		const oobCode = urlParams.get('oobCode');
 		auth.handleVerifyEmail(oobCode)
-		.then((resp) => {
-			setShowWelcomeForm(true)
-			localStorage.setItem("logged in","true")
-		}
-		)	
+					.then((resp) => {
+						setShowWelcomeForm(true)
+						localStorage.setItem("logged in","true")
+					}
+					)	
 	} 
+
 
 	
 	setTimeout (() => {
@@ -122,7 +123,7 @@ useEffect(() => {
 		}
 		
 	if (currentUser !== null && called === false) {
-		var userId = localStorage.getItem("userId")
+		
 		
 		setIdToken(currentUser.accessToken)
 		localStorage.setItem("idToken", currentUser.accessToken)
@@ -168,8 +169,9 @@ useEffect(() => {
 
 
 
+
  
-}, [currentUser, auth, creditcalled, called, verification]) 
+}, [currentUser, auth, creditcalled, called, verification ,urlParams]) 
 
 
 
@@ -178,7 +180,7 @@ useEffect(() => {
 
 		
 		
-        const idToken = await currentUser.getIdToken().then((idToken) => {
+        await currentUser.getIdToken().then((idToken) => {
 
         axios.get(`${API_URL}/payments/status`,
         {
@@ -400,7 +402,7 @@ useEffect(() => {
 
 						</Routes>
 
-						{/* {location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null} */}
+						
 
 					</>
 

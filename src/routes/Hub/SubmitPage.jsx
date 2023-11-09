@@ -3,7 +3,6 @@ import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworke
 
 import Dialog from '@mui/material/Dialog';
 
-import Loading from '../../components/Loading';
 import { Helmet } from "react-helmet";
 import HubContent from './HubContent';	
 
@@ -19,16 +18,10 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
 
-	
-	const [data, setData] = useState([]);
-	
-	const [isLoading, setIsLoading] = useState(false);
+
 
 	const [deleteDialog, setDeleteDialog] = useState(false);
-	const [subCalled, setSubCalled] = useState(false);
-	const [errorMessage, setErrorMessage] = useState(false);
-	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
-	const [helmetThumbnail, setHelmetThumbnail] = useState("");
+
 	const [globalLayout, setGlobalLayout] = useState(false);
 	const [userLayout, setUserLayout] = useState(false);
 	const [submitLayout, setSubmitLayout] = useState(true);
@@ -106,7 +99,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  max-h-[90vh] sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
 						}}`}
 				>
-					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300 " color="green" /> : 
+					{ 
 					<HubContent
 					data={data} tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 

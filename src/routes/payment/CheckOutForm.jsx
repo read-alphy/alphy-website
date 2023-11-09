@@ -3,11 +3,9 @@ import { useAuth } from "../../hooks/useAuth";
 import {
     PaymentElement,
     LinkAuthenticationElement,
-    AddressElement,
-    ExpressCheckoutElement,
     useStripe,
     useElements,
-    CardElement,
+
 
 } from "@stripe/react-stripe-js";
 import StripeBanner from "../../img/stripe_banner.svg";
@@ -18,8 +16,8 @@ export default function CheckOutForm({ clientSecret }) {
     const elements = useElements();
     const { currentUser } = useAuth();
 
-    const [name, setName] = useState('Jenny Rosen');
-    const [email, setEmail] = useState("");
+
+    
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [paymentIntent, setPaymentIntent] = useState("");
@@ -54,7 +52,7 @@ export default function CheckOutForm({ clientSecret }) {
                     break;
             }
         });
-        if (currentUser) setEmail(currentUser.email);
+        
     }, [stripe]);
 
     const handleSubmit = async (e) => {
