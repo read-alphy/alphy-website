@@ -24,7 +24,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
     const [searched, setSearched] = useState(false);
     const [typing, setTyping] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [loading, setLoading] = useState(false);
+    
     const [submitInputValue, setSubmitInputValue] = useState('');
     const [failed, setFailed] = useState(false);
     const [errorMessageSubmit, setErrorMessageSubmit] = useState('');
@@ -153,7 +153,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
 
 
         if (currentUser) {
-            setLoading(true);
+            
             // get id token
             currentUser.getIdToken().then((idToken) => {
                 
@@ -174,7 +174,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
 
                         setCreditCalled(false)
                         setErrorMessageSubmit("")
-                        setLoading(false);
+                        
                         setFailed(false)
                         
                         setDataArchipelago([...dataArchipelago,response.data])
@@ -200,7 +200,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
                 }
                         setFailed(true)
                         setSubmitInputValue('');
-                        setLoading(false);
+                        
                         throw error;
                     });
             });
