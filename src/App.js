@@ -76,7 +76,7 @@ function App() {
 		// Would improve performance throughout.
 			getDataGlobalArchipelagos(0, true, true, idToken)
 		
-	}, [idToken, getDataGlobalArchipelagos])
+	}, [idToken])
 
 const resetPassword = (urlParams.get('mode')==="resetPassword");
 
