@@ -8,13 +8,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu');
 @import url('https://fonts.googleapis.com/css2?family=Cantarell');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css2?family=Nunito');
 
 * {
 	padding: 0;
 	margin: 0;
-	font-family: "Nunito", sans-serif;
+	font-family: "Ubuntu", sans-serif;
 	
 	
 
@@ -22,15 +20,15 @@
 
 
 .font-averta-semibold{
-	font-family: "Nunito", sans-serif;
-	font-weight:700
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+	font-weight:600
 }
 .font-averta-light{
 	font-family: 'AvertaStd-Light';
 
 }
 .font-averta-regular{
-	font-family: "Nunito", sans-serif;
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
 	font-weight:500
 
 }
@@ -704,13 +702,15 @@ CONTENT PAGE
 }
 
 .summary-text {
-	font-family: "Nunito", sans-serif;	font-weight:500;
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+	font-weight:500;
 	font-size: 16px;
 	
 }
 
 .summary-text p,li,ul,span,code,pre,ol{
-	font-family: "Nunito", sans-serif;	font-weight:500
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+	font-weight:500
 
 
 }
@@ -719,7 +719,8 @@ CONTENT PAGE
 
 	white-space: pre-wrap;
 	padding-left:10px;
-	font-family: "Nunito", sans-serif;
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+
 }
 
 .select-option span{
@@ -750,14 +751,16 @@ CONTENT PAGE
 	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: "Nunito", sans-serif;	
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+	
 }
 .summary-text h1{
 	
 	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: "Nunito", sans-serif;}
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+}
 /* .summary-text p{
 	font-family : "Bookerly";
 	font-weight:500
@@ -767,23 +770,27 @@ CONTENT PAGE
 	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: "Nunito", sans-serif;}
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+}
 
 .summary-text h4{
 	font-weight:600;
 	font-size: 20px;
 	margin-top:30px;
-	font-family: "Nunito", sans-serif;}
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+}
 
 .summary-text h5{
 	font-weight:600;
 	font-size: 16px;
 	margin-top:30px;
-	font-family: "Nunito", sans-serif;}
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+}
 
 .summary-text strong{
 
-	font-family: "Nunito", sans-serif;	font-weight:600;
+	font-family: "ui-sans-serif,  -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji";
+	font-weight:600;
 	font-style:italic
 
 }
