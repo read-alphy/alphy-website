@@ -6,6 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { API_URL } from '../../constants';
+import ConvertPrivately from "../../img/convertprivately.png"
 
 export default function     UploadBlock({currentUser, tier, credit}) {
     const [uploadProgress, setUploadProgress] = useState(0)
@@ -22,6 +23,8 @@ export default function     UploadBlock({currentUser, tier, credit}) {
         navigate("/account")
         
     }
+
+    console.log(currentUser.accessToken)
     
     const handleFileUpload = (event) => {
 
@@ -94,6 +97,7 @@ export default function     UploadBlock({currentUser, tier, credit}) {
 				//page'e navige et
 			})
 			.catch((error) => {
+                console.log(error)
 				
 				setErrorMessage(true)
 				handleFileUploadClear()
@@ -124,13 +128,13 @@ export default function     UploadBlock({currentUser, tier, credit}) {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
     return(
-        <div className="dark:bg-mildDarkMode h-[full] sm:min-h-[70vh] sm:max-h-[70vh] p-10  sm:p-20 sm:py-16">
+        <div className="dark:bg-mildDarkMode h-[full] sm:min-h-[85vh] sm:max-h-[85vh] p-10  sm:p-20 sm:py-16">
             <div className="pb-4 ">
             <div className="flex mx-auto   text-indigo-400 text-sm font-bold mb-10">
                 <VerifiedIcon className="mr-1 "/>
                     <span>PREMIUM</span>
                 </div>
-                    <p className="dark:text-zinc-300 text-zinc-500 mb-4 text-lg font-averta-semibold">Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
+                    <p className="dark:text-zinc-200 text-zinc-700 mb-4 text-lg font-averta-semibold">Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
                     </p>
                     <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md font-averta-semibold">As we value your privacy, we delete your audio files after transcription, and we make sure Alphy's summary, transcription, and chatbot are only accessible to you and no one else.
                     </p>
@@ -139,55 +143,7 @@ export default function     UploadBlock({currentUser, tier, credit}) {
     </div>
 
     
-    {tier==="premium" 
-                        &&
-                        <div>
-    <div className="flex-col flex">
-    <div className="flex flex-row">
-            <a href="/account" className="underline text-zinc-500 dark:text-zinc-400 font-averta-semibold">
-                {tier==="free" && "Starter Plan"}
-                {tier==="basic" && "Basic Plan"}
-                {tier==="premium" && "Premium Plan"}
-                
-                </a>
-                <p className="ml-1 mr-1"> - </p>
-                 <p className="text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
-                 </p>
-    </div>
-               
-              
-
-               
-    <div  className="mt-8 mb-8  flex flex-col text-sm">
-                        <p className={`text-zinc-500 dark:text-zinc-400 mr-2  font-averta-semibold`}>Need more credits? </p> 
-                       
-                    <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  mt-2 ">
-                        
-                         Upgrade to a paid plan to get credit topups.</span>
-                        
-                        <div className="flex flex-col ">
-                            <Button onClick={navigateCredit} size="sm" className={`bg-indigo-300 ${(tier==="basic"||tier==="premium") ?"":"pointer-events-none opacity-50"} text-white mt-4 w-[100px] font-averta-semibold`}>
-                                        
-                            <span className="mt-1 dark:text-zinc-800">Buy here</span>
-
-                           
-                           {/*  <div className="relative flex flex-row group cursor-default">
-						  <WorkspacePremiumIcon className="text-indigo-400"/>
-						  <p className="text-indigo-400 ml-2 font-averta-semibold">Premium Processing</p>
-						  <span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
-							This content was processed with advanced AI models accessible to Premium.
-						  </span>
-						</div> */}
-                    </Button>
-                   
-                    </div>
-                        
-
-                
-                        </div>   
-                        </div>  
-    </div>
-                        }
+   
     
 
 
@@ -215,12 +171,14 @@ export default function     UploadBlock({currentUser, tier, credit}) {
                                         </div>
                                     }
 
+                         
+
                                     </div> :
 
                                     <div className="items-center justify-center flex flex-col items-center">
                                             <svg className="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-300 items-center flex" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
+                    <path d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
                                         <p className="mb-2 text-sm text-zinc-600 dark:text-zinc-300 font-sans">
                                     
                                             <strong>Drop your file here. </strong></p>
@@ -295,8 +253,90 @@ export default function     UploadBlock({currentUser, tier, credit}) {
 
                 </div>
 
+               
+
             </div>
         }
+
+
+           
+
+
+
+{(tier==="premium" && file!==null)
+                        &&
+                        <div className={`${file!==null && "mt-10"}`} >
+                            <div className="border-b border-gray-200 dark:border-gray-600 mx-auto items-center flex mb-5 mt-5"></div>
+    <div className="flex-col flex">
+    <div className="flex flex-row">
+            <a href="/account" className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold">
+                {tier==="free" && "Starter Plan"}
+                {tier==="basic" && "Basic Plan"}
+                {tier==="premium" && "Premium Plan"}
+                
+                </a>
+                <p className="ml-1 mr-1"> - </p>
+                 <p className="text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
+                 </p>
+    </div>
+               
+              
+
+               
+    <div  className="mt-8 mb-8  flex flex-col text-sm">
+                        <p className={`text-zinc-500 dark:text-zinc-400 mr-2  font-averta-semibold`}>Need more credits? </p> 
+                       
+                    <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  mt-2 ">
+                        
+                         Upgrade to a paid plan to get credit topups.</span>
+                        
+                        <div className="flex flex-col ">
+                            <p onClick={navigateCredit} size="sm" className={` ${(tier==="basic"||tier==="premium") ?"":"pointer-events-none opacity-50"} cursor-pointer mt-4 w-[100px] font-averta-semibold`}>
+                                        
+                            <span className="mt-1 underline font-averta-semibold text-indigo-400">Buy here</span>
+
+                           
+                           {/*  <div className="relative flex flex-row group cursor-default">
+						  <WorkspacePremiumIcon className="text-indigo-400"/>
+						  <p className="text-indigo-400 ml-2 font-averta-semibold">Premium Processing</p>
+						  <span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
+							This content was processed with advanced AI models accessible to Premium.
+						  </span>
+						</div> */}
+                    </p>
+                   
+                    </div>
+                        
+
+                
+                        </div>   
+                        </div>  
+    </div>
+                        }
+
+{file===null && 
+            
+            (<div className="pb-10 w-full  p-4 ">
+                                                                        <div className="border-b border-gray-200 dark:border-gray-600 mx-auto items-center flex mb-5 "></div>
+
+                                            <p className=" dark:text-zinc-200 text-zinc-700 text-lg font-averta-semibold items-center ">Use our free converter tool to get your video and audio files ready for transcription. </p>
+<div className="flex flex-row items-center mt-6 ">
+           
+            <a className="cursor-pointer rounded-md bg-gradient-to-br from-indigo-300 to-indigo-500 px-2 py-1 transition duration-500 hover:scale-105 ease-in-out" href="https://convertprivately.com/" target="_blank" >
+                    <div className="flex flex-row items-center rounded-lg p-1 ">
+                            <img src={ConvertPrivately} width={30} className="p-1" />
+                            <p className="ml-2 text-md font-semibold-averta text-zinc-700"> ConvertPrivately</p>
+                    </div>
+                    </a>
+
+                  
+            </div>
+            </div>
+            )
+
+    }
+
+                      
         </div>
     )
 }
