@@ -317,13 +317,13 @@ export default function     UploadBlock({currentUser, tier, credit}) {
             (<div className="pb-10 w-full  p-4 ">
                                                                         <div className="border-b border-gray-200 dark:border-gray-600 mx-auto items-center flex mb-5 "></div>
 
-                                            <p className=" dark:text-zinc-200 text-zinc-700 text-lg font-averta-semibold items-center ">Use our free converter tool to get your video and audio files ready for transcription. </p>
+                                            <p className=" dark:text-zinc-200 text-zinc-500 text-md font-averta-semibold items-center ">Use our free converter tool to get your video and audio files ready for transcription. </p>
 <div className="flex flex-row items-center mt-6 ">
            
             <a className="cursor-pointer rounded-md bg-gradient-to-br from-indigo-300 to-indigo-500 px-2 py-1 transition duration-500 hover:scale-105 ease-in-out" href="https://convertprivately.com/" target="_blank" >
                     <div className="flex flex-row items-center rounded-lg p-1 ">
                             <img src={ConvertPrivately} width={30} className="p-1" />
-                            <p className="ml-2 text-md font-semibold-averta text-zinc-700"> ConvertPrivately</p>
+                            <p className="ml-2 text-md font-bold text-white dark:text-zinc-800"> ConvertPrivately</p>
                     </div>
                     </a>
 
