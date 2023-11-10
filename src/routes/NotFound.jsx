@@ -1,10 +1,10 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import React, {  useState,  useEffect } from 'react';
 import SideFeedReworked from '../components/ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 
 import Loading from '../components/Loading';
-import axios from 'axios';
+
 import { Helmet } from "react-helmet";
 import NotFoundInfo from './NotFoundInfo';
 
@@ -14,8 +14,7 @@ import NotFoundInfo from './NotFoundInfo';
 
 
 function NotFound({currentUser, collapsed, setCollapsed, tier,setShowWelcomeForm, showWelcomeForm, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
-	const location = useLocation();
-	const navigate = useNavigate();
+	
 	
 
 	let source_id
@@ -26,7 +25,7 @@ function NotFound({currentUser, collapsed, setCollapsed, tier,setShowWelcomeForm
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [subCalled, setSubCalled] = useState(false);
+	
 
 
 
@@ -43,12 +42,6 @@ function NotFound({currentUser, collapsed, setCollapsed, tier,setShowWelcomeForm
 })
 
 
-
-
-	const handleCollapse = () => {
-		setCollapsed(!collapsed)
-		
-	}
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">

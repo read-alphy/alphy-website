@@ -24,7 +24,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
     const [searched, setSearched] = useState(false);
     const [typing, setTyping] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [loading, setLoading] = useState(false);
+    
     const [submitInputValue, setSubmitInputValue] = useState('');
     const [failed, setFailed] = useState(false);
     const [errorMessageSubmit, setErrorMessageSubmit] = useState('');
@@ -153,7 +153,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
 
 
         if (currentUser) {
-            setLoading(true);
+            
             // get id token
             currentUser.getIdToken().then((idToken) => {
                 
@@ -174,7 +174,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
 
                         setCreditCalled(false)
                         setErrorMessageSubmit("")
-                        setLoading(false);
+                        
                         setFailed(false)
                         
                         setDataArchipelago([...dataArchipelago,response.data])
@@ -200,7 +200,7 @@ export default function ArchipelagoCreation({archipelagoDescription, tier,archip
                 }
                         setFailed(true)
                         setSubmitInputValue('');
-                        setLoading(false);
+                        
                         throw error;
                     });
             });
@@ -317,7 +317,7 @@ const handleKeyDown = (event) => {
                          </div>
 <div className="archipelago-search max-h-[80vh] overflow-y-scroll mt-5">
     {
-        (inputValue.length>0 && searchCalled == true) &&
+        (inputValue.length>0 && searchCalled === true) &&
         <p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300 flex flex-col text-sm font-averta-semibold"> 
                                                 Can't find what you are looking for? Paste the link for the content above to process it first.
                                                 </p>

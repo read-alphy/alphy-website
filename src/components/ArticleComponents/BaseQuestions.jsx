@@ -3,7 +3,7 @@ import Markdown from "react-markdown";
 
 
 
-export default function BaseQuestions({key_qa,data, setBaseSources, singleSource, areaRefs, handleCopyToClipboard, handleShareLink, handleLength, showSource, updateVariable, baseSources, collapseIndex, handleShowAllSources, handleBaseQAaccordion,formatAnswer ,DataArrayIcon}){
+export default function BaseQuestions({key_qa,data,  singleSource, areaRefs, handleCopyToClipboard, handleShareLink, handleLength, showSource, updateVariable, baseSources, collapseIndex, handleShowAllSources, handleBaseQAaccordion,formatAnswer ,DataArrayIcon}){
 
 
 const oct31 = new Date('2023-10-31T00:00:00+00:00');
@@ -21,11 +21,11 @@ const added_ts = new Date(data.added_ts);
 								<div id="accordion-flush" data-active-classes="bg-white dark:bg-mildDarkMode text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
 									<h2 id="accordion-flush-heading-1">
 										<button onClick={(event) => handleBaseQAaccordion(event, index, item)} type="button" className="flex items-center justify-between w-full py-5 font-averta-semibold text-left text-zinc-700 border-b border-gray-200 dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
-											<span className="font-averta-semibold">{item}</span>
-											<svg data-accordion-icon className={`w-6 h-6 ${index == collapseIndex && collapseIndex != -1 ? "rotate-180" : ""} shrink-0`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+											<span className="font-averta-semibold text-md">{item}</span>
+											<svg data-accordion-icon className={`w-6 h-6 ${index === collapseIndex && collapseIndex !== -1 ? "rotate-180" : ""} shrink-0`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 										</button>
 									</h2>
-									<div className={index == collapseIndex && collapseIndex != -1 ? "" : "hidden"} aria-labelledby="accordion-flush-heading-1">
+									<div className={index === collapseIndex && collapseIndex !== -1 ? "" : "hidden"} aria-labelledby="accordion-flush-heading-1">
 										<div className="py-5 border-b border-gray-200 dark:border-gray-700">
 											<div className="flex flex-row justify-end text-slate-400">
 
@@ -89,7 +89,7 @@ const added_ts = new Date(data.added_ts);
 																	<p ref={areaRefs.current[index]} className={`${(singleSource===true && showSource!== index+1) && "hidden"} font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5`}  key={index}>
 
 																		{source.start !== null && source.start !== undefined && source.end ? (
-																			window.innerWidth > 999 && data.source_type == "yt" ?
+																			window.innerWidth > 999 && data.source_type === "yt" ?
 																				<a onClick={updateVariable} className="underline cursor-pointer">
 
 
@@ -111,7 +111,7 @@ const added_ts = new Date(data.added_ts);
 																					{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
 																				</a>
 																		) :
-																			window.innerWidth > 999 && data.source_type == "yt" ?
+																			window.innerWidth > 999 && data.source_type === "yt" ?
 																				<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
 																				:
 																				<a target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=0` : ""} className="underline">00:00:00</a>

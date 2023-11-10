@@ -1,9 +1,8 @@
-import React, { Fragment, useState, useRef, useCallback } from 'react';
+import React, {  useState} from 'react';
 import { useEffect } from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
-import FeedItem from '../../components/ArticleComponents/FeedTabs/FeedItem';
+
 import axios from 'axios';
-import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';
+
 import CuratedCarouselItem from '../../components/LandingPage/CuratedCarouselItem';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -137,19 +136,6 @@ function HubArcFeed(props) {
 
 
 	}
-
-	const handleShowExpandedArcs = () => {
-		localStorage.setItem("mainShow", "arcs")  
-		props.setMainShow("arcs")
-	}
-	
-
-	const handleShowMain = () => {
-		 props.setMainShow("default")
-		 localStorage.setItem("mainShow", "default")
-	}
-
-
 
 
 	return (

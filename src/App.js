@@ -14,7 +14,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
 import Success from './routes/payment/Success';
 import Account from './routes/Account';
-import Home from './routes/Home';
+
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import Auth from './routes/Auth';
@@ -50,7 +50,7 @@ function App() {
 	const [idToken, setIdToken] = useState("")
 	const [userArchipelagos, setUserArchipelagos] = useState([])
 	const [dataGlobalArchipelagos , setDataGlobalArchipelagos] = useState([])
-	const [isLoadingGlobalArchipelagos, setIsLoadingGlobalArchipelagos] = useState(true);
+	
 	const [customerID, setCustomerID] = useState("");
 	const [userArcsCalled, setUserArcsCalled] = useState(false)
 
@@ -62,7 +62,7 @@ function App() {
 			localStorage.setItem("theme", "light")
 		}
 	}
-	const verification = (urlParams.get('mode')=="verifyEmail");
+	const verification = (urlParams.get('mode')==="verifyEmail");
 	
 
 
@@ -78,7 +78,7 @@ function App() {
 		
 	}, [idToken])
 
-const resetPassword = (urlParams.get('mode')=="resetPassword");
+const resetPassword = (urlParams.get('mode')==="resetPassword");
 
 
 	useEffect(() => {
@@ -99,15 +99,16 @@ const resetPassword = (urlParams.get('mode')=="resetPassword");
 
 useEffect(() => {
 	if(verification){
-		const url = window.location.href;
+		
 		const oobCode = urlParams.get('oobCode');
 		auth.handleVerifyEmail(oobCode)
-		.then((resp) => {
-			setShowWelcomeForm(true)
-			localStorage.setItem("logged in","true")
-		}
-		)	
+					.then((resp) => {
+						setShowWelcomeForm(true)
+						localStorage.setItem("logged in","true")
+					}
+					)	
 	} 
+
 
 	
 	setTimeout (() => {
@@ -122,7 +123,7 @@ useEffect(() => {
 		}
 		
 	if (currentUser !== null && called === false) {
-		var userId = localStorage.getItem("userId")
+		
 		
 		setIdToken(currentUser.accessToken)
 		localStorage.setItem("idToken", currentUser.accessToken)
@@ -168,8 +169,9 @@ useEffect(() => {
 
 
 
+
  
-}, [currentUser, auth, creditcalled, called, verification]) 
+}, [currentUser, auth, creditcalled, called, verification ,urlParams]) 
 
 
 
@@ -178,7 +180,7 @@ useEffect(() => {
 
 		
 		
-        const idToken = await currentUser.getIdToken().then((idToken) => {
+        await currentUser.getIdToken().then((idToken) => {
 
         axios.get(`${API_URL}/payments/status`,
         {
@@ -220,7 +222,7 @@ useEffect(() => {
 			return;
 		}
 		
-		setIsLoadingGlobalArchipelagos(true);
+		
 		axios.get(`${API_URL}/playlists/`, {
 			params: {
 			  user_id: 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3',
@@ -241,7 +243,7 @@ useEffect(() => {
 				shuffleArray(response.data)
 				setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
 			}
-			setIsLoadingGlobalArchipelagos(false);
+			
 			setTimeout(() => {
 				const elements = document.querySelectorAll(".styles-module_item-provider__YgMwz")
 				if(elements){
@@ -253,7 +255,7 @@ useEffect(() => {
 
 		})
 		.catch((error) => {
-			setIsLoadingGlobalArchipelagos(false);
+		console.log(error)
 		}
 		)
 	}
@@ -400,7 +402,7 @@ useEffect(() => {
 
 						</Routes>
 
-						{/* {location.pathname === '/' || location.pathname === '/privacypolicy' || location.pathname==="/plans" || location.pathname==="/account" || location.pathname==="/404" ? <Footer /> : null} */}
+						
 
 					</>
 

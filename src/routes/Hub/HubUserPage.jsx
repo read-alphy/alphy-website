@@ -6,49 +6,38 @@ import HubFeedItem from "./HubFeedItemElements/HubFeedItem"
 import Loading from '../../components/Loading';
 import CuratedCarouselItem from '../../components/LandingPage/CuratedCarouselItem';
 import AddIcon from '@mui/icons-material/Add';
-import { set } from 'lodash';
+
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import ChatIcon from '@mui/icons-material/Chat';
+
 import LinkIcon from '@mui/icons-material/Link';
 import { API_URL } from '../../constants';
 
 
 export default function HubUserPage({currentUser,credit,tier,userArchipelagos,setUserLayout, setGlobalLayout, setSubmitLayout, mainShow, setMainShow, collapsed, setCollapsed}){
     const [data, setData] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+
 	const [search, setSearch] = useState('');
-	const [offset, setOffset] = useState(0);
-	const [hasMore, setHasMore] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+
 	const [hasMorePersonal, setHasMorePersonal] = useState(false);
 	const [isLoadingPersonal, setIsLoadingPersonal] = useState(localStorage.getItem("logged in") ==="true" ? false : true);
 	const [dataPersonal, setDataPersonal] = useState([]);
     const [offsetPersonal, setOffsetPersonal] = useState(0);
 	const [called, setCalled] 	= useState(false);
-	const [ready, setReady] = useState(false)
+	
 	const [hasMoreUploads, setHasMoreUploads] = useState(false);
 	const [dataUploads, setDataUploads] = useState([]);
 	const [isLoadingUploads, setIsLoadingUploads] = useState(true);
-    const [offsetUploads, setOffsetUploads] = useState(0);
-    const [showTab, setShowTab] = useState("myWorks")
 
 
-	const [file, setFile] = useState(null)
-	const [fileUploading, setFileUploading] = useState(false)
-	const [errorMessage, setErrorMessage] = useState(false)
-	const [myBookmarks, setMyBookmarks] = useState(false)
+
 	const [offsetBookmarks, setOffsetBookmarks] = useState(0);
 	const [hasMoreBookmarks, setHasMoreBookmarks] = useState(false);
 	const [dataBookmarks, setDataBookmarks] = useState([]);
 	const [isLoadingBookmarks, setIsLoadingBookmarks] = useState(true);
-	const [myWorks, setMyWorks] = useState(localStorage.getItem("logged in") ==="true" ? true : false);
-	const [archipelagos, setArchipelagos] = useState(false)
-	const [searchQuery, setSearchQuery] = useState("");
-	const [searchMemory, setSearchMemory] = useState("")
-    const [submitted, setSubmitted] = useState(false);
+
 
     
     const carouselRef = useRef(null);
@@ -56,12 +45,12 @@ export default function HubUserPage({currentUser,credit,tier,userArchipelagos,se
     const leftButtonRef = useRef(null);
     const [isForwardArrowVisible, setIsForwardArrowVisible] = useState(true);
     const [isBackwardArrowVisible, setIsBackwardArrowVisible] = useState(false);
-    let shuffledData = []
+
     let limit = 16
     let calledAndEmpty
 
     
-    const searchInputRef = useRef(null);
+
 
 
     const getDataPersonal = (offsetPersonal, firstTimePersonal, hasMorePersonal) => {

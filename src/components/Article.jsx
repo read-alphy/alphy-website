@@ -1,21 +1,15 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import React, {  useState,  useEffect,  } from 'react';
 import SideFeedReworked from './ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Content from './ArticleComponents/ContentTabs/Content';
-import MicIcon from '@mui/icons-material/Mic';
 
-import {Button} from "@material-tailwind/react";
-
-import Twitter from '..//img/twitter_spaces.png';
-
-import { useAuth } from '../hooks/useAuth';
 import axios from 'axios';
 import Loading from './Loading';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Helmet } from "react-helmet";
 import { API_URL } from '../constants';
-import { set } from 'lodash';
+
 
 
 
@@ -23,7 +17,7 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const location = useLocation();
 	const navigate = useNavigate();
 	let source_id
-	const [windowSizeChecked,setWindowSizeChecked] = useState(false);
+	
 	const [isBookmarked, setIsBookmarked] = useState(false);
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -31,8 +25,10 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 	const [bookmarkChecked, setBookmarkChecked] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
 	const [isPublic, setIsPublic] = useState(false);
-	const [language, setLanguage] = useState(data.summaries !== undefined && data.summaries.length > 1 && data.lang !== undefined ? data.lang : 'en')
+	const [language, setLanguage] = useState((data.summaries !== undefined && data.summaries.length > 1 && data.lang !== undefined && data.summaries[1]!==undefined && data.summaries[1].complete===true )? data.lang : 'en')
 
+
+	
 	const [called, setCalled] = useState(false);
 	const [authorizationError, setAuthorizationError] = useState(false)
 
@@ -68,7 +64,9 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 				(response) => {
 					
 					if(response.data!==null && response.data!==undefined){
-					setLanguage(response.data.lang)						
+						if(response.data.lang!==undefined && response.data.lang!==null) {
+							setLanguage(response.data.lang)	
+							}			
 					setData(response.data);
 					setContentName(response.data.title)
 					
@@ -153,7 +151,10 @@ function Article({ source_type, collapsed, setCollapsed, tier,setContentName,use
 					
 					
 					if(response.data!==null && response.data!==undefined){
+						
+						if(response.data.lang!==undefined && response.data.lang!==null) {
 						setLanguage(response.data.lang)	
+						}
 					setData(response.data);
 					setIsVisible(response.data.is_visible)
 					setIsPublic(response.data.is_visible)

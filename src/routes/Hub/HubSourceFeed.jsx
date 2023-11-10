@@ -1,6 +1,6 @@
-import React, { Fragment, useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
+
 import HubFeedItem from './HubFeedItemElements/HubFeedItem';
 import axios from 'axios';
 import SkeletonItem from '../../components/ArticleComponents/FeedTabs/SkeletonItem';

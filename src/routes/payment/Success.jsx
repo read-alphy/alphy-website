@@ -1,13 +1,13 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import React, { useState,  useEffect } from 'react';
 import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
-import axios from 'axios';
+
 import { Helmet } from "react-helmet";
 import SuccessInfo from './SuccessInfo';
-import { set } from 'lodash';
+
 
 
 
@@ -15,9 +15,7 @@ import { set } from 'lodash';
 
 
 function Success({currentUser, collapsed, setCollapsed, tier,customerID, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
-	const location = useLocation();
-	const navigate = useNavigate();
-	
+
 
 	let source_id
 	
@@ -49,10 +47,6 @@ if((tier!== undefined || tier!==null) && subCalled===false){
 }
 
 
-	const handleCollapse = () => {
-		setCollapsed(!collapsed)
-		
-	}
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">

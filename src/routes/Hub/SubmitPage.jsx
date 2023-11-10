@@ -1,14 +1,8 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import React, {  useState,  useEffect } from 'react';
 import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
-// import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {Button, Spinner, Input, Textarea} from "@material-tailwind/react";
-import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
+
 import Dialog from '@mui/material/Dialog';
-import { useAuth } from '../../hooks/useAuth';
-import Loading from '../../components/Loading';
-import axios from 'axios';
+
 import { Helmet } from "react-helmet";
 import HubContent from './HubContent';	
 
@@ -17,24 +11,17 @@ import HubContent from './HubContent';
 
 
 function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
-	const location = useLocation();
-	const navigate = useNavigate();
+
 	let source_id
 	
 	
     const [windowSizeChecked,setWindowSizeChecked] = useState(false);
 	
-	const [called, setCalled] = useState(false);
-	
-	const [data, setData] = useState([]);
-	
-	const [isLoading, setIsLoading] = useState(false);
+
+
 
 	const [deleteDialog, setDeleteDialog] = useState(false);
-	const [subCalled, setSubCalled] = useState(false);
-	const [errorMessage, setErrorMessage] = useState(false);
-	const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
-	const [helmetThumbnail, setHelmetThumbnail] = useState("");
+
 	const [globalLayout, setGlobalLayout] = useState(false);
 	const [userLayout, setUserLayout] = useState(false);
 	const [submitLayout, setSubmitLayout] = useState(true);
@@ -55,10 +42,7 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 })
 
 
-	const handleCollapse = () => {
-		setCollapsed(!collapsed)
-		
-	}
+
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
@@ -115,9 +99,9 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  max-h-[90vh] sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
 						}}`}
 				>
-					{ isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300 " color="green" /> : 
+					{ 
 					<HubContent
-					data={data} tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+					tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
 					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
 					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
 					mainShow={mainShow} setMainShow={setMainShow}

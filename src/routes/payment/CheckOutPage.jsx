@@ -1,10 +1,10 @@
-import React, { useCallback, useState, useMemo, useEffect, useRef, memo } from 'react';
+import React, { useState,  useEffect } from 'react';
 import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
-// import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+
 
 import Loading from '../../components/Loading';
-import axios from 'axios';
+
 import { Helmet } from "react-helmet";
 import CheckOutPageInfo from './CheckOutPageInfo';
 
@@ -12,8 +12,7 @@ import CheckOutPageInfo from './CheckOutPageInfo';
 
 
 export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasActiveSub,setShowWelcomeForm, showWelcomeForm, stripePromise,userArchipelagos}) {
-	const location = useLocation();
-	const navigate = useNavigate();
+
 	const [clientSecret, setClientSecret] = useState("");
 	
 
@@ -24,8 +23,6 @@ export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasA
 	
 
 	const [isLoading, setIsLoading] = useState(true);
-
-	const [subCalled, setSubCalled] = useState(false);
 
 
 
@@ -44,17 +41,13 @@ export default function CheckOutPage({currentUser, collapsed, setCollapsed, hasA
 
 useEffect (() => {
 
-			setSubCalled(true)
+			
 			setIsLoading(false)
 	
 		
 	})
 
 
-	const handleCollapse = () => {
-		setCollapsed(!collapsed)
-		
-	}
 
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">

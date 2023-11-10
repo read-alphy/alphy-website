@@ -85,7 +85,7 @@ module.exports = {
 				'5xs': '8px',
 			},
 			fontFamily: {
-				noto: ['Noto Sans', 'sans-serif'],
+		/* 		noto: ['Noto Sans', 'sans-serif'], */
 
 			},
 			colors: {

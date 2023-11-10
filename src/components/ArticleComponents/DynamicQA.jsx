@@ -67,7 +67,7 @@ export default function DynamicQA({answerData, areaRefs, answer, data, handleCle
                                     
                             
                                     {source.start !== null && source.start !== undefined && source.end ? (
-                                        window.innerWidth > 999 && data.source_type == "yt" ?
+                                        window.innerWidth > 999 && data.source_type === "yt" ?
                                             <a onClick={updateVariable} className="underline cursor-pointer font-bold">
                                                 
 
