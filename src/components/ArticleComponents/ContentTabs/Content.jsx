@@ -192,7 +192,8 @@ useEffect(() => {
 	}
 useEffect(() => {
 	if(summary!== undefined && summary!==null){
-		setModelName(summary.model_name)
+		
+		setModelName(summary.quality_str)
 	}
 },[summary]
 )
@@ -809,8 +810,8 @@ return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 				<div>
 				<div className="grid grid-cols-3 ">
-					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language === summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
-						{modelName==="gpt-4" &&
+					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary!=undefined &&language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
+						{modelName==="HIGH" &&
 						<div className="relative flex flex-col">
 						<div className="relative flex flex-row group cursor-default">
 						  <WorkspacePremiumIcon className="text-indigo-400"/>
@@ -824,7 +825,7 @@ return (
 								
 								}
 
-								{modelName==="gpt-3.5-turbo-16k" &&
+								{modelName==="MID" &&
 										<div className="relative flex flex-col">
 										<div className="relative flex flex-row group cursor-default">
 										<MemoryIcon className="text-gray-500"/>

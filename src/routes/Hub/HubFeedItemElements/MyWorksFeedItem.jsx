@@ -9,7 +9,7 @@ export default function MyWorksFeedItem({item,index, source_id,imageUrl,language
 
 let model_name = ""
 if(item.summaries!==undefined && item.summaries.find(item => item.lang==="en")!==undefined){
-	model_name= item.summaries.find(item => item.lang==="en").model_name
+	model_name= item.summaries.find(item => item.lang==="en").quality_str
 }
 
     return(
@@ -74,7 +74,7 @@ if(item.summaries!==undefined && item.summaries.find(item => item.lang==="en")!=
 									}
 									
 									</div>
-									{model_name==="gpt-4" && 
+									{model_name==="HIGH" && 
 									
 									<p className="text-indigo-400 ">
 										<WorkspacePremiumIcon fontSize="small" className="text-indigo-300 -ml-1"/>
