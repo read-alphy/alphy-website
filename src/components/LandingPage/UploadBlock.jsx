@@ -244,7 +244,7 @@ export default function     UploadBlock({currentUser, tier, credit}) {
                         </div>
                         {/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
 */}
-                        {fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className={`text-sm font-sans ${errorMessage ? "text-red-400 dark:text-400" : "text-zinc-500 dark:text-zinc-300"}`}>{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-indigo-400 lg:ml-10 normal-case max-w-[100px] my-4 text-zinc-100">Continue</Button></div>}
+                        {fileUploading ? <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4"><p className={`text-sm font-sans ${errorMessage ? "text-red-400 dark:text-400" : "text-zinc-500 dark:text-zinc-300"}`}>{uploadProgress !== 100 ? `Uploading... ${uploadProgress}% ` : errorMessage ? "There was an error. Please try again." : `Complete!`}</p> </p> : <div className="flex flex-row"> {/* <p className="lg:hidden">You are about to process this file.</p> */}<Button onClick={handlePostUpload} className="bg-indigo-400 lg:ml-10 normal-case max-w-[100px] my-4 text-zinc-100 dark:text-zinc-700">Continue</Button></div>}
 
                     </div>
 
@@ -286,9 +286,7 @@ export default function     UploadBlock({currentUser, tier, credit}) {
     <div  className="mt-8 mb-8  flex flex-col text-sm">
                         <p className={`text-zinc-500 dark:text-zinc-400 mr-2  font-averta-semibold`}>Need more credits? </p> 
                        
-                    <span className=" font-averta-regular dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm  mt-2 ">
-                        
-                         Upgrade to a paid plan to get credit topups.</span>
+                    
                         
                         <div className="flex flex-col ">
                             <p onClick={navigateCredit} size="sm" className={` ${(tier==="basic"||tier==="premium") ?"":"pointer-events-none opacity-50"} cursor-pointer mt-4 w-[100px] font-averta-semibold`}>
