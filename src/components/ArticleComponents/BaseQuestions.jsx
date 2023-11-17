@@ -52,11 +52,8 @@ const added_ts = new Date(data.added_ts);
 
 			:
 
-			<div>
-				<ReactMarkdown>
-				{key_qa[item].answer}
-				</ReactMarkdown>
-				</div>
+			<div className="font-averta-semibold text-md text-zinc-700" dangerouslySetInnerHTML={{__html : key_qa[item].answer}}/>
+
 
 
 														}
