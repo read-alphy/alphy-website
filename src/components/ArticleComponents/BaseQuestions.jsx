@@ -52,7 +52,7 @@ const added_ts = new Date(data.added_ts);
 
 			:
 
-			<div className="font-averta-semibold text-md text-zinc-700" dangerouslySetInnerHTML={{__html : key_qa[item].answer}}/>
+			<div className="font-averta-regular text-md text-zinc-700" dangerouslySetInnerHTML={{__html : key_qa[item].answer}}/>
 
 
 
