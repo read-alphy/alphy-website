@@ -14,8 +14,8 @@ export default function WelcomeExplainer() {
             <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 2xl:pl-40  overflow-hidden">
 
                 <div className=" pl-5 ">
-                    <p className="text-zinc-700 dark:text-zinc-300 mb-5 mx-auto mt-4 text-xl md:text-3xl font-averta-semibold ">Save time and learn better from audiovisual content.</p>
-                    <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-md md:text-xl font-averta-regular max-w-[600px]"> Join the Alphy community to transcribe, summarize, and create interactive learning experiences from audiovisual content with AI.
+                    <p className="text-zinc-700 dark:text-zinc-300 mb-5 mx-auto mt-4 text-xl md:text-[30px] font-averta-semibold ">Save time and learn better from audiovisual content.</p>
+                    <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-md md:text-[20px] font-averta-regular max-w-[600px]"> Join the Alphy community to transcribe, summarize, and create interactive learning experiences from audiovisual content with AI.
                     </p>
                     {/* 
                     Works on:
