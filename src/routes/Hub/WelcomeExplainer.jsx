@@ -41,7 +41,7 @@ export default function WelcomeExplainer() {
                             <Link to="/submit" onClick={() => { localStorage.setItem("newItem", "link") }} className="rounded-lg text-zinc-600  text-center text-sm xs:text-md bg-green-100 px-2 py-2  font-averta-semibold drop-shadow-md">Submit a Link
                             </Link>
 
-                            <p className="flex flex-col mt-8 pl-2 h-[90px] hidden sm:flex">
+                            <p className="flex flex-col mt-8  h-[90px] hidden sm:flex">
                                 <span className="text-zinc-500 dark:text-zinc-400 text-md font-averta-regular px-2">Get key insights from YouTube videos and Twitter Spaces</span>
                             </p>
 
@@ -50,8 +50,8 @@ export default function WelcomeExplainer() {
                         <div className="flex flex-col max-w-[120px] sm:max-w-[180px]">
 
                             <Link to="/submit" onClick={() => { localStorage.setItem("newItem", "upload") }} className="rounded-lg text-zinc-600 text-center text-sm xs:text-md bg-indigo-100 px-2 py-2  font-averta-semibold drop-shadow-md">Upload a File</Link>
-                            <p className="flex flex-col mt-8 pl-2 h-[90px] hidden sm:flex">
-                                <span className="text-zinc-500 dark:text-zinc-500 text-md font-averta-regular px-2"> Import meetings, lectures, seminars, or any recording for transcription</span>
+                            <p className="flex flex-col mt-8  h-[90px] hidden sm:flex">
+                                <span className="text-zinc-500 dark:text-zinc-400 text-md font-averta-regular px-2"> Import meetings, lectures, seminars, or any recording for transcription</span>
                             </p>
                         </div>
 
@@ -60,7 +60,7 @@ export default function WelcomeExplainer() {
 
 
                             <Link to="/arc/createArc" className="rounded-lg text-zinc-600 text-center text-sm xs:text-md bg-red-100 px-2 py-2 font-averta-semibold drop-shadow-md">Create an Arc</Link>
-                            <p className="flex flex-col mt-8 ml-2 h-[90px] hidden sm:flex">
+                            <p className="flex flex-col mt-8  h-[90px] hidden sm:flex">
                                 <span className="text-zinc-500 dark:text-zinc-400 text-md font-averta-regular px-2">Learn interactively by asking questions to hundreds of hours of videos</span>
                             </p>
 
