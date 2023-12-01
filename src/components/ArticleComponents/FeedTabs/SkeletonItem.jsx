@@ -9,12 +9,9 @@ const SkeletonItem = () => {
 				<div className="flex flex-row items-center justify-start cursor-pointer w-full h-full hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-md mb-2 transition duration-200 ease-in-out hover:shadow-md  hover:scale-105 transform hover:translate-x-2 hover:translate-y-2 mr-auto ml-auto">
 					<div className="w-1/2 min-w-[150px] max-w-[300px] mr-3 ">
 						<div
-							className="flex items-center justify-center h-0 rounded-md bg-zinc-300 dark:bg-zinc-700 animate"
+							className="flex items-center justify-center h-0 rounded-md bg-zinc-300 dark:bg-zinc-700 animate bg-center bg-no-repeat bg-cover"
 							style={{
 								paddingBottom: '50%',
-								backgroundPosition: 'center',
-								backgroundRepeat: 'no-repeat',
-								backgroundSize: 'cover',
 							}}
 						></div>
 					</div>

@@ -7,15 +7,9 @@ import ReactLoading from 'react-loading';
 export default function Loading() {
 	return (
 		<div
-			className="loading"
-			style={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				height: '100vh',
-			}}
+			className="loading flex justify-center items-center h-screen"
 		>
-			<ReactLoading type="spin" color="#cfd8dc" width={50}/>
+			<ReactLoading type="spin" color="#cfd8dc" width={50} />
 
 		</div>
 	);

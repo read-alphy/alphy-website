@@ -155,7 +155,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 						if (response.data.lang !== undefined && response.data.lang !== null) {
 							setLanguage(response.data.lang)
 						}
-						console.log("response.data", response.data)
+
 						setData(response.data);
 						setIsVisible(response.data.is_visible)
 						setIsPublic(response.data.is_visible)
