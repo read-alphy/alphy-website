@@ -136,7 +136,7 @@ export default function UploadBlock({ currentUser, tier, credit }) {
                 </div>
                 <p className="dark:text-zinc-200 text-zinc-700 mb-4 text-lg font-averta-semibold">Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
                 </p>
-                <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md font-averta-semibold">As we value your privacy, we delete your audio files after transcription, and we make sure Alphy's summary, transcription, and chatbot are only accessible to you and no one else.
+                <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md font-averta-semibold">As we value your privacy, we immediately delete your audio files after transcription, and we make sure Alphy's summary, transcription, and chatbot are only accessible to you and no one else.
                 </p>
 
 
