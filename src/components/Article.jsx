@@ -247,21 +247,18 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 			if (data !== null && data.summaries !== undefined && data.summaries.find(item => item.lang === language) !== undefined) {
 				summaryComplete = data.summaries.find(item => item.lang === language).complete
-
-
 			}
 
-			if (data !== null && summaryComplete == false && called === true) {
+			if (data !== null && summaryComplete != true && called === true) {
 
-				if (source_type === "up" && summaryComplete == false) {
+				if (source_type === "up") {
 					fetchDataUpload(url, true);
 				}
-				else if (source_type !== "up" && summaryComplete === false) {
+				else {
 					fetchData(url, true);
 				}
 
 			}
-
 			else {
 				return
 			}
