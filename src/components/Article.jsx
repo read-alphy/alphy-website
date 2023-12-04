@@ -51,6 +51,8 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 	if (metaTag) {
 		metaTag.setAttribute('content', data.title);
 	}
+
+
 	const fetchData = async (url, constantFetch) => {
 
 
@@ -67,7 +69,9 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 						if (response.data.lang !== undefined && response.data.lang !== null) {
 							setLanguage(response.data.lang)
 						}
-						setData(response.data);
+						if (response.data) {
+							setData(response.data);
+						}
 						setContentName(response.data.title)
 
 					}
@@ -186,8 +190,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 		}
 	};
 
-	// if windows size is less than 768px then collapse the navbar
-	const { width } = useWindowSize();
+
 
 
 	const url = `${API_URL}/sources/${source_type}/${source_id}`;
@@ -208,6 +211,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 			}
 			if (source_type !== "up" && data.length === 0) {
+
 
 				setCalled(true)
 
@@ -239,38 +243,37 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 	};
 
-
 	useEffect(() => {
 		let interval;
-		const intervalFetch = () => {
-			let summaryComplete
 
-			if (data !== null && data.summaries !== undefined && data.summaries.find(item => item.lang === language) !== undefined) {
-				summaryComplete = data.summaries.find(item => item.lang === language).complete
+		const intervalFetch = () => {
+
+
+			// Check if data processing is complete
+			if (data && data.summaries[0] && data.summaries[0].complete === true) {
+				console.log("Data processing complete, stopping interval.");
+				clearInterval(interval);
+				return;
 			}
 
-			if (data !== null && summaryComplete != true && called === true) {
+			// Rest of your intervalFetch logic
 
+			if (data) {
 				if (source_type === "up") {
 					fetchDataUpload(url, true);
 				}
 				else {
 					fetchData(url, true);
 				}
-
 			}
-			else {
-				return
-			}
+		};
 
-		}
+		// Start the interval
 		interval = setInterval(intervalFetch, 5000);
 
-		return () => {
-			// Clean up the interval when the component unmounts
-			clearInterval(interval);
-		};
-	}, []);
+		// Cleanup function to clear the interval when the component unmounts or data changes
+		return () => clearInterval(interval);
+	}, [data]);
 
 	const handleVisibility = () => {
 		const targetVisibility = !isVisible
