@@ -1,30 +1,41 @@
-import Twitter from '../../../img/twitter_spaces.png';
+import Twitter from '../../../img/twitter_space.webp';
+import ApplePodcastBanner from "../../../img/apple_podcast_banner.png";
+import Twitch from "../../../img/twitchSource.png";
 import axios from 'axios';
 import { useState } from 'react';
 import MyWorksFeedItem from './MyWorksFeedItem';
 import BookmarkFeedItem from './BookmarkFeedItem';
 import MyUploadsFeedItem from './MyUploadsFeedItem';
 
-const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFeed,fromArchipelago, dataArchipelago,setDataArchipelago,sourceIDsArchipelago,setSourceIDsArchipelago,forDetail}) => {
-	const source_id = item!==undefined ? item.source_id : "";
+const HubFeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, sideFeed, fromArchipelago, dataArchipelago, setDataArchipelago, sourceIDsArchipelago, setSourceIDsArchipelago, forDetail }) => {
+	const source_id = item !== undefined ? item.source_id : "";
 	let formattedDate = ""
-	const inputDate = item!==undefined && item.added_ts!==undefined &&  item.added_ts.substring(0, 10)
-	const [removed,setRemoved] = useState(false)
-	if (inputDate !== undefined && item!==undefined && item.added_ts!==undefined) {
+	const inputDate = item !== undefined && item.added_ts !== undefined && item.added_ts.substring(0, 10)
+	const [removed, setRemoved] = useState(false)
+	if (inputDate !== undefined && item !== undefined && item.added_ts !== undefined) {
 		const parts = inputDate.split("-");
 		formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
 	}
 
 	let imageUrl;
-	if(item!==undefined){
+	if (item !== undefined) {
 		if (item.source_type === 'yt') {
 			imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
 		} else if (item.source_type === 'sp') {
 			imageUrl = Twitter;
 		}
-}
+		else if (item.source_type === "ap") {
+			imageUrl = ApplePodcastBanner;
+		}
+		else if (item.source_type === "tv") {
+			imageUrl = Twitch
+		}
 
-	
+	}
+
+
+
+
 	const language_codes = {
 		"af": "Afrikaans",
 		"ar": "العربية",
@@ -84,24 +95,24 @@ const HubFeedItem = ({item,index, setCollapsed, myBookmarks, currentUser, sideFe
 		"vi": "Tiếng Việt",
 		"cy": "Cymraeg"
 	}
-	
+
 
 	return (
 		<div className={`grid border-b-0 w-full md:w-full   `}>
-			{item!==undefined ? 
-			
+			{item !== undefined ?
+
 				item.source_type !== "up"
-				?
+					?
 
-				!myBookmarks ? 
-					<MyWorksFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes}/>
+					!myBookmarks ?
+						<MyWorksFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} />
+						:
+
+						<BookmarkFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} removed={removed} setRemoved={setRemoved} currentUser={currentUser} />
+
 					:
 
-					<BookmarkFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} removed={removed} setRemoved={setRemoved} currentUser={currentUser}/>
-
-					:
-			
-				<MyUploadsFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} setCollapsed={setCollapsed} sideFeed={sideFeed} formattedDate={formattedDate}/>
+					<MyUploadsFeedItem item={item} index={index} source_id={source_id} imageUrl={imageUrl} language_codes={language_codes} setCollapsed={setCollapsed} sideFeed={sideFeed} formattedDate={formattedDate} />
 				:
 				null
 			}

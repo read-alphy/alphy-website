@@ -1,5 +1,7 @@
 import './FeedItem.css';
-import Twitter from '../../../img/twitter_spaces.png';
+import Twitter from '../../../img/twitter_space.webp';
+import ApplePodcast from "../../../img/apple_podcast_banner.png";
+import Twitch from "../../../img/twitchSource.png";
 import axios from 'axios';
 import { useState } from 'react';
 import { Button } from "@material-tailwind/react";
@@ -26,6 +28,12 @@ const FeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, sideFee
 		imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
 	} else if (item !== undefined && item.source_type === 'sp') {
 		imageUrl = Twitter;
+	}
+	else if (item !== undefined && item.source_type === "ap") {
+		imageUrl = ApplePodcast;
+	}
+	else if (item !== undefined && item.source_type === "tv") {
+		imageUrl = Twitch
 	}
 
 

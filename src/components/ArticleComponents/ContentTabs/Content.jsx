@@ -15,18 +15,20 @@ import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { saveAs } from 'file-saver'; // library to save file as blob
 import { useAuth } from "../../../hooks/useAuth"
-import DownloadStatic from '../../../img/download_static.png';
+
 import ReactMarkdown from "react-markdown";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import * as Selection from 'selection-popover'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddIcon from '@mui/icons-material/Add';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import ClearIcon from '@mui/icons-material/Clear';
-import TwitterSpaces from "../../../img/twitter_spaces.png"
+import TwitchIcon from "../../../img/twitch.png";
+import TwitterSpaces from "../../../img/twitter_space.webp";
+import ApplePodcasts from "../../../img/apple_podcasts.png";
+/* import TwitchBanner from "../../../img/twitchSource.png"; */
 import TwitterIcon from '@mui/icons-material/Twitter';
 import {
 	Popover,
@@ -248,7 +250,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 		summaryParser()
 
-	}, [language, props.data])
+	}, [language])
 
 	const requestTranslation = async () => {
 
@@ -342,7 +344,12 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	const upPart = parts[3];
 
 
+	useEffect(() => {
+		if (upPart === "up" && data.length === 0 && basicDataLoaded === true) {
+			/* navigate("/404") */
+		}
 
+	}, [basicDataLoaded, data])
 
 	useEffect(() => {
 
@@ -501,11 +508,9 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	}
 
 
-	useEffect(() => {
-		if (transcript.length === 0 && props.data !== undefined && props.data.transcript !== null) {
-			transcriptParser();
-		}
-	}, [props.data])
+	if (transcript.length === 0 && data.transcript !== null) {
+		transcriptParser();
+	}
 
 
 	useEffect(() => {
@@ -806,6 +811,9 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	return (
 		<div id="content" ref={ref} className={`md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}>
 			<div>
+
+
+
 				<div className="grid grid-cols-3 ">
 					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary != undefined && language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						{modelName === "HIGH" &&
@@ -868,7 +876,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 												<Popover placement="right">
 													<PopoverHandler>
-														<button className="flex flex-row text-zinc-600 dark:text-zinc-300 font-averta-semibold"><AddCircleIcon className="text-green-200" /> <p className="ml-2 font-averta-semibold">Add To Arc</p></button>
+														<button className="flex flex-row text-zinc-600 dark:text-zinc-300 font-averta-semibold"><AddCircleIcon className="text-green-200" /> <p className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Add To Arc</p></button>
 													</PopoverHandler>
 													<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 
@@ -888,6 +896,8 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 													</PopoverContent>
 												</Popover>
+
+
 
 												{(data.source_type === "up" && (props.data !== undefined && props.data !== null && (currentUser !== null && props.data.submitter_id == currentUser.uid))) &&
 													<div>
@@ -1070,18 +1080,25 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 											<p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Click to listen</p>
 										</a>
 									}
+									{
+										data.source_type === "tv" &&
+										<a className="flex flex-row mb-5 mt-3  " target="_blank" href={`https://www.twitch.tv/${data.source_id}`}>
+											<img className="ml-1" src={TwitchIcon} width={20} />
+											<p className=" text-zinc-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Click to watch</p>
+										</a>
+									}
 									<div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 
 
 									<Popover placement="right">
 										<PopoverHandler>
-											<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-200" /> <p className="ml-2 font-averta-semibold">Add To Arc</p></button>
+											<button className="flex flex-row text-zinc-600 dark:text-zinc-300"><AddCircleIcon className="text-green-200" /> <p className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Add To Arc</p></button>
 										</PopoverHandler>
 										<PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
 
 											<MenuItem onClick={() => handleAddToArchipelago(0, true)} className="text-zinc-700 dark:text-zinc-200 flex-row flex">
 												<AddIcon className="text-zinc-600 dark:text-zinc-300" />
-												<p className="text-zinc-600 dark:text-zinc-300 pl-1 font-averta-semibold">Create An Arc</p>
+												<p className="text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Create An Arc</p>
 											</MenuItem>
 											{userArchipelagoNames.map(item =>
 
@@ -1143,8 +1160,8 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 													<BookmarkAddIcon />
 												}
 
-												{currentUser && props.isBookmarked === true && <span className="ml-2">Remove Bookmark</span>}
-												{currentUser && props.isBookmarked === false && <span className="ml-2">Add Bookmark</span>}
+												{currentUser && props.isBookmarked === true && <span className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Remove Bookmark</span>}
+												{currentUser && props.isBookmarked === false && <span className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Add Bookmark</span>}
 											</p>
 										</div>
 									}
@@ -1256,475 +1273,547 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 				</div> */}
 
 				<div id="content-area ">
-					{
-
-						transcript.length > 0 && (
-
-							(summary !== undefined && language === summary.lang)
-
-						)
-							?
-							<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
-								{transcript.length > 0 &&
+					{transcript.length > 0 && ((summary !== undefined && summary.complete !== undefined && language === summary.lang) || (summary !== undefined && summary.complete === undefined))
+						?
+						<div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
+							{transcript.length > 0 &&
 
 
-									<div className={`${props.data.summaries.length === 0 ? "hidden" : ""} grid-cols-2 w-full md:min-w-[500px]`}>
-										{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
+								<div className={`${props.data.summaries.length === 0 ? "hidden" : ""} grid-cols-2 w-full md:min-w-[500px]`}>
+									{/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
-										{showYouTubeFrame === true &&
+									{showYouTubeFrame === true &&
 
-											<div>
-												<div className={`hidden ${data.source_type === "yt" ? "lg:flex" : ""}  justify-center items-center `}>
-													{data.source_type === "yt" &&
-														(transcript.length > 0 || data.complete === true ?
-															<div>
+										<div>
+											<div className={`hidden ${(data.source_type === "yt" || data.source_type === "tv" || data.source_type == "ap") ? "lg:flex" : ""}  justify-center items-center `}>
+												{data.source_type === "yt" &&
+													(transcript.length > 0 || data.complete === true ?
+														<div>
 
-																{/* <div id="drag-handle" ref={dragHandleRef}  className="fixed bottom-4 right-4 w-[300px] h-[200px] cursor-move z-[9999] bg-black opacity-20"></div>										 */}
+															{/* <div id="drag-handle" ref={dragHandleRef}  className="fixed bottom-4 right-4 w-[300px] h-[200px] cursor-move z-[9999] bg-black opacity-20"></div>										 */}
 
-																<iframe
-																	id="player"
-																	ref={videoRef}
-																	title="My YouTube Video "
-																	className={`fixed bottom-24 right-4 w-[480px] h-[320px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`}
-																	src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
-																	width="100%"
-																	height="100%"
-																	frameBorder="0"
-																	allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-																></iframe>
-																<canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
-
-
-															</div>
-															: null)
+															<iframe
+																id="player"
+																ref={videoRef}
+																title="My YouTube Video "
+																className={`fixed bottom-24 right-4 w-[480px] h-[320px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`}
+																src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
+																width="100%"
+																height="100%"
+																frameBorder="0"
+																allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+															></iframe>
+															<canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
 
 
-													}
+														</div>
+														: null)
+												}
 
-												</div>
+												{data.source_type === "tv" &&
+													((transcript.length > 0 || data.complete === true) ?
+														<div>
+
+															{/* <div id="drag-handle" ref={dragHandleRef}  className="fixed bottom-4 right-4 w-[300px] h-[200px] cursor-move z-[9999] bg-black opacity-20"></div>										 */}
+															<iframe
+																ref={videoRef}
+																className={`fixed bottom-24 right-4 w-[480px] h-[320px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`}
+																src={`https://player.twitch.tv/?video=v${data.source_id}&parent=${window.location.href.includes("localhost") ? "localhost" : "alphy.app"}&autoplay=${autoplay}&t=${timestamp}`}
+																width="100%"
+																height="100%"
+																allowFullScreen={true}
+															></iframe>
+															<canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
 
 
-												<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type === "sp" ? "hidden lg:flex" : " hidden"}`}>
-													<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
-														<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto" />
-														<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
-															Listen to <span className="font-bold pb-6 hyphenate font-averta-semibold">"{`${title}`.substring(0, 90)} {title.length > 90 && "..."}"</span>  on Twitter
-														</p>
+														</div>
+														: null)
+												}
 
-													</a>
-												</div>
+												{data.source_type === "ap" &&
+													((transcript.length > 0 || data.complete === true) ?
+														<div>
+
+															{/* <div id="drag-handle" ref={dragHandleRef}  className="fixed bottom-4 right-4 w-[300px] h-[200px] cursor-move z-[9999] bg-black opacity-20"></div>										 */}
+															<iframe
+																ref={videoRef}
+																className={`fixed drop-shadow-xl  bottom-24 right-4 w-[540px] h-[160px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`}
+																src={`https://embed.podcasts.apple.com/podcast/id${data.source_id.split("-")[0]}?i=${data.source_id.split("-")[1]}&theme=${localStorage.getItem("theme") === "dark" ? "dark" : "light"}`}
+																width="100%"
+																height="100%"
+																allowFullScreen={true}
+															></iframe>
+
+
+														</div>
+														: null)
+												}
 
 											</div>
-										}
 
 
-										<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "yt" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
-											{showYouTubeFrame ?
-												<ArrowDownwardIcon fontSize="large" className="text-white " />
-												:
-												<YouTubeIcon fontSize="large" className="text-white" />
-											}
-										</button>
-
-
-
-										<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "sp" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
-											{showYouTubeFrame ?
-												<ArrowDownwardIcon fontSize="large" className="text-white " />
-												:
-												<TwitterIcon fontSize="large" className="text-white" />
-											}
-										</button>
-
-
-
-
-
-										<div className={`col-span-2 ${data.source_type === "yt" && ""} drop-shadow-sm `}>
-											{summary.key_qa !== undefined && summary.key_qa === null ? (
-												<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
-													<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center italic ">
-
-														Generating questions... plugging in an AI assistant...
-
-														<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={140} alt="My SVG" />
-
-
+											<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type === "sp" ? "hidden lg:flex" : " hidden"}`}>
+												<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
+													<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto" />
+													<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
+														Listen to <span className="font-bold pb-6 hyphenate font-averta-semibold">"{`${title}`.substring(0, 90)} {title.length > 90 && "..."}"</span>  on Twitter
 													</p>
-												</div>
 
+												</a>
+											</div>
 
-											) : (
-												summary.key_qa && (
-													<QuestionAnswering
-														source_id={data.source_id}
-														source_type={data.source_type}
-														selectionCall={selectionCall}
-														setSelectionCall={setSelectionCall}
-														key_qa={summary.key_qa}
-														inputValue={inputValue}
-														setInputValue={setInputValue}
-														buttonRef={buttonRef}
-														inputRef={inputRef}
-														data={data}
-														transcript={transcript}
-														timestampChanger={timestampChanger}
-													/>
-												)
-											)}
 										</div>
+									}
+
+
+									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "yt" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
+										{showYouTubeFrame ?
+											<ArrowDownwardIcon fontSize="large" className="text-white " />
+											:
+											<YouTubeIcon fontSize="large" className="text-white" />
+
+										}
+									</button>
+
+
+									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "tv" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#9146ff] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
+										{showYouTubeFrame ?
+											<ArrowDownwardIcon fontSize="large" className="text-black " />
+											:
+											<img src={TwitchIcon} fontSize="large" className="text-white opacity-80" width={35} height={35} />
+										}
+									</button>
+
+
+
+									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "sp" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
+										{showYouTubeFrame ?
+											<ArrowDownwardIcon fontSize="large" className="text-white " />
+											:
+											<TwitterIcon fontSize="large" className="text-white" />
+										}
+									</button>
+
+									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "ap" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#ff4cd7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
+										{showYouTubeFrame ?
+											<ArrowDownwardIcon fontSize="large" className="text-white " />
+											:
+
+											<svg fill="#ffffff" width="35px" height="35px" viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
+												<g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+												<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+												<g id="SVGRepo_iconCarrier">
+
+													<path d="M267.429 488.563C262.286 507.573 242.858 512 224 512c-18.857 0-38.286-4.427-43.428-23.437C172.927 460.134 160 388.898 160 355.75c0-35.156 31.142-43.75 64-43.75s64 8.594 64 43.75c0 32.949-12.871 104.179-20.571 132.813zM156.867 288.554c-18.693-18.308-29.958-44.173-28.784-72.599 2.054-49.724 42.395-89.956 92.124-91.881C274.862 121.958 320 165.807 320 220c0 26.827-11.064 51.116-28.866 68.552-2.675 2.62-2.401 6.986.628 9.187 9.312 6.765 16.46 15.343 21.234 25.363 1.741 3.654 6.497 4.66 9.449 1.891 28.826-27.043 46.553-65.783 45.511-108.565-1.855-76.206-63.595-138.208-139.793-140.369C146.869 73.753 80 139.215 80 220c0 41.361 17.532 78.7 45.55 104.989 2.953 2.771 7.711 1.77 9.453-1.887 4.774-10.021 11.923-18.598 21.235-25.363 3.029-2.2 3.304-6.566.629-9.185zM224 0C100.204 0 0 100.185 0 224c0 89.992 52.602 165.647 125.739 201.408 4.333 2.118 9.267-1.544 8.535-6.31-2.382-15.512-4.342-30.946-5.406-44.339-.146-1.836-1.149-3.486-2.678-4.512-47.4-31.806-78.564-86.016-78.187-147.347.592-96.237 79.29-174.648 175.529-174.899C320.793 47.747 400 126.797 400 224c0 61.932-32.158 116.49-80.65 147.867-.999 14.037-3.069 30.588-5.624 47.23-.732 4.767 4.203 8.429 8.535 6.31C395.227 389.727 448 314.187 448 224 448 100.205 347.815 0 224 0zm0 160c-35.346 0-64 28.654-64 64s28.654 64 64 64 64-28.654 64-64-28.654-64-64-64z" />
+
+												</g>
+
+											</svg>
+										}
+									</button>
 
 
 
 
 
+									<div className={`col-span-2 ${data.source_type === "yt" && ""} drop-shadow-sm `}>
+										{summary.key_qa !== undefined && summary.key_qa === null ? (
+											<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
+												<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center italic ">
+
+													Generating questions... plugging in an AI assistant...
+
+													<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={140} alt="My SVG" />
+
+
+												</p>
+											</div>
+
+
+										) : (
+											summary.key_qa && (
+												<QuestionAnswering
+													source_id={data.source_id}
+													source_type={data.source_type}
+													selectionCall={selectionCall}
+													setSelectionCall={setSelectionCall}
+													key_qa={summary.key_qa}
+													inputValue={inputValue}
+													setInputValue={setInputValue}
+													buttonRef={buttonRef}
+													inputRef={inputRef}
+													data={data}
+													transcript={transcript}
+													timestampChanger={timestampChanger}
+												/>
+											)
+										)}
 									</div>
-								}
-								{transcript.length > 0 &&
 
-									<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6 max-w-[700px] mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
-										{transcript.length > 0 ? (
-											<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
-												<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
-													<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto font-averta-semibold	">
-														<li className={`w-1/3 md:w-4/12 ${activeTab === "tab3" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2  font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
-															<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Key Takeaways</button>
-														</li>
-														<li className={` w-1/3 md:w-4/12 ${activeTab === "tab1" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
-															<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Summary</button>
-														</li>
-														<li className={` w-1/3 md:w-4/12 ${activeTab === "tab2" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
-															<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Transcript</button>
-														</li>
-														{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab === "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+
+
+
+								</div>
+							}
+							{transcript.length > 0 &&
+
+								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6 max-w-[700px] mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
+									{transcript.length > 0 ? (
+										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
+
+											<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
+												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto font-averta-semibold	">
+													<li className={`w-1/3 md:w-4/12 ${activeTab === "tab3" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2  font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
+														<button onClick={() => setActiveTab("tab3")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Key Takeaways</button>
+													</li>
+													<li className={` w-1/3 md:w-4/12 ${activeTab === "tab1" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
+														<button onClick={() => setActiveTab("tab1")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Summary</button>
+													</li>
+													<li className={` w-1/3 md:w-4/12 ${activeTab === "tab2" ? "text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor" : "font-averta-semibold hover:text-gray-600 hover:border-gray-300"}`} >
+														<button onClick={() => setActiveTab("tab2")} className={`text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor`}>Transcript</button>
+													</li>
+													{/* 										<li className={` w-1/3 md:w-3/12 ${activeTab === "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
 											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-greenColor`}>Ask questions</button>
 										</li> */}
 
-													</ul>
-												</div>
+												</ul>
+											</div>
 
 
 
 
 
-												<Selection.Root>
-													<Selection.Portal>
-														<Selection.Content>
+											<Selection.Root>
+												<Selection.Portal>
+													<Selection.Content>
 
-															<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-800 dark:text-zinc-800 font-averta-semibold " onClick={handleAskAlphy}> Ask Alphy to learn more about it</Button>
-
-
-															<Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
-
-														</Selection.Content>
-													</Selection.Portal>
-													<Selection.Trigger>
+														<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-800 dark:text-zinc-800 font-averta-semibold " onClick={handleAskAlphy}> Ask Alphy to learn more about it</Button>
 
 
+														<Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" />
 
-														<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 " >
-
-															<Tabs>
-																<Tab eventKey="transcript" title="">
-
-																	{activeTab === "tab3" && (data ? summary.key_takeaways ? summary.key_takeaways.map((item, index) => {
-																		return (
-																			<p className="flex flex-row pb-2 summary-text ">{index + 1})
-																				<ReactMarkdown className="ml-1 ">{item}</ReactMarkdown>
-																			</p>)
+													</Selection.Content>
+												</Selection.Portal>
+												<Selection.Trigger>
 
 
-																	}) : (
 
-																		summary === undefined || summary.length === 0
+													<div ref={contentRef} className="main-content text-zinc-700 dark:text-zinc-200 " >
 
-																			?
+														<Tabs>
+															<Tab eventKey="transcript" title="">
+
+																{activeTab === "tab3" && (data ? summary.key_takeaways ? summary.key_takeaways.map((item, index) => {
+																	return (
+																		<p className="flex flex-row pb-2 summary-text ">{index + 1})
+																			<ReactMarkdown className="ml-1 ">{item}</ReactMarkdown>
+																		</p>)
+
+
+																}) : (
+
+																	summary === undefined || summary.length === 0
+
+																		?
+
+																		<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
+																			This content doesn't have key takeaways. Check out the transcript!
+
+																		</p> :
+
+
+																		<p>
+																			<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
+
+																				Processing key takeaways...
+
+																				<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={80} alt="My SVG" />
+
+
+																			</p>
+																		</p>
+
+																) : null)}
+
+
+																{activeTab === 'tab1' && (
+
+																	<div className={`content-area text-l font-normal  max-w-screen-lg overflow-auto  h-full xl:max-h-[110vh]`}>
+																		{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
+
+
+																		{isLoading ? (
+																			<Loading />
+																		) : summaryArray.length === 0 ? (
 
 																			<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
-																				This content doesn't have key takeaways. Check out the transcript!
 
-																			</p> :
-
-
-																			<p>
-																				<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
-
-																					Processing key takeaways...
-
-																					<img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={80} alt="My SVG" />
-
-
-																				</p>
+																				{summary === undefined || summary.length === 0 ? "This content doesn't have a summary. Check out the transcript!" : "Still waiting for the summary! Meanwhile, check the transcript."}
 																			</p>
 
-																	) : null)}
+																		) : (
+																			summaryArray.map((item, index) => {
+																				return (
+																					<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
+																						<div className="summary-text font-averta-semibold text-l">
+																							<ReactMarkdown >
+																								{item}
+																							</ReactMarkdown>
+																						</div>
 
 
-																	{activeTab === 'tab1' && (
-
-																		<div className={`content-area text-l font-normal  max-w-screen-lg overflow-auto  h-full xl:max-h-[110vh]`}>
-																			{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
 
-																			{isLoading ? (
-																				<Loading />
-																			) : summaryArray.length === 0 ? (
+																					</div>
+																				);
+																			})
+																		)}
+																	</div>
+																)}
+																{activeTab === 'tab2' && (
+																	<div className="content-area text-l font-normal max-w-screen-md overflow-auto h-full xl:max-h-[110vh] ">
 
-																				<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center py-10">
+																		{isLoading ? (
+																			<Loading />
+																		) : (
+																			transcript.map((item, index) => {
 
-																					{summary === undefined || summary.length === 0 ? "This content doesn't have a summary. Check out the transcript!" : "Still waiting for the summary! Meanwhile, check the transcript."}
-																				</p>
 
-																			) : (
-																				summaryArray.map((item, index) => {
+																				if (index % 2 === 0 && index < transcript.length) {
 																					return (
-																						<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
-																							<div className="summary-text font-averta-semibold text-l">
-																								<ReactMarkdown >
-																									{item}
-																								</ReactMarkdown>
+																						window.innerWidth > 999 && (data.source_type === "yt" || data.source_type === "tv") ?
+																							<div className="flex flex-row dark:text-zinc-300">
+																								<a
+																									onClick={handleClickTimestamp}
+																									className={`${(data.source_type === 'yt' || data.source_type === 'tv')
+																										? 'lg:cursor-pointer lg:pointer-events-auto'
+																										: ''
+																										} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-zinc-300`}
+																									key={index}
+																								>
+																									<br></br>
+
+
+																									<p className="text-md summary-text ">{item}{' '}</p>
+
+																								</a>
+
+
+
+																								<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end `} >
+																									<Popover
+
+																									>
+
+
+
+																										<PopoverHandler>
+																											<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier === undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
+																												<button className={`${props.tier === "free" || props.tier === undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm  font-averta-semibold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
+
+																													{downloading ? <Spinner className="flex justify-center mx-auto opacity-70 pointer-events-none" color="gray" /> : "Download Transcript"}
+
+																												</button>
+																											</button>
+																										</PopoverHandler>
+
+																										<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white font-averta-semibold  rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
+																											<ThemeProvider value={themePopover}>
+																												<PopoverContent background="indigo">
+																													{props.tier !== undefined && props.tier != "free" && basicDataLoaded === true ?
+
+																														<div className="">
+																															<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																																<p className="font-averta-semibold">Download as Plain Subtitles (.srt)</p>
+																															</div>
+
+																															<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																																<p className="font-averta-semibold">Download Formatted Transcript (.txt)</p>
+																															</div>
+																														</div>
+																														:
+
+																														<div className="px-3 cursor-pointer py-2 pointer-events-none ">
+																															<p className="font-averta-semibold">Upgrade your plan to download the transcript</p>
+																														</div>}
+																												</PopoverContent>
+																											</ThemeProvider>
+
+																										</div>
+																									</Popover>
+
+																								</div>
+
+
 																							</div>
 
+																							:
+																							<div className="flex flex-row">
+																								<a
+																									target="_blank" href={data.source_type !== "up" ?
+																										(
+																											(data.source_type === "yt" && `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}`)
+																											|| (data.source_type === "tv" && `https://www.twitch.tv/videos/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0])) + "h" + Math.floor(parseInt(item.split(':')[1])) + "m" + Math.floor(parseInt(item.split(':')[2])) + "s"}`)
+																											|| (data.source_type === "sp" && `https://twitter.com/i/spaces/${data.source_id}`)
+																										)
+
+																										: null}
 
 
+																									className={`summary-text  ${(data.source_type === 'yt' || data.source_type === 'tv')
+																										? 'lg:cursor-pointer lg:pointer-events-auto'
+																										: ''
+																										}  lg:pointer-events-auto lg:text-slate-900 dark:text-zinc-300 font-bold underline`}
+																									key={index}
+																								>
+																									<br></br>
 
+																									{item}{' '}
+
+
+																								</a>
+
+																								<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`}>
+																									<Popover>
+																										<PopoverHandler>
+																											<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier === undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
+
+																												<button className={`${props.tier === "free" || props.tier === undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white font-averta-semibold`}>
+
+																													{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray" /> : "Download Transcript"}
+
+																												</button>
+
+																											</button>
+																										</PopoverHandler>
+
+																										<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
+																											<ThemeProvider value={themePopover}>
+																												<PopoverContent background="indigo">
+																													{props.tier !== undefined && props.tier != "free" && basicDataLoaded === true ?
+
+																														<div>
+																															<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																																<p className=" font-averta-semibold">Download as Plain Subtitles (.srt)</p>
+																															</div>
+
+																															<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
+																																<p className="font-averta-semibold">Download Formatted Transcript (.txt)</p>
+																															</div>
+																														</div>
+																														:
+
+																														<div className="px-3 cursor-pointer py-2 pointer-events-none font-averta-semibold ">
+																															<p className="">Upgrade your plan to download the transcript</p>
+																														</div>}
+																												</PopoverContent>
+																											</ThemeProvider>
+
+																										</div>
+																									</Popover>
+
+																								</div>
+
+																							</div>
+
+																					);
+																				} else if (index % 2 === 1 && index < transcript.length) {
+																					return (
+																						<div className="summary-text " key={index}>
+																							<br></br>
+																							{item}
 																						</div>
 																					);
-																				})
-																			)}
-																		</div>
-																	)}
-																	{activeTab === 'tab2' && (
-																		<div className="content-area text-l font-normal max-w-screen-md overflow-auto h-full xl:max-h-[110vh] ">
+																				}
+																			})
+																		)}
+																	</div>
+																)}
+															</Tab>
+														</Tabs>
+													</div>
+												</Selection.Trigger>
 
-																			{isLoading ? (
-																				<Loading />
-																			) : (
-																				transcript.map((item, index) => {
+											</Selection.Root>
+										</div>
+									) : (
+										<div>
 
-
-																					if (index % 2 === 0 && index < transcript.length) {
-																						return (
-																							window.innerWidth > 999 && data.source_type === "yt" ?
-																								<div className="flex flex-row dark:text-zinc-300">
-																									<a
-																										onClick={handleClickTimestamp}
-																										className={`${data.source_type === 'yt'
-																											? 'lg:cursor-pointer lg:pointer-events-auto'
-																											: ''
-																											} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-zinc-300`}
-																										key={index}
-																									>
-																										<br></br>
+										</div>
+									)}
+								</div>}{' '}
+						</div>
+						:
 
 
-																										<p className="text-md summary-text ">{item}{' '}</p>
+						<div className="flex flex-col mb-20 mt-20 ">
+							{(errorMessage === true || (languagesWanted.includes(language) === true) || languages.includes(language) || (summary !== undefined && summary.summary !== undefined && summary.summary !== null && summary.summary.length > 0) || (contentSummaries !== undefined && contentSummaries.length > 1 && (contentSummaries[0].lang === language || contentSummaries[1].lang === language)) || language === "en")
 
-																									</a>
+								? null :
 
+								<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
 
+									Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.tier !== undefined && props.tier !== "free" ? <p className="font-averta-regular">Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
+										: <p className="font-averta-regular">Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "account" : "plans"}</a> page for more detail</p>}
 
-																									<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end `} >
-																										<Popover
-
-																										>
-
-
-
-																											<PopoverHandler>
-																												<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier === undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
-																													<button className={`${props.tier === "free" || props.tier === undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm  font-averta-semibold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}>
-
-																														{downloading ? <Spinner className="flex justify-center mx-auto opacity-70 pointer-events-none" color="gray" /> : "Download Transcript"}
-
-																													</button>
-																												</button>
-																											</PopoverHandler>
-
-																											<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white font-averta-semibold  rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
-																												<ThemeProvider value={themePopover}>
-																													<PopoverContent background="indigo">
-																														{props.tier != undefined && props.tier != "free" && basicDataLoaded === true ?
-
-																															<div className="">
-																																<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																																	<p className="font-averta-semibold">Download as Plain Subtitles (.srt)</p>
-																																</div>
-
-																																<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																																	<p className="font-averta-semibold">Download Formatted Transcript (.txt)</p>
-																																</div>
-																															</div>
-																															:
-
-																															<div className="px-3 cursor-pointer py-2 pointer-events-none ">
-																																<p className="font-averta-semibold">Upgrade your plan to download the transcript</p>
-																															</div>}
-																													</PopoverContent>
-																												</ThemeProvider>
-
-																											</div>
-																										</Popover>
-
-																									</div>
-
-
-																								</div>
-
-																								:
-																								<div className="flex flex-row">
-																									<a
-
-																										target="_blank" href={data.source_type !== "up" ? "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}` : `https://twitter.com/i/spaces/${data.source_id}` : null}
-
-
-																										className={`summary-text  ${data.source_type === 'yt'
-																											? 'lg:cursor-pointer lg:pointer-events-auto'
-																											: ''
-																											}  lg:pointer-events-auto lg:text-slate-900 dark:text-zinc-300 font-bold underline`}
-																										key={index}
-																									>
-																										<br></br>
-
-																										{item}{' '}
-
-
-																									</a>
-
-																									<div className={`${index !== 0 ? "hidden" : ""}   flex ml-auto justify-end flex-row justify-end`}>
-																										<Popover>
-																											<PopoverHandler>
-																												<button id="popoverButtonDownload" data-popover-target="popoverHover" data-popover-trigger="hover" className={`${props.tier === "free" || props.tier === undefined ? "cursor-default dark:invert" : ""} mr-8 opacity-80 pt-4`} >
-
-																													<button className={`${props.tier === "free" || props.tier === undefined ? "bg-indigo-200 text-white pointer-events-none" : ""} text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white font-averta-semibold`}>
-
-																														{downloading ? <Spinner className="flex justify-center mx-auto opacity-70" color="gray" /> : "Download Transcript"}
-
-																													</button>
-
-																												</button>
-																											</PopoverHandler>
-
-																											<div data-popover id="popoverHover" role="tooltip" className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode ">
-																												<ThemeProvider value={themePopover}>
-																													<PopoverContent background="indigo">
-																														{props.tier !== undefined && props.tier != "free" && basicDataLoaded === true ?
-
-																															<div>
-																																<div onClick={() => handleDownload(1)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																																	<p className=" font-averta-semibold">Download as Plain Subtitles (.srt)</p>
-																																</div>
-
-																																<div onClick={() => handleDownload(2)} className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold  dark:hover:bg-zinc-200 dark:hover:text-zinc-500">
-																																	<p className="font-averta-semibold">Download Formatted Transcript (.txt)</p>
-																																</div>
-																															</div>
-																															:
-
-																															<div className="px-3 cursor-pointer py-2 pointer-events-none font-averta-semibold ">
-																																<p className="">Upgrade your plan to download the transcript</p>
-																															</div>}
-																													</PopoverContent>
-																												</ThemeProvider>
-
-																											</div>
-																										</Popover>
-
-																									</div>
-
-																								</div>
-
-																						);
-																					} else if (index % 2 === 1 && index < transcript.length) {
-																						return (
-																							<div className="summary-text " key={index}>
-																								<br></br>
-																								{item}
-																							</div>
-																						);
-																					}
-																				})
-																			)}
-																		</div>
-																	)}
-																</Tab>
-															</Tabs>
-														</div>
-													</Selection.Trigger>
-
-												</Selection.Root>
-											</div>
-										) : (
-											<div>
-
-											</div>
-										)}
-									</div>}{' '}
-							</div>
-							:
-
-
-							<div className="flex flex-col mb-20 mt-20 ">
-								{(errorMessage === true || (languagesWanted.includes(language) === true) || languages.includes(language) || (summary !== undefined && summary.summary !== undefined && summary.summary !== null && summary.summary.length > 0) || (contentSummaries !== undefined && contentSummaries.length > 1 && (contentSummaries[0].lang === language || contentSummaries[1].lang === language)) || language === "en")
-
-									? null :
-
-									<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
-
-										Seems like Alphy hasn't processed the content in {language_codes[language]} yet. {props.tier !== undefined && props.tier !== "free" ? <p className="font-averta-regular">Request Alphy to generate summary, key takeaways, and questions in {language_codes[language]} clicking <a onClick={requestTranslation} className="underline text-greenColor cursor-pointer">here</a>.</p>
-											: <p className="font-averta-regular">Upgrade your plan request translation. You can check out the <a className="underline text-green-300" href={currentUser ? "/account" : "/plans"}>{currentUser ? "account" : "plans"}</a> page for more detail</p>}
-
-										{/* 	<div className="ml-4 mt-12">
+									{/* 	<div className="ml-4 mt-12">
 						<button type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Request Summary</button>
 					</div> */}
-									</p>
-								}
+								</p>
+							}
 
-							</div>
+						</div>
 
 					}
 				</div>
 
 			</div>
 
-			{basicDataLoaded === true && <div>
-				{data !== null && transcript.length === 0 && (language === "en") ?
+			{
+				basicDataLoaded === true && <div>
+					{data !== null && transcript.length === 0 && (language === "en") ?
 
-					<div className="flex flex-col mb-20 mt-20 ">
-						<p className="text-xl text-zinc-500 dark:text-zinc-200  max-w-screen-md mx-auto p-3 text-center">
+						<div className="flex flex-col mb-20 mt-20 ">
+							<p className="text-xl text-zinc-500 dark:text-zinc-200  max-w-screen-md mx-auto p-3 text-center">
 
-							<span className="font-averta-regular">
-								Alphy is doing its best to process this {data.source_type === "yt" ? "video" : "recording"}, it will be ready in a few minutes. Meanwhile, you can check out other videos.
-								<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
-							</span>
+								<span className="font-averta-regular">
+									Alphy is doing its best to process this {data.source_type === "yt" ? "video" : "recording"}, it will be ready in a few minutes. Meanwhile, you can check out other videos.
+									<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
+								</span>
 
-						</p>
+							</p>
 
-					</div> : null
-				}
-				{((summary != undefined && summary !== null && summary.summary === null && summary.lang !== "en" && language !== "en" && summary.summary === undefined) || (languagesWanted.includes(language) === true && language !== "en")) && <div className="flex flex-col mb-20 mt-20 ">
-					{data !== null &&
-						<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular  max-w-screen-md mx-auto p-3 text-center">
-
-							Alphy is currently working hard to translate this  {data.source_type === "yt" ? "video" : "recording"} to {language_codes[language]}. Please come back in a few minutes!
-
-							<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
-
-						</p>
+						</div> : null
 					}
-				</div>}
-			</div>}
-			{errorMessage === true && <div className="flex flex-col mb-20 mt-20 ">
-				<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
+					{((summary != undefined && summary !== null && summary.summary === null && summary.lang !== "en" && language !== "en" && summary.summary === undefined) || (languagesWanted.includes(language) === true && language !== "en")) && <div className="flex flex-col mb-20 mt-20 ">
+						{data !== null &&
+							<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular  max-w-screen-md mx-auto p-3 text-center">
 
-					There was an error with the request :( <br></br><br></br>Please refresh the page and try again. If the issue persists, please contact us at support@alphy.app
+								Alphy is currently working hard to translate this  {data.source_type === "yt" ? "video" : "recording"} to {language_codes[language]}. Please come back in a few minutes!
+
+								<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
+
+							</p>
+						}
+					</div>}
+				</div>
+			}
+			{
+				errorMessage === true && <div className="flex flex-col mb-20 mt-20 ">
+					<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
+
+						There was an error with the request :( <br></br><br></br>Please refresh the page and try again. If the issue persists, please contact us at support@alphy.app
 
 
 
-				</p>
+					</p>
 
-			</div>}
+				</div>
+			}
 
 			<button
 				onClick={handleScroll}
@@ -1732,6 +1821,6 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 			>
 				<ArrowUpwardIcon className="" />
 			</button>
-		</div>
+		</div >
 	);
 }

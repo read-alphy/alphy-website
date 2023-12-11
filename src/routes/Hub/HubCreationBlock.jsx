@@ -5,152 +5,191 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ChatIcon from '@mui/icons-material/Chat';
 import LinkIcon from '@mui/icons-material/Link';
 import Dialog from '@mui/material/Dialog';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PublishIcon from '@mui/icons-material/Publish';
-import { Button} from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import { API_URL } from '../../constants';
 
 
 
 
-export default function HubCreationBlock({currentUser, tier, credit}){
+export default function HubCreationBlock({ currentUser, tier, credit }) {
     const [submitDialog, setSubmitDialog] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [failed, setFailed] = useState(false);
 
-    const navigate = useNavigate(); 
-    
+    const navigate = useNavigate();
+
 
     const handleSubmit = (event, selectedOption) => {
-		
-			if(!(
-				inputValue.includes('https://www.youtube.com/watch') ||
-				inputValue.includes('https://youtu.be') ||
-				inputValue.includes('https://m.youtube.com') ||
-				inputValue.includes('https://twitter.com/i/spaces') ||
-				inputValue.includes('https://www.youtube.com/live')
-                )
-			)
-		 {
-			setInputValue('');
-			setErrorMessage('Please provide a link to a YouTube video or Twitter Space.')
-			setFailed(true)
-			return;
-		}
-		else {
-			let videoId
-			let video_source
-			//check if video already exists
-			if (inputValue.includes('https://www.youtube.com')) {
-				
-				if(inputValue.includes('https://www.youtube.com/watch')){
-				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
-				
-				}
-				else if(inputValue.includes('https://www.youtube.com/live') ){
-					videoId = inputValue.split('/').pop().split("?")[0];
-					
-				}
-				video_source = "yt"
-				
-			
-		}
 
-			else if (inputValue.includes('https://youtu.be')) {
-				videoId = inputValue.split('/').pop().split("?")[0];
-				video_source = "yt"
+        if (!(
+            inputValue.includes('https://www.youtube.com/watch') ||
+            inputValue.includes('https://youtu.be') ||
+            inputValue.includes('https://m.youtube.com') ||
+            inputValue.includes('https://twitter.com/i/spaces') ||
+            inputValue.includes('https://www.youtube.com/live') ||
+            inputValue.includes('https://podcasts.apple.com') ||
+            inputValue.includes('https://www.twitch.tv') ||
+            inputValue.includes('https://www.twitch.com')
+        )
+        ) {
+            setInputValue('');
+            setErrorMessage('Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast.')
+            setFailed(true)
+            return;
+        }
+        else {
+            let videoId
+            let video_source
+            //check if video already exists
+            if (inputValue.includes('https://www.youtube.com')) {
 
-			}
+                if (inputValue.includes('https://www.youtube.com/watch')) {
+                    videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
 
-			else if (inputValue.includes('https://m.youtube.com')) {
-				videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
-				video_source = "yt"
+                }
+                else if (inputValue.includes('https://www.youtube.com/live')) {
+                    videoId = inputValue.split('/').pop().split("?")[0];
 
-			}
-			else if (inputValue.includes('https://twitter.com/i/spaces')) {
-				if (tier==="basic" || tier==="premium"){
-				videoId = inputValue.split('/').pop().split("?")[0];
-				video_source = "sp"
-				}
-				else{
+                }
+                video_source = "yt"
+
+
+            }
+
+            else if (inputValue.includes('https://youtu.be')) {
+                videoId = inputValue.split('/').pop().split("?")[0];
+                video_source = "yt"
+
+            }
+
+            else if (inputValue.includes('https://m.youtube.com')) {
+                videoId = inputValue.split('/').pop().split('?v=')[1].split("&")[0];
+                video_source = "yt"
+
+            }
+            else if (inputValue.includes('https://twitter.com/i/spaces')) {
+                if (tier === "basic" || tier === "premium") {
+                    videoId = inputValue.split('/').pop().split("?")[0];
+                    video_source = "sp"
+                }
+                else {
                     setFailed(true)
-					setErrorMessage('Upgrade your plan to process Twitter Spaces. See Account page for more detail.');
-					return;
-				}
+                    setErrorMessage('Upgrade your plan to process Twitter Spaces. See Account page for more detail.');
+                    return;
+                }
 
-			}
+            }
+
+            else if (inputValue.includes("https://podcasts.apple.com")) {
+                if (tier === "basic" || tier === "premium") {
+                    const idRegex = /id(\d+)/;
+                    const iRegex = /i=(\d+)/;
+
+                    const idMatch = inputValue.match(idRegex);
+                    const iMatch = inputValue.match(iRegex);
+
+                    const podcastId = idMatch ? idMatch[1] : '';
+                    const episodeId = iMatch ? iMatch[1] : '';
+
+                    videoId = `id${podcastId}-${episodeId}`;
+                    video_source = "ap"
+                }
+                else {
+                    setFailed(true)
+                    setErrorMessage('Upgrade your plan to process Apple Podcasts. See Account page for more detail.');
+                    return;
+                }
+            }
+            else if (inputValue.includes("https://twitch.tv") || inputValue.includes("https://www.twitch.com")) {
+                if (tier === "basic" || tier === "premium") {
+
+                    const regex = /twitch\.tv\/videos\/(\d+)/;
+                    const match = inputValue.match(regex);
+                    videoId = match ? match[1] : '';
+                    video_source = "tv"
+                }
+                else {
+                    setFailed(true)
+                    setErrorMessage('Upgrade your plan to process Twitch recordings. See Account page for more detail.');
+                    return;
+                }
+            }
 
 
-			if (currentUser) {
-				setLoading(true);
-				// get id token
-				currentUser.getIdToken().then((idToken) => {
-					
-				axios
-						.post(
-							`${API_URL}/sources/`,
-							{
-								url: inputValue,
-							},
-							{
-								headers: {
-									'id-token': idToken,
-								},
-							},
-						)
-						.then((response) => {
+
+
+            if (currentUser) {
+                setLoading(true);
+
+                // get id token
+                currentUser.getIdToken().then((idToken) => {
+
+                    axios
+                        .post(
+                            `${API_URL}/sources/`,
+                            {
+                                url: inputValue,
+                            },
+                            {
+                                headers: {
+                                    'id-token': idToken,
+                                },
+                            },
+                        )
+                        .then((response) => {
                             sessionStorage.setItem("refreshCredit", "true")
-							setErrorMessage("")
-							setLoading(false);
-							setFailed(false)
-							setInputValue('');
-								navigate(`/${video_source}/${videoId}`)
+                            setErrorMessage("")
+                            setLoading(false);
+                            setFailed(false)
+                            setInputValue('');
+                            navigate(`/${video_source}/${videoId}`)
 
-						}).
-						catch((error) => {
+                        }).
+                        catch((error) => {
                             console.log(error)
-                            if(errorMessage.length===0){
-                                
-                                if (tier==="basic" || tier==="premium"){
-								setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
-                            }
-						
-						else{	
-								if(error.response.data.detail=="Video not popular enough for free users")
-								{
-									setErrorMessage("Make sure the content you are submitting has more than 10,000 views.")
-								}
-								else if(error.response.data.detail=="Not enough minutes"){
+                            if (errorMessage.length === 0) {
 
-									setErrorMessage("You don't have enough credits to submit this content.")
-								}
-                                else if (error.response.data.detail=="Free users cannot submit twitter spaces"){
-                                    setErrorMessage("Upgrade your plan to process Twitter Spaces. See Account page for more detail.");
+                                if (tier === "basic" || tier === "premium") {
+                                    setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
                                 }
-								else {
-									setErrorMessage("There was an error submitting the form. Please try again.")
-								}
-				
-						}
-                    }
-							setFailed(true)
-							setInputValue('');
-							setLoading(false);
-							throw error;
-						});
-				});
-			} else {
-				// sign in
-				// navigate('/auth');
-				setErrorMessage('Please sign in to submit content.');
-			}
-		}
+
+                                else {
+                                    if (error.response.data.detail == "Video not popular enough for free users") {
+                                        setErrorMessage("Make sure the content you are submitting has more than 10,000 views.")
+                                    }
+                                    else if (error.response.data.detail == "Not enough minutes") {
+
+                                        setErrorMessage("You don't have enough credits to submit this content.")
+                                    }
+                                    else if (error.response.data.detail == "Free users cannot submit twitter spaces") {
+                                        setErrorMessage("Upgrade your plan to process Twitter Spaces. See Account page for more detail.");
+                                    }
+                                    else {
+                                        setErrorMessage("There was an error submitting the form. Please try again.")
+                                    }
+
+                                }
+                            }
+                            setFailed(true)
+                            setInputValue('');
+                            setLoading(false);
+                            throw error;
+                        });
+                });
+            } else {
+                // sign in
+                // navigate('/auth');
+                setErrorMessage('Please sign in to submit content.');
+            }
+        }
     }
 
-    return(
+    return (
         <div className="mt-10 md:pl-20">
             <p className="px-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-greenColor text-xl mb-10 font-bold">
                 It's your hub: create, discover, and share.
@@ -158,36 +197,36 @@ export default function HubCreationBlock({currentUser, tier, credit}){
 
             <div className="flex flex-row gap-20 w-full px-10">
                 <div className=" bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
-                onClick={() => setSubmitDialog(true)}>
+                    onClick={() => setSubmitDialog(true)}>
                     <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
-                       <p className="text-emerald-300 text-lg font-semibold "> Submit a Link
+                        <p className="text-emerald-300 text-lg font-semibold "> Submit a Link
 
-                       </p>
-                       <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
-                        Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
-                       </p>
-                       <div className="flex-row flex mt-5">
-                         
-                            <LinkIcon fontSize="large" className="text-emerald-200"/>
-                       </div>
-                       <button className="mt-5 px-5 py-2 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-emerald-200 to-yellow-200 rounded-md text-white mb-5">
-                        Submit
-                       </button>
+                        </p>
+                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
+                            Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
+                        </p>
+                        <div className="flex-row flex mt-5">
+
+                            <LinkIcon fontSize="large" className="text-emerald-200" />
+                        </div>
+                        <button className="mt-5 px-5 py-2 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-emerald-200 to-yellow-200 rounded-md text-white mb-5">
+                            Submit
+                        </button>
                     </div>
                 </div>
                 <div className=" bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
                     <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
-                         <p className="text-indigo-400 text-lg font-semibold">
-                                Upload a Recording
-                                </p>
-                                <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center ">
+                        <p className="text-indigo-400 text-lg font-semibold">
+                            Upload a Recording
+                        </p>
+                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center ">
                             Import an audio file from your device to transcribe, summarize, and question with Alphy.
-                            </p>
-                                <CloudUploadIcon fontSize="large" className="text-indigo-300 mt-5"/>
-                                <button className="mt-5 px-5 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 mb-5 rounded-md text-white"
-                    >
-                        Upload
-                          </button>
+                        </p>
+                        <CloudUploadIcon fontSize="large" className="text-indigo-300 mt-5" />
+                        <button className="mt-5 px-5 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 mb-5 rounded-md text-white"
+                        >
+                            Upload
+                        </button>
                     </div>
 
                 </div>
@@ -196,131 +235,131 @@ export default function HubCreationBlock({currentUser, tier, credit}){
                         <p className="text-red-300 text-lg font-semibold">
                             Create an Arc
                         </p>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
-                        Create your own AI-assisted search engine on countless hours of audiovisual content.
+                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
+                            Create your own AI-assisted search engine on countless hours of audiovisual content.
                         </p>
-                            <ChatIcon fontSize="large" className="text-yellow-300 mt-5"/>
-                            <button className="mt-5 px-5 py-2 bg-gradient-to-b from-red-200 via-red-300 to-yellow-200 mb-5 rounded-md text-white"
-                >
-                    Create
+                        <ChatIcon fontSize="large" className="text-yellow-300 mt-5" />
+                        <button className="mt-5 px-5 py-2 bg-gradient-to-b from-red-200 via-red-300 to-yellow-200 mb-5 rounded-md text-white"
+                        >
+                            Create
                         </button>
-                        </div>
+                    </div>
                 </div>
             </div>
 
 
             {submitDialog &&
-			<Dialog maxWidth="md" fullWidth="true" open={submitDialog} onClose={() => setSubmitDialog(false)} >
-				
-                            <div className="p-10 text-zinc-700 h-[50vh] dark:text-zinc-300 bg-white dark:bg-mildDarkMode  items-center  justify-center">
-                                                    
-                                               
+                <Dialog maxWidth="md" fullWidth="true" open={submitDialog} onClose={() => setSubmitDialog(false)} >
+
+                    <div className="p-10 text-zinc-700 h-[50vh] dark:text-zinc-300 bg-white dark:bg-mildDarkMode  items-center  justify-center">
+
+
                         <p className="font-sans font-semibold text-zinc-700 dark:text-zinc-30">
                             Submit your link below</p>
-                                               
 
-                               
-                            
 
-                            
-                            <div className=" sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5 ">
+
+
+
+
+                        <div className=" sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5 ">
                             <div className="sm:col-span-2 lg:col-span-3 relative w-full min-w-[200px] h-12">
-                                        <input 
-                                        
-                                        value={inputValue}
-                                        onChange={(event) => setInputValue(event.target.value)}
-                                        placeholder=" "
+                                <input
 
-                                        className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor"/>
-                                        <label className="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">Insert the link to YouTube video or Twitter Space</label>
+                                    value={inputValue}
+                                    onChange={(event) => setInputValue(event.target.value)}
+                                    placeholder=" "
 
-                                        <div className="sm:hidden">
-                                        <Button size="sm" className="!absolute right-1 top-1 rounded bg-green-300" onClick={(e) => {
-                                            handleSubmit();
-                                        }}> <PublishIcon fontSize="medium"/></Button>
+                                    className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor" />
+                                <label className="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">Insert the link to YouTube video or Twitter Space</label>
+
+                                <div className="sm:hidden">
+                                    <Button size="sm" className="!absolute right-1 top-1 rounded bg-green-300" onClick={(e) => {
+                                        handleSubmit();
+                                    }}> <PublishIcon fontSize="medium" /></Button>
                                 </div>
-                                    </div>
+                            </div>
 
                             <div className={`hidden sm:block sm:col-span-1 mt-5 sm:mt-0 flex ml-5 justify-center md:justify-self-start items-center ${currentUser ? "" : ""}`}>
-                                
-                                    <div>
-                                   
-                                    
+
+                                <div>
+
+
                                     <Button size="sm" type="submit"
                                         onClick={(e) => {
                                             handleSubmit();
                                         }} className=" bg-green-300 dark:text-zinc-300 px-6 py-3 text-sm lg:text-[15px] normal-case">Submit</Button>
-                                    </div>
-                               
+                                </div>
+
                             </div>
-                            </div>
-                            {failed && 
+                        </div>
+                        {failed &&
                             <div className="mx-auto mt-5 text-sm text-red-400 ml-2">
-                            {errorMessage}
+                                {errorMessage}
                             </div>
-                            }
-                             <div className="flex items-center  mt-4 space-x-4 md:justify-center lg:mt-0  ">
+                        }
+                        <div className="flex items-center  mt-4 space-x-4 md:justify-center lg:mt-0  ">
 
-<div className="w-full flex flex-col">
-   
-
-        {currentUser && 
-        <span className="text-sm pl-2 mb-2 text-gray-600 dark:text-zinc-300 mt-4"> 
-        
-        <a href="/account" className="underline">
-            
-            {tier==="free" && "Starter Plan"}
-            {tier==="basic" && "Basic Plan"}
-            {tier==="premium" && "Premium Plan"}
-            </a> - Remaining Credits : {Math.floor(credit)} minutes 
-        
-    </span> }
-
-    
-        <div className="p-3 space-y-2 ">
-
-            {tier==="free" ? 
-            <div>
-            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on the Starter Plan</p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You can only submit YouTube videos. Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions and free Twitter Spaces transcription.</p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2"> Alphy might fail to process content with location limits.</p>
-
-            </div>
-         :   
-         <div>
-            
-            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200 mb-2 ml-1">You are on Premium Plan</p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No duration limit applied.</p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No view limit applied. </p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You have access to <span className="text-greenColor">unlimited Twitter Spaces transcription</span>.</p>
-            <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2">  Alphy might fail to process content with location limits.</p>
-            </div>
-        }
-        
-
-            
-    
-    
-    </div>
+                            <div className="w-full flex flex-col">
 
 
-    
+                                {currentUser &&
+                                    <span className="text-sm pl-2 mb-2 text-gray-600 dark:text-zinc-300 mt-4">
 
-</div>
+                                        <a href="/account" className="underline">
 
-</div>
+                                            {tier === "free" && "Starter Plan"}
+                                            {tier === "basic" && "Basic Plan"}
+                                            {tier === "premium" && "Premium Plan"}
+                                        </a> - Remaining Credits : {Math.floor(credit)} minutes
 
-<div className="border-b border-gray-100 mt-10 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 md:w-1/3"></div>
+                                    </span>}
 
-<div className="flex flex-row mt-5 justify-center mx-auto ml-4"> 
-                    <YouTubeIcon fontSize="large" className="text-emerald-200"/>
-                    <TwitterIcon fontSize="large" className="ml-4 text-emerald-200"/> 
-    </div>
+
+                                <div className="p-3 space-y-2 ">
+
+                                    {tier === "free" ?
+                                        <div>
+                                            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on the Starter Plan</p>
+                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You can only submit YouTube videos. Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions from Twitter Spaces, Twitter videos, Twitch recordings, and Apple Podcasts.</p>
+                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2"> Alphy might fail to process content with location limits.</p>
+
+                                        </div>
+                                        :
+                                        <div>
+
+                                            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200 mb-2 ml-1">You are on Premium Plan</p>
+                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No duration limit applied.</p>
+                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No view limit applied. </p>
+                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You have access to <span className="text-greenColor">unlimited Twitter Spaces transcription</span>.</p>
+                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2">  Alphy might fail to process content with location limits.</p>
+                                        </div>
+                                    }
+
+
+
+
+
+                                </div>
+
+
+
+
                             </div>
 
+                        </div>
 
-			</Dialog>
-			}
+                        <div className="border-b border-gray-100 mt-10 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 md:w-1/3"></div>
+
+                        <div className="flex flex-row mt-5 justify-center mx-auto ml-4">
+                            <YouTubeIcon fontSize="large" className="text-emerald-200" />
+                            <TwitterIcon fontSize="large" className="ml-4 text-emerald-200" />
+                        </div>
+                    </div>
+
+
+                </Dialog>
+            }
 
 
         </div>

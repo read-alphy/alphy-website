@@ -51,11 +51,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 	if (metaTag) {
 		metaTag.setAttribute('content', data.title);
 	}
-
-
 	const fetchData = async (url, constantFetch) => {
-
-
 		try {
 			if (!constantFetch) {
 				setIsLoading(true);
@@ -69,9 +65,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 						if (response.data.lang !== undefined && response.data.lang !== null) {
 							setLanguage(response.data.lang)
 						}
-						if (response.data) {
-							setData(response.data);
-						}
+						setData(response.data);
 						setContentName(response.data.title)
 
 					}
@@ -159,7 +153,6 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 						if (response.data.lang !== undefined && response.data.lang !== null) {
 							setLanguage(response.data.lang)
 						}
-
 						setData(response.data);
 						setIsVisible(response.data.is_visible)
 						setIsPublic(response.data.is_visible)
@@ -190,7 +183,8 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 		}
 	};
 
-
+	// if windows size is less than 768px then collapse the navbar
+	const { width } = useWindowSize();
 
 
 	const url = `${API_URL}/sources/${source_type}/${source_id}`;
@@ -211,7 +205,6 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 			}
 			if (source_type !== "up" && data.length === 0) {
-
 
 				setCalled(true)
 
@@ -243,37 +236,41 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 	};
 
+
 	useEffect(() => {
 		let interval;
-
 		const intervalFetch = () => {
+			let summaryComplete
+
+			if (data !== null && data.summaries !== undefined && data.summaries.find(item => item.lang === language) !== undefined) {
+				summaryComplete = data.summaries.find(item => item.lang === language).complete
 
 
-			// Check if data processing is complete
-			if (data && data.summaries[0] && data.summaries[0].complete === true) {
-				console.log("Data processing complete, stopping interval.");
-				clearInterval(interval);
-				return;
 			}
 
-			// Rest of your intervalFetch logic
+			if (data !== null && summaryComplete == false && called === true) {
 
-			if (data) {
-				if (source_type === "up") {
+				if (source_type === "up" && summaryComplete == false) {
 					fetchDataUpload(url, true);
 				}
-				else {
+				else if (source_type !== "up" && summaryComplete === false) {
 					fetchData(url, true);
 				}
-			}
-		};
 
-		// Start the interval
+			}
+
+			else {
+				return
+			}
+
+		}
 		interval = setInterval(intervalFetch, 5000);
 
-		// Cleanup function to clear the interval when the component unmounts or data changes
-		return () => clearInterval(interval);
-	}, [data]);
+		return () => {
+			// Clean up the interval when the component unmounts
+			clearInterval(interval);
+		};
+	}, []);
 
 	const handleVisibility = () => {
 		const targetVisibility = !isVisible
@@ -358,27 +355,9 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 							:
 
-							(source_type === "up" ?
-
-								currentUser === null ?
-									<div className="flex-col flex mx-10 md:mx-20 mx-auto mt-20 md:mt-40">
-										<div className="text-xl max-w-[600px] text-zinc-700 dark:text-zinc-300 font-averta-semibold">
-											Please <Link to="/u/login" className="underline mt-6 text-zinc-700 dark:text-zinc-300 max-w-[150px] font-averta-semibold">sign in</Link> to access this page.
-										</div>
-
-									</div> :
-
-									<Content data={data} tier={tier} isVisible={isVisible} isPublic={isPublic} handleVisibility={handleVisibility} isBookmarked={isBookmarked}
-										setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub} language={language} setLanguage={setLanguage}
-										handleLanguageChange={handleLanguageChange} />
-
-								:
-
-								<Content data={data} tier={tier} isVisible={isVisible} isPublic={isPublic} handleVisibility={handleVisibility} isBookmarked={isBookmarked}
-									setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub} language={language} setLanguage={setLanguage}
-									handleLanguageChange={handleLanguageChange} />
-
-							)
+							<Content data={data} tier={tier} isVisible={isVisible} isPublic={isPublic} handleVisibility={handleVisibility} isBookmarked={isBookmarked}
+								setIsBookmarked={setIsBookmarked} userArchipelagos={userArchipelagos} actionsHub={actionsHub} language={language} setLanguage={setLanguage}
+								handleLanguageChange={handleLanguageChange} />
 
 
 

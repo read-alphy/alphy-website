@@ -11,6 +11,42 @@ export default function BaseQuestions({ key_qa, data, singleSource, areaRefs, ha
 
 
 
+	function timestampFormatter(sourceStart, sourceEnd) {
+		return (
+			<div>
+				{Math.floor(sourceStart / 3600) < 10 ? `0${Math.floor((sourceStart / 3600))}` : `${Math.floor((sourceStart / 3600))}`}
+				{":"}
+				{Math.floor(sourceStart / 60) < 10 ? `0${(Math.floor(sourceStart / 60))}` : Math.floor(sourceStart % 3600) < 600 ? `0${(Math.floor(sourceStart / 60 - (Math.floor(sourceStart / 3600)) * 60))}` : Math.floor(sourceStart / 60 - (Math.floor(sourceStart / 3600)) * 60)}
+				{":"}
+				{Math.floor(sourceStart % 60) < 10 ? `0${(Math.floor(sourceStart % 60))}` : (Math.floor(sourceStart % 60))}
+
+				{" - "}
+
+				{Math.floor(sourceEnd / 3600) < 10 ? `0${Math.floor((sourceEnd / 3600))}` : `${Math.floor((sourceEnd / 3600))}`}
+				{":"}
+				{Math.floor(sourceEnd / 60) < 10 ? `0${(Math.floor(sourceEnd / 60))}` : Math.floor(sourceEnd % 3600) < 600 ? `0${(Math.floor(sourceEnd / 60 - (Math.floor(sourceEnd / 3600)) * 60))}` : Math.floor(sourceEnd / 60 - (Math.floor(sourceEnd / 3600)) * 60)}
+				{":"}
+				{Math.floor(sourceEnd % 60) < 10 ? `0${(Math.floor(sourceEnd % 60))}` : (Math.floor(sourceEnd % 60))}
+			</div>
+		)
+	}
+
+	function twitchTimestampFormatter(sourceStart) {
+		const hours = Math.floor(sourceStart / 3600);
+		const minutes = Math.floor((sourceStart % 3600) / 60);
+		const seconds = Math.floor(sourceStart % 60);
+
+		const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
+		const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+		const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+		return `${formattedHours}h${formattedMinutes}m${formattedSeconds}s`;
+	}
+
+	// Example usage:
+
+
+
 	return (
 		<div>
 			<p className="mb-5 underline text-l font-averta-semibold text-zinc-600 dark:text-zinc-300">
@@ -49,7 +85,6 @@ export default function BaseQuestions({ key_qa, data, singleSource, areaRefs, ha
 
 										</div>
 
-
 										:
 
 										<div className="font-averta-regular text-md text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: key_qa[item].answer }} />
@@ -85,33 +120,63 @@ export default function BaseQuestions({ key_qa, data, singleSource, areaRefs, ha
 													? key_qa[item].sources.map((source, index) => (
 														<p ref={areaRefs.current[index]} className={`${(singleSource === true && showSource !== index + 1) && "hidden"} font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5`} key={index}>
 
-															{source.start !== null && source.start !== undefined && source.end ? (
-																window.innerWidth > 999 && data.source_type === "yt" ?
-																	<a onClick={updateVariable} className="underline cursor-pointer">
+															{source.start !== null && source.start !== undefined && source.end ?
+
+																(
+																	(data.source_type === "yt" || data.source_type === "tv") ?
+																		(window.innerWidth > 999 ?
+																			(<a onClick={updateVariable} className="underline cursor-pointer">
+
+																				{timestampFormatter(source.start, source.end)}
+																			</a>)
 
 
-																		{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}` : `${Math.floor((source.start / 3600))}`}
-																		{":"}
-																		{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : Math.floor(source.start % 3600) < 600 ? `0${(Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}` : Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60)}
-																		{":"}
-																		{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))}
 
-																		{" - "}
+																			:
+																			(<a target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(source.start)}`
+																				: `https://www.twitch.com/videos/${data.source_id}?t=${twitchTimestampFormatter(source.start)}`} className="underline">
+																				{timestampFormatter(source.start, source.end)}
+																			</a>)
+																		)
 
-																		{Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}` : `${Math.floor((source.end / 3600))}`}
-																		{":"}
-																		{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : Math.floor(source.end % 3600) < 600 ? `0${(Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60))}` : Math.floor(source.end / 60 - (Math.floor(source.end / 3600)) * 60)}
-																		{":"}
-																		{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
-																	</a> : <a target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=${Math.floor(source.start)}` : ""} className="underline">
+																		:
 
-																		{Math.floor(source.start / 3600) < 10 ? `0${Math.floor((source.start / 3600))}:` : `${Math.floor((source.start / 3600))}:`}{Math.floor(source.start / 60) < 10 ? `0${(Math.floor(source.start / 60))}` : (Math.floor(source.start / 60 - (Math.floor(source.start / 3600)) * 60))}:{Math.floor(source.start % 60) < 10 ? `0${(Math.floor(source.start % 60))}` : (Math.floor(source.start % 60))} - {Math.floor(source.end / 3600) < 10 ? `0${Math.floor((source.end / 3600))}:` : `${Math.floor((source.end / 3600))}:`}{Math.floor(source.end / 60) < 10 ? `0${(Math.floor(source.end / 60))}` : (Math.floor(source.end / 60 - Math.floor(source.end / 3600) * 60))}:{Math.floor(source.end % 60) < 10 ? `0${(Math.floor(source.end % 60))}` : (Math.floor(source.end % 60))}
-																	</a>
-															) :
-																window.innerWidth > 999 && data.source_type === "yt" ?
-																	<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
-																	:
-																	<a target="_blank" href={data.source_type === "yt" ? `https://youtu.be/${data.source_id}?t=0` : ""} className="underline">00:00:00</a>
+																		(<a target="_blank" href={
+																			(data.source_type === "ap" ? `https://podcasts.apple.com/podcast/id${data.source_id.split("-")[0]}?i=${data.source_id.split("-")[1]}` :
+																				(data.source_type === "sp" ? `https://twitter.com/i/spaces/${data.source_id}` : null /*for upload */)
+																			)
+																		} className="underline">
+																			{timestampFormatter(source.start, source.end)}
+																		</a>
+																		)
+
+
+
+																)
+																:
+																//if the timestamp is 00:00
+																(
+																	(data.source_type === "yt" || data.source_type === "tv") ?
+																		(window.innerWidth > 999 ?
+																			<a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
+																			:
+																			<a target="_blank" href={
+																				(data.source_type === "yt" && `https://youtu.be/${data.source_id}`)
+																					(data.source_type === "tv" && `https://www.imdb.com/title/${data.source_id}`)
+																			}>00:00:00</a>
+																		)
+																		:
+																		<a target="_blank"
+
+																			href={
+																				(
+																					(data.source_type === "ap" && `https://podcasts.apple.com/podcast/id${data.source_id.split("-")[0]}?i=${data.source_id.split("-")[1]}`)
+																						(data.source_type === "sp" ? `https://twitter.com/i/spaces/${data.source_id}` : "")
+																				)
+																			}
+
+																			className="underline">00:00:00</a>
+																)
 															}
 
 
@@ -138,9 +203,10 @@ export default function BaseQuestions({ key_qa, data, singleSource, areaRefs, ha
 
 						</div>
 					</div>
-				</div>))}
+				</div>))
+			}
 
 
-		</div>
+		</div >
 	)
 }

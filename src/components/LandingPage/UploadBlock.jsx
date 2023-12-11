@@ -314,7 +314,7 @@ export default function UploadBlock({ currentUser, tier, credit }) {
 
             {file === null &&
 
-                (<div className="pb-10 w-full  p-4 ">
+                (<div className="pb-10 w-full py-4">
                     <div className="border-b border-gray-200 dark:border-gray-600 mx-auto items-center flex mb-5 "></div>
 
                     <p className=" dark:text-zinc-200 text-zinc-500 text-md font-averta-semibold items-center ">Use our free converter tool to get your video and audio files ready for transcription. </p>
