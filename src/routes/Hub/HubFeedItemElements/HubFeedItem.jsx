@@ -27,10 +27,10 @@ const HubFeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, side
 		else if (item.source_type === "ap") {
 			imageUrl = ApplePodcastBanner;
 		}
-		else if (item.source_type === "tv") {
+		else if (item.source_type === "tw") {
 			imageUrl = Twitch
 		}
-		else if (item.source_type === "tw") {
+		else if (item.source_type === "x") {
 			imageUrl = X
 		}
 

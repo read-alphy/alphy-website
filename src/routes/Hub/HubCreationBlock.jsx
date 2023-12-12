@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ArcBlock from '../../components/LandingPage/ArcBlock';
 
+
 import UploadBlock from '../../components/LandingPage/UploadBlock';
 
 import SubmitBlock from '../../components/LandingPage/SubmitBlock';
@@ -193,7 +194,7 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
                         .post(
                             `${API_URL}/sources/`,
                             {
-                                url: video_source === "tw" ? inputValue.split('/video/')[0] : inputValue
+                                url: video_source === "x" ? inputValue.split('/video/')[0] : inputValue
                             },
                             {
                                 headers: {
@@ -255,197 +256,204 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
 
     const handleArcNavigation = () => {
         navigate('/arc/createArc')
-
-
     }
+
+    const handleGoBack = () => {
+        setSubmitDialog(false)
+        setUploadDialog(false)
+        setArcDialog(false)
+    }
+
     return (
         <div className="md:mt-10 xl:mt-20 mx-auto ">
 
 
 
-            <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
+            {
+
+                (!submitDialog && !uploadDialog && !arcDialog) &&
+
+                <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
 
 
-                <div className="flex flex-col gap-10">
-                    <div className="text-xl text-stone-900  dark:text-zinc-300 text-center mb-10 font-averta-semibold">
-                        Process New Content
-                    </div>
-
-
-                    <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-105 transition duration-500 ease-in-out"
-
-                        onClick={() => {
-                            setSubmitDialog(true)
-                            handleButtonClick()
-                        }}>
-
-
-                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-                            <p className="text-emerald-300 text-lg font-averta-semibold text-center row-span-1"> Submit a Link
-
-                            </p>
-                            <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
-                                Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
-                            </p>
-                            <div className="row-span-1 w-full justify-center items-center flex">
-                                <LinkIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2" />
-                            </div>
-                            {/*  <button className="max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5 row-span-1 dark:text-zinc-700 dark:font-averta-semibold">
-                                        Submit
-                                    </button> */}
-                        </div>
-                    </div>
-                    <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px] transform hover:scale-105 transition duration-500 ease-in-out">
-                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
-                            onClick={() => setUploadDialog(true)}>
-
-                            <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
-                                Upload a Recording
-                            </p>
-                            <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
-                                Import an audio file from your device to transcribe, summarize, and question privately.
-                            </p>
-                            <div className="row-span-1 w-full justify-center items-center flex">
-                                <CloudUploadIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-indigo-300 mx-auto mb-2" />
-                            </div>
-                            {/*     <button className=" max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white   dark:text-zinc-700 dark:font-averta-semibold"
-                            >
-                                Upload
-                                </button> */}
+                    <div className="flex flex-col gap-10">
+                        <div className="text-xl text-stone-900  dark:text-zinc-300 text-center mb-10 font-averta-semibold">
+                            Process New Content
                         </div>
 
-                    </div>
-                </div>
 
-                <div className=" mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
+                        <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-105 transition duration-500 ease-in-out"
 
-                <div className="justify-center flex flex-col ">
-
-                    <div className="text-xl text-stone-900   font-averta-semibold dark:text-zinc-300 text-center mb-10">
-                        Connect Audio with AI
-                    </div>
-                    <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">
-                        <div onClick={handleArcNavigation} className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-
-                            <p className="text-red-300 text-lg font-averta-semibold text-center mt-2 row-span-1">
-                                Create an Arc
-                            </p>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
-                                {window.innerWidth > 600 ? "Build your own AI-assisted search engine on countless hours of audiovisual content."
-                                    : "Build your AI assistants"}
-                            </p>
+                            onClick={() => {
+                                setSubmitDialog(true)
+                                handleButtonClick()
+                            }}>
 
 
-                            <div className="row-span-1 w-full justify-center items-center flex mt-1">
-                                <ChatIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-red-300 mx-auto mb-2 " />
+                            <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
+                                <p className="text-green-300 text-lg font-averta-semibold text-center row-span-1"> Submit a Link
+
+                                </p>
+                                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                    Submit a link to an audiovisual content to process with Alphy.
+                                </p>
+                                <div className="row-span-1 w-full justify-center items-center flex">
+                                    <LinkIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-green-300 mx-auto mb-2" />
+                                </div>
+                                {/*  <button className="max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5 row-span-1 dark:text-zinc-700 dark:font-averta-semibold">
+                                                        Submit
+                                                    </button> */}
                             </div>
-                            {/*    <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold"
-                >
-                    Create
-                        </button> */}
+                        </div>
+                        <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px] transform hover:scale-105 transition duration-500 ease-in-out">
+                            <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
+                                onClick={() => setUploadDialog(true)}>
+
+                                <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
+                                    Upload a Recording
+                                </p>
+                                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                    Import an audio file from your device to transcribe, summarize, and question privately.
+                                </p>
+                                <div className="row-span-1 w-full justify-center items-center flex">
+                                    <CloudUploadIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-indigo-300 mx-auto mb-2" />
+                                </div>
+                                {/*     <button className=" max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white   dark:text-zinc-700 dark:font-averta-semibold"
+                                            >
+                                                Upload
+                                                </button> */}
+                            </div>
+
                         </div>
                     </div>
-                </div>
-            </div>
 
+                    <div className=" mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
 
+                    <div className="justify-center flex flex-col ">
 
-
-            <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] mt-20">
-
-                <p className="mb-10 text-xl font-averta-semibold text-zinc-600 dark:text-zinc-300 text-center">Start discovering Alphy's capabilities</p>
-                <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
-                    <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
-                        onClick={() => {
-                            setSubmitDialog(true)
-                            handleButtonClick()
-                        }}>
-                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-                            <p className="text-emerald-300 text-lg font-averta-semibold text-center row-span-1"> Submit a Link
-
-                            </p>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
-
-                                {!mobileWindow ? "Submit a link to a YouTube video or Twitter Space to unlock with Alphy"
-                                    : "Use Alphy on a YouTube video or Twitter Space"}
-                            </p>
-                            <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
-                                <LinkIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2" />
-                            </div>
-                            <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5  dark:text-zinc-700 dark:font-averta-semibold">
-                                Submit
-                            </button>
+                        <div className="text-xl text-stone-900   font-averta-semibold dark:text-zinc-300 text-center mb-10">
+                            Connect Audio with AI
                         </div>
-                    </div>
-                    <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
-                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
-                            onClick={() => setUploadDialog(true)}>
-                            <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
-                                Upload a Recording
-                            </p>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
-                                {!mobileWindow ? " Import an audio file from your device to transcribe, summarize, and question privately"
-                                    : "Process an audio file from your device"}
+                        <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">
+                            <div onClick={handleArcNavigation} className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
 
-                            </p>
-                            <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
-                                <CloudUploadIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-indigo-300 mx-auto mb-2" />
+                                <p className="text-red-300 text-lg font-averta-semibold text-center mt-2 row-span-1">
+                                    Create an Arc
+                                </p>
+                                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                    {window.innerWidth > 600 ? "Build your own AI-assisted search engine on countless hours of audiovisual content."
+                                        : "Build your AI assistants"}
+                                </p>
+
+
+                                <div className="row-span-1 w-full justify-center items-center flex mt-1">
+                                    <ChatIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-red-300 mx-auto mb-2 " />
+                                </div>
+                                {/*    <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold"
+                    >
+                        Create
+                            </button> */}
                             </div>
-                            <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white row-span-1  dark:text-zinc-700 dark:font-averta-semibold"
-                            >
-                                Upload
-                            </button>
-                        </div>
-
-                    </div>
-                    <div className=" bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
-                        <div onClick={handleArcNavigation} className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-                            <p className="text-red-300 text-lg font-averta-semibold text-center row-span-1">
-                                Create an Arc
-                            </p>
-                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 ">
-                                {!mobileWindow ? "Build your own AI-assisted search engine as effortlessly as building a playlist."
-                                    : "Create an AI assistant as simply as creating a playlist"}
-                            </p>
-
-
-                            <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
-                                <ChatIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-red-300 mx-auto mb-2 " />
-                            </div>
-                            <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold"
-                            >
-                                Create
-                            </button>
                         </div>
                     </div>
                 </div>
 
-            </div>
+            }
+
+            {(!submitDialog && !uploadDialog && !arcDialog) &&
+                <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] mt-20">
+
+                    <p className="mb-10 text-xl font-averta-semibold text-zinc-600 dark:text-zinc-300 text-center">Start discovering Alphy's capabilities</p>
+                    <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
+                        <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
+                            onClick={() => {
+                                setSubmitDialog(true)
+                                handleButtonClick()
+                            }}>
+                            <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
+                                <p className="text-emerald-300 text-lg font-averta-semibold text-center row-span-1"> Submit a Link
+
+                                </p>
+                                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
+
+                                    {!mobileWindow ? "Submit a link to an audiovisual content to process with Alphy."
+                                        : "Use Alphy on online content"}
+                                </p>
+                                <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
+                                    <LinkIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2" />
+                                </div>
+                                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5  dark:text-zinc-700 dark:font-averta-semibold">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                        <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+                            <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
+                                onClick={() => setUploadDialog(true)}>
+                                <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
+                                    Upload a Recording
+                                </p>
+                                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
+                                    {!mobileWindow ? " Import an audio file from your device to transcribe, summarize, and question privately"
+                                        : "Process an audio file from your device"}
+
+                                </p>
+                                <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
+                                    <CloudUploadIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-indigo-300 mx-auto mb-2" />
+                                </div>
+                                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white row-span-1  dark:text-zinc-700 dark:font-averta-semibold"
+                                >
+                                    Upload
+                                </button>
+                            </div>
+
+                        </div>
+                        <div className=" bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+                            <div onClick={handleArcNavigation} className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
+                                <p className="text-red-300 text-lg font-averta-semibold text-center row-span-1">
+                                    Create an Arc
+                                </p>
+                                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 ">
+                                    {!mobileWindow ? "Build your own AI-assisted search engine as effortlessly as building a playlist."
+                                        : "Create an AI assistant as simply as creating a playlist"}
+                                </p>
+
+
+                                <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
+                                    <ChatIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-red-300 mx-auto mb-2 " />
+                                </div>
+                                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold"
+                                >
+                                    Create
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
 
 
 
             {submitDialog &&
-                <Dialog maxWidth="lg" fullWidth="true" open={submitDialog} onClose={() => {
-                    setSubmitDialog(false)
-                    setErrorMessage("")
-                }} >
-                    <SubmitBlock loading={loading} currentUser={currentUser} tier={tier} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef} />
 
-                </Dialog>
+                <SubmitBlock handleGoBack={handleGoBack} loading={loading} currentUser={currentUser} tier={tier} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef} />
+
+
             }
 
             {uploadDialog &&
-                <Dialog maxWidth="lg" fullWidth="true" open={uploadDialog} onClose={() => setUploadDialog(false)} >
 
-                    <UploadBlock currentUser={currentUser} tier={tier} credit={credit} />
-                </Dialog>}
 
-            {arcDialog &&
+                <UploadBlock handleGoBack={handleGoBack} currentUser={currentUser} tier={tier} credit={credit} />
+            }
+
+            {/*   {arcDialog &&
                 <Dialog maxWidth="lg" fullWidth="true" open={arcDialog} onClose={() => setArcDialog(false)} >
                     <ArcBlock currentUser={currentUser} tier={tier} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} />
                 </Dialog>
 
-            }
+            } */}
 
         </div>
     )

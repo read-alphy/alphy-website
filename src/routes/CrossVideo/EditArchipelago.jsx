@@ -173,7 +173,7 @@ export default function EditArchipelago({ archipelagoInfo, setArchipelagoInfo, a
                     const match = inputValue.match(regex);
                     videoId = match ? match[1] : null;
 
-                    video_source = "tv"
+                    video_source = "tw"
                 }
                 else {
                     setFailed(true)
@@ -188,7 +188,7 @@ export default function EditArchipelago({ archipelagoInfo, setArchipelagoInfo, a
                     const regex = /status\/(\d+)/;
                     const match = inputValue.split('/video/')[0].match(regex);
                     videoId = match ? match[1] : '';
-                    video_source = "tw"
+                    video_source = "x"
                 }
                 else {
                     setFailed(true)

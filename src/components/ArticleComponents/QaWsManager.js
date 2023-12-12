@@ -38,7 +38,7 @@ export class QaWsManager {
 
   /**
    * @typedef {Object} SourceObj
-   * @property {'yt'|'sp'|'ap'| tv'} source_type - 'yt' or 'sp' or 'ap' or 'tv'.
+   * @property {'yt'|'sp'|'ap'| tv'} source_type - 'yt' or 'sp' or 'ap' or 'tw'.
    * @property {string} source_id - The source ID.
    */
 

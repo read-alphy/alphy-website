@@ -33,10 +33,10 @@ const FeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, sideFee
 	else if (item !== undefined && item.source_type === "ap") {
 		imageUrl = ApplePodcast;
 	}
-	else if (item !== undefined && item.source_type === "tv") {
+	else if (item !== undefined && item.source_type === "tw") {
 		imageUrl = Twitch
 	}
-	else if (item !== undefined && item.source_type === "tw") {
+	else if (item !== undefined && item.source_type === "x") {
 		imageUrl = X
 	}
 

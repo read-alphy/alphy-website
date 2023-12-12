@@ -232,7 +232,7 @@ function HubSourceFeed(props) {
 					const match = search.match(regex);
 					videoId = match ? match[1] : null;
 
-					video_source = "tv"
+					video_source = "tw"
 				}
 				else {
 					setFailed(true)
@@ -247,7 +247,7 @@ function HubSourceFeed(props) {
 					const regex = /status\/(\d+)/;
 					const match = search.split('/video/')[0].match(regex);
 					videoId = match ? match[1] : '';
-					video_source = "tw"
+					video_source = "x"
 				}
 				else {
 					setFailed(true)

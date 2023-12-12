@@ -9,13 +9,12 @@ import EditArchipelago from './EditArchipelago';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import Dialog from '@mui/material/Dialog';
-import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/Loading';
 import axios from 'axios';
-import { Helmet } from "react-helmet";
+
 import jsonData from "./arcs_and_thumbnails.json" // TODO: replace with API call
 import { API_URL } from '../../constants';
-import PrivateUseImage from "../../img/private_use_only.png"
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 
 
@@ -388,7 +387,13 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 							:
 
 
-							<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40">
+							<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 pl-5">
+
+								<div className="mb-10">
+									<Link to="/submit" className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer">
+										<KeyboardArrowLeftIcon fontSize="small" className="" />
+										<span className="text-sm  font-averta-semibold">Go Back</span>
+									</Link></div>
 								<Link to="/u/login" className="dark:text-greenColor text-green-400 underline font-averta-semibold">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline font-averta-semibold"> create an account</Link> to access this page.
 							</div>
 						)
@@ -430,7 +435,7 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 							:
 
 
-							<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 font-averta-semibold">
+							<div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 font-averta-semibold pl-5">
 								<Link to="/u/login" className="dark:text-greenColor text-green-400 underline font-averta-semibold">Sign in</Link> or <Link to="/u/register" className="dark:text-greenColor text-green-400 underline font-averta-semibold"> create an account</Link> to access this page.
 							</div>
 
@@ -459,7 +464,7 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 				)
 
 				&&
-				<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${!collapsed && window.innerWidth < 1000 && "hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
+				<div className={`z-50 absolute bottom-0 w-full flex h-[40px] ${currentUser ? "" : "hidden"} ${!collapsed && window.innerWidth < 1000 && "hidden"} lg:bg-transparent dark:lg:bg-transparent`} >
 					<div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
 
 						{isEditArc && !isLoadingSubmit && <Button size={window.innerWidth > 1000 ? "lg" : `md`} className="bg-red-400 px-5 mr-5 font-averta-semibold" onClick={() => setDeleteDialog(true)}> <DeleteIcon /> <span className="mt-1">Delete </span></Button>}

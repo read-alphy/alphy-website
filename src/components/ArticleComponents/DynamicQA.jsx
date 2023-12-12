@@ -100,7 +100,7 @@ export default function DynamicQA({ answerData, areaRefs, answer, data, handleCl
                                         {source.start !== null && source.start !== undefined && source.end ?
 
                                             (
-                                                (data.source_type === "yt" || data.source_type === "tv") ?
+                                                (data.source_type === "yt" || data.source_type === "tw") ?
                                                     (window.innerWidth > 999 ?
                                                         (<a onClick={updateVariable} className="underline cursor-pointer">
 
@@ -133,13 +133,13 @@ export default function DynamicQA({ answerData, areaRefs, answer, data, handleCl
                                             :
                                             //if the timestamp is 00:00
                                             (
-                                                (data.source_type === "yt" || data.source_type === "tv") ?
+                                                (data.source_type === "yt" || data.source_type === "tw") ?
                                                     (window.innerWidth > 999 ?
                                                         <a onClick={updateVariable} className="underline cursor-pointer">00:00:00</a>
                                                         :
                                                         <a target="_blank" href={
                                                             (data.source_type === "yt" && `https://youtu.be/${data.source_id}`)
-                                                                (data.source_type === "tv" && `https://www.imdb.com/title/${data.source_id}`)
+                                                                (data.source_type === "tw" && `https://www.imdb.com/title/${data.source_id}`)
                                                         }>00:00:00</a>
                                                     )
                                                     :

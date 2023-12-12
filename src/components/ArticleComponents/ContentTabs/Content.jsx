@@ -1084,7 +1084,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 										</a>
 									}
 									{
-										data.source_type === "tv" &&
+										data.source_type === "tw" &&
 										<a className="flex flex-row mb-5 mt-3  " target="_blank" href={`https://www.twitch.tv/${data.source_id}`}>
 											<img className="ml-1" src={TwitchIcon} width={20} />
 											<p className=" text-zinc-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">Click to watch</p>
@@ -1288,7 +1288,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 									{showYouTubeFrame === true &&
 
 										<div>
-											<div className={`hidden ${(data.source_type === "yt" || data.source_type === "tv" || data.source_type == "ap" || data.source_type === "tw") ? "lg:flex" : ""}  justify-center items-center `}>
+											<div className={`hidden ${(data.source_type === "yt" || data.source_type == "ap" || data.source_type === "tw") ? "lg:flex" : ""}  justify-center items-center `}>
 												{data.source_type === "yt" &&
 													(transcript.length > 0 || data.complete === true ?
 														<div>
@@ -1313,7 +1313,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 														: null)
 												}
 
-												{data.source_type === "tv" &&
+												{data.source_type === "tw" &&
 													((transcript.length > 0 || data.complete === true) ?
 														<div>
 
@@ -1367,11 +1367,11 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 												</a>
 											</div>
 
-											<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type === "tw" ? "hidden lg:flex" : " hidden"}`}>
+											<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type === "x" ? "hidden lg:flex" : " hidden"}`}>
 												<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/status/${data.source_id.split("-")[1]}`}>
 													<img src={X} className="w-[240px] h-[120px] mx-auto" />
 													<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
-														Listen to <span className="font-bold pb-6 hyphenate font-averta-semibold">"{`${title}`.substring(0, 90)} {title.length > 90 && "..."}"</span>  on Twitter
+														Watch <span className="font-bold pb-6 hyphenate font-averta-semibold">"{`${title}`.substring(0, 90)} {title.length > 90 && "..."}"</span>  on Twitter
 													</p>
 
 												</a>
@@ -1391,7 +1391,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 									</button>
 
 
-									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "tv" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#9146ff] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
+									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "tw" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#9146ff] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}>
 										{showYouTubeFrame ?
 											<ArrowDownwardIcon fontSize="large" className="text-black " />
 											:
@@ -1409,7 +1409,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 										}
 									</button>
 
-									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "tw" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-black transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
+									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "x" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-black transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
 										{showYouTubeFrame ?
 											<ArrowDownwardIcon fontSize="large" className="text-white " />
 											:
@@ -1608,11 +1608,11 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 																				if (index % 2 === 0 && index < transcript.length) {
 																					return (
-																						window.innerWidth > 999 && (data.source_type === "yt" || data.source_type === "tv") ?
+																						window.innerWidth > 999 && (data.source_type === "yt" || data.source_type === "tw") ?
 																							<div className="flex flex-row dark:text-zinc-300">
 																								<a
 																									onClick={handleClickTimestamp}
-																									className={`${(data.source_type === 'yt' || data.source_type === 'tv')
+																									className={`${(data.source_type === 'yt' || data.source_type === 'tw')
 																										? 'lg:cursor-pointer lg:pointer-events-auto'
 																										: ''
 																										} lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-zinc-300`}
@@ -1680,14 +1680,14 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																									target="_blank" href={data.source_type !== "up" ?
 																										(
 																											(data.source_type === "yt" && `https://youtu.be/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0] * 3600) + parseInt(item.split(':')[1] * 60) + parseInt(item.split(':')[2]))}`)
-																											|| (data.source_type === "tv" && `https://www.twitch.tv/videos/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0])) + "h" + Math.floor(parseInt(item.split(':')[1])) + "m" + Math.floor(parseInt(item.split(':')[2])) + "s"}`)
+																											|| (data.source_type === "tw" && `https://www.twitch.tv/videos/${data.source_id}?t=${Math.floor(parseInt(item.split(':')[0])) + "h" + Math.floor(parseInt(item.split(':')[1])) + "m" + Math.floor(parseInt(item.split(':')[2])) + "s"}`)
 																											|| (data.source_type === "sp" && `https://twitter.com/i/spaces/${data.source_id}`)
 																										)
 
 																										: null}
 
 
-																									className={`summary-text  ${(data.source_type === 'yt' || data.source_type === 'tv')
+																									className={`summary-text  ${(data.source_type === 'yt' || data.source_type === 'tw')
 																										? 'lg:cursor-pointer lg:pointer-events-auto'
 																										: ''
 																										}  lg:pointer-events-auto lg:text-slate-900 dark:text-zinc-300 font-bold underline`}

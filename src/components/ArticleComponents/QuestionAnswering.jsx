@@ -1,6 +1,5 @@
 //import usestate
 import React, { useState, useEffect, createRef } from 'react';
-import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
@@ -310,6 +309,7 @@ export default function QuestionAnswering(props) {
 		} else {
 			if (currentUser) {
 				try {
+					console.log(props.data.source_type, props.data.source_id)
 					setIsLoadingInside(true);
 					setAnswer(false);
 					setAnswerData({ answer: '', sources: [] });

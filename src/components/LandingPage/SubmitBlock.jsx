@@ -1,21 +1,22 @@
 import PublishIcon from '@mui/icons-material/Publish';
 
 import { Button, Spinner } from "@material-tailwind/react";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Twitch from "../../img/twitch_full.png"
 import Twitter from "../../img/twitter_square.png"
 import Youtube from "../../img/youtube.png"
 import ApplePodcast from "../../img/apple_podcasts.png"
 import Spaces from "../../img/spaces_square.png"
-
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { useNavigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import HelpIcon from '@mui/icons-material/Help';
 
 
-
-export default function SubmitBlock({ currentUser, tier, credit, handleSubmit, loading, inputValue, setInputValue, errorMessage, failed, inputRef }) {
+export default function SubmitBlock({ currentUser, tier, credit, handleGoBack, handleSubmit, loading, inputValue, setInputValue, errorMessage, failed, inputRef }) {
     const navigate = useNavigate()
+    const [showExampleLinks, setShowExampleLinks] = useState(false)
 
 
     const navigateCredit = () => {
@@ -29,7 +30,14 @@ export default function SubmitBlock({ currentUser, tier, credit, handleSubmit, l
     }, [inputRef]);
 
     return (
-        <div className="p-10 sm:pt-20 text-zinc-700 h-full sm:h-[70vh] dark:text-zinc-300 bg-white dark:bg-mildDarkMode  items-center  justify-center sm:px-20">
+        <div className="mt-10 sm:mt-20 text-zinc-700 h-full p-5 dark:text-zinc-300 max-w-[1000px] mx-auto items-center  justify-center sm:px-20">
+
+            <div className="mb-10">
+                <p onClick={() => handleGoBack()} className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer">
+                    <KeyboardArrowLeftIcon fontSize="small" className="" />
+                    <span className="text-sm  font-averta-semibold">Go Back</span>
+                </p></div>
+
             <p className={`dark:text-zinc-300 text-zinc-700 mb-4 text-lg px-1 font-averta-semibold ${currentUser ? "" : "hidden"}`} >
                 Submit your link below</p>
             <div className={`${currentUser ? "sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5" : "hidden"}`}>
@@ -79,7 +87,7 @@ export default function SubmitBlock({ currentUser, tier, credit, handleSubmit, l
             }
             <div className="flex items-center  mt-4 space-x-4 md:justify-center lg:mt-0  ">
 
-                <div className="w-full flex flex-col  px-1">
+                <div className="w-full flex flex-col">
 
 
                     {currentUser &&
@@ -141,7 +149,7 @@ export default function SubmitBlock({ currentUser, tier, credit, handleSubmit, l
                                         &&
 
                                         <div>
-                                            <p onClick={navigateCredit} className={`text-indigo-400 underline mr-2  font-averta-semibold cursor-pointer`}>Need more credits? </p>
+                                            <p onClick={navigateCredit} className={`text-indigo-400 underline font-averta-semibold cursor-pointer`}>Need more credits? </p>
 
                                         </div>
 
@@ -160,14 +168,7 @@ export default function SubmitBlock({ currentUser, tier, credit, handleSubmit, l
 
                             </div> */}
 
-                            {/* <div className=" bottom-0 mt-20 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold">
-                                <p className="mb-6">Example links. Please make sure the link you are submitting is in the same format:</p>
-                                <p>YouTube : https://www.youtube.com/watch?v=h6fcK_fRYaI</p>
-                                <p>Twitter Spaces : https://twitter.com/i/spaces/1yoJMwnLObwKQ</p>
-                                <p>Twitch : https://www.twitch.tv/videos/1965889164</p>
-                                <p>Apple Podcasts : https://podcasts.apple.com/us/podcast/54-kevin-lee-immi-healthy-ramen/id1507881694?i=1000529427756</p>
-                            </div>
- */}
+
 
 
                         </div>
@@ -189,23 +190,41 @@ export default function SubmitBlock({ currentUser, tier, credit, handleSubmit, l
                 </div>
 
             </div>
+
+            {currentUser &&
+                <div>
+                    <p onClick={() => setShowExampleLinks(!showExampleLinks)} className="mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold cursor-pointer">Example Links <HelpIcon /></p>
+                    {showExampleLinks &&
+                        < div className=" bottom-0 mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold">
+                            <p className="mb-6"> Please make sure the link you are submitting is in one of the following formats:</p>
+                            <p className="mt-4">YouTube : https://www.youtube.com/watch?v=h6fcK_fRYaI</p>
+                            <p className="mt-4">Twitter / X Spaces : https://twitter.com/i/spaces/1yoJMwnLObwKQ</p>
+                            <p className="mt-4">Twitter / X Videos : https://twitter.com/i/status/1731765772874129676</p>
+                            <p className="mt-4">Twitch : https://www.twitch.tv/videos/1965889164</p>
+                            <p className="mt-4">Apple Podcasts : https://podcasts.apple.com/us/podcast/54-kevin-lee-immi-healthy-ramen/id1507881694?i=1000529427756</p>
+                        </div>}
+                </div>
+            }
+
             {currentUser && (tier === "basic" || tier === "premium") &&
                 <div>
-                    <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-md sm:text-lg mt-4">
+
+                    <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
+
+
+                    <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-semibold text-md sm:text-lg mt-4">
                         Supported Platforms
                         <div className="flex flex-row mt-4 sm:mt-10 opacity-50 overflow-scroll">
-                            <img src={Youtube} height={20} width={110} title="YouTube" className="sm:mr-6 lg:mr-10 grayscale w-1/3 mx-2 max-w-[150px]" />
-                            <img src={Twitter} height={20} width={80} title="Twitter / X videos" className="grayscale rounded-xl  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[130px]" />
-                            <img src={Spaces} height={20} width={80} title="Twitter / X Spaces" className="grayscale rounded-xl sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[130px]" />
-                            <img src={Twitch} title="Twitch" height={20} width={80} className="sm:mr-6   grayscale rounded-xl lg:mr-10 w-1/3  px-2 max-w-[130px]" />
-                            <img src={ApplePodcast} height={20} width={80} title="Apple Podcasts" className="grayscale rounded-lg  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[130px]" />
+                            <img src={Youtube} height={20} width={120} title="YouTube" className="sm:mr-6 lg:mr-10 grayscale w-1/3 mx-2 max-w-[120px]" />
+                            <img src={Twitter} height={20} width={80} title="Twitter / X videos" className="grayscale rounded-xl  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[100px]" />
+                            <img src={Spaces} height={20} width={80} title="Twitter / X Spaces" className="grayscale rounded-xl sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[100px]" />
+                            <img src={Twitch} title="Twitch" height={20} width={80} className="sm:mr-6   grayscale rounded-xl lg:mr-10 w-1/3  px-2 max-w-[100px]" />
+                            <img src={ApplePodcast} height={20} width={80} title="Apple Podcasts" className="grayscale rounded-lg  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[100px]" />
                         </div>
                     </div>
                 </div>
             }
-
-
-        </div>
+        </div >
 
     )
 }

@@ -108,7 +108,7 @@ export default function ArchipelagoCreation({ archipelagoDescription, tier, arch
         )
         ) {
             setInputValue('');
-            setErrorMessageSubmit('Please provide a link to a YouTube video or Twitter Space.')
+            setErrorMessageSubmit('Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast')
             setFailed(true)
             return;
         }
@@ -181,7 +181,7 @@ export default function ArchipelagoCreation({ archipelagoDescription, tier, arch
                     const match = inputValue.match(regex);
                     videoId = match ? match[1] : null;
 
-                    video_source = "tv"
+                    video_source = "tw"
                 }
                 else {
                     setFailed(true)
@@ -196,7 +196,7 @@ export default function ArchipelagoCreation({ archipelagoDescription, tier, arch
                     const regex = /status\/(\d+)/;
                     const match = inputValue.split('/video/')[0].match(regex);
                     videoId = match ? match[1] : '';
-                    video_source = "tw"
+                    video_source = "x"
                 }
                 else {
                     setFailed(true)

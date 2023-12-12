@@ -7,8 +7,10 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { API_URL } from '../../constants';
 import ConvertPrivately from "../../img/convertprivately.png"
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-export default function UploadBlock({ currentUser, tier, credit }) {
+
+export default function UploadBlock({ currentUser, tier, credit, handleGoBack }) {
     const [uploadProgress, setUploadProgress] = useState(0)
     const [uploadDuration, setUploadDuration] = useState("")
     const [uploadTitle, setUploadTitle] = useState("")
@@ -128,7 +130,12 @@ export default function UploadBlock({ currentUser, tier, credit }) {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
     return (
-        <div className="dark:bg-mildDarkMode h-[full] sm:min-h-[85vh] sm:max-h-[85vh] p-10  sm:p-20 sm:py-16">
+        <div className="mt-10 sm:mt-20 text-zinc-700 h-full p-5 dark:text-zinc-300 max-w-[1000px] mx-auto items-center  justify-center sm:px-20">
+            <div className="mb-10">
+                <p onClick={() => handleGoBack()} className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer">
+                    <KeyboardArrowLeftIcon fontSize="small" className="" />
+                    <span className="text-sm  font-averta-semibold">Go Back</span>
+                </p></div>
             <div className="pb-4 ">
                 <div className="flex mx-auto   text-indigo-400 text-sm font-bold mb-10">
                     <VerifiedIcon className="mr-1 " />
