@@ -26,6 +26,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddIcon from '@mui/icons-material/Add';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitchIcon from "../../../img/twitch.png";
+import X from "../../../img/X.png";
 import TwitterSpaces from "../../../img/twitter_space.webp";
 import ApplePodcasts from "../../../img/apple_podcasts.png";
 /* import TwitchBanner from "../../../img/twitchSource.png"; */
@@ -105,6 +106,8 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	};
 
 	const data = props.data
+
+
 
 
 	const title = data.title
@@ -1285,7 +1288,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 									{showYouTubeFrame === true &&
 
 										<div>
-											<div className={`hidden ${(data.source_type === "yt" || data.source_type === "tv" || data.source_type == "ap") ? "lg:flex" : ""}  justify-center items-center `}>
+											<div className={`hidden ${(data.source_type === "yt" || data.source_type === "tv" || data.source_type == "ap" || data.source_type === "tw") ? "lg:flex" : ""}  justify-center items-center `}>
 												{data.source_type === "yt" &&
 													(transcript.length > 0 || data.complete === true ?
 														<div>
@@ -1318,7 +1321,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 															<iframe
 																ref={videoRef}
 																className={`fixed bottom-24 right-4 w-[480px] h-[320px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${showYouTubeFrame ? "opacity-100" : "opacity-0"}}`}
-																src={`https://player.twitch.tv/?video=v${data.source_id}&parent=${window.location.href.includes("localhost") ? "localhost" : "alphy.app"}&autoplay=${autoplay}&t=${timestamp}`}
+																src={`https://player.twitch.tv/?video=v${data.source_id}&parent=${window.location.href.includes("localhost") ? "localhost" : window.location.href.includes("alphy.app") ? "alphy.app" : "staging--alphy-web.netlify.app"}&autoplay=${autoplay}&t=${timestamp}`}
 																width="100%"
 																height="100%"
 																allowFullScreen={true}
@@ -1349,12 +1352,24 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 														: null)
 												}
 
+
+
+
 											</div>
 
 
 											<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type === "sp" ? "hidden lg:flex" : " hidden"}`}>
 												<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/spaces/${data.source_id}`}>
 													<img src={TwitterSpaces} className="w-[240px] h-[120px] mx-auto" />
+													<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
+														Listen to <span className="font-bold pb-6 hyphenate font-averta-semibold">"{`${title}`.substring(0, 90)} {title.length > 90 && "..."}"</span>  on Twitter
+													</p>
+												</a>
+											</div>
+
+											<div className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${data.source_type === "tw" ? "hidden lg:flex" : " hidden"}`}>
+												<a className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3" target="_blank" href={`https://twitter.com/i/status/${data.source_id.split("-")[1]}`}>
+													<img src={X} className="w-[240px] h-[120px] mx-auto" />
 													<p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
 														Listen to <span className="font-bold pb-6 hyphenate font-averta-semibold">"{`${title}`.substring(0, 90)} {title.length > 90 && "..."}"</span>  on Twitter
 													</p>
@@ -1387,6 +1402,14 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "sp" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
+										{showYouTubeFrame ?
+											<ArrowDownwardIcon fontSize="large" className="text-white " />
+											:
+											<TwitterIcon fontSize="large" className="text-white" />
+										}
+									</button>
+
+									<button onClick={handleShowYouTubeFrame} className={`z-50 fixed hidden ${data.source_type == "tw" && "lg:block"} bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-black transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}>
 										{showYouTubeFrame ?
 											<ArrowDownwardIcon fontSize="large" className="text-white " />
 											:

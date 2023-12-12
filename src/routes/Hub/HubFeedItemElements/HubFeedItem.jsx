@@ -1,7 +1,7 @@
 import Twitter from '../../../img/twitter_space.webp';
 import ApplePodcastBanner from "../../../img/apple_podcast_banner.png";
 import Twitch from "../../../img/twitchSource.png";
-import axios from 'axios';
+import X from '../../../img/X.png';
 import { useState } from 'react';
 import MyWorksFeedItem from './MyWorksFeedItem';
 import BookmarkFeedItem from './BookmarkFeedItem';
@@ -29,6 +29,9 @@ const HubFeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, side
 		}
 		else if (item.source_type === "tv") {
 			imageUrl = Twitch
+		}
+		else if (item.source_type === "tw") {
+			imageUrl = X
 		}
 
 	}

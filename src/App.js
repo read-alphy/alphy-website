@@ -340,6 +340,12 @@ function App() {
 								}
 							/>
 							<Route
+								path="/tw/:article_ID"
+								element={
+									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'tw'} tier={tier} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos} />
+								}
+							/>
+							<Route
 								path="/tv/:article_ID"
 								element={
 									<Article collapsed={collapsed} setCollapsed={setCollapsed} source_type={'tv'} tier={tier} contentName={contentName} setContentName={setContentName} currentUser={currentUser} idToken={idToken} userArchipelagos={userArchipelagos} />

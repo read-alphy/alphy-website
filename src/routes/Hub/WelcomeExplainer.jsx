@@ -18,7 +18,7 @@ export default function WelcomeExplainer() {
         <div>
             <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 2xl:pl-40  overflow-hidden pb-10">
 
-                <div className="pl-5 ">
+                <div className="pl-5 pr-5">
                     <p className="text-zinc-700 dark:text-zinc-300 mb-5 mx-auto mt-4 text-xl md:text-[30px] font-averta-semibold ">Save time and learn better from audiovisual content.</p>
                     <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-md md:text-[20px] font-averta-regular max-w-[600px]"> Join the Alphy community to transcribe, summarize, and create interactive learning experiences from audiovisual content with AI.
                     </p>
@@ -67,14 +67,11 @@ export default function WelcomeExplainer() {
                     </div>
                     <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg">
                         Supported Platforms
-
-                        <div className="flex flex-row mt-10 opacity-50 overflow-scroll ">
-
-                            <img src={Youtube} height={20} width={110} title="YouTube" className=" mr-10 grayscale" />
-                            <img src={Twitter} height={20} width={80} title="Twitter videos and Twitter Spaces" className="  mr-10 grayscale rounded-lg" />
-                            <img src={Twitch} title="Twitch" height={20} width={80} className=" mr-10 grayscale rounded-lg" />
-                            <img src={ApplePodcast} height={20} width={80} title="Apple Podcasts" className="  mr-10 grayscale" />
-
+                        <div className="flex flex-row mt-10 opacity-50 overflow-scroll">
+                            <img src={Youtube} height={20} width={110} title="YouTube" className="mr-6 grayscale" />
+                            <img src={Twitter} height={20} width={80} title="Twitter videos and Twitter Spaces" className="grayscale rounded-lg mr-6" />
+                            <img src={Twitch} title="Twitch" height={20} width={80} className="mr-6 grayscale rounded-lg" />
+                            <img src={ApplePodcast} height={20} width={80} title="Apple Podcasts" className="grayscale" />
                         </div>
                     </div>
                 </div>

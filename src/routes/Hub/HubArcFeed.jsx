@@ -143,7 +143,7 @@ function HubArcFeed(props) {
 		<div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 xl:pl-20 2xl:pl-40 flex flex-row overflow-hidden">
 			{props.mainShow === "default" ?
 
-				<div className=" p-[10px] pl-5 xl:min-w-[1200px]  xl:max-w-[1200px] ">
+				<div className=" p-[10px]  xl:min-w-[1200px]  xl:max-w-[1200px] ">
 
 					<p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-averta-semibold">Learn from the best online sources with Alphy's Arcs.</p>
 

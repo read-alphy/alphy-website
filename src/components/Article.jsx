@@ -38,6 +38,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 	if (location.pathname.split('/')[2].split("&q=")[0] !== undefined) {
 		source_id = location.pathname.split('/')[2].split("&q=")[0]
+
 	}
 	else {
 		source_id = location.pathname.split('/')[2];

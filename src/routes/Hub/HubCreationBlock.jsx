@@ -1,30 +1,75 @@
-import React, { useState } from 'react';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import React, { useState, useEffect, useRef } from 'react';
+
+import { Button } from "@material-tailwind/react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ChatIcon from '@mui/icons-material/Chat';
 import LinkIcon from '@mui/icons-material/Link';
 import Dialog from '@mui/material/Dialog';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import PublishIcon from '@mui/icons-material/Publish';
-import { Button } from "@material-tailwind/react";
+import ArcBlock from '../../components/LandingPage/ArcBlock';
+
+import UploadBlock from '../../components/LandingPage/UploadBlock';
+
+import SubmitBlock from '../../components/LandingPage/SubmitBlock';
+
+
 import { API_URL } from '../../constants';
 
 
-
-
-export default function HubCreationBlock({ currentUser, tier, credit }) {
+export default function HubCreationBlock({ currentUser, tier, credit, dataGlobalArchipelagos, setDataGlobalArchipelagos }) {
     const [submitDialog, setSubmitDialog] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [failed, setFailed] = useState(false);
+    const [uploadDialog, setUploadDialog] = useState(false);
+    const [creationDialogMobile, setCreationDialogMobile] = useState(false);
+    const [mobileWindow, setMobileWindow] = useState(window.innerWidth < 600);
+    const [arcDialog, setArcDialog] = useState(false);
 
     const navigate = useNavigate();
+    const inputRef = useRef(null)
+
+    const handleButtonClick = () => {
+        // current property is referring to the actual input element
+
+        inputRef.current.focus();
+
+    };
+
+    if (localStorage.getItem("newItem") !== null) {
+        if (localStorage.getItem("newItem") === "link") {
+            setSubmitDialog(true)
+            localStorage.setItem("newItem", null)
+        }
+        else if (localStorage.getItem("newItem") === "upload") {
+            setUploadDialog(true)
+            localStorage.setItem("newItem", null)
+        }
+
+    }
+
+    useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth < 600) {
+                setMobileWindow(true);
+            }
+            else {
+                setMobileWindow(false);
+            }
+        }
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
 
     const handleSubmit = (event, selectedOption) => {
+
 
         if (!(
             inputValue.includes('https://www.youtube.com/watch') ||
@@ -34,7 +79,10 @@ export default function HubCreationBlock({ currentUser, tier, credit }) {
             inputValue.includes('https://www.youtube.com/live') ||
             inputValue.includes('https://podcasts.apple.com') ||
             inputValue.includes('https://www.twitch.tv') ||
-            inputValue.includes('https://www.twitch.com')
+            inputValue.includes('https://www.twitch.com') ||
+            inputValue.includes('https://twitter.com') ||
+            inputValue.includes("https://x.com") ||
+            inputValue.includes("https://x.com/i/spaces")
         )
         ) {
             setInputValue('');
@@ -96,7 +144,7 @@ export default function HubCreationBlock({ currentUser, tier, credit }) {
                     const podcastId = idMatch ? idMatch[1] : '';
                     const episodeId = iMatch ? iMatch[1] : '';
 
-                    videoId = `id${podcastId}-${episodeId}`;
+                    videoId = `${podcastId}-${episodeId}`;
                     video_source = "ap"
                 }
                 else {
@@ -105,12 +153,12 @@ export default function HubCreationBlock({ currentUser, tier, credit }) {
                     return;
                 }
             }
-            else if (inputValue.includes("https://twitch.tv") || inputValue.includes("https://www.twitch.com")) {
+            else if (inputValue.includes("https://www.twitch.tv") || inputValue.includes("https://www.twitch.com")) {
                 if (tier === "basic" || tier === "premium") {
-
-                    const regex = /twitch\.tv\/videos\/(\d+)/;
+                    const regex = /twitch\.(tv|com)\/videos\/(\d+)/;
                     const match = inputValue.match(regex);
-                    videoId = match ? match[1] : '';
+                    videoId = match ? match[1] : null;
+
                     video_source = "tv"
                 }
                 else {
@@ -120,8 +168,19 @@ export default function HubCreationBlock({ currentUser, tier, credit }) {
                 }
             }
 
-
-
+            else if ((inputValue.includes("https://x.com") || inputValue.includes("https://twitter.com")) && !inputValue.includes("i/spaces")) {
+                if (tier === "basic" || tier === "premium") {
+                    const regex = /status\/(\d+)/;
+                    const match = inputValue.match(regex);
+                    videoId = match ? match[1] : '';
+                    video_source = "tw"
+                }
+                else {
+                    setFailed(true)
+                    setErrorMessage('Upgrade your plan to process Twitter videos. See Account page for more detail.');
+                    return;
+                }
+            }
 
             if (currentUser) {
                 setLoading(true);
@@ -147,33 +206,36 @@ export default function HubCreationBlock({ currentUser, tier, credit }) {
                             setLoading(false);
                             setFailed(false)
                             setInputValue('');
-                            navigate(`/${video_source}/${videoId}`)
+                            setTimeout(() => {
+                                navigate(`/${video_source}/${videoId}`)
+                            }
+                                , 1000)
+
 
                         }).
                         catch((error) => {
                             console.log(error)
-                            if (errorMessage.length === 0) {
+                            setLoading(false)
+                            if (tier === "basic" || tier === "premium") {
+                                setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
+                            }
 
-                                if (tier === "basic" || tier === "premium") {
-                                    setErrorMessage("There was an error submitting the form. Make sure you have enough credits for the submission.")
+                            else {
+                                if (error.response.data.detail == "Video not popular enough for free users") {
+                                    setErrorMessage("Make sure the content you are submitting has more than 10,000 views.")
                                 }
+                                else if (error.response.data.detail == "Not enough minutes") {
 
+                                    setErrorMessage("You don't have enough credits to submit this content.")
+                                }
+                                else if (error.response.data.detail == "Free users cannot submit twitter spaces") {
+                                    setErrorMessage("Upgrade your plan to process Twitter Spaces. See Account page for more detail.");
+                                }
                                 else {
-                                    if (error.response.data.detail == "Video not popular enough for free users") {
-                                        setErrorMessage("Make sure the content you are submitting has more than 10,000 views.")
-                                    }
-                                    else if (error.response.data.detail == "Not enough minutes") {
-
-                                        setErrorMessage("You don't have enough credits to submit this content.")
-                                    }
-                                    else if (error.response.data.detail == "Free users cannot submit twitter spaces") {
-                                        setErrorMessage("Upgrade your plan to process Twitter Spaces. See Account page for more detail.");
-                                    }
-                                    else {
-                                        setErrorMessage("There was an error submitting the form. Please try again.")
-                                    }
-
+                                    setErrorMessage("There was an error submitting the form. Please try again.")
                                 }
+
+
                             }
                             setFailed(true)
                             setInputValue('');
@@ -189,178 +251,199 @@ export default function HubCreationBlock({ currentUser, tier, credit }) {
         }
     }
 
+    const handleArcNavigation = () => {
+        navigate('/arc/createArc')
+
+
+    }
     return (
-        <div className="mt-10 md:pl-20">
-            <p className="px-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-greenColor text-xl mb-10 font-bold">
-                It's your hub: create, discover, and share.
-            </p>
+        <div className="md:mt-10 xl:mt-20 mx-auto ">
 
-            <div className="flex flex-row gap-20 w-full px-10">
-                <div className=" bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
-                    onClick={() => setSubmitDialog(true)}>
-                    <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
-                        <p className="text-emerald-300 text-lg font-semibold "> Submit a Link
 
-                        </p>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
-                            Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
-                        </p>
-                        <div className="flex-row flex mt-5">
 
-                            <LinkIcon fontSize="large" className="text-emerald-200" />
+            <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
+
+
+                <div className="flex flex-col gap-10">
+                    <div className="text-xl text-stone-900  dark:text-zinc-300 text-center mb-10 font-averta-semibold">
+                        Process New Content
+                    </div>
+
+
+                    <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-105 transition duration-500 ease-in-out"
+
+                        onClick={() => {
+                            setSubmitDialog(true)
+                            handleButtonClick()
+                        }}>
+
+
+                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
+                            <p className="text-emerald-300 text-lg font-averta-semibold text-center row-span-1"> Submit a Link
+
+                            </p>
+                            <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                Submit a link to a YouTube video or Twitter Space to unlock with Alphy.
+                            </p>
+                            <div className="row-span-1 w-full justify-center items-center flex">
+                                <LinkIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2" />
+                            </div>
+                            {/*  <button className="max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5 row-span-1 dark:text-zinc-700 dark:font-averta-semibold">
+                                        Submit
+                                    </button> */}
                         </div>
-                        <button className="mt-5 px-5 py-2 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-emerald-200 to-yellow-200 rounded-md text-white mb-5">
-                            Submit
-                        </button>
                     </div>
-                </div>
-                <div className=" bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
-                    <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
-                        <p className="text-indigo-400 text-lg font-semibold">
-                            Upload a Recording
-                        </p>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center ">
-                            Import an audio file from your device to transcribe, summarize, and question with Alphy.
-                        </p>
-                        <CloudUploadIcon fontSize="large" className="text-indigo-300 mt-5" />
-                        <button className="mt-5 px-5 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 mb-5 rounded-md text-white"
-                        >
-                            Upload
-                        </button>
-                    </div>
+                    <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px] transform hover:scale-105 transition duration-500 ease-in-out">
+                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
+                            onClick={() => setUploadDialog(true)}>
 
+                            <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
+                                Upload a Recording
+                            </p>
+                            <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                Import an audio file from your device to transcribe, summarize, and question privately.
+                            </p>
+                            <div className="row-span-1 w-full justify-center items-center flex">
+                                <CloudUploadIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-indigo-300 mx-auto mb-2" />
+                            </div>
+                            {/*     <button className=" max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white   dark:text-zinc-700 dark:font-averta-semibold"
+                            >
+                                Upload
+                                </button> */}
+                        </div>
+
+                    </div>
                 </div>
-                <div className=" bg-white dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
-                    <div className="flex flex-col items-center mx-auto px-5 pt-5  ">
-                        <p className="text-red-300 text-lg font-semibold">
-                            Create an Arc
-                        </p>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-5 text-center">
-                            Create your own AI-assisted search engine on countless hours of audiovisual content.
-                        </p>
-                        <ChatIcon fontSize="large" className="text-yellow-300 mt-5" />
-                        <button className="mt-5 px-5 py-2 bg-gradient-to-b from-red-200 via-red-300 to-yellow-200 mb-5 rounded-md text-white"
-                        >
-                            Create
-                        </button>
+
+                <div className=" mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
+
+                <div className="justify-center flex flex-col ">
+
+                    <div className="text-xl text-stone-900   font-averta-semibold dark:text-zinc-300 text-center mb-10">
+                        Connect Audio with AI
+                    </div>
+                    <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">
+                        <div onClick={handleArcNavigation} className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
+
+                            <p className="text-red-300 text-lg font-averta-semibold text-center mt-2 row-span-1">
+                                Create an Arc
+                            </p>
+                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                {window.innerWidth > 600 ? "Build your own AI-assisted search engine on countless hours of audiovisual content."
+                                    : "Build your AI assistants"}
+                            </p>
+
+
+                            <div className="row-span-1 w-full justify-center items-center flex mt-1">
+                                <ChatIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-red-300 mx-auto mb-2 " />
+                            </div>
+                            {/*    <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold"
+                >
+                    Create
+                        </button> */}
+                        </div>
                     </div>
                 </div>
             </div>
 
 
-            {submitDialog &&
-                <Dialog maxWidth="md" fullWidth="true" open={submitDialog} onClose={() => setSubmitDialog(false)} >
-
-                    <div className="p-10 text-zinc-700 h-[50vh] dark:text-zinc-300 bg-white dark:bg-mildDarkMode  items-center  justify-center">
 
 
-                        <p className="font-sans font-semibold text-zinc-700 dark:text-zinc-30">
-                            Submit your link below</p>
+            <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] mt-20">
 
+                <p className="mb-10 text-xl font-averta-semibold text-zinc-600 dark:text-zinc-300 text-center">Start discovering Alphy's capabilities</p>
+                <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
+                    <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
+                        onClick={() => {
+                            setSubmitDialog(true)
+                            handleButtonClick()
+                        }}>
+                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
+                            <p className="text-emerald-300 text-lg font-averta-semibold text-center row-span-1"> Submit a Link
 
+                            </p>
+                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
 
-
-
-
-                        <div className=" sm:grid sm:grid-cols-3 lg:grid-cols-4 mx-auto mt-5 ">
-                            <div className="sm:col-span-2 lg:col-span-3 relative w-full min-w-[200px] h-12">
-                                <input
-
-                                    value={inputValue}
-                                    onChange={(event) => setInputValue(event.target.value)}
-                                    placeholder=" "
-
-                                    className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor" />
-                                <label className="text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">Insert the link to YouTube video or Twitter Space</label>
-
-                                <div className="sm:hidden">
-                                    <Button size="sm" className="!absolute right-1 top-1 rounded bg-green-300" onClick={(e) => {
-                                        handleSubmit();
-                                    }}> <PublishIcon fontSize="medium" /></Button>
-                                </div>
+                                {!mobileWindow ? "Submit a link to a YouTube video or Twitter Space to unlock with Alphy"
+                                    : "Use Alphy on a YouTube video or Twitter Space"}
+                            </p>
+                            <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
+                                <LinkIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-emerald-200 mx-auto mb-2" />
                             </div>
-
-                            <div className={`hidden sm:block sm:col-span-1 mt-5 sm:mt-0 flex ml-5 justify-center md:justify-self-start items-center ${currentUser ? "" : ""}`}>
-
-                                <div>
-
-
-                                    <Button size="sm" type="submit"
-                                        onClick={(e) => {
-                                            handleSubmit();
-                                        }} className=" bg-green-300 dark:text-zinc-300 px-6 py-3 text-sm lg:text-[15px] normal-case">Submit</Button>
-                                </div>
-
-                            </div>
-                        </div>
-                        {failed &&
-                            <div className="mx-auto mt-5 text-sm text-red-400 ml-2">
-                                {errorMessage}
-                            </div>
-                        }
-                        <div className="flex items-center  mt-4 space-x-4 md:justify-center lg:mt-0  ">
-
-                            <div className="w-full flex flex-col">
-
-
-                                {currentUser &&
-                                    <span className="text-sm pl-2 mb-2 text-gray-600 dark:text-zinc-300 mt-4">
-
-                                        <a href="/account" className="underline">
-
-                                            {tier === "free" && "Starter Plan"}
-                                            {tier === "basic" && "Basic Plan"}
-                                            {tier === "premium" && "Premium Plan"}
-                                        </a> - Remaining Credits : {Math.floor(credit)} minutes
-
-                                    </span>}
-
-
-                                <div className="p-3 space-y-2 ">
-
-                                    {tier === "free" ?
-                                        <div>
-                                            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200">You are on the Starter Plan</p>
-                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You can only submit YouTube videos. Switch to a <a href="/u/account" className="text-greenColor text-sm underline"> paid plan </a>for limitless submissions from Twitter Spaces, Twitter videos, Twitch recordings, and Apple Podcasts.</p>
-                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2"> Alphy might fail to process content with location limits.</p>
-
-                                        </div>
-                                        :
-                                        <div>
-
-                                            <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200 mb-2 ml-1">You are on Premium Plan</p>
-                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No duration limit applied.</p>
-                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • No view limit applied. </p>
-                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm"> • You have access to <span className="text-greenColor">unlimited Twitter Spaces transcription</span>.</p>
-                                            <p className="text-zinc-700 dark:text-zinc-200 text-sm mt-2">  Alphy might fail to process content with location limits.</p>
-                                        </div>
-                                    }
-
-
-
-
-
-                                </div>
-
-
-
-
-                            </div>
-
-                        </div>
-
-                        <div className="border-b border-gray-100 mt-10 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 md:w-1/3"></div>
-
-                        <div className="flex flex-row mt-5 justify-center mx-auto ml-4">
-                            <YouTubeIcon fontSize="large" className="text-emerald-200" />
-                            <TwitterIcon fontSize="large" className="ml-4 text-emerald-200" />
+                            <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5  dark:text-zinc-700 dark:font-averta-semibold">
+                                Submit
+                            </button>
                         </div>
                     </div>
+                    <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+                        <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
+                            onClick={() => setUploadDialog(true)}>
+                            <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
+                                Upload a Recording
+                            </p>
+                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
+                                {!mobileWindow ? " Import an audio file from your device to transcribe, summarize, and question privately"
+                                    : "Process an audio file from your device"}
 
+                            </p>
+                            <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
+                                <CloudUploadIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-indigo-300 mx-auto mb-2" />
+                            </div>
+                            <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white row-span-1  dark:text-zinc-700 dark:font-averta-semibold"
+                            >
+                                Upload
+                            </button>
+                        </div>
+
+                    </div>
+                    <div className=" bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+                        <div onClick={handleArcNavigation} className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
+                            <p className="text-red-300 text-lg font-averta-semibold text-center row-span-1">
+                                Create an Arc
+                            </p>
+                            <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 ">
+                                {!mobileWindow ? "Build your own AI-assisted search engine as effortlessly as building a playlist."
+                                    : "Create an AI assistant as simply as creating a playlist"}
+                            </p>
+
+
+                            <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
+                                <ChatIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-red-300 mx-auto mb-2 " />
+                            </div>
+                            <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold"
+                            >
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            {submitDialog &&
+                <Dialog maxWidth="lg" fullWidth="true" open={submitDialog} onClose={() => {
+                    setSubmitDialog(false)
+                    setErrorMessage("")
+                }} >
+                    <SubmitBlock loading={loading} currentUser={currentUser} tier={tier} handleSubmit={handleSubmit} inputValue={inputValue} setInputValue={setInputValue} credit={credit} failed={failed} errorMessage={errorMessage} handleButtonClick={handleButtonClick} inputRef={inputRef} />
 
                 </Dialog>
             }
 
+            {uploadDialog &&
+                <Dialog maxWidth="lg" fullWidth="true" open={uploadDialog} onClose={() => setUploadDialog(false)} >
+
+                    <UploadBlock currentUser={currentUser} tier={tier} credit={credit} />
+                </Dialog>}
+
+            {arcDialog &&
+                <Dialog maxWidth="lg" fullWidth="true" open={arcDialog} onClose={() => setArcDialog(false)} >
+                    <ArcBlock currentUser={currentUser} tier={tier} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} />
+                </Dialog>
+
+            }
 
         </div>
     )
