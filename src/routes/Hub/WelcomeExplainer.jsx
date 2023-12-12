@@ -5,6 +5,7 @@ import Twitch from "../../img/twitch_full.png"
 import Twitter from "../../img/twitter_square.png"
 import Youtube from "../../img/youtube.png"
 import ApplePodcast from "../../img/apple_podcasts.png"
+import Spaces from "../../img/spaces_square.png"
 
 
 
@@ -65,13 +66,14 @@ export default function WelcomeExplainer() {
 
 
                     </div>
-                    <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg">
+                    <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-md sm:text-lg mt-4">
                         Supported Platforms
-                        <div className="flex flex-row mt-10 opacity-50 overflow-scroll">
-                            <img src={Youtube} height={20} width={110} title="YouTube" className="mr-6 grayscale" />
-                            <img src={Twitter} height={20} width={80} title="Twitter videos and Twitter Spaces" className="grayscale rounded-lg mr-6" />
-                            <img src={Twitch} title="Twitch" height={20} width={80} className="mr-6 grayscale rounded-lg" />
-                            <img src={ApplePodcast} height={20} width={80} title="Apple Podcasts" className="grayscale" />
+                        <div className="flex flex-row mt-4 sm:mt-10 opacity-50 overflow-scroll">
+                            <img src={Youtube} height={20} width={110} title="YouTube" className="sm:mr-6 lg:mr-10 grayscale w-1/3 mx-2 max-w-[150px]" />
+                            <img src={Twitter} height={20} width={80} title="Twitter / X videos" className="grayscale rounded-xl  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[130px]" />
+                            <img src={Spaces} height={20} width={80} title="Twitter / X Spaces" className="grayscale rounded-xl sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[130px]" />
+                            <img src={Twitch} title="Twitch" height={20} width={80} className="sm:mr-6   grayscale rounded-xl lg:mr-10 w-1/3  px-2 max-w-[130px]" />
+                            <img src={ApplePodcast} height={20} width={80} title="Apple Podcasts" className="grayscale rounded-lg  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[130px]" />
                         </div>
                     </div>
                 </div>

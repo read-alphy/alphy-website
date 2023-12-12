@@ -92,7 +92,13 @@ export default function EditArchipelago({ archipelagoInfo, setArchipelagoInfo, a
             inputValue.includes('https://youtu.be') ||
             inputValue.includes('https://m.youtube.com') ||
             inputValue.includes('https://twitter.com/i/spaces') ||
-            inputValue.includes('https://www.youtube.com/live')
+            inputValue.includes('https://www.youtube.com/live') ||
+            inputValue.includes('https://podcasts.apple.com') ||
+            inputValue.includes('https://www.twitch.tv') ||
+            inputValue.includes('https://www.twitch.com') ||
+            inputValue.includes('https://twitter.com') ||
+            inputValue.includes("https://x.com") ||
+            inputValue.includes("https://x.com/i/spaces")
         )
         ) {
             setInputValue('');
@@ -141,7 +147,55 @@ export default function EditArchipelago({ archipelagoInfo, setArchipelagoInfo, a
                     return;
                 }
             }
+            else if (inputValue.includes("https://podcasts.apple.com")) {
+                if (tier === "basic" || tier === "premium") {
+                    const idRegex = /id(\d+)/;
+                    const iRegex = /i=(\d+)/;
 
+                    const idMatch = inputValue.match(idRegex);
+                    const iMatch = inputValue.match(iRegex);
+
+                    const podcastId = idMatch ? idMatch[1] : '';
+                    const episodeId = iMatch ? iMatch[1] : '';
+
+                    videoId = `${podcastId}-${episodeId}`;
+                    video_source = "ap"
+                }
+                else {
+                    setFailed(true)
+                    setErrorMessageSubmit('Upgrade your plan to process Apple Podcasts. See Account page for more detail.');
+                    return;
+                }
+            }
+            else if (inputValue.includes("https://www.twitch.tv") || inputValue.includes("https://www.twitch.com")) {
+                if (tier === "basic" || tier === "premium") {
+                    const regex = /twitch\.(tv|com)\/videos\/(\d+)/;
+                    const match = inputValue.match(regex);
+                    videoId = match ? match[1] : null;
+
+                    video_source = "tv"
+                }
+                else {
+                    setFailed(true)
+                    setErrorMessageSubmit('Upgrade your plan to process Twitch recordings. See Account page for more detail.');
+                    return;
+                }
+            }
+
+            else if ((inputValue.includes("https://x.com") || inputValue.includes("https://twitter.com")) && !inputValue.includes("i/spaces")) {
+                if (tier === "basic" || tier === "premium") {
+                    setInputValue(inputValue.split('/video/')[0])
+                    const regex = /status\/(\d+)/;
+                    const match = inputValue.split('/video/')[0].match(regex);
+                    videoId = match ? match[1] : '';
+                    video_source = "tw"
+                }
+                else {
+                    setFailed(true)
+                    setErrorMessageSubmit('Upgrade your plan to process Twitter videos. See Account page for more detail.');
+                    return;
+                }
+            }
 
             if (currentUser) {
                 setLoading(true);

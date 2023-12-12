@@ -2,6 +2,7 @@ import './FeedItem.css';
 import Twitter from '../../../img/twitter_space.webp';
 import ApplePodcast from "../../../img/apple_podcast_banner.png";
 import Twitch from "../../../img/twitchSource.png";
+import X from "../../../img/X.png";
 import axios from 'axios';
 import { useState } from 'react';
 import { Button } from "@material-tailwind/react";
@@ -34,6 +35,9 @@ const FeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, sideFee
 	}
 	else if (item !== undefined && item.source_type === "tv") {
 		imageUrl = Twitch
+	}
+	else if (item !== undefined && item.source_type === "tw") {
+		imageUrl = X
 	}
 
 

@@ -170,8 +170,9 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
 
             else if ((inputValue.includes("https://x.com") || inputValue.includes("https://twitter.com")) && !inputValue.includes("i/spaces")) {
                 if (tier === "basic" || tier === "premium") {
+                    setInputValue(inputValue.split('/video/')[0])
                     const regex = /status\/(\d+)/;
-                    const match = inputValue.match(regex);
+                    const match = inputValue.split('/video/')[0].match(regex);
                     videoId = match ? match[1] : '';
                     video_source = "tw"
                 }
@@ -192,7 +193,7 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
                         .post(
                             `${API_URL}/sources/`,
                             {
-                                url: inputValue,
+                                url: video_source === "tw" ? inputValue.split('/video/')[0] : inputValue
                             },
                             {
                                 headers: {
@@ -202,15 +203,16 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
                         )
                         .then((response) => {
                             sessionStorage.setItem("refreshCredit", "true")
+
+
+                            videoId = response.data.source_id
+                            video_source = response.data.source_type
+
                             setErrorMessage("")
                             setLoading(false);
                             setFailed(false)
                             setInputValue('');
-                            setTimeout(() => {
-                                navigate(`/${video_source}/${videoId}`)
-                            }
-                                , 1000)
-
+                            navigate(`/${video_source}/${videoId}`)
 
                         }).
                         catch((error) => {

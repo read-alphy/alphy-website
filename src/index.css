@@ -1,10 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url(https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold); 
-@import url(https://db.onlinewebfonts.com/c/b5d2107c7c6e775b13169eb51d8970c1?family=AvertaStd-Light); 
-@import url(https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=Bookerly); 
-@import url(https://db.onlinewebfonts.com/c/a67d98abe8980caaa1768b6e27b323c6?family=Typewriter); 
+@import url(https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold);
+@import url(https://db.onlinewebfonts.com/c/b5d2107c7c6e775b13169eb51d8970c1?family=AvertaStd-Light);
+@import url(https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=Bookerly);
+@import url(https://db.onlinewebfonts.com/c/a67d98abe8980caaa1768b6e27b323c6?family=Typewriter);
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu');
 @import url('https://fonts.googleapis.com/css2?family=Cantarell');
@@ -13,44 +13,49 @@
 	padding: 0;
 	margin: 0;
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	
-	
+
+
 
 }
 
 
-.font-averta-semibold{
+.font-averta-semibold {
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	font-weight:600
+	font-weight: 600
 }
-.font-averta-light{
+
+.font-averta-light {
 	font-family: 'AvertaStd-Light';
 
 }
-.font-averta-regular{
-	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	font-weight:500
 
+.font-averta-regular {
+	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-weight: 500
 }
 
 :root {
-	--background-color: #ffffff; /* Light theme */
-	--text-color: #000000; /* Light theme */
-  }
-  
-  .dark-theme {
-	--background-color: #121212; /* Dark theme */
-	--text-color: #ffffff; /* Dark theme */
-  }
-  
-	
-  .backface-hidden {
+	--background-color: #ffffff;
+	/* Light theme */
+	--text-color: #000000;
+	/* Light theme */
+}
+
+.dark-theme {
+	--background-color: #121212;
+	/* Dark theme */
+	--text-color: #ffffff;
+	/* Dark theme */
+}
+
+
+.backface-hidden {
 	backface-visibility: hidden;
-  }
-  
+}
+
 html {
-    overflow: hidden;
-    height: 100%;
+	overflow: hidden;
+	height: 100%;
 }
 
 body {
@@ -61,56 +66,66 @@ body {
 	overscroll-behavior: none;
 	background-color: var(--background-color);
 	color: var(--text-color);
-  }
-	
+}
+
 .side-feed {
 	/* Hide the scrollbar */
-	scrollbar-width: none; /* Firefox */
-	-ms-overflow-style: none; /* Internet Explorer and Edge */
-  }
-  
-  .side-feed::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, and Opera */
-  }
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+	/* Internet Explorer and Edge */
+}
 
-  
-  .carousel-area{
-	
-	scrollbar-width: none; /* Firefox */
-	-ms-overflow-style: none; 
-  }
-  .carousel-area::-webkit-scrollbar
-  {
-	  display: none;
-  }
+.side-feed::-webkit-scrollbar {
+	display: none;
+	/* Chrome, Safari, and Opera */
+}
 
-  .archipelago-search{
-	scrollbar-width: none; /* Firefox */
-	-ms-overflow-style: none; /* Internet Explorer and Edge */
 
-  }
+.carousel-area {
 
-  .archipelago-search::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, and Opera */
-  }
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+}
+
+.carousel-area::-webkit-scrollbar {
+	display: none;
+}
+
+.archipelago-search {
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+	/* Internet Explorer and Edge */
+
+}
+
+.archipelago-search::-webkit-scrollbar {
+	display: none;
+	/* Chrome, Safari, and Opera */
+}
 
 .answer-area li {
 	font-weight: 400;
-	
+
 	list-style: square;
 
 }
 
 @keyframes bounce {
-	0%, 100% {
-	  transform: translateY(-25%);
-	  animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+
+	0%,
+	100% {
+		transform: translateY(-25%);
+		animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
 	}
+
 	50% {
-	  transform: translateY(0);
-	  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		transform: translateY(0);
+		animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
 	}
-  }
+}
 
 
 .answer-area p {
@@ -140,7 +155,8 @@ ul {
 
 span {
 	user-select: text;
-  }
+}
+
 /* 
 
 
@@ -298,38 +314,43 @@ MAIN PAGE
 	max-height: 0;
 	opacity: 0;
 	overflow: hidden;
-  }
-  
-  .visibleDropdown {
-	transition: max-height 0.3s ease-in, opacity 0.3s ease-in, transform 0.3s ease-in;
-	max-height: 30vh; /* you need to set this to a value that's always greater than the content height */
-	opacity: 1;
-  }
+}
 
- /* style.css */
+.visibleDropdown {
+	transition: max-height 0.3s ease-in, opacity 0.3s ease-in, transform 0.3s ease-in;
+	max-height: 30vh;
+	/* you need to set this to a value that's always greater than the content height */
+	opacity: 1;
+}
+
+/* style.css */
 
 .hiddenDrawer {
 	transition: transform 0.5s ease-out;
 	transform: translateX(-100%);
-	width: 250px; /* Adjust as needed */
+	width: 250px;
+	/* Adjust as needed */
 	position: fixed;
 	left: 0;
 	top: 0;
 	height: 100vh;
-	overflow: auto;  }
-  
-  .visibleDrawer {
+	overflow: auto;
+}
+
+.visibleDrawer {
 	transition: transform 0.5s ease-in;
 	transform: translateX(0);
-	width: 250px; /* Adjust as needed */
+	width: 250px;
+	/* Adjust as needed */
 	position: fixed;
 	left: 0;
 	top: 0;
 	height: 100vh;
-	overflow: auto;  }
-  
-  
-  
+	overflow: auto;
+}
+
+
+
 .scrolling {
 	overflow-y: scroll;
 	scrollbar-width: none;
@@ -575,15 +596,18 @@ CONTENT PAGE
 	width: 0px;
 	height: 0px;
 }
-.question-answering{
+
+.question-answering {
 
 	scrollbar-width: none;
 }
-.question-answering::-webkit-scrollbar{
+
+.question-answering::-webkit-scrollbar {
 	display: none;
 	width: 0;
 	height: 0;
 }
+
 .content-upperside {
 	display: flex;
 	flex-direction: row;
@@ -703,30 +727,34 @@ CONTENT PAGE
 
 .summary-text {
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	font-weight:500;
+	font-weight: 500;
 	font-size: 16px;
-	
+
 }
 
-.summary-text p,li,ul,span,code,pre,ol{
+.summary-text p,
+li,
+ul,
+span,
+code,
+pre,
+ol {
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	font-weight:500
-
-
+	font-weight: 500
 }
 
-.summary-text code{
+.summary-text code {
 
 	white-space: pre-wrap;
-	padding-left:10px;
+	padding-left: 10px;
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 }
 
-.select-option span{
+.select-option span {
 	padding-left: 10px;
-	padding-top:5px;
-	padding-bottom:0px;
+	padding-top: 5px;
+	padding-bottom: 0px;
 
 
 
@@ -736,79 +764,84 @@ CONTENT PAGE
 .or-area {
 	display: flex;
 	align-items: center;
-  }
-  
-  .or-area::before {
+}
+
+.or-area::before {
 	content: '';
 	flex-grow: 1;
 	height: 1px;
 	background-color: black;
 	margin-right: 10px;
-  }
-  
-.summary-text h2{
-	
-	font-weight:600;
-	font-size: 20px;
-	margin-top:30px;
-	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	
 }
-.summary-text h1{
-	
-	font-weight:600;
+
+.summary-text h2 {
+
+	font-weight: 600;
 	font-size: 20px;
-	margin-top:30px;
+	margin-top: 30px;
+	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+.summary-text h1 {
+
+	font-weight: 600;
+	font-size: 20px;
+	margin-top: 30px;
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
 /* .summary-text p{
 	font-family : "Bookerly";
 	font-weight:500
 } */
-.summary-text h3{
-	
-	font-weight:600;
+.summary-text h3 {
+
+	font-weight: 600;
 	font-size: 20px;
-	margin-top:30px;
+	margin-top: 30px;
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.summary-text h4{
-	font-weight:600;
+.summary-text h4 {
+	font-weight: 600;
 	font-size: 20px;
-	margin-top:30px;
+	margin-top: 30px;
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.summary-text h5{
-	font-weight:600;
+.summary-text h5 {
+	font-weight: 600;
 	font-size: 16px;
-	margin-top:30px;
+	margin-top: 30px;
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.summary-text strong{
+.summary-text strong {
 
 	font-family: "Segoe UI", ui-sans-serif, -apple-system, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	font-weight:600;
-	font-style:italic
+	font-weight: 600;
+	font-style: italic
+}
+
+.slick-arrow::before {
+	background: "black"
+}
+
+
+.summary-text ul {
+	list-style-type: disc;
 
 }
 
-.slick-arrow::before{
-	background:"black"
-}
-
-
-.summary-text 	ul{
-	list-style-type:disc;
-
-}
 .summary-text li::before {
-	content: "•"; /* Bullet point character */
-	color: #a1a1aa; /* Change color here */
-	margin-right: 0.5em; /* Add some spacing between the bullet and the text */
-  }
+	content: "•";
+	/* Bullet point character */
+	color: #a1a1aa;
+	/* Change color here */
+	margin-right: 0.5em;
+	/* Add some spacing between the bullet and the text */
+}
 
 .sign-in-input input {
 	position: relative;
@@ -970,7 +1003,7 @@ DIFFERENT SCREEN SIZES
 		text-align: center;
 	}
 
-	
+
 	.menuToggler {
 		display: none;
 	}

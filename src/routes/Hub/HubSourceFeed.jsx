@@ -149,7 +149,13 @@ function HubSourceFeed(props) {
 			search.includes('https://youtu.be') ||
 			search.includes('https://m.youtube.com') ||
 			search.includes('https://twitter.com/i/spaces') ||
-			search.includes('https://www.youtube.com/live')
+			search.includes('https://www.youtube.com/live') ||
+			search.includes('https://podcasts.apple.com') ||
+			search.includes('https://www.twitch.tv') ||
+			search.includes('https://www.twitch.com') ||
+			search.includes('https://twitter.com') ||
+			search.includes("https://x.com") ||
+			search.includes("https://x.com/i/spaces")
 		)
 		) {
 			setInputValue('');
@@ -200,6 +206,56 @@ function HubSourceFeed(props) {
 				}
 
 			}
+			else if (search.includes("https://podcasts.apple.com")) {
+				if (props.tier === "basic" || props.tier === "premium") {
+					const idRegex = /id(\d+)/;
+					const iRegex = /i=(\d+)/;
+
+					const idMatch = search.match(idRegex);
+					const iMatch = search.match(iRegex);
+
+					const podcastId = idMatch ? idMatch[1] : '';
+					const episodeId = iMatch ? iMatch[1] : '';
+
+					videoId = `${podcastId}-${episodeId}`;
+					video_source = "ap"
+				}
+				else {
+					setFailed(true)
+					setErrorMessageSubmit('Upgrade your plan to process Apple Podcasts. See Account page for more detail.');
+					return;
+				}
+			}
+			else if (search.includes("https://www.twitch.tv") || search.includes("https://www.twitch.com")) {
+				if (props.tier === "basic" || props.tier === "premium") {
+					const regex = /twitch\.(tv|com)\/videos\/(\d+)/;
+					const match = search.match(regex);
+					videoId = match ? match[1] : null;
+
+					video_source = "tv"
+				}
+				else {
+					setFailed(true)
+					setErrorMessageSubmit('Upgrade your plan to process Twitch recordings. See Account page for more detail.');
+					return;
+				}
+			}
+
+			else if ((search.includes("https://x.com") || search.includes("https://twitter.com")) && !search.includes("i/spaces")) {
+				if (props.tier === "basic" || props.tier === "premium") {
+					setSearch(search.split('/video/')[0])
+					const regex = /status\/(\d+)/;
+					const match = search.split('/video/')[0].match(regex);
+					videoId = match ? match[1] : '';
+					video_source = "tw"
+				}
+				else {
+					setFailed(true)
+					setErrorMessageSubmit('Upgrade your plan to process Twitter videos. See Account page for more detail.');
+					return;
+				}
+			}
+
 
 
 			if (currentUser) {
@@ -211,7 +267,7 @@ function HubSourceFeed(props) {
 						.post(
 							`${API_URL}/sources/`,
 							{
-								url: search,
+								url: video_source === "tw" ? search.split('/video/')[0] : search
 							},
 							{
 								headers: {
@@ -370,11 +426,19 @@ function HubSourceFeed(props) {
 					{data.length === 0 && !isLoading &&
 
 						currentUser ?
-						(search.includes('https://www.youtube.com/watch') ||
+						(
+							search.includes('https://www.youtube.com/watch') ||
 							search.includes('https://youtu.be') ||
 							search.includes('https://m.youtube.com') ||
 							search.includes('https://twitter.com/i/spaces') ||
-							search.includes('https://www.youtube.com/live'))
+							search.includes('https://www.youtube.com/live') ||
+							search.includes('https://podcasts.apple.com') ||
+							search.includes('https://www.twitch.tv') ||
+							search.includes('https://www.twitch.com') ||
+							search.includes('https://twitter.com') ||
+							search.includes("https://x.com") ||
+							search.includes("https://x.com/i/spaces")
+						)
 
 							?
 

@@ -66,7 +66,7 @@ export default function About() {
 							</AccordionHeader>
 							<AccordionBody className="text-md dark:text-zinc-300">
 								<p className="font-averta-regular">
-									You can use Alphy to transcribe, summarize, and question YouTube videos, Twitter Spaces, Twitter videos, Twitch recordings, Apple Podcasts, and your local audio files (.mp3, .m4a, .mpga, .mpeg, .wav, or .webm).
+									You can use Alphy to transcribe, summarize, and question YouTube videos, Twitter / X Spaces, Twitter / X videos, Twitch recordings, Apple Podcasts, and your local audio files (.mp3, .m4a, .mpga, .mpeg, .wav, or .webm).
 								</p>
 							</AccordionBody>
 						</Accordion>
