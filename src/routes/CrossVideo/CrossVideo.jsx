@@ -134,7 +134,7 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 					{
 						headers: {
 							"accept": "application/json",
-							'id-token': idToken,
+							'id-token': idToken ? idToken : "123",
 						},
 					}
 				).then((response) => {
