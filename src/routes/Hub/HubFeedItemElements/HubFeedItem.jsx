@@ -17,6 +17,8 @@ const HubFeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, side
 		formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
 	}
 
+
+
 	let imageUrl;
 	if (item !== undefined) {
 		if (item.source_type === 'yt') {
@@ -28,6 +30,7 @@ const HubFeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, side
 			imageUrl = ApplePodcastBanner;
 		}
 		else if (item.source_type === "tw") {
+			/* 	imageUrl = item.thumbnail ? item.thumbnail : Twitch */
 			imageUrl = Twitch
 		}
 		else if (item.source_type === "x") {

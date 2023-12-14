@@ -6,6 +6,7 @@ import HubSubmitPage from "./HubSubmitPage"
 import HubUserPage from "./HubUserPage.jsx"
 import { Link } from "react-router-dom"
 import WelcomeExplainer from "./WelcomeExplainer"
+import AISearchEngine from "./AISearchEngine.jsx"
 
 
 export default function HubContent({ arcs, currentUser, tier, userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos,
@@ -31,7 +32,8 @@ export default function HubContent({ arcs, currentUser, tier, userArchipelagos, 
 
                             {mainShow === "sources" &&
                                 <div className="min-h-[90vh]">
-                                    <HubSourceFeed currentUser={currentUser} tier={tier} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+                                    {/*   <AISearchEngine collapsed={collapsed} currentUser={currentUser} /> */}
+                                    <HubSourceFeed credit={credit} currentUser={currentUser} tier={tier} userArchipelagos={userArchipelagos} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                                         mainShow={mainShow} setMainShow={setMainShow} />
                                 </div>
                             }

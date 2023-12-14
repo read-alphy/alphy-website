@@ -82,7 +82,7 @@ function HubSourceFeed(props) {
 			localStorage.setItem('search', '');
 		}
 	});
-	const limit = 16;
+	const limit = window.location.href.includes("/explore") ? 40 : 16;
 	const searchInputRef = React.useRef(null);
 
 
@@ -127,9 +127,17 @@ function HubSourceFeed(props) {
 	};
 
 	const loadMore = () => {
-		setOffset(offset + limit);
-		getData(offset + limit, false, true);
+		if (window.location.href.includes("/explore")) {
+			setOffset(offset + limit);
+			getData(offset + limit, false, true);
+		}
+		else {
+			navigate("/explore")
+		}
+
 	};
+
+
 
 	if (called === false && search.length === 0) {
 		getData(0, true, true);
@@ -159,7 +167,7 @@ function HubSourceFeed(props) {
 		)
 		) {
 			setInputValue('');
-			setErrorMessageSubmit('Please provide a link to a YouTube video or Twitter Space.')
+			setErrorMessageSubmit('Please provide a valid link.')
 			setFailed(true)
 			return;
 		}
@@ -170,11 +178,22 @@ function HubSourceFeed(props) {
 			if (search.includes('https://www.youtube.com')) {
 
 				if (search.includes('https://www.youtube.com/watch')) {
-					videoId = search.split('/').pop().split('?v=')[1].split("&")[0];
+					try { videoId = search.split('/').pop().split('?v=')[1].split("&")[0]; }
+					catch {
+						setErrorMessageSubmit('Please provide a valid link.')
+						setFailed(true)
+						return;
+					}
 
 				}
 				else if (search.includes('https://www.youtube.com/live')) {
 					videoId = search.split('/').pop().split("?")[0];
+
+				}
+				else {
+					setErrorMessageSubmit('Please provide a valid link.')
+					setFailed(true)
+					return;
 
 				}
 				video_source = "yt"
@@ -321,7 +340,7 @@ function HubSourceFeed(props) {
 		<div className="main-page-feed-section  xl:min-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1280px] 2xl:min-w-[1280px] w-full mx-auto xl:mx-0 md:pl-10  lg:pl-16  xl:pl-20 2xl:pl-40   flex flex-row">
 
 			<div className=" p-[10px] mt-10 min-h-[60vh]  w-full">
-				<p className="font-averta-semibold text-zinc-700 dark:text-zinc-300 text-lg font-sans font-semibold text-xl xl:text-2xl pl-2"> Discover our database.</p>
+				<p className="font-averta-semibold text-zinc-700 dark:text-zinc-300 text-lg font-sans font-semibold text-xl xl:text-2xl pl-2"> Explore our database.</p>
 
 
 
@@ -443,7 +462,7 @@ function HubSourceFeed(props) {
 							?
 
 							<div>
-								<p className="mt-2 mb-4 text-zinc-500 dark:text-zinc-400 flex flex-col text-md">
+								<p className="mb-4 text-zinc-500 dark:text-zinc-400 flex flex-col text-md">
 									Submit for processing
 								</p>
 

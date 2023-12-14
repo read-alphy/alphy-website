@@ -295,9 +295,9 @@ export default function QuestionAnswering(props) {
 		setinputError(false);
 		setIsCleared(false)
 
-		if (props.inputValue.length > 250) {
+		if (props.inputValue.length > 300) {
 			setinputError(true);
-			setErrorText('Your question is too long, please keep it under 250 characters.');
+			setErrorText('Your question is too long, please keep it under 300 characters.');
 			props.setInputValue('');
 			return;
 		} else if (props.inputValue.length === 0) {

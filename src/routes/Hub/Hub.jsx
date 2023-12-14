@@ -41,6 +41,9 @@ function Hub({ arcs, currentUser, collapsed, setCollapsed, tier, contentName, cr
 		if (location.pathname.includes("arcs")) {
 			setMainShow("arcs")
 		}
+		else if (location.pathname.includes("explore")) {
+			setMainShow("sources")
+		}
 		else {
 			setMainShow("default")
 		}

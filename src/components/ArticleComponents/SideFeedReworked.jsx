@@ -132,16 +132,24 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 
 							</Link>
 
-							<Link to="/" className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+							<Link to="/explore" className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
 									className="mr-3 mt-0.5 feather feather-compass"
 
 									stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
 
 
-								<p className="font-averta-semibold">Discover</p>
+								<p className="font-averta-semibold">Explore</p>
 
 							</Link>
+							<Link to="/arcs" className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+
+
+								<svg className="mr-3 mt-0.5 feather feather-message-square" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+								<p className="font-averta-semibold">Arcs</p>
+
+							</Link>
+
 							{
 								localStorage.getItem("logged in") === "true" ? (
 									null
@@ -208,8 +216,8 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 				</div>
 				:
 
-				<div>
-					<div className="">
+				<div className="flex flex-col flex-grow">
+					<div className="flex flex-col flex-grow">
 						<div className={`flex items-center font-bold pt-10 pl-0.5`}>
 
 							<button onClick={() => setCollapsed(false)} className="text-zinc-800 dark:text-gray-200 ">

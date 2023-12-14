@@ -122,7 +122,6 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 			}
 			else {
 				idToken = await currentUser.getIdToken(true)
-				console.log(idToken)
 			}
 
 
