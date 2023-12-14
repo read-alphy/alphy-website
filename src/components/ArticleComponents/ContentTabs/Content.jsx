@@ -1844,7 +1844,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 							<p className="text-xl text-zinc-500 dark:text-zinc-200  max-w-screen-md mx-auto p-3 text-center">
 
 								<span className="font-averta-regular">
-									Alphy is doing its best to process this {data.source_type === "yt" ? "video" : "recording"}, it will be ready in a few minutes. Meanwhile, you can check out other videos.
+									Alphy is doing its best to process this {data.source_type === "yt" ? "video" : "recording"}, it will be ready in a few minutes. We'll send you an email when it's ready!
 									<img className={`opacity-70 dark:opacity-90 mx-auto `} src={working} alt="My SVG" />
 								</span>
 
