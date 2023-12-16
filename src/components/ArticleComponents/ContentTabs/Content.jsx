@@ -1906,7 +1906,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 			{showScrollBackButton ?
 				<button
 					onClick={scrollToSavedDepth}
-					className={`xl:hidden absolute ${showYouTubeFrame ? "right-24 bottom-8" : "mb-20 right-5 bottom-5"}  text-zinc-300 dark:text-zinc-600  bg-mildDarkMode dark:bg-green-200 hover:bg-green-200 hover:text-zinc-700 text-white font-averta-semibold text-sm py-2 px-2 rounded-full transition ease-in-out duration-300 hover:scale-105  `}
+					className={`xl:hidden absolute ${showYouTubeFrame ? "right-24 bottom-8" : "lg:mb-20 right-5 bottom-5"}  text-zinc-300 dark:text-zinc-600  bg-mildDarkMode dark:bg-green-200 hover:bg-green-200 hover:text-zinc-700 text-white font-averta-semibold text-sm py-2 px-2 rounded-full transition ease-in-out duration-300 hover:scale-105  `}
 				>
 					{showYouTubeFrame ?
 						<p>SCROLL BACK</p> :
