@@ -596,7 +596,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	const handleAskAlphy = (type) => {
 		let askInput
 
-		if (type === "default ") {
+		if (type === "default") {
 			askInput = "Explain the following:" + askText + "?'"
 		}
 		else if (type === "investment") {
