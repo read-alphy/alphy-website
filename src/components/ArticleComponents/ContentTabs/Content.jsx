@@ -600,24 +600,19 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		let askInput
 
 		const selection = window.getSelection();
-
+		setShowScrollBackButton(true)
 		if (!selection.rangeCount) return;
 		if (document.getElementById("selection-span") !== null) {
 			const previousSpanSelection = document.getElementById("selection-span");
-			previousSpanSelection.id = ""
+			previousSpanSelection.outerHTML = previousSpanSelection.innerHTML;
 			previousSpanSelection.className = ""
+			previousSpanSelection.id = ""
+
 		}
 		const range = selection.getRangeAt(0);
 		const span = document.createElement('span');
 		span.id = "selection-span"
 		range.surroundContents(span);
-
-
-		if (ref.current) {
-			localStorage.setItem("scrollPosition", ref.current.scrollTop.toString());
-			setShowScrollBackButton(true)
-
-		}
 
 
 
@@ -659,17 +654,21 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	}
 
 	const scrollToSavedDepth = () => {
-
-		const savedPosition = localStorage.getItem("scrollPosition");
+		setShowScrollBackButton(false)
+		/* const savedPosition = localStorage.getItem("scrollPosition"); */
 		if (document.getElementById("selection-span")) {
 			const selectionSpan = document.getElementById("selection-span");
-			selectionSpan.className = "flash-effect"
+			if (selectionSpan) {
+				selectionSpan.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll
+				selectionSpan.className = "flash-effect"
+
+			}
 		}
 
-		if (savedPosition && ref.current) {
-			ref.current.scrollTop = parseInt(savedPosition, 10);
-			setShowScrollBackButton(false)
-		}
+		/* 	if (savedPosition && ref.current) {
+				ref.current.scrollTop = parseInt(savedPosition, 10);
+				setShowScrollBackButton(false)
+			} */
 	};
 
 
@@ -1576,9 +1575,9 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 												<Selection.Portal>
 													<Selection.Content >
 														<div className="flex flex-col bg-white dark:bg-darkMode dark:border dark:border-zinc-600 rounded-lg drop-shadow-2xl p-4">
-															<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("default")}> Ask Alphy to learn more about it</Button>
-															<Button className="rounded-md bg-blue-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("ELI5")}> Explain like I'm 5</Button>
-															<Button className="rounded-md bg-violet-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("investment")}>Explain it like an investment analyst</Button>
+															<Button size="sm" className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold" onClick={() => handleAskAlphy("default")}> Ask Alphy to learn more about it</Button>
+															<Button size="sm" className="rounded-md bg-blue-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("ELI5")}> Explain like I'm 5</Button>
+															<Button size="sm" className="rounded-md bg-violet-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("investment")}>Explain it like an investment analyst</Button>
 														</div>
 
 														{/* <Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" /> */}
@@ -1815,7 +1814,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																					return (
 																						<div className="summary-text " key={index}>
 																							<br></br>
-																							{item}
+																							{item.replace(/\\h/g, ' ')}
 																						</div>
 																					);
 																				}
@@ -1904,20 +1903,28 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 				</div>
 			}
+			{showScrollBackButton ?
+				<button
+					onClick={scrollToSavedDepth}
+					className={`xl:hidden absolute ${showYouTubeFrame ? "right-24 bottom-8" : "mb-20 right-5 bottom-5"}  text-zinc-300 dark:text-zinc-600  bg-mildDarkMode dark:bg-green-200 hover:bg-green-200 hover:text-zinc-700 text-white font-averta-semibold text-sm py-2 px-2 rounded-full transition ease-in-out duration-300 hover:scale-105  `}
+				>
+					{showYouTubeFrame ?
+						<p>SCROLL BACK</p> :
+						<ArrowUpwardIcon className="rotate-180" />
+					}
 
-			<button
-				onClick={handleScroll}
-				className={`lg:hidden lg:mb-20 absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-800 text-white font-bold py-2 px-2 rounded-full transition ease-in-out duration:300`}
-			>
-				<ArrowUpwardIcon className="" />
-			</button>
+				</button>
 
-			<button
-				onClick={scrollToSavedDepth}
-				className={`xl:hidden ${showScrollBackButton ? "" : "hidden"} lg:mb-20 absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-800 text-white font-bold py-2 px-2 rounded-full transition ease-in-out duration:300`}
-			>
-				<ArrowUpwardIcon className="rotate-180" />
-			</button>
+				:
+				<button
+					onClick={handleScroll}
+					className={`lg:hidden lg:mb-20 absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-800 text-white font-bold py-2 px-2 rounded-full transition ease-in-out duration:300`}
+				>
+					<ArrowUpwardIcon className="" />
+				</button>
+
+
+			}
 		</div >
 	);
 }

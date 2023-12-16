@@ -69,7 +69,7 @@ export default function WelcomeExplainer() {
                     <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-md sm:text-lg mt-10">
                         Supported Platforms
                         <div className="flex flex-row mt-4 sm:mt-10gap-y-4 opacity-80 overflow-scroll">
-                            <img src={Youtube} height={20} width={135} title="YouTube" className="sm:mr-4 lg:mr-10 w-1/6 sm:w-2/12 lg:w-1/3 mx-2 max-w-[160px]" />
+                            <img src={Youtube} height={20} width={135} title="YouTube" className="sm:mr-4 lg:mr-10 w-1/6 sm:w-2/12 lg:w-[40%] mx-2 max-w-[160px]" />
                             <img src={Twitter} height={20} width={80} title="Twitter / X videos" className="  sm:mr-4 lg:mr-10 w-1/6 sm:w-2/12 lg:w-1/3  px-2 max-w-[130px]" />
                             <img src={Spaces} height={20} width={80} title="Twitter / X Spaces" className="  sm:mr-4 lg:mr-10 w-1/6 sm:w-2/12 lg:w-1/3  px-2 max-w-[130px]" />
                             <img src={Twitch} title="Twitch" height={20} width={80} className="sm:mr-4 lg:mr-10 justify-center sm:w-2/12 w-1/6 lg:w-1/3  px-2 max-w-[130px]" />

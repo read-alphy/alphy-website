@@ -184,7 +184,7 @@ export default function BaseQuestions({ key_qa, data, singleSource, areaRefs, ha
 															<br /> <br />
 
 															{
-																<p className="text-zinc-500 dark:text-zinc-400  font-normal" dangerouslySetInnerHTML={{ __html: handleLength(source.text) }} />
+																<p className="text-zinc-500 dark:text-zinc-400  font-normal" dangerouslySetInnerHTML={{ __html: handleLength(source.text.replace(/\\h/g, ' ')) }} />
 
 
 															}
