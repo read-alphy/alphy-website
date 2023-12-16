@@ -67,7 +67,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	const [selectionCall, setSelectionCall] = useState(false);
 	const [modelName, setModelName] = useState("");
 	const [languages, setLanguages] = useState([]);
-
+	const [showScrollBackButton, setShowScrollBackButton] = useState(false);
 
 	const [mainPopoverOpen, setMainPopoverOpen] = useState(false);
 	const [mainPopoverOpenSmall, setMainPopoverOpenSmall] = useState(false);
@@ -79,6 +79,9 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	const [summary, setSummary] = useState("")
 
 	const [inputValue, setInputValue] = useState("");
+
+	const [highlightClass, setHighlightClass] = useState('');
+
 
 
 	const buttonRef = useRef(null);
@@ -596,6 +599,36 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	const handleAskAlphy = (type) => {
 		let askInput
 
+		const selection = window.getSelection();
+
+		if (!selection.rangeCount) return;
+		if (document.getElementById("selection-span") !== null) {
+			const previousSpanSelection = document.getElementById("selection-span");
+			previousSpanSelection.id = ""
+			previousSpanSelection.className = ""
+		}
+		const range = selection.getRangeAt(0);
+		const span = document.createElement('span');
+		span.id = "selection-span"
+		range.surroundContents(span);
+
+
+		if (ref.current) {
+			localStorage.setItem("scrollPosition", ref.current.scrollTop.toString());
+			setShowScrollBackButton(true)
+
+		}
+
+
+
+		if (window.getSelection) {
+
+			window.getSelection().removeAllRanges(); // Clears the text selection
+		} else if (document.selection) { // For older versions of IE
+
+			document.selection.empty();
+		}
+
 		if (type === "default") {
 			askInput = "Explain the following:" + askText + "?'"
 		}
@@ -620,11 +653,26 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 		}
 
-
-
+		handleScroll()
 
 
 	}
+
+	const scrollToSavedDepth = () => {
+
+		const savedPosition = localStorage.getItem("scrollPosition");
+		if (document.getElementById("selection-span")) {
+			const selectionSpan = document.getElementById("selection-span");
+			selectionSpan.className = "flash-effect"
+		}
+
+		if (savedPosition && ref.current) {
+			ref.current.scrollTop = parseInt(savedPosition, 10);
+			setShowScrollBackButton(false)
+		}
+	};
+
+
 
 	const handleAddToArchipelago = (archipelagoUID, create) => {
 
@@ -676,14 +724,15 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 	// Function to handle scroll and toggle visibility
 	const handleScroll = () => {
-		const contentElement = document.getElementById('content');
+
+		const contentElement = document.getElementById('processing-tier');
 		if (contentElement) {
 			contentElement.scrollIntoView({ behavior: 'smooth' });
 		}
 	};
 
 	const toggleVisibility = () => {
-		const bodyTextElement = document.getElementById('q_and_a');
+		const bodyTextElement = document.getElementById('q-and-a');
 		if (bodyTextElement) {
 			const position = bodyTextElement.getBoundingClientRect();
 			/* 	if (position.top < window.innerHeight && position.bottom >= 0) {
@@ -723,7 +772,6 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 	function handleShowYouTubeFrame() {
-
 		if (showYouTubeFrame) {
 			setShowYouTubeFrame(false)
 			localStorage.setItem("showYouTubeFrame", false)
@@ -781,39 +829,17 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 
+	const triggerFlashEffect = () => {
+		setHighlightClass('flash-effect');
+		setTimeout(() => setHighlightClass(''), 1000); // Reset after animation
+	};
+
+
+
 
 	const videoRef = useRef(null);
 	const canvasRef = useRef(null);
 
-	const takeSnapshot = () => {
-		const video = videoRef.current;
-		const canvas = canvasRef.current;
-
-		if (video && canvas) {
-			const context = canvas.getContext('2d');
-			const width = parseInt(video.offsetWidth, 10);
-			const height = parseInt(video.offsetHeight, 10);
-
-			// Set canvas size to match the video
-			canvas.width = width;
-			canvas.height = height;
-
-			// Draw the video frame to the canvas
-			context.drawImage(video, 0, 0, width, height);
-
-			// Convert the canvas to a data URL
-			const base64ImageData = canvas.toDataURL('image/jpeg');
-			const filename = `snap-${width}x${height}-${video.currentTime}.jpg`;
-
-			// Trigger a download
-			const link = document.createElement('a');
-			link.download = filename;
-			link.href = base64ImageData;
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-		}
-	};
 
 
 
@@ -826,7 +852,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 				<div className="grid grid-cols-3 ">
-					<div className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary != undefined && language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
+					<div id="processing-tier" className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary != undefined && language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
 						{modelName === "HIGH" &&
 							<div className="relative flex flex-col">
 								<div className="relative flex flex-row group cursor-default">
@@ -1479,7 +1505,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 									<div className={`col-span-2 ${data.source_type === "yt" && ""} drop-shadow-sm `}>
 										{summary.key_qa !== undefined && summary.key_qa === null ? (
-											<div id="q_and_a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
+											<div id="q-and-a" className={`question-answering  md:min-h-[600px] border-b overflow-auto mx-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}>
 												<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center italic ">
 
 													Generating questions... plugging in an AI assistant...
@@ -1501,6 +1527,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 													key_qa={summary.key_qa}
 													inputValue={inputValue}
 													setInputValue={setInputValue}
+													setShowYouTubeFrame={setShowYouTubeFrame}
 													buttonRef={buttonRef}
 													inputRef={inputRef}
 													data={data}
@@ -1547,8 +1574,8 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 											<Selection.Root>
 												<Selection.Portal>
-													<Selection.Content>
-														<div className="flex flex-col bg-white dark:bg-darkMode dark:border dark:border-zinc-600 rounded-lg drop-shadow-xl p-4">
+													<Selection.Content >
+														<div className="flex flex-col bg-white dark:bg-darkMode dark:border dark:border-zinc-600 rounded-lg drop-shadow-2xl p-4">
 															<Button className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("default")}> Ask Alphy to learn more about it</Button>
 															<Button className="rounded-md bg-blue-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("ELI5")}> Explain like I'm 5</Button>
 															<Button className="rounded-md bg-violet-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("investment")}>Explain it like an investment analyst</Button>
@@ -1880,9 +1907,16 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 			<button
 				onClick={handleScroll}
-				className={`lg:hidden absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-600 text-white font-bold py-2 px-2 rounded-full`}
+				className={`lg:hidden lg:mb-20 absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-800 text-white font-bold py-2 px-2 rounded-full transition ease-in-out duration:300`}
 			>
 				<ArrowUpwardIcon className="" />
+			</button>
+
+			<button
+				onClick={scrollToSavedDepth}
+				className={`xl:hidden ${showScrollBackButton ? "" : "hidden"} lg:mb-20 absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-800 text-white font-bold py-2 px-2 rounded-full transition ease-in-out duration:300`}
+			>
+				<ArrowUpwardIcon className="rotate-180" />
 			</button>
 		</div >
 	);

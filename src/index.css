@@ -1174,3 +1174,26 @@ DIFFERENT SCREEN SIZES
 	width: 0%;
 	left: 50%;
 }
+
+@keyframes flash {
+
+	0% {
+		background-color: #fef08a;
+
+	}
+
+
+
+	100% {
+		background-color: transparent;
+	}
+
+	50% {
+		background-color: #fef08a;
+
+	}
+}
+
+.flash-effect {
+	animation: flash 1s ease-in-out;
+}

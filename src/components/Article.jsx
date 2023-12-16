@@ -341,7 +341,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} px-3 md:px-0  mx-auto  h-full sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh]'
+					className={`scrolling px-3 md:px-0  mx-auto  h-full sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh]'
 						}}`}
 				>
 					{isLoading || data.length ? <Loading /> :
