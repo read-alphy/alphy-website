@@ -127,7 +127,7 @@ export default function SubmitBlock({ currentUser, tier, credit, handleGoBack, h
 
                                     <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-semibold">Apple Podcasts</p></div>
 
-                                    <p className="dark:text-zinc-300 text-zinc-500 mb-3 mt-6 font-averta-semibold"> Switch to a <a href="/u/account" className="text-greenColor  underline"> paid plan</a> to for limitless access.</p>
+                                    <p className="dark:text-zinc-300 text-zinc-500 mb-3 mt-6 font-averta-semibold"> Switch to a <Link to="/account" className="text-greenColor  underline"> paid plan</Link> to for limitless access.</p>
 
 
 
