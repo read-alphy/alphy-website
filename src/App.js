@@ -244,11 +244,25 @@ function App() {
 			.then((response) => {
 				if (firstTime) {
 					shuffleArray(response.data)
-					setDataGlobalArchipelagos(response.data);
+
+					/* setDataGlobalArchipelagos(response.data); */
+					let temporary = []
+					response.data.forEach((item) => {
+						if (item.user_id === null || item.user_id === "dUfMZPwN8fcxoBtoYeBuR5ENiBD3") {
+							temporary.push(item)
+						}
+					});
+					setDataGlobalArchipelagos(temporary);
 				}
 				else {
 					shuffleArray(response.data)
-					setDataGlobalArchipelagos([...dataGlobalArchipelagos, ...response.data]);
+					let temporary = []
+					response.data.forEach((item) => {
+						if (item.user_id === null || item.user_id === "dUfMZPwN8fcxoBtoYeBuR5ENiBD3") {
+							temporary.push(item)
+						}
+					});
+					setDataGlobalArchipelagos(temporary);
 				}
 
 				setTimeout(() => {
