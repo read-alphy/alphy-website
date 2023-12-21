@@ -209,7 +209,7 @@ export default function UploadBlock({ currentUser, tier, credit, handleGoBack })
 
                 )
                 :
-                <div className="rounded-xl dark:border-darkMode bg-white dark:bg-mildDarkMode pr-10 pt-10 font-semibold ">
+                <div className="rounded-xl dark:border-darkMode  pr-10 pt-10 font-semibold ">
                     <p className={`flex flex-row font-sans text-zinc-500 dark:text-zinc-400  ${uploadProgress > 0 ? "italic" : "underline"} `}>  {uploadProgress > 0 && uploadProgress !== 100 ? "Sending to Alphy..." : "Process another file instead"}
                         <svg onClick={handleFileUploadClear} className={`${uploadProgress > 0 && !errorMessage ? "opacity-40 pointer-events-none" : " cursor-pointer "} ml-2`} width="20px" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <title className="font-bold">Clear</title>
