@@ -109,7 +109,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 
-	console.log(data.summaries)
+
 	const title = data.title
 	const inputDate = data.added_ts !== undefined ? data.added_ts.substring(0, 10) : undefined;
 	let formattedDate = ""
@@ -502,11 +502,14 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 		for (let i = 0; i < srt_array.length; i++) {
 			count = count + 1;
+			const text_to_be_added = srt_array[i].text.replace(/\\h/g, " ");
 
-			nothing = nothing + ' ' + srt_array[i].text;
+
+			nothing = nothing + ' ' + text_to_be_added;
+
 			if (
-				(count > 6 || count >= srt_array.length) &&
-				srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
+				(count > 4 || count >= srt_array.length) &&
+				(srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.' || srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '?' || srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '!')
 			) {
 				await transcript.push(nothing);
 				await transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
@@ -1679,11 +1682,12 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																							<h3 className="text-xl mb-1 underline cursor-pointer dark:text-zinc-200" onClick={() => handleClickTimestamp(item.at)}>
 																								{`${item.title}`}
 																							</h3>
-																							<h5 className="mb-2">({`${Math.floor(item.at / 3600) < 10 ? `0${Math.floor((item.at / 3600))}` : `${Math.floor((item.at / 3600))}`}
+																							<h5 onClick={() => handleClickTimestamp(item.at)} className="mb-2 cursor-pointer">
+																								{`${Math.floor(item.at / 3600) < 10 ? `0${Math.floor((item.at / 3600))}` : `${Math.floor((item.at / 3600))}`}
 																								${":"}
 																								${Math.floor(item.at / 60) < 10 ? `0${(Math.floor(item.at / 60))}` : Math.floor(item.at % 3600) < 600 ? `0${(Math.floor(item.at / 60 - (Math.floor(item.at / 3600)) * 60))}` : Math.floor(item.at / 60 - (Math.floor(item.at / 3600)) * 60)}
 																								${":"}
-																								${Math.floor(item.at % 60) < 10 ? `0${(Math.floor(item.at % 60))}` : (Math.floor(item.at % 60))}`})</h5>
+																								${Math.floor(item.at % 60) < 10 ? `0${(Math.floor(item.at % 60))}` : (Math.floor(item.at % 60))}`}</h5>
 
 																							{item.summary.split('\n').map((item, index) => (
 																								<div key={index} className="font-averta-regular text-stone-700 dark:text-zinc-300 text-md ">
@@ -1852,6 +1856,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																						<div className="summary-text " key={index}>
 																							<br></br>
 																							{item}
+
 																						</div>
 																					);
 																				}

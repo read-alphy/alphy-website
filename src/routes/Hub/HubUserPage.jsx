@@ -473,10 +473,6 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
 
                                     )
                                 }
-
-
-
-
                                 {offsetBookmarks < dataBookmarks.length && dataBookmarks.length > 0 && searchKeyword(dataBookmarks).length > 0 && hasMoreBookmarks && (
                                     <div className="w-full flex justify-center">
                                         {
