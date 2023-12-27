@@ -15,7 +15,7 @@ import LogoBlack from "../../img/ALPHY_BG_REMOVED_DARK.png"
 import { Link } from 'react-router-dom';
 import HubFeedItem from "../../routes/Hub/HubFeedItemElements/HubFeedItem"
 import { useLocation } from 'react-router-dom';
-import Compass from "../../img/icons/compass.svg"
+import { Shine } from "frosted-ui"
 
 
 function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, globalLayout, dataArchipelago, tier }) {
@@ -120,10 +120,12 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 					<div className="pt-10 md:pl-5">
 
 						<div className="flex flex-col w-full justify-start px-5">
-							<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out ${submitLayout ? " drop-shadow-sm " : "drop-shadow-sm"}   text-sm sm:text-md bg-green-200 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[120px] flex flex-row `} >
-								<AddIcon fontSize="small" className="mr-3" />
-								<p className="font-averta-semibold">New</p>
-							</Link>
+							<Shine puffyness='2'>
+								<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out drop-shadow-sm   text-sm sm:text-md bg-green-100 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `} >
+									<AddIcon fontSize="small" className="mr-3" />
+									<p className="font-averta-semibold">New</p>
+								</Link>
+							</Shine>
 
 
 							<Link to="/myhub" className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${userLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >

@@ -22,6 +22,7 @@
     "file-saver": "^2.0.5",
     "firebase": "^9.19.1",
     "flowbite": "^1.6.5",
+    "frosted-ui": "^0.0.1-canary.12",
     "fs": "^0.0.1-security",
     "howler": "^2.2.3",
     "lamejs": "^1.2.1",
