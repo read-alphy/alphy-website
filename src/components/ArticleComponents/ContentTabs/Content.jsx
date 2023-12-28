@@ -109,7 +109,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	};
 
 	const data = props.data
-
+	console.log(data)
 
 
 
@@ -407,10 +407,17 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	}
 	const handleClickTimestamp = (event) => {
 		setAutoplay(1);
-		let formattedTimestamp = event.target.textContent;
-		const [hours, minutes, seconds] = formattedTimestamp.split(':');
+		let formattedTimestamp
+		if (event.target) {
+			formattedTimestamp = event.target.textContent;
+			const [hours, minutes, seconds] = formattedTimestamp.split(':');
 
-		setTimestamp(hours * 3600 + minutes * 60 + seconds * 1);
+			setTimestamp(hours * 3600 + minutes * 60 + seconds * 1);
+		}
+		else {
+			setTimestamp(Math.floor(event))
+		}
+
 		setShowYouTubeFrame(true)
 	};
 
@@ -432,17 +439,42 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		let activeSummary
 
 		if (contentSummaries !== undefined && contentSummaries.length > 0) {
-			activeSummary = contentSummaries.find(summary => summary.lang === language)
+			activeSummary = await contentSummaries.find(summary => summary.lang === language)
 		}
 
-		setSummary(activeSummary)
+		await setSummary(activeSummary)
+
+
 
 		if (activeSummary !== undefined && activeSummary !== null && activeSummary.summary !== undefined && activeSummary.summary !== null) {
 			if (activeSummary.summary_prettified !== undefined && activeSummary.summary_prettified !== null) {
-				setSummaryArray(activeSummary.summary_prettified.split('\n'))
+
+
+
+				if (typeof activeSummary.summary_prettified === "string") {
+					await setSummaryArray(activeSummary.summary_prettified.split('\n'))
+
+
+				}
+				else {
+
+					await setSummaryArray(activeSummary.summary_prettified)
+				}
+
+
+
+
+
+
 			}
 			else {
-				setSummaryArray(activeSummary.summary.split('\n'))
+				if (typeof activeSummary.summary === "string") {
+					await setSummaryArray(activeSummary.summary.split('\n'))
+
+				}
+				else {
+					await setSummaryArray(activeSummary.summary)
+				}
 			}
 
 		}
@@ -458,37 +490,40 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 
-		var parser = new srtParser2();
+		var parser = await new srtParser2();
 
-		var srt_array = parser.fromSrt(transcript_raw);
+		var srt_array = await parser.fromSrt(transcript_raw);
 
 
 
 		let nothing = '';
 		let count = 0;
 
-		transcript.push('00:00:00');
+		await transcript.push('00:00:00');
 
 
 
 		for (let i = 0; i < srt_array.length; i++) {
 			count = count + 1;
+			const text_to_be_added = srt_array[i].text.replace(/\\h/g, " ");
 
-			nothing = nothing + ' ' + srt_array[i].text;
+
+			nothing = nothing + ' ' + text_to_be_added;
+
 			if (
-				(count > 6 || count >= srt_array.length) &&
-				srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.'
+				(count > 4 || count >= srt_array.length) &&
+				(srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '.' || srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '?' || srt_array[i].text.substring(srt_array[i].text.length - 1, srt_array[i].text.length) === '!')
 			) {
-				transcript.push(nothing);
-				transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
+				await transcript.push(nothing);
+				await transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
 				//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
 				count = 0;
 				nothing = '';
 			}
 			// in case missing punctuation, push it anyway
 			else if (count > 12) {
-				transcript.push(nothing);
-				transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
+				await transcript.push(nothing);
+				await transcript.push(srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4));
 				//timestamps = timestamps + `<a style='cursor:pointer' onclick={event.target.textContent} ${srt_array[i].endTime.substring(0, srt_array[i].endTime.length - 4)} <a/>`
 				count = 0;
 				nothing = '';
@@ -496,7 +531,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 			}
 			else if (i === srt_array.length - 1) {
 
-				transcript.push(nothing);
+				await transcript.push(nothing);
 				count = 0;
 				nothing = '';
 
@@ -506,7 +541,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		}
 
 
-		setTranscript(transcript)
+		await setTranscript(transcript)
 		/* transcript_array = data.transcript_chunked.split("\n") */
 
 
@@ -514,9 +549,13 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	}
 
 
-	if (transcript.length === 0 && data.transcript !== null) {
+	if (transcript.length === 0 && data !== undefined && data.transcript !== null) {
 		transcriptParser();
 	}
+
+
+
+
 
 
 	useEffect(() => {
@@ -1547,7 +1586,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 								<div className={`${isLoading ? "hidden" : ""} w-full 3xl:w-5/6 max-w-[700px] mx-auto mt-10 md:mt-0 ${window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""}`} >
 									{transcript.length > 0 ? (
-										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-sm 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
+										<div className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-md 3xl:min-w-[500px] mb-10 lg:mb-0  ${window.innerWidth > 1280 && window.innerWidth < 1420 ? window.innerWidth > 1280 && window.innerWidth < 1340 ? "ml-2" : "ml-6" : "xl:ml-10"} rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`} >
 
 											<div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
 												<ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto font-averta-semibold	">
@@ -1631,7 +1670,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 																{activeTab === 'tab1' && (
 
-																	<div className={`content-area text-l font-normal  max-w-screen-lg overflow-auto  h-full xl:max-h-[110vh]`}>
+																	<div className={`content-area text-l font-normal  max-w-screen-lg overflow-auto h-full xl:max-h-[110vh]`}>
 																		{/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
 
@@ -1645,22 +1684,50 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																			</p>
 
 																		) : (
-																			summaryArray.map((item, index) => {
-																				return (
-																					<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
-																						<div className="summary-text font-averta-semibold text-l">
-																							<ReactMarkdown >
-																								{item}
-																							</ReactMarkdown>
+																			typeof summaryArray[0] === "string" ?
+																				summaryArray.map((item, index) => {
+																					return (
+																						<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
+																							<div className="summary-text font-averta-semibold ">
+																								<ReactMarkdown >
+																									{item}
+																								</ReactMarkdown>
+																							</div>
+
+
+
+
 																						</div>
+																					);
+																				})
+																				:
 
+																				Object.values(summaryArray).map((item, index) => (
+																					<div className="mb-4  text-stone-900  dark:text-zinc-200" key={index}>
+																						<div className="font-averta-semibold text-l   dark:border-indigo-100 p-1 xs:p-2 sm:p-4">
+																							<h3 className="text-xl mb-1 underline cursor-pointer dark:text-zinc-200" onClick={() => handleClickTimestamp(item.at)}>
+																								{`${item.title}`}
+																							</h3>
+																							<h5 onClick={() => handleClickTimestamp(item.at)} className="mb-2 cursor-pointer">
+																								{`${Math.floor(item.at / 3600) < 10 ? `0${Math.floor((item.at / 3600))}` : `${Math.floor((item.at / 3600))}`}
+																								${":"}
+																								${Math.floor(item.at / 60) < 10 ? `0${(Math.floor(item.at / 60))}` : Math.floor(item.at % 3600) < 600 ? `0${(Math.floor(item.at / 60 - (Math.floor(item.at / 3600)) * 60))}` : Math.floor(item.at / 60 - (Math.floor(item.at / 3600)) * 60)}
+																								${":"}
+																								${Math.floor(item.at % 60) < 10 ? `0${(Math.floor(item.at % 60))}` : (Math.floor(item.at % 60))}`}</h5>
 
+																							{item.summary.split('\n').map((item, index) => (
+																								<div key={index} className="font-averta-regular text-stone-700 dark:text-zinc-300 text-md ">
+																									<ReactMarkdown className="react-markdown">
+																										{item}
+																									</ReactMarkdown>
+																								</div>
+																							))}
 
-
+																						</div>
 																					</div>
-																				);
-																			})
-																		)}
+																				))
+																		)
+																		}
 																	</div>
 																)}
 																{activeTab === 'tab2' && (
@@ -1814,7 +1881,9 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																					return (
 																						<div className="summary-text " key={index}>
 																							<br></br>
+
 																							{item.replace(/\\h/g, ' ')}
+
 																						</div>
 																					);
 																				}

@@ -465,7 +465,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                                         called ?
                                             <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh] font-averta-regular">
 
-                                                You don't have any bookmarks. <Link to="/" className="text-indigo-400 underline cursor-pointer font-averta-semibold">Discover</Link> the content other users unlocked with Alphy.
+                                                You don't have any bookmarks. <Link to="/explore" className="text-indigo-400 underline cursor-pointer font-averta-semibold">Discover</Link> the content other users unlocked with Alphy.
 
                                             </div>
                                             :
@@ -473,10 +473,6 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
 
                                     )
                                 }
-
-
-
-
                                 {offsetBookmarks < dataBookmarks.length && dataBookmarks.length > 0 && searchKeyword(dataBookmarks).length > 0 && hasMoreBookmarks && (
                                     <div className="w-full flex justify-center">
                                         {

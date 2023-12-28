@@ -2,10 +2,11 @@ import {
     Button, Spinner, Popover,
     PopoverHandler, PopoverContent, ThemeProvider
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom"
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { useNavigate } from "react-router-dom"
+import { Shine } from "frosted-ui";
+
 import Dialog from '@mui/material/Dialog';
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
 
@@ -121,12 +122,11 @@ export default function PremiumCard({ tier, openPopover, setOpenPopover, current
             <div className={`h-[460px]`}>
                 <ul role="list" className="space-y-5 my-7">
 
-
-
-                    <Button onClick={
-                        handleDialog
-                    } type="button" className={` bg-gradient-to-l from-green-100 to-green-300   transition duration-200 ease-in ${tier === "premium" ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-averta-semibold px-5 py-3 inline-flex text-zinc-700 justify-center w-full text-center`} >{tier === "premium" ? "Active" : ("Go Premium")}</Button>
-
+                    <Shine puffyness="0.5">
+                        <Button onClick={
+                            handleDialog
+                        } type="button" className={` bg-gradient-to-l from-green-100 to-green-300   transition duration-200 ease-in ${tier === "premium" ? "pointer-events-none text-whiteLike" : ""} rounded-lg text-[16px] font-averta-semibold px-5 py-3 inline-flex text-zinc-700 justify-center w-full text-center`} >{tier === "premium" ? "Active" : ("Go Premium")}</Button>
+                    </Shine>
                     <li className="flex space-x-3">
 
                         <svg aria-hidden="true" className="flex-shrink-0 w-5 h-5 mt-1 text-greenColor" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
@@ -285,6 +285,9 @@ export default function PremiumCard({ tier, openPopover, setOpenPopover, current
                                                                                         />
                                                                                         */}
 
+
+
+
                             <Button className={`bg-indigo-300 w-[200px] mt-6 py-3 ${(upgradeLoading) && "pointer-events-none opacity-60"}`} size="md" onClick={upgradePlan}>
                                 {upgradeLoading ?
                                     <Spinner color="gray" className="opacity-40 w-5 text-center margin-auto w-full" /> :
@@ -292,6 +295,7 @@ export default function PremiumCard({ tier, openPopover, setOpenPopover, current
                                 }
 
                             </Button>
+
                             {errorMessage.length == 0 ?
                                 <p className="items-center margin-auto flex mt-4">
                                     You will be charged automatically.

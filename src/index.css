@@ -1196,4 +1196,10 @@ DIFFERENT SCREEN SIZES
 
 .flash-effect {
 	animation: flash 1s ease-in-out;
+
+}
+
+.react-markdown ul {
+	list-style: disc outside none;
+
 }
