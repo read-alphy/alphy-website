@@ -106,7 +106,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	};
 
 	const data = props.data
-
+	console.log(data)
 
 
 
