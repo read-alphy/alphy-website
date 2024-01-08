@@ -33,7 +33,7 @@ export default function WelcomeExplainer({ currentUser }) {
                 <div className="pl-5 pr-5 mt-4  sm:mt-10 lg:mt-20 ">
                     {totalMinutes > 0 &&
                         <div className="flex flex-row ">
-                            <p className="bg-gradient-to-r from-pink-200 to-amber-100 via-red-200 rounded-lg px-2 py-1   font-bold text-zinc-900 text-md xs:text-lg">{Math.floor(totalMinutes).toLocaleString()} <span className="font-averta-regular text-sm xs:text-md">minutes processed with Alphy </span ></p>
+                            <p className="bg-gradient-to-r from-pink-200 to-amber-100 via-red-200 rounded-lg px-2 py-1   font-bold text-zinc-900 text-md xs:text-lg">{Math.floor(totalMinutes).toLocaleString()} <span className="font-averta-regular text-sm xs:text-lg">minutes processed with Alphy </span ></p>
                         </div>
                     }
                     <p className="text-zinc-900 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">Save time and learn better from audiovisual content.</p>
