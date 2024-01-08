@@ -40,7 +40,7 @@ export default function WelcomeExplainer({ currentUser }) {
                     <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-xl lg:text-xl font-averta-regular font-normal max-w-[600px]"> Join the Alphy community to transcribe, summarize, and ask questions to online and offline audiovisual content.
                     </p>
                     <div className={`mt-16 flex flex-row`}>
-                        <Link to="/submit" className="rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-teal-50 to-teal-100  px-4 py-3 font-averta-semibold drop-shadow-sm w-[200px]">
+                        <Link to="/submit" className={`rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-teal-50 to-teal-100  px-4 py-3 font-averta-semibold drop-shadow-sm ${currentUser ? "w-[200px]" : "w-[250px]"}`}>
                             {currentUser ? window.innerWidth < 400 ? "New Submit" : "Submit New Content" : "Start Your Journey Now"}
                         </Link>
                         {currentUser &&
@@ -109,7 +109,7 @@ export default function WelcomeExplainer({ currentUser }) {
 
                         </div>
                     </div> */}
-                    <div className="mt-10 sm:mt-20 flex flex-col" >
+                    <div className="mt-10 sm:mt-40 flex flex-col" >
                         <div className="flex flex-col">
                             <p className="text-2xl text-zinc-900 dark:text-zinc-200">Meet Alphy's extension: Supercharge YouTube search with AI </p>
                             <span className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-md lg:text-lg md:text-[16px] font-averta-regular font-normal max-w-[800px]">
@@ -122,13 +122,16 @@ export default function WelcomeExplainer({ currentUser }) {
                             <a className="" href="https://chrome.google.com/webstore/detail/alphy/eifpdfgnodpopimeakmdebmfglimkdno " target="_blank">
 
 
-                                <Button className="flex flex-row normal-case bg-white dark:bg-mildDarkMode items-center border border-zinc-200 dark:border-zinc-700 drop-shadow-sm px-2 w-[300px]">
+                                <button className=" rounded-lg flex flex-row normal-case bg-white dark:bg-mildDarkMode items-center border border-zinc-700 dark:border-zinc-700  px-2 py-3 w-[300px]">
                                     <div className="mx-auto flex flex-row items-center">
                                         <img src={ChromeIcon} width={40} />
                                         <span className="text-xl pl-4  font-averta-regular text-zinc-900 dark:text-zinc-300">Install on Chrome</span>
                                     </div>
-                                </Button>
+                                </button>
                             </a>
+                            <div>
+
+                            </div>
 
                         </div>
                     </div>
