@@ -26,7 +26,7 @@ export default function About() {
 
 
 
-			<div className="mx-auto md:w-800 w-full flex  justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-zinc-50" id="about">
+			<div className="mx-auto md:w-800 w-full flex  justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-white" id="about">
 
 
 				<div id="about" className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l">
@@ -39,8 +39,8 @@ export default function About() {
 							<AccordionBody className="text-md dark:text-zinc-300">
 								<p className="text-l dark:text-zinc-300 font-averta-regular">
 
-									Alphy helps you interact with audiovisual content as easily as you do with written content.
-									We combine latest speech-to-text technologies and large language models to transcribe, summarize, and let users create contextually aware search engines on top of videos and recordings.
+									Alphy is a set of tools designed to help users interact with online and offline audiovisual content as easily and effectively as possible.
+									We use AI to transcribe, summarize, and let users create their own AI search engines on top of videos and recordings.
 									<br /><br />
 									Our goal is to make the information in audiovisual content as readily available as written content.
 								</p>
@@ -55,14 +55,14 @@ export default function About() {
 								<p className="font-averta-regular">
 									Upon submitting a link or uploading a recording, Alphy creates the transcription, summary, key takeaways, and a mini AI assistant for the content.
 									<br /><br />
-									Then you can combine these content as effortlessly as building a playlist and create your AI-assisted search engine (we call it Arc) that will answer your questions based on the corpus of content you have curated.
+									Then you can combine these content to create your AI-assisted search engines as effortlessly as building a playlist (we call them Arcs) that will answer your questions based on the corpus of content you have curated.
 								</p>
 							</AccordionBody>
 						</Accordion>
 
 						<Accordion className="mt-6" open={true}>
 							<AccordionHeader className="cursor-default font-averta-semibold" onClick={() => handleOpen(2)}>
-								What kind of audiovisual content can I use Alphy with?
+								What kind of content can I use Alphy with?
 							</AccordionHeader>
 							<AccordionBody className="text-md dark:text-zinc-300">
 								<p className="font-averta-regular">
@@ -73,11 +73,11 @@ export default function About() {
 
 						<Accordion className="mt-6" open={true}>
 							<AccordionHeader className="cursor-default font-averta-semibold" onClick={() => handleOpen(4)}>
-								How does private audio processing work? Is my data safe?
+								Can I upload local audio files for processing?
 							</AccordionHeader>
 							<AccordionBody className="text-md dark:text-zinc-300">
 								<p className="font-averta-regular">
-									When you upload files to Alphy, we handle them the same way as we do with your YouTube and Twitter Space submissions. The key difference is that your uploads are kept private, ensuring they remain accessible only to you.
+									Yes. When you upload files to Alphy, we handle them the same way as we do with your online submissions. The key difference is that your uploads are kept private, ensuring they remain accessible only to you.
 
 									<br /><br />
 

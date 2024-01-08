@@ -13,7 +13,7 @@ export default function BasicCard({ tier, openPopover, setOpenPopover, currentUs
         popover: {
             styles: {
                 base: {
-                    bg: "bg-zinc-50 dark:bg-mildDarkMode",
+                    bg: "bg-white dark:bg-mildDarkMode",
                     color: "text-zinc-600 dark:text-zinc-200",
                     border: "border-2 border-zinc-100 dark:border-zinc-600",
 

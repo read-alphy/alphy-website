@@ -43,10 +43,12 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
         if (localStorage.getItem("newItem") === "link") {
             setSubmitDialog(true)
             localStorage.setItem("newItem", null)
+            sessionStorage.setItem("navigatedFromMainPage", "true")
         }
         else if (localStorage.getItem("newItem") === "upload") {
             setUploadDialog(true)
             localStorage.setItem("newItem", null)
+            sessionStorage.setItem("navigatedFromMainPage", "true")
         }
 
     }
@@ -259,9 +261,18 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
     }
 
     const handleGoBack = () => {
+        if (sessionStorage.getItem("navigatedFromMainPage") !== null) {
+            navigate("/")
+
+            setSubmitDialog(false)
+            setUploadDialog(false)
+            setArcDialog(false)
+            sessionStorage.setItem("navigatedFromMainPage", null)
+        }
         setSubmitDialog(false)
         setUploadDialog(false)
         setArcDialog(false)
+
     }
 
     return (

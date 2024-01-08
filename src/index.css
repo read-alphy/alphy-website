@@ -1203,3 +1203,7 @@ DIFFERENT SCREEN SIZES
 	list-style: disc outside none;
 
 }
+
+.react-markdown p {
+	font-weight: 400;
+}

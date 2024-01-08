@@ -295,7 +295,7 @@ function App() {
 	return (
 
 
-		<div className="App bg-[#fafafa] dark:bg-darkMode dark:text-zinc-300">
+		<div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
 
 			{/* 	{showWelcomeForm && 
 					<div className="fixed inset-0 z-50 flex items-center justify-center ">

@@ -83,7 +83,7 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 	};
 
 	return (
-		<div id="side-feed" className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-zinc-50 sm:bg-zinc-100 min-h-[100vh] sm:max-h-[100vh] ${collapsed ? "min-w-[60px] max-w-[60px]" : "w-full lg:min-w-[270px] lg:max-w-[270px]"} flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `} >
+		<div id="side-feed" className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-zinc-50 min-h-[100vh] sm:max-h-[100vh] ${collapsed ? "min-w-[60px] max-w-[60px]" : "w-full sm:min-w-[200px] lg:min-w-[270px] lg:max-w-[270px]"} flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `} >
 
 			{!collapsed ?
 				<div className="flex flex-col flex-grow ">
@@ -128,13 +128,13 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 							</Shine>
 
 
-							<Link to="/myhub" className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${userLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+							<Link to="/myhub" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${userLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 								<svg className="mr-3 mt-0.5 feather feather-layers " xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
 								<p className="font-averta-semibold">My Hub</p>
 
 							</Link>
 
-							<Link to="/explore" className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+							<Link to="/explore" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
 									className="mr-3 mt-0.5 feather feather-compass"
 
@@ -144,7 +144,7 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 								<p className="font-averta-semibold">Explore</p>
 
 							</Link>
-							<Link to="/arcs" className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+							<Link to="/arcs" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 
 
 								<svg className="mr-3 mt-0.5 feather feather-message-square" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>

@@ -336,7 +336,7 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 					/></div>}
 
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform ${isArc ? "md:hidden" : "sm:hidden"}  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform ${isArc ? "md:hidden" : "sm:hidden"}  w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-white'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
@@ -484,7 +484,7 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 					{deleteDialog &&
 						<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
 
-							<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-mildDarkMode items-center text-center justify-center drop-shadow-sm flex-col">
+							<div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-white dark:bg-mildDarkMode items-center text-center justify-center drop-shadow-sm flex-col">
 								<p className="mb-10 font-averta-semibold">You are about to delete this arc. Would you like to continue?</p>
 								<div >
 									{isLoadingDelete ?

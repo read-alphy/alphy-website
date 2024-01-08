@@ -534,7 +534,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
 
                                         {data.length === 0 && tier !== "premium" && called &&
 
-                                            <p className="font-averta-regular ">You don't have any uploads. Upgrade to <Link to="/account" className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold">premium plan</Link> to process local files.
+                                            <p className="font-averta-regular ">You don't have any uploads. Upgrade to <Link to="/account" className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold">premium plan</Link> to upload your own files.
                                             </p>}
 
                                         {data.length === 0 && tier === "premium" && called &&

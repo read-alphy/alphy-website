@@ -1,22 +1,22 @@
-import React, {  useState,  useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked';
 
 import Dialog from '@mui/material/Dialog';
 
 import { Helmet } from "react-helmet";
-import HubContent from './HubContent';	
+import HubContent from './HubContent';
 
 
 
 
 
-function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, credit,userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos}) {
+function SubmitPage({ currentUser, collapsed, setCollapsed, tier, contentName, credit, userArchipelagos, dataGlobalArchipelagos, setDataGlobalArchipelagos, getDataGlobalArchipelagos }) {
 
 	let source_id
-	
-	
-    const [windowSizeChecked,setWindowSizeChecked] = useState(false);
-	
+
+
+	const [windowSizeChecked, setWindowSizeChecked] = useState(false);
+
 
 
 
@@ -32,14 +32,14 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 	useEffect(() => {
 
 
-		if(!windowSizeChecked){
-			if(window.innerWidth<1000){
-			setCollapsed(true)
+		if (!windowSizeChecked) {
+			if (window.innerWidth < 1000) {
+				setCollapsed(true)
 			}
 			setWindowSizeChecked(true)
 		}
-	
-})
+
+	})
 
 
 
@@ -48,13 +48,13 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			<Helmet>
 				<title>Alphy - Use Alphy</title>
-			</Helmet> 
+			</Helmet>
 			<div
 				className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
 					}`}
 			></div>
-			
-			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
+
+			<div className="flex flex-row bg-white dark:bg-darkMode ">
 				{/* {collapsed==true && 
 			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
 			<div className={`hidden md:flex `}>
@@ -70,28 +70,28 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 
 			</div>
 			} */}
-		<div className={`flex hidden sm:block`}>
-				
-				<SideFeedReworked 
-				
-				collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
-				globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-				tier={tier}
-				/></div>
-				
+				<div className={`flex hidden sm:block`}>
+
+					<SideFeedReworked
+
+						collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id}
+						globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+						tier={tier}
+					/></div>
+
 				<div
-					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+					className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-white'
 						}`}
 				>
 					<div className="rounded-lg rounded-t-none shadow-lg">
 						<div className="h-screen">
-							<SideFeedReworked 
-							collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id} 
-							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-							tier={tier}
+							<SideFeedReworked
+								collapsed={collapsed} setCollapsed={setCollapsed} source_id={source_id}
+								globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+								tier={tier}
 							/>
-							
-							</div>
+
+						</div>
 					</div>
 				</div>
 
@@ -99,29 +99,29 @@ function SubmitPage({currentUser, collapsed, setCollapsed, tier,contentName, cre
 					className={`${collapsed ? "scrolling" : "scrolling"} md:px-0  max-h-[90vh] sm:max-h-[100vh] w-full ${collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
 						}}`}
 				>
-					{ 
-					<HubContent
-					tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
-					dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos} 
-					globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
-					mainShow={mainShow} setMainShow={setMainShow}
-					/>}
-					
+					{
+						<HubContent
+							tier={tier} credit={credit} currentUser={currentUser} userArchipelagos={userArchipelagos}
+							dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+							globalLayout={globalLayout} setGlobalLayout={setGlobalLayout} userLayout={userLayout} setUserLayout={setUserLayout} submitLayout={submitLayout} setSubmitLayout={setSubmitLayout}
+							mainShow={mainShow} setMainShow={setMainShow}
+						/>}
+
 
 
 				</div>
 			</div>
-		
-			
-						
-		{deleteDialog &&
-			<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
-				
-			
-			
-			</Dialog>
+
+
+
+			{deleteDialog &&
+				<Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} >
+
+
+
+				</Dialog>
 			}
-        </div>
+		</div>
 	);
 
 }

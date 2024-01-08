@@ -1704,8 +1704,8 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 																				Object.values(summaryArray).map((item, index) => (
 																					<div className="mb-4  text-stone-900  dark:text-zinc-200" key={index}>
-																						<div className="font-averta-semibold text-l   dark:border-indigo-100 p-1 xs:p-2 sm:p-4">
-																							<h3 className="text-xl mb-1 underline cursor-pointer dark:text-zinc-200" onClick={() => handleClickTimestamp(item.at)}>
+																						<div className="text-l   dark:border-indigo-100 p-1 xs:p-2 sm:p-4">
+																							<h3 className="text-xl mb-1 font-averta-semibold  underline cursor-pointer dark:text-zinc-200" onClick={() => handleClickTimestamp(item.at)}>
 																								{`${item.title}`}
 																							</h3>
 																							<h5 onClick={() => handleClickTimestamp(item.at)} className="mb-2 cursor-pointer">

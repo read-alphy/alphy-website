@@ -39,6 +39,7 @@ function Hub({ arcs, currentUser, collapsed, setCollapsed, tier, contentName, cr
 	useEffect(() => {
 
 		if (location.pathname.includes("arcs")) {
+
 			setMainShow("arcs")
 		}
 		else if (location.pathname.includes("explore")) {
@@ -75,7 +76,7 @@ function Hub({ arcs, currentUser, collapsed, setCollapsed, tier, contentName, cr
 					}`}
 			></div>
 
-			<div className="flex flex-row bg-zinc-50 dark:bg-darkMode ">
+			<div className="flex flex-row bg-white dark:bg-darkMode ">
 
 				{<div className={` hidden sm:block `}>
 
@@ -103,7 +104,7 @@ function Hub({ arcs, currentUser, collapsed, setCollapsed, tier, contentName, cr
 				</div>
 
 				<div
-					className={`${collapsed ? "scrolling" : "scrolling"} w-full max-h-[90vh] sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
+					className={`${collapsed ? "scrolling" : "scrolling"} w-full max-h-[90vh]   sm:max-h-[100vh] ${collapsed ? 'hidden' : ' overflow-hidden'
 						}}`}
 				>
 					{isLoading ? <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" /> :

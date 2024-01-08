@@ -55,12 +55,7 @@ export default function FooterReworked({ currentUser, collapsed, setCollapsed, h
           <div className="">
             <div className="flex flex-col">
               <div className=" pl-3 md:pl-6  mb-6">
-                <a href="https://chrome.google.com/webstore/detail/alphy/eifpdfgnodpopimeakmdebmfglimkdno" target="_blank">
-                  <Button className="flex flex-row normal-case text-zinc-500 dark:text-zinc-400 bg-white dark:bg-darkMode  items-center border border-zinc-200 dark:border-zinc-700 drop-shadow-sm px-2">
-                    <img src={ChromeIcon} width={20} />
-                    <span className="text-xs pl-2  font-averta-regular ">Install Alphy's Extension</span>
-                  </Button>
-                </a>
+
               </div>
               {/*   {tier===free && 
                                     <div className="mb-6 hidden xl:block">
