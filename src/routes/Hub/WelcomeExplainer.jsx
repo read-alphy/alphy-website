@@ -135,7 +135,7 @@ export default function WelcomeExplainer({ currentUser }) {
 
                         </div>
                     </div>
-                    <video className="xl:max-w-[1000px] border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg" autoPlay loop muted>
+                    <video className="3xl:max-w-[1000px] border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg" autoPlay loop muted>
                         <source src={LitmusDemo} type="video/mp4" />
                     </video>
 
