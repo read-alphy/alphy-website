@@ -17,7 +17,7 @@ export default function HubContent({ arcs, currentUser, tier, userArchipelagos, 
         <div className="">
             {globalLayout &&
                 (mainShow == "default" ?
-                    <div className="pt-10 md:pt-20 overflow-x-hidden ">
+                    <div className="pt-10 md:pt-16 3xl:pt-20 overflow-x-hidden ">
                         <WelcomeExplainer currentUser={currentUser} />
 
                     </div>

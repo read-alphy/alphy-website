@@ -28,7 +28,7 @@ export default function WelcomeExplainer({ currentUser }) {
 
     return (
         <div>
-            <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 2xl:pl-40  overflow-hidden pb-10">
+            <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 3xl:pl-40  overflow-hidden pb-10">
 
                 <div className="pl-5 pr-5 mt-4  sm:mt-10 lg:mt-20 ">
                     {totalMinutes > 0 &&
@@ -109,7 +109,7 @@ export default function WelcomeExplainer({ currentUser }) {
 
                         </div>
                     </div> */}
-                    <div className="mt-10 sm:mt-20 xl:mt-40 flex flex-col" >
+                    <div className="mt-10 sm:mt-20 3xl:mt-40 flex flex-col" >
                         <div className="flex flex-col">
                             <p className="text-2xl text-zinc-900 dark:text-zinc-200">Meet Alphy's extension: Supercharge YouTube search with AI </p>
                             <span className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-md lg:text-lg md:text-[16px] font-averta-regular font-normal max-w-[800px]">
