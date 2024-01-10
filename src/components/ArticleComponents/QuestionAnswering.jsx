@@ -3,9 +3,9 @@ import React, { useState, useEffect, createRef } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { useWindowSize } from '../../hooks/useWindowSize';
+
 import { useLocation } from 'react-router-dom';
-import { Button, Spinner } from "@material-tailwind/react";
+import {Spinner } from "@material-tailwind/react";
 import QaWsManager from './QaWsManager';
 import { API_HOST, API_SSL } from '../../constants';
 

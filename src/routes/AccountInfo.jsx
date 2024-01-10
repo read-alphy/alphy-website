@@ -1,36 +1,37 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
-import { Carousel } from "react-responsive-carousel";
-import { useAuth } from '../hooks/useAuth';
+
 import { useWindowSize } from '../hooks/useWindowSize';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 //import { Popover } from 'flowbite';
 import FreeCard from "../components/PricingCards/FreeCard";
 import BasicCard from "../components/PricingCards/BasicCard";
 import PremiumCard from "../components/PricingCards/PremiumCard";
-import SideFeedReworked from '../components/ArticleComponents/SideFeedReworked';
+
 import Loading from '../components/Loading';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { Button, Spinner } from "@material-tailwind/react";
 import Dialog from '@mui/material/Dialog';
-import { Remove } from "@mui/icons-material";
+
 import { API_URL } from "../constants"
+import { useLocation } from "react-router-dom";
 
 
-let userStripeId = ""
+
 
 
 
 export default function AccountInfo({ credit, tier, currentUser, canceledAtPeriodEnd }) {
 
 
+	const location = useLocation();
 
-    const navigate = useNavigate();
+    
 
     const [quantity, setQuantity] = useState(1);
     const [creditPurchaseLoading, setCreditPurchaseLoading] = useState(false);
@@ -47,6 +48,8 @@ export default function AccountInfo({ credit, tier, currentUser, canceledAtPerio
         }
 
     };
+
+    
 
 
     useEffect(() => {
@@ -76,7 +79,7 @@ export default function AccountInfo({ credit, tier, currentUser, canceledAtPerio
     };
 
     const windowSize = useWindowSize();
-    const [subscription, setSubscription] = useState(false);
+    
     const [isLoaded, setIsLoaded] = useState(false);
     const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false);
 
@@ -85,7 +88,7 @@ export default function AccountInfo({ credit, tier, currentUser, canceledAtPerio
 
     const [called, setCalled] = useState(false);
 
-    const auth = useAuth();
+    
     const [openPopover, setOpenPopover] = useState(false);
     const [openPopover1, setOpenPopover1] = useState(false);
 
@@ -104,19 +107,7 @@ export default function AccountInfo({ credit, tier, currentUser, canceledAtPerio
     };
 
 
-    const themePopover = {
-        popover: {
-            styles: {
-                base: {
-                    bg: "bg-white dark:bg-mildDarkMode",
-                    color: "text-zinc-600 dark:text-zinc-200",
-                    border: "border-2 border-zinc-100 dark:border-mildDarkMode",
 
-                },
-            },
-        },
-
-    };
 
 
 
@@ -174,7 +165,7 @@ export default function AccountInfo({ credit, tier, currentUser, canceledAtPerio
             setIsLoaded(true)
         }
 
-    }, [currentUser]);
+    }, [currentUser,called]);
 
 
 

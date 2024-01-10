@@ -318,6 +318,9 @@ function App() {
 				<meta name="twitter:title" content="Alphy: Unlock the Information in Audiovisual Content" />
 			</Helmet>
 
+			
+
+
 			<Elements stripe={stripePromise}>
 				{UNDER_CONSTRUCTION === 'true' ? (
 					<>
@@ -449,7 +452,9 @@ function App() {
 					</>
 
 				)}
+					
 			</Elements>
+
 		</div>
 
 	);
