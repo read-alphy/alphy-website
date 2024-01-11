@@ -659,12 +659,12 @@ CONTENT PAGE
 	margin-bottom: 10px;
 }
 
-.react-markdown ul {
+.react-markdown-edit ul {
 	list-style: disc outside none;
 
 }
 
-.react-markdown p {
+.react-markdown-edit p {
 	font-weight: 400;
 }
 

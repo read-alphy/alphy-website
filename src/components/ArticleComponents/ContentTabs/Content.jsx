@@ -639,6 +639,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		let askInput
 
 		const selection = window.getSelection();
+		
 		setShowScrollBackButton(true)
 		if (!selection.rangeCount) return;
 		if (document.getElementById("selection-span") !== null) {
@@ -648,14 +649,16 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 			previousSpanSelection.id = ""
 
 		}
-		const range = selection.getRangeAt(0);
+		let range = selection.getRangeAt(0);
+		
 		const span = document.createElement('span');
 		span.id = "selection-span"
-		range.surroundContents(span);
-
-
-
-		if (window.getSelection) {
+		let lastChild = range.commonAncestorContainer.lastChild
+		let newRange = document.createRange();
+		newRange.selectNode(lastChild);
+        newRange.surroundContents(span);
+		/* range.surroundContents(span); */
+.		if (window.getSelection) {
 
 			window.getSelection().removeAllRanges(); // Clears the text selection
 		} else if (document.selection) { // For older versions of IE
@@ -666,9 +669,9 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		if (type === "default") {
 			askInput = "Explain the following:" + askText + "?'"
 		}
-		else if (type === "investment") {
-			askInput = "Give me the investment opportunities and risks for the following:" + "'" + askText + "'"
-		}
+		/* 		else if (type === "investment") {
+					askInput = "Give me the investment opportunities and risks for the following:" + "'" + askText + "'"
+				} */
 		else if (type === "ELI5") {
 
 			askInput = "Explain the following like I'm 5:" + "'" + askText + "'"
@@ -694,9 +697,10 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 	const scrollToSavedDepth = () => {
 		setShowScrollBackButton(false)
-		/* const savedPosition = localStorage.getItem("scrollPosition"); */
+		console.log("scrolling")
 		if (document.getElementById("selection-span")) {
 			const selectionSpan = document.getElementById("selection-span");
+			
 			if (selectionSpan) {
 				selectionSpan.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll
 				selectionSpan.className = "flash-effect"
@@ -1616,7 +1620,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 														<div className="flex flex-col bg-white dark:bg-darkMode dark:border dark:border-zinc-600 rounded-lg drop-shadow-2xl p-4">
 															<Button size="sm" className="rounded-md bg-green-200 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold" onClick={() => handleAskAlphy("default")}> Ask Alphy to learn more about it</Button>
 															<Button size="sm" className="rounded-md bg-blue-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("ELI5")}> Explain like I'm 5</Button>
-															{/* <Button size="sm" className="rounded-md bg-violet-300 mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold " onClick={() => handleAskAlphy("investment")}>Explain it like an investment analyst</Button> */}
+															
 														</div>
 
 														{/* <Selection.Arrow className="text-green-300 fill-green-300 mb-2" color="white" /> */}
@@ -1717,7 +1721,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 																								{item.summary.split('\n').map((item, index) => (
 																									<div key={index} className="font-averta-regular text-stone-700 dark:text-zinc-300 text-md mt-4">
-																										<ReactMarkdown className="react-markdown">
+																										<ReactMarkdown className="react-markdown-edit">
 																											{item}
 																										</ReactMarkdown>
 																									</div>
