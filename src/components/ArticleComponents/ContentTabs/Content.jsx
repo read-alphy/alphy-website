@@ -109,7 +109,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 	};
 
 	const data = props.data
-	console.log(data)
+	
 
 
 
@@ -1704,7 +1704,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 																				Object.values(summaryArray).map((item, index) => (
 																					<div className="mb-4  text-stone-900  dark:text-zinc-200" key={index}>
-																						<div className="text-l   dark:border-indigo-100 p-1 xs:p-2 sm:p-4">
+																						<div className="text-l   dark:border-indigo-100 p-4">
 																							<h3 className="text-xl mb-1 font-averta-semibold  underline cursor-pointer dark:text-zinc-200" onClick={() => handleClickTimestamp(item.at)}>
 																								{`${item.title}`}
 																							</h3>
@@ -1715,13 +1715,13 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																								${":"}
 																								${Math.floor(item.at % 60) < 10 ? `0${(Math.floor(item.at % 60))}` : (Math.floor(item.at % 60))}`}</h5>
 
-																							{item.summary.split('\n').map((item, index) => (
-																								<div key={index} className="font-averta-regular text-stone-700 dark:text-zinc-300 text-md ">
-																									<ReactMarkdown className="react-markdown">
-																										{item}
-																									</ReactMarkdown>
-																								</div>
-																							))}
+																								{item.summary.split('\n').map((item, index) => (
+																									<div key={index} className="font-averta-regular text-stone-700 dark:text-zinc-300 text-md mt-4">
+																										<ReactMarkdown className="react-markdown">
+																											{item}
+																										</ReactMarkdown>
+																									</div>
+																								))}
 
 																						</div>
 																					</div>

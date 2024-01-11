@@ -659,6 +659,16 @@ CONTENT PAGE
 	margin-bottom: 10px;
 }
 
+.react-markdown ul {
+	list-style: disc outside none;
+
+}
+
+.react-markdown p {
+	font-weight: 400;
+}
+
+
 
 .create-article {
 	align-items: center;
@@ -1221,11 +1231,3 @@ DIFFERENT SCREEN SIZES
 
 }
 
-.react-markdown ul {
-	list-style: disc outside none;
-
-}
-
-.react-markdown p {
-	font-weight: 400;
-}
