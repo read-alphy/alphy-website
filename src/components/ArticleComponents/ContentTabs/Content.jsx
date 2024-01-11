@@ -658,7 +658,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		newRange.selectNode(lastChild);
         newRange.surroundContents(span);
 		/* range.surroundContents(span); */
-.		if (window.getSelection) {
+		if (window.getSelection) {
 
 			window.getSelection().removeAllRanges(); // Clears the text selection
 		} else if (document.selection) { // For older versions of IE
