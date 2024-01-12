@@ -41,15 +41,15 @@ export default function CuratedCarouselItem(props) {
   return (
     <Link to={`/arc/${props.item.uid}`}>
       {props.expandedLayout !== true ?
-        <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "md:min-w-[220px] md:max-w-[150px]"} md:w-64  rounded-md overflow-hidden shadow-md cursor-pointer`} >
+        <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  rounded-md overflow-hidden shadow-md cursor-pointer`} >
 
 
           <img src={props.item.thumbnail_url} />
 
           <div className={` ${!isHovered && props.item.thumbnail_url !== null ? "opacity-0" : "opacity-100 transition duration-300 ease-in-out"} rounded-md  absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
             <div className="flex flex-col py-2 px-4 ">
-              <p className={`text-white bg-opacity-100 text-sm ${props.forFeed !== true && "md:text-lg"} mb-5 font-averta-semibold`} >{props.item.name}</p>
-              <p className={`text-white bg-opacity-100 text-xs ${props.forFeed !== true && "md:text-sm"} font-averta-regular`} >{description}</p>
+              <p className={`text-white bg-opacity-100 text-sm ${props.forFeed !== true && "lg:text-lg"} mb-5 font-averta-semibold`} >{props.item.name}</p>
+              <p className={`text-white bg-opacity-100 text-xs ${props.forFeed !== true && "lg:text-sm"} font-averta-regular`} >{description}</p>
             </div>
 
 
@@ -67,9 +67,9 @@ export default function CuratedCarouselItem(props) {
 
         :
         <div>
-          <div className="hidden md:block bg-white dark:bg-mildDarkMode min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] drop-shadow-lg items-center p-5 transform hover:scale-105 transition duration-300 ease-in-out rounded-xl">
+          <div className="hidden lg:block bg-white dark:bg-mildDarkMode min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] drop-shadow-lg items-center p-5 transform hover:scale-105 transition duration-300 ease-in-out rounded-xl">
 
-            <div className={`relative mx-auto min-w-[180px] max-w-[180px] ${props.forFeed !== true && "md:min-w-[220px] md:max-w-[150px]"} md:w-64  overflow-hidden shadow-md cursor-pointer`} >
+            <div className={`relative mx-auto min-w-[180px] max-w-[180px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  overflow-hidden shadow-md cursor-pointer`} >
 
 
               <img src={props.item.thumbnail_url} />
@@ -86,9 +86,9 @@ export default function CuratedCarouselItem(props) {
 
 
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
 
-            <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "md:min-w-[220px] md:max-w-[150px]"} md:w-64  overflow-hidden shadow-md cursor-pointer`} >
+            <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  overflow-hidden shadow-md cursor-pointer`} >
 
 
               <img src={props.item.thumbnail_url} />
@@ -96,7 +96,7 @@ export default function CuratedCarouselItem(props) {
               <div className={` ${!isHovered && props.item.thumbnail_url !== null ? "opacity-0" : "opacity-100 transition duration-300 ease-in-out"}   absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
                 <div className="flex flex-col py-2 px-4 ">
 
-                  <p className={`text-white bg-opacity-100 text-xs ${props.forFeed !== true && "md:text-sm"} font-averta-regular`} >{props.item.description}</p>
+                  <p className={`text-white bg-opacity-100 text-xs ${props.forFeed !== true && "lg:text-sm"} font-averta-regular`} >{props.item.description}</p>
                 </div>
 
 

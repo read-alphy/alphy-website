@@ -275,7 +275,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
 
 
     return (
-        <div className="xl:max-w-[1200px] lg:ml-20 pt-20 p-4 md:ml-5 sm:pl-10">
+        <div className="xl:max-w-[1200px] xl:ml-20 pt-20 p-4 md:ml-5 sm:pl-10">
 
 
 
@@ -291,24 +291,30 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                     <div className="flex flex-row mt-10 ">
                         <div className="xl:min-w-[1200px]  xl:max-w-[1200px]">
                             <div className="w-full">
-                                <div className="w-full h-full container  lg:max-w-[620px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
+                                <div className="w-full h-full container  lg:max-w-[900px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
 
                                     <div className="relative ">
                                         {userArchipelagos.length > 0 &&
                                             <button onClick={scrollBackward} ref={leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isBackwardArrowVisible ? '' : 'hidden'
                                                 }`}>
-                                                <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out ">
                                                     <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
                                                 </div>
                                             </button>
                                         }
-                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3 sm:gap-6 ${collapsed ? "sm:grid-cols-3" : "sm:grid-cols-2"}  lg:flex md:grid-cols-2 lg:flex-row lg:grid-cols-none gap-4 overflow-x-scroll scroll-smooth carousel-area md:min-h-[400px]`} ref={carouselRef}>
-                                            <Link to="/arc/createArc" className="mt-2 ml-2 drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  md:min-h-[360px] md:max-h-[360px] md:min-w-[240px] md:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700  items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3 sm:gap-6 
+                                        
+                                
+                                        
+                                        gap-4 overflow-x-scroll scroll-smooth carousel-area md:min-h-[400px]`} 
+                                        
+                                        ref={carouselRef}>
+                                            <Link to="/arc/createArc" className="mt-2 ml-2 drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  lg:min-h-[360px] lg:max-h-[360px] lg:min-w-[240px] lg:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700  items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                                 <div >
                                                     <AddIcon fontSize="large" className="text-zinc-600 dark:text-zinc-300 mb-4 " />
-                                                    <p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl font-averta-semibold">Create An Arc</p>
-                                                    <p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5 font-averta-regular">Connect multiple audio content with AI.</p>
+                                                    <p className="text-zinc-600 dark:text-zinc-300 text-l lg:text-xl font-averta-semibold">Create An Arc</p>
+                                                    <p className="text-zinc-600 dark:text-zinc-500 hidden lg:block text-sm px-5 font-averta-regular">Connect multiple audio content with AI.</p>
 
                                                 </div>
 
@@ -327,7 +333,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                                         {userArchipelagos.length > 0 &&
                                             <button onClick={scrollForward} ref={rightButtonRef} type="button" className={`right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isForwardArrowVisible ? 'hidden lg:block' : 'hidden'
                                                 }`}>
-                                                <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
+                                                <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out dark:bg-mildDarkMode">
                                                     <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 p-1 " />
                                                 </div>
                                             </button>

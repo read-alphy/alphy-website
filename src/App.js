@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Article from './components/Article';
+import FeedbackComponent from './components/FeedbackComponent';
 import PrivacyPolicy from './routes/PrivacyPolicy';
 import NotFound from './routes/NotFound';
 import image from './img/robot.png';
@@ -454,6 +455,11 @@ function App() {
 				)}
 					
 			</Elements>
+			{
+			(location.pathname.includes("/x/") === false && location.pathname.includes("/yt/") === false && location.pathname.includes("/sp/") === false &&location.pathname.includes("/tw/") === false && 
+			location.pathname.includes("/tv/") === false &&location.pathname.includes("/ap/") === false && location.pathname.includes("/up/") === false && location.pathname.includes("/arc/") === false )&&
+			<FeedbackComponent currentUser = {currentUser} />
+}
 
 		</div>
 

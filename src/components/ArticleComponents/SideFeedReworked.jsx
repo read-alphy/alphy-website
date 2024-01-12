@@ -83,7 +83,7 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 	};
 
 	return (
-		<div id="side-feed" className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-zinc-50 min-h-[100vh] sm:max-h-[100vh] ${collapsed ? "min-w-[60px] max-w-[60px]" : "w-full sm:min-w-[200px] lg:min-w-[270px] lg:max-w-[270px]"} flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `} >
+		<div id="side-feed" className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-zinc-50 min-h-[100vh] sm:max-h-[100vh] ${collapsed ? "min-w-[60px] max-w-[60px]" : "w-full sm:min-w-[200px] xl:min-w-[270px] xl:max-w-[270px]"} flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `} >
 
 			{!collapsed ?
 				<div className="flex flex-col flex-grow ">
@@ -119,50 +119,51 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 
 					<div className="pt-10 md:pl-5">
 
-						<div className="flex flex-col w-full justify-start px-5">
+						<div className="flex flex-col w-full justify-start px-2 m">
 							<Shine puffyness='2'>
 								<Link to="/submit" className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out drop-shadow-sm   text-sm sm:text-md bg-green-100 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `} >
 									<AddIcon fontSize="small" className="mr-3" />
 									<p className="font-averta-semibold">New</p>
 								</Link>
 							</Shine>
+							<div className = "flex flex-col w-full justify-start px-3 mt-2 ">
+
+												<Link to="/myhub" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${userLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+													<svg className="mr-3 mt-0.5 feather feather-layers " xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+													<p className="font-averta-semibold">My Hub</p>
+
+												</Link>
+
+												<Link to="/explore" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+													<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+														className="mr-3 mt-0.5 feather feather-compass"
+
+														stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
 
 
-							<Link to="/myhub" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${userLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
-								<svg className="mr-3 mt-0.5 feather feather-layers " xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-								<p className="font-averta-semibold">My Hub</p>
+													<p className="font-averta-semibold">Explore</p>
 
-							</Link>
-
-							<Link to="/explore" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
-								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-									className="mr-3 mt-0.5 feather feather-compass"
-
-									stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+												</Link>
+												<Link to="/arcs" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
 
 
-								<p className="font-averta-semibold">Explore</p>
+													<svg className="mr-3 mt-0.5 feather feather-message-square" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+													<p className="font-averta-semibold">Arcs</p>
 
-							</Link>
-							<Link to="/arcs" onClick={() => { if (window.innerWidth < 640) { setCollapsed(true) } }} className={`${globalLayout ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`} >
+												</Link>
 
-
-								<svg className="mr-3 mt-0.5 feather feather-message-square" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-								<p className="font-averta-semibold">Arcs</p>
-
-							</Link>
-
-							{
-								localStorage.getItem("logged in") === "true" ? (
-									null
-								) : (
-									<Link
-										className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
-										to="/u/login"
-									><LoginIcon className="mr-3 text-green-300 dark:text-green-200" fontSize="small" />
-										<p className="text-green-400 dark:text-green-200">Sign In</p>
-									</Link>
-								)}
+												{
+													localStorage.getItem("logged in") === "true" ? (
+														null
+													) : (
+														<Link
+															className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
+															to="/u/login"
+														><LoginIcon className="mr-3 text-green-300 dark:text-green-200" fontSize="small" />
+															<p className="text-green-400 dark:text-green-200">Sign In</p>
+														</Link>
+													)}
+								</div>
 						</div>
 
 					</div>
