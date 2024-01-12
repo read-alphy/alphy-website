@@ -50,7 +50,7 @@ transition-height duration-300 ease-in-out ${showFeedbackTally ? "h-[800px]" : "
     px-4 py-3`}>
         {showFeedbackTally === false ?
             <div className="flex flex-col text-center items-center ">
-                        <p className="text-black dark:text-whiteLike text-xl"><span className="wave mr-2 text-xl">👋</span>Help us build Alphy! </p>
+                        <p className="text-black dark:text-whiteLike text-xl"><span className="wave mr-2 text-xl">👋</span>Win 1 hour in transcription credits! </p>
                         <p className="hidden group-hover:block mt-4 dark:text-whiteLike"> Fill out this 5-min survey about your experience with Alphy so far and win <span className="underline dark:text-whiteLike font-bold">1 hour</span> in transcription credits! </p>
                         <div className="flex flex-row">
                             <button onClick={() => setShowFeedbackTally(!showFeedbackTally)} className={` text-md hidden group-hover:block mt-4 px-4 py-2 rounded-lg bg-green-200 text-zinc-900 drop-shadow-lg`}>

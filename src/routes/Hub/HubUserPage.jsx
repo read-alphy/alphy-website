@@ -294,22 +294,22 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                                 <div className="w-full h-full container  lg:max-w-[900px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
 
                                     <div className="relative ">
-                                        {userArchipelagos.length > 0 &&
+                                      {/*   {userArchipelagos.length > 0 &&
                                             <button onClick={scrollBackward} ref={leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isBackwardArrowVisible ? '' : 'hidden'
                                                 }`}>
                                                 <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out ">
                                                     <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
                                                 </div>
                                             </button>
-                                        }
-                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3 sm:gap-6 
+                                        } */}
+                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3  sm:gap-6 
                                         
                                 
                                         
-                                        gap-4 overflow-x-scroll scroll-smooth carousel-area md:min-h-[400px]`} 
+                                        gap-4  `} 
                                         
                                         ref={carouselRef}>
-                                            <Link to="/arc/createArc" className="mt-2 ml-2 drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  lg:min-h-[360px] lg:max-h-[360px] lg:min-w-[240px] lg:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700  items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                                            <Link to="/arc/createArc" className="mt-2 ml-2 drop-shadow-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  lg:min-h-[360px] lg:max-h-[360px] lg:min-w-[240px] lg:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 rounded-lg items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                                 <div >
                                                     <AddIcon fontSize="large" className="text-zinc-600 dark:text-zinc-300 mb-4 " />
@@ -323,21 +323,21 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
 
                                             {
                                                 userArchipelagos.map((item, index) => (
-                                                    <div className="mt-2">
+                                                    <div className="mt-2"   >
                                                         <CuratedCarouselItem currentUser={currentUser} key={index} item={item} forFeed={true} expandedLayout={true} />
                                                     </div>
                                                 ))}
 
                                         </div>
 
-                                        {userArchipelagos.length > 0 &&
+                                       {/*  {userArchipelagos.length > 0 &&
                                             <button onClick={scrollForward} ref={rightButtonRef} type="button" className={`right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isForwardArrowVisible ? 'hidden lg:block' : 'hidden'
                                                 }`}>
                                                 <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out dark:bg-mildDarkMode">
                                                     <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 p-1 " />
                                                 </div>
                                             </button>
-                                        }
+                                        } */}
                                     </div>
                                 </div>
 
@@ -378,7 +378,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                                 {dataPersonal.length > 0 &&
                                     <Link to="/submit" onClick={() => {
                                         localStorage.setItem("newItem", "link")
-                                    }} className="md:mt-2 drop-shadow-lg  mb-6 xs:mb-0 ml-2 xs:ml-0 min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px]    h-[140px] xs:min-h-none xs:max-h-none border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                                    }} className="md:mt-2 drop-shadow-lg  mb-6 xs:mb-0 ml-2 xs:ml-0 min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px]  rounded-lg  h-[140px] xs:min-h-none xs:max-h-none border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                         <div >
                                             <LinkIcon fontSize="medium" className="text-zinc-600 dark:text-zinc-300 mb-4 " />
@@ -514,7 +514,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
 
                                 <Link to="/submit" onClick={() => {
                                     localStorage.setItem("newItem", "upload")
-                                }} className="drop-shadow-lg  mb-4 xs:mb-0  xs:ml-0 min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px] h-[140px]  border border-2 bg-white dark:bg-mildDarkMode  border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+                                }} className="drop-shadow-lg  mb-4 xs:mb-0  xs:ml-0 min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px] h-[140px]  rounded-lg border border-2 bg-white dark:bg-mildDarkMode  border dark:border-zinc-700 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                     <div >
                                         <CloudUploadIcon fontSize="medium" className="text-zinc-600 dark:text-zinc-400 mb-4 " />
