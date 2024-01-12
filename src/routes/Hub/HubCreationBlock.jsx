@@ -372,7 +372,7 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
             }
 
             {(!submitDialog && !uploadDialog && !arcDialog) &&
-                <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] mt-20">
+                <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] mt-6 lg:mt-20">
 
                     <p className="mb-10 text-xl font-averta-semibold text-zinc-600 dark:text-zinc-300 text-center">Start discovering Alphy's capabilities</p>
                     <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
