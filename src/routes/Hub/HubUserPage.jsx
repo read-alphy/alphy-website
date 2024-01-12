@@ -291,7 +291,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                     <div className="flex flex-row mt-10 ">
                         <div className="xl:min-w-[1200px]  xl:max-w-[1200px]">
                             <div className="w-full">
-                                <div className="w-full h-full container  lg:max-w-[900px] xl:max-w-[840px] 2xl:max-w-[1000px]  ">
+                                <div className="w-full h-full container  lg:max-w-[900px] xl:max-w-[840px] 2xl:max-w-[1200px]  ">
 
                                     <div className="relative ">
                                       {/*   {userArchipelagos.length > 0 &&
@@ -302,7 +302,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                                                 </div>
                                             </button>
                                         } */}
-                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3  sm:gap-6 
+                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-4 sm:gap-6 
                                         
                                 
                                         
@@ -314,7 +314,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                                                 <div >
                                                     <AddIcon fontSize="large" className="text-zinc-600 dark:text-zinc-300 mb-4 " />
                                                     <p className="text-zinc-600 dark:text-zinc-300 text-l lg:text-xl font-averta-semibold">Create An Arc</p>
-                                                    <p className="text-zinc-600 dark:text-zinc-500 hidden lg:block text-sm px-5 font-averta-regular">Connect multiple audio content with AI.</p>
+                                                    <p className="text-zinc-600 dark:text-zinc-500 hidden lg:block text-sm px-5 font-normal mt-2">Connect multiple audio content with AI.</p>
 
                                                 </div>
 
