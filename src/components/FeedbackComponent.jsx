@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { useLocation } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import updateUserMetadata from "../utils/updateUserMetadata"
 
 
-export default function FeedbackComponent({currentUser}){
+export default function FeedbackComponent({currentUser, userMetadata,setUserMetadata}){
     const location = useLocation();
 
 	const [showFeedbackTally, setShowFeedbackTally] = useState(false);
@@ -23,6 +24,10 @@ export default function FeedbackComponent({currentUser}){
 			const submitFeedbackValue = searchParams.split("submit_feedback=")[1]; 
 			if (submitFeedbackValue !== undefined && submitFeedbackValue === "true" && currentUser ) {
                 localStorage.setItem(`${currentUser.uid}_showFeedbackTally`, `false`)
+                const newMetadata = {...userMetadata, show_feedback_tally: "false"}
+
+                updateUserMetadata(currentUser.accessToken, newMetadata)
+                setUserMetadata(newMetadata)
 		
 
 				let url = new URL(window.location);
@@ -38,6 +43,7 @@ export default function FeedbackComponent({currentUser}){
 			}, [currentUser]) // eslint-disable-line react-hooks/exhaustive-deps
 
             
+        
             
 
 

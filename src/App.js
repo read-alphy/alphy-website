@@ -95,10 +95,10 @@ function App() {
 
 
 async function handleMetadata(){
-
+	
 	if(userMetadata.length===0 ){
-		const userMetadata = await getUserMetadata(currentUser.accessToken)
-		setUserMetadata(userMetadata)
+		const metaData = await getUserMetadata(currentUser.accessToken)
+		setUserMetadata(metaData)
 		}
 	
 	
@@ -524,7 +524,7 @@ async function handleMetadata(){
 			{
 			(location.pathname.includes("/x/") === false && location.pathname.includes("/yt/") === false && location.pathname.includes("/sp/") === false &&location.pathname.includes("/tw/") === false && 
 			location.pathname.includes("/tv/") === false &&location.pathname.includes("/ap/") === false && location.pathname.includes("/up/") === false && location.pathname.includes("/arc/") === false )&&
-			<FeedbackComponent currentUser = {currentUser} />
+			<FeedbackComponent currentUser = {currentUser} userMetadata={userMetadata} setUserMetadata={setUserMetadata} />
 }
 
 		</div>
