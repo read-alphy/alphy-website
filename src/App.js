@@ -25,7 +25,10 @@ import MyHub from './routes/Hub/MyHub';
 import FAQ from "./routes/FAQ"
 import SubmitPage from "./routes/Hub/SubmitPage"
 import { API_URL, STRIPE_PK, UNDER_CONSTRUCTION } from "./constants"
-
+import getUserMetadata from './utils/getUserMetadata';
+import updateUserMetadata from './utils/updateUserMetadata';
+import addToUserMetadata from './utils/addToUserMetadata';
+import WelcomeForm from './components/WelcomeForm';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
@@ -45,12 +48,15 @@ function App() {
 	const [credit, setCredit] = useState(0)
 	const [creditcalled, setCreditCalled] = useState(false)
 	const urlParams = new URLSearchParams(window.location.search);
-	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
+	
 	const [contentName, setContentName] = useState("")
 	const [collapsed, setCollapsed] = useState(window.innerWidth < 768 ? true : false);
 	const [idToken, setIdToken] = useState("")
 	const [userArchipelagos, setUserArchipelagos] = useState([])
 	const [dataGlobalArchipelagos, setDataGlobalArchipelagos] = useState([])
+	const [userMetadata, setUserMetadata] = useState("")
+	const [showWelcomeForm, setShowWelcomeForm] = useState(false)
+	const [welcomeFormCalled, setWelcomeFormCalled] = useState(false)
 
 	const [customerID, setCustomerID] = useState("");
 	const [userArcsCalled, setUserArcsCalled] = useState(false)
@@ -75,9 +81,29 @@ function App() {
 		// TODO this delays the loading of the page, but it's necessary to get the user's idToken.
 		// Find a way to store idToken in local storage, minding the expiration behavior.
 		// Would improve performance throughout.
-		getDataGlobalArchipelagos(0, true, true, idToken)
+		if(currentUser !== null && currentUser !== undefined){
+			if(dataGlobalArchipelagos.length === 0){
+				getDataGlobalArchipelagos(0, true, true, currentUser.accessToken)
+			}
+	
+			handleMetadata()
+		}
+	
+		
 
-	}, [idToken])
+	},[currentUser])
+
+
+async function handleMetadata(){
+
+	if(userMetadata.length===0 ){
+		const userMetadata = await getUserMetadata(currentUser.accessToken)
+		setUserMetadata(userMetadata)
+		}
+	
+	
+	}
+
 
 	const resetPassword = (urlParams.get('mode') === "resetPassword");
 
@@ -95,7 +121,49 @@ function App() {
 		}
 
 
-	}, []);
+	});
+
+	useEffect (() => {
+		
+		
+		
+		if(userMetadata!==null && userMetadata.show_welcome_form!== undefined && userMetadata.show_welcome_form!==null && currentUser && welcomeFormCalled === false){			
+			
+			
+			if(userMetadata.show_welcome_form === "false"){
+				return
+			}
+			const createdAt = currentUser.metadata.createdAt
+			console.log(parseInt(createdAt) - parseInt("1705166047067"))
+				if((parseInt(createdAt) - parseInt("1705166047067") < 0)){
+					setUserMetadata({...userMetadata, show_welcome_form: "false"})
+					addToUserMetadata(currentUser.accessToken, {show_welcome_form: "false"})
+					setShowWelcomeForm(false)
+				}
+
+				else{
+
+					setUserMetadata({...userMetadata, show_welcome_form: "true"})
+					addToUserMetadata(currentUser.accessToken, {show_welcome_form: "true"})
+					
+					setTimeout (() => {
+							setShowWelcomeForm(true)
+					} , 1000)
+					}
+				setWelcomeFormCalled(true)
+			}
+		
+	}, [userMetadata, currentUser])
+	
+
+	useEffect (() => {
+			
+		if (!called && currentUser) {
+			
+				getCustomerInfo(currentUser)
+		}
+	}, [currentUser, called])
+
 
 
 	useEffect(() => {
@@ -104,11 +172,18 @@ function App() {
 			const oobCode = urlParams.get('oobCode');
 			auth.handleVerifyEmail(oobCode)
 				.then((resp) => {
+				
 					setShowWelcomeForm(true)
 					localStorage.setItem("logged in", "true")
+
 				}
 				)
 		}
+
+
+	
+			
+		
 
 
 
@@ -132,21 +207,10 @@ function App() {
 				if (userId === null) {
 					localStorage.setItem('userId', currentUser.uid)
 				}
-				if (!called) {
-					setTimeout(() => {
-						getCustomerInfo(currentUser)
-					}, 500)
-				}
+				
 
-				const createdAt = currentUser.metadata.createdAt
-				const lastLoginAt = currentUser.metadata.lastLoginAt
-				const registerRecently = parseInt(createdAt) - parseInt(lastLoginAt)
+			
 
-
-				if (registerRecently > -10000 && localStorage.getItem('welcomeForm') !== "false") {
-					setShowWelcomeForm(true)
-					localStorage.setItem('welcomeForm', 'false')
-				}
 
 				if (userArcsCalled === false) {
 					axios.get(`${API_URL}/playlists/`, {
@@ -181,18 +245,19 @@ function App() {
 
 
 
-		await currentUser.getIdToken().then((idToken) => {
+		
 
-			axios.get(`${API_URL}/payments/status`,
+			await axios.get(`${API_URL}/payments/status`,
 				{
 					headers: {
-						'id-token': idToken,
+						'id-token': currentUser.accessToken,
 					},
 				},
 			)
 
 				.then(r => {
 					/* console.log(r.data) */
+					
 					if (r.data.current_tier !== null) {
 						setTier(r.data.current_tier)
 						localStorage.setItem("tier", r.data.current_tier ? r.data.current_tier : "free")
@@ -209,10 +274,11 @@ function App() {
 					localStorage.setItem("tier", "free")
 
 				})
-		})
+		
 
 	}
 	const limit = 40
+
 
 
 
@@ -239,7 +305,7 @@ function App() {
 			},
 			headers: {
 				'accept': 'application/json',
-				'id-token': idToken
+				'id-token': currentUser.accessToken
 			}
 		})
 			.then((response) => {
@@ -277,7 +343,7 @@ function App() {
 
 			})
 			.catch((error) => {
-				console.log(error)
+				console.error("Error fetching data in global arcs: ", error);
 			}
 			)
 	}
@@ -298,18 +364,18 @@ function App() {
 
 		<div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
 
-			{/* 	{showWelcomeForm && 
-					<div className="fixed inset-0 z-50 flex items-center justify-center ">
+				{showWelcomeForm && 
+					<div className={`fixed inset-0 z-50 flex items-center justify-center`} >
 								<div className="fixed inset-0 bg-black opacity-80"></div>
-								<div className="z-10 bg-white dark:bg-mildDarkMode rounded-md shadow-lg w-full max-w-lg ">
+								<div className="z-10 bg-white dark:bg-mildDarkMode rounded-md shadow-lg w-full max-w-lg  ">
 								<div className="flex  flex-col gap-6">
 								
-								<WelcomeForm currentUser={currentUser} setShowWelcomeForm={setShowWelcomeForm}/>
+								<WelcomeForm currentUser={currentUser} userMetadata = {userMetadata} setUserMetadata={setUserMetadata} setShowWelcomeForm={setShowWelcomeForm} />
 							</div>	
 							</div>
 							</div>
 							} 
-							 */}
+							
 			<Helmet>
 				<title>{contentName === undefined || contentName.length === 0 ? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
 				<meta name="description" content="Transcribe, question, and summarize audio with the help of AI. Try Alphy for free!" />

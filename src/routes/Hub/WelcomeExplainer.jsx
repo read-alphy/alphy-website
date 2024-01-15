@@ -40,13 +40,17 @@ export default function WelcomeExplainer({ currentUser }) {
                     <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[600px]"> Join the Alphy community to transcribe, summarize, and ask questions to online and offline audiovisual content.
                     </p>
                     <div className={`mt-8 flex flex-row`}>
-                        <Link to="/submit" className={`rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-teal-50 to-teal-100  px-4 py-3 font-averta-semibold drop-shadow-sm ${currentUser ? "w-[200px]" : "w-[250px]"}`}>
-                            {currentUser ? window.innerWidth < 400 ? "New Submit" : "Submit New Content" : "Start Your Journey Now"}
+                        <Link to="/u/register" className={`rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-teal-50 to-teal-100  px-4 py-3 font-averta-semibold drop-shadow-sm ${currentUser ? "w-[200px]" : "w-[150px]"}`}>
+                            {currentUser ? window.innerWidth < 400 ? "New Submit" : "Submit New Content" : "Start for Free"}
                         </Link>
-                        {currentUser &&
+                        {currentUser ?
                             <Link to="/myhub" className="rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-none border border-zinc-700 dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 font-averta-semibold drop-shadow-sm w-[150px]">
                                 {window.innerWidth < 400 ? " Your Hub" : "Go to Your Hub"}
                             </Link>
+                            :
+                            <Link to="/explore" className="rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-none border border-zinc-700 dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 font-averta-semibold drop-shadow-sm ">
+                            {window.innerWidth < 400 ? "Explore" : "Explore Our Database"}
+                        </Link>
                         }
                     </div>
 

@@ -121,7 +121,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 		}
 
 		catch (error) {
-			console.log(error)
+			console.error("Error checking bookmarks", error)
 			setBookmarkChecked(true)
 		}
 	}
@@ -163,7 +163,7 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 				}
 
 			).catch((error) => {
-				console.log(error)
+				console.error("Error getting upload data", error)
 				if (error.response.data.detail === "Source is inaccessible") {
 					setAuthorizationError(true)
 				}

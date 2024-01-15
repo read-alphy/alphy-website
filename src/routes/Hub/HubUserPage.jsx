@@ -302,7 +302,7 @@ export default function HubUserPage({ currentUser, credit, tier, userArchipelago
                                                 </div>
                                             </button>
                                         } */}
-                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-4 sm:gap-6 
+                                        <div className={`grid grid-cols-2 xsSm:grid-cols-3  xl:grid-cols-3 2xl:grid-cols-4 sm:gap-6 
                                         
                                 
                                         

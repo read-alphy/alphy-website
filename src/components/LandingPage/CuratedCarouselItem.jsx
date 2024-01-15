@@ -86,31 +86,31 @@ export default function CuratedCarouselItem(props) {
 
 
 
-          <div className="lg:hidden">
+          <div className="lg:hidden drop-shadow-xl rounded-lg bg-white dark:bgMildDarkMode min-w-[150px] max-w-[150px] min-h-[150px] max-h-[150px] transform hover:scale-105 transition duration-300 ease-in-out ">
 
-            <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  overflow-hidden shadow-md cursor-pointer`} >
+                <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  overflow-hidden drop-shadow-xl rounded-xl cursor-pointer `} >
 
 
-              <img src={props.item.thumbnail_url} />
+                  <img src={props.item.thumbnail_url} />
 
-              <div className={` ${!isHovered && props.item.thumbnail_url !== null ? "opacity-0" : "opacity-100 transition duration-300 ease-in-out"}   absolute inset-0 bg-zinc-700 dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
-                <div className="flex flex-col py-2 px-4 ">
+                  <div className={` ${!isHovered && props.item.thumbnail_url !== null ? "opacity-0" : "opacity-100 transition duration-300 ease-in-out"}   absolute inset-0    dark:bg-stone-800 dark:border dark:border-stone-600 bg-opacity-80 transition duration-300 ease-in-out items-center justify-center`} >
+                    <div className="flex flex-col py-2 px-4 ">
 
-                  <p className={`text-white bg-opacity-100 text-xs ${props.forFeed !== true && "lg:text-sm"} font-averta-regular`} >{props.item.description}</p>
+                      <p className={`text-white bg-opacity-100 text-xs ${props.forFeed !== true && "lg:text-sm"} font-averta-regular`} >{props.item.description}</p>
+                    </div>
+
+
+                  </div>
+
+
+                  <div
+                    className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-opacity duration-300 "
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  ></div>
                 </div>
 
-
-              </div>
-
-
-              <div
-                className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-opacity duration-300"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              ></div>
-            </div>
-
-            <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2 max-w-[150px] font-averta-semibold`} >{props.item.name}</p>
+            <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2 mt-4 ml-2 max-w-[150px] font-averta-semibold`} >{props.item.name}</p>
 
           </div>
 

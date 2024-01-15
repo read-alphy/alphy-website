@@ -753,7 +753,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 					navigate(`/arc/${archipelagoUID}`)
 				})
 				.catch((error) => {
-					console.log(error)
+					console.error("Error adding to arc:", error);
 					setMainPopoverOpen(false)
 				}
 				);

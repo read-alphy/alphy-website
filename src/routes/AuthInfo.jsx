@@ -136,11 +136,13 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 	};
 
 	const handleLoginWithGoogle = (e) => {
-		localStorage.setItem("welcomeForm", "true")
+		
 		e.preventDefault();
 		auth.loginWithGoogle()
 			.then(() => {
 				localStorage.setItem("logged in", "true")
+
+				
 				navigate('/myhub');
 			}
 			)
@@ -225,15 +227,6 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 			)
 	}
 
-	const handleLoginWithTwitter = () => {
-		auth.loginWithTwitter()
-			.then(() => {
-				navigate('/');
-			})
-			.catch((error) => {
-				setError(error.message);
-			});
-	};
 
 	return (
 
