@@ -125,20 +125,22 @@ async function handleMetadata(accessToken){
 
 
 	});
+	
 
 	useEffect (() => {
 		
 		
 		
 		if(userMetadata!==null && userMetadata.show_welcome_form!== undefined && userMetadata.show_welcome_form!==null && currentUser && welcomeFormCalled === false){			
-			
+			const createdAt = currentUser.metadata.createdAt
+
 			
 			if(userMetadata.show_welcome_form === "false"){
 				return
 			}
-			const createdAt = currentUser.metadata.createdAt
-			console.log(parseInt(createdAt) - parseInt("1705166047067"))
+
 				if((parseInt(createdAt) - parseInt("1705166047067") < 0)){
+					
 					setUserMetadata({...userMetadata, show_welcome_form: "false"})
 					addToUserMetadata(currentUser.accessToken, {show_welcome_form: "false"})
 					setShowWelcomeForm(false)

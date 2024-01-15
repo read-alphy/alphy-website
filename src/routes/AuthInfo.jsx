@@ -159,7 +159,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 		auth.resetPassword(email)
 
 			.then((result) => {
-
+			
 				setIsSubmitting(false)
 				setSuccessMessage(true)
 				localStorage.setItem('resetPassword', 'false');
@@ -320,7 +320,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 									</div>
 									<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" : ""} bg-greenColor font-averta-semibold`}> {isSubmitting ? <ReactLoading type="spin" width={17} height={17} color="#ffffff" /> : <span>Send Link</span>}</Button>
 								</form>
-								{error && <div className="text-red-500 text-sm mb-8 mt-5 font-averta-semibold">{error}</div>}
+								{error && <div className="text-red-500 text-sm mb-8 mt-5 font-averta-semibold">{error} </div> }
 								{successMessage && <div className="text-green-500 text-sm mb-8 mt-5 font-averta-semibold">Email sent successfully</div>}
 
 							</div>
@@ -368,10 +368,10 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 					:
 
 					<div className="mb-20 w-[300px]">
-						<h1 className="text-xl mb-8 font-averta-semibold">We've send a verification link to {email !== null ? email : "your email"}!</h1>
+						<h1 className="text-xl mb-8 font-averta-semibold">We sent a verification link to {email !== null ? email : "your email"}!</h1>
 						<p className="text-sm text-zinc-600 mb-10 font-averta-semibold">Please follow the link to complete your registration. If you didn't get the email, try again from the link below.</p>
 						<Button onClick={handleResendVerificationEmail} className={`${isSubmitting ? "opacity-50 pointer-events-none" : ""} bg-greenColor font-averta-semibold`}> {isSubmitting ? <ReactLoading type="spin" width={17} height={17} color="#ffffff" /> : <span>Resend Link</span>}</Button>
-						{successMessage && <div className="text-zinc-500 text-sm mb-8 mt-5 font-averta-semibold">We've successMessage the verification email. Please check your inbox.</div>}
+						{successMessage && <div className="text-zinc-500 text-sm mb-8 mt-5 font-averta-semibold">Done! Please check your inbox.</div>}
 					</div>
 
 			}
