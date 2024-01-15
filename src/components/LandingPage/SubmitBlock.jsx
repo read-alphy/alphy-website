@@ -12,18 +12,24 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { useNavigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import HelpIcon from '@mui/icons-material/Help';
+import WarningIcon from '@mui/icons-material/Warning';
 
 
 export default function SubmitBlock({ currentUser, tier, credit, handleGoBack, handleSubmit, loading, inputValue, setInputValue, errorMessage, failed, inputRef }) {
     const navigate = useNavigate()
     const [showExampleLinks, setShowExampleLinks] = useState(false)
+    
 
 
     const navigateCredit = () => {
         sessionStorage.setItem("creditPurchase", "true")
         navigate("/account")
-
     }
+
+
+
+
+
 
     useEffect(() => {
         inputRef.current.focus();
@@ -88,22 +94,40 @@ export default function SubmitBlock({ currentUser, tier, credit, handleGoBack, h
             <div className="flex items-center  mt-4 space-x-4 md:justify-center lg:mt-0  ">
 
                 <div className="w-full flex flex-col">
-
+{(  inputValue.includes("twitter.com/") && inputValue.includes("/status/")) && 
+<p className="mt-2 text-yellow-400 dark:text-amber-200 text-sm items-center">
+    <WarningIcon fontSize="small" className="text-yellow-300 p-0.5"/> <span className="pt-2">You are about to submit a Twitter video. If you are trying to submit a Twitter Space, please get the link to the Space.</span>
+    </p>}
 
                     {currentUser &&
                         <span className="text-sm mb-2 mt-4 text-gray-600 dark:text-zinc-300 ">
 
                             <div className="flex-col flex">
-                                <div className="flex flex-row">
+                                <div className="flex flex-col sm:flex-row">
                                     <a href="/account" className="text-zinc-500 dark:text-zinc-400 font-averta-semibold">
                                         {tier === "free" && "Starter Plan"}
                                         {tier === "basic" && "Basic Plan"}
                                         {tier === "premium" && "Premium Plan"}
 
                                     </a>
-                                    <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400"> - </p>
-                                    <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold"> Remaining Credits : {Math.floor(credit)} minutes
+                                    <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400 hidden sm:block"> - </p>
+                                    <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold mt-2   sm:mt-0"> Remaining Credits : {Math.floor(credit)} minutes
                                     </p>
+
+                                    {
+                                currentUser ?
+                                    (tier !== "free"
+                                        &&
+
+                                        <div className="mt-2 sm:mt-0 sm:ml-4">
+                                            <p onClick={navigateCredit} className={`text-indigo-400 underline font-averta-semibold cursor-pointer`}>Need more credits? </p>
+
+                                        </div>
+
+                                    )
+                                    :
+                                    null
+                            }
                                 </div>
 
                             </div>
@@ -117,17 +141,17 @@ export default function SubmitBlock({ currentUser, tier, credit, handleGoBack, h
                             currentUser ?
                                 <div>
                                     {/* <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200 font-averta-semibold">You are on the Starter Plan</p> */}
-                                    <p className="mt-2 mb-2 font-averta-semibold text-zinc-600 dark:text-zinc-300">Available:</p>
+                                    <p className="mt-2 mb-2 font-averta-regular text-zinc-600 dark:text-zinc-300">Available:</p>
 
-                                    <div className="flex flex-row"><CheckCircleIcon className="text-green-300 p-1" /><p className="text-zinc-500 dark:text-zinc-400 font-averta-semibold">YouTube</p></div>
-                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-semibold">Twitter Spaces</p></div>
-                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-semibold">Twitter videos</p></div>
+                                    <div className="flex flex-row"><CheckCircleIcon className="text-green-300 p-1" /><p className="text-zinc-500 dark:text-zinc-400 font-averta-regular">YouTube</p></div>
+                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">Twitter Spaces</p></div>
+                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">Twitter videos</p></div>
 
-                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-semibold">Twitch</p></div>
+                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">Twitch</p></div>
 
-                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-semibold">Apple Podcasts</p></div>
+                                    <div className="flex flex-row"><CheckCircleIcon className="text-zinc-300 p-1" /><p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">Apple Podcasts</p></div>
 
-                                    <p className="dark:text-zinc-300 text-zinc-500 mb-3 mt-6 font-averta-semibold"> Switch to a <Link to="/account" className="text-greenColor  underline"> paid plan</Link> to for limitless access.</p>
+                                    <p className="dark:text-zinc-300 text-zinc-500 mb-3 mt-6 font-averta-regular"> Switch to a <Link to="/account" className="text-greenColor  underline"> paid plan</Link>  for limitless access.</p>
 
 
 
@@ -140,38 +164,6 @@ export default function SubmitBlock({ currentUser, tier, credit, handleGoBack, h
                             null
                         }
 
-
-                        <div className=" flex flex-col text-sm">
-
-                            {
-                                currentUser ?
-                                    (tier !== "free"
-                                        &&
-
-                                        <div>
-                                            <p onClick={navigateCredit} className={`text-indigo-400 underline font-averta-semibold cursor-pointer`}>Need more credits? </p>
-
-                                        </div>
-
-                                    )
-                                    :
-                                    null
-                            }
-
-                            {/*    <div className="flex flex-col ">
-                                <Button onClick={navigateCredit} size="sm" className={`bg-indigo-300 ${(tier === "basic" || tier === "premium") ? "" : "pointer-events-none opacity-50"} text-white mt-4 w-[100px] font-averta-semibold`}>
-
-                                    <span className="mt-1 dark:text-zinc-800">Buy here</span>
-
-
-                                </Button>
-
-                            </div> */}
-
-
-
-
-                        </div>
 
 
 
@@ -193,9 +185,9 @@ export default function SubmitBlock({ currentUser, tier, credit, handleGoBack, h
 
             {currentUser &&
                 <div>
-                    <p onClick={() => setShowExampleLinks(!showExampleLinks)} className="mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold cursor-pointer">Example Links <HelpIcon /></p>
+                    <p onClick={() => setShowExampleLinks(!showExampleLinks)} className="mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold cursor-pointer">Example Links <HelpIcon className="text-zinc-600 p-1 dark:text-zinc-300 mb-1 -ml-1" /></p>
                     {showExampleLinks &&
-                        < div className=" bottom-0 mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold">
+                        < div className=" bottom-0 mt-4 sm:mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-regular">
                             <p className="mb-6"> Please make sure the link you are submitting is in one of the following formats:</p>
                             <p className="mt-4">YouTube : https://www.youtube.com/watch?v=h6fcK_fRYaI</p>
                             <p className="mt-4">Twitter / X Spaces : https://twitter.com/i/spaces/1yoJMwnLObwKQ</p>

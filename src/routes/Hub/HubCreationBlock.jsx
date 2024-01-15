@@ -305,8 +305,8 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
                                 <p className="text-green-300 text-lg font-averta-semibold text-center row-span-1"> Submit a Link
 
                                 </p>
-                                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
-                                    Submit a link to an audiovisual content to process with Alphy.
+                                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-regular">
+                                    Submit a link to an online discussion to process with Alphy.
                                 </p>
                                 <div className="row-span-1 w-full justify-center items-center flex">
                                     <LinkIcon fontSize={window.innerWidth > 600 ? "large" : "medium"} className="text-green-300 mx-auto mb-2" />
@@ -323,7 +323,7 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
                                 <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
                                     Upload a Recording
                                 </p>
-                                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-regular">
                                     Import an audio file from your device to transcribe, summarize, and question privately.
                                 </p>
                                 <div className="row-span-1 w-full justify-center items-center flex">
@@ -351,7 +351,7 @@ export default function HubCreationBlock({ currentUser, tier, credit, dataGlobal
                                 <p className="text-red-300 text-lg font-averta-semibold text-center mt-2 row-span-1">
                                     Create an Arc
                                 </p>
-                                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-semibold">
+                                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-regular">
                                     {window.innerWidth > 600 ? "Build your own AI-assisted search engine on countless hours of audiovisual content."
                                         : "Build your AI assistants"}
                                 </p>
