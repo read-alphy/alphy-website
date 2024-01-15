@@ -147,7 +147,7 @@ async function handleMetadata(accessToken){
 				}
 
 				else{
-
+					console.log("hey")
 					setUserMetadata({...userMetadata, show_welcome_form: "true"})
 					addToUserMetadata(currentUser.accessToken, {show_welcome_form: "true"})
 					

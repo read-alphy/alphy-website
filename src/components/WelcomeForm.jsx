@@ -13,9 +13,8 @@ export default function WelcomeForm({setShowWelcomeForm, userMetadata, setUserMe
   
 
 const handleShowWelcomeMessage = () => {
-  
-  addToUserMetadata(currentUser.accessToken, {show_welcome_form: "false"})
   setShowWelcomeForm(false)
+  addToUserMetadata(currentUser.accessToken, {show_welcome_form: "false"})
   setUserMetadata({...userMetadata, show_welcome_form: "false"})
 
 }
