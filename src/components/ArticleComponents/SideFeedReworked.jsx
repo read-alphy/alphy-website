@@ -72,6 +72,7 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 			auth.logout();
 			localStorage.setItem("logged in", "false")
 			localStorage.setItem("idToken", null)
+			localStorage.setItem("tier", "")
 
 			navigate("/")
 			window.location.reload()

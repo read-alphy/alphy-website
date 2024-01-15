@@ -81,12 +81,11 @@ function App() {
 		// TODO this delays the loading of the page, but it's necessary to get the user's idToken.
 		// Find a way to store idToken in local storage, minding the expiration behavior.
 		// Would improve performance throughout.
-		if(currentUser !== null && currentUser !== undefined){
+		if(currentUser !== undefined && currentUser !== null){
 			if(dataGlobalArchipelagos.length === 0){
 				getDataGlobalArchipelagos(0, true, true, currentUser.accessToken)
 			}
-	
-			handleMetadata()
+			handleMetadata(currentUser.accessToken)
 		}
 	
 		
@@ -94,14 +93,18 @@ function App() {
 	},[currentUser])
 
 
-async function handleMetadata(){
+async function handleMetadata(accessToken){
 	
 	if(userMetadata.length===0 ){
-		const metaData = await getUserMetadata(currentUser.accessToken)
-		setUserMetadata(metaData)
+		let metaData = await getUserMetadata(accessToken)
+		if(metaData===null){
+			metaData= {}
+			setUserMetadata(metaData)
 		}
-	
-	
+		else{
+			setUserMetadata(metaData)
+		}
+		}	
 	}
 
 

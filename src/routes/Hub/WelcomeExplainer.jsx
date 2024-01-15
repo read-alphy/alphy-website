@@ -40,7 +40,7 @@ export default function WelcomeExplainer({ currentUser }) {
                     <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[600px]"> Join the Alphy community to transcribe, summarize, and ask questions to online and offline audiovisual content.
                     </p>
                     <div className={`mt-8 flex flex-row`}>
-                        <Link to="/u/register" className={`rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-teal-50 to-teal-100  px-4 py-3 font-averta-semibold drop-shadow-sm ${currentUser ? "w-[200px]" : "w-[150px]"}`}>
+                        <Link to={`${currentUser ? "/submit":  "/u/register"}`}  className={`rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-teal-50 to-teal-100  px-4 py-3 font-averta-semibold drop-shadow-sm ${currentUser ? "w-[200px]" : "w-[150px]"}`}>
                             {currentUser ? window.innerWidth < 400 ? "New Submit" : "Submit New Content" : "Start for Free"}
                         </Link>
                         {currentUser ?
