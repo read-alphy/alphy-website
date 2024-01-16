@@ -81,10 +81,12 @@ function App() {
 		// TODO this delays the loading of the page, but it's necessary to get the user's idToken.
 		// Find a way to store idToken in local storage, minding the expiration behavior.
 		// Would improve performance throughout.
+		if(dataGlobalArchipelagos.length === 0){
+			getDataGlobalArchipelagos(0, true, true)		
+		}
+		
 		if(currentUser !== undefined && currentUser !== null){
-			if(dataGlobalArchipelagos.length === 0){
-				getDataGlobalArchipelagos(0, true, true, currentUser.accessToken)
-			}
+			
 			handleMetadata(currentUser.accessToken)
 		}
 	
@@ -304,14 +306,12 @@ async function handleMetadata(accessToken){
 
 		axios.get(`${API_URL}/playlists/`, {
 			params: {
-				user_id: 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3',
+				
 				limit: limit,
-				offset: offsetGlobalArchipelagos
+				offset: offsetGlobalArchipelagos,
+				only_my : false,
 			},
-			headers: {
-				'accept': 'application/json',
-				'id-token': currentUser.accessToken
-			}
+			
 		})
 			.then((response) => {
 				if (firstTime) {
