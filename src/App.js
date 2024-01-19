@@ -89,8 +89,6 @@ function App() {
 			
 			handleMetadata(currentUser.accessToken)
 		}
-	
-		
 
 	},[currentUser])
 

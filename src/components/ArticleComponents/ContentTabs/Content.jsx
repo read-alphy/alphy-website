@@ -213,10 +213,6 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 			let languagesToSet = []
 			if (contentSummaries !== undefined && contentSummaries.length > 0) {
 				contentSummaries.map(summary => languagesToSet.push(summary.lang));
-
-
-
-
 				if (summary !== undefined && summary.length > 0 && summary.summary === null) {
 					languagesWanted.push(language)
 				}
@@ -485,8 +481,6 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 		let transcript = []
-
-
 
 
 
@@ -1951,7 +1945,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 						</div> : null
 					}
-					{((summary != undefined && summary !== null && summary.summary === null && summary.lang !== "en" && language !== "en" && summary.summary === undefined) || (languagesWanted.includes(language) === true && language !== "en")) && <div className="flex flex-col mb-20 mt-20 ">
+					{((summary !== undefined && summary !== null && summary.summary === null && summary.lang !== "en" && language !== "en" && summary.summary === undefined) || (languagesWanted.includes(language) === true && language !== "en")) && <div className="flex flex-col mb-20 mt-20 ">
 						{data !== null &&
 							<p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular  max-w-screen-md mx-auto p-3 text-center">
 

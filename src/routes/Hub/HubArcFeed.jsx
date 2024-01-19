@@ -270,12 +270,12 @@ function HubArcFeed(props) {
 							className={`grid grid-cols-2 xsSm:grid-cols-3 xsSm:gap-6 sm:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 `}
 						>
 
-							<Link to="/arc/createArc" className="drop-shadow-lg rounded-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  md:min-h-[360px] md:max-h-[360px] md:min-w-[240px] md:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 mt-5 ml-2 md:ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
+							<Link to="/arc/createArc" className="drop-shadow-lg rounded-lg min-h-[150px] max-h-[150px] min-w-[150px] max-w-[150px]  lg:min-h-[360px] lg:max-h-[360px] lg:min-w-[240px] lg:max-w-[240px] border border-2 bg-white dark:bg-mildDarkMode border dark:border-zinc-700 mt-5 ml-2 md:ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
 								<div >
 									<AddIcon fontSize="large" className="text-zinc-600 dark:text-zinc-300 mb-4 " />
-									<p className="text-zinc-600 dark:text-zinc-300 text-l md:text-xl font-averta-semibold">Create Your Arc</p>
-									<p className="text-zinc-600 dark:text-zinc-500 hidden md:block text-sm px-5 font-normal mt-2">Connect multiple audio content with AI.</p>
+									<p className="text-zinc-600 dark:text-zinc-300 text-l lg:text-xl font-averta-semibold">Create Your Arc</p>
+									<p className="text-zinc-600 dark:text-zinc-500 hidden lg:block text-sm px-5 font-normal mt-2">Connect multiple audio content with AI.</p>
 
 								</div>
 

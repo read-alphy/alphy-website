@@ -41,7 +41,7 @@ export default function CuratedCarouselItem(props) {
   return (
     <Link to={`/arc/${props.item.uid}`}>
       {props.expandedLayout !== true ?
-        <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  rounded-md overflow-hidden shadow-md cursor-pointer`} >
+        <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  dark:bg-mildDarkMode rounded-md overflow-hidden shadow-md cursor-pointer`} >
 
 
           <img src={props.item.thumbnail_url} />
@@ -110,7 +110,7 @@ export default function CuratedCarouselItem(props) {
                   ></div>
                 </div>
 
-            <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2 mt-4 ml-2 max-w-[150px] font-averta-semibold`} >{props.item.name}</p>
+            <p className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2  ml-2 max-w-[150px] font-averta-semibold`} >{props.item.name}</p>
 
           </div>
 
