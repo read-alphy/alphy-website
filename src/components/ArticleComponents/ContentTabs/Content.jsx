@@ -633,6 +633,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		let askInput
 
 		const selection = window.getSelection();
+		console.log(selection)
 		
 		setShowScrollBackButton(true)
 		if (!selection.rangeCount) return;
@@ -645,20 +646,23 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		}
 		let range = selection.getRangeAt(0);
 		
+		
 		const span = document.createElement('span');
 		span.id = "selection-span"
 		let lastChild = range.commonAncestorContainer.lastChild
+		if(lastChild==null){lastChild=range.commonAncestorContainer}
+		
 		let newRange = document.createRange();
 		newRange.selectNode(lastChild);
         newRange.surroundContents(span);
 		/* range.surroundContents(span); */
 		if (window.getSelection) {
-
 			window.getSelection().removeAllRanges(); // Clears the text selection
 		} else if (document.selection) { // For older versions of IE
-
+			
 			document.selection.empty();
 		}
+		
 
 		if (type === "default") {
 			askInput = "Explain the following:" + askText + "?'"
@@ -670,8 +674,10 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 			askInput = "Explain the following like I'm 5:" + "'" + askText + "'"
 		}
+		
 
 		setInputValue(askInput)
+		
 		//setSelectionCall(true)
 
 		if (inputRef.current) {
