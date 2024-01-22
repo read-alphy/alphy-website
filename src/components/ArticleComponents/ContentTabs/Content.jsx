@@ -633,15 +633,17 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		let askInput
 
 		const selection = window.getSelection();
-		console.log(selection)
+		
 		
 		setShowScrollBackButton(true)
 		if (!selection.rangeCount) return;
 		if (document.getElementById("selection-span") !== null) {
+			
 			const previousSpanSelection = document.getElementById("selection-span");
 			previousSpanSelection.outerHTML = previousSpanSelection.innerHTML;
 			previousSpanSelection.className = ""
 			previousSpanSelection.id = ""
+			
 
 		}
 		let range = selection.getRangeAt(0);
@@ -679,6 +681,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 		setInputValue(askInput)
 		
 		//setSelectionCall(true)
+		
 
 		if (inputRef.current) {
 
@@ -690,14 +693,14 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 		}
 
+		
 		handleScroll()
-
 
 	}
 
 	const scrollToSavedDepth = () => {
 		setShowScrollBackButton(false)
-		console.log("scrolling")
+		
 		if (document.getElementById("selection-span")) {
 			const selectionSpan = document.getElementById("selection-span");
 			
@@ -764,12 +767,13 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 
-	// Function to handle scroll and toggle visibility
-	const handleScroll = () => {
 
+	const handleScroll = () => {
+	
 		const contentElement = document.getElementById('processing-tier');
-		if (contentElement) {
-			contentElement.scrollIntoView({ behavior: 'smooth' });
+		if (contentElement) 
+		{		
+		contentElement.scrollIntoView({ behavior: 'smooth' });
 		}
 	};
 
@@ -894,7 +898,8 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 				<div className="grid grid-cols-3 ">
-					<div id="processing-tier" className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary != undefined && language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
+					<div  className={`col-span-2 lg:col-span-3 xl:mt-0 ${transcript.length > 0 && (summary != undefined && language == summary.lang) ? "xl:col-span-2" : "xl:col-span-3"}`} >
+						<div id="processing-tier">
 						{modelName === "HIGH" &&
 							<div className="relative flex flex-col">
 								<div className="relative flex flex-row group cursor-default">
@@ -920,9 +925,8 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 								</div>
 							</div>
 
-
-
 						}
+						</div>
 						<div className="flex flex-row ml-1">
 							<h1 className="col-span-2 mt-6 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
 								{data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
