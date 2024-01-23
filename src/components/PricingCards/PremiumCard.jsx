@@ -34,7 +34,7 @@ export default function PremiumCard({ tier, openPopover, setOpenPopover, current
         },
 
     };
-
+    
     const handleDialog = () => {
         if (currentUser) {
             if (tier === "basic") {
@@ -57,34 +57,38 @@ export default function PremiumCard({ tier, openPopover, setOpenPopover, current
 
 
     const upgradePlan = async () => {
-        setErrorMessage("")
-        setUpgradeLoading(true)
+		setErrorMessage('');
+		setUpgradeLoading(true);
 
-        await currentUser.getIdToken().then((idToken) => {
-
-            axios.post(`${API_URL}/payments/subscription?subscription_type=premium`, {},
-                {
-                    headers: {
-                        'id-token': idToken,
-                    },
-                },
-            )
-                .then(r => {
-                    setUpgradeLoading(false)
-                    window.location.reload()
-
-                }
-
-                )
-                .catch((error) => {
-                    console.log(error)
-                    setUpgradeLoading(false)
-                    setErrorMessage("Something went wrong, please try again")
-
-                })
-        })
-
-    }
+		await currentUser.getIdToken().then((idToken) => {
+			const params = {
+				subscription_type: 'premium',
+			};
+			if (window.tolt_referral) {
+				params['tolt_referral'] = window.tolt_referral;
+			}
+			axios
+				.post(
+					`${API_URL}/payments/subscription`,
+					{},
+					{
+						headers: {
+							'id-token': idToken,
+						},
+						params: params,
+					},
+				)
+				.then((r) => {
+					setUpgradeLoading(false);
+					window.location.reload();
+				})
+				.catch((error) => {
+					console.log(error);
+					setUpgradeLoading(false);
+					setErrorMessage('Something went wrong, please try again');
+				});
+		});
+	};
 
     const handleUpgradeDialog = () => {
         setShowUpgradeDialog(false)

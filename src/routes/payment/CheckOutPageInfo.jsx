@@ -41,37 +41,36 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret }) {
 
     })
 
-
-
     const fetchData = async () => {
-
-        await currentUser.getIdToken().then((idToken) => {
-
-            axios.post(`${API_URL}/payments/subscription?subscription_type=${subValue}`, {},
-                {
-                    headers: {
-                        'id-token': idToken,
-                    },
-                },
-            )
-                .then(r => {
-                    sessionStorage.setItem("subValue", subValue)
-                    const clientSecret = r.data.latest_invoice.payment_intent.client_secret
-                    setClientSecret(clientSecret)
-                    setCalled(true)
-                }
-
-                )
-                .catch((error) => {
-                    console.log(error)
-
-                })
-        })
-
-    }
-
-
-
+		await currentUser.getIdToken().then((idToken) => {
+			const params = {
+				subscription_type: subValue,
+			};
+			if (window.tolt_referral) {
+				params['tolt_referral'] = window.tolt_referral;
+			}
+			axios
+				.post(
+					`${API_URL}/payments/subscription`,
+					{},
+					{
+						headers: {
+							'id-token': idToken,
+						},
+						params: params,
+					},
+				)
+				.then((r) => {
+					sessionStorage.setItem('subValue', subValue);
+					const clientSecret = r.data.latest_invoice.payment_intent.client_secret;
+					setClientSecret(clientSecret);
+					setCalled(true);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		});
+	};
 
     let appearance
 
