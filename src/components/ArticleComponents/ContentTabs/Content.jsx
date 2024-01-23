@@ -131,7 +131,6 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 
-
 	const transcript_raw = props.data.transcript;
 
 
@@ -1054,7 +1053,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 															(language === code ?
 																<MenuItem className="text-zinc-700 dark:text-zinc-200 font-averta-semibold" key={code} value={code}>
-																	<p className="font-averta-semibold">	{name}</p>
+																	<p className="font-averta-semibold text-zinc-700 dark:text-zinc-300">	{name}</p>
 																</MenuItem>
 																:
 
@@ -1295,7 +1294,7 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 													(language === code ?
 														<MenuItem className="text-zinc-700 dark:text-zinc-200 font-averta-semibold" key={code} value={code}>
-															<p className="font-averta-semibold">{name}</p>
+															<p className="font-averta-semibold text-zinc-700 dark:text-zinc-300">{name}</p>
 														</MenuItem>
 														:
 
