@@ -237,24 +237,27 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 
 	};
 
+useEffect(() => {
+	const interval  = setInterval(() => {
+			let summaryComplete = false
+		
 
-	useEffect(() => {
-		let interval;
-		const intervalFetch = () => {
-			let summaryComplete
-
-			if (data !== null && data.summaries !== undefined && data.summaries.find(item => item.lang === language) !== undefined) {
-				summaryComplete = data.summaries.find(item => item.lang === language).complete
-
-
+			if (data !== null && data.summaries !== undefined) {
+				
+				if(data.summaries.length >0 ){
+				summaryComplete = data.summaries.find(item => item.lang === language).complete !== undefined ? data.summaries.find(item => item.lang === language).complete : false
+				
+					}
+				
 			}
+			
+			if (data !== null && summaryComplete === false && called === true) {
 
-			if (data !== null && summaryComplete == false && called === true) {
-
-				if (source_type === "up" && summaryComplete == false) {
+				if (source_type === "up" && summaryComplete === false) {
 					fetchDataUpload(url, true);
 				}
 				else if (source_type !== "up" && summaryComplete === false) {
+					
 					fetchData(url, true);
 				}
 
@@ -265,13 +268,12 @@ function Article({ source_type, collapsed, setCollapsed, tier, setContentName, u
 			}
 
 		}
-		interval = setInterval(intervalFetch, 5000);
 
-		return () => {
-			// Clean up the interval when the component unmounts
-			clearInterval(interval);
-		};
-	}, []);
+			, 5000);
+
+			return () => clearInterval(interval);
+
+	}, [data, language])
 
 	const handleVisibility = () => {
 		const targetVisibility = !isVisible

@@ -248,10 +248,9 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 
 	useEffect(() => {
-
 		summaryParser()
 
-	}, [language])
+	}, [language,data])
 
 	const requestTranslation = async () => {
 
@@ -884,7 +883,6 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 
 	const videoRef = useRef(null);
 	const canvasRef = useRef(null);
-
 
 
 
@@ -1685,9 +1683,10 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																			<Loading />
 																		) : summaryArray.length === 0 ? (
 
-																			<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
+																			<p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center flex flex-col">
 
 																				{summary === undefined || summary.length === 0 ? "This content doesn't have a summary. Check out the transcript!" : "Still waiting for the summary! Meanwhile, check the transcript."}
+																				{summary === undefined || summary.length === 0 ? null : <img className={`opacity-70 dark:opacity-90 mx-auto`} src={working} width={80} alt="My SVG" />}
 																			</p>
 
 																		) : (
