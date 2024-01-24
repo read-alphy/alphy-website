@@ -221,7 +221,7 @@ const FeedItem = ({ item, index, setCollapsed, myBookmarks, currentUser, sideFee
 											{(item.summaries !== undefined && item.summaries[0] !== undefined && (item.summaries[0].complete === true)) || (fromArchipelago === "archipelago" && item.source !== undefined && item.source.complete === true) ? null : (
 												<div className=" text-purpleLike dark:text-zinc-300 font-averta-semibold">📝 IN PROGRESS</div>
 											)}
-											<div className={`text-sm video-text text-black dark:text-zinc-300 font-averta-semibold`} >
+											<div className={`text-sm  text-black dark:text-zinc-300 font-averta-semibold  ${"max-w-[200px]"}`} >
 
 												{item.title}
 												{item.source !== undefined && item.source.title}

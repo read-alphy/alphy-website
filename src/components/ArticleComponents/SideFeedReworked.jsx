@@ -183,7 +183,7 @@ function SideFeedReworked({ collapsed, setCollapsed, userLayout, submitLayout, g
 
 									{dataArchipelago.map((item, index) =>
 
-										<HubFeedItem sideFeed={true} key={index} item={item.source} setCollapsed={setCollapsed} myBookmarks={false} />
+										<HubFeedItem sideFeed={true}  key={index} item={item.source} setCollapsed={setCollapsed} myBookmarks={false} />
 
 									)}
 

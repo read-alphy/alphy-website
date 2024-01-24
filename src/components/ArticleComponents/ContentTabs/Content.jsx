@@ -1693,11 +1693,13 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																		) : (
 																			typeof summaryArray[0] === "string" ?
 																				summaryArray.map((item, index) => {
+																					
+
 																					return (
 																						<div className="mb-4 text-zinc-700 dark:text-zinc-200" key={index}>
 																							<div className="summary-text font-averta-semibold ">
 																								<ReactMarkdown >
-																									{item}
+																								{item}
 																								</ReactMarkdown>
 																							</div>
 
@@ -1722,13 +1724,20 @@ export default function Content({ language, setLanguage, handleLanguageChange, .
 																								${":"}
 																								${Math.floor(item.at % 60) < 10 ? `0${(Math.floor(item.at % 60))}` : (Math.floor(item.at % 60))}`}</h5>
 
-																								{item.summary.split('\n').map((item, index) => (
+																								{item.summary.split('\n').map((item, index) =>{
+																									
+																									
+																									
+																									return (
+																									
 																									<div key={index} className="font-averta-regular text-stone-700 dark:text-zinc-300 text-md mt-4">
 																										<ReactMarkdown className="react-markdown-edit">
 																											{item}
 																										</ReactMarkdown>
 																									</div>
-																								))}
+																								)
+																							}
+																								)}
 
 																						</div>
 																					</div>

@@ -192,7 +192,7 @@ export default function AccountInfo({ credit, tier, currentUser, canceledAtPerio
 
                                             <h1 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 font-averta-semibold ">Account Details</h1>
 
-                                            <div className="grid grid-cols-3 mb-5">
+                                            <div className="grid grid-cols-3 mb-5 max-w-[900px]">
                                                 <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm">
                                                     <p className="mb-2 font-averta-semibold">Your Email</p>
                                                     <p className="mb-2 font-averta-semibold">Password</p>

@@ -121,7 +121,9 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 				idToken = localStorage.getItem("idToken")
 			}
 			else {
+				if(currentUser){
 				idToken = await currentUser.getIdToken(true)
+				}
 			}
 
 
