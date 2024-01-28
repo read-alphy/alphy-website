@@ -152,7 +152,8 @@ async function handleMetadata(accessToken){
 					addToUserMetadata(currentUser.accessToken, {show_welcome_form: "true"})
 					
 					setTimeout (() => {
-							setShowWelcomeForm(true)
+							/* setShowWelcomeForm(true) */
+							setShowWelcomeForm(false)
 					} , 1000)
 					}
 				setWelcomeFormCalled(true)
@@ -178,7 +179,8 @@ async function handleMetadata(accessToken){
 			auth.handleVerifyEmail(oobCode)
 				.then((resp) => {
 				
-					setShowWelcomeForm(true)
+					/* setShowWelcomeForm(true) */
+					setShowWelcomeForm(false)
 					localStorage.setItem("logged in", "true")
 
 				}
@@ -367,7 +369,7 @@ async function handleMetadata(accessToken){
 
 		<div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
 
-				{showWelcomeForm && 
+			{/* 	{showWelcomeForm && 
 					<div className={`fixed inset-0 z-50 flex items-center justify-center`} >
 								<div className="fixed inset-0 bg-black opacity-80"></div>
 								<div className="z-10 bg-white dark:bg-mildDarkMode rounded-md shadow-lg w-full max-w-lg  ">
@@ -377,7 +379,7 @@ async function handleMetadata(accessToken){
 							</div>	
 							</div>
 							</div>
-							} 
+							}  */}
 							
 			<Helmet>
 				<title>{contentName === undefined || contentName.length === 0 ? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>

@@ -239,7 +239,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 
 
 							<div >
-								<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">{isRegister ? 'Create an account' : 'Login'}	</h1>
+								<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">{isRegister ? 'Create an account' : 'Sign in'}	</h1>
 
 								<form onSubmit={isRegister ? handleRegisterWithEmail : handleLoginWithEmail}>
 									<div className="relative z-0 w-full mb-6 group">
@@ -266,7 +266,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 									</div>
 
 
-									<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" : ""} bg-greenColor font-averta-semibold`}> {isSubmitting ? <ReactLoading type="spin" width={17} height={17} color="#ffffff" /> : <span>Submit</span>}</Button>
+									<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" : ""} bg-greenColor text-zinc-700 font-averta-semibold`}> {isSubmitting ? <ReactLoading type="spin" width={17} height={17} color="#ffffff" /> : <span className="font-averta-bold">Submit</span>}</Button>
 
 
 								</form>
@@ -277,7 +277,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 									{isRegister === false ?
 										<div className="text-zinc-600 dark:text-zinc-300 text-sm" ><p><Link to="/u/resetpassword" className="underline cursor-pointer font-averta-semibold"> Forgot your password?</Link></p> </div> : null}
 									{isRegister ?
-										<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold"> Already have an account? Login <Link to="/u/login" className="text-greenColor font-averta-semibold">here.</Link></p> </div> : <div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold">Don't have an account? <Link to="/u/register" className="text-greenColor font-averta-semibold">Register now.</Link></p> </div>}
+										<div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold"> Already have an account? Sign in <Link to="/u/login" className="text-greenColor font-averta-semibold">here.</Link></p> </div> : <div className="mt-6"><p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold">Don't have an account? <Link to="/u/register" className="text-greenColor font-averta-semibold">Register now.</Link></p> </div>}
 								</div>
 
 							</div>
@@ -359,7 +359,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 											<path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 										</svg>
 										<p className="mx-auto text-center mt-4 text-zinc-600 font-averta-semibold">
-											Password reset successfully. <Link className="underline font-averta-semibold" to="/u/login"> Login</Link> to continue.
+											Password reset successfully. <Link className="underline font-averta-semibold" to="/u/login">Sign in</Link> to continue.
 										</p></div>}
 
 
