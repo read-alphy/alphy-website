@@ -321,8 +321,6 @@ function CrossVideo({ currentUser, collapsed, setCollapsed, tier, idToken, userA
 		}
 	}
 
-
-
 	return (
 		<div className="scrolling dark:bg-darkMode dark:text-zinc-300">
 			<div

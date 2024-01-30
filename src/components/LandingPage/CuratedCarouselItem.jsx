@@ -41,7 +41,7 @@ export default function CuratedCarouselItem(props) {
   return (
     <Link to={`/arc/${props.item.uid}`}>
       {props.expandedLayout !== true ?
-        <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  dark:bg-mildDarkMode rounded-md overflow-hidden shadow-md cursor-pointer`} >
+        <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  dark:bg-darkMode  rounded-md overflow-hidden shadow-md cursor-pointer`} >
 
 
           <img src={props.item.thumbnail_url} />
@@ -63,10 +63,9 @@ export default function CuratedCarouselItem(props) {
           ></div>
         </div>
 
-
-
         :
-        <div>
+        
+        <div className="mb-16 md:mb-6">
           <div className="hidden lg:block bg-white dark:bg-mildDarkMode min-h-[360px] max-h-[360px] min-w-[240px] max-w-[240px] drop-shadow-lg items-center p-5 transform hover:scale-105 transition duration-300 ease-in-out rounded-xl">
 
             <div className={`relative mx-auto min-w-[180px] max-w-[180px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  overflow-hidden shadow-md cursor-pointer`} >
@@ -86,9 +85,9 @@ export default function CuratedCarouselItem(props) {
 
 
 
-          <div className="lg:hidden drop-shadow-xl rounded-lg bg-white dark:bgMildDarkMode min-w-[150px] max-w-[150px] min-h-[150px] max-h-[150px] transform hover:scale-105 transition duration-300 ease-in-out ">
+          <div className="lg:hidden drop-shadow-xl rounded-lg bg-white dark:bg-mildDarkMode min-w-[150px] max-w-[150px] min-h-[150px] max-h-[150px] transform hover:scale-105 transition duration-300 ease-in-out ">
 
-                <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  overflow-hidden drop-shadow-xl rounded-xl cursor-pointer `} >
+                <div className={`relative min-w-[150px] max-w-[150px] ${props.forFeed !== true && "lg:min-w-[220px] lg:max-w-[150px]"} lg:w-64  overflow-hidden drop-shadow-xl rounded-xl  cursor-pointer `} >
 
 
                   <img src={props.item.thumbnail_url} />
