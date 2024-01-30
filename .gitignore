@@ -25,3 +25,6 @@ src/.env
 .env
 
 .envrc
+src/soundbite/lotr.mp3
+src/soundbite/Soundbite.jsx
+src/App.js

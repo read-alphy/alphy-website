@@ -284,7 +284,7 @@ function HubArcFeed(props) {
 							{props.dataGlobalArchipelagos.length > 0
 								&& searchKeyword(props.dataGlobalArchipelagos)
 									.map((item, index) =>
-										<div className="mx-2 my-5 md:mx-5 md:my-5 col-span-1">
+										<div className="mx-2 my-5 md:mx-5 md:my-5 col-span-1 ">
 											<CuratedCarouselItem currentUser={currentUser} key={index} item={item} forFeed={true} expandedLayout={true} />
 										</div>
 
