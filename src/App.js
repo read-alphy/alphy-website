@@ -15,7 +15,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
 import Success from './routes/payment/Success';
 import Account from './routes/Account';
-import Soundbite from './soundbite/Soundbite';
+
 
 import axios from 'axios';
 import { Helmet } from "react-helmet";
