@@ -326,7 +326,7 @@ export default function HeaderArea({ data, title, tier, isVisible, handleVisibil
 		{
 			isSandbox === true ? 
 			<button className="cursor-pointer flex flex-row gap-2 rounded-lg items-center text-center px-2 py-2 bg-transparent border-zinc-400 dark:border-zinc-200 border w-[200px] justify-center" onClick={() => setIsSandbox(false)}>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={`${localStorage.getItem("theme")==="light" ? "#27272a" : "#1e293b"}`}  className="w-5 h-5">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={`${localStorage.getItem("theme")==="light" ? "#27272a" : "#d4d4d8"}`}  className="w-5 h-5">
   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
 </svg>
 
