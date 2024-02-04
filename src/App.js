@@ -15,7 +15,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckOutPage from './routes/payment/CheckOutPage';
 import Success from './routes/payment/Success';
 import Account from './routes/Account';
-import Soundbite from './soundbite/Soundbite';
+
 
 import axios from 'axios';
 import { Helmet } from "react-helmet";
@@ -367,7 +367,7 @@ async function handleMetadata(accessToken){
 
 
 		<div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
-	{/* <Soundbite audioUrl={"./soundbite/lotr.mp3"}/> */}
+	
 				{showWelcomeForm && 
 					<div className={`fixed inset-0 z-50 flex items-center justify-center`} >
 								<div className="fixed inset-0 bg-black opacity-80"></div>

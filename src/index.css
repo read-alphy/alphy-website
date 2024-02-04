@@ -72,8 +72,76 @@
 }
 
 .glow-effect {
-	box-shadow: 0 0 10px rgba(187, 247, 208, 0.5); /* Adjust the color and radius as needed */
+	box-shadow: 0 0 13px rgba(187, 247, 208, 0.5); /* Adjust the color and radius as needed */
   }
+
+  .focus-glow-effect {
+	transition: box-shadow 0.3s ease-in-out; /* Adjust durat	ion and timing function as needed */
+	box-shadow: none; /* No shadow initially */
+  }		
+  .focus-glow-effect:focus{
+	box-shadow: 0 0 13px #a78bfa; /* Your desired glow effect */
+  }
+
+
+.glow-effect-textarea {
+	 box-shadow: 0 0 13px #a78bfa;  
+}
+
+.textarea::-webkit-resizer {
+    display: none;
+	opacity:0;
+	width:0;
+}
+.textarea::-webkit-scrollbar {
+	display: none;
+	width: 0px;
+	height: 0px;
+}
+.textarea{
+	overflow: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+#gradientButton::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(45deg, #ff69b4, #00ff7f, #00bfff, #ff69b4);
+	z-index: -1;
+	border-radius: 5px; /* Match your button's border-radius */
+	animation: slide 3s infinite linear;
+  }
+
+  
+@keyframes gradientBorder {
+	  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+  }
+  
+  /* Custom class for the animated gradient border */
+  .animated-gradient-border {
+	@apply relative;
+	background: linear-gradient(90deg, #f0abfc, #93c5fd, #f0abfc);
+	background-size: 200% 200%;
+	animation: gradientBorder 4s ease infinite;
+  }
+  
+  .animated-gradient-border::after {
+	@apply block absolute top-0 left-0 w-full h-full;
+	content: '';
+	border-radius: inherit; /* Match the border-radius of the parent if needed */
+	z-index: -1;
+  }
+
 
 html {
 	overflow: hidden;

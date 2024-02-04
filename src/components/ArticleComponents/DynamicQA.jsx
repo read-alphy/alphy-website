@@ -40,7 +40,7 @@ export default function DynamicQA({ answerData, areaRefs, answer, data, handleCl
         <div className="text-zinc-600 dark:text-zinc-200 pb-10">
             {answerData.answer ? (
                 <div  >
-                    <div className="grid grid-cols-2 flex flex-row mb-4">
+                    <div className="flex flex-row mb-4">
 
 
                         <h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200"> <span className=" font-averta-semibold" >Answer from Alphy</span>
