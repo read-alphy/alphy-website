@@ -104,8 +104,8 @@ const adjustments = <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidd
 
 
 
-        <div className="flex flex-row justify-end mt-10  md:ml-4 pr-6 ">
-        <Button ripple={true} onClick={() =>  setAdvancedSettingsToggled(!advancedSettingsToggled)} className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-300 dark:border-indigo-500 cursor-pointer normal-case mr-4 h-[40px]">
+        <div className="flex flex-row justify-end mt-4 md:ml-4 pr-6 ">
+        <Button ripple={true} onClick={() =>  setAdvancedSettingsToggled(!advancedSettingsToggled)} className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]">
             {adjustments} Advanced Settings
         </Button>       
             

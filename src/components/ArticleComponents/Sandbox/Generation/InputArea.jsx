@@ -6,7 +6,8 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 
 
 
-export default function InputArea({setUserPrompt, createDopeStuff, isLoading}){
+export default function InputArea({userPrompt, setUserPrompt, createDopeStuff, isLoading}){
+    
     
     const textareaRef = useRef(null);
 
@@ -23,7 +24,7 @@ export default function InputArea({setUserPrompt, createDopeStuff, isLoading}){
                 textarea.classList.add('glow-effect-textarea');
             } else {
                 textarea.classList.remove('glow-effect-textarea');
-            }                       
+            }                     
         };
 
     useEffect(() => {
@@ -31,14 +32,14 @@ export default function InputArea({setUserPrompt, createDopeStuff, isLoading}){
     }, []);
 
 
-    const prompt_quoteGetter = `Get me quotes from the conversation about the talking points I specify. For instance, if I want you to get me quotes about "generative AI", I want you to get me as many quotes about generative AI as possible from the conversation. Here are the talking points: [talking points]` 
-    const prompt_summarizer = `Summarize the conversation by focusing on the following subjects : [subjects]`
+    const prompt_quoteGetter = `Get me quotes from the conversation about the talking points I specify. For instance, if I want you to get me quotes about "generative AI", I want you to get me as many quotes about generative AI as possible from the conversation.\n\n Here are the talking points:  [TALKING POINTS]` 
+    const prompt_summarizer = `Summarize the conversation by focusing on the following subjects : [SUBJECTS]`
 
     return(
     <div className="flex flex-col ">
-        <textarea  ref={textareaRef} className=" shadow-[0_0_13px_#bae6fd] text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-mildDarkMode  dark:border-zinc-700 rounded-lg w-[95%] mt-4 mx-2 md:mx-0  
+        <textarea  ref={textareaRef} className="  text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-mildDarkMode  dark:border-zinc-700 rounded-lg w-[95%] mt-4 mx-2 md:mx-0  
         margin-auto min-h-[8vh] max-h-[300px]  resize-none dark:focus:border-zinc-700 focus:border-zinc-200 border border-zinc-200 placeholder:text-sm"
-        onInput={resizeTextarea}
+        onInput={resizeTextarea} onChange = {resizeTextarea} value = {userPrompt}
          placeholder = "generate something beautiful for me..."/>
             {/*     <Button onClick={() => createDopeStuff()} ripple={true} className="mr-6 hidden md:flex bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case">
             {isLoading ? <Spinner color="blue" size="sm"/>: "Generate"}
@@ -49,13 +50,15 @@ export default function InputArea({setUserPrompt, createDopeStuff, isLoading}){
         onClick={() => {
 
             if(textareaRef.current){
-                textareaRef.current.value = prompt_quoteGetter;
+                setUserPrompt(prompt_quoteGetter)
+                textareaRef.style.height = 'auto'; // Reset height to recalculate
+                textareaRef.style.height = textareaRef.scrollHeight + 'px'; // Set to scroll height
               
             }
         }}
 
-        className="rounded-md bg-gray-100 border border-gray-200 px-4 h-[34px] py-1 text-sm text-zinc-500 flex flex-row items-center gap-0.5">
-       <FormatQuoteIcon className="text-zinc-500  mt-1 mr-1"
+        className=" px-4 h-[34px] py-1 underline text-sm text-zinc-500 dark:text-zinc-300 flex flex-row items-center gap-0.5">
+       <FormatQuoteIcon className="text-zinc-500  dark:text-zinc-300 mt-1 mr-1"
        
        sx={{
         width:"16px",
@@ -69,14 +72,16 @@ export default function InputArea({setUserPrompt, createDopeStuff, isLoading}){
         onClick={() => {
 
             if(textareaRef.current){
-                textareaRef.current.value = prompt_summarizer;
+                setUserPrompt(prompt_summarizer)
+                textareaRef.style.height = 'auto'; // Reset height to recalculate
+                textareaRef.style.height = textareaRef.scrollHeight + 'px'; // Set to scroll height
                 
             }
         }}
         
-        className="rounded-md bg-slate-100 border  h-[34px] border-slate-200 px-4 py-1 text-sm text-zinc-500 font-averta-regular">
+        className="  h-[34px] border-slate-200 underline px-4 py-1 text-sm dark:text-zinc-300 text-zinc-500 font-averta-regular">
            
-           <EditNoteIcon className="text-slate-500 -mt-0.5 mr-1" sx={{
+           <EditNoteIcon className="text-zinc-500 dark:text-zinc-300 -mt-0.5 mr-1" sx={{
         width:"16px",
         height:"16px",
         }}/>

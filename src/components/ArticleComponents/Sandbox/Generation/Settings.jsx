@@ -70,8 +70,8 @@ const checkIcon = <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="
 
 
 
-        <div className={`${advancedSettingsToggled ? 'max-h-96 ' : 'max-h-0'} pr-6 overflow-hidden transition-[max-height] duration-500 ease-in-out rounded-lg drop-shadow-xl `}>
-       <div className="mt-10 text-lg">
+        <div className={`${advancedSettingsToggled ? 'max-h-96 ' : 'max-h-0'} pr-6 overflow-hidden transition-[max-height] duration-500 ease-in-out rounded-lg `}>
+       <div className=" text-lg">
                Settings
             </div>
 

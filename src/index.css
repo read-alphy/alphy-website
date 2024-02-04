@@ -80,12 +80,12 @@
 	box-shadow: none; /* No shadow initially */
   }		
   .focus-glow-effect:focus{
-	box-shadow: 0 0 13px #a78bfa; /* Your desired glow effect */
+	box-shadow: 0 0 13px #bae6fd; /* Your desired glow effect */
   }
 
 
 .glow-effect-textarea {
-	 box-shadow: 0 0 13px #a78bfa;  
+	 box-shadow: 0 0 13px #bae6fd;  
 }
 
 .textarea::-webkit-resizer {

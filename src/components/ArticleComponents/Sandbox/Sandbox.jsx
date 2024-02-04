@@ -14,8 +14,8 @@ export default function Sandbox({data}){
 
     return(
     
-        <div className="min-h-[70vh] w-full max-w-[1200px] drop-shadow-sm dark:bg-mildDarkMode  rounded-xl">
-            <p className="font-medium  text-lg  text-slate-500 dark:text-zinc-300">
+        <div className="min-h-[70vh] w-full max-w-[1200px] drop-shadow-sm  rounded-xl">
+            <p className="font-medium  text-lg mt-10 mb-6 text-zinc-500 ml-2 dark:text-zinc-300">
 
             Create anything from the content.
             </p>
