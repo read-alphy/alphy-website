@@ -1,7 +1,5 @@
-
-
-
-											{/* <div className="flex flex-col border border-gray-200 rounded-lg p-10 text-zinc-500 max-w-[750px]">
+{
+  /* <div className="flex flex-col border border-gray-200 rounded-lg p-10 text-zinc-500 max-w-[750px]">
 												<h1 className="font-bold text-xl text-red-400 mb-5"> Bankless - The Blockchain Trilemma - ETH Vs SOL Vs ATOM with Mike Ippolito</h1>
 												
 												<p className="font-bold text-lg text-zinc-600">Opportunity 3 : Investing in Ethereum</p>
@@ -27,4 +25,5 @@
 
 										<p className="mt-6 text-red-400 underline">See timestamped sources from the discussion ></p>
 									
-													</div> */}
+													</div> */
+}

@@ -1,6 +1,6 @@
 /**
  * The WebSocket protocol for QA between FE and BE is as follows:
- * 
+ *
  * 1. FE opens a WebSocket connection to the BE.
  * 2. FE sends a question to the BE over the WebSocket as plaintext.
  * 3. BE sends a list of sources to the FE over the WebSocket as a JSON array of objects.
@@ -10,10 +10,9 @@
  * 6. BE can send errors in websocket messages like '{"error":"This is an error"}' and then close the connection by dropping.
  */
 
-
 /**
  * Encapsulates a WebSocket connection for QA.
- * 
+ *
  * The callbacks are overwriting setters, do not bother with accumulation yourself.
  */
 export class QaWsManager {
@@ -21,7 +20,7 @@ export class QaWsManager {
    * @property {string} answer - The answer accumulator.
    * @public
    */
-  answer = "";
+  answer = ''
 
   /**
    * @typedef {Object} Callbacks
@@ -66,16 +65,21 @@ export class QaWsManager {
    */
   constructor(options) {
     /** @private */
-    this._options = options;
+    this._options = options
 
-    if ([options.source, options.myWorks, options.arcId].filter(Boolean).length !== 1) {
-      throw new Error("Exactly one of source, myWorks, or arcId must be provided.");
+    if (
+      [options.source, options.myWorks, options.arcId].filter(Boolean)
+        .length !== 1
+    ) {
+      throw new Error(
+        'Exactly one of source, myWorks, or arcId must be provided.'
+      )
     }
 
     /** @private */
-    this._ws = new WebSocket(this.wsUrl);
+    this._ws = new WebSocket(this.wsUrl)
 
-    this._bindEvents();
+    this._bindEvents()
   }
 
   /**
@@ -83,20 +87,22 @@ export class QaWsManager {
    * @returns {string} The WebSocket URL.
    */
   get wsUrl() {
-    const url = `ws${this._options.apiInfo.ssl ? 's' : ''}://${this._options.apiInfo.apiHost}/ws/question`;
-    console.log("Attempting to connect to: " + url);
-    return url;
+    const url = `ws${this._options.apiInfo.ssl ? 's' : ''}://${
+      this._options.apiInfo.apiHost
+    }/ws/question`
+    console.log('Attempting to connect to: ' + url)
+    return url
   }
 
   /**
    * Calls the onError callback if it exists.
-   * @param {string} reason 
+   * @param {string} reason
    * @private
    */
   _handleError(reason) {
     console.error(`QaWsManager error: ${JSON.stringify(reason)}`)
     if (this._options.callbacks.onError) {
-      this._options.callbacks.onError(reason);
+      this._options.callbacks.onError(reason)
     }
   }
 
@@ -105,17 +111,17 @@ export class QaWsManager {
       question: this._options.question,
       lang: this._options.lang,
       id_token: this._options.idToken,
-    };
-    if (this._options.source) {
-      payload.source = this._options.source;
-    } else if (this._options.myWorks) {
-      payload.my_works = this._options.myWorks;
-    } else if (this._options.arcId) {
-      payload.arc_id = this._options.arcId;
-    } else {
-      throw new Error("Either source, myWorks or arcId must be provided.");
     }
-    this._ws.send(JSON.stringify(payload));
+    if (this._options.source) {
+      payload.source = this._options.source
+    } else if (this._options.myWorks) {
+      payload.my_works = this._options.myWorks
+    } else if (this._options.arcId) {
+      payload.arc_id = this._options.arcId
+    } else {
+      throw new Error('Either source, myWorks or arcId must be provided.')
+    }
+    this._ws.send(JSON.stringify(payload))
   }
 
   /**
@@ -123,21 +129,21 @@ export class QaWsManager {
    * @private
    */
   _bindEvents() {
-    this._ws.onopen = (event) => {
-      this._sendOpenMessage();
-    };
+    this._ws.onopen = event => {
+      this._sendOpenMessage()
+    }
 
-    this._ws.onmessage = (event) => {
-      let message;
+    this._ws.onmessage = event => {
+      let message
       try {
-        message = JSON.parse(event.data);
+        message = JSON.parse(event.data)
       } catch (e) {
-        const err = `Invalid JSON received from WebSocket: ${e} for message: ${event.data}`;
-        this._handleError(err);
-        return;
+        const err = `Invalid JSON received from WebSocket: ${e} for message: ${event.data}`
+        this._handleError(err)
+        return
       }
-      this._handleMessage(message);
-    };
+      this._handleMessage(message)
+    }
   }
 
   /**
@@ -147,13 +153,13 @@ export class QaWsManager {
    */
   _handleMessage(message) {
     if (message.sources) {
-      this._options.callbacks.setSources(message.sources);
+      this._options.callbacks.setSources(message.sources)
     } else if (message.error) {
-      this._handleError(message.error);
+      this._handleError(message.error)
     } else {
-      const answerPiece = message.a;
-      this.answer = this.answer + answerPiece;
-      this._options.callbacks.setAnswer(this.answer);
+      const answerPiece = message.a
+      this.answer = this.answer + answerPiece
+      this._options.callbacks.setAnswer(this.answer)
     }
   }
 
@@ -161,8 +167,8 @@ export class QaWsManager {
    * Closes the WebSocket connection.
    */
   close() {
-    this._ws.close();
+    this._ws.close()
   }
 }
 
-export default QaWsManager;
+export default QaWsManager

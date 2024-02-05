@@ -3,27 +3,26 @@
 @tailwind utilities;
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    @apply bg-white dark: bg-slate-800 transition-all ease-in duration-300
+  @apply bg-white dark: bg-slate-800 transition-all ease-in duration-300;
 }
 
-
 .rounded-div {
-    @apply border rounded-2xl shadow-xl border-gray-200 bg-white dark: bg-gray-900 dark:border-gray-800 dark:text-white px-6 max-w-[1140px] w-full mx-auto;
+  @apply border rounded-2xl shadow-xl border-gray-200 bg-white dark: bg-gray-900 dark:border-gray-800 dark:text-white px-6 max-w-[1140px] w-full mx-auto;
 }
 
 .text-color {
-    @apply text-black dark: text-white
+  @apply text-black dark: text-white;
 }
 
 .sign-btn {
-    @apply bg-blue-300 text-black dark: text-white dark:bg-blue-900 rounded-xl w-full py-2 mt-3
+  @apply bg-blue-300 text-black dark: text-white dark:bg-blue-900 rounded-xl w-full py-2 mt-3;
 }
 
-.about-text>a {
-    @apply dark: text-blue-400 text-zinc-200
+.about-text > a {
+  @apply dark: text-blue-400 text-zinc-200;
 }

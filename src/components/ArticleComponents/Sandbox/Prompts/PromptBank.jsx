@@ -1,6 +1,3 @@
-
-
-
 /* export const SettingsPrompt= `
 
 The following will define how you'll process the request.
@@ -8,13 +5,11 @@ On a scale of 1-10, your verbosity level should be set to
 
 ` */
 
-
 //key takeaways expander
 //twitter thread generator from summary
 //newsletter generator from summary
 //blog post generator from summary
 //quote getter from transcript
-
 
 //highlight idea generator from summary (which points of discussions can I highlight?)
 //Video topic / Twitter Space generator inspired from summary --> includes conversation topics + potential guest persona + 3 interview questions
@@ -22,16 +17,14 @@ On a scale of 1-10, your verbosity level should be set to
 //Keyword identifier (to do what? this looks like a middle step)
 //create a catchy Twitter Space intro for me
 //analyze the video like a financial analyst
-//create actionables from the video 
+//create actionables from the video
 //create quizes from the video
 //create synopses
 //report - executive brief
 
-
 //investment analysis
 //community update analysis
 //crypto technical explainer
-
 
 ////internal stuff
 //summary manager
@@ -47,8 +40,9 @@ Structure: The organization and composition of your sentences and paragraphs, wh
 `
 
 export const CharacterPrompts = [
-            {name:"Casual",
-            prompt: `
+  {
+    name: 'Casual',
+    prompt: `
             
 
             You are a Casual voice. Answer in a way that feels like chatting with a friend.
@@ -56,20 +50,24 @@ export const CharacterPrompts = [
             Approach: Include humor and colloquial expressions when fitting.
             Structure: Keep sentences simple and brief, with a relaxed use of grammar.
             
-            `},
+            `,
+  },
 
-            {name:"Formal",
-            prompt: `
+  {
+    name: 'Formal',
+    prompt: `
         
             \n\n
             You are a Formal communicator. You'll answer content according to your Focus Area, Content, and Engagement.
             Focus Areas: Professionalism and clarity.
             Content: Utilizes official terminology and provides balanced viewpoints.
             Engagement: Invites respectful and formal user interactions.
-            `},
+            `,
+  },
 
-            {name:"Academic",
-            prompt: `
+  {
+    name: 'Academic',
+    prompt: `
             
             \n\n
             You are an Academic expert. Your responses should reflect a scholarly environment.
@@ -77,10 +75,12 @@ export const CharacterPrompts = [
             Approach: Use technical terms and detailed explanations where necessary.
             Structure: Formulate responses with structured arguments and clear evidence.
             
-            `},
+            `,
+  },
 
-            {name:"Marketing",
-            prompt: `
+  {
+    name: 'Marketing',
+    prompt: `
             
             \n\n
             You are a Marketing professional. Your answers should persuade and motivate.
@@ -88,30 +88,33 @@ export const CharacterPrompts = [
             Approach: Highlight benefits and use a narrative to contextualize products or services.
             Structure: Craft messages that are impactful and prompt a clear action from the user.
             
-            `},
+            `,
+  },
 
-            {name:"Scientific",
-            prompt:`
+  {
+    name: 'Scientific',
+    prompt: `
             
             \n\n
             You are a Scientific authority. Provide information that is empirical and well-substantiated.
             Tone: Remain objective, focusing on data and research findings.
             Approach: Use specific terminology and reference studies or statistics.
             Structure: Present information logically, leading the user through your reasoning process.            
-            `},
+            `,
+  },
 
-            {name:"Literary",
-            prompt:`
+  {
+    name: 'Literary',
+    prompt: `
             \n\n You are a Literary voice. Craft your responses as though they are part of a narrative.
             Tone: Be expressive and imaginative, using language to evoke imagery and emotion.
             Approach: Employ literary devices such as metaphors and analogies.
             Structure: Compose your responses with a rhythm and flow that enhances the content.            
-            `},
-
+            `,
+  },
 ]
 
-
-export const twitterThreadWriter =`
+export const twitterThreadWriter = `
         Create a Twitter thread from the provided text. The thread should be concise, direct, and devoid of unnecessary elements, presenting the core message effectively in a series of tweets.
 
         Guidelines:
@@ -123,12 +126,7 @@ export const twitterThreadWriter =`
         - Use clear and impactful language suitable for social media engagement.
 `
 
-
-
-
-
-
-export const quoteGetter= `
+export const quoteGetter = `
 
         Talking Points: {{ TALKING POINTS }}
         Extract quotes from the provided transcript that are relevant to the specified talking points. The quotes should capture key insights or statements related to these points.
@@ -141,8 +139,7 @@ export const quoteGetter= `
         - Ensure the quotes are well-distributed across the talking points, offering a balanced view of the discussion.
 `
 
-
-export const keyTakeawaysExpander =  `
+export const keyTakeawaysExpander = `
         Expand upon these key takeaways by providing additional related information. The expansion should delve deeper into the subject matter, offering insights, context, and elaboration that were not initially present in the provided takeaways.
         
         Guidelines:
@@ -154,10 +151,7 @@ export const keyTakeawaysExpander =  `
         - The expanded content should be insightful and provide value to someone deeply familiar with the topic.
         `
 
-
-
-
-export const blogPostGenerator= `
+export const blogPostGenerator = `
 
 Create a blog post based on this text. The blog post should be concise, direct, and clearly communicate the key points, aimed at readers who seek a deeper understanding of the topic.
 
@@ -248,8 +242,6 @@ Guidelines:
 - Ensure the keywords are naturally occurring within the context of the text."
 `
 
-
-
 export const actionablesGenerator = `
 
 Extract and formulate actionable items based on the content of the video. These should be clear, feasible steps or recommendations derived from the video's key points.
@@ -262,7 +254,6 @@ Guidelines:
 - The actionable items should be useful for the intended audience, offering tangible ways to apply the video's insights."
 `
 
-
 export const quizGenerator = `
 
 Design a quiz based on the content of the video. The quiz should test knowledge and understanding of key points, facts, and concepts presented in the video.
@@ -274,7 +265,6 @@ Guidelines:
 - Provide correct answers and brief explanations for each question.
 - The quiz should be engaging and educational, suitable for the video's target audience."
 `
-
 
 /* export const synopsesGenerator = `
 Write a synopsis for the provided video or Twitter Space based on its transcript. The synopsis should succinctly capture the main themes, discussions, and conclusions.
@@ -303,21 +293,6 @@ Guidelines:
 
 `
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const investmentAnalysis = `
 SPOTTING INVESTMENT OPPORTUNITIES
 
@@ -338,9 +313,7 @@ Give an actionable DYOR section where you give step-by-step guidance for retail 
 
 Each investment opportunity should have the following items: "Opportunity", "Reasoning", "Further implications","Risk assessment", "DYOR"
 
-` 
-
-
+`
 
 export const communityUpdateInfoSpotter = `
 
@@ -362,7 +335,6 @@ Make space with fusion, compression, and removal of uninformative phrases like "
 Each valuable information should have the following items:  "Information", "Elaboration", "Reasoning"
 `
 
-
 export const cryptoTechnicalExplainer = `
 You will explain the technicalities present in the above text at an expert level. Adhere to the following steps.
 
@@ -377,4 +349,3 @@ Assess potential limitations or constraints specific to the technical topics or 
 Each valuable information should have the following items:  "Technical Subject", "Explanation", "Further Implications","Risk Assessment".
 
 `
-
