@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Spinner } from '@material-tailwind/react'
 
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -15,15 +15,30 @@ import QuizIcon from '@mui/icons-material/Quiz'
 import WorkIcon from '@mui/icons-material/Work'
 import ShowChartIcon from '@mui/icons-material/ShowChart'
 
-export default function Toolbox({ theme, createDopeStuff, isLoading }) {
-  const [toolboxExpand, setToolboxExpand] = useState(false)
+export default function Toolbox({
+  theme,
+  createDopeStuff,
+  isLoading,
+  toolboxActive,
+  setToolboxActive,
+}) {
   const [selectedTool, setSelectedTool] = useState('')
+
+  useEffect(() => {
+    if (selectedTool !== '') {
+      setToolboxActive(true)
+    } else {
+      setToolboxActive(false)
+    }
+  }, [selectedTool])
 
   return (
     <div className="mt-6 w-full ">
       <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 pt-6 dark:opacity-40"></div>
 
-      <p className="text-lg mt-6">One-click Generation</p>
+      <p className="text-lg mt-6 text-zinc-500 dark:text-zinc-300 ">
+        One-click Generation
+      </p>
 
       <div className="flex flex-wrap  mt-4 gap-6">
         {/* TWITTER THREAD */}

@@ -24,6 +24,7 @@ export default function GenerationZone({
   const [isLoading, setIsLoading] = useState(false)
   const [userPrompt, setUserPrompt] = useState('')
   const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
+  const [toolboxActive, setToolboxActive] = useState(false)
 
   const theme = localStorage.getItem('theme')
 
@@ -113,47 +114,62 @@ export default function GenerationZone({
 
   return (
     <div className="max-w-[1000px] h-full px-2">
-
       <p className="text-xl mb-6">Welcome to Sandbox!</p>
-       <MannerArea settings={settings} setSettings={setSettings} theme={theme}/> 
+      <MannerArea settings={settings} setSettings={setSettings} theme={theme} />
 
-      <InputArea
-        userPrompt={userPrompt}
-        setUserPrompt={setUserPrompt}
-        createDopeStuff={createDopeStuff}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-      />
+      <div>
+        {
+          <div className="relative">
+            <div
+              className={`${
+                toolboxActive && 'opacity-30 pointer-events-none'
+              } transition-opacity duration-300 `}
+            >
+              <InputArea
+                userPrompt={userPrompt}
+                setUserPrompt={setUserPrompt}
+                createDopeStuff={createDopeStuff}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
 
-      <div className="flex flex-row justify-end mt-4 md:ml-4 pr-6 ">
-        <Button
-          ripple={true}
-          onClick={() => setAdvancedSettingsToggled(!advancedSettingsToggled)}
-          className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
-        >
-          {adjustments} Advanced Settings
-        </Button>
+              <div className="flex flex-row justify-end mt-4 md:ml-4 pr-6 ">
+                <Button
+                  ripple={true}
+                  onClick={() =>
+                    setAdvancedSettingsToggled(!advancedSettingsToggled)
+                  }
+                  className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
+                >
+                  {adjustments} Advanced Settings
+                </Button>
 
-        <Button
-          onClick={() => createDopeStuff()}
-          ripple={true}
-          className=" bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case w-[120px]"
-        >
-          {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
-        </Button>
+                <Button
+                  onClick={() => createDopeStuff()}
+                  ripple={true}
+                  className=" bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case w-[120px]"
+                >
+                  {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                </Button>
+              </div>
+              <Settings
+                settings={settings}
+                setSettings={setSettings}
+                advancedSettingsToggled={advancedSettingsToggled}
+                setAdvancedSettingsToggled={setAdvancedSettingsToggled}
+                theme={theme}
+                adjustments={adjustments}
+              />
+            </div>
+          </div>
+        }
       </div>
-      <Settings
-        settings={settings}
-        setSettings={setSettings}
-        advancedSettingsToggled={advancedSettingsToggled}
-        setAdvancedSettingsToggled={setAdvancedSettingsToggled}
-        theme={theme}
-        adjustments={adjustments}
-      />
 
       <Toolbox
         theme={theme}
         createDopeStuff={createDopeStuff}
+        toolboxActive={toolboxActive}
+        setToolboxActive={setToolboxActive}
         isLoading={isLoading}
       />
     </div>

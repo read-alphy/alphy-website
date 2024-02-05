@@ -15,12 +15,12 @@ export default function Settings({
 }) {
   const [detailLevel, setDetailLevel] = useState(null)
   const [lengthLevel, setLengthLevel] = useState(null)
-  const [useTranscript, setUseTranscript] = useState(true)
+  const [useTranscript, setUseTranscript] = useState(false)
   const [useTranscriptExplanation, setUseTranscriptExplanation] =
     useState(false)
 
   return (
-    <div className="ml-4">
+    <div className="ml-4 ">
       {
         <div
           className={`${
@@ -228,10 +228,10 @@ export default function Settings({
                 <div className="relative flex flex-row group cursor-default">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
+                    fill={theme === 'light' ? '#64748b' : 'white'}
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
-                    stroke={theme === 'light' ? '#64748b' : '#a1a1aa'}
+                    stroke={theme === 'light' ? '#a1a1aa' : 'black'}
                     className="w-5 h-5 ml-1 cursor-pointer"
                     onMouseEnter={() => setUseTranscriptExplanation(true)}
                     onMouseLeave={() => setUseTranscriptExplanation(false)}
@@ -265,9 +265,9 @@ export default function Settings({
                   '--Switch-trackBackground': '#64748b',
                 },
                 [`&.${switchClasses.checked}`]: {
-                  '--Switch-trackBackground': '#4ade80',
+                  '--Switch-trackBackground': '#6366f1',
                   '&:hover': {
-                    '--Switch-trackBackground': '#4ade80',
+                    '--Switch-trackBackground': '#6366f1',
                   },
                 },
               }}
@@ -276,13 +276,11 @@ export default function Settings({
 
           <span
             className={`  max-w-[400px] flex cursor-default transition-all ${
-              useTranscriptExplanation === true
-                ? 'max-h-96 opacity-100'
-                : 'max-h-0 opacity-0'
+              useTranscriptExplanation === true ? ' opacity-100' : ' opacity-0'
             } duration-200 ease-in-out  text-zinc-400 dark:text-zinc-400 text-sm `}
           >
-            Sandbox uses summaries by default. Switching to transcript will
-            allow it cover more details, but the process may take longer.
+            By default, Sandbox uses summaries. Switching to transcripts will
+            cover more details, but the process may take longer.
           </span>
         </div>
       }

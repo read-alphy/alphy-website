@@ -144,7 +144,9 @@ export default function MannerArea({ theme, settings, setSettings }) {
 
   return (
     <div className="pt-4 overflow-x-scroll content-area">
-      <p className="mb-2 text-md ">Pick a voice (optional)</p>
+      <p className="mb-2 text-md text-zinc-700 dark:text-zinc-400 ">
+        Pick a voice (optional)
+      </p>
       <RadioGroup
         className="w-[600px] pl-0.5 "
         aria-label="platform"
