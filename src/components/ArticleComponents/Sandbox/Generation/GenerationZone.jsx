@@ -20,13 +20,18 @@ export default function GenerationZone({
   setGeneratedPrompt,
   outputMessage,
   setOutputMessage,
+  isLoading,
+  setIsLoading,
 }) {
-  const [isLoading, setIsLoading] = useState(false)
+  
   const [userPrompt, setUserPrompt] = useState('')
   const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
   const [toolboxActive, setToolboxActive] = useState(false)
+  const [selectedTool, setSelectedTool] = useState('')
 
   const theme = localStorage.getItem('theme')
+
+
 
   const [contentDetails, setContentDetails] = useState({
     content: '',
@@ -93,7 +98,7 @@ export default function GenerationZone({
     const generated_prompt = promptGenerator(settings, contentDetails)
     setGeneratedPrompt(generated_prompt)
     setOutputMessage(generated_prompt)
-    console.log(generated_prompt)
+    
   }
   const adjustments = (
     <svg
@@ -113,18 +118,26 @@ export default function GenerationZone({
   )
 
   return (
-    <div className="max-w-[1000px] h-full px-2">
-      <p className="text-xl mb-6">Welcome to Sandbox!</p>
+    <div className="max-w-[1000px]  2xl:max-w-[1200px] h-full px-2 xl:px-6">
+ 
+      <div className={`mt-6 font-averta-regular text-xl text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
+        !toolboxActive  ? 'opacity-100 delay-200' : "opacity-0  "
+        }`} >
+            Turn the conversation into vibrant content.
+          </div>  
+     {
+     <div className={` overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
+      toolboxActive  ? 'max-h-[100%]' : "max-h-0 "
+      }`}>
       <MannerArea settings={settings} setSettings={setSettings} theme={theme} />
+      </div>
+      }
 
-      <div>
-        {
-          <div className="relative">
-            <div
-              className={`${
-                toolboxActive && 'opacity-30 pointer-events-none'
-              } transition-opacity duration-300 `}
-            >
+          <div className={`overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 max-w-[800px]  ${
+            selectedTool === "custom_prompt" ? 'max-h-[100%]' : "max-h-0 "
+            }`}>
+      
+            
               <InputArea
                 userPrompt={userPrompt}
                 setUserPrompt={setUserPrompt}
@@ -161,9 +174,8 @@ export default function GenerationZone({
                 adjustments={adjustments}
               />
             </div>
-          </div>
-        }
-      </div>
+         
+  
 
       <Toolbox
         theme={theme}
@@ -171,6 +183,9 @@ export default function GenerationZone({
         toolboxActive={toolboxActive}
         setToolboxActive={setToolboxActive}
         isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        selectedTool={selectedTool}
+        setSelectedTool={setSelectedTool}
       />
     </div>
   )

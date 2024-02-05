@@ -50,7 +50,7 @@ export default function InputArea({
       {/*     <Button onClick={() => createDopeStuff()} ripple={true} className="mr-6 hidden md:flex bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case">
             {isLoading ? <Spinner color="blue" size="sm"/>: "Generate"}
         </Button> */}
-      <div className="flex flex-row mt-6 overflow-x-auto gap-4">
+      <div className="flex flex-row mt-6 mb-10 overflow-x-auto gap-4">
         <button
           onClick={() => {
             if (textareaRef.current) {

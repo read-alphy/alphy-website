@@ -16,8 +16,7 @@ export default function Settings({
   const [detailLevel, setDetailLevel] = useState(null)
   const [lengthLevel, setLengthLevel] = useState(null)
   const [useTranscript, setUseTranscript] = useState(false)
-  const [useTranscriptExplanation, setUseTranscriptExplanation] =
-    useState(false)
+  const [useTranscriptExplanation, setUseTranscriptExplanation] =useState(false)
 
   return (
     <div className="ml-4 ">
@@ -179,9 +178,9 @@ export default function Settings({
               Short
             </button>
             <button
-              value={'Mid'}
+              value={'Average'}
               className={`border text-zinc-500 dark:text-zinc-300 ${
-                lengthLevel === 'Mid'
+                lengthLevel === 'Average'
                   ? 'border-indigo-200 dark:border-indigo-400 bg-indigo-100 dark:bg-indigo-200 dark:text-zinc-500'
                   : 'border-zinc-200 dark:border-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300'
               } rounded-md px-2 py-1 text-sm`}
@@ -195,7 +194,7 @@ export default function Settings({
                 }
               }}
             >
-              Mid
+              Average
             </button>
             <button
               value={'Long'}
@@ -276,11 +275,12 @@ export default function Settings({
 
           <span
             className={`  max-w-[400px] flex cursor-default transition-all ${
-              useTranscriptExplanation === true ? ' opacity-100' : ' opacity-0'
+              useTranscriptExplanation === true
+                ? ' opacity-100'
+                : '  opacity-0'
             } duration-200 ease-in-out  text-zinc-400 dark:text-zinc-400 text-sm `}
           >
-            By default, Sandbox uses summaries. Switching to transcripts will
-            cover more details, but the process may take longer.
+          By default, Sandbox uses summaries. Switching to transcripts will cover more details, but the process may take longer.
           </span>
         </div>
       }
