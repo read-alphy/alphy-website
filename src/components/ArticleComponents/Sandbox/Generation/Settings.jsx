@@ -16,7 +16,8 @@ export default function Settings({
   const [detailLevel, setDetailLevel] = useState(null)
   const [lengthLevel, setLengthLevel] = useState(null)
   const [useTranscript, setUseTranscript] = useState(false)
-  const [useTranscriptExplanation, setUseTranscriptExplanation] =useState(false)
+  const [useTranscriptExplanation, setUseTranscriptExplanation] =
+    useState(false)
 
   return (
     <div className="ml-4 ">
@@ -275,12 +276,11 @@ export default function Settings({
 
           <span
             className={`  max-w-[400px] flex cursor-default transition-all ${
-              useTranscriptExplanation === true
-                ? ' opacity-100'
-                : '  opacity-0'
+              useTranscriptExplanation === true ? ' opacity-100' : '  opacity-0'
             } duration-200 ease-in-out  text-zinc-400 dark:text-zinc-400 text-sm `}
           >
-          By default, Sandbox uses summaries. Switching to transcripts will cover more details, but the process may take longer.
+            By default, Sandbox uses summaries. Switching to transcripts will
+            cover more details, but the process may take longer.
           </span>
         </div>
       }

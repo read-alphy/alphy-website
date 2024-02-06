@@ -4,7 +4,6 @@ import { Button, Spinner } from '@material-tailwind/react'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin'
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
 import EmailIcon from '@mui/icons-material/Email'
 import HighlightIcon from '@mui/icons-material/Highlight'
 import YouTubeIcon from '@mui/icons-material/YouTube'
@@ -14,7 +13,8 @@ import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl'
 import QuizIcon from '@mui/icons-material/Quiz'
 import WorkIcon from '@mui/icons-material/Work'
 import ShowChartIcon from '@mui/icons-material/ShowChart'
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
+
 export default function Toolbox({
   theme,
   createDopeStuff,
@@ -24,8 +24,6 @@ export default function Toolbox({
   selectedTool,
   setSelectedTool,
 }) {
-  
-
   useEffect(() => {
     if (selectedTool !== '') {
       setToolboxActive(true)
@@ -36,19 +34,19 @@ export default function Toolbox({
 
   return (
     <div className="w-full ">
-{/*       <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 pt-6 dark:opacity-40"></div>
+      {/*       <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 pt-6 dark:opacity-40"></div>
 
       <p className="text-lg mt-6 text-zinc-500 dark:text-zinc-300 ">
         One-click Generation
       </p> */}
 
       <div className="flex flex-wrap  mt-4 gap-6">
-         {/* CUSTOM INPUT */}
-         <div
+        {/* CUSTOM INPUT */}
+        <div
           className={`${
             selectedTool === 'custom_prompt' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px]   p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px]   p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() => {
@@ -60,7 +58,7 @@ export default function Toolbox({
             }}
             className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'custom_prompt' && ''
-            }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[270px] 2xl:max-w-[300px] `}
+            }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[240px] 2xl:max-w-[300px] `}
           >
             <ModeEditOutlineIcon
               className="row-span-1"
@@ -72,26 +70,24 @@ export default function Toolbox({
               Write Your Own Prompt
             </p>
             <p className="row-span-1 text-sm font-averta-regular text-zinc-500 dark:text-zinc-400 dark:text-zinc-400 ">
-              Write a custom prompt for the AI to generate content from.    
+              Write whatever you want and let Alphy do the rest.
             </p>
 
             <div
               className={`${
                 selectedTool === 'twitter_thread' ? 'max-h-96' : 'max-h-0'
               }  transition-[max-height]  duration-500 ease-in-out`}
-            >
-             
-            </div>
+            ></div>
           </div>
         </div>
 
-
         {/* TWITTER THREAD */}
         <div
+          id="twitter_thread"
           className={`${
             selectedTool === 'twitter_thread' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px]   p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px]   p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() => {
@@ -103,7 +99,7 @@ export default function Toolbox({
             }}
             className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'twitter_thread' && ''
-            }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[270px] 2xl:max-w-[300px] `}
+            }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[240px] 2xl:max-w-[300px] `}
           >
             <TwitterIcon
               className="row-span-1"
@@ -124,7 +120,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'twitter_thread'}
                 className={`${
@@ -144,7 +143,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'video_clips' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px]  p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px]  p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -152,7 +151,7 @@ export default function Toolbox({
                 selectedTool === 'video_clips' ? '' : 'video_clips'
               )
             }
-            className={`p-4 h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'video_clips' && ''
             }`}
           >
@@ -170,7 +169,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'video_clips'}
                 className={`${
@@ -189,13 +191,13 @@ export default function Toolbox({
           className={`${
             selectedTool === 'blog_post' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
               setSelectedTool(selectedTool === 'blog_post' ? '' : 'blog_post')
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'blog_post' && ''
             }`}
           >
@@ -226,7 +228,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'blog_post'}
                 className={`${
@@ -245,7 +250,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'investment_analysis' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -255,7 +260,7 @@ export default function Toolbox({
                   : 'investment_analysis'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'investment_analysis' && ''
             }`}
           >
@@ -277,7 +282,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'investment_analysis'}
                 className={`${
@@ -293,8 +301,8 @@ export default function Toolbox({
         </div>
 
         {/* QUOTE GETTER */}
-        {/* <div className={`${selectedTool === "quote_getter" && "animated-gradient-border rounded-lg "} flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}>
-    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${selectedTool !== "quote_getter" && ""}`}>
+        {/* <div className={`${selectedTool === "quote_getter" && "animated-gradient-border rounded-lg "} flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}>
+    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${selectedTool !== "quote_getter" && ""}`}>
         <FormatQuoteIcon className="row-span-1" fontSize="medium" sx={{ color: "#86198f" }}/>
         <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">Quotes</p>
         <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">Get me quotes from the conversation about the talking points I specify.</p>
@@ -306,7 +314,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'newsletter_generator' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -316,7 +324,7 @@ export default function Toolbox({
                   : 'newsletter_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'newsletter_generator' && ''
             }`}
           >
@@ -338,7 +346,10 @@ export default function Toolbox({
               } transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'newsletter_generator'}
                 className={`${
@@ -358,7 +369,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'highlight_generator' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -368,7 +379,7 @@ export default function Toolbox({
                   : 'highlight_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'highlight_generator' && ''
             }`}
           >
@@ -391,7 +402,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'highlight_generator'}
                 className={`${
@@ -411,7 +425,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'video_topic_generator' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -421,7 +435,7 @@ export default function Toolbox({
                   : 'video_topic_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'video_topic_generator' && ''
             }`}
           >
@@ -446,7 +460,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'video_topic_generator'}
                 className={`${
@@ -465,7 +482,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'video_description' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -473,7 +490,7 @@ export default function Toolbox({
                 selectedTool === 'video_description' ? '' : 'video_description'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'video_description' && ''
             }`}
           >
@@ -495,7 +512,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'video_description'}
                 className={`${
@@ -515,7 +535,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'space_idea_generator' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -525,7 +545,7 @@ export default function Toolbox({
                   : 'space_idea_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'space_idea_generator' && ''
             }`}
           >
@@ -547,7 +567,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'space_idea_generator'}
                 className={`${
@@ -567,7 +590,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'space_description_generator' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -577,7 +600,7 @@ export default function Toolbox({
                   : 'space_description_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'space_description_generator' && ''
             }`}
           >
@@ -602,7 +625,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'space_description_generator'}
                 className={`${
@@ -622,7 +648,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'keyword_identifier' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -632,7 +658,7 @@ export default function Toolbox({
                   : 'keyword_identifier'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'keyword_identifier' && ''
             }`}
           >
@@ -655,7 +681,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'keyword_identifier'}
                 className={`${
@@ -675,7 +704,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'get_actionables' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -683,7 +712,7 @@ export default function Toolbox({
                 selectedTool === 'get_actionables' ? '' : 'get_actionables'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'get_actionables' && ''
             }`}
           >
@@ -706,7 +735,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'get_actionables'}
                 className={`${
@@ -726,7 +758,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'generate_quizzes' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -734,7 +766,7 @@ export default function Toolbox({
                 selectedTool === 'generate_quizzes' ? '' : 'generate_quizzes'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'generate_quizzes' && ''
             }`}
           >
@@ -757,7 +789,10 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
                 disabled={selectedTool !== 'generate_quizzes'}
                 className={`${
@@ -777,7 +812,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'executive_brief_composer' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -787,7 +822,7 @@ export default function Toolbox({
                   : 'executive_brief_composer'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'executive_brief_composer' && ''
             }`}
           >
@@ -812,9 +847,12 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
-                disabled={selectedTool !== 'video_clips'}
+                disabled={selectedTool !== 'executive_brief_composer'}
                 className={`${
                   selectedTool !== 'executive_brief_composer'
                     ? 'opacity-0'
@@ -832,7 +870,7 @@ export default function Toolbox({
           className={`${
             selectedTool === 'investment_insight_extractor' &&
             'animated-gradient-border rounded-lg '
-          } flex flex-col h-[190px] p-0.5  transition duration-300 ease-in-out  `}
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
@@ -842,7 +880,7 @@ export default function Toolbox({
                   : 'investment_insight_extractor'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[270px] 2xl:max-w-[300px] ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px] 2xl:max-w-[300px] ${
               selectedTool !== 'investment_insight_extractor' && ''
             }`}
           >
@@ -867,9 +905,12 @@ export default function Toolbox({
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
-                onClick={() => createDopeStuff()}
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
                 ripple={true}
-                disabled={selectedTool !== 'video_clips'}
+                disabled={selectedTool !== 'investment_insight_extractor'}
                 className={`${
                   selectedTool !== 'investment_insight_extractor'
                     ? 'opacity-0'

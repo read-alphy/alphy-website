@@ -148,7 +148,7 @@ export default function HeaderArea({
           )}
         </div>
         <div className="flex flex-row ml-1">
-          <h1 className="col-span-2 mt-6 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  lg:text-2xl text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+          <h1 className="col-span-2 mt-6 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
             {data.source_type === 'up'
               ? title.substring(0, title.lastIndexOf('.'))
               : title}
@@ -443,7 +443,7 @@ export default function HeaderArea({
         </div>
         <div className="col-span-2  ml-1 grid grid-cols-2 flex flex-row">
           <div className="col-span-1">
-            <h2 className="mt-5 text-l text-left lg:col-span-3 font-averta-regular lg:mt-5 lg:text-xl text-blueLike dark:bg-darkMode dark:text-zinc-300  flex flex-row">
+            <h2 className="mt-5 text-lg text-left lg:col-span-3 font-averta-regular lg:mt-5  text-blueLike dark:bg-darkMode dark:text-zinc-300  flex flex-row">
               {data.source_type !== 'up' && data.creator_name}
               {data.source_type === 'up' && 'Private Content'}
             </h2>
@@ -504,7 +504,7 @@ export default function HeaderArea({
             </button>
           )}
         </div>
-        <p className="w-full mt-5 border border-zinc-100 dark:border-zinc-700"></p>
+        <p className="max-w-[800px] mt-5 border border-zinc-100 dark:border-zinc-700"></p>
       </div>
 
       <div className="flex flex-col mt-5 ml-2 items-center  lg:hidden cursor-default">

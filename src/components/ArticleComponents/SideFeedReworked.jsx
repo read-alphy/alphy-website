@@ -83,9 +83,7 @@ function SideFeedReworked({
     <div
       id="side-feed"
       className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-zinc-50 min-h-[100vh] sm:max-h-[100vh] ${
-        collapsed
-          ? 'min-w-[60px] max-w-[60px]'
-          : 'w-full sm:min-w-[200px] xl:min-w-[270px] xl:max-w-[270px]'
+        collapsed ? 'min-w-[60px] max-w-[60px]' : 'w-full sm:min-w-[200px] '
       } flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `}
     >
       {!collapsed ? (
@@ -242,7 +240,7 @@ function SideFeedReworked({
                   >
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                   </svg>
-                  <p className="font-averta-semibold">Arcs</p>
+                  <p className="font-averta-semibold text-sm">Arcs</p>
                 </Link>
 
                 {localStorage.getItem('logged in') === 'true' ? null : (

@@ -78,7 +78,7 @@ export default function InputArea({
               textareaRef.style.height = textareaRef.scrollHeight + 'px' // Set to scroll height
             }
           }}
-          className="  h-[34px] border-slate-200 underline px-4 py-1 text-sm dark:text-zinc-300 text-zinc-500"
+          className="h-[34px] border-slate-200 underline px-4 py-1 text-sm dark:text-zinc-300 text-zinc-500"
         >
           <EditNoteIcon
             className="text-zinc-500 dark:text-zinc-300 -mt-0.5 mr-1"

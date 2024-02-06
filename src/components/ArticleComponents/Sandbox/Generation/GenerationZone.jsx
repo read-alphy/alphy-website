@@ -16,22 +16,20 @@ const sourcesMap = {
 
 export default function GenerationZone({
   data,
-  generatedPrompt,
+
   setGeneratedPrompt,
-  outputMessage,
+
   setOutputMessage,
   isLoading,
   setIsLoading,
+  setPromptType,
 }) {
-  
   const [userPrompt, setUserPrompt] = useState('')
   const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
   const [toolboxActive, setToolboxActive] = useState(false)
   const [selectedTool, setSelectedTool] = useState('')
 
   const theme = localStorage.getItem('theme')
-
-
 
   const [contentDetails, setContentDetails] = useState({
     content: '',
@@ -45,12 +43,12 @@ export default function GenerationZone({
     verbosity_level: 5,
     detail_level: 5,
     content_to_use: 'summary',
-    prompt_type: 'user_prompt',
+    prompt_type: 'twitter_thread',
     character: 'Casual',
   })
 
   function generateContentDetails() {
-    let content_to_use = 'summary'
+    let content_to_use = 'transcript'
     let source_title = ''
     let source_type = ''
     let creator_name = ''
@@ -98,7 +96,9 @@ export default function GenerationZone({
     const generated_prompt = promptGenerator(settings, contentDetails)
     setGeneratedPrompt(generated_prompt)
     setOutputMessage(generated_prompt)
-    
+    if (settings.prompt_type) {
+      setPromptType(settings.prompt_type)
+    }
   }
   const adjustments = (
     <svg
@@ -118,64 +118,67 @@ export default function GenerationZone({
   )
 
   return (
-    <div className="max-w-[1000px]  2xl:max-w-[1200px] h-full px-2 xl:px-6">
- 
-      <div className={`mt-6 font-averta-regular text-xl text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
-        !toolboxActive  ? 'opacity-100 delay-200' : "opacity-0  "
-        }`} >
-            Turn the conversation into vibrant content.
-          </div>  
-     {
-     <div className={` overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
-      toolboxActive  ? 'max-h-[100%]' : "max-h-0 "
-      }`}>
-      <MannerArea settings={settings} setSettings={setSettings} theme={theme} />
+    <div className="max-w-[1000px] mt-6  2xl:max-w-[1200px] h-full px-2 ">
+      <div
+        className={`font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
+          !toolboxActive ? 'opacity-100 delay-200 ' : 'opacity-0  '
+        }`}
+      >
+        Turn the conversation into vibrant content.
       </div>
+      {
+        <div
+          className={` overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
+            toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
+          }`}
+        >
+          <MannerArea
+            settings={settings}
+            setSettings={setSettings}
+            theme={theme}
+          />
+        </div>
       }
 
-          <div className={`overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 max-w-[800px]  ${
-            selectedTool === "custom_prompt" ? 'max-h-[100%]' : "max-h-0 "
-            }`}>
-      
-            
-              <InputArea
-                userPrompt={userPrompt}
-                setUserPrompt={setUserPrompt}
-                createDopeStuff={createDopeStuff}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
+      <div
+        className={`overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 max-w-[800px]  ${
+          selectedTool === 'custom_prompt' ? 'max-h-[100%]' : 'max-h-0 '
+        }`}
+      >
+        <InputArea
+          userPrompt={userPrompt}
+          setUserPrompt={setUserPrompt}
+          createDopeStuff={createDopeStuff}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
 
-              <div className="flex flex-row justify-end mt-4 md:ml-4 pr-6 ">
-                <Button
-                  ripple={true}
-                  onClick={() =>
-                    setAdvancedSettingsToggled(!advancedSettingsToggled)
-                  }
-                  className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
-                >
-                  {adjustments} Advanced Settings
-                </Button>
+        <div className="flex flex-row justify-end mt-4 md:ml-4 pr-6 ">
+          <Button
+            ripple={true}
+            onClick={() => setAdvancedSettingsToggled(!advancedSettingsToggled)}
+            className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
+          >
+            {adjustments} Advanced Settings
+          </Button>
 
-                <Button
-                  onClick={() => createDopeStuff()}
-                  ripple={true}
-                  className=" bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case w-[120px]"
-                >
-                  {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
-                </Button>
-              </div>
-              <Settings
-                settings={settings}
-                setSettings={setSettings}
-                advancedSettingsToggled={advancedSettingsToggled}
-                setAdvancedSettingsToggled={setAdvancedSettingsToggled}
-                theme={theme}
-                adjustments={adjustments}
-              />
-            </div>
-         
-  
+          <Button
+            onClick={() => createDopeStuff()}
+            ripple={true}
+            className=" bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case w-[120px]"
+          >
+            {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+          </Button>
+        </div>
+        <Settings
+          settings={settings}
+          setSettings={setSettings}
+          advancedSettingsToggled={advancedSettingsToggled}
+          setAdvancedSettingsToggled={setAdvancedSettingsToggled}
+          theme={theme}
+          adjustments={adjustments}
+        />
+      </div>
 
       <Toolbox
         theme={theme}
