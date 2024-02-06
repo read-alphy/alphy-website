@@ -30,7 +30,13 @@ export default function Output({
           a few seconds.
         </p> */}
       </div>
-      <div className="items-end  w-full  flex max-w-[1000px]">
+      <InputMessage
+        promptType={promptType}
+        generatedPrompt={generatedPrompt}
+        setActiveGenerationZone={setActiveGenerationZone}
+      />
+
+      <div className="items-end  mt-10 w-full  flex max-w-[1000px]">
         <OutputMessage generatedPrompt={generatedPrompt} />
       </div>
 

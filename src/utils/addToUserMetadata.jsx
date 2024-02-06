@@ -9,7 +9,6 @@ export default async function addToUserMetadata(idToken, additionalMetadata) {
 
     // Combine current metadata with additional metadata
     const combinedMetadata = { ...currentUserMetadata, ...additionalMetadata }
-    console.log(combinedMetadata)
 
     // Post request to update metadata
     const response = await axios.post(

@@ -10,7 +10,6 @@ export default async function updateUserMetadata(idToken, newMetadata) {
         },
       })
       .then(response => {
-        console.log(response.data)
         return response.data
       })
   } catch (error) {

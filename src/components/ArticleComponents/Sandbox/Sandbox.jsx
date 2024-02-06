@@ -79,16 +79,7 @@ export default function Sandbox({ data }) {
         )} */}
 
         <div className=" grid grid-cols-4">
-          {activeGenerationZone === false ? (
-            <div className="col-span-1 flex flex-row">
-              <InputMessage
-                promptType={promptType}
-                generatedPrompt={generatedPrompt}
-                setActiveGenerationZone={setActiveGenerationZone}
-              />
-              <div className="border-r h-full mr-4 ml-4"></div>
-            </div>
-          ) : (
+          {activeGenerationZone === true && (
             <div className="col-span-4">
               <GenerationZone
                 data={data}

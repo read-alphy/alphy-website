@@ -263,7 +263,6 @@ export default function QuestionAnswering(props) {
     } else {
       if (currentUser) {
         try {
-          console.log(props.data.source_type, props.data.source_id)
           setIsLoadingInside(true)
           setAnswer(false)
           setAnswerData({ answer: '', sources: [] })
