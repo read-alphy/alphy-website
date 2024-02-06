@@ -18,7 +18,7 @@ export default function GenerationZone({
   data,
 
   setGeneratedPrompt,
-
+  setActiveGenerationZone,
   setOutputMessage,
   isLoading,
   setIsLoading,
@@ -94,6 +94,7 @@ export default function GenerationZone({
 
   function createDopeStuff() {
     const generated_prompt = promptGenerator(settings, contentDetails)
+    setActiveGenerationZone(false)
     setGeneratedPrompt(generated_prompt)
     setOutputMessage(generated_prompt)
     if (settings.prompt_type) {
@@ -118,17 +119,17 @@ export default function GenerationZone({
   )
 
   return (
-    <div className="max-w-[1000px] mt-6  2xl:max-w-[1200px] h-full px-2 ">
+    <div className="mt-6   h-full mx-auto  flex flex-col  px-2 ">
       <div
-        className={`font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
-          !toolboxActive ? 'opacity-100 delay-200 ' : 'opacity-0  '
+        className={`max-w-[800px] w-full mx-auto font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
+          !toolboxActive ? 'opacity-100 delay-300 ' : 'opacity-0  '
         }`}
       >
         Turn the conversation into vibrant content.
       </div>
       {
         <div
-          className={` overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
+          className={`mx-auto max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
             toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
           }`}
         >
@@ -141,7 +142,7 @@ export default function GenerationZone({
       }
 
       <div
-        className={`overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 max-w-[800px]  ${
+        className={` mx-auto max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 ${
           selectedTool === 'custom_prompt' ? 'max-h-[100%]' : 'max-h-0 '
         }`}
       >
@@ -153,7 +154,15 @@ export default function GenerationZone({
           setIsLoading={setIsLoading}
         />
 
-        <div className="flex flex-row justify-end mt-4 md:ml-4 pr-6 ">
+        <div className="flex flex-row justify-end mt-4  pr-6 ">
+          <Settings
+            settings={settings}
+            setSettings={setSettings}
+            advancedSettingsToggled={advancedSettingsToggled}
+            setAdvancedSettingsToggled={setAdvancedSettingsToggled}
+            theme={theme}
+            adjustments={adjustments}
+          />
           <Button
             ripple={true}
             onClick={() => setAdvancedSettingsToggled(!advancedSettingsToggled)}
@@ -170,14 +179,6 @@ export default function GenerationZone({
             {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
           </Button>
         </div>
-        <Settings
-          settings={settings}
-          setSettings={setSettings}
-          advancedSettingsToggled={advancedSettingsToggled}
-          setAdvancedSettingsToggled={setAdvancedSettingsToggled}
-          theme={theme}
-          adjustments={adjustments}
-        />
       </div>
 
       <Toolbox

@@ -10,7 +10,7 @@ export default function Output({
   activeGenerationZone,
   setActiveGenerationZone,
   promptType,
-  setPromptType,
+  createDopeStuff,
 }) {
   return (
     <div className="content-area   max-w-[800px] text-zinc-700 dark:text-zinc-300 overflow-y-auto   max-w-[1000px] flex flex-col ">
@@ -37,7 +37,10 @@ export default function Output({
       />
 
       <div className="items-end  mt-10 w-full  flex max-w-[1000px]">
-        <OutputMessage generatedPrompt={generatedPrompt} />
+        <OutputMessage
+          generatedPrompt={generatedPrompt}
+          setActiveGenerationZone={setActiveGenerationZone}
+        />
       </div>
 
       <div>

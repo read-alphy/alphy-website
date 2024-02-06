@@ -52,13 +52,9 @@ export default function InputMessage({
   }, [promptAreaExpanded]) // Re-check on expand/collapse
 
   let messageObject
-  if(promptType){
-  messageObject = inputMessages.find(
-    item => item.prompt_type === promptType
-    )
+  if (promptType) {
+    messageObject = inputMessages.find(item => item.prompt_type === promptType)
   }
-
-
 
   return (
     <div
@@ -85,7 +81,8 @@ export default function InputMessage({
             ref={messageRef}
             className="text-md mt-2 text-zinc-700 dark:text-zinc-300 overflow-hidden"
           >
-            {messageObject !== undefined && (messageObject.message ? messageObject.message : '')}
+            {messageObject !== undefined &&
+              (messageObject.message ? messageObject.message : '')}
           </p>
         </div>
 
@@ -99,16 +96,6 @@ export default function InputMessage({
           </div>
         </div>
       </div> */}
-
-        <div className="mt-2 ml-10 items-center flex justify-center">
-          <Button
-            onClick={() => setActiveGenerationZone(true)}
-            ripple={true}
-            className="  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case w-[120px]"
-          >
-            Start Over
-          </Button>
-        </div>
       </div>
       {isOverflowing && (
         <div classname="flex w-full items-center mx-auto">

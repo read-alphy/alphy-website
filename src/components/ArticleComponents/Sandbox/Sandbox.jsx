@@ -11,7 +11,7 @@ export default function Sandbox({ data }) {
   const [promptType, setPromptType] = useState('')
 
   return (
-    <div className="min-h-[70vh] w-full">
+    <div className="min-h-[70vh] w-full ">
       {/*  <div className="flex flex-row text-zinc-700 dark:text-zinc-300 gap-6 text-lg cursor-pointer">
         <p className="underline" onClick={() => setActiveGenerationZone(true)}>
           Generation Module
@@ -23,7 +23,7 @@ export default function Sandbox({ data }) {
       {/* <div className="border-b border-gray-100 dark:border-zinc-700  flex mt-10 mb-5 dark:opacity-40 w-full max-w-[1000px]"></div> */}
       <div className="flex flex-col ">
         {outputMessage.length > 0 && (
-          <div className="mb-10">
+          <div className="mb-10 w-full mx-auto mt-4 max-w-[800px]">
             <button
               className=" flex underline flex-row gap-2"
               onClick={() => setActiveGenerationZone(!activeGenerationZone)}
@@ -43,7 +43,7 @@ export default function Sandbox({ data }) {
                 />
               </svg>
 
-              <span className="text-zinc-700 dark:text-zinc-100">
+              <span className="  text-zinc-700 dark:text-zinc-100">
                 {activeGenerationZone
                   ? 'See your output'
                   : 'Create something new'}
@@ -99,8 +99,8 @@ export default function Sandbox({ data }) {
 
           <div
             className={`${
-              activeGenerationZone === false ? 'col-span-3' : 'hidden'
-            }`}
+              activeGenerationZone === false ? 'col-span-4' : 'hidden'
+            }  mx-auto w-full justify-center`}
           >
             <OutputZone
               generatedPrompt={generatedPrompt}

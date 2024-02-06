@@ -107,7 +107,11 @@ export default function HeaderArea({
   }))
 
   return (
-    <div className="grid grid-cols-3 ">
+    <div
+      className={`grid max-w-[800px] lg:w-[800px] grid-cols-3 lg:grid-cols-2 flex ${
+        isSandbox && ''
+      }`}
+    >
       <div
         className={`col-span-2 lg:col-span-3 xl:mt-0 ${
           transcript.length > 0 &&
@@ -117,7 +121,7 @@ export default function HeaderArea({
             : 'xl:col-span-3'
         }`}
       >
-        <div id="processing-tier">
+        <div id="processing-tier" className={`${isSandbox && ''}`}>
           {modelName === 'HIGH' && (
             <div className="relative flex flex-col">
               <div className="relative flex flex-row group cursor-default">
@@ -148,7 +152,7 @@ export default function HeaderArea({
           )}
         </div>
         <div className="flex flex-row ml-1">
-          <h1 className="col-span-2 mt-6 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+          <h1 className="col-span-2 mt-2 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
             {data.source_type === 'up'
               ? title.substring(0, title.lastIndexOf('.'))
               : title}
@@ -441,7 +445,13 @@ export default function HeaderArea({
             </Popover>
           </div>
         </div>
-        <div className="col-span-2  ml-1 grid grid-cols-2 flex flex-row">
+        <div
+          className={`${
+            isSandbox
+              ? 'hidden'
+              : 'col-span-2  ml-1 grid grid-cols-2 flex flex-row'
+          }`}
+        >
           <div className="col-span-1">
             <h2 className="mt-5 text-lg text-left lg:col-span-3 font-averta-regular lg:mt-5  text-blueLike dark:bg-darkMode dark:text-zinc-300  flex flex-row">
               {data.source_type !== 'up' && data.creator_name}

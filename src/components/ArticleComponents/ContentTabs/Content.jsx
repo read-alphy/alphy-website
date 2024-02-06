@@ -670,13 +670,16 @@ export default function Content({
 
   return (
     <div
-      id="content"
       ref={ref}
       className={
-        'md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden  md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto'
+        'md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden   md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto'
       }
     >
-      <div>
+      <div
+        className={`${
+          isSandbox && ' mx-auto flex flex-col justify-center items-center '
+        }`}
+      >
         <HeaderArea
           data={data}
           title={title}
@@ -706,7 +709,7 @@ export default function Content({
           setIsSandbox={setIsSandbox}
         />
 
-        <div className="mt-4 ">
+        <div className="">
           <div className={`${isSandbox && 'hidden'}`}>
             <ReadComponent
               data={data}
@@ -753,7 +756,7 @@ export default function Content({
             />
           </div>
 
-          <div className={`${isSandbox ? 'flex' : 'hidden'} w-full mt-6`}>
+          <div className={`${isSandbox ? 'flex' : 'hidden'} w-full `}>
             <Sandbox data={data} />
           </div>
         </div>
