@@ -79,7 +79,7 @@ const copyToClipboard = async text => {
         </div>
         
        
-        <div className={`flex flex-row ml-4 text-sm mt-1 h-[30px] ${copiedText ?  "opacity-100" : "opacity-0 pointer-events-none"} overflow-hidden`} >
+        <div className={`flex flex-row ml-4 text-sm mt-1 h-[30px] ${copiedText ?  "opacity-100" : "opacity-0 pointer-events-none    "} overflow-hidden`} >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#86efac" class="w-5 h-5 mr-0.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 </svg>

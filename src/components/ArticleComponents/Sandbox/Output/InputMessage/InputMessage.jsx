@@ -51,9 +51,14 @@ export default function InputMessage({
     return () => window.removeEventListener('resize', checkOverflow)
   }, [promptAreaExpanded]) // Re-check on expand/collapse
 
-  const messageObject = inputMessages.find(
+  let messageObject
+  if(promptType){
+  messageObject = inputMessages.find(
     item => item.prompt_type === promptType
-  )
+    )
+  }
+
+
 
   return (
     <div
@@ -80,7 +85,7 @@ export default function InputMessage({
             ref={messageRef}
             className="text-md mt-2 text-zinc-700 dark:text-zinc-300 overflow-hidden"
           >
-            {messageObject.message ? messageObject.message : ''}
+            {messageObject !== undefined && (messageObject.message ? messageObject.message : '')}
           </p>
         </div>
 
