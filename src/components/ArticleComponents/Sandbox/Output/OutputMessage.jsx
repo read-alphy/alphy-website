@@ -98,7 +98,7 @@ export default function OutputMessage({
           </div>
 
           <div
-            className={`flex flex-row ml-4 text-sm mt-1 h-[30px] ${
+            className={`flex text-zinc-500 dark:text-zinc-300 flex-row ml-4 text-sm mt-1 h-[30px] ${
               copiedText ? 'opacity-100' : 'opacity-0 pointer-events-none    '
             } overflow-hidden`}
           >

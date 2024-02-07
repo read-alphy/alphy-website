@@ -42,7 +42,7 @@ export default function GenerationZone({
 
   const [settings, setSettings] = useState({
     verbosity_level: 5,
-    detail_level: 5,
+    detail_level: 5,  
     content_to_use: 'summary',
     prompt_type: 'twitter_thread',
     character: 'Casual',
@@ -120,7 +120,7 @@ export default function GenerationZone({
   )
 
   return (
-    <div className="mt-6   h-full  flex flex-col  px-2 ">
+    <div className="mt-6   h-full  flex flex-col  px-2 sm:px-0">
       <div
         className={`max-w-[800px] w-full font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
           (!toolboxActive && outputMessage.length  === 0  )? 'opacity-100 delay-300 ' : 'opacity-0  '

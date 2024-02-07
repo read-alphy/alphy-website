@@ -672,12 +672,12 @@ export default function Content({
     <div
       ref={ref}
       className={
-        'md:max-w-[100vw]  scroll-smooth pb-10 md:px-10 xl:px-20 3xl:px-40  mt-5 md:mt-0 grow mx-auto overflow-x-hidden   md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto'
+        `md:max-w-[100vw] scroll-smooth pb-10 md:px-10  xl:px-20   mt-5 md:mt-0  mx-auto 3xl:mx-0 overflow-x-hidden   md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`
       }
     >
-      <div className={`transition-transform duration-300 ${isSandbox ? "sm:translate-x-[5%] lg:translate-x-[10%] 2xl:translate-x-[20%]" : "translate-x-0"} flex flex-col `}>
+      <div className={`transition-transform duration-300 ${isSandbox ? "sm:translate-x-[5%] lg:translate-x-[10%] xl:translate-x-[15%] 3xl:translate-x-[10%]" : "translate-x-0"} flex flex-col `}>
         <HeaderArea
-          data={data}
+          data={data} 
           title={title}
           tier={props.tier}
           isVisible={props.isVisible}

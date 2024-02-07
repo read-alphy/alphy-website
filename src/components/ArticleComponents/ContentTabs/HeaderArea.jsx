@@ -121,7 +121,7 @@ export default function HeaderArea({
             : 'xl:col-span-3'
         }`}
       >
-        <div id="processing-tier" className={`${isSandbox && ''}`}>
+        <div id="processing-tier" className={`${isSandbox && 'hidden'}`}>
           {modelName === 'HIGH' && (
             <div className="relative flex flex-col">
               <div className="relative flex flex-row group cursor-default">

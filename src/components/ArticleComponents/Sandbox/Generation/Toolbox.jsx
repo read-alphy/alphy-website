@@ -67,10 +67,10 @@ export default function Toolbox({
               }}
             />
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
-              Write Your Own Prompt
+              Custom Creation
             </p>
             <p className="row-span-1 text-sm font-averta-regular text-zinc-500 dark:text-zinc-400 dark:text-zinc-400 ">
-              Write whatever you want and let Alphy do the rest.
+              Create content from the conversation with your own prompt.  
             </p>
 
             <div
@@ -443,6 +443,7 @@ export default function Toolbox({
               className="row-span-1"
               fontSize="medium"
               sx={{ color: '#dc2626' }}
+              
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               YouTube Video Ideas
@@ -477,6 +478,8 @@ export default function Toolbox({
             </div>
           </div>
         </div>
+
+        
         {/* VIDEO CLIPS */}
         <div
           className={`${

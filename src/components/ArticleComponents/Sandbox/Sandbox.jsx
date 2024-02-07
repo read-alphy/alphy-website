@@ -33,7 +33,7 @@ export default function Sandbox({ data }) {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke={localStorage.theme === 'light' ? '#3f3f46' : '#f4f4f5'}
+                stroke={localStorage.theme === 'light' ? '#64748b' : '#f4f4f5'}
                 class="w-6 h-6"
               >
                 <path
@@ -43,7 +43,7 @@ export default function Sandbox({ data }) {
                 />
               </svg>
 
-              <span className="  text-zinc-700 dark:text-zinc-100">
+              <span className="  text-slate-500 dark:text-zinc-100">
                 {activeGenerationZone
                   ? 'See your output'
                   : 'Create something new'}
@@ -101,7 +101,7 @@ export default function Sandbox({ data }) {
             </div>
           )}
  <div
-    className={`absolute inset-0 transition-transform mx-auto w-full justify-center ${!activeGenerationZone ? "translate-x-0" : "translate-x-full"} col-span-4`}
+    className={`absolute inset-0 transition-transform mx-auto w-full justify-center ${!activeGenerationZone ? "translate-x-0" : "translate-x-[125%]"} col-span-4`}
   >
             <OutputZone
               generatedPrompt={generatedPrompt}

@@ -30,7 +30,7 @@ export default function InputArea({
     resizeTextarea()
   }, [userPrompt])
 
-  const prompt_quoteGetter = `Get me quotes from the conversation about the talking points I specify. For instance, if I want you to get me quotes about "generative AI", I want you to get me as many quotes about generative AI as possible from the conversation.\n\n Here are the talking points:  [TALKING POINTS]`
+  const prompt_quoteGetter = `Extract and compile a comprehensive list of quotes related to the talking points I specify. Focus on identifying and presenting all mentions, discussions, and analyses that directly pertain to the talking points. For instance, if my talking point is "generative AI", I want you to get a comprehensive list of quotes from the conversation about generative AI.\n\n Here are the talking points:  [TALKING POINTS]`
   const prompt_summarizer = `Summarize the conversation by focusing on the following subjects : [SUBJECTS]`
 
   return (
@@ -50,7 +50,7 @@ export default function InputArea({
       {/*     <Button onClick={() => createDopeStuff()} ripple={true} className="mr-6 hidden md:flex bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case">
             {isLoading ? <Spinner color="blue" size="sm"/>: "Generate"}
         </Button> */}
-      <div className="flex flex-row mt-6 mb-10 overflow-x-auto gap-4">
+      <div className="flex flex-row mt-6 mb-10 overflow-y-hidden gap-4 overflow-x-scroll">
         <button
           onClick={() => {
             if (textareaRef.current) {
@@ -59,7 +59,7 @@ export default function InputArea({
               textareaRef.style.height = textareaRef.scrollHeight + 'px' // Set to scroll height
             }
           }}
-          className=" px-4 h-[34px] py-1 underline text-sm text-zinc-500 dark:text-zinc-300 flex flex-row items-center gap-0.5"
+          className=" px-4  py-1 underline text-sm text-zinc-500 dark:text-zinc-300 flex flex-row items-center gap-0.5"
         >
           <FormatQuoteIcon
             className="text-zinc-500  dark:text-zinc-300 mt-1 mr-1"
@@ -78,10 +78,10 @@ export default function InputArea({
               textareaRef.style.height = textareaRef.scrollHeight + 'px' // Set to scroll height
             }
           }}
-          className="h-[34px] border-slate-200 underline px-4 py-1 text-sm dark:text-zinc-300 text-zinc-500"
+          className="  px-4 py-1 underline text-sm dark:text-zinc-300 text-zinc-500 flex flex-row items-center "
         >
           <EditNoteIcon
-            className="text-zinc-500 dark:text-zinc-300 -mt-0.5 mr-1"
+            className="text-zinc-500 dark:text-zinc-300 mt-0.5 mr-1"
             sx={{
               width: '16px',
               height: '16px',

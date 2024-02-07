@@ -13,7 +13,7 @@ export default function Output({
   createDopeStuff,
 }) {
   return (
-    <div className="content-area   max-w-[800px] text-zinc-700 dark:text-zinc-300 overflow-y-auto   max-w-[1000px] flex flex-col ">
+    <div className="content-area   mt-6 max-w-[800px] text-zinc-700 dark:text-zinc-300 overflow-y-auto   max-w-[1000px] flex flex-col ">
       <div className="flex flex-col ">
         {/*  <InputMessage
           promptType={promptType}

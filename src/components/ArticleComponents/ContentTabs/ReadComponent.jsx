@@ -353,7 +353,7 @@ export default function ReadComponent({
             <div
               className={`${
                 isLoading ? 'hidden' : ''
-              } w-full 3xl:w-5/6 max-w-[700px] mx-auto mt-10 md:mt-0 ${
+              } w-full 3xl:w-5/6 max-w-[700px]  mx-auto mt-10 md:mt-0 ${
                 window.innerWidth > 1280 && window.innerWidth < 1420 ? '' : ''
               }`}
             >

@@ -362,7 +362,7 @@ export default function QuestionAnswering(props) {
     /* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
     <div
       id="q-and-a"
-      className={` md:min-h-[600px] lg:w-[700px] xl:w-[500px] 2xl:w-[550px] 3xl:w-full mx-auto xl:mx-none bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}
+      className={` md:min-h-[600px] lg:w-[700px] xl:w-[550px] 2xl:w-[550px] 3xl:w-full mx-auto sm:mx-0 bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}
       ref={QARef}
     >
       <p className="mb-4 font-averta-regular text-l text-zinc-500 dark:text-zinc-200">
