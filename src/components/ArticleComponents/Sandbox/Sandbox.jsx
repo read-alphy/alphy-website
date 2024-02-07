@@ -5,22 +5,13 @@ import InputMessage from './Output/InputMessage/InputMessage'
 
 export default function Sandbox({ data }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
-  const [outputMessage, setOutputMessage] = useState('')
+  const [outputMessage, setOutputMessage] = useState(' ')
   const [isLoading, setIsLoading] = useState(false)
   const [activeGenerationZone, setActiveGenerationZone] = useState(true)
   const [promptType, setPromptType] = useState('')
 
   return (
     <div className="min-h-[70vh] w-full ">
-      {/*  <div className="flex flex-row text-zinc-700 dark:text-zinc-300 gap-6 text-lg cursor-pointer">
-        <p className="underline" onClick={() => setActiveGenerationZone(true)}>
-          Generation Module
-        </p>
-        <p className="underline" onClick={() => setActiveGenerationZone(false)}>
-          Output Zone
-          </p>
-      </div>  */}
-      {/* <div className="border-b border-gray-100 dark:border-zinc-700  flex mt-10 mb-5 dark:opacity-40 w-full max-w-[1000px]"></div> */}
       <div className="flex flex-col ">
         {outputMessage.length > 0 && (
           <div className=" w-full mt-8 max-w-[800px]">
@@ -52,39 +43,15 @@ export default function Sandbox({ data }) {
           </div>
         )}
 
-        {/*  {!activeGenerationZone ? (
-          <OutputZone
-            generatedPrompt={generatedPrompt}
-            outputMessage={outputMessage}
-            setOutputMessage={setOutputMessage}
-            activeGenerationZone={activeGenerationZone}
-            setActiveGenerationZone={setActiveGenerationZone}
-            promptType={promptType}
-            setPromptType={setPromptType}
-          />
-        ) : (
-          <GenerationZone
-            data={data}
-            generatedPrompt={generatedPrompt}
-            setGeneratedPrompt={setGeneratedPrompt}
-            outputMessage={outputMessage}
-            setOutputMessage={setOutputMessage}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            activeGenerationZone={activeGenerationZone}
-            setActiveGenerationZone={setActiveGenerationZone}
-            promptType={promptType}
-            setPromptType={setPromptType}
-          />
-        )} */}
-
         <div className=" grid grid-cols-4 relative">
-          
           {activeGenerationZone === true && (
             <div
-            className={`transition-transform duration-500 ${activeGenerationZone ? "translate-x-0" : "-translate-x-full opacity-0"} col-span-4`}
-          >
-            
+              className={`transition-transform duration-500 ${
+                activeGenerationZone
+                  ? 'translate-x-0'
+                  : '-translate-x-full opacity-0'
+              } col-span-4`}
+            >
               <GenerationZone
                 data={data}
                 generatedPrompt={generatedPrompt}
@@ -100,9 +67,13 @@ export default function Sandbox({ data }) {
               />
             </div>
           )}
- <div
-    className={`absolute inset-0 transition-transform mx-auto w-full justify-center ${!activeGenerationZone ? "translate-x-0" : "translate-x-[125%]"} col-span-4`}
-  >
+          <div
+            className={`absolute inset-0 transition-transform transition-opacity duration-300 mx-auto w-full justify-center ${
+              !activeGenerationZone
+                ? 'translate-x-0 opacity-100'
+                : 'translate-x-[125%] opacity-20 '
+            } col-span-4`}
+          >
             <OutputZone
               generatedPrompt={generatedPrompt}
               outputMessage={outputMessage}

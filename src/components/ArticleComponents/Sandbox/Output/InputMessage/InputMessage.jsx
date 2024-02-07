@@ -53,12 +53,12 @@ export default function InputMessage({
 
   let messageObject
   if (promptType) {
-    messageObject = inputMessages.find(item => item.prompt_type === promptType)
+    messageObject = inputMessages.find(item => item.command_type === promptType)
   }
 
   return (
     <div
-      className={`max-w-[800px] w-fit  p-6 rounded-lg  right-0 flex flex-col  border-zinc-200 dark:border-zinc-800 bg-slate-50 dark:bg-mildDarkMode`}
+      className={`xl: max-w-[800px] w-full  p-6 rounded-lg  right-0 flex flex-col  border-zinc-200 dark:border-zinc-800 bg-slate-50 dark:bg-mildDarkMode`}
     >
       {/* { <p className="text-zinc-600 dark:text-zinc-300 text-lg">Current Task</p>} */}
       {/* <TwitterIcon

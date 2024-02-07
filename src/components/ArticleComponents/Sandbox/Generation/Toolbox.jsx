@@ -14,6 +14,7 @@ import QuizIcon from '@mui/icons-material/Quiz'
 import WorkIcon from '@mui/icons-material/Work'
 import ShowChartIcon from '@mui/icons-material/ShowChart'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
+import GraphicEqIcon from '@mui/icons-material/GraphicEq'
 
 export default function Toolbox({
   theme,
@@ -44,33 +45,44 @@ export default function Toolbox({
         {/* CUSTOM INPUT */}
         <div
           className={`${
-            selectedTool === 'custom_prompt' &&
+            selectedTool === 'command_custom' &&
             'animated-gradient-border rounded-lg '
           } flex flex-col h-[210px]   p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() => {
-              if (selectedTool === 'custom_prompt') {
+              if (selectedTool === 'command_custom') {
                 setSelectedTool('')
               } else {
-                setSelectedTool('custom_prompt')
+                setSelectedTool('command_custom')
               }
             }}
             className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
-              selectedTool !== 'custom_prompt' && ''
+              selectedTool !== 'command_custom' && ''
             }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col   max-w-[350px] sm:max-w-[240px]   `}
           >
-            <ModeEditOutlineIcon
-              className="row-span-1"
-              sx={{
-                color: 'green',
-              }}
-            />
+            <div className="flex flex-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#fde047"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke={theme === 'light' ? '#1e293b' : 'none'}
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                />
+              </svg>
+            </div>
+
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
               Custom Creation
             </p>
             <p className="row-span-1 text-sm font-averta-regular text-zinc-500 dark:text-zinc-400 dark:text-zinc-400 ">
-              Create content from the conversation with your own prompt.  
+              Create content from the conversation with your own prompt.
             </p>
 
             <div
@@ -130,42 +142,41 @@ export default function Toolbox({
                   selectedTool !== 'twitter_thread'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
             </div>
           </div>
         </div>
-        {/* VIDEO CLIPS */}
+
+        {/* AUDIOGRAM */}
 
         <div
           className={`${
-            selectedTool === 'video_clips' &&
+            selectedTool === 'audiogram' &&
             'animated-gradient-border rounded-lg '
           } flex flex-col h-[210px]  p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() =>
-              setSelectedTool(
-                selectedTool === 'video_clips' ? '' : 'video_clips'
-              )
+              setSelectedTool(selectedTool === 'audiogram' ? '' : 'audiogram')
             }
             className={`p-4 h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
-              selectedTool !== 'video_clips' && ''
+              selectedTool !== 'audiogram' && ''
             }`}
           >
-            <StarRateIcon className="row-span-1" sx={{ color: '#facc15' }} />
+            <GraphicEqIcon className="row-span-1" sx={{ color: '#818cf8' }} />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Video Clip Ideas
+              Audiogram
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Give me the most noteworthy parts of the conversation worth of
-              video clips.
+              Give me 5 moments from the conversation that would go well as an
+              audiogram.
             </p>
             <div
               className={`${
-                selectedTool === 'video_clips' ? 'max-h-96' : 'max-h-0'
+                selectedTool === 'audiogram' ? 'max-h-96' : 'max-h-0'
               }  transition-[max-height]  duration-500 ease-in-out`}
             >
               <Button
@@ -174,10 +185,10 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'video_clips'}
+                disabled={selectedTool !== 'audiogram'}
                 className={`${
-                  selectedTool !== 'video_clips' ? 'opacity-0' : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                  selectedTool !== 'audiogram' ? 'opacity-0' : 'opacity-100'
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -236,7 +247,7 @@ export default function Toolbox({
                 disabled={selectedTool !== 'blog_post'}
                 className={`${
                   selectedTool !== 'blog_post' ? 'opacity-0' : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -292,7 +303,7 @@ export default function Toolbox({
                   selectedTool !== 'investment_analysis'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -356,7 +367,7 @@ export default function Toolbox({
                   selectedTool !== 'newsletter_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -412,7 +423,61 @@ export default function Toolbox({
                   selectedTool !== 'highlight_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+              >
+                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* YOUTUBE SHORT IDEATION */}
+        <div
+          className={`${
+            selectedTool === 'youtube_shorts' &&
+            'animated-gradient-border rounded-lg '
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
+        >
+          <div
+            onClick={() =>
+              setSelectedTool(
+                selectedTool === 'youtube_shorts' ? '' : 'youtube_shorts'
+              )
+            }
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+              selectedTool !== 'youtube_shorts' && ''
+            }`}
+          >
+            <YouTubeIcon
+              className="row-span-1"
+              fontSize="medium"
+              sx={{ color: '#dc2626' }}
+            />
+            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+              YouTube Shorts
+            </p>
+            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+              Give me 5 moments from the conversation that would create engaging
+              YouTube Shorts.
+            </p>
+
+            <div
+              className={`${
+                selectedTool === 'youtube_shorts' ? 'max-h-96' : 'max-h-0'
+              }  transition-[max-height]  duration-500 ease-in-out`}
+            >
+              <Button
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
+                ripple={true}
+                disabled={selectedTool !== 'youtube_shorts'}
+                className={`${
+                  selectedTool !== 'youtube_shorts'
+                    ? 'opacity-0'
+                    : 'opacity-100'
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -443,7 +508,6 @@ export default function Toolbox({
               className="row-span-1"
               fontSize="medium"
               sx={{ color: '#dc2626' }}
-              
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               YouTube Video Ideas
@@ -471,7 +535,7 @@ export default function Toolbox({
                   selectedTool !== 'video_topic_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -479,7 +543,6 @@ export default function Toolbox({
           </div>
         </div>
 
-        
         {/* VIDEO CLIPS */}
         <div
           className={`${
@@ -525,7 +588,7 @@ export default function Toolbox({
                   selectedTool !== 'video_description'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -561,7 +624,7 @@ export default function Toolbox({
               Twitter Space Idea
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Design a detailed Twitter Space concept from this content.{' '}
+              Come up with a new Twitter Space idea based on this content.{' '}
             </p>
 
             <div
@@ -580,7 +643,7 @@ export default function Toolbox({
                   selectedTool !== 'space_idea_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -638,7 +701,7 @@ export default function Toolbox({
                   selectedTool !== 'space_description_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -674,7 +737,7 @@ export default function Toolbox({
               SEO Keyword Extractor
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Extract the main keywords from the conversation to use in your SEO
+              Extract the main keywords from the conversation to use in my SEO
               strategy.
             </p>
 
@@ -694,7 +757,7 @@ export default function Toolbox({
                   selectedTool !== 'keyword_identifier'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -748,7 +811,7 @@ export default function Toolbox({
                   selectedTool !== 'get_actionables'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -802,7 +865,7 @@ export default function Toolbox({
                   selectedTool !== 'generate_quizzes'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -860,7 +923,7 @@ export default function Toolbox({
                   selectedTool !== 'executive_brief_composer'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>
@@ -918,7 +981,7 @@ export default function Toolbox({
                   selectedTool !== 'investment_insight_extractor'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
                 {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
               </Button>

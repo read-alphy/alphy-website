@@ -177,13 +177,13 @@ export default function MannerArea({ theme, settings, setSettings }) {
         }}
       >
         {[
-          'Friend',
-          'Teacher',
-          'Marketer',
-          'Technical',
-          'Scientist',
-          'Writer',
-          'Journalist',
+          'friend',
+          'teacher',
+          'marketer',
+          'technical',
+          'scientist',
+          'writer',
+          'journalist',
         ].map(value => (
           <div className="flex flex-col">
             <Sheet
@@ -214,25 +214,25 @@ export default function MannerArea({ theme, settings, setSettings }) {
                 onClick={e => {
                   if (manner === value) {
                     setManner('')
-                    setSettings({ ...settings, character: '' })
+                    setSettings({ ...settings, manner: null })
                   } else {
                     setManner(e.target.value)
-                    setSettings({ ...settings, character: e.target.value })
+                    setSettings({ ...settings, manner: e.target.value })
                   }
                 }}
               />
 
-              {value === 'Friend' && conversationBubble}
-              {value === 'Teacher' && building}
-              {value === 'Marketer' && megaphone}
-              {value === 'Technical' && commandLine}
-              {value === 'Scientist' && beaker}
-              {value === 'Writer' && book}
-              {value === 'Journalist' && newsPaper}
+              {value === 'friend' && conversationBubble}
+              {value === 'teacher' && building}
+              {value === 'marketer' && megaphone}
+              {value === 'technical' && commandLine}
+              {value === 'scientist' && beaker}
+              {value === 'writer' && book}
+              {value === 'journalist' && newsPaper}
             </Sheet>
 
             <p className="dark:text-zinc-300 text-center items-center mx-auto mt-2 text-xs md:text-sm">
-              {value}
+              {value.charAt(0).toUpperCase() + value.slice(1)}
             </p>
           </div>
         ))}

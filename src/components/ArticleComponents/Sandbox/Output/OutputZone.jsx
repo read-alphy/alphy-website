@@ -3,11 +3,9 @@ import working from '../../ContentTabs/working.svg'
 import InputMessage from './InputMessage/InputMessage'
 import OutputMessage from './OutputMessage'
 
-export default function Output({
+export default function OutputZone({
   generatedPrompt,
   outputMessage,
-  setOutputMessage,
-  activeGenerationZone,
   setActiveGenerationZone,
   promptType,
   createDopeStuff,
@@ -36,10 +34,12 @@ export default function Output({
         setActiveGenerationZone={setActiveGenerationZone}
       />
 
-      <div className="items-end  mt-10 w-full  flex max-w-[1000px]">
+      <div className="items-end  mt-10 w-full  flex max-w-[800px]">
         <OutputMessage
           generatedPrompt={generatedPrompt}
           setActiveGenerationZone={setActiveGenerationZone}
+          outputMessage={outputMessage}
+          createDopeStuff={createDopeStuff}
         />
       </div>
 

@@ -123,29 +123,28 @@ function Hub({
             <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />
           ) : (
             <div>
-            <HubContent
-              arcs={arcs}
-              data={data}
-              tier={tier}
-              credit={credit}
-              currentUser={currentUser}
-              userArchipelagos={userArchipelagos}
-              dataGlobalArchipelagos={dataGlobalArchipelagos}
-              setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-              getDataGlobalArchipelagos={getDataGlobalArchipelagos}
-              globalLayout={globalLayout}
-              setGlobalLayout={setGlobalLayout}
-              userLayout={userLayout}
-              setUserLayout={setUserLayout}
-              submitLayout={submitLayout}
-              setSubmitLayout={setSubmitLayout}
-              mainShow={mainShow}
-              setMainShow={setMainShow}
-              collapsed={collapsed}
-              setCollapsed={setCollapsed}
-            />
-            
-          </div>
+              <HubContent
+                arcs={arcs}
+                data={data}
+                tier={tier}
+                credit={credit}
+                currentUser={currentUser}
+                userArchipelagos={userArchipelagos}
+                dataGlobalArchipelagos={dataGlobalArchipelagos}
+                setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+                getDataGlobalArchipelagos={getDataGlobalArchipelagos}
+                globalLayout={globalLayout}
+                setGlobalLayout={setGlobalLayout}
+                userLayout={userLayout}
+                setUserLayout={setUserLayout}
+                submitLayout={submitLayout}
+                setSubmitLayout={setSubmitLayout}
+                mainShow={mainShow}
+                setMainShow={setMainShow}
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
+              />
+            </div>
           )}
         </div>
       </div>
@@ -156,8 +155,6 @@ function Hub({
           onClose={() => setDeleteDialog(false)}
         ></Dialog>
       )}
-
-
     </div>
   )
 }

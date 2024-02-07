@@ -47,7 +47,7 @@ export default function InputArea({
         value={userPrompt}
         placeholder="generate something beautiful for me..."
       />
-      {/*     <Button onClick={() => createDopeStuff()} ripple={true} className="mr-6 hidden md:flex bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case">
+      {/*     <Button onClick={() => createDopeStuff()} ripple={true} className="mr-6 hidden md:flex bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case">
             {isLoading ? <Spinner color="blue" size="sm"/>: "Generate"}
         </Button> */}
       <div className="flex flex-row mt-6 mb-10 overflow-y-hidden gap-4 overflow-x-scroll">

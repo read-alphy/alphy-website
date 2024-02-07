@@ -228,7 +228,8 @@ export default function Settings({
                 <div className="relative flex flex-row group cursor-default">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill={theme === 'light' ? '#64748b' : 'white'}
+                    /* fill={theme === 'light' ? '#64748b' : 'white'} */
+                    fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke={theme === 'light' ? '#a1a1aa' : 'black'}
@@ -265,9 +266,9 @@ export default function Settings({
                   '--Switch-trackBackground': '#64748b',
                 },
                 [`&.${switchClasses.checked}`]: {
-                  '--Switch-trackBackground': '#6366f1',
+                  '--Switch-trackBackground': '#818cf8',
                   '&:hover': {
-                    '--Switch-trackBackground': '#6366f1',
+                    '--Switch-trackBackground': '#818cf8',
                   },
                 },
               }}

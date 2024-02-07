@@ -4,6 +4,7 @@ import Settings from './Settings'
 import { Button, Spinner } from '@material-tailwind/react'
 import { promptGenerator } from '../Prompts/PromptHandler'
 import Toolbox from './Toolbox'
+
 import MannerArea from './MannerArea'
 
 const sourcesMap = {
@@ -31,6 +32,14 @@ export default function GenerationZone({
   const [selectedTool, setSelectedTool] = useState('')
 
   const theme = localStorage.getItem('theme')
+  useEffect(() => {
+    setSettings(prevSettings => {
+      return {
+        ...prevSettings,
+        command_type: selectedTool,
+      }
+    })
+  }, [selectedTool])
 
   const [contentDetails, setContentDetails] = useState({
     content: '',
@@ -41,25 +50,22 @@ export default function GenerationZone({
   })
 
   const [settings, setSettings] = useState({
-    verbosity_level: 5,
-    detail_level: 5,  
+    length_level: null,
+    detail_level: null,
     content_to_use: 'summary',
-    prompt_type: 'twitter_thread',
-    character: 'Casual',
+    command_type: '',
+    manner: null,
   })
 
   function generateContentDetails() {
-    let content_to_use = 'transcript'
     let source_title = ''
     let source_type = ''
     let creator_name = ''
+    let source_id = ''
 
-    if (settings.content_to_use === 'transcript') {
-      content_to_use = data.transcript
-    } else {
-      content_to_use = data.summaries[0][settings.content_to_use]
+    if (data.source_id) {
+      source_id = data.source_id
     }
-
     if (data.title) {
       source_title = data.title
     }
@@ -71,10 +77,10 @@ export default function GenerationZone({
     }
 
     const content_details = {
-      content: content_to_use,
-      character: settings.character,
-      content_type: settings.content_to_use,
+      manner: settings.manner,
+      source_variant: settings.content_to_use,
       source_type: source_type,
+      source_id: source_id,
       source_title: source_title,
       creator_name: creator_name,
     }
@@ -94,13 +100,68 @@ export default function GenerationZone({
   }, [data, settings])
 
   function createDopeStuff() {
-    const generated_prompt = promptGenerator(settings, contentDetails)
-    setActiveGenerationZone(false)
-    setGeneratedPrompt(generated_prompt)
-    setOutputMessage(generated_prompt)
-    if (settings.prompt_type) {
-      setPromptType(settings.prompt_type)
+    const request = {
+      source_type: contentDetails.source_type,
+      source_id: contentDetails.source_id,
+      source_variant: contentDetails.source_variant,
+      // "source_variant": "transcript",
+
+      // TEMPORARILY REQUIRED
+      title: contentDetails.source_title,
+      creator: contentDetails.creator_name,
+
+      // MUST GIVE manner_custom if manner is custom
+      // OMITTABLE
+      manner: settings.manner,
+      // "manner": "custom",
+      // "manner_custom": "Talk like a kindergartener",
+
+      // OMITTABLE
+      slider_detail: settings.detail_level,
+      slider_length: settings.length_level,
+
+      // MUST GIVE command_custom if command is custom
+      // NOT OMITTABLE
+      command: settings.command_type,
+      command_custom:
+        settings.command_type === 'command_custom' ? userPrompt : null,
     }
+
+    console.log(request)
+    /* 
+    if (settings.command_type) {
+      setPromptType(settings.command_type)
+    }
+    
+
+    const ws = new WebSocket('ws://localhost:8000/sandbox');
+  
+      ws.onopen = () => {
+        ws.send(JSON.stringify(request));
+      }
+
+
+      ws.onmessage = (message) => {
+        setOutputMessage((prevMessage) => prevMessage + message.data);
+        
+      }
+
+
+      ws.onclose = () => {
+       console.log("closed")
+       
+      }
+      ws.onerror = (error) => {
+        console.error('WebSocket Error:', error);
+        setOutputMessage('Error connecting to WebSocket');
+      };
+      
+    setActiveGenerationZone(false)  */
+
+    /*     const generated_prompt = promptGenerator(settings, contentDetails)
+    
+    setGeneratedPrompt(generated_prompt)
+    setOutputMessage(generated_prompt) */
   }
   const adjustments = (
     <svg
@@ -123,7 +184,9 @@ export default function GenerationZone({
     <div className="mt-6   h-full  flex flex-col  px-2 sm:px-0">
       <div
         className={`max-w-[800px] w-full font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
-          (!toolboxActive && outputMessage.length  === 0  )? 'opacity-100 delay-300 ' : 'opacity-0  '
+          !toolboxActive && outputMessage.length === 0
+            ? 'opacity-100 delay-300 '
+            : 'opacity-0  pointer-events-none   '
         }`}
       >
         Turn the conversation into vibrant content.
@@ -144,7 +207,7 @@ export default function GenerationZone({
 
       <div
         className={` max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 ${
-          selectedTool === 'custom_prompt' ? 'max-h-[100%]' : 'max-h-0 '
+          selectedTool === 'command_custom' ? 'max-h-[100%]' : 'max-h-0 '
         }`}
       >
         <InputArea
@@ -154,7 +217,7 @@ export default function GenerationZone({
           isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
-         <div className="md:hidden">
+        <div className="md:hidden">
           <Settings
             settings={settings}
             setSettings={setSettings}
@@ -163,18 +226,18 @@ export default function GenerationZone({
             theme={theme}
             adjustments={adjustments}
           />
-          </div>
+        </div>
 
         <div className="flex flex-row justify-end mt-4  pr-6 ">
           <div className="hidden md:flex">
-          <Settings
-            settings={settings}
-            setSettings={setSettings}
-            advancedSettingsToggled={advancedSettingsToggled}
-            setAdvancedSettingsToggled={setAdvancedSettingsToggled}
-            theme={theme}
-            adjustments={adjustments}
-          />
+            <Settings
+              settings={settings}
+              setSettings={setSettings}
+              advancedSettingsToggled={advancedSettingsToggled}
+              setAdvancedSettingsToggled={setAdvancedSettingsToggled}
+              theme={theme}
+              adjustments={adjustments}
+            />
           </div>
           <Button
             ripple={true}
@@ -187,13 +250,19 @@ export default function GenerationZone({
           <Button
             onClick={() => createDopeStuff()}
             ripple={true}
-            className=" bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case w-[120px]"
+            disabled={
+              selectedTool === 'command_custom' && userPrompt.length === 0
+            }
+            className={`${
+              selectedTool === 'command_custom' && userPrompt.length === 0
+                ? 'opacity-70'
+                : 'opacity-100'
+            }  transition-opacity duration-300 ease-in-out bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 dark:from-purple-400 font-averta-regular normal-case w-[120px]`}
           >
             {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
           </Button>
         </div>
       </div>
-     
 
       <Toolbox
         theme={theme}

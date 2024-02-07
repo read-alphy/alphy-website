@@ -2,10 +2,12 @@ import ReactMarkdown from 'react-markdown'
 import { saveAs } from 'file-saver'
 import { useState } from 'react'
 import { Button } from '@material-tailwind/react'
+import ReplayIcon from '@mui/icons-material/Replay'
 
 export default function OutputMessage({
   generatedPrompt,
-  setActiveGenerationZone,
+  outputMessage,
+  createDopeStuff,
 }) {
   const [copiedText, setCopiedText] = useState(false)
 
@@ -29,7 +31,7 @@ export default function OutputMessage({
   }
 
   return (
-    <div className="  w-fit   p-6 rounded-lg  right-0 flex flex-col border-zinc-200 dark:border-zinc-300 rounded-lg bg-slate-50  dark:bg-mildDarkMode">
+    <div className=" w-full  p-6 rounded-lg  right-0 flex flex-col border-zinc-200 dark:border-zinc-300 rounded-lg bg-slate-50  dark:bg-mildDarkMode">
       <div className="flex flex-row justify-between">
         <p className="text-zinc-700 dark:text-zinc-300 text-md font-averta-semibold mb-6 items-center text-center justify-center flex">
           Output
@@ -86,13 +88,22 @@ export default function OutputMessage({
               Export
             </button>
 
-            <div className="mt-2 items-center flex justify-center">
+            <div className="mt-2  ">
               <Button
-                onClick={() => setActiveGenerationZone(true)}
+                onClick={() => createDopeStuff()}
                 ripple={true}
-                className="  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 text-zinc-700 font-averta-regular normal-case w-[120px]"
+                className=" flex flex-row bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case w-[120px]"
               >
-                Start Over
+                <ReplayIcon
+                  className="mr-1 -ml-1"
+                  sx={{
+                    color: '#191919',
+                    width: '16px',
+                    height: '16px',
+                  }}
+                />
+
+                <p>Regenerate</p>
               </Button>
             </div>
           </div>
@@ -121,7 +132,11 @@ export default function OutputMessage({
         </div>
       </div>
       <div className="mt-4">
-        <ReactMarkdown>{generatedPrompt.split('"""')[1]}</ReactMarkdown>
+        {outputMessage.length > 0 ? (
+          <ReactMarkdown>{outputMessage}</ReactMarkdown>
+        ) : (
+          <ReactMarkdown>{generatedPrompt.split('"""')[1]}</ReactMarkdown>
+        )}
       </div>
     </div>
   )
