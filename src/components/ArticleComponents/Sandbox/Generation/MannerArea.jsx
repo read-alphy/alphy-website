@@ -144,7 +144,7 @@ export default function MannerArea({ theme, settings, setSettings }) {
 
   return (
     <div className="overflow-x-scroll content-area">
-      <p className="mb-6  ml-2 text-md text-zinc-500 dark:text-zinc-300 ">
+      <p className="mb-6  ml-2 text-md text-zinc-500 dark:text-zinc-300 w-fit">
         Pick your AI (optional)
       </p>
       <RadioGroup

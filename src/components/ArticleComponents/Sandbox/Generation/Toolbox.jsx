@@ -45,20 +45,19 @@ export default function Toolbox({
         {/* CUSTOM INPUT */}
         <div
           className={`${
-            selectedTool === 'command_custom' &&
-            'animated-gradient-border rounded-lg '
+            selectedTool === 'custom' && 'animated-gradient-border rounded-lg '
           } flex flex-col h-[210px]   p-0.5  transition duration-300 ease-in-out  `}
         >
           <div
             onClick={() => {
-              if (selectedTool === 'command_custom') {
+              if (selectedTool === 'custom') {
                 setSelectedTool('')
               } else {
-                setSelectedTool('command_custom')
+                setSelectedTool('custom')
               }
             }}
             className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
-              selectedTool !== 'command_custom' && ''
+              selectedTool !== 'custom' && ''
             }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col   max-w-[350px] sm:max-w-[240px]   `}
           >
             <div className="flex flex-row">

@@ -3,6 +3,7 @@ import { saveAs } from 'file-saver'
 import { useState } from 'react'
 import { Button } from '@material-tailwind/react'
 import ReplayIcon from '@mui/icons-material/Replay'
+import HandAnimation from './HandAnimation'
 
 export default function OutputMessage({
   generatedPrompt,
@@ -37,7 +38,11 @@ export default function OutputMessage({
           Output
         </p>
         <div className="flex flex-col">
-          <div className="flex flex-row gap-4">
+          <div
+            className={`flex flex-row gap-4 ${
+              outputMessage.length === 0 && 'opacity-0 pointer-events-none'
+            }`}
+          >
             <button
               onClick={() => copyToClipboard(generatedPrompt)}
               className="flex flex-row items-center rounded-xl px-4 py-1 bg-transparent text-sm font-averta-semibold text-zinc-500 dark:text-zinc-300"
@@ -133,9 +138,11 @@ export default function OutputMessage({
       </div>
       <div className="mt-4">
         {outputMessage.length > 0 ? (
-          <ReactMarkdown>{outputMessage}</ReactMarkdown>
+          <ReactMarkdown>{outputMessage.replace(/\n/g, '\n\n')}</ReactMarkdown>
         ) : (
-          <ReactMarkdown>{generatedPrompt.split('"""')[1]}</ReactMarkdown>
+          <div className="">
+            <HandAnimation />
+          </div>
         )}
       </div>
     </div>

@@ -676,7 +676,7 @@ export default function Content({
       <div
         className={`transition-transform duration-300 ${
           isSandbox
-            ? 'sm:translate-x-[5%] lg:translate-x-[10%] xl:translate-x-[15%] 3xl:translate-x-[10%]'
+            ? 'sm:translate-x-[5%] lg:translate-x-[10%] xl:translate-x-[15%] 3xl:translate-x-[15%]'
             : 'translate-x-0'
         } flex flex-col `}
       >

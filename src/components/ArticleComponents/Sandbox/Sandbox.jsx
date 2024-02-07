@@ -1,19 +1,155 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
-import InputMessage from './Output/InputMessage/InputMessage'
 
 export default function Sandbox({ data }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
-  const [outputMessage, setOutputMessage] = useState(' ')
+  const [outputMessage, setOutputMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [activeGenerationZone, setActiveGenerationZone] = useState(true)
   const [promptType, setPromptType] = useState('')
+  const [userPrompt, setUserPrompt] = useState('')
+  const [selectedTool, setSelectedTool] = useState('')
+  const [creationCalled, setCreationCalled] = useState(false)
+
+  const theme = localStorage.getItem('theme')
+  useEffect(() => {
+    setSettings(prevSettings => {
+      return {
+        ...prevSettings,
+        command_type: selectedTool,
+      }
+    })
+  }, [selectedTool])
+
+  const [contentDetails, setContentDetails] = useState({
+    content: '',
+    content_type: '',
+    source_type: '',
+    source_title: '',
+    creator_name: '',
+  })
+
+  const [settings, setSettings] = useState({
+    length_level: null,
+    detail_level: null,
+    content_to_use: 'summary',
+    command_type: '',
+    manner: null,
+  })
+
+  function generateContentDetails() {
+    let source_title = ''
+    let source_type = ''
+    let creator_name = ''
+    let source_id = ''
+
+    if (data.source_id) {
+      source_id = data.source_id
+    }
+    if (data.title) {
+      source_title = data.title
+    }
+    if (data.source_type) {
+      source_type = data.source_type
+    }
+    if (data.creator_name) {
+      creator_name = data.creator_name
+    }
+
+    const content_details = {
+      manner: settings.manner,
+      source_variant:
+        settings.command_type === 'custom'
+          ? settings.content_to_use
+          : 'transcript',
+      source_type: source_type,
+      source_id: source_id,
+      source_title: source_title,
+      creator_name: creator_name,
+    }
+    return content_details
+  }
+
+  useEffect(() => {
+    if (data === null || data === undefined) {
+      return
+    }
+    if (data.summaries === null || data.summaries === undefined) {
+      return
+    }
+
+    const content_details = generateContentDetails()
+    setContentDetails(content_details)
+  }, [data, settings])
+
+  function createDopeStuff() {
+    setOutputMessage('')
+    setCreationCalled(true)
+
+    const request = {
+      source_type: contentDetails.source_type,
+      source_id: contentDetails.source_id,
+      source_variant: contentDetails.source_variant,
+      // "source_variant": "transcript",
+
+      // TEMPORARILY REQUIRED
+      title: contentDetails.source_title,
+      creator: contentDetails.creator_name,
+
+      // MUST GIVE manner_custom if manner is custom
+      // OMITTABLE
+      manner: settings.manner,
+      // "manner": "custom",
+      // "manner_custom": "Talk like a kindergartener",
+
+      // OMITTABLE
+      slider_detail: settings.detail_level,
+      slider_length: settings.length_level,
+
+      // MUST GIVE command_custom if command is custom
+      // NOT OMITTABLE
+      command: settings.command_type,
+      command_custom: settings.command_type === 'custom' ? userPrompt : null,
+    }
+
+    console.log(request)
+
+    if (settings.command_type) {
+      setPromptType(settings.command_type)
+    }
+
+    const ws = new WebSocket('ws://localhost:8000/sandbox')
+
+    ws.onopen = () => {
+      console.log('connected')
+      ws.send(JSON.stringify(request))
+    }
+
+    ws.onmessage = message => {
+      setOutputMessage(prevMessage => prevMessage + message.data)
+    }
+
+    ws.onclose = event => {
+      console.log(event)
+      console.log('closed')
+    }
+    ws.onerror = error => {
+      console.error('WebSocket Error:', error)
+    }
+
+    setActiveGenerationZone(false)
+
+    /*     const generated_prompt = promptGenerator(settings, contentDetails)
+    
+    setGeneratedPrompt(generated_prompt)
+    setOutputMessage(generated_prompt) */
+  }
 
   return (
     <div className="min-h-[70vh] w-full ">
       <div className="flex flex-col ">
-        {outputMessage.length > 0 && (
+        {creationCalled === true && (
           <div className=" w-full mt-8 max-w-[800px]">
             <button
               className=" flex underline flex-row gap-2"
@@ -64,6 +200,14 @@ export default function Sandbox({ data }) {
                 setActiveGenerationZone={setActiveGenerationZone}
                 promptType={promptType}
                 setPromptType={setPromptType}
+                userPrompt={userPrompt}
+                setUserPrompt={setUserPrompt}
+                theme={theme}
+                selectedTool={selectedTool}
+                setSelectedTool={setSelectedTool}
+                createDopeStuff={createDopeStuff}
+                settings={settings}
+                setSettings={setSettings}
               />
             </div>
           )}
@@ -77,11 +221,13 @@ export default function Sandbox({ data }) {
             <OutputZone
               generatedPrompt={generatedPrompt}
               outputMessage={outputMessage}
+              userPrompt={userPrompt}
               setOutputMessage={setOutputMessage}
               activeGenerationZone={activeGenerationZone}
               setActiveGenerationZone={setActiveGenerationZone}
               promptType={promptType}
               setPromptType={setPromptType}
+              createDopeStuff={createDopeStuff}
             />
           </div>
         </div>

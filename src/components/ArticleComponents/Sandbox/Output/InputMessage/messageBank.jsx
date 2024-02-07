@@ -1,6 +1,6 @@
 export const inputMessages = [
   {
-    command_type: 'command_custom',
+    command_type: 'custom',
     message: 'Write whatever you want and let Alphy do the rest.',
   },
   {
