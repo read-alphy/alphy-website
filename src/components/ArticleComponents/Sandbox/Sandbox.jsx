@@ -23,7 +23,7 @@ export default function Sandbox({ data }) {
       {/* <div className="border-b border-gray-100 dark:border-zinc-700  flex mt-10 mb-5 dark:opacity-40 w-full max-w-[1000px]"></div> */}
       <div className="flex flex-col ">
         {outputMessage.length > 0 && (
-          <div className="mb-10 w-full mx-auto mt-4 max-w-[800px]">
+          <div className=" w-full mt-8 max-w-[800px]">
             <button
               className=" flex underline flex-row gap-2"
               onClick={() => setActiveGenerationZone(!activeGenerationZone)}
@@ -78,9 +78,13 @@ export default function Sandbox({ data }) {
           />
         )} */}
 
-        <div className=" grid grid-cols-4">
+        <div className=" grid grid-cols-4 relative">
+          
           {activeGenerationZone === true && (
-            <div className="col-span-4">
+            <div
+            className={`transition-transform duration-500 ${activeGenerationZone ? "translate-x-0" : "-translate-x-full opacity-0"} col-span-4`}
+          >
+            
               <GenerationZone
                 data={data}
                 generatedPrompt={generatedPrompt}
@@ -96,12 +100,9 @@ export default function Sandbox({ data }) {
               />
             </div>
           )}
-
-          <div
-            className={`${
-              activeGenerationZone === false ? 'col-span-4' : 'hidden'
-            }  mx-auto w-full justify-center`}
-          >
+ <div
+    className={`absolute inset-0 transition-transform mx-auto w-full justify-center ${!activeGenerationZone ? "translate-x-0" : "translate-x-full"} col-span-4`}
+  >
             <OutputZone
               generatedPrompt={generatedPrompt}
               outputMessage={outputMessage}

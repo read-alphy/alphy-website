@@ -122,6 +122,7 @@ function Hub({
           {isLoading ? (
             <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />
           ) : (
+            <div>
             <HubContent
               arcs={arcs}
               data={data}
@@ -143,6 +144,8 @@ function Hub({
               collapsed={collapsed}
               setCollapsed={setCollapsed}
             />
+            
+          </div>
           )}
         </div>
       </div>
@@ -153,6 +156,8 @@ function Hub({
           onClose={() => setDeleteDialog(false)}
         ></Dialog>
       )}
+
+
     </div>
   )
 }

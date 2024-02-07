@@ -61,14 +61,14 @@ export default function FooterReworked({
           <div className="">
             <div className="flex flex-col">
               <div className=" pl-3 md:pl-6  mb-6"></div>
-              {/*   {tier===free && 
-                                    <div className="mb-6 hidden xl:block">
+               {/*  {tier!=="premium" && 
+                                    <div className="mb-6 hidden lg:flex lg:flex-col text-sm max-w-[200px]">
                                     <p className = "text-zinc-500 dark:text-zinc-200 text-md  w-full w-full pl-10 mb-5 ">Try Premium</p>
-                                    <p className = "text-zinc-500 dark:text-zinc-300 text-sm w-full w-full pl-10 ">Extra transcription credits, multi-language access, local audio processing, and unlimited Arc creation</p>
+                                    <p className = "text-zinc-500 dark:text-zinc-300 text-sm w-full w-full pl-10 ">Upgrade for creative access, more transcription credits, and smarter AI.</p>
                                     <Link to="/plans" className=" text-xs w-full cursor-pointer w-full pl-10 mt-5 text-green-400 dark:text-greenColor">Learn More > </Link>
                                     </div>
-                                    }
- */}
+                                    } */}
+ 
               {tier === 'premium' && (
                 <div className="mb-6  flex flex-row w-full pl-6 md:pl-10">
                   <p className="text-indigo-400 text-md  ">
@@ -93,7 +93,7 @@ export default function FooterReworked({
                   className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 "
                   to="/plans"
                 >
-                  <span className="font-averta-semibold">Plans</span>
+                  <span className="font-averta-semibold">Pricing</span>
                 </Link>
               )}
             </div>
@@ -111,7 +111,7 @@ export default function FooterReworked({
                 className="text-zinc-500 dark:text-zinc-300 text-sm font-averta-semibold    w-full cursor-pointer w-[120px]"
                 to="/about "
               >
-                About Alphy
+                FAQ
               </Link>
             </div>
           </div>
@@ -163,14 +163,14 @@ export default function FooterReworked({
               </div>
             )}
           </div>
-          <div className="pl-6 md:pl-10 mt-2 lg:mt-4 flex flex-row">
+         {/*  <div className="pl-6 md:pl-10 mt-2 lg:mt-4 flex flex-row">
             <Link
               className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] font-averta-semibold"
               to="/privacypolicy"
             >
               Privacy Policy
             </Link>
-          </div>
+          </div> */}
           {currentUser !== null && currentUser !== undefined && (
             <div className="pl-6 md:pl-10 mt-2 lg:mt-4 flex flex-row">
               <button
@@ -184,7 +184,7 @@ export default function FooterReworked({
 
           <div className="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 
-          <div className="grid grid-cols-3 justify-items-center px-2 mb-8">
+          <div className="grid grid-cols-3 justify-items-center px-2 ">
             <a
               href="https://twitter.com/alphyapp"
               className="cursor-pointer"

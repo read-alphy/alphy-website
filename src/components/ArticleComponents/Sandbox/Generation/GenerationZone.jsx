@@ -19,6 +19,7 @@ export default function GenerationZone({
 
   setGeneratedPrompt,
   setActiveGenerationZone,
+  outputMessage,
   setOutputMessage,
   isLoading,
   setIsLoading,
@@ -119,17 +120,17 @@ export default function GenerationZone({
   )
 
   return (
-    <div className="mt-6   h-full mx-auto  flex flex-col  px-2 ">
+    <div className="mt-6   h-full  flex flex-col  px-2 ">
       <div
-        className={`max-w-[800px] w-full mx-auto font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
-          !toolboxActive ? 'opacity-100 delay-300 ' : 'opacity-0  '
+        className={`max-w-[800px] w-full font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
+          (!toolboxActive && outputMessage.length  === 0  )? 'opacity-100 delay-300 ' : 'opacity-0  '
         }`}
       >
         Turn the conversation into vibrant content.
       </div>
       {
         <div
-          className={`mx-auto max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
+          className={` max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
             toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
           }`}
         >
@@ -142,7 +143,7 @@ export default function GenerationZone({
       }
 
       <div
-        className={` mx-auto max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 ${
+        className={` max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 ${
           selectedTool === 'custom_prompt' ? 'max-h-[100%]' : 'max-h-0 '
         }`}
       >
@@ -153,8 +154,7 @@ export default function GenerationZone({
           isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
-
-        <div className="flex flex-row justify-end mt-4  pr-6 ">
+         <div className="md:hidden">
           <Settings
             settings={settings}
             setSettings={setSettings}
@@ -163,12 +163,25 @@ export default function GenerationZone({
             theme={theme}
             adjustments={adjustments}
           />
+          </div>
+
+        <div className="flex flex-row justify-end mt-4  pr-6 ">
+          <div className="hidden md:flex">
+          <Settings
+            settings={settings}
+            setSettings={setSettings}
+            advancedSettingsToggled={advancedSettingsToggled}
+            setAdvancedSettingsToggled={setAdvancedSettingsToggled}
+            theme={theme}
+            adjustments={adjustments}
+          />
+          </div>
           <Button
             ripple={true}
             onClick={() => setAdvancedSettingsToggled(!advancedSettingsToggled)}
             className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
           >
-            {adjustments} Advanced Settings
+            {adjustments} <p className="hidden md:flex">Advanced Settings</p>
           </Button>
 
           <Button
@@ -180,6 +193,7 @@ export default function GenerationZone({
           </Button>
         </div>
       </div>
+     
 
       <Toolbox
         theme={theme}

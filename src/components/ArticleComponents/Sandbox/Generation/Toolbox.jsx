@@ -33,14 +33,14 @@ export default function Toolbox({
   }, [selectedTool])
 
   return (
-    <div className="w-full max-w-[1200px] ">
+    <div className="w-full  max-w-[800px] ">
       {/*       <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 pt-6 dark:opacity-40"></div>
 
       <p className="text-lg mt-6 text-zinc-500 dark:text-zinc-300 ">
         One-click Generation
       </p> */}
 
-      <div className="flex flex-wrap mx-auto justify-center mt-4 gap-6">
+      <div className="flex flex-wrap mt-4 gap-6">
         {/* CUSTOM INPUT */}
         <div
           className={`${
@@ -58,7 +58,7 @@ export default function Toolbox({
             }}
             className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'custom_prompt' && ''
-            }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col  max-w-[240px]  `}
+            }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col   max-w-[350px] sm:max-w-[240px]   `}
           >
             <ModeEditOutlineIcon
               className="row-span-1"
@@ -99,7 +99,7 @@ export default function Toolbox({
             }}
             className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'twitter_thread' && ''
-            }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[240px]  `}
+            }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[350px]  sm:max-w-[240px]   `}
           >
             <TwitterIcon
               className="row-span-1"
@@ -151,7 +151,7 @@ export default function Toolbox({
                 selectedTool === 'video_clips' ? '' : 'video_clips'
               )
             }
-            className={`p-4 h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_clips' && ''
             }`}
           >
@@ -197,7 +197,7 @@ export default function Toolbox({
             onClick={() =>
               setSelectedTool(selectedTool === 'blog_post' ? '' : 'blog_post')
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'blog_post' && ''
             }`}
           >
@@ -260,7 +260,7 @@ export default function Toolbox({
                   : 'investment_analysis'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'investment_analysis' && ''
             }`}
           >
@@ -302,7 +302,7 @@ export default function Toolbox({
 
         {/* QUOTE GETTER */}
         {/* <div className={`${selectedTool === "quote_getter" && "animated-gradient-border rounded-lg "} flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}>
-    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${selectedTool !== "quote_getter" && ""}`}>
+    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${selectedTool !== "quote_getter" && ""}`}>
         <FormatQuoteIcon className="row-span-1" fontSize="medium" sx={{ color: "#86198f" }}/>
         <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">Quotes</p>
         <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">Get me quotes from the conversation about the talking points I specify.</p>
@@ -324,7 +324,7 @@ export default function Toolbox({
                   : 'newsletter_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'newsletter_generator' && ''
             }`}
           >
@@ -379,7 +379,7 @@ export default function Toolbox({
                   : 'highlight_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'highlight_generator' && ''
             }`}
           >
@@ -435,7 +435,7 @@ export default function Toolbox({
                   : 'video_topic_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_topic_generator' && ''
             }`}
           >
@@ -490,7 +490,7 @@ export default function Toolbox({
                 selectedTool === 'video_description' ? '' : 'video_description'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_description' && ''
             }`}
           >
@@ -545,7 +545,7 @@ export default function Toolbox({
                   : 'space_idea_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'space_idea_generator' && ''
             }`}
           >
@@ -600,7 +600,7 @@ export default function Toolbox({
                   : 'space_description_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'space_description_generator' && ''
             }`}
           >
@@ -658,7 +658,7 @@ export default function Toolbox({
                   : 'keyword_identifier'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'keyword_identifier' && ''
             }`}
           >
@@ -712,7 +712,7 @@ export default function Toolbox({
                 selectedTool === 'get_actionables' ? '' : 'get_actionables'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'get_actionables' && ''
             }`}
           >
@@ -766,7 +766,7 @@ export default function Toolbox({
                 selectedTool === 'generate_quizzes' ? '' : 'generate_quizzes'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'generate_quizzes' && ''
             }`}
           >
@@ -822,7 +822,7 @@ export default function Toolbox({
                   : 'executive_brief_composer'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'executive_brief_composer' && ''
             }`}
           >
@@ -880,7 +880,7 @@ export default function Toolbox({
                   : 'investment_insight_extractor'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[240px]  ${
+            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'investment_insight_extractor' && ''
             }`}
           >

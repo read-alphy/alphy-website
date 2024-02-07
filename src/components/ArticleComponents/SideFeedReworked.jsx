@@ -157,7 +157,7 @@ function SideFeedReworked({
                       setCollapsed(true)
                     }
                   }}
-                  className={` flex flex-row py-3 mt-2 sm:mt-6  text-sm sm:text-md  ${
+                  className={` flex flex-row py-3 mt-2   text-sm sm:text-md  ${
                     userLayout
                       ? 'text-zinc-700 dark:text-zinc-200'
                       : 'text-zinc-500 dark:text-zinc-300'
@@ -193,7 +193,7 @@ function SideFeedReworked({
                     globalLayout
                       ? 'text-zinc-700 dark:text-zinc-200'
                       : 'text-zinc-500 dark:text-zinc-300'
-                  } flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
+                  } flex flex-row py-3 mt-2  text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -224,7 +224,7 @@ function SideFeedReworked({
                     globalLayout
                       ? 'text-zinc-700 dark:text-zinc-200'
                       : 'text-zinc-500 dark:text-zinc-300'
-                  } flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
+                  } flex flex-row py-3 mt-2  text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
                 >
                   <svg
                     className="mr-3 mt-0.5 feather feather-message-square"
@@ -245,7 +245,7 @@ function SideFeedReworked({
 
                 {localStorage.getItem('logged in') === 'true' ? null : (
                   <Link
-                    className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 sm:mt-6 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
+                    className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2  text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
                     to="/u/login"
                   >
                     <LoginIcon
