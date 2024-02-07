@@ -112,11 +112,11 @@ function Navbar({ collapsed, setCollapsed }) {
           <Link to={'/'} className="dark:text-gray-200 pl-4 ">
             <div className="flex-row flex">
               <img src={Logo} width={50} className="hidden dark:block"></img>
-              <img
+              {/* <img
                 src={LogoBlack}
                 width={50}
                 className="dark:hidden opacity-80 "
-              ></img>
+              ></img> */}
               <h1 className="ml-2 mt-2 text-2xl">ALPHY</h1>
             </div>
           </Link>

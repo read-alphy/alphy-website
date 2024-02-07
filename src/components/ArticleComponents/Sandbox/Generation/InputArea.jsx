@@ -40,7 +40,7 @@ export default function InputArea({
       </p>
       <textarea
         ref={textareaRef}
-        className="  text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-zinc-900  dark:border-zinc-700 rounded-lg w-[100  %] mt-4 mx-2 md:mx-0  
+        className="  text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-zinc-  dark:border-zinc-700 rounded-lg w-[100  %] mt-4 mx-2 md:mx-0  
         margin-auto min-h-[10vh] max-h-[300px]  resize-none dark:focus:border-zinc-700 focus:border-zinc-200 border border-zinc-200 placeholder:text-sm"
         onInput={resizeTextarea}
         onChange={resizeTextarea}
@@ -55,8 +55,7 @@ export default function InputArea({
           onClick={() => {
             if (textareaRef.current) {
               setUserPrompt(prompt_quoteGetter)
-              textareaRef.style.height = 'auto' // Reset height to recalculate
-              textareaRef.style.height = textareaRef.scrollHeight + 'px' // Set to scroll height
+             
             }
           }}
           className=" px-4  py-1 underline text-sm text-zinc-500 dark:text-zinc-300 flex flex-row items-center gap-0.5"
@@ -74,8 +73,7 @@ export default function InputArea({
           onClick={() => {
             if (textareaRef.current) {
               setUserPrompt(prompt_summarizer)
-              textareaRef.style.height = 'auto' // Reset height to recalculate
-              textareaRef.style.height = textareaRef.scrollHeight + 'px' // Set to scroll height
+            
             }
           }}
           className="  px-4 py-1 underline text-sm dark:text-zinc-300 text-zinc-500 flex flex-row items-center "

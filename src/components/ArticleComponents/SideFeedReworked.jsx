@@ -363,7 +363,7 @@ function SideFeedReworked({
                 <div className="pl-2">
                   <Link
                     to="/submit"
-                    className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-zinc-200 px-2 py-1.5 dark:bg-zinc-100 text-md`}
+                    className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-green-100 px-2 py-2 dark:bg-zinc-100 text-md`}
                   >
                     <AddIcon className="mb-1" fontSize="small" />
                   </Link>

@@ -8,22 +8,25 @@ export default function InputMessage({ promptType, userPrompt }) {
   const [isOverflowing, setIsOverflowing] = useState(false)
   const messageRef = useRef(null)
 
-  useEffect(() => {
-    const checkOverflow = () => {
-      const current = messageRef.current
-      if (!current) {
-        return
-      }
-      const isOverflow = current.scrollHeight > current.clientHeight
-      setIsOverflowing(isOverflow)
+  const checkOverflow = () => {
+    const current = messageRef.current
+    if(isOverflowing){
+      return
     }
+    if (!current) {
+      return
+    }
+    const isOverflow = current.scrollHeight > current.clientHeight
+    setIsOverflowing(isOverflow)
+  }
 
+
+  useEffect(() => {
+  
     checkOverflow()
-
-    // Optional: Re-check on window resize if your layout is responsive
     window.addEventListener('resize', checkOverflow)
     return () => window.removeEventListener('resize', checkOverflow)
-  }, [promptAreaExpanded]) // Re-check on expand/collapse
+  }, [promptAreaExpanded, userPrompt]) 
 
   let messageObject
   if (promptType) {
@@ -35,6 +38,8 @@ export default function InputMessage({ promptType, userPrompt }) {
       }
     }
   }
+
+  
 
   return (
     <div

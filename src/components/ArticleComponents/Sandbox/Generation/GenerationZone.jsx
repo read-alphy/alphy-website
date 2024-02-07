@@ -50,7 +50,7 @@ export default function GenerationZone({
   return (
     <div className="mt-6   h-full  flex flex-col  px-2 sm:px-0">
       <div
-        className={`max-w-[800px] w-full font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
+        className={`max-w-[800px]  font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
           !toolboxActive && outputMessage.length === 0
             ? 'opacity-100 delay-300 '
             : 'opacity-0  pointer-events-none   '
@@ -67,7 +67,7 @@ export default function GenerationZone({
       >
         {
           <div
-            className={` max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
+            className={` lg:max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
               toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
             }`}
           >
