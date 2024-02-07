@@ -79,7 +79,10 @@ export default function Settings({
               } rounded-md px-2 py-1 text-sm`}
               onClick={e => {
                 if (detailLevel !== e.target.value) {
-                  setSettings({ ...settings, detail_level: (e.target.value).toLowerCase() })
+                  setSettings({
+                    ...settings,
+                    detail_level: e.target.value.toLowerCase(),
+                  })
                   setDetailLevel(e.target.value)
                 } else {
                   setSettings({ ...settings, detail_level: null })
@@ -118,7 +121,10 @@ export default function Settings({
                 rounded-md px-2 py-1 text-sm`}
               onClick={e => {
                 if (detailLevel !== e.target.value) {
-                  setSettings({ ...settings, detail_level: (e.target.value).toLowerCase()})
+                  setSettings({
+                    ...settings,
+                    detail_level: e.target.value.toLowerCase(),
+                  })
                   setDetailLevel(e.target.value)
                 } else {
                   setSettings({ ...settings, detail_level: null })
@@ -168,7 +174,10 @@ export default function Settings({
               } rounded-md px-2 py-1 text-sm`}
               onClick={e => {
                 if (lengthLevel !== e.target.value) {
-                  setSettings({ ...settings, length_level: (e.target.value).toLowerCase()})
+                  setSettings({
+                    ...settings,
+                    length_level: e.target.value.toLowerCase(),
+                  })
                   setLengthLevel(e.target.value)
                 } else {
                   setSettings({ ...settings, length_level: null })
@@ -187,7 +196,7 @@ export default function Settings({
               } rounded-md px-2 py-1 text-sm`}
               onClick={e => {
                 if (lengthLevel !== e.target.value) {
-                  setSettings({ ...settings, length_level: "medium" })
+                  setSettings({ ...settings, length_level: 'medium' })
                   setLengthLevel(e.target.value)
                 } else {
                   setSettings({ ...settings, length_level: null })
@@ -206,7 +215,10 @@ export default function Settings({
               } rounded-md px-2 py-1 text-sm`}
               onClick={e => {
                 if (lengthLevel !== e.target.value) {
-                  setSettings({ ...settings, length_level: (e.target.value).toLowerCase() })
+                  setSettings({
+                    ...settings,
+                    length_level: e.target.value.toLowerCase(),
+                  })
                   setLengthLevel(e.target.value)
                 } else {
                   setSettings({ ...settings, length_level: null })

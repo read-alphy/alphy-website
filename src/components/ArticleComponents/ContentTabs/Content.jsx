@@ -680,7 +680,6 @@ export default function Content({
             : 'translate-x-0'
         } flex flex-col `}
       >
-        
         <HeaderArea
           data={data}
           title={title}

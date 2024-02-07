@@ -10,7 +10,7 @@ export default function InputMessage({ promptType, userPrompt }) {
 
   const checkOverflow = () => {
     const current = messageRef.current
-    if(isOverflowing){
+    if (isOverflowing) {
       return
     }
     if (!current) {
@@ -20,13 +20,11 @@ export default function InputMessage({ promptType, userPrompt }) {
     setIsOverflowing(isOverflow)
   }
 
-
   useEffect(() => {
-  
     checkOverflow()
     window.addEventListener('resize', checkOverflow)
     return () => window.removeEventListener('resize', checkOverflow)
-  }, [promptAreaExpanded, userPrompt]) 
+  }, [promptAreaExpanded, userPrompt])
 
   let messageObject
   if (promptType) {
@@ -38,8 +36,6 @@ export default function InputMessage({ promptType, userPrompt }) {
       }
     }
   }
-
-  
 
   return (
     <div

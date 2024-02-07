@@ -55,7 +55,6 @@ export default function InputArea({
           onClick={() => {
             if (textareaRef.current) {
               setUserPrompt(prompt_quoteGetter)
-             
             }
           }}
           className=" px-4  py-1 underline text-sm text-zinc-500 dark:text-zinc-300 flex flex-row items-center gap-0.5"
@@ -73,7 +72,6 @@ export default function InputArea({
           onClick={() => {
             if (textareaRef.current) {
               setUserPrompt(prompt_summarizer)
-            
             }
           }}
           className="  px-4 py-1 underline text-sm dark:text-zinc-300 text-zinc-500 flex flex-row items-center "

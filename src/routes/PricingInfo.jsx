@@ -73,8 +73,12 @@ export default function Pricing({ tier }) {
       {isLoaded ? (
         <div className="dark:bg-darkMode">
           <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
-            <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-3xl font-averta-semibold mb-20">
+            <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-xl md:text-2xl lg:text-3xl font-averta-semibold">
               Choose the best plan for you
+            </p>
+            <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300  md:text-lg mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
+              Upgrade to have extra transcription credits, submit from multiple
+              platforms, upload audio files, and access most capable AI models.
             </p>
 
             {/* <div className="items-center flex justify-center"><label className="relative inline-flex items-center ">
@@ -93,7 +97,7 @@ export default function Pricing({ tier }) {
                 canceledAtPeriodEnd={canceledAtPeriodEnd}
                 setCanceledAtPeriodEnd={setCanceledAtPeriodEnd}
               />
-              <BasicCard
+              {/*  <BasicCard
                 currentUser={currentUser}
                 tier={tier}
                 triggers={triggers}
@@ -101,7 +105,7 @@ export default function Pricing({ tier }) {
                 setOpenPopover={setOpenPopover}
                 canceledAtPeriodEnd={canceledAtPeriodEnd}
                 setCanceledAtPeriodEnd={setCanceledAtPeriodEnd}
-              />
+              /> */}
               <PremiumCard
                 currentUser={currentUser}
                 tier={tier}

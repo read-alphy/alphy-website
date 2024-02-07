@@ -338,14 +338,14 @@ export default function AccountInfo({
               setOpenPopover1={setOpenPopover1}
               canceledAtPeriodEnd={canceledAtPeriodEnd}
             />
-            <BasicCard
+            {/*   <BasicCard
               currentUser={currentUser}
               tier={tier}
               triggers={triggers}
               openPopover={openPopover}
               setOpenPopover={setOpenPopover}
               canceledAtPeriodEnd={canceledAtPeriodEnd}
-            />
+            /> */}
             <PremiumCard
               currentUser={currentUser}
               tier={tier}
