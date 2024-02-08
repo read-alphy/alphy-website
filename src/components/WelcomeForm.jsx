@@ -16,11 +16,9 @@ export default function WelcomeForm({
 
   return (
     <div className="flex flex-col w-full justify-center items-center mt-10 sm:mt-20 2xl:mt-40">
-    
-
       {localStorage.getItem('theme') === 'light' ? (
         <iframe
-        title="Welcome Form"
+          title="Welcome Form"
           className="h-[800px] sm:w-[450px] focus:border-none focus:ring-0 focus:outline-none"
           src={`https://tally.so/embed/mVQV4E?user_id=${
             currentUser !== null && currentUser.uid
@@ -28,7 +26,7 @@ export default function WelcomeForm({
         ></iframe>
       ) : (
         <iframe
-        title="Welcome Form"
+          title="Welcome Form"
           className="h-[800px] sm:w-[450px] focus:border-none focus:ring-0 focus:outline-none"
           src={`https://tally.so/embed/mDk5Mp?user_id=${
             currentUser !== null && currentUser.uid

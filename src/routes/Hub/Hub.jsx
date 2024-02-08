@@ -60,11 +60,14 @@ function Hub({
     setIsLoading(false)
   }
 
-  
-  if(location.search.includes('?onboarding_form=complete')){
-    localStorage.setItem("onboarding_form","complete")
-    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-    window.history.pushState({path:newUrl}, '', newUrl);
+  if (location.search.includes('?onboarding_form=complete')) {
+    localStorage.setItem('onboarding_form', 'complete')
+    const newUrl =
+      window.location.protocol +
+      '//' +
+      window.location.host +
+      window.location.pathname
+    window.history.pushState({ path: newUrl }, '', newUrl)
   }
 
   return (
