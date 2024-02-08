@@ -453,7 +453,7 @@ export default function HeaderArea({
           }`}
         >
           <div className="col-span-1">
-            <h2 className="mt-5 text-lg text-left lg:col-span-3 font-averta-regular lg:mt-5  text-blueLike dark:bg-darkMode dark:text-zinc-300  flex flex-row">
+            <h2 className="text-lg text-left lg:col-span-3 font-averta-regular mt-2 text-zinc-600  dark:bg-darkMode dark:text-zinc-400  flex flex-row">
               {data.source_type !== 'up' && data.creator_name}
               {data.source_type === 'up' && 'Private Content'}
             </h2>

@@ -1,7 +1,7 @@
 import Navbar from './components/Navbar'
 import { useState, useEffect } from 'react'
 
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate} from 'react-router-dom'
 import Article from './components/Article'
 import FeedbackComponent from './components/FeedbackComponent'
 import PrivacyPolicy from './routes/PrivacyPolicy'
@@ -23,6 +23,7 @@ import CrossVideo from './routes/CrossVideo/CrossVideo'
 import Hub from './routes/Hub/Hub'
 import MyHub from './routes/Hub/MyHub'
 import FAQ from './routes/FAQ'
+import WelcomePage from './routes/WelcomePage'
 import SubmitPage from './routes/Hub/SubmitPage'
 import { API_URL, STRIPE_PK, UNDER_CONSTRUCTION } from './constants'
 import getUserMetadata from './utils/getUserMetadata'
@@ -61,6 +62,9 @@ function App() {
   const [customerID, setCustomerID] = useState('')
   const [userArcsCalled, setUserArcsCalled] = useState(false)
 
+
+
+
   if (
     localStorage.getItem('theme') !== null &&
     localStorage.getItem('theme') !== undefined &&
@@ -76,8 +80,11 @@ function App() {
     }
   }
   const verification = urlParams.get('mode') === 'verifyEmail'
+  const navigate = useNavigate()
 
   const stripePromise = loadStripe(`${STRIPE_PK}`)
+
+
 
   useEffect(() => {
     // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
@@ -103,6 +110,8 @@ function App() {
       }
     }
   }
+
+
 
   const resetPassword = urlParams.get('mode') === 'resetPassword'
 
@@ -154,6 +163,7 @@ function App() {
   useEffect(() => {
     if (!called && currentUser) {
       getCustomerInfo(currentUser)
+      
     }
   }, [currentUser, called])
 
@@ -161,8 +171,9 @@ function App() {
     if (verification) {
       const oobCode = urlParams.get('oobCode')
       auth.handleVerifyEmail(oobCode).then(resp => {
-        setShowWelcomeForm(true)
+  
         localStorage.setItem('logged in', 'true')
+        navigate('/u/welcome?onboarding_form')
       })
     }
 
@@ -223,8 +234,9 @@ function App() {
 
       .then(r => {
         /* console.log(r.data) */
-
+        
         if (r.data.current_tier !== null) {
+          
           setTier(r.data.current_tier)
           localStorage.setItem(
             'tier',
@@ -740,6 +752,21 @@ function App() {
                   />
                 }
               ></Route>
+
+              <Route
+                path="/u/welcome"
+                element={
+                  <WelcomePage
+                    showWelcomeForm={showWelcomeForm}
+                    setShowWelcomeForm={setShowWelcomeForm}
+                    collapsed={collapsed}
+                    setCollapsed={setCollapsed}
+                    tier={tier}
+                    currentUser = {currentUser}
+                  />
+                }
+              ></Route>
+
               <Route
                 path="/u/resetpassword"
                 element={

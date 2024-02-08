@@ -29,7 +29,7 @@ export default function FreeCard({ tier, currentUser }) {
 
   return (
     <div className="col-span-1 xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 bg-white border border-zinc-700 rounded-lg    sm:p-8 dark:bg-zinc-900  dark:border-gray-700  ">
-      <p className="mb-4 text-2xl  text-gray-500 dark:text-zinc-300 font-averta-semibold">
+      <p className="mb-4 text-2xl  text-zinc-900 dark:text-zinc-300 font-averta-semibold">
         Starter
       </p>
 

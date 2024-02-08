@@ -96,10 +96,10 @@ export default function PremiumCard({
   }
 
   return (
-    <div className="col-span-2  xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 border border-zinc-700 transform *-translate-y-2* rounded-lg sm:p-8  from-white to-slate-50 dark:from-gray-900 dark:via-gray-800 dark:to-zinc-900 dark:bg-gradient-to-br dark:border-gray-700 ">
+    <div className="col-span-2  xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 border border-zinc-700 transform *-translate-y-2* rounded-lg sm:p-8  bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-zinc-900 dark:bg-gradient-to-br dark:border-gray-700 ">
       <div className="flex flex-row">
         <VerifiedIcon fontSize="large" className="-ml-2 text-indigo-400 " />
-        <p className="ml-1 mb-4 text-2xl font-averta-semibold text-gray-500 dark:text-zinc-300">
+        <p className="ml-1 mb-4 text-2xl font-averta-semibold text-zinc-900 dark:text-zinc-300">
           Premium
         </p>
       </div>

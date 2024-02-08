@@ -60,6 +60,13 @@ function Hub({
     setIsLoading(false)
   }
 
+  
+  if(location.search.includes('?onboarding_form=complete')){
+    localStorage.setItem("onboarding_form","complete")
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({path:newUrl}, '', newUrl);
+  }
+
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300 font-averta-semibold">
       <Helmet>

@@ -81,9 +81,9 @@ export default function ReadComponent({
                   <div
                     className={`hidden ${
                       data.source_type === 'yt' ||
-                      data.source_type == 'ap' ||
+                      data.source_type === 'ap' ||
                       data.source_type === 'tw'
-                        ? 'lg:flex'
+                        ? 'lg:flex '
                         : ''
                     }  justify-center items-center `}
                   >
@@ -353,7 +353,7 @@ export default function ReadComponent({
             <div
               className={`${
                 isLoading ? 'hidden' : ''
-              } w-full 3xl:w-5/6 max-w-[700px]  mx-auto mt-10 md:mt-0 ${
+              } w-full 3xl:w-5/6 max-w-[700px]  mt-10 md:mt-0 ${
                 window.innerWidth > 1280 && window.innerWidth < 1420 ? '' : ''
               }`}
             >
