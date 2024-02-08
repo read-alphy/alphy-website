@@ -232,13 +232,13 @@ export default function SubmitBlock({
                 </div>
               ) : (
                 <div className="text-zinc-600 dark:text-zinc-400 font-averta-regular">
-                  <a
+                  <Link
                     className="text-greenColor font-semibold underline"
-                    href="/u/login"
+                    to="/u/login"
                   >
                     {' '}
                     Sign in
-                  </a>{' '}
+                  </Link>{' '}
                   to process content with Alphy.
                 </div>
               )

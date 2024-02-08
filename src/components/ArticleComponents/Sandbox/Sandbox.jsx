@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react'
 import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
 
-export default function Sandbox({ data }) {
+export default function Sandbox({
+  data,
+  askAlphyForSandbox,
+  setAskAlphyForSandbox,
+  askText,
+}) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [outputMessage, setOutputMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -37,6 +42,14 @@ export default function Sandbox({ data }) {
     command_type: '',
     manner: null,
   })
+
+  useEffect(() => {
+    if (askAlphyForSandbox) {
+      let excerpt = '"' + askText + '"'
+      setUserPrompt(excerpt)
+      setSelectedTool('custom')
+    }
+  }, [askAlphyForSandbox, askText])
 
   function generateContentDetails() {
     let source_title = ''

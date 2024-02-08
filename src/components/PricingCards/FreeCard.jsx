@@ -278,7 +278,7 @@ export default function FreeCard({ tier, currentUser }) {
                     tier !== 'free'
                       ? 'bg-zinc-700  dark:bg-darkMode dark:bg-zinc-700 text-zinc-300'
                       : 'pointer-events-none text-zinc-700'
-                  } rounded-lg text-[16px] font-averta-semibold px-5 py-3 inline-flex text-zinc-100 justify-center w-full text-center`}
+                  } normal-case rounded-lg text-[16px] font-averta-semibold px-5 py-3 inline-flex text-zinc-100 justify-center w-full text-center`}
                 >
                   {currentUser
                     ? tier !== 'free'

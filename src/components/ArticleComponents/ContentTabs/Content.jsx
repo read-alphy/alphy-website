@@ -59,6 +59,7 @@ export default function Content({
 
   const [highlightClass, setHighlightClass] = useState('')
   const [isSandbox, setIsSandbox] = useState(false)
+  const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
 
   const buttonRef = useRef(null)
   const inputRef = useRef(null)
@@ -484,6 +485,12 @@ export default function Content({
   const handleAskAlphy = type => {
     let askInput
 
+    if (type === 'sandbox') {
+      setAskAlphyForSandbox(true)
+      setIsSandbox(true)
+      return
+    }
+
     const selection = window.getSelection()
 
     setShowScrollBackButton(true)
@@ -759,7 +766,12 @@ export default function Content({
           </div>
 
           <div className={`${isSandbox ? 'flex' : 'hidden'} w-full `}>
-            <Sandbox data={data} />
+            <Sandbox
+              data={data}
+              askAlphyForSandbox={askAlphyForSandbox}
+              setAskAlphyForSandbox={setAskAlphyForSandbox}
+              askText={askText}
+            />
           </div>
         </div>
       </div>
