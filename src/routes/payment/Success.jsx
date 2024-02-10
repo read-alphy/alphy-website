@@ -15,10 +15,6 @@ function Success({
   tier,
   customerID,
   credit,
-  userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
 }) {
   let source_id
 

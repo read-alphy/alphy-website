@@ -10,14 +10,19 @@ import AddIcon from '@mui/icons-material/Add'
 import { Link } from 'react-router-dom'
 import { API_URL } from '../../constants'
 
-function HubArcFeed(props) {
+function HubArcFeed({
+  dataGlobalArchipelagos,
+  setDataGlobalArchipelagos,
+  currentUser,
+  mainShow,
+  collapsed,
+}) {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [offset, setOffset] = useState(0)
   const [hasMore, setHasMore] = useState(false)
   /*const const { currentUser } = useAuth(); */
-  const currentUser = props.currentUser
 
   const [inputValue, setInputValue] = useState('')
 
@@ -107,9 +112,93 @@ function HubArcFeed(props) {
     setCalled(true)
   }
 
+  const limit_glob = 40
+
+  /* const { currentUser } = useAuth(); */
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      const temp = array[i]
+      array[i] = array[j]
+      array[j] = temp
+    }
+  }
+
+  useEffect(() => {
+    // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
+    // Find a way to store idToken in local storage, minding the expiration behavior.
+    // Would improve performance throughout.
+    if (dataGlobalArchipelagos.length === 0) {
+      getDataGlobalArchipelagos(0, true, true)
+    }
+  }, [currentUser, dataGlobalArchipelagos])
+
+  const getDataGlobalArchipelagos = (
+    offsetGlobalArchipelagos,
+    firstTime,
+    hasMoreGlobalArchipelagos
+  ) => {
+    if (!hasMoreGlobalArchipelagos) {
+      return
+    }
+
+    axios
+      .get(`${API_URL}/playlists/`, {
+        params: {
+          limit_glob,
+          offset: offsetGlobalArchipelagos,
+          only_my: false,
+        },
+      })
+      .then(response => {
+        if (firstTime) {
+          shuffleArray(response.data)
+
+          /* setDataGlobalArchipelagos(response.data); */
+          const temporary = []
+          response.data.forEach(item => {
+            if (
+              item.user_id === null ||
+              item.user_id === 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3'
+            ) {
+              temporary.push(item)
+            }
+          })
+          setDataGlobalArchipelagos(temporary)
+        } else {
+          shuffleArray(response.data)
+          const temporary = []
+          response.data.forEach(item => {
+            if (
+              item.user_id === null ||
+              item.user_id === 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3'
+            ) {
+              temporary.push(item)
+            }
+          })
+          setDataGlobalArchipelagos(temporary)
+        }
+
+        setTimeout(() => {
+          const elements = document.querySelectorAll(
+            '.styles-module_item-provider__YgMwz'
+          )
+          if (elements) {
+            elements.forEach(element => {
+              element.classList.add('cursor-default')
+            })
+          }
+        }, 500)
+      })
+      .catch(error => {
+        console.error('Error fetching data in global arcs: ', error)
+      })
+  }
+
   return (
     <div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 3xl:pl-40 flex flex-row overflow-hidden">
-      {props.mainShow === 'default' ? (
+      {mainShow === 'default' ? (
         <div className=" p-[10px]  xl:min-w-[1200px]  xl:max-w-[1200px] ">
           <p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-averta-semibold">
             Learn from the best online sources with Alphy's Arcs.
@@ -172,7 +261,7 @@ function HubArcFeed(props) {
 
           <div
             className={`  mx-auto md:mx-0 w-full container  ${
-              props.collapsed
+              collapsed
                 ? 'md:max-w-[800px] lg:max-w-[840px]'
                 : 'md:max-w-[620px] lg:max-w-[840px]'
             }  xl:max-w-[900px] 2xl:max-w-[1000px]`}
@@ -180,8 +269,8 @@ function HubArcFeed(props) {
             <div
               className={`relative  grid grid-cols-2 xsSm:grid-cols-3 overflow-x-hidden w-full`}
             >
-              {props.dataGlobalArchipelagos.length > 0 &&
-                searchKeyword(props.dataGlobalArchipelagos).map(
+              {dataGlobalArchipelagos.length > 0 &&
+                searchKeyword(dataGlobalArchipelagos).map(
                   (item, index) =>
                     index < 6 && (
                       <div key={index} className="my-5 mx-2 md:mx-5 md:my-5">
@@ -258,20 +347,18 @@ function HubArcFeed(props) {
                   </p>
                 </div>
               </Link>
-              {props.dataGlobalArchipelagos.length > 0 &&
-                searchKeyword(props.dataGlobalArchipelagos).map(
-                  (item, index) => (
-                    <div className="mx-2 my-5 md:mx-5 md:my-5 col-span-1 ">
-                      <CuratedCarouselItem
-                        currentUser={currentUser}
-                        key={index}
-                        item={item}
-                        forFeed={true}
-                        expandedLayout={true}
-                      />
-                    </div>
-                  )
-                )}
+              {dataGlobalArchipelagos.length > 0 &&
+                searchKeyword(dataGlobalArchipelagos).map((item, index) => (
+                  <div className="mx-2 my-5 md:mx-5 md:my-5 col-span-1 ">
+                    <CuratedCarouselItem
+                      currentUser={currentUser}
+                      key={index}
+                      item={item}
+                      forFeed={true}
+                      expandedLayout={true}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
         </div>

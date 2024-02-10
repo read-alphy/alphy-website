@@ -15,10 +15,6 @@ function WelcomePage({
   tier,
   customerID,
   credit,
-  userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
 }) {
   const location = useLocation()
   const navigate = useNavigate()

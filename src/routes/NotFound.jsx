@@ -14,11 +14,7 @@ function NotFound({
   tier,
   setShowWelcomeForm,
   showWelcomeForm,
-  credit,
   userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
 }) {
   let source_id
 

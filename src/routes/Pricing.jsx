@@ -6,18 +6,7 @@ import Loading from '../components/Loading'
 import { Helmet } from 'react-helmet'
 import PricingInfo from './PricingInfo'
 
-function Pricing({
-  currentUser,
-  collapsed,
-  setCollapsed,
-  tier,
-  contentName,
-  credit,
-  userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
-}) {
+function Pricing({ currentUser, collapsed, setCollapsed, tier, credit }) {
   let source_id
 
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)

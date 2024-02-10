@@ -15,7 +15,7 @@ export default function HubContent({
   userArchipelagos,
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
+
   credit,
   globalLayout,
   setGlobalLayout,
@@ -53,7 +53,6 @@ export default function HubContent({
                   userArchipelagos={userArchipelagos}
                   dataGlobalArchipelagos={dataGlobalArchipelagos}
                   setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-                  getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                   mainShow={mainShow}
                   setMainShow={setMainShow}
                 />
@@ -69,7 +68,6 @@ export default function HubContent({
                   userArchipelagos={userArchipelagos}
                   dataGlobalArchipelagos={dataGlobalArchipelagos}
                   setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-                  getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                   mainShow={mainShow}
                   setMainShow={setMainShow}
                   collapsed={collapsed}
@@ -86,7 +84,6 @@ export default function HubContent({
           userArchipelagos={userArchipelagos}
           dataGlobalArchipelagos={dataGlobalArchipelagos}
           setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-          getDataGlobalArchipelagos={getDataGlobalArchipelagos}
           mainShow={mainShow}
           setMainShow={setMainShow}
           credit={credit}
@@ -100,7 +97,6 @@ export default function HubContent({
           userArchipelagos={userArchipelagos}
           dataGlobalArchipelagos={dataGlobalArchipelagos}
           setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-          getDataGlobalArchipelagos={getDataGlobalArchipelagos}
           mainShow={mainShow}
           setMainShow={setMainShow}
           credit={credit}

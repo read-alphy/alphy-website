@@ -14,11 +14,8 @@ function PrivacyPolicy({
   tier,
   setShowWelcomeForm,
   showWelcomeForm,
-  credit,
+  t,
   userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
 }) {
   let source_id
 

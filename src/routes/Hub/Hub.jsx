@@ -18,7 +18,6 @@ function Hub({
   userArchipelagos,
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
   totalMinutes,
   setTotalMinutes,
 }) {
@@ -144,7 +143,6 @@ function Hub({
                 userArchipelagos={userArchipelagos}
                 dataGlobalArchipelagos={dataGlobalArchipelagos}
                 setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-                getDataGlobalArchipelagos={getDataGlobalArchipelagos}
                 globalLayout={globalLayout}
                 setGlobalLayout={setGlobalLayout}
                 userLayout={userLayout}

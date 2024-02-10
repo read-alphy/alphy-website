@@ -20,7 +20,6 @@ export default function HubSubmitPage({
           userArchipelagos={userArchipelagos}
           dataGlobalArchipelagos={dataGlobalArchipelagos}
           setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-          getDataGlobalArchipelagos={getDataGlobalArchipelagos}
           mainShow={mainShow}
           setMainShow={setMainShow}
           credit={credit}

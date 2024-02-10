@@ -19,7 +19,6 @@ function Hub({
   userArchipelagos,
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
 }) {
   let source_id
 
@@ -128,7 +127,6 @@ function Hub({
               userArchipelagos={userArchipelagos}
               dataGlobalArchipelagos={dataGlobalArchipelagos}
               setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-              getDataGlobalArchipelagos={getDataGlobalArchipelagos}
               globalLayout={globalLayout}
               setGlobalLayout={setGlobalLayout}
               userLayout={userLayout}

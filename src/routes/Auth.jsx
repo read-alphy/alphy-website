@@ -22,11 +22,7 @@ function Auth({
   tier,
   setShowWelcomeForm,
   showWelcomeForm,
-  credit,
   userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
 }) {
   const location = useLocation()
   const navigate = useNavigate()

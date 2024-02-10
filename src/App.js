@@ -86,9 +86,6 @@ function App() {
     // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
     // Find a way to store idToken in local storage, minding the expiration behavior.
     // Would improve performance throughout.
-    if (dataGlobalArchipelagos.length === 0) {
-      getDataGlobalArchipelagos(0, true, true)
-    }
 
     if (currentUser !== undefined && currentUser !== null) {
       handleMetadata(currentUser.accessToken)
@@ -246,78 +243,6 @@ function App() {
         setCalled(true)
         setTier('free')
         localStorage.setItem('tier', 'free')
-      })
-  }
-  const limit = 40
-
-  /* const { currentUser } = useAuth(); */
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      const temp = array[i]
-      array[i] = array[j]
-      array[j] = temp
-    }
-  }
-  const getDataGlobalArchipelagos = (
-    offsetGlobalArchipelagos,
-    firstTime,
-    hasMoreGlobalArchipelagos
-  ) => {
-    if (!hasMoreGlobalArchipelagos) {
-      return
-    }
-
-    axios
-      .get(`${API_URL}/playlists/`, {
-        params: {
-          limit,
-          offset: offsetGlobalArchipelagos,
-          only_my: false,
-        },
-      })
-      .then(response => {
-        if (firstTime) {
-          shuffleArray(response.data)
-
-          /* setDataGlobalArchipelagos(response.data); */
-          const temporary = []
-          response.data.forEach(item => {
-            if (
-              item.user_id === null ||
-              item.user_id === 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3'
-            ) {
-              temporary.push(item)
-            }
-          })
-          setDataGlobalArchipelagos(temporary)
-        } else {
-          shuffleArray(response.data)
-          const temporary = []
-          response.data.forEach(item => {
-            if (
-              item.user_id === null ||
-              item.user_id === 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3'
-            ) {
-              temporary.push(item)
-            }
-          })
-          setDataGlobalArchipelagos(temporary)
-        }
-
-        setTimeout(() => {
-          const elements = document.querySelectorAll(
-            '.styles-module_item-provider__YgMwz'
-          )
-          if (elements) {
-            elements.forEach(element => {
-              element.classList.add('cursor-default')
-            })
-          }
-        }, 500)
-      })
-      .catch(error => {
-        console.error('Error fetching data in global arcs: ', error)
       })
   }
   const location = useLocation()
@@ -593,6 +518,7 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     dataGlobalArchipelagos={dataGlobalArchipelagos}
+                    setDataGlobalArchipelagos={setDataGlobalArchipelagos}
                     userArchipelagos={userArchipelagos}
                     setUserArchipelagos={setUserArchipelagos}
                     tier={tier}
@@ -632,6 +558,7 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     dataGlobalArchipelagos={dataGlobalArchipelagos}
+                    setDataGlobalArchipelagos={setDataGlobalArchipelagos}
                     userArchipelagos={userArchipelagos}
                     setUserArchipelagos={setUserArchipelagos}
                     tier={tier}

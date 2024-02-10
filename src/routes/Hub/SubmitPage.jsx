@@ -11,12 +11,11 @@ function SubmitPage({
   collapsed,
   setCollapsed,
   tier,
-  contentName,
+
   credit,
   userArchipelagos,
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
 }) {
   let source_id
 
@@ -118,7 +117,6 @@ function SubmitPage({
               userArchipelagos={userArchipelagos}
               dataGlobalArchipelagos={dataGlobalArchipelagos}
               setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-              getDataGlobalArchipelagos={getDataGlobalArchipelagos}
               globalLayout={globalLayout}
               setGlobalLayout={setGlobalLayout}
               userLayout={userLayout}
