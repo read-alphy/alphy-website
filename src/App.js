@@ -330,22 +330,6 @@ function App() {
 
   return (
     <div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
-      {showWelcomeForm && (
-        <div className={'fixed inset-0 z-50 flex items-center justify-center'}>
-          <div className="fixed inset-0 bg-black opacity-80"></div>
-          <div className="z-10 bg-white dark:bg-mildDarkMode rounded-md shadow-lg w-full max-w-lg  ">
-            <div className="flex  flex-col gap-6">
-              <WelcomeForm
-                currentUser={currentUser}
-                userMetadata={userMetadata}
-                setUserMetadata={setUserMetadata}
-                setShowWelcomeForm={setShowWelcomeForm}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
       <Helmet>
         <title>
           {contentName === undefined || contentName.length === 0

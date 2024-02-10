@@ -37,8 +37,9 @@ export default function HubCreationBlock({
 
   const handleButtonClick = () => {
     // current property is referring to the actual input element
-
-    inputRef.current.focus()
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
   }
 
   if (localStorage.getItem('newItem') !== null) {

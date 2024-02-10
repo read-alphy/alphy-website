@@ -5,6 +5,7 @@ import HubSubmitPage from './HubSubmitPage'
 import HubUserPage from './HubUserPage.jsx'
 import { Link } from 'react-router-dom'
 import WelcomeExplainer from './WelcomeExplainer'
+
 import AISearchEngine from './AISearchEngine.jsx'
 
 export default function HubContent({
@@ -104,6 +105,14 @@ export default function HubContent({
           setCollapsed={setCollapsed}
         />
       )}
+
+      {/*    {
+         mainShow ==='default' && (
+          <div className="hidden sm:flex  overflow-x-hidden ">
+                  <FlagArea/>
+          </div>
+        )}
+ */}
     </div>
   )
 }

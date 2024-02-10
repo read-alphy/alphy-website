@@ -36,7 +36,9 @@ export default function SubmitBlock({
   }
 
   useEffect(() => {
-    inputRef.current.focus()
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
   }, [inputRef])
 
   return (

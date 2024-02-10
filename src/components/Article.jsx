@@ -325,7 +325,7 @@ function Article({
         </div>
 
         <div
-          className={`scrolling px-3 md:px-0  mx-auto  h-full sm:max-h-[100vh] w-full ${
+          className={`scrolling  mx-auto  h-full sm:max-h-[100vh] w-full ${
             collapsed ? 'hidden' : ' max-h-[100vh]'
           }}`}
         >

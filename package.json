@@ -23,6 +23,7 @@
     "clarity-js": "^0.7.8",
     "file-saver": "^2.0.5",
     "firebase": "^9.19.1",
+    "flag-icons": "^7.1.0",
     "flowbite": "^1.6.5",
     "frosted-ui": "^0.0.1-canary.12",
     "fs": "^0.0.1-security",

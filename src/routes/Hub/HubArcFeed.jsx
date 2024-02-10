@@ -171,7 +171,7 @@ function HubArcFeed(props) {
           <div className={`buttons flex justify-between mt-2 `}></div>
 
           <div
-            className={`main-page-feed  mx-auto md:mx-0 w-full container  ${
+            className={`  mx-auto md:mx-0 w-full container  ${
               props.collapsed
                 ? 'md:max-w-[800px] lg:max-w-[840px]'
                 : 'md:max-w-[620px] lg:max-w-[840px]'
@@ -224,7 +224,7 @@ function HubArcFeed(props) {
         </div>
       ) : (
         <div className="p-4">
-          <div className="main-page-feed  xl:max-w-[1400px]">
+          <div className="  xl:max-w-[1400px]">
             <div className="mb-10">
               <Link
                 to="/"

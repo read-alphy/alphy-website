@@ -159,7 +159,10 @@ export default function QuestionAnswering(props) {
       question = props.inputValue
     }
     const myHtml = document.getElementById('answer-area')
-    const plainText = `${question} \n\n ${myHtml.innerText}`
+    let plainText = `${question} \n\n `
+    if (myHtml) {
+      plainText = `${question} \n\n ${myHtml.innerText}`
+    }
     navigator.clipboard.writeText(plainText)
     toast.success('Answer copied to clipboard!')
   }

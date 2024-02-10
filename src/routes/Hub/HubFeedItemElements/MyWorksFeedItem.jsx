@@ -25,7 +25,7 @@ export default function MyWorksFeedItem({
 						 
 							transform sm:hover:scale-105
 							cursor-pointer 
-							 p-2 rounded-md mb-2 transition duration-200 ease-in-out`}
+							rounded-md mb-2 transition duration-200 ease-in-out`}
           target="_blank"
         >
           <div

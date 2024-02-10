@@ -213,7 +213,9 @@ export default function ArchipelagoChat({
   }
 
   const handleAskPremadeQuestion = event => {
-    setInputValue(event.target.innerText)
+    if (event.target) {
+      setInputValue(event.target.innerText)
+    }
     setIsLoadingInside(true)
     setTimeout(() => {
       buttonRef.current.click()
