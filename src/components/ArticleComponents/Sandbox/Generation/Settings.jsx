@@ -244,7 +244,7 @@ export default function Settings({
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
-                    stroke={theme === 'light' ? '#a1a1aa' : 'black'}
+                    stroke={theme === 'light' ? '#a1a1aa' : '#a1a1aa'}
                     className="w-5 h-5 ml-1 cursor-pointer"
                     onMouseEnter={() => setUseTranscriptExplanation(true)}
                     onMouseLeave={() => setUseTranscriptExplanation(false)}

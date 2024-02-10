@@ -9,6 +9,7 @@ export default function OutputMessage({
   generatedPrompt,
   outputMessage,
   createDopeStuff,
+  isLoading,
 }) {
   const [copiedText, setCopiedText] = useState(false)
 
@@ -32,7 +33,7 @@ export default function OutputMessage({
   }
 
   return (
-    <div className=" w-full  p-6 rounded-lg  right-0 flex flex-col border-zinc-200 dark:border-zinc-300 rounded-lg bg-slate-50  dark:bg-mildDarkMode">
+    <div className=" w-full  p-6 rounded-lg  right-0 flex flex-col border border-slate-100 dark:border-zinc-700 rounded-lg bg-slate-50  dark:bg-mildDarkMode">
       <div className="flex flex-row justify-between">
         <p className="text-zinc-700 dark:text-zinc-300 text-md font-averta-semibold mb-6 items-center text-center justify-center flex">
           Output
@@ -69,7 +70,7 @@ export default function OutputMessage({
             </button>
 
             <button
-              onClick={() => downloadTxtFile(generatedPrompt)}
+              onClick={() => downloadTxtFile(outputMessage)}
               className="flex flex-row items-center rounded-xl px-4 py-1 bg-transparent  text-sm font-averta-semibold text-zinc-500 dark:text-zinc-300"
             >
               <svg
@@ -136,13 +137,11 @@ export default function OutputMessage({
           </div>
         </div>
       </div>
-      <div className="mt-4">
+      <div id="output-message" className=" output-message mt-4">
         {outputMessage.length > 0 ? (
-          <ReactMarkdown>{outputMessage.replace(/\n/g, '\n\n')}</ReactMarkdown>
+          <ReactMarkdown>{outputMessage.replace(/\n/g, '\n')}</ReactMarkdown>
         ) : (
-          <div className="">
-            <HandAnimation />
-          </div>
+          <div className="">{isLoading && <HandAnimation />}</div>
         )}
       </div>
     </div>

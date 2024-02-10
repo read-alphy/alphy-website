@@ -10,6 +10,7 @@ export default function OutputZone({
   promptType,
   createDopeStuff,
   userPrompt,
+  isLoading,
 }) {
   return (
     <div className="content-area   mt-6 max-w-[800px] text-zinc-700 dark:text-zinc-300 overflow-y-auto   max-w-[1000px] flex flex-col ">
@@ -42,6 +43,7 @@ export default function OutputZone({
           setActiveGenerationZone={setActiveGenerationZone}
           outputMessage={outputMessage}
           createDopeStuff={createDopeStuff}
+          isLoading={isLoading}
         />
       </div>
 

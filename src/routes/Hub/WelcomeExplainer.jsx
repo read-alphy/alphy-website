@@ -215,7 +215,7 @@ export default function WelcomeExplainer({
                   title="YouTube"
                   className="row-span-3 lg:row-span-2 rounded-lg flex min-w-[40px] mx-auto"
                 />
-                <p className=" hidden lg:block  text-md font-averta-regular text-[16px]">
+                <p className=" hidden lg:block  text-md font-normal text-[16px]">
                   YouTube
                 </p>
               </div>
@@ -228,7 +228,7 @@ export default function WelcomeExplainer({
                   title="Twitter / X videos"
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className=" hidden lg:block  text-md font-averta-regular text-[16px]">
+                <p className=" hidden lg:block  text-md font-normal  text-[16px]">
                   Twitter Videos
                 </p>
               </div>
@@ -242,7 +242,7 @@ export default function WelcomeExplainer({
                   title="Twitter / X Spaces"
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className=" hidden lg:block  text-md font-averta-regular text-[16px]">
+                <p className=" hidden lg:block  text-md font-normal text-[16px]">
                   Twitter Spaces
                 </p>
               </div>
@@ -255,7 +255,7 @@ export default function WelcomeExplainer({
                   width={80}
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className=" hidden lg:block  row-span-1 text-md font-averta-regular text-[16px]">
+                <p className=" hidden lg:block  row-span-1 text-md font-normal text-[16px]">
                   Twitch
                 </p>
               </div>
@@ -269,13 +269,18 @@ export default function WelcomeExplainer({
                   title="Apple Podcasts"
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className="hidden lg:block  text-md font-averta-regular text-[16px]">
+                <p className="hidden lg:block  text-md font-normal text-[16px]">
                   Apple Podcasts
                 </p>
               </div>
             </div>
           </div>
-          <div></div>
+
+          {/*           <div>
+
+          Import your meetings
+
+          </div> */}
 
           <div className="mt-10 sm:mt-20 flex flex-col">
             <div className="flex flex-col">

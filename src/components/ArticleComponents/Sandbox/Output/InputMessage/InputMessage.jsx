@@ -29,7 +29,10 @@ export default function InputMessage({ promptType, userPrompt }) {
   let messageObject
   if (promptType) {
     messageObject = inputMessages.find(item => item.command_type === promptType)
-    if (messageObject.command_type === 'custom') {
+    if (
+      messageObject !== undefined &&
+      messageObject.command_type === 'custom'
+    ) {
       messageObject = {
         command_type: 'custom',
         message: userPrompt,
@@ -39,7 +42,7 @@ export default function InputMessage({ promptType, userPrompt }) {
 
   return (
     <div
-      className={`xl: max-w-[800px] w-full  p-6 rounded-lg  right-0 flex flex-col  border-zinc-200 dark:border-zinc-800 bg-slate-50 dark:bg-mildDarkMode`}
+      className={`xl: max-w-[800px] w-full  p-6 rounded-lg  right-0 flex flex-col  border border-slate-100 dark:border-zinc-700  bg-slate-50 dark:bg-mildDarkMode`}
     >
       {/* { <p className="text-zinc-600 dark:text-zinc-300 text-lg">Current Task</p>} */}
       {/* <TwitterIcon

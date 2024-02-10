@@ -82,7 +82,7 @@ function SideFeedReworked({
   return (
     <div
       id="side-feed"
-      className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-zinc-50 min-h-[100vh] sm:max-h-[100vh] ${
+      className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-slate-50 min-h-[100vh] sm:max-h-[100vh] ${
         collapsed ? 'min-w-[60px] max-w-[60px]' : 'w-full sm:min-w-[200px] '
       } flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `}
     >
@@ -140,15 +140,14 @@ function SideFeedReworked({
 
           <div className="pt-10 md:pl-5">
             <div className="flex flex-col w-full justify-start px-2 m">
-              <Shine puffyness="2">
-                <Link
-                  to="/submit"
-                  className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out drop-shadow-sm   text-sm sm:text-md bg-green-100 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
-                >
-                  <AddIcon fontSize="small" className="mr-3" />
-                  <p className="font-averta-semibold">New</p>
-                </Link>
-              </Shine>
+              <Link
+                to="/submit"
+                className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out drop-shadow-sm   text-sm sm:text-md bg-green-100 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
+              >
+                <AddIcon fontSize="small" className="mr-3" />
+                <p className="font-averta-semibold">New</p>
+              </Link>
+
               <div className="flex flex-col w-full justify-start px-3 mt-2 ">
                 <Link
                   to="/myhub"
@@ -363,7 +362,7 @@ function SideFeedReworked({
                 <div className="pl-2">
                   <Link
                     to="/submit"
-                    className={`text-zinc-700 transition duration-300 ease-in-out rounded-full bg-green-100 px-2 py-2 dark:bg-zinc-100 text-md`}
+                    className={`text-zinc-700 transition duration-300 ease-in-out rounded-full  px-2 py-2 dark:bg-zinc-100 text-md`}
                   >
                     <AddIcon className="mb-1" fontSize="small" />
                   </Link>

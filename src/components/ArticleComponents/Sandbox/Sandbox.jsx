@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
+import { API_HOST } from '../../../constants'
 
-export default function Sandbox({
-  data,
-  askAlphyForSandbox,
-  setAskAlphyForSandbox,
-  askText,
-}) {
+export default function Sandbox({ data, askAlphyForSandbox, askText }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [outputMessage, setOutputMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -16,6 +12,7 @@ export default function Sandbox({
   const [userPrompt, setUserPrompt] = useState('')
   const [selectedTool, setSelectedTool] = useState('')
   const [creationCalled, setCreationCalled] = useState(false)
+  const [error, setError] = useState(false)
 
   const theme = localStorage.getItem('theme')
   useEffect(() => {
@@ -99,16 +96,18 @@ export default function Sandbox({
   function createDopeStuff() {
     setOutputMessage('')
     setCreationCalled(true)
+    setIsLoading(true)
 
     const request = {
       source_type: contentDetails.source_type,
       source_id: contentDetails.source_id,
-      source_variant: contentDetails.source_variant,
+      /* source_variant: contentDetails.source_variant, */
       // "source_variant": "transcript",
 
       // TEMPORARILY REQUIRED
       title: contentDetails.source_title,
       creator: contentDetails.creator_name,
+      summary_lang: contentDetails.source_variant === 'summary' ? 'en' : null,
 
       // MUST GIVE manner_custom if manner is custom
       // OMITTABLE
@@ -122,17 +121,20 @@ export default function Sandbox({
 
       // MUST GIVE command_custom if command is custom
       // NOT OMITTABLE
-      command: settings.command_type,
-      command_custom: settings.command_type === 'custom' ? userPrompt : null,
+      command:
+        settings.command_type === 'custom'
+          ? { prompt: userPrompt }
+          : settings.command_type,
     }
-
-    console.log(request)
 
     if (settings.command_type) {
       setPromptType(settings.command_type)
     }
 
-    const ws = new WebSocket('ws://localhost:8000/sandbox')
+    const ws = new WebSocket(`wss://${API_HOST}/sandbox/ws`)
+
+    /* wss://backend-staging-2459.up.railway.app/ws/question */
+    /* wss://backend-staging-2459.up.railway.app/ws/sandbox */
 
     ws.onopen = () => {
       console.log('connected')
@@ -144,11 +146,14 @@ export default function Sandbox({
     }
 
     ws.onclose = event => {
-      console.log(event)
       console.log('closed')
+      setIsLoading(false)
+      setError(true)
     }
     ws.onerror = error => {
       console.error('WebSocket Error:', error)
+      setIsLoading(false)
+      setError(true)
     }
 
     setActiveGenerationZone(false)
@@ -241,6 +246,7 @@ export default function Sandbox({
               promptType={promptType}
               setPromptType={setPromptType}
               createDopeStuff={createDopeStuff}
+              isLoading={isLoading}
             />
           </div>
         </div>

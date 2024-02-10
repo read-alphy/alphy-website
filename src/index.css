@@ -520,6 +520,10 @@ table tr {
   width: 80vw;
 }
 
+.output-message p {
+  margin-top: 15px;
+}
+
 .main-page-feed-section h1 {
   font-size: 30px;
   font-weight: 600;

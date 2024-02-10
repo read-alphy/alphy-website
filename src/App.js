@@ -137,7 +137,6 @@ function App() {
         })
         setShowWelcomeForm(false)
       } else {
-        console.log('hey')
         setUserMetadata({ ...userMetadata, show_welcome_form: 'true' })
         addToUserMetadata(currentUser.accessToken, {
           show_welcome_form: 'true',

@@ -307,7 +307,7 @@ function Article({
 
         <div
           className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${
-            collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-zinc-50'
+            collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-slate-50'
           }`}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">

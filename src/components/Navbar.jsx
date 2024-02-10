@@ -126,7 +126,7 @@ function Navbar({ collapsed, setCollapsed }) {
               onClick={() => setCollapsed(!collapsed)}
               className={`hidden lg:flex rounded-full bg-opacity-0 hover:bg-opacity-60 hover:bg-zinc-200 dark:hover:bg-zinc-700 ml-40  mr-4 p-1 transition duration-300 ease-in-out ${
                 collapsed
-                  ? ' lg:hidden bg-zinc-50 dark:bg-darkMode'
+                  ? ' lg:hidden bg-slate-50 dark:bg-darkMode'
                   : ' bg-zinc-100 dark:bg-mildDarkMode  justify-end  '
               }  `}
             >

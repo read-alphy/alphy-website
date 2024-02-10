@@ -85,7 +85,10 @@ export default function Content({
 
   let contentSummaries = []
 
-  const transcript_raw = props.data.transcript
+  let transcript_raw = ''
+  if (props.data) {
+    transcript_raw = props.data.transcript
+  }
 
   const ref = useRef(null)
 

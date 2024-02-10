@@ -30,7 +30,7 @@ export default function InputArea({
     resizeTextarea()
   }, [userPrompt])
 
-  const prompt_quoteGetter = `Extract and compile a comprehensive list of quotes related to the talking points I specify. Focus on identifying and presenting all mentions, discussions, and analyses that directly pertain to the talking points. For instance, if my talking point is "generative AI", I want you to get a comprehensive list of quotes from the conversation about generative AI.\n\n Here are the talking points:  [TALKING POINTS]`
+  const prompt_quoteGetter = `Extract and compile a comprehensive list of quotes related to the talking points I specify with the timestamps. Focus on identifying and presenting all mentions, discussions, and analyses that directly pertain to the talking points. For instance, if my talking point is "generative AI", I want you to get a comprehensive list of quotes from the conversation about generative AI with the timestamps.\n\n Here are the talking points:  [TALKING POINTS]`
   const prompt_summarizer = `Summarize the conversation by focusing on the following subjects : [SUBJECTS]`
 
   return (
