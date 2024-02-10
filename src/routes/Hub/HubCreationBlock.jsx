@@ -42,17 +42,27 @@ export default function HubCreationBlock({
     }
   }
 
-  if (localStorage.getItem('newItem') !== null) {
-    if (localStorage.getItem('newItem') === 'link') {
-      setSubmitDialog(true)
+  console.log(localStorage.getItem('newItem'))
+
+  useEffect(() => {
+    if (localStorage.getItem('newItem') !== null) {
+      if (localStorage.getItem('newItem') === 'link') {
+        setSubmitDialog(true)
+        setUploadDialog(false)
+        localStorage.setItem('newItem', null)
+        sessionStorage.setItem('navigatedFromMainPage', 'true')
+      } else if (localStorage.getItem('newItem') === 'upload') {
+        setUploadDialog(true)
+        setSubmitDialog(false)
+        localStorage.setItem('newItem', null)
+        sessionStorage.setItem('navigatedFromMainPage', 'true')
+      }
       localStorage.setItem('newItem', null)
-      sessionStorage.setItem('navigatedFromMainPage', 'true')
-    } else if (localStorage.getItem('newItem') === 'upload') {
-      setUploadDialog(true)
-      localStorage.setItem('newItem', null)
-      sessionStorage.setItem('navigatedFromMainPage', 'true')
+    } else {
+      setSubmitDialog(false)
+      setUploadDialog(false)
     }
-  }
+  }, [localStorage.getItem('newItem')])
 
   useEffect(() => {
     function handleResize() {

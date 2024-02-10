@@ -58,6 +58,7 @@ function App() {
   const [userMetadata, setUserMetadata] = useState('')
   const [showWelcomeForm, setShowWelcomeForm] = useState(false)
   const [welcomeFormCalled, setWelcomeFormCalled] = useState(false)
+  const [totalMinutes, setTotalMinutes] = useState(0)
 
   const [customerID, setCustomerID] = useState('')
   const [userArcsCalled, setUserArcsCalled] = useState(false)
@@ -597,6 +598,8 @@ function App() {
                     tier={tier}
                     contentName={contentName}
                     setContentName={setContentName}
+                    totalMinutes={totalMinutes}
+                    setTotalMinutes={setTotalMinutes}
                   />
                 }
               ></Route>

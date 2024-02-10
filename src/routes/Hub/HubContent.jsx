@@ -27,13 +27,19 @@ export default function HubContent({
   mainShow,
   collapsed,
   setCollapsed,
+  totalMinutes,
+  setTotalMinutes,
 }) {
   return (
     <div className="">
       {globalLayout &&
         (mainShow == 'default' ? (
           <div className="pt-10 md:pt-16 3xl:pt-20 overflow-x-hidden ">
-            <WelcomeExplainer currentUser={currentUser} />
+            <WelcomeExplainer
+              currentUser={currentUser}
+              totalMinutes={totalMinutes}
+              setTotalMinutes={setTotalMinutes}
+            />
           </div>
         ) : (
           <div>

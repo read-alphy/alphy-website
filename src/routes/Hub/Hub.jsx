@@ -19,6 +19,8 @@ function Hub({
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
   getDataGlobalArchipelagos,
+  totalMinutes,
+  setTotalMinutes,
 }) {
   const location = useLocation()
 
@@ -153,6 +155,8 @@ function Hub({
                 setMainShow={setMainShow}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
+                totalMinutes={totalMinutes}
+                setTotalMinutes={setTotalMinutes}
               />
             </div>
           )}

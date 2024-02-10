@@ -16,14 +16,18 @@ import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
 import AudioFileIcon from '@mui/icons-material/AudioFile'
 
-export default function WelcomeExplainer({ currentUser }) {
-  const [totalMinutes, setTotalMinutes] = useState(0)
-
-  axios.get(`${API_URL}/stats`).then(res => {
-    if (res.data.total_mins !== undefined && res.data.total_mins !== null) {
-      setTotalMinutes(res.data.total_mins)
-    }
-  })
+export default function WelcomeExplainer({
+  currentUser,
+  totalMinutes,
+  setTotalMinutes,
+}) {
+  if (totalMinutes === 0) {
+    axios.get(`${API_URL}/stats`).then(res => {
+      if (res.data.total_mins !== undefined && res.data.total_mins !== null) {
+        setTotalMinutes(res.data.total_mins)
+      }
+    })
+  }
 
   const scrollToLanguages = () => {
     document.getElementById('languages').scrollIntoView({ behavior: 'smooth' })
@@ -119,7 +123,7 @@ export default function WelcomeExplainer({ currentUser }) {
             {currentUser ? (
               <Link
                 to="/submit"
-                onClick={localStorage.setItem('newItem', 'upload')}
+                onClick={() => localStorage.setItem('newItem', 'upload')}
                 className="rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-none flex flex-row dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 font-averta-semibold drop-shadow-sm px-2"
               >
                 <svg
@@ -170,7 +174,7 @@ export default function WelcomeExplainer({ currentUser }) {
               <span>Transcribe and use AI on more than</span>
               <span
                 onClick={() => scrollToLanguages()}
-                className="text-blue-500 cursor-pointer ml-1"
+                className="text-blue-500 dark:text-blue-400 cursor-pointer ml-1"
               >
                 {' '}
                 40 languages
@@ -180,7 +184,7 @@ export default function WelcomeExplainer({ currentUser }) {
             <div className="flex flex-row mt-6">
               {languages.map(language => (
                 <img
-                  className="rounded-full object-cover w-10 h-10 border border-green-100"
+                  className="rounded-full object-cover w-10 h-10 border border-green-100 dark:border-zinc-800 mx-1"
                   src={`https://flagcdn.com/w80/${language.country_code}.png`}
                   alt={language.language}
                 />
