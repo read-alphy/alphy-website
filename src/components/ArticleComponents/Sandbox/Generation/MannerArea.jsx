@@ -143,12 +143,12 @@ export default function MannerArea({ theme, settings, setSettings }) {
   )
 
   return (
-    <div className="overflow-x-scroll content-area">
-      <p className="mb-6  ml-2 text-md text-zinc-500 dark:text-zinc-300 w-fit">
+    <div className="">
+      <p className="mb-6 pt-2  ml-2 text-md text-zinc-500 dark:text-zinc-300">
         Pick your Agent (optional)
       </p>
       <RadioGroup
-        className="w-[600px] pl-0.5 "
+        className="w-screen overflow-x-scroll content-area lg:w-[600px] pl-0.5 "
         aria-label="platform"
         defaultValue="Website"
         overlay

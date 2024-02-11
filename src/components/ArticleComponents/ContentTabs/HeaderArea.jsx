@@ -113,7 +113,7 @@ export default function HeaderArea({
       }`}
     >
       <div
-        className={`col-span-2 lg:col-span-3 xl:mt-0 ${
+        className={`col-span-2 pl-2 lg:col-span-3 xl:mt-0 ${
           transcript.length > 0 &&
           summary != undefined &&
           language == summary.lang

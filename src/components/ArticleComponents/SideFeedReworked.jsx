@@ -25,6 +25,7 @@ function SideFeedReworked({
   globalLayout,
   dataArchipelago,
   tier,
+  isSandbox,
 }) {
   const { currentUser } = useAuth()
   const [firstTimePersonal, setFirstTimePersonal] = useState(true)
@@ -88,7 +89,7 @@ function SideFeedReworked({
     >
       {!collapsed ? (
         <div className="flex flex-col flex-grow ">
-          <div className={`flex items-center font-bold pt-8 relative`}>
+          <div className={`flex items-center font-bold pt-4 sm:pt-8 relative`}>
             <Link
               to="/"
               className="text-zinc-800 dark:text-gray-200 pl-4 sm:pl-6 "
@@ -142,7 +143,7 @@ function SideFeedReworked({
             <div className="flex flex-col w-full justify-start px-2 m">
               <Link
                 to="/submit"
-                className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out drop-shadow-sm   text-sm sm:text-md bg-green-100 text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
+                className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out drop-shadow-sm   text-sm sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-100 via-blue-100 to-sky-200  text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
               >
                 <AddIcon fontSize="small" className="mr-3" />
                 <p className="font-averta-semibold">New</p>
@@ -335,7 +336,7 @@ function SideFeedReworked({
                   ></img>
 
                   <div className="absolute z-50 pl-1 pt-1">
-                    <button className="opacity-0 hover:opacity-100 hover:text-zinc-100 dark:hover:text-zinc-100 hover:block text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-green-300 dark:hover:bg-green-300 hover:transition  hover:ease-in-out duration-300 p-1 ">
+                    <button className="opacity-0 hover:opacity-100 hover:text-sky-800 dark:hover:text-zinc-800 hover:block text-zinc-500 dark:text-zinc-800 cursor-pointer rounded-full hover:bg-sky-100 dark:hover:bg-white hover:transition  hover:ease-in-out duration-300 p-1 ">
                       <svg
                         onClick={() => setCollapsed(true)}
                         className="feather feather-chevron-left  rotate-180"
@@ -362,7 +363,7 @@ function SideFeedReworked({
                 <div className="pl-2">
                   <Link
                     to="/submit"
-                    className={`text-zinc-700 transition duration-300 ease-in-out rounded-full  px-2 py-2 dark:bg-zinc-100 text-md`}
+                    className={`text-zinc-700 transition duration-300 ease-in-out rounded-full  px-2 py-2 dark:text-zinc-200 dark:hover:text-white text-md`}
                   >
                     <AddIcon className="mb-1" fontSize="small" />
                   </Link>
@@ -370,7 +371,7 @@ function SideFeedReworked({
 
                 <Link
                   to="/myhub"
-                  className={` pl-4 flex flex-row py-3 mt-6 text-zinc-500 dark:text-zinc-300	 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
+                  className={` pl-4 flex flex-row py-3 mt-6 text-zinc-500 dark:text-zinc-300	 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-white  transition duration-300 ease-in-out`}
                 >
                   <svg
                     className="mr-3 mt-0.5 feather feather-layers "
@@ -391,7 +392,7 @@ function SideFeedReworked({
                 </Link>
                 <Link
                   to="/"
-                  className={` pl-4 text-zinc-500 dark:text-zinc-300 flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
+                  className={` pl-4 text-zinc-500 dark:text-zinc-300 flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-white transition duration-300 ease-in-out`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

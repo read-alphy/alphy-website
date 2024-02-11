@@ -34,14 +34,14 @@ export default function InputArea({
   const prompt_summarizer = `Summarize the conversation by focusing on the following subjects : [SUBJECTS]`
 
   return (
-    <div className="flex flex-col mt-10 ">
+    <div className="flex flex-col mt-10 pr-4 sm:pr-0">
       <p className="font-medium  text-md  text-zinc-500 ml-2 dark:text-zinc-300">
         Tell what you want to generate
       </p>
       <textarea
         ref={textareaRef}
-        className="  text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-zinc-900  dark:border-zinc-700 rounded-lg w-[100  %] mt-4 mx-2 md:mx-0  
-        margin-auto min-h-[10vh] max-h-[300px]  resize-none dark:focus:border-zinc-700 focus:border-zinc-200 border border-zinc-200 placeholder:text-sm"
+        className="  text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-zinc-900  dark:border-zinc-700 rounded-lg w-[100%] mt-4 md:mx-0  
+        margin-auto min-h-[20vh] max-h-[400px] sm:min-h-[10vh] sm:max-h-[300px]  resize-none dark:focus:border-zinc-700 focus:border-zinc-200 border border-zinc-200 placeholder:text-sm"
         onInput={resizeTextarea}
         onChange={resizeTextarea}
         value={userPrompt}

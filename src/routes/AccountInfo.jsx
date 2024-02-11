@@ -217,9 +217,16 @@ export default function AccountInfo({
 
  */}
 
-              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl  mb-10 mt-20 font-averta-semibold">
+              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-xl 2xl:text-2xl  mt-20 font-averta-semibold">
                 Manage Subscription{' '}
               </p>
+              {tier !== 'premium' && (
+                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
+                  Upgrade to have extra transcription credits, submit from
+                  multiple platforms, upload audio files, and access most
+                  capable AI models.
+                </p>
+              )}
 
               {tier !== 'free' ? (
                 <a
@@ -307,9 +314,17 @@ export default function AccountInfo({
                 ) : null}
               </div>
 
-              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-2xl font-semibold mt-20 mb-10">
+              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-xl xl:text-2xl font-semibold mt-20 mb-10">
                 Manage Subscription{' '}
               </p>
+
+              {tier !== 'premium' && (
+                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
+                  Upgrade to have extra transcription credits, submit from
+                  multiple platforms, upload audio files, and access most
+                  capable AI models.
+                </p>
+              )}
               {currentUser ? (
                 <div className="items-center flex flex-col justify-center">
                   {tier !== 'free' ? (
@@ -329,7 +344,7 @@ export default function AccountInfo({
             </div>
           )}
 
-          <div className="flex  gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8  mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">
+          <div className="flex  px-4 gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8  mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">
             <FreeCard
               currentUser={currentUser}
               tier={tier}

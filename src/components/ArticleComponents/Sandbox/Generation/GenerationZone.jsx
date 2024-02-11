@@ -50,7 +50,7 @@ export default function GenerationZone({
   return (
     <div className="mt-6   h-full  flex flex-col  px-2 sm:px-0">
       <div
-        className={`max-w-[800px]  font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
+        className={`lg:max-w-[800px]  font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
           !toolboxActive && outputMessage.length === 0
             ? 'opacity-100 delay-300 '
             : 'opacity-0  pointer-events-none   '
@@ -63,11 +63,11 @@ export default function GenerationZone({
         className={` ${
           selectedTool === 'custom' &&
           'bg-slate-50 dark:bg-mildDarkMode rounded-lg w-fit mb-4'
-        } p-2`}
+        } sm:p-2`}
       >
         {
           <div
-            className={` lg:max-w-[800px] w-full overflow-hidden transition-[max-height] duration-300 px-2 ease-in-out ${
+            className={` lg:max-w-[800px] w-full overflow-hidden  transition-[max-height] duration-300 sm:px-2 ease-in-out ${
               toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
             }`}
           >
@@ -80,7 +80,7 @@ export default function GenerationZone({
         }
 
         <div
-          className={` max-w-[800px] w-fit overflow-hidden transition-[max-height] duration-300 ease-in-out rounded-md pb-4 px-2 ${
+          className={`lg:max-w-[800px] w-fit  overflow-hidden  transition-[max-height] duration-300 ease-in-out rounded-md pb-4 sm:px-2 ${
             selectedTool === 'custom' ? 'max-h-[100%]' : 'max-h-0 '
           }`}
         >
@@ -102,7 +102,7 @@ export default function GenerationZone({
             />
           </div>
 
-          <div className={`flex flex-row justify-end mt-4 -ml-6 mr-2`}>
+          <div className={`flex flex-row justify-end mt-4 -ml-6 mr-4 sm:mr-2`}>
             <div className="hidden md:flex">
               <Settings
                 settings={settings}

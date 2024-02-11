@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
-import { API_HOST } from '../../../constants'
+import { API_HOST, API_URL } from '../../../constants'
+import axios from 'axios'
 
 export default function Sandbox({ data, askAlphyForSandbox, askText }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
@@ -163,6 +164,14 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
     setGeneratedPrompt(generated_prompt)
     setOutputMessage(generated_prompt) */
   }
+
+  function getHistory() {
+    axios.get(`${API_URL}/sandbox/?user_id=local`).then(response => {
+      console.log(response.data)
+    })
+  }
+
+  getHistory()
 
   return (
     <div className="min-h-[70vh] w-full ">

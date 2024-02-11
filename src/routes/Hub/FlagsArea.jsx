@@ -65,7 +65,7 @@ export default function FlagsArea() {
   return (
     <div
       id="languages"
-      className="w-full  mt-20 xl:mt-40 overflow-hidden pb-10"
+      className="w-full  pt-20 xl:pt-40 overflow-hidden pb-10"
     >
       <p className="text-xl xl:text-2xl  pl-4 text-zinc-800 dark:text-zinc-300 font-averta-semibold">
         Supported Languages

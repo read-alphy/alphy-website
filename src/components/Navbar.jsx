@@ -109,15 +109,15 @@ function Navbar({ collapsed, setCollapsed }) {
               className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]"
             ></div>
           )}
-          <Link to={'/'} className="dark:text-gray-200 pl-4 ">
+          <Link to={'/'} className="text-zinc-800 dark:text-gray-200 pl-4 ">
             <div className="flex-row flex">
-              <img src={Logo} width={50} className="hidden dark:block"></img>
-              {/* <img
+              <img src={Logo} width={40} className="hidden dark:block"></img>
+              <img
                 src={LogoBlack}
-                width={50}
+                width={40}
                 className="dark:hidden opacity-80 "
-              ></img> */}
-              <h1 className="ml-2 mt-2 text-2xl">ALPHY</h1>
+              ></img>
+              <h1 className="ml-1 mt-1 text-2xl">ALPHY</h1>
             </div>
           </Link>
 

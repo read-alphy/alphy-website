@@ -306,7 +306,7 @@ export default function ReadComponent({
               </button>
 
               <div
-                className={`col-span-2 ${
+                className={`col-span-2  ${
                   data.source_type === 'yt' && ''
                 } drop-shadow-sm `}
               >
