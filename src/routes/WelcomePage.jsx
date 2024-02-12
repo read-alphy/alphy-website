@@ -75,6 +75,7 @@ function WelcomePage({
         {
           <div className={`flex hidden sm:block dark:bg-mildDarkMode`}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
@@ -91,6 +92,7 @@ function WelcomePage({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}

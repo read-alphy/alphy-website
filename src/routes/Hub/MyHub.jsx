@@ -19,6 +19,8 @@ function Hub({
   userArchipelagos,
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
+  sandboxHistory,
+  setSandboxHistory,
 }) {
   let source_id
 
@@ -73,6 +75,7 @@ function Hub({
         {
           <div className={`hidden sm:block`}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
@@ -83,6 +86,8 @@ function Hub({
               submitLayout={submitLayout}
               setSubmitLayout={setSubmitLayout}
               tier={tier}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -95,6 +100,7 @@ function Hub({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
                 globalLayout={globalLayout}
@@ -104,6 +110,8 @@ function Hub({
                 submitLayout={submitLayout}
                 setSubmitLayout={setSubmitLayout}
                 tier={tier}
+                sandboxHistory={sandboxHistory}
+                setSandboxHistory={setSandboxHistory}
               />
             </div>
           </div>

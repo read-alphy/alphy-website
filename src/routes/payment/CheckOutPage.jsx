@@ -15,6 +15,8 @@ export default function CheckOutPage({
   showWelcomeForm,
   stripePromise,
   userArchipelagos,
+  sandboxHistory,
+  setSandboxHistory,
 }) {
   const [clientSecret, setClientSecret] = useState('')
 
@@ -66,10 +68,13 @@ export default function CheckOutPage({
         {
           <div className={`hidden sm:block`}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               hasActiveSub={hasActiveSub}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -82,10 +87,13 @@ export default function CheckOutPage({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
                 hasActiveSub={hasActiveSub}
+                sandboxHistory={sandboxHistory}
+                setSandboxHistory={setSandboxHistory}
               />
             </div>
           </div>

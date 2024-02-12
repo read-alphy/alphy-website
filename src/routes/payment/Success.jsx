@@ -15,6 +15,9 @@ function Success({
   tier,
   customerID,
   credit,
+
+  sandboxHistory,
+  setSandboxHistory,
 }) {
   let source_id
 
@@ -68,10 +71,13 @@ function Success({
         {
           <div className={`flex hidden sm:block dark:bg-mildDarkMode`}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               tier={tier}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -84,10 +90,13 @@ function Success({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
                 tier={tier}
+                sandboxHistory={sandboxHistory}
+                setSandboxHistory={setSandboxHistory}
               />
             </div>
           </div>

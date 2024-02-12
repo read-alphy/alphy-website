@@ -34,6 +34,8 @@ function CrossVideo({
   credit,
   setContentName,
   setCreditCalled,
+  sandboxHistory,
+  setSandboxHistory,
 }) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -322,11 +324,14 @@ function CrossVideo({
         {
           <div className={`hidden ${isArc ? 'md:block' : 'sm:block'} `}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               dataArchipelago={dataArchipelago}
               tier={tier}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -341,11 +346,14 @@ function CrossVideo({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
                 dataArchipelago={dataArchipelago}
                 tier={tier}
+                sandboxHistory={sandboxHistory}
+                setSandboxHistory={setSandboxHistory}
               />
             </div>
           </div>

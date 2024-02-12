@@ -292,8 +292,9 @@ export default function Settings({
               useTranscriptExplanation === true ? ' opacity-100' : '  opacity-0'
             } duration-200 ease-in-out  text-zinc-400 dark:text-zinc-400 text-sm `}
           >
-            By default, Sandbox uses summaries. Switching to transcripts will
-            cover more details, but the process may take longer.
+            Custom creations work on summaries by default. Switching to
+            transcripts will cover more details, but the process may take
+            longer.
           </span>
         </div>
       }

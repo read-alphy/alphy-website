@@ -15,6 +15,7 @@ import WorkIcon from '@mui/icons-material/Work'
 import ShowChartIcon from '@mui/icons-material/ShowChart'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
 import GraphicEqIcon from '@mui/icons-material/GraphicEq'
+import { inputMessages } from '../messageBank'
 
 export default function Toolbox({
   theme,
@@ -78,10 +79,10 @@ export default function Toolbox({
             </div>
 
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
-              Custom Creation
+              {inputMessages.find(obj => obj.command_type === 'custom').title}{' '}
             </p>
             <p className="row-span-1 text-sm font-averta-regular text-zinc-500 dark:text-zinc-400 dark:text-zinc-400 ">
-              Create content from the conversation with your own prompt.
+              {inputMessages.find(obj => obj.command_type === 'custom').message}{' '}
             </p>
 
             <div
@@ -119,10 +120,16 @@ export default function Toolbox({
               }}
             />
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
-              Twitter Thread
+              {
+                inputMessages.find(obj => obj.command_type === 'twitter_thread')
+                  .title
+              }
             </p>
             <p className="row-span-1 text-sm font-averta-regular text-zinc-500 dark:text-zinc-400 dark:text-zinc-400 ">
-              Write an engaging Twitter thread from the conversation.
+              {
+                inputMessages.find(obj => obj.command_type === 'twitter_thread')
+                  .message
+              }
             </p>
 
             <div
@@ -167,11 +174,16 @@ export default function Toolbox({
           >
             <GraphicEqIcon className="row-span-1" sx={{ color: '#818cf8' }} />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Audiogram
+              {
+                inputMessages.find(obj => obj.command_type === 'audiogram')
+                  .title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Give me 5 moments from the conversation that would go well as an
-              audiogram.
+              {
+                inputMessages.find(obj => obj.command_type === 'audiogram')
+                  .message
+              }
             </p>
             <div
               className={`${
@@ -226,10 +238,16 @@ export default function Toolbox({
               />
             </svg>
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Blog Post
+              {
+                inputMessages.find(obj => obj.command_type === 'blog_post')
+                  .title
+              }{' '}
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Turn the conversation into an easily accessible blog post.
+              {
+                inputMessages.find(obj => obj.command_type === 'blog_post')
+                  .message
+              }
             </p>
 
             <div
@@ -279,11 +297,18 @@ export default function Toolbox({
               sx={{ color: '#ef8e19' }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Investment Analysis
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'investment_analysis'
+                ).title
+              }{' '}
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Spot investment opportunities with associated risks and further
-              action items.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'investment_analysis'
+                ).message
+              }
             </p>
 
             <div
@@ -344,10 +369,18 @@ export default function Toolbox({
               sx={{ color: `${theme === 'light' ? '#64748b' : '#cbd5e1'}` }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Newsletter
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'newsletter_generator'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Turn the conversation into a newsletter ready for sending readers.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'newsletter_generator'
+                ).message
+              }
             </p>
 
             <div
@@ -399,11 +432,18 @@ export default function Toolbox({
               sx={{ color: '#facc15' }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Highlights
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'highlight_generator'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Get me the most impactful and interesting parts of the
-              conversation.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'highlight_generator'
+                ).message
+              }
             </p>
 
             <div
@@ -453,11 +493,16 @@ export default function Toolbox({
               sx={{ color: '#dc2626' }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              YouTube Shorts
+              {
+                inputMessages.find(obj => obj.command_type === 'youtube_shorts')
+                  .title
+              }{' '}
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Give me 5 moments from the conversation that would create engaging
-              YouTube Shorts.
+              {
+                inputMessages.find(obj => obj.command_type === 'youtube_shorts')
+                  .message
+              }
             </p>
 
             <div
@@ -512,8 +557,11 @@ export default function Toolbox({
               YouTube Video Ideas
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Generate new YouTube video ideas from this content with themes and
-              segments.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'video_topic_generator'
+                ).message
+              }
             </p>
 
             <div
@@ -565,10 +613,18 @@ export default function Toolbox({
               sx={{ color: '#dc2626' }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              YouTube Video Description
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'video_description'
+                ).title
+              }{' '}
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Write a compelling description for this YouTube video.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'video_description'
+                ).message
+              }
             </p>
 
             <div
@@ -620,10 +676,18 @@ export default function Toolbox({
               sx={{ color: '#7366d7' }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Twitter Space Idea
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_idea_generator'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Come up with a new Twitter Space idea based on this content.{' '}
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_idea_generator'
+                ).message
+              }
             </p>
 
             <div
@@ -675,11 +739,18 @@ export default function Toolbox({
               sx={{ color: '#7366d7' }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Twitter Space Description
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_description_generator'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Create an impactful tweet describing this Twitter Space to
-              encourage replays.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_description_generator'
+                ).message
+              }
             </p>
 
             <div
@@ -733,11 +804,18 @@ export default function Toolbox({
               sx={{ color: `${theme === 'light' ? '#64748b' : '#cbd5e1'}` }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              SEO Keyword Extractor
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'keyword_identifier'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Extract the main keywords from the conversation to use in my SEO
-              strategy.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'keyword_identifier'
+                ).message
+              }
             </p>
 
             <div
@@ -787,11 +865,18 @@ export default function Toolbox({
               sx={{ color: `${theme === 'light' ? '#22c55e' : '#22c55e'}` }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Actionables
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'get_actionables'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Outline clear and specific action steps from the content to
-              implement its insights.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'get_actionables'
+                ).message
+              }
             </p>
 
             <div
@@ -841,11 +926,18 @@ export default function Toolbox({
               sx={{ color: `${theme === 'light' ? '#64748b' : '#cbd5e1'}` }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Pop Quiz
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'generate_quizzes'
+                ).title
+              }{' '}
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Craft a pop quiz from the content to assess understanding of key
-              points and facts.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'generate_quizzes'
+                ).message
+              }
             </p>
 
             <div
@@ -897,11 +989,18 @@ export default function Toolbox({
               sx={{ color: `${theme === 'light' ? '#a16207' : '#422006'}` }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Executive Brief
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'executive_brief_composer'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Write an executive brief highlighting key insights and strategic
-              recommendations.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'executive_brief_composer'
+                ).message
+              }
             </p>
 
             <div
@@ -955,11 +1054,18 @@ export default function Toolbox({
               sx={{ color: `${theme === 'light' ? '#86efac' : '#86efac'}` }}
             />
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              Financial Insights
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'investment_insight_extractor'
+                ).title
+              }
             </p>
             <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              Identify and elaborate on key information for retail investors
-              from content.
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'investment_insight_extractor'
+                ).message
+              }
             </p>
 
             <div

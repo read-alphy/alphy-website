@@ -42,7 +42,6 @@ export default function WelcomeExplainer({
     { language: 'French', country_code: 'fr' }, // France
   ]
 
-  console.log(currentUser)
   return (
     <div>
       <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 3xl:pl-40  overflow-hidden pb-10">

@@ -58,6 +58,7 @@ function Pricing({ currentUser, collapsed, setCollapsed, tier, credit }) {
             className={`flex hidden sm:block mr-5 bg-zinc-100 dark:bg-mildDarkMode`}
           >
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
@@ -74,6 +75,7 @@ function Pricing({ currentUser, collapsed, setCollapsed, tier, credit }) {
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}

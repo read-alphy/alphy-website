@@ -15,6 +15,8 @@ function NotFound({
   setShowWelcomeForm,
   showWelcomeForm,
   userArchipelagos,
+  sandboxHistory,
+  setSandboxHistory,
 }) {
   let source_id
 
@@ -60,10 +62,13 @@ function NotFound({
         {
           <div className={`hidden lg:block`}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               tier={tier}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -76,10 +81,13 @@ function NotFound({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
                 tier={tier}
+                sandboxHistory={sandboxHistory}
+                setSandboxHistory={setSandboxHistory}
               />
             </div>
           </div>

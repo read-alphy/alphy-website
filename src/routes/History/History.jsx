@@ -1,41 +1,28 @@
-import React, {
-  useCallback,
-  useState,
-  useMemo,
-  useEffect,
-  useRef,
-  memo,
-} from 'react'
-import SideFeedReworked from '../components/ArticleComponents/SideFeedReworked'
-// import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked'
 
-import Loading from '../components/Loading'
-import axios from 'axios'
+import HistoryInfo from './HistoryInfo'
+
+import Loading from '../../components/Loading'
+
 import { Helmet } from 'react-helmet'
-import AuthInfo from './AuthInfo'
 
-function Auth({
-  currentUser,
+export default function History({
+  source_type,
   collapsed,
   setCollapsed,
   tier,
-  setShowWelcomeForm,
-  showWelcomeForm,
+  setContentName,
   userArchipelagos,
+  currentUser,
   sandboxHistory,
   setSandboxHistory,
 }) {
-  const location = useLocation()
-  const navigate = useNavigate()
-
   let source_id
 
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
-
-  const [subCalled, setSubCalled] = useState(false)
 
   useEffect(() => {
     if (!windowSizeChecked) {
@@ -46,14 +33,10 @@ function Auth({
     }
   })
 
-  const handleCollapse = () => {
-    setCollapsed(!collapsed)
-  }
-
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
       <Helmet>
-        <title>Alphy - Start Your Journey</title>
+        <title>Alphy - About</title>
       </Helmet>
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
@@ -70,6 +53,8 @@ function Auth({
               setCollapsed={setCollapsed}
               source_id={source_id}
               tier={tier}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -98,20 +83,18 @@ function Auth({
           className={`${
             collapsed ? 'scrolling' : 'scrolling'
           } md:px-0  w-full max-h-[90vh] sm:max-h-[100vh] ${
-            collapsed ? 'hidden' : ' overflow-hidden'
+            collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
           }}`}
         >
           {isLoading ? (
             <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />
           ) : (
-            <AuthInfo
+            <HistoryInfo
               tier={tier}
               currentUser={currentUser}
-              showWelcomeForm={showWelcomeForm}
-              setShowWelcomeForm={setShowWelcomeForm}
-              userArchipelagos={userArchipelagos}
               sandboxHistory={sandboxHistory}
               setSandboxHistory={setSandboxHistory}
+              userArchipelagos={userArchipelagos}
             />
           )}
         </div>
@@ -119,5 +102,3 @@ function Auth({
     </div>
   )
 }
-
-export default Auth

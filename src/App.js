@@ -15,6 +15,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import CheckOutPage from './routes/payment/CheckOutPage'
 import Success from './routes/payment/Success'
 import Account from './routes/Account'
+import History from './routes/History/History'
 
 import axios from 'axios'
 import { Helmet } from 'react-helmet'
@@ -59,6 +60,7 @@ function App() {
   const [showWelcomeForm, setShowWelcomeForm] = useState(false)
   const [welcomeFormCalled, setWelcomeFormCalled] = useState(false)
   const [totalMinutes, setTotalMinutes] = useState(0)
+  const [sandboxHistory, setSandboxHistory] = useState([])
 
   const [customerID, setCustomerID] = useState('')
   const [userArcsCalled, setUserArcsCalled] = useState(false)
@@ -155,6 +157,18 @@ function App() {
       getCustomerInfo(currentUser)
     }
   }, [currentUser, called])
+
+  const getSandboxHistory = () => {
+    axios.get(`${API_URL}/sandbox/?user_id=local`).then(response => {
+      setSandboxHistory(response.data)
+    })
+  }
+
+  useEffect(() => {
+    if (sandboxHistory.length === 0) {
+      getSandboxHistory()
+    }
+  }, [sandboxHistory])
 
   useEffect(() => {
     if (verification) {
@@ -322,6 +336,8 @@ function App() {
                     currentUser={currentUser}
                     idToken={idToken}
                     userArchipelagos={userArchipelagos}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -338,6 +354,8 @@ function App() {
                     currentUser={currentUser}
                     idToken={idToken}
                     userArchipelagos={userArchipelagos}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -354,6 +372,8 @@ function App() {
                     currentUser={currentUser}
                     idToken={idToken}
                     userArchipelagos={userArchipelagos}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -370,6 +390,8 @@ function App() {
                     currentUser={currentUser}
                     idToken={idToken}
                     userArchipelagos={userArchipelagos}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -386,6 +408,8 @@ function App() {
                     currentUser={currentUser}
                     idToken={idToken}
                     userArchipelagos={userArchipelagos}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -402,10 +426,12 @@ function App() {
                     currentUser={currentUser}
                     idToken={idToken}
                     userArchipelagos={userArchipelagos}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
-
+              {/* 
               <Route
                 path="/archipelago/:archipelago_ID"
                 element={
@@ -453,7 +479,7 @@ function App() {
                 }
               >
                 {' '}
-              </Route>
+              </Route> */}
 
               <Route
                 path="/arc/:arc_ID"
@@ -464,9 +490,30 @@ function App() {
                     setCollapsed={setCollapsed}
                     tier={tier}
                     setContentName={setContentName}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
+              <Route
+                path="/history"
+                element={
+                  <History
+                    collapsed={collapsed}
+                    setCollapsed={setCollapsed}
+                    source_type={'yt'}
+                    tier={tier}
+                    contentName={contentName}
+                    setContentName={setContentName}
+                    currentUser={currentUser}
+                    idToken={idToken}
+                    userArchipelagos={userArchipelagos}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
+                  />
+                }
+              />
+
               <Route
                 path="/arc/createArc"
                 element={
@@ -481,6 +528,8 @@ function App() {
                     setContentName={setContentName}
                     credit={credit}
                     setCreditCalled={setCreditCalled}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               >
@@ -501,6 +550,8 @@ function App() {
                     setContentName={setContentName}
                     credit={credit}
                     setCreditCalled={setCreditCalled}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               >
@@ -525,6 +576,8 @@ function App() {
                     setContentName={setContentName}
                     totalMinutes={totalMinutes}
                     setTotalMinutes={setTotalMinutes}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -543,6 +596,8 @@ function App() {
                     tier={tier}
                     contentName={contentName}
                     setContentName={setContentName}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -563,6 +618,8 @@ function App() {
                     tier={tier}
                     contentName={contentName}
                     setContentName={setContentName}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -581,6 +638,8 @@ function App() {
                     tier={tier}
                     contentName={contentName}
                     setContentName={setContentName}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -599,6 +658,8 @@ function App() {
                     tier={tier}
                     contentName={contentName}
                     setContentName={setContentName}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -616,6 +677,9 @@ function App() {
                     tier={tier}
                     showWelcomeForm={showWelcomeForm}
                     setShowWelcomeForm={setShowWelcomeForm}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -628,6 +692,9 @@ function App() {
                     tier={tier}
                     showWelcomeForm={showWelcomeForm}
                     setShowWelcomeForm={setShowWelcomeForm}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -640,6 +707,9 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     tier={tier}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -652,6 +722,8 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     tier={tier}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -666,6 +738,8 @@ function App() {
                     setCollapsed={setCollapsed}
                     tier={tier}
                     currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -673,7 +747,12 @@ function App() {
               <Route
                 path="/u/resetpassword"
                 element={
-                  <Auth collapsed={collapsed} setCollapsed={setCollapsed} />
+                  <Auth
+                    collapsed={collapsed}
+                    setCollapsed={setCollapsed}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
+                  />
                 }
               ></Route>
               <Route
@@ -688,6 +767,8 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     customerID={customerID}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -699,6 +780,9 @@ function App() {
                     tier={tier}
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -709,6 +793,9 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     tier={tier}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -719,6 +806,9 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     tier={tier}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               ></Route>
@@ -730,6 +820,9 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     tier={tier}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />
@@ -740,6 +833,9 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     tier={tier}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
                   />
                 }
               />

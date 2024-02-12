@@ -490,7 +490,7 @@ export default function HeaderArea({
             </button>
           ) : (
             <button
-              className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 bg-gradient-to-bl from-green-200 via-blue-300 to-purple-200 w-[200px] justify-center"
+              className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 bg-gradient-to-bl from-lime-100 via-sky-200 to-indigo-200 w-[200px] justify-center"
               onClick={() => setIsSandbox(true)}
             >
               <svg

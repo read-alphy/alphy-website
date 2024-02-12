@@ -6,8 +6,6 @@ import HubUserPage from './HubUserPage.jsx'
 import { Link } from 'react-router-dom'
 import WelcomeExplainer from './WelcomeExplainer'
 
-import AISearchEngine from './AISearchEngine.jsx'
-
 export default function HubContent({
   arcs,
   currentUser,
@@ -33,7 +31,7 @@ export default function HubContent({
   return (
     <div className="">
       {globalLayout &&
-        (mainShow == 'default' ? (
+        (mainShow === 'default' ? (
           <div className="pt-10 md:pt-16 3xl:pt-20 overflow-x-hidden ">
             <WelcomeExplainer
               currentUser={currentUser}
@@ -46,6 +44,7 @@ export default function HubContent({
             {mainShow === 'sources' && (
               <div className="min-h-[90vh]">
                 {/*   <AISearchEngine collapsed={collapsed} currentUser={currentUser} /> */}
+
                 <HubSourceFeed
                   credit={credit}
                   currentUser={currentUser}

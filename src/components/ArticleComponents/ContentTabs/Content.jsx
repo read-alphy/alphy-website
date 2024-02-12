@@ -17,14 +17,20 @@ export default function Content({
   language,
   setLanguage,
   handleLanguageChange,
-  ...props
+  isSandbox,
+  setIsSandbox,
+  data,
+  isVisible,
+  handleVisibility,
+  tier,
+  userArchipelagos,
+  isBookmarked,
+  setIsBookmarked,
 }) {
   const { currentUser } = useAuth()
   const navigate = useNavigate()
 
-  const [isLoading, setIsLoading] = useState(
-    props.data.transcript === undefined
-  )
+  const [isLoading, setIsLoading] = useState(data.transcript === undefined)
 
   const [activeTab, setActiveTab] = useState('tab1')
   const [autoplay, setAutoplay] = useState(0)
@@ -46,7 +52,7 @@ export default function Content({
   const [transcript, setTranscript] = useState([])
   const [summaryArray, setSummaryArray] = useState([])
   const [showYouTubeFrame, setShowYouTubeFrame] = useState(
-    props.data.source_type !== undefined && props.data.source_type === 'sp'
+    data.source_type !== undefined && data.source_type === 'sp'
       ? false
       : localStorage.getItem('showYouTubeFrame') !== 'false'
   )
@@ -58,19 +64,17 @@ export default function Content({
   const [inputValue, setInputValue] = useState('')
 
   const [highlightClass, setHighlightClass] = useState('')
-  const [isSandbox, setIsSandbox] = useState(false)
+
   const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
 
   const buttonRef = useRef(null)
   const inputRef = useRef(null)
   const contentRef = useRef(null)
 
-  const userArchipelagoNames = props.userArchipelagos.map(item => [
+  const userArchipelagoNames = userArchipelagos.map(item => [
     item.name,
     item.uid,
   ])
-
-  const data = props.data
 
   const title = data.title
   const inputDate =
@@ -86,8 +90,8 @@ export default function Content({
   let contentSummaries = []
 
   let transcript_raw = ''
-  if (props.data) {
-    transcript_raw = props.data.transcript
+  if (data) {
+    transcript_raw = data.transcript
   }
 
   const ref = useRef(null)
@@ -159,12 +163,8 @@ export default function Content({
   }, [summary])
 
   useEffect(() => {
-    if (
-      props.data !== undefined &&
-      props.data !== null &&
-      contentSummaries.length === 0
-    ) {
-      contentSummaries = props.data.summaries
+    if (data !== undefined && data !== null && contentSummaries.length === 0) {
+      contentSummaries = data.summaries
       const languagesToSet = []
       if (contentSummaries !== undefined && contentSummaries.length > 0) {
         contentSummaries.map(summary => languagesToSet.push(summary.lang))
@@ -179,7 +179,7 @@ export default function Content({
 
       setLanguages(languagesToSet)
     }
-  }, [props.data, language])
+  }, [data, language])
 
   const reorderedLanguageCodes = {
     ...languages.reduce((result, code) => {
@@ -222,7 +222,7 @@ export default function Content({
   }
 
   const handleBookmark = async () => {
-    const changeBookmark = !props.isBookmarked
+    const changeBookmark = !isBookmarked
 
     await currentUser.getIdToken().then(idToken => {
       axios
@@ -236,7 +236,7 @@ export default function Content({
             },
           }
         )
-        .then(props.setIsBookmarked(!props.isBookmarked))
+        .then(setIsBookmarked(!isBookmarked))
     })
   }
 
@@ -695,11 +695,11 @@ export default function Content({
         <HeaderArea
           data={data}
           title={title}
-          tier={props.tier}
-          isVisible={props.isVisible}
-          handleVisibility={props.handleVisibility}
+          tier={tier}
+          isVisible={isVisible}
+          handleVisibility={handleVisibility}
           handleBookmark={handleBookmark}
-          isBookmarked={props.isBookmarked}
+          isBookmarked={isBookmarked}
           handleReportIssue={handleReportIssue}
           showReportIssue={showReportIssue}
           setShowReportIssue={setShowReportIssue}
@@ -764,7 +764,7 @@ export default function Content({
               currentUser={currentUser}
               QuestionAnswering={QuestionAnswering}
               requestTranslation={requestTranslation}
-              tier={props.tier}
+              tier={tier}
             />
           </div>
 

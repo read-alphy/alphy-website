@@ -36,7 +36,7 @@ export default function InputArea({
   return (
     <div className="flex flex-col mt-10 pr-4 sm:pr-0">
       <p className="font-medium  text-md  text-zinc-500 ml-2 dark:text-zinc-300">
-        Tell what you want to generate
+        Tell what you want to create
       </p>
       <textarea
         ref={textareaRef}

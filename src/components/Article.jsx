@@ -18,6 +18,8 @@ function Article({
   setContentName,
   userArchipelagos,
   currentUser,
+  sandboxHistory,
+  setSandboxHistory,
 }) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -30,6 +32,8 @@ function Article({
   const [bookmarkChecked, setBookmarkChecked] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [isPublic, setIsPublic] = useState(false)
+  const [isSandbox, setIsSandbox] = useState(false)
+
   const [language, setLanguage] = useState(
     data.summaries !== undefined &&
       data.summaries.length > 1 &&
@@ -295,12 +299,15 @@ function Article({
         {
           <div className={`hidden sm:flex `}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               actionsHub={actionsHub}
               setActionsHub={setActionsHub}
               tier={tier}
+              isSandbox={isSandbox}
+              sandboxHistory={sandboxHistory}
             />
           </div>
         }
@@ -313,12 +320,15 @@ function Article({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
                 actionsHub={actionsHub}
                 setActionsHub={setActionsHub}
                 tier={tier}
+                isSandbox={isSandbox}
+                sandboxHistory={sandboxHistory}
               />
             </div>
           </div>
@@ -358,6 +368,8 @@ function Article({
               language={language}
               setLanguage={setLanguage}
               handleLanguageChange={handleLanguageChange}
+              isSandbox={isSandbox}
+              setIsSandbox={setIsSandbox}
             />
           )}
         </div>

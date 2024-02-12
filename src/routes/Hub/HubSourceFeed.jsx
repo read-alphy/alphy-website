@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useEffect } from 'react'
 
 import HubFeedItem from './HubFeedItemElements/HubFeedItem'
@@ -64,43 +64,43 @@ function HubSourceFeed(props) {
       localStorage.setItem('search', '')
     }
   })
-  const limit = window.location.href.includes('/explore') ? 40 : 16
+  const limit = window.location.href.includes('/explore') ? 20 : 16
   const searchInputRef = React.useRef(null)
 
-  const getData = (offset, firstTime, hasMore) => {
-    if (!hasMore) {
-      return
-    }
-    setIsLoading(true)
+  // Inside your HubSourceFeed component
+  const getData = useCallback(
+    (offset, firstTime, hasMore) => {
+      if (!hasMore) {
+        return
+      }
+      setIsLoading(true)
 
-    axios
-      .get(`${API_URL}/sources/`, {
-        params: {
-          q: search,
-          offset: offset,
-          limit,
-          // only_my: "submits" | "uploads" | "bookmarks",
-        },
-        // headers: { //TODO: this fails since we dont have the token yet.
-        // 	'id-token': idToken,
-        // }
-      })
-      .then(response => {
-        setHasMore(!(response.data.length < limit))
+      axios
+        .get(`${API_URL}/sources/`, {
+          params: {
+            q: search,
+            offset: offset,
+            limit,
+          },
+        })
+        .then(response => {
+          setHasMore(!(response.data.length < limit))
 
-        if (firstTime) {
-          setData(response.data)
-        } else {
-          setData([...data, ...response.data])
-        }
-        setIsLoading(false)
-      })
-      .catch(error => {
-        console.log(error)
-        setIsLoading(false)
-        throw error
-      })
-  }
+          if (firstTime) {
+            setData(response.data)
+          } else {
+            setData(prevData => [...prevData, ...response.data])
+          }
+          setIsLoading(false)
+        })
+        .catch(error => {
+          console.log(error)
+          setIsLoading(false)
+          throw error
+        })
+    },
+    [search, limit]
+  ) // Add any other dependencies if needed
 
   const loadMore = () => {
     if (window.location.href.includes('/explore')) {

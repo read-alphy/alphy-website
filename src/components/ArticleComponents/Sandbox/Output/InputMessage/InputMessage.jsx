@@ -1,4 +1,4 @@
-import { inputMessages } from './messageBank'
+import { inputMessages } from '../../messageBank'
 
 import { Button } from '@material-tailwind/react'
 import { useState, useRef, useEffect } from 'react'

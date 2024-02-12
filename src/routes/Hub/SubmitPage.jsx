@@ -16,6 +16,8 @@ function SubmitPage({
   userArchipelagos,
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
+  sandboxHistory,
+  setSandboxHistory,
 }) {
   let source_id
 
@@ -66,6 +68,7 @@ function SubmitPage({
 			} */}
         <div className={`flex hidden sm:block`}>
           <SideFeedReworked
+            currentUser={currentUser}
             collapsed={collapsed}
             setCollapsed={setCollapsed}
             source_id={source_id}
@@ -76,6 +79,8 @@ function SubmitPage({
             submitLayout={submitLayout}
             setSubmitLayout={setSubmitLayout}
             tier={tier}
+            sandboxHistory={sandboxHistory}
+            setSandboxHistory={setSandboxHistory}
           />
         </div>
 
@@ -87,6 +92,7 @@ function SubmitPage({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
@@ -97,6 +103,8 @@ function SubmitPage({
                 submitLayout={submitLayout}
                 setSubmitLayout={setSubmitLayout}
                 tier={tier}
+                sandboxHistory={sandboxHistory}
+                setSandboxHistory={setSandboxHistory}
               />
             </div>
           </div>

@@ -14,6 +14,8 @@ function FAQ({
   tier,
   setShowWelcomeForm,
   showWelcomeForm,
+  sandboxHistory,
+  setSandboxHistory,
 
   userArchipelagos,
 }) {
@@ -47,10 +49,13 @@ function FAQ({
         {
           <div className={`hidden sm:block`}>
             <SideFeedReworked
+              currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               tier={tier}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -63,10 +68,13 @@ function FAQ({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
                 tier={tier}
+                sandboxHistory={sandboxHistory}
+                setSandboxHistory={setSandboxHistory}
               />
             </div>
           </div>

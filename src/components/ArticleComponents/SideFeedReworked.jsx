@@ -15,7 +15,8 @@ import LogoBlack from '../../img/ALPHY_BG_REMOVED_DARK.png'
 import { Link } from 'react-router-dom'
 import HubFeedItem from '../../routes/Hub/HubFeedItemElements/HubFeedItem'
 import { useLocation } from 'react-router-dom'
-import { Shine } from 'frosted-ui'
+import HistoryIcon from '@mui/icons-material/History'
+import { inputMessages } from './Sandbox/messageBank'
 
 function SideFeedReworked({
   collapsed,
@@ -25,24 +26,62 @@ function SideFeedReworked({
   globalLayout,
   dataArchipelago,
   tier,
-  isSandbox,
+  sandboxHistory,
+  currentUser,
 }) {
-  const { currentUser } = useAuth()
-  const [firstTimePersonal, setFirstTimePersonal] = useState(true)
   const [called, setCalled] = useState(false)
+
   const location = useLocation()
   const carouselRef = useRef(null)
   const auth = useAuth()
   const navigate = useNavigate()
-
-  const temp = 10
-  const limit = temp
 
   useEffect(() => {
     setTimeout(() => {
       setCalled(true)
     }, 1000)
   }, [])
+
+  const [groupedData, setGroupedData] = useState([])
+
+  const [visibleGroups, setVisibleGroups] = useState({})
+
+  const toggleGroupVisibility = index => {
+    setVisibleGroups(prevState => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }))
+  }
+
+  useEffect(() => {
+    if (sandboxHistory === undefined) {
+      return
+    }
+    const groupBySourceId = sandboxHistory.slice(0, 10).reduce((acc, item) => {
+      const { source_id, created_at } = item
+      if (!acc[source_id]) {
+        acc[source_id] = []
+      }
+      acc[source_id].push(item)
+      return acc
+    }, {})
+
+    const sortedGroups = Object.values(groupBySourceId).sort(
+      (a, b) =>
+        new Date(
+          b.sort(
+            (x, y) => new Date(y.created_at) - new Date(x.created_at)
+          )[0].created_at
+        ) -
+        new Date(
+          a.sort(
+            (x, y) => new Date(y.created_at) - new Date(x.created_at)
+          )[0].created_at
+        )
+    )
+
+    setGroupedData(sortedGroups)
+  }, [sandboxHistory])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,7 +123,7 @@ function SideFeedReworked({
     <div
       id="side-feed"
       className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-slate-50 min-h-[100vh] sm:max-h-[100vh] ${
-        collapsed ? 'min-w-[60px] max-w-[60px]' : 'w-full sm:min-w-[200px] '
+        collapsed ? 'w-[60px]' : 'w-full sm:min-w-[200px] '
       } flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `}
     >
       {!collapsed ? (
@@ -117,7 +156,7 @@ function SideFeedReworked({
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                className="feather feather-chevron-left ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1"
+                className="feather feather-chevron-left ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full transition transform hover:-translate-x-1 duration-300 ease-in p-1"
               >
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
@@ -143,7 +182,7 @@ function SideFeedReworked({
             <div className="flex flex-col w-full justify-start px-2 m">
               <Link
                 to="/submit"
-                className={`text-zinc-700  px-2 py-2 transition duration-300 ease-in-out drop-shadow-sm   text-sm sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-100 via-blue-100 to-sky-200  text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
+                className={`text-zinc-700  drop-shadow-lg px-2 py-2 transition duration-300 ease-in-out    text-sm sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-100 via-blue-100 to-sky-200   text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
               >
                 <AddIcon fontSize="small" className="mr-3" />
                 <p className="font-averta-semibold">New</p>
@@ -213,46 +252,97 @@ function SideFeedReworked({
 
                   <p className="font-averta-semibold">Explore</p>
                 </Link>
-                <Link
-                  to="/arcs"
-                  onClick={() => {
-                    if (window.innerWidth < 640) {
-                      setCollapsed(true)
-                    }
-                  }}
-                  className={`${
-                    globalLayout
-                      ? 'text-zinc-700 dark:text-zinc-200'
-                      : 'text-zinc-500 dark:text-zinc-300'
-                  } flex flex-row py-3 mt-2  text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
-                >
-                  <svg
-                    className="mr-3 mt-0.5 feather feather-message-square"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                  </svg>
-                  <p className="font-averta-semibold text-sm">Arcs</p>
-                </Link>
+
+                {/* 
+             <Link
+                    to="/arcs"
+                    onClick={() => {
+                        if (window.innerWidth < 640) {
+                        setCollapsed(true)
+                        }
+                    }}
+                    className={`  w-full  mt-2  py-3 flex flex-row text-sm sm:text-md  text-zinc-700 dark:text-zinc-300 hover:text-zinc-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
+                    >
+                    <svg
+                        className="mr-3 mt-0.5 feather feather-message-square"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <p className="font-averta-semibold text-sm ml-0.5">Arcs</p>
+                    </Link> */}
+
+                {currentUser && (
+                  <div className="flex flex-col">
+                    <Link
+                      to="/history"
+                      className="flex flex-row py-3 mt-2  text-sm sm:text-md  -pr-0.5 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
+                    >
+                      <HistoryIcon className="text-zinc-500 dark:text-zinc-300 mr-2  " />
+                      <p className="text-zinc-500 dark:text-zinc-300 ">
+                        History
+                      </p>
+                    </Link>
+
+                    {groupedData.length > 0 && (
+                      <div>
+                        {groupedData.map((item, index) => (
+                          <div className="relative flex flex-col group cursor-pointer">
+                            <p
+                              className="text-zinc-500 dark:text-zinc-300 text-xs hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md p-1"
+                              onClick={() => toggleGroupVisibility(index)}
+                            >
+                              {item[0].title.slice(0, 15)}...
+                            </p>
+                            <div className="pl-2 text-zinc-400 dark:text-zinc-400 font-normal">
+                              {item.map(subItem => (
+                                <p
+                                  className={`text-xs rounded-lg font-averta-semibold overflow-hidden transition-all duration-200 ease-in-out hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md ${
+                                    visibleGroups[index]
+                                      ? 'max-h-96 p-1 '
+                                      : 'max-h-0 p-0'
+                                  }`}
+                                >
+                                  {typeof subItem.request.command === 'object'
+                                    ? subItem.request.command.prompt.slice(
+                                        0,
+                                        15
+                                      ) + '...'
+                                    : inputMessages
+                                        .find(
+                                          obj =>
+                                            obj.command_type ===
+                                            subItem.request.command
+                                        )
+                                        .title.slice(0, 15) + '...'}
+                                </p>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {localStorage.getItem('logged in') === 'true' ? null : (
                   <Link
-                    className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2  text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
+                    className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 -ml-1 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
                     to="/u/login"
                   >
                     <LoginIcon
                       className="mr-3 text-green-300 dark:text-green-200"
                       fontSize="small"
                     />
-                    <p className="text-green-400 dark:text-green-200">
+                    <p className="text-green-400 dark:text-green-200 ">
                       Sign In
                     </p>
                   </Link>
@@ -430,6 +520,7 @@ function SideFeedReworked({
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 handleSignout={handleSignOut}
+                currentUser={currentUser}
               />
             </div>
           </div>
