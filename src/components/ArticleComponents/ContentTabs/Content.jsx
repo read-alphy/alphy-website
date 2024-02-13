@@ -80,6 +80,7 @@ export default function Content({
   const inputDate =
     data.added_ts !== undefined ? data.added_ts.substring(0, 10) : undefined
   let formattedDate = ''
+
   useEffect(() => {
     if (inputDate !== undefined && formattedDate.length === 0) {
       const parts = inputDate.split('-')
@@ -93,6 +94,20 @@ export default function Content({
   if (data) {
     transcript_raw = data.transcript
   }
+
+  useEffect(() => {
+    const generationPrompt = sessionStorage.getItem('fillPrompt')
+
+    if (isLoading) {
+      return
+    }
+
+    if (generationPrompt !== null) {
+      setIsSandbox(true)
+    }
+
+    /* sessionStorage.setItem("fillPrompt",  null) */
+  }, [isLoading, sessionStorage.getItem('fillPrompt')])
 
   const ref = useRef(null)
 

@@ -26,6 +26,8 @@ export default function GenerationZone({
   theme,
   selectedTool,
   setSelectedTool,
+  manner,
+  setManner,
 }) {
   const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
   const [toolboxActive, setToolboxActive] = useState(false)
@@ -75,6 +77,8 @@ export default function GenerationZone({
               settings={settings}
               setSettings={setSettings}
               theme={theme}
+              manner={manner}
+              setManner={setManner}
             />
           </div>
         }

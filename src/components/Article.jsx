@@ -183,16 +183,29 @@ function Article({
    */
 
   useEffect(() => {
-    if (called === false && data.complete !== true) {
-      if (source_type === 'up' && data.length === 0) {
+    const previousUrl = sessionStorage.getItem('previousUrl')
+
+    if (
+      (called === false && data.complete !== true) ||
+      window.location.href !== previousUrl
+    ) {
+      if (
+        source_type === 'up' &&
+        (data.length === 0 || window.location.href !== previousUrl)
+      ) {
         setCalled(true)
 
         fetchDataUpload(url, false)
+        sessionStorage.setItem('previousUrl', window.location.href)
       }
-      if (source_type !== 'up' && data.length === 0) {
+      if (
+        source_type !== 'up' &&
+        (data.length === 0 || window.location.href !== previousUrl)
+      ) {
         setCalled(true)
 
         fetchData(url, false)
+        sessionStorage.setItem('previousUrl', window.location.href)
       }
     }
 
@@ -201,7 +214,7 @@ function Article({
         checkBookmark()
       }, 1000)
     }
-  }, [data, currentUser])
+  }, [data, currentUser, window.location.href])
 
   const handleLanguageChange = event => {
     /* 	if(errorMessage ==true || translationMessage==true)

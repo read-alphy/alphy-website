@@ -119,6 +119,12 @@ function SideFeedReworked({
     }
   }
 
+  const seeInSource = item => {
+    sessionStorage.setItem('fillPrompt', JSON.stringify(item))
+
+    navigate(`/${item.source_type}/${item.source_id}`)
+  }
+
   return (
     <div
       id="side-feed"
@@ -210,7 +216,7 @@ function SideFeedReworked({
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
+                    stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
@@ -242,7 +248,7 @@ function SideFeedReworked({
                     fill="none"
                     className="mr-3 mt-0.5 feather feather-compass"
                     stroke="currentColor"
-                    stroke-width="2"
+                    stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
@@ -286,14 +292,29 @@ function SideFeedReworked({
                       to="/history"
                       className="flex flex-row py-3 mt-2  text-sm sm:text-md  -pr-0.5 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
                     >
-                      <HistoryIcon className="text-zinc-500 dark:text-zinc-300 mr-2  " />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5 text-zinc-500 dark:text-zinc-300 mr-2 "
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                      </svg>
+
+                      {/* <HistoryIcon strokeWidth={"1.5"} className="text-zinc-500 dark:text-zinc-300 mr-2  " /> */}
                       <p className="text-zinc-500 dark:text-zinc-300 ">
                         History
                       </p>
                     </Link>
 
                     {groupedData.length > 0 && (
-                      <div>
+                      <div className="select-none">
                         {groupedData.map((item, index) => (
                           <div className="relative flex flex-col group cursor-pointer">
                             <p
@@ -305,6 +326,7 @@ function SideFeedReworked({
                             <div className="pl-2 text-zinc-400 dark:text-zinc-400 font-normal">
                               {item.map(subItem => (
                                 <p
+                                  onClick={() => seeInSource(subItem)}
                                   className={`text-xs rounded-lg font-averta-semibold overflow-hidden transition-all duration-200 ease-in-out hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md ${
                                     visibleGroups[index]
                                       ? 'max-h-96 p-1 '
@@ -333,7 +355,7 @@ function SideFeedReworked({
                   </div>
                 )}
 
-                {localStorage.getItem('logged in') === 'true' ? null : (
+                {currentUser === null && called === true && (
                   <Link
                     className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 -ml-1 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
                     to="/u/login"
@@ -492,7 +514,7 @@ function SideFeedReworked({
                     fill="none"
                     className="mr-3 mt-0.5"
                     stroke="currentColor"
-                    stroke-width="2"
+                    stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     class="feather feather-compass"

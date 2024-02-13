@@ -12,6 +12,7 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
   const [userPrompt, setUserPrompt] = useState('')
   const [selectedTool, setSelectedTool] = useState('')
   const [creationCalled, setCreationCalled] = useState(false)
+  const [manner, setManner] = useState(null)
   const [error, setError] = useState(false)
 
   const theme = localStorage.getItem('theme')
@@ -47,6 +48,60 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
       setSelectedTool('custom')
     }
   }, [askAlphyForSandbox, askText])
+
+  useEffect(() => {
+    const historyPrompt = sessionStorage.getItem('fillPrompt')
+    console.log(historyPrompt === null)
+    if (historyPrompt === null) {
+      return
+    } else {
+      try {
+        const parsedHistoryPrompt = JSON.parse(historyPrompt)
+
+        setSelectedTool(
+          typeof parsedHistoryPrompt.request.command === 'object'
+            ? 'custom'
+            : parsedHistoryPrompt.request.command
+        )
+        setContentDetails({
+          length_level: parsedHistoryPrompt.request.slider_length,
+          detail_level: parsedHistoryPrompt.request.slider_detail,
+          summary_lang:
+            parsedHistoryPrompt.request.summary_lang === null
+              ? null
+              : 'summary',
+          command_type:
+            typeof parsedHistoryPrompt.request.command === 'object'
+              ? 'custom'
+              : parsedHistoryPrompt.request.command,
+          manner: parsedHistoryPrompt.request.manner,
+        })
+        setManner(parsedHistoryPrompt.request.manner)
+        setPromptType(
+          typeof parsedHistoryPrompt.request.command === 'object'
+            ? 'custom'
+            : parsedHistoryPrompt.request.command
+        )
+        if (typeof parsedHistoryPrompt.request.command === 'object') {
+          setUserPrompt(parsedHistoryPrompt.request.command.prompt)
+        }
+        setOutputMessage(parsedHistoryPrompt.response)
+        setActiveGenerationZone(false)
+        setCreationCalled(true)
+        setTimeout(() => {
+          if (sessionStorage.getItem('fillPrompt') !== null) {
+            sessionStorage.removeItem('fillPrompt')
+          }
+        }, 1000)
+      } catch (e) {
+        console.log('error in history navigation', e)
+
+        setTimeout(() => {
+          sessionStorage.removeItem('fillPrompt')
+        }, 200)
+      }
+    }
+  }, [sessionStorage.getItem('fillPrompt')])
 
   function generateContentDetails() {
     let source_title = ''
@@ -226,6 +281,8 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
                 createDopeStuff={createDopeStuff}
                 settings={settings}
                 setSettings={setSettings}
+                manner={manner}
+                setManner={setManner}
               />
             </div>
           )}
@@ -238,8 +295,8 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
           >
             <OutputZone
               generatedPrompt={generatedPrompt}
-              outputMessage={outputMessage}
               userPrompt={userPrompt}
+              outputMessage={outputMessage}
               setOutputMessage={setOutputMessage}
               activeGenerationZone={activeGenerationZone}
               setActiveGenerationZone={setActiveGenerationZone}

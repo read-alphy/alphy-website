@@ -25,7 +25,7 @@ export default function FooterMenu({
 dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
 
                   pl-6
-                       text-zinc-700 dark:text-zinc-200
+                       text-zinc-500 dark:text-zinc-200
                      flex flex-row py-2 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
                 >
                   <svg
@@ -54,7 +54,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                         setCollapsed(true)
                         }
                     }}
-                    className={`  w-full pl-6 my-3 flex flex-row text-sm sm:text-md  text-zinc-700 dark:text-zinc-300 hover:text-zinc-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
+                    className={`  w-full pl-6 my-3 flex flex-row text-sm sm:text-md  text-zinc-500 dark:text-zinc-300 hover:text-zinc-500 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
                     >
                     <svg
                         className="mr-1 mt-0.5 feather feather-message-square"
@@ -82,7 +82,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
 
       {localStorage.getItem('logged in') === 'true' ? (
         <Link
-          className="text-zinc-700 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6  py-2 flex flex-row "
+          className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6  py-2 flex flex-row "
           to="/account"
         >
           <svg
@@ -104,7 +104,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
         </Link>
       ) : (
         <Link
-          className="text-zinc-700 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 flex flex-row py-2 "
+          className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 flex flex-row py-2 "
           to="/plans"
         >
           {' '}
@@ -126,7 +126,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
         </Link>
       )}
 
-      <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-700 dark:text-zinc-300">
+      <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
         {localStorage.getItem('theme') === 'light' ? (
           <div onClick={handleDarkMode} className=" flex flex-row">
             <svg
@@ -175,7 +175,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
       </div>
       <div className="py-2  pl-6 ">
         <Link
-          className="text-zinc-700 flex flex-row dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"
+          className="text-zinc-500 flex flex-row dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"
           onClick={() => setOpenFeedbackDialog(true)}
         >
           <svg
@@ -198,7 +198,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
       </div>
       <div className="  pl-6 ">
         <Link
-          className="text-zinc-700 dark:text-zinc-300 text-sm font-averta-semibold   my-3  flex flex-row w-full cursor-pointer w-[120px]"
+          className="text-zinc-500 dark:text-zinc-300 text-sm font-averta-semibold   my-3  flex flex-row w-full cursor-pointer w-[120px]"
           to="/about "
         >
           <svg
@@ -222,7 +222,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
 
       <div className="pl-6 py-2 flex flex-row">
         <Link
-          className="text-zinc-700 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] font-averta-semibold"
+          className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] font-averta-semibold"
           to="/privacypolicy"
         >
           Privacy Policy
@@ -234,7 +234,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
           <div className="flex w-full border-b border-gray-100 dark:border-zinc-700"></div>
           <div className="flex flex-row pl-6 mt-2">
             <button
-              className="text-zinc-700 dark:text-zinc-300 text-sm cursor-pointer font-averta-semibold flex flex-row"
+              className="text-zinc-500 dark:text-zinc-300 text-sm cursor-pointer font-averta-semibold flex flex-row"
               onClick={() => handleSignout()}
             >
               <svg
