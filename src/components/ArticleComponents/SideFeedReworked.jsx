@@ -235,7 +235,7 @@ function SideFeedReworked({
                     }
                   }}
                   className={`${
-                    globalLayout
+                    window.location.href.includes("/explore")
                       ? 'text-zinc-700 dark:text-zinc-200'
                       : 'text-zinc-500 dark:text-zinc-300'
                   } flex flex-row py-3 mt-2  text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
@@ -290,7 +290,8 @@ function SideFeedReworked({
                   <div className="flex flex-col">
                     <Link
                       to="/history"
-                      className="flex flex-row py-3 mt-2  text-sm sm:text-md  -pr-0.5 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
+                      className={`${
+                        window.location.href.includes("/history") ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-300"} flex flex-row py-3 mt-2  text-sm sm:text-md  -pr-0.5  hover:text-zinc-500 dark:hover:text-zinc-100 transition duration-300 ease-in-out`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -308,7 +309,7 @@ function SideFeedReworked({
                       </svg>
 
                       {/* <HistoryIcon strokeWidth={"1.5"} className="text-zinc-500 dark:text-zinc-300 mr-2  " /> */}
-                      <p className="text-zinc-500 dark:text-zinc-300 ">
+                      <p  >
                         History
                       </p>
                     </Link>
