@@ -10,7 +10,7 @@ import AddIcon from '@mui/icons-material/Add'
 import Link from 'next/link'
 import { API_URL } from '../../constants'
 
-function HubArcFeed({
+export default function HubArcFeed({
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
   currentUser,
@@ -132,6 +132,7 @@ useEffect(() => {
     // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
     // Find a way to store idToken in local storage, minding the expiration behavior.
     // Would improve performance throughout.
+    console.log(dataGlobalArchipelagos)
     if (dataGlobalArchipelagos.length === 0) {
       getDataGlobalArchipelagos(0, true, true)
     }
@@ -156,6 +157,7 @@ useEffect(() => {
       })
       .then(response => {
         if (firstTime) {
+          
           shuffleArray(response.data)
 
           /* setDataGlobalArchipelagos(response.data); */
@@ -370,4 +372,3 @@ useEffect(() => {
   )
 }
 
-export default HubArcFeed

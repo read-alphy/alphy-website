@@ -11,7 +11,7 @@ import { useAuth } from '../../hooks/useAuth'
 import ReadComponent from './Read/ReadComponent'
 import { API_URL } from '../../constants'
 import HeaderArea from './Read/HeaderArea'
-import Sandbox from './Sandbox/Sandbox'
+import Image from 'next/image'
 
 export default function Content({
   language,
@@ -811,7 +811,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
                   {data.source_type === 'yt' ? 'video' : 'recording'}, it will
                   be ready in a few minutes. We'll send you an email when it's
                   ready!
-                  <img
+                  <Image
                     className={'opacity-70 dark:opacity-90 mx-auto '}
                     src={working}
                     alt="My SVG"
@@ -834,7 +834,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
                   Alphy is currently working hard to translate this{' '}
                   {data.source_type === 'yt' ? 'video' : 'recording'} to{' '}
                   {language_codes[language]}. Please come back in a few minutes!
-                  <img
+                  <Image
                     className={'opacity-70 dark:opacity-90 mx-auto '}
                     src={working}
                     alt="My SVG"

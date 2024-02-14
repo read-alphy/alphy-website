@@ -20,7 +20,7 @@ export default function OutputZone({
           generatedPrompt={generatedPrompt}
         /> */}
 
-        {/*  <img
+        {/*  <Image
           className={'opacity-70 dark:opacity-90 mx-auto '}
           src={working}
           alt="My SVG"

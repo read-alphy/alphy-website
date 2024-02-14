@@ -28,6 +28,8 @@ export default function HubContent({
   totalMinutes,
   setTotalMinutes,
 }) {
+
+  
   return (
     <div className="">
       {globalLayout &&

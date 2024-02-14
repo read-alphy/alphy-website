@@ -6,7 +6,8 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js'
-import StripeBanner from '../../img/stripe_banner.svg'
+import StripeBanner from '../../../public/img/stripe_banner.svg'
+import Image from 'next/image'
 
 export default function CheckOutForm({ clientSecret }) {
   const stripe = useStripe()
@@ -222,11 +223,11 @@ export default function CheckOutForm({ clientSecret }) {
         </span>
       </button>
 
-      {/* <img width={300} src={StripeBanner}></img> */}
+      {/* <Image width={300} src={StripeBanner}></img> */}
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
       <div className=" mt-5">
-        <img width={120} src={StripeBanner}></img>
+        <Image width={120} src={StripeBanner}></Image>
       </div>
     </form>
   )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked'
+import SideFeed from '../SideFeed/SideFeed'
 
 import Loading from '../Loading'
 

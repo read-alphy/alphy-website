@@ -35,20 +35,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/explore": [
+    "/arcs": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/explore.js"
-    ],
-    "/myhub": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/myhub.js"
-    ],
-    "/submit": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/submit.js"
+      "static/chunks/pages/arcs.js"
     ]
   },
   "ampFirstPages": []

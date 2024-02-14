@@ -52,7 +52,7 @@ export default function CuratedCarouselItem(props) {
             props.forFeed !== true && 'lg:min-w-[220px] lg:max-w-[150px]'
           } lg:w-64  dark:bg-darkMode  rounded-md overflow-hidden shadow-md cursor-pointer`}
         >
-          <Image src={props.item.thumbnail_url} />
+          <img src={props.item.thumbnail_url} />
 
           <div
             className={` ${
@@ -93,7 +93,7 @@ export default function CuratedCarouselItem(props) {
                 props.forFeed !== true && 'lg:min-w-[220px] lg:max-w-[150px]'
               } lg:w-64  overflow-hidden shadow-md cursor-pointer`}
             >
-              <Image src={props.item.thumbnail_url} />
+              <img src={props.item.thumbnail_url} />
             </div>
             <p
               className={` bg-opacity-100 text-lg text-zinc-600 dark:text-zinc-300 pt-2 ml-2 font-averta-semibold`}
@@ -113,7 +113,7 @@ export default function CuratedCarouselItem(props) {
                 props.forFeed !== true && 'lg:min-w-[220px] lg:max-w-[150px]'
               } lg:w-64  overflow-hidden drop-shadow-xl rounded-xl  cursor-pointer `}
             >
-              <Image src={props.item.thumbnail_url} />
+              <img src={props.item.thumbnail_url} />
 
               <div
                 className={` ${

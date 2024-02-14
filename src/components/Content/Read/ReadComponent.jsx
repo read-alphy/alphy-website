@@ -17,6 +17,7 @@ import {
 } from '@material-tailwind/react'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import Image from 'next/image'
 
 export default function ReadComponent({
   data,
@@ -177,7 +178,7 @@ export default function ReadComponent({
                       href={`https://twitter.com/i/spaces/${data.source_id}`}
                       rel="noreferrer"
                     >
-                      <img
+                      <Image
                         src={TwitterSpaces}
                         className="w-[240px] h-[120px] mx-auto"
                       />
@@ -203,7 +204,7 @@ export default function ReadComponent({
                       href={`https://twitter.com/i/status/${data.source_id}`}
                       rel="noreferrer"
                     >
-                      <img src={X} className="w-[240px] h-[120px] mx-auto" />
+                      <Image src={X} className="w-[240px] h-[120px] mx-auto" />
                       <p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
                         Watch{' '}
                         <span className="font-bold pb-6 hyphenate font-averta-semibold">
@@ -239,7 +240,7 @@ export default function ReadComponent({
                 {showYouTubeFrame ? (
                   <ArrowDownwardIcon fontSize="large" className="text-black " />
                 ) : (
-                  <img
+                  <Image
                     src={TwitchIcon}
                     fontSize="large"
                     className="text-white opacity-80"
@@ -320,7 +321,7 @@ export default function ReadComponent({
                   >
                     <p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md p-3 text-center italic ">
                       Generating questions... plugging in an AI assistant...
-                      <img
+                      <Image
                         className={'opacity-70 dark:opacity-90 mx-auto'}
                         src={working}
                         width={140}
@@ -503,7 +504,7 @@ export default function ReadComponent({
                                   <p>
                                     <p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
                                       Processing key takeaways...
-                                      <img
+                                      <Image
                                         className={
                                           'opacity-70 dark:opacity-90 mx-auto'
                                         }
@@ -522,7 +523,7 @@ export default function ReadComponent({
                                   'content-area text-l font-normal  max-w-screen-lg overflow-auto h-full xl:max-h-[110vh]'
                                 }
                               >
-                                {/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
+                                {/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <Image src={Download}></img> : <Image title="Download summary" src={DownloadStatic}></img>}</button> */}
 
                                 {isLoading ? (
                                   <Loading />
@@ -534,7 +535,7 @@ export default function ReadComponent({
                                       : 'Still waiting for the summary! Meanwhile, check the transcript.'}
                                     {summary === undefined ||
                                     summary.length === 0 ? null : (
-                                      <img
+                                      <Image
                                         className={
                                           'opacity-70 dark:opacity-90 mx-auto'
                                         }

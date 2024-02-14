@@ -1,5 +1,9 @@
-import Hub from "../components/Hub/Hub";
-import { useEffect } from "react";
+import dynamic from 'next/dynamic'
+
+const Hub = dynamic(() => import('../components/Hub/Hub'), {
+  ssr: false,
+})
+
 
 
 export default function Myhub({

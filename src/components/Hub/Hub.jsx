@@ -34,13 +34,15 @@ export default function Hub({
   setSubmitLayout,
   data,
   loggedIn,
-  setLoggedIn
+  setLoggedIn,
+  
 }) {
   const router = useRouter()
   
   let source_id
 
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
+  const [mainShow, setMainShow] = useState("default")
 
   
 
@@ -50,13 +52,19 @@ export default function Hub({
   const [subCalled, setSubCalled] = useState(false)
 
 
-  const [mainShow, setMainShow] = useState("default")
-  
+
 useEffect(() => {
 
   if(router.asPath.includes('/explore')){
     setMainShow("sources")
   }
+  else if (router.asPath.includes('/arcs')){
+    setMainShow("arcs")
+  }
+  else{
+    setMainShow("default")
+  }
+
 }, [router.asPath])
   
   useEffect(() => {   

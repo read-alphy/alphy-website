@@ -193,6 +193,10 @@ function MyApp({ Component, pageProps }) {
         })
       }
   
+     
+    }, [currentUser, auth, creditcalled, called,  searchParams])
+
+    useEffect (() => {
       setTimeout(() => {
         const userId = localStorage.getItem('userId')
   
@@ -222,6 +226,7 @@ function MyApp({ Component, pageProps }) {
           }
   
           if (userArcsCalled === false) {
+          
             axios
               .get(`${API_URL}/playlists/`, {
                 params: {
@@ -238,10 +243,13 @@ function MyApp({ Component, pageProps }) {
                 setUserArchipelagos(response.data)
                 setUserArcsCalled(true)
               })
+              .catch(e => {
+                console.log(e)
+              })
           }
         }
       }, 1000)
-    }, [currentUser, auth, creditcalled, called,  searchParams])
+    }, [currentUser, called, userArcsCalled])
   
     const getCustomerInfo = async currentUser => {
       await axios

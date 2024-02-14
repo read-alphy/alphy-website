@@ -6,15 +6,15 @@ import React, {
   useRef,
   memo,
 } from 'react'
-import SideFeedReworked from '../components/ArticleComponents/SideFeedReworked'
+import SideFeed from '../SideFeed/SideFeed'
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import Loading from '../components/Loading'
-import axios from 'axios'
-import { Helmet } from 'react-helmet'
+
+
+import Loading from '../../components/Loading'
+
 import AccountInfo from './AccountInfo'
-import { set } from 'lodash'
+
 
 function Account({
   currentUser,
@@ -28,8 +28,7 @@ function Account({
   loggedIn,
   setLoggedIn
 }) {
-  const location = useLocation()
-  const navigate = useNavigate()
+
 
   let source_id
 
@@ -59,9 +58,7 @@ function Account({
 
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-      <Helmet>
-        <title>Alphy - Account</title>
-      </Helmet>
+
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
           collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'

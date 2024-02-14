@@ -34,7 +34,7 @@ export default function Explore({
   <Hub
   loggedIn={loggedIn}
   setLoggedIn={setLoggedIn}
-    arcs={arcs}
+    arcs={false}
     currentUser={currentUser}
     collapsed={collapsed}
     setCollapsed={setCollapsed}

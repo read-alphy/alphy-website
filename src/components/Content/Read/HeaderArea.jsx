@@ -19,6 +19,7 @@ import {
 } from '@material-tailwind/react'
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium'
 import MemoryIcon from '@mui/icons-material/Memory'
+import Image from 'next/image'
 
 export default function HeaderArea({
   data,
@@ -206,7 +207,7 @@ export default function HeaderArea({
                         href={`https://www.youtube.com/watch?v=${data.source_id}`}
                         rel="noreferrer"
                       >
-                        <img
+                        <Image
                           className="mr-1 -ml-2"
                           src="/youtubeicon.png"
                           width={40}
@@ -564,7 +565,7 @@ export default function HeaderArea({
                   href={`https://www.youtube.com/watch?v=${data.source_id}`}
                   rel="noreferrer"
                 >
-                  <img className="-ml-2" src="/youtubeicon.png" width={40} />
+                  <Image className="-ml-2" src="/youtubeicon.png" width={40} />
                   <p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center text-md font-averta-semibold ">
                     Click to watch
                   </p>
@@ -577,7 +578,7 @@ export default function HeaderArea({
                   href={`https://twitter.com/i/spaces/${data.source_id}`}
                   rel="noreferrer"
                 >
-                  <img className="ml-1" src={TwitterLogo} width={20} />
+                  <Image className="ml-1" src={TwitterLogo} width={20} />
                   <p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
                     Click to listen
                   </p>
@@ -590,7 +591,7 @@ export default function HeaderArea({
                   href={`https://www.twitch.tv/videos/${data.source_id}`}
                   rel="noreferrer"
                 >
-                  <img className="ml-1 mt-1" src={TwitchIcon} width={20} />
+                  <Image className="ml-1 mt-1" src={TwitchIcon} width={20} />
                   <p className=" text-zinc-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
                     Click to watch
                   </p>

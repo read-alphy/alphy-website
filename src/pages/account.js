@@ -15,20 +15,24 @@ export default function AccountPage({
     credit,
     sandboxHistory,
     setSandboxHistory,
+    loggedIn,
+    setLoggedIn
 }) {
     return (
      <Account
      currentUser={currentUser}
-     stripe={stripePromise}
+      
      credit={credit}
      tier={tier}
-     idToken={idToken}
+     
      collapsed={collapsed}
      setCollapsed={setCollapsed}
      customerID={customerID}
      sandboxHistory={sandboxHistory}
      setSandboxHistory={setSandboxHistory}
      
+      loggedIn={loggedIn}
+      setLoggedIn={setLoggedIn}
      />
     );
     }

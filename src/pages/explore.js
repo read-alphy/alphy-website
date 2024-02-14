@@ -31,6 +31,7 @@ setLoggedIn,
 
 return (
 <Hub
+
   loggedIn = {loggedIn}
   setLoggedIn = {setLoggedIn}
   arcs={false}

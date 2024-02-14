@@ -369,7 +369,7 @@ export default function SourcePage({
                 don't have permission to access it.
               </div>
               <Link
-                to="/myhub"
+                href="/myhub"
                 className="underline mt-6 text-zinc-700 dark:text-zinc-300 max-w-[150px] font-averta-semibold"
               >
                 Back To My Hub
