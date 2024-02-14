@@ -1,10 +1,17 @@
 {
   "/_app": "pages/_app.js",
+  "/account": "pages/account.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/submit": "pages/submit.js",
-  "/myhub": "pages/myhub.js",
+  "/[source_type]/[source_id]": "pages/[source_type]/[source_id].js",
+  "/about": "pages/about.js",
   "/explore": "pages/explore.js",
-  "/[source_type]/[source_id]": "pages/[source_type]/[source_id].js"
+  "/plans/checkout": "pages/plans/checkout.js",
+  "/plans": "pages/plans.js",
+  "/": "pages/index.js",
+  "/myhub": "pages/myhub.js",
+  "/u/register": "pages/u/register.js",
+  "/privacypolicy": "pages/privacypolicy.js",
+  "/u/login": "pages/u/login.js",
+  "/submit": "pages/submit.js",
+  "/_document": "pages/_document.js"
 }

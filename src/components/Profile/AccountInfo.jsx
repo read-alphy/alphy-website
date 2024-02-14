@@ -1,7 +1,7 @@
 import React from 'react'
 import 'tailwindcss/tailwind.css'
 
-import { useWindowSize } from '../hooks/useWindowSize'
+
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -19,7 +19,7 @@ import { Button, Spinner } from '@material-tailwind/react'
 import Dialog from '@mui/material/Dialog'
 
 import { API_URL } from '../constants'
-import { useLocation } from 'react-router-dom'
+
 
 export default function AccountInfo({
   credit,
@@ -27,7 +27,7 @@ export default function AccountInfo({
   currentUser,
   canceledAtPeriodEnd,
 }) {
-  const location = useLocation()
+  
 
   const [quantity, setQuantity] = useState(1)
   const [creditPurchaseLoading, setCreditPurchaseLoading] = useState(false)
@@ -69,7 +69,7 @@ export default function AccountInfo({
     }
   }
 
-  const windowSize = useWindowSize()
+  
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false)
@@ -144,8 +144,8 @@ export default function AccountInfo({
         <div className="dark:bg-darkMode">
           <div className="max-w-[200px] min-w-[200px] flex-row flex"></div>
 
-          {windowSize.width > 1280 ? (
-            <div className=" w-full max-w-[1200px] pt-20 grid grid-col-3 mb-30 ">
+         
+            <div className=" hidden xl:flex w-full max-w-[1200px] pt-20 grid grid-col-3 mb-30 ">
               <div className="items-center margin-auto justify-center flex flex-col">
                 {currentUser ? (
                   <div>
@@ -243,8 +243,8 @@ export default function AccountInfo({
 
               <div className="flex flex-wrap justify-center md:space-x-4 md:items-stretch"></div>
             </div>
-          ) : (
-            <div className="mb-10">
+        
+            <div className="xl:hidden mb-10">
               <div className="items-center margin-auto justify-center flex flex-col mt-20">
                 {currentUser ? (
                   <div className="px-4 sm:mx-0">
@@ -342,7 +342,7 @@ export default function AccountInfo({
                 </div>
               ) : null}
             </div>
-          )}
+      
 
           <div className="flex  px-4 gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8  mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">
             <FreeCard

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import SideFeedReworked from '../../components/ArticleComponents/SideFeedReworked'
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
-import { useLocation, useNavigate } from 'react-router-dom'
+
 
 import Loading from '../Loading'
 
-import { Helmet } from 'react-helmet'
+
 import SuccessInfo from './SuccessInfo'
 
 function Success({
@@ -45,9 +45,9 @@ function Success({
 
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-      <Helmet>
+      
         <title>Alphy - Success!</title>
-      </Helmet>
+      
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
           collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'

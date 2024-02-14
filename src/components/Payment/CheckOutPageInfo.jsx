@@ -5,7 +5,7 @@ import axios from 'axios'
 import CheckOutForm from './CheckOutForm'
 import { useAuth } from '../../hooks/useAuth'
 import Loading from '../Loading'
-import { useNavigate, useLocation } from 'react-router-dom'
+
 import StripeBanner from '../../img/stripe_banner.svg'
 import { API_URL, STRIPE_PK } from '../../constants'
 
@@ -16,16 +16,16 @@ import { API_URL, STRIPE_PK } from '../../constants'
 const stripePromise = loadStripe(STRIPE_PK)
 
 export default function CheckOutPageInfo({ clientSecret, setClientSecret }) {
-  const location = useLocation()
+  
   const { currentUser } = useAuth()
   const [user, setUser] = useState('')
   const [called, setCalled] = useState(false)
-  let userStripeId = ''
-  const navigate = useNavigate()
 
-  const searchParams = new URLSearchParams(location.search)
 
-  const subValue = searchParams.get('sub') || 'premium'
+
+  
+
+  const subValue = 'premium'
 
   useEffect(() => {
     if (
