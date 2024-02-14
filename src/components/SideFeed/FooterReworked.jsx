@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
@@ -17,13 +18,17 @@ export default function FooterReworked({
   setCollapsed,
   handleSignout,
   tier,
+  loggedIn,
+  setLoggedIn,
 }) {
   const [openFeedbackDialog, setOpenFeedbackDialog] = useState(false)
   const [theme, setTheme] = useState("light")
-  const [loggedIn, setLoggedIn] = useState(false)
+  
+  
   const [footerReworkedShow, setFooterReworkedShow] = useState(false)
 
   useEffect(() => {
+    
     if (
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
@@ -33,16 +38,17 @@ export default function FooterReworked({
     } else {
       document.documentElement.classList.remove('dark')
     }
-
-    setLoggedIn(localStorage.getItem('logged in') === 'true' ? true : false)
+const loggedDetail = localStorage.getItem('logged in') === 'true' ? true : false
+    setLoggedIn(loggedDetail)
  
   }, [])
 
   const handleDarkMode = () => {
-    const colorTheme = theme === 'dark' ? 'light' : 'dark'
-    document.documentElement.classList.remove(theme)
+    const colorTheme = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark'
+    
+    document.documentElement.classList.remove(localStorage.getItem('theme'))
+    setTheme(colorTheme)
     document.documentElement.classList.add(colorTheme)
-    setDarkMode(colorTheme)
     localStorage.setItem('theme', colorTheme)
   }
 
@@ -119,6 +125,7 @@ export default function FooterReworked({
                 handleDarkMode={handleDarkMode}
                 currentUser={currentUser}
                 handleSignout={handleSignout}
+                theme = {theme}
               />
             </div>
           )}

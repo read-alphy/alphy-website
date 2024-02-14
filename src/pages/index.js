@@ -17,10 +17,10 @@ export default function Explore({
   setSandboxHistory,
   globalLayout,
   setGlobalLayout,
-  userLayout,
-  setUserLayout,
-  submitLayout,
+
   setSubmitLayout,
+  loggedIn,
+  setLoggedIn
 }) {
 
 /* useEffect(() => {
@@ -32,6 +32,8 @@ export default function Explore({
  */
   return (
   <Hub
+  loggedIn={loggedIn}
+  setLoggedIn={setLoggedIn}
     arcs={arcs}
     currentUser={currentUser}
     collapsed={collapsed}

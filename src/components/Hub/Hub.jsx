@@ -33,6 +33,8 @@ export default function Hub({
   submitLayout,
   setSubmitLayout,
   data,
+  loggedIn,
+  setLoggedIn
 }) {
   const router = useRouter()
   
@@ -50,7 +52,12 @@ export default function Hub({
 
   const [mainShow, setMainShow] = useState("default")
   
+useEffect(() => {
 
+  if(router.asPath.includes('/explore')){
+    setMainShow("sources")
+  }
+}, [router.asPath])
   
   useEffect(() => {   
     if (!windowSizeChecked) {
@@ -96,7 +103,9 @@ export default function Hub({
       <div className="flex flex-row bg-white dark:bg-darkMode ">
         {
           <div className={` hidden sm:block `}>
-            <SideFeed
+            <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -121,7 +130,9 @@ export default function Hub({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="">
-              <SideFeed
+              <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

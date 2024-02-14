@@ -3,6 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
+  "/submit": "pages/submit.js",
   "/myhub": "pages/myhub.js",
-  "/explore": "pages/explore.js"
+  "/explore": "pages/explore.js",
+  "/[source_type]/[source_id]": "pages/[source_type]/[source_id].js"
 }

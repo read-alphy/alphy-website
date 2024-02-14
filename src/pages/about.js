@@ -17,8 +17,9 @@ function About({
   showWelcomeForm,
   sandboxHistory,
   setSandboxHistory,
-
   userArchipelagos,
+  loggedIn,
+  setLoggedIn
 }) {
   let source_id
   
@@ -48,7 +49,9 @@ function About({
       <div className="flex flex-row bg-white dark:bg-darkMode ">
         {
           <div className={`hidden sm:block`}>
-             <SideFeed
+             <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -67,7 +70,9 @@ function About({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-               <SideFeed
+               <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

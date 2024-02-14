@@ -11,7 +11,7 @@ export default function FooterMenu({
   theme
 }) {
   return (
-    <div className="">
+    <div className="select-none">
       {/* {currentUser && 
             <div className="flex flex-col">
             <Link

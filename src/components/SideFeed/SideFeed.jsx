@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image'
 import axios from 'axios'
 import React, { useState, useRef } from 'react'
@@ -20,16 +22,21 @@ import HubFeedItem from '../FeedTabs/HubFeedItemElements/HubFeedItem'
 
 import { inputMessages } from '../Content/Sandbox/messageBank'
 
+
+
+
+
 function SideFeed({
   collapsed,
   setCollapsed,
   userLayout,
-  submitLayout,
-  globalLayout,
+  loggedIn,
+  setLoggedIn,
   dataArchipelago,
   tier,
   sandboxHistory,
   currentUser,
+  
 }) {
   const [called, setCalled] = useState(false)
   
@@ -115,6 +122,7 @@ const router = useRouter()
       localStorage.setItem('logged in', 'false')
       localStorage.setItem('idToken', null)
       localStorage.setItem('tier', '')
+      setLoggedIn(false)
 
       router.push('/')
       window.location.reload()
@@ -194,7 +202,12 @@ const router = useRouter()
                 href="/submit"
                 className={`text-zinc-700  drop-shadow-lg px-2 py-2 transition duration-300 ease-in-out    text-sm sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-100 via-blue-100 to-sky-200   text-zinc-600 dark:text-zinc-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
               >
-                <AddIcon fontSize="small" className="mr-3" />
+           
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+
                 <p className="font-averta-semibold">New</p>
               </Link>
 
@@ -360,15 +373,16 @@ const router = useRouter()
                   </div>
                 )}
 
-                {currentUser === null && called === true && (
+                {(loggedIn!==true) && (
                   <Link
                     className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 -ml-1 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
                     href="/u/login"
                   >
-                    <LoginIcon
-                      className="mr-3 text-green-300 dark:text-green-200"
-                      fontSize="small"
-                    />
+                  
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-300 dark:text-green-200 rotate-180 mr-3  ml-0.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                  </svg>
+
                     <p className="text-green-400 dark:text-green-200 ">
                       Sign In
                     </p>
@@ -423,6 +437,8 @@ const router = useRouter()
           ) : (
             <div className="flex flex-grow justify-end items-end w-full">
               <FooterReworked
+                loggedIn= {loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
@@ -528,7 +544,7 @@ const router = useRouter()
                     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                   </svg>
                 </Link>
-                {localStorage.getItem('logged in') === 'true' ? null : (
+                {loggedIn !== true && (
                   <Link
                     className="pl-4 text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
                     href="/u/login"
@@ -544,6 +560,8 @@ const router = useRouter()
 
             <div className="flex flex-grow justify-end items-end w-full mt-4 pb-4">
               <FooterReworked
+              loggedIn= {loggedIn}
+              setLoggedIn={setLoggedIn}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 handleSignout={handleSignOut}

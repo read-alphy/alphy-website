@@ -58,25 +58,14 @@ function MyApp({ Component, pageProps }) {
     const [globalLayout, setGlobalLayout] = useState(true)
     const [userLayout, setUserLayout] = useState(false)
     const [submitLayout, setSubmitLayout] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
+  
 
   
     const [customerID, setCustomerID] = useState('')
     const [userArcsCalled, setUserArcsCalled] = useState(false)
     useEffect(() => {
-        if (
-            localStorage.getItem('theme') !== null &&
-            localStorage.getItem('theme') !== undefined &&
-            localStorage.getItem('theme').length === 0
-          ) {
-            if (
-              window.matchMedia &&
-              window.matchMedia('(prefers-color-scheme: dark)').matches
-            ) {
-              localStorage.setItem('theme', 'dark')
-            } else {
-              localStorage.setItem('theme', 'light')
-            }
-          }
+       
 
         const urlParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlParams.entries());
@@ -89,7 +78,17 @@ function MyApp({ Component, pageProps }) {
 
       }, []);
 
-    
+      
+      useEffect (() => {
+        const theme = localStorage.getItem('theme')
+
+        if(theme!==null){
+          document.documentElement.classList.add(theme)
+        }
+
+        
+      }
+      , [])
  
     
   
@@ -171,10 +170,10 @@ function MyApp({ Component, pageProps }) {
     }, [currentUser, called])
   
     const getSandboxHistory = () => {
-      axios.get(`${API_URL}/sandbox/?user_id=local`).then(response => {
+/*       axios.get(`${API_URL}/sandbox/?user_id=local`).then(response => {
         
         setSandboxHistory(response.data)
-      })
+      }) */
     }
   
     useEffect(() => {
@@ -189,6 +188,7 @@ function MyApp({ Component, pageProps }) {
         const oobCode = urlParams.get('oobCode')
         auth.handleVerifyEmail(oobCode).then(resp => {
           localStorage.setItem('logged in', 'true')
+          setLoggedIn(true)
           router.push('/u/welcome?onboarding_form')
         })
       }
@@ -207,8 +207,10 @@ function MyApp({ Component, pageProps }) {
         }
         if (currentUser) {
           localStorage.setItem('logged in', 'true')
+          setLoggedIn(true)
         } else {
           localStorage.setItem('logged in', 'false')
+          setLoggedIn(false)
         }
   
         if (currentUser !== null && called === false) {
@@ -306,6 +308,8 @@ const additionalProps ={
     setUserLayout : setUserLayout,
     submitLayout : submitLayout,
     setSubmitLayout : setSubmitLayout,
+    loggedIn : loggedIn,
+    setLoggedIn : setLoggedIn,
 
 }
 

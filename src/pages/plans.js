@@ -1,11 +1,27 @@
 
 
-export default function Pricing(){
+import dynamic from 'next/dynamic'
+
+const Pricing = dynamic(() => import('../components/Profile/Pricing'), {
+  ssr: false,
+})
+
+
+
+export default function Plans({ currentUser, collapsed, setCollapsed, tier, sandboxHistory, setSandboxHistory, loggedIn, setLoggedIn}){
 
     return (
-        <div>
-            <h1>Pricing</h1>
-            <p>This is the pricing page content.</p>
-        </div>
+      <Pricing
+      
+      loggedIn = {loggedIn}
+      setLoggedIn={setLoggedIn}
+      tier={tier}
+      collapsed={collapsed}
+      setCollapsed={setCollapsed}
+      currentUser={currentUser}
+      sandboxHistory={sandboxHistory}
+      setSandboxHistory={setSandboxHistory}
+      
+      />
     );
 }
