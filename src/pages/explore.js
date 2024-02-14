@@ -1,4 +1,9 @@
-import Hub from "../components/Hub/Hub";
+import dynamic from 'next/dynamic'
+
+const Hub = dynamic(() => import('../components/Hub/Hub'), {
+  ssr: false,
+})
+
 
 
 
@@ -18,16 +23,17 @@ export default function Explore({arcs,
     setSandboxHistory,
     globalLayout,
     setGlobalLayout,
-    userLayout,
-    setUserLayout,
-    submitLayout,
+loggedIn,
+setLoggedIn,
     setSubmitLayout,
   }) {
 
 
 return (
 <Hub
-  arcs={arcs}
+  loggedIn = {loggedIn}
+  setLoggedIn = {setLoggedIn}
+  arcs={false}
   currentUser={currentUser}
   collapsed={collapsed}
   setCollapsed={setCollapsed}

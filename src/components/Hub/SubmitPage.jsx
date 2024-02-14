@@ -18,6 +18,8 @@ function SubmitPage({
   setDataGlobalArchipelagos,
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn
 }) {
   let source_id
 
@@ -65,7 +67,9 @@ function SubmitPage({
 			</div>
 			} */}
         <div className={`flex hidden sm:block`}>
-          <SideFeed
+          <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
             currentUser={currentUser}
             collapsed={collapsed}
             setCollapsed={setCollapsed}
@@ -89,7 +93,9 @@ function SubmitPage({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-              <SideFeed
+              <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

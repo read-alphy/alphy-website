@@ -2,7 +2,8 @@ import Hub from "../components/Hub/Hub";
 import { useEffect } from "react";
 
 
-export default function Myhub({arcs,
+export default function Myhub({
+  arcs,
     currentUser,
     collapsed,
     setCollapsed,
@@ -18,10 +19,9 @@ export default function Myhub({arcs,
     setSandboxHistory,
     globalLayout,
     setGlobalLayout,
-    userLayout,
-    setUserLayout,
-    submitLayout,
     setSubmitLayout,
+    loggedIn,
+    setLoggedIn
   }) {
 /*   
   useEffect(() => {
@@ -33,6 +33,8 @@ export default function Myhub({arcs,
 
 return (
 <Hub
+loggedIn= {loggedIn}
+setLoggedIn= {setLoggedIn}
   arcs={arcs}
   currentUser={currentUser}
   collapsed={collapsed}

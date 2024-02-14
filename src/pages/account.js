@@ -1,9 +1,34 @@
+import dynamic from 'next/dynamic'
 
-export default function Account() {
+const Account = dynamic(() => import('../components/Profile/Account'), {
+  ssr: false,
+})
+
+
+
+export default function AccountPage({
+    currentUser,
+    collapsed,
+    setCollapsed,
+    tier,
+    customerID,
+    credit,
+    sandboxHistory,
+    setSandboxHistory,
+}) {
     return (
-        <div>
-        <h1>Account</h1>
-        <p>This is the account page content.</p>
-        </div>
+     <Account
+     currentUser={currentUser}
+     stripe={stripePromise}
+     credit={credit}
+     tier={tier}
+     idToken={idToken}
+     collapsed={collapsed}
+     setCollapsed={setCollapsed}
+     customerID={customerID}
+     sandboxHistory={sandboxHistory}
+     setSandboxHistory={setSandboxHistory}
+     
+     />
     );
     }

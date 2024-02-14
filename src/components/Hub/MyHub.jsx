@@ -21,6 +21,8 @@ function Hub({
   setDataGlobalArchipelagos,
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn
 }) {
   let source_id
 
@@ -74,7 +76,9 @@ function Hub({
 			} */}
         {
           <div className={`hidden sm:block`}>
-            <SideFeed
+            <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -99,7 +103,9 @@ function Hub({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-              <SideFeed
+              <SideFeed 
+loggedIn={loggedIn}
+setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 setCollapsed={setCollapsed}
                 source_id={source_id}

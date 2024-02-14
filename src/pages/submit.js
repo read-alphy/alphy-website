@@ -1,5 +1,10 @@
 
-import SubmitPage from "../components/Hub/SubmitPage"
+import dynamic from 'next/dynamic'
+
+const SubmitPage = dynamic(() => import('../components/Hub/SubmitPage'), {
+  ssr: false,
+})
+
 
 
 export default function Submit({
@@ -16,11 +21,15 @@ export default function Submit({
     setDataGlobalArchipelagos,
     sandboxHistory,
     setSandboxHistory,
-    setCreditcalled
+    setCreditcalled,
+    loggedIn,
+    setLoggedIn
 
 }) {
     return (
       <SubmitPage
+      loggedIn ={loggedIn}
+      setLoggedIn={setLoggedIn}
       credit={credit}
       setCreditcalled={setCreditcalled}
     currentUser={currentUser}
