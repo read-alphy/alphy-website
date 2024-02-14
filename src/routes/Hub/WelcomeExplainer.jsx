@@ -14,7 +14,7 @@ import { Button } from '@material-tailwind/react'
 import AboutMainPage from './AboutMainPage.jsx'
 import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
-import AudioFileIcon from '@mui/icons-material/AudioFile'
+
 
 export default function WelcomeExplainer({
   currentUser,
