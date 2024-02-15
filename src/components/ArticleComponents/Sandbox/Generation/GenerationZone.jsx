@@ -137,7 +137,8 @@ export default function GenerationZone({
                   : 'opacity-100'
               }  transition-opacity duration-300 ease-in-out bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 dark:from-purple-400 font-averta-regular normal-case w-[120px]`}
             >
-              {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                             {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
             </Button>
           </div>
         </div>

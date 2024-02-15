@@ -3,7 +3,7 @@ import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
 import { API_HOST } from '../../../constants'
 
-export default function Sandbox({ data, askAlphyForSandbox, askText }) {
+export default function Sandbox({ data, askAlphyForSandbox, askText,currentUser }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [outputMessage, setOutputMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -13,7 +13,7 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
   const [selectedTool, setSelectedTool] = useState('')
   const [creationCalled, setCreationCalled] = useState(false)
   const [manner, setManner] = useState(null)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false) 
 
   const theme = localStorage.getItem('theme')
   useEffect(() => {
@@ -149,11 +149,15 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
   }, [data, settings])
 
   function createDopeStuff() {
+    
+    if(currentUser === null || currentUser === undefined){return}
+
     setOutputMessage('')
     setCreationCalled(true)
     setIsLoading(true)
 
     const request = {
+      id_token: currentUser.accessToken,
       source_type: contentDetails.source_type,
       source_id: contentDetails.source_id,
       /* source_variant: contentDetails.source_variant, */
@@ -180,19 +184,23 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
         settings.command_type === 'custom'
           ? { prompt: userPrompt }
           : settings.command_type,
-    }
+    
+    
+        }
 
     if (settings.command_type) {
       setPromptType(settings.command_type)
     }
 
-    const ws = new WebSocket(`wss://${API_HOST}/sandbox/ws`)
+    const ws = new WebSocket(`wss://${API_HOST}/sandbox/ws`,
+    
+    )
 
     /* wss://backend-staging-2459.up.railway.app/ws/question */
     /* wss://backend-staging-2459.up.railway.app/ws/sandbox */
-
+/* {idToken: currentUser.accessToken} */
     ws.onopen = () => {
-      console.log('connected')
+      
       ws.send(JSON.stringify(request))
     }
 

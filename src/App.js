@@ -61,6 +61,7 @@ function App() {
   const [welcomeFormCalled, setWelcomeFormCalled] = useState(false)
   const [totalMinutes, setTotalMinutes] = useState(0)
   const [sandboxHistory, setSandboxHistory] = useState([])
+  const [sandboxHistoryCalled, setSandboxHistoryCalled] = useState(false)
 
   const [customerID, setCustomerID] = useState('')
   const [userArcsCalled, setUserArcsCalled] = useState(false)
@@ -159,16 +160,21 @@ function App() {
   }, [currentUser, called])
 
   const getSandboxHistory = () => {
-    axios.get(`${API_URL}/sandbox/?user_id=local`).then(response => {
+    axios.get(`${API_URL}/sandbox/`,{
+      headers: {
+        'id-token': currentUser.accessToken,
+    }}).then(response => {
+      setSandboxHistoryCalled(true)
       setSandboxHistory(response.data)
     })
+    
   }
 
   useEffect(() => {
-    if (sandboxHistory.length === 0) {
+    if (sandboxHistoryCalled===false && currentUser) {
       getSandboxHistory()
     }
-  }, [sandboxHistory])
+  }, [sandboxHistory,currentUser])
 
   useEffect(() => {
     if (verification) {

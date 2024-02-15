@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { useEffect } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import ExploreIcon from '@mui/icons-material/Explore'
@@ -30,6 +30,10 @@ function SideFeedReworked({
   currentUser,
 }) {
   const [called, setCalled] = useState(false)
+  const [isDragging, setIsDragging] = useState(false);
+  const [sideFeedWidth, setSideFeedWidth] = useState(200);
+  const [sliceSize, setSliceSize] = useState(15)
+
 
   const location = useLocation()
   const carouselRef = useRef(null)
@@ -45,6 +49,8 @@ function SideFeedReworked({
   const [groupedData, setGroupedData] = useState([])
 
   const [visibleGroups, setVisibleGroups] = useState({})
+
+
 
   const toggleGroupVisibility = index => {
     setVisibleGroups(prevState => ({
@@ -105,6 +111,48 @@ function SideFeedReworked({
     }
   }, [])
 
+
+ 
+  const onMouseDown = (e) => {
+    // Only left mouse button
+    
+    if (e.button !== 0) return;
+    setIsDragging(true);
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
+  const onMouseMove = (e) => {
+    if (isDragging) {
+      // Set the width to the new mouse position
+      if(e.clientX < 200|| e.clientX > 350){return}
+      setSideFeedWidth(e.clientX);
+      
+    }
+  };
+
+  const onMouseUp = () => {
+    setIsDragging(false);
+  };  
+
+  // Add event listeners when dragging starts and remove them when it ends
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    } else {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    }
+    
+    // Cleanup function to remove event listeners
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, [isDragging]); // Only re-run the effect if the isDragging state changes
+
+
   const handleSignOut = async () => {
     try {
       auth.logout()
@@ -118,6 +166,17 @@ function SideFeedReworked({
       console.log('sign out error', error)
     }
   }
+useEffect (() => {
+
+  if(window.innerWidth < 640){
+    setSideFeedWidth(640)
+  }
+  else{
+    setSideFeedWidth(200)
+
+  }
+},[window.innerWidth])
+ 
 
   const seeInSource = item => {
     sessionStorage.setItem('fillPrompt', JSON.stringify(item))
@@ -126,15 +185,21 @@ function SideFeedReworked({
   }
 
   return (
+    <div className="flex dark:bg-darkMode"
+   
+    id="side-feed"
+    >
     <div
       id="side-feed"
-      className={` font-averta-semibold dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-slate-50 min-h-[100vh] sm:max-h-[100vh] ${
-        collapsed ? 'w-[60px]' : 'w-full sm:min-w-[200px] '
+      
+      className={` font-averta-semibold dark:bg-mildDarkMode  dark:text-zinc-300 bg-white sm:bg-slate-50 min-h-[100vh] sm:max-h-[100vh] ${
+        collapsed ? 'w-[60px] max-w-[60px]' : `w-full`
       } flex flex-col transition-all duration-300 ease-in-out	overflow-y-scroll `}
+      style ={{width : `${sideFeedWidth}px`}}
     >
       {!collapsed ? (
         <div className="flex flex-col flex-grow ">
-          <div className={`flex items-center font-bold pt-4 sm:pt-8 relative`}>
+          <div className={`flex w-full items-center font-bold pt-4 sm:pt-8 relative justify-space-between`}>
             <Link
               to="/"
               className="text-zinc-800 dark:text-gray-200 pl-4 sm:pl-6 "
@@ -149,7 +214,7 @@ function SideFeedReworked({
                 <h1 className="ml-1 text-2xl mt-1 ">ALPHY</h1>
               </div>
             </Link>
-            <div className="hidden md:block">
+            <div className="hidden md:flex w-full justify-end items-end ">
               {/* <LastPageIcon onClick={() => setCollapsed(true)} fontSize="large" className="rotate-180 ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1" /> */}
               <svg
                 onClick={() => setCollapsed(true)}
@@ -162,7 +227,7 @@ function SideFeedReworked({
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                className="feather feather-chevron-left ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full transition transform hover:-translate-x-1 duration-300 ease-in p-1"
+                className="feather feather-chevron-left ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full transition transform hover:-translate-x-1 duration-300 ease-in p-1 mr-1"
               >
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
@@ -315,44 +380,51 @@ function SideFeedReworked({
                     </Link>
 
                     {groupedData.length > 0 && (
-                      <div className="select-none">
+                      <div className="select-none relative">
+                    
                         {groupedData.map((item, index) => (
                           <div className="relative flex flex-col group cursor-pointer">
                             <p
-                              className="text-zinc-500 dark:text-zinc-300 text-xs hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md p-1"
+                              className="text-zinc-500 h-[20px] overflow-hidden dark:text-zinc-300 text-xs hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md p-1"
                               onClick={() => toggleGroupVisibility(index)}
                             >
-                              {item[0].title.slice(0, 15)}...
+                              {item[0].title}
                             </p>
                             <div className="pl-2 text-zinc-400 dark:text-zinc-400 font-normal">
                               {item.map(subItem => (
                                 <p
                                   onClick={() => seeInSource(subItem)}
-                                  className={`text-xs rounded-lg font-averta-semibold overflow-hidden transition-all duration-200 ease-in-out hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md ${
+                                  className={`text-xs h-[20px] rounded-lg font-averta-semibold overflow-hidden transition-all duration-200 ease-in-out hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md ${
                                     visibleGroups[index]
                                       ? 'max-h-96 p-1 '
                                       : 'max-h-0 p-0'
                                   }`}
                                 >
+                                  
+                          
+                                        
+
+                                        
                                   {typeof subItem.request.command === 'object'
-                                    ? subItem.request.command.prompt.slice(
-                                        0,
-                                        15
-                                      ) + '...'
+                                    ? subItem.request.command.prompt
                                     : inputMessages
                                         .find(
                                           obj =>
                                             obj.command_type ===
                                             subItem.request.command
                                         )
-                                        .title.slice(0, 15) + '...'}
+                                        .title}
                                 </p>
                               ))}
                             </div>
                           </div>
                         ))}
+                   
+
                       </div>
                     )}
+
+                    
                   </div>
                 )}
 
@@ -549,6 +621,14 @@ function SideFeedReworked({
           </div>
         </div>
       )}
+       
+    </div>
+    <div
+          className=" hidden sm:flex w-1 cursor-col-resize  bg-transparent   "
+          
+          onMouseDown={onMouseDown}>
+          {/* This is the draggable area */}
+        </div>
     </div>
   )
 }

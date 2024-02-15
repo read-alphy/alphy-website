@@ -88,10 +88,10 @@ function Navbar({ collapsed, setCollapsed }) {
       } justify-between dark:bg-darkMode pb-2	`}
     >
       <div
-        className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-white   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${
+        className={`flex  justify-between flex-row fixed w-full pb-2 top-0 z-40 text-blueLike bg-white   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${
           isYt || isSp || isUp || isArc || isHub
-            ? 'h-[8vh] min-h-[40px]'
-            : 'h-[8vh] min-h-[40px]'
+            ? ' min-h-[40px]'
+            : ' min-h-[40px]'
         } dark:bg-darkMode`}
       >
         <div

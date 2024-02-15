@@ -736,7 +736,7 @@ export default function Content({
           setIsSandbox={setIsSandbox}
         />
 
-        <div className="">
+        <div className="px-2 md:px-0">
           <div className={`${isSandbox && 'hidden'}`}>
             <ReadComponent
               data={data}
@@ -789,6 +789,7 @@ export default function Content({
               askAlphyForSandbox={askAlphyForSandbox}
               setAskAlphyForSandbox={setAskAlphyForSandbox}
               askText={askText}
+              currentUser={currentUser}
             />
           </div>
         </div>

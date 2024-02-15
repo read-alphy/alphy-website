@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Spinner } from '@material-tailwind/react'
 
-import TwitterIcon from '@mui/icons-material/Twitter'
-import StarRateIcon from '@mui/icons-material/StarRate'
-import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin'
-import EmailIcon from '@mui/icons-material/Email'
-import HighlightIcon from '@mui/icons-material/Highlight'
-import YouTubeIcon from '@mui/icons-material/YouTube'
-import MicIcon from '@mui/icons-material/Mic'
-import GoogleIcon from '@mui/icons-material/Google'
-import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl'
-import QuizIcon from '@mui/icons-material/Quiz'
-import WorkIcon from '@mui/icons-material/Work'
-import ShowChartIcon from '@mui/icons-material/ShowChart'
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
-import GraphicEqIcon from '@mui/icons-material/GraphicEq'
+
 import { inputMessages } from '../messageBank'
 
 export default function Toolbox({
@@ -42,7 +29,7 @@ export default function Toolbox({
         One-click Generation
       </p> */}
 
-      <div className="flex flex-wrap mt-4 gap-6">
+      <div className="flex flex-wrap mt-4 gap-6 justify-center sm:justify-normal">
         {/* CUSTOM INPUT */}
         <div
           className={`${
@@ -62,20 +49,7 @@ export default function Toolbox({
             }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col   max-w-[350px] sm:max-w-[240px]   `}
           >
             <div className="flex flex-row">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="#fde047"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke={theme === 'light' ? '#1e293b' : 'none'}
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
-                />
-              </svg>
+            {inputMessages.find(obj => obj.command_type === 'custom').icon}{' '}
             </div>
 
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
@@ -113,12 +87,14 @@ export default function Toolbox({
               selectedTool !== 'twitter_thread' && ''
             }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[350px]  sm:max-w-[240px]   `}
           >
-            <TwitterIcon
-              className="row-span-1"
-              sx={{
-                color: '#4ab3f4',
-              }}
-            />
+           
+
+
+           {
+                inputMessages.find(obj => obj.command_type === 'twitter_thread')
+                  .icon
+              }
+
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
               {
                 inputMessages.find(obj => obj.command_type === 'twitter_thread')
@@ -150,7 +126,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -172,7 +149,11 @@ export default function Toolbox({
               selectedTool !== 'audiogram' && ''
             }`}
           >
-            <GraphicEqIcon className="row-span-1" sx={{ color: '#818cf8' }} />
+             {
+                inputMessages.find(obj => obj.command_type === 'audiogram')
+                  .icon
+              }
+          
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'audiogram')
@@ -201,7 +182,7 @@ export default function Toolbox({
                   selectedTool !== 'audiogram' ? 'opacity-0' : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
               </Button>
             </div>
           </div>
@@ -223,20 +204,12 @@ export default function Toolbox({
               selectedTool !== 'blog_post' && ''
             }`}
           >
-            <svg
-              className="row-span-1 w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke={`${theme === 'light' ? '#64748b' : '#cbd5e1'}`}
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-              />
-            </svg>
+            {
+                inputMessages.find(obj => obj.command_type === 'blog_post')
+                  .icon
+              }{' '}
+
+
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'blog_post')
@@ -266,7 +239,8 @@ export default function Toolbox({
                   selectedTool !== 'blog_post' ? 'opacity-0' : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -292,10 +266,12 @@ export default function Toolbox({
               selectedTool !== 'investment_analysis' && ''
             }`}
           >
-            <CurrencyBitcoinIcon
-              className="row-span-1"
-              sx={{ color: '#ef8e19' }}
-            />
+            {
+                inputMessages.find(
+                  obj => obj.command_type === 'investment_analysis'
+                ).icon
+              }{' '}
+           
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -329,7 +305,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -363,11 +340,13 @@ export default function Toolbox({
               selectedTool !== 'newsletter_generator' && ''
             }`}
           >
-            <EmailIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: `${theme === 'light' ? '#64748b' : '#cbd5e1'}` }}
-            />
+           
+           {
+                inputMessages.find(
+                  obj => obj.command_type === 'newsletter_generator'
+                ).icon
+              }
+
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -401,7 +380,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -426,11 +406,13 @@ export default function Toolbox({
               selectedTool !== 'highlight_generator' && ''
             }`}
           >
-            <HighlightIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: '#facc15' }}
-            />
+
+            {
+                inputMessages.find(
+                  obj => obj.command_type === 'highlight_generator'
+                ).icon
+              }
+           
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -464,7 +446,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -487,11 +470,10 @@ export default function Toolbox({
               selectedTool !== 'youtube_shorts' && ''
             }`}
           >
-            <YouTubeIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: '#dc2626' }}
-            />
+           {
+                inputMessages.find(obj => obj.command_type === 'youtube_shorts')
+                  .icon
+              }{' '}
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'youtube_shorts')
@@ -523,7 +505,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -547,12 +530,12 @@ export default function Toolbox({
             className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_topic_generator' && ''
             }`}
-          >
-            <YouTubeIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: '#dc2626' }}
-            />
+          > {
+            inputMessages.find(
+              obj => obj.command_type === 'video_topic_generator'
+            ).icon
+          }
+            
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               YouTube Video Ideas
             </p>
@@ -584,7 +567,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -607,11 +591,13 @@ export default function Toolbox({
               selectedTool !== 'video_description' && ''
             }`}
           >
-            <YouTubeIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: '#dc2626' }}
-            />
+
+{
+                inputMessages.find(
+                  obj => obj.command_type === 'video_description'
+                ).icon
+              }{' '}
+            
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -645,7 +631,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -670,11 +657,12 @@ export default function Toolbox({
               selectedTool !== 'space_idea_generator' && ''
             }`}
           >
-            <MicIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: '#7366d7' }}
-            />
+            {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_idea_generator'
+                ).icon
+              }
+           
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -708,7 +696,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -733,11 +722,12 @@ export default function Toolbox({
               selectedTool !== 'space_description_generator' && ''
             }`}
           >
-            <MicIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: '#7366d7' }}
-            />
+            {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_idea_generator'
+                ).icon
+              }
+           
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -773,7 +763,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -798,11 +789,11 @@ export default function Toolbox({
               selectedTool !== 'keyword_identifier' && ''
             }`}
           >
-            <GoogleIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: `${theme === 'light' ? '#64748b' : '#cbd5e1'}` }}
-            />
+           {
+                inputMessages.find(
+                  obj => obj.command_type === 'keyword_identifier'
+                ).icon
+              }
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -836,7 +827,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -859,11 +851,11 @@ export default function Toolbox({
               selectedTool !== 'get_actionables' && ''
             }`}
           >
-            <ChecklistRtlIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: `${theme === 'light' ? '#22c55e' : '#22c55e'}` }}
-            />
+            {
+                inputMessages.find(
+                  obj => obj.command_type === 'get_actionables'
+                ).icon
+              }
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -897,7 +889,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -920,11 +913,12 @@ export default function Toolbox({
               selectedTool !== 'generate_quizzes' && ''
             }`}
           >
-            <QuizIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: `${theme === 'light' ? '#64748b' : '#cbd5e1'}` }}
-            />
+             {
+                inputMessages.find(
+                  obj => obj.command_type === 'generate_quizzes'
+                ).icon
+              }{' '}
+           
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -958,7 +952,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -983,11 +978,12 @@ export default function Toolbox({
               selectedTool !== 'executive_brief_composer' && ''
             }`}
           >
-            <WorkIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: `${theme === 'light' ? '#a16207' : '#422006'}` }}
-            />
+             {
+                inputMessages.find(
+                  obj => obj.command_type === 'executive_brief_composer'
+                ).icon
+              }
+           
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -1023,7 +1019,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
@@ -1048,11 +1045,11 @@ export default function Toolbox({
               selectedTool !== 'investment_insight_extractor' && ''
             }`}
           >
-            <ShowChartIcon
-              className="row-span-1"
-              fontSize="medium"
-              sx={{ color: `${theme === 'light' ? '#86efac' : '#86efac'}` }}
-            />
+            {
+                inputMessages.find(
+                  obj => obj.command_type === 'investment_insight_extractor'
+                ).icon
+              }
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -1088,7 +1085,8 @@ export default function Toolbox({
                     : 'opacity-100'
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+
               </Button>
             </div>
           </div>
