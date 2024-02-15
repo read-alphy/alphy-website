@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/[source_type]/[source_id]": "pages/[source_type]/[source_id].js",
-  "/arcs": "pages/arcs.js",
-  "/": "pages/index.js"
+  "/": "pages/index.js",
+  "/plans/checkout/success": "pages/plans/checkout/success.js"
 }

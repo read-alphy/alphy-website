@@ -145,7 +145,7 @@ export default function AccountInfo({
           <div className="max-w-[200px] min-w-[200px] flex-row flex"></div>
 
          
-            <div className=" hidden xl:flex w-full max-w-[1200px] pt-20 grid grid-col-3 mb-30 ">
+            <div className=" hidden xl:flex flex-col w-full max-w-[1200px] pt-20 grid grid-col-3 mb-30 ">
               <div className="items-center margin-auto justify-center flex flex-col">
                 {currentUser ? (
                   <div>

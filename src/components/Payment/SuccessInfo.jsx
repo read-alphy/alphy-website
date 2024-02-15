@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
+import {useRouter} from 'next/router'
 
-export default function Success() {
-  const navigate = useNavigate()
-  const { currentUser } = useAuth()
+
+export default function Success({currentUser}) {
+  const router = useRouter()
+  
   /* let subValue = sessionStorage.getItem("subValue") */
 
   useEffect(() => {
     setTimeout(() => {
-      navigate('/')
+      router.push('/')
     }, 3000)
   })
 

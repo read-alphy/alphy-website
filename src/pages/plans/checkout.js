@@ -1,9 +1,17 @@
+import CheckoutPage from '../../components/Payment/CheckoutPage';
 
-export default function Checkout() {
+
+export default function Checkout( {collapsed, setCollapsed, tier, currentUser, sandboxHistory, setSandboxHistory, loggedIn, setLoggedIn}) {
     return (
-        <div>
-        <h1>Plans</h1>
-        <p>This is the plans page content.</p>
-        </div>
+        <CheckoutPage
+        collapsed={collapsed}
+                    setCollapsed={setCollapsed}
+                    tier={tier}
+                    currentUser={currentUser}
+                    sandboxHistory={sandboxHistory}
+                    setSandboxHistory={setSandboxHistory}
+                    loggedIn ={loggedIn}
+                    setLoggedIn={setLoggedIn}
+                     />
     );
     }

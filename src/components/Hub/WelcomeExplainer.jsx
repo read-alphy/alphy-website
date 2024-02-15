@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Twitch from '../../../public/img/twitch_full.png'
 import Twitter from '../../../public/img/twitter_square.png'
@@ -17,11 +17,20 @@ import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
 import Image from 'next/image'
 
+
 export default function WelcomeExplainer({
   currentUser,
   totalMinutes,
   setTotalMinutes,
+  loggedIn,
+  setLoggedIn,
 }) {
+  const [clientSide, setClientSide] = useState(false)
+
+
+useEffect (() => {
+
+  setClientSide(true)
   if (totalMinutes === 0) {
     axios.get(`${API_URL}/stats`).then(res => {
       if (res.data.total_mins !== undefined && res.data.total_mins !== null) {
@@ -29,6 +38,9 @@ export default function WelcomeExplainer({
       }
     })
   }
+
+
+}, [])
 
   const scrollToLanguages = () => {
     document.getElementById('languages').scrollIntoView({ behavior: 'smooth' })
@@ -78,7 +90,7 @@ export default function WelcomeExplainer({
               
               `}
             >
-              {currentUser && (
+              {loggedIn && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -94,34 +106,12 @@ export default function WelcomeExplainer({
                   />
                 </svg>
               )}
-              {currentUser
-                ? window.innerWidth < 400
-                  ? 'Submit a Link'
-                  : 'Submit a Link'
+              {loggedIn ?'Submit a Link'
+                
                 : 'Start for Free'}
             </Link>
-            {/* {currentUser && 
-            <Link
-              href={`${currentUser ? '/submit' : '/u/register'}`}
-              className="rounded-lg flex flex-row text-zinc-800  text-center text-md sm:text-md bg-none border border-zinc-700 dark:border-zinc-500 dark:text-zinc-300 ml-4  items-center py-3 font-averta-semibold drop-shadow-sm 
-              
-              px-2"
-            >
-              {currentUser && 
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1 mt-0.5">
-             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-           </svg>
-            }
-              
-                {window.innerWidth < 400
-                  ? 'Upload'
-                  : 'Upload from Device'
-                }
-            </Link>
-
-} */}
-
-            {currentUser ? (
+        
+            {loggedIn ? (
               <Link
                 href="/submit"
                 onClick={() => localStorage.setItem('newItem', 'upload')}
@@ -141,8 +131,10 @@ export default function WelcomeExplainer({
                     d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
                   />
                 </svg>
+                <p className="xs:hidden">Upload</p>
+                <p className="hidden xs:flex">Upload from Device</p>
 
-                {window.innerWidth < 400 ? 'Upload' : 'Upload from Device'}
+                
               </Link>
             ) : (
               <Link
@@ -312,6 +304,7 @@ export default function WelcomeExplainer({
               <div></div>
             </div>
           </div>
+          {clientSide&& 
           <video
             className="lg:max-w-[650px] 2xl:max-w-[700px] 3xl:max-w-[800px] border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg"
             autoPlay
@@ -321,6 +314,7 @@ export default function WelcomeExplainer({
           >
             {/* <source src={LitmusDemo} type="video/mp4" /> */}
           </video>
+          }
         </div>
         <div className="">
           <FlagArea />

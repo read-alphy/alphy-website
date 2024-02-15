@@ -3,10 +3,10 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import axios from 'axios'
 import CheckOutForm from './CheckOutForm'
-import { useAuth } from '../../hooks/useAuth'
+
 import Loading from '../Loading'
-import { useNavigate, useLocation } from 'react-router-dom'
-import StripeBanner from '../../img/stripe_banner.svg'
+
+/* import StripeBanner from '../../img/stripe_banner.svg' */
 import { API_URL, STRIPE_PK } from '../../constants'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -15,17 +15,17 @@ import { API_URL, STRIPE_PK } from '../../constants'
 //const stripePromise = loadStripe("pk_live_51...")
 const stripePromise = loadStripe(STRIPE_PK)
 
-export default function CheckOutPageInfo({ clientSecret, setClientSecret }) {
-  const location = useLocation()
-  const { currentUser } = useAuth()
-  const [user, setUser] = useState('')
+export default function CheckOutPageInfo({ clientSecret, setClientSecret,currentUser }) {
+  
+  
+
   const [called, setCalled] = useState(false)
-  let userStripeId = ''
-  const navigate = useNavigate()
+  
+  
 
-  const searchParams = new URLSearchParams(location.search)
+  
 
-  const subValue = searchParams.get('sub') || 'premium'
+  const subValue = 'premium'
 
   useEffect(() => {
     if (
@@ -103,7 +103,7 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret }) {
             </div>
 
             <Elements options={options} stripe={stripePromise}>
-              <CheckOutForm clientSecret={clientSecret} />
+              <CheckOutForm clientSecret={clientSecret} currentUser={currentUser} />
             </Elements>
           </div>
         ) : (

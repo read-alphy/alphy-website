@@ -92,8 +92,8 @@ setLoggedIn={setLoggedIn}
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeed 
-loggedIn={loggedIn}
-setLoggedIn={setLoggedIn}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

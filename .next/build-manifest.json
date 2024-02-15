@@ -20,11 +20,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/[source_type]/[source_id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/[source_type]/[source_id].js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -35,10 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/arcs": [
+    "/plans/checkout/success": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/arcs.js"
+      "static/chunks/pages/plans/checkout/success.js"
     ]
   },
   "ampFirstPages": []

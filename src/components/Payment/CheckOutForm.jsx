@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useAuth } from '../../hooks/useAuth'
+
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -9,10 +9,10 @@ import {
 import StripeBanner from '../../../public/img/stripe_banner.svg'
 import Image from 'next/image'
 
-export default function CheckOutForm({ clientSecret }) {
+export default function CheckOutForm({ clientSecret,currentUser }) {
   const stripe = useStripe()
   const elements = useElements()
-  const { currentUser } = useAuth()
+  
 
   const [message, setMessage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
