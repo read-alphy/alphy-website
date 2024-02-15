@@ -32,7 +32,9 @@
     "react-lottie": "^1.2.4",
     "react-markdown": "^9.0.1",
     "selection-popover": "^0.3.0",
+    "sharp": "^0.33.2",
     "srt-parser-2": "^1.2.3",
+    "swc": "^1.0.11",
     "typeit-react": "^2.7.1"
   },
   "devDependencies": {
