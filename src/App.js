@@ -160,21 +160,24 @@ function App() {
   }, [currentUser, called])
 
   const getSandboxHistory = () => {
-    axios.get(`${API_URL}/sandbox/`,{
-      headers: {
-        'id-token': currentUser.accessToken,
-    }}).then(response => {
-      setSandboxHistoryCalled(true)
-      setSandboxHistory(response.data)
-    })
-    
+    axios
+      .get(`${API_URL}/sandbox/`, {
+        headers: {
+          'id-token': currentUser.accessToken,
+        },
+      })
+      .then(response => {
+        setSandboxHistoryCalled(true)
+        setSandboxHistory(response.data)
+        console.log(response.data)
+      })
   }
 
   useEffect(() => {
-    if (sandboxHistoryCalled===false && currentUser) {
+    if (sandboxHistoryCalled === false && currentUser) {
       getSandboxHistory()
     }
-  }, [sandboxHistory,currentUser])
+  }, [sandboxHistory, currentUser])
 
   useEffect(() => {
     if (verification) {
@@ -344,6 +347,7 @@ function App() {
                     userArchipelagos={userArchipelagos}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    getSandboxHistory={getSandboxHistory}
                   />
                 }
               />
@@ -362,6 +366,7 @@ function App() {
                     userArchipelagos={userArchipelagos}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    getSandboxHistory={getSandboxHistory}
                   />
                 }
               />
@@ -380,6 +385,7 @@ function App() {
                     userArchipelagos={userArchipelagos}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    getSandboxHistory={getSandboxHistory}
                   />
                 }
               />
@@ -398,6 +404,7 @@ function App() {
                     userArchipelagos={userArchipelagos}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    getSandboxHistory={getSandboxHistory}
                   />
                 }
               />
@@ -416,6 +423,7 @@ function App() {
                     userArchipelagos={userArchipelagos}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    getSandboxHistory={getSandboxHistory}
                   />
                 }
               />
@@ -434,6 +442,7 @@ function App() {
                     userArchipelagos={userArchipelagos}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    getSandboxHistory={getSandboxHistory}
                   />
                 }
               />
@@ -862,8 +871,7 @@ function App() {
             userMetadata={userMetadata}
             setUserMetadata={setUserMetadata}
           />
-        ) */
-        }
+        ) */}
     </div>
   )
 }

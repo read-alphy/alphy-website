@@ -63,7 +63,7 @@ export default function FooterReworked({
                   footerReworkedShow ? 'max-h-96' : 'max-h-0'
                 } overflow-hidden transition-all duration-300 ease-in-out`}
               >
-                <div className="bg-white dark:bg-zinc-900 mx-1 border border-sky-50 dark:border-zinc-800 rounded-lg mb-2 py-4">
+                <div className="bg-white dark:bg-zinc-900 mx-1 border border-zinc-200 dark:border-zinc-800 rounded-lg mb-2 py-4">
                   <FooterMenu
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}

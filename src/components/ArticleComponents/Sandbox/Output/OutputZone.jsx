@@ -37,7 +37,7 @@ export default function OutputZone({
         userPrompt={userPrompt}
       />
 
-      <div className="items-end  mt-10 w-full  flex max-w-[800px]">
+      <div className="items-end  mt-10 w-full  flex max-w-[800px] pb-10 ">
         <OutputMessage
           generatedPrompt={generatedPrompt}
           setActiveGenerationZone={setActiveGenerationZone}

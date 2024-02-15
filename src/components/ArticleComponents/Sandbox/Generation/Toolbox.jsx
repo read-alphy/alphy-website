@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Spinner } from '@material-tailwind/react'
-
+import VerifiedIcon from '@mui/icons-material/Verified'
 
 import { inputMessages } from '../messageBank'
 
 export default function Toolbox({
-  theme,
+  tier,
   createDopeStuff,
   isLoading,
   toolboxActive,
@@ -44,12 +44,12 @@ export default function Toolbox({
                 setSelectedTool('custom')
               }
             }}
-            className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
+            className={` p-4 pb-2  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'custom' && ''
             }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col   max-w-[350px] sm:max-w-[240px]   `}
           >
             <div className="flex flex-row">
-            {inputMessages.find(obj => obj.command_type === 'custom').icon}{' '}
+              {inputMessages.find(obj => obj.command_type === 'custom').icon}{' '}
             </div>
 
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
@@ -62,7 +62,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'twitter_thread' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             ></div>
           </div>
         </div>
@@ -83,17 +83,14 @@ export default function Toolbox({
                 setSelectedTool('twitter_thread')
               }
             }}
-            className={` p-4  h-full grid grid-row-3  normal-case rounded-lg ${
+            className={` p-4 pb-2  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'twitter_thread' && ''
             }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[350px]  sm:max-w-[240px]   `}
           >
-           
-
-
-           {
-                inputMessages.find(obj => obj.command_type === 'twitter_thread')
-                  .icon
-              }
+            {
+              inputMessages.find(obj => obj.command_type === 'twitter_thread')
+                .icon
+            }
 
             <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
               {
@@ -111,7 +108,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'twitter_thread' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -124,15 +121,226 @@ export default function Toolbox({
                   selectedTool !== 'twitter_thread'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                }  transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : (
+                  'Generate'
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+        {/* BLOG POST */}
 
+        <div
+          className={`${
+            selectedTool === 'blog_post' &&
+            'animated-gradient-border rounded-lg '
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
+        >
+          <div
+            onClick={() =>
+              setSelectedTool(selectedTool === 'blog_post' ? '' : 'blog_post')
+            }
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm  max-w-[350px] sm:max-w-[240px]   ${
+              selectedTool !== 'blog_post' && ''
+            }`}
+          >
+            {inputMessages.find(obj => obj.command_type === 'blog_post').icon}{' '}
+            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+              {
+                inputMessages.find(obj => obj.command_type === 'blog_post')
+                  .title
+              }{' '}
+            </p>
+            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+              {
+                inputMessages.find(obj => obj.command_type === 'blog_post')
+                  .message
+              }
+            </p>
+            <div
+              className={`${
+                selectedTool === 'blog_post' ? 'max-h-96' : 'max-h-0'
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
+            >
+              <Button
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
+                ripple={true}
+                disabled={selectedTool !== 'blog_post'}
+                className={`${
+                  selectedTool !== 'blog_post' ? 'opacity-0' : 'opacity-100'
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+              >
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : (
+                  'Generate'
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+        {/* SPACE DESCRIPTION GENERATOR */}
+        <div
+          className={`${
+            selectedTool === 'space_description_generator' &&
+            'animated-gradient-border rounded-lg '
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
+        >
+          <div
+            onClick={() =>
+              setSelectedTool(
+                selectedTool === 'space_description_generator'
+                  ? ''
+                  : 'space_description_generator'
+              )
+            }
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+              selectedTool !== 'space_description_generator' && ''
+            }`}
+          >
+            {
+              inputMessages.find(
+                obj => obj.command_type === 'space_idea_generator'
+              ).icon
+            }
+
+            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_description_generator'
+                ).title
+              }
+            </p>
+            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'space_description_generator'
+                ).message
+              }
+            </p>
+
+            <div
+              className={`${
+                selectedTool === 'space_description_generator'
+                  ? 'max-h-96'
+                  : 'max-h-0'
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
+            >
+              <Button
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
+                ripple={true}
+                disabled={selectedTool !== 'space_description_generator'}
+                className={`${
+                  selectedTool !== 'space_description_generator'
+                    ? 'opacity-0'
+                    : 'opacity-100'
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+              >
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
         </div>
 
+        {/* EXECUTIVE BRIEF COMPOSER */}
+        <div
+          className={`${
+            selectedTool === 'executive_brief_composer' &&
+            'animated-gradient-border rounded-lg '
+          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
+        >
+          <div
+            onClick={() =>
+              setSelectedTool(
+                selectedTool === 'executive_brief_composer'
+                  ? ''
+                  : 'executive_brief_composer'
+              )
+            }
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+              selectedTool !== 'executive_brief_composer' && ''
+            }`}
+          >
+            {
+              inputMessages.find(
+                obj => obj.command_type === 'executive_brief_composer'
+              ).icon
+            }
+
+            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'executive_brief_composer'
+                ).title
+              }
+            </p>
+            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'executive_brief_composer'
+                ).message
+              }
+            </p>
+
+            <div
+              className={`${
+                selectedTool === 'executive_brief_composer'
+                  ? 'max-h-96'
+                  : 'max-h-0'
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
+            >
+              <Button
+                onClick={event => {
+                  event.stopPropagation()
+                  createDopeStuff()
+                }}
+                ripple={true}
+                disabled={selectedTool !== 'executive_brief_composer'}
+                className={`${
+                  selectedTool !== 'executive_brief_composer'
+                    ? 'opacity-0'
+                    : 'opacity-100'
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+              >
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : (
+                  'Generate'
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
         {/* AUDIOGRAM */}
 
         <div
@@ -145,15 +353,23 @@ export default function Toolbox({
             onClick={() =>
               setSelectedTool(selectedTool === 'audiogram' ? '' : 'audiogram')
             }
-            className={`p-4 h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2  h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'audiogram' && ''
             }`}
           >
-             {
-                inputMessages.find(obj => obj.command_type === 'audiogram')
-                  .icon
-              }
-          
+            <div className="flex flex-row w-full">
+              {inputMessages.find(obj => obj.command_type === 'audiogram').icon}
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'audiogram')
@@ -169,7 +385,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'audiogram' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height] overflow-hidden duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -177,70 +393,40 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'audiogram'}
+                disabled={selectedTool !== 'audiogram' || tier !== 'premium'}
                 className={`${
                   selectedTool !== 'audiogram' ? 'opacity-0' : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* BLOG POST */}
-
-        <div
-          className={`${
-            selectedTool === 'blog_post' &&
-            'animated-gradient-border rounded-lg '
-          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
-        >
-          <div
-            onClick={() =>
-              setSelectedTool(selectedTool === 'blog_post' ? '' : 'blog_post')
-            }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm  max-w-[350px] sm:max-w-[240px]   ${
-              selectedTool !== 'blog_post' && ''
-            }`}
-          >
-            {
-                inputMessages.find(obj => obj.command_type === 'blog_post')
-                  .icon
-              }{' '}
-
-
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              {
-                inputMessages.find(obj => obj.command_type === 'blog_post')
-                  .title
-              }{' '}
-            </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              {
-                inputMessages.find(obj => obj.command_type === 'blog_post')
-                  .message
-              }
-            </p>
-
-            <div
-              className={`${
-                selectedTool === 'blog_post' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
-            >
-              <Button
-                onClick={event => {
-                  event.stopPropagation()
-                  createDopeStuff()
-                }}
-                ripple={true}
-                disabled={selectedTool !== 'blog_post'}
-                className={`${
-                  selectedTool !== 'blog_post' ? 'opacity-0' : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
-              >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -262,16 +448,28 @@ export default function Toolbox({
                   : 'investment_analysis'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={` p-4 pb-2 h-full pb-2 grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'investment_analysis' && ''
             }`}
           >
-            {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'investment_analysis'
                 ).icon
               }{' '}
-           
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
+
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -290,7 +488,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'investment_analysis' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden  overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -298,15 +496,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'investment_analysis'}
+                disabled={
+                  selectedTool !== 'investment_analysis' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'investment_analysis'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -314,7 +541,7 @@ export default function Toolbox({
 
         {/* QUOTE GETTER */}
         {/* <div className={`${selectedTool === "quote_getter" && "animated-gradient-border rounded-lg "} flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}>
-    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${selectedTool !== "quote_getter" && ""}`}>
+    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${selectedTool !== "quote_getter" && ""}`}>
         <FormatQuoteIcon className="row-span-1" fontSize="medium" sx={{ color: "#86198f" }}/>
         <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">Quotes</p>
         <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">Get me quotes from the conversation about the talking points I specify.</p>
@@ -336,16 +563,28 @@ export default function Toolbox({
                   : 'newsletter_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'newsletter_generator' && ''
             }`}
           >
-           
-           {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'newsletter_generator'
                 ).icon
               }
+
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
 
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
@@ -365,7 +604,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'newsletter_generator' ? 'max-h-96' : 'max-h-0'
-              } transition-[max-height]  duration-500 ease-in-out`}
+              } transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -373,15 +612,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'newsletter_generator'}
+                disabled={
+                  selectedTool !== 'newsletter_generator' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'newsletter_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -402,17 +670,27 @@ export default function Toolbox({
                   : 'highlight_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'highlight_generator' && ''
             }`}
           >
-
-            {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'highlight_generator'
                 ).icon
               }
-           
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -431,7 +709,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'highlight_generator' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -439,15 +717,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'highlight_generator'}
+                disabled={
+                  selectedTool !== 'highlight_generator' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'highlight_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -466,14 +773,26 @@ export default function Toolbox({
                 selectedTool === 'youtube_shorts' ? '' : 'youtube_shorts'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'youtube_shorts' && ''
             }`}
           >
-           {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(obj => obj.command_type === 'youtube_shorts')
                   .icon
               }{' '}
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'youtube_shorts')
@@ -490,7 +809,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'youtube_shorts' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -498,15 +817,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'youtube_shorts'}
+                disabled={
+                  selectedTool !== 'youtube_shorts' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'youtube_shorts'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -527,15 +875,28 @@ export default function Toolbox({
                   : 'video_topic_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_topic_generator' && ''
             }`}
-          > {
-            inputMessages.find(
-              obj => obj.command_type === 'video_topic_generator'
-            ).icon
-          }
-            
+          >
+            <div className="flex flex-row w-full">
+              {
+                inputMessages.find(
+                  obj => obj.command_type === 'video_topic_generator'
+                ).icon
+              }
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
+
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               YouTube Video Ideas
             </p>
@@ -552,7 +913,7 @@ export default function Toolbox({
                 selectedTool === 'video_topic_generator'
                   ? 'max-h-96'
                   : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -560,15 +921,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'video_topic_generator'}
+                disabled={
+                  selectedTool !== 'video_topic_generator' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'video_topic_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -587,17 +977,28 @@ export default function Toolbox({
                 selectedTool === 'video_description' ? '' : 'video_description'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_description' && ''
             }`}
           >
-
-{
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'video_description'
                 ).icon
               }{' '}
-            
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
+
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -616,7 +1017,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'video_description' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -624,15 +1025,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'video_description'}
+                disabled={
+                  selectedTool !== 'video_description' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'video_description'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -653,16 +1083,29 @@ export default function Toolbox({
                   : 'space_idea_generator'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'space_idea_generator' && ''
             }`}
           >
-            {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'space_idea_generator'
                 ).icon
               }
-           
+
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
+
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -681,7 +1124,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'space_idea_generator' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -689,82 +1132,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'space_idea_generator'}
+                disabled={
+                  selectedTool !== 'space_idea_generator' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'space_idea_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* SPACE DESCRIPTION GENERATOR */}
-        <div
-          className={`${
-            selectedTool === 'space_description_generator' &&
-            'animated-gradient-border rounded-lg '
-          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
-        >
-          <div
-            onClick={() =>
-              setSelectedTool(
-                selectedTool === 'space_description_generator'
-                  ? ''
-                  : 'space_description_generator'
-              )
-            }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
-              selectedTool !== 'space_description_generator' && ''
-            }`}
-          >
-            {
-                inputMessages.find(
-                  obj => obj.command_type === 'space_idea_generator'
-                ).icon
-              }
-           
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              {
-                inputMessages.find(
-                  obj => obj.command_type === 'space_description_generator'
-                ).title
-              }
-            </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              {
-                inputMessages.find(
-                  obj => obj.command_type === 'space_description_generator'
-                ).message
-              }
-            </p>
-
-            <div
-              className={`${
-                selectedTool === 'space_description_generator'
-                  ? 'max-h-96'
-                  : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
-            >
-              <Button
-                onClick={event => {
-                  event.stopPropagation()
-                  createDopeStuff()
-                }}
-                ripple={true}
-                disabled={selectedTool !== 'space_description_generator'}
-                className={`${
-                  selectedTool !== 'space_description_generator'
-                    ? 'opacity-0'
-                    : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
-              >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -785,15 +1190,28 @@ export default function Toolbox({
                   : 'keyword_identifier'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'keyword_identifier' && ''
             }`}
           >
-           {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'keyword_identifier'
                 ).icon
               }
+
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -812,7 +1230,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'keyword_identifier' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -820,15 +1238,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'keyword_identifier'}
+                disabled={
+                  selectedTool !== 'keyword_identifier' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'keyword_identifier'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -847,15 +1294,28 @@ export default function Toolbox({
                 selectedTool === 'get_actionables' ? '' : 'get_actionables'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'get_actionables' && ''
             }`}
           >
-            {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'get_actionables'
                 ).icon
               }
+
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -874,7 +1334,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'get_actionables' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -882,15 +1342,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'get_actionables'}
+                disabled={
+                  selectedTool !== 'get_actionables' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'get_actionables'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -909,16 +1398,28 @@ export default function Toolbox({
                 selectedTool === 'generate_quizzes' ? '' : 'generate_quizzes'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'generate_quizzes' && ''
             }`}
           >
-             {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'generate_quizzes'
                 ).icon
               }{' '}
-           
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
+
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -937,7 +1438,7 @@ export default function Toolbox({
             <div
               className={`${
                 selectedTool === 'generate_quizzes' ? 'max-h-96' : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden`}
             >
               <Button
                 onClick={event => {
@@ -945,82 +1446,44 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'generate_quizzes'}
+                disabled={
+                  selectedTool !== 'generate_quizzes' || tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'generate_quizzes'
                     ? 'opacity-0'
                     : 'opacity-100'
+                }  ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* EXECUTIVE BRIEF COMPOSER */}
-        <div
-          className={`${
-            selectedTool === 'executive_brief_composer' &&
-            'animated-gradient-border rounded-lg '
-          } flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}
-        >
-          <div
-            onClick={() =>
-              setSelectedTool(
-                selectedTool === 'executive_brief_composer'
-                  ? ''
-                  : 'executive_brief_composer'
-              )
-            }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
-              selectedTool !== 'executive_brief_composer' && ''
-            }`}
-          >
-             {
-                inputMessages.find(
-                  obj => obj.command_type === 'executive_brief_composer'
-                ).icon
-              }
-           
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
-              {
-                inputMessages.find(
-                  obj => obj.command_type === 'executive_brief_composer'
-                ).title
-              }
-            </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
-              {
-                inputMessages.find(
-                  obj => obj.command_type === 'executive_brief_composer'
-                ).message
-              }
-            </p>
-
-            <div
-              className={`${
-                selectedTool === 'executive_brief_composer'
-                  ? 'max-h-96'
-                  : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
-            >
-              <Button
-                onClick={event => {
-                  event.stopPropagation()
-                  createDopeStuff()
-                }}
-                ripple={true}
-                disabled={selectedTool !== 'executive_brief_composer'}
-                className={`${
-                  selectedTool !== 'executive_brief_composer'
-                    ? 'opacity-0'
-                    : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
-              >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>
@@ -1041,15 +1504,28 @@ export default function Toolbox({
                   : 'investment_insight_extractor'
               )
             }
-            className={`p-4 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'investment_insight_extractor' && ''
             }`}
           >
-            {
+            <div className="flex flex-row">
+              {
                 inputMessages.find(
                   obj => obj.command_type === 'investment_insight_extractor'
                 ).icon
               }
+
+              <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+                <p className="text-indigo-400 text-md  ">
+                  {tier !== 'premium' && (
+                    <VerifiedIcon
+                      fontSize="small"
+                      className=" ml-2 text-indigo-400 "
+                    />
+                  )}
+                </p>
+              </div>
+            </div>
             <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
               {
                 inputMessages.find(
@@ -1070,7 +1546,7 @@ export default function Toolbox({
                 selectedTool === 'investment_insight_extractor'
                   ? 'max-h-96'
                   : 'max-h-0'
-              }  transition-[max-height]  duration-500 ease-in-out`}
+              }  transition-[max-height]  duration-500 ease-in-out overflow-hidden n`}
             >
               <Button
                 onClick={event => {
@@ -1078,15 +1554,45 @@ export default function Toolbox({
                   createDopeStuff()
                 }}
                 ripple={true}
-                disabled={selectedTool !== 'investment_insight_extractor'}
+                disabled={
+                  selectedTool !== 'investment_insight_extractor' ||
+                  tier !== 'premium'
+                }
                 className={`${
                   selectedTool !== 'investment_insight_extractor'
                     ? 'opacity-0'
                     : 'opacity-100'
+                } ${
+                  tier !== 'premium' && 'flex flex-row opacity-50 '
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
               >
-                               {isLoading ? <Spinner color="blue" size="sm" className="mx-auto w-full justify-center " /> : 'Generate'}
-
+                {tier !== 'premium' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 mr-1 -mt-0.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    />
+                  </svg>
+                )}{' '}
+                {isLoading ? (
+                  <Spinner
+                    color="blue"
+                    size="sm"
+                    className="mx-auto w-full justify-center "
+                  />
+                ) : tier !== 'premium' ? (
+                  'Premium'
+                ) : (
+                  'Generate'
+                )}
               </Button>
             </div>
           </div>

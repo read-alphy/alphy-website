@@ -15,7 +15,6 @@ import AboutMainPage from './AboutMainPage.jsx'
 import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
 
-
 export default function WelcomeExplainer({
   currentUser,
   totalMinutes,

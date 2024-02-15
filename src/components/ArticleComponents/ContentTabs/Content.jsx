@@ -26,6 +26,7 @@ export default function Content({
   userArchipelagos,
   isBookmarked,
   setIsBookmarked,
+  getSandboxHistory,
 }) {
   const { currentUser } = useAuth()
   const navigate = useNavigate()
@@ -790,6 +791,8 @@ export default function Content({
               setAskAlphyForSandbox={setAskAlphyForSandbox}
               askText={askText}
               currentUser={currentUser}
+              getSandboxHistory={getSandboxHistory}
+              tier={tier}
             />
           </div>
         </div>

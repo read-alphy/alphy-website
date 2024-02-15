@@ -20,6 +20,7 @@ function Article({
   currentUser,
   sandboxHistory,
   setSandboxHistory,
+  getSandboxHistory,
 }) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -383,6 +384,7 @@ function Article({
               handleLanguageChange={handleLanguageChange}
               isSandbox={isSandbox}
               setIsSandbox={setIsSandbox}
+              getSandboxHistory={getSandboxHistory}
             />
           )}
         </div>
