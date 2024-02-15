@@ -325,8 +325,6 @@ useEffect (() => {
                 </Link>
 
                 {/* 
-
-                
              <Link
                     to="/arcs"
                     onClick={() => {
