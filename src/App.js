@@ -1,21 +1,21 @@
-import Navbar from './components/Navbar';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Article from './components/Article';
-import FeedbackComponent from './components/FeedbackComponent';
-import PrivacyPolicy from './routes/PrivacyPolicy';
-import NotFound from './routes/NotFound';
-import image from './img/robot.png';
-import { useAuth } from './hooks/useAuth';
-import { initializeApp } from 'firebase/app';
-import Pricing from './routes/Pricing';
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import CheckOutPage from './routes/payment/CheckOutPage';
-import Success from './routes/payment/Success';
-import Account from './routes/Account';
+import Navbar from './components/Navbar'
+import { useState, useEffect } from 'react'
 
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import Article from './components/Article'
+import FeedbackComponent from './components/FeedbackComponent'
+import PrivacyPolicy from './routes/PrivacyPolicy'
+import NotFound from './routes/NotFound'
+import image from './img/robot.png'
+import { useAuth } from './hooks/useAuth'
+import { initializeApp } from 'firebase/app'
+import Pricing from './routes/Pricing'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+import CheckOutPage from './routes/payment/CheckOutPage'
+import Success from './routes/payment/Success'
+import Account from './routes/Account'
+import History from './routes/History/History'
 
 import axios from 'axios'
 import { Helmet } from 'react-helmet'
@@ -298,32 +298,6 @@ function App() {
           content="Transcribe, question, and summarize audio with the help of AI. Try Alphy for free!"
           property="og:description"
         />
-	return (
-
-
-		<div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
-
-
-			{/* 	{showWelcomeForm && 
-
-
-
-
-					<div className={`fixed inset-0 z-50 flex items-center justify-center`} >
-								<div className="fixed inset-0 bg-black opacity-80"></div>
-								<div className="z-10 bg-white dark:bg-mildDarkMode rounded-md shadow-lg w-full max-w-lg  ">
-								<div className="flex  flex-col gap-6">
-								
-								<WelcomeForm currentUser={currentUser} userMetadata = {userMetadata} setUserMetadata={setUserMetadata} setShowWelcomeForm={setShowWelcomeForm} />
-							</div>	
-							</div>
-							</div>
-							}  */}
-							
-			<Helmet>
-				<title>{contentName === undefined || contentName.length === 0 ? "Alphy: Unlock the Information in Audiovisual Content" : contentName} </title>
-				<meta name="description" content="Transcribe, question, and summarize audio with the help of AI. Try Alphy for free!" />
-				<meta content="Transcribe, question, and summarize audio with the help of AI. Try Alphy for free!" property="og:description" />
 
         <meta
           property="og:title"
