@@ -83,7 +83,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
       <div className="border-b border-gray-200 dark:border-zinc-600 w-full mt-4"></div>
       <div className="mt-10 ">
         {sandboxHistory && sandboxHistory.length === 0 && (
-          <div className="text-center">
+          <div className="text-center text-zinc-700 dark:text-zinc-200">
             Anything you'll create with Playground will appear here.
             <br /> <br />
             {/* Learn more about Playground. */}
