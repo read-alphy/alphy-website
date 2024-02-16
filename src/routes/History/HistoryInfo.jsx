@@ -8,6 +8,7 @@ import HistoryIcon from '@mui/icons-material/History'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
+import PlaygroundDemo from '../../img/playground_demo.mp4'
 
 export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
   const navigate = useNavigate()
@@ -88,6 +89,19 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
             <br /> <br />
             {/* Learn more about Playground. */}
             Switch to the Playground mode on any source page to create content with AI.
+
+           
+            <video
+            className="lg:max-w-[650px] mt-20 2xl:max-w-[700px] 3xl:max-w-[800px] border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg"
+            autoPlay
+            loop
+            muted
+          >
+            <source src={PlaygroundDemo} type="video/mp4" />
+          </video>
+
+
+
           </div>
         )}
         {sandboxHistory &&
