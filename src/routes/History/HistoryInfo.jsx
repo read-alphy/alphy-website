@@ -87,7 +87,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
             Anything you'll create with Playground will appear here.
             <br /> <br />
             {/* Learn more about Playground. */}
-            Switch to sandbox mode on any source page to create content with AI.
+            Switch to the Playground mode on any source page to create content with AI.
           </div>
         )}
         {sandboxHistory &&
