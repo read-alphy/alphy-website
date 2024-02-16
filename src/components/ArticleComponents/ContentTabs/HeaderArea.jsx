@@ -485,7 +485,7 @@ export default function HeaderArea({
               </svg>
 
               <p className=" text-md font-averta-semibold text-zinc-800 dark:text-zinc-200 ">
-                Switch to Reading
+                Reading
               </p>
             </button>
           ) : (
@@ -508,8 +508,8 @@ export default function HeaderArea({
                 />
               </svg>
 
-              <p className=" text-md font-averta-semibold text-zinc-700 dark:text-zinc-700 ">
-                Switch to Playground
+              <p className=" text-md font-averta-semibold text-zinc-700 dark:text-zinc-700 mr-1 ">
+              Playground
               </p>
             </button>
           )}

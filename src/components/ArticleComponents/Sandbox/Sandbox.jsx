@@ -21,6 +21,7 @@ export default function Sandbox({
   const [creationCalled, setCreationCalled] = useState(false)
   const [manner, setManner] = useState(null)
   const [error, setError] = useState(false)
+  const [authError, setAuthError] = useState(false)
 
   const theme = localStorage.getItem('theme')
   useEffect(() => {
@@ -156,7 +157,9 @@ export default function Sandbox({
   }, [data, settings])
 
   function createDopeStuff() {
+    setAuthError(false)
     if (currentUser === null || currentUser === undefined) {
+      setAuthError(true)
       return
     }
 
@@ -296,6 +299,7 @@ export default function Sandbox({
                 manner={manner}
                 setManner={setManner}
                 tier={tier}
+                authError={authError}
               />
             </div>
           )}

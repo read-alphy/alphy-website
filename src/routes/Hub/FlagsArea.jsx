@@ -63,12 +63,12 @@ export default function FlagsArea() {
   ]
 
   return (
-    <div id="languages" className="w-full   overflow-hidden pb-10">
-      <p className="text-xl xl:text-2xl  pl-4 text-zinc-800 dark:text-zinc-300 font-averta-semibold">
+    <div id="languages" className="w-full   overflow-hidden pb-20 xl:pb-40">
+      <p className="mt-20 xl:mt-40  text-xl xl:text-2xl  pl-4 text-zinc-800 dark:text-zinc-300 font-averta-semibold">
         Supported Languages
       </p>
       <p className="text-md xl:text-lg mb-6  pt-4 pl-4 text-zinc-600 dark:text-zinc-300 font-normal">
-        Transcribe, translate, and use generative AI with more than 40
+        Transcribe, translate, and use generative AI in more than 40
         languages.
       </p>
       <div className="max-w-[800px] flex flex-wrap gap-6 mt-10">

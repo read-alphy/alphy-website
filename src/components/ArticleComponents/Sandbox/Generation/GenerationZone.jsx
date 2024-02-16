@@ -31,6 +31,7 @@ export default function GenerationZone({
   manner,
   setManner,
   tier,
+  authError
 }) {
   const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
   const [toolboxActive, setToolboxActive] = useState(false)
@@ -75,7 +76,10 @@ export default function GenerationZone({
             className={` lg:max-w-[800px] w-full overflow-hidden  transition-[max-height] duration-300 sm:px-2 ease-in-out ${
               toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
             }`}
-          >
+          >{
+            authError ? 
+      <div className="text-xl my-10"><Link to="/u/login" className="text-indigo-400">Sign in</Link> to start creating on Playground!</div>
+            :
             <MannerArea
               settings={settings}
               setSettings={setSettings}
@@ -83,6 +87,7 @@ export default function GenerationZone({
               manner={manner}
               setManner={setManner}
             />
+          }
           </div>
         }
 

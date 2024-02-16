@@ -154,6 +154,7 @@ function SideFeedReworked({
       auth.logout()
       localStorage.setItem('logged in', 'false')
       setLoggedIn(false)
+      
       localStorage.setItem('idToken', null)
       localStorage.setItem('tier', '')
 

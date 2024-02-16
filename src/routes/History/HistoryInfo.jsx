@@ -84,7 +84,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
       <div className="mt-10 ">
         {sandboxHistory && sandboxHistory.length === 0 && (
           <div className="text-center">
-            Anything you'll create with Sandbox will appear here.
+            Anything you'll create with Playground will appear here.
             <br /> <br />
             Learn more about Playground.
             {/* Switch to sandbox mode on any source page to create content with AI. */}

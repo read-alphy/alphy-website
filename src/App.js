@@ -208,6 +208,7 @@ function App() {
       } else {
         localStorage.setItem('logged in', 'false')
         setLoggedIn(false)
+        setTier(null)
       }
 
       if (currentUser !== null && called === false) {
