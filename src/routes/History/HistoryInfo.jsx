@@ -161,14 +161,17 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                         : 'max-h-20 text-zinc-500 mt-2'
                     }`}
                   >
-                    {item.response.includes('```')    ? <p className="overflow-hidden">{item.response}</p>
-                    : <ReactMarkdown>
+                    {item.response.includes('```')    ? 
+                    
+                    <div className="overflow-x-scroll max-w-[600px] break-all pb-4"><ReactMarkdown>{item.response}</ReactMarkdown></div>
+
+                    : <ReactMarkdown                >
                     {item.response}</ReactMarkdown>}
                     
                   </p>
                 </div>
               </div>
-
+                    
               {index !== sandboxHistory.length - 1 && (
                 <div className="border-b border-gray-200 dark:border-zinc-800 w-full mt-4"></div>
               )}
