@@ -509,7 +509,7 @@ export default function HeaderArea({
               </svg>
 
               <p className=" text-md font-averta-semibold text-zinc-700 dark:text-zinc-700 ">
-                Switch to Sandbox
+                Switch to Playground
               </p>
             </button>
           )}

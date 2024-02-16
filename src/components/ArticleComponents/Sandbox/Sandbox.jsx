@@ -9,7 +9,7 @@ export default function Sandbox({
   askText,
   currentUser,
   getSandboxHistory,
-  tier
+  tier,
 }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [outputMessage, setOutputMessage] = useState('')
@@ -58,7 +58,7 @@ export default function Sandbox({
 
   useEffect(() => {
     const historyPrompt = sessionStorage.getItem('fillPrompt')
-    
+
     if (historyPrompt === null) {
       return
     } else {

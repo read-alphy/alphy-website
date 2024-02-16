@@ -6,7 +6,15 @@ import Loading from '../components/Loading'
 import { Helmet } from 'react-helmet'
 import PricingInfo from './PricingInfo'
 
-function Pricing({ currentUser, collapsed, setCollapsed, tier, credit }) {
+function Pricing({
+  currentUser,
+  collapsed,
+  setCollapsed,
+  tier,
+  credit,
+  loggedIn,
+  setLoggedIn,
+}) {
   let source_id
 
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
@@ -58,6 +66,8 @@ function Pricing({ currentUser, collapsed, setCollapsed, tier, credit }) {
             className={`flex hidden sm:block mr-5 bg-zinc-100 dark:bg-mildDarkMode`}
           >
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -75,6 +85,8 @@ function Pricing({ currentUser, collapsed, setCollapsed, tier, credit }) {
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

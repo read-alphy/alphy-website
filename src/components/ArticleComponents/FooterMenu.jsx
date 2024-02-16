@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout'
+import VerifiedIcon from '@mui/icons-material/Verified'
 
 export default function FooterMenu({
   currentUser,
@@ -7,6 +8,7 @@ export default function FooterMenu({
   setCollapsed,
   setOpenFeedbackDialog,
   handleDarkMode,
+  tier,
 }) {
   return (
     <div className="">
@@ -79,6 +81,14 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                     </div>
                 }
             */}
+      {tier === 'premium' && (
+        <div className="mb-6  flex flex-row w-full pl-6 ">
+          <p className="text-indigo-400 text-md  ">
+            <VerifiedIcon fontSize="small" className="text-indigo-400 " />
+            <span className="mt-1 font-averta-semibold ml-2">Premium</span>
+          </p>
+        </div>
+      )}
 
       {localStorage.getItem('logged in') === 'true' ? (
         <Link

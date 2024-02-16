@@ -56,12 +56,12 @@ export default function WelcomeExplainer({
             </div>
           )} */}
           <p className="text-zinc-900 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">
-            Turn audio to text, summarize, and ask questions
+            Turn audio to text, summarize, and generate content with AI
           </p>
           <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[640px]">
             {' '}
-            Join the Alphy community to save time and learn better from audio
-            content with the highest quality transcription and AI models.
+            Join the Alphy community to transcribe, summarize, question, and
+            create content with the highest quality AI models on the market.
           </p>
 
           <div className={`mt-8 flex flex-row`}>
@@ -195,7 +195,11 @@ export default function WelcomeExplainer({
 
           <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg mt-16">
             Supported Online Platforms
-            <div className="flex flex-row  mx-auto w-full mt-4       sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
+            <p className="font-normal text-md mt-4 dark:text-zinc-500 text-zinc-500">
+              Submit a link from the following platforms. Or upload audio from
+              your device.{' '}
+            </p>
+            <div className="flex flex-row  mx-auto w-full mt-4     xl:gap-x-10   sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
               {/* <div className="hidden lg:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
                     <AudioFileIcon title="Local Audio Files" className="row-span-3 lg:row-span-2 flex mx-auto " sx={{
                       color:"#bbf7d0",                  
@@ -223,9 +227,9 @@ export default function WelcomeExplainer({
                   src={Twitter}
                   alt="Twitter / X videos"
                   height={20}
-                  width={80}
+                  width={90}
                   title="Twitter / X videos"
-                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
                 />
                 <p className=" hidden lg:block  text-md font-normal  text-[16px]">
                   Twitter Videos
@@ -239,7 +243,7 @@ export default function WelcomeExplainer({
                   height={20}
                   width={80}
                   title="Twitter / X Spaces"
-                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
                 />
                 <p className=" hidden lg:block  text-md font-normal text-[16px]">
                   Twitter Spaces
@@ -252,7 +256,7 @@ export default function WelcomeExplainer({
                   alt="Twitch"
                   height={20}
                   width={80}
-                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
                 />
                 <p className=" hidden lg:block  row-span-1 text-md font-normal text-[16px]">
                   Twitch
@@ -266,7 +270,7 @@ export default function WelcomeExplainer({
                   alt="Apple Podcasts"
                   width={80}
                   title="Apple Podcasts"
-                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
                 />
                 <p className="hidden lg:block  text-md font-normal text-[16px]">
                   Apple Podcasts
@@ -319,7 +323,7 @@ export default function WelcomeExplainer({
             <source src={LitmusDemo} type="video/mp4" />
           </video>
         </div>
-        <div className="">
+        <div className="pt-10 xl:pt-20">
           <FlagArea />
         </div>
 
@@ -327,7 +331,7 @@ export default function WelcomeExplainer({
           <AboutMainPage />
         </div>
       </div>
-      <div className="sm:hidden">
+      <div className="sm:hidden ">
         <FooterMainPage currentUser={currentUser} />
       </div>
     </div>

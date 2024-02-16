@@ -21,6 +21,8 @@ function Article({
   sandboxHistory,
   setSandboxHistory,
   getSandboxHistory,
+  loggedIn,
+  setLoggedIn,
 }) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -313,6 +315,8 @@ function Article({
         {
           <div className={`hidden sm:flex `}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -334,6 +338,8 @@ function Article({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

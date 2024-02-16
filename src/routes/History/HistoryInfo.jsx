@@ -77,16 +77,17 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
           />
         </svg>
 
-        <p className="text-xl font-averta-semibold">Sandbox History</p>
+        <p className="text-xl font-averta-semibold">Creation History</p>
       </div>
 
       <div className="border-b border-gray-200 dark:border-zinc-600 w-full mt-4"></div>
       <div className="mt-10 ">
         {sandboxHistory && sandboxHistory.length === 0 && (
-          <div>
-            Anything you'll create from videos and recordings will appear here.
+          <div className="text-center">
+            Anything you'll create with Sandbox will appear here.
             <br /> <br />
-            Use sandbox mode on any source page to create content with AI
+            Learn more about Playground.
+            {/* Switch to sandbox mode on any source page to create content with AI. */}
           </div>
         )}
         {sandboxHistory &&
@@ -156,7 +157,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                   <p
                     className={`  transition-all text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
                       visibleGroups[index]
-                        ? 'max-h-96 text-zinc-600 mt-4'
+                        ? 'max-h-[100%] text-zinc-600 mt-4'
                         : 'max-h-20 text-zinc-500 mt-2'
                     }`}
                   >

@@ -62,6 +62,7 @@ function App() {
   const [totalMinutes, setTotalMinutes] = useState(0)
   const [sandboxHistory, setSandboxHistory] = useState([])
   const [sandboxHistoryCalled, setSandboxHistoryCalled] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   const [customerID, setCustomerID] = useState('')
   const [userArcsCalled, setUserArcsCalled] = useState(false)
@@ -184,6 +185,7 @@ function App() {
       const oobCode = urlParams.get('oobCode')
       auth.handleVerifyEmail(oobCode).then(resp => {
         localStorage.setItem('logged in', 'true')
+        setLoggedIn(true)
         navigate('/u/welcome?onboarding_form')
       })
     }
@@ -202,8 +204,10 @@ function App() {
       }
       if (currentUser) {
         localStorage.setItem('logged in', 'true')
+        setLoggedIn(true)
       } else {
         localStorage.setItem('logged in', 'false')
+        setLoggedIn(false)
       }
 
       if (currentUser !== null && called === false) {
@@ -348,6 +352,8 @@ function App() {
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
                     getSandboxHistory={getSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -367,6 +373,8 @@ function App() {
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
                     getSandboxHistory={getSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -386,6 +394,8 @@ function App() {
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
                     getSandboxHistory={getSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -405,6 +415,8 @@ function App() {
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
                     getSandboxHistory={getSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -424,6 +436,8 @@ function App() {
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
                     getSandboxHistory={getSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -443,6 +457,8 @@ function App() {
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
                     getSandboxHistory={getSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -507,6 +523,8 @@ function App() {
                     setContentName={setContentName}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -525,6 +543,8 @@ function App() {
                     userArchipelagos={userArchipelagos}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -545,6 +565,8 @@ function App() {
                     setCreditCalled={setCreditCalled}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               >
@@ -567,6 +589,8 @@ function App() {
                     setCreditCalled={setCreditCalled}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               >
@@ -593,6 +617,8 @@ function App() {
                     setTotalMinutes={setTotalMinutes}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -613,6 +639,8 @@ function App() {
                     setContentName={setContentName}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -635,6 +663,8 @@ function App() {
                     setContentName={setContentName}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -655,6 +685,8 @@ function App() {
                     setContentName={setContentName}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -675,6 +707,8 @@ function App() {
                     setContentName={setContentName}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -695,6 +729,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -710,6 +746,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -725,6 +763,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -737,8 +777,11 @@ function App() {
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     tier={tier}
+                    currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -755,6 +798,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -767,6 +812,8 @@ function App() {
                     setCollapsed={setCollapsed}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -784,6 +831,8 @@ function App() {
                     customerID={customerID}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -798,6 +847,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -811,6 +862,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -824,6 +877,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               ></Route>
@@ -838,6 +893,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />
@@ -851,6 +908,8 @@ function App() {
                     currentUser={currentUser}
                     sandboxHistory={sandboxHistory}
                     setSandboxHistory={setSandboxHistory}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                   />
                 }
               />

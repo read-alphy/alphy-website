@@ -22,6 +22,8 @@ function Hub({
   setTotalMinutes,
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn,
 }) {
   const location = useLocation()
 
@@ -88,6 +90,8 @@ function Hub({
         {
           <div className={` hidden sm:block `}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -113,6 +117,8 @@ function Hub({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

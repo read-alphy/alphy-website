@@ -18,6 +18,8 @@ function Success({
 
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn,
 }) {
   let source_id
 
@@ -71,6 +73,8 @@ function Success({
         {
           <div className={`flex hidden sm:block dark:bg-mildDarkMode`}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -90,6 +94,8 @@ function Success({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

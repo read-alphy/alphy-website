@@ -7,7 +7,7 @@ import FeedbackForm from '../FeedbackForm'
 import PersonIcon from '@mui/icons-material/Person'
 
 import { Link } from 'react-router-dom'
-import VerifiedIcon from '@mui/icons-material/Verified'
+
 import FooterMenu from './FooterMenu'
 
 export default function FooterReworked({
@@ -71,21 +71,10 @@ export default function FooterReworked({
                     handleDarkMode={handleDarkMode}
                     currentUser={currentUser}
                     handleSignout={handleSignout}
+                    tier={tier}
                   />
                 </div>
               </div>
-
-              {tier === 'premium' && (
-                <div className="mb-6  flex flex-row w-full pl-6 md:pl-10">
-                  <p className="text-indigo-400 text-md  ">
-                    <span className="mt-1 font-averta-semibold">Premium</span>
-                    <VerifiedIcon
-                      fontSize="small"
-                      className=" ml-2 text-indigo-400 "
-                    />
-                  </p>
-                </div>
-              )}
 
               <div
                 onClick={() => setFooterReworkedShow(!footerReworkedShow)}
@@ -123,6 +112,7 @@ export default function FooterReworked({
                 handleDarkMode={handleDarkMode}
                 currentUser={currentUser}
                 handleSignout={handleSignout}
+                tier={tier}
               />
             </div>
           )}

@@ -17,6 +17,8 @@ export default function CheckOutPage({
   userArchipelagos,
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn,
 }) {
   const [clientSecret, setClientSecret] = useState('')
 
@@ -68,6 +70,8 @@ export default function CheckOutPage({
         {
           <div className={`hidden sm:block`}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -87,6 +91,8 @@ export default function CheckOutPage({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

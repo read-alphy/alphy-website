@@ -25,6 +25,8 @@ function Account({
   credit,
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn,
 }) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -85,6 +87,8 @@ function Account({
         {
           <div className={`flex hidden sm:block dark:bg-mildDarkMode`}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -104,6 +108,8 @@ function Account({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

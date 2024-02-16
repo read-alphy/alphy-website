@@ -30,7 +30,7 @@ export default function GenerationZone({
   setSelectedTool,
   manner,
   setManner,
-  tier
+  tier,
 }) {
   const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
   const [toolboxActive, setToolboxActive] = useState(false)
@@ -70,7 +70,6 @@ export default function GenerationZone({
           'bg-slate-50 dark:bg-mildDarkMode rounded-lg w-fit mb-4'
         } sm:p-2 `}
       >
-        
         {
           <div
             className={` lg:max-w-[800px] w-full overflow-hidden  transition-[max-height] duration-300 sm:px-2 ease-in-out ${
@@ -92,23 +91,30 @@ export default function GenerationZone({
             selectedTool === 'custom' ? 'max-h-[100%]' : 'max-h-0 '
           }`}
         >
-             {(tier !== 'premium' && selectedTool==="custom") && (
-    <div className="absolute inset-0 bg-sky-50/30 text-zinc-600 dark:bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center z-10 dark:text-white rounded-lg ">
-    
-                <p className="text-indigo-400 text-md  ">
-                  {tier !== 'premium' && (
-                    <VerifiedIcon
-                      fontSize="medium"
-                      className=" mb-4 text-indigo-400 "
-                    />
-                  )}
-                </p>
-            
+          {tier !== 'premium' && selectedTool === 'custom' && (
+            <div className="absolute inset-0 bg-sky-50/30 text-zinc-600 dark:bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center z-10 dark:text-white rounded-lg ">
+              <p className="text-indigo-400 text-md  ">
+                {tier !== 'premium' && (
+                  <VerifiedIcon
+                    fontSize="medium"
+                    className=" mb-4 text-indigo-400 "
+                  />
+                )}
+              </p>
 
-      <p>Go <Link to="/account" className="text-indigo-400 dark:text-indigo-300 border-b border-indigo-400">premium</Link> to run custom prompts on transcripts. </p>
-    </div>
-  )}
-       
+              <p>
+                Go{' '}
+                <Link
+                  to="/account"
+                  className="text-indigo-400 dark:text-indigo-300 border-b border-indigo-400"
+                >
+                  premium
+                </Link>{' '}
+                to run custom prompts on transcripts.{' '}
+              </p>
+            </div>
+          )}
+
           <InputArea
             userPrompt={userPrompt}
             setUserPrompt={setUserPrompt}
@@ -116,7 +122,7 @@ export default function GenerationZone({
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
-          
+
           <div className="md:hidden">
             <Settings
               settings={settings}

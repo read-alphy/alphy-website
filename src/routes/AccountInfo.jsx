@@ -344,7 +344,7 @@ export default function AccountInfo({
             </div>
           )}
 
-          <div className="flex  px-4 gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8  mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">
+          <div className="flex  mt-6 px-4 gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8  mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">
             <FreeCard
               currentUser={currentUser}
               tier={tier}

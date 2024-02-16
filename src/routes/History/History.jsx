@@ -17,6 +17,8 @@ export default function History({
   currentUser,
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn,
 }) {
   let source_id
 
@@ -48,6 +50,8 @@ export default function History({
         {
           <div className={`hidden sm:block`}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -67,6 +71,8 @@ export default function History({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

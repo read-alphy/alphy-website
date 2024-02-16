@@ -25,6 +25,8 @@ function Auth({
   userArchipelagos,
   sandboxHistory,
   setSandboxHistory,
+  loggedIn,
+  setLoggedIn,
 }) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -65,11 +67,15 @@ function Auth({
         {
           <div className={`hidden sm:block`}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               tier={tier}
+              sandboxHistory={sandboxHistory}
+              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -82,6 +88,8 @@ function Auth({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
@@ -112,6 +120,8 @@ function Auth({
               userArchipelagos={userArchipelagos}
               sandboxHistory={sandboxHistory}
               setSandboxHistory={setSandboxHistory}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
             />
           )}
         </div>

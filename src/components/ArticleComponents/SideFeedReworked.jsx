@@ -28,11 +28,12 @@ function SideFeedReworked({
   tier,
   sandboxHistory,
   currentUser,
+  loggedIn,
+  setLoggedIn,
 }) {
   const [called, setCalled] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [sideFeedWidth, setSideFeedWidth] = useState(200)
-  const [sliceSize, setSliceSize] = useState(15)
 
   const location = useLocation()
   const carouselRef = useRef(null)
@@ -152,6 +153,7 @@ function SideFeedReworked({
     try {
       auth.logout()
       localStorage.setItem('logged in', 'false')
+      setLoggedIn(false)
       localStorage.setItem('idToken', null)
       localStorage.setItem('tier', '')
 
@@ -191,7 +193,7 @@ function SideFeedReworked({
             >
               <Link
                 to="/"
-                className="text-zinc-800 dark:text-gray-200 pl-4 sm:pl-6 "
+                className="text-zinc-800 dark:text-gray-200 ml-4 sm:ml-6 "
               >
                 <div className="flex-row flex">
                   <img
@@ -207,7 +209,7 @@ function SideFeedReworked({
                   <h1 className="ml-1 text-2xl mt-1 ">ALPHY</h1>
                 </div>
               </Link>
-              <div className="hidden md:flex w-full justify-end items-end ">
+              <div className="hidden md:flex ml-16 w-full justify-end items-end ">
                 {/* <LastPageIcon onClick={() => setCollapsed(true)} fontSize="large" className="rotate-180 ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1" /> */}
                 <svg
                   onClick={() => setCollapsed(true)}
@@ -220,7 +222,7 @@ function SideFeedReworked({
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  className="feather feather-chevron-left ml-16  text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full transition transform hover:-translate-x-1 duration-300 ease-in p-1 mr-1"
+                  className="feather feather-chevron-left   text-zinc-500 dark:text-zinc-500 cursor-pointer rounded-full transition transform hover:-translate-x-1 duration-300 ease-in p-1 mr-1"
                 >
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
@@ -354,6 +356,7 @@ function SideFeedReworked({
                             : 'text-zinc-500 dark:text-zinc-300'
                         } flex flex-row py-3 mt-2  text-sm sm:text-md  -pr-0.5  hover:text-zinc-500 dark:hover:text-zinc-100 transition duration-300 ease-in-out`}
                       >
+                        {/* 
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -367,10 +370,24 @@ function SideFeedReworked({
                             stroke-linejoin="round"
                             d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                           />
+                        </svg> */}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-5 h-5 text-zinc-500 dark:text-zinc-300 mr-2 "
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                          />
                         </svg>
 
                         {/* <HistoryIcon strokeWidth={"1.5"} className="text-zinc-500 dark:text-zinc-300 mr-2  " /> */}
-                        <p>History</p>
+                        <p className="ml-0.5">My Creations</p>
                       </Link>
 
                       {groupedData.length > 0 && (
@@ -410,7 +427,7 @@ function SideFeedReworked({
                     </div>
                   )}
 
-                  {currentUser === null && called === true && (
+                  {loggedIn !== true && (
                     <Link
                       className="text-zinc-500 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 -ml-1 text-sm sm:text-md dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
                       to="/u/login"
@@ -605,7 +622,7 @@ function SideFeedReworked({
         )}
       </div>
       <div
-        className=" hidden sm:flex w-1 cursor-col-resize  bg-transparent   "
+        className=" hidden sm:flex w-1 cursor-col-resize  bg-transparent focus:outline-none focus:border-0 focus:ring-0 ring-0 outline-none border-0"
         onMouseDown={onMouseDown}
       >
         {/* This is the draggable area */}

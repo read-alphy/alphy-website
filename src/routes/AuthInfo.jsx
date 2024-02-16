@@ -8,7 +8,7 @@ import { Button } from '@material-tailwind/react'
 import ReactLoading from 'react-loading'
 import Google from '../img/google.png'
 
-const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
+const AuthInfo = ({ loggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
@@ -102,6 +102,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
           setError('Oops! Incorrect email or password.')
         } else {
           localStorage.setItem('logged in', 'true')
+          setLoggedIn(true)
           navigate('/myhub')
           setIsSubmitting(false)
         }
@@ -126,6 +127,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
     auth
       .loginWithGoogle()
       .then(event => {
+        setLoggedIn(true)
         localStorage.setItem('logged in', 'true')
         if (event.user) {
           const createdAt = event.user.metadata.createdAt

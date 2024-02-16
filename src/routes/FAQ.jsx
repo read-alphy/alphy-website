@@ -18,6 +18,8 @@ function FAQ({
   setSandboxHistory,
 
   userArchipelagos,
+  loggedIn,
+  setLoggedIn,
 }) {
   let source_id
 
@@ -49,6 +51,8 @@ function FAQ({
         {
           <div className={`hidden sm:block`}>
             <SideFeedReworked
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -68,6 +72,8 @@ function FAQ({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeedReworked
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
