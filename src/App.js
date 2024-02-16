@@ -1,21 +1,21 @@
-import Navbar from './components/Navbar'
-import { useState, useEffect } from 'react'
+import Navbar from './components/Navbar';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Article from './components/Article';
+import FeedbackComponent from './components/FeedbackComponent';
+import PrivacyPolicy from './routes/PrivacyPolicy';
+import NotFound from './routes/NotFound';
+import image from './img/robot.png';
+import { useAuth } from './hooks/useAuth';
+import { initializeApp } from 'firebase/app';
+import Pricing from './routes/Pricing';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckOutPage from './routes/payment/CheckOutPage';
+import Success from './routes/payment/Success';
+import Account from './routes/Account';
 
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
-import Article from './components/Article'
-import FeedbackComponent from './components/FeedbackComponent'
-import PrivacyPolicy from './routes/PrivacyPolicy'
-import NotFound from './routes/NotFound'
-import image from './img/robot.png'
-import { useAuth } from './hooks/useAuth'
-import { initializeApp } from 'firebase/app'
-import Pricing from './routes/Pricing'
-import { Elements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
-import CheckOutPage from './routes/payment/CheckOutPage'
-import Success from './routes/payment/Success'
-import Account from './routes/Account'
-import History from './routes/History/History'
 
 import axios from 'axios'
 import { Helmet } from 'react-helmet'
