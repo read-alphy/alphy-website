@@ -86,8 +86,8 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
           <div className="text-center">
             Anything you'll create with Playground will appear here.
             <br /> <br />
-            Learn more about Playground.
-            {/* Switch to sandbox mode on any source page to create content with AI. */}
+            {/* Learn more about Playground. */}
+            Switch to sandbox mode on any source page to create content with AI.
           </div>
         )}
         {sandboxHistory &&
