@@ -1,95 +1,131 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap"
+    />
 
-  <meta charset="utf-8" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Alphy: Unlock the Information in Audiovisual Content"
+    />
+    <meta
+      name="twitter:description"
+      content="Transcribe, summarize, question YouTube, Twitter Spaces, Twitch, Twitter videos, Apple Podcasts, and local audio with the help of AI. Try Alphy for free!"
+    />
+    <meta name="twitter:site" content="@alphyapp" />
+    <meta
+      name="twitter:image"
+      content="https://alphy.blob.core.windows.net/thumbnails/homepage.png"
+    />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap">
+    <meta
+      name="keywords"
+      content="Summarize,transcribe,YouTube summarization,summarize YouTube,summarize YouTube videos,chatbot,question answering,generate questions,search videos,summarization,Twitter Spaces,Twitter,podcasts,Apple Podcasts,audio media,audiovisual content,transcribe YouTube,transcribe audio,transcribe video"
+    />
+    <meta
+      name="description"
+      content="Transcribe, summarize, question YouTube, Twitter Spaces, Twitter videos, Apple Podcasts, and local audio with the help of AI. Try Alphy for free!"
+    />
+    <meta
+      content="Transcribe, question, and summarize online and local audio  with the help of AI. Try Alphy for free!"
+      property="og:description"
+    />
 
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Alphy: Unlock the Information in Audiovisual Content" />
-  <meta name="twitter:description" content="Transcribe, summarize, question YouTube, Twitter Spaces, Twitch, Twitter videos, Apple Podcasts, and local audio with the help of AI. Try Alphy for free!" />
-  <meta name="twitter:site" content="@alphyapp">
-  <meta name="twitter:image" content="https://alphy.blob.core.windows.net/thumbnails/homepage.png"  />
-  
-  <meta name="keywords" content="Summarize,transcribe,YouTube summarization,summarize YouTube,summarize YouTube videos,chatbot,question answering,generate questions,search videos,summarization,Twitter Spaces,Twitter,podcasts,Apple Podcasts,audio media,audiovisual content,transcribe YouTube,transcribe audio,transcribe video">
-  <meta name="description" content="Transcribe, summarize, question YouTube, Twitter Spaces, Twitter videos, Apple Podcasts, and local audio with the help of AI. Try Alphy for free!" />
-  <meta content="Transcribe, question, and summarize online and local audio  with the help of AI. Try Alphy for free!"  property="og:description"/>
-  
-  
-  <meta content="https://alphy.blob.core.windows.net/thumbnails/homepage.png" property="og:image" />
-  
+    <meta
+      content="https://alphy.blob.core.windows.net/thumbnails/homepage.png"
+      property="og:image"
+    />
 
+    <meta
+      property="og:title"
+      content="Alphy: Unlock the information in audiovisual content"
+    />
 
+    <script>
+      ;(function () {
+        var theme = localStorage.getItem('theme')
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark-theme')
+        }
+      })()
+    </script>
+    <script async src="https://tally.so/widgets/embed.js"></script>
 
-  <meta property="og:title" content="Alphy: Unlock the information in audiovisual content" />
-  
+    <!-- Google Tag Manager -->
+    <script>
+      ;(function (w, d, s, l, i) {
+        w[l] = w[l] || []
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : ''
+        j.async = true
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+        f.parentNode.insertBefore(j, f)
+      })(window, document, 'script', 'dataLayer', 'GTM-MSDBCTS')
+    </script>
 
-  <script>
-    (function() {
-      var theme = localStorage.getItem('theme');
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark-theme');
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8Z8TFG1KMS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
       }
-    })();
-  </script>
-<script async src="https://tally.so/widgets/embed.js"></script>
+      gtag('js', new Date())
 
-  
- <!-- Google Tag Manager -->
-<script>
-  
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MSDBCTS');</script>
-  
+      gtag('config', 'G-8Z8TFG1KMS')
+    </script>
+    <script type="text/javascript">
+      var userId =
+        localStorage.getItem('userId') !== null
+          ? localStorage.getItem('userId')
+          : 'notLoggedIn'
+      var tier =
+        localStorage.getItem('tier') !== null
+          ? localStorage.getItem('tier')
+          : 'free'
 
-  
+      ;(function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            ;(c[a].q = c[a].q || []).push(arguments)
+          }
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Z8TFG1KMS"></script>
-  <script>
-    
-    
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+        t = l.createElement(r)
+        t.async = 1
+        t.src = 'https://www.clarity.ms/tag/' + i
+        y = l.getElementsByTagName(r)[0]
+        y.parentNode.insertBefore(t, y)
+        c[a]('identify', userId)
+        c[a]('set', 'tier', tier) // Assuming Clarity accepts custom attributes
+      })(window, document, 'clarity', 'script', 'fy8nzp2uqz')
+    </script>
 
-    gtag('config', 'G-8Z8TFG1KMS');
-  </script>
-  <script type="text/javascript">
-    var userId = localStorage.getItem('userId') !==null ? localStorage.getItem('userId') : "notLoggedIn";
-    var tier = localStorage.getItem('tier') !== null ? localStorage.getItem('tier') : "free";
-    
-    (function (c, l, a, r, i, t, y) {
-      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-      c[a]("identify", userId);
-      c[a]("set", "tier", tier); // Assuming Clarity accepts custom attributes
-    })(window, document, "clarity", "script", "fy8nzp2uqz");
-    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta
+      name="google-signin-client_id"
+      content="1095799494177-qhg6sot0m532rg51j34kfrf3t0rds5sg.apps.googleusercontent.com"
+    />
 
-    
-  </script>
+    <link href="output.css" rel="stylesheet" />
+    <link rel="icon" href="%PUBLIC_URL%/ALPHY_NEW_OVAL.png" />
 
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id"
-    content="1095799494177-qhg6sot0m532rg51j34kfrf3t0rds5sg.apps.googleusercontent.com">
-
-  <link href="output.css" rel="stylesheet">
-  <link rel="icon" href="%PUBLIC_URL%/ALPHY_NEW_OVAL.png" />
-
-  <!--
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -98,21 +134,27 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title id="page-title">Alphy</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
-</head>
+    <title id="page-title">Alphy</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MSDBCTS"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root">
-
-
-  </div>
-  <!--
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MSDBCTS"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -122,9 +164,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <!-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-
-</body>
-
+    <!-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+  </body>
 </html>

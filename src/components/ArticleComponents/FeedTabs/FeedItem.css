@@ -1,86 +1,84 @@
-    .video-container {
-        display: flex;
-        padding: 5px;
-        width: 350px;
-        cursor: pointer;
-    }
+.video-container {
+  display: flex;
+  padding: 5px;
+  width: 350px;
+  cursor: pointer;
+}
 
-    .selected {
-        background-color: rgb(51, 51, 51);
-        border-radius: 15px;
-    }
+.selected {
+  background-color: rgb(51, 51, 51);
+  border-radius: 15px;
+}
 
-    .bg-zinc-300.animate {
-        animation: pulse 1s ease-in-out infinite;
-    }
+.bg-zinc-300.animate {
+  animation: pulse 1s ease-in-out infinite;
+}
 
-    @keyframes pulse {
-        0% {
-            opacity: 0.6;
-        }
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
 
-        100% {
-            opacity: 1;
-        }
-    }
-    .bg-zinc-700.animate {
-        animation: pulse 1s ease-in-out infinite;
-    }
+  100% {
+    opacity: 1;
+  }
+}
+.bg-zinc-700.animate {
+  animation: pulse 1s ease-in-out infinite;
+}
 
-    .video-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        /* number of lines to show */
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
+.video-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 
-    .video-container:hover {
-        /* smoothly change the background with time */
-        transition: background-color 0.5s;
-        background-color: rgb(51, 51, 51);
-        border-radius: 15px;
-    }
+.video-container:hover {
+  /* smoothly change the background with time */
+  transition: background-color 0.5s;
+  background-color: rgb(51, 51, 51);
+  border-radius: 15px;
+}
 
-    /* first video container */
-    .video-container:first-child {
-        margin-top: 10px;
-    }
+/* first video container */
+.video-container:first-child {
+  margin-top: 10px;
+}
 
+.video {
+  width: 130px;
+  height: 75px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
 
-
-    .video {
-        width: 130px;
-        height: 75px;
-        background-size: cover;
-        background-position: center;
-        border-radius: 10px;
-
-        /* @media (min-width: 640px) {
+  /* @media (min-width: 640px) {
             width: 150px;
         }
 
         @media (min-width: 1024px) {
             width: 200px;
         } */
-    }
+}
 
-    .video:hover {
-        animation: gif-animation 2s steps(3) forwards infinite;
-    }
+.video:hover {
+  animation: gif-animation 2s steps(3) forwards infinite;
+}
 
-    @keyframes gif-animation {
-        0% {
-            background-image: url('https://i.ytimg.com/vi/mzoQWj6ijw0/1.jpg');
-        }
+@keyframes gif-animation {
+  0% {
+    background-image: url('https://i.ytimg.com/vi/mzoQWj6ijw0/1.jpg');
+  }
 
-        33% {
-            background-image: url('https://i.ytimg.com/vi/mzoQWj6ijw0/2.jpg');
-        }
+  33% {
+    background-image: url('https://i.ytimg.com/vi/mzoQWj6ijw0/2.jpg');
+  }
 
-        66% {
-            background-image: url('https://i.ytimg.com/vi/mzoQWj6ijw0/3.jpg');
-        }
-    }
+  66% {
+    background-image: url('https://i.ytimg.com/vi/mzoQWj6ijw0/3.jpg');
+  }
+}
