@@ -123,8 +123,19 @@ useEffect(() => {
 					setError("Oops! Incorrect email or password.");
 				}
 				else {
-					localStorage.setItem("logged in", "true")
-					navigate('/myhub');
+					
+          if(localStorage.getItem('onboarding_form')!=='complete'){
+            navigate('/u/welcome?onboarding_form')
+            localStorage.setItem("logged in", "true")
+          }
+					else{
+            
+            navigate('/');
+            window.location.reload()
+            localStorage.setItem("logged in", "true")
+          }
+            
+            
 					setIsSubmitting(false)
 				}
 			})
@@ -148,10 +159,20 @@ useEffect(() => {
 		e.preventDefault();
 		auth.loginWithGoogle()
 			.then(() => {
-				localStorage.setItem("logged in", "true")
-
 				
-				navigate('/myhub');
+        if(localStorage.getItem('onboarding_form')!=='complete'){
+          navigate('/u/welcome?onboarding_form')
+          localStorage.setItem("logged in", "true")
+        }
+        else{
+          
+          navigate('/');
+          window.location.reload()
+          localStorage.setItem("logged in", "true")
+        }
+          
+          
+        setIsSubmitting(false)
 			}
 			)
 			.catch((error) => {
