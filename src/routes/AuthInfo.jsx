@@ -22,6 +22,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 	const [verificationMessage, setVerificationMessage] = useState(false)
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const [successMessage, setSuccessMessage] = useState(false)
+  const [emailVerifiedSignInMessage, setEmailVerifiedSignInMessage] = useState(true)
 	const resetPassword = (useLocation().pathname.includes('/u/resetpassword'));
 	const verification = (useLocation().pathname.includes('/u/verify') && urlParams.get('mode') == "verifyEmail");
 
@@ -32,6 +33,13 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 
 	const oobCode = urlParams.get('oobCode');
 
+  
+useEffect(() => {
+  if(sessionStorage.getItem('emailVerified') ==='true'){
+    setEmailVerifiedSignInMessage(true)
+    sessionStorage.removeItem('emailVerified')
+  }
+},[])
 
 
 
@@ -239,6 +247,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 
 
 							<div >
+                {!isRegister && emailVerifiedSignInMessage && <div className="text-green-300 text-sm mb-8 mt-5 font-averta-semibold">Email verified successfully. You can now sign in.</div>}
 								<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">{isRegister ? 'Create an account' : 'Sign in'}	</h1>
 
 								<form onSubmit={isRegister ? handleRegisterWithEmail : handleLoginWithEmail}>
@@ -266,7 +275,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 									</div>
 
 
-									<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" : ""} bg-greenColor text-zinc-700 font-averta-semibold`}> {isSubmitting ? <ReactLoading type="spin" width={17} height={17} color="#ffffff" /> : <span className="font-averta-bold">Submit</span>}</Button>
+									<Button type="submit" className={`${isSubmitting ? "opacity-50 pointer-events-none" : ""} bg-greenColor text-zinc-700 font-averta-semibold`}> {isSubmitting ? <ReactLoading type="spin" width={17} height={17} color="#ffffff" /> : <span className="font-averta-semibold">Submit</span>}</Button>
 
 
 								</form>

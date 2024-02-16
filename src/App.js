@@ -184,9 +184,8 @@ function App() {
     if (verification) {
       const oobCode = urlParams.get('oobCode')
       auth.handleVerifyEmail(oobCode).then(resp => {
-        localStorage.setItem('logged in', 'true')
-        setLoggedIn(true)
-        navigate('/u/welcome?onboarding_form')
+        sessionStorage.setItem('emailVerified', 'true')
+        navigate('u/login')
       })
     }
 
