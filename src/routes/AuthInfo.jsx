@@ -22,7 +22,7 @@ const AuthInfo = ({ setShowWelcomeForm, showWelcomeForm }) => {
 	const [verificationMessage, setVerificationMessage] = useState(false)
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const [successMessage, setSuccessMessage] = useState(false)
-  const [emailVerifiedSignInMessage, setEmailVerifiedSignInMessage] = useState(true)
+  const [emailVerifiedSignInMessage, setEmailVerifiedSignInMessage] = useState(false)
 	const resetPassword = (useLocation().pathname.includes('/u/resetpassword'));
 	const verification = (useLocation().pathname.includes('/u/verify') && urlParams.get('mode') == "verifyEmail");
 
@@ -268,7 +268,7 @@ useEffect(() => {
 
 
 							<div >
-                {!isRegister && emailVerifiedSignInMessage && <div className="text-green-300 text-sm mb-8 mt-5 font-averta-semibold">Email verified successfully. You can now sign in.</div>}
+                {(!isRegister && emailVerifiedSignInMessage) && <div className="text-green-300 text-sm mb-8 mt-5 font-averta-semibold">Email verified successfully. You can now sign in.</div>}
 								<h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">{isRegister ? 'Create an account' : 'Sign in'}	</h1>
 
 								<form onSubmit={isRegister ? handleRegisterWithEmail : handleLoginWithEmail}>
