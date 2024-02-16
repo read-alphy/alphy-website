@@ -20,7 +20,8 @@ export default function WelcomePageInfo({
     if (onboardQueryCalled === false) {
       if (
         location.search.includes('?onboarding_form') === false ||
-        localStorage.getItem('onboarding_form') === 'complete'
+        localStorage.getItem('onboarding_form') === 'complete' ||
+        (currentUser === null || currentUser === undefined)
       ) {
         setOnboardQueryCalled(true)
         navigate('/')

@@ -155,13 +155,16 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                     </p>
                   </p>
                   <p
-                    className={`  transition-all text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
+                    className={`  transition-all overflow-x-hidden text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
                       visibleGroups[index]
                         ? 'max-h-[100%] text-zinc-600 mt-4'
                         : 'max-h-20 text-zinc-500 mt-2'
                     }`}
                   >
-                    <ReactMarkdown>{item.response}</ReactMarkdown>
+                    {item.response.includes('```')    ? <p className="overflow-hidden">{item.response}</p>
+                    : <ReactMarkdown>
+                    {item.response}</ReactMarkdown>}
+                    
                   </p>
                 </div>
               </div>

@@ -137,7 +137,7 @@ export default function OutputMessage({
           </div>
         </div>
       </div>
-      <div id="output-message" className=" output-message mt-4">
+      <div id="output-message" className=" output-message mt-4 overflow-x-scroll">
         {outputMessage.length > 0 ? (
           <ReactMarkdown>{outputMessage.replace(/\n/g, '\n')}</ReactMarkdown>
         ) : (
