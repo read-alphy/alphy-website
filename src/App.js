@@ -170,7 +170,7 @@ function App() {
       .then(response => {
         setSandboxHistoryCalled(true)
         setSandboxHistory(response.data)
-        console.log(response.data)
+        
       })
   }
 

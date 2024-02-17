@@ -11,6 +11,8 @@ export default function OutputZone({
   createDopeStuff,
   userPrompt,
   isLoading,
+  settings,
+  contentDetails
 }) {
   return (
     <div className="content-area   mt-6 max-w-[800px] px-4 sm:px-0 text-zinc-700 dark:text-zinc-300 overflow-y-auto   max-w-[1000px] flex flex-col ">
@@ -35,6 +37,9 @@ export default function OutputZone({
         generatedPrompt={generatedPrompt}
         setActiveGenerationZone={setActiveGenerationZone}
         userPrompt={userPrompt}
+        settings = {settings}
+        contentDetails = {contentDetails}
+        
       />
 
       <div className="items-end  mt-10 w-full  flex max-w-[800px] pb-10 ">

@@ -169,7 +169,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                     </p>
                   </p>
                   <p
-                    className={`  transition-all overflow-x-hidden text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
+                    className={`  output-message transition-all overflow-x-hidden text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
                       visibleGroups[index]
                         ? 'max-h-[100%] text-zinc-600 mt-4'
                         : 'max-h-20 text-zinc-500 mt-2'
@@ -177,7 +177,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                   >
                     {item.response.includes('```')    ? 
                     
-                    <div className="overflow-x-scroll max-w-[600px] break-all pb-4"><ReactMarkdown>{item.response}</ReactMarkdown></div>
+                    <div className=" overflow-x-scroll max-w-[600px] break-all pb-4"><ReactMarkdown>{item.response}</ReactMarkdown></div>
 
                     : <ReactMarkdown                >
                     {item.response}</ReactMarkdown>}

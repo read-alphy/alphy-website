@@ -520,9 +520,7 @@ table tr {
   width: 80vw;
 }
 
-.output-message p {
-  margin-top: 15px;
-}
+
 
 .main-page-feed-section h1 {
   font-size: 30px;
@@ -955,6 +953,119 @@ ol {
   font-weight: 600;
   font-style: italic;
 }
+
+
+.summary-text {
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.summary-text p,
+li,
+ul,
+span,
+code,
+pre,
+ol {
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: 500;
+}
+
+.summary-text code {
+  white-space: pre-wrap;
+  padding-left: 10px;
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.select-option span {
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+
+.or-area {
+  display: flex;
+  align-items: center;
+}
+
+.or-area::before {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background-color: black;
+  margin-right: 10px;
+}
+
+.output-message p {
+  margin-top: 15px;
+}
+
+.output-message h2 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 30px;
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.output-message h1 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 30px;
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* .summary-text p{
+	font-family : "Bookerly";
+	font-weight:500
+} */
+.output-message h3 {
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 10px;
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.output-message h4 {
+  font-weight: 600;
+  font-size: 16px;
+  padding-top: 40px;
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.output-message h5 {
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 10px;
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.output-message strong {
+  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+
 
 .slick-arrow::before {
   background: 'black';

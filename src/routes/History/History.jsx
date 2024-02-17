@@ -38,7 +38,7 @@ export default function History({
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
       <Helmet>
-        <title>Alphy - About</title>
+        <title>Alphy - My Creations</title>
       </Helmet>
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${

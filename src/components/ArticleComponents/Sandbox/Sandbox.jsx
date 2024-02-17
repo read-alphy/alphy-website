@@ -65,15 +65,28 @@ export default function Sandbox({
     } else {
       try {
         const parsedHistoryPrompt = JSON.parse(historyPrompt)
-
+        
         setSelectedTool(
+          
           typeof parsedHistoryPrompt.request.command === 'object'
             ? 'custom'
             : parsedHistoryPrompt.request.command
         )
-        setContentDetails({
+
+
+        setSettings(prevSettings => {
+          return {
+            ...prevSettings,
           length_level: parsedHistoryPrompt.request.slider_length,
           detail_level: parsedHistoryPrompt.request.slider_detail,
+          manner: parsedHistoryPrompt.request.manner,
+          content_to_use: parsedHistoryPrompt.request.summary_lang === null ? 'transcript' : 'summary',
+        }
+      }
+        )
+
+
+        setContentDetails({
           summary_lang:
             parsedHistoryPrompt.request.summary_lang === null
               ? null
@@ -82,7 +95,7 @@ export default function Sandbox({
             typeof parsedHistoryPrompt.request.command === 'object'
               ? 'custom'
               : parsedHistoryPrompt.request.command,
-          manner: parsedHistoryPrompt.request.manner,
+          
         })
         setManner(parsedHistoryPrompt.request.manner)
         setPromptType(
@@ -177,7 +190,7 @@ export default function Sandbox({
       // TEMPORARILY REQUIRED
       title: contentDetails.source_title,
       creator: contentDetails.creator_name,
-      summary_lang: contentDetails.source_variant === 'summary' ? 'en' : null,
+      summary_lang: contentDetails.source_variant === 'summary' ? ('en') : null,
 
       // MUST GIVE manner_custom if manner is custom
       // OMITTABLE
@@ -321,6 +334,8 @@ export default function Sandbox({
               setPromptType={setPromptType}
               createDopeStuff={createDopeStuff}
               isLoading={isLoading}
+              settings = {settings}
+              contentDetails = {contentDetails}
             />
           </div>
         </div>

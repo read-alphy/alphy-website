@@ -18,7 +18,7 @@ export default function OutputMessage({
     try {
       await navigator.clipboard.writeText(text)
       setCopiedText(true)
-      setTimeout(() => {
+      setTimeout(() => {  
         setCopiedText(false)
       }, 500)
     } catch (err) {
@@ -31,6 +31,7 @@ export default function OutputMessage({
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' })
     saveAs(blob, filename)
   }
+
 
   return (
     <div className=" w-full  p-6 rounded-lg  right-0 flex flex-col border border-slate-100 dark:border-zinc-700 rounded-lg bg-slate-50  dark:bg-mildDarkMode">
@@ -46,7 +47,7 @@ export default function OutputMessage({
           >
             <button
               onClick={() => copyToClipboard(generatedPrompt)}
-              className="flex flex-row items-center rounded-xl px-1 sm:px-4 py-1 bg-transparent text-sm font-averta-semibold text-zinc-500 dark:text-zinc-300"
+              className="hover:brightness-[120%] transition duration-500 ease-in-out flex flex-row items-center rounded-xl px-1 sm:px-4 py-1 bg-transparent text-sm font-averta-semibold text-zinc-500 dark:text-zinc-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +72,7 @@ export default function OutputMessage({
 
             <button
               onClick={() => downloadTxtFile(outputMessage)}
-              className="flex flex-row items-center rounded-xl px-1 sm:px-4 py-1 bg-transparent  text-sm font-averta-semibold text-zinc-500 dark:text-zinc-300"
+              className="hover:brightness-[120%] transition duration-500 ease-in-out flex flex-row items-center rounded-xl px-1 sm:px-4 py-1 bg-transparent  text-sm font-averta-semibold text-zinc-500 dark:text-zinc-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +99,7 @@ export default function OutputMessage({
               <Button
                 onClick={() => createDopeStuff()}
                 ripple={true}
-                className=" flex flex-row bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case w-[120px]"
+                className="<hover:brightness-[110%] transition duration-500 >ease-in-out flex flex-row bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case w-[120px]"
               >
                 <ReplayIcon
                   className="mr-1 -ml-1"
@@ -137,9 +138,9 @@ export default function OutputMessage({
           </div>
         </div>
       </div>
-      <div id="output-message" className=" output-message mt-4 overflow-x-scroll">
+      <div id="output-message" className="output-message mt-4 overflow-x-scroll">
         {outputMessage.length > 0 ? (
-          <ReactMarkdown>{outputMessage.replace(/\n/g, '\n')}</ReactMarkdown>
+          <ReactMarkdown>{outputMessage}</ReactMarkdown>
         ) : (
           <div className="">{isLoading && <HandAnimation />}</div>
         )}
