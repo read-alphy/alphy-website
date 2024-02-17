@@ -15,7 +15,7 @@ import LogoBlack from '../../img/ALPHY_BG_REMOVED_DARK.png'
 import { Link } from 'react-router-dom'
 import HubFeedItem from '../../routes/Hub/HubFeedItemElements/HubFeedItem'
 import { useLocation } from 'react-router-dom'
-import HistoryIcon from '@mui/icons-material/History'
+import FiberNewIcon from '@mui/icons-material/FiberNew';
 import { inputMessages } from './Sandbox/messageBank'
 
 function SideFeedReworked({
@@ -388,7 +388,12 @@ function SideFeedReworked({
                         </svg>
 
                         {/* <HistoryIcon strokeWidth={"1.5"} className="text-zinc-500 dark:text-zinc-300 mr-2  " /> */}
+                        <div className="flex flex-row relative"> 
+                        
                         <p className="ml-0.5">My Creations</p>
+                        <FiberNewIcon fontSize="medium" className="absolute right-0 top-0  -mr-5 -mt-4   text-green-300" /> 
+                        </div>
+                        
                       </Link>
 
                       {groupedData.length > 0 && (
