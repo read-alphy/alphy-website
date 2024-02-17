@@ -59,7 +59,46 @@ export default function ReadComponent({
   QuestionAnswering,
   requestTranslation,
   tier,
-}) {
+}) 
+
+
+{
+
+
+  function convertTimeToSeconds(time) {
+    // Check if the input is a string and matches the ISO 8601 duration format
+    if (typeof time === 'string' && time.match(/^PT/)) {
+      const matches = time.match(/PT(\d+H)?(\d+M)?(\d+(?:\.\d+)?S)?/);
+      let seconds = 0;
+  
+      // If hours are present, convert them to seconds and add to total
+      if (matches[1]) {
+        seconds += parseInt(matches[1]) * 3600;
+      }
+  
+      // If minutes are present, convert them to seconds and add to total
+      if (matches[2]) {
+        seconds += parseInt(matches[2]) * 60;
+      }
+  
+      // If seconds are present, add them to total
+      if (matches[3]) {
+        seconds += parseFloat(matches[3]);
+      }
+  
+      return seconds;
+    } else if (typeof time === 'number' || (typeof time === 'string' && time.match(/^\d+(?:\.\d+)?$/))) {
+      // If the input is a numeric value or a string representing a number, parse it directly
+      return parseFloat(time);
+    } else {
+      // If the input is neither, return null or throw an error
+      return null;
+    }
+  }
+
+
+
+  
   return (
     <div id="content-area overscroll-none">
       {transcript.length > 0 &&
@@ -578,7 +617,59 @@ export default function ReadComponent({
                                             }
                                             className="mb-2 cursor-pointer"
                                           >
-                                            {`${
+                                            {(typeof item.at === 'string' && item.at.match(/^PT/))
+
+                                            ? 
+                                             
+                                            `${
+                                              Math.floor(convertTimeToSeconds(item.at) / 3600) < 10
+                                                ? `0${Math.floor(
+                                                    convertTimeToSeconds(item.at) / 3600
+                                                  )}`
+                                                : `${Math.floor(
+                                                    convertTimeToSeconds(item.at) / 3600
+                                                  )}`
+                                              }
+																								${':'}
+																								${
+                                                  Math.floor(convertTimeToSeconds(item.at) / 60) < 10
+                                                    ? `0${Math.floor(
+                                                        convertTimeToSeconds(item.at) / 60
+                                                      )}`
+                                                    : Math.floor(
+                                                        convertTimeToSeconds(item.at) % 3600
+                                                      ) < 600
+                                                    ? `0${Math.floor(
+                                                        convertTimeToSeconds(item.at) / 60 -
+                                                          Math.floor(
+                                                            convertTimeToSeconds(item.at) / 3600
+                                                          ) *
+                                                            60
+                                                      )}`
+                                                    : Math.floor(
+                                                        convertTimeToSeconds(item.at) / 60 -
+                                                          Math.floor(
+                                                            convertTimeToSeconds(item.at) / 3600
+                                                          ) *
+                                                            60
+                                                      )
+                                                }
+																								${':'}
+																								${
+                                                  Math.floor(convertTimeToSeconds(item.at) % 60) < 10
+                                                    ? `0${Math.floor(
+                                                        convertTimeToSeconds(item.at) % 60
+                                                      )}`
+                                                    : Math.floor(convertTimeToSeconds(item.at) % 60)
+                                                }`
+                                                
+                                                :
+
+
+                                            
+                                            
+                                            
+                                            `${
                                               Math.floor(item.at / 3600) < 10
                                                 ? `0${Math.floor(
                                                     item.at / 3600
@@ -586,7 +677,7 @@ export default function ReadComponent({
                                                 : `${Math.floor(
                                                     item.at / 3600
                                                   )}`
-                                            }
+                                              }
 																								${':'}
 																								${
                                                   Math.floor(item.at / 60) < 10
