@@ -76,7 +76,7 @@ function Hub({
   }
 
   return (
-    <div className="scrolling   dark:bg-darkMode dark:text-zinc-300 font-averta-semibold">
+    <div className="scrolling  dark:bg-darkMode dark:text-zinc-300 font-averta-semibold">
       <Helmet>
         <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
       </Helmet>

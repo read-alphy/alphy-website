@@ -10,6 +10,7 @@ export default function Sandbox({
   currentUser,
   getSandboxHistory,
   tier,
+  
 }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [outputMessage, setOutputMessage] = useState('')
@@ -56,6 +57,10 @@ export default function Sandbox({
       setSelectedTool('custom')
     }
   }, [askAlphyForSandbox, askText])
+
+
+
+  
 
   useEffect(() => {
     const historyPrompt = sessionStorage.getItem('fillPrompt')
@@ -190,7 +195,7 @@ export default function Sandbox({
       // TEMPORARILY REQUIRED
       title: contentDetails.source_title,
       creator: contentDetails.creator_name,
-      summary_lang: contentDetails.source_variant === 'summary' ? ('en') : null,
+      summary_lang: contentDetails.source_variant === 'summary' ? (data.lang ? data.lang : 'en') : null,
 
       // MUST GIVE manner_custom if manner is custom
       // OMITTABLE
