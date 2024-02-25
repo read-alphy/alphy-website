@@ -30,7 +30,7 @@ export default function Content({
 }) {
   const { currentUser } = useAuth()
   const navigate = useNavigate()
-console.log(data)
+
   const [isLoading, setIsLoading] = useState(data.transcript === undefined)
 
   const [activeTab, setActiveTab] = useState('tab1')
