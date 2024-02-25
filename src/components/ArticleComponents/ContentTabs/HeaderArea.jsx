@@ -464,6 +464,7 @@ export default function HeaderArea({
             <button
               className="cursor-pointer flex flex-row gap-2 rounded-lg items-center text-center px-2 py-2 bg-transparent border-zinc-400 dark:border-zinc-200 border w-[200px] justify-center"
               onClick={() => setIsSandbox(false)}
+              
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

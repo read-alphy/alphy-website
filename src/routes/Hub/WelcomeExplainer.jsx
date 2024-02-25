@@ -43,8 +43,8 @@ export default function WelcomeExplainer({
 
   return (
     <div>
-      <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 3xl:pl-40  overflow-hidden pb-10">
-        <div className="pl-5 pr-5 mt-4  sm:mt-10 lg:mt-20 ">
+      <div className="w-full   mx-auto  md:pl-10  lg:pl-16 xl:pl-20 3xl:pl-40  overflow-hidden pb-10">
+        <div className="pl-5 pr-5  mt-10 lg:mt-20 ">
           {/* {totalMinutes > 0 && (
             <div className="flex flex-row ">
               <p className="bg-gradient-to-r from-pink-200 to-amber-100 via-red-200 rounded-lg px-2 py-1   font-bold text-zinc-900 text-md xs:text-lg">

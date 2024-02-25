@@ -10,10 +10,7 @@ import { API_URL } from '../../constants'
 
 export default function PremiumCard({
   tier,
-  openPopover,
-  setOpenPopover,
   currentUser,
-  triggers,
 }) {
   const [showUpgradeDialog, setShowUpgradeDialog] = useState(false)
   const [upgradeLoading, setUpgradeLoading] = useState(false)
@@ -23,16 +20,6 @@ export default function PremiumCard({
   const navigate = useNavigate()
   const inputRef = useRef(null)
 
-  const themePopover = {
-    popover: {
-      styles: {
-        base: {
-          bg: 'bg-white dark:bg-mildDarkMode',
-          color: 'text-zinc-600 dark:text-zinc-200',
-        },
-      },
-    },
-  }
 
   const handleDialog = () => {
     if (currentUser) {

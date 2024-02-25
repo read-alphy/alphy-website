@@ -918,7 +918,7 @@ function App() {
           </>
         )}
       </Elements>
-      {/* location.pathname.includes('/x/') === false &&
+      { location.pathname.includes('/x/') === false &&
         location.pathname.includes('/yt/') === false &&
         location.pathname.includes('/sp/') === false &&
         location.pathname.includes('/tw/') === false &&
@@ -931,7 +931,7 @@ function App() {
             userMetadata={userMetadata}
             setUserMetadata={setUserMetadata}
           />
-        ) */}
+        ) }
     </div>
   )
 }

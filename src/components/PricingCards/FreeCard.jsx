@@ -1,31 +1,11 @@
 import {
-  Popover,
-  PopoverHandler,
-  PopoverContent,
-  ThemeProvider,
   Button,
 } from '@material-tailwind/react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 
 export default function FreeCard({ tier, currentUser }) {
-  const triggers1 = {
-    onMouseEnter: () => setOpenPopover1(true),
-    onMouseLeave: () => setOpenPopover1(false),
-  }
 
-  const [openPopover1, setOpenPopover1] = useState(false)
-  const themePopover = {
-    popover: {
-      styles: {
-        base: {
-          bg: 'bg-white dark:bg-mildDarkMode ',
-          color: 'text-zinc-600 dark:text-zinc-200',
-          border: 'border-2 border-zinc-100 dark:border-zinc-600',
-        },
-      },
-    },
-  }
+
 
   return (
     <div className="col-span-1 xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 bg-white border border-zinc-700 rounded-lg    sm:p-8 dark:bg-zinc-900  dark:border-gray-700  ">
