@@ -2,7 +2,7 @@ import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove'
 import ReplayIcon from '@mui/icons-material/Replay'
 import axios from 'axios'
 import Link  from 'next/link'
-import { API_URL } from '../../../constants'
+import { API_URL } from '../../../../constants'
 
 export default function BookmarkFeedItem({
   item,

@@ -17,7 +17,7 @@ import { loadStripe } from '@stripe/stripe-js'
 
 import axios from 'axios'
 
-import { API_URL, STRIPE_PK } from '../constants'
+import { API_URL, STRIPE_PK } from '../../constants'
 import getUserMetadata from '../utils/getUserMetadata'
 import { useRouter } from 'next/router';
 import addToUserMetadata from '../utils/addToUserMetadata'

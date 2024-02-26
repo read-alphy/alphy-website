@@ -8,7 +8,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import AddIcon from '@mui/icons-material/Add'
 import Link from 'next/link'
-import { API_URL } from '../../constants'
+import { API_URL } from '../../../constants'
 
 export default function HubArcFeed({
   dataGlobalArchipelagos,

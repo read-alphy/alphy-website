@@ -6,7 +6,7 @@ import VerifiedIcon from '@mui/icons-material/Verified'
 import Dialog from '@mui/material/Dialog'
 import { useState, useRef } from 'react'
 import axios from 'axios'
-import { API_URL } from '../../../constants'
+import { API_URL } from '../../../../constants'
 
 export default function PremiumCard({
   tier,

@@ -18,7 +18,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import { Button, Spinner } from '@material-tailwind/react'
 import Dialog from '@mui/material/Dialog'
 
-import { API_URL } from '../../constants'
+import { API_URL } from '../../../constants'
 
 
 export default function AccountInfo({

@@ -7,7 +7,7 @@ import { useRef } from 'react'
 import { useRouter } from 'next/router'
 import { Spinner } from '@material-tailwind/react'
 import QaWsManager from './QaWsManager'
-import { API_HOST, API_SSL } from '../../../../constants'
+import { API_HOST, API_SSL } from '../../../../../constants'
 
 import DataArrayIcon from '@mui/icons-material/DataArray'
 import BaseQuestions from './BaseQuestions'

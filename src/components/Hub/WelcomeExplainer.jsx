@@ -8,7 +8,7 @@ import ApplePodcast from '../../../public/img/apple_podcasts.png'
 import Spaces from '../../../public/img/spaces_square.png'
 
 import axios from 'axios'
-import { API_URL } from '../../constants'
+import { API_URL } from '../../../constants'
 
 import ChromeIcon from '../../../public/img/chrome_icon.png'
 import { Button } from '@material-tailwind/react'

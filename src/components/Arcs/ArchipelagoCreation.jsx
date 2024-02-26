@@ -10,7 +10,7 @@ import { useAuth } from '../../hooks/useAuth'
 import SearchIcon from '@mui/icons-material/Search'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { API_URL } from '../../constants'
+import { API_URL } from '../../../constants'
 
 export default function ArchipelagoCreation({
   archipelagoDescription,

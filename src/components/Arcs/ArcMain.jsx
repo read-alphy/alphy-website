@@ -22,7 +22,7 @@ import Loading from '../Loading'
 import axios from 'axios'
 
 import jsonData from './arcs_and_thumbnails.json' // TODO: replace with API call
-import { API_URL } from '../../constants'
+import { API_URL } from '../../../constants'
 
 
 export default function ArcMain({

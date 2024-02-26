@@ -7,7 +7,7 @@ import CheckOutForm from './CheckOutForm'
 import Loading from '../Loading'
 
 /* import StripeBanner from '../../img/stripe_banner.svg' */
-import { API_URL, STRIPE_PK } from '../../constants'
+import { API_URL, STRIPE_PK } from '../../../constants'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.

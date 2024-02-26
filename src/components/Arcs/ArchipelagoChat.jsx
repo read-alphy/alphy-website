@@ -21,7 +21,7 @@ import QaWsManager from '../Content/Read/QA/QaWsManager'
 import ReactMarkdown from 'react-markdown'
 import LoopIcon from '@mui/icons-material/Loop'
 import RefreshIcon from '@mui/icons-material/Refresh'
-import { API_HOST, API_SSL } from '../../constants'
+import { API_HOST, API_SSL } from '../../../constants'
 import Image from 'next/image'
 
 export default function ArchipelagoChat({

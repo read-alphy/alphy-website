@@ -9,7 +9,7 @@ import axios from 'axios'
 import Loading from '../Loading'
 
 
-import { API_URL } from '../../constants'
+import { API_URL } from '../../../constants'
 import dynamic from 'next/dynamic'
 
 const Content = dynamic(() => import('./Content'), {
