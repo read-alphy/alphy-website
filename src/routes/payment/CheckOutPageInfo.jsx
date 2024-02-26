@@ -56,7 +56,7 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret }) {
           sessionStorage.setItem('subValue', subValue)
           const clientSecret =
             r.data.latest_invoice.payment_intent.client_secret
-          console.log(clientSecret)
+          
           setClientSecret(clientSecret)
           setCalled(true)
         })
