@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head';
 
-const Pricing = dynamic(() => import('../components/Profile/Pricing'), {
+const Pricing = dynamic(() => import('../../components/Profile/Pricing'), {
   ssr: false,
 })
 
