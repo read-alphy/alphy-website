@@ -1,9 +1,6 @@
+import SubmitPage from '../components/Hub/SubmitPage'
+import Head from 'next/head';
 
-import dynamic from 'next/dynamic'
-
-const SubmitPage = dynamic(() => import('../components/Hub/SubmitPage'), {
-  ssr: false,
-})
 
 
 
@@ -27,6 +24,10 @@ export default function Submit({
 
 }) {
     return (
+      <div>
+        <Head >
+          Alphy - Submit a Link!
+          </Head>
       <SubmitPage
       loggedIn ={loggedIn}
       setLoggedIn={setLoggedIn}
@@ -43,5 +44,6 @@ export default function Submit({
     sandboxHistory={sandboxHistory}
     setSandboxHistory={setSandboxHistory}
                     />
+                    </div>
     );
     }

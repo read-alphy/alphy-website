@@ -1,0 +1,44 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@material-tailwind/react": "^2.1.9",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/joy": "^5.0.0-beta.28",
+    "@mui/material-nextjs": "^5.15.9",
+    "@react-oauth/google": "^0.12.1",
+    "@stripe/react-stripe-js": "^2.5.0",
+    "@stripe/stripe-js": "^3.0.2",
+    "axios": "^1.6.7",
+    "file-saver": "^2.0.5",
+    "firebase": "^10.8.0",
+    "next": "14.1.0",
+    "next-themes": "^0.2.1",
+    "react": "^18",
+    "react-bootstrap": "^2.10.1",
+    "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
+    "react-loading": "^2.0.3",
+    "react-lottie": "^1.2.4",
+    "react-markdown": "^9.0.1",
+    "selection-popover": "^0.3.0",
+    "sharp": "^0.33.2",
+    "srt-parser-2": "^1.2.3",
+    "typeit-react": "^2.7.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  }
+}

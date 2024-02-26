@@ -2,6 +2,7 @@
 
 
 import Hub from '../components/Hub/Hub'
+import Head from 'next/head';
 
 
 export default function Arcs({
@@ -24,6 +25,11 @@ export default function Arcs({
 
 
     return(
+        <div>
+            <Head >
+                Alphy - Arcs
+            </Head>
+        
         <Hub
                     arcs={true}
                     credit={credit}
@@ -44,5 +50,6 @@ export default function Arcs({
                     globalLayout = {true}
                     
                   />
+                  </div>
     )
 }

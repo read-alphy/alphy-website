@@ -1,6 +1,7 @@
 
 
 import dynamic from 'next/dynamic'
+import Head from 'next/head';
 
 const Pricing = dynamic(() => import('../components/Profile/Pricing'), {
   ssr: false,
@@ -11,6 +12,11 @@ const Pricing = dynamic(() => import('../components/Profile/Pricing'), {
 export default function Plans({ currentUser, collapsed, setCollapsed, tier, sandboxHistory, setSandboxHistory, loggedIn, setLoggedIn}){
 
     return (
+      <div>
+        <Head>
+          <title>Alphy - Our Plans</title>
+        </Head>
+      
       <Pricing
       
       loggedIn = {loggedIn}
@@ -23,5 +29,6 @@ export default function Plans({ currentUser, collapsed, setCollapsed, tier, sand
       setSandboxHistory={setSandboxHistory}
       
       />
+      </div>
     );
 }

@@ -78,7 +78,7 @@ export default function Pricing({ tier,currentUser }) {
             </p>
             <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300  md:text-lg mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
               Upgrade to have extra transcription credits, submit from multiple
-              platforms, upload audio files, and access most capable AI models.
+              platforms, upload audio files, and generate limitless content with AI.
             </p>
 
             {/* <div className="items-center flex justify-center"><label className="relative inline-flex items-center ">

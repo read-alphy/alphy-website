@@ -13,6 +13,7 @@ export default function Settings({
   advancedSettingsToggled,
   setAdvancedSettingsToggled,
 }) {
+  
   const [detailLevel, setDetailLevel] = useState(null)
   const [lengthLevel, setLengthLevel] = useState(null)
   const [useTranscript, setUseTranscript] = useState(false)

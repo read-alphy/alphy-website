@@ -1,13 +1,14 @@
 
-
+ 
 import '../app/globals.css'
+
 
 import React, { useState, useEffect } from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import Navbar from '../components/Misc/Navbar'
-
+import Head from 'next/head';
 import { useAuth } from '../hooks/useAuth'
 import { initializeApp } from 'firebase/app'
 
@@ -59,6 +60,7 @@ function MyApp({ Component, pageProps }) {
     const [userLayout, setUserLayout] = useState(false)
     const [submitLayout, setSubmitLayout] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
+    const [sandboxHistoryCalled, setSandboxHistoryCalled] = useState(false)
   
 
   
@@ -81,9 +83,11 @@ function MyApp({ Component, pageProps }) {
       
       useEffect (() => {
         const theme = localStorage.getItem('theme')
+        
 
         if(theme!==null){
           document.documentElement.classList.add(theme)
+          document.documentElement.classList.add('dark-theme')
         }
 
         
@@ -170,17 +174,24 @@ function MyApp({ Component, pageProps }) {
     }, [currentUser, called])
   
     const getSandboxHistory = () => {
-/*       axios.get(`${API_URL}/sandbox/?user_id=local`).then(response => {
-        
-        setSandboxHistory(response.data)
-      }) */
+      axios
+        .get(`${API_URL}/sandbox/`, {
+          headers: {
+            'id-token': currentUser.accessToken,
+          },
+        })
+        .then(response => {
+          setSandboxHistoryCalled(true) 
+          setSandboxHistory(response.data)
+          
+        })
     }
   
     useEffect(() => {
-      if (sandboxHistory.length === 0) {
+      if (sandboxHistoryCalled === false && currentUser) {
         getSandboxHistory()
       }
-    }, [sandboxHistory])
+    }, [sandboxHistory, currentUser])
   
     useEffect(() => {
         const verification = searchParams.mode === 'verifyEmail'
@@ -310,6 +321,7 @@ const additionalProps ={
     setDataGlobalArchipelagos : setDataGlobalArchipelagos,
     sandboxHistory : sandboxHistory,
     setSandboxHistory : setSandboxHistory,
+    getSandboxHistory: getSandboxHistory,
     globalLayout : globalLayout,
     setGlobalLayout : setGlobalLayout,
     userLayout : userLayout,
@@ -326,7 +338,20 @@ const additionalProps ={
   return(
     <GoogleOAuthProvider clientId="1095799494177-qhg6sot0m532rg51j34kfrf3t0rds5sg.apps.googleusercontent.com">
 <AppRouterCacheProvider>
-    <div className=" App bg-white dark:bg-darkMode dark:text-zinc-300">
+
+    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
+    <Head>
+
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.png" type= "image/png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+    
+
+       <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
+        
+    </Head>
     <div
               className={`${
                 router.asPath.split('/')[1] === 'arc' &&
@@ -338,8 +363,11 @@ const additionalProps ={
             >
               <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
             </div>
+            
     <Component {...pageProps}  {...additionalProps} />
+    
     </div>
+    
 </AppRouterCacheProvider>
 </GoogleOAuthProvider>
   )

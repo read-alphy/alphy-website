@@ -52,10 +52,10 @@ export default function HeaderArea({
   const ITEM_HEIGHT = 48
   const ITEM_PADDING_TOP = 8
   const [menuProps, setMenuProps] = useState(null)
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState('dark')
 
   useEffect(() => {
-    setTheme(localStorage.getItem('theme'))
+    if(menuProps === null){
    setMenuProps({
       PaperProps: {
         style: {
@@ -67,6 +67,7 @@ export default function HeaderArea({
         },
       },
     })
+  }
   }
   )
 

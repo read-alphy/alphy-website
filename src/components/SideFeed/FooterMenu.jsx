@@ -1,17 +1,17 @@
 import Link  from 'next/link'
-import LogoutIcon from '@mui/icons-material/Logout'
+import VerifiedIcon from '@mui/icons-material/Verified'
 
 export default function FooterMenu({
   currentUser,
   handleSignout,
-  setCollapsed,
+  loggedIn,
   setOpenFeedbackDialog,
   handleDarkMode,
-  loggedIn,
+  tier,
   theme
 }) {
   return (
-    <div className="select-none">
+    <div className="">
       {/* {currentUser && 
             <div className="flex flex-col">
             <Link
@@ -81,8 +81,16 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                     </div>
                 }
             */}
+      {tier === 'premium' && (
+        <div className="mb-6  flex flex-row w-full pl-6 ">
+          <p className="text-indigo-400 text-md  ">
+            <VerifiedIcon fontSize="small" className="text-indigo-400 " />
+            <span className="mt-1 font-averta-semibold ml-2">Premium</span>
+          </p>
+        </div>
+      )}
 
-      {loggedIn === true ? (
+      {loggedIn ? (
         <Link
           className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6  py-2 flex flex-row "
           href="/account"
@@ -129,7 +137,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
       )}
 
       <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
-        {theme==="light" ? (
+        {theme ==='light' ? (
           <div onClick={handleDarkMode} className=" flex flex-row">
             <svg
               className=" mt-1 mr-1 duration-200 transition ease-in duration-200 feather feather-sun"
@@ -253,7 +261,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                   d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
                 />
               </svg>
-              Log Out
+              <p className="ml-2">Log Out</p>
             </button>
           </div>
         </div>

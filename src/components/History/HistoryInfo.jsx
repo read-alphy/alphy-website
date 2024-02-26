@@ -9,6 +9,7 @@ import { useState } from 'react'
 import {useRouter} from 'next/router'
 import ReactMarkdown from 'react-markdown'
 
+
 export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
   const router = useRouter()
 
@@ -23,10 +24,12 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
   }
 
   const toggleGroupVisibility = index => {
-    setVisibleGroups(prevState => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }))
+    if (window.getSelection().toString().length === 0) {
+      setVisibleGroups(prevState => ({
+        ...prevState,
+        [index]: !prevState[index],
+      }))
+    }
   }
 
   const imageURLSetter = (source_type, source_id) => {
@@ -58,7 +61,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
   }
 
   return (
-    <div className="mx-auto flex flex-col w-full items-center mt-10 xl:mt-20 max-w-[800px] pb-20">
+    <div className="px-4 mx-auto sm:px-10 flex flex-col  items-center mt-10 xl:mt-20 sm:max-w-[500px] md:max-w-[600px] lg:max-w-[800px] pb-20">
       <div className="flex flex-row text-zinc-700 dark:text-zinc-300 w-full ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -75,118 +78,114 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
           />
         </svg>
 
-        <p className="text-xl font-averta-semibold">History</p>
+        <p className="text-xl font-averta-semibold">Creation History</p>
       </div>
 
       <div className="border-b border-gray-200 dark:border-zinc-600 w-full mt-4"></div>
-      <div className="mt-10">
+      <div className="mt-10 ">
+        {sandboxHistory && sandboxHistory.length === 0 && (
+          <div className="text-center text-zinc-700 dark:text-zinc-200">
+            Anything you'll create with Playground will appear here.
+            <br /> <br />
+            {/* Learn more about Playground. */}
+            Switch to the Playground mode on any source page to create content with AI.
+
+           
+            <video
+            className="lg:max-w-[650px] mt-20 2xl:max-w-[700px] 3xl:max-w-[800px] border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg"
+            autoPlay
+            loop
+            muted
+          >
+            <source src="/img/playground_demo.mp4" type="video/mp4" />
+          </video>
+
+
+
+          </div>
+        )}
         {sandboxHistory &&
           sandboxHistory.map((item, index) => (
             <div
-              onClick={() => toggleGroupVisibility(index)}
-              className="mt-4 cursor-pointer "
+              onMouseUp={() => toggleGroupVisibility(index)}
+              className="mt-4 cursor-pointer  "
               key={index}
             >
-              <div className="flex flex-row gap-6 items-center relative w-full">
-                <Image
-                  src={imageURLSetter(item.source_type, item.source_id)}
-                  width={40}
-                  className="rounded-lg"
-                />
-                <p className="text-xl text-zinc-700 dark:text-zinc-300 font-averta-semibold hover:brightness-[150%] transition  duration-300 ease-in-out">
-                  {item.title}
-                </p>
-
-                <div className="flex flex-col items-end right-0 absolute mt-4 ">
-                  <button
-                    onClick={event => {
-                      event.stopPropagation()
-                      copyToClipboard(item.response, index)
-                    }}
-                    className="flex flex-row items-center rounded-xl px-4 py-1 bg-transparent text-sm font-averta-semibold text-zinc-500 dark:text-zinc-300"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke={`${
-                        localStorage.getItem('theme') === 'light'
-                          ? '#71717a'
-                          : '#d4d4d8'
-                      }`}
-                      class="w-5 h-5 pr-0.5 mt-0.5"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
-                      />
-                    </svg>
-                    Copy
-                  </button>
-
+              <div className="group">
+                <div className="flex flex-row gap-6 items-center relative w-full  ">
+                  <img
+                    src={imageURLSetter(item.source_type, item.source_id)}
+                    width={100}
+                    className="rounded-lg"
+                  />
+                  <p className="text-xl text-zinc-700 dark:text-zinc-300 font-averta-semibold select-none w-full  group-hover:brightness-[125%] transition  duration-300 ease-in-out ">
+                    {item.title}
+                  </p>
                   <div
-                    className={`flex text-zinc-500 dark:text-zinc-300 flex-row text-sm mt-1 h-[30px] mr-4 ${
-                      copiedText && index === copiedIndex
-                        ? 'opacity-100'
-                        : 'opacity-0 pointer-events-none    '
-                    } overflow-hidden`}
+                    className={`w-1/3  right-0    relative ${'max-h-96 text-zinc-600   mb-10   '}`}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="#86efac"
-                      class="w-5 h-5 mr-0.5"
+                    <button
+                      className="text-blue-900 flex flex-row font-averta-semibold text-sm dark:text-white right-0 absolute px-2 py-2 rounded-md
+                              bg-sky-100 dark:bg-indigo-400"
+                      onClick={event => {
+                        event.stopPropagation()
+                        seeInSource(item)
+                      }}
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      />
-                    </svg>
-                    Done!
+                      <p> See On Source</p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-4 h-4 mt-1 ml-1"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
-              </div>
-              <div className="flex flex-col transition  duration-300 ease-in-out">
-                <p className="flex text-md text-zinc-700 dark:text-zinc-300 mt-4  font-averta-semibold">
-                  {typeof item.request.command === 'object'
-                    ? item.request.command.prompt.slice(0, 100)
-                    : inputMessages
-                        .find(obj => obj.command_type === item.request.command)
-                        .message.slice(0, 100)}
-                </p>
-                <p
-                  className={`hover:brightness-[150%]   transition-all text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
-                    visibleGroups[index]
-                      ? 'max-h-96 text-zinc-600 mt-4'
-                      : 'max-h-20 text-zinc-500 mt-2'
-                  }`}
-                >
-                  <ReactMarkdown>{item.response}</ReactMarkdown>
-                </p>
-
-                <div
-                  className={`w-full      relative ${
-                    visibleGroups[index]
-                      ? 'max-h-96 text-zinc-600  pt-6  mb-10   '
-                      : 'max-h-0 text-zinc-500 overflow-hidden '
-                  }`}
-                >
-                  <button
-                    className="text-blue-900 font-averta-semibold text-sm dark:text-white right-0 absolute px-2 py-2 rounded-lg bg-sky-100 dark:bg-indigo-400"
-                    onClick={event => {
-                      event.stopPropagation()
-                      seeInSource(item)
-                    }}
+                <div className="flex flex-col transition  duration-300 ease-in-out  group-hover:brightness-[125%] transition  duration-300 ease-in-out">
+                  <p className="flex text-md text-zinc-700 dark:text-zinc-300 mt-4  font-averta-semibold">
+                    {typeof item.request.command === 'object'
+                      ? inputMessages.find(obj => obj.command_type === 'custom')
+                          .icon
+                      : inputMessages.find(
+                          obj => obj.command_type === item.request.command
+                        ).icon}
+                    <p className="ml-1">
+                      {typeof item.request.command === 'object'
+                        ? item.request.command.prompt.slice(0, 100)
+                        : inputMessages
+                            .find(
+                              obj => obj.command_type === item.request.command
+                            )
+                            .message.slice(0, 100)}
+                    </p>
+                  </p>
+                  <p
+                    className={`  output-message transition-all overflow-x-hidden text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
+                      visibleGroups[index]
+                        ? 'max-h-[100%] text-zinc-600 mt-4'
+                        : 'max-h-20 text-zinc-500 mt-2'
+                    }`}
                   >
-                    See it on the source
-                  </button>
+                    {item.response.includes('```')    ? 
+                    
+                    <div className=" overflow-x-scroll max-w-[600px] break-all pb-4"><ReactMarkdown>{item.response}</ReactMarkdown></div>
+
+                    : <ReactMarkdown                >
+                    {item.response}</ReactMarkdown>}
+                    
+                  </p>
                 </div>
               </div>
+                    
               {index !== sandboxHistory.length - 1 && (
                 <div className="border-b border-gray-200 dark:border-zinc-800 w-full mt-4"></div>
               )}

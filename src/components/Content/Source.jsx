@@ -28,6 +28,7 @@ export default function SourcePage({
   currentUser,
   sandboxHistory,
   setSandboxHistory,
+  getSandboxHistory,
   loggedIn,
   setLoggedIn
 }) {
@@ -303,7 +304,7 @@ export default function SourcePage({
   }
 
   return (
-    <div className="article dark:bg-darkMode dark:text-zinc-300">
+    <div className="article bg-white dark:bg-darkMode dark:text-zinc-300">
 
 
       <div
@@ -391,6 +392,7 @@ export default function SourcePage({
               handleLanguageChange={handleLanguageChange}
               isSandbox={isSandbox}
               setIsSandbox={setIsSandbox}
+              getSandboxHistory={getSandboxHistory}
             /> 
             
           )}

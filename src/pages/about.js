@@ -5,6 +5,8 @@ import SideFeed from '../components/SideFeed/SideFeed'
 import Loading from '../components/Loading'
 
 import AboutInfo from '../components/FAQ/AboutInfo'
+import Head from 'next/head';
+
 
 
 
@@ -39,6 +41,9 @@ function About({
 
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
+      <Head>
+        <title>Alphy - About </title>
+      </Head>
       
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${

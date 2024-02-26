@@ -6,7 +6,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube'
 import TwitchIcon from '../../../../public/img/twitch.png'
 import X from '../../../../public/img/X.png'
 import TwitterSpaces from '../../../../public/img/twitter_space.webp'
-import QuestionAnswering from '../Read/QA/QuestionAnswering'
+
 import {
   Popover,
   PopoverHandler,
@@ -17,7 +17,13 @@ import {
 } from '@material-tailwind/react'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import TwitterIcon from '@mui/icons-material/Twitter'
-import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+
+const QuestionAnswering = dynamic(() => import('../Read/QA/QuestionAnswering'), {
+  ssr: false,
+})
+
 
 export default function ReadComponent({
   data,
@@ -58,10 +64,57 @@ export default function ReadComponent({
   themePopover,
   language_codes,
   currentUser,
-  
   requestTranslation,
   tier,
-}) {
+  theme
+}) 
+
+
+{
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+
+
+
+  function convertTimeToSeconds(time) {
+    // Check if the input is a string and matches the ISO 8601 duration format
+    if (typeof time === 'string' && time.match(/^PT/)) {
+      const matches = time.match(/PT(\d+H)?(\d+M)?(\d+(?:\.\d+)?S)?/);
+      let seconds = 0;
+  
+      // If hours are present, convert them to seconds and add to total
+      if (matches[1]) {
+        seconds += parseInt(matches[1]) * 3600;
+      }
+  
+      // If minutes are present, convert them to seconds and add to total
+      if (matches[2]) {
+        seconds += parseInt(matches[2]) * 60;
+      }
+  
+      // If seconds are present, add them to total
+      if (matches[3]) {
+        seconds += parseFloat(matches[3]);
+      }
+  
+      return seconds;
+    } else if (typeof time === 'number' || (typeof time === 'string' && time.match(/^\d+(?:\.\d+)?$/))) {
+      // If the input is a numeric value or a string representing a number, parse it directly
+      return parseFloat(time);
+    } else {
+      // If the input is neither, return null or throw an error
+      return null;
+    }
+  }
+
+
+
+
+  
   return (
     <div id="content-area overscroll-none">
       {transcript.length > 0 &&
@@ -154,7 +207,7 @@ export default function ReadComponent({
                             src={`https://embed.podcasts.apple.com/podcast/id${
                               data.source_id.split('-')[0]
                             }?i=${data.source_id.split('-')[1]}&theme=${
-                              localStorage.getItem('theme') === 'dark'
+                              theme ==='dark'
                                 ? 'dark'
                                 : 'light'
                             }`}
@@ -178,7 +231,7 @@ export default function ReadComponent({
                       href={`https://twitter.com/i/spaces/${data.source_id}`}
                       rel="noreferrer"
                     >
-                      <Image
+                      <img
                         src={TwitterSpaces}
                         className="w-[240px] h-[120px] mx-auto"
                       />
@@ -204,7 +257,7 @@ export default function ReadComponent({
                       href={`https://twitter.com/i/status/${data.source_id}`}
                       rel="noreferrer"
                     >
-                      <Image src={X} className="w-[240px] h-[120px] mx-auto" />
+                      <img src={X} className="w-[240px] h-[120px] mx-auto" />
                       <p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
                         Watch{' '}
                         <span className="font-bold pb-6 hyphenate font-averta-semibold">
@@ -240,7 +293,7 @@ export default function ReadComponent({
                 {showYouTubeFrame ? (
                   <ArrowDownwardIcon fontSize="large" className="text-black " />
                 ) : (
-                  <Image
+                  <img
                     src={TwitchIcon}
                     fontSize="large"
                     className="text-white opacity-80"
@@ -321,7 +374,7 @@ export default function ReadComponent({
                   >
                     <p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md p-3 text-center italic ">
                       Generating questions... plugging in an AI assistant...
-                      <Image
+                      <img
                         className={'opacity-70 dark:opacity-90 mx-auto'}
                         src={working}
                         width={140}
@@ -504,7 +557,7 @@ export default function ReadComponent({
                                   <p>
                                     <p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
                                       Processing key takeaways...
-                                      <Image
+                                      <img
                                         className={
                                           'opacity-70 dark:opacity-90 mx-auto'
                                         }
@@ -523,7 +576,7 @@ export default function ReadComponent({
                                   'content-area text-l font-normal  max-w-screen-lg overflow-auto h-full xl:max-h-[110vh]'
                                 }
                               >
-                                {/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <Image src={Download}></img> : <Image title="Download summary" src={DownloadStatic}></img>}</button> */}
+                                {/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
 
                                 {isLoading ? (
                                   <Loading />
@@ -535,7 +588,7 @@ export default function ReadComponent({
                                       : 'Still waiting for the summary! Meanwhile, check the transcript.'}
                                     {summary === undefined ||
                                     summary.length === 0 ? null : (
-                                      <Image
+                                      <img
                                         className={
                                           'opacity-70 dark:opacity-90 mx-auto'
                                         }
@@ -580,7 +633,59 @@ export default function ReadComponent({
                                             }
                                             className="mb-2 cursor-pointer"
                                           >
-                                            {`${
+                                            {(typeof item.at === 'string' && item.at.match(/^PT/))
+
+                                            ? 
+                                             
+                                            `${
+                                              Math.floor(convertTimeToSeconds(item.at) / 3600) < 10
+                                                ? `0${Math.floor(
+                                                    convertTimeToSeconds(item.at) / 3600
+                                                  )}`
+                                                : `${Math.floor(
+                                                    convertTimeToSeconds(item.at) / 3600
+                                                  )}`
+                                              }
+																								${':'}
+																								${
+                                                  Math.floor(convertTimeToSeconds(item.at) / 60) < 10
+                                                    ? `0${Math.floor(
+                                                        convertTimeToSeconds(item.at) / 60
+                                                      )}`
+                                                    : Math.floor(
+                                                        convertTimeToSeconds(item.at) % 3600
+                                                      ) < 600
+                                                    ? `0${Math.floor(
+                                                        convertTimeToSeconds(item.at) / 60 -
+                                                          Math.floor(
+                                                            convertTimeToSeconds(item.at) / 3600
+                                                          ) *
+                                                            60
+                                                      )}`
+                                                    : Math.floor(
+                                                        convertTimeToSeconds(item.at) / 60 -
+                                                          Math.floor(
+                                                            convertTimeToSeconds(item.at) / 3600
+                                                          ) *
+                                                            60
+                                                      )
+                                                }
+																								${':'}
+																								${
+                                                  Math.floor(convertTimeToSeconds(item.at) % 60) < 10
+                                                    ? `0${Math.floor(
+                                                        convertTimeToSeconds(item.at) % 60
+                                                      )}`
+                                                    : Math.floor(convertTimeToSeconds(item.at) % 60)
+                                                }`
+                                                
+                                                :
+
+
+                                            
+                                            
+                                            
+                                            `${
                                               Math.floor(item.at / 3600) < 10
                                                 ? `0${Math.floor(
                                                     item.at / 3600
@@ -588,7 +693,7 @@ export default function ReadComponent({
                                                 : `${Math.floor(
                                                     item.at / 3600
                                                   )}`
-                                            }
+                                              }
 																								${':'}
 																								${
                                                   Math.floor(item.at / 60) < 10

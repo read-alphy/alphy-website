@@ -8,10 +8,18 @@ import {useRouter} from 'next/router'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { saveAs } from 'file-saver' // library to save file as blob
 import { useAuth } from '../../hooks/useAuth'
-import ReadComponent from './Read/ReadComponent'
 import { API_URL } from '../../constants'
-import HeaderArea from './Read/HeaderArea'
+
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+
+const ReadComponent = dynamic(() => import('./Read/ReadComponent'), {
+  ssr: false,
+})
+const Sandbox = dynamic(() => import('./Sandbox/Sandbox'), { ssr: false })
+const HeaderArea = dynamic(() => import('./Read/HeaderArea'), { ssr: false })
+
 
 export default function Content({
   language,
@@ -26,6 +34,7 @@ export default function Content({
   userArchipelagos,
   isBookmarked,
   setIsBookmarked,
+  getSandboxHistory
 }) {
   const { currentUser } = useAuth()
   const router = useRouter()
@@ -52,8 +61,7 @@ export default function Content({
   const [transcript, setTranscript] = useState([])
   const [summaryArray, setSummaryArray] = useState([])
   const [showYouTubeFrame, setShowYouTubeFrame] = useState(false)
-  const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] =
-    useState(false)
+  const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] =useState(false)
 
     useEffect(() => {
 
@@ -791,12 +799,15 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           </div>
 
           <div className={`${isSandbox ? 'flex' : 'hidden'} w-full `}>
-            {/* <Sandbox
+            <Sandbox
               data={data}
               askAlphyForSandbox={askAlphyForSandbox}
               setAskAlphyForSandbox={setAskAlphyForSandbox}
               askText={askText}
-            /> */}
+              currentUser={currentUser}
+              getSandboxHistory={getSandboxHistory}
+              tier={tier}
+            />
           </div>
         </div>
       </div>

@@ -6,23 +6,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 export default function FreeCard({ tier, currentUser }) {
-  const triggers1 = {
-    onMouseEnter: () => setOpenPopover1(true),
-    onMouseLeave: () => setOpenPopover1(false),
-  }
 
-  const [openPopover1, setOpenPopover1] = useState(false)
-  const themePopover = {
-    popover: {
-      styles: {
-        base: {
-          bg: 'bg-white dark:bg-mildDarkMode ',
-          color: 'text-zinc-600 dark:text-zinc-200',
-          border: 'border-2 border-zinc-100 dark:border-zinc-600',
-        },
-      },
-    },
-  }
+
 
   return (
     <div className="col-span-1 xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 bg-white border border-zinc-700 rounded-lg    sm:p-8 dark:bg-zinc-900  dark:border-gray-700  ">
@@ -36,7 +21,7 @@ export default function FreeCard({ tier, currentUser }) {
         </span>
       </div>
       <p className="mt-3 text-zinc-500 ">Discover Alphy's capabilities </p>
-      <div className="h-[550px]">
+      <div className="h-[720px]">
         <ul role="list" className="space-y-5 my-7">
           <li className="flex  space-x-3">
             <svg
@@ -236,6 +221,93 @@ export default function FreeCard({ tier, currentUser }) {
               No optional credit topups
             </span>
           </li>
+
+          <div className="w-full border-b border-gray-300 dark:border-zinc-700 "></div>
+
+          <li className="flex space-x-3">
+            <svg
+              aria-hidden="true"
+              className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Check icon</title>
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+            {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+            <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+              Limited access to Playground:
+            </span>
+          </li>
+
+          <div className="flex flex-col ml-6 gap-y-4">
+            <li className="flex space-x-3">
+              <svg
+                aria-hidden="true"
+                className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Check icon</title>
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+                Only works on summaries
+              </span>
+            </li>
+            <li className="flex space-x-3">
+              <svg
+                aria-hidden="true"
+                className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Check icon</title>
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+                No custom prompts
+              </span>
+            </li>
+
+            <li className="flex space-x-3">
+              <svg
+                aria-hidden="true"
+                className="flex-shrink-0 w-5 h-5 text-gray-200 dark:text-zinc-200"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Check icon</title>
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+                Limited access to preset commands
+              </span>
+            </li>
+          </div>
 
           {/*                <li className="flex space-x-3">
 

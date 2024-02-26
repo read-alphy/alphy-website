@@ -3,7 +3,7 @@ import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
 import { API_HOST } from '../../../constants'
 
-export default function Sandbox({ data, askAlphyForSandbox, askText }) {
+export default function Sandbox({ data, askAlphyForSandbox, askText, tier, currentUser, getSandboxHistory}) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [outputMessage, setOutputMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -14,7 +14,8 @@ export default function Sandbox({ data, askAlphyForSandbox, askText }) {
   const [creationCalled, setCreationCalled] = useState(false)
   const [manner, setManner] = useState(null)
   const [error, setError] = useState(false)
-const [theme, setTheme] = useState('light')
+  const [authError, setAuthError] = useState(false)
+const [theme, setTheme] = useState('dark')
   
   useEffect(() => {
     setTheme(localStorage.getItem('theme'))
@@ -25,6 +26,8 @@ const [theme, setTheme] = useState('light')
       }
     })
   }, [selectedTool])
+
+ 
 
   const [contentDetails, setContentDetails] = useState({
     content: '',
@@ -52,7 +55,7 @@ const [theme, setTheme] = useState('light')
 
   useEffect(() => {
     const historyPrompt = sessionStorage.getItem('fillPrompt')
-    console.log(historyPrompt === null)
+
     if (historyPrompt === null) {
       return
     } else {
@@ -102,7 +105,7 @@ const [theme, setTheme] = useState('light')
         }, 200)
       }
     }
-  }, [/* sessionStorage.getItem('fillPrompt') */])
+  }, [sessionStorage.getItem('fillPrompt')])
 
   function generateContentDetails() {
     let source_title = ''
@@ -150,11 +153,18 @@ const [theme, setTheme] = useState('light')
   }, [data, settings])
 
   function createDopeStuff() {
+    setAuthError(false)
+    if (currentUser === undefined ||currentUser === null ) {
+      setAuthError(true)
+      return
+    }
+
     setOutputMessage('')
     setCreationCalled(true)
     setIsLoading(true)
 
     const request = {
+      id_token: currentUser.accessToken,
       source_type: contentDetails.source_type,
       source_id: contentDetails.source_id,
       /* source_variant: contentDetails.source_variant, */
@@ -191,9 +201,8 @@ const [theme, setTheme] = useState('light')
 
     /* wss://backend-staging-2459.up.railway.app/ws/question */
     /* wss://backend-staging-2459.up.railway.app/ws/sandbox */
-
+    /* {idToken: currentUser.accessToken} */
     ws.onopen = () => {
-      console.log('connected')
       ws.send(JSON.stringify(request))
     }
 
@@ -202,6 +211,7 @@ const [theme, setTheme] = useState('light')
     }
 
     ws.onclose = event => {
+      getSandboxHistory()
       console.log('closed')
       setIsLoading(false)
       setError(true)
@@ -284,6 +294,8 @@ const [theme, setTheme] = useState('light')
                 setSettings={setSettings}
                 manner={manner}
                 setManner={setManner}
+                tier={tier}
+                authError={authError}
               />
             </div>
           )}

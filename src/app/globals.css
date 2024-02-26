@@ -34,7 +34,7 @@ body {
  */
 
 
- @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import url(https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold);

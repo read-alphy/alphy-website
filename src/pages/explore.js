@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Head from 'next/head';
 
 const Hub = dynamic(() => import('../components/Hub/Hub'), {
   ssr: false,
@@ -30,6 +31,11 @@ setLoggedIn,
 
 
 return (
+  <div>
+    <Head>
+      <title>Alphy - Explore</title>
+    </Head>
+  
 <Hub
 
   loggedIn = {loggedIn}
@@ -54,5 +60,6 @@ return (
     submitLayout={false}
     setSubmitLayout={setSubmitLayout}
 />
+</div>
 );
 }

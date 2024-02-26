@@ -1,6 +1,6 @@
 import { Button, Spinner } from '@material-tailwind/react'
 import {useRouter} from 'next/router'
-import { Shine } from 'frosted-ui'
+
 import VerifiedIcon from '@mui/icons-material/Verified'
 
 import Dialog from '@mui/material/Dialog'
@@ -10,10 +10,8 @@ import { API_URL } from '../../../constants'
 
 export default function PremiumCard({
   tier,
-  openPopover,
-  setOpenPopover,
   currentUser,
-  triggers,
+  
 }) {
   const [showUpgradeDialog, setShowUpgradeDialog] = useState(false)
   const [upgradeLoading, setUpgradeLoading] = useState(false)
@@ -22,17 +20,6 @@ export default function PremiumCard({
   const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter()
   const inputRef = useRef(null)
-
-  const themePopover = {
-    popover: {
-      styles: {
-        base: {
-          bg: 'bg-white dark:bg-mildDarkMode',
-          color: 'text-zinc-600 dark:text-zinc-200',
-        },
-      },
-    },
-  }
 
   const handleDialog = () => {
     if (currentUser) {
@@ -113,7 +100,7 @@ export default function PremiumCard({
         </span>
       </div>
       <p className="mt-3 text-gray-400">Experience audiovisual mastery </p>
-      <div className={`h-[550px]`}>
+      <div className={`h-[720px]`}>
         <ul role="list" className="space-y-5 my-7">
           <li className="flex space-x-3">
             <svg
@@ -317,7 +304,95 @@ export default function PremiumCard({
               Optional credit topups
             </span>
           </li>
-          <Shine puffyness="0.5">
+
+          <div className="w-full border-b border-gray-300 dark:border-zinc-700 "></div>
+
+          <li className="flex space-x-3">
+            <svg
+              aria-hidden="true"
+              className="flex-shrink-0 w-5 h-5 text-greenColor"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Check icon</title>
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+            {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+            <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+              Full access to Playground:
+            </span>
+          </li>
+
+          <div className="flex flex-col ml-6 gap-y-4">
+            <li className="flex space-x-3">
+              <svg
+                aria-hidden="true"
+                className="flex-shrink-0 w-5 h-5 text-greenColor "
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Check icon</title>
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+                Generative AI on Transcripts
+              </span>
+            </li>
+            <li className="flex space-x-3">
+              <svg
+                aria-hidden="true"
+                className="flex-shrink-0 w-5 h-5 text-greenColor"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Check icon</title>
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+                Access to custom creation
+              </span>
+            </li>
+
+            <li className="flex space-x-3">
+              <svg
+                aria-hidden="true"
+                className="flex-shrink-0 w-5 h-5 text-greenColor"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Check icon</title>
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
+                Unlimited access to preset commands
+              </span>
+            </li>
+          </div>
+
+          
             <button
               onClick={handleDialog}
               type="button"
@@ -327,7 +402,7 @@ export default function PremiumCard({
             >
               {tier === 'premium' ? 'Active' : 'Go Premium'}
             </button>
-          </Shine>
+          
         </ul>
       </div>
 

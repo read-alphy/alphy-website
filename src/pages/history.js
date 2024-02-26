@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Head from 'next/head';
 
 const History = dynamic(() => import('../components/History/History'), {
     ssr: false,
@@ -20,7 +21,11 @@ export default function HistoryPage({
     
     {
         return(
-        
+        <div>
+            <Head>
+                <title>Alphy - Creation History</title>
+            </Head>
+       
             <History
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
@@ -34,6 +39,7 @@ export default function HistoryPage({
             setSandboxHistory={setSandboxHistory}
 
             />
+             </div>
             )
         
     }

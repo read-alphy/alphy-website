@@ -3,6 +3,8 @@ import InputArea from './InputArea'
 import Settings from './Settings'
 import { Button, Spinner } from '@material-tailwind/react'
 import Toolbox from './Toolbox'
+import VerifiedIcon from '@mui/icons-material/Verified'
+import Link from 'next/link'
 
 import MannerArea from './MannerArea'
 
@@ -14,7 +16,7 @@ import MannerArea from './MannerArea'
   ap: 'Apple Podcasts',
 } */
 
-export default function GenerationZone({
+export default function   GenerationZone({
   settings,
   setSettings,
   outputMessage,
@@ -28,6 +30,8 @@ export default function GenerationZone({
   setSelectedTool,
   manner,
   setManner,
+  tier,
+  authError
 }) {
   const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
   const [toolboxActive, setToolboxActive] = useState(false)
@@ -65,14 +69,17 @@ export default function GenerationZone({
         className={` ${
           selectedTool === 'custom' &&
           'bg-slate-50 dark:bg-mildDarkMode rounded-lg w-fit mb-4'
-        } sm:p-2`}
+        } sm:p-2 `}
       >
         {
           <div
             className={` lg:max-w-[800px] w-full overflow-hidden  transition-[max-height] duration-300 sm:px-2 ease-in-out ${
               toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
             }`}
-          >
+          >{
+            authError ? 
+      <div className="text-xl my-10"><Link href="/u/login" className="text-indigo-400">Sign in</Link> to start creating on Playground!</div>
+            :
             <MannerArea
               settings={settings}
               setSettings={setSettings}
@@ -80,14 +87,39 @@ export default function GenerationZone({
               manner={manner}
               setManner={setManner}
             />
+          }
           </div>
         }
 
         <div
-          className={`lg:max-w-[800px] w-fit  overflow-hidden  transition-[max-height] duration-300 ease-in-out rounded-md pb-4 sm:px-2 ${
+          className={`relative lg:max-w-[800px] w-fit  overflow-hidden  transition-[max-height] duration-300 ease-in-out rounded-md pb-4 sm:px-2 ${
             selectedTool === 'custom' ? 'max-h-[100%]' : 'max-h-0 '
           }`}
         >
+          {tier !== 'premium' && selectedTool === 'custom' && (
+            <div className="absolute inset-0 bg-sky-50/30 text-zinc-600 dark:bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center z-10 dark:text-white rounded-lg ">
+              <p className="text-indigo-400 text-md  ">
+                {tier !== 'premium' && (
+                  <VerifiedIcon
+                    fontSize="medium"
+                    className=" mb-4 text-indigo-400 "
+                  />
+                )}
+              </p>
+
+              <p>
+                Go{' '}
+                <Link
+                  href="/account"
+                  className="text-indigo-400 dark:text-indigo-300 border-b border-indigo-400"
+                >
+                  premium
+                </Link>{' '}
+                to run custom prompts on transcripts.{' '}
+              </p>
+            </div>
+          )}
+
           <InputArea
             userPrompt={userPrompt}
             setUserPrompt={setUserPrompt}
@@ -95,6 +127,7 @@ export default function GenerationZone({
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
+
           <div className="md:hidden">
             <Settings
               settings={settings}
@@ -103,6 +136,7 @@ export default function GenerationZone({
               setAdvancedSettingsToggled={setAdvancedSettingsToggled}
               theme={theme}
               adjustments={adjustments}
+              tier={tier}
             />
           </div>
 
@@ -115,6 +149,7 @@ export default function GenerationZone({
                 setAdvancedSettingsToggled={setAdvancedSettingsToggled}
                 theme={theme}
                 adjustments={adjustments}
+                tier={tier}
               />
             </div>
             <Button
@@ -137,7 +172,15 @@ export default function GenerationZone({
                   : 'opacity-100'
               }  transition-opacity duration-300 ease-in-out bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 dark:from-purple-400 font-averta-regular normal-case w-[120px]`}
             >
-              {isLoading ? <Spinner color="blue" size="sm" /> : 'Generate'}
+              {isLoading ? (
+                <Spinner
+                  color="blue"
+                  size="sm"
+                  className="mx-auto w-full justify-center "
+                />
+              ) : (
+                'Generate'
+              )}
             </Button>
           </div>
         </div>
@@ -152,6 +195,7 @@ export default function GenerationZone({
         setIsLoading={setIsLoading}
         selectedTool={selectedTool}
         setSelectedTool={setSelectedTool}
+        tier={tier}
       />
     </div>
   )

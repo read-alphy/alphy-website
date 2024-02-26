@@ -1,4 +1,5 @@
 import PrivacyPolicy from "../components/PrivacyPolicy/PrivacyPolicy";
+import Head from 'next/head';
 
 
 
@@ -16,6 +17,11 @@ export default function PrivacyPolicyPage({
     }) {
 
     return (
+        <div>
+            <Head>
+                <title>Alphy - Privacy Policy</title>
+            </Head>
+        
         <PrivacyPolicy
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
@@ -30,5 +36,6 @@ export default function PrivacyPolicyPage({
 
 
         />
+        </div>
     );
     }

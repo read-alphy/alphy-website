@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Head from 'next/head';
 
 const Account = dynamic(() => import('../components/Profile/Account'), {
   ssr: false,
@@ -19,6 +20,10 @@ export default function AccountPage({
     setLoggedIn
 }) {
     return (
+      <div>
+      <Head>
+      <title>Alphy - Account</title>
+      </Head>
      <Account
      currentUser={currentUser}
       
@@ -34,5 +39,6 @@ export default function AccountPage({
       loggedIn={loggedIn}
       setLoggedIn={setLoggedIn}
      />
+     </div>
     );
     }

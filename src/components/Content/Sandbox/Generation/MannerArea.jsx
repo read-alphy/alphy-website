@@ -2,7 +2,6 @@ import Radio, { radioClasses } from '@mui/joy/Radio'
 import RadioGroup from '@mui/joy/RadioGroup'
 import Sheet from '@mui/joy/Sheet'
 import React, { useState } from 'react'
-
 export default function MannerArea({
   theme,
   settings,

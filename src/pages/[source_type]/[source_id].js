@@ -12,6 +12,7 @@ export default function SourceMaterial({
     currentUser,
     sandboxHistory,
     setSandboxHistory,
+    getSandboxHistory,
     loggedIn,
     setLoggedIn
 }){
@@ -19,7 +20,7 @@ export default function SourceMaterial({
 
   
     const {source_id,source_type} = router.query;
-    console.log(source_type)
+    
 
   
 
@@ -46,6 +47,7 @@ return(
     setSandboxHistory={setSandboxHistory}
     loggedIn={loggedIn}
     setLoggedIn={setLoggedIn}
+    getSandboxHistory = {getSandboxHistory}
     />
 }
 </div>
