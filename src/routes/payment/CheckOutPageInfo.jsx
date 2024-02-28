@@ -66,6 +66,8 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret }) {
     })
   }
 
+
+
   let appearance
 
   if (localStorage.getItem('theme') === 'dark') {
@@ -85,6 +87,7 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret }) {
   return (
     <div className="h-[110vh] dark:bg-darkMode bg-white">
       <div className="mx-auto container items-center pt-10 max-h-[95vh] px-5">
+      
         {/* <button onClick={fetchData}>Create</button> */}
 
         {clientSecret !== undefined &&

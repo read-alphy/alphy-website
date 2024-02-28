@@ -250,7 +250,14 @@ function App() {
 
       .then(r => {
         /* console.log(r.data) */
-
+        
+      /*   if (r.data.curr  ent_tier=== null) {
+        setTier('basic')
+        localStorage.setItem(
+          'tier',
+          'basic'
+        )
+        } */
         if (r.data.current_tier !== null) {
           setTier(r.data.current_tier)
           localStorage.setItem(
@@ -853,7 +860,7 @@ function App() {
                   />
                 }
               />
-              <Route
+              {/* <Route
                 path="/plans/checkout"
                 element={
                   <CheckOutPage
@@ -867,7 +874,7 @@ function App() {
                     setLoggedIn={setLoggedIn}
                   />
                 }
-              ></Route>
+              ></Route> */}
               <Route
                 path="/plans/checkout/success"
                 element={
