@@ -33,6 +33,14 @@ export default function AccountInfo({
   const [quantity, setQuantity] = useState(1)
   const [creditPurchaseLoading, setCreditPurchaseLoading] = useState(false)
   const [subscriptionLinkLoading, setSubscriptionLinkLoading] = useState(false)
+  
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false)
+
+  const [called, setCalled] = useState(false)
+
+  const [openPopover, setOpenPopover] = useState(false)
+  const [openPopover1, setOpenPopover1] = useState(false)
 
   const handleQuantityChange = event => {
     const value = event.target.value
@@ -73,13 +81,6 @@ export default function AccountInfo({
 
   const windowSize = useWindowSize()
 
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false)
-
-  const [called, setCalled] = useState(false)
-
-  const [openPopover, setOpenPopover] = useState(false)
-  const [openPopover1, setOpenPopover1] = useState(false)
 
   //Popover
   const triggers = {
@@ -402,8 +403,8 @@ export default function AccountInfo({
             </div>
           )}
 
-<div className="flex flex-row  w-full max-w-[1200px]">
-<div className="flex gap-6 flex-row w-fit mx-auto justify-center my-6  px-4 py-2 rounded-xl">
+<div className="flex flex-row  w-full  max-w-[1200px]">
+<div className=" flex gap-6 flex-row w-fit mx-auto justify-center my-6  px-4 py-2 rounded-xl xl:pl-20">
   
 <p className={`text-lg font-bold ${isYearly ? "text-slate-700 dark:text-white" : " text-indigo-400"}`} >Monthly</p>
         <Switch

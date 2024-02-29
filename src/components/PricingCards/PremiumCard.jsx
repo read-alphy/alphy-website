@@ -38,62 +38,7 @@ export default function PremiumCard({
     },
   }
 
-  const handlePremiumUpgrade = () => {
-    if (currentUser) {
-      getSubscriptionLink(isYearly)
-    } else {
-      navigate('/u/login')
-    }
-  }
 
-  const handleCouponCode = e => {
-    setCouponCode(e.target.value)
-  }
-
-  const upgradePlan = async () => {
-    setErrorMessage('')
-    setUpgradeLoading(true)
-
-    await currentUser.getIdToken().then(idToken => {
-      axios
-        .post(
-          `${API_URL}/payments/subscription?subscription_type=premium`,
-          {},
-          {
-            headers: {
-              'id-token': idToken,
-            },
-          }
-        )
-        .then(r => {
-          setUpgradeLoading(false)
-          window.location.reload()
-        })
-        .catch(error => {
-          console.log(error)
-          setUpgradeLoading(false)
-          setErrorMessage('Something went wrong, please try again')
-        })
-    })
-  }
-
-  const handleUpgradeDialog = () => {
-    setShowUpgradeDialog(false)
-    setErrorMessage('')
-  }
-
-  const handleCouponBox = () => {
-    if (showCouponBox === false) {
-      setShowCouponBox(true)
-      setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.focus()
-        }
-      }, 100)
-    } else {
-      setShowCouponBox(false)
-    }
-  }
 
   return (
     <div className="relative col-span-2  xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 border border-zinc-700 transform *-translate-y-2* rounded-lg sm:p-8  bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-zinc-900 dark:bg-gradient-to-br dark:border-gray-700 ">
@@ -176,7 +121,7 @@ export default function PremiumCard({
               ></path>
             </svg>
             <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-              Create Unlimited Arcs
+              Upload local audio files
             </span>
           </li>
 
@@ -222,6 +167,7 @@ export default function PremiumCard({
               Download transcripts
             </span>
           </li>
+        
           <li className="flex space-x-3">
             <svg
               aria-hidden="true"
@@ -238,10 +184,9 @@ export default function PremiumCard({
               ></path>
             </svg>
             <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-              Upload local audio files
+              Create Unlimited Arcs
             </span>
           </li>
-       
 
           <li className="flex space-x-3">
             <svg
@@ -357,7 +302,7 @@ export default function PremiumCard({
 
       <Shine puffyness="0.5">
             <button
-              onClick={handlePremiumUpgrade}
+              onClick={getSubscriptionLink}
               type="button"
               className={`absolute bottom-4 normal-case text-white transition duration-200 ease-in ${
                 tier === 'premium' ? 'pointer-events-none text-whiteLike' : ''
@@ -373,228 +318,7 @@ export default function PremiumCard({
             </button>
           </Shine>
          
-      <Dialog
-        fullWidth={'true'}
-        maxWidth={'sm'}
-        open={showUpgradeDialog}
-        onClose={handleUpgradeDialog}
-      >
-        <div className="p-10 text-zinc-600 text-sm dark:text-zinc-300 dark:bg-mildDarkMode">
-          <p className="text-lg font-averta-semibold ">
-            You are about to upgrade to Premium Plan
-          </p>
-          <div className="mb-6 mt-2 text-lg">$12.5/month</div>
-
-          <div className="flex flex-col ">
-            <ul role="list" className="space-y-5 my-7">
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300 "
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  20 of prioritized transcription credits per month
-                </span>
-              </li>
-
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  Multi-language translation{' '}
-                </span>
-              </li>
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  Process Twitter Spaces{' '}
-                </span>
-              </li>
-
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  Download transcripts
-                </span>
-              </li>
-
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  Upload local audio files
-                </span>
-              </li>
-
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  GPT-4 Access
-                </span>
-              </li>
-
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  Create Unlimited Arcs
-                </span>
-              </li>
-
-              <li className="flex space-x-3">
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-5 h-5 text-indigo-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Check icon</title>
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                {/* <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-                <span className="text-base font-averta-semibold leading-tight text-gray-500 dark:text-zinc-300">
-                  Optional credit topups
-                </span>
-              </li>
-            </ul>
-
-            <div className="flex flex-col">
-              {/*             <div>
-                                                                            <p onClick={handleCouponBox} className={`cursor-pointer text-indigo-400  font-averta-semiboldd text-md underline mb-2 mt-6`} >Add promotion code</p>
-                                                                            </div>
-                                                                            <input 
-                                                                                        ref={inputRef}
-                                                                                            type="text" 
-                                                                                            value={couponCode} 
-                                                                                            onChange={handleCouponCode} 
-                                                                                            onBlur={() => setShowCouponBox(false)}
-                                                                                            placeholder="Enter your code here.."
-                                                                                            className={`${showCouponBox ? "min-w-[100px] max-w-[200px] opacity-100" :"min-w-[100px] max-w-[200px]  opacity-0 pointer-events-none"} transition duration-300  rounded-lg border border-indigo-300 focus:border-indigo-300 focus:outline-none focus:ring-indigo-300 text-sm`}
-                                                                                        />
-                                                                                        */}
-
-              <Button
-                className={`bg-indigo-300 w-[200px] mt-6 py-3 ${
-                  upgradeLoading && 'pointer-events-none opacity-60'
-                }`}
-                size="md"
-                onClick={upgradePlan}
-              >
-                {upgradeLoading ? (
-                  <Spinner
-                    color="gray"
-                    className="opacity-40 w-5 text-center margin-auto w-full"
-                  />
-                ) : (
-                  <p className="py-1 dark:text-zinc-800 text-md">Upgrade Now</p>
-                )}
-              </Button>
-
-              {errorMessage.length == 0 ? (
-                <p className="items-center margin-auto flex mt-4">
-                  You will be charged automatically.
-                </p>
-              ) : (
-                <p className="mt-4 text-red-400">{errorMessage}</p>
-              )}
-            </div>
-          </div>
-        </div>
-      </Dialog>
+      
     </div>
   )
 }

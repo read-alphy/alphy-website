@@ -85,7 +85,7 @@ export default function Pricing({ tier }) {
             </p>
             
             <div className="flex flex-row mx-auto w-fit ">
-<div className="flex gap-6 flex-row w-fit justify-center my-6  px-4 py-2 rounded-xl">
+<div className="flex gap-6 flex-row w-fit justify-center my-6  px-4 py-2 rounded-xl xl:pl-20">
   
 <p className={`text-lg font-bold ${isYearly ? "text-slate-700 dark:text-white" : " text-indigo-400"}`} >Monthly</p>
         <Switch
