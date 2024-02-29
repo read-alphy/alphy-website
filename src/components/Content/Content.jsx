@@ -8,7 +8,7 @@ import {useRouter} from 'next/router'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { saveAs } from 'file-saver' // library to save file as blob
 import { useAuth } from '../../hooks/useAuth'
-import { API_URL } from '../../../constants'
+import { API_URL } from '../../constants'
 
 import Image from 'next/image'
 import dynamic from 'next/dynamic'

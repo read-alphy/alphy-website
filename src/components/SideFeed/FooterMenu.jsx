@@ -136,7 +136,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
         </Link>
       )}
 
-      <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
+      {/* <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
         {theme ==='light' ? (
           <div onClick={handleDarkMode} className=" flex flex-row">
             <svg
@@ -182,7 +182,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
             <p className=" pt-0.5  font-averta-semibold  ml-2">Dark</p>
           </div>
         )}
-      </div>
+      </div> */}
       <div className="py-2  pl-6 ">
         <button
           className="text-zinc-500 flex flex-row dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"

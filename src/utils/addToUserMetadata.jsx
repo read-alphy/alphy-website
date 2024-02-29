@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from '../../constants'
+import { API_URL } from '../constants'
 import getUserMetadata from './getUserMetadata'
 
 export default async function addToUserMetadata(idToken, additionalMetadata) {

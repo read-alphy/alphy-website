@@ -12,6 +12,7 @@ import SideFeed from '../SideFeed/SideFeed'
 
 
 import Loading from '../../components/Loading'
+import { useRouter } from 'next/router'
 
 import AccountInfo from './AccountInfo'
 
@@ -31,7 +32,7 @@ function Account({
 
 
   let source_id
-
+const router = useRouter()
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
 
   const [isLoading, setIsLoading] = useState(true)
@@ -46,6 +47,12 @@ function Account({
       setWindowSizeChecked(true)
     }
   })
+
+  useEffect(() => {
+    if(currentUser===null){
+      router.push('/plans')
+    }
+  }, [currentUser])
 
   if ((tier !== undefined || tier !== null) && subCalled === false) {
     setSubCalled(true)

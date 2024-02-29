@@ -8,7 +8,7 @@ import ApplePodcast from '../../../public/img/apple_podcasts.png'
 import Spaces from '../../../public/img/spaces_square.png'
 
 import axios from 'axios'
-import { API_URL } from '../../../constants'
+import { API_URL } from '../../constants'
 
 import ChromeIcon from '../../../public/img/chrome_icon.png'
 import { Button } from '@material-tailwind/react'
@@ -306,7 +306,7 @@ useEffect (() => {
           </div>
           {clientSide&& 
           <video
-            className="lg:max-w-[650px] 2xl:max-w-[700px] 3xl:max-w-[800px] border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg"
+            className="  border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg"
             autoPlay
             loop
             muted

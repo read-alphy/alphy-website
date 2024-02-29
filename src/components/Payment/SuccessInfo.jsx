@@ -21,9 +21,9 @@ export default function Success({currentUser}) {
             🎉 Success!{' '}
           </p>
           <br></br> <br></br>
-          <p className="text-lg md:text-xl font-averta-semibold">
+            {/*   <p className="text-lg md:text-xl font-averta-semibold">
             You have now subscribed to Alphy!
-          </p>
+          </p> */}
           <br></br> <br></br>
           <p className="text-lg md:text-xl font-averta-semibold">
             You'll be redirected to the main page shortly.

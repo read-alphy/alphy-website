@@ -12,7 +12,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
 import LinkIcon from '@mui/icons-material/Link'
-import { API_URL } from '../../../constants'
+import { API_URL } from '../../constants'
 
 export default function HubUserPage({
   currentUser,

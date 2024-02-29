@@ -7,7 +7,7 @@ import SkeletonItem from '../FeedTabs/SkeletonItem'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import { Button, Spinner } from '@material-tailwind/react'
-import { API_URL } from '../../../constants'
+import { API_URL } from '../../constants'
 
 function HubSourceFeed(props) {
   const [data, setData] = useState([])

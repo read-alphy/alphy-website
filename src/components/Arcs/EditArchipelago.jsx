@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
 
-import { API_URL } from '../../../constants'
+import { API_URL } from '../../constants'
 
 export default function EditArchipelago({
   archipelagoInfo,

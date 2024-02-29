@@ -7,7 +7,7 @@ import CheckOutForm from './CheckOutForm'
 import Loading from '../Loading'
 
 /* import StripeBanner from '../../img/stripe_banner.svg' */
-import { API_URL, STRIPE_PK } from '../../../constants'
+import { API_URL, STRIPE_PK } from '../../constants'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -36,10 +36,11 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret,current
       called === false
     ) {
       fetchData()
+      fetchData2()
       setCalled(true)
     }
   })
-
+ 
   const fetchData = async () => {
     await currentUser.getIdToken().then(idToken => {
       axios
@@ -56,7 +57,7 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret,current
           sessionStorage.setItem('subValue', subValue)
           const clientSecret =
             r.data.latest_invoice.payment_intent.client_secret
-          console.log(clientSecret)
+        
           setClientSecret(clientSecret)
           setCalled(true)
         })
@@ -64,7 +65,33 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret,current
           console.log(error)
         })
     })
+  } 
+
+  
+
+  const fetchData2 = async () => {
+    await currentUser.getIdToken().then(idToken => {
+      axios
+        .post(
+          `${API_URL}/payments/v2/subscription`,
+          {},
+          {
+            headers: {
+              'id-token': idToken,
+            },
+          }
+        )
+        .then(r => {
+          console.log(r.data)
+          /* window.location.href = r.data.url */
+        })
+         .catch(error => {
+          console.log(error)
+        })
+    })
   }
+
+
 
   let appearance
 
@@ -84,6 +111,7 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret,current
 
   return (
     <div className="h-[110vh] dark:bg-darkMode bg-white">
+      <button onClick={() => fetchData2()}className="bg-blue-400 px-2 rounded-lg py-4">CREATE SUBSCRIPTION</button>
       <div className="mx-auto container items-center pt-10 max-h-[95vh] px-5">
         {/* <button onClick={fetchData}>Create</button> */}
 

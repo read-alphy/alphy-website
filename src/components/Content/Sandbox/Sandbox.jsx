@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
-import { API_HOST } from '../../../../constants'
+import { API_HOST } from '../../../constants'
 
 export default function Sandbox({ data, askAlphyForSandbox, askText, tier, currentUser, getSandboxHistory}) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
