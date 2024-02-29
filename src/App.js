@@ -265,6 +265,10 @@ function App() {
             r.data.current_tier ? r.data.current_tier : 'free'
           )
         }
+        else {
+          setTier('free')
+          localStorage.setItem('tier', 'free')
+        }
 
         setCustomerID(r.data.customer_id)
         setCredit(
