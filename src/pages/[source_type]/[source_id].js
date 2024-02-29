@@ -1,6 +1,150 @@
 import Source from '../../components/Content/Source'
-import { useRouter } from 'next/router'
+
 import Loading from '../../components/Loading'
+import { API_URL } from '../../constants'
+import axios from 'axios'
+
+export async function getServerSideProps(context) {
+    
+    
+  
+    const {source_id,source_type} = context.params
+
+
+
+
+    const fetchData = async (url, constantFetch) => {
+    
+let data = {}
+        try {
+    
+          await axios
+            .get(url)
+            .then(response => {
+              data = response.data
+            })
+            .catch(error => {
+              console.log('error1', error, constantFetch)
+              if (constantFetch === false && error.code !== 'ERR_NETWORK') {
+                return error
+              }
+            })
+        } catch (error) {
+          if (error.response?.status === 404) {
+            /* setIsLoading(false) */
+            console.log('error2', error)
+            
+          }
+          console.error(`Error fetching data: ${error}`)
+        } finally {
+          /* setIsLoading(false) */
+        }
+
+        return data
+      }
+    
+
+
+      const fetchDataUpload = async (url, constantFetch) => {
+        setAuthorizationError(false)
+        localStorage.setItem('isVisibleUpload', false)
+    
+        const idToken =
+          localStorage.getItem('idToken').length > 0
+            ? localStorage.getItem('idToken')
+            : '123'
+    
+        try {
+          if (constantFetch === false) {
+            /* setIsLoading(true) */
+          }
+    
+          const response = await axios
+            .get(url, {
+              headers: {
+                'id-token': idToken,
+              },
+            })
+            .then(response => {
+              /* if (response.data !== null && response.data !== undefined) {
+                if (
+                  response.data.lang !== undefined &&
+                  response.data.lang !== null
+                ) {
+                  setLanguage(response.data.lang)
+                }
+                setData(response.data)
+                setIsVisible(response.data.is_visible)
+                setIsPublic(response.data.is_visible)
+                localStorage.setItem('isVisibleUpload', response.data.is_visible)
+                setContentName(response.data.title)
+              } */
+              return response
+            })
+            .catch(error => {
+              console.error('Error getting upload data', error)
+              if (error.response.data.detail === 'Source is inaccessible') {
+                setAuthorizationError(true)
+              }
+            })
+        } catch (error) {
+          if (error.response?.status === 404) {
+            /* setIsLoading(false) */
+            console.log('error3', error)
+            /* navigate('/404'); */
+          } else {
+            return error
+          }
+        } finally {
+          /* setIsLoading(false) */
+        }
+    }
+    
+
+
+
+
+    
+    const url = `${API_URL}/sources/${source_type}/${source_id}`
+    
+  
+    // Fetch data using source_id or any other relevant data
+    let data = {}
+    let error = null
+    
+    try {
+        let response
+        if(source_type =='up'){
+            response = await fetchDataUpload(url, false)
+        }
+      else{
+        response = await fetchData(url, false)
+      }
+
+      data = response
+
+    } catch (err) {
+      console.error(err)
+      error = err.message
+    }
+  
+    // Pass the fetched data as props to the page component
+    return {
+      props: {
+        sourceData: data, // Rename 'sourceData' as needed
+        source_id: source_id,
+        source_type: source_type,
+        error
+      },
+    }
+  
+
+
+
+}
+
+
+
 
 
 export default function SourceMaterial({
@@ -14,22 +158,14 @@ export default function SourceMaterial({
     setSandboxHistory,
     getSandboxHistory,
     loggedIn,
-    setLoggedIn
+    setLoggedIn,
+    error,
+    sourceData,
+    source_id,
+    source_type
 }){
-    const router = useRouter()
 
-  
-    const {source_id,source_type} = router.query;
-    
 
-  
-
-    /*  if (router.asPath.split('/')[2].split('&q=')[0] !== undefined) {
-       {source_id} = router.asPath.split('/')[2].split('&q=')[0]
-     } else {
-       source_id = router.asPath.split('/')[2]
-       
-     } */
 return(
     <div>
         
@@ -49,6 +185,8 @@ return(
     loggedIn={loggedIn}
     setLoggedIn={setLoggedIn}
     getSandboxHistory = {getSandboxHistory}
+    data={sourceData}
+
     />
 }
 </div>

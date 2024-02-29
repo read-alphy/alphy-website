@@ -9,13 +9,11 @@ import axios from 'axios'
 import Loading from '../Loading'
 
 
-import { API_URL } from '../../constants'
+
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import Content from './Content'
 
-const Content = dynamic(() => import('./Content'), {
-  ssr: false,
-})
 
 
 export default function SourcePage({
@@ -31,14 +29,15 @@ export default function SourcePage({
   setSandboxHistory,
   getSandboxHistory,
   loggedIn,
-  setLoggedIn
+  setLoggedIn,
+  data
 }) {
  
 
   
 
   const [isBookmarked, setIsBookmarked] = useState(false)
-  const [data, setData] = useState([])
+  
   const [isLoading, setIsLoading] = useState(false)
   const [actionsHub, setActionsHub] = useState(false)
   const [bookmarkChecked, setBookmarkChecked] = useState(false)
@@ -70,47 +69,6 @@ export default function SourcePage({
   } */
 
   
-
-  const fetchData = async (url, constantFetch) => {
-    
-
-    try {
-      if (!constantFetch) {
-        setIsLoading(true)
-      }
-
-      const response = await axios
-        .get(url)
-        .then(response => {
-          if (response.data !== null && response.data !== undefined) {
-            if (
-              response.data.lang !== undefined &&
-              response.data.lang !== null
-            ) {
-              setLanguage(response.data.lang)
-            }
-            setData(response.data)
-            setContentName(response.data.title)
-          }
-        })
-        .catch(error => {
-          console.log('error1', error, constantFetch)
-          if (constantFetch === false && error.code !== 'ERR_NETWORK') {
-            navigate('/404')
-          }
-        })
-    } catch (error) {
-      if (error.response?.status === 404) {
-        setIsLoading(false)
-        console.log('error2', error)
-        navigate('/404')
-      }
-      console.error(`Error fetching data: ${error}`)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   const checkBookmark = async () => {
     try {
       await currentUser.getIdToken().then(idToken => {
@@ -137,63 +95,9 @@ export default function SourcePage({
     }
   }
 
-  const fetchDataUpload = async (url, constantFetch) => {
-    setAuthorizationError(false)
-    localStorage.setItem('isVisibleUpload', false)
-
-    const idToken =
-      localStorage.getItem('idToken').length > 0
-        ? localStorage.getItem('idToken')
-        : '123'
-
-    try {
-      if (constantFetch === false) {
-        setIsLoading(true)
-      }
-
-      const response = await axios
-        .get(url, {
-          headers: {
-            'id-token': idToken,
-          },
-        })
-        .then(response => {
-          if (response.data !== null && response.data !== undefined) {
-            if (
-              response.data.lang !== undefined &&
-              response.data.lang !== null
-            ) {
-              setLanguage(response.data.lang)
-            }
-            setData(response.data)
-            setIsVisible(response.data.is_visible)
-            setIsPublic(response.data.is_visible)
-            localStorage.setItem('isVisibleUpload', response.data.is_visible)
-            setContentName(response.data.title)
-          }
-        })
-        .catch(error => {
-          console.error('Error getting upload data', error)
-          if (error.response.data.detail === 'Source is inaccessible') {
-            setAuthorizationError(true)
-          }
-        })
-    } catch (error) {
-      if (error.response?.status === 404) {
-        setIsLoading(false)
-        console.log('error3', error)
-        /* navigate('/404'); */
-      } else {
-        navigate('/404')
-      }
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   
 
-  const url = `${API_URL}/sources/${source_type}/${source_id}`
+  
   /* 	const url_bookmark= `${API_URL}/sources/${source_type}/${source_id}/bookmark`
    */
 
@@ -203,7 +107,7 @@ export default function SourcePage({
       
       return}
 
-    if (
+    /* if (
       (called === false && data.complete !== true) ||
       window.location.href !== previousUrl
     ) {
@@ -225,7 +129,7 @@ export default function SourcePage({
         fetchData(url, false)
         sessionStorage.setItem('previousUrl', window.location.href)
       }
-    }
+    } */
 
     if (currentUser !== null && bookmarkChecked === false) {
       setTimeout(() => {
@@ -306,7 +210,7 @@ export default function SourcePage({
 
   return (
     <div className="article bg-white dark:bg-darkMode dark:text-zinc-300">
-     {/*  <Head>
+      <Head>
  <meta property="og:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />
   <meta property="og:description" content="Description of your content" />
   <meta property="og:image" content="URL to your image" />
@@ -321,7 +225,7 @@ export default function SourcePage({
   <meta name="twitter:image" content="URL to your image" />
   <meta name="twitter:creator" content="@authorhandle" />
   <title>{data.title!==undefined ? data.title : "Alphy - Turn audio to text, summarize, and generate content with AI"}</title>
-  </Head> */}
+  </Head>
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
           collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
