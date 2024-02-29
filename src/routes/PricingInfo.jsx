@@ -13,6 +13,8 @@ import ReactLoading from 'react-loading'
 import FreeCard from '../components/PricingCards/FreeCard'
 import BasicCard from '../components/PricingCards/BasicCard'
 import PremiumCard from '../components/PricingCards/PremiumCard'
+import Switch, { switchClasses } from '@mui/joy/Switch'
+
 
 export default function Pricing({ tier }) {
   const { currentUser } = useAuth()
@@ -22,6 +24,7 @@ export default function Pricing({ tier }) {
   const [canceledAtPeriodEnd, setCanceledAtPeriodEnd] = useState(false)
   const [openPopover, setOpenPopover] = useState(false)
   const [openPopover1, setOpenPopover1] = useState(false)
+  const [isYearly, setIsYearly] = useState(true)
 
   //Popover
   const triggers = {
@@ -69,23 +72,62 @@ export default function Pricing({ tier }) {
   }, [currentUser])
 
   return (
-    <div className="dark:bg-darkMode  lg:mt-10 md:pl-10 lg:pl-20 xl:pl-20 pb-10">
+    <div className="dark:bg-darkMode  lg:mt-10 md:pl-10 lg:pl-20 xl:pl-20 2xl:pl-0 pb-10">
       {isLoaded ? (
         <div className="dark:bg-darkMode">
           <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
             <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-xl md:text-2xl lg:text-3xl font-averta-semibold">
               Choose the best plan for you
             </p>
-            <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300  md:text-lg mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
+            <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300  md:text-lg mt-6   mb-6 max-w-[600px] items-center justify-center mx-auto">
               Upgrade to have extra transcription credits, submit from multiple
               platforms, upload audio files, and generate limitless content with AI.
             </p>
+            
+            <div className="flex flex-row mx-auto w-fit ">
+<div className="flex gap-6 flex-row w-fit justify-center my-6  px-4 py-2 rounded-xl xl:pl-20">
+  
+<p className={`text-lg font-bold ${isYearly ? "text-slate-700 dark:text-white" : " text-indigo-400"}`} >Monthly</p>
+        <Switch
+      checked={isYearly}
+      onChange={() => setIsYearly(!isYearly)}
+      sx={(theme) => ({
+        '--Switch-thumbShadow': '0 3px 7px 0 rgba(0 0 0 / 0.12)',
+        '--Switch-thumbBackground': "#818cf8",
+        '--Switch-thumbSize': '27px',
+        '--Switch-trackWidth': '70px',
+        '--Switch-trackHeight': '30px',
+        '--Switch-trackBackground': '#334155',
+        [`& .${switchClasses.thumb}`]: {
+          transition: 'width 0.2s, left 0.2s',
 
-            {/* <div className="items-center flex justify-center"><label className="relative inline-flex items-center ">
-                            <input type="checkbox" value="" className="sr-only peer" onClick={handleDarkMode}/>
-                            <div className="w-11 cursor-pointer h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            <span className="ml-3 text-sm font-medium pointer-events-none text-gray-900 dark:text-gray-300">{isDarkMode=="dark" ? "Toggle Light Mode" : "Toggle Dark Mode"}</span>
-                            </label> </div> */}
+        },
+        '&:hover': {
+          
+          '--Switch-trackBackground': '#334155',
+        },
+        '&:active': {
+          '--Switch-thumbWidth': '32px',
+        },
+        [`&.${switchClasses.checked}`]: {
+          '--Switch-thumbBackground': '#818cf8',
+          '--Switch-trackBackground': '#334155',
+          '&:hover': {
+            '--Switch-trackBackground': '#334155', 
+          },
+        },
+      })}
+    />
+    <p className={`text-lg font-bold ${isYearly===false ? "text-slate-700 dark:text-white" : "text-indigo-400"}`} >
+    Yearly (Save 40%)</p>
+      
+
+        
+
+  
+  </div>
+  </div>
+          
 
             <div className="flex gap-10 mx-auto items-center justify-center flex-col xl:flex-row max-w-[1200px]">
               <FreeCard
@@ -114,6 +156,7 @@ export default function Pricing({ tier }) {
                 setOpenPopover={setOpenPopover}
                 canceledAtPeriodEnd={canceledAtPeriodEnd}
                 setCanceledAtPeriodEnd={setCanceledAtPeriodEnd}
+                isYearly={isYearly}
               />
             </div>
           </div>

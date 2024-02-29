@@ -19,18 +19,28 @@ import { Button, Spinner } from '@material-tailwind/react'
 import Dialog from '@mui/material/Dialog'
 
 import { API_URL } from '../constants'
-import { useLocation } from 'react-router-dom'
+import Switch, { switchClasses } from '@mui/joy/Switch';
 
 export default function AccountInfo({
   credit,
   tier,
   currentUser,
   canceledAtPeriodEnd,
+  
 }) {
-  const location = useLocation()
-
+  
+  const [isYearly, setIsYearly] = useState(true)
   const [quantity, setQuantity] = useState(1)
   const [creditPurchaseLoading, setCreditPurchaseLoading] = useState(false)
+  const [subscriptionLinkLoading, setSubscriptionLinkLoading] = useState(false)
+  
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false)
+
+  const [called, setCalled] = useState(false)
+
+  const [openPopover, setOpenPopover] = useState(false)
+  const [openPopover1, setOpenPopover1] = useState(false)
 
   const handleQuantityChange = event => {
     const value = event.target.value
@@ -71,13 +81,6 @@ export default function AccountInfo({
 
   const windowSize = useWindowSize()
 
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false)
-
-  const [called, setCalled] = useState(false)
-
-  const [openPopover, setOpenPopover] = useState(false)
-  const [openPopover1, setOpenPopover1] = useState(false)
 
   //Popover
   const triggers = {
@@ -137,6 +140,63 @@ export default function AccountInfo({
       setIsLoaded(true)
     }
   }, [currentUser, called])
+
+  
+  const getSubscriptionLink = async () => {
+    setSubscriptionLinkLoading(true)
+    await currentUser.getIdToken().then(idToken => {
+      axios
+        .post(
+          `${API_URL}/payments/v2/subscription?subscription_period=${isYearly ? 'yearly' : 'monthly'}`,
+          {},
+          {
+            headers: {
+              'id-token': idToken,
+            },
+          }
+        )
+        .then(r => {
+          setSubscriptionLinkLoading(false)
+          window.open(r.data.url, '_blank');
+        
+        
+
+        })
+         .catch(error => {
+          setSubscriptionLinkLoading(false)
+          console.log(error)
+        })
+    })
+  }
+
+  
+  
+  const getCreditPurchaseLink= async () => {
+    setCreditPurchaseLoading(true)
+    await currentUser.getIdToken().then(idToken => {
+      axios
+        .post(
+          `${API_URL}/payments/v2/credit?quantity=${quantity}`,
+          {},
+          {
+            headers: {
+              'id-token': idToken,
+            },
+          }
+        )
+        .then(r => {
+          setCreditPurchaseLoading(false)
+          window.open(r.data.url, '_blank')
+          setCreditPurchaseDialog(false)
+        })
+         .catch(error => {
+          setCreditPurchaseLoading(false)
+          console.log(error)
+        })
+    })
+  }
+
+
 
   return (
     <div className="dark:bg-darkMode pb-20 md:pl-10  3xl:pl-40">
@@ -221,14 +281,14 @@ export default function AccountInfo({
                 Manage Subscription{' '}
               </p>
               {tier !== 'premium' && (
-                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
+                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 max-w-[600px] items-center justify-center mx-auto">
                   Upgrade to have extra transcription credits, submit from
-                  multiple platforms, upload audio files, and access most
-                  capable AI models.
+                  multiple platforms, upload audio files, and generate content with the most capable AI models.
                 </p>
               )}
 
-              {tier !== 'free' ? (
+
+              {tier=== 'premium' ? (
                 <a
                   className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-averta-semibold mb-4"
                   target="_blank"
@@ -319,15 +379,14 @@ export default function AccountInfo({
               </p>
 
               {tier !== 'premium' && (
-                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
+                <p className="text-center mb-10 text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 max-w-[600px] items-center justify-center mx-auto">
                   Upgrade to have extra transcription credits, submit from
-                  multiple platforms, upload audio files, and access most
-                  capable AI models.
+                  multiple platforms, upload audio files, and generate content with the most capable AI models.   
                 </p>
               )}
               {currentUser ? (
                 <div className="items-center flex flex-col justify-center">
-                  {tier !== 'free' ? (
+                  {tier === 'premium' ? (
                     <a
                       className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4"
                       target="_blank"
@@ -344,6 +403,52 @@ export default function AccountInfo({
             </div>
           )}
 
+<div className="flex flex-row  w-full  max-w-[1200px]">
+<div className=" flex gap-6 flex-row w-fit mx-auto justify-center my-6  px-4 py-2 rounded-xl xl:pl-20">
+  
+<p className={`text-lg font-bold ${isYearly ? "text-slate-700 dark:text-white" : " text-indigo-400"}`} >Monthly</p>
+        <Switch
+      checked={isYearly}
+      onChange={() => setIsYearly(!isYearly)}
+      sx={(theme) => ({
+        '--Switch-thumbShadow': '0 3px 7px 0 rgba(0 0 0 / 0.12)',
+        '--Switch-thumbBackground': "#818cf8",
+        '--Switch-thumbSize': '27px',
+        '--Switch-trackWidth': '70px',
+        '--Switch-trackHeight': '30px',
+        '--Switch-trackBackground': '#334155',
+        [`& .${switchClasses.thumb}`]: {
+          transition: 'width 0.2s, left 0.2s',
+
+        },
+        '&:hover': {
+          
+          '--Switch-trackBackground': '#334155',
+        },
+        '&:active': {
+          '--Switch-thumbWidth': '32px',
+        },
+        [`&.${switchClasses.checked}`]: {
+          '--Switch-thumbBackground': '#818cf8',
+          '--Switch-trackBackground': '#334155',
+          '&:hover': {
+            '--Switch-trackBackground': '#334155', 
+          },
+        },
+      })}
+    />
+    <p className={`text-lg font-bold ${isYearly===false ? "text-slate-700 dark:text-white" : "text-indigo-400"}`} >
+    Yearly (Save 40%)</p>
+      
+
+        
+
+  
+  </div>
+
+        </div>
+
+       
           <div className="flex  mt-6 px-4 gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8  mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">
             <FreeCard
               currentUser={currentUser}
@@ -352,6 +457,7 @@ export default function AccountInfo({
               openPopover1={openPopover1}
               setOpenPopover1={setOpenPopover1}
               canceledAtPeriodEnd={canceledAtPeriodEnd}
+              isYearly={isYearly}   
             />
             {/*   <BasicCard
               currentUser={currentUser}
@@ -368,6 +474,9 @@ export default function AccountInfo({
               openPopover={openPopover}
               setOpenPopover={setOpenPopover}
               canceledAtPeriodEnd={canceledAtPeriodEnd}
+              isYearly={isYearly}
+              getSubscriptionLink= {getSubscriptionLink}
+              subscriptionLinkLoading={subscriptionLinkLoading}
             />
           </div>
         </div>
@@ -434,7 +543,7 @@ export default function AccountInfo({
                 'pointer-events-none opacity-60'
               }`}
               size="md"
-              onClick={buyCredit}
+              onClick={getCreditPurchaseLink}
             >
               {creditPurchaseLoading ? (
                 <Spinner
@@ -448,7 +557,7 @@ export default function AccountInfo({
               )}
             </Button>
             <p className="items-center margin-auto flex mt-4 font-averta-regular">
-              You will be charged automatically.
+              You will be redirected to the payment page.
             </p>
           </div>
         </div>

@@ -249,13 +249,24 @@ function App() {
 
       .then(r => {
         /* console.log(r.data) */
-
+        
+      /*   if (r.data.curr  ent_tier=== null) {
+        setTier('basic')
+        localStorage.setItem(
+          'tier',
+          'basic'
+        )
+        } */
         if (r.data.current_tier !== null) {
           setTier(r.data.current_tier)
           localStorage.setItem(
             'tier',
             r.data.current_tier ? r.data.current_tier : 'free'
           )
+        }
+        else {
+          setTier('free')
+          localStorage.setItem('tier', 'free')
         }
 
         setCustomerID(r.data.customer_id)
@@ -853,7 +864,7 @@ function App() {
                   />
                 }
               />
-              <Route
+              {/* <Route
                 path="/plans/checkout"
                 element={
                   <CheckOutPage
@@ -867,7 +878,7 @@ function App() {
                     setLoggedIn={setLoggedIn}
                   />
                 }
-              ></Route>
+              ></Route> */}
               <Route
                 path="/plans/checkout/success"
                 element={
