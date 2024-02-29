@@ -306,7 +306,7 @@ export default function SourcePage({
 
   return (
     <div className="article bg-white dark:bg-darkMode dark:text-zinc-300">
-      <Head>
+     {/*  <Head>
  <meta property="og:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />
   <meta property="og:description" content="Description of your content" />
   <meta property="og:image" content="URL to your image" />
@@ -321,7 +321,7 @@ export default function SourcePage({
   <meta name="twitter:image" content="URL to your image" />
   <meta name="twitter:creator" content="@authorhandle" />
   <title>{data.title!==undefined ? data.title : "Alphy - Turn audio to text, summarize, and generate content with AI"}</title>
-  </Head>
+  </Head> */}
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
           collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
