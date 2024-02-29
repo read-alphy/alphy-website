@@ -1,4 +1,4 @@
-import CheckoutPage from "@/components/Payment/CheckoutPage";
+import CheckoutPage from "@/components/Payment/CheckOutPage";
 
 export default function Checkout({
   collapsed,
