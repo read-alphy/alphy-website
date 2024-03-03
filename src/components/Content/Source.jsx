@@ -13,6 +13,7 @@ import Loading from '../Loading'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Content from './Content'
+import { API_URL } from '../../constants'
 
 
 

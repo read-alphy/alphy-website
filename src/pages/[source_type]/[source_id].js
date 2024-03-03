@@ -24,15 +24,16 @@ let data = {}
               data = response.data
             })
             .catch(error => {
-              console.log('error1', error, constantFetch)
+
+              
               if (constantFetch === false && error.code !== 'ERR_NETWORK') {
-                return error
-              }
+                return { error: true, statusCode: error.response?.statusCode }; 
+                            }
             })
         } catch (error) {
           if (error.response?.status === 404) {
             /* setIsLoading(false) */
-            console.log('error2', error)
+            
             
           }
           console.error(`Error fetching data: ${error}`)
@@ -47,12 +48,7 @@ let data = {}
 
       const fetchDataUpload = async (url, constantFetch) => {
         setAuthorizationError(false)
-        localStorage.setItem('isVisibleUpload', false)
-    
-        const idToken =
-          localStorage.getItem('idToken').length > 0
-            ? localStorage.getItem('idToken')
-            : '123'
+        let idToken = "123"
     
         try {
           if (constantFetch === false) {
@@ -119,13 +115,24 @@ let data = {}
         }
       else{
         response = await fetchData(url, false)
+      
+        
       }
 
       data = response
+      
 
     } catch (err) {
-      console.error(err)
-      error = err.message
+      
+      return {
+        redirect: {
+          destination: '/ 404', // Assuming you have a custom error page
+          permanent: false,
+        },
+      };
+
+
+    
     }
   
     // Pass the fetched data as props to the page component
@@ -159,7 +166,7 @@ export default function SourceMaterial({
     getSandboxHistory,
     loggedIn,
     setLoggedIn,
-    error,
+    redirect,
     sourceData,
     source_id,
     source_type
