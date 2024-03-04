@@ -4,40 +4,17 @@
   import { API_URL } from '../../constants'
   import axios from 'axios'
 
-
-  const fetchData = async (url) => {
-      
-    let data = {}
-            try {
-        
-              await axios
-                .get(url)
-                .then(response => {
-                  data = response.data
-                  
-                  return response.data
-                })
-                // Example error handling response
-                .catch(error => {
-                  return { error: true, statusCode: error.response?.status, message: error.message };
-                });
-    
-            } catch (error) {
-              if (error.response?.status === 404) {
-                /* setIsLoading(false) */
-                
-                
-              }
-              console.error(`Error fetching data: ${error}`)
-            } finally {
-              /* setIsLoading(false) */
-            }
-            
-    
-            return data
-          }
-        
-    
+// Define the fetchData function
+async function fetchData(sourceType, sourceId) {
+  const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
+  try {
+    const response = await axios.get(url);
+    return { data: response.data, error: null };
+  } catch (error) {
+    console.error(`Error fetching data: ${error}`);
+    return { data: null, error: error.response ? error.response.data : 'Error fetching data' };
+  }
+}
     
           const fetchDataUpload = async (url, constantFetch) => {
             setAuthorizationError(false)
@@ -89,74 +66,28 @@
             }
         }
 
-        
   export async function getServerSideProps(context) {
-      
-      
-    
-      const {source_id,source_type} = context.params 
-
-
-
-
-      
-      const url = `${API_URL}/sources/${source_type}/${source_id}`
-      
-    
-      // Fetch data using source_id or any other relevant data
-      let data = {}
-      let error = null
-      
-      try {
-          let response
-          if(source_type =='up'){
-              response = await fetchDataUpload(url, false)
-          }
-        else{
-          response = await fetchData(url, false)
-          if (response.error) {
-            console.error(`Fetch error: ${response.message}`);
-            // Redirect to a custom error page or handle the error appropriately
-            return {
-              redirect: {
-                destination: '/404', // Ensure the path is correct
-                permanent: false,
-              },
-            };
-          }
-        
-          
-        }
-
-        data = response
-        
-
-      } catch (err) {
-        
-        return {
-          redirect: {
-            destination: '/404', // Assuming you have a custom error page
-            permanent: false,
-          },
-        };
-
-
-      
-      }
-    
-      // Pass the fetched data as props to the page component
+    const { source_id, source_type } = context.params;
+    const { data, error } = await fetchData(source_type, source_id);
+  
+    if (error || !data) {
+      // Handle the case where there is an error or no data
+      console.error(`Fetch error: ${error}`);
       return {
         props: {
-          sourceData: data, // Rename 'sourceData' as needed
-          source_id: source_id,
-          source_type: source_type,
-          error
+          error: error || 'An unknown error occurred',
         },
-      }
-    
-
-
-
+      };
+    }
+  
+    // If data is valid, return it as props
+    return {
+      props: {
+        sourceData: data,
+        source_id,
+        source_type,
+      },
+    };
   }
 
 
@@ -176,12 +107,22 @@
       loggedIn,
       setLoggedIn,
       redirect,
-      sourceData,
+      data,
       source_id,
       source_type
   }){
 
 console.log(source_id, source_type, sourceData)
+if (error) {
+  
+  return <div>Error loading data: {error}</div>;
+}
+
+if (!sourceData || source_id === undefined || source_type === undefined) {
+  return <Loading />;
+}
+
+
   return(
       <div>
       {
@@ -200,7 +141,7 @@ console.log(source_id, source_type, sourceData)
       loggedIn={loggedIn}
       setLoggedIn={setLoggedIn}
       getSandboxHistory = {getSandboxHistory}
-      data={sourceData}
+      data={data}
 
       />
   }
