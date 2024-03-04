@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic'
 const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,
 })
-
 // Define the fetchData function
 async function fetchData(sourceType, sourceId) {
   if(sourceId === '[object Object]') {
