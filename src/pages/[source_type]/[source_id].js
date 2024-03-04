@@ -23,13 +23,11 @@ let data = {}
             .then(response => {
               data = response.data
             })
-            .catch(error => {
+            // Example error handling response
+.catch(error => {
+  return { error: true, statusCode: error.response?.status, message: error.message };
+});
 
-              
-              if (constantFetch === false && error.code !== 'ERR_NETWORK') {
-                return { error: true, statusCode: error.response?.statusCode }; 
-                            }
-            })
         } catch (error) {
           if (error.response?.status === 404) {
             /* setIsLoading(false) */
@@ -115,6 +113,16 @@ let data = {}
         }
       else{
         response = await fetchData(url, false)
+        if (response.error) {
+          console.error(`Fetch error: ${response.message}`);
+          // Redirect to a custom error page or handle the error appropriately
+          return {
+            redirect: {
+              destination: '/404', // Ensure the path is correct
+              permanent: false,
+            },
+          };
+        }
       
         
       }
@@ -126,7 +134,7 @@ let data = {}
       
       return {
         redirect: {
-          destination: '/ 404', // Assuming you have a custom error page
+          destination: '/404', // Assuming you have a custom error page
           permanent: false,
         },
       };
