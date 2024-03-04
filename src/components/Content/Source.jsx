@@ -18,8 +18,7 @@ import { API_URL } from '../../constants'
 
 
 export default function SourcePage({
-  source_type,
-  source_id,
+
   collapsed,
   setCollapsed,
   tier,
@@ -59,7 +58,10 @@ export default function SourcePage({
   const [called, setCalled] = useState(false)
   const [authorizationError, setAuthorizationError] = useState(false)
   
+const router = useRouter()
 
+  const source_type = router.query.source_type
+  const source_id = router.query.source_id  
   
 
  /*  if (router.asPath.split('/')[2].split('&q=')[0] !== undefined) {
@@ -104,9 +106,7 @@ export default function SourcePage({
 
   useEffect(() => {
     const previousUrl = sessionStorage.getItem('previousUrl')
-    if(source_id==='[source_id]'){
-      
-      return}
+  
 
     /* if (
       (called === false && data.complete !== true) ||
@@ -134,7 +134,7 @@ export default function SourcePage({
 
     if (currentUser !== null && bookmarkChecked === false) {
       setTimeout(() => {
-        checkBookmark()
+        /* checkBookmark() */
       }, 1000)
     }
   }, [data, currentUser, source_id])
@@ -165,9 +165,9 @@ export default function SourcePage({
 
         if (data !== null && summaryComplete === false && called === true) {
           if (source_type === 'up' && summaryComplete === false) {
-            fetchDataUpload(url, true)
+            /* fetchDataUpload(url, true) */
           } else if (source_type !== 'up' && summaryComplete === false) {
-            fetchData(url, true)
+            /* fetchData(url, true) */
           }
         } else {
           return
@@ -187,7 +187,7 @@ export default function SourcePage({
     try {
       axios
         .patch(
-          `${API_URL}/sources/${data.source_type}/${data.source_id}/visibility?visibility=${targetVisibility}`,
+          `${API_URL}/sources/${source_type}/${source_id}/visibility?visibility=${targetVisibility}`,
           null,
           {
             headers: {
@@ -313,6 +313,8 @@ export default function SourcePage({
               isSandbox={isSandbox}
               setIsSandbox={setIsSandbox}
               getSandboxHistory={getSandboxHistory}
+              source_id={source_id}
+              source_type={source_type}
             /> 
             
           )}

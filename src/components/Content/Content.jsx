@@ -34,7 +34,9 @@ export default function Content({
   userArchipelagos,
   isBookmarked,
   setIsBookmarked,
-  getSandboxHistory
+  getSandboxHistory,
+  source_id,
+  source_type,
 }) {
   const { currentUser } = useAuth()
   const router = useRouter()
@@ -231,7 +233,7 @@ export default function Content({
     await currentUser.getIdToken().then(idToken => {
       axios
         .post(
-          `${API_URL}/sources/${data.source_type}/${data.source_id}?lang=${language}`,
+          `${API_URL}/sources/${source_type}/${source_id}?lang=${language}`,
           {
             lang: language,
           },
@@ -258,7 +260,7 @@ export default function Content({
     await currentUser.getIdToken().then(idToken => {
       axios
         .patch(
-          `${API_URL}/sources/${data.source_type}/${data.source_id}/bookmark?bookmark=${changeBookmark}`,
+          `${API_URL}/sources/${source_type}/${source_id}/bookmark?bookmark=${changeBookmark}`,
           {},
           {
             headers: {
@@ -294,7 +296,7 @@ export default function Content({
   }, [basicDataLoaded, data])
 
   useEffect(() => {
-    if (data != undefined && data.source_type === 'up') {
+    if (data != undefined && source_type === 'up') {
       setTimeout(() => {
         setBasicDataLoaded(true)
       }, 2000)
@@ -599,8 +601,8 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
 
   const handleAddToArchipelago = (archipelagoUID, create) => {
     const newSource = {
-      source_id: data.source_id,
-      source_type: data.source_type,
+      source_id: source_id,
+      source_type: source_type,
     }
     if (create === false) {
       axios
@@ -819,7 +821,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
               <p className="text-xl text-zinc-500 dark:text-zinc-200  max-w-screen-md mx-auto p-3 text-center">
                 <span className="font-averta-regular">
                   Alphy is doing its best to process this{' '}
-                  {data.source_type === 'yt' ? 'video' : 'recording'}, it will
+                  {source_type === 'yt' ? 'video' : 'recording'}, it will
                   be ready in a few minutes. We'll send you an email when it's
                   ready!
                   <Image
@@ -843,7 +845,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
               {data !== null && (
                 <p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular  max-w-screen-md mx-auto p-3 text-center">
                   Alphy is currently working hard to translate this{' '}
-                  {data.source_type === 'yt' ? 'video' : 'recording'} to{' '}
+                  {source_type === 'yt' ? 'video' : 'recording'} to{' '}
                   {language_codes[language]}. Please come back in a few minutes!
                   <Image
                     className={'opacity-70 dark:opacity-90 mx-auto '}

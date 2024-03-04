@@ -1,8 +1,13 @@
-  import Source from '../../components/Content/Source'
+  /* import Source from '../../components/Content/Source' */
 
   import Loading from '../../components/Loading'
   import { API_URL } from '../../constants'
   import axios from 'axios'
+import dynamic from 'next/dynamic'
+
+const Source = dynamic(() => import('../../components/Content/Source'), {
+  ssr: false,
+})
 
 // Define the fetchData function
 async function fetchData(sourceType, sourceId) {
@@ -73,8 +78,7 @@ async function fetchData(sourceType, sourceId) {
   export async function getServerSideProps(context) {
     
     const { source_type, source_id } = context.params;
-    console.log(context.params)
-    
+
     if (typeof source_id !== 'string') {
       console.error('source_id is not a string:', source_id);
       // Handle the case or log more details
@@ -87,6 +91,7 @@ async function fetchData(sourceType, sourceId) {
       console.error(`Fetch error: ${error}`);
       return {
         props: {
+          data:null,
           error: error || 'An unknown error occurred',
         },
       };
@@ -98,12 +103,13 @@ async function fetchData(sourceType, sourceId) {
         data: data,
         source_id,
         source_type,
+        error: error
       },
     };
   }
 
 
-
+  
 
 
   export default function SourceMaterial({
@@ -124,7 +130,10 @@ async function fetchData(sourceType, sourceId) {
       source_type
   }){
 
+console.log('source_id', source_id)
+console.log('source_type', source_type)
 
+  
 if (error) {
   
   return <div>Error loading data: {error}</div>;
