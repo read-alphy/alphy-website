@@ -22,11 +22,13 @@ let data = {}
             .get(url)
             .then(response => {
               data = response.data
+              
+              return response.data
             })
             // Example error handling response
-.catch(error => {
-  return { error: true, statusCode: error.response?.status, message: error.message };
-});
+            .catch(error => {
+              return { error: true, statusCode: error.response?.status, message: error.message };
+            });
 
         } catch (error) {
           if (error.response?.status === 404) {
@@ -38,6 +40,7 @@ let data = {}
         } finally {
           /* setIsLoading(false) */
         }
+        
 
         return data
       }
