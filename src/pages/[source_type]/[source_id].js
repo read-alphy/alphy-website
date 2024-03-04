@@ -9,7 +9,7 @@ const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,
 })
 
-export const runtime = 'edge'
+export const runtime = 'experimental-edge'
 
 // Define the fetchData function
 async function fetchData(sourceType, sourceId) {
