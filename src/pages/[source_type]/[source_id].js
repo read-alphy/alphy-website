@@ -183,9 +183,8 @@ export default function SourceMaterial({
 
 return(
     <div>
-        
     {
-        (source_id===undefined|| source_type===undefined) ?  <Loading /> : 
+        (source_id===undefined|| source_type===undefined || sourceData=== null) ?  <Loading /> : 
     <Source
     source_type={source_type}
     source_id={source_id}
