@@ -5,11 +5,13 @@
   import axios from 'axios'
 import dynamic from 'next/dynamic'
 
+export const runtime = 'experimental-edge'
+
 const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,
 })
 
-export const runtime = 'experimental-edge'
+
 
 // Define the fetchData function
 async function fetchData(sourceType, sourceId) {
@@ -19,8 +21,9 @@ async function fetchData(sourceType, sourceId) {
       
       const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
   try {
-    const response = await axios.get(url);
-    return { data: response.data, error: null };
+    const response = await fetch(url);
+    const data = await response.json();
+    return { data: data, error: null };
   } catch (error) {
     console.error(`Error fetching data: ${error}`);
     return { data: null, error: error.response ? error.response.data : 'Error fetching data' };
