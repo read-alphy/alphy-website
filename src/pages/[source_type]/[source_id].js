@@ -4,6 +4,7 @@
   import { API_URL } from '../../constants'
   import axios from 'axios'
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 
 export const runtime = 'experimental-edge'
 
@@ -151,6 +152,23 @@ if (!data || source_id === undefined || source_type === undefined) {
 
   return(
       <div>
+          <Head>
+ <meta property="og:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />
+  <meta property="og:description" content="Description of your content" />
+  <meta property="og:image" content="URL to your image" />
+  <meta property="og:url" content="URL of the page" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Your Site Name" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  
+  <meta name="twitter:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />
+  <meta name="twitter:description" content="Description of your content" />
+  <meta name="twitter:image" content="URL to your image" />
+  <meta name="twitter:creator" content="@authorhandle" />
+  <title>{data.title!==undefined ? data.title : "Alphy - Turn audio to text, summarize, and generate content with AI"}</title>
+  </Head>
+  
       {
           (source_id===undefined|| source_type===undefined || data=== null) ?  <Loading /> : 
       <Source

@@ -9,7 +9,9 @@ import {useRouter} from 'next/router'
 import { Button, Spinner } from '@material-tailwind/react'
 import { API_URL } from '../../constants'
 
+
 function HubSourceFeed(props) {
+  
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -65,7 +67,7 @@ function HubSourceFeed(props) {
       localStorage.setItem('search', '')
     }
   })
-  const limit = window.location.href.includes('/explore') ? 20 : 16
+  const limit = 40
   const searchInputRef = React.useRef(null)
 
   // Inside your HubSourceFeed component

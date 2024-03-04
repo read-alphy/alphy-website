@@ -16,6 +16,7 @@ export default function MyWorksFeedItem({
     model_name = item.summaries.find(item => item.lang === 'en').quality_str
   }
 
+
   return (
     <Link href={`/${item.source_type}/${source_id}`}>
       <div className="flex flex-col xs:max-w-[250px] ">
@@ -34,7 +35,7 @@ export default function MyWorksFeedItem({
             <div
               className="flex w-full  h-0 dark:opacity-80  rounded-md bg-gray-600"
               style={{
-                backgroundImage: `url(${imageUrl})`,
+                backgroundImage: `url(${typeof imageUrl === "object" ? imageUrl.src : imageUrl})`,
                 paddingBottom: '50%',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
