@@ -307,7 +307,7 @@ useEffect (() => {
               <div></div>
             </div>
           </div>
-          {clientSide&& 
+          {/* {clientSide&& 
           <video
             className="  border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg"
             autoPlay
@@ -315,9 +315,9 @@ useEffect (() => {
             muted
             src="/img/litmus_demo.mp4"
           >
-            {/* <source src={LitmusDemo} type="video/mp4" /> */}
+           
           </video>
-          }
+          } */}
         </div>
         <div className="">
           <FlagArea />

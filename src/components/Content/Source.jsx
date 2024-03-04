@@ -8,9 +8,8 @@ import {useRouter} from 'next/router'
 import axios from 'axios'
 import Loading from '../Loading'
 
+import Head from 'next/head'
 
-
-import dynamic from 'next/dynamic'
 
 import Content from './Content'
 import { API_URL } from '../../constants'
@@ -22,7 +21,6 @@ export default function SourcePage({
   collapsed,
   setCollapsed,
   tier,
-  setContentName,
   userArchipelagos,
   currentUser,
   sandboxHistory,
@@ -30,13 +28,17 @@ export default function SourcePage({
   getSandboxHistory,
   loggedIn,
   setLoggedIn,
-  data
+  data,
+  setData,
+  source_type,
+
 }) {
  
 
   
 
   const [isBookmarked, setIsBookmarked] = useState(false)
+  
   
   const [isLoading, setIsLoading] = useState(false)
   const [actionsHub, setActionsHub] = useState(false)
@@ -45,23 +47,25 @@ export default function SourcePage({
   const [isPublic, setIsPublic] = useState(false)
   const [isSandbox, setIsSandbox] = useState(false)
 
-  const [language, setLanguage] = useState(
-    data.summaries !== undefined &&
-      data.summaries.length > 1 &&
-      data.lang !== undefined &&
-      data.summaries[1] !== undefined &&
-      data.summaries[1].complete === true
-      ? data.lang
-      : 'en'
-  )
-
+  const [language, setLanguage] = useState('en')
   const [called, setCalled] = useState(false)
   const [authorizationError, setAuthorizationError] = useState(false)
+
+
+useEffect(() => {
+  if(data.summaries!==undefined && data.summaries.length>1 && data.lang!==undefined && data.summaries[1]!==undefined && data.summaries[1].complete===true){
+    setLanguage(data.lang)
+  }
+}, [data])
+
+
+
   
 const router = useRouter()
 
-  const source_type = router.query.source_type
+  
   const source_id = router.query.source_id  
+  const url = `${API_URL}/sources/up/${source_id}`
   
 
  /*  if (router.asPath.split('/')[2].split('&q=')[0] !== undefined) {
@@ -74,14 +78,12 @@ const router = useRouter()
   
   const checkBookmark = async () => {
     try {
-      await currentUser.getIdToken().then(idToken => {
-        axios
+      await axios
           .get(
-            `${API_URL}/sources/${source_type}/${source_id}/bookmark`,
-
+            `${API_URL}/sources/up/${source_id}/bookmark`,
             {
               headers: {
-                'id-token': idToken,
+                'id-token': currentUser.accessToken,
               },
             }
           )
@@ -91,7 +93,7 @@ const router = useRouter()
               setIsBookmarked(response.data.is_bookmark)
             }
           })
-      })
+     
     } catch (error) {
       console.error('Error checking bookmarks', error)
       setBookmarkChecked(true)
@@ -105,39 +107,80 @@ const router = useRouter()
    */
 
   useEffect(() => {
-    const previousUrl = sessionStorage.getItem('previousUrl')
+    if(source_type==='up'){
+      setAuthorizationError(true)
+    }
   
 
-    /* if (
-      (called === false && data.complete !== true) ||
-      window.location.href !== previousUrl
-    ) {
-      if (
-        source_type === 'up' &&
-        (data.length === 0 || window.location.href !== previousUrl)
-      ) {
+     if 
+      (currentUser && called === false && source_type== 'up') 
+     {
+      
+        source_type === 'up'
+      
         setCalled(true)
 
         fetchDataUpload(url, false)
-        sessionStorage.setItem('previousUrl', window.location.href)
-      }
-      if (
-        source_type !== 'up' &&
-        (data.length === 0 || window.location.href !== previousUrl)
-      ) {
-        setCalled(true)
+       
+      
+    } 
 
-        fetchData(url, false)
-        sessionStorage.setItem('previousUrl', window.location.href)
-      }
-    } */
-
-    if (currentUser !== null && bookmarkChecked === false) {
+    if (currentUser !== null && bookmarkChecked === false && source_type!=='up') {
       setTimeout(() => {
-        /* checkBookmark() */
+         checkBookmark() 
       }, 1000)
     }
   }, [data, currentUser, source_id])
+
+  
+  const fetchDataUpload = async (url,constantFetch) => {
+      
+    console.log('fetching data')
+  
+    try {
+      if (constantFetch === false) {
+         setIsLoading(true) 
+      }
+  
+     await axios.get(url,
+				{
+					headers: {
+						'id-token': currentUser.accessToken	,
+					}
+					}
+				).then(
+				(response) => {
+					
+					if(response.data!==null && response.data!==undefined){
+					setData(response.data);
+          setIsVisible(response.data.is_visible)
+          setIsPublic(response.data.is_public)
+          
+          
+            
+				}
+        setIsLoading(false)
+        setAuthorizationError(false)
+				}
+
+			).catch((error) => {
+        setIsLoading(false)
+				console.log(error)	
+				 /* router.push('/404') */ 
+			});
+
+		} catch (error) {
+			if (error.response?.status === 404) {
+				setIsLoading(false);
+				/* navigate('/404'); */
+			}
+			console.error(`Error fetching data: ${error}`);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+
 
   const handleLanguageChange = event => {
     /* 	if(errorMessage ==true || translationMessage==true)
@@ -163,7 +206,7 @@ const router = useRouter()
           }
         }
 
-        if (data !== null && summaryComplete === false && called === true) {
+        if (data !== null && summaryComplete === false && called === true && currentUser) {
           if (source_type === 'up' && summaryComplete === false) {
              fetchDataUpload(url, true) 
           } else if (source_type !== 'up' && summaryComplete === false) {
@@ -211,7 +254,9 @@ const router = useRouter()
 
   return (
     <div className="article bg-white dark:bg-darkMode dark:text-zinc-300">
-    
+    <Head>
+    <title>{data.title!==undefined ? data.title : "Alphy - Turn audio to text, summarize, and generate content with AI"}</title>
+    </Head>
       <div
         className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
           collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
@@ -275,10 +320,10 @@ const router = useRouter()
                 don't have permission to access it.
               </div>
               <Link
-                href="/myhub"
+                href="/"
                 className="underline mt-6 text-zinc-700 dark:text-zinc-300 max-w-[150px] font-averta-semibold"
               >
-                Back To My Hub
+                Back To Home Page
               </Link>
             </div>
           ) : (

@@ -1,5 +1,8 @@
-import ArcMain from '../../components/Arcs/ArcMain'
-export const runtime = 'experimental-edge'
+import dynamic from 'next/dynamic'
+
+const ArcMain = dynamic(() => import('../../components/Arcs/ArcMain'), {
+  ssr: false,
+})
 
 export default function Arc({
     currentUser,

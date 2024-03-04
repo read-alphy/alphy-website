@@ -319,6 +319,7 @@ export default function ArchipelagoChat({
     },
   }))
 
+  
   const formatAnswer = (answer, answerData) => {
     const cleanedText = answer.replace(/\r?\n|\r/g, ' ')
 
@@ -375,10 +376,12 @@ export default function ArchipelagoChat({
       <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10 px-3 ">
         <div className="col-span-4 sm:col-span-3 flex flex-row">
           {archipelagoImageLink.length > 0 && (
-            <Image
+            <img
               className={`${'hidden'} sm:block w-[200px] sm:mr-4`}
               src={archipelagoImageLink}
               alt = "archipelago image"
+              width={200}
+              height={200}
             />
           )}
           <div className="ml-2">

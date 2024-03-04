@@ -35,48 +35,6 @@ async function fetchData(sourceType, sourceId) {
   }
 }
     
-          const fetchDataUpload = async (url, constantFetch) => {
-            setAuthorizationError(false)
-            let idToken = "123"
-        
-            try {
-              if (constantFetch === false) {
-                /* setIsLoading(true) */
-              }
-        
-              const response = await fetch(url, {headers: { 'id-token': idToken }});
-              const data = await response.json();
-              return { data: data, error: null };
-            }
-                
-                  /* if (response.data !== null && response.data !== undefined) {
-                    if (
-                      response.data.lang !== undefined &&
-                      response.data.lang !== null
-                    ) {
-                      setLanguage(response.data.lang)
-                    }
-                    setData(response.data)
-                    setIsVisible(response.data.is_visible)
-                    setIsPublic(response.data.is_visible)
-                    localStorage.setItem('isVisibleUpload', response.data.is_visible)
-                    setContentName(response.data.title)
-                  } */
-              
-         
-             catch (error) {
-              if (error.response?.status === 404) {
-                /* setIsLoading(false) */
-                console.log('error3', error)
-                /* navigate('/404'); */
-              } else {
-                return error
-              }
-            } finally {
-              /* setIsLoading(false) */
-            }
-        }
-
   export async function getServerSideProps(context) {
     
     const { source_type, source_id } = context.params;
@@ -85,29 +43,29 @@ async function fetchData(sourceType, sourceId) {
       console.error('source_id is not a string:', source_id);
       // Handle the case or log more details
     }
-    
-    const { data, error } = await fetchData(source_type, source_id);
+          const { data, error } = await fetchData(source_type, source_id);
+        
+          if (error || !data) {
+            // Handle the case where there is an error or no data
+            console.error(`Fetch error: ${error}`);
+            return {
+              props: {
+                data:null,
+                error: error || 'An unknown error occurred',
+              },
+            };
+          }
+        
+          // If data is valid, return it as props
+          return {
+            props: {
+              data: data,
+              source_id,
+              source_type,
+              error: error
+            },
+          };
   
-    if (error || !data) {
-      // Handle the case where there is an error or no data
-      console.error(`Fetch error: ${error}`);
-      return {
-        props: {
-          data:null,
-          error: error || 'An unknown error occurred',
-        },
-      };
-    }
-  
-    // If data is valid, return it as props
-    return {
-      props: {
-        data: data,
-        source_id,
-        source_type,
-        error: error
-      },
-    };
   }
 
 

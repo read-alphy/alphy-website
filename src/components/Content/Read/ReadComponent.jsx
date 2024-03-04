@@ -79,6 +79,7 @@ export default function ReadComponent({
   }, [])
 
 
+  
 
 
   function convertTimeToSeconds(time) {
@@ -118,7 +119,8 @@ export default function ReadComponent({
   
   return (
     <div id="content-area overscroll-none">
-      {transcript.length > 0 &&
+  {isClient && 
+      (transcript.length > 0 &&
       ((summary !== undefined &&
         summary.complete !== undefined &&
         language === summary.lang) ||
@@ -410,6 +412,9 @@ export default function ReadComponent({
               </div>
             </div>
           )}
+         
+         
+         
           {transcript.length > 0 && (
             <div
               className={`${
@@ -1109,7 +1114,9 @@ export default function ReadComponent({
             </p>
           )}
         </div>
-      )}
+      )
+      )
+        }
     </div>
   )
 }

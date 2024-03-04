@@ -8,6 +8,7 @@ import HistoryIcon from '@mui/icons-material/History' */
 import { useState } from 'react'
 import {useRouter} from 'next/router'
 import ReactMarkdown from 'react-markdown'
+import Image from 'next/image'
 
 
 export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
@@ -16,6 +17,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
   const [visibleGroups, setVisibleGroups] = useState({})
   const [copiedText, setCopiedText] = useState(false)
   const [copiedIndex, setCopiedIndex] = useState(null)
+  
 
   const seeInSource = item => {
     sessionStorage.setItem('fillPrompt', JSON.stringify(item))
@@ -113,10 +115,12 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
             >
               <div className="group">
                 <div className="flex flex-row gap-6 items-center relative w-full  ">
-                  <img
+                  <Image
                     src={imageURLSetter(item.source_type, item.source_id)}
                     width={100}
                     className="rounded-lg"
+                    height={100}
+                    alt="source image"
                   />
                   <p className="text-xl text-zinc-700 dark:text-zinc-300 font-averta-semibold select-none w-full  group-hover:brightness-[125%] transition  duration-300 ease-in-out ">
                     {item.title}

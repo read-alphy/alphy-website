@@ -132,13 +132,14 @@ export default function ArcMain({
 
     if ((isArc || isEditArc) && data.length === 0 && called !== true) {
       setIsLoading(true)
-      let idToken ="123"
+      let idToken
       if(currentUser){
         idToken = currentUser.accessToken
       }
+    
 
       source_id = isArc
-        ? router.asPath.split('/')[2]
+        ? router.query.arc_id
         : router.asPath.split('/')[3]
 
       try {
@@ -146,10 +147,11 @@ export default function ArcMain({
           .get(`${API_URL}/playlists/${source_id}?nof_questions=30`, {
             headers: {
               accept: 'application/json',
-              'id-token': idToken,
+              'id-token': idToken!==null ? idToken : null,
             },
           })
           .then(response => {
+            
             setAuthorizationError(false)
             setCalled(true)
             setData(response.data)
@@ -339,6 +341,7 @@ export default function ArcMain({
               tier={tier}
               sandboxHistory={sandboxHistory}
               setSandboxHistory={setSandboxHistory}
+              isArc={isArc}
             />
           </div>
         }
@@ -363,6 +366,7 @@ export default function ArcMain({
                 tier={tier}
                 sandboxHistory={sandboxHistory}
                 setSandboxHistory={setSandboxHistory}
+                isArc={isArc}
               />
             </div>
           </div>

@@ -37,6 +37,7 @@ export default function SideFeed({
   tier,
   sandboxHistory,
   currentUser,
+  isArc
   
 }) {
   const [called, setCalled] = useState(false)
@@ -53,6 +54,9 @@ const [mobileScreen, setMobileScreen] = useState(false)
 
   
   useEffect(() => {
+    if(isArc){
+      setSideFeedWidth(300)
+    }
     setTimeout(() => {
       if(window.innerWidth < 640){
         setMobileScreen(true)
