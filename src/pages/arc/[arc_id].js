@@ -1,5 +1,5 @@
 import ArcMain from '../../components/Arcs/ArcMain'
-export const runtime = 'edge'
+export const runtime = 'experimental-edge'
 
 export default function Arc({
     currentUser,
