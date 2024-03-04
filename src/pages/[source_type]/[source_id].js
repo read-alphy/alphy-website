@@ -83,7 +83,7 @@ async function fetchData(sourceType, sourceId) {
     // If data is valid, return it as props
     return {
       props: {
-        sourceData: data,
+        data: data,
         source_id,
         source_type,
       },
@@ -106,19 +106,19 @@ async function fetchData(sourceType, sourceId) {
       getSandboxHistory,
       loggedIn,
       setLoggedIn,
-      redirect,
+      error,
       data,
       source_id,
       source_type
   }){
 
-console.log(source_id, source_type, sourceData)
+console.log(source_id, source_type, data)
 if (error) {
   
   return <div>Error loading data: {error}</div>;
 }
 
-if (!sourceData || source_id === undefined || source_type === undefined) {
+if (!data || source_id === undefined || source_type === undefined) {
   return <Loading />;
 }
 
@@ -126,7 +126,7 @@ if (!sourceData || source_id === undefined || source_type === undefined) {
   return(
       <div>
       {
-          (source_id===undefined|| source_type===undefined || sourceData=== null) ?  <Loading /> : 
+          (source_id===undefined|| source_type===undefined || data=== null) ?  <Loading /> : 
       <Source
       source_type={source_type}
       source_id={source_id}
