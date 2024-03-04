@@ -214,11 +214,13 @@ const [mobileScreen, setMobileScreen] = useState(false)
                     src={Logo}
                     width={40}
                     className="hidden dark:block"
+                    alt="Alphy Logo"
                   ></Image>
                   <Image
                     src={LogoBlack}
                     width={40}
                     className="dark:hidden opacity-80 "
+                    alt="Alphy Logo"
                   ></Image>
                   <h1 className="ml-1 text-2xl mt-1 ">ALPHY</h1>
                 </div>
@@ -536,11 +538,13 @@ const [mobileScreen, setMobileScreen] = useState(false)
                       src={Logo}
                       width={50}
                       className="hidden dark:block"
+                      alt="Alphy Logo"
                     ></Image>
                     <Image
                       src={LogoBlack}
                       width={50}
                       className="dark:hidden opacity-80 "
+                      alt="Alphy Logo"
                     ></Image>
 
                     <div className="absolute z-50 pl-1 pt-1">

@@ -74,11 +74,14 @@ function Navbar({ collapsed, setCollapsed }) {
           )}
           <Link href={'/'} className="text-zinc-800 dark:text-gray-200 pl-4 ">
             <div className="flex-row flex">
-              <Image src={Logo} width={40} className="hidden dark:block"></Image>
+              <Image src={Logo} width={40} className="hidden dark:block"
+              alt="Alphy Logo"
+              ></Image>
               <Image
                 src={LogoBlack}
                 width={40}
                 className="dark:hidden opacity-80 "
+                alt="Alphy Logo"
               ></Image>
               <h1 className="ml-1 mt-1 text-2xl">ALPHY</h1>
             </div>

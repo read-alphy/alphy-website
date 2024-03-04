@@ -361,7 +361,8 @@ const AuthInfo = () => {
                 onClick={handleLoginWithGoogle}
               >
                 <div className="flex flex-rows	">
-                  <Image src={Google} width={30}></Image>
+                  <Image src={Google} width={30} alt= 'google logo' height={30} 
+                  ></Image>
                   <span className=" ml-4 font-extral	text-zinc-700 dark:text-zinc-300 font-averta-semibold">
                     Continue with Google
                   </span>

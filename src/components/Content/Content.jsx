@@ -79,7 +79,7 @@ export default function Content({
   const [highlightClass, setHighlightClass] = useState('')
 
   const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
-  const [transcriptRaw, setTranscriptRaw] = useState('')
+  
 
   const buttonRef = useRef(null)
   const inputRef = useRef(null)
@@ -98,10 +98,6 @@ export default function Content({
   useEffect(() => {
 
     
-    
-    if (data) {
-    setTranscriptRaw(data.transcript)
-    }
     
     if (inputDate !== undefined && formattedDate.length === 0) {
       const parts = inputDate.split('-')
@@ -393,8 +389,10 @@ export default function Content({
     const transcript = []
 
     const parser = await new srtParser2()
+    const transcriptRaw = data.transcript
 if(transcriptRaw=== undefined || transcriptRaw === null){return}
     const srt_array = await parser.fromSrt(transcriptRaw)
+    
 
     let nothing = ''
     let count = 0
@@ -450,13 +448,16 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
     /* transcript_array = data.transcript_chunked.split("\n") */
   }
 
+  useEffect (() => {
   if (
     transcript.length === 0 &&
     data !== undefined &&
     data.transcript !== null
   ) {
+    
     transcriptParser()
   }
+}, [data])
 
   useEffect(() => {
     if (

@@ -187,10 +187,12 @@ const router = useRouter()
                 <Image
                   src={Logo}
                   className="w-[30px] h-[30px] hidden dark:flex"
+                  alt="Alphy Logo"
                 />
                 <Image
                   src={LogoInverted}
                   className="w-[30px] h-[30px]  dark:hidden"
+                  alt="Alphy Logo"
                 />
               </div>
               <p className="ml-2 mt-1 text-sm sm:text-md text-zinc-500 dark:text-zinc-300 font-averta-semibold">

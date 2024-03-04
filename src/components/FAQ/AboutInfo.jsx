@@ -17,11 +17,16 @@ export default function AboutInfo() {
   return (
     <div className="flex flex-col">
       <div className="hidden sm:flex flex-row flex  md:w-800 w-full flex  justify-center dark:bg-darkMode dark:text-zinc-300 ">
-        <Image src={Logo} width={70} className="hidden dark:block"></Image>
+        <Image src={Logo} width={70} className="hidden dark:block"
+        alt="Alphy Logo"
+        
+        
+        ></Image>
         <Image
           src={LogoBlack}
           width={70}
           className="dark:hidden opacity-80 "
+          alt="Alphy Logo"
         ></Image>
         <h1 className="ml-2 mt-4 text-4xl font-bold">ALPHY</h1>
       </div>

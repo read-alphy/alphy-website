@@ -213,6 +213,7 @@ export default function HeaderArea({
                           src="/youtubeicon.png"
                           width={40}
                           height={40}
+                          alt="Youtube Icon"
                         />
                         <p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center font-averta-semibold text-md">
                           Click to watch
@@ -567,7 +568,7 @@ export default function HeaderArea({
                   href={`https://www.youtube.com/watch?v=${data.source_id}`}
                   rel="noreferrer"
                 >
-                  <Image className="-ml-2" src="/youtubeicon.png" width={40} height={40} />
+                  <Image className="-ml-2" src="/youtubeicon.png" width={40} height={40} alt="Youtube Icon" />
                   <p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center text-md font-averta-semibold ">
                     Click to watch
                   </p>
@@ -580,7 +581,7 @@ export default function HeaderArea({
                   href={`https://twitter.com/i/spaces/${data.source_id}`}
                   rel="noreferrer"
                 >
-                  <Image className="ml-1" src={TwitterLogo} width={20} height={20}/>
+                  <Image className="ml-1" src={TwitterLogo} width={20} height={20} alt="Twitter Icon" />
                   <p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
                     Click to listen
                   </p>
@@ -593,7 +594,7 @@ export default function HeaderArea({
                   href={`https://www.twitch.tv/videos/${data.source_id}`}
                   rel="noreferrer"
                 >
-                  <Image className="ml-1 mt-1" src={TwitchIcon} width={20} height={20} />
+                  <Image className="ml-1 mt-1" src={TwitchIcon} width={20} height={20}  alt="Twitch Icon" />
                   <p className=" text-zinc-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
                     Click to watch
                   </p>

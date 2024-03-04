@@ -236,6 +236,7 @@ export default function ReadComponent({
                         src={TwitterSpaces}
                         className="w-[240px] h-[120px] mx-auto"
                         width={240}
+                        alt="Twitter Spaces"
                       />
                       <p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
                         Listen to{' '}
@@ -259,7 +260,9 @@ export default function ReadComponent({
                       href={`https://twitter.com/i/status/${data.source_id}`}
                       rel="noreferrer"
                     >
-                      <Image src={X} className="w-[240px] h-[120px] mx-auto" width={240}/>
+                      <Image src={X} className="w-[240px] h-[120px] mx-auto" width={240}
+                      alt="Twitter Video"
+                      />
                       <p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
                         Watch{' '}
                         <span className="font-bold pb-6 hyphenate font-averta-semibold">
@@ -301,6 +304,7 @@ export default function ReadComponent({
                     className="text-white opacity-80"
                     width={35}
                     height={35}
+                    alt="Twitch"
                   />
                 )}
               </button>

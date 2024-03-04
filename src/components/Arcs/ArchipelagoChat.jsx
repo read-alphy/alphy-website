@@ -378,6 +378,7 @@ export default function ArchipelagoChat({
             <Image
               className={`${'hidden'} sm:block w-[200px] sm:mr-4`}
               src={archipelagoImageLink}
+              alt = "archipelago image"
             />
           )}
           <div className="ml-2">

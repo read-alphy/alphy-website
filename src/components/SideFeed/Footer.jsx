@@ -140,7 +140,7 @@ export default function Footer({
             </a>
             <div>
               <a href="https://discord.gg/N4CkQhCVv2" target="_blank">
-                <Image src={DiscordIcon} className="mt-1" />
+                <Image src={DiscordIcon} className="mt-1" alt="Discord Icon"/>
               </a>
             </div>
           </div>

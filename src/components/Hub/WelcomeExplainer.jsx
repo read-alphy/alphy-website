@@ -294,7 +294,10 @@ useEffect (() => {
               >
                 <button className=" rounded-lg flex flex-row normal-case bg-white dark:bg-mildDarkMode items-center border border-zinc-700 dark:border-zinc-700  px-2 py-3 w-[300px]">
                   <div className="mx-auto flex flex-row items-center">
-                    <Image src={ChromeIcon} width={40} />
+                    <Image src={ChromeIcon} width={40} 
+                    alt="Chrome Icon"
+                    
+                    />
                     <span className="text-xl pl-4  font-averta-regular text-zinc-900 dark:text-zinc-300">
                       Install on Chrome
                     </span>

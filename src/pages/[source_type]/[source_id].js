@@ -44,13 +44,11 @@ async function fetchData(sourceType, sourceId) {
                 /* setIsLoading(true) */
               }
         
-              const response = await axios
-                .get(url, {
-                  headers: {
-                    'id-token': idToken,
-                  },
-                })
-                .then(response => {
+              const response = await fetch(url, {headers: { 'id-token': idToken }});
+              const data = await response.json();
+              return { data: data, error: null };
+            }
+                
                   /* if (response.data !== null && response.data !== undefined) {
                     if (
                       response.data.lang !== undefined &&
@@ -64,15 +62,9 @@ async function fetchData(sourceType, sourceId) {
                     localStorage.setItem('isVisibleUpload', response.data.is_visible)
                     setContentName(response.data.title)
                   } */
-                  return response
-                })
-                .catch(error => {
-                  console.error('Error getting upload data', error)
-                  if (error.response.data.detail === 'Source is inaccessible') {
-                    setAuthorizationError(true)
-                  }
-                })
-            } catch (error) {
+              
+         
+             catch (error) {
               if (error.response?.status === 404) {
                 /* setIsLoading(false) */
                 console.log('error3', error)
@@ -140,6 +132,8 @@ async function fetchData(sourceType, sourceId) {
       source_type
   }){
 
+    
+
     let imageUrl = ""
 if(data !== null && data.thumbnail !== null){
   imageUrl = data.thumbnail
@@ -172,7 +166,7 @@ if (!data || source_id === undefined || source_type === undefined) {
   return <Loading />;
 }
 
-console.log(data)
+
   return(
       <div>
           <Head>

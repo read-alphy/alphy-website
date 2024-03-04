@@ -70,7 +70,9 @@ export default function FooterMainPage({ currentUser }) {
         </a>
         <div>
           <a href="https://discord.gg/N4CkQhCVv2" target="_blank">
-            <Image src={DiscordIcon} className="mt-1" />
+            <Image src={DiscordIcon} className="mt-1" 
+            width={20} alt="Discord Icon"
+            />
           </a>
         </div>
       </div>

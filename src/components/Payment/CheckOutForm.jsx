@@ -227,7 +227,10 @@ export default function CheckOutForm({ clientSecret,currentUser }) {
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
       <div className=" mt-5">
-        <Image width={120} src={StripeBanner}></Image>
+        <Image width={120} src={StripeBanner}
+        alt="Stripe Banner"
+        
+        ></Image>
       </div>
     </form>
   )

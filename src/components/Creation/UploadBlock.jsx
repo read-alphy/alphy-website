@@ -450,7 +450,9 @@ export default function UploadBlock({
               target="_blank"
             >
               <div className="flex flex-row items-center rounded-lg p-1 ">
-                <Image src={ConvertPrivately} width={30} className="p-1" />
+                <Image src={ConvertPrivately} width={30} className="p-1" 
+                alt = "ConvertPrivately"
+                />
                 <p className="ml-2 text-md font-bold text-white dark:text-zinc-800">
                   {' '}
                   ConvertPrivately

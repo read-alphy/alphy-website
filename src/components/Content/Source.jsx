@@ -165,9 +165,9 @@ const router = useRouter()
 
         if (data !== null && summaryComplete === false && called === true) {
           if (source_type === 'up' && summaryComplete === false) {
-            /* fetchDataUpload(url, true) */
+             fetchDataUpload(url, true) 
           } else if (source_type !== 'up' && summaryComplete === false) {
-            /* fetchData(url, true) */
+             fetchData(url, true) 
           }
         } else {
           return

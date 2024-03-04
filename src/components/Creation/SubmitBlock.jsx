@@ -301,6 +301,7 @@ export default function SubmitBlock({
                 width={120}
                 title="YouTube"
                 className="sm:mr-6 lg:mr-10 grayscale w-1/3 mx-2 max-w-[120px]"
+                alt="YouTube"
               />
               <Image
                 src={Twitter}
@@ -308,6 +309,7 @@ export default function SubmitBlock({
                 width={80}
                 title="Twitter / X videos"
                 className="grayscale rounded-xl  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[100px]"
+                alt="Twitter"
               />
               <Image
                 src={Spaces}
@@ -315,6 +317,7 @@ export default function SubmitBlock({
                 width={80}
                 title="Twitter / X Spaces"
                 className="grayscale rounded-xl sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[100px]"
+                alt="Twitter"
               />
               <Image
                 src={Twitch}
@@ -322,6 +325,8 @@ export default function SubmitBlock({
                 height={20}
                 width={80}
                 className="sm:mr-6   grayscale rounded-xl lg:mr-10 w-1/3  px-2 max-w-[100px]"
+                alt="Twitch"
+
               />
               <Image
                 src={ApplePodcast}
@@ -329,6 +334,7 @@ export default function SubmitBlock({
                 width={80}
                 title="Apple Podcasts"
                 className="grayscale rounded-lg  sm:mr-6 lg:mr-10 w-1/3  px-2 max-w-[100px]"
+                alt="Apple Podcasts"
               />
             </div>
           </div>
