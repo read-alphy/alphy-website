@@ -6,7 +6,11 @@
 
 // Define the fetchData function
 async function fetchData(sourceType, sourceId) {
-  const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
+  if(sourceId === '[object Object]') {
+      return { data: null, error: 'Invalid source ID' };
+  }
+      
+      const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
   try {
     const response = await axios.get(url);
     return { data: response.data, error: null };
@@ -67,7 +71,15 @@ async function fetchData(sourceType, sourceId) {
         }
 
   export async function getServerSideProps(context) {
-    const { source_id, source_type } = context.params;
+    
+    const { source_type, source_id } = context.params;
+    console.log(context.params)
+    
+    if (typeof source_id !== 'string') {
+      console.error('source_id is not a string:', source_id);
+      // Handle the case or log more details
+    }
+    
     const { data, error } = await fetchData(source_type, source_id);
   
     if (error || !data) {
@@ -112,7 +124,7 @@ async function fetchData(sourceType, sourceId) {
       source_type
   }){
 
-console.log(source_id, source_type, data)
+
 if (error) {
   
   return <div>Error loading data: {error}</div>;
