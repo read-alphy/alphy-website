@@ -8,6 +8,9 @@ import dynamic from 'next/dynamic'
 const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,
 })
+
+export const runtime = 'edge'
+
 // Define the fetchData function
 async function fetchData(sourceType, sourceId) {
   if(sourceId === '[object Object]') {
