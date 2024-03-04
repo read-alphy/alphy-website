@@ -1,10 +1,14 @@
   /* import Source from '../../components/Content/Source' */
 
-  import Loading from '../../components/Loading'
-  import { API_URL } from '../../constants'
-  import axios from 'axios'
+import Loading from '../../components/Loading'
+import { API_URL } from '../../constants'
+import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import Twitter from '../../../public/img/twitter_space.webp'
+import ApplePodcastBanner from '../../../public/img/apple_podcast_banner.png'
+import Twitch from '../../../public/img/twitchSource.png'
+import X_Image from '../../../public/img/X.png'
 
 export const runtime = 'experimental-edge'
 
@@ -136,8 +140,27 @@ async function fetchData(sourceType, sourceId) {
       source_type
   }){
 
-console.log('source_id', source_id)
-console.log('source_type', source_type)
+    let imageUrl = ""
+if(data !== null && data.thumbnail !== null){
+  imageUrl = data.thumbnail
+}
+else {
+  if (source_type === "x"){
+  imageUrl = X_Image
+  }
+  else if (source_type === "yt"){
+  imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`
+  }
+  else if (source_type === "sp"){
+  imageUrl = Twitter
+  }
+  else if (source_type === "ap"){
+  imageUrl = ApplePodcastBanner
+  }
+  else if (source_type === "tw"){
+  imageUrl = Twitch
+  }
+}
 
   
 if (error) {
@@ -149,26 +172,24 @@ if (!data || source_id === undefined || source_type === undefined) {
   return <Loading />;
 }
 
-
+console.log(data)
   return(
       <div>
           <Head>
- <meta property="og:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />
-  <meta property="og:description" content="Description of your content" />
-  <meta property="og:image" content="URL to your image" />
-  <meta property="og:url" content="URL of the page" />
+ <meta property="og:title" content={data.title!==undefined ? data.title: " Turn audio to text, summarize, and generate content with AI"} />
+  <meta property="og:description" content="'Explore audiovisual content like never before with Alphy. Transcribe, summarize, and interact with audio files effortlessly." />
+  <meta property="og:image" content={imageUrl} />
+  <meta property="og:url" content={`https://alphy.app/${source_type}/${source_id}`} />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Your Site Name" />
+  <meta property="og:site_name" content="Alphy - Transcribe, summarize, generate content with AI" />
   <meta property="og:locale" content="en_US" />
-  <meta name="twitter:card" content="summary_large_image" />
-  
+<meta name="twitter:card" content="summary_large_image" />  
   <meta name="twitter:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />
-  <meta name="twitter:description" content="Description of your content" />
-  <meta name="twitter:image" content="URL to your image" />
-  <meta name="twitter:creator" content="@authorhandle" />
+  <meta name="twitter:description" content={`${data.summaries!== undefined && data.summaries[0]!== undefined && data.summaries[0].key_takeaways!==null ? data.summaries[0].key_takeaways : 'Explore audiovisual content like never before with Alphy. Transcribe, summarize, and interact with audio files effortlessly.'}`} />
+  <meta name="twitter:image" content={imageUrl} />
   <title>{data.title!==undefined ? data.title : "Alphy - Turn audio to text, summarize, and generate content with AI"}</title>
   </Head>
-  
+
       {
           (source_id===undefined|| source_type===undefined || data=== null) ?  <Loading /> : 
       <Source
