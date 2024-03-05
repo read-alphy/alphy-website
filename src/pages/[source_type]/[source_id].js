@@ -112,7 +112,7 @@ else {
   else if (source_type === "tw"){
   imageUrl = Twitch
   }
-}
+} 
 
   
 if (error) {
@@ -133,7 +133,7 @@ if (!data || source_id === undefined || source_type === undefined) {
   <meta property="og:image" content={imageUrl} />
   <meta property="og:url" content={`https://alphy.app/${source_type}/${source_id}`} />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Alphy - Transcribe, summarize, generate content with AI" />
+  <meta property="og:site_name" content={data.title!==undefined ? `Alphy - ${data.title}`: "Turn audio to text, summarize, and generate content with AI"} />
   <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />  
   <meta name="twitter:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />

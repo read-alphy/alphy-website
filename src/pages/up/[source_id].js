@@ -47,7 +47,7 @@ const Source = dynamic(() => import('../../components/Content/Source'), {
   return(
       <div>
       <Head>
- <meta property="og:title" content={"Private Audio File - Transcribe, summarize, generate new text"} />
+ <meta property="og:title" content={"Private Audio File - Requires permission to read and create content on top."} />
   <meta property="og:description" content="'Explore audiovisual content like never before with Alphy. Transcribe, summarize, and interact with audio files effortlessly." />
     {/* <meta property="og:image" content={imageUrl} /> */}
   <meta property="og:type" content="website" />
