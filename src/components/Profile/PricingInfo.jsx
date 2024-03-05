@@ -10,17 +10,9 @@ import {useRouter} from 'next/router'
 
 import ReactLoading from 'react-loading'
 
-<<<<<<< HEAD:src/routes/PricingInfo.jsx
-import FreeCard from '../components/PricingCards/FreeCard'
-import BasicCard from '../components/PricingCards/BasicCard'
-import PremiumCard from '../components/PricingCards/PremiumCard'
-import Switch, { switchClasses } from '@mui/joy/Switch'
-
-=======
 import FreeCard from './PricingCards/FreeCard'
 import BasicCard from './PricingCards/BasicCard'
 import PremiumCard from './PricingCards/PremiumCard'
->>>>>>> next:src/components/Profile/PricingInfo.jsx
 
 export default function Pricing({ tier,currentUser }) {
   

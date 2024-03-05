@@ -26,10 +26,6 @@ export default function Hub({
   setTotalMinutes,
   sandboxHistory,
   setSandboxHistory,
-<<<<<<< HEAD:src/routes/Hub/Hub.jsx
-  loggedIn,
-  setLoggedIn,
-=======
   globalLayout,
   setGlobalLayout,
   userLayout,
@@ -40,7 +36,6 @@ export default function Hub({
   loggedIn,
   setLoggedIn,
   
->>>>>>> next:src/components/Hub/Hub.jsx
 }) {
   const router = useRouter()
   
@@ -116,15 +111,9 @@ useEffect(() => {
       <div className="flex flex-row bg-white dark:bg-darkMode ">
         {
           <div className={` hidden sm:block `}>
-<<<<<<< HEAD:src/routes/Hub/Hub.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Hub/Hub.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -149,15 +138,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="">
-<<<<<<< HEAD:src/routes/Hub/Hub.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Hub/Hub.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

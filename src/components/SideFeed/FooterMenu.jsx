@@ -1,9 +1,4 @@
-<<<<<<< HEAD:src/components/ArticleComponents/FooterMenu.jsx
-import { Link } from 'react-router-dom'
-import LogoutIcon from '@mui/icons-material/Logout'
-=======
 import Link  from 'next/link'
->>>>>>> next:src/components/SideFeed/FooterMenu.jsx
 import VerifiedIcon from '@mui/icons-material/Verified'
 
 export default function FooterMenu({
@@ -13,10 +8,7 @@ export default function FooterMenu({
   setOpenFeedbackDialog,
   handleDarkMode,
   tier,
-<<<<<<< HEAD:src/components/ArticleComponents/FooterMenu.jsx
-=======
   theme
->>>>>>> next:src/components/SideFeed/FooterMenu.jsx
 }) {
   return (
     <div className="">

@@ -16,11 +16,8 @@ import { Button } from '@material-tailwind/react'
 import AboutMainPage from './AboutMainPage.jsx'
 import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
-<<<<<<< HEAD:src/routes/Hub/WelcomeExplainer.jsx
-=======
 import Image from 'next/image'
 
->>>>>>> next:src/components/Hub/WelcomeExplainer.jsx
 
 export default function WelcomeExplainer({
   currentUser,
@@ -73,15 +70,10 @@ useEffect (() => {
               </p>
             </div>
           )} */}
-<<<<<<< HEAD:src/routes/Hub/WelcomeExplainer.jsx
-          <p className="text-zinc-900 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold   ">
-            Turn audio to text, summarize, and generate content with AI
-=======
           <p className="text-zinc-900 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">
           Turn audio to text, summarize, and generate content with AI
->>>>>>> next:src/components/Hub/WelcomeExplainer.jsx
           </p>
-          <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[700px]">
+          <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[640px]">
             {' '}
             Join the Alphy community to transcribe, summarize, and 
             create content with the highest quality AI models on the market.
@@ -196,25 +188,12 @@ useEffect (() => {
 
           <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 font-averta-semibold"></div>
 
-<<<<<<< HEAD:src/routes/Hub/WelcomeExplainer.jsx
-          <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg xl:text-xl mt-16">
-            Supported Online Platforms
-            <p className="font-normal text-md mt-4 dark:text-zinc-500 text-zinc-500">
-              Submit a link from the following platforms. Or upload audio from
-              your device.{' '}
-            </p>
-            <div className="flex flex-row  mx-auto w-full mt-4   xl:mt-10  xl:gap-x-10   sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
-              {/* <div className="hidden lg:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
-                    <AudioFileIcon title="Local Audio Files" className="row-span-3 lg:row-span-2 flex mx-auto " sx={{
-                      color:"#bbf7d0",                  
-=======
           <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg mt-16">
             Supported Platforms 
             <div className="flex flex-row  mx-auto w-full mt-4       sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
               { <div className="hidden sm:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
                     <AudioFileIcon title="Local Audio Files" className="row-span-3 lg:row-span-2 flex mx-auto max-w-[80px] sm:max-s-[120px] " sx={{
                       color:"#bae6fd",                  
->>>>>>> next:src/components/Hub/WelcomeExplainer.jsx
                       width:`100px` ,
                       height:`80px`,
                     }}/>
@@ -239,9 +218,9 @@ useEffect (() => {
                   src={Twitter}
                   alt="Twitter / X videos"
                   height={20}
-                  width={90}
+                  width={80}
                   title="Twitter / X videos"
-                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
                 <p className=" hidden lg:block  text-md font-normal  text-[16px]">
                   Twitter Videos
@@ -255,7 +234,7 @@ useEffect (() => {
                   height={20}
                   width={80}
                   title="Twitter / X Spaces"
-                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
                 <p className=" hidden lg:block  text-md font-normal text-[16px]">
                   Twitter Spaces
@@ -268,7 +247,7 @@ useEffect (() => {
                   alt="Twitch"
                   height={20}
                   width={80}
-                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
                 <p className=" hidden lg:block  row-span-1 text-md font-normal text-[16px]">
                   Twitch
@@ -282,7 +261,7 @@ useEffect (() => {
                   alt="Apple Podcasts"
                   width={80}
                   title="Apple Podcasts"
-                  className="row-span-3 lg:row-span-2 rounded-md min-w-[40px] flex mx-auto"
+                  className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
                 <p className="hidden lg:block  text-md font-normal text-[16px]">
                   Apple Podcasts
@@ -291,11 +270,6 @@ useEffect (() => {
             </div>
           </div>
 
-<<<<<<< HEAD:src/routes/Hub/WelcomeExplainer.jsx
-{/*           <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 font-averta-semibold"></div>
- */}
-          <div className="mt-10 sm:mt-20 flex flex-col xl:mt-40">
-=======
           {/*           <div>
 
           Import your meetings
@@ -303,7 +277,6 @@ useEffect (() => {
           </div> */}
 
          {/*  <div className="mt-10 sm:mt-20 flex flex-col">
->>>>>>> next:src/components/Hub/WelcomeExplainer.jsx
             <div className="flex flex-col">
               <p className="text-2xl text-zinc-900 dark:text-zinc-200">
                 Meet Alphy's extension: Supercharge YouTube search with AI{' '}
@@ -355,7 +328,7 @@ useEffect (() => {
           <AboutMainPage />
         </div>
       </div>
-      <div className="sm:hidden ">
+      <div className="sm:hidden">
         <FooterMainPage currentUser={currentUser} />
       </div>
     </div>

@@ -297,11 +297,7 @@ export default function FreeCard({ tier, currentUser }) {
  */}
 
           
-<<<<<<< HEAD:src/components/PricingCards/FreeCard.jsx
-{currentUser ? (
-=======
       {currentUser ? (
->>>>>>> next:src/components/Profile/PricingCards/FreeCard.jsx
               <a
                 target="_blank"
                 rel="noreferrer"

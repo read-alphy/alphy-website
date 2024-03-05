@@ -19,11 +19,7 @@ function Success({
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
-<<<<<<< HEAD:src/routes/payment/Success.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/components/Payment/Success.jsx
 }) {
   let source_id
 
@@ -74,15 +70,9 @@ function Success({
 			} */}
         {
           <div className={`flex hidden sm:block dark:bg-mildDarkMode`}>
-<<<<<<< HEAD:src/routes/payment/Success.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Payment/Success.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -101,11 +91,7 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/payment/Success.jsx
-              <SideFeedReworked
-=======
               <SideFeed 
->>>>>>> next:src/components/Payment/Success.jsx
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
                 currentUser={currentUser}

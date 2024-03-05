@@ -20,40 +20,22 @@ import Dialog from '@mui/material/Dialog'
 import Switch, { switchClasses } from '@mui/joy/Switch'
 import { API_URL } from '../../constants'
 
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-import { API_URL } from '../constants'
-import Switch, { switchClasses } from '@mui/joy/Switch';
-=======
->>>>>>> next:src/components/Profile/AccountInfo.jsx
 
 export default function AccountInfo({
   credit,
   tier,
   currentUser,
   canceledAtPeriodEnd,
-  
 }) {
   
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-=======
 
->>>>>>> next:src/components/Profile/AccountInfo.jsx
   const [isYearly, setIsYearly] = useState(true)
   const [quantity, setQuantity] = useState(1)
   const [creditPurchaseLoading, setCreditPurchaseLoading] = useState(false)
   const [subscriptionLinkLoading, setSubscriptionLinkLoading] = useState(false)
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-  
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false)
-
-  const [called, setCalled] = useState(false)
-
-=======
   const [isLoaded, setIsLoaded] = useState(false)
   const [creditPurchaseDialog, setCreditPurchaseDialog] = useState(false)
   const [called, setCalled] = useState(false)
->>>>>>> next:src/components/Profile/AccountInfo.jsx
   const [openPopover, setOpenPopover] = useState(false)
   const [openPopover1, setOpenPopover1] = useState(false)
 
@@ -156,10 +138,6 @@ export default function AccountInfo({
     }
   }, [currentUser, called])
 
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-  
-=======
->>>>>>> next:src/components/Profile/AccountInfo.jsx
   const getSubscriptionLink = async () => {
     setSubscriptionLinkLoading(true)
     await currentUser.getIdToken().then(idToken => {
@@ -216,12 +194,9 @@ export default function AccountInfo({
 
 
 
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-=======
 
 
 
->>>>>>> next:src/components/Profile/AccountInfo.jsx
   return (
     <div className="dark:bg-darkMode pb-20 md:pl-10  3xl:pl-40">
       {isLoaded ? (
@@ -305,14 +280,14 @@ export default function AccountInfo({
                 Manage Subscription{' '}
               </p>
               {tier !== 'premium' && (
-                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 max-w-[600px] items-center justify-center mx-auto">
+                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
                   Upgrade to have extra transcription credits, submit from
-                  multiple platforms, upload audio files, and generate content with the most capable AI models.
+                  multiple platforms, upload audio files, and access most
+                  capable AI models.
                 </p>
               )}
 
-
-              {tier=== 'premium' ? (
+              {tier !== 'free' ? (
                 <a
                   className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-averta-semibold mb-4"
                   target="_blank"
@@ -403,18 +378,15 @@ export default function AccountInfo({
               </p>
 
               {tier !== 'premium' && (
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-                <p className="text-center mb-10 text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 max-w-[600px] items-center justify-center mx-auto">
-=======
                 <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 xl:mb-20 max-w-[600px] items-center justify-center mx-auto">
->>>>>>> next:src/components/Profile/AccountInfo.jsx
                   Upgrade to have extra transcription credits, submit from
-                  multiple platforms, upload audio files, and generate content with the most capable AI models.   
+                  multiple platforms, upload audio files, and access most
+                  capable AI models.
                 </p>
               )}
               {currentUser ? (
                 <div className="items-center flex flex-col justify-center">
-                  {tier === 'premium' ? (
+                  {tier !== 'free' ? (
                     <a
                       className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4"
                       target="_blank"
@@ -430,55 +402,6 @@ export default function AccountInfo({
               ) : null}
             </div>
 
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-<div className="flex flex-row  w-full  max-w-[1200px]">
-<div className=" flex gap-6 flex-row w-fit mx-auto justify-center my-6  px-4 py-2 rounded-xl xl:pl-20">
-  
-<p className={`text-lg font-bold ${isYearly ? "text-slate-700 dark:text-white" : " text-indigo-400"}`} >Monthly</p>
-        <Switch
-      checked={isYearly}
-      onChange={() => setIsYearly(!isYearly)}
-      sx={(theme) => ({
-        '--Switch-thumbShadow': '0 3px 7px 0 rgba(0 0 0 / 0.12)',
-        '--Switch-thumbBackground': "#818cf8",
-        '--Switch-thumbSize': '27px',
-        '--Switch-trackWidth': '70px',
-        '--Switch-trackHeight': '30px',
-        '--Switch-trackBackground': '#334155',
-        [`& .${switchClasses.thumb}`]: {
-          transition: 'width 0.2s, left 0.2s',
-
-        },
-        '&:hover': {
-          
-          '--Switch-trackBackground': '#334155',
-        },
-        '&:active': {
-          '--Switch-thumbWidth': '32px',
-        },
-        [`&.${switchClasses.checked}`]: {
-          '--Switch-thumbBackground': '#818cf8',
-          '--Switch-trackBackground': '#334155',
-          '&:hover': {
-            '--Switch-trackBackground': '#334155', 
-          },
-        },
-      })}
-    />
-    <p className={`text-lg font-bold ${isYearly===false ? "text-slate-700 dark:text-white" : "text-indigo-400"}`} >
-    Yearly (Save 40%)</p>
-      
-
-        
-
-  
-  </div>
-
-        </div>
-
-       
-          <div className="flex  mt-6 px-4 gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8  mx-auto xl:mx-0 items-center justify-center flex-col xl:flex-row max-w-[1200px]">
-=======
 
 
             
@@ -528,7 +451,6 @@ export default function AccountInfo({
 
     <div className="flex flex-col xl:flex-row  px-4 gap-y-8 xl:gap-y-0 gap-x-4 2xl:gap-x-8">
       <div className="hidden xl:flex"> 
->>>>>>> next:src/components/Profile/AccountInfo.jsx
             <FreeCard
               currentUser={currentUser}
               tier={tier}
@@ -536,11 +458,7 @@ export default function AccountInfo({
               openPopover1={openPopover1}
               setOpenPopover1={setOpenPopover1}
               canceledAtPeriodEnd={canceledAtPeriodEnd}
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-              isYearly={isYearly}   
-=======
 
->>>>>>> next:src/components/Profile/AccountInfo.jsx
             />
 
 </div>
@@ -551,15 +469,9 @@ export default function AccountInfo({
               openPopover={openPopover}
               setOpenPopover={setOpenPopover}
               canceledAtPeriodEnd={canceledAtPeriodEnd}
-<<<<<<< HEAD:src/routes/AccountInfo.jsx
-              isYearly={isYearly}
-              getSubscriptionLink= {getSubscriptionLink}
-              subscriptionLinkLoading={subscriptionLinkLoading}
-=======
               getSubscriptionLink= {getSubscriptionLink}
               subscriptionLinkLoading={subscriptionLinkLoading}
               isYearly={isYearly}
->>>>>>> next:src/components/Profile/AccountInfo.jsx
             />
 
 <div className="xl:hidden"> 
@@ -642,7 +554,7 @@ export default function AccountInfo({
                 'pointer-events-none opacity-60'
               }`}
               size="md"
-              onClick={getCreditPurchaseLink}
+              onClick={buyCredit}
             >
               {creditPurchaseLoading ? (
                 <Spinner
@@ -656,7 +568,7 @@ export default function AccountInfo({
               )}
             </Button>
             <p className="items-center margin-auto flex mt-4 font-averta-regular">
-              You will be redirected to the payment page.
+              You will be charged automatically.
             </p>
           </div>
         </div>

@@ -3,18 +3,7 @@ import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
 import { API_HOST } from '../../../constants'
 
-<<<<<<< HEAD:src/components/ArticleComponents/Sandbox/Sandbox.jsx
-export default function Sandbox({
-  data,
-  askAlphyForSandbox,
-  askText,
-  currentUser,
-  getSandboxHistory,
-  tier,
-}) {
-=======
 export default function Sandbox({ data, askAlphyForSandbox, askText, tier, currentUser, getSandboxHistory}) {
->>>>>>> next:src/components/Content/Sandbox/Sandbox.jsx
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [outputMessage, setOutputMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -26,13 +15,8 @@ export default function Sandbox({ data, askAlphyForSandbox, askText, tier, curre
   const [manner, setManner] = useState(null)
   const [error, setError] = useState(false)
   const [authError, setAuthError] = useState(false)
-<<<<<<< HEAD:src/components/ArticleComponents/Sandbox/Sandbox.jsx
-
-  const theme = localStorage.getItem('theme')
-=======
 const [theme, setTheme] = useState('dark')
   
->>>>>>> next:src/components/Content/Sandbox/Sandbox.jsx
   useEffect(() => {
     setTheme(localStorage.getItem('theme'))
     setSettings(prevSettings => {
@@ -170,11 +154,7 @@ const [theme, setTheme] = useState('dark')
 
   function createDopeStuff() {
     setAuthError(false)
-<<<<<<< HEAD:src/components/ArticleComponents/Sandbox/Sandbox.jsx
-    if (currentUser === null || currentUser === undefined) {
-=======
     if (currentUser === undefined ||currentUser === null ) {
->>>>>>> next:src/components/Content/Sandbox/Sandbox.jsx
       setAuthError(true)
       return
     }

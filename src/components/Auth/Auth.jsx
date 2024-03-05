@@ -27,11 +27,7 @@ function Auth({
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
-<<<<<<< HEAD:src/routes/Auth.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/components/Auth/Auth.jsx
 }) {
 
 
@@ -63,22 +59,14 @@ function Auth({
       <div className="flex flex-row bg-white dark:bg-darkMode ">
         {
           <div className={`hidden sm:block`}>
-<<<<<<< HEAD:src/routes/Auth.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Auth/Auth.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
               tier={tier}
-              sandboxHistory={sandboxHistory}
-              setSandboxHistory={setSandboxHistory}
             />
           </div>
         }
@@ -90,15 +78,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/Auth.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed 
 loggedIn={loggedIn} 
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Auth/Auth.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
@@ -129,8 +111,6 @@ setLoggedIn={setLoggedIn}
               userArchipelagos={userArchipelagos}
               sandboxHistory={sandboxHistory}
               setSandboxHistory={setSandboxHistory}
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
             />
           )}
         </div>

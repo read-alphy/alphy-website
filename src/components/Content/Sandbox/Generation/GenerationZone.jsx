@@ -4,11 +4,7 @@ import Settings from './Settings'
 import { Button, Spinner } from '@material-tailwind/react'
 import Toolbox from './Toolbox'
 import VerifiedIcon from '@mui/icons-material/Verified'
-<<<<<<< HEAD:src/components/ArticleComponents/Sandbox/Generation/GenerationZone.jsx
-import { Link } from 'react-router-dom'
-=======
 import Link from 'next/link'
->>>>>>> next:src/components/Content/Sandbox/Generation/GenerationZone.jsx
 
 import MannerArea from './MannerArea'
 
@@ -82,11 +78,7 @@ export default function   GenerationZone({
             }`}
           >{
             authError ? 
-<<<<<<< HEAD:src/components/ArticleComponents/Sandbox/Generation/GenerationZone.jsx
-      <div className="text-xl my-10"><Link to="/u/login" className="text-indigo-400">Sign in</Link> to start creating on Playground!</div>
-=======
       <div className="text-xl my-10"><Link href="/u/login" className="text-indigo-400">Sign in</Link> to start creating on Playground!</div>
->>>>>>> next:src/components/Content/Sandbox/Generation/GenerationZone.jsx
             :
             <MannerArea
               settings={settings}
@@ -118,11 +110,7 @@ export default function   GenerationZone({
               <p>
                 Go{' '}
                 <Link
-<<<<<<< HEAD:src/components/ArticleComponents/Sandbox/Generation/GenerationZone.jsx
-                  to="/account"
-=======
                   href="/account"
->>>>>>> next:src/components/Content/Sandbox/Generation/GenerationZone.jsx
                   className="text-indigo-400 dark:text-indigo-300 border-b border-indigo-400"
                 >
                   premium

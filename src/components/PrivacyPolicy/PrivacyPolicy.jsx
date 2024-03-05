@@ -20,11 +20,7 @@ function PrivacyPolicy({
   setSandboxHistory,
   userArchipelagos,
   loggedIn,
-<<<<<<< HEAD:src/routes/PrivacyPolicy.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/components/PrivacyPolicy/PrivacyPolicy.jsx
 }) {
   let source_id
 
@@ -69,15 +65,9 @@ function PrivacyPolicy({
 
         {
           <div className={`hidden sm:block`}>
-<<<<<<< HEAD:src/routes/PrivacyPolicy.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/PrivacyPolicy/PrivacyPolicy.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -96,15 +86,9 @@ function PrivacyPolicy({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/PrivacyPolicy.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/PrivacyPolicy/PrivacyPolicy.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

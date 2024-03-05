@@ -35,11 +35,8 @@ export default function Content({
   isBookmarked,
   setIsBookmarked,
   getSandboxHistory,
-<<<<<<< HEAD:src/components/ArticleComponents/ContentTabs/Content.jsx
-=======
   source_id,
   source_type,
->>>>>>> next:src/components/Content/Content.jsx
 }) {
   const { currentUser } = useAuth()
   const router = useRouter()
@@ -758,7 +755,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           setIsSandbox={setIsSandbox}
         />
 
-        <div className="px-2 md:px-0">
+        <div className="">
           <div className={`${isSandbox && 'hidden'}`}>
             <ReadComponent
               data={data}

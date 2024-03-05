@@ -18,8 +18,6 @@ export default function History({
   currentUser,
   sandboxHistory,
   setSandboxHistory,
-  loggedIn,
-  setLoggedIn,
 }) {
   let source_id
 
@@ -48,15 +46,9 @@ export default function History({
       <div className="flex flex-row bg-white dark:bg-darkMode ">
         {
           <div className={`hidden sm:block`}>
-<<<<<<< HEAD:src/routes/History/History.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed
             loggedIn = {loggedIn}
             setLoggedIn = {setLoggedIn}
->>>>>>> next:src/components/History/History.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -75,15 +67,9 @@ export default function History({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/History/History.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed
                loggedIn = {loggedIn}
                setLoggedIn = {setLoggedIn}
->>>>>>> next:src/components/History/History.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

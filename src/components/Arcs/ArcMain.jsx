@@ -38,13 +38,8 @@ export default function ArcMain({
   setCreditCalled,
   sandboxHistory,
   setSandboxHistory,
-<<<<<<< HEAD:src/routes/CrossVideo/CrossVideo.jsx
-  loggedIn, 
-  setLoggedIn
-=======
   loggedIn,
   setLoggedIn,
->>>>>>> next:src/components/Arcs/ArcMain.jsx
 }) {
   const router = useRouter()
   let source_id
@@ -335,15 +330,9 @@ export default function ArcMain({
       <div className="flex flex-row ">
         {
           <div className={`hidden ${isArc ? 'md:block' : 'sm:block'} `}>
-<<<<<<< HEAD:src/routes/CrossVideo/CrossVideo.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed
             loggedIn = {loggedIn}
             setLoggedIn = {setLoggedIn}
->>>>>>> next:src/components/Arcs/ArcMain.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -366,15 +355,9 @@ export default function ArcMain({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/CrossVideo/CrossVideo.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed
               loggedIn = {loggedIn}
               setLoggedIn = {setLoggedIn}
->>>>>>> next:src/components/Arcs/ArcMain.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

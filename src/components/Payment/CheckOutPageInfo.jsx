@@ -57,11 +57,7 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret,current
           sessionStorage.setItem('subValue', subValue)
           const clientSecret =
             r.data.latest_invoice.payment_intent.client_secret
-<<<<<<< HEAD:src/routes/payment/CheckOutPageInfo.jsx
-          
-=======
         
->>>>>>> next:src/components/Payment/CheckOutPageInfo.jsx
           setClientSecret(clientSecret)
           setCalled(true)
         })
@@ -117,7 +113,6 @@ export default function CheckOutPageInfo({ clientSecret, setClientSecret,current
     <div className="h-[110vh] dark:bg-darkMode bg-white">
       <button onClick={() => fetchData2()}className="bg-blue-400 px-2 rounded-lg py-4">CREATE SUBSCRIPTION</button>
       <div className="mx-auto container items-center pt-10 max-h-[95vh] px-5">
-      
         {/* <button onClick={fetchData}>Create</button> */}
 
         {clientSecret !== undefined &&

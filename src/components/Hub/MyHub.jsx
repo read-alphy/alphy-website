@@ -22,11 +22,7 @@ function Hub({
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
-<<<<<<< HEAD:src/routes/Hub/MyHub.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/components/Hub/MyHub.jsx
 }) {
   let source_id
 
@@ -80,15 +76,9 @@ function Hub({
 			} */}
         {
           <div className={`hidden sm:block`}>
-<<<<<<< HEAD:src/routes/Hub/MyHub.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Hub/MyHub.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -113,15 +103,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/Hub/MyHub.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Hub/MyHub.jsx
                 currentUser={currentUser}
                 setCollapsed={setCollapsed}
                 source_id={source_id}

@@ -27,11 +27,7 @@ function Account({
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
-<<<<<<< HEAD:src/routes/Account.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/components/Profile/Account.jsx
 }) {
 
 
@@ -94,15 +90,9 @@ const router = useRouter()
 			} */}
         {
           <div className={`flex hidden sm:block dark:bg-mildDarkMode`}>
-<<<<<<< HEAD:src/routes/Account.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Profile/Account.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -121,15 +111,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/Account.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Profile/Account.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

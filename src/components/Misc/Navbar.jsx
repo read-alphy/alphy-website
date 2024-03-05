@@ -1,15 +1,3 @@
-<<<<<<< HEAD:src/components/Navbar.jsx
-import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
-import { FaGoogle, FaTwitter } from 'react-icons/fa'
-import { GoogleLogin } from '@react-oauth/google'
-import { useState } from 'react'
-import Logo from '../img/ALPHY_BG_REMOVED_LIGHT.png'
-import LogoBlack from '../img/ALPHY_BG_REMOVED_DARK.png'
-import HomeIcon from '@mui/icons-material/Home'
-=======
 import React, { useEffect, useR } from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
@@ -17,7 +5,6 @@ import Link from 'next/link'
 import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
 import LogoBlack from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
 import Image from 'next/image'
->>>>>>> next:src/components/Misc/Navbar.jsx
 
 function Navbar({ collapsed, setCollapsed }) {
   const router = useRouter()
@@ -64,10 +51,10 @@ function Navbar({ collapsed, setCollapsed }) {
       } justify-between dark:bg-darkMode pb-2	`}
     >
       <div
-        className={`flex  justify-between flex-row fixed w-full pb-2 top-0 z-40 text-blueLike bg-white   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${
+        className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-white   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${
           isYt || isSp || isUp || isArc || isHub
-            ? ' min-h-[40px]'
-            : ' min-h-[40px]'
+            ? 'h-[8vh] min-h-[40px]'
+            : 'h-[8vh] min-h-[40px]'
         } dark:bg-darkMode`}
       >
         <div

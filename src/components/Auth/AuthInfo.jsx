@@ -8,11 +8,7 @@ import ReactLoading from 'react-loading'
 import Google from '../../../public/img/google.png'
 import Image from 'next/image'
 
-<<<<<<< HEAD:src/routes/AuthInfo.jsx
-const AuthInfo = ({ loggedIn, setLoggedIn }) => {
-=======
 const AuthInfo = () => {
->>>>>>> next:src/components/Auth/AuthInfo.jsx
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
@@ -107,13 +103,8 @@ const AuthInfo = () => {
           setError('Oops! Incorrect email or password.')
         } else {
           localStorage.setItem('logged in', 'true')
-<<<<<<< HEAD:src/routes/AuthInfo.jsx
-          setLoggedIn(true)
-          navigate('/myhub')
-=======
           
           router.push('/myhub')
->>>>>>> next:src/components/Auth/AuthInfo.jsx
           setIsSubmitting(false)
         }
       })
@@ -137,7 +128,6 @@ const AuthInfo = () => {
     auth
       .loginWithGoogle()
       .then(event => {
-        setLoggedIn(true)
         localStorage.setItem('logged in', 'true')
         if (event.user) {
           const createdAt = event.user.metadata.createdAt

@@ -21,11 +21,7 @@ function About({
   setSandboxHistory,
   userArchipelagos,
   loggedIn,
-<<<<<<< HEAD:src/routes/FAQ.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/pages/about.js
 }) {
   let source_id
   
@@ -69,15 +65,9 @@ function About({
       <div className="flex flex-row bg-white dark:bg-darkMode ">
         {
           <div className={`hidden sm:block`}>
-<<<<<<< HEAD:src/routes/FAQ.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
              <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/pages/about.js
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -96,15 +86,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/FAQ.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
                <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/pages/about.js
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

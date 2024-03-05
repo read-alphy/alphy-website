@@ -8,12 +8,8 @@ import { useState, useEffect } from 'react'
 import FeedbackForm from './FeedbackForm'
 import PersonIcon from '@mui/icons-material/Person'
 
-<<<<<<< HEAD:src/components/ArticleComponents/FooterReworked.jsx
-import { Link } from 'react-router-dom'
-=======
 
 import Link  from 'next/link'
->>>>>>> next:src/components/SideFeed/Footer.jsx
 
 import FooterMenu from './FooterMenu'
 
@@ -72,7 +68,7 @@ export default function Footer({
                   FooterShow ? 'max-h-96' : 'max-h-0'
                 } overflow-hidden transition-all duration-300 ease-in-out`}
               >
-                <div className="bg-white dark:bg-zinc-900 mx-1 border border-zinc-200 dark:border-zinc-800 rounded-lg mb-2 py-4">
+                <div className="bg-white dark:bg-zinc-900 mx-1 border border-sky-50 dark:border-zinc-800 rounded-lg mb-2 py-4">
                   <FooterMenu
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
@@ -80,21 +76,14 @@ export default function Footer({
                     handleDarkMode={handleDarkMode}
                     currentUser={currentUser}
                     handleSignout={handleSignout}
-<<<<<<< HEAD:src/components/ArticleComponents/FooterReworked.jsx
-                    tier={tier}
-=======
                     loggedIn={loggedIn}
                     theme= {theme}
                     tier = {tier}
->>>>>>> next:src/components/SideFeed/Footer.jsx
                   />
                 </div>
               </div>
 
-<<<<<<< HEAD:src/components/ArticleComponents/FooterReworked.jsx
-=======
              
->>>>>>> next:src/components/SideFeed/Footer.jsx
               <div
                 onClick={() => setFooterShow(!FooterShow)}
                 className="flex flex-row text-zinc-700 dark:text-zinc-300 mx-auto w-full pl-6 font-normal cursor-pointer rounded-lg hover:bg-zinc-100s dark:hover:bg-darkModes py-2 transition duration-300 ease-in-out"
@@ -131,11 +120,7 @@ export default function Footer({
                 handleDarkMode={handleDarkMode}
                 currentUser={currentUser}
                 handleSignout={handleSignout}
-<<<<<<< HEAD:src/components/ArticleComponents/FooterReworked.jsx
-                tier={tier}
-=======
                 theme = {theme}
->>>>>>> next:src/components/SideFeed/Footer.jsx
               />
             </div>
           )}

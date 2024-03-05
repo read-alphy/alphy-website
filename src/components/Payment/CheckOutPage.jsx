@@ -18,11 +18,7 @@ export default function CheckOutPage({
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
-<<<<<<< HEAD:src/routes/payment/CheckOutPage.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/components/Payment/CheckOutPage.jsx
 }) {
   const [clientSecret, setClientSecret] = useState('')
 
@@ -71,15 +67,9 @@ export default function CheckOutPage({
 
         {
           <div className={`hidden sm:block`}>
-<<<<<<< HEAD:src/routes/payment/CheckOutPage.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Payment/CheckOutPage.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -98,15 +88,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/payment/CheckOutPage.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Payment/CheckOutPage.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

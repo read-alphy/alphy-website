@@ -64,18 +64,6 @@ export default function NotFound({
 
         {
           <div className={`hidden lg:block`}>
-<<<<<<< HEAD:src/routes/NotFound.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-              currentUser={currentUser}
-              collapsed={collapsed}
-              setCollapsed={setCollapsed}
-              source_id={source_id}
-              tier={tier}
-              sandboxHistory={sandboxHistory}
-              setSandboxHistory={setSandboxHistory}
-=======
             <SideFeed
               loggedIn = {loggedIn}
               setLoggedIn = {setLoggedIn}
@@ -87,7 +75,6 @@ export default function NotFound({
                 tier={tier}
                 sandboxHistory={sandboxHistory}
                 setSandboxHistory={setSandboxHistory}
->>>>>>> next:src/components/404/NotFound.jsx
             />
           </div>
         }
@@ -99,18 +86,6 @@ export default function NotFound({
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/NotFound.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                currentUser={currentUser}
-                collapsed={collapsed}
-                setCollapsed={setCollapsed}
-                source_id={source_id}
-                tier={tier}
-                sandboxHistory={sandboxHistory}
-                setSandboxHistory={setSandboxHistory}
-=======
               <SideFeed
                 loggedIn = {loggedIn}
                 setLoggedIn = {setLoggedIn}
@@ -122,7 +97,6 @@ export default function NotFound({
                   tier={tier}
                   sandboxHistory={sandboxHistory}
                   setSandboxHistory={setSandboxHistory}
->>>>>>> next:src/components/404/NotFound.jsx
               />
             </div>
           </div>

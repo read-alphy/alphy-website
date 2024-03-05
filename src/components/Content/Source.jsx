@@ -28,13 +28,10 @@ export default function SourcePage({
   getSandboxHistory,
   loggedIn,
   setLoggedIn,
-<<<<<<< HEAD:src/components/Article.jsx
-=======
   data,
   setData,
   source_type,
 
->>>>>>> next:src/components/Content/Source.jsx
 }) {
  
 
@@ -269,13 +266,7 @@ const router = useRouter()
       <div className="flex flex-row ">
         {
           <div className={`hidden sm:flex `}>
-<<<<<<< HEAD:src/components/Article.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed
->>>>>>> next:src/components/Content/Source.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -298,13 +289,7 @@ const router = useRouter()
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/components/Article.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed
->>>>>>> next:src/components/Content/Source.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
@@ -358,14 +343,10 @@ const router = useRouter()
               isSandbox={isSandbox}
               setIsSandbox={setIsSandbox}
               getSandboxHistory={getSandboxHistory}
-<<<<<<< HEAD:src/components/Article.jsx
-            />
-=======
               source_id={source_id}
               source_type={source_type}
             /> 
             
->>>>>>> next:src/components/Content/Source.jsx
           )}
         </div>
       </div>

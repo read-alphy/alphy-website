@@ -6,20 +6,8 @@ import Loading from '../Loading'
 
 import PricingInfo from './PricingInfo'
 
-<<<<<<< HEAD:src/routes/Pricing.jsx
-function Pricing({
-  currentUser,
-  collapsed,
-  setCollapsed,
-  tier,
-  credit,
-  loggedIn,
-  setLoggedIn,
-}) {
-=======
 function Pricing({ currentUser, collapsed, setCollapsed, tier, credit, loggedIn,
   setLoggedIn }) {
->>>>>>> next:src/components/Profile/Pricing.jsx
   let source_id
 
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
@@ -68,15 +56,9 @@ function Pricing({ currentUser, collapsed, setCollapsed, tier, credit, loggedIn,
           <div
             className={`flex hidden sm:block mr-5 bg-zinc-100 dark:bg-mildDarkMode`}
           >
-<<<<<<< HEAD:src/routes/Pricing.jsx
-            <SideFeedReworked
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-=======
             <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Profile/Pricing.jsx
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -93,15 +75,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/Pricing.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Profile/Pricing.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

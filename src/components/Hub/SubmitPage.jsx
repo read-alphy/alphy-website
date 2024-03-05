@@ -19,11 +19,7 @@ function SubmitPage({
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
-<<<<<<< HEAD:src/routes/Hub/SubmitPage.jsx
-  setLoggedIn,
-=======
   setLoggedIn
->>>>>>> next:src/components/Hub/SubmitPage.jsx
 }) {
   let source_id
 
@@ -71,15 +67,9 @@ function SubmitPage({
 			</div>
 			} */}
         <div className={`flex hidden sm:block`}>
-<<<<<<< HEAD:src/routes/Hub/SubmitPage.jsx
-          <SideFeedReworked
-            loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
-=======
           <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Hub/SubmitPage.jsx
             currentUser={currentUser}
             collapsed={collapsed}
             setCollapsed={setCollapsed}
@@ -103,15 +93,9 @@ setLoggedIn={setLoggedIn}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
-<<<<<<< HEAD:src/routes/Hub/SubmitPage.jsx
-              <SideFeedReworked
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-=======
               <SideFeed 
 loggedIn={loggedIn}
 setLoggedIn={setLoggedIn}
->>>>>>> next:src/components/Hub/SubmitPage.jsx
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
