@@ -1,4 +1,5 @@
 import ArcMain from '../../components/Arcs/ArcMain'
+import Head from 'next/head';
 
 
 export default function EditArc({
