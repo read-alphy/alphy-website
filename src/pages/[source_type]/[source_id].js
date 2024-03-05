@@ -115,7 +115,7 @@ else {
 } 
 
   
-if (error) {
+if (error) {    
   
   return <div>Error loading data: {error}</div>;
 }

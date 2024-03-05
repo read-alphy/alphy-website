@@ -40,6 +40,7 @@ return (
   <div>
     <Head>
       <title>Alphy - My Hub</title>
+  
     </Head>
   
 <Hub
