@@ -6,16 +6,17 @@ function stringToBoolean(str) {
   return truePattern.test(str.trim())
 }
 
-export const API_HOST = process.env.REACT_APP_API_HOST
+export const API_HOST = process.env.NEXT_PUBLIC_REACT_APP_API_HOST
+
 if (!API_HOST) {
   throw new Error('REACT_APP_API_HOST must be set')
 }
 export const API_SSL = !API_HOST.startsWith('localhost')
 export const API_URL = `${API_SSL ? 'https' : 'http'}://${API_HOST}`
-export const STRIPE_PK = process.env.REACT_APP_STRIPE_PK
+export const STRIPE_PK = process.env.NEXT_PUBLIC_REACT_APP_STRIPE_PK
 if (!STRIPE_PK) {
   throw new Error('REACT_APP_STRIPE_PK must be set')
 }
 export const UNDER_CONSTRUCTION = stringToBoolean(
-  process.env.REACT_APP_UNDER_CONSTRUCTION || ''
+  process.env.NEXT_PUBLIC_REACT_APP_UNDER_CONSTRUCTION || ''
 )
