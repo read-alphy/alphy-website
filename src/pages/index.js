@@ -1,5 +1,6 @@
 
 import Hub from "../components/Hub/Hub";
+import Head from 'next/head';
 export default function Explore({
   arcs,
   currentUser,
@@ -31,6 +32,20 @@ export default function Explore({
 , [])
  */
   return (
+    <>
+    <Head>
+
+<link rel="icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.png" type= "image/png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+<meta property="og:image" content={"https://ibb.co/3C8SscL"} /> 
+
+
+   <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
+    
+</Head>
   <Hub
   loggedIn={loggedIn}
   setLoggedIn={setLoggedIn}
@@ -54,5 +69,6 @@ export default function Explore({
     submitLayout={false}
     setSubmitLayout={setSubmitLayout}
   />
+  </>
   );
 }

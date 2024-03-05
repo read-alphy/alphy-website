@@ -27,7 +27,17 @@ export default function Arcs({
     return(
         <div>
             <Head >
-                Alphy - Arcs
+                <title>Alphy - Arcs</title>
+                <meta property="og:title" content={"Alphy - Free-to-use AI Assistants"} />
+  <meta property="og:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
+    {/* <meta property="og:image" content={imageUrl} /> */}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Alphy - Turn audio to text, summarize, and generate content with AI" />
+  <meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary" />  
+  <meta name="twitter:title" content={"Alphy - Free-to-use AI Assistants"} />
+  <meta name="twitter:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
+
             </Head>
         
         <Hub

@@ -24,6 +24,18 @@ export default function HistoryPage({
         <div>
             <Head>
                 <title>Alphy - Creation History</title>
+                <meta property="og:title" content={"Alphy - History"} />
+  <meta property="og:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
+     <meta property="og:image" content={"https://ibb.co/3C8SscL"} /> 
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Alphy - Turn audio to text, summarize, and generate content with AI" />
+  <meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary" />  
+  <meta name="twitter:title" content={"Alphy - History"} />
+  <meta name="twitter:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
+
+    
+                
             </Head>
        
             <History
