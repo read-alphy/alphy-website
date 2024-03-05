@@ -98,19 +98,19 @@ if(data !== null && data.thumbnail !== null){
 }
 else {
   if (source_type === "x"){
-  imageUrl = X_Image
+  imageUrl = "/img/X.png"
   }
   else if (source_type === "yt"){
   imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`
   }
   else if (source_type === "sp"){
-  imageUrl = Twitter
+  imageUrl = "/img/twitter_space.webp"
   }
   else if (source_type === "ap"){
-  imageUrl = ApplePodcastBanner
+  imageUrl = "/img/apple_podcast_banner.png"
   }
   else if (source_type === "tw"){
-  imageUrl = Twitch
+  imageUrl = "/img/twitchSource.png"
   }
 } 
 

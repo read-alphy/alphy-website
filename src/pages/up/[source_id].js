@@ -53,7 +53,7 @@ const Source = dynamic(() => import('../../components/Content/Source'), {
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Alphy - Transcribe, summarize, generate content with AI" />
   <meta property="og:locale" content="en_US" />
-<meta name="twitter:card" content="summary" />  
+<meta name="twitter:card" content="summary_larger_image" />  
   <meta name="twitter:title" content={"Alphy - Private File"} />
   <meta name="twitter:description" content={`Explore audiovisual content like never before with Alphy. Transcribe, summarize, and interact with audio files effortlessly.`} />
   {/* <meta name="twitter:image" content={imageUrl} /> */}
