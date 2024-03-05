@@ -128,7 +128,7 @@ if (!data || source_id === undefined || source_type === undefined) {
   return(
       <div>
           <Head>
- <meta property="og:title" content={data.title!==undefined ? data.title: " Turn audio to text, summarize, and generate content with AI"} />
+ <meta property="og:title" content={data.title!==undefined ? data.title: "Turn audio to text, summarize, and generate content with AI"} />
   <meta property="og:description" content="'Explore audiovisual content like never before with Alphy. Transcribe, summarize, and interact with audio files effortlessly." />
   <meta property="og:image" content={imageUrl} />
   <meta property="og:url" content={`https://alphy.app/${source_type}/${source_id}`} />

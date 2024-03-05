@@ -275,7 +275,7 @@ useEffect (() => {
 
           </div> */}
 
-          <div className="mt-10 sm:mt-20 flex flex-col">
+         {/*  <div className="mt-10 sm:mt-20 flex flex-col">
             <div className="flex flex-col">
               <p className="text-2xl text-zinc-900 dark:text-zinc-200">
                 Meet Alphy's extension: Supercharge YouTube search with AI{' '}
@@ -306,7 +306,7 @@ useEffect (() => {
               </a>
               <div></div>
             </div>
-          </div>
+          </div> */}
           {/* {clientSide&& 
           <video
             className="  border-4 rounded-lg border-zinc-900 dark:border-zinc-400 drop-shadow-lg"
