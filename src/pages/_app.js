@@ -347,7 +347,7 @@ const additionalProps ={
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    <meta property="og:image" content={"https://ibb.co/3C8SscL"} /> 
+    <meta property="og:image" content="https://i.ibb.co/XCdF4tv/ALPHY.jpg" /> 
     
 
        <title>Alphy - AI Transcriber, Summarizer, Assistant</title>

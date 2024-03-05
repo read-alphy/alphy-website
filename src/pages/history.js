@@ -26,7 +26,7 @@ export default function HistoryPage({
                 <title>Alphy - Creation History</title>
                 <meta property="og:title" content={"See your creation history."} />
   <meta property="og:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
-     <meta property="og:image" content={"/img/ALPHY_LINK_IMAGE.png"} /> 
+     <meta property="og:image" content="https://i.ibb.co/XCdF4tv/ALPHY.jpg" /> 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Alphy - Turn audio to text, summarize, and generate content with AI" />
   <meta property="og:locale" content="en_US" />
