@@ -7,7 +7,6 @@ class MyDocument extends Document {
         <Head>
           {/* Static files and scripts */}
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap" />
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" />
           <script async src="https://tally.so/widgets/embed.js"></script>
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Z8TFG1KMS"></script>
           {/* More scripts and meta tags as needed */}

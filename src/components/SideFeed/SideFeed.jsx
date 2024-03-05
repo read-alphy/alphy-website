@@ -60,9 +60,11 @@ const [mobileScreen, setMobileScreen] = useState(false)
     setTimeout(() => {
       if(window.innerWidth < 640){
         setMobileScreen(true)
+        setSideFeedWidth(640)
+
       }
       setCalled(true)
-    }, 1000)
+    }, 300)
   }, [])
 
   const [groupedData, setGroupedData] = useState([])

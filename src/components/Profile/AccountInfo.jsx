@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
-//import { Popover } from 'flowbite';
+
 import FreeCard from './PricingCards/FreeCard'
 import BasicCard from './PricingCards/BasicCard'
 import PremiumCard from './PricingCards/PremiumCard'
