@@ -347,7 +347,18 @@ const additionalProps ={
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    <meta property="og:image" content="https://i.ibb.co/XCdF4tv/ALPHY.jpg" /> 
+    <meta property="og:image" content="https://i.ibb.co/Xt9WRkC/ALPHY-PREVIEW.png"/> 
+    <meta property="og:title" content={"Turn audio to text and generate content with AI"} />
+  <meta property="og:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Alphy - Turn audio to text, summarize, and generate content with AI" />
+  <meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary" />  
+  <meta name="twitter:title" content={"Turn audio to text and generate content on top."} />
+  <meta name="twitter:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
+
+    
     
 
        <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
