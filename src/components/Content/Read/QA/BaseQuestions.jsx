@@ -1,3 +1,10 @@
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from '@material-tailwind/react'
+import { Fragment, useState } from 'react'
+
 export default function BaseQuestions({
   key_qa,
   data,
@@ -68,7 +75,7 @@ export default function BaseQuestions({
     return `${formattedHours}h${formattedMinutes}m${formattedSeconds}s`
   }
 
-  // Example usage:
+  
 
   return (
     <div className="text-zinc-700 dark:text-zinc-300">
@@ -76,22 +83,22 @@ export default function BaseQuestions({
         {' '}
         Questions by Alphy
       </p>
+      <Fragment>
+   
+
+     
       {Object.keys(key_qa).map((item, index) => (
         <div
-          id="accordion-flush"
-          data-active-classes="bg-white dark:bg-mildDarkMode text-zinc-700 dark:text-zinc-300"
-          data-inactive-classes="text-gray-500 dark:text-gray-400"
+         className="bg-white dark:bg-mildDarkMode text-zinc-700 dark:text-zinc-300"
         >
-          <h2 id="accordion-flush-heading-1">
-            <button
-              onClick={event => handleBaseQAaccordion(event, index, item)}
-              type="button"
-              className="flex items-center justify-between w-full py-5 font-averta-semibold text-left text-zinc-700 border-b border-gray-200 dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	"
-              data-accordion-target="#accordion-flush-body-1"
-              aria-expanded="true"
-              aria-controls="accordion-flush-body-1"
-            >
-              <span className="font-averta-semibold text-md">{item}</span>
+             <Accordion   open={collapseIndex === index}>
+              
+        <AccordionHeader 
+        onClick={event => handleBaseQAaccordion(event, index, item)}
+      
+        > 
+      <div className=" flex flex-row dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	">
+              <span className="font-averta-semibold text-lg">{item}</span>
               <svg
                 data-accordion-icon
                 className={`w-6 h-6 ${
@@ -109,13 +116,13 @@ export default function BaseQuestions({
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </button>
-          </h2>
+            </div>
+          </AccordionHeader>
+
+
+      <AccordionBody className="text-md">
           <div
-            className={
-              index === collapseIndex && collapseIndex !== -1 ? '' : 'hidden'
-            }
-            aria-labelledby="accordion-flush-heading-1"
+                    
           >
             <div className="py-5 border-b border-gray-200 dark:border-gray-700">
               <div className="flex flex-row justify-end text-slate-400">
@@ -320,8 +327,13 @@ export default function BaseQuestions({
               </div>
             </div>
           </div>
+          </AccordionBody>
+          </Accordion>
         </div>
       ))}
+
+
+      </Fragment>
     </div>
   )
 }
