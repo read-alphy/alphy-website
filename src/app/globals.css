@@ -218,13 +218,13 @@ body {
   border-radius: inherit; /* Match the border-radius of the parent if needed */
   z-index: -1;
 }
-/* 
+
 html {
   overflow: hidden;
   height: 100%;
   
 }
- */
+
 body {
   display: flex;
   flex-direction: column;
