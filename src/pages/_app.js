@@ -354,7 +354,7 @@ const additionalProps ={
    <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
     
 </Head>
-    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
+    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 h-[120%]">
 
     <div
               className={`${

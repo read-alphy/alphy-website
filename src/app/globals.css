@@ -223,7 +223,7 @@ html {
   overflow: auto;
   height: 100vh;
   height : -webkit-fill-available;
-  top:0;
+  
 
 }
 
@@ -874,9 +874,7 @@ CONTENT PAGE
   padding-top: 20px;
 }
 
-.App {
-  height: 100%;
-  height: -webkit-fill-available;
+.App {  
   width: 100vw;
   margin: 0;
   padding: 0;
