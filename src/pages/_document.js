@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 class MyDocument extends Document {
   render() {
     return (
-      <html lang="en" className="bg-white dark:bg-darkMode ">
+      <html lang="en" >
         <Head>
           {/* Static files and scripts */}
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap" />
@@ -11,7 +11,7 @@ class MyDocument extends Document {
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Z8TFG1KMS"></script>
           {/* More scripts and meta tags as needed */}
         </Head>
-        <body>
+        <body className="bg-white dark:bg-darkMode">
           <Main />
           <NextScript />
           {/* Inline script and noscript tags */}

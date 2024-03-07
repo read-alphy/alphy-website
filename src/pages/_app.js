@@ -84,14 +84,17 @@ function MyApp({ Component, pageProps }) {
 
 
       useEffect (() => {
-        const theme = localStorage.getItem('theme')
-        
-
-        if(theme!==null){
-          document.documentElement.classList.add(theme)
-          document.documentElement.classList.add('dark-theme')
-        }
-
+       
+	if (localStorage.getItem("theme") !== null && localStorage.getItem("theme") !== undefined && localStorage.getItem("theme").length === 0) {
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			localStorage.setItem("theme", "dark")
+      setTheme('dark')
+		}
+		else {
+			localStorage.setItem("theme", "light")
+      setTheme('light')
+		}
+	}
         
       }
       , [])
