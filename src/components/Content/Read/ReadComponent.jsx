@@ -69,6 +69,7 @@ export default function ReadComponent({
 
 {
   const [isClient, setIsClient] = useState(false)
+  
 
   useEffect(() => {
     setIsClient(true)
@@ -115,8 +116,8 @@ export default function ReadComponent({
   
   return (
     <div id="content-area overscroll-none">
-  {isClient && 
-      (transcript.length > 0 &&
+  
+      {(transcript.length > 0 &&
       ((summary !== undefined &&
         summary.complete !== undefined &&
         language === summary.lang) ||
@@ -387,7 +388,7 @@ export default function ReadComponent({
                     </p>
                   </div>
                 ) : (
-                  summary.key_qa && (
+                  (summary.key_qa ) && (
                     <QuestionAnswering
                       source_id={data.source_id}
                       source_type={data.source_type}
