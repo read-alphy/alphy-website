@@ -69,13 +69,13 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke="currentColor"
-          class="w-8 h-8    text-zinc-700 dark:text-zinc-300 mr-2   "
+          className="w-8 h-8    text-zinc-700 dark:text-zinc-300 mr-2   "
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
           />
         </svg>
@@ -141,13 +141,13 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="currentColor"
-                        class="w-4 h-4 mt-1 ml-1"
+                        className="w-4 h-4 mt-1 ml-1"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                           d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
                         />
                       </svg>

@@ -96,13 +96,13 @@ useEffect (() => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="2"
+                  strokeWidth="2"
                   stroke="currentColor"
-                  class="w-5 h-5 mr-1 mt-0.5"
+                  className="w-5 h-5 mr-1 mt-0.5"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
                   />
                 </svg>
@@ -122,13 +122,13 @@ useEffect (() => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="2"
+                  strokeWidth="2"
                   stroke="currentColor"
-                  class="w-6 h-6 mr-2"
+                  className="w-6 h-6 mr-2"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
                   />
                 </svg>
@@ -150,9 +150,9 @@ useEffect (() => {
                   fill="none"
                   className="mr-2 mt-1 feather feather-compass"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <circle cx="12" cy="12" r="10"></circle>
                   <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>

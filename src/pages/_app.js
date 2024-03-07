@@ -339,15 +339,15 @@ const additionalProps ={
     <GoogleOAuthProvider clientId=  "1095799494177-qhg6sot0m532rg51j34kfrf3t0rds5sg.apps.googleusercontent.com">
 <AppRouterCacheProvider>
 
-    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
+    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 h-[110%]">
     <Head>
 
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="icon" href="/favicon.png" type= "image/png"/>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.png" type= "image/png"/>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
    
     
 

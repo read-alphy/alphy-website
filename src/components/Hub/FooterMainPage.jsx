@@ -13,7 +13,7 @@ export default function FooterMainPage({ currentUser }) {
   return (
     <div className="bottom-0">
       <div>
-        <div className="">
+        <div className="flex flex-row">
           <div className="flex flex-col">
             {!currentUser && (
               <div className=" mt-2 lg:mt-4 pl-6 md:pl-10">
@@ -44,7 +44,7 @@ export default function FooterMainPage({ currentUser }) {
             )}
           </div>
 
-          <div className="mt-2 lg:mt-4 pl-6 md:pl-10">
+          <div className="mt-2 pl-6 md:pl-10">
             <button
               className="text-zinc-500 dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"
               onClick={() => setOpenFeedbackDialog(true)}

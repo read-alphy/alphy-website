@@ -76,11 +76,12 @@ export default function FlagsArea() {
         languages.
       </p>
       <div className="max-w-[800px] flex flex-wrap gap-6 mt-10">
-        {languages.map(language => (
+        {languages.map((language,index) => (
           <div className="flex flex-col items-center justify-center mx-auto w-[100px] grid grid-rows-3">
             <img
               className="row-span-2 rounded-md   object-cover w-16 h-10 mx-auto"
               src={`https://flagcdn.com/w80/${language.country_code}.png`}
+              key={index}
               alt={languages.language}
             />
 

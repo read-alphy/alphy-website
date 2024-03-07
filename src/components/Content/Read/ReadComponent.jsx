@@ -20,11 +20,7 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-
-const QuestionAnswering = dynamic(() => import('../Read/QA/QuestionAnswering'), {
-  ssr: false,
-})
-
+import QuestionAnswering from '../Read/QA/QuestionAnswering'
 
 export default function ReadComponent({
   data,

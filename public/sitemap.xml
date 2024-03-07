@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      
+              <url>
+                <loc>https://alphy.app/404</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/about</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/account</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/arcs</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/explore</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/history</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/myhub</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/plans</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/privacypolicy</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/submit</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/arc/createArc</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/arc/editArc</loc>
+              </url>           
+              <url>
+                <loc>https://alphy.app/u/login</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/u/register</loc>
+              </url>
+            
+              <url>
+                <loc>https://alphy.app/plans/checkout/success</loc>
+              </url>
+            
+    </urlset>
