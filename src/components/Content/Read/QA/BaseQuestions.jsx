@@ -100,7 +100,7 @@ export default function BaseQuestions({
       <div className=" flex flex-row dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	">
               <span className="font-averta-semibold text-lg">{item}</span>
               <svg
-                data-accordion-icon
+              
                 className={`w-6 h-6 ${
                   index === collapseIndex && collapseIndex !== -1
                     ? 'rotate-180'
