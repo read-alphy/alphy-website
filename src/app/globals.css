@@ -220,10 +220,11 @@ body {
 }
 
 html {
-  overflow: hidden;
-  height: 100%;
+  overflow: auto;
+  height: 100vh;
   height : -webkit-fill-available;
-  
+  top:0;
+
 }
 
 body {
