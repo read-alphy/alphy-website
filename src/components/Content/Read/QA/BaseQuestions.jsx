@@ -71,7 +71,7 @@ export default function BaseQuestions({
   // Example usage:
 
   return (
-    <div>
+    <div className="text-zinc-700 dark:text-zinc-300">
       <p className="mb-5 underline text-l font-averta-semibold text-zinc-600 dark:text-zinc-300">
         {' '}
         Questions by Alphy

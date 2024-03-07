@@ -132,7 +132,7 @@ export default function PremiumCard({
       
         
       <p className="mt-3 text-gray-400">Experience audiovisual mastery </p>
-      <div className={`h-[720px] `}>
+      <div className={`h-[720px] relative `}>
         <ul role="list" className="space-y-5 my-7">
         <li className="flex space-x-3">
            
@@ -357,13 +357,13 @@ export default function PremiumCard({
         </ul>
       </div>
 
-      
+<div className="w-full flex items-center justify-center -mt-16   "> 
             <button
               onClick={getSubscriptionLink}
               type="button"
-              className={`absolute bottom-12 normal-case text-white transition duration-200 ease-in ${
+              className={`normal-case text-white transition duration-200 ease-in   ${
                 tier === 'premium' ? 'pointer-events-none text-whiteLike' : ''
-              } rounded-lg text-[16px]  drop-shadow-sm  bg-[#4262ff] font-averta-semibold px-5 py-3  justify-center w-[295px] text-center `}
+              } rounded-lg text-[16px]  drop-shadow-sm  bg-[#4262ff] font-averta-semibold px-5 py-3  justify-center w-full text-center `}
             >{
 
               subscriptionLinkLoading ? (<Spinner color="white" className=" w-5 text-center margin-auto w-full" />)
@@ -375,7 +375,7 @@ export default function PremiumCard({
             </button>
       
          
-      
+      </div>
     </div>
   )
 }

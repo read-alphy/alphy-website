@@ -11,7 +11,7 @@ export default function FooterMainPage({ currentUser }) {
   const [openFeedbackDialog, setOpenFeedbackDialog] = useState(false)
 
   return (
-    <div className="bottom-0">
+    <div className="bottom-0 text-zinc-700 dark:text-zinc-300">
       <div>
         <div className="flex flex-row">
           <div className="flex flex-col">
@@ -44,7 +44,7 @@ export default function FooterMainPage({ currentUser }) {
             )}
           </div>
 
-          <div className="mt-2 pl-6 md:pl-10">
+          <div className="mt-1 pl-6 md:pl-10">
             <button
               className="text-zinc-500 dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"
               onClick={() => setOpenFeedbackDialog(true)}

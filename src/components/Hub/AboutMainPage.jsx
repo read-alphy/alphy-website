@@ -15,7 +15,7 @@ export default function AboutMainPage() {
   return (
     <div
       id="about"
-      className="px-4 container max-w-4xl mt-20 pb-20 text-l lg:text-l"
+      className="px-4 container max-w-4xl mt-20 pb-20 text-l lg:text-l  text-zinc-700 dark:text-zinc-300"
     >
       <Fragment>
         <Accordion className="cursor-default" open={true}>

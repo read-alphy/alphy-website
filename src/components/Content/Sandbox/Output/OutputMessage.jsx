@@ -22,7 +22,10 @@ export default function OutputMessage({
 
 useEffect (() => {
   if(localStorage.getItem('theme') === null) {
-  setTheme(localStorage.getItem('theme'))
+  setTheme('light')
+  }
+  else{
+    setTheme(localStorage.getItem('theme'))
   }
 }, [])
 

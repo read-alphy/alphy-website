@@ -13,10 +13,14 @@ import { API_URL } from '../../constants'
 
 import ChromeIcon from '../../../public/img/chrome_icon.png'
 import { Button } from '@material-tailwind/react'
-import AboutMainPage from './AboutMainPage.jsx'
 import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+const AboutMainPage = dynamic(() => import('./AboutMainPage'), {
+  ssr: false,
+})
 
 
 export default function WelcomeExplainer({
