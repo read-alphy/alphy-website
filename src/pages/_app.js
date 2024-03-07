@@ -334,6 +334,21 @@ const additionalProps ={
     setLoggedIn : setLoggedIn,
 
 }
+function adjustLayoutHeight() {
+  const viewportHeight = window.innerHeight;
+  document.documentElement.style.height = `${viewportHeight}px`;
+  // Additionally adjust for other elements if necessary
+}
+
+useEffect(() => {
+window.addEventListener('load', adjustLayoutHeight);
+window.addEventListener('resize', adjustLayoutHeight);
+return () => {
+  window.removeEventListener('load', adjustLayoutHeight);
+  window.removeEventListener('resize', adjustLayoutHeight);
+}
+}, []);
+
 
 
 
@@ -357,7 +372,7 @@ const additionalProps ={
     <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 h-[120%]">
 
     <div
-              className={` fixed top-0 z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
+              className={` top-0 z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
                 router.asPath.split('/')[1] === 'arc' &&
                 router.asPath.split('/')[2] !== 'editArc' &&
                 router.asPath.split('/')[2] !== 'createArc'
