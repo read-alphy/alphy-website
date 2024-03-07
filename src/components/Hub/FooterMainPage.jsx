@@ -12,7 +12,7 @@ export default function FooterMainPage({ currentUser }) {
 
   return (
     <div className="bottom-0 text-zinc-700 dark:text-zinc-300">
-      <div>
+      {/* <div>
         <div className="flex flex-row">
           <div className="flex flex-col">
             {!currentUser && (
@@ -31,7 +31,7 @@ export default function FooterMainPage({ currentUser }) {
                 className="text-zinc-500  mt-2 lg:mt-4 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 "
                 href="/account"
               >
-                {/* <PersonIcon className="text-zinc-300 mr-2" fontSize="medium"/> */}
+                
                 <span className="font-averta-semibold">Account</span>
               </Link>
             ) : (
@@ -53,7 +53,7 @@ export default function FooterMainPage({ currentUser }) {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 
