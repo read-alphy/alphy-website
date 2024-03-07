@@ -79,7 +79,7 @@ export default function BaseQuestions({
       {Object.keys(key_qa).map((item, index) => (
         <div
           id="accordion-flush"
-          data-active-classes="bg-white dark:bg-mildDarkMode text-gray-900 dark:text-white"
+          data-active-classes="bg-white dark:bg-mildDarkMode text-zinc-700 dark:text-zinc-300"
           data-inactive-classes="text-gray-500 dark:text-gray-400"
         >
           <h2 id="accordion-flush-heading-1">
@@ -197,7 +197,7 @@ export default function BaseQuestions({
                                   singleSource === true &&
                                   showSource !== index + 1 &&
                                   'hidden'
-                                } font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5`}
+                                } font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5 text-zinc-700 dark:text-zinc-300`}
                                 key={index}
                               >
                                 {source.start !== null &&

@@ -14,7 +14,7 @@ function Navbar({ collapsed, setCollapsed }) {
   
 
   useEffect(() => {
-    if (
+    /* if (
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -22,7 +22,7 @@ function Navbar({ collapsed, setCollapsed }) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
-    }
+    } */
 
     const handleResize = () => {}
 
