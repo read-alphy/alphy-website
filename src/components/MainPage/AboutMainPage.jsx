@@ -126,9 +126,9 @@ export default function AboutMainPage() {
           id="about"
           className="container w-5/6 max-w-4xl mt-20  text-l lg:text-l"
         >
-          <h1 className="text-2xl mb-5 underline font-averta-semibold">
+          <h2 className="text-2xl mb-5 underline font-averta-semibold">
             Subscription & Billing
-          </h1>
+          </h2>
         </div>
         <Accordion className="mt-6" open={true}>
           <AccordionHeader

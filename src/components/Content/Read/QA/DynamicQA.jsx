@@ -70,7 +70,7 @@ export default function DynamicQA({
       {answerData.answer ? (
         <div>
           <div className="flex flex-row mb-4">
-            <h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200">
+            <h2 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200">
               {' '}
               <span className=" font-averta-semibold">Answer from Alphy</span>
               <svg
@@ -89,7 +89,7 @@ export default function DynamicQA({
                   fillRule="evenodd"
                 ></path>
               </svg>
-            </h1>
+            </h2>
             <div className="col-span-1 justify-end flex flex-row flex ">
               <svg
                 onClick={handleShareLink}
@@ -156,7 +156,7 @@ export default function DynamicQA({
           {answer ? (
             <div>
               <div>
-                <h1 className="mb-4 text-sm font-normal md:mb-8"> </h1>
+                <h2 className="mb-4 text-sm font-normal md:mb-8"> </h2>
 
                 {answerData.sources.map((source, index) => (
                   <div

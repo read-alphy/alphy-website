@@ -2,9 +2,9 @@ export default function PrivacyPolicy() {
   return (
     <div className="dark:bg-darkMode w-full pt-1 font-averta-regular sm:px-10">
       <div className="text-zinc-600 dark:text-zinc-200 mt-20 mb-40 mx-auto max-w-[850px] pl-5 pr-5 ">
-        <h1 className="text-3xl font-averta-semibold mb-5 pt-5 ">
+        <h2 className="text-3xl font-averta-semibold mb-5 pt-5 ">
           Privacy Policy
-        </h1>
+        </h2>
         <p className="pt-1 font-averta-regular">Last updated: March 02, 2023</p>
         <p className="pt-1 font-averta-regular">
           This Privacy Policy describes Our policies and procedures on the
@@ -17,9 +17,9 @@ export default function PrivacyPolicy() {
           the Service, You agree to the collection and use of information in
           accordance with this Privacy Policy.{' '}
         </p>
-        <h1 className="text-xl font-averta-semibold mb-5 mt-10">
+        <h2 className="text-xl font-averta-semibold mb-5 mt-10">
           Interpretation and Definitions
-        </h1>
+        </h2>
         <h2 className="text-l font-semibold mt-5 mb-3">Interpretation</h2>
         <p className="pt-1 font-averta-regular">
           The words of which the initial letter is capitalized have meanings
@@ -123,9 +123,9 @@ export default function PrivacyPolicy() {
             </p>
           </li>
         </ul>
-        <h1 className="text-xl font-averta-semibold mb-5 mt-10">
+        <h2 className="text-xl font-averta-semibold mb-5 mt-10">
           Collecting and Using Your Personal Data
-        </h1>
+        </h2>
         <h2 className="text-l font-semibold mt-5 mb-3">
           Types of Data Collected
         </h2>
@@ -487,9 +487,9 @@ export default function PrivacyPolicy() {
           acceptable means to protect Your Personal Data, We cannot guarantee
           its absolute security.
         </p>
-        <h1 className="text-xl font-averta-semibold mb-5 mt-10">
+        <h2 className="text-xl font-averta-semibold mb-5 mt-10">
           Children's Privacy
-        </h1>
+        </h2>
         <p className="pt-1 font-averta-regular">
           Our Service does not address anyone under the age of 13. We do not
           knowingly collect personally identifiable information from anyone
@@ -505,9 +505,9 @@ export default function PrivacyPolicy() {
           require Your parent's consent before We collect and use that
           information.
         </p>
-        <h1 className="text-xl font-averta-semibold mb-5 mt-10">
+        <h2 className="text-xl font-averta-semibold mb-5 mt-10">
           Links to Other Websites
-        </h1>
+        </h2>
         <p className="pt-1 font-averta-regular">
           Our Service may contain links to other websites that are not operated
           by Us. If You click on a third party link, You will be directed to
@@ -518,9 +518,9 @@ export default function PrivacyPolicy() {
           We have no control over and assume no responsibility for the content,
           privacy policies or practices of any third party sites or services.
         </p>
-        <h1 className="text-xl font-averta-semibold mb-5 mt-10">
+        <h2 className="text-xl font-averta-semibold mb-5 mt-10">
           Changes to this Privacy Policy
-        </h1>
+        </h2>
         <p className="pt-1 font-averta-regular">
           We may update Our Privacy Policy from time to time. We will notify You
           of any changes by posting the new Privacy Policy on this page.
@@ -535,7 +535,7 @@ export default function PrivacyPolicy() {
           changes. Changes to this Privacy Policy are effective when they are
           posted on this page.
         </p>
-        <h1 className="text-xl font-averta-semibold mb-5 mt-10">Contact Us</h1>
+        <h2 className="text-xl font-averta-semibold mb-5 mt-10">Contact Us</h2>
         <p className="pt-1 font-averta-regular">
           If you have any questions about this Privacy Policy, You can contact
           us:

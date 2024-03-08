@@ -4,7 +4,7 @@ import HubArcFeed from './HubArcFeed'
 import HubSubmitPage from './HubSubmitPage'
 import HubUserPage from './HubUserPage.jsx'
 import Link from 'next/link'
-import WelcomeExplainer from './WelcomeExplainer'
+import WelcomeExplainer from '../MainPage/WelcomeExplainer'
 
 export default function HubContent({
   arcs,

@@ -215,9 +215,9 @@ const AuthInfo = () => {
         resetPassword === false ? (
           <div className="mb-20 w-[300px]">
             <div>
-              <h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">
+              <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">
                 {isRegister ? 'Create an account' : 'Login'}{' '}
-              </h1>
+              </h2>
 
               <form
                 onSubmit={
@@ -372,9 +372,9 @@ const AuthInfo = () => {
           </div>
         ) : oobCode === null || oobCode === undefined ? (
           <div className="mb-20 w-[300px]">
-            <h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700 font-averta-semibold">
+            <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700 font-averta-semibold">
               Reset Password{' '}
-            </h1>
+            </h2>
             <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold">
               Enter your email address and we will send you a link to reset your
               password.
@@ -432,9 +432,9 @@ const AuthInfo = () => {
           <div className="mb-20 w-[300px]">
             {successMessage === false ? (
               <div>
-                <h1 className="text-xl mb-8 font-averta-semibold">
+                <h2 className="text-xl mb-8 font-averta-semibold">
                   Pick a New Password{' '}
-                </h1>
+                </h2>
                 <p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300 font-averta-semibold">
                   You are about to reset your password. Please make sure your
                   new password is longer than 8 characters.
@@ -542,10 +542,10 @@ const AuthInfo = () => {
         )
       ) : (
         <div className="mb-20 w-[300px]">
-          <h1 className="text-xl mb-8 font-averta-semibold">
+          <h2 className="text-xl mb-8 font-averta-semibold">
             We sent a verification link to{' '}
             {email !== null ? email : 'your email'}!
-          </h1>
+          </h2>
           <p className="text-sm text-zinc-600 mb-10 font-averta-semibold">
             Please follow the link to complete your registration. If you didn't
             get the email, try again from the link below.

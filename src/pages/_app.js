@@ -366,6 +366,8 @@ return () => {
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+{/* /*meta description */}
+<meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of the best online conversations. Try Alphy for free!"/>
 
 
 

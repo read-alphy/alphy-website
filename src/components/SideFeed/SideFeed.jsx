@@ -228,7 +228,7 @@ const [mobileScreen, setMobileScreen] = useState(false)
                     className="dark:hidden opacity-80 "
                     alt="Alphy Logo"
                   ></Image>
-                  <h1 className="ml-1 text-2xl mt-1 ">ALPHY</h1>
+                  <h2 className="ml-1 text-2xl mt-1 ">ALPHY</h2>
                 </div>
               </Link>
               <div className="hidden md:flex ml-16 w-full justify-end items-end ">

@@ -28,7 +28,7 @@ export default function AboutInfo() {
           className="dark:hidden opacity-80 "
           alt="Alphy Logo"
         ></Image>
-        <h1 className="ml-2 mt-4 text-4xl font-bold">ALPHY</h1>
+        <h2 className="ml-2 mt-4 text-4xl font-bold">ALPHY</h2>
       </div>
 
       <div
@@ -39,9 +39,9 @@ export default function AboutInfo() {
           id="about"
           className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l"
         >
-          <h1 className="text-2xl mb-5 underline font-averta-semibold">
+          <h2 className="text-2xl mb-5 underline font-averta-semibold">
             About Alphy
-          </h1>
+          </h2>
           <Fragment>
             <Accordion className="cursor-default" open={true}>
               <AccordionHeader
@@ -151,9 +151,9 @@ export default function AboutInfo() {
               id="about"
               className="container w-5/6 max-w-4xl mt-20  text-l lg:text-l"
             >
-              <h1 className="text-2xl mb-5 underline font-averta-semibold">
+              <h2 className="text-2xl mb-5 underline font-averta-semibold">
                 Subscription & Billing
-              </h1>
+              </h2>
             </div>
             <Accordion className="mt-6" open={true}>
               <AccordionHeader

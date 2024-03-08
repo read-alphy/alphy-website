@@ -15,8 +15,10 @@ import ChromeIcon from '../../../public/img/chrome_icon.png'
 import { Button } from '@material-tailwind/react'
 import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
+import ValueCards from './ValueCards'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+
 
 const AboutMainPage = dynamic(() => import('./AboutMainPage'), {
   ssr: false,
@@ -190,10 +192,10 @@ useEffect (() => {
             </div>
           </div>
 
-          <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 font-averta-semibold"></div>
+          
 
           <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg mt-16">
-            Supported Platforms 
+            
             <div className="flex flex-row  mx-auto w-full mt-4       sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
               { <div className="hidden sm:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
                     <AudioFileIcon title="Local Audio Files" className="row-span-3 lg:row-span-2 flex mx-auto max-w-[80px] sm:max-s-[120px] " sx={{
@@ -201,7 +203,7 @@ useEffect (() => {
                       width:`100px` ,
                       height:`80px`,
                     }}/>
-                    <p className=" hidden lg:block text-md font-averta-regular text-[14px] lg:text-[16px]">Local Audio Files</p>
+                    <p className=" hidden lg:block text-md font-averta-regular text-[14px] lg:text-[16px] mt-2">Local Audio Files</p>
                     </div>
  }
               <div className="grid grid-rows-3 items-center text-center sm:mr-4   mx-2 max-w-[160px]">
@@ -323,6 +325,10 @@ useEffect (() => {
            
           </video>
           } */}
+        </div>
+        <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 font-averta-semibold"></div>
+        <div>
+        <ValueCards/>
         </div>
         <div className="">
           <FlagArea />
