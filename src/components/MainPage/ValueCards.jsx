@@ -84,7 +84,7 @@ export default function ValueCards(){
 <div className="grid grid-row-1 md:grid-cols-2  2xl:grid-cols-3 gap-6 ">
 
 <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
-          <Image src="/educationIcons/Alarm clock.svg" width={120} height={120} className="mx-auto "/> 
+          <Image src="/educationIcons/AlarmClock.svg" width={120} height={120} className="mx-auto "/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl"> Save 95% Time with Powerful Summaries</p>
           <p className="font-light text-md mt-2">Read the key takeaways or chapterized summaries to distill essential information and get rid of the clutter</p>
@@ -107,7 +107,7 @@ export default function ValueCards(){
 
 
                 <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
-          <Image src="/educationIcons/Student card.svg" width={120} height={120} className="mx-auto "/> 
+          <Image src="/educationIcons/StudentCard.svg" width={120} height={120} className="mx-auto "/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl">Build Custom AI Agents on Audio </p>
           <p className="font-light text-md mt-2"> Combine your uploads and online content and create a powerful AI agent ready to answer all your questions from the audio content you specify. </p>

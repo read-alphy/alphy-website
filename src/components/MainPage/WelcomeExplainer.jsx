@@ -76,7 +76,7 @@ useEffect (() => {
               </p>
             </div>
           )} */}
-          <p className="text-zinc-900 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">
+          <p className="text-slate-700 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">
           Turn audio to text, summarize, and generate content with AI
           </p>
           <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[640px]">
