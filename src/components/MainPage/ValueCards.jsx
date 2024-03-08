@@ -8,11 +8,11 @@ export default function ValueCards(){
     return(
         <div className="mt-20 max-w-[1000px] 2xl:max-w-[1200px] px-6">
             {/* <h2 className="pb-10 text-4xl  text-center items-center flex justify-center">Features</h2> */}
-            <h2 className="pb-10 text-3xl  text-center items-center flex justify-center md:justify-start ">Features</h2>
+            <h2 className="pb-10 text-3xl  text-center items-center flex justify-center md:justify-start text-slate-700 dark:text-zinc-300">Features</h2>
 <div className="grid grid-row-1 md:grid-cols-2  2xl:grid-cols-3 gap-6 ">
        
 
-            <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+            <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Medal.svg" width={120} height={120} className="mx-auto "/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl"> Transcribe with High Accuracy</p>
@@ -23,7 +23,7 @@ export default function ValueCards(){
 
 
 
-          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Books.svg" width={120} height={120} className="mx-auto"/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl">Upload Meetings, Lectures, or Any Recording</p>
@@ -31,7 +31,7 @@ export default function ValueCards(){
           </div>
           </div>
 
-          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
             <Image src="/educationIcons/Video.svg" width={120} height={120} className="mx-auto"/>    
 
             <div className="flex flex-col pb-6">
@@ -40,7 +40,7 @@ export default function ValueCards(){
             </div>
           </div>
 
-          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
             <Image src="/educationIcons/Textbook.svg" width={120} height={120} className="mx-auto mt-2"/>    
 
             <div className="flex flex-col pb-6">
@@ -51,7 +51,7 @@ export default function ValueCards(){
             </div>
 
             
-          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Globus.svg" width={120} height={120} className="mx-auto "/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl"> Break Down Language Barriers</p>
@@ -60,7 +60,7 @@ export default function ValueCards(){
           </div>
           </div>
 
-          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
             <Image src="/educationIcons/Physics.svg" width={120} height={120} className="mx-auto"/>    
 
             <div className="flex flex-col pb-6">
@@ -80,10 +80,10 @@ export default function ValueCards(){
 </div>
 
 <div className="flex flex-col mt-20">
-<h2 className="pb-10 text-3xl  text-center items-center flex justify-center md:justify-start">For Productivity</h2>
+<h2 className="pb-10 text-3xl  text-center items-center flex justify-center md:justify-start text-slate-700 dark:text-zinc-300">For Productivity</h2>
 <div className="grid grid-row-1 md:grid-cols-2  2xl:grid-cols-3 gap-6 ">
 
-<div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+<div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Alarm clock.svg" width={120} height={120} className="mx-auto "/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl"> Save 95% Time with Powerful Summaries</p>
@@ -94,7 +94,7 @@ export default function ValueCards(){
 
 
                                         
-                <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+                <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Communication.svg" width={120} height={120} className="mx-auto "/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl"> Get Accurate Answers with Precise Timestamps </p>
@@ -106,7 +106,7 @@ export default function ValueCards(){
 
 
 
-                <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+                <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Student card.svg" width={120} height={120} className="mx-auto "/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl">Build Custom AI Agents on Audio </p>
@@ -120,11 +120,11 @@ export default function ValueCards(){
 </div>
 </div>
 <div className="flex flex-col mt-20">
-<h2 className="pb-10 text-3xl  text-center items-center flex justify-center md:justify-start">For Creators</h2>
+<h2 className="pb-10 text-3xl  text-center items-center flex justify-center md:justify-start text-slate-700 dark:text-zinc-300">For Creators</h2>
 <div className="grid grid-row-1 md:grid-cols-2  2xl:grid-cols-3 gap-6 ">
 
 
-<div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+<div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Pendilum.svg" width={120} height={120} className="mx-auto"/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl">Turn Discussions to New Content</p>
@@ -136,7 +136,7 @@ export default function ValueCards(){
           </div>
 
         
-<div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+<div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Presentation.svg" width={120} height={120} className="mx-auto"/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl">Educational Material</p>
@@ -146,7 +146,7 @@ export default function ValueCards(){
 
           
           </div>
-          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
+          <div className="max-w-[400px] md:max-w-[350px] 3xl:max-w-[400px] rounded-xl border bg-slate-50 dark:bg-mildDarkMode drop-shadow-md dark:drop-shadow-none border-gray-300 dark:border-zinc-700  justify-center items-center mx-auto px-10 dark:hover:bg-zinc-800 hover:bg-slate-100 duration-300 ease-in-out transition-all">
           <Image src="/educationIcons/Rating.svg" width={120} height={120} className="mx-auto"/> 
           <div className="flex flex-col pb-6">
           <p className="font-averta-semibold text-xl">SEO & Copywriting & Research</p>
