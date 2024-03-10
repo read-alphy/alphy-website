@@ -130,7 +130,7 @@ export default function SubmitBlock({
       )}
       <div className="flex items-center  mt-4 space-x-4 md:justify-center lg:mt-0  ">
         <div className="w-full flex flex-col">
-          {inputValue.includes('twitter.com/') &&
+       {/*    {inputValue.includes('twitter.com/') &&
             inputValue.includes('/status/') && (
               <p className="mt-2 text-yellow-400 dark:text-amber-200 text-sm items-center">
                 <WarningIcon
@@ -142,7 +142,7 @@ export default function SubmitBlock({
                   submit a Twitter Space, please get the link to the Space.
                 </span>
               </p>
-            )}
+            )} */}
 
           {currentUser && (
             <span className="text-sm mb-2 mt-4 text-gray-600 dark:text-zinc-300 ">
