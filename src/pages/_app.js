@@ -367,11 +367,11 @@ return () => {
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 {/* /*meta description */}
-<meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of the best online conversations. Try Alphy for free!"/>
+<meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of YouTube, Twitter Spaces, and Podcasts. Try Alphy for free!"/>
 
+    
 
-
-   <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
+   <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, Twitter Spaces, and Podcasts </title>
     
 </Head>
     <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
