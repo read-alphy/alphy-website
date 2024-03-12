@@ -198,7 +198,7 @@ export default function Footer({
             </div>
           </div>
 
-          <div className=" mt-6 text-sm cursor-pointer text-zinc-500  dark:text-zinc-300">
+          {/* <div className=" mt-6 text-sm cursor-pointer text-zinc-500  dark:text-zinc-300">
             {theme==="light" ? (
               <div onClick={handleDarkMode} className="flex flex-row">
                 <svg
@@ -242,7 +242,7 @@ export default function Footer({
                 </svg>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       )}
 
