@@ -5,7 +5,7 @@ import * as Selection from 'selection-popover'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import TwitchIcon from '../../../../public/img/twitch.png'
 import X from '../../../../public/img/X.png'
-import TwitterSpaces from '../../../../public/img/twitter_space.webp'
+import TwitterSpaces from '../../../../public/img/twitter_space.png'
 
 import {
   Popover,

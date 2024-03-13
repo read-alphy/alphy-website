@@ -1,5 +1,5 @@
 import { inputMessages } from '../Content/Sandbox/messageBank'
-import Twitter from '../../../public/img/twitter_space.webp'
+import Twitter from '../../../public/img/twitter_space.png'
 import ApplePodcast from '../../../public/img/apple_podcast_banner.png'
 import Twitch from '../../../public/img/twitchSource.png'
 import X from '../../../public/img/X.png'

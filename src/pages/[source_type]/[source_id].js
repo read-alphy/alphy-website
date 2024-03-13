@@ -5,7 +5,7 @@ import { API_URL } from '../../constants'
 import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Twitter from '../../../public/img/twitter_space.webp'
+import Twitter from '../../../public/img/twitter_space.png'
 import ApplePodcastBanner from '../../../public/img/apple_podcast_banner.png'
 import Twitch from '../../../public/img/twitchSource.png'
 import X_Image from '../../../public/img/X.png'
@@ -104,7 +104,7 @@ else {
   imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`
   }
   else if (source_type === "sp"){
-  imageUrl = "/img/twitter_space.webp"
+  imageUrl = "/img/twitter_space.png"
   }
   else if (source_type === "ap"){
   imageUrl = "/img/apple_podcast_banner.png"
@@ -135,7 +135,7 @@ if (!data || source_id === undefined || source_type === undefined) {
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content={data.title!==undefined ? `Alphy - ${data.title}`: "Turn audio to text, summarize, and generate content with AI"} />
   <meta property="og:locale" content="en_US" />
-<meta name="twitter:card" content="summary_large_image" />  
+  <meta name="twitter:card" content="summary_large_image" />  
   <meta name="twitter:title" content={data.title!==undefined ? data.title: "Alphy - Turn audio to text, summarize, and generate content with AI"} />
   <meta name="twitter:description" content={`${data.summaries!== undefined && data.summaries[0]!== undefined && data.summaries[0].key_takeaways!==null ? data.summaries[0].key_takeaways : 'Explore audiovisual content like never before with Alphy. Transcribe, summarize, and interact with audio files effortlessly.'}`} />
   <meta name="twitter:image" content={imageUrl} />
