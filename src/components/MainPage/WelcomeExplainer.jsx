@@ -113,7 +113,7 @@ useEffect (() => {
                   />
                 </svg>
               )}
-              {loggedIn ?'Submit a Link'
+              {currentUser ?'Submit a Link'
                 
                 : 'Start for Free'}
             </Link>
