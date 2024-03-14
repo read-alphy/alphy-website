@@ -97,7 +97,7 @@ useEffect (() => {
               
               `}
             >
-              {loggedIn && (
+              {currentUser && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -118,7 +118,7 @@ useEffect (() => {
                 : 'Start for Free'}
             </Link>
         
-            {loggedIn ? (
+            {currentUser ? (
               <Link
                 href="/submit"
                 onClick={() => localStorage.setItem('newItem', 'upload')}
