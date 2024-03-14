@@ -52,15 +52,14 @@ export default function AboutInfo() {
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="text-l dark:text-zinc-300 font-averta-regular">
-                  Alphy is a set of tools designed to help users interact with
-                  online and offline audiovisual content as easily and
-                  effectively as possible. We use AI to transcribe, summarize,
-                  and let users create their own AI search engines on top of
-                  videos and recordings.
-                  <br />
-                  <br />
-                  Our goal is to make the information in audiovisual content as
-                  readily available as written content.
+                Alphy is a set of AI tools designed to help users interact with
+              online and offline audiovisual content as easily and effectively
+              as possible. 
+              <br/>
+              <br/>
+              We use AI to transcribe, summarize, question, and let users
+              create new written content on top of videos and
+              recordings. 
                 </p>
               </AccordionBody>
             </Accordion>
@@ -96,10 +95,10 @@ export default function AboutInfo() {
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="font-averta-regular">
-                  You can use Alphy to transcribe, summarize, and question
-                  YouTube videos, Twitter / X Spaces, Twitter / X videos, Twitch
-                  recordings, Apple Podcasts, and your local audio files (.mp3,
-                  .m4a, .mpga, .mpeg, .wav, or .webm).
+                You can use Alphy on YouTube
+              videos, Twitter / X Spaces, Twitter / X videos, Twitch recordings,
+              Apple Podcasts, and your local audio files (.mp3, .m4a, .mpga,
+              .mpeg, .wav, or .webm).
                 </p>
               </AccordionBody>
             </Accordion>
@@ -126,6 +125,7 @@ export default function AboutInfo() {
                 </p>
               </AccordionBody>
             </Accordion>
+            
             <Accordion className="mt-6" open={true}>
               <AccordionHeader
                 className="cursor-default font-averta-semibold"

@@ -334,7 +334,7 @@ useEffect (() => {
           <FlagArea />
         </div>
 
-        <div className="sm:hidden">
+        <div className="">
           <AboutMainPage />
         </div>
       </div>

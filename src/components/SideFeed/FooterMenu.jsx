@@ -209,7 +209,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
       <div className="  pl-6 ">
         <Link
           className="text-zinc-500 dark:text-zinc-300 text-sm font-averta-semibold   my-3  flex flex-row w-full cursor-pointer w-[120px]"
-          href="/about "
+          href="/#about "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
