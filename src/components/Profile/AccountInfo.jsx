@@ -169,10 +169,11 @@ export default function AccountInfo({
   
   const getCreditPurchaseLink= async () => {
     setCreditPurchaseLoading(true)
+    let localQuantity = quantity > 0 ? quantity : 1
     await currentUser.getIdToken().then(idToken => {
       axios
         .post(
-          `${API_URL}/payments/v2/credit?quantity=${quantity}`,
+          `${API_URL}/payments/v2/credit?quantity=${localQuantity}`,
           {},
           {
             headers: {
@@ -554,7 +555,7 @@ export default function AccountInfo({
                 'pointer-events-none opacity-60'
               }`}
               size="md"
-              onClick={buyCredit}
+              onClick={() => getCreditPurchaseLink()}
             >
               {creditPurchaseLoading ? (
                 <Spinner

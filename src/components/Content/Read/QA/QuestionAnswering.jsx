@@ -23,6 +23,7 @@ export default function QuestionAnswering({
   setInputValue,
   inputRef,
   buttonRef,
+  setSelectionCall,
 
 
   

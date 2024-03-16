@@ -403,6 +403,7 @@ export default function ReadComponent({
                       data={data}
                       transcript={transcript}
                       timestampChanger={timestampChanger}
+                      currentUser={currentUser}
                     />
                   )
                 )}
