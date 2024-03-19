@@ -185,6 +185,7 @@ export default function QuestionAnswering({
 
   const formatAnswer = (answer, answerData) => {
     const cleanedText = answer.replace(/\r?\n|\r/g, ' ')
+
     const regexPattern = /\]\./g
     const replaceEverySecondOccurrence = (text, pattern, replacement) => {
       let count = 0

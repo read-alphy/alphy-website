@@ -25,7 +25,44 @@ export default function BaseQuestions({
   const oct31 = new Date('2023-10-31T00:00:00+00:00')
   const added_ts = new Date(data.added_ts)
 
+
+
+  function convertTimeToSeconds(time) {
+    // Check if the input is a string and matches the ISO 8601 duration format
+    if (typeof time === 'string' && time.match(/^PT/)) {
+      const matches = time.match(/PT(\d+H)?(\d+M)?(\d+(?:\.\d+)?S)?/);
+      let seconds = 0;
+  
+      // If hours are present, convert them to seconds and add to total
+      if (matches[1]) {
+        seconds += parseInt(matches[1]) * 3600;
+      }
+  
+      // If minutes are present, convert them to seconds and add to total
+      if (matches[2]) {
+        seconds += parseInt(matches[2]) * 60;
+      }
+  
+      // If seconds are present, add them to total
+      if (matches[3]) {
+        seconds += parseFloat(matches[3]);
+      }
+  
+      return seconds;
+    } else if (typeof time === 'number' || (typeof time === 'string' && time.match(/^\d+(?:\.\d+)?$/))) {
+      // If the input is a numeric value or a string representing a number, parse it directly
+      return parseFloat(time);
+    } else {
+      // If the input is neither, return null or throw an error
+      return null;
+    }
+  }
+
+
+
   function timestampFormatter(sourceStart, sourceEnd) {
+    sourceStart = convertTimeToSeconds(sourceStart)
+    sourceEnd = convertTimeToSeconds(sourceEnd)
     return (
       <div>
         {Math.floor(sourceStart / 3600) < 10
@@ -98,7 +135,7 @@ export default function BaseQuestions({
       
         > 
       <div className=" flex flex-row dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	">
-              <span className="font-averta-semibold text-lg">{item}</span>
+              <span className="font-averta-semibold text-lg"><span className="text-xs text-center items-center">🟠</span> {item}</span>
               <svg
               
                 className={`w-6 h-6 ${
