@@ -13,10 +13,16 @@ import { API_URL } from '../../constants'
 
 import ChromeIcon from '../../../public/img/chrome_icon.png'
 import { Button } from '@material-tailwind/react'
-import AboutMainPage from './AboutMainPage.jsx'
 import FooterMainPage from './FooterMainPage.jsx'
 import FlagArea from './FlagsArea.jsx'
+import ValueCards from './ValueCards'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+
+const AboutMainPage = dynamic(() => import('./AboutMainPage'), {
+  ssr: false,
+})
 
 
 export default function WelcomeExplainer({
@@ -57,7 +63,7 @@ useEffect (() => {
   ]
 
   return (
-    <div>
+    <div className="h-full">
       <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 3xl:pl-40  overflow-hidden pb-10">
         <div className="pl-5 pr-5 mt-4  sm:mt-10 lg:mt-20 ">
           {/* {totalMinutes > 0 && (
@@ -70,7 +76,7 @@ useEffect (() => {
               </p>
             </div>
           )} */}
-          <p className="text-zinc-900 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">
+          <p className="text-slate-700 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">
           Turn audio to text, summarize, and generate content with AI
           </p>
           <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[640px]">
@@ -91,28 +97,28 @@ useEffect (() => {
               
               `}
             >
-              {loggedIn && (
+              {currentUser && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="2"
+                  strokeWidth="2"
                   stroke="currentColor"
-                  class="w-5 h-5 mr-1 mt-0.5"
+                  className="w-5 h-5 mr-1 mt-0.5"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
                   />
                 </svg>
               )}
-              {loggedIn ?'Submit a Link'
+              {currentUser ?'Submit a Link'
                 
                 : 'Start for Free'}
             </Link>
         
-            {loggedIn ? (
+            {currentUser ? (
               <Link
                 href="/submit"
                 onClick={() => localStorage.setItem('newItem', 'upload')}
@@ -122,13 +128,13 @@ useEffect (() => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="2"
+                  strokeWidth="2"
                   stroke="currentColor"
-                  class="w-6 h-6 mr-2"
+                  className="w-6 h-6 mr-2"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
                   />
                 </svg>
@@ -150,9 +156,9 @@ useEffect (() => {
                   fill="none"
                   className="mr-2 mt-1 feather feather-compass"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <circle cx="12" cy="12" r="10"></circle>
                   <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
@@ -186,10 +192,10 @@ useEffect (() => {
             </div>
           </div>
 
-          <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 font-averta-semibold"></div>
+          
 
           <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg mt-16">
-            Supported Platforms 
+            
             <div className="flex flex-row  mx-auto w-full mt-4       sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
               { <div className="hidden sm:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
                     <AudioFileIcon title="Local Audio Files" className="row-span-3 lg:row-span-2 flex mx-auto max-w-[80px] sm:max-s-[120px] " sx={{
@@ -197,7 +203,7 @@ useEffect (() => {
                       width:`100px` ,
                       height:`80px`,
                     }}/>
-                    <p className=" hidden lg:block text-md font-averta-regular text-[14px] lg:text-[16px]">Local Audio Files</p>
+                    <p className=" hidden lg:block text-md font-averta-regular text-[14px] lg:text-[16px] mt-2">Local Audio Files</p>
                     </div>
  }
               <div className="grid grid-rows-3 items-center text-center sm:mr-4   mx-2 max-w-[160px]">
@@ -320,11 +326,15 @@ useEffect (() => {
           </video>
           } */}
         </div>
+        <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 font-averta-semibold"></div>
+        <div>
+        <ValueCards/>
+        </div>
         <div className="">
           <FlagArea />
         </div>
 
-        <div className="sm:hidden">
+        <div className="">
           <AboutMainPage />
         </div>
       </div>

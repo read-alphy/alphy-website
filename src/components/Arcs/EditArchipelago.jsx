@@ -239,7 +239,7 @@ export default function EditArchipelago({
             .catch(error => {
               if (errorMessageSubmit.length === 0) {
                 setErrorMessageSubmit(
-                  'There was an error submitting the form. Please check the link and your remaining credits and try again.'
+                  'There was an error submitting the form. Please refresh the page and try again. If the issue persists, contact us at support@alphy.app'
                 )
               } else if (
                 error.response.data.detail ==

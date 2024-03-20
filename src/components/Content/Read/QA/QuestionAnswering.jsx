@@ -23,6 +23,7 @@ export default function QuestionAnswering({
   setInputValue,
   inputRef,
   buttonRef,
+  setSelectionCall,
 
 
   
@@ -184,6 +185,7 @@ export default function QuestionAnswering({
 
   const formatAnswer = (answer, answerData) => {
     const cleanedText = answer.replace(/\r?\n|\r/g, ' ')
+
     const regexPattern = /\]\./g
     const replaceEverySecondOccurrence = (text, pattern, replacement) => {
       let count = 0
@@ -380,10 +382,10 @@ export default function QuestionAnswering({
     /* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
     <div
       id="q-and-a"
-      className={` md:min-h-[600px] lg:w-[700px] xl:w-[500px] 2xl:w-[550px] 3xl:w-full mx-auto sm:mx-0 bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl`}
+      className={` md:min-h-[600px] lg:w-[700px] xl:w-[500px] 2xl:w-[550px] 3xl:w-full mx-auto sm:mx-0 bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl text-zinc-700 dark:text-zinc-300`}
       ref={QARef}
     >
-      <p className="mb-4 font-averta-regular text-l text-zinc-500 dark:text-zinc-200">
+      <p className="mb-4 font-averta-regular text-l text-zinc-700 dark:text-zinc-300">
         Chat with the content. In any language you want
       </p>
 
@@ -441,14 +443,14 @@ export default function QuestionAnswering({
                   aria-hidden="true"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
               </button>

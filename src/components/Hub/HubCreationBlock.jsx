@@ -224,7 +224,7 @@ export default function HubCreationBlock({
               setLoading(false)
               if (tier === 'basic' || tier === 'premium') {
                 setErrorMessage(
-                  'There was an error submitting the form. Make sure you have enough credits for the submission.'
+                  'There was an error submitting the form. Please refresh the page and try again. If the issue persists, contact us at support@alphy.app'
                 )
               } else {
                 if (

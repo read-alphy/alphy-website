@@ -8,13 +8,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -53,6 +47,8 @@ body {
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+
+
 .font-averta-semibold {
   font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
     Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
@@ -71,19 +67,6 @@ body {
   font-weight: 500;
 }
 
-:root {
-  --background-color: #ffffff;
-  /* Light theme */
-  --text-color: #000000;
-  /* Light theme */
-}
-
-.dark-theme {
-  --background-color: #121212;
-  /* Dark theme */
-  --text-color: #ffffff;
-  /* Dark theme */
-}
 
 .wave {
   animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
@@ -220,8 +203,12 @@ body {
 }
 
 html {
-  overflow: hidden;
-  height: 100%;
+  overflow: auto;
+  height: 100vh;
+  height : -webkit-fill-available;
+  
+  
+
 }
 
 body {
@@ -230,8 +217,9 @@ body {
   width: 100vw;
   overflow-x: hidden;
   overscroll-behavior: none;
-  background-color: var(--background-color);
   color: var(--text-color);
+
+  overflow-y:auto
 }
 
 .side-feed {
@@ -868,13 +856,21 @@ CONTENT PAGE
   padding-top: 20px;
 }
 
-.App {
-  height: 100vh;
+.App {  
   width: 100vw;
   margin: 0;
   padding: 0;
+  
+  
+
 }
 
+#__next {
+  
+  display: flex;
+  flex-direction: column;
+  
+}
 .summary-text {
   font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
     Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,

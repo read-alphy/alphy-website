@@ -215,9 +215,9 @@ const AuthInfo = () => {
         resetPassword === false ? (
           <div className="mb-20 w-[300px]">
             <div>
-              <h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">
+              <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">
                 {isRegister ? 'Create an account' : 'Login'}{' '}
-              </h1>
+              </h2>
 
               <form
                 onSubmit={
@@ -372,9 +372,9 @@ const AuthInfo = () => {
           </div>
         ) : oobCode === null || oobCode === undefined ? (
           <div className="mb-20 w-[300px]">
-            <h1 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700 font-averta-semibold">
+            <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700 font-averta-semibold">
               Reset Password{' '}
-            </h1>
+            </h2>
             <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold">
               Enter your email address and we will send you a link to reset your
               password.
@@ -432,9 +432,9 @@ const AuthInfo = () => {
           <div className="mb-20 w-[300px]">
             {successMessage === false ? (
               <div>
-                <h1 className="text-xl mb-8 font-averta-semibold">
+                <h2 className="text-xl mb-8 font-averta-semibold">
                   Pick a New Password{' '}
-                </h1>
+                </h2>
                 <p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300 font-averta-semibold">
                   You are about to reset your password. Please make sure your
                   new password is longer than 8 characters.
@@ -515,14 +515,14 @@ const AuthInfo = () => {
                   width={60}
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="1"
+                  strokeWidth="1"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
                 <p className="mx-auto text-center mt-4 text-zinc-600 font-averta-semibold">
@@ -542,10 +542,10 @@ const AuthInfo = () => {
         )
       ) : (
         <div className="mb-20 w-[300px]">
-          <h1 className="text-xl mb-8 font-averta-semibold">
+          <h2 className="text-xl mb-8 font-averta-semibold">
             We sent a verification link to{' '}
             {email !== null ? email : 'your email'}!
-          </h1>
+          </h2>
           <p className="text-sm text-zinc-600 mb-10 font-averta-semibold">
             Please follow the link to complete your registration. If you didn't
             get the email, try again from the link below.

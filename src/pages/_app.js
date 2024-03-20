@@ -81,15 +81,20 @@ function MyApp({ Component, pageProps }) {
       }, []);
 
       
+
+
       useEffect (() => {
-        const theme = localStorage.getItem('theme')
-        
-
-        if(theme!==null){
-          document.documentElement.classList.add(theme)
-          document.documentElement.classList.add('dark-theme')
-        }
-
+       
+	if (localStorage.getItem("theme") !== null && localStorage.getItem("theme") !== undefined && localStorage.getItem("theme").length === 0) {
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			localStorage.setItem("theme", "dark")
+      setTheme('dark')
+		}
+		else {
+			localStorage.setItem("theme", "light")
+      setTheme('light')
+		}
+	}
         
       }
       , [])
@@ -332,35 +337,52 @@ const additionalProps ={
     setLoggedIn : setLoggedIn,
 
 }
+function adjustLayoutHeight() {
+  const viewportHeight = window.innerHeight;
+  document.documentElement.style.height = `${viewportHeight}px`;
+  // Additionally adjust for other elements if necessary
+}
+
+useEffect(() => {
+window.addEventListener('load', adjustLayoutHeight);
+window.addEventListener('resize', adjustLayoutHeight);
+return () => {
+  window.removeEventListener('load', adjustLayoutHeight);
+  window.removeEventListener('resize', adjustLayoutHeight);
+}
+}, []);
+
 
 
 
   return(
     <GoogleOAuthProvider clientId=  "1095799494177-qhg6sot0m532rg51j34kfrf3t0rds5sg.apps.googleusercontent.com">
 <AppRouterCacheProvider>
+<Head>
 
-    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300">
-    <Head>
+<link rel="icon" href="favicon.ico" />
+<link rel="icon" href="favicon.png" type= "image/png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+{/* /*meta description */}
+<meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of YouTube, Twitter Spaces, and Podcasts. Try Alphy for free!"/>
 
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="icon" href="/favicon.png" type= "image/png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
     
-   
-    
 
-       <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
-        
-    </Head>
+   <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, Twitter Spaces, and Podcasts </title>
+    
+</Head>
+    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
+
     <div
-              className={`${
+              className={` z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
                 router.asPath.split('/')[1] === 'arc' &&
                 router.asPath.split('/')[2] !== 'editArc' &&
                 router.asPath.split('/')[2] !== 'createArc'
-                  ? 'md:hidden'
-                  : 'sm:hidden'
+                  ? 'md:hidden  top-0 w-full '
+                  : 'sm:hidden  top-0 w-full '
               }`}
             >
               <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />

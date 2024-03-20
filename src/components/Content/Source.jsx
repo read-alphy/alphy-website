@@ -46,6 +46,7 @@ export default function SourcePage({
   const [isVisible, setIsVisible] = useState(false)
   const [isPublic, setIsPublic] = useState(false)
   const [isSandbox, setIsSandbox] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
   const [language, setLanguage] = useState('en')
   const [called, setCalled] = useState(false)
@@ -59,6 +60,9 @@ useEffect(() => {
 }, [data])
 
 
+useEffect(() => {
+  setIsClient(true)
+}, [])
 
   
 const router = useRouter()
@@ -327,6 +331,7 @@ const router = useRouter()
               </Link>
             </div>
           ) : (
+            isClient &&
              <Content
               data={data}
               tier={tier}

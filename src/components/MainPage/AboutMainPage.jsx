@@ -4,6 +4,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from '@material-tailwind/react'
+import Link from 'next/link'
 
 export default function AboutMainPage() {
   const [open, setOpen] = useState(1)
@@ -15,37 +16,40 @@ export default function AboutMainPage() {
   return (
     <div
       id="about"
-      className="px-4 container max-w-4xl mt-20 pb-20 text-l lg:text-l"
+      className="px-4 scroll-smooth container max-w-4xl mt-20 pb-20 text-l lg:text-l  text-zinc-700 dark:text-zinc-300"
     >
+       <h2 className="text-2xl mb-5 underline font-averta-semibold">
+      Frequently Asked Questions
+      </h2>
       <Fragment>
-        <Accordion className="cursor-default" open={true}>
+        <Accordion className="cursor-default bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
           <AccordionHeader
             className="cursor-default font-averta-semibold"
             onClick={() => handleOpen(1)}
           >
-            What is Alphy?
+           🟣 What is Alphy?
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="text-l dark:text-zinc-300 font-averta-regular">
-              Alphy is a set of tools designed to help users interact with
+              Alphy is a set of AI tools designed to help users interact with
               online and offline audiovisual content as easily and effectively
-              as possible. We use AI to transcribe, summarize, and let users
-              create their own AI search engines on top of videos and
-              recordings.
-              <br />
-              <br />
-              Our goal is to make the information in audiovisual content as
-              readily available as written content.
+              as possible. 
+              <br/>
+              <br/>
+              We use AI to transcribe, summarize, question, and let users
+              create new written content on top of videos and
+              recordings. 
+            
             </p>
           </AccordionBody>
         </Accordion>
 
-        <Accordion className="mt-6" open={true}>
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4  " open={true}>
           <AccordionHeader
-            className="cursor-default font-averta-semibold"
+            className="cursor-default font-averta-semibold "
             onClick={() => handleOpen(3)}
           >
-            How does Alphy work?
+           🟣 How does Alphy work?
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="font-averta-regular">
@@ -62,16 +66,16 @@ export default function AboutMainPage() {
           </AccordionBody>
         </Accordion>
 
-        <Accordion className="mt-6" open={true}>
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
           <AccordionHeader
             className="cursor-default font-averta-semibold"
             onClick={() => handleOpen(2)}
           >
-            What kind of content can I use Alphy with?
+           🟣 What kind of content can I use Alphy with?
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="font-averta-regular">
-              You can use Alphy to transcribe, summarize, and question YouTube
+              You can use Alphy on YouTube
               videos, Twitter / X Spaces, Twitter / X videos, Twitch recordings,
               Apple Podcasts, and your local audio files (.mp3, .m4a, .mpga,
               .mpeg, .wav, or .webm).
@@ -79,12 +83,12 @@ export default function AboutMainPage() {
           </AccordionBody>
         </Accordion>
 
-        <Accordion className="mt-6" open={true}>
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
           <AccordionHeader
             className="cursor-default font-averta-semibold"
             onClick={() => handleOpen(4)}
           >
-            Can I upload local audio files for processing?
+           🟣 Can I upload local audio files for processing?
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="font-averta-regular">
@@ -96,17 +100,32 @@ export default function AboutMainPage() {
               <br />
               We respect your privacy and do not retain your audio files. After
               real-time processing, they are deleted. If you ever want to remove
-              the processed results, simply reach us at{' '}
+              the processed results, reach us at{' '}
               <span className="underline">support@alphy.app</span>.
             </p>
           </AccordionBody>
         </Accordion>
-        <Accordion className="mt-6" open={true}>
+
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
           <AccordionHeader
             className="cursor-default font-averta-semibold"
             onClick={() => handleOpen(4)}
           >
-            What are Arcs?
+           🟣 Can I download the transcripts?
+          </AccordionHeader>
+          <AccordionBody className="text-md dark:text-zinc-300">
+            <p className="font-averta-regular">
+              Yes. If you are a Premium user, you can download the transcripts in subtitle (.srt) or text (.txt) format.
+              
+            </p>
+          </AccordionBody>
+        </Accordion>
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
+          <AccordionHeader
+            className="cursor-default font-averta-semibold"
+            onClick={() => handleOpen(4)}
+          >
+           🟣 What are Arcs?
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="font-averta-regular">
@@ -118,51 +137,70 @@ export default function AboutMainPage() {
               audio content, organized by specific subjects, creators, or
               topics. It's like music playlists, but for learning from countless
               hours of material.
+              <br />
+              <br />
+              <Link href="/arcs" className="underline text-indigo-300">Check out the free Arcs by us.</Link>
             </p>
           </AccordionBody>
         </Accordion>
+
+        
 
         <div
           id="about"
           className="container w-5/6 max-w-4xl mt-20  text-l lg:text-l"
         >
-          <h1 className="text-2xl mb-5 underline font-averta-semibold">
+          <h2 className="text-2xl mb-5 underline font-averta-semibold">
             Subscription & Billing
-          </h1>
+          </h2>
         </div>
-        <Accordion className="mt-6" open={true}>
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
           <AccordionHeader
             className="cursor-default font-averta-semibold"
             onClick={() => handleOpen(4)}
           >
-            What does Premium offer?
+           🟣  What does Premium offer?
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="font-averta-regular">
-              See{' '}
+              More hours, uploads, full access to Alphy's capabilities. See our {' '}
               <a
-                className="underline text-green-300 font-averta-semibold"
+                className="underline text-indigo-300 font-averta-semibold"
                 href="/plans"
               >
-                here
+                pricing page
               </a>{' '}
-              to learn detailed info about Alphy's plans.
+              to learn more about it
             </p>
           </AccordionBody>
         </Accordion>
 
-        <Accordion className="mt-6" open={true}>
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
           <AccordionHeader
             className="cursor-default font-averta-semibold"
             onClick={() => handleOpen(4)}
           >
-            What happens to my credits if I cancel my subscriptions?
+           🟣  What happens to my credits if I cancel my subscriptions?
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="font-averta-regular">
               If you want to cancel your subscription, you can do so at any
               time. You will be able to spend your credits until the end of your
               billing period.
+            </p>
+          </AccordionBody>
+        </Accordion>
+
+        <Accordion className="mt-6 bg-slate-50 dark:bg-zinc-800 rounded-xl p-4" open={true}>
+          <AccordionHeader
+            className="cursor-default font-averta-semibold"
+            onClick={() => handleOpen(4)}
+          >
+           🟣 Can I get a refund?
+          </AccordionHeader>
+          <AccordionBody className="text-md dark:text-zinc-300">
+            <p className="font-averta-regular">
+              Yes. Simply reach us at <span className="underline">support@alphy.app</span> and we'll reimburse you for the remaining credits on your account.
             </p>
           </AccordionBody>
         </Accordion>

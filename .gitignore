@@ -19,6 +19,7 @@
 # misc
 .DS_Store
 *.pem
+siteMapGen.js
 
 # debug
 npm-debug.log*
@@ -30,6 +31,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
 
 # typescript
 *.tsbuildinfo

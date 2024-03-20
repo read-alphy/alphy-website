@@ -15,7 +15,45 @@ export default function DynamicQA({
   highlightIndex,
   handleLength,
 }) {
+
+
+
+  function convertTimeToSeconds(time) {
+    // Check if the input is a string and matches the ISO 8601 duration format
+    if (typeof time === 'string' && time.match(/^PT/)) {
+      const matches = time.match(/PT(\d+H)?(\d+M)?(\d+(?:\.\d+)?S)?/);
+      let seconds = 0;
+  
+      // If hours are present, convert them to seconds and add to total
+      if (matches[1]) {
+        seconds += parseInt(matches[1]) * 3600;
+      }
+  
+      // If minutes are present, convert them to seconds and add to total
+      if (matches[2]) {
+        seconds += parseInt(matches[2]) * 60;
+      }
+  
+      // If seconds are present, add them to total
+      if (matches[3]) {
+        seconds += parseFloat(matches[3]);
+      }
+  
+      return seconds;
+    } else if (typeof time === 'number' || (typeof time === 'string' && time.match(/^\d+(?:\.\d+)?$/))) {
+      // If the input is a numeric value or a string representing a number, parse it directly
+      return parseFloat(time);
+    } else {
+      // If the input is neither, return null or throw an error
+      return null;
+    }
+  }
+
+
   function timestampFormatter(sourceStart, sourceEnd) {
+
+    sourceStart = convertTimeToSeconds(sourceStart);
+    sourceEnd = convertTimeToSeconds(sourceEnd);
     return (
       <div>
         {Math.floor(sourceStart / 3600) < 10
@@ -70,7 +108,7 @@ export default function DynamicQA({
       {answerData.answer ? (
         <div>
           <div className="flex flex-row mb-4">
-            <h1 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200">
+            <h2 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200">
               {' '}
               <span className=" font-averta-semibold">Answer from Alphy</span>
               <svg
@@ -89,7 +127,7 @@ export default function DynamicQA({
                   fillRule="evenodd"
                 ></path>
               </svg>
-            </h1>
+            </h2>
             <div className="col-span-1 justify-end flex flex-row flex ">
               <svg
                 onClick={handleShareLink}
@@ -156,7 +194,7 @@ export default function DynamicQA({
           {answer ? (
             <div>
               <div>
-                <h1 className="mb-4 text-sm font-normal md:mb-8"> </h1>
+                <h2 className="mb-4 text-sm font-normal md:mb-8"> </h2>
 
                 {answerData.sources.map((source, index) => (
                   <div

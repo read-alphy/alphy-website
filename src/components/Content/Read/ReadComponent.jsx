@@ -5,7 +5,7 @@ import * as Selection from 'selection-popover'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import TwitchIcon from '../../../../public/img/twitch.png'
 import X from '../../../../public/img/X.png'
-import TwitterSpaces from '../../../../public/img/twitter_space.webp'
+import TwitterSpaces from '../../../../public/img/twitter_space.png'
 
 import {
   Popover,
@@ -20,11 +20,7 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-
-const QuestionAnswering = dynamic(() => import('../Read/QA/QuestionAnswering'), {
-  ssr: false,
-})
-
+import QuestionAnswering from '../Read/QA/QuestionAnswering'
 
 export default function ReadComponent({
   data,
@@ -73,6 +69,7 @@ export default function ReadComponent({
 
 {
   const [isClient, setIsClient] = useState(false)
+  
 
   useEffect(() => {
     setIsClient(true)
@@ -119,8 +116,8 @@ export default function ReadComponent({
   
   return (
     <div id="content-area overscroll-none">
-  {isClient && 
-      (transcript.length > 0 &&
+  
+      {(transcript.length > 0 &&
       ((summary !== undefined &&
         summary.complete !== undefined &&
         language === summary.lang) ||
@@ -391,7 +388,7 @@ export default function ReadComponent({
                     </p>
                   </div>
                 ) : (
-                  summary.key_qa && (
+                  (summary.key_qa ) && (
                     <QuestionAnswering
                       source_id={data.source_id}
                       source_type={data.source_type}
@@ -406,6 +403,7 @@ export default function ReadComponent({
                       data={data}
                       transcript={transcript}
                       timestampChanger={timestampChanger}
+                      currentUser={currentUser}
                     />
                   )
                 )}

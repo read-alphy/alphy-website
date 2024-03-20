@@ -160,11 +160,11 @@ export default function HeaderArea({
           )}
         </div>
         <div className="flex flex-row ml-1">
-          <h1 className="col-span-2 mt-2 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+          <h2 className="col-span-2 mt-2 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
             {data.source_type === 'up'
               ? title.substring(0, title.lastIndexOf('.'))
               : title}
-          </h1>
+          </h2>
 
           <div className="flex flex-row justify-end mx-auto ">
             <Popover
@@ -500,7 +500,7 @@ export default function HeaderArea({
             </button>
           ) : (
             <button
-              className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 bg-gradient-to-bl from-lime-100 via-sky-200 to-indigo-200 w-[200px] justify-center"
+              className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 bg-gradient-to-bl from-lime-100 via-sky-200 to-indigo-200 w-[220px] justify-center"
               onClick={() => setIsSandbox(true)}
             >
               <svg
@@ -519,7 +519,7 @@ export default function HeaderArea({
               </svg>
 
               <p className=" text-md font-averta-semibold text-zinc-700 dark:text-zinc-700 ">
-                Switch to Sandbox
+                Switch to Playground
               </p>
             </button>
           )}

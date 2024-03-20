@@ -15,7 +15,7 @@ export default function Sandbox({ data, askAlphyForSandbox, askText, tier, curre
   const [manner, setManner] = useState(null)
   const [error, setError] = useState(false)
   const [authError, setAuthError] = useState(false)
-const [theme, setTheme] = useState('dark')
+const [theme, setTheme] = useState('light')
   
   useEffect(() => {
     setTheme(localStorage.getItem('theme'))
@@ -236,20 +236,20 @@ const [theme, setTheme] = useState('dark')
         {creationCalled === true && (
           <div className=" w-full mt-8 max-w-[800px]">
             <button
-              className=" flex underline flex-row gap-2"
+              className=" flex underline flex-row gap-2 ml-2"
               onClick={() => setActiveGenerationZone(!activeGenerationZone)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke={localStorage.theme === 'light' ? '#64748b' : '#f4f4f5'}
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
                 />
               </svg>

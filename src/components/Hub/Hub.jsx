@@ -112,8 +112,8 @@ useEffect(() => {
         {
           <div className={` hidden sm:block `}>
             <SideFeed 
-loggedIn={loggedIn}
-setLoggedIn={setLoggedIn}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}

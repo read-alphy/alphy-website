@@ -1,3 +1,10 @@
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from '@material-tailwind/react'
+import { Fragment, useState } from 'react'
+
 export default function BaseQuestions({
   key_qa,
   data,
@@ -18,7 +25,44 @@ export default function BaseQuestions({
   const oct31 = new Date('2023-10-31T00:00:00+00:00')
   const added_ts = new Date(data.added_ts)
 
+
+
+  function convertTimeToSeconds(time) {
+    // Check if the input is a string and matches the ISO 8601 duration format
+    if (typeof time === 'string' && time.match(/^PT/)) {
+      const matches = time.match(/PT(\d+H)?(\d+M)?(\d+(?:\.\d+)?S)?/);
+      let seconds = 0;
+  
+      // If hours are present, convert them to seconds and add to total
+      if (matches[1]) {
+        seconds += parseInt(matches[1]) * 3600;
+      }
+  
+      // If minutes are present, convert them to seconds and add to total
+      if (matches[2]) {
+        seconds += parseInt(matches[2]) * 60;
+      }
+  
+      // If seconds are present, add them to total
+      if (matches[3]) {
+        seconds += parseFloat(matches[3]);
+      }
+  
+      return seconds;
+    } else if (typeof time === 'number' || (typeof time === 'string' && time.match(/^\d+(?:\.\d+)?$/))) {
+      // If the input is a numeric value or a string representing a number, parse it directly
+      return parseFloat(time);
+    } else {
+      // If the input is neither, return null or throw an error
+      return null;
+    }
+  }
+
+
+
   function timestampFormatter(sourceStart, sourceEnd) {
+    sourceStart = convertTimeToSeconds(sourceStart)
+    sourceEnd = convertTimeToSeconds(sourceEnd)
     return (
       <div>
         {Math.floor(sourceStart / 3600) < 10
@@ -68,32 +112,32 @@ export default function BaseQuestions({
     return `${formattedHours}h${formattedMinutes}m${formattedSeconds}s`
   }
 
-  // Example usage:
+  
 
   return (
-    <div>
+    <div className="text-zinc-700 dark:text-zinc-300">
       <p className="mb-5 underline text-l font-averta-semibold text-zinc-600 dark:text-zinc-300">
         {' '}
         Questions by Alphy
       </p>
+      <Fragment>
+   
+
+     
       {Object.keys(key_qa).map((item, index) => (
         <div
-          id="accordion-flush"
-          data-active-classes="bg-white dark:bg-mildDarkMode text-gray-900 dark:text-white"
-          data-inactive-classes="text-gray-500 dark:text-gray-400"
+         className="bg-white dark:bg-mildDarkMode text-zinc-700 dark:text-zinc-300"
         >
-          <h2 id="accordion-flush-heading-1">
-            <button
-              onClick={event => handleBaseQAaccordion(event, index, item)}
-              type="button"
-              className="flex items-center justify-between w-full py-5 font-averta-semibold text-left text-zinc-700 border-b border-gray-200 dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	"
-              data-accordion-target="#accordion-flush-body-1"
-              aria-expanded="true"
-              aria-controls="accordion-flush-body-1"
-            >
-              <span className="font-averta-semibold text-md">{item}</span>
+             <Accordion   open={collapseIndex === index}>
+              
+        <AccordionHeader 
+        onClick={event => handleBaseQAaccordion(event, index, item)}
+      
+        > 
+      <div className=" flex flex-row dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	">
+              <span className="font-averta-semibold text-lg"><span className="text-xs text-center items-center">🟠</span> {item}</span>
               <svg
-                data-accordion-icon
+              
                 className={`w-6 h-6 ${
                   index === collapseIndex && collapseIndex !== -1
                     ? 'rotate-180'
@@ -104,18 +148,18 @@ export default function BaseQuestions({
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
-            </button>
-          </h2>
+            </div>
+          </AccordionHeader>
+
+
+      <AccordionBody className="text-md">
           <div
-            className={
-              index === collapseIndex && collapseIndex !== -1 ? '' : 'hidden'
-            }
-            aria-labelledby="accordion-flush-heading-1"
+                    
           >
             <div className="py-5 border-b border-gray-200 dark:border-gray-700">
               <div className="flex flex-row justify-end text-slate-400">
@@ -197,7 +241,7 @@ export default function BaseQuestions({
                                   singleSource === true &&
                                   showSource !== index + 1 &&
                                   'hidden'
-                                } font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5`}
+                                } font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5 text-zinc-700 dark:text-zinc-300`}
                                 key={index}
                               >
                                 {source.start !== null &&
@@ -320,8 +364,13 @@ export default function BaseQuestions({
               </div>
             </div>
           </div>
+          </AccordionBody>
+          </Accordion>
         </div>
       ))}
+
+
+      </Fragment>
     </div>
   )
 }

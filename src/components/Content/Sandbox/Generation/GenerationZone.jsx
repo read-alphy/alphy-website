@@ -38,7 +38,7 @@ export default function   GenerationZone({
 
   const adjustments = (
     <svg
-      class="w-5 h-5 text-gray-800 dark:text-white"
+      className="w-5 h-5 text-gray-800 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -46,8 +46,8 @@ export default function   GenerationZone({
     >
       <path
         stroke={`${theme === 'light' ? '#52525b' : 'white'}`}
-        stroke-linecap="round"
-        stroke-width="1.5"
+        strokeLinecap="round"
+        strokeWidth="1.5"
         d="M6 4v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2m6-16v2m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v10m6-16v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2"
       />
     </svg>

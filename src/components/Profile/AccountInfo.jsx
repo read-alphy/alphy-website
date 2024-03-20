@@ -169,10 +169,11 @@ export default function AccountInfo({
   
   const getCreditPurchaseLink= async () => {
     setCreditPurchaseLoading(true)
+    let localQuantity = quantity > 0 ? quantity : 1
     await currentUser.getIdToken().then(idToken => {
       axios
         .post(
-          `${API_URL}/payments/v2/credit?quantity=${quantity}`,
+          `${API_URL}/payments/v2/credit?quantity=${localQuantity}`,
           {},
           {
             headers: {
@@ -208,9 +209,9 @@ export default function AccountInfo({
               <div className="items-center margin-auto justify-center flex flex-col">
                 {currentUser ? (
                   <div>
-                    <h1 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 font-averta-semibold ">
+                    <h2 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 font-averta-semibold ">
                       Account Details
-                    </h1>
+                    </h2>
 
                     <div className="grid grid-cols-3 mb-5 max-w-[900px]">
                       <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm">
@@ -307,9 +308,9 @@ export default function AccountInfo({
               <div className="items-center margin-auto justify-center flex flex-col mt-20">
                 {currentUser ? (
                   <div className="px-4 sm:mx-0">
-                    <h1 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold ">
+                    <h2 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold ">
                       Account Details
-                    </h1>
+                    </h2>
 
                     <div className="grid grid-cols-3 mb-5  ">
                       <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm border-r border-gray-300 pr-4">
@@ -554,7 +555,7 @@ export default function AccountInfo({
                 'pointer-events-none opacity-60'
               }`}
               size="md"
-              onClick={buyCredit}
+              onClick={() => getCreditPurchaseLink()}
             >
               {creditPurchaseLoading ? (
                 <Spinner

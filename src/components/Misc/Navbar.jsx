@@ -14,7 +14,7 @@ function Navbar({ collapsed, setCollapsed }) {
   
 
   useEffect(() => {
-    if (
+    /* if (
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -22,7 +22,7 @@ function Navbar({ collapsed, setCollapsed }) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
-    }
+    } */
 
     const handleResize = () => {}
 
@@ -51,11 +51,11 @@ function Navbar({ collapsed, setCollapsed }) {
       } justify-between dark:bg-darkMode pb-2	`}
     >
       <div
-        className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-white   dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${
+        className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${
           isYt || isSp || isUp || isArc || isHub
             ? 'h-[8vh] min-h-[40px]'
             : 'h-[8vh] min-h-[40px]'
-        } dark:bg-darkMode`}
+        } `}
       >
         <div
           className={`flex mt-4 font-bold ${
@@ -83,7 +83,7 @@ function Navbar({ collapsed, setCollapsed }) {
                 className="dark:hidden opacity-80 "
                 alt="Alphy Logo"
               ></Image>
-              <h1 className="ml-1 mt-1 text-2xl">ALPHY</h1>
+              <h2 className="ml-1 mt-1 text-2xl">ALPHY</h2>
             </div>
           </Link>
 
@@ -105,14 +105,14 @@ function Navbar({ collapsed, setCollapsed }) {
                   aria-hidden="true"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
               </button>

@@ -135,8 +135,8 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
           <span className="font-averta-semibold ml-2">Pricing</span>
         </Link>
       )}
-
-      {/* <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
+  
+     {/* <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
         {theme ==='light' ? (
           <div onClick={handleDarkMode} className=" flex flex-row">
             <svg
@@ -182,7 +182,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
             <p className=" pt-0.5  font-averta-semibold  ml-2">Dark</p>
           </div>
         )}
-      </div> */}
+      </div>  */}
       <div className="py-2  pl-6 ">
         <button
           className="text-zinc-500 flex flex-row dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"
@@ -209,7 +209,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
       <div className="  pl-6 ">
         <Link
           className="text-zinc-500 dark:text-zinc-300 text-sm font-averta-semibold   my-3  flex flex-row w-full cursor-pointer w-[120px]"
-          href="/about "
+          href="/#about "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -228,6 +228,18 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
 
           <span className="ml-2 font-averta-semibold">FAQ</span>
         </Link>
+        {
+  <Link
+          className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full flex flex-row py-2 "
+          href="/blog"
+        >
+ <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  class="w-5 h-5 mr-1">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
+</svg>
+
+<span className="font-averta-semibold ml-2">Blog</span>
+ </Link>
+ }
       </div>
 
       <div className="pl-6 py-2 flex flex-row">
