@@ -45,6 +45,7 @@ body {
   font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
     Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
 }
 
 
@@ -206,6 +207,7 @@ html {
   overflow: auto;
   height: 100vh;
   height : -webkit-fill-available;
+  overscroll-behavior: none;
   
   
 
@@ -889,7 +891,7 @@ ol {
   font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
     Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .summary-text code {
