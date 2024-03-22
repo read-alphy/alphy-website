@@ -67,8 +67,6 @@ function MyApp({ Component, pageProps }) {
     const [customerID, setCustomerID] = useState('')
     const [userArcsCalled, setUserArcsCalled] = useState(false)
     useEffect(() => {
-       
-
         const urlParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlParams.entries());
         setSearchParams(params);
@@ -200,6 +198,8 @@ function MyApp({ Component, pageProps }) {
   
     useEffect(() => {
         const verification = searchParams.mode === 'verifyEmail'
+        const urlParams = new URLSearchParams(window.location.search);
+
       if (verification) {
         const oobCode = urlParams.get('oobCode')
         auth.handleVerifyEmail(oobCode).then(resp => {

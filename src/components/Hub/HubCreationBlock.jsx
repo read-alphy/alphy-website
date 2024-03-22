@@ -222,11 +222,11 @@ export default function HubCreationBlock({
             .catch(error => {
               console.log(error)
               setLoading(false)
-              if (tier === 'basic' || tier === 'premium') {
+              
                 setErrorMessage(
                   'There was an error submitting the form. Please refresh the page and try again. If the issue persists, contact us at support@alphy.app'
                 )
-              } else {
+              /* } else {
                 if (
                   error.response.data.detail ==
                   'Video not popular enough for free users'
@@ -249,8 +249,8 @@ export default function HubCreationBlock({
                   setErrorMessage(
                     'There was an error submitting the form. Please try again.'
                   )
-                }
-              }
+                } */
+              
               setFailed(true)
               setInputValue('')
               setLoading(false)
