@@ -17,7 +17,6 @@ const Source = dynamic(() => import('../../components/Content/Source'), {
 })
 
 
-
 // Define the fetchData function
 async function fetchData(sourceType, sourceId) {
   if(sourceId === '[object Object]') {
@@ -25,11 +24,13 @@ async function fetchData(sourceType, sourceId) {
   }
       
       const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
+    
   try {
     const response = await fetch(url);
     const data = await response.json();
     return { data: data, error: null };
   } catch (error) {
+    console.log(error)
     console.error(`Error fetching data: ${error}`);
     return { data: null, error: error.response ? error.response.data : 'Error fetching data' };
   }

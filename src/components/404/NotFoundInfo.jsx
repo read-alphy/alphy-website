@@ -13,8 +13,8 @@ export default function NotFound() {
       <h2 className="welcome-prompt mb-5 text-6xl flex md:flex-row flex-col justify-center  text-[2.25rem] font-averta-semibold">
         Oops!
       </h2>
-      <h2 className="mb-5 text-zinc-700 dark:text-zinc-300 font-averta-semibold">
-        Sorry, we coluldn't find the page you were looking for :( <br></br>{' '}
+      <h2 className="mb-5 text-zinc-700 dark:text-zinc-300 font-normal">
+        Sorry, we couldn't find the page you were looking for :( <br></br>{' '}
       </h2>
       <div className="flex flex-row pb-20 mb-20">
         <Link

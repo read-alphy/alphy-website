@@ -70,6 +70,11 @@ const router = useRouter()
   
   const source_id = router.query.source_id  
   const url = `${API_URL}/sources/up/${source_id}`
+  useEffect (() => {
+    if(source_type !== "yt" && source_type !== "x" && source_type !== "up" && source_type !== "tw" && source_type !== "sp" && source_type !== "ap"){
+      router.push('/404')
+    }
+  }, [source_type])
   
 
  /*  if (router.asPath.split('/')[2].split('&q=')[0] !== undefined) {
