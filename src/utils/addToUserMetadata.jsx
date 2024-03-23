@@ -12,7 +12,7 @@ export default async function addToUserMetadata(idToken, additionalMetadata) {
 
     // Post request to update metadata
     const response = await axios.post(
-      `${API_URL}/fe-metadata`,
+      `${API_URL}/fe-metadata/`,
       combinedMetadata,
       {
         headers: {
