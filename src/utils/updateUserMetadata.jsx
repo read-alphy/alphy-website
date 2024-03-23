@@ -4,7 +4,7 @@ import { API_URL } from '../constants'
 export default async function updateUserMetadata(idToken, newMetadata) {
   try {
     axios
-      .post(`${API_URL}/fe-metadata`, newMetadata, {
+      .post(`${API_URL}/fe-metadata/`, newMetadata, {
         headers: {
           'id-token': idToken,
         },

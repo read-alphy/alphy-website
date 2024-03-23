@@ -13,7 +13,6 @@ if (!API_HOST) {
 }
 export const API_SSL = !API_HOST.startsWith('localhost')
 export const API_URL = `${API_SSL ? 'https' : 'http'}://${API_HOST}`
-console.log("API_URL =", API_URL)
 export const STRIPE_PK = process.env.NEXT_PUBLIC_REACT_APP_STRIPE_PK
 if (!STRIPE_PK) {
   throw new Error('REACT_APP_STRIPE_PK must be set')
