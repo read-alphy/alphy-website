@@ -60,7 +60,7 @@ export default function MyWorksFeedItem({
             <div
               className={`text-sm video-text text-black dark:text-zinc-300 font-averta-semibold`}
             >
-              {item.title}
+              {item.title.length > 50 ? item.title.slice(0, 50) + '...' : item.title}
               {item.source !== undefined && item.source.title}
             </div>
             <div className="font-averta-semibold text-zinc-500 dark:text-zinc-300 ">

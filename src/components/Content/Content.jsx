@@ -469,6 +469,10 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
     }
   }, [summary])
 
+
+
+
+
   const handleDownload = selection => {
     setDownloading(true)
     // popover.toggle()
@@ -495,6 +499,22 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
             saveAs(blob, `${data.creator_name}_${title}_Transcript.txt`)
           }
         }
+        else if (selection === 3) {
+          let i = 0
+          let text = ''
+          for (i = 0; i < transcript.length; i++){
+          if(i%2 === 1){
+            text = text + transcript[i]
+          }
+
+        }
+        
+
+
+        const blob = new Blob([text], { type: 'text/txt' })
+        saveAs(blob, `${data.creator_name}_${title}_PlainText.txt`)
+          }
+
 
         setTimeout(() => {
           setDownloading(false)

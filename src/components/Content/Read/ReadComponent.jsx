@@ -78,7 +78,6 @@ export default function ReadComponent({
 
   
 
-
   function convertTimeToSeconds(time) {
     // Check if the input is a string and matches the ISO 8601 duration format
     if (typeof time === 'string' && time.match(/^PT/)) {
@@ -864,6 +863,17 @@ export default function ReadComponent({
                                                             Transcript (.txt)
                                                           </p>
                                                         </div>
+                                                        <div
+                                                          onClick={() =>
+                                                            handleDownload(3)
+                                                          }
+                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
+                                                        >
+                                                          <p className="font-averta-semibold">
+                                                            Download as Plain
+                                                            Text (.txt)
+                                                          </p>
+                                                        </div>
                                                       </div>
                                                     ) : (
                                                       <div className="px-3 cursor-pointer py-2 pointer-events-none ">
@@ -1015,6 +1025,17 @@ export default function ReadComponent({
                                                           <p className="font-averta-semibold">
                                                             Download Formatted
                                                             Transcript (.txt)
+                                                          </p>
+                                                        </div>
+
+                                                        <div
+                                                          onClick={() =>
+                                                            handleDownload(3)
+                                                          }
+                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold  dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
+                                                        >
+                                                          <p className="font-averta-semibold">
+                                                            Download as Plain Text (.txt)
                                                           </p>
                                                         </div>
                                                       </div>

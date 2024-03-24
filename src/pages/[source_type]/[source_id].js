@@ -30,7 +30,7 @@ async function fetchData(sourceType, sourceId) {
     const data = await response.json();
     return { data: data, error: null };
   } catch (error) {
-    console.log(error)
+    
     console.error(`Error fetching data: ${error}`);
     return { data: null, error: error.response ? error.response.data : 'Error fetching data' };
   }
