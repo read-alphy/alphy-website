@@ -98,7 +98,8 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
             autoPlay
             loop
             muted
-          >
+            >
+
             <source src="/img/playground_demo.mp4" type="video/mp4" />
           </video>
 

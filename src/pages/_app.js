@@ -21,7 +21,7 @@ import { API_URL, STRIPE_PK } from '../constants'
 import getUserMetadata from '../utils/getUserMetadata'
 import { useRouter } from 'next/router';
 import addToUserMetadata from '../utils/addToUserMetadata'
-
+import { ThemeProvider } from "next-themes"
 
 
 
@@ -370,7 +370,9 @@ return () => {
 <meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of YouTube, Twitter Spaces, and Podcasts. Try Alphy for free!"/>
 
     
-
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap')
+  </style>
    <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, Twitter Spaces, and Podcasts </title>
     
 </Head>
@@ -387,8 +389,10 @@ return () => {
             >
               <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
             </div>
-            
+            <ThemeProvider attribute="class">
+
     <Component {...pageProps}  {...additionalProps} />
+              </ThemeProvider>
     
     </div>
     

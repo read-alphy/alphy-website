@@ -322,14 +322,14 @@ export default function ArcMain({
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
       <div
-        className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
+        className={`w-screen  bg-bordoLike transition origin-top-right transform sm:hidden rounded-t-none rounded-3xl ${
           collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
         }`}
       ></div>
 
       <div className="flex flex-row ">
         {
-          <div className={`hidden ${isArc ? 'md:block' : 'sm:block'} `}>
+          <div className={`hidden ${isArc ? 'md:flex' : 'md:flex'} `}>
             <SideFeed
             loggedIn = {loggedIn}
             setLoggedIn = {setLoggedIn}
@@ -348,13 +348,13 @@ export default function ArcMain({
 
         <div
           className={`fixed top-0 z-50 transition origin-top-right transform ${
-            isArc ? 'md:hidden' : 'sm:hidden'
+            isArc ? 'md:hidden' : 'md:hidden'
           }  w-full shadow-lg bg-zinc-100 ${
             collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-white'
           }`}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
-            <div className="h-screen">
+            <div className="">
               <SideFeed
               loggedIn = {loggedIn}
               setLoggedIn = {setLoggedIn}
@@ -402,15 +402,15 @@ export default function ArcMain({
                 />
               ) : isLoadingSubmit === false ? (
                 <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 flex flex-col">
-                  <p className="font-averta-semibold">
+                  <p className="quicksand font-semibold">
                     You've already have the maximum number of Arcs for your
                     plan.
                   </p>
 
-                  <p className="mt-4 font-averta-semibold">
+                  <p className="mt-4 quicksand font-semibold">
                     <Link
                       href="/account"
-                      className="dark:text-greenColor text-green-400 underline font-averta-semibold "
+                      className="dark:text-greenColor text-green-400 underline quicksand font-semibold "
                     >
                       Upgrade
                     </Link>{' '}
@@ -429,21 +429,21 @@ export default function ArcMain({
   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
 </svg>
 
-                    <span className="text-sm  font-averta-semibold">
+                    <span className="text-sm  quicksand font-semibold">
                       Go Back
                     </span>
                   </Link>
                 </div>
                 <Link
                   href="/u/login"
-                  className="dark:text-greenColor text-green-400 underline font-averta-semibold"
+                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
                 >
                   Sign in
                 </Link>{' '}
                 or{' '}
                 <Link
                   href="/u/register"
-                  className="dark:text-greenColor text-green-400 underline font-averta-semibold"
+                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
                 >
                   {' '}
                   create an account
@@ -457,12 +457,12 @@ export default function ArcMain({
               <Loading />
             ) : authorizationError ? (
               <div className="mx-10 mx-auto md:mx-20  mt-20 md:mt-40">
-                <div className="text-xl  text-zinc-700 dark:text-zinc-300 max-w-[600px] font-averta-semibold">
+                <div className="text-xl  text-zinc-700 dark:text-zinc-300 max-w-[600px] quicksand font-semibold">
                   The arc you're trying to reach either doesn't exist or you
                   don't have permission to access it. Check out arcs by Alphy{' '}
                   <Link
                     href="/arcs"
-                    className="dark:text-greenColor text-green-400 underline font-averta-semibold"
+                    className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
                   >
                     here
                   </Link>
@@ -507,17 +507,17 @@ export default function ArcMain({
                 setCreditCalled={setCreditCalled}
               />
             ) : (
-              <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 font-averta-semibold pl-5">
+              <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 quicksand font-semibold pl-5">
                 <Link
                   href="/u/login"
-                  className="dark:text-greenColor text-green-400 underline font-averta-semibold"
+                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
                 >
                   Sign in
                 </Link>{' '}
                 or{' '}
                 <Link
                   href="/u/register"
-                  className="dark:text-greenColor text-green-400 underline font-averta-semibold"
+                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
                 >
                   {' '}
                   create an account
@@ -543,7 +543,7 @@ export default function ArcMain({
             {isEditArc && !isLoadingSubmit && (
               <Button
                 size={"md"}
-                className="bg-red-400 px-5 mr-5 font-averta-semibold"
+                className="bg-red-400 px-5 mr-5 quicksand font-semibold"
                 onClick={() => setDeleteDialog(true)}
               >
                 {' '}
@@ -553,7 +553,7 @@ export default function ArcMain({
             {
               <Button
                 size={"md"}
-                className={`bg-greenColor px-5 font-averta-semibold ${
+                className={`bg-greenColor px-5 quicksand font-semibold ${
                   isLoadingSubmit &&
                   'bg-green-300 pointer-events-none min-w-[106.533px]'
                 }`}
@@ -577,7 +577,7 @@ export default function ArcMain({
           {deleteDialog && (
             <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
               <div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-white dark:bg-mildDarkMode items-center text-center justify-center drop-shadow-sm flex-col">
-                <p className="mb-10 font-averta-semibold">
+                <p className="mb-10 quicksand font-semibold">
                   You are about to delete this arc. Would you like to continue?
                 </p>
                 <div>
@@ -588,14 +588,14 @@ export default function ArcMain({
                         size="sm"
                         className="flex mx-auto opacity-40 mb-2"
                       />
-                      <p className="text-zinc-500 dark:text-zinc-600 italic font-averta-semibold">
+                      <p className="text-zinc-500 dark:text-zinc-600 italic quicksand font-semibold">
                         Deleting...
                       </p>
                     </div>
                   ) : (
                     <div className="flex flex-row">
                       <p
-                        className="text-greenColor cursor-pointer font-averta-semibold"
+                        className="text-greenColor cursor-pointer quicksand font-semibold"
                         size="sm"
                         onClick={() => setDeleteDialog(false)}
                       >
@@ -603,7 +603,7 @@ export default function ArcMain({
                       </p>
                       <div className="border-r h-full mr-4 ml-4"></div>
                       <p
-                        className="text-red-400 cursor-pointer font-averta-semibold"
+                        className="text-red-400 cursor-pointer quicksand font-semibold"
                         size="sm"
                         onClick={handleDeleteArchipelago}
                       >

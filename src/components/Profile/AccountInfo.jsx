@@ -209,38 +209,38 @@ export default function AccountInfo({
               <div className="items-center margin-auto justify-center flex flex-col">
                 {currentUser ? (
                   <div>
-                    <h2 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 font-averta-semibold ">
+                    <h2 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 quicksand font-bold ">
                       Account Details
                     </h2>
 
                     <div className="grid grid-cols-3 mb-5 max-w-[900px]">
                       <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm">
-                        <p className="mb-2 font-averta-semibold">Your Email</p>
-                        <p className="mb-2 font-averta-semibold">Password</p>
+                        <p className="mb-2 quicksand font-bold">Your Email</p>
+                        <p className="mb-2 quicksand font-bold">Password</p>
                         {credit !== null ? (
-                          <p className="mt-2 font-averta-semibold">
+                          <p className="mt-2 quicksand font-bold">
                             Remaining Credits
                           </p>
                         ) : null}
-                        <p className="mt-2 font-averta-semibold">Plan</p>
+                        <p className="mt-2 quicksand font-bold">Plan</p>
                       </div>
                       <div className="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
                       <div className="col-span-1 text-zinc-600 dark:text-zinc-200 text-sm">
-                        <p className="mb-2 font-averta-regular">
+                        <p className="mb-2 quicksand font-normal">
                           {currentUser.email}
                         </p>
                         <a
                           href="/u/resetpassword"
-                          className="mb-2 underline font-averta-regular"
+                          className="mb-2 underline quicksand font-normal"
                         >
                           Reset password
                         </a>
                         {credit !== null ? (
-                          <p className="mt-2 font-averta-regular">
+                          <p className="mt-2 quicksand font-normal">
                             {Math.floor(credit)} minutes
                           </p>
                         ) : null}
-                        <p className="mt-2 font-averta-regular">
+                        <p className="mt-2 quicksand font-normal">
                           {tier === 'free' && 'Starter'}
                           {tier === 'basic' && 'Basic'}
                           {tier === 'premium' && 'Premium'}
@@ -253,16 +253,16 @@ export default function AccountInfo({
                                 tier === 'basic' || tier === 'premium'
                                   ? ''
                                   : 'pointer-events-none opacity-50'
-                              } font-averta-semibold`}
+                              } quicksand font-bold`}
                               onClick={() => setCreditPurchaseDialog(true)}
                             >
                               <AddCircleOutlineIcon className="mr-2 dark:text-zinc-800" />
-                              <span className="mt-1 dark:text-zinc-800 font-averta-semibold">
+                              <span className="mt-1 dark:text-zinc-800 quicksand font-bold">
                                 Buy Credits
                               </span>
                             </Button>
                             {tier === 'free' && (
-                              <span className=" font-averta-regular text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
+                              <span className=" quicksand font-normal text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
                                 Upgrade to a paid plan to get credit topups.
                               </span>
                             )}
@@ -277,7 +277,7 @@ export default function AccountInfo({
 
  */}
 
-              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-xl 2xl:text-2xl  mt-20 font-averta-semibold">
+              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-xl 2xl:text-2xl  mt-20 quicksand font-bold">
                 Manage Subscription{' '}
               </p>
               {tier !== 'premium' && (
@@ -290,7 +290,7 @@ export default function AccountInfo({
 
               {tier !== 'free' ? (
                 <a
-                  className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-averta-semibold mb-4"
+                  className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline quicksand font-bold mb-4"
                   target="_blank"
                   href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"
                 >
@@ -308,39 +308,39 @@ export default function AccountInfo({
               <div className="items-center margin-auto justify-center flex flex-col mt-20">
                 {currentUser ? (
                   <div className="px-4 sm:mx-0">
-                    <h2 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold ">
+                    <h2 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 quicksand font-bold ">
                       Account Details
                     </h2>
 
                     <div className="grid grid-cols-3 mb-5  ">
                       <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm border-r border-gray-300 pr-4">
-                        <p className="mb-3 font-averta-semibold">Your Email</p>
-                        <p className="mb-3 font-averta-semibold">Password</p>
+                        <p className="mb-3 quicksand font-bold">Your Email</p>
+                        <p className="mb-3 quicksand font-bold">Password</p>
                         {credit !== null ? (
-                          <p className="mt-2 font-averta-semibold">
+                          <p className="mt-2 quicksand font-bold">
                             Remaining <br></br>Credits
                           </p>
                         ) : null}
-                        <p className="mt-2 font-averta-semibold">Plan</p>
+                        <p className="mt-2 quicksand font-bold">Plan</p>
                       </div>
                       {/* <div className="border-r border-gray-300 h-[10vh] col-span-1 mx-auto items-center flex"></div> */}
                       <div className="col-span-2 text-black dark:text-zinc-200 text-sm ml-6">
-                        <p className="mb-3 font-averta-regular">
+                        <p className="mb-3 quicksand font-normal">
                           {currentUser.email}
                         </p>
                         <a
                           href="/u/resetpassword"
-                          className="mb-2 underline font-averta-regular"
+                          className="mb-2 underline quicksand font-normal"
                         >
                           Reset password
                         </a>
                         {credit !== null ? (
-                          <p className="mt-5 font-averta-regular">
+                          <p className="mt-5 quicksand font-normal">
                             {Math.floor(credit)} minutes
                           </p>
                         ) : null}
 
-                        <p className="mt-5 font-averta-regular">
+                        <p className="mt-5 quicksand font-normal">
                           {tier === 'free' && 'Starter Plan'}
                           {tier === 'basic' && 'Basic Plan'}
                           {tier === 'premium' && 'Premium Plan'}
@@ -357,12 +357,12 @@ export default function AccountInfo({
                               onClick={() => setCreditPurchaseDialog(true)}
                             >
                               <AddCircleOutlineIcon className="mr-2 dark:text-zinc-800" />
-                              <span className="mt-1 dark:text-zinc-800 font-averta-semibold">
+                              <span className="mt-1 dark:text-zinc-800 quicksand font-bold">
                                 Buy Credits
                               </span>
                             </Button>
                             {tier === 'free' && (
-                              <span className=" font-averta-regular text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
+                              <span className=" quicksand font-normal text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
                                 Upgrade to a paid plan to get credit topups.
                               </span>
                             )}
@@ -414,7 +414,7 @@ export default function AccountInfo({
 
       <div className="flex gap-6 flex-row justify-center my-6  xl:ml-20  px-4 py-2 rounded-xl ">
   
-  <p className={`text-lg font-bold ${isYearly ? "text-slate-700 dark:text-white" : " text-indigo-400"}`} >Monthly</p>
+  <p className={`text-lg font-bold ${isYearly ? "text-slate-700 dark:text-white" : " text-indigo-400"} quicksand`} >Monthly</p>
           <Switch
         checked={isYearly}
         onChange={() => setIsYearly(!isYearly)}
@@ -445,7 +445,7 @@ export default function AccountInfo({
           },
         })}
       />
-      <p className={`text-lg font-bold ${isYearly===false ? "text-slate-700 dark:text-white" : "text-indigo-400"}`} >
+      <p className={`text-lg font-bold ${isYearly===false ? "text-slate-700 dark:text-white" : "text-indigo-400"} quicksand`} >
       Yearly (Save 40%)</p>
         
     </div>
@@ -505,22 +505,22 @@ export default function AccountInfo({
         onClose={() => setCreditPurchaseDialog(false)}
       >
         <div className="h-[400px] p-10 text-zinc-600 text-sm dark:text-zinc-300 dark:bg-mildDarkMode  text-center items-center">
-          <p className="text-lg font-averta-semibold ">
+          <p className="text-lg quicksand font-bold ">
             You are about to purchase extra credits.
           </p>
-          <p className=" font-averta-semibold">
+          <p className=" quicksand font-bold">
             Update quantity to scale your minutes proportionally.
           </p>
 
           <div className="mt-6">
             <p
-              className="font-averta-semibold
+              className="quicksand font-bold
                                                                              text-lg"
             >
               {' '}
               ${quantity * 5}
             </p>
-            <p className="font-averta-semibold">
+            <p className="quicksand font-bold">
               {quantity * 300} minutes (={quantity * 5} hours)
             </p>
           </div>
@@ -540,7 +540,7 @@ export default function AccountInfo({
                 value={quantity}
                 onChange={handleQuantityChange}
                 onBlur={handleBlur}
-                className="w-[70px] rounded-lg border border-gray-200 font-averta-semibold text-center dark:bg-mildDarkMode focus:outline-none focus:ring-0 focus:border-indigo-400"
+                className="w-[70px] rounded-lg border border-gray-200 quicksand font-bold text-center dark:bg-mildDarkMode focus:outline-none focus:ring-0 focus:border-indigo-400"
               />
 
               <AddCircleIcon
@@ -563,12 +563,12 @@ export default function AccountInfo({
                   className="opacity-40 w-5 text-center margin-auto w-full"
                 />
               ) : (
-                <p className="py-1 dark:text-zinc-800 text-md font-averta-semibold">
+                <p className="py-1 dark:text-zinc-800 text-md quicksand font-bold">
                   Purchase
                 </p>
               )}
             </Button>
-            <p className="items-center margin-auto flex mt-4 font-averta-regular">
+            <p className="items-center margin-auto flex mt-4 quicksand font-normal">
               You will be charged automatically.
             </p>
           </div>

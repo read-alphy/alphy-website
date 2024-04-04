@@ -33,6 +33,7 @@ body {
 @tailwind utilities;
 @import url(https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold);
 @import url(https://db.onlinewebfonts.com/c/b5d2107c7c6e775b13169eb51d8970c1?family=AvertaStd-Light);
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @import url(https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=Bookerly);
 @import url(https://db.onlinewebfonts.com/c/a67d98abe8980caaa1768b6e27b323c6?family=Typewriter);
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
@@ -42,11 +43,8 @@ body {
 * {
   padding: 0;
   margin: 0;
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
 }
-
 
 
 .font-averta-semibold {
@@ -67,6 +65,9 @@ body {
   font-weight: 500;
 }
 
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+}
 
 .wave {
   animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
@@ -290,7 +291,7 @@ body {
 h2,
 h3 {
   font-weight: 600;
-  font-size: large;
+  
 }
 
 .answer-area ol,
@@ -770,9 +771,18 @@ CONTENT PAGE
   list-style: disc outside none;
 }
 
-.react-markdown-edit p {
-  font-weight: 400;
+
+.react-markdown-edit p,
+li,
+ul,
+span,
+code,
+pre,
+ol 
+{
+  font-family: 'Quicksand', sans-serif;
 }
+
 
 .create-article {
   align-items: center;
@@ -872,9 +882,7 @@ CONTENT PAGE
   
 }
 .summary-text {
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
   font-weight: 500;
   font-size: 16px;
 }
@@ -886,9 +894,7 @@ span,
 code,
 pre,
 ol {
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
   font-weight: 500;
 }
 
@@ -923,18 +929,14 @@ ol {
   font-weight: 600;
   font-size: 20px;
   margin-top: 30px;
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
 }
 
 .summary-text h1 {
   font-weight: 600;
   font-size: 20px;
   margin-top: 30px;
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
 }
 
 /* .summary-text p{
@@ -945,33 +947,25 @@ ol {
   font-weight: 600;
   font-size: 20px;
   margin-top: 30px;
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
 }
 
 .summary-text h4 {
   font-weight: 600;
   font-size: 20px;
   margin-top: 30px;
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
 }
 
 .summary-text h5 {
   font-weight: 600;
   font-size: 16px;
   margin-top: 30px;
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
 }
 
 .summary-text strong {
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
   font-weight: 600;
   font-style: italic;
 }
@@ -1338,4 +1332,15 @@ DIFFERENT SCREEN SIZES
 
 .flash-effect {
   animation: flash 1s ease-in-out;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* For Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

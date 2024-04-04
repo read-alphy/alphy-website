@@ -35,17 +35,17 @@ export default function MyUploadsFeedItem({
               (item.summaries[0].complete === true ||
                 item.summaries[1] !== undefined ||
                 item.summaries[0] !== undefined) ? null : (
-                <div className="font-light text-xs font-averta-semibold ">
+                <div className="font-light text-xs quicksand font-bold ">
                   📝 IN PROGRESS
                 </div>
               )}
             </div>
 
-            <div className="row-span-2 break-all font-averta-semibold">
+            <div className="row-span-2 break-all quicksand font-bold">
               {displayText}
             </div>
 
-            <div className="font-light text-zinc-500 dark:text-zinc-300 text-xs row-span-1 font-averta-semibold">
+            <div className="font-light text-slate-500 dark:text-zinc-300 text-xs row-span-1 quicksand font-bold">
               Time added: {formattedDate}
             </div>
           </div>

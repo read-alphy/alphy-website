@@ -22,7 +22,8 @@ export default function SourceCard({
   setOpenDialog,
 }) {
   const setOpenDialogInside = setOpenDialog
-  const startTime = Math.floor(source.start)
+  const startTime =convertTimeToSeconds(source.start)
+  const endTime = convertTimeToSeconds(source.end)
   const [expanded, setExpanded] = useState(false)
 const router = useRouter()
   let displayText = ''
@@ -30,6 +31,37 @@ const router = useRouter()
 
   let sentences
   let groupedText
+
+  function convertTimeToSeconds(time) {
+    // Check if the input is a string and matches the ISO 8601 duration format
+    if (typeof time === 'string' && time.match(/^PT/)) {
+      const matches = time.match(/PT(\d+H)?(\d+M)?(\d+(?:\.\d+)?S)?/);
+      let seconds = 0;
+  
+      // If hours are present, convert them to seconds and add to total
+      if (matches[1]) {
+        seconds += parseInt(matches[1]) * 3600;
+      }
+  
+      // If minutes are present, convert them to seconds and add to total
+      if (matches[2]) {
+        seconds += parseInt(matches[2]) * 60;
+      }
+  
+      // If seconds are present, add them to total
+      if (matches[3]) {
+        seconds += parseFloat(matches[3]);
+      }
+  
+      return seconds;
+    } else if (typeof time === 'number' || (typeof time === 'string' && time.match(/^\d+(?:\.\d+)?$/))) {
+      // If the input is a numeric value or a string representing a number, parse it directly
+      return parseFloat(time);
+    } else {
+      // If the input is neither, return null or throw an error
+      return null;
+    }
+  }
 
   if (source.text !== undefined) {
     const sentenceRegex = /(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/
@@ -174,8 +206,8 @@ const router = useRouter()
               ></div>
             </div>
 
-            <div className=" text-lg w-full font-sans min-h-[80px] max-h-[80px] overflow-y-hidden text-zinc-600 dark:text-zinc-200">
-              <p className="font-averta-semibold">{displayTitle}</p>
+            <div className=" text-lg w-full font-sans min-h-[80px] max-h-[80px] overflow-y-hidden text-slate-700 dark:text-zinc-200">
+              <p className="quicksand font-bold">{displayTitle}</p>
             </div>
           </div>
           <div>
@@ -195,54 +227,54 @@ const router = useRouter()
                   alt="Alphy Logo"
                 />
               </div>
-              <p className="ml-2 mt-1 text-sm sm:text-md text-zinc-500 dark:text-zinc-300 font-averta-semibold">
+              <p className="ml-2 mt-1 text-sm sm:text-md text-slate-600 dark:text-zinc-300 quicksand font-normal">
                 See more details on Alphy{' '}
               </p>
             </a>
             <p className="mt-4">
-              <a className=" text-zinc-500 dark:text-zinc-300 font-averta-semibold">
-                {Math.floor(source.start / 3600) < 10
-                  ? `0${Math.floor(source.start / 3600)}`
-                  : `${Math.floor(source.start / 3600)}`}
+              <a className=" text-slate-600 dark:text-zinc-300 quicksand font-bold">
+                {Math.floor(startTime / 3600) < 10
+                  ? `0${Math.floor(startTime / 3600)}`
+                  : `${Math.floor(startTime / 3600)}`}
                 {':'}
-                {Math.floor(source.start / 60) < 10
-                  ? `0${Math.floor(source.start / 60)}`
-                  : Math.floor(source.start % 3600) < 600
+                {Math.floor(startTime / 60) < 10
+                  ? `0${Math.floor(startTime / 60)}`
+                  : Math.floor(startTime % 3600) < 600
                   ? `0${Math.floor(
-                      source.start / 60 - Math.floor(source.start / 3600) * 60
+                      startTime / 60 - Math.floor(startTime / 3600) * 60
                     )}`
                   : Math.floor(
-                      source.start / 60 - Math.floor(source.start / 3600) * 60
+                      startTime / 60 - Math.floor(startTime / 3600) * 60
                     )}
                 {':'}
-                {Math.floor(source.start % 60) < 10
-                  ? `0${Math.floor(source.start % 60)}`
-                  : Math.floor(source.start % 60)}
+                {Math.floor(startTime % 60) < 10
+                  ? `0${Math.floor(startTime % 60)}`
+                  : Math.floor(startTime % 60)}
 
                 {' - '}
 
-                {Math.floor(source.end / 3600) < 10
-                  ? `0${Math.floor(source.end / 3600)}`
-                  : `${Math.floor(source.end / 3600)}`}
+                {Math.floor(endTime / 3600) < 10
+                  ? `0${Math.floor(endTime / 3600)}`
+                  : `${Math.floor(endTime / 3600)}`}
                 {':'}
-                {Math.floor(source.end / 60) < 10
-                  ? `0${Math.floor(source.end / 60)}`
-                  : Math.floor(source.end % 3600) < 600
+                {Math.floor(endTime / 60) < 10
+                  ? `0${Math.floor(endTime / 60)}`
+                  : Math.floor(endTime % 3600) < 600
                   ? `0${Math.floor(
-                      source.end / 60 - Math.floor(source.end / 3600) * 60
+                      endTime / 60 - Math.floor(endTime / 3600) * 60
                     )}`
                   : Math.floor(
-                      source.end / 60 - Math.floor(source.end / 3600) * 60
+                      endTime / 60 - Math.floor(endTime / 3600) * 60
                     )}
                 {':'}
-                {Math.floor(source.end % 60) < 10
-                  ? `0${Math.floor(source.end % 60)}`
-                  : Math.floor(source.end % 60)}
+                {Math.floor(endTime % 60) < 10
+                  ? `0${Math.floor(endTime % 60)}`
+                  : Math.floor(endTime % 60)}
               </a>
             </p>
             <p
               ref={myRef}
-              className={` mt-4 text-zinc-500 dark:text-zinc-300 text-md  pb-2 font-averta-regular`}
+              className={` mt-4 text-slate-600 dark:text-zinc-300 text-md  pb-2 quicksand font-normal`}
             >
               {displayText[0] === displayText[0].toUpperCase() ? '' : '...'}
               {displayText}
@@ -256,14 +288,14 @@ const router = useRouter()
                 : '...'}
             </p>
           </div>
-          <p className="absolute bottom-0 text-greenColor font-averta-semibold  ">
+          <p className="absolute bottom-0 text-greenColor quicksand font-bold  ">
             Click to see more
           </p>
         </div>
       ) : (
         <div className="w-full">
           <CloseIcon
-            className="right-0 absolute mr-4 mt-2 cursor-pointer text-zinc-500 dark:text-zinc-300"
+            className="right-0 absolute mr-4 mt-2 cursor-pointer text-slate-600 dark:text-zinc-300"
             onClick={() => setOpenDialog(false)}
           ></CloseIcon>
           <div
@@ -283,12 +315,12 @@ const router = useRouter()
               ></iframe>
             )}
             <p
-              className={`text-greenColor mt-4 mb-4 px-2 sm:px-10 font-averta-semibold`}
+              className={`text-greenColor mt-4 mb-4 px-2 sm:px-10 quicksand font-bold`}
             >
               <TextSnippetIcon /> Passage
             </p>
             <p
-              className="px-2 sm:px-10 text-zinc-500 dark:text-zinc-300 font-averta-regular"
+              className="px-2 sm:px-10 text-slate-600 dark:text-zinc-300 quicksand font-normal"
               dangerouslySetInnerHTML={{ __html: groupedText }}
             ></p>
           </div>

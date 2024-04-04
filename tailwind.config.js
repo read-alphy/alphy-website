@@ -1,6 +1,6 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  
+  darkMode: ["class"],
   theme: {
     screens: {
       xs: '420px',
@@ -12,8 +12,7 @@ module.exports = {
       '2xl': '1440px',
       '3xl': '1660px',
     },
-    darkMode: 'class',
-
+    
     extend: {
       transitionProperty: {
         height: 'height',

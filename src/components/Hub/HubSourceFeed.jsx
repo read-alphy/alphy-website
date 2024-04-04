@@ -307,7 +307,7 @@ function HubSourceFeed(props) {
   return (
     <div className="xl:min-w-[1000px] xl:max-w-[1000px] 3xl:max-w-[1280px] 3xl:min-w-[1280px] w-full mx-auto xl:mx-0 md:pl-10  lg:pl-16  xl:pl-20 3xl:pl-40   flex flex-row">
       <div className=" p-[10px] mt-10 min-h-[60vh]  w-full">
-        <p className="font-averta-semibold text-zinc-700 dark:text-zinc-300 text-lg font-sans font-semibold text-xl xl:text-2xl pl-2">
+        <p className="quicksand font-bold text-zinc-700 dark:text-zinc-300 text-lg font-sans font-semibold text-xl xl:text-2xl pl-2">
           {' '}
           Explore our database.
         </p>
@@ -329,7 +329,7 @@ function HubSourceFeed(props) {
                   setSearch(e.target.value)
                 }}
                 placeholder="Type in a key word or paste a link..."
-                className=" pl-10 peer min-w-[320px] max-w-[320px] font-averta-semibold xs:min-w-[380px] sm:min-w-[400px] xl:min-w-[600px] h-full border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700  outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-blue-000 dark:focus:border-blue-000"
+                className=" pl-10 peer min-w-[320px] max-w-[320px] quicksand font-normal xs:min-w-[380px] sm:min-w-[400px] xl:min-w-[600px] h-full border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700  outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-blue-000 dark:focus:border-blue-000"
               />
               <div className="cursor-pointer absolute inset-y-0 left-0 flex items-center pl-3 ">
                 <svg
@@ -400,7 +400,7 @@ function HubSourceFeed(props) {
             <div className="w-full flex justify-center">
               {
                 <button
-                  className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline font-averta-semibold"
+                  className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline quicksand font-bold"
                   onClick={loadMore}
                 >
                   {'Load more'}

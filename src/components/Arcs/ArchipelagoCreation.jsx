@@ -299,15 +299,15 @@ export default function ArchipelagoCreation({
             <div className="mt-10 lg:mt-0 ">
               <a
                 onClick={() => handleGoBack()}
-                className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
+                className="text-slate-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
               >
                 <KeyboardArrowLeftIcon fontSize="small" className="" />
-                <span className="text-sm  font-averta-semibold">Go Back</span>
+                <span className="text-sm  quicksand font-semibold">Go Back</span>
               </a>
             </div>
             <div className=" flex flex-row w-full items-center">
               <div className="relative w-full min-w-[200px] h-12 mt-10 ">
-                <p className="text-zinc-700 dark:text-zinc-300 mb-2 ml-1 font-averta-semibold">
+                <p className="text-slate-700 dark:text-zinc-300 mb-2 ml-1 quicksand font-semibold">
                   Title
                 </p>
 
@@ -315,7 +315,7 @@ export default function ArchipelagoCreation({
                   value={archipelagoTitle}
                   placeholder="Set a title..."
                   onChange={event => setArchipelagoTitle(event.target.value)}
-                  className="w-full  font-averta-semibold text-l px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-200 dark:border-zinc-700 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"
+                  className="w-full  quicksand font-semibold text-md px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-200 dark:border-zinc-700 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"
                 />
               </div>
 
@@ -325,11 +325,11 @@ export default function ArchipelagoCreation({
                 }}/> */}
             </div>
             <div className="w-full">
-              <p className="text-zinc-700 dark:text-zinc-300 mb-2 mt-16 ml-1 font-averta-semibold">
+              <p className="text-slate-700 dark:text-zinc-300 mb-2 mt-16 ml-1 quicksand font-semibold">
                 Description
               </p>
               <textarea
-                className={`min-h-[120px]  p-2 border rounded-lg font-averta-semibold bg-white border-zinc-200 dark:border-zinc-700 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`}
+                className={`min-h-[120px]  p-2 border rounded-lg quicksand font-semibold bg-white border-zinc-200 dark:border-zinc-700 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`}
                 value={archipelagoDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
                 placeholder="Set a description for your archipelago..."
@@ -341,10 +341,10 @@ export default function ArchipelagoCreation({
             </div>
           </div>
           <div className=" mt-10 border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
-          <p className="mt-4 lg:mt-10 mb-2     text-zinc-700 dark:text-zinc-300 ml-1 font-averta-semibold">
+          <p className="mt-4 lg:mt-10 mb-2     text-slate-700 dark:text-zinc-300 ml-1 quicksand font-semibold">
             Curate your knowledge hub
           </p>
-          <p className="mt-2 mb-6 text-zinc-600 dark:text-zinc-400 ml-1 text-sm font-averta-regular">
+          <p className="mt-2 mb-6 text-slate-600 dark:text-zinc-400 ml-1 text-sm quicksand font-normal">
             Search by keyword or paste a link.
           </p>
           <div className="w-full grid grid-cols-5 lg:grid-cols-6 ">
@@ -354,12 +354,12 @@ export default function ArchipelagoCreation({
                 onChange={event => setInputValue(event.target.value)}
                 placeholder=" "
                 onKeyDown={handleKeyDown}
-                className="peer w-full font-averta-semibold  lg:w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor pl-8"
+                className="peer w-full quicksand font-semibold  lg:w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-black dark:focus:border-r-greenColor  dark:focus:border-l-greenColor dark:focus:border-b-greenColor focus:border-greenColor pl-8"
               ></input>
               <label
                 className={`${
                   inputValue.length === 0 ? 'pl-6' : ''
-                } font-averta-semibold  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor pt-1 peer-focus:pt-0 `}
+                } quicksand font-semibold  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor pt-1 peer-focus:pt-0 `}
               >
                 Search from our database...
               </label>
@@ -376,7 +376,7 @@ export default function ArchipelagoCreation({
           </div>
           <div className="archipelago-search max-h-[80vh] overflow-y-scroll mt-5">
             {inputValue.length > 0 && searchCalled === true && (
-              <p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300 flex flex-col text-sm font-averta-semibold">
+              <p className="mt-2 mb-8 text-zinc-600 dark:text-zinc-300 flex flex-col text-sm quicksand font-semibold">
                 Can't find what you are looking for? Paste the link for the
                 content above to process it first.
               </p>
@@ -420,7 +420,7 @@ export default function ArchipelagoCreation({
             <div className="w-full flex justify-center">
               {
                 <button
-                  className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold underline pb-10 font-averta-semibold"
+                  className="justify-center flex text-blueLike dark:text-zinc-300 quicksand font-normal underline pb-10 quicksand font-semibold"
                   onClick={loadMore}
                 >
                   {'Load more'}
@@ -446,7 +446,7 @@ export default function ArchipelagoCreation({
                 onClick={e => {
                   handleSubmit()
                 }}
-                className=" bg-green-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case font-averta-semibold"
+                className=" bg-green-300 dark:text-slate-700 px-6 py-3 text-sm lg:text-[15px] normal-case quicksand font-semibold"
               >
                 Submit
               </Button>
@@ -478,18 +478,18 @@ export default function ArchipelagoCreation({
                     {' '}
                     -{' '}
                   </p>
-                  <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold">
+                  <p className=" text-zinc-500 dark:text-zinc-400 quicksand font-semibold">
                     {' '}
                     Remaining Credits : {Math.floor(credit)} minutes
                   </p>
                 </div>
               </div>
               <div className="flex flex-col">
-                <p className="text-zinc-500 dark:text-zinc-400 mr-2 font-averta-semibold mt-2">
+                <p className="text-zinc-500 dark:text-zinc-400 mr-2 quicksand font-semibold mt-2">
                   Need more credits?{' '}
                 </p>
                 {tier === 'free' && (
-                  <span className=" font-averta-regular  text-zinc-500 dark:text-zinc-300 text-sm  ">
+                  <span className=" quicksand font-normal  text-zinc-500 dark:text-zinc-300 text-sm  ">
                     Upgrade to a paid plan to get credit topups.
                   </span>
                 )}
@@ -497,7 +497,7 @@ export default function ArchipelagoCreation({
               <Link
                 onClick={() => sessionStorage.setItem('creditPurchase', 'true')}
                 href="/account"
-                className={`text-indigo-400 font-semibold text-sm  mt-4 underline font-averta-semibold ${
+                className={`text-indigo-400 quicksand font-normal text-sm  mt-4 underline quicksand font-semibold ${
                   tier === 'basic' || tier === 'premium' ? '' : 'hidden'
                 }`}
               >
@@ -514,19 +514,19 @@ export default function ArchipelagoCreation({
         <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
 
         <div className=" lg:border-l w-full lg:px-10 mx-auto lg:min-w-[550px]">
-          <p className="mt-20 lg:mt-5 ml-2 text-lg font-bold text-zinc-700 dark:text-zinc-300 font-averta-semibold">
+          <p className="mt-20 lg:mt-5 ml-2 text-lg font-bold text-slate-700 dark:text-zinc-300 quicksand font-semibold">
             {archipelagoTitle.length > 0 ? archipelagoTitle : 'Arc'}
           </p>
           {archipelagoDescription.length > 0 && (
-            <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80 font-averta-semibold">
+            <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80 quicksand font-semibold">
               {archipelagoDescription}
             </p>
           )}
-          <p className="mt-4 ml-2 mb-5 text-md text-zinc-700 dark:text-zinc-300 opacity-80 font-averta-semibold">
+          <p className="mt-4 ml-2 mb-5 text-md text-slate-700 dark:text-zinc-300 opacity-80 quicksand font-semibold">
             Add or remove content to change the scope of your chat assistant.
           </p>
           {errorMessage && dataArchipelago.length === 0 && (
-            <p className="mt-4 ml-2 mb-5 text-md text-red-500 dark:text-red-400 opacity-80 font-averta-semibold">
+            <p className="mt-4 ml-2 mb-5 text-md text-red-500 dark:text-red-400 opacity-80 quicksand font-semibold">
               An Arc cannot be empty. Please add an item to continue.
             </p>
           )}

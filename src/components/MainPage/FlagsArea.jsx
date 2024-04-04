@@ -68,10 +68,10 @@ export default function FlagsArea() {
       id="languages"
       className="w-full  pt-20 xl:pt-40 overflow-hidden pb-10"
     >
-      <p className="text-xl xl:text-2xl  pl-4 text-zinc-800 dark:text-zinc-300 font-averta-semibold">
+      <p className="text-xl xl:text-2xl  pl-4 text-slate-700 dark:text-zinc-300 quicksand font-bold">
         Supported Languages
       </p>
-      <p className="text-md xl:text-lg mb-6  pt-4 pl-4 text-zinc-600 dark:text-zinc-300 font-normal">
+      <p className="text-md xl:text-lg mb-6  pt-4 pl-4 text-slate-700 dark:text-zinc-300 font-normal quicksand">
         Transcribe, translate, and use generative AI with more than 40
         languages.
       </p>
@@ -85,7 +85,7 @@ export default function FlagsArea() {
               alt={languages.language}
             />
 
-            <p className="row-span-1 text-center text-zinc-600 dark:text-zinc-400 text-md">
+            <p className="row-span-1 text-center font-normal text-slate-600 dark:text-zinc-400 text-md quicksand">
               {language.language}
             </p>
           </div>

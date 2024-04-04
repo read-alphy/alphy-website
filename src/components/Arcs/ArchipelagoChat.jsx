@@ -377,7 +377,7 @@ export default function ArchipelagoChat({
         <div className="col-span-4 sm:col-span-3 flex flex-row">
           {archipelagoImageLink.length > 0 && (
             <img
-              className={`${'hidden'} sm:block w-[200px] sm:mr-4`}
+              className={`${'hidden'} sm:block w-[200px] h-[200px] sm:mr-4`}
               src={archipelagoImageLink}
               alt = "archipelago image"
               width={200}
@@ -385,13 +385,13 @@ export default function ArchipelagoChat({
             />
           )}
           <div className="ml-2">
-            <p className="text-xl text-zinc-700 dark:text-zinc-300 font-averta-semibold">
+            <p className="text-xl text-slate-800 dark:text-zinc-300 quicksand font-bold">
               {title}
             </p>
             {
               <p
                 onClick={toggleExpand}
-                className={`text-md text-zinc-400 dark:text-zinc-500 font-averta-semibold ${
+                className={`text-md text-slate-500 dark:text-zinc-500 quicksand font-bold ${
                   !expanded && 'hover:opacity-80'
                 } ${'sm:hidden'} cursor-pointer`}
               >
@@ -399,13 +399,13 @@ export default function ArchipelagoChat({
               </p>
             }
             <p
-              className={`text-md text-zinc-400 dark:text-zinc-500 font-averta-semibold ${'hidden sm:block'} `}
+              className={`text-sm text-slate-500 dark:text-zinc-500 quicksand font-normal ${'hidden sm:block'} mt-2 `}
             >
               {description}
             </p>
             <div className="flex">
               <p
-                className="cursor-pointer underline text-zinc-600 dark:text-zinc-300 font-averta-semibold"
+                className="cursor-pointer underline text-slate-700 dark:text-zinc-300 quicksand font-bold text-sm"
                 onClick={() => setShowTrackDetails(true)}
               >
                 More Details...
@@ -424,13 +424,13 @@ export default function ArchipelagoChat({
                   onClick={() => setShowTrackDetails(false)}
                 ></CloseIcon>
                 <div className="mb-10 px-4 sm:px-10">
-                  <p className="text-zinc-700 dark:text-zinc-300 text-lg font-averta-semibold">
+                  <p className="text-slate-800 dark:text-zinc-300 text-lg quicksand font-bold">
                     {title}
                   </p>
                   {
                     <p
                       onClick={toggleExpand}
-                      className={`text-md text-zinc-400 dark:text-zinc-500 ${
+                      className={`text-md text-slate-500 dark:text-zinc-500 ${
                         !expanded && 'hover:opacity-80'
                       } ${'sm:hidden'} cursor-pointer`}
                     >
@@ -438,13 +438,13 @@ export default function ArchipelagoChat({
                     </p>
                   }
                   <p
-                    className={`text-md text-zinc-400 dark:text-zinc-500 ${'hidden sm:block'} lg:max-w-[700px] font-averta-semibold`}
+                    className={`text-md text-slate-500 dark:text-zinc-500 ${'hidden sm:block'} lg:max-w-[700px] quicksand font-bold`}
                   >
                     {description}
                   </p>
 
                   <div className="flex flex-row mt-5">
-                    <p className="text-zinc-500 dark:text-zinc-500 text-md font-averta-semibold ">
+                    <p className="text-zinc-500 dark:text-zinc-500 text-md quicksand font-bold ">
                       {dataArchipelago !== null && dataArchipelago.length} items
                     </p>
                     <div className="ml-5">
@@ -454,27 +454,27 @@ export default function ArchipelagoChat({
                             <div className="flex-grow flex">
                               <p
                                 onClick={handleEdit}
-                                className="cursor-pointer text-zinc-600 dark:text-zinc-300 underline font-averta-semibold"
+                                className="cursor-pointer text-slate-700 dark:text-zinc-300 underline quicksand font-bold"
                               >
                                 Edit
                               </p>
                               <EditIcon
                                 onClick={handleEdit}
                                 fontSize="small"
-                                className="cursor-pointer text-zinc-600 dark:text-zinc-300 pl-1 pt-1"
+                                className="cursor-pointer text-slate-700 dark:text-zinc-300 pl-1 pt-1"
                                 title={'Edit archipelago'}
                               />
                             </div>
 
                             <div className="relative flex flex-col ml-20">
                               <div className="relative flex flex-row  group  cursor-default">
-                                <div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center">
+                                <div className=" flex flex-row text-slate-700 dark:text-zinc-300 items-center">
                                   <AntSwitch
                                     onChange={handleVisibility}
                                     defaultChecked={isVisible}
                                     disabled={tier !== 'premium'}
                                   />
-                                  <span className="text-sm mx-2 font-averta-semibold">
+                                  <span className="text-sm mx-2 quicksand font-bold">
                                     {localStorage.getItem('isVisible') ===
                                     'true'
                                       ? 'Public'
@@ -483,14 +483,14 @@ export default function ArchipelagoChat({
                                 </div>
 
                                 {tier === 'premium' && (
-                                  <span className="absolute font-averta-semibold opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
+                                  <span className="absolute quicksand font-bold opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lgtext-slate-600 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
                                     {isVisible
                                       ? 'Toggle the visibility of this arc. Switching to private makes it accessible only by you.'
                                       : 'Toggle the visibility of this arc. Switching to public makes it accessible by all.'}
                                   </span>
                                 )}
                                 {tier !== 'premium' && (
-                                  <span className="absolute font-averta-semibold opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
+                                  <span className="absolute quicksand font-bold opacity-0 min-w-[200px]  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lgtext-slate-600 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-50 mb-2 ml-4">
                                     This arc is private. Switch to the Premium
                                     plan to make it publicly accessible.
                                   </span>
@@ -505,7 +505,7 @@ export default function ArchipelagoChat({
                   <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-10 mt-10 dark:opacity-40"></div>
                 </div>
                 <div className="w-full px-3 sm:px-8 ">
-                  <p className="text-zinc-700 dark:text-zinc-300 text-lg font-averta-semibold">
+                  <p className="text-slate-800 dark:text-zinc-300 text-lg quicksand font-bold">
                     Item List
                   </p>
                   <div
@@ -521,7 +521,7 @@ export default function ArchipelagoChat({
                   >
                     {dataArchipelago.length > 0
                       ? dataArchipelago.map((item, index) => (
-                          <div className="hover:bg-zinc-100 dark:hover:bg-zinc-700 font-averta-semibold">
+                          <div className="hover:bg-zinc-100 dark:hover:bg-zinc-700 quicksand font-bold">
                             <FeedItem
                               index={index}
                               item={item}
@@ -553,12 +553,12 @@ export default function ArchipelagoChat({
                 type="text"
                 id="questionAnswering"
                 placeholder="Type your question here..."
-                className="m-0 w-full  font-averta-semibold text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-400 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]"
+                className="m-0 w-full  quicksand font-bold text-slate-800 dark:text-zinc-300 dark:placeholder:text-slate-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]"
               />
               {inputValue.length > 0 ? (
                 <div
                   onClick={handleClear}
-                  className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-10 md:mr-14 dark:text-zinc-500 text-zinc-400 "
+                  className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-10 md:mr-14 dark:text-zinc-500 text-slate-500 "
                 >
                   <svg
                     width="20"
@@ -596,7 +596,7 @@ export default function ArchipelagoChat({
                   />
                 ) : (
                   <svg
-                    className="w-4 h-4 text-zinc-600 dark:text-zinc-700"
+                    className="w-4 h-4 text-slate-700 dark:text-slate-800"
                     aria-hidden="true"
                     fill="none"
                     stroke="currentColor"
@@ -616,12 +616,12 @@ export default function ArchipelagoChat({
           </div>
         </div>
         {errorMessage && (
-          <div className="mt-4 text-zinc-500 dark:text-zinc-400">
-            <p className="font-averta-semibold">
+          <div className="mt-4text-slate-600 dark:text-slate-500">
+            <p className="quicksand font-bold">
               Please{' '}
               <a
                 href="/u/login"
-                className="underline text-greenColor dark:text-green-200 font-averta-semibold"
+                className="underline text-greenColor dark:text-green-200 quicksand font-bold"
               >
                 sign in
               </a>{' '}
@@ -645,14 +645,14 @@ export default function ArchipelagoChat({
             }
             <p className="flex flex-row mb-5 sm:ml-6">
               <QuizIcon className="text-greenColor dark:text-green-200 mr-2" />
-              <span className="text-zinc-600 dark:text-zinc-200 font-averta-semibold">
+              <span className="text-slate-700 dark:text-zinc-200 quicksand font-bold">
                 Suggested Questions
               </span>
 
               <RefreshIcon
                 title="Refresh questions."
                 fontSize="small"
-                className="ml-2 text-zinc-500 dark:text-zinc-300 cursor-pointer"
+                className="ml-2 mt-1 text-slate-600 dark:text-zinc-300 cursor-pointer"
                 onClick={() => {
                   setSelectedQuestions('')
                   setI(0)
@@ -664,14 +664,14 @@ export default function ArchipelagoChat({
               selectedQuestions.map((question, index) =>
                 index % 2 == 0 ? (
                   <button
-                    className="bg-stone-50 border dark:bg-darkMode hover:scale-105 duration-300 transition ease-in-out text-zinc-500 dark:text-zinc-300 rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm font-averta-semibold"
+                    className="bg-slate-100 border dark:bg-darkMode hover:scale-105 duration-300 transition ease-in-outtext-slate-600 dark:text-zinc-300 rounded-xl px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm quicksand font-normal"
                     onClick={handleAskPremadeQuestion}
                   >
                     {question}
                   </button>
                 ) : (
                   <button
-                    className="bg-white border dark:bg-mildDarkMode text-zinc-500 dark:text-zinc-300 hover:scale-105 duration-300 transition ease-in-out rounded-full px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm font-averta-semibold"
+                    className="bg-white border dark:bg-mildDarkModetext-slate-600 dark:text-zinc-300 hover:scale-105 duration-300 transition ease-in-out rounded-xl px-5 py-1 text-md mr-4 mt-4 dark:border-zinc-700 drop-shadow-sm quicksand font-normal"
                     onClick={handleAskPremadeQuestion}
                   >
                     {question}
@@ -686,11 +686,11 @@ export default function ArchipelagoChat({
           className="answer-area text-l max-w-[900px] ml-2 sm:ml-10 mt-10 "
         >
           {isLoadingInside || answerData.answer !== '' ? (
-            <p className="text-greenColor dark:text-green-200 text-l font-averta-semibold">
+            <p className="text-greenColor dark:text-green-200 text-l quicksand font-bold">
               <QuestionAnswerIcon className="text-greenColor dark:text-green-200 mr-1 " />
               Answer
               <LoopIcon
-                className="ml-2 cursor-pointer text-zinc-500 dark:text-zinc-300"
+                className="ml-2 cursor-pointertext-slate-600 dark:text-zinc-300"
                 fontSize="small"
                 onClick={() => {
                   setAnswerData({ answer: '', sources: [] })
@@ -725,15 +725,15 @@ export default function ArchipelagoChat({
           )}
 
           {answerData.answer !== '' && (
-            <div className="text-zinc-700 dark:text-zinc-300">
+            <div className="text-slate-800 dark:text-zinc-300">
               {/* <p dangerouslySetInnerHTML={{ __html: answerData.answer.replace(/\n/g, '<br/>')
                                  }}/>  */}
 
-              <div className="whitespace-pre-line font-averta-regular">
+              <div className="whitespace-pre-line quicksand font-normal">
                 {formatAnswer(answerData.answer, answerData)}
               </div>
 
-              <div className="dark:text-zinc-300 text-zinc-600 opacity-60 text-center items-center mt-20 font-averta-semibold">
+              <div className="dark:text-zinc-300 text-slate-700 opacity-60 text-center items-center mt-20 quicksand font-bold">
                 Always check the passages before quoting. AI may not be 100%
                 accurate.
               </div>
@@ -749,7 +749,7 @@ export default function ArchipelagoChat({
         }
 
         <p
-          className={`text-greenColor dark:text-green-200  ml-10 mt-4 mb-4 font-averta-semibold ${
+          className={`text-greenColor dark:text-green-200  ml-10 mt-4 mb-4 quicksand font-bold ${
             answerData.answer.length === 0 && 'hidden'
           }`}
         >
@@ -803,7 +803,7 @@ export default function ArchipelagoChat({
                   }`}
                 >
                   <div className="rounded-full  p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
-                    <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
+                    <ArrowBackIosNewIcon className="cursor-pointer text-slate-700 p-1 " />
                   </div>
                 </button>
 
@@ -832,7 +832,7 @@ export default function ArchipelagoChat({
                   }`}
                 >
                   <div className="rounded-full p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out">
-                    <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 p-1 " />
+                    <ArrowForwardIosIcon className="cursor-pointer text-slate-700 p-1 " />
                   </div>
                 </button>
 
@@ -846,8 +846,8 @@ export default function ArchipelagoChat({
                       <ArrowBackIosNewIcon
                         className={`${
                           isBackwardArrowVisible
-                            ? 'cursor-pointer text-zinc-500  '
-                            : ' text-zinc-300 dark:text-zinc-700cursor-default'
+                            ? 'cursor-pointertext-slate-600  '
+                            : ' text-zinc-300 dark:text-slate-800cursor-default'
                         } p-1 `}
                       />
                     </div>
@@ -861,8 +861,8 @@ export default function ArchipelagoChat({
                       <ArrowForwardIosIcon
                         className={`${
                           isForwardArrowVisible
-                            ? 'cursor-pointer text-zinc-500'
-                            : '  text-zinc-300 dark:text-zinc-700 cursor-default'
+                            ? 'cursor-pointertext-slate-600'
+                            : '  text-zinc-300 dark:text-slate-800 cursor-default'
                         } p-1 `}
                       />
                     </div>

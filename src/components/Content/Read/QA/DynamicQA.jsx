@@ -104,13 +104,13 @@ export default function DynamicQA({
   }
 
   return (
-    <div className="text-zinc-600 dark:text-zinc-200 pb-10">
+    <div className="text-slate-600 dark:text-slate-200 pb-10">
       {answerData.answer ? (
         <div>
           <div className="flex flex-row mb-4">
-            <h2 className="text-xl col-span-1 flex flex-row font-sans  text-zinc-700 dark:text-zinc-200">
+            <h2 className="text-xl col-span-1 flex flex-row font-sans  text-slate-700 dark:text-slate-200">
               {' '}
-              <span className=" font-averta-semibold">Answer from Alphy</span>
+              <span className=" quicksand font-bold">Answer from Alphy</span>
               <svg
                 onClick={handleClear}
                 className="ml-2 mt-1 cursor-pointer"
@@ -172,19 +172,19 @@ export default function DynamicQA({
 
           <div
             id="answer-area"
-            className=" answer-area text-md sm:text-l container text-zinc-500 dark:text-zinc-300"
+            className=" answer-area text-md sm:text-l container text-slate-500 dark:text-slate-300"
           >
-            <div className="whitespace-pre-line text-zinc-700 dark:text-zinc-200 font-averta-regular">
+            <div className="whitespace-pre-line text-slate-700 dark:text-slate-200 quicksand font-normal">
               {formatAnswer(answerData.answer, answerData)}
             </div>
           </div>
 
           <button
-            className={`cursor-pointer justify-end mt-10 flex flex-row bg-whiteLike hover:bg-zinc-100  transition duration-300 ease-in-out dark:bg-zinc-700 dark:hover:bg-zinc-600 px-2 py-2 rounded-lg`}
+            className={`cursor-pointer justify-end mt-10 flex flex-row bg-slate-100 hover:bg-zinc-100  transition duration-300 ease-in-out dark:bg-zinc-700 dark:hover:bg-zinc-600 px-2 py-2 rounded-lg`}
             onClick={handleShowAllSources}
           >
             <span
-              className={` text-zinc-600 dark:text-zinc-200 text-md pr-1 font-averta-semibold`}
+              className={` text-slate-600 dark:text-slate-200 text-sm pr-1 quicksand font-bold`}
             >
               {answer && !singleSource ? 'Hide sources' : 'See all sources'}{' '}
               <DataArrayIcon fontSize="sm" />
@@ -294,7 +294,7 @@ export default function DynamicQA({
 
                     <p
                       key={index}
-                      className="text-zinc-500 dark:text-zinc-400  font-normal mb-10 mt-6"
+                      className="text-slate-500 dark:text-slate-400  font-normal mb-10 mt-6"
                       dangerouslySetInnerHTML={{
                         __html: handleLength(source.text),
                       }}

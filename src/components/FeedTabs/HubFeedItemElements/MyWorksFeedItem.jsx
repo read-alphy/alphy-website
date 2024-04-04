@@ -26,14 +26,14 @@ export default function MyWorksFeedItem({
 						 
 							transform sm:hover:scale-105
 							cursor-pointer 
-							rounded-md mb-2 transition duration-200 ease-in-out`}
+							rounded-md mb-2 transition duration-200 ease-in-out mx-auto`}
           target="_blank"
         >
           <div
             className={`  min-w-[320px] max-w-[320px]  xs:min-w-[100px] xs:max-w-[200px] mr-3 `}
           >
             <div
-              className="flex w-full  h-0 dark:opacity-80  rounded-md bg-gray-600"
+              className="flex w-full  h-0 dark:opacity-80  rounded-md bg-gray-600  sm:flex-col lg:flex-row"
               style={{
                 backgroundImage: `url(${typeof imageUrl === "object" ? imageUrl.src : imageUrl})`,
                 paddingBottom: '50%',
@@ -58,23 +58,23 @@ export default function MyWorksFeedItem({
                 )}
 
             <div
-              className={`text-sm video-text text-black dark:text-zinc-300 font-averta-semibold`}
+              className={`text-sm video-text text-slate-700 dark:text-zinc-300 quicksand font-bold`}
             >
               {item.title}
               {item.source !== undefined && item.source.title}
             </div>
-            <div className="font-averta-semibold text-zinc-500 dark:text-zinc-300 ">
+            <div className="quicksand font-bold text-zinc-500 dark:text-zinc-300 ">
               {item.creator_name}
               {item.source !== undefined && item.source.creator_name}
             </div>
-            <div className="font-averta-semibold text-zinc-400 dark:text-zinc-300 flex flex-row">
+            <div className="quicksand font-bold text-zinc-400 dark:text-zinc-300 flex flex-row">
               {item.summaries !== undefined &&
                 item.summaries.map((summary, index) => (
                   <div
                     className={
                       index !== 0
-                        ? 'ml-1 font-averta-semibold'
-                        : 'font-averta-semibold'
+                        ? 'ml-1 quicksand font-bold'
+                        : 'quicksand font-bold'
                     }
                   >
                     {language_codes[summary.lang]}

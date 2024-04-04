@@ -63,23 +63,23 @@ useEffect (() => {
   ]
 
   return (
-    <div className="h-full">
+    <div className="h-full ">
       <div className="w-full  mx-auto  md:pl-10  lg:pl-16 xl:pl-20 3xl:pl-40  overflow-hidden pb-10">
         <div className="pl-5 pr-5 mt-4  sm:mt-10 lg:mt-20 ">
           {/* {totalMinutes > 0 && (
             <div className="flex flex-row ">
               <p className="bg-gradient-to-r from-pink-200 to-amber-100 via-red-200 rounded-lg px-2 py-1   font-bold text-zinc-900 text-md xs:text-lg">
                 {Math.floor(totalMinutes).toLocaleString()}{' '}
-                <span className="font-averta-regular text-sm xs:text-md md:text-lg">
+                <span className="quicksand-regular text-sm xs:text-md md:text-lg">
                   minutes processed with Alphy{' '}
                 </span>
               </p>
             </div>
           )} */}
-          <p className="text-slate-700 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]   font-bold  ">
+          <p className="text-slate-700 dark:text-zinc-300 mb-5 mt-4 mx-auto text-3xl xs:text-4xl text-[30px]  quicksand font-bold ">
           Turn audio to text, summarize, and generate content with AI
           </p>
-          <p className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-averta-regular font-normal max-w-[640px]">
+          <p className="text-slate-500 dark:text-zinc-400 mb-5  mt-4 text-lg xs:text-xl lg:text-xl font-normal quicksand quicksand max-w-[640px]">
             {' '}
             Join the Alphy community to transcribe, summarize, and 
             create content with the highest quality AI models on the market.
@@ -93,7 +93,7 @@ useEffect (() => {
                   localStorage.setItem('newItem', 'link')
                 }
               }}
-              className={`rounded-lg  text-zinc-800  transition duration-300  ease-in-out hover:-translate-y-1 transform flex flex-row text-center text-md sm:text-md bg-sky-100 dark:bg-zinc-100 px-2 sm:px-6  py-3 font-averta-semibold drop-shadow-sm
+              className={`rounded-lg  text-zinc-800  transition duration-300  ease-in-out hover:-translate-y-1 transform flex flex-row text-center text-md sm:text-md bg-sky-100 dark:bg-zinc-100 px-2 sm:px-6  py-3 quicksand drop-shadow-sm
               
               `}
             >
@@ -122,7 +122,7 @@ useEffect (() => {
               <Link
                 href="/submit"
                 onClick={() => localStorage.setItem('newItem', 'upload')}
-                className="rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-none flex flex-row dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 font-averta-semibold drop-shadow-sm px-2"
+                className="rounded-lg  text-zinc-800  text-center text-md sm:text-md bg-none flex flex-row dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 quicksand drop-shadow-sm px-2 sm:px-6  py-3  transition duration-300  ease-in-out hover:translate-x-1 transform"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -139,14 +139,14 @@ useEffect (() => {
                   />
                 </svg>
                 <p className="xs:hidden">Upload</p>
-                <p className="hidden xs:flex">Upload from Device</p>
+                <p className="hidden xs:flex quicksand">Upload from Device</p>
 
                 
               </Link>
             ) : (
               <Link
                 href="/explore"
-                className="rounded-lg  flex flex-row text-zinc-800  text-center text-md sm:text-md bg-none dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 font-averta-semibold "
+                className="rounded-lg  flex flex-row text-zinc-800  text-center text-md sm:text-md bg-none dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 quicksand "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -170,11 +170,11 @@ useEffect (() => {
           </div>
 
           <div className=" mt-20  text-zinc-600 dark:text-zinc-300 text-lg flex flex-col">
-            <div className="flex flex-col sm:flex-row">
-              <span>Transcribe and use AI on more than</span>
+            <div className="flex flex-col sm:flex-row ">
+              <span className="quicksand">Transcribe and use AI on more than</span>
               <span
                 onClick={() => scrollToLanguages()}
-                className="text-blue-500 dark:text-blue-400 cursor-pointer ml-1"
+                className="text-blue-500 dark:text-blue-400 cursor-pointer ml-1 quicksand"
               >
                 {' '}
                 40 languages
@@ -194,7 +194,7 @@ useEffect (() => {
 
           
 
-          <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-bold text-lg mt-16">
+          <div className="flex flex-col text-zinc-700 dark:text-zinc-300 text-lg mt-16">
             
             <div className="flex flex-row  mx-auto w-full mt-4       sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
               { <div className="hidden sm:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
@@ -203,7 +203,7 @@ useEffect (() => {
                       width:`100px` ,
                       height:`80px`,
                     }}/>
-                    <p className=" hidden lg:block text-md font-averta-regular text-[14px] lg:text-[16px] mt-2">Local Audio Files</p>
+                    <p className=" hidden lg:block text-md font-normal quicksand text-[14px] lg:text-[16px] mt-2">Local Audio Files</p>
                     </div>
  }
               <div className="grid grid-rows-3 items-center text-center sm:mr-4   mx-2 max-w-[160px]">
@@ -215,7 +215,7 @@ useEffect (() => {
                   title="YouTube"
                   className="row-span-3 lg:row-span-2 rounded-lg flex min-w-[40px] mx-auto"
                 />
-                <p className=" hidden lg:block  text-md font-normal text-[16px]">
+                <p className=" hidden lg:block  text-md font-normal quicksand text-[16px]">
                   YouTube
                 </p>
               </div>
@@ -228,7 +228,7 @@ useEffect (() => {
                   title="Twitter / X videos"
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className=" hidden lg:block  text-md font-normal  text-[16px]">
+                <p className=" hidden lg:block  text-md font-normal quicksand  text-[16px]">
                   Twitter Videos
                 </p>
               </div>
@@ -242,7 +242,7 @@ useEffect (() => {
                   title="Twitter / X Spaces"
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className=" hidden lg:block  text-md font-normal text-[16px]">
+                <p className=" hidden lg:block  text-md font-normal quicksand text-[16px]">
                   Twitter Spaces
                 </p>
               </div>
@@ -255,7 +255,7 @@ useEffect (() => {
                   width={80}
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className=" hidden lg:block  row-span-1 text-md font-normal text-[16px]">
+                <p className=" hidden lg:block  row-span-1 text-md font-normal quicksand text-[16px]">
                   Twitch
                 </p>
               </div>
@@ -269,7 +269,7 @@ useEffect (() => {
                   title="Apple Podcasts"
                   className="row-span-3 lg:row-span-2 rounded-lg min-w-[40px] flex mx-auto"
                 />
-                <p className="hidden lg:block  text-md font-normal text-[16px]">
+                <p className="hidden lg:block  text-md font-normal quicksand text-[16px]">
                   Apple Podcasts
                 </p>
               </div>
@@ -287,7 +287,7 @@ useEffect (() => {
               <p className="text-2xl text-zinc-900 dark:text-zinc-200">
                 Meet Alphy's extension: Supercharge YouTube search with AI{' '}
               </p>
-              <span className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-md lg:text-lg md:text-[16px] font-averta-regular font-normal max-w-[800px]">
+              <span className="text-zinc-500 dark:text-zinc-400 mb-5  mt-4 text-md lg:text-lg md:text-[16px] quicksand-regular font-normal quicksand max-w-[800px]">
                 No need to watch. No need to summarize. Simply search YouTube
                 and Alphy will give you direct answers from the top videos,
                 complete with timestamps and source links.
@@ -305,7 +305,7 @@ useEffect (() => {
                     alt="Chrome Icon"
                     
                     />
-                    <span className="text-xl pl-4  font-averta-regular text-zinc-900 dark:text-zinc-300">
+                    <span className="text-xl pl-4  quicksand-regular text-zinc-900 dark:text-zinc-300">
                       Install on Chrome
                     </span>
                   </div>
@@ -326,7 +326,7 @@ useEffect (() => {
           </video>
           } */}
         </div>
-        <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 font-averta-semibold"></div>
+        <div className="max-w-[800px] border-b border-slate-200 dark:border-zinc-500  dark:opacity-40 mt-10 quicksand"></div>
         <div>
         <ValueCards/>
         </div>
