@@ -199,7 +199,7 @@ useEffect (() => {
             <div className="flex flex-row  mx-auto w-full mt-4       sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
               { <div className="hidden sm:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
                     <AudioFileIcon title="Local Audio Files" className="row-span-3 lg:row-span-2 flex mx-auto max-w-[80px] sm:max-s-[120px] " sx={{
-                      color:"#bae6fd",                  
+                      color:"#3b82f6",                  
                       width:`100px` ,
                       height:`80px`,
                     }}/>

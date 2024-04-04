@@ -106,14 +106,14 @@ export default function PremiumCard({
         </p>
       </div>
 
-      {/* <h5 className="mb-4 text-xl quicksand font-bold text-gray-500 dark:text-zinc-300">For Seekers</h5> */}
+      {/* <h5 className="mb-4 text-xl quicksand font-bold text-slate-700 dark:text-zinc-300">For Seekers</h5> */}
       
       
     <div className={` transition-all duration-300 overflow-hidden ${isYearly !== true ? " translate-x-[30%] opacity-0 max-h-0" : ""}` }>
         <div className="flex items-baseline text-gray-900 dark:text-white">
         <span className="text-3xl quicksand font-bold">$</span>
         <span className="text-5xl quicksand font-bold tracking-tight">12</span>
-        <span className="ml-1 text-xl quicksand font-bold text-gray-500 dark:text-zinc-300">
+        <span className="ml-1 text-xl quicksand font-bold text-slate-700 dark:text-zinc-300">
         /month 
         </span>
    
@@ -123,7 +123,7 @@ export default function PremiumCard({
       <div className="flex items-baseline text-gray-900 dark:text-white">
         <span className="text-3xl quicksand font-bold">$</span>
         <span className="text-5xl quicksand font-bold tracking-tight">19.90</span>
-        <span className="ml-1 text-xl quicksand font-bold text-gray-500 dark:text-zinc-300">
+        <span className="ml-1 text-xl quicksand font-bold text-slate-700 dark:text-zinc-300">
           /month 
         </span>
       </div>
@@ -136,7 +136,7 @@ export default function PremiumCard({
         <ul role="list" className="space-y-5 my-7">
         <li className="flex space-x-3">
            
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300 underline">
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300 underline">
               Everything on the Starter plan plus:
             </span>
           </li>
@@ -157,7 +157,7 @@ export default function PremiumCard({
                 clipRule="evenodd"
               ></path>
             </svg>
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               20 hours of prioritized transcription credits per month
             </span>
           </li>
@@ -177,7 +177,7 @@ export default function PremiumCard({
                 clipRule="evenodd"
               ></path>
             </svg>
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Upload local audio files
             </span>
           </li>
@@ -198,8 +198,8 @@ export default function PremiumCard({
                 clipRule="evenodd"
               ></path>
             </svg>
-            {/* <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Submit YouTube, Twitter Spaces, Twitter videos, Twitch recordings,
               and Apple Podcasts{' '}
             </span>
@@ -219,8 +219,8 @@ export default function PremiumCard({
                 clipRule="evenodd"
               ></path>
             </svg>
-            {/* <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Download transcripts
             </span>
           </li>
@@ -240,7 +240,7 @@ export default function PremiumCard({
                 clipRule="evenodd"
               ></path>
             </svg>
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Create Unlimited Arcs
             </span>
           </li>
@@ -260,8 +260,8 @@ export default function PremiumCard({
                 clipRule="evenodd"
               ></path>
             </svg>
-            {/* <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Optional credit topups
             </span>
           </li>
@@ -283,8 +283,8 @@ export default function PremiumCard({
                 clipRule="evenodd"
               ></path>
             </svg>
-            {/* <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
+            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Full access to Playground:
             </span>
           </li>
@@ -305,8 +305,8 @@ export default function PremiumCard({
                   clipRule="evenodd"
                 ></path>
               </svg>
-              {/* <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-              <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+              {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
                 Generative AI on Transcripts
               </span>
             </li>
@@ -325,8 +325,8 @@ export default function PremiumCard({
                   clipRule="evenodd"
                 ></path>
               </svg>
-              {/* <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-              <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+              {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
                 Create anything   with your own prompts
               </span>
             </li>
@@ -346,8 +346,8 @@ export default function PremiumCard({
                   clipRule="evenodd"
                 ></path>
               </svg>
-              {/* <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">Optional credit top ups</span> */}
-              <span className="text-base quicksand font-bold leading-tight text-gray-500 dark:text-zinc-300">
+              {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
+              <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
                 Unlimited access to preset commands
               </span>
             </li>

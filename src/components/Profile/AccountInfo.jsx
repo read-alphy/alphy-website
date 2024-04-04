@@ -209,12 +209,12 @@ export default function AccountInfo({
               <div className="items-center margin-auto justify-center flex flex-col">
                 {currentUser ? (
                   <div>
-                    <h2 className="text-md dark:text-zinc-300 text-zinc-600 mb-10 quicksand font-bold ">
+                    <h2 className="text-md dark:text-zinc-300 text-slate-700 mb-10 quicksand font-bold ">
                       Account Details
                     </h2>
 
                     <div className="grid grid-cols-3 mb-5 max-w-[900px]">
-                      <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm">
+                      <div className="col-span-1 text-slate-600 dark:text-zinc-400 text-sm">
                         <p className="mb-2 quicksand font-bold">Your Email</p>
                         <p className="mb-2 quicksand font-bold">Password</p>
                         {credit !== null ? (
@@ -225,7 +225,7 @@ export default function AccountInfo({
                         <p className="mt-2 quicksand font-bold">Plan</p>
                       </div>
                       <div className="border-r border-gray-300 h-[10vh] col-span-1  mx-auto items-center flex"></div>
-                      <div className="col-span-1 text-zinc-600 dark:text-zinc-200 text-sm">
+                      <div className="col-span-1 text-slate-700 dark:text-zinc-200 text-sm">
                         <p className="mb-2 quicksand font-normal">
                           {currentUser.email}
                         </p>
@@ -262,7 +262,7 @@ export default function AccountInfo({
                               </span>
                             </Button>
                             {tier === 'free' && (
-                              <span className=" quicksand font-normal text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
+                              <span className=" quicksand font-normal text-slate-600 dark:text-zinc-300 text-sm  mt-4 ">
                                 Upgrade to a paid plan to get credit topups.
                               </span>
                             )}
@@ -281,7 +281,7 @@ export default function AccountInfo({
                 Manage Subscription{' '}
               </p>
               {tier !== 'premium' && (
-                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
+                <p className="text-center text-slate-700  dark:bg-darkMode dark:text-zinc-300   mt-6 mb-20 max-w-[600px] items-center justify-center mx-auto">
                   Upgrade to have extra transcription credits, submit from
                   multiple platforms, upload audio files, and access most
                   capable AI models.
@@ -308,12 +308,12 @@ export default function AccountInfo({
               <div className="items-center margin-auto justify-center flex flex-col mt-20">
                 {currentUser ? (
                   <div className="px-4 sm:mx-0">
-                    <h2 className="text-md text-zinc-600 dark:text-zinc-300 mb-10 quicksand font-bold ">
+                    <h2 className="text-md text-slate-700 dark:text-zinc-300 mb-10 quicksand font-bold ">
                       Account Details
                     </h2>
 
                     <div className="grid grid-cols-3 mb-5  ">
-                      <div className="col-span-1 text-zinc-500 dark:text-zinc-400 text-sm border-r border-gray-300 pr-4">
+                      <div className="col-span-1 text-slate-600 dark:text-zinc-400 text-sm border-r border-gray-300 pr-4">
                         <p className="mb-3 quicksand font-bold">Your Email</p>
                         <p className="mb-3 quicksand font-bold">Password</p>
                         {credit !== null ? (
@@ -362,7 +362,7 @@ export default function AccountInfo({
                               </span>
                             </Button>
                             {tier === 'free' && (
-                              <span className=" quicksand font-normal text-zinc-500 dark:text-zinc-300 text-sm  mt-4 ">
+                              <span className=" quicksand font-normal text-slate-600 dark:text-zinc-300 text-sm  mt-4 ">
                                 Upgrade to a paid plan to get credit topups.
                               </span>
                             )}
@@ -379,7 +379,7 @@ export default function AccountInfo({
               </p>
 
               {tier !== 'premium' && (
-                <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300   mt-6 xl:mb-20 max-w-[600px] items-center justify-center mx-auto">
+                <p className="text-center text-slate-700  dark:bg-darkMode dark:text-zinc-300   mt-6 xl:mb-20 max-w-[600px] items-center justify-center mx-auto">
                   Upgrade to have extra transcription credits, submit from
                   multiple platforms, upload audio files, and access most
                   capable AI models.
@@ -504,7 +504,7 @@ export default function AccountInfo({
         open={creditPurchaseDialog}
         onClose={() => setCreditPurchaseDialog(false)}
       >
-        <div className="h-[400px] p-10 text-zinc-600 text-sm dark:text-zinc-300 dark:bg-mildDarkMode  text-center items-center">
+        <div className="h-[400px] p-10 text-slate-700 text-sm dark:text-zinc-300 dark:bg-mildDarkMode  text-center items-center">
           <p className="text-lg quicksand font-bold ">
             You are about to purchase extra credits.
           </p>

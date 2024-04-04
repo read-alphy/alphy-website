@@ -27,7 +27,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(1)}
           >
-           🟣 What is Alphy?
+           <span className="quicksand font-bold w-fit"> 🟣 What is Alphy?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="text-l dark:text-zinc-300 quicksand font-normal">
@@ -49,7 +50,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold "
             onClick={() => handleOpen(3)}
           >
-           🟣 How does Alphy work?
+           <span className="quicksand font-bold w-fit"> 🟣 How does Alphy work?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">
@@ -71,7 +73,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(2)}
           >
-           🟣 What kind of content can I use Alphy with?
+           <span className="quicksand font-bold w-fit"> 🟣 What kind of content can I use Alphy with?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">
@@ -88,7 +91,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(4)}
           >
-           🟣 Can I upload local audio files for processing?
+           <span className="quicksand font-bold w-fit"> 🟣 Can I upload local audio files for processing?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">
@@ -111,7 +115,7 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(4)}
           >
-           🟣 Can I download the transcripts?
+            <span className="quicksand font-bold w-fit"> 🟣 Can I download the transcripts?</span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">
@@ -125,7 +129,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(4)}
           >
-           🟣 What are Arcs?
+           <span className="quicksand font-bold w-fit"> 🟣 What are Arcs?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">
@@ -159,7 +164,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(4)}
           >
-           🟣  What does Premium offer?
+           <span className="quicksand font-bold w-fit"> 🟣 What does Premium offer?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">
@@ -180,7 +186,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(4)}
           >
-           🟣  What happens to my credits if I cancel my subscriptions?
+           <span className="quicksand font-bold w-fit"> 🟣 What happens to my credits if I cancel my subscriptions?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">
@@ -196,7 +203,8 @@ export default function AboutMainPage() {
             className="cursor-default quicksand font-bold"
             onClick={() => handleOpen(4)}
           >
-           🟣 Can I get a refund?
+           <span className="quicksand font-bold w-fit"> 🟣 Can I get a refund?
+          </span>
           </AccordionHeader>
           <AccordionBody className="text-md dark:text-zinc-300">
             <p className="quicksand font-normal">

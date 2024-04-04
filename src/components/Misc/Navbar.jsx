@@ -82,7 +82,7 @@ function Navbar({ collapsed, setCollapsed }) {
                 className="dark:hidden opacity-80 "
                 alt="Alphy Logo"
               ></Image>
-              <h2 className="ml-1 mt-1 text-2xl quicksand">ALPHY</h2>
+              <h2 className="ml-1 mt-1 text-2xl quicksand font-bold">ALPHY</h2>
             </div>
           </Link>
 
