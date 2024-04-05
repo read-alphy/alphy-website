@@ -162,7 +162,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
-            <span className=" pt-0.5  quicksand font-normal ml-2 font-normal">Light </span>
+            <span className=" pt-0.5  quicksand  ml-2 ">Light </span>
           </div>
         ) : (
           <div onClick={handleDarkMode} className="flex flex-row">
@@ -247,7 +247,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
 
       <div className="pl-6 py-2 flex flex-row">
         <Link
-          className="text-slate-700 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] quicksand font-normal"
+          className="text-slate-700 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] quicksand"
           href="/privacypolicy"
         >
          <span className="quicksand"> Privacy Policy</span>
@@ -276,7 +276,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                   d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
                 />
               </svg>
-              <p className="ml-2 quicksand font-normal text-slate-800">Log Out</p>
+              <p className="ml-2 quicksand  text-slate-800 dark:text-zinc-300">Log Out</p>
             </button>
           </div>
         </div>

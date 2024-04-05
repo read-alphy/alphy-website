@@ -432,18 +432,18 @@ export default function ReadComponent({
                   } rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`}
                 >
                   <div className="text-sm font-medium text-center text-slate-700 dark:text-slate-200 dark:border-gray-700 ">
-                    <ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto quicksand font-bold	">
+                    <ul className="flex flex-wrap xl:w-[450px] w-full mx-auto quicksand font-bold	">
                       <li
                         className={`w-1/3 md:w-4/12 ${
                           activeTab === 'tab3'
                             ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2  quicksand font-bold border-greenColor'
-                            : 'quicksand font-bold hover:text-gray-600 hover:border-gray-300'
+                            : 'quicksand font-bold border-b border-gray-200   '
                         }`}
                       >
                         <button
                           onClick={() => setActiveTab('tab3')}
                           className={
-                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
+                            'text-l  p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
                           }
                         >
                           Key Takeaways
@@ -453,7 +453,7 @@ export default function ReadComponent({
                         className={` w-1/3 md:w-4/12 ${
                           activeTab === 'tab1'
                             ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor'
-                            : 'quicksand font-bold hover:text-gray-600 hover:border-gray-300'
+                            : 'quicksand font-bold border-b border-gray-200 '
                         }`}
                       >
                         <button
@@ -469,7 +469,7 @@ export default function ReadComponent({
                         className={` w-1/3 md:w-4/12 ${
                           activeTab === 'tab2'
                             ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor'
-                            : 'quicksand font-bold hover:text-gray-600 hover:border-gray-300'
+                            : 'quicksand font-bold border-b border-gray-200  '
                         }`}
                       >
                         <button
