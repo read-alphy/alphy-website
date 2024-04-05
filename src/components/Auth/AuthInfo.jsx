@@ -215,7 +215,7 @@ const AuthInfo = () => {
         resetPassword === false ? (
           <div className="mb-20 w-[300px]">
             <div>
-              <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 quicksand font-bold">
+              <h2 className="text-xl mb-8 text-slate-700 dark:text-slate-300 quicksand font-bold">
                 {isRegister ? 'Create an account' : 'Login'}{' '}
               </h2>
 
@@ -307,7 +307,7 @@ const AuthInfo = () => {
               )}
               <div className="mt-4">
                 {isRegister === false ? (
-                  <div className="text-zinc-600 dark:text-zinc-300 text-sm">
+                  <div className="text-slate-600 dark:text-slate-300 text-sm">
                     <p>
                       <Link
                         href="/u/resetpassword"
@@ -321,7 +321,7 @@ const AuthInfo = () => {
                 ) : null}
                 {isRegister ? (
                   <div className="mt-6">
-                    <p className="text-zinc-600 dark:text-zinc-300 text-sm quicksand font-bold">
+                    <p className="text-slate-600 dark:text-slate-300 text-sm quicksand font-bold">
                       {' '}
                       Already have an account? Login{' '}
                       <Link
@@ -334,7 +334,7 @@ const AuthInfo = () => {
                   </div>
                 ) : (
                   <div className="mt-6">
-                    <p className="text-zinc-600 dark:text-zinc-300 text-sm quicksand font-bold">
+                    <p className="text-slate-600 dark:text-slate-300 text-sm quicksand font-bold">
                       Don't have an account?{' '}
                       <Link
                         href="/u/register"
@@ -363,7 +363,7 @@ const AuthInfo = () => {
                 <div className="flex flex-rows	">
                   <Image src={Google} width={30} alt= 'google logo' height={30} 
                   ></Image>
-                  <span className=" ml-4 font-extral	text-zinc-700 dark:text-zinc-300 quicksand font-bold">
+                  <span className=" ml-4 font-extral	text-slate-700 dark:text-slate-300 quicksand font-bold">
                     Continue with Google
                   </span>
                 </div>
@@ -372,10 +372,10 @@ const AuthInfo = () => {
           </div>
         ) : oobCode === null || oobCode === undefined ? (
           <div className="mb-20 w-[300px]">
-            <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700 quicksand font-bold">
+            <h2 className="text-xl mb-8 text-slate-700 dark:text-slate-700 quicksand font-bold">
               Reset Password{' '}
             </h2>
-            <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10 quicksand font-bold">
+            <p className="text-sm text-slate-600 dark:text-slate-300 mb-10 quicksand font-bold">
               Enter your email address and we will send you a link to reset your
               password.
             </p>
@@ -435,7 +435,7 @@ const AuthInfo = () => {
                 <h2 className="text-xl mb-8 quicksand font-bold">
                   Pick a New Password{' '}
                 </h2>
-                <p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300 quicksand font-bold">
+                <p className="text-sm text-slate-600 mb-10 dark:text-slate-300 quicksand font-bold">
                   You are about to reset your password. Please make sure your
                   new password is longer than 8 characters.
                 </p>
@@ -501,7 +501,7 @@ const AuthInfo = () => {
                         color="#ffffff"
                       />
                     ) : (
-                      <span className="text-zinc-700 dark:text-zinc-700 quicksand font-bold">
+                      <span className="text-slate-700 dark:text-slate-700 quicksand font-bold">
                         Reset Password
                       </span>
                     )}
@@ -525,7 +525,7 @@ const AuthInfo = () => {
                     strokeLinejoin="round"
                   ></path>
                 </svg>
-                <p className="mx-auto text-center mt-4 text-zinc-600 quicksand font-bold">
+                <p className="mx-auto text-center mt-4 text-slate-600 quicksand font-bold">
                   Password reset successfully.{' '}
                   <Link
                     className="underline quicksand font-bold"
@@ -546,7 +546,7 @@ const AuthInfo = () => {
             We sent a verification link to{' '}
             {email !== null ? email : 'your email'}!
           </h2>
-          <p className="text-sm text-zinc-600 mb-10 quicksand font-bold">
+          <p className="text-sm text-slate-600 mb-10 quicksand font-bold">
             Please follow the link to complete your registration. If you didn't
             get the email, try again from the link below.
           </p>
@@ -569,7 +569,7 @@ const AuthInfo = () => {
             )}
           </Button>
           {successMessage && (
-            <div className="text-zinc-500 text-sm mb-8 mt-5 quicksand font-bold">
+            <div className="text-slate-500 text-sm mb-8 mt-5 quicksand font-bold">
               Done! Please check your inbox.
             </div>
           )}

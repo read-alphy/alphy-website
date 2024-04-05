@@ -45,9 +45,9 @@ return(
           <p>Zoom</p>
         <ZoomSlider zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} waveSurferRef={waveSurferRef} />
         </div>
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex flex-row gap-2">
-              <p className="mt-1">Start</p>
+              <p className="mt-1 w-[50px]">Start</p>
               <div
                 className={`text-sm 
                   dark:bg-zinc-800 bg-slate-100
@@ -174,7 +174,9 @@ return(
                 />
               </div>
             </div>
-            <p className="mt-1">End</p>
+            <div className="flex flex-row gap-2">
+            <p className="mt-1 w-[50px]">
+              End</p>
             <div
               className={`text-sm dark:bg-zinc-800 bg-slate-100 rounded-md p-1 outline-none border-none text-center flex items-center `}
             >
@@ -285,6 +287,7 @@ return(
                 max={59}
                 placeholder="ss"
               />
+            </div>
             </div>
           </div>
           </div>

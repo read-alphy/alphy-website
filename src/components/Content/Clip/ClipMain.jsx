@@ -75,7 +75,6 @@ export default function Clip({ timestamp, data }) {
     setIsPreview(true);
     setVideoBlob(null);
     setVideoReady(false);
-    setAudioLoaded(false);
   };
 
   const handleDownloadVideo = () => {

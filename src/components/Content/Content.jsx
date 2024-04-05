@@ -764,11 +764,11 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           showClip={showClip}
           setShowClip={setShowClip}
         />
-{showClip && (
+{/* {showClip && (
 <Clip timestamp = {timestamp}
     data = {data}
              />
-             )}
+             )} */}
 
 
         <div className="">

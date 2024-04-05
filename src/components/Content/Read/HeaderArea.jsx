@@ -238,7 +238,7 @@ export default function HeaderArea({
                       <PopoverHandler>
                         <button className="flex flex-row text-slate-600 dark:text-zinc-300 quicksand font-bold">
                           <AddCircleIcon className="text-green-200" />{' '}
-                          <p className="ml-2 text-slate-600 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
+                          <p className="ml-2 text-slate-700 dark:text-zinc-300 opacity-100 items-center text-md quicksand font-bold">
                             Add To Arc
                           </p>
                         </button>
@@ -427,7 +427,7 @@ export default function HeaderArea({
                         strokeLinejoin="round"
                       ></path>
                     </svg>
-                    <p className="text-left quicksand font-bold">
+                    <p className="text-left quicksand font-bold text-slate-700">
                       Report an issue
                     </p>
                   </button>
@@ -484,7 +484,7 @@ export default function HeaderArea({
         <div className="flex flex-row pt-6 ">
           {isSandbox === true ? (
             <button
-              className="cursor-pointer flex flex-row gap-2 rounded-lg items-center text-center px-2 py-2 bg-transparent border-zinc-400 dark:border-zinc-200 border w-[200px] justify-center"
+              className="cursor-pointer flex flex-row gap-2 rounded-lg items-center text-center px-2 py-2 bg-transparent border-slate-700 dark:border-zinc-200 border w-[200px] justify-center"
               onClick={() => setIsSandbox(false)}
             >
               <svg
@@ -492,11 +492,7 @@ export default function HeaderArea({
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke={`${
-                 theme  === 'light'
-                    ? '#27272a'
-                    : '#d4d4d8'
-                }`}
+                stroke={`currentColor`}
                 className="w-5 h-5"
               >
                 <path
@@ -506,7 +502,7 @@ export default function HeaderArea({
                 />
               </svg>
 
-              <p className=" text-md quicksand font-normal text-slate-800 dark:text-zinc-200 ">
+              <p className=" text-[15px] quicksand font-semibold text-slate-800 dark:text-zinc-200 ">
                 Switch to Reading
               </p>
             </button>
@@ -530,22 +526,22 @@ export default function HeaderArea({
                 />
               </svg>
 
-              <p className=" text-[16px] quicksand font-normal text-slate-700 dark:text-slate-700 ">
+              <p className=" text-[15px] quicksand font-semibold text-slate-700 dark:text-slate-700 ">
                 Switch to Playground
               </p>
             </button>
           )}
 
-          <button
+          {/* <button
               className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 bg-transparent w-[220px] justify-center"
               onClick={() => setShowClip(!showClip)}
             >
               
           
-              <p className=" text-[16px] quicksand font-normal text-slate-700 dark:text-slate-700 ">
+              <p className=" text-[15px] quicksand font-normal text-slate-700 dark:text-slate-700 ">
                 Show clip (VIP)
               </p>
-            </button>
+            </button> */}
         </div>
         <p className="max-w-[800px] mt-5 border border-zinc-100 dark:border-zinc-700"></p>
       </div>

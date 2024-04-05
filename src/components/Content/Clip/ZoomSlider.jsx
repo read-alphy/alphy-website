@@ -13,7 +13,7 @@ return(
           defaultValue={0}
           max={100}
           value={zoomLevel}
-          className="max-w-[300px]"
+          className="max-w-[200px] xs:max-w-[300px]"
           color='primary'
           onChange={(e, value) => {
 
