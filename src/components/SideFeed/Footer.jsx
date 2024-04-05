@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Image from 'next/image'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
@@ -7,6 +7,7 @@ import Dialog from '@mui/material/Dialog'
 import { useState, useEffect } from 'react'
 import FeedbackForm from './FeedbackForm'
 import PersonIcon from '@mui/icons-material/Person'
+import { useTheme } from "next-themes";
 
 
 import Link  from 'next/link'
@@ -23,39 +24,23 @@ export default function Footer({
   
 }) {
   const [openFeedbackDialog, setOpenFeedbackDialog] = useState(false)
-  const [theme, setTheme] = useState("light")
-  
+  const { theme, setTheme } = useTheme();
+  const [isClient, setIsClient] = useState(false)
   
   const [FooterShow, setFooterShow] = useState(false)
 
-  useEffect(() => {
-    
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
- 
-  }, [])
+  
 
   const handleDarkMode = () => {
-    const currentTheme = localStorage.getItem('theme') || 'light'; // Default to 'light' if not set
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-
-    
-    // Update the class on the document element
-    document.documentElement.classList.remove(currentTheme);
-    document.documentElement.classList.add(newTheme);
-    
-    // Update theme in local storage and state/context
-    localStorage.setItem('theme', newTheme);
-    setTheme(newTheme); // Make sure 'setTheme' updates the state or context accordingly
+    const newTheme = theme === "dark" ? "light" : "dark"
+    setTheme(newTheme)
+    localStorage.setItem("theme", newTheme)
   }
+  useEffect(() => {
+    setIsClient(true)
+  }
+  , [])
+
 
   return (
     <div className="w-full mx-auto mb-4">
@@ -79,6 +64,7 @@ export default function Footer({
                     loggedIn={loggedIn}
                     theme= {theme}
                     tier = {tier}
+                    isClient = {isClient}
                   />
                 </div>
               </div>
@@ -86,7 +72,7 @@ export default function Footer({
              
               <div
                 onClick={() => setFooterShow(!FooterShow)}
-                className="flex flex-row text-zinc-700 dark:text-zinc-300 mx-auto w-full pl-6 font-normal cursor-pointer rounded-lg hover:bg-zinc-100s dark:hover:bg-darkModes py-2 transition duration-300 ease-in-out"
+                className="flex flex-row text-slate-600 dark:text-zinc-200 mx-auto w-full pl-6 font-normal cursor-pointer rounded-lg hover:bg-zinc-100s dark:hover:bg-darkModes py-2 transition duration-300 ease-in-out"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +88,7 @@ export default function Footer({
                     d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                   />
                 </svg>
-                <p className="text-sm lg:text-md select-none">
+                <p className="text-sm lg:text-md select-none quicksand">
                   {currentUser.displayName
                     ? currentUser.displayName
                     : currentUser.email}
@@ -121,9 +107,14 @@ export default function Footer({
                 currentUser={currentUser}
                 handleSignout={handleSignout}
                 theme = {theme}
+                isClient = {isClient}
               />
             </div>
           )}
+
+<div className=" mt-6 text-sm cursor-pointer text-slate-600 dark:text-zinc-200">
+            
+          </div>
 
           <div className="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 
@@ -150,7 +141,7 @@ export default function Footer({
           <div className="mb-6 ">
             <div className="flex flex-col">
               <Link
-                className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full"
+                className="text-slate-600 dark:text-zinc-200 text-sm w-full cursor-pointer w-full"
                 href={
                   loggedIn
                     ? '/account'
@@ -177,7 +168,7 @@ export default function Footer({
 
             <div className="mt-6">
               <button
-                className="text-zinc-500 dark:text-zinc-300 text-sm    w-full cursor-pointer w-[120px]"
+                className="text-slate-600 dark:text-zinc-200 text-sm    w-full cursor-pointer w-[120px]"
                 onClick={() => setOpenFeedbackDialog(true)}
               >
                 <svg
@@ -198,9 +189,8 @@ export default function Footer({
             </div>
           </div>
 
-          {/* <div className=" mt-6 text-sm cursor-pointer text-zinc-500  dark:text-zinc-300">
-            {theme==="light" ? (
-              <div onClick={handleDarkMode} className="flex flex-row">
+          {isClient&& (theme==="light" ? (
+              <div onClick={handleDarkMode} className="flex flex-row cursor-pointer text-slate-600 dark:text-zinc-200">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -241,8 +231,7 @@ export default function Footer({
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
               </div>
-            )}
-          </div> */}
+            ))}
         </div>
       )}
 
@@ -251,6 +240,7 @@ export default function Footer({
         fullWidth={true}
         open={openFeedbackDialog}
         onClose={() => setOpenFeedbackDialog(false)}
+        
       >
         <div className="dark:bg-mildDarkMode">
           <FeedbackForm />

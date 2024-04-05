@@ -51,9 +51,9 @@ export default function Explore({
 <meta name="twitter:card" content="summary_large_image" />  
   <meta name="twitter:title" content={"Alphy - Transcribe, summarize, and generate content with AI"} />
   <meta name="twitter:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
-
-    
-          
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap')
+  </style>   
    <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
     
 </Head>

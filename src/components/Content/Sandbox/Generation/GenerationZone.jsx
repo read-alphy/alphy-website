@@ -56,7 +56,7 @@ export default function   GenerationZone({
   return (
     <div className="mt-6   h-full  flex flex-col  px-2 sm:px-0">
       <div
-        className={`lg:max-w-[800px]  font-averta-regular text-lg text-zinc-500 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
+        className={`lg:max-w-[800px]  quicksand font-normal text-lg text-slate-600 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
           !toolboxActive && outputMessage.length === 0
             ? 'opacity-100 delay-300 '
             : 'opacity-0  pointer-events-none   '
@@ -97,7 +97,7 @@ export default function   GenerationZone({
           }`}
         >
           {tier !== 'premium' && selectedTool === 'custom' && (
-            <div className="absolute inset-0 bg-sky-50/30 text-zinc-600 dark:bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center z-10 dark:text-white rounded-lg ">
+            <div className="absolute inset-0 bg-sky-50/30 text-slate-700 dark:bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center z-10 dark:text-white rounded-lg ">
               <p className="text-indigo-400 text-md  ">
                 {tier !== 'premium' && (
                   <VerifiedIcon
@@ -157,7 +157,7 @@ export default function   GenerationZone({
               onClick={() =>
                 setAdvancedSettingsToggled(!advancedSettingsToggled)
               }
-              className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-zinc-600 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
+              className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-slate-700 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
             >
               {adjustments} <p className="hidden md:flex">Advanced Settings</p>
             </Button>
@@ -170,7 +170,7 @@ export default function   GenerationZone({
                 selectedTool === 'custom' && userPrompt.length === 0
                   ? 'opacity-70'
                   : 'opacity-100'
-              }  transition-opacity duration-300 ease-in-out bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 dark:from-purple-400 font-averta-regular normal-case w-[120px]`}
+              }  transition-opacity duration-300 ease-in-out bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-slate-800  text-zinc-700 dark:from-purple-400 quicksand font-normal normal-case w-[120px]`}
             >
               {isLoading ? (
                 <Spinner

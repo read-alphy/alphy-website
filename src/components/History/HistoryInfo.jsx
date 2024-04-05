@@ -64,14 +64,14 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
 
   return (
     <div className="px-4 mx-auto sm:px-10 flex flex-col  items-center mt-10 xl:mt-20 sm:max-w-[500px] md:max-w-[600px] lg:max-w-[800px] pb-20">
-      <div className="flex flex-row text-zinc-700 dark:text-zinc-300 w-full ">
+      <div className="flex flex-row text-slate-700 dark:text-zinc-300 w-full ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-8 h-8    text-zinc-700 dark:text-zinc-300 mr-2   "
+          className="w-8 h-8    text-slate-700 dark:text-zinc-300 mr-2   "
         >
           <path
             strokeLinecap="round"
@@ -80,13 +80,13 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
           />
         </svg>
 
-        <p className="text-xl font-averta-semibold">Creation History</p>
+        <p className="text-xl quicksand font-bold">Creation History</p>
       </div>
 
       <div className="border-b border-gray-200 dark:border-zinc-600 w-full mt-4"></div>
       <div className="mt-10 ">
         {sandboxHistory && sandboxHistory.length === 0 && (
-          <div className="text-center text-zinc-700 dark:text-zinc-200">
+          <div className="text-center text-slate-700 dark:text-zinc-200">
             Anything you'll create with Playground will appear here.
             <br /> <br />
             {/* Learn more about Playground. */}
@@ -98,7 +98,8 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
             autoPlay
             loop
             muted
-          >
+            >
+
             <source src="/img/playground_demo.mp4" type="video/mp4" />
           </video>
 
@@ -122,14 +123,14 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                     height={100}
                     alt="source image"
                   />
-                  <p className="text-xl text-zinc-700 dark:text-zinc-300 font-averta-semibold select-none w-full  group-hover:brightness-[125%] transition  duration-300 ease-in-out ">
+                  <p className="text-xl text-slate-700 dark:text-zinc-300 quicksand font-bold select-none w-full  group-hover:brightness-[125%] transition  duration-300 ease-in-out ">
                     {item.title}
                   </p>
                   <div
-                    className={`w-1/3  right-0    relative ${'max-h-96 text-zinc-600   mb-10   '}`}
+                    className={`w-1/3  right-0    relative ${'max-h-96 text-slate-600   mb-10   '}`}
                   >
                     <button
-                      className="text-blue-900 flex flex-row font-averta-semibold text-sm dark:text-white right-0 absolute px-2 py-2 rounded-md
+                      className="text-blue-900 flex flex-row quicksand font-bold text-sm dark:text-white right-0 absolute px-2 py-2 rounded-md
                               bg-sky-100 dark:bg-indigo-400"
                       onClick={event => {
                         event.stopPropagation()
@@ -155,7 +156,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                   </div>
                 </div>
                 <div className="flex flex-col transition  duration-300 ease-in-out  group-hover:brightness-[125%] transition  duration-300 ease-in-out">
-                  <p className="flex text-md text-zinc-700 dark:text-zinc-300 mt-4  font-averta-semibold">
+                  <p className="flex text-md text-slate-700 dark:text-zinc-300 mt-4  quicksand font-bold">
                     {typeof item.request.command === 'object'
                       ? inputMessages.find(obj => obj.command_type === 'custom')
                           .icon
@@ -173,10 +174,10 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                     </p>
                   </p>
                   <p
-                    className={`  output-message transition-all overflow-x-hidden text-sm text-zinc-500 dark:text-zinc-400 overflow-hidden  duration-200 ease-in-out ${
+                    className={`  output-message transition-all overflow-x-hidden text-sm text-slate-500 dark:text-slate-400 overflow-hidden  duration-200 ease-in-out ${
                       visibleGroups[index]
-                        ? 'max-h-[100%] text-zinc-600 mt-4'
-                        : 'max-h-20 text-zinc-500 mt-2'
+                        ? 'max-h-[100%] text-slate-600 mt-4'
+                        : 'max-h-20 text-slate-500 mt-2'
                     }`}
                   >
                     {item.response.includes('```')    ? 

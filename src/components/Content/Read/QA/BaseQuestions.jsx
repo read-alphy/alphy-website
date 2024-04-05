@@ -115,8 +115,8 @@ export default function BaseQuestions({
   
 
   return (
-    <div className="text-zinc-700 dark:text-zinc-300">
-      <p className="mb-5 underline text-l font-averta-semibold text-zinc-600 dark:text-zinc-300">
+    <div className="text-slate-700 dark:text-zinc-300">
+      <p className="mb-5 underline text-l quicksand font-bold text-slate-600 dark:text-zinc-300">
         {' '}
         Questions by Alphy
       </p>
@@ -126,7 +126,7 @@ export default function BaseQuestions({
      
       {Object.keys(key_qa).map((item, index) => (
         <div
-         className="bg-white dark:bg-mildDarkMode text-zinc-700 dark:text-zinc-300"
+         className="bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300"
         >
              <Accordion   open={collapseIndex === index}>
               
@@ -134,8 +134,8 @@ export default function BaseQuestions({
         onClick={event => handleBaseQAaccordion(event, index, item)}
       
         > 
-      <div className=" flex flex-row dark:border-gray-700 dark:text-zinc-200 text-md sm:text-l	">
-              <span className="font-averta-semibold text-lg"><span className="text-xs text-center items-center">🟠</span> {item}</span>
+      <div className=" flex flex-row dark:border-gray-700 dark:text-zinc-200 text-md 	">
+              <span className="quicksand font-bold text-[16px]"><span className="text-xs text-center items-center">🟠</span> {item}</span>
               <svg
               
                 className={`w-6 h-6 ${
@@ -201,14 +201,14 @@ export default function BaseQuestions({
                 </svg>
               </div>
               <div>
-                <div className="answer-area text-zinc-700 dark:text-zinc-300 font-normal text-md sm:text-l">
+                <div className="answer-area text-slate-700 dark:text-zinc-300 font-normal text-md">
                   {added_ts > oct31 ? (
-                    <div className=" font-averta-regular">
+                    <div className=" font-normal quicksand">
                       {formatAnswer(key_qa[item].answer, key_qa[item])}
                     </div>
                   ) : (
                     <div
-                      className="font-averta-regular text-md text-zinc-700 dark:text-zinc-300"
+                      className="quicksand font-normal text-md text-slate-700 dark:text-zinc-300"
                       dangerouslySetInnerHTML={{ __html: key_qa[item].answer }}
                     />
                   )}
@@ -216,11 +216,11 @@ export default function BaseQuestions({
               </div>
               <div>
                 <button
-                  className={`cursor-pointer justify-end mt-10 flex flex-row bg-whiteLike hover:bg-zinc-100  transition duration-300 ease-in-out dark:bg-zinc-700 dark:hover:bg-zinc-600 px-2 py-2 rounded-lg`}
+                  className={`cursor-pointer justify-end mt-10 flex flex-row bg-slate-100 hover:bg-zinc-100  transition duration-300 ease-in-out dark:bg-zinc-700 dark:hover:bg-zinc-600 px-2 py-2 rounded-lg`}
                   onClick={handleShowAllSources}
                 >
                   <span
-                    className={` text-zinc-600 dark:text-zinc-200 text-md pr-1 font-averta-semibold`}
+                    className={` text-slate-600 dark:text-zinc-200 text-sm pr-1 quicksand font-bold`}
                   >
                     {baseSources && !singleSource
                       ? 'Hide sources'
@@ -241,7 +241,7 @@ export default function BaseQuestions({
                                   singleSource === true &&
                                   showSource !== index + 1 &&
                                   'hidden'
-                                } font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5 text-zinc-700 dark:text-zinc-300`}
+                                } font-bold border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5 text-slate-700 dark:text-zinc-300`}
                                 key={index}
                               >
                                 {source.start !== null &&
@@ -346,7 +346,7 @@ export default function BaseQuestions({
                                 <br /> <br />
                                 {
                                   <p
-                                    className="text-zinc-500 dark:text-zinc-400  font-normal"
+                                    className="text-slate-500 dark:text-zinc-400  quicksand font-normal"
                                     dangerouslySetInnerHTML={{
                                       __html: handleLength(
                                         source.text.replace(/\\h/g, ' ')

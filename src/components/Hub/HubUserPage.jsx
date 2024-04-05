@@ -272,14 +272,14 @@ export default function HubUserPage({
   return (
     <div className="xl:max-w-[1200px] xl:ml-20 pt-20 p-4 md:ml-5 sm:pl-10">
       {currentUser && (
-        <p className="text-2xl text-zinc-600 dark:text-zinc-300  font-averta-semibold">
+        <p className="text-2xl text-slate-700 dark:text-zinc-300  quicksand font-bold">
           Welcome to Your Hub!
         </p>
       )}
 
       {currentUser ? (
         <div className="mt-10">
-          <p className="text-zinc-600 dark:text-zinc-300 text-xl font-averta-semibold">
+          <p className="text-slate-700 dark:text-zinc-300 text-xl quicksand font-bold">
             Arcs
           </p>
           <div className="flex flex-row mt-10 ">
@@ -291,7 +291,7 @@ export default function HubUserPage({
                                             <button onClick={scrollBackward} ref={leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isBackwardArrowVisible ? '' : 'hidden'
                                                 }`}>
                                                 <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out ">
-                                                    <ArrowBackIosNewIcon className="cursor-pointer text-zinc-600 p-1 " />
+                                                    <ArrowBackIosNewIcon className="cursor-pointer text-slate-700 p-1 " />
                                                 </div>
                                             </button>
                                         } */}
@@ -310,12 +310,12 @@ export default function HubUserPage({
                         <div>
                           <AddIcon
                             fontSize="large"
-                            className="text-zinc-600 dark:text-zinc-300 mb-4 "
+                            className="text-slate-700 dark:text-zinc-300 mb-4 "
                           />
-                          <p className="text-zinc-600 dark:text-zinc-300 text-l lg:text-xl font-averta-semibold">
+                          <p className="text-slate-700 dark:text-zinc-300 text-l lg:text-xl quicksand font-bold">
                             Create An Arc
                           </p>
-                          <p className="text-zinc-600 dark:text-zinc-500 hidden lg:block text-sm px-5 font-normal mt-2">
+                          <p className="text-slate-700 dark:text-zinc-500 hidden lg:block text-sm px-5 font-normal mt-2">
                             Connect multiple audio content with AI.
                           </p>
                         </div>
@@ -338,7 +338,7 @@ export default function HubUserPage({
                                             <button onClick={scrollForward} ref={rightButtonRef} type="button" className={`right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isForwardArrowVisible ? 'hidden lg:block' : 'hidden'
                                                 }`}>
                                                 <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out dark:bg-mildDarkMode">
-                                                    <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 p-1 " />
+                                                    <ArrowForwardIosIcon className="cursor-pointer text-slate-700 p-1 " />
                                                 </div>
                                             </button>
                                         } */}
@@ -352,7 +352,7 @@ export default function HubUserPage({
 
           <div className="mb-20">
             <div className="flex flex-row mt-20">
-              <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10 font-averta-semibold">
+              <p className="text-slate-700 dark:text-zinc-300 text-xl mb-10 quicksand font-bold">
                 Submissions
               </p>
 
@@ -379,9 +379,9 @@ export default function HubUserPage({
                     <div>
                       <LinkIcon
                         fontSize="medium"
-                        className="text-zinc-600 dark:text-zinc-300 mb-4 "
+                        className="text-slate-700 dark:text-zinc-300 mb-4 "
                       />
-                      <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l font-averta-semibold">
+                      <p className="text-slate-700 dark:text-zinc-300 text-md md:text-l quicksand font-bold">
                         Submit A Link
                       </p>
                     </div>
@@ -395,12 +395,12 @@ export default function HubUserPage({
                       )
                   )
                 ) : called ? (
-                  <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
+                  <div className="text-slate-700 dark:text-zinc-300 min-h-[20vh]">
                     {/*   <div href="/arc/createArc" className="min-h-[240px] max-h-[240px] min-w-[180px] max-w-[180px] border border-2 bg-white dark:bg-mildDarkMode border-dashed dark:border-zinc-700  ml-5 items-center justify-center text-center flex cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out">
 
                                                         <div >
-                                                            <AddIcon fontSize = "large" className="text-zinc-600 dark:text-zinc-300 mb-4 "/>
-                                                            <p className="text-zinc-600 dark:text-zinc-300 text-xl">Submit a link</p>
+                                                            <AddIcon fontSize = "large" className="text-slate-700 dark:text-zinc-300 mb-4 "/>
+                                                            <p className="text-slate-700 dark:text-zinc-300 text-xl">Submit a link</p>
 
                                                         </div>
 
@@ -412,7 +412,7 @@ export default function HubUserPage({
                       conversation{' '}
                       <Link
                         href="/submit"
-                        className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold"
+                        className="underline dark:text-greenColor text-green-400 cursor-pointer quicksand font-bold"
                         onClick={() => {
                           localStorage.setItem('newItem', 'link')
                         }}
@@ -433,7 +433,7 @@ export default function HubUserPage({
                     <div className="w-full flex justify-center">
                       {
                         <button
-                          className="justify-center flex text-blueLike dark:text-zinc-300 font-averta-semibold  mt-10 underline"
+                          className="justify-center flex text-blueLike dark:text-zinc-300 quicksand font-bold  mt-10 underline"
                           onClick={() => loadMore('personal')}
                         >
                           {'Load more'}
@@ -449,7 +449,7 @@ export default function HubUserPage({
 
           <div className="min-h-[300px]">
             <div className="">
-              <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10 font-averta-semibold">
+              <p className="text-slate-700 dark:text-zinc-300 text-xl mb-10 quicksand font-bold">
                 Bookmarks
               </p>
               <div>
@@ -468,11 +468,11 @@ export default function HubUserPage({
                     )}
                   </div>
                 ) : called ? (
-                  <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh] font-averta-regular">
+                  <div className="text-slate-700 dark:text-zinc-300 min-h-[20vh] font-averta-regular">
                     You don't have any bookmarks.{' '}
                     <Link
                       href="/explore"
-                      className="text-indigo-400 underline cursor-pointer font-averta-semibold"
+                      className="text-indigo-400 underline cursor-pointer quicksand font-bold"
                     >
                       Discover
                     </Link>{' '}
@@ -504,7 +504,7 @@ export default function HubUserPage({
 
           <div className="mt-20">
             <p className="mb-4">
-              <p className="text-zinc-600 dark:text-zinc-300 text-xl mb-10">
+              <p className="text-slate-700 dark:text-zinc-300 text-xl mb-10 quicksand">
                 Uploads
               </p>
             </p>
@@ -527,9 +527,9 @@ export default function HubUserPage({
                   <div>
                     <CloudUploadIcon
                       fontSize="medium"
-                      className="text-zinc-600 dark:text-zinc-400 mb-4 "
+                      className="text-slate-700 dark:text-zinc-400 mb-4 "
                     />
-                    <p className="text-zinc-600 dark:text-zinc-300 text-md md:text-l font-averta-semibold">
+                    <p className="text-slate-700 dark:text-zinc-300 text-md md:text-l quicksand font-bold">
                       Upload A Recording
                     </p>
                   </div>
@@ -539,13 +539,13 @@ export default function HubUserPage({
                 ))}
               </div>
             ) : called ? (
-              <div className="text-zinc-600 dark:text-zinc-300 min-h-[20vh]">
+              <div className="text-slate-700 dark:text-zinc-300 min-h-[20vh]">
                 {data.length === 0 && tier !== 'premium' && called && (
                   <p className="font-averta-regular ">
                     You don't have any uploads. Upgrade to{' '}
                     <Link
                       href="/account"
-                      className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold"
+                      className="underline dark:text-greenColor text-green-400 cursor-pointer quicksand font-bold"
                     >
                       premium plan
                     </Link>{' '}
@@ -561,7 +561,7 @@ export default function HubUserPage({
                       onClick={() => {
                         localStorage.setItem('newItem', 'upload')
                       }}
-                      className="underline dark:text-greenColor text-green-400 cursor-pointer font-averta-semibold"
+                      className="underline dark:text-greenColor text-green-400 cursor-pointer quicksand font-bold"
                     >
                       Process your first file now!
                     </Link>
@@ -591,24 +591,24 @@ export default function HubUserPage({
         </div>
       ) : (
         <div>
-          <button
+         {/*  <button
             onClick={() => handleHubNavigation('global')}
             className="text-zinc-700 dark:text-zinc-300 text-lg mt-20 cursor-pointer"
           >
             <KeyboardArrowLeftIcon fontSize="small" className="" />
-            <span className="text-sm">Go Back</span>
-          </button>
-          <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20">
+            <span className="text-sm quicksand">Go Back</span>
+          </button> */}
+          <div className="text-md text-zinc-700 dark:text-zinc-300 mx-auto mt-20 quicksand">
             <a
               href="/u/login"
-              className="dark:text-greenColor text-green-400 underline"
+              className="dark:text-greenColor text-green-400 underline quicksand"
             >
               Sign in
             </a>{' '}
             or{' '}
             <a
               href="/u/register"
-              className="dark:text-greenColor text-green-400 underline"
+              className="dark:text-greenColor text-green-400 underline quicksand"
             >
               {' '}
               create an account

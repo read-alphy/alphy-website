@@ -213,7 +213,7 @@ export default function FeedItem ({
                 >
                   {forDetail === true ? (
                     <div className="flex flex-row">
-                      <div className="flex mr-4 text-zinc-700 dark:text-zinc-400 font-averta-semibold">
+                      <div className="flex mr-4 text-slate-700 dark:text-zinc-400 quicksand font-bold">
                         {index + 1}
                       </div>
                       <div
@@ -250,28 +250,28 @@ export default function FeedItem ({
                   (fromArchipelago === 'archipelago' &&
                     item.source !== undefined &&
                     item.source.complete === true) ? null : (
-                    <div className=" text-purpleLike dark:text-zinc-300 font-averta-semibold">
+                    <div className=" text-purpleLike dark:text-zinc-300 quicksand font-bold">
                       📝 IN PROGRESS
                     </div>
                   )}
                   <div
-                    className={`text-sm  text-black dark:text-zinc-300 font-averta-semibold  ${'max-w-[200px]'}`}
+                    className={`text-sm  text-slate-800 dark:text-zinc-300 quicksand font-bold  ${'max-w-[200px]'}`}
                   >
                     {item.title}
                     {item.source !== undefined && item.source.title}
                   </div>
-                  <div className="font-averta-regular text-zinc-500 dark:text-zinc-300 ">
+                  <div className="quicksand font-normal text-slate-500 dark:text-zinc-300 ">
                     {item.creator_name}
                     {item.source !== undefined && item.source.creator_name}
                   </div>
-                  <div className="font-averta-semibold text-zinc-400 dark:text-zinc-300 flex flex-row">
+                  <div className="quicksand font-bold text-slate-400 dark:text-zinc-300 flex flex-row">
                     {item.summaries !== undefined &&
                       item.summaries.map((summary, index) => (
                         <div
                           className={
                             index !== 0
-                              ? 'ml-1 font-averta-semibold'
-                              : 'font-averta-semibold'
+                              ? 'ml-1 quicksand font-bold'
+                              : 'quicksand font-bold'
                           }
                         >
                           {language_codes[summary.lang]}
@@ -337,7 +337,7 @@ export default function FeedItem ({
                     (item.summaries[0].complete === true ||
                       item.summaries[1] !== undefined ||
                       item.summaries[0] !== undefined) ? null : (
-                      <div className=" text-purpleLike dark:text-zinc-300 font-averta-semibold">
+                      <div className=" text-purpleLike dark:text-zinc-300 quicksand font-bold">
                         📝 IN PROGRESS
                       </div>
                     )}
@@ -346,10 +346,10 @@ export default function FeedItem ({
                       className="cursor-pointer"
                       href={`/${item.source_type}/${source_id}`}
                     >
-                      <div className="text-sm video-text text-black dark:bg-mildDarkMode dark:text-zinc-300  font-averta-semibold">
+                      <div className="text-sm video-text text-slate-800 dark:bg-mildDarkMode dark:text-zinc-300  quicksand font-bold">
                         {item.title}
                       </div>
-                      <div className="_ text-zinc-500 dark:text-zinc-300 font-averta-regular">
+                      <div className="_ text-slate-500 dark:text-zinc-300 quicksand font-normal">
                         {item.creator_name}
                       </div>
                       <div className=" text-zinc-400 dark:text-zinc-300 flex flex-row">
@@ -358,8 +358,8 @@ export default function FeedItem ({
                             <div
                               className={
                                 index !== 0
-                                  ? 'ml-1 font-averta-semibold'
-                                  : 'font-averta-semibold'
+                                  ? 'ml-1 quicksand font-bold'
+                                  : 'quicksand font-bold'
                               }
                             >
                               {language_codes[summary.lang]}
@@ -378,12 +378,12 @@ export default function FeedItem ({
                     {removed ? (
                       <ReplayIcon
                         onClick={removeBookmark}
-                        className="cursor-pointer text-zinc-600 dark:text-zinc-300"
+                        className="cursor-pointer text-slate-600 dark:text-zinc-300"
                       />
                     ) : (
                       <BookmarkRemoveIcon
                         onClick={removeBookmark}
-                        className="cursor-pointer text-zinc-600 dark:text-zinc-300"
+                        className="cursor-pointer text-slate-600 dark:text-zinc-300"
                       />
                     )}
                   </div>
@@ -410,14 +410,14 @@ export default function FeedItem ({
                 (item.summaries[0].complete === true ||
                   item.summaries[1] !== undefined ||
                   item.summaries[0] !== undefined) ? null : (
-                  <div className=" text-purpleLike dark:text-zinc-300 font-averta-semibold">
+                  <div className=" text-purpleLike dark:text-zinc-300 quicksand font-bold">
                     📝 IN PROGRESS
                   </div>
                 )}
-                <div className="text-sm  text-black dark:bg-mildDarkMode dark:text-zinc-300  underline font-averta-semibold">
+                <div className="text-sm  text-slate-800 dark:bg-mildDarkMode dark:text-zinc-300  underline quicksand font-bold">
                   {item.title}{' '}
                 </div>
-                <div className="_ text-zinc-500 dark:text-zinc-300 font-averta-semibold">
+                <div className="_ text-slate-500 dark:text-zinc-300 quicksand font-bold">
                   Time added: {formattedDate}
                 </div>
 

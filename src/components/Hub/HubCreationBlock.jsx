@@ -288,23 +288,23 @@ export default function HubCreationBlock({
       {!submitDialog && !uploadDialog && !arcDialog && (
         <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
           <div className="flex flex-col gap-10">
-            <div className="text-xl text-stone-900  dark:text-zinc-300 text-center mb-10 font-averta-semibold">
+            <div className="text-xl text-stone-900  dark:text-zinc-300 text-center mb-10 quicksand font-semibold">
               Process New Content
             </div>
 
             <div
-              className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-105 transition duration-500 ease-in-out"
+              className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-105 transition duration-500 ease-in-out"
               onClick={() => {
                 setSubmitDialog(true)
                 handleButtonClick()
               }}
             >
               <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-                <p className="text-green-300 text-lg font-averta-semibold text-center row-span-1">
+                <p className="text-green-300 text-lg quicksand font-semibold text-center row-span-1">
                   {' '}
                   Submit a Link
                 </p>
-                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-regular">
+                <p className="hidden sm:block text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
                   Submit a link to an online discussion to process with Alphy.
                 </p>
                 <div className="row-span-1 w-full justify-center items-center flex">
@@ -313,20 +313,20 @@ export default function HubCreationBlock({
                     className="text-green-300 mx-auto mb-2"
                   />
                 </div>
-                {/*  <button className="max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5 row-span-1 dark:text-zinc-700 dark:font-averta-semibold">
+                {/*  <button className="max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-lg text-white mb-5 row-span-1 dark:text-zinc-700 dark:quicksand font-semibold">
                                                         Submit
                                                     </button> */}
               </div>
             </div>
-            <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px] transform hover:scale-105 transition duration-500 ease-in-out">
+            <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[300px] transform hover:scale-105 transition duration-500 ease-in-out">
               <div
                 className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
                 onClick={() => setUploadDialog(true)}
               >
-                <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
+                <p className="text-indigo-400 text-lg quicksand font-semibold text-center row-span-1">
                   Upload a Recording
                 </p>
-                <p className="hidden sm:block text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-regular">
+                <p className="hidden sm:block text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
                   Import an audio file from your device to transcribe,
                   summarize, and question privately.
                 </p>
@@ -336,7 +336,7 @@ export default function HubCreationBlock({
                     className="text-indigo-300 mx-auto mb-2"
                   />
                 </div>
-                {/*     <button className=" max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white   dark:text-zinc-700 dark:font-averta-semibold"
+                {/*     <button className=" max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-lg text-white   dark:text-zinc-700 dark:quicksand font-semibold"
                                             >
                                                 Upload
                                                 </button> */}
@@ -347,18 +347,18 @@ export default function HubCreationBlock({
           <div className=" mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
 
           <div className="justify-center flex flex-col ">
-            <div className="text-xl text-stone-900   font-averta-semibold dark:text-zinc-300 text-center mb-10">
+            <div className="text-xl text-stone-900   quicksand font-semibold dark:text-zinc-300 text-center mb-10">
               Connect Audio with AI
             </div>
-            <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">
+            <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">
               <div
                 onClick={handleArcNavigation}
                 className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
               >
-                <p className="text-red-300 text-lg font-averta-semibold text-center mt-2 row-span-1">
+                <p className="text-red-300 text-lg quicksand font-semibold text-center mt-2 row-span-1">
                   Create an Arc
                 </p>
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 font-averta-regular">
+                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
                   {mobileWindow===false
                     ? 'Build your own AI-assisted search engine on countless hours of audiovisual content.'
                     : 'Build your AI assistants'}
@@ -370,7 +370,7 @@ export default function HubCreationBlock({
                     className="text-red-300 mx-auto mb-2 "
                   />
                 </div>
-                {/*    <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold"
+                {/*    <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-lg text-white dark:text-zinc-700 dark:quicksand font-semibold"
                     >
                         Create
                             </button> */}
@@ -382,23 +382,23 @@ export default function HubCreationBlock({
 
       {!submitDialog && !uploadDialog && !arcDialog && (
         <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] mt-6 lg:mt-20">
-          <p className="mb-10 text-xl font-averta-semibold text-zinc-600 dark:text-zinc-300 text-center">
+          <p className="mb-10 text-xl quicksand font-semibold text-zinc-600 dark:text-zinc-300 text-center">
             Start discovering Alphy's capabilities
           </p>
           <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
             <div
-              className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
+              className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
               onClick={() => {
                 setSubmitDialog(true)
                 handleButtonClick()
               }}
             >
               <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-                <p className="text-emerald-300 text-lg font-averta-semibold text-center row-span-1">
+                <p className="text-emerald-300 text-lg quicksand font-semibold text-center row-span-1">
                   {' '}
                   Submit a Link
                 </p>
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
+                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal ">
                   {!mobileWindow
                     ? 'Submit a link to an audiovisual content to process with Alphy.'
                     : 'Use Alphy on online content'}
@@ -409,20 +409,20 @@ export default function HubCreationBlock({
                     className="text-emerald-200 mx-auto mb-2"
                   />
                 </div>
-                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-md text-white mb-5  dark:text-zinc-700 dark:font-averta-semibold">
+                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-lg text-white mb-5  dark:text-zinc-700 dark:quicksand font-semibold">
                   Submit
                 </button>
               </div>
             </div>
-            <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+            <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
               <div
                 className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
                 onClick={() => setUploadDialog(true)}
               >
-                <p className="text-indigo-400 text-lg font-averta-semibold text-center row-span-1">
+                <p className="text-indigo-400 text-lg quicksand font-semibold text-center row-span-1">
                   Upload a Recording
                 </p>
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2">
+                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
                   {!mobileWindow
                     ? ' Import an audio file from your device to transcribe, summarize, and question privately'
                     : 'Process an audio file from your device'}
@@ -433,20 +433,20 @@ export default function HubCreationBlock({
                     className="text-indigo-300 mx-auto mb-2"
                   />
                 </div>
-                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-md text-white row-span-1  dark:text-zinc-700 dark:font-averta-semibold">
+                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-lg text-white row-span-1  dark:text-zinc-700 dark:quicksand font-semibold">
                   Upload
                 </button>
               </div>
             </div>
-            <div className=" bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-md drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
+            <div className=" bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
               <div
                 onClick={handleArcNavigation}
                 className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
               >
-                <p className="text-red-300 text-lg font-averta-semibold text-center row-span-1">
+                <p className="text-red-300 text-lg quicksand font-semibold text-center row-span-1">
                   Create an Arc
                 </p>
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm  text-center row-span-2 ">
+                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
                   {!mobileWindow
                     ? 'Build your own AI-assisted search engine as effortlessly as building a playlist.'
                     : 'Create an AI assistant as simply as creating a playlist'}
@@ -458,7 +458,7 @@ export default function HubCreationBlock({
                     className="text-red-300 mx-auto mb-2 "
                   />
                 </div>
-                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-md text-white dark:text-zinc-700 dark:font-averta-semibold">
+                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-lg text-white dark:text-zinc-700 dark:quicksand font-semibold">
                   Create
                 </button>
               </div>

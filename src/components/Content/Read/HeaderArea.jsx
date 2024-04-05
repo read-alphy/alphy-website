@@ -48,6 +48,8 @@ export default function HeaderArea({
   reorderedLanguageCodes,
   isSandbox,
   setIsSandbox,
+  showClip,
+  setShowClip,
 }) {
   const ITEM_HEIGHT = 48
   const ITEM_PADDING_TOP = 8
@@ -70,6 +72,16 @@ export default function HeaderArea({
   }
   }
   )
+
+  useEffect(() => {
+    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+      setTheme('dark')
+    }
+    else{
+      setTheme('light')
+    }
+  
+  }, [])
 
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
@@ -134,10 +146,10 @@ export default function HeaderArea({
             <div className="relative flex flex-col">
               <div className="relative flex flex-row group cursor-default">
                 <WorkspacePremiumIcon className="text-indigo-400" />
-                <p className="text-indigo-400 ml-2 font-averta-semibold">
+                <p className="text-indigo-400 ml-2 quicksand font-bold">
                   Premium Processing
                 </p>
-                <span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
+                <span className="absolute opacity-0 quicksand font-bold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
                   This content was processed with advanced AI models accessible
                   to Premium.
                 </span>
@@ -149,10 +161,10 @@ export default function HeaderArea({
             <div className="relative flex flex-col">
               <div className="relative flex flex-row group cursor-default">
                 <MemoryIcon className="text-gray-500" />
-                <p className="text-gray-500 ml-2 font-averta-semibold">
+                <p className="text-gray-500 ml-2 quicksand font-bold">
                   Standard Processing
                 </p>
-                <span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:bottom-full z-50 mb-2 ml-4">
+                <span className="absolute opacity-0 quicksand font-bold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:bottom-full z-50 mb-2 ml-4">
                   This content was processed with standard AI models.
                 </span>
               </div>
@@ -160,7 +172,7 @@ export default function HeaderArea({
           )}
         </div>
         <div className="flex flex-row ml-1">
-          <h2 className="col-span-2 mt-2 text-xl  font-averta-semibold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+          <h2 className="col-span-2 mt-2 text-xl  quicksand font-bold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
             {data.source_type === 'up'
               ? title.substring(0, title.lastIndexOf('.'))
               : title}
@@ -176,7 +188,7 @@ export default function HeaderArea({
               >
                 <div className="hidden lg:flex mt-8">
                   <svg
-                    className="cursor-pointer text-zinc-700 dark:text-zinc-300"
+                    className="cursor-pointer text-slate-700 dark:text-zinc-300"
                     width={30}
                     aria-hidden="true"
                     fill="none"
@@ -215,7 +227,7 @@ export default function HeaderArea({
                           height={40}
                           alt="Youtube Icon"
                         />
-                        <p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center font-averta-semibold text-md">
+                        <p className="text-slate-600 dark:text-zinc-300 items-center pt-1 text-center quicksand font-bold text-md">
                           Click to watch
                         </p>
                       </a>
@@ -224,9 +236,9 @@ export default function HeaderArea({
 
                     <Popover placement="right">
                       <PopoverHandler>
-                        <button className="flex flex-row text-zinc-600 dark:text-zinc-300 font-averta-semibold">
+                        <button className="flex flex-row text-slate-600 dark:text-zinc-300 quicksand font-bold">
                           <AddCircleIcon className="text-green-200" />{' '}
-                          <p className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                          <p className="ml-2 text-slate-700 dark:text-zinc-300 opacity-100 items-center text-md quicksand font-bold">
                             Add To Arc
                           </p>
                         </button>
@@ -234,10 +246,10 @@ export default function HeaderArea({
                       <PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
                         <MenuItem
                           onClick={() => handleAddToArchipelago(0, true)}
-                          className="text-zinc-700 dark:text-zinc-200 flex-row flex font-averta-semibold"
+                          className="text-slate-700 dark:text-zinc-200 flex-row flex quicksand font-bold"
                         >
-                          <AddIcon className="text-zinc-600 dark:text-zinc-300" />
-                          <p className="text-zinc-600 dark:text-zinc-300 pl-1 font-averta-semibold">
+                          <AddIcon className="text-slate-600 dark:text-zinc-300" />
+                          <p className="text-slate-600 dark:text-zinc-300 pl-1 quicksand font-bold">
                             Create An Arc
                           </p>
                         </MenuItem>
@@ -246,10 +258,10 @@ export default function HeaderArea({
                             onClick={() =>
                               handleAddToArchipelago(item[1], false)
                             }
-                            className="text-zinc-700 dark:text-zinc-200"
+                            className="text-slate-700 dark:text-zinc-200"
                             value={item}
                           >
-                            <p className="text-zinc-600 dark:text-zinc-300 font-averta-semibold">
+                            <p className="text-slate-600 dark:text-zinc-300 quicksand font-bold">
                               {item[0]}
                             </p>
                           </MenuItem>
@@ -266,26 +278,26 @@ export default function HeaderArea({
                           <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5"></div>
 
                           <div className="relative flex flex-row  group  cursor-default">
-                            <div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center z-[9999]">
+                            <div className=" flex flex-row text-slate-600 dark:text-zinc-300 items-center z-[9999]">
                               <AntSwitch
                                 onChange={handleVisibility}
                                 defaultChecked={isVisible}
                                 disabled={tier !== 'premium'}
                               />
-                              <span className="text-sm mx-2 font-averta-semibold">
+                              <span className="text-sm mx-2 quicksand font-bold">
                                 {isVisible === true ? 'Public' : 'Private'}
                               </span>
                             </div>
 
                             {tier === 'premium' && (
-                              <span className="absolute opacity-0 min-w-[200px] font-averta-semibold  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
+                              <span className="absolute opacity-0 min-w-[200px] quicksand font-bold  group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
                                 {isVisible
                                   ? 'Toggle the visibility of this content. Switching to private makes it accessible only by you.'
                                   : 'Toggle the visibility of this content. Switching to public makes it accessible by all.'}
                               </span>
                             )}
                             {tier !== 'premium' && (
-                              <span className="absolute opacity-0 min-w-[200px] font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
+                              <span className="absolute opacity-0 min-w-[200px] quicksand font-bold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
                                 This content is private. Switch to the Premium
                                 plan to make it publicly accessible.
                               </span>
@@ -299,7 +311,7 @@ export default function HeaderArea({
                     <div className="flex flex-row mb-2	 items-center hover:opacity-80 dark:hover:opacity-80 ">
                       <p
                         onClick={handleBookmark}
-                        className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer font-averta-semibold"
+                        className="text-center items-center flex text-slate-700 dark:text-zinc-200 opacity-80 cursor-pointer quicksand font-bold"
                       >
                         {currentUser &&
                           isBookmarked &&
@@ -320,7 +332,7 @@ export default function HeaderArea({
                           currentUser &&
                           data &&
                           data.submitter_id !== currentUser.uid && (
-                            <span className="ml-2 font-averta-semibold">
+                            <span className="ml-2 quicksand font-bold">
                               Remove Bookmark
                             </span>
                           )}
@@ -329,7 +341,7 @@ export default function HeaderArea({
                           currentUser &&
                           data &&
                           data.submitter_id !== currentUser.uid && (
-                            <span className="ml-2 font-averta-semibold">
+                            <span className="ml-2 quicksand font-bold">
                               Add To Bookmarks
                             </span>
                           )}
@@ -341,12 +353,12 @@ export default function HeaderArea({
                         <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
                       )}
                   </div>
-                  <p className="mb-2 text-zinc-700 dark:text-zinc-300 font-averta-semibold">
+                  <p className="mb-2 text-slate-700 dark:text-zinc-300 quicksand font-bold">
                     Language
                   </p>
                   <Box sx={{ minWidth: 200 }} className="">
                     <FormControl
-                      className="w-full text-zinc-200 dark:text-zinc-700 font-averta-semibold "
+                      className="w-full text-zinc-200 dark:text-slate-700 quicksand font-bold "
                       size="small"
                     >
                       <Select
@@ -357,34 +369,34 @@ export default function HeaderArea({
                         onChange={handleLanguageChange}
                         displayEmpty
                         MenuProps={menuProps}
-                        className="text-zinc-700 dark:text-zinc-200 font-averta-semibold"
+                        className="text-slate-700 dark:text-zinc-200 quicksand font-bold"
                       >
                         {Object.entries(reorderedLanguageCodes).map(
                           ([code, name], index) =>
                             language === code ? (
                               <MenuItem
-                                className="text-zinc-700 dark:text-zinc-200 font-averta-semibold"
+                                className="text-slate-700 dark:text-zinc-200 quicksand font-bold"
                                 key={code}
                                 value={code}
                               >
-                                <p className="font-averta-semibold text-zinc-700 dark:text-zinc-300">
+                                <p className="quicksand font-bold text-slate-700 dark:text-zinc-300">
                                   {' '}
                                   {name}
                                 </p>
                               </MenuItem>
                             ) : index === languages.length ? (
-                              <div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+                              <div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-slate-700 dark:text-zinc-200"></div>
                             ) : (
                               <MenuItem
                                 className={`${
                                   languages.includes(code)
                                     ? ''
                                     : 'text-gray-300 dark:text-gray-500'
-                                } font-averta-semibold`}
+                                } quicksand font-bold`}
                                 key={code}
                                 value={code}
                               >
-                                <p className="font-averta-semibold">{name}</p>
+                                <p className="quicksand font-bold">{name}</p>
                               </MenuItem>
                             )
                         )}
@@ -397,7 +409,7 @@ export default function HeaderArea({
                   </div>
 
                   <button
-                    className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70"
+                    className=" bg-none text-sm text-slate-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70"
                     onClick={handleReportIssue}
                   >
                     <svg
@@ -415,7 +427,7 @@ export default function HeaderArea({
                         strokeLinejoin="round"
                       ></path>
                     </svg>
-                    <p className="text-left font-averta-semibold">
+                    <p className="text-left quicksand font-bold text-slate-700">
                       Report an issue
                     </p>
                   </button>
@@ -463,7 +475,7 @@ export default function HeaderArea({
           }`}
         >
           <div className="col-span-1">
-            <h2 className="text-lg text-left lg:col-span-3 font-averta-regular mt-2 text-zinc-600  dark:bg-darkMode dark:text-zinc-400  flex flex-row">
+            <h2 className="text-lg text-left lg:col-span-3 quicksand font-normal mt-2 text-slate-600  dark:bg-darkMode dark:text-zinc-400  flex flex-row">
               {data.source_type !== 'up' && data.creator_name}
               {data.source_type === 'up' && 'Private Content'}
             </h2>
@@ -472,7 +484,7 @@ export default function HeaderArea({
         <div className="flex flex-row pt-6 ">
           {isSandbox === true ? (
             <button
-              className="cursor-pointer flex flex-row gap-2 rounded-lg items-center text-center px-2 py-2 bg-transparent border-zinc-400 dark:border-zinc-200 border w-[200px] justify-center"
+              className="cursor-pointer flex flex-row gap-2 rounded-lg items-center text-center px-2 py-2 bg-transparent border-slate-700 dark:border-zinc-200 border w-[200px] justify-center"
               onClick={() => setIsSandbox(false)}
             >
               <svg
@@ -480,11 +492,7 @@ export default function HeaderArea({
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke={`${
-                 theme  === 'light'
-                    ? '#27272a'
-                    : '#d4d4d8'
-                }`}
+                stroke={`currentColor`}
                 className="w-5 h-5"
               >
                 <path
@@ -494,7 +502,7 @@ export default function HeaderArea({
                 />
               </svg>
 
-              <p className=" text-md font-averta-semibold text-zinc-800 dark:text-zinc-200 ">
+              <p className=" text-[15px] quicksand font-semibold text-slate-800 dark:text-zinc-200 ">
                 Switch to Reading
               </p>
             </button>
@@ -518,11 +526,22 @@ export default function HeaderArea({
                 />
               </svg>
 
-              <p className=" text-md font-averta-semibold text-zinc-700 dark:text-zinc-700 ">
+              <p className=" text-[15px] quicksand font-semibold text-slate-700 dark:text-slate-700 ">
                 Switch to Playground
               </p>
             </button>
           )}
+
+          {/* <button
+              className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 bg-transparent w-[220px] justify-center"
+              onClick={() => setShowClip(!showClip)}
+            >
+              
+          
+              <p className=" text-[15px] quicksand font-normal text-slate-700 dark:text-slate-700 ">
+                Show clip (VIP)
+              </p>
+            </button> */}
         </div>
         <p className="max-w-[800px] mt-5 border border-zinc-100 dark:border-zinc-700"></p>
       </div>
@@ -569,7 +588,7 @@ export default function HeaderArea({
                   rel="noreferrer"
                 >
                   <Image className="-ml-2" src="/youtubeicon.png" width={40} height={40} alt="Youtube Icon" />
-                  <p className="text-zinc-600 dark:text-zinc-300 items-center pt-1 text-center text-md font-averta-semibold ">
+                  <p className="text-slate-600 dark:text-zinc-300 items-center pt-1 text-center text-md quicksand font-bold ">
                     Click to watch
                   </p>
                 </a>
@@ -582,7 +601,7 @@ export default function HeaderArea({
                   rel="noreferrer"
                 >
                   <Image className="ml-1" src={TwitterLogo} width={20} height={20} alt="Twitter Icon" />
-                  <p className=" text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                  <p className=" text-slate-600 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                     Click to listen
                   </p>
                 </a>
@@ -595,7 +614,7 @@ export default function HeaderArea({
                   rel="noreferrer"
                 >
                   <Image className="ml-1 mt-1" src={TwitchIcon} width={20} height={20}  alt="Twitch Icon" />
-                  <p className=" text-zinc-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                  <p className=" text-slate-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                     Click to watch
                   </p>
                 </a>
@@ -623,7 +642,7 @@ export default function HeaderArea({
                       d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"
                     />
                   </svg>
-                  <p className=" text-zinc-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                  <p className=" text-slate-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                     Click to watch
                   </p>
                 </a>
@@ -661,7 +680,7 @@ export default function HeaderArea({
                       <path d="M267.429 488.563C262.286 507.573 242.858 512 224 512c-18.857 0-38.286-4.427-43.428-23.437C172.927 460.134 160 388.898 160 355.75c0-35.156 31.142-43.75 64-43.75s64 8.594 64 43.75c0 32.949-12.871 104.179-20.571 132.813zM156.867 288.554c-18.693-18.308-29.958-44.173-28.784-72.599 2.054-49.724 42.395-89.956 92.124-91.881C274.862 121.958 320 165.807 320 220c0 26.827-11.064 51.116-28.866 68.552-2.675 2.62-2.401 6.986.628 9.187 9.312 6.765 16.46 15.343 21.234 25.363 1.741 3.654 6.497 4.66 9.449 1.891 28.826-27.043 46.553-65.783 45.511-108.565-1.855-76.206-63.595-138.208-139.793-140.369C146.869 73.753 80 139.215 80 220c0 41.361 17.532 78.7 45.55 104.989 2.953 2.771 7.711 1.77 9.453-1.887 4.774-10.021 11.923-18.598 21.235-25.363 3.029-2.2 3.304-6.566.629-9.185zM224 0C100.204 0 0 100.185 0 224c0 89.992 52.602 165.647 125.739 201.408 4.333 2.118 9.267-1.544 8.535-6.31-2.382-15.512-4.342-30.946-5.406-44.339-.146-1.836-1.149-3.486-2.678-4.512-47.4-31.806-78.564-86.016-78.187-147.347.592-96.237 79.29-174.648 175.529-174.899C320.793 47.747 400 126.797 400 224c0 61.932-32.158 116.49-80.65 147.867-.999 14.037-3.069 30.588-5.624 47.23-.732 4.767 4.203 8.429 8.535 6.31C395.227 389.727 448 314.187 448 224 448 100.205 347.815 0 224 0zm0 160c-35.346 0-64 28.654-64 64s28.654 64 64 64 64-28.654 64-64-28.654-64-64-64z" />
                     </g>
                   </svg>
-                  <p className=" text-zinc-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                  <p className=" text-slate-600 ml-2 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                     Click to listen
                   </p>
                 </a>
@@ -670,9 +689,9 @@ export default function HeaderArea({
 
               <Popover placement="right">
                 <PopoverHandler>
-                  <button className="flex flex-row text-zinc-600 dark:text-zinc-300">
+                  <button className="flex flex-row text-slate-600 dark:text-zinc-300">
                     <AddCircleIcon className="text-green-200" />{' '}
-                    <p className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                    <p className="ml-2 text-slate-600 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                       Add To Arc
                     </p>
                   </button>
@@ -680,20 +699,20 @@ export default function HeaderArea({
                 <PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
                   <MenuItem
                     onClick={() => handleAddToArchipelago(0, true)}
-                    className="text-zinc-700 dark:text-zinc-200 flex-row flex"
+                    className="text-slate-700 dark:text-zinc-200 flex-row flex"
                   >
-                    <AddIcon className="text-zinc-600 dark:text-zinc-300" />
-                    <p className="text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                    <AddIcon className="text-slate-600 dark:text-zinc-300" />
+                    <p className="text-slate-600 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                       Create An Arc
                     </p>
                   </MenuItem>
                   {userArchipelagoNames.map(item => (
                     <MenuItem
                       onClick={() => handleAddToArchipelago(item[1], false)}
-                      className="text-zinc-700 dark:text-zinc-200"
+                      className="text-slate-700 dark:text-zinc-200"
                       value={item}
                     >
-                      <p className="text-zinc-600 dark:text-zinc-300 font-averta-semibold">
+                      <p className="text-slate-600 dark:text-zinc-300 quicksand font-bold">
                         {item[0]}
                       </p>
                     </MenuItem>
@@ -706,10 +725,10 @@ export default function HeaderArea({
                 currentUser !== null &&
                 data.submitter_id == currentUser.uid && (
                   <div>
-                    <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5 font-averta-semibold"></div>
+                    <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40 mt-5 quicksand font-bold"></div>
 
                     <div className="relative flex flex-row  group  cursor-default">
-                      <div className=" flex flex-row text-zinc-600 dark:text-zinc-300 items-center z-[9999]">
+                      <div className=" flex flex-row text-slate-600 dark:text-zinc-300 items-center z-[9999]">
                         <AntSwitch
                           onChange={handleVisibility}
                           defaultChecked={isVisible}
@@ -721,14 +740,14 @@ export default function HeaderArea({
                       </div>
 
                       {tier === 'premium' && (
-                        <span className="absolute mt-6 opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
+                        <span className="absolute mt-6 opacity-0 min-w-[200px] group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:top-full z-[9999] mb-2 ml-4">
                           {isVisible
                             ? 'Toggle the visibility of this content. Switching to private makes it accessible only by you.'
                             : 'Toggle the visibility of this content. Switching to public makes it accessible by all.'}
                         </span>
                       )}
                       {tier !== 'premium' && (
-                        <span className="absolute mt-6 opacity-0 min-w-[200px]  font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
+                        <span className="absolute mt-6 opacity-0 min-w-[200px]  quicksand font-bold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-gray-300 text-sm rounded py-1 px-2 z-[9999] md:top-full z-50 mb-2 ml-4">
                           This content is private. Switch to the Premium plan to
                           make it publicly accessible.
                         </span>
@@ -742,7 +761,7 @@ export default function HeaderArea({
                 <div className="flex flex-row mb-5 items-center hover:opacity-80 dark:hover:opacity-80 ">
                   <p
                     onClick={handleBookmark}
-                    className="text-center items-center flex text-zinc-700 dark:text-zinc-200 opacity-80 cursor-pointer"
+                    className="text-center items-center flex text-slate-700 dark:text-zinc-200 opacity-80 cursor-pointer"
                   >
                     {currentUser &&
                       isBookmarked &&
@@ -759,12 +778,12 @@ export default function HeaderArea({
                       )}
 
                     {currentUser && isBookmarked === true && (
-                      <span className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                      <span className="ml-2 text-slate-600 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                         Remove Bookmark
                       </span>
                     )}
                     {currentUser && isBookmarked === false && (
-                      <span className="ml-2 text-zinc-600 dark:text-zinc-300 opacity-80 items-center text-md font-averta-semibold">
+                      <span className="ml-2 text-slate-600 dark:text-zinc-300 opacity-80 items-center text-md quicksand font-bold">
                         Add Bookmark
                       </span>
                     )}
@@ -775,13 +794,13 @@ export default function HeaderArea({
                 <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 dark:opacity-40"></div>
               ) : null}
 
-              <p className="mb-2 text-zinc-700 dark:text-zinc-200 opacity-80 font-averta-semibold">
+              <p className="mb-2 text-slate-700 dark:text-zinc-200 opacity-80 quicksand font-bold">
                 Language
               </p>
 
               <Box sx={{ minWidth: 200 }} className="">
                 <FormControl
-                  className="w-full text-zinc-200 dark:text-zinc-700 font-averta-semibold "
+                  className="w-full text-zinc-200 dark:text-slate-700 quicksand font-bold "
                   size="small"
                 >
                   <Select
@@ -789,33 +808,33 @@ export default function HeaderArea({
                     onChange={handleLanguageChange}
                     displayEmpty
                     MenuProps={menuProps}
-                    className="text-zinc-700 dark:text-zinc-200 font-averta-semibold"
+                    className="text-slate-700 dark:text-zinc-200 quicksand font-bold"
                   >
                     {Object.entries(reorderedLanguageCodes).map(
                       ([code, name], index) =>
                         language === code ? (
                           <MenuItem
-                            className="text-zinc-700 dark:text-zinc-200 font-averta-semibold"
+                            className="text-slate-700 dark:text-zinc-200 quicksand font-bold"
                             key={code}
                             value={code}
                           >
-                            <p className="font-averta-semibold text-zinc-700 dark:text-zinc-300">
+                            <p className="quicksand font-bold text-slate-700 dark:text-zinc-300">
                               {name}
                             </p>
                           </MenuItem>
                         ) : index === languages.length ? (
-                          <div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-zinc-700 dark:text-zinc-200"></div>
+                          <div className=" border-t mt-2 mb-4 border-gray-100 dark:border-zinc-700 mx-auto items-center flex  dark:opacity-40 text-slate-700 dark:text-zinc-200"></div>
                         ) : (
                           <MenuItem
                             className={`${
                               languages.includes(code)
                                 ? ''
                                 : 'text-gray-300 dark:text-gray-500'
-                            } font-averta-semibold`}
+                            } quicksand font-bold`}
                             key={code}
                             value={code}
                           >
-                            <p className="font-averta-semibold">{name}</p>
+                            <p className="quicksand font-bold">{name}</p>
                           </MenuItem>
                         )
                     )}
@@ -826,7 +845,7 @@ export default function HeaderArea({
               <div className="border-b border-gray-100 mx-auto items-center flex mt-5 dark:opacity-40"></div>
 
               <button
-                className=" bg-none text-sm text-zinc-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70"
+                className=" bg-none text-sm text-slate-700 dark:text-zinc-200 flex  mt-5 pt-1 opacity-70"
                 onClick={handleReportIssue}
               >
                 <svg
@@ -865,10 +884,10 @@ export default function HeaderArea({
                     ></iframe>
                   </div>
                 ) : (
-                  <p className=" dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200 font-averta-semibold">
+                  <p className=" dark:bg-mildDarkMode dark:border-zinc-500 dark:text-zinc-200 quicksand font-bold">
                     Please{' '}
                     <a
-                      className="text-greenColor underline font-averta-semibold"
+                      className="text-greenColor underline quicksand font-bold"
                       href="/u/login"
                     >
                       sign in{' '}

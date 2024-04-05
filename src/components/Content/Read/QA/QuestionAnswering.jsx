@@ -207,7 +207,7 @@ export default function QuestionAnswering({
           <div className="relative inline-flex  group ">
             <span
               key={index}
-              className="underline text-xs text-green-300 cursor-pointer font-averta-regular ml-1"
+              className="underline text-xs text-green-300 cursor-pointer quicksand font-normal ml-1"
               onClick={() => handleShowSingleSource(part)}
             >
               [{part}]
@@ -382,10 +382,10 @@ export default function QuestionAnswering({
     /* <div className="bg-whiteLike drop-shadow-2xl border mt-5   rounded-2xl p-5 pb-20 mb-20  mx-auto" ref={QARef}> */
     <div
       id="q-and-a"
-      className={` md:min-h-[600px] lg:w-[700px] xl:w-[500px] 2xl:w-[550px] 3xl:w-full mx-auto sm:mx-0 bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl text-zinc-700 dark:text-zinc-300`}
+      className={` md:min-h-[600px] lg:w-[700px] xl:w-[500px] 2xl:w-[550px] 3xl:w-full mx-auto sm:mx-0 bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl text-slate-700 dark:text-zinc-300`}
       ref={QARef}
     >
-      <p className="mb-4 font-averta-regular text-l text-zinc-700 dark:text-zinc-300">
+      <p className="mb-4 quicksand font-normal text-l text-slate-700 dark:text-zinc-300">
         Chat with the content. In any language you want
       </p>
 
@@ -403,7 +403,7 @@ export default function QuestionAnswering({
               type="text"
               id="questionAnswering"
               placeholder="Ask anything to the transcript..."
-              className="m-0 w-full  font-averta-regular text-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]"
+              className="m-0 w-full  quicksand font-normal text-slate-700 dark:text-zinc-300 dark:placeholder:text-zinc-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]"
             />
             {inputValue.length > 0 ? (
               <div
@@ -439,7 +439,7 @@ export default function QuestionAnswering({
                 className="absolute  rounded-md absolute p-1 rounded-md  gizmo:md:bottom-2.5 md:p-2 md:right-3 bottom-2 md:bottom-3 right-2  bg-green-200"
               >
                 <svg
-                  className="w-4 h-4 text-zinc-600 dark:text-zinc-700"
+                  className="w-4 h-4 text-zinc-600 dark:text-slate-700"
                   aria-hidden="true"
                   fill="none"
                   stroke="currentColor"

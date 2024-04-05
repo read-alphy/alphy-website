@@ -63,7 +63,7 @@ export default function ReadComponent({
   currentUser,
   requestTranslation,
   tier,
-  theme
+  theme,
 }) 
 
 
@@ -236,9 +236,9 @@ export default function ReadComponent({
                         width={240}
                         alt="Twitter Spaces"
                       />
-                      <p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
+                      <p className="text-md text-slate-600 dark:text-slate-300 mt-10 text-center px-5 mx-auto underline quicksand font-bold">
                         Listen to{' '}
-                        <span className="font-bold pb-6 hyphenate font-averta-semibold">
+                        <span className="font-bold pb-6 hyphenate quicksand font-bold">
                           "{`${title}`.substring(0, 90)}{' '}
                           {title.length > 90 && '...'}"
                         </span>{' '}
@@ -261,9 +261,9 @@ export default function ReadComponent({
                       <Image src={X} className="w-[240px] h-[120px] mx-auto" width={240}
                       alt="Twitter Video"
                       />
-                      <p className="text-md text-zinc-600 dark:text-zinc-300 mt-10 text-center px-5 mx-auto underline font-averta-semibold">
+                      <p className="text-md text-slate-600 dark:text-slate-300 mt-10 text-center px-5 mx-auto underline quicksand font-bold">
                         Watch{' '}
-                        <span className="font-bold pb-6 hyphenate font-averta-semibold">
+                        <span className="font-bold pb-6 hyphenate quicksand font-bold">
                           "{`${title}`.substring(0, 90)}{' '}
                           {title.length > 90 && '...'}"
                         </span>{' '}
@@ -376,7 +376,7 @@ export default function ReadComponent({
                       'question-answering  md:min-h-[600px] border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl'
                     }
                   >
-                    <p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md p-3 text-center italic ">
+                    <p className="text-xl text-slate-500 dark:text-slate-200 quicksand font-normal max-w-screen-md p-3 text-center italic ">
                       Generating questions... plugging in an AI assistant...
                       <Image
                         className={'opacity-70 dark:opacity-90 mx-auto'}
@@ -430,19 +430,19 @@ export default function ReadComponent({
                       : 'xl:ml-10'
                   } rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`}
                 >
-                  <div className="text-sm font-medium text-center text-zinc-700 dark:text-zinc-200 dark:border-gray-700 ">
-                    <ul className="flex flex-wrap border-b border-gray-200 xl:w-[400px] w-full mx-auto font-averta-semibold	">
+                  <div className="text-sm font-medium text-center text-slate-700 dark:text-slate-200 dark:border-gray-700 ">
+                    <ul className="flex flex-wrap xl:w-[450px] w-full mx-auto quicksand font-bold	">
                       <li
                         className={`w-1/3 md:w-4/12 ${
                           activeTab === 'tab3'
-                            ? 'text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2  font-averta-semibold border-greenColor'
-                            : 'font-averta-semibold hover:text-gray-600 hover:border-gray-300'
+                            ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2  quicksand font-bold border-greenColor'
+                            : 'quicksand font-bold border-b border-gray-200   '
                         }`}
                       >
                         <button
                           onClick={() => setActiveTab('tab3')}
                           className={
-                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor'
+                            'text-l  p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
                           }
                         >
                           Key Takeaways
@@ -451,14 +451,14 @@ export default function ReadComponent({
                       <li
                         className={` w-1/3 md:w-4/12 ${
                           activeTab === 'tab1'
-                            ? 'text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor'
-                            : 'font-averta-semibold hover:text-gray-600 hover:border-gray-300'
+                            ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor'
+                            : 'quicksand font-bold border-b border-gray-200 '
                         }`}
                       >
                         <button
                           onClick={() => setActiveTab('tab1')}
                           className={
-                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor'
+                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
                           }
                         >
                           Summary
@@ -467,21 +467,21 @@ export default function ReadComponent({
                       <li
                         className={` w-1/3 md:w-4/12 ${
                           activeTab === 'tab2'
-                            ? 'text-zinc-700 dark:bg-mildDarkMode dark:text-zinc-300 border-b-2 font-averta-semibold border-greenColor'
-                            : 'font-averta-semibold hover:text-gray-600 hover:border-gray-300'
+                            ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor'
+                            : 'quicksand font-bold border-b border-gray-200  '
                         }`}
                       >
                         <button
                           onClick={() => setActiveTab('tab2')}
                           className={
-                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-zinc-200 dark:border-greenColor'
+                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
                           }
                         >
                           Transcript
                         </button>
                       </li>
-                      {/* 										<li className={` w-1/3 md:w-3/12 ${activeTab === "tab4" ? "text-blueLike dark:bg-darkMode dark:text-zinc-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
-											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-zinc-200 dark:border-greenColor`}>Ask questions</button>
+                      {/* 										<li className={` w-1/3 md:w-3/12 ${activeTab === "tab4" ? "text-blueLike dark:bg-darkMode dark:text-slate-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-slate-200 dark:border-greenColor`}>Ask questions</button>
 										</li> */}
                     </ul>
                   </div>
@@ -492,7 +492,7 @@ export default function ReadComponent({
                         <div className="flex flex-col bg-white dark:bg-darkMode border dark:border dark:border-zinc-600 rounded-lg drop-shadow-2xl p-4">
                           <Button
                             size="sm"
-                            className="rounded-md justify-center h-[40px] bg-purple-500 mx-auto w-full mt-2 mb-2 text-white dark:text-zinc-800 font-averta-semibold flex flex-row items-center text-center gap-2"
+                            className="rounded-md justify-center h-[40px] bg-purple-500 mx-auto w-full mt-2 mb-2 text-white dark:text-slate-800 quicksand font-bold flex flex-row items-center text-center gap-2"
                             onClick={() => handleAskAlphy('sandbox')}
                           >
                             {' '}
@@ -515,7 +515,7 @@ export default function ReadComponent({
 
                           <Button
                             size="sm"
-                            className="rounded-md bg-green-200  h-[40px] mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold drop-shadow-none"
+                            className="rounded-md bg-green-200  h-[40px] mt-2 mb-2 text-slate-700 dark:text-slate-800 quicksand font-bold drop-shadow-none"
                             onClick={() => handleAskAlphy('default')}
                           >
                             {' '}
@@ -523,7 +523,7 @@ export default function ReadComponent({
                           </Button>
                           <Button
                             size="sm"
-                            className="rounded-md bg-blue-300  h-[40px] mt-2 mb-2 text-zinc-700 dark:text-zinc-800 font-averta-semibold "
+                            className="rounded-md bg-blue-300  h-[40px] mt-2 mb-2 text-slate-700 dark:text-slate-800 quicksand font-bold "
                             onClick={() => handleAskAlphy('ELI5')}
                           >
                             {' '}
@@ -538,7 +538,7 @@ export default function ReadComponent({
                     <Selection.Trigger>
                       <div
                         ref={contentRef}
-                        className="main-content text-zinc-700 dark:text-zinc-200 "
+                        className="main-content text-slate-700 dark:text-slate-200 "
                       >
                         <Tabs>
                           <Tab eventKey="transcript" title="">
@@ -557,13 +557,13 @@ export default function ReadComponent({
                                   })
                                 ) : summary === undefined ||
                                   summary.length === 0 ? (
-                                  <p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
+                                  <p className="text-l text-slate-500 dark:text-slate-200 quicksand font-bold max-w-screen-md mx-auto p-3 text-center">
                                     This content doesn't have key takeaways.
                                     Check out the transcript!
                                   </p>
                                 ) : (
                                   <p>
-                                    <p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
+                                    <p className="text-l text-slate-500 dark:text-slate-200 quicksand font-normal max-w-screen-md mx-auto p-3 text-center">
                                       Processing key takeaways...
                                       <Image
                                         className={
@@ -589,7 +589,7 @@ export default function ReadComponent({
                                 {isLoading ? (
                                   <Loading />
                                 ) : summaryArray.length === 0 ? (
-                                  <p className="text-l text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center flex flex-col">
+                                  <p className="text-l text-slate-500 dark:text-slate-200 quicksand font-bold max-w-screen-md mx-auto p-3 text-center flex flex-col">
                                     {summary === undefined ||
                                     summary.length === 0
                                       ? "This content doesn't have a summary. Check out the transcript!"
@@ -610,10 +610,10 @@ export default function ReadComponent({
                                   summaryArray.map((item, index) => {
                                     return (
                                       <div
-                                        className="mb-4 text-zinc-700 dark:text-zinc-200"
+                                        className="mb-4 text-slate-700 dark:text-slate-200"
                                         key={index}
                                       >
-                                        <div className="summary-text font-averta-semibold ">
+                                        <div className="summary-text quicksand font-bold ">
                                           <ReactMarkdown>{item}</ReactMarkdown>
                                         </div>
                                       </div>
@@ -623,12 +623,12 @@ export default function ReadComponent({
                                   Object.values(summaryArray).map(
                                     (item, index) => (
                                       <div
-                                        className="mb-4  text-stone-900  dark:text-zinc-200"
+                                        className="mb-4  text-slate-800  quicksand dark:text-slate-200"
                                         key={index}
                                       >
                                         <div className="text-l   dark:border-indigo-100 p-4">
                                           <h3
-                                            className="text-xl mb-1 font-averta-semibold  underline cursor-pointer dark:text-zinc-200"
+                                            className="text-xl mb-1 quicksand font-bold  underline text-slate-700 cursor-pointer dark:text-slate-200"
                                             onClick={() =>
                                               handleClickTimestamp(item.at)
                                             }
@@ -742,9 +742,9 @@ export default function ReadComponent({
                                               return (
                                                 <div
                                                   key={index}
-                                                  className="font-averta-regular text-stone-700 dark:text-zinc-300 text-md mt-4"
+                                                  className="quicksand font-normal text-slate-700 dark:text-slate-300 text-md mt-4"
                                                 >
-                                                  <ReactMarkdown className="react-markdown-edit">
+                                                  <ReactMarkdown className="react-markdown-edit quicksand">
                                                     {item}
                                                   </ReactMarkdown>
                                                 </div>
@@ -770,7 +770,7 @@ export default function ReadComponent({
                                       return window.innerWidth > 999 &&
                                         (data.source_type === 'yt' ||
                                           data.source_type === 'tw') ? (
-                                        <div className="flex flex-row dark:text-zinc-300">
+                                        <div className="flex flex-row dark:text-slate-300">
                                           <a
                                             onClick={handleClickTimestamp}
                                             className={`${
@@ -778,7 +778,7 @@ export default function ReadComponent({
                                               data.source_type === 'tw'
                                                 ? 'lg:cursor-pointer lg:pointer-events-auto'
                                                 : ''
-                                            } lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-zinc-300`}
+                                            } lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-slate-300`}
                                             key={index}
                                           >
                                             <br></br>
@@ -812,7 +812,7 @@ export default function ReadComponent({
                                                       tier === undefined
                                                         ? 'bg-indigo-200 text-white pointer-events-none'
                                                         : ''
-                                                    } text-sm  font-averta-semibold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}
+                                                    } text-sm  quicksand font-bold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}
                                                   >
                                                     {downloading ? (
                                                       <Spinner
@@ -830,7 +830,7 @@ export default function ReadComponent({
                                                 data-popover
                                                 id="popoverHover"
                                                 role="tooltip"
-                                                className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white font-averta-semibold  rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode "
+                                                className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white quicksand font-bold  rounded-lg shadow-sm opacity-0 dark:text-slate-200 dark:border-gray-600 dark:bg-mildDarkMode "
                                               >
                                                 <ThemeProvider
                                                   value={themePopover}
@@ -844,9 +844,9 @@ export default function ReadComponent({
                                                           onClick={() =>
                                                             handleDownload(1)
                                                           }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
+                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  quicksand font-bold dark:hover:bg-zinc-200 dark:hover:text-slate-500"
                                                         >
-                                                          <p className="font-averta-semibold">
+                                                          <p className="quicksand font-bold">
                                                             Download as Plain
                                                             Subtitles (.srt)
                                                           </p>
@@ -856,9 +856,9 @@ export default function ReadComponent({
                                                           onClick={() =>
                                                             handleDownload(2)
                                                           }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
+                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  quicksand font-bold dark:hover:bg-zinc-200 dark:hover:text-slate-500"
                                                         >
-                                                          <p className="font-averta-semibold">
+                                                          <p className="quicksand font-bold">
                                                             Download Formatted
                                                             Transcript (.txt)
                                                           </p>
@@ -877,7 +877,7 @@ export default function ReadComponent({
                                                       </div>
                                                     ) : (
                                                       <div className="px-3 cursor-pointer py-2 pointer-events-none ">
-                                                        <p className="font-averta-semibold">
+                                                        <p className="quicksand font-bold">
                                                           Upgrade your plan to
                                                           download the
                                                           transcript
@@ -944,7 +944,7 @@ export default function ReadComponent({
                                               data.source_type === 'tw'
                                                 ? 'lg:cursor-pointer lg:pointer-events-auto'
                                                 : ''
-                                            }  lg:pointer-events-auto lg:text-slate-900 dark:text-zinc-300 font-bold underline`}
+                                            }  lg:pointer-events-auto lg:text-slate-900 dark:text-slate-300 font-bold underline`}
                                             key={index}
                                             rel="noreferrer"
                                           >
@@ -976,7 +976,7 @@ export default function ReadComponent({
                                                       tier === undefined
                                                         ? 'bg-indigo-200 text-white pointer-events-none'
                                                         : ''
-                                                    } text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white font-averta-semibold`}
+                                                    } text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white quicksand font-bold`}
                                                   >
                                                     {downloading ? (
                                                       <Spinner
@@ -994,7 +994,7 @@ export default function ReadComponent({
                                                 data-popover
                                                 id="popoverHover"
                                                 role="tooltip"
-                                                className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-zinc-200 dark:border-gray-600 dark:bg-mildDarkMode "
+                                                className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-slate-200 dark:border-gray-600 dark:bg-mildDarkMode "
                                               >
                                                 <ThemeProvider
                                                   value={themePopover}
@@ -1008,9 +1008,9 @@ export default function ReadComponent({
                                                           onClick={() =>
                                                             handleDownload(1)
                                                           }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
+                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 quicksand font-bold dark:hover:bg-zinc-200 dark:hover:text-slate-500"
                                                         >
-                                                          <p className=" font-averta-semibold">
+                                                          <p className=" quicksand font-bold">
                                                             Download as Plain
                                                             Subtitles (.srt)
                                                           </p>
@@ -1020,9 +1020,9 @@ export default function ReadComponent({
                                                           onClick={() =>
                                                             handleDownload(2)
                                                           }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold  dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
+                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 quicksand font-bold  dark:hover:bg-zinc-200 dark:hover:text-slate-500"
                                                         >
-                                                          <p className="font-averta-semibold">
+                                                          <p className="quicksand font-bold">
                                                             Download Formatted
                                                             Transcript (.txt)
                                                           </p>
@@ -1040,7 +1040,7 @@ export default function ReadComponent({
                                                         </div>
                                                       </div>
                                                     ) : (
-                                                      <div className="px-3 cursor-pointer py-2 pointer-events-none font-averta-semibold ">
+                                                      <div className="px-3 cursor-pointer py-2 pointer-events-none quicksand font-bold ">
                                                         <p className="">
                                                           Upgrade your plan to
                                                           download the
@@ -1100,11 +1100,11 @@ export default function ReadComponent({
             (contentSummaries[0].lang === language ||
               contentSummaries[1].lang === language)) ||
           language === 'en' ? null : (
-            <p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular max-w-screen-md mx-auto p-3 text-center">
+            <p className="text-xl text-slate-500 dark:text-slate-200 quicksand font-normal max-w-screen-md mx-auto p-3 text-center">
               Seems like Alphy hasn't processed the content in{' '}
               {language_codes[language]} yet.{' '}
               {tier !== undefined && tier !== 'free' ? (
-                <p className="font-averta-regular">
+                <p className="quicksand font-normal">
                   Request Alphy to generate summary, key takeaways, and
                   questions in {language_codes[language]} clicking{' '}
                   <a
@@ -1116,7 +1116,7 @@ export default function ReadComponent({
                   .
                 </p>
               ) : (
-                <p className="font-averta-regular">
+                <p className="quicksand font-normal">
                   Upgrade your plan request translation. You can check out the{' '}
                   <a
                     className="underline text-green-300"

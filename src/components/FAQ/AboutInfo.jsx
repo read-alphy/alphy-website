@@ -39,13 +39,13 @@ export default function AboutInfo() {
           id="about"
           className="px-4 container w-5/6 max-w-4xl mt-20 pb-20 text-l lg:text-l"
         >
-          <h2 className="text-2xl mb-5 underline font-averta-semibold">
+          <h2 className="text-2xl mb-5 underline quicksand font-bold">
             About Alphy
           </h2>
           <Fragment>
             <Accordion className="cursor-default" open={true}>
               <AccordionHeader
-                className="cursor-default font-averta-semibold"
+                className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(1)}
               >
                 What is Alphy?
@@ -66,7 +66,7 @@ export default function AboutInfo() {
 
             <Accordion className="mt-6" open={true}>
               <AccordionHeader
-                className="cursor-default font-averta-semibold"
+                className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(3)}
               >
                 How does Alphy work?
@@ -88,7 +88,7 @@ export default function AboutInfo() {
 
             <Accordion className="mt-6" open={true}>
               <AccordionHeader
-                className="cursor-default font-averta-semibold"
+                className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(2)}
               >
                 What kind of content can I use Alphy with?
@@ -105,7 +105,7 @@ export default function AboutInfo() {
 
             <Accordion className="mt-6" open={true}>
               <AccordionHeader
-                className="cursor-default font-averta-semibold"
+                className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(4)}
               >
                 Can I upload local audio files for processing?
@@ -128,7 +128,7 @@ export default function AboutInfo() {
             
             <Accordion className="mt-6" open={true}>
               <AccordionHeader
-                className="cursor-default font-averta-semibold"
+                className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(4)}
               >
                 What are Arcs?
@@ -151,13 +151,13 @@ export default function AboutInfo() {
               id="about"
               className="container w-5/6 max-w-4xl mt-20  text-l lg:text-l"
             >
-              <h2 className="text-2xl mb-5 underline font-averta-semibold">
+              <h2 className="text-2xl mb-5 underline quicksand font-bold">
                 Subscription & Billing
               </h2>
             </div>
             <Accordion className="mt-6" open={true}>
               <AccordionHeader
-                className="cursor-default font-averta-semibold"
+                className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(4)}
               >
                 What does Premium offer?
@@ -166,7 +166,7 @@ export default function AboutInfo() {
                 <p className="font-averta-regular">
                   See{' '}
                   <a
-                    className="underline text-green-300 font-averta-semibold"
+                    className="underline text-green-300 quicksand font-bold"
                     href="/plans"
                   >
                     here
@@ -178,7 +178,7 @@ export default function AboutInfo() {
 
             <Accordion className="mt-6" open={true}>
               <AccordionHeader
-                className="cursor-default font-averta-semibold"
+                className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(4)}
               >
                 What happens to my credits if I cancel my subscriptions?

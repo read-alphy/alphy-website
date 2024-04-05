@@ -43,19 +43,19 @@ export default function SubmitBlock({
   }, [inputRef])
 
   return (
-    <div className="mt-10 sm:mt-20 text-zinc-700 h-full p-5 dark:text-zinc-300 max-w-[1000px] mx-auto items-center  justify-center sm:px-20">
+    <div className="mt-10 sm:mt-20 text-slate-700 h-full p-5 dark:text-zinc-300 max-w-[1000px] mx-auto items-center  justify-center sm:px-20">
       <div className="mb-10">
         <p
           onClick={() => handleGoBack()}
-          className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
+          className="text-slate-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
         >
           <KeyboardArrowLeftIcon fontSize="small" className="" />
-          <span className="text-sm  font-averta-semibold">Go Back</span>
+          <span className="text-sm  quicksand font-normal">Go Back</span>
         </p>
       </div>
 
       <p
-        className={`dark:text-zinc-300 text-zinc-700 mb-4 text-lg px-1 font-averta-semibold ${
+        className={`dark:text-zinc-300 text-slate-700 mb-4 text-lg px-1 quicksand font-normal ${
           currentUser ? '' : 'hidden'
         }`}
       >
@@ -78,7 +78,7 @@ export default function SubmitBlock({
             placeholder=" "
             className="peer w-full border-t-blue-gray-500 h-full bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 dark:place-holder-shown:border-t-darkMode placeholder-shown:border-t-blue-gray-200 border focus:border-2  focus:border-t-transparent dark:focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-500 dark:border-zinc-700 dark:focus:border-r-indigo-400  dark:focus:border-l-indigo-400 dark:focus:border-b-indigo-400 focus:border-indigo-400"
           />
-          <label className=" font-averta-semibold text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-indigo-400 before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-indigo-400 after:border-blue-gray-200 peer-focus:after:!border-indigo-400">
+          <label className=" quicksand font-normal text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor">
             {window.innerWidth < 600
               ? 'Insert a link...'
               : 'Insert a link to start...'}
@@ -87,7 +87,7 @@ export default function SubmitBlock({
           <div className="sm:hidden">
             <Button
               size="sm"
-              className="!absolute right-1 top-1 rounded bg-indigo-300 font-averta-semibold"
+              className="!absolute right-1 top-1 rounded bg-green-300 font-averta-semibold"
               onClick={e => {
                 handleSubmit()
               }}
@@ -110,14 +110,14 @@ export default function SubmitBlock({
               onClick={e => {
                 handleSubmit()
               }}
-              className={`bg-indigo-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case ${
+              className={`bg-green-300 dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case ${
                 loading && 'opacity-70 pointer-events-none'
               }`}
             >
               {loading ? (
                 <Spinner></Spinner>
               ) : (
-                <p className="font-averta-semibold">Submit</p>
+                <p className="quicksand font-normal">Submit</p>
               )}
             </Button>
           </div>
@@ -150,17 +150,17 @@ export default function SubmitBlock({
                 <div className="flex flex-col sm:flex-row"> 
                   <a
                     href="/account"
-                    className="text-zinc-500 dark:text-zinc-400 font-averta-semibold"
+                    className="text-slate-500 dark:text-zinc-400 quicksand font-normal"
                   >
                     {tier === 'free' && 'Starter Plan'}
                     {tier === 'basic' && 'Basic Plan'}
                     {tier === 'premium' && 'Premium Plan'}
                   </a>
-                  <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400 hidden sm:block">
+                  <p className="ml-1 mr-1 text-slate-500 dark:text-zinc-400 hidden sm:block">
                     {' '}
                     -{' '}
                   </p>
-                  <p className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold mt-2   sm:mt-0">
+                  <p className=" text-slate-500 dark:text-zinc-400 quicksand font-normal mt-2   sm:mt-0">
                     {' '}
                     Remaining Credits : {Math.floor(credit)} minutes
                   </p>
@@ -170,7 +170,7 @@ export default function SubmitBlock({
                         <div className="mt-2 sm:mt-0 sm:ml-4">
                           <p
                             onClick={navigateCredit}
-                            className={`text-indigo-400 underline font-averta-semibold cursor-pointer`}
+                            className={`text-indigo-400 underline quicksand font-normal cursor-pointer`}
                           >
                             Need more credits?{' '}
                           </p>
@@ -185,45 +185,45 @@ export default function SubmitBlock({
             {tier === 'free' ? (
               currentUser ? (
                 <div>
-                  {/* <p className="font-semibold text-md text-zinc-700 dark:text-zinc-200 font-averta-semibold">You are on the Starter Plan</p> */}
+                  {/* <p className="font-semibold text-md text-slate-700 dark:text-zinc-200 quicksand font-normal">You are on the Starter Plan</p> */}
                   <p className="mt-2 mb-2 font-averta-regular text-zinc-600 dark:text-zinc-300">
                     Available:
                   </p>
 
                   <div className="flex flex-row">
-                    <CheckCircleIcon className="text-indigo-300 p-1" />
+                    <CheckCircleIcon className="text-green-300 p-1" />
                     <p className="text-zinc-500 dark:text-zinc-400 font-averta-regular">
                       YouTube
                     </p>
                   </div>
                   <div className="flex flex-row">
                     <CheckCircleIcon className="text-zinc-300 p-1" />
-                    <p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">
+                    <p className="line-through text-slate-500 dark:text-zinc-400 font-averta-regular">
                       Twitter Spaces
                     </p>
                   </div>
                   <div className="flex flex-row">
                     <CheckCircleIcon className="text-zinc-300 p-1" />
-                    <p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">
+                    <p className="line-through text-slate-500 dark:text-zinc-400 font-averta-regular">
                       Twitter videos
                     </p>
                   </div>
 
                   <div className="flex flex-row">
                     <CheckCircleIcon className="text-zinc-300 p-1" />
-                    <p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">
+                    <p className="line-through text-slate-500 dark:text-zinc-400 font-averta-regular">
                       Twitch
                     </p>
                   </div>
 
                   <div className="flex flex-row">
                     <CheckCircleIcon className="text-zinc-300 p-1" />
-                    <p className="line-through text-zinc-500 dark:text-zinc-400 font-averta-regular">
+                    <p className="line-through text-slate-500 dark:text-zinc-400 font-averta-regular">
                       Apple Podcasts
                     </p>
                   </div>
 
-                  <p className="dark:text-zinc-300 text-zinc-500 mb-3 mt-6 font-averta-regular">
+                  <p className="dark:text-zinc-300 text-slate-500 mb-3 mt-6 font-averta-regular">
                     {' '}
                     Switch to a{' '}
                     <Link href="/account" className="text-indigo-400  underline">
@@ -254,13 +254,13 @@ export default function SubmitBlock({
         <div>
           <p
             onClick={() => setShowExampleLinks(!showExampleLinks)}
-            className="mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold cursor-pointer"
+            className="mt-10 relative text-slate-500 dark:text-zinc-400 quicksand font-normal cursor-pointer"
           >
             Example Links{' '}
             <HelpIcon className="text-zinc-600 p-1 dark:text-zinc-300 mb-1 -ml-1" />
           </p>
           {showExampleLinks && (
-            <div className=" bottom-0 mt-4 sm:mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-semibold">
+            <div className=" bottom-0 mt-4 sm:mt-10 relative text-zinc-500 dark:text-zinc-400 font-averta-regular">
               <p className="mb-6">
                 {' '}
                 Please make sure the link you are submitting is in one of the
@@ -290,7 +290,7 @@ export default function SubmitBlock({
         <div>
           <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mt-5 mb-5 dark:opacity-40"></div>
 
-          <div className="flex flex-col text-zinc-700 dark:text-zinc-300 font-averta-semibold text-md sm:text-lg mt-4">
+          <div className="flex flex-col text-slate-700 dark:text-zinc-300 quicksand font-normal text-md sm:text-lg mt-4">
             Supported Platforms
             <div className="flex flex-row mt-4 sm:mt-10 opacity-50 overflow-scroll">
               <Image

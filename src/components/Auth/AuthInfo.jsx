@@ -215,7 +215,7 @@ const AuthInfo = () => {
         resetPassword === false ? (
           <div className="mb-20 w-[300px]">
             <div>
-              <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-300 font-averta-semibold">
+              <h2 className="text-xl mb-8 text-slate-700 dark:text-slate-300 quicksand font-bold">
                 {isRegister ? 'Create an account' : 'Login'}{' '}
               </h2>
 
@@ -237,7 +237,7 @@ const AuthInfo = () => {
                   />
                   <label
                     for="floating_email"
-                    className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold"
+                    className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 quicksand font-bold"
                   >
                     Email address
                   </label>
@@ -254,7 +254,7 @@ const AuthInfo = () => {
                   />
                   <label
                     for="floating_password"
-                    className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold"
+                    className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 quicksand font-bold"
                   >
                     Password
                   </label>
@@ -272,7 +272,7 @@ const AuthInfo = () => {
                     />
                     <label
                       for="floating_repeat_password"
-                      className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold"
+                      className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 quicksand font-bold"
                     >
                       Confirm password
                     </label>
@@ -284,7 +284,7 @@ const AuthInfo = () => {
                   type="submit"
                   className={`${
                     isSubmitting ? 'opacity-50 pointer-events-none' : ''
-                  } bg-greenColor font-averta-semibold`}
+                  } bg-greenColor quicksand font-bold`}
                 >
                   {' '}
                   {isSubmitting ? (
@@ -307,11 +307,11 @@ const AuthInfo = () => {
               )}
               <div className="mt-4">
                 {isRegister === false ? (
-                  <div className="text-zinc-600 dark:text-zinc-300 text-sm">
+                  <div className="text-slate-600 dark:text-slate-300 text-sm">
                     <p>
                       <Link
                         href="/u/resetpassword"
-                        className="underline cursor-pointer font-averta-semibold"
+                        className="underline cursor-pointer quicksand font-bold"
                       >
                         {' '}
                         Forgot your password?
@@ -321,12 +321,12 @@ const AuthInfo = () => {
                 ) : null}
                 {isRegister ? (
                   <div className="mt-6">
-                    <p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold">
+                    <p className="text-slate-600 dark:text-slate-300 text-sm quicksand font-bold">
                       {' '}
                       Already have an account? Login{' '}
                       <Link
                         href="/u/login"
-                        className="text-greenColor font-averta-semibold"
+                        className="text-greenColor quicksand font-bold"
                       >
                         here.
                       </Link>
@@ -334,11 +334,11 @@ const AuthInfo = () => {
                   </div>
                 ) : (
                   <div className="mt-6">
-                    <p className="text-zinc-600 dark:text-zinc-300 text-sm font-averta-semibold">
+                    <p className="text-slate-600 dark:text-slate-300 text-sm quicksand font-bold">
                       Don't have an account?{' '}
                       <Link
                         href="/u/register"
-                        className="text-greenColor font-averta-semibold"
+                        className="text-greenColor quicksand font-bold"
                       >
                         Register now.
                       </Link>
@@ -350,7 +350,7 @@ const AuthInfo = () => {
             <div className="">
               <div className="flex items-center mt-10 mb-10">
                 <div className="border-b border-gray-300 w-[200px] mr-3"></div>
-                <span className="text-sm text-gray-400 font-averta-semibold">
+                <span className="text-sm text-gray-400 quicksand font-bold">
                   OR
                 </span>
                 <div className="border-b border-gray-300 w-[200px] ml-3 "></div>
@@ -363,7 +363,7 @@ const AuthInfo = () => {
                 <div className="flex flex-rows	">
                   <Image src={Google} width={30} alt= 'google logo' height={30} 
                   ></Image>
-                  <span className=" ml-4 font-extral	text-zinc-700 dark:text-zinc-300 font-averta-semibold">
+                  <span className=" ml-4 font-extral	text-slate-700 dark:text-slate-300 quicksand font-bold">
                     Continue with Google
                   </span>
                 </div>
@@ -372,10 +372,10 @@ const AuthInfo = () => {
           </div>
         ) : oobCode === null || oobCode === undefined ? (
           <div className="mb-20 w-[300px]">
-            <h2 className="text-xl mb-8 text-zinc-700 dark:text-zinc-700 font-averta-semibold">
+            <h2 className="text-xl mb-8 text-slate-700 dark:text-slate-700 quicksand font-bold">
               Reset Password{' '}
             </h2>
-            <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-10 font-averta-semibold">
+            <p className="text-sm text-slate-600 dark:text-slate-300 mb-10 quicksand font-bold">
               Enter your email address and we will send you a link to reset your
               password.
             </p>
@@ -393,7 +393,7 @@ const AuthInfo = () => {
                 />
                 <label
                   for="floating_email"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor dark:peer-focus:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 quicksand font-bold"
                 >
                   Email address
                 </label>
@@ -402,7 +402,7 @@ const AuthInfo = () => {
                 type="submit"
                 className={`${
                   isSubmitting ? 'opacity-50 pointer-events-none' : ''
-                } bg-greenColor font-averta-semibold`}
+                } bg-greenColor quicksand font-bold`}
               >
                 {' '}
                 {isSubmitting ? (
@@ -418,12 +418,12 @@ const AuthInfo = () => {
               </Button>
             </form>
             {error && (
-              <div className="text-red-500 text-sm mb-8 mt-5 font-averta-semibold">
+              <div className="text-red-500 text-sm mb-8 mt-5 quicksand font-bold">
                 {error}{' '}
               </div>
             )}
             {successMessage && (
-              <div className="text-green-500 text-sm mb-8 mt-5 font-averta-semibold">
+              <div className="text-green-500 text-sm mb-8 mt-5 quicksand font-bold">
                 Email sent successfully
               </div>
             )}
@@ -432,10 +432,10 @@ const AuthInfo = () => {
           <div className="mb-20 w-[300px]">
             {successMessage === false ? (
               <div>
-                <h2 className="text-xl mb-8 font-averta-semibold">
+                <h2 className="text-xl mb-8 quicksand font-bold">
                   Pick a New Password{' '}
                 </h2>
-                <p className="text-sm text-zinc-600 mb-10 dark:text-zinc-300 font-averta-semibold">
+                <p className="text-sm text-slate-600 mb-10 dark:text-slate-300 quicksand font-bold">
                   You are about to reset your password. Please make sure your
                   new password is longer than 8 characters.
                 </p>
@@ -457,7 +457,7 @@ const AuthInfo = () => {
                     />
                     <label
                       for="floating_password"
-                      className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold"
+                      className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 quicksand font-bold"
                     >
                       Password
                     </label>
@@ -475,7 +475,7 @@ const AuthInfo = () => {
                     />
                     <label
                       for="floating_repeat_password"
-                      className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 font-averta-semibold"
+                      className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-greenColor peer-focus:dark:text-greenColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 quicksand font-bold"
                     >
                       Confirm password
                     </label>
@@ -501,7 +501,7 @@ const AuthInfo = () => {
                         color="#ffffff"
                       />
                     ) : (
-                      <span className="text-zinc-700 dark:text-zinc-700 font-averta-semibold">
+                      <span className="text-slate-700 dark:text-slate-700 quicksand font-bold">
                         Reset Password
                       </span>
                     )}
@@ -525,10 +525,10 @@ const AuthInfo = () => {
                     strokeLinejoin="round"
                   ></path>
                 </svg>
-                <p className="mx-auto text-center mt-4 text-zinc-600 font-averta-semibold">
+                <p className="mx-auto text-center mt-4 text-slate-600 quicksand font-bold">
                   Password reset successfully.{' '}
                   <Link
-                    className="underline font-averta-semibold"
+                    className="underline quicksand font-bold"
                     href="/u/login"
                   >
                     {' '}
@@ -542,11 +542,11 @@ const AuthInfo = () => {
         )
       ) : (
         <div className="mb-20 w-[300px]">
-          <h2 className="text-xl mb-8 font-averta-semibold">
+          <h2 className="text-xl mb-8 quicksand font-bold">
             We sent a verification link to{' '}
             {email !== null ? email : 'your email'}!
           </h2>
-          <p className="text-sm text-zinc-600 mb-10 font-averta-semibold">
+          <p className="text-sm text-slate-600 mb-10 quicksand font-bold">
             Please follow the link to complete your registration. If you didn't
             get the email, try again from the link below.
           </p>
@@ -554,7 +554,7 @@ const AuthInfo = () => {
             onClick={handleResendVerificationEmail}
             className={`${
               isSubmitting ? 'opacity-50 pointer-events-none' : ''
-            } bg-greenColor font-averta-semibold`}
+            } bg-greenColor quicksand font-bold`}
           >
             {' '}
             {isSubmitting ? (
@@ -569,7 +569,7 @@ const AuthInfo = () => {
             )}
           </Button>
           {successMessage && (
-            <div className="text-zinc-500 text-sm mb-8 mt-5 font-averta-semibold">
+            <div className="text-slate-500 text-sm mb-8 mt-5 quicksand font-bold">
               Done! Please check your inbox.
             </div>
           )}

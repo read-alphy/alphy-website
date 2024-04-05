@@ -44,7 +44,7 @@ export default function BookmarkFeedItem({
       >
         <Link href={`/${item.source_type}/${source_id}`}>
           <div
-            className={`min-w-[320px] max-w-[320px]  font-averta-semibold xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}
+            className={`min-w-[320px] max-w-[320px]  quicksand font-bold xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}
           >
             <div
               className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
@@ -67,7 +67,7 @@ export default function BookmarkFeedItem({
               (item.summaries[0].complete === true ||
                 item.summaries[1] !== undefined ||
                 item.summaries[0] !== undefined) ? null : (
-                <div className="font-bold text-purpleLike dark:text-zinc-300 font-averta-semibold">
+                <div className="font-bold text-purpleLike dark:text-zinc-300 quicksand font-bold">
                   📝 IN PROGRESS
                 </div>
               )}
@@ -76,20 +76,20 @@ export default function BookmarkFeedItem({
                 className="cursor-pointer"
                 href={`/${item.source_type}/${source_id}`}
               >
-                <div className="text-sm font-averta-semibold video-text text-black 	 dark:text-zinc-300 font-normal">
+                <div className="text-sm quicksand font-bold text-slate-700 	 dark:text-zinc-300 ">
                   {item.title}
                 </div>
-                <div className=" text-zinc-500 dark:text-zinc-300 font-averta-semibold">
+                <div className=" text-slate-600 dark:text-zinc-300 quicksand font-normal">
                   {item.creator_name}
                 </div>
-                <div className="font-averta-semibold text-zinc-400 dark:text-zinc-300 flex flex-row">
+                <div className="quicksand font-bold text-zinc-400 dark:text-zinc-300 flex flex-row">
                   {item.summaries !== undefined &&
                     item.summaries.map((summary, index) => (
                       <div
                         className={
                           index !== 0
-                            ? 'ml-1 font-averta-semibold'
-                            : 'font-averta-semibold'
+                            ? 'ml-1 quicksand font-bold'
+                            : 'quicksand font-bold'
                         }
                       >
                         {language_codes[summary.lang]}
@@ -106,12 +106,12 @@ export default function BookmarkFeedItem({
               {removed ? (
                 <ReplayIcon
                   onClick={removeBookmark}
-                  className="cursor-pointer text-zinc-600 dark:text-zinc-300"
+                  className="cursor-pointer text-slate-700 dark:text-zinc-300"
                 />
               ) : (
                 <BookmarkRemoveIcon
                   onClick={removeBookmark}
-                  className="cursor-pointer text-zinc-600 dark:text-zinc-300"
+                  className="cursor-pointer text-slate-700 dark:text-zinc-300"
                 />
               )}
             </div>

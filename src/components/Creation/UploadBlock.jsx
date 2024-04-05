@@ -137,7 +137,7 @@ export default function UploadBlock({
           className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
         >
           <KeyboardArrowLeftIcon fontSize="small" className="" />
-          <span className="text-sm  font-averta-semibold">Go Back</span>
+          <span className="text-sm  quicksand font-normal">Go Back</span>
         </p>
       </div>
       <div className="pb-4 ">
@@ -145,10 +145,10 @@ export default function UploadBlock({
           <VerifiedIcon className="mr-1 " />
           <span>PREMIUM</span>
         </div>
-        <p className="dark:text-zinc-200 text-zinc-700 mb-4 text-lg font-averta-semibold">
+        <p className="dark:text-zinc-200 text-zinc-700 mb-4 text-lg quicksand font-normal">
           Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
         </p>
-        {/*    <p className="dark:text-zinc-500 text-zinc-500 mb-6 text-md font-averta-semibold">
+        {/*    <p className="dark:text-slate-700 text-slate-700 mb-6 text-md quicksand font-normal">
           As we value your privacy, we immediately delete your audio files after
           transcription, and we make sure Alphy's summary, transcription, and
           chatbot are only accessible to you and no one else.
@@ -177,8 +177,8 @@ export default function UploadBlock({
                           className="text-indigo-400 mb-4 "
                         />
 
-                        <p className="mb-2 text-sm text-zinc-500 dark:text-zinc-300">
-                          <span className="font-semibold">
+                        <p className="mb-2 text-sm text-slate-700 dark:text-zinc-300">
+                          <span className="quicksand font-normal">
                             Click to upload an audio file
                           </span>{' '}
                           or drag and drop.
@@ -245,7 +245,7 @@ export default function UploadBlock({
         ) : (
           <div>
             <div className="flex flex-col  col-span-2 mx-auto items-center">
-              <p className="text-zinc-500 dark:text-zinc-400 items-center margin-auto text-l  mb-5 w-full  font-averta-semibold col-span-2">
+              <p className="text-slate-700 dark:text-zinc-400 items-center margin-auto text-l  mb-5 w-full  quicksand font-normal col-span-2">
                 You need to go{' '}
                 <Link
                   className="text-indigo-400 underline font-bold"
@@ -259,9 +259,9 @@ export default function UploadBlock({
           </div>
         )
       ) : (
-        <div className="rounded-xl dark:border-darkMode  pr-10 pt-10 font-semibold ">
+        <div className="rounded-xl dark:border-darkMode  pr-10 pt-10 quicksand font-normal ">
           <p
-            className={`flex flex-row font-sans text-zinc-500 dark:text-zinc-400  ${
+            className={`flex flex-row font-sans text-slate-700 dark:text-zinc-400  ${
               uploadProgress > 0 ? 'italic' : 'underline'
             } `}
           >
@@ -291,7 +291,7 @@ export default function UploadBlock({
             </svg>
           </p>
           <div className="lg:flex lg:flex-row lg:grid lg:grid-cols-5">
-            <p className="lg:col-span-2 flex  items-center font-sans text-zinc-500 dark:text-zinc-300 mt-8 lg:mt-0 ">
+            <p className="lg:col-span-2 flex  items-center font-sans text-slate-700 dark:text-zinc-300 mt-8 lg:mt-0 ">
               {' '}
               {uploadTitle}
             </p>
@@ -317,13 +317,13 @@ export default function UploadBlock({
                   </div>
                   {/*  */}{' '}
                   {fileUploading === false && (
-                    <p className="text-sm  text-zinc-500 dark:text-zinc-300 italic font-sans w-full flex justify-center lg:mt-2">
+                    <p className="text-sm  text-slate-700 dark:text-zinc-300 italic font-sans w-full flex justify-center lg:mt-2">
                       Click continue to process the file...
                     </p>
                   )}
                   {/* <Progress className={`${uploadProgress>0 && "hidden"}`}color="gray" size="lg" value={100} label={0} /> */}
                 </div>
-                {/* 	<div className="sm:col-span-1 text-sm flex justify-center font-sans  text-zinc-500 dark:text-zinc-300">
+                {/* 	<div className="sm:col-span-1 text-sm flex justify-center font-sans  text-slate-700 dark:text-zinc-300">
     {Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes
         </div> */}
               </div>
@@ -331,7 +331,7 @@ export default function UploadBlock({
 
             <div className="col-span-1 flex flex-col lg:flex-row lg:items-center lg:justify-center  lg:margin-auto">
               {fileUploading === 0 && (
-                <p className="text-sm  text-zinc-500 dark:text-zinc-300 italic font-sans my-4 lg:hidden">
+                <p className="text-sm  text-slate-700 dark:text-zinc-300 italic font-sans my-4 lg:hidden">
                   Click continue to process the file...
                 </p>
               )}
@@ -353,7 +353,7 @@ export default function UploadBlock({
                     className={`text-sm font-sans ${
                       errorMessage
                         ? 'text-red-400 dark:text-400'
-                        : 'text-zinc-500 dark:text-zinc-300'
+                        : 'text-slate-700 dark:text-zinc-300'
                     }`}
                   >
                     {uploadProgress !== 100
@@ -387,14 +387,14 @@ export default function UploadBlock({
             <div className="flex flex-row">
               <a
                 href="/account"
-                className=" text-zinc-500 dark:text-zinc-400 font-averta-semibold"
+                className=" text-slate-700 dark:text-zinc-400 quicksand font-normal"
               >
                 {tier === 'free' && 'Starter Plan'}
                 {tier === 'basic' && 'Basic Plan'}
                 {tier === 'premium' && 'Premium Plan'}
               </a>
               <p className="ml-1 mr-1"> - </p>
-              <p className="text-zinc-500 dark:text-zinc-400 font-averta-semibold">
+              <p className="text-slate-700 dark:text-zinc-400 quicksand font-normal">
                 {' '}
                 Remaining Credits : {Math.floor(credit)} minutes
               </p>
@@ -402,7 +402,7 @@ export default function UploadBlock({
 
             <div className="mt-8 mb-8  flex flex-col text-sm">
               <p
-                className={`text-zinc-500 dark:text-zinc-400 mr-2  font-averta-semibold`}
+                className={`text-slate-700 dark:text-zinc-400 mr-2  quicksand font-normal`}
               >
                 Need more credits?{' '}
               </p>
@@ -415,16 +415,16 @@ export default function UploadBlock({
                     tier === 'basic' || tier === 'premium'
                       ? ''
                       : 'pointer-events-none opacity-50'
-                  } cursor-pointer mt-4 w-[100px] font-averta-semibold`}
+                  } cursor-pointer mt-4 w-[100px] quicksand font-normal`}
                 >
-                  <span className="mt-1 underline font-averta-semibold text-indigo-400">
+                  <span className="mt-1 underline quicksand font-normal text-indigo-400">
                     Buy here
                   </span>
 
                   {/*  <div className="relative flex flex-row group cursor-default">
 						  <WorkspacePremiumIcon className="text-indigo-400"/>
-						  <p className="text-indigo-400 ml-2 font-averta-semibold">Premium Processing</p>
-						  <span className="absolute opacity-0 font-averta-semibold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-zinc-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
+						  <p className="text-indigo-400 ml-2 quicksand font-normal">Premium Processing</p>
+						  <span className="absolute opacity-0 quicksand font-normal group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-700 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
 							This content was processed with advanced AI models accessible to Premium.
 						  </span>
 						</div> */}
@@ -439,7 +439,7 @@ export default function UploadBlock({
         <div className="pb-10 w-full py-4">
           <div className="border-b border-gray-200 dark:border-gray-600 mx-auto items-center flex mb-5 "></div>
 
-          <p className=" dark:text-zinc-200 text-zinc-500 text-md font-averta-semibold items-center ">
+          <p className=" dark:text-zinc-200 text-slate-700 text-md quicksand font-normal items-center ">
             Use our free converter tool to get your video and audio files ready
             for transcription.{' '}
           </p>

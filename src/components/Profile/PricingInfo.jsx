@@ -75,10 +75,10 @@ export default function Pricing({ tier,currentUser }) {
       {isLoaded ? (
         <div className="dark:bg-darkMode">
           <div className=" w-full pt-20 grid grid-col-3 mb-30 items-center margin-auto">
-            <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-xl md:text-2xl lg:text-3xl font-averta-semibold">
+            <p className="text-center text-blueLike  dark:bg-darkMode dark:text-zinc-300 text-xl md:text-2xl lg:text-3xl quicksand font-bold">
               Choose the best plan for you
             </p>
-            <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300  md:text-lg mt-6   mb-6 max-w-[600px] items-center justify-center mx-auto">
+            <p className="text-center text-zinc-600  dark:bg-darkMode dark:text-zinc-300  md:text-lg mt-6   mb-6 max-w-[600px] items-center justify-center mx-auto quicksand">
               Upgrade to have extra transcription credits, submit from multiple
               platforms, upload audio files, and access most capable AI models.
             </p>

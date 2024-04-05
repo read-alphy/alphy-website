@@ -43,7 +43,6 @@ function Navbar({ collapsed, setCollapsed }) {
   const isUp = router.asPath.includes('/up')
   const isArc = router.asPath.includes('/arc')
   const isHub = router.asPath.includes('/hub')
-
   return (
     <div
       className={`items-center ${
@@ -51,7 +50,7 @@ function Navbar({ collapsed, setCollapsed }) {
       } justify-between dark:bg-darkMode pb-2	`}
     >
       <div
-        className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md font-normal ${
+        className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md quicksand ${
           isYt || isSp || isUp || isArc || isHub
             ? 'h-[8vh] min-h-[40px]'
             : 'h-[8vh] min-h-[40px]'
@@ -83,7 +82,7 @@ function Navbar({ collapsed, setCollapsed }) {
                 className="dark:hidden opacity-80 "
                 alt="Alphy Logo"
               ></Image>
-              <h2 className="ml-1 mt-1 text-2xl">ALPHY</h2>
+              <h2 className="ml-1 mt-1 text-2xl quicksand font-bold">ALPHY</h2>
             </div>
           </Link>
 

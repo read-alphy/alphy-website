@@ -65,14 +65,14 @@ export default function CuratedCarouselItem(props) {
               <p
                 className={`text-white bg-opacity-100 text-sm ${
                   props.forFeed !== true && 'lg:text-lg'
-                } mb-5 font-averta-semibold`}
+                } mb-5 quicksand font-bold`}
               >
                 {props.item.name}
               </p>
               <p
                 className={`text-white bg-opacity-100 text-xs ${
                   props.forFeed !== true && 'lg:text-sm'
-                } font-averta-regular`}
+                } quicksand font-normal`}
               >
                 {description}
               </p>
@@ -96,12 +96,12 @@ export default function CuratedCarouselItem(props) {
               <img src={props.item.thumbnail_url} />
             </div>
             <p
-              className={` bg-opacity-100 text-lg text-zinc-600 dark:text-zinc-300 pt-2 ml-2 font-averta-semibold`}
+              className={` bg-opacity-100 text-lg text-zinc-600 dark:text-zinc-300 pt-2 ml-2 quicksand font-bold`}
             >
               {props.item.name}
             </p>
             <p
-              className={` bg-opacity-100 text-sm text-zinc-500 dark:text-zinc-500 pt-2 ml-2 font-averta-regular`}
+              className={` bg-opacity-100 text-sm text-slate-700 dark:text-slate-700 pt-2 ml-2 quicksand font-normal`}
             >
               {description}
             </p>
@@ -126,7 +126,7 @@ export default function CuratedCarouselItem(props) {
                   <p
                     className={`text-white bg-opacity-100 text-xs ${
                       props.forFeed !== true && 'lg:text-sm'
-                    } font-averta-regular`}
+                    } quicksand font-normal`}
                   >
                     {props.item.description}
                   </p>
@@ -141,7 +141,7 @@ export default function CuratedCarouselItem(props) {
             </div>
 
             <p
-              className={` bg-opacity-100 text-md text-zinc-500 dark:text-zinc-300 pt-2  ml-2 max-w-[150px] font-averta-semibold`}
+              className={` bg-opacity-100 text-md text-slate-700 dark:text-zinc-300 pt-2  ml-2 max-w-[150px] quicksand font-bold`}
             >
               {props.item.name}
             </p>

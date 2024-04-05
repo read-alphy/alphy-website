@@ -8,7 +8,8 @@ export default function FooterMenu({
   setOpenFeedbackDialog,
   handleDarkMode,
   tier,
-  theme
+  theme,
+  isClient,
 }) {
   return (
     <div className="">
@@ -27,7 +28,7 @@ export default function FooterMenu({
 dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
 
                   pl-6
-                       text-zinc-500 dark:text-zinc-200
+                       text-slate-700 dark:text-zinc-200
                      flex flex-row py-2 text-sm sm:text-md  dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
                 >
                   <svg
@@ -46,7 +47,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                   </svg>
 
-                  <p className="font-averta-semibold ml-2">Explore</p>
+                  <p className="quicksand  ml-2">Explore</p>
                 </Link>
              
              <Link
@@ -56,7 +57,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                         setCollapsed(true)
                         }
                     }}
-                    className={`  w-full pl-6 my-3 flex flex-row text-sm sm:text-md  text-zinc-500 dark:text-zinc-300 hover:text-zinc-500 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
+                    className={`  w-full pl-6 my-3 flex flex-row text-sm sm:text-md  text-slate-700 dark:text-zinc-300 hover:text-slate-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
                     >
                     <svg
                         className="mr-1 mt-0.5 feather feather-message-square"
@@ -72,7 +73,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                     >
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
-                    <p className="font-averta-semibold text-sm  ml-2">Arcs</p>
+                    <p className="quicksand  text-sm  ml-2">Arcs</p>
                     </Link>
 
                     <div className="flex w-full border-b border-gray-100 dark:border-zinc-700"></div>
@@ -85,14 +86,14 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
         <div className="mb-6  flex flex-row w-full pl-6 ">
           <p className="text-indigo-400 text-md  ">
             <VerifiedIcon fontSize="small" className="text-indigo-400 " />
-            <span className="mt-1 font-averta-semibold ml-2">Premium</span>
+            <span className="mt-1 quicksand  ml-2">Premium</span>
           </p>
         </div>
       )}
 
       {loggedIn ? (
         <Link
-          className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6  py-2 flex flex-row "
+          className="text-slate-700 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6  py-2 flex flex-row "
           href="/account"
         >
           <svg
@@ -110,11 +111,11 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
             />
           </svg>
 
-          <span className="font-averta-semibold ml-2">My Plan</span>
+          <span className="quicksand  ml-2">My Plan</span>
         </Link>
       ) : (
         <Link
-          className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 flex flex-row py-2 "
+          className="text-slate-700 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 flex flex-row py-2 "
           href="/plans"
         >
           {' '}
@@ -132,11 +133,11 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
               d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
             />
           </svg>
-          <span className="font-averta-semibold ml-2">Pricing</span>
+          <span className="quicksand  ml-2">Pricing</span>
         </Link>
       )}
-  
-     {/* <div className="pl-6  py-2 text-sm cursor-pointer text-zinc-500 dark:text-zinc-300">
+  {isClient &&
+     <div className="pl-6  py-2 text-sm cursor-pointer text-slate-700 dark:text-zinc-300">
         {theme ==='light' ? (
           <div onClick={handleDarkMode} className=" flex flex-row">
             <svg
@@ -161,7 +162,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
-            <p className=" pt-0.5  font-averta-semibold ml-2 ">Light </p>
+            <span className=" pt-0.5  quicksand  ml-2 ">Light </span>
           </div>
         ) : (
           <div onClick={handleDarkMode} className="flex flex-row">
@@ -179,13 +180,15 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
             >
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
-            <p className=" pt-0.5  font-averta-semibold  ml-2">Dark</p>
+            <span className=" pt-0.5  quicksand   ml-2">Dark</span>
           </div>
         )}
-      </div>  */}
+      </div>
+    }
+
       <div className="py-2  pl-6 ">
         <button
-          className="text-zinc-500 flex flex-row dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"
+          className="text-slate-700 flex flex-row dark:text-zinc-300 text-sm  quicksand   w-full cursor-pointer w-[120px]"
           onClick={() => setOpenFeedbackDialog(true)}
         >
           <svg
@@ -203,12 +206,12 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
             />
           </svg>
 
-          <span className="ml-2 font-averta-semibold">Reach Us</span>
+          <span className="ml-2 quicksand ">Reach Us</span>
         </button>
       </div>
       <div className="  pl-6 ">
         <Link
-          className="text-zinc-500 dark:text-zinc-300 text-sm font-averta-semibold   my-3  flex flex-row w-full cursor-pointer w-[120px]"
+          className="text-slate-700 dark:text-zinc-300 text-sm quicksand    my-3  flex flex-row w-full cursor-pointer w-[120px]"
           href="/#about "
         >
           <svg
@@ -226,28 +229,28 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
             />
           </svg>
 
-          <span className="ml-2 font-averta-semibold">FAQ</span>
+          <span className="ml-2 quicksand ">FAQ</span>
         </Link>
         {
   <Link
-          className="text-zinc-500 dark:text-zinc-300 text-sm w-full cursor-pointer w-full flex flex-row py-2 "
+          className="text-slate-700 dark:text-zinc-300 text-sm w-full cursor-pointer w-full flex flex-row py-2 "
           href="/blog"
         >
  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"  className="w-5 h-5 mr-1">
   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
 </svg>
 
-<span className="font-averta-semibold ml-2">Blog</span>
+<span className="quicksand  ml-2">Blog</span>
  </Link>
  }
       </div>
 
       <div className="pl-6 py-2 flex flex-row">
         <Link
-          className="text-zinc-500 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] font-averta-semibold"
+          className="text-slate-700 dark:text-zinc-300 text-sm   w-full cursor-pointer w-[120px] quicksand"
           href="/privacypolicy"
         >
-          Privacy Policy
+         <span className="quicksand"> Privacy Policy</span>
         </Link>
       </div>
 
@@ -256,7 +259,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
           <div className="flex w-full border-b border-gray-100 dark:border-zinc-700"></div>
           <div className="flex flex-row pl-6 mt-2">
             <button
-              className="text-zinc-500 dark:text-zinc-300 text-sm cursor-pointer font-averta-semibold flex flex-row"
+              className="text-slate-700 dark:text-zinc-300 text-sm cursor-pointer quicksand  flex flex-row"
               onClick={() => handleSignout()}
             >
               <svg
@@ -273,7 +276,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
                   d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
                 />
               </svg>
-              <p className="ml-2">Log Out</p>
+              <p className="ml-2 quicksand  text-slate-800 dark:text-zinc-300">Log Out</p>
             </button>
           </div>
         </div>

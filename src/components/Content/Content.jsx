@@ -17,6 +17,7 @@ import dynamic from 'next/dynamic'
 const ReadComponent = dynamic(() => import('./Read/ReadComponent'), {
   ssr: false,
 })
+const Clip = dynamic(() => import('./Clip/ClipMain'), { ssr: false })
 const Sandbox = dynamic(() => import('./Sandbox/Sandbox'), { ssr: false })
 const HeaderArea = dynamic(() => import('./Read/HeaderArea'), { ssr: false })
 
@@ -57,6 +58,7 @@ export default function Content({
   const [modelName, setModelName] = useState('')
   const [languages, setLanguages] = useState([])
   const [showScrollBackButton, setShowScrollBackButton] = useState(false)
+  
 
   const [mainPopoverOpen, setMainPopoverOpen] = useState(false)
   const [mainPopoverOpenSmall, setMainPopoverOpenSmall] = useState(false)
@@ -64,6 +66,7 @@ export default function Content({
   const [summaryArray, setSummaryArray] = useState([])
   const [showYouTubeFrame, setShowYouTubeFrame] = useState(false)
   const [isPastMainPopoverOpenThreshold, setIsPastMainPopoverOpenThreshold] =useState(false)
+  
 
     useEffect(() => {
 
@@ -77,7 +80,7 @@ export default function Content({
   const [inputValue, setInputValue] = useState('')
 
   const [highlightClass, setHighlightClass] = useState('')
-
+  const [showClip, setShowClip] = useState(false)
   const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
   
 
@@ -334,6 +337,7 @@ export default function Content({
       const [hours, minutes, seconds] = formattedTimestamp.split(':')
 
       setTimestamp(hours * 3600 + minutes * 60 + seconds * 1)
+
     } else {
       setTimestamp(Math.floor(event))
     }
@@ -732,6 +736,9 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
 
+
+
+
   return (
     <div
       ref={ref}
@@ -739,6 +746,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
         isSandbox === true ? 'ml-0' : 'md:ml-6'
       }  xl:px-20  3xl:px-40  mt-5 md:mt-0  mx-auto 3xl:mx-0 overflow-x-hidden   md:pt-20 h-full lg:min-h-[100vh] lg:max-h-[100vh] overflow-y-auto`}
     >
+      
       <div
         className={`transition-transform duration-300 ${
           isSandbox
@@ -773,7 +781,15 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           reorderedLanguageCodes={reorderedLanguageCodes}
           isSandbox={isSandbox}
           setIsSandbox={setIsSandbox}
+          showClip={showClip}
+          setShowClip={setShowClip}
         />
+{/* {showClip && (
+<Clip timestamp = {timestamp}
+    data = {data}
+             />
+             )} */}
+
 
         <div className="">
           <div className={`${isSandbox && 'hidden'}`}>
@@ -818,6 +834,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
               currentUser={currentUser}
               requestTranslation={requestTranslation}
               tier={tier}
+          
             />
           </div>
 
@@ -833,6 +850,8 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
             />
           </div>
         </div>
+
+        
       </div>
 
       {basicDataLoaded === true && (

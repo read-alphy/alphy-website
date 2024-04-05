@@ -21,7 +21,8 @@ import { API_URL, STRIPE_PK } from '../constants'
 import getUserMetadata from '../utils/getUserMetadata'
 import { useRouter } from 'next/router';
 import addToUserMetadata from '../utils/addToUserMetadata'
-
+import { ThemeProvider } from "next-themes"
+import {useTheme} from 'next-themes'
 
 
 
@@ -61,6 +62,26 @@ function MyApp({ Component, pageProps }) {
     const [submitLayout, setSubmitLayout] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
     const [sandboxHistoryCalled, setSandboxHistoryCalled] = useState(false)
+    const {theme, setTheme} = useTheme('light')
+
+
+    useEffect(() => {
+    const themeRefreshed = localStorage.getItem('themeRefreshed')
+    if (themeRefreshed !== 'true') {
+      localStorage.setItem('theme', 'light')
+      localStorage.setItem('themeRefreshed', 'true')
+    }
+
+      const storedTheme = localStorage.getItem('theme');
+
+      
+      if (storedTheme!==null) {
+       setTheme(storedTheme);
+      }
+      else {
+        setTheme('light')
+      }
+    }, []);
   
 
   
@@ -370,7 +391,9 @@ return () => {
 <meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of YouTube, Twitter Spaces, and Podcasts. Try Alphy for free!"/>
 
     
-
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap')
+  </style>
    <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, Twitter Spaces, and Podcasts </title>
     
 </Head>
@@ -387,8 +410,10 @@ return () => {
             >
               <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
             </div>
-            
+            <ThemeProvider attribute="class" theme={theme}>
+
     <Component {...pageProps}  {...additionalProps} />
+              </ThemeProvider>
     
     </div>
     
