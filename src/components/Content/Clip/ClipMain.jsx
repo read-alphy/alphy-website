@@ -48,7 +48,7 @@ export default function Clip({ timestamp, data }) {
     setVideoReady(false);
     try {
       const response = await axios.post(
-        `http://35.222.44.57:3001/create_audiogram?start_time=${startTime}&end_time=${endTime}&title=${"title"}&creator_name=${creatorName}&is_preview=${forPreview}`,
+        `http://35.222.44.57:3001/create_audiogram?start_time=${startTime}&end_time=${endTime}&title=${title}&creator_name=${creatorName}&is_preview=${forPreview}`,
         {},
         { responseType: "blob", timeout: 60000 }
       );
