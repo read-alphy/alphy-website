@@ -882,31 +882,22 @@ ol
   flex-direction: column;
   
 }
-.summary-text {
-  font-family:'Quicksand', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-}
-
 .summary-text p,
 li,
 ul,
 span,
 code,
 pre,
-ol {
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  font-weight: 500;
+ol{
+  font-family:'Quicksand', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .summary-text code {
   white-space: pre-wrap;
   padding-left: 10px;
-  font-family: 'Segoe UI', ui-sans-serif, -apple-system, Roboto, Ubuntu,
-    Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:'Quicksand', sans-serif;
 }
 
 .select-option span {
