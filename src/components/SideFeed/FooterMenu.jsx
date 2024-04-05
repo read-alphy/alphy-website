@@ -162,7 +162,7 @@ dark:hover:bg-zinc-700 rounded-sm dark:hover:bg-opacity-50
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
-            <p className=" pt-0.5  quicksand  ml-2 ">Light </p>
+            <span className=" pt-0.5  quicksand font-normal ml-2 font-normal">Light </span>
           </div>
         ) : (
           <div onClick={handleDarkMode} className="flex flex-row">

@@ -32,7 +32,9 @@ export default function Footer({
   
 
   const handleDarkMode = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
+    const newTheme = theme === "dark" ? "light" : "dark"
+    setTheme(newTheme)
+    localStorage.setItem("theme", newTheme)
   }
   useEffect(() => {
     setIsClient(true)
