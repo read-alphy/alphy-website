@@ -354,7 +354,7 @@ export default function ArcMain({
           }`}
         >
           <div className="rounded-lg rounded-t-none shadow-lg">
-            <div className="">
+            <div className="h-screen">
               <SideFeed
               loggedIn = {loggedIn}
               setLoggedIn = {setLoggedIn}
@@ -533,13 +533,13 @@ export default function ArcMain({
           tier === 'premium')) ||
         isEditArc) && (
         <div
-          className={`z-50 absolute bottom-0 w-full flex h-[40px] ${
+          className={`z-50 absolute bottom-10 w-full flex h-[40px] ${
             currentUser ? '' : 'hidden'
           } ${
-            !collapsed  && 'hidden lg:block'
+            !collapsed  && 'hidden lg:flex'
           } lg:bg-transparent dark:lg:bg-transparent`}
         >
-          <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40 pb-10 lg:pb-40 ">
+          <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40  ">
             {isEditArc && !isLoadingSubmit && (
               <Button
                 size={"md"}
@@ -566,7 +566,7 @@ export default function ArcMain({
                     className="flex mx-auto"
                   />
                 ) : (
-                  <div className="pb-6">
+                  <div className="">
                     <SaveIcon className="mr-2 " />
                     {isCreateArc ? 'Create' : 'Save'}
                   </div>

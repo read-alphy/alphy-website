@@ -315,7 +315,7 @@ export default function ArchipelagoCreation({
                   value={archipelagoTitle}
                   placeholder="Set a title..."
                   onChange={event => setArchipelagoTitle(event.target.value)}
-                  className="w-full  quicksand font-semibold text-md px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-200 dark:border-zinc-700 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"
+                  className="w-full  quicksand font-normal text-sm px-2 h-[50px] bg-white dark:bg-mildDarkMode border border-zinc-200 dark:border-zinc-700 focus:border-greenColor focus:outline-none focus:ring-0 rounded-lg"
                 />
               </div>
 
@@ -325,14 +325,14 @@ export default function ArchipelagoCreation({
                 }}/> */}
             </div>
             <div className="w-full">
-              <p className="text-slate-700 dark:text-zinc-300 mb-2 mt-16 ml-1 quicksand font-semibold">
+              <p className="text-slate-700 dark:text-zinc-300 mb-2 mt-16 ml-1 quicksand font-semibold text-md">
                 Description
               </p>
               <textarea
-                className={`min-h-[120px]  p-2 border rounded-lg quicksand font-semibold bg-white border-zinc-200 dark:border-zinc-700 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`}
+                className={`min-h-[120px]  p-2 border rounded-lg quicksand font-normal bg-white border-zinc-200 dark:border-zinc-700 dark:bg-mildDarkMode resize-none text-sm w-full text-top focus:border-greenColor focus:outline-none focus:ring-0`}
                 value={archipelagoDescription}
                 /* onClick={ () => setEditBasicInfo(true)} */
-                placeholder="Set a description for your archipelago..."
+                placeholder="Set a description for your arc..."
                 onBlur={() => setEditBasicInfo(false)}
                 onChange={event =>
                   setArchipelagoDescription(event.target.value)
@@ -359,7 +359,7 @@ export default function ArchipelagoCreation({
               <label
                 className={`${
                   inputValue.length === 0 ? 'pl-6' : ''
-                } quicksand font-semibold  peer-focus:pl-0 text-zinc-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor pt-1 peer-focus:pt-0 `}
+                } quicksand font-normal  peer-focus:pl-0 text-slate-400 flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-greenColor before:border-blue-gray-200 dark:before:border-mildDarkMode dark:after:border-mildDarkMode peer-focus:before:!border-greenColor after:border-blue-gray-200 peer-focus:after:!border-greenColor pt-1 peer-focus:pt-0 `}
               >
                 Search from our database...
               </label>
@@ -518,7 +518,7 @@ export default function ArchipelagoCreation({
             {archipelagoTitle.length > 0 ? archipelagoTitle : 'Arc'}
           </p>
           {archipelagoDescription.length > 0 && (
-            <p className="mt-2 ml-2 mb-5 text-md text-zinc-800 dark:text-zinc-200 opacity-80 quicksand font-semibold">
+            <p className="mt-2 ml-2 mb-5 text-md text-slate-600 dark:text-zinc-200 opacity-80 quicksand font-normal">
               {archipelagoDescription}
             </p>
           )}

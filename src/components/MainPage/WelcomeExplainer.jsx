@@ -146,7 +146,7 @@ useEffect (() => {
             ) : (
               <Link
                 href="/explore"
-                className="rounded-lg  flex flex-row text-zinc-800  text-center text-md sm:text-md bg-none dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 quicksand "
+                className="rounded-lg  flex flex-row text-zinc-800  text-center text-md sm:text-md bg-none dark:border-zinc-500 dark:text-zinc-300 ml-4  px-4 py-3 quicksand hover:translate-x-1 transform drop-shadow-sm px-2 sm:px-6  py-3  transition duration-300  ease-in-out"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -169,12 +169,12 @@ useEffect (() => {
             )}
           </div>
 
-          <div className=" mt-20  text-zinc-600 dark:text-zinc-300 text-lg flex flex-col">
+          <div className=" mt-20  text-slate-600 dark:text-zinc-300 text-lg flex flex-col">
             <div className="flex flex-col sm:flex-row ">
               <span className="quicksand">Transcribe and use AI on more than</span>
               <span
                 onClick={() => scrollToLanguages()}
-                className="text-blue-500 dark:text-blue-400 cursor-pointer ml-1 quicksand"
+                className="text-blue-500 hover:text-sky-500 dark:text-blue-400 cursor-pointer ml-1 quicksand"
               >
                 {' '}
                 40 languages
@@ -194,7 +194,7 @@ useEffect (() => {
 
           
 
-          <div className="flex flex-col text-zinc-700 dark:text-zinc-300 text-lg mt-16">
+          <div className="flex flex-col text-slate-700 dark:text-zinc-300 text-lg mt-16">
             
             <div className="flex flex-row  mx-auto w-full mt-4       sm:mt-8 sm:gap-y-4 opacity-80 overflow-scroll">
               { <div className="hidden sm:block grid grid-rows-3 items-center text-center sm:mr-4   mx-2  ">
@@ -299,7 +299,7 @@ useEffect (() => {
                 href="https://chrome.google.com/webstore/detail/alphy/eifpdfgnodpopimeakmdebmfglimkdno "
                 target="_blank"
               >
-                <button className=" rounded-lg flex flex-row normal-case bg-white dark:bg-mildDarkMode items-center border border-zinc-700 dark:border-zinc-700  px-2 py-3 w-[300px]">
+                <button className=" rounded-lg flex flex-row normal-case bg-white dark:bg-mildDarkMode items-center border border-slate-700 dark:border-slate-700  px-2 py-3 w-[300px]">
                   <div className="mx-auto flex flex-row items-center">
                     <Image src={ChromeIcon} width={40} 
                     alt="Chrome Icon"

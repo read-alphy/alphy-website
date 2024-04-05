@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Image from 'next/image'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
@@ -238,6 +238,7 @@ export default function Footer({
         fullWidth={true}
         open={openFeedbackDialog}
         onClose={() => setOpenFeedbackDialog(false)}
+        
       >
         <div className="dark:bg-mildDarkMode">
           <FeedbackForm />

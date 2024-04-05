@@ -553,7 +553,7 @@ export default function ArchipelagoChat({
                 type="text"
                 id="questionAnswering"
                 placeholder="Type your question here..."
-                className="m-0 w-full  quicksand font-bold text-slate-800 dark:text-zinc-300 dark:placeholder:text-slate-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]"
+                className="m-0 w-full  quicksand font-normal text-slate-800 dark:text-zinc-300 dark:placeholder:text-slate-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:outline-none focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]"
               />
               {inputValue.length > 0 ? (
                 <div

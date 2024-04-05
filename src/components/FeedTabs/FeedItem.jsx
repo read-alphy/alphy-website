@@ -264,7 +264,7 @@ export default function FeedItem ({
                     {item.creator_name}
                     {item.source !== undefined && item.source.creator_name}
                   </div>
-                  <div className="quicksand font-bold text-zinc-400 dark:text-zinc-300 flex flex-row">
+                  <div className="quicksand font-bold text-slate-400 dark:text-zinc-300 flex flex-row">
                     {item.summaries !== undefined &&
                       item.summaries.map((summary, index) => (
                         <div

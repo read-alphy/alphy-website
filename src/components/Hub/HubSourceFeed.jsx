@@ -329,7 +329,7 @@ function HubSourceFeed(props) {
                   setSearch(e.target.value)
                 }}
                 placeholder="Type in a key word or paste a link..."
-                className=" pl-10 peer min-w-[320px] max-w-[320px] quicksand font-normal xs:min-w-[380px] sm:min-w-[400px] xl:min-w-[600px] h-full border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700  outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-blue-000 dark:focus:border-blue-000"
+                className=" pl-10 peer min-w-[320px] max-w-[320px] quicksand font-normal xs:min-w-[380px] sm:min-w-[400px] xl:min-w-[600px] h-full border-zinc-300 bg-white dark:bg-mildDarkMode dark:border-zinc-700 text-blue-gray-700  outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] focus:border-sky-300 dark:focus:border-zinc-500"
               />
               <div className="cursor-pointer absolute inset-y-0 left-0 flex items-center pl-3 ">
                 <svg

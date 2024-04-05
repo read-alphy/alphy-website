@@ -26,7 +26,7 @@ export default function Toolbox({
     <div className="w-full  max-w-[800px] ">
       {/*       <div className="border-b border-gray-100 dark:border-zinc-700 mx-auto items-center flex mb-5 pt-6 dark:opacity-40"></div>
 
-      <p className="text-lg mt-6 text-zinc-500 dark:text-zinc-300 ">
+      <p className="text-lg mt-6 text-slate-500 dark:text-zinc-300 ">
         One-click Generation
       </p> */}
 
@@ -47,16 +47,16 @@ export default function Toolbox({
             }}
             className={` p-4 pb-2  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'custom' && ''
-            }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col   max-w-[350px] sm:max-w-[240px]   `}
+            }  cursor-pointer border border-slate-100 bg-gradient-to-tr from-slate-50 via-indigo-100 to-slate-100 dark:bg-gradient-to-tr dark:from-stone-900 dark:via-zinc-900 dark:to-stone-950 drop-shadow-sm text-slate-700 dark:text-zinc-300 dark:text-zinc-200 dark:border-zinc-500  flex flex-col   max-w-[350px] sm:max-w-[240px]   `}
           >
             <div className="flex flex-row">
               {inputMessages.find(obj => obj.command_type === 'custom').icon}{' '}
             </div>
 
-            <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
+            <p className="row-span-1 text-md quicksand font-bold text-slate-700  dark:text-zinc-300 ">
               {inputMessages.find(obj => obj.command_type === 'custom').title}{' '}
             </p>
-            <p className="row-span-1 text-sm font-averta-regular text-zinc-500 dark:text-zinc-400 dark:text-zinc-400 ">
+            <p className="row-span-1 text-sm quicksand font-normal text-slate-500 dark:text-zinc-400 dark:text-zinc-400 ">
               {inputMessages.find(obj => obj.command_type === 'custom').message}{' '}
             </p>
 
@@ -86,20 +86,20 @@ export default function Toolbox({
             }}
             className={` p-4 pb-2  h-full grid grid-row-3  normal-case rounded-lg ${
               selectedTool !== 'twitter_thread' && ''
-            }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[350px]  sm:max-w-[240px]   `}
+            }  cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode drop-shadow-sm text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-200 dark:border-zinc-800  flex flex-col  max-w-[350px]  sm:max-w-[240px]   `}
           >
             {
               inputMessages.find(obj => obj.command_type === 'twitter_thread')
                 .icon
             }
 
-            <p className="row-span-1 text-md font-averta-semibold text-zinc-600  dark:text-zinc-300 ">
+            <p className="row-span-1 text-md quicksand font-bold text-slate-700  dark:text-zinc-300 ">
               {
                 inputMessages.find(obj => obj.command_type === 'twitter_thread')
                   .title
               }
             </p>
-            <p className="row-span-1 text-sm font-averta-regular text-zinc-500 dark:text-zinc-400 dark:text-zinc-400 ">
+            <p className="row-span-1 text-sm quicksand font-normal text-slate-500 dark:text-zinc-400 dark:text-zinc-400 ">
               {
                 inputMessages.find(obj => obj.command_type === 'twitter_thread')
                   .message
@@ -122,7 +122,7 @@ export default function Toolbox({
                   selectedTool !== 'twitter_thread'
                     ? 'opacity-0'
                     : 'opacity-100'
-                }  transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                }  transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
                   <Spinner
@@ -149,18 +149,18 @@ export default function Toolbox({
             onClick={() =>
               setSelectedTool(selectedTool === 'blog_post' ? '' : 'blog_post')
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'blog_post' && ''
             }`}
           >
             {inputMessages.find(obj => obj.command_type === 'blog_post').icon}{' '}
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'blog_post')
                   .title
               }{' '}
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(obj => obj.command_type === 'blog_post')
                   .message
@@ -180,7 +180,7 @@ export default function Toolbox({
                 disabled={selectedTool !== 'blog_post'}
                 className={`${
                   selectedTool !== 'blog_post' ? 'opacity-0' : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
                   <Spinner
@@ -210,7 +210,7 @@ export default function Toolbox({
                   : 'space_description_generator'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'space_description_generator' && ''
             }`}
           >
@@ -220,14 +220,14 @@ export default function Toolbox({
               ).icon
             }
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'space_description_generator'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'space_description_generator'
@@ -253,7 +253,7 @@ export default function Toolbox({
                   selectedTool !== 'space_description_generator'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
                   <Spinner
@@ -284,7 +284,7 @@ export default function Toolbox({
                   : 'executive_brief_composer'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'executive_brief_composer' && ''
             }`}
           >
@@ -294,14 +294,14 @@ export default function Toolbox({
               ).icon
             }
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'executive_brief_composer'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'executive_brief_composer'
@@ -327,7 +327,7 @@ export default function Toolbox({
                   selectedTool !== 'executive_brief_composer'
                     ? 'opacity-0'
                     : 'opacity-100'
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
                   <Spinner
@@ -354,7 +354,7 @@ export default function Toolbox({
             onClick={() =>
               setSelectedTool(selectedTool === 'audiogram' ? '' : 'audiogram')
             }
-            className={`p-4 pb-2  h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2  h-full h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'audiogram' && ''
             }`}
           >
@@ -371,13 +371,13 @@ export default function Toolbox({
                 </p>
               </div>
             </div>
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'audiogram')
                   .title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(obj => obj.command_type === 'audiogram')
                   .message
@@ -399,7 +399,7 @@ export default function Toolbox({
                   selectedTool !== 'audiogram' ? 'opacity-0' : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -449,7 +449,7 @@ export default function Toolbox({
                   : 'investment_analysis'
               )
             }
-            className={` p-4 pb-2 h-full pb-2 grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={` p-4 pb-2 h-full pb-2 grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'investment_analysis' && ''
             }`}
           >
@@ -471,14 +471,14 @@ export default function Toolbox({
               </div>
             </div>
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'investment_analysis'
                 ).title
               }{' '}
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'investment_analysis'
@@ -506,7 +506,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -542,10 +542,10 @@ export default function Toolbox({
 
         {/* QUOTE GETTER */}
         {/* <div className={`${selectedTool === "quote_getter" && "animated-gradient-border rounded-lg "} flex flex-col h-[210px] p-0.5  transition duration-300 ease-in-out  `}>
-    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${selectedTool !== "quote_getter" && ""}`}>
+    <div onClick={() => setSelectedTool("quote_getter")} className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${selectedTool !== "quote_getter" && ""}`}>
         <FormatQuoteIcon className="row-span-1" fontSize="medium" sx={{ color: "#86198f" }}/>
-        <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">Quotes</p>
-        <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">Get me quotes from the conversation about the talking points I specify.</p>
+        <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">Quotes</p>
+        <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">Get me quotes from the conversation about the talking points I specify.</p>
     </div>
 </div> */}
 
@@ -564,7 +564,7 @@ export default function Toolbox({
                   : 'newsletter_generator'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'newsletter_generator' && ''
             }`}
           >
@@ -587,14 +587,14 @@ export default function Toolbox({
               </div>
             </div>
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'newsletter_generator'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'newsletter_generator'
@@ -622,7 +622,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -671,7 +671,7 @@ export default function Toolbox({
                   : 'highlight_generator'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'highlight_generator' && ''
             }`}
           >
@@ -692,14 +692,14 @@ export default function Toolbox({
                 </p>
               </div>
             </div>
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'highlight_generator'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'highlight_generator'
@@ -727,7 +727,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -774,7 +774,7 @@ export default function Toolbox({
                 selectedTool === 'youtube_shorts' ? '' : 'youtube_shorts'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'youtube_shorts' && ''
             }`}
           >
@@ -794,13 +794,13 @@ export default function Toolbox({
                 </p>
               </div>
             </div>
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(obj => obj.command_type === 'youtube_shorts')
                   .title
               }{' '}
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(obj => obj.command_type === 'youtube_shorts')
                   .message
@@ -827,7 +827,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -876,7 +876,7 @@ export default function Toolbox({
                   : 'video_topic_generator'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_topic_generator' && ''
             }`}
           >
@@ -898,10 +898,10 @@ export default function Toolbox({
               </div>
             </div>
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               YouTube Video Ideas
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'video_topic_generator'
@@ -931,7 +931,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -978,7 +978,7 @@ export default function Toolbox({
                 selectedTool === 'video_description' ? '' : 'video_description'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'video_description' && ''
             }`}
           >
@@ -1000,14 +1000,14 @@ export default function Toolbox({
               </div>
             </div>
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'video_description'
                 ).title
               }{' '}
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'video_description'
@@ -1035,7 +1035,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -1084,7 +1084,7 @@ export default function Toolbox({
                   : 'space_idea_generator'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'space_idea_generator' && ''
             }`}
           >
@@ -1107,14 +1107,14 @@ export default function Toolbox({
               </div>
             </div>
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'space_idea_generator'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'space_idea_generator'
@@ -1142,7 +1142,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -1191,7 +1191,7 @@ export default function Toolbox({
                   : 'keyword_identifier'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'keyword_identifier' && ''
             }`}
           >
@@ -1213,14 +1213,14 @@ export default function Toolbox({
                 </p>
               </div>
             </div>
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'keyword_identifier'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'keyword_identifier'
@@ -1248,7 +1248,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -1295,7 +1295,7 @@ export default function Toolbox({
                 selectedTool === 'get_actionables' ? '' : 'get_actionables'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'get_actionables' && ''
             }`}
           >
@@ -1317,14 +1317,14 @@ export default function Toolbox({
                 </p>
               </div>
             </div>
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'get_actionables'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'get_actionables'
@@ -1352,7 +1352,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -1399,7 +1399,7 @@ export default function Toolbox({
                 selectedTool === 'generate_quizzes' ? '' : 'generate_quizzes'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'generate_quizzes' && ''
             }`}
           >
@@ -1421,14 +1421,14 @@ export default function Toolbox({
               </div>
             </div>
 
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'generate_quizzes'
                 ).title
               }{' '}
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'generate_quizzes'
@@ -1456,7 +1456,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 }  ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg
@@ -1505,7 +1505,7 @@ export default function Toolbox({
                   : 'investment_insight_extractor'
               )
             }
-            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-zinc-600 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
+            className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 dark:text-zinc-300 dark:bg-mildDarkMode dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col  max-w-[350px] sm:max-w-[240px]   ${
               selectedTool !== 'investment_insight_extractor' && ''
             }`}
           >
@@ -1527,14 +1527,14 @@ export default function Toolbox({
                 </p>
               </div>
             </div>
-            <p className="text-md font-averta-semibold text-zinc-600 dark:text-zinc-300">
+            <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'investment_insight_extractor'
                 ).title
               }
             </p>
-            <p className="text-sm font-averta-regular text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
               {
                 inputMessages.find(
                   obj => obj.command_type === 'investment_insight_extractor'
@@ -1565,7 +1565,7 @@ export default function Toolbox({
                     : 'opacity-100'
                 } ${
                   tier !== 'premium' && 'flex flex-row opacity-50 '
-                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800  text-zinc-700 font-averta-regular normal-case`}
+                } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {tier !== 'premium' && (
                   <svg

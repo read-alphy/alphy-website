@@ -271,13 +271,13 @@ const [mobileScreen, setMobileScreen] = useState(false)
               <div className="flex flex-col w-full justify-start px-2 m">
                 <Link
                   href="/submit"
-                  className={`text-slate-700  drop-shadow-lg px-2 py-2 transition duration-300 ease-in-out    text-sm sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-100 via-blue-100 to-sky-200   text-slate-700 dark:text-slate-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
+                  className={`text-slate-700  drop-shadow-lg px-2 py-2 transition duration-300 ease-in-out    text-sm sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-200 via-indigo-100 to-sky-200   text-slate-700 dark:text-slate-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 mr-3">
   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 </svg>
 
-                  <p className="quicksand font-semibold font-bold">New</p>
+                  <p className="quicksand  font-extrabold">New</p>
                 </Link>
 
                 <div className="flex flex-col w-full justify-start px-3 mt-2 ">

@@ -40,7 +40,7 @@ export default function InputArea({
       </p>
       <textarea
         ref={textareaRef}
-        className="  text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-zinc-900  dark:border-zinc-700 rounded-lg w-[100%] mt-4 md:mx-0  
+        className="  focus:outline-none p-4 text-zinc-700 text-sm md:text-md dark:text-zinc-200 textarea overflow-y-scroll  focus-glow-effect  dark:bg-zinc-900  dark:border-zinc-700 rounded-lg w-[100%] mt-4 md:mx-0  
         margin-auto min-h-[20vh] max-h-[400px] sm:min-h-[10vh] sm:max-h-[300px]  resize-none dark:focus:border-zinc-700 focus:border-zinc-200 border border-zinc-200 placeholder:text-sm"
         onInput={resizeTextarea}
         onChange={resizeTextarea}

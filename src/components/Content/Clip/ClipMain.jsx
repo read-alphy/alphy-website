@@ -91,7 +91,7 @@ export default function Clip({ timestamp, data }) {
   
 
   return (
-    <div>
+    <div className="max-w-[1000px]">
       {dataReady && (
         <div>
           {videoBlob === null && videoLoading === false ? (

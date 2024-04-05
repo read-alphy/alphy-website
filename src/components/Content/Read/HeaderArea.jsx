@@ -48,6 +48,8 @@ export default function HeaderArea({
   reorderedLanguageCodes,
   isSandbox,
   setIsSandbox,
+  showClip,
+  setShowClip,
 }) {
   const ITEM_HEIGHT = 48
   const ITEM_PADDING_TOP = 8
@@ -533,6 +535,17 @@ export default function HeaderArea({
               </p>
             </button>
           )}
+
+          <button
+              className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 bg-transparent w-[220px] justify-center"
+              onClick={() => setShowClip(!showClip)}
+            >
+              
+          
+              <p className=" text-[16px] quicksand font-normal text-slate-700 dark:text-slate-700 ">
+                Show clip (VIP)
+              </p>
+            </button>
         </div>
         <p className="max-w-[800px] mt-5 border border-zinc-100 dark:border-zinc-700"></p>
       </div>

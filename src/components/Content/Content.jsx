@@ -80,7 +80,7 @@ export default function Content({
   const [inputValue, setInputValue] = useState('')
 
   const [highlightClass, setHighlightClass] = useState('')
-
+  const [showClip, setShowClip] = useState(false)
   const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
   
 
@@ -761,11 +761,15 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           reorderedLanguageCodes={reorderedLanguageCodes}
           isSandbox={isSandbox}
           setIsSandbox={setIsSandbox}
+          showClip={showClip}
+          setShowClip={setShowClip}
         />
-
+{showClip && (
 <Clip timestamp = {timestamp}
     data = {data}
              />
+             )}
+
 
         <div className="">
           <div className={`${isSandbox && 'hidden'}`}>
