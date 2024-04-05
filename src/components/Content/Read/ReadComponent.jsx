@@ -431,7 +431,7 @@ export default function ReadComponent({
                   } rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`}
                 >
                   <div className="text-sm font-medium text-center text-slate-700 dark:text-slate-200 dark:border-gray-700 ">
-                    <ul className="flex flex-wrap xl:w-[450px] w-full mx-auto quicksand font-bold	">
+                    <ul className="flex flex-wrap xl:w-[500px] w-full mx-auto quicksand font-bold	">
                       <li
                         className={`w-1/3 md:w-4/12 ${
                           activeTab === 'tab3'

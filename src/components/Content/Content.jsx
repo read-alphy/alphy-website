@@ -784,11 +784,13 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           showClip={showClip}
           setShowClip={setShowClip}
         />
+
+        {/* 
 {showClip && (
 <Clip timestamp = {timestamp}
     data = {data}
              />
-             )}
+             )} */}
 
 
         <div className="">
@@ -859,7 +861,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           {data !== null && transcript.length === 0 && language === 'en' ? (
             <div className="flex flex-col mb-20 mt-20 ">
               <p className="text-xl text-zinc-500 dark:text-zinc-200  max-w-screen-md mx-auto p-3 text-center">
-                <span className="font-averta-regular">
+                <span className="quicksand ">
                   Alphy is doing its best to process this{' '}
                   {source_type === 'yt' ? 'video' : 'recording'}, it will
                   be ready in a few minutes. We'll send you an email when it's
@@ -883,7 +885,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
               language !== 'en')) && (
             <div className="flex flex-col mb-20 mt-20 ">
               {data !== null && (
-                <p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-regular  max-w-screen-md mx-auto p-3 text-center">
+                <p className="text-xl text-zinc-500 dark:text-zinc-200 quicksand   max-w-screen-md mx-auto p-3 text-center">
                   Alphy is currently working hard to translate this{' '}
                   {source_type === 'yt' ? 'video' : 'recording'} to{' '}
                   {language_codes[language]}. Please come back in a few minutes!
@@ -900,7 +902,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
       )}
       {errorMessage === true && (
         <div className="flex flex-col mb-20 mt-20 ">
-          <p className="text-xl text-zinc-500 dark:text-zinc-200 font-averta-semibold max-w-screen-md mx-auto p-3 text-center">
+          <p className="text-xl text-zinc-500 dark:text-zinc-200 quicksand font-bold max-w-screen-md mx-auto p-3 text-center">
             There was an error with the request :( <br></br>
             <br></br>Please refresh the page and try again. If the issue
             persists, please contact us at support@alphy.app
@@ -912,7 +914,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           onClick={scrollToSavedDepth}
           className={`xl:hidden absolute ${
             showYouTubeFrame ? 'right-24 bottom-8' : 'lg:mb-20 right-5 bottom-5'
-          }  text-zinc-300 dark:text-zinc-600  bg-mildDarkMode dark:bg-green-200 hover:bg-green-200 hover:text-zinc-700 text-white font-averta-semibold text-sm py-2 px-2 rounded-full transition ease-in-out duration-300 hover:scale-105  `}
+          }  text-zinc-300 dark:text-zinc-600  bg-mildDarkMode dark:bg-green-200 hover:bg-green-200 hover:text-zinc-700 text-white quicksand font-bold text-sm py-2 px-2 rounded-full transition ease-in-out duration-300 hover:scale-105  `}
         >
           {showYouTubeFrame ? (
             <p>SCROLL BACK</p>

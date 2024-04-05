@@ -532,7 +532,7 @@ export default function HeaderArea({
             </button>
           )}
 
-          { <button
+         {/*  { <button
               className="cursor-pointer flex flex-row gap-2 rounded-lg 	px-2 py-2 border border-slate-400 ml-4 w-[220px] justify-center"
               onClick={() => setShowClip(!showClip)}
             >
@@ -544,7 +544,7 @@ export default function HeaderArea({
               <p className=" text-[15px] quicksand font-normal text-slate-700 dark:text-slate-700 ">
                 Create a clip
               </p>
-            </button> }
+            </button> } */}
         </div>
         <p className="max-w-[800px] mt-5 border border-zinc-100 dark:border-zinc-700"></p>
       </div>
