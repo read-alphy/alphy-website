@@ -23,7 +23,7 @@ function Auth({
   tier,
   setShowWelcomeForm,
   showWelcomeForm,
-  userArchipelagos,
+  userArcs,
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
@@ -108,7 +108,7 @@ setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               showWelcomeForm={showWelcomeForm}
               setShowWelcomeForm={setShowWelcomeForm}
-              userArchipelagos={userArchipelagos}
+              userArcs={userArcs}
               sandboxHistory={sandboxHistory}
               setSandboxHistory={setSandboxHistory}
             />

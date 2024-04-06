@@ -9,7 +9,7 @@ export default function Custom404({
   tier,
   setShowWelcomeForm,
   showWelcomeForm,
-  userArchipelagos,
+  userArcs,
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
@@ -44,7 +44,7 @@ export default function Custom404({
       tier={tier}
       setShowWelcomeForm={setShowWelcomeForm}
       showWelcomeForm={showWelcomeForm}
-      userArchipelagos={userArchipelagos}
+      userArcs={userArcs}
       sandboxHistory={sandboxHistory}
       setSandboxHistory={setSandboxHistory}
       loggedIn={loggedIn}

@@ -14,11 +14,11 @@ export default function HubFeedItem ({
   myBookmarks,
   currentUser,
   sideFeed,
-  fromArchipelago,
-  dataArchipelago,
-  setDataArchipelago,
-  sourceIDsArchipelago,
-  setSourceIDsArchipelago,
+  fromArc,
+  dataArc,
+  setDataArc,
+  sourceIDsArc,
+  setSourceIDsArc,
   forDetail,
 }){
   const source_id = item !== undefined ? item.source_id : ''

@@ -21,11 +21,11 @@ export default function FeedItem ({
   myBookmarks,
   currentUser,
   sideFeed,
-  fromArchipelago,
-  dataArchipelago,
-  setDataArchipelago,
-  sourceIDsArchipelago,
-  setSourceIDsArchipelago,
+  fromArc,
+  dataArc,
+  setDataArc,
+  sourceIDsArc,
+  setSourceIDsArc,
   forDetail,
   forCreationPool,
 }) {
@@ -138,7 +138,7 @@ export default function FeedItem ({
   }
 
   const handleClick = e => {
-    if (fromArchipelago !== undefined && forDetail !== true) {
+    if (fromArc !== undefined && forDetail !== true) {
       e.preventDefault() // This will prevent the link from navigating
     }
   }
@@ -151,46 +151,46 @@ export default function FeedItem ({
             <div className="flex w-full ">
               <div
                 className={`grid ${
-                  fromArchipelago === 'archipelago' && forDetail !== true
+                  fromArc === 'arc' && forDetail !== true
                     ? 'grid-cols-3 sm:grid-cols-4 cursor-default'
                     : 'grid-cols-3'
                 } ${
-                  fromArchipelago === undefined &&
+                  fromArc === undefined &&
                   'lg:grid-cols-2 sm:hover:scale-10 transform sm:hover:translate-x-2'
                 } flex ${
-                  ((dataArchipelago !== undefined &&
-                    dataArchipelago.includes(item) &&
-                    fromArchipelago === 'search') ||
-                    (sourceIDsArchipelago !== undefined &&
-                      sourceIDsArchipelago.includes(item.source_id) &&
+                  ((dataArc !== undefined &&
+                    dataArc.includes(item) &&
+                    fromArc === 'search') ||
+                    (sourceIDsArc !== undefined &&
+                      sourceIDsArc.includes(item.source_id) &&
                       forCreationPool !== true)) &&
                   'border-4 border-greenColor'
                 } flex-row items-center justify-start cursor-pointer w-full h-full  p-2 rounded-md mb-2  transition duration-200 ease-in-out  mr-auto ml-auto`}
                 onClick={() => {
                   // navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
 
-                  if (fromArchipelago === undefined) {
+                  if (fromArc === undefined) {
                     setCollapsed(true)
                   } else {
-                    if (fromArchipelago === 'search') {
+                    if (fromArc === 'search') {
                       if (
-                        dataArchipelago.includes(item) ||
-                        sourceIDsArchipelago.includes(item.source_id)
+                        dataArc.includes(item) ||
+                        sourceIDsArc.includes(item.source_id)
                       ) {
-                        const newArchipelagoArray = dataArchipelago.filter(
+                        const newArcArray = dataArc.filter(
                           element => element.source_id !== item.source_id
                         )
-                        setDataArchipelago(newArchipelagoArray)
+                        setDataArc(newArcArray)
 
-                        const newSourceIDArray = sourceIDsArchipelago.filter(
+                        const newSourceIDArray = sourceIDsArc.filter(
                           element => element !== item.source_id
                         )
 
-                        setSourceIDsArchipelago(newSourceIDArray)
+                        setSourceIDsArc(newSourceIDArray)
                       } else {
-                        setDataArchipelago([...dataArchipelago, item])
-                        setSourceIDsArchipelago([
-                          ...sourceIDsArchipelago,
+                        setDataArc([...dataArc, item])
+                        setSourceIDsArc([
+                          ...sourceIDsArc,
                           item.source_id,
                         ])
                       }
@@ -204,7 +204,7 @@ export default function FeedItem ({
                     router.pathname.includes('arc/createArc') ||
                     router.pathname.includes('arc/editArc')
                       ? `${
-                          fromArchipelago === 'archipelago'
+                          fromArc === 'arc'
                             ? 'min-w-[80px]'
                             : 'min-w-[80px]'
                         }`
@@ -237,17 +237,17 @@ export default function FeedItem ({
 
                 <div
                   className={`${
-                    fromArchipelago === 'archipelago'
+                    fromArc === 'arc'
                       ? 'col-span-1 sm:col-span-2'
                       : 'col-span-2'
-                  } ${!fromArchipelago && 'lg:col-span-1'}  ${
+                  } ${!fromArc && 'lg:col-span-1'}  ${
                     window.innerWidth > 400 && window.innerWidth < 500 && 'ml-5'
                   } xs:ml-0 sm:ml-0 justify-start text-xs`}
                 >
                   {(item.summaries !== undefined &&
                     item.summaries[0] !== undefined &&
                     item.summaries[0].complete === true) ||
-                  (fromArchipelago === 'archipelago' &&
+                  (fromArc === 'arc' &&
                     item.source !== undefined &&
                     item.source.complete === true) ? null : (
                     <div className=" text-purpleLike dark:text-zinc-300 quicksand font-bold">
@@ -281,21 +281,21 @@ export default function FeedItem ({
                   </div>
                 </div>
                 <div className="col-span-1">
-                  {fromArchipelago === 'archipelago' && forDetail !== true && (
+                  {fromArc === 'arc' && forDetail !== true && (
                     <div className="justify-center items-center flex">
                       <RemoveCircleOutlineIcon
                         className="cursor-pointer"
                         onClick={() => {
-                          const newArchipelagoArray = dataArchipelago.filter(
+                          const newArcArray = dataArc.filter(
                             element => element.source_id !== item.source_id
                           )
-                          setDataArchipelago(newArchipelagoArray)
+                          setDataArc(newArcArray)
 
-                          const newSourceIDArray = sourceIDsArchipelago.filter(
+                          const newSourceIDArray = sourceIDsArc.filter(
                             element => element !== item.source_id
                           )
 
-                          setSourceIDsArchipelago(newSourceIDArray)
+                          setSourceIDsArc(newSourceIDArray)
                         }}
                       />
                     </div>

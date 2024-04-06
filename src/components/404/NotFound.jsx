@@ -15,7 +15,7 @@ export default function NotFound({
   tier,
   setShowWelcomeForm,
   showWelcomeForm,
-  userArchipelagos,
+  userArcs,
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
@@ -115,7 +115,7 @@ export default function NotFound({
               currentUser={currentUser}
               showWelcomeForm={showWelcomeForm}
               setShowWelcomeForm={setShowWelcomeForm}
-              userArchipelagos={userArchipelagos}
+              userArcs={userArcs}
             />
           
         </div>

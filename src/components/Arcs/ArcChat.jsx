@@ -24,14 +24,14 @@ import RefreshIcon from '@mui/icons-material/Refresh'
 import { API_HOST, API_SSL } from '../../constants'
 import Image from 'next/image'
 
-export default function ArchipelagoChat({
+export default function ArcChat({
   data,
   isVisible,
   tier,
   handleVisibility,
   currentUser,
-  dataArchipelago,
-  setDataArchipelago,
+  dataArc,
+  setDataArc,
   collapsed,
 }) {
   const [inputValue, setInputValue] = useState('')
@@ -88,13 +88,13 @@ export default function ArchipelagoChat({
     }
   }
 
-  const archipelagoUserID = data.user_id
-  const archipelagoImageLink = `${data.thumbnail_url ? data.thumbnail_url : ''}`
-  const archipelagoID = data.uid
+  const arcUserID = data.user_id
+  const arcImageLink = `${data.thumbnail_url ? data.thumbnail_url : ''}`
+  const arcID = data.uid
   const buttonRef = useRef(null)
 
-  if (localStorage.getItem('archipelagoEdited') === 'true') {
-    localStorage.setItem('archipelagoEdited', 'false')
+  if (localStorage.getItem('arcEdited') === 'true') {
+    localStorage.setItem('arcEdited', 'false')
     window.location.reload()
   }
   //remove cursor for trendyol carousel gaps
@@ -375,11 +375,11 @@ export default function ArchipelagoChat({
     >
       <div className="grid grid-cols-5 sm:grid-cols-4 mt-20 w-full sm:ml-10 px-3 ">
         <div className="col-span-4 sm:col-span-3 flex flex-row">
-          {archipelagoImageLink.length > 0 && (
+          {arcImageLink.length > 0 && (
             <img
               className={`${'hidden'} sm:block w-[200px] h-[200px] sm:mr-4`}
-              src={archipelagoImageLink}
-              alt = "archipelago image"
+              src={arcImageLink}
+              alt = "arc image"
               width={200}
               height={200}
             />
@@ -445,11 +445,11 @@ export default function ArchipelagoChat({
 
                   <div className="flex flex-row mt-5">
                     <p className="text-zinc-500 dark:text-zinc-500 text-md quicksand font-bold ">
-                      {dataArchipelago !== null && dataArchipelago.length} items
+                      {dataArc !== null && dataArc.length} items
                     </p>
                     <div className="ml-5">
                       {currentUser !== null &&
-                        currentUser.uid === archipelagoUserID && (
+                        currentUser.uid === arcUserID && (
                           <div className="flex flex-row w-full space-between flex-grow">
                             <div className="flex-grow flex">
                               <p
@@ -462,7 +462,7 @@ export default function ArchipelagoChat({
                                 onClick={handleEdit}
                                 fontSize="small"
                                 className="cursor-pointer text-slate-700 dark:text-zinc-300 pl-1 pt-1"
-                                title={'Edit archipelago'}
+                                title={'Edit arc'}
                               />
                             </div>
 
@@ -512,23 +512,23 @@ export default function ArchipelagoChat({
                     className={`
 							grid grid-cols-1 mt-10
 							${
-                dataArchipelago.length === 1
+                dataArc.length === 1
                   ? 'lg:grid-cols-1 xl:grid-cols-1 lg:w-1/2'
                   : 'lg:grid-cols-2 xl:grid-cols-2'
               }
 							gap-4 
 							`}
                   >
-                    {dataArchipelago.length > 0
-                      ? dataArchipelago.map((item, index) => (
+                    {dataArc.length > 0
+                      ? dataArc.map((item, index) => (
                           <div className="hover:bg-zinc-100 dark:hover:bg-zinc-700 quicksand font-bold">
                             <FeedItem
                               index={index}
                               item={item}
                               mainFeedInput={inputValue}
-                              fromArchipelago={'archipelago'}
-                              dataArchipelago={dataArchipelago}
-                              setDataArchipelago={setDataArchipelago}
+                              fromArc={'arc'}
+                              dataArc={dataArc}
+                              setDataArc={setDataArc}
                               forDetail={true}
                             />
                           </div>

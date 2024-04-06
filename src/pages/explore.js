@@ -15,9 +15,9 @@ export default function Explore({arcs,
     tier,
     contentName,
     credit,
-    userArchipelagos,
-    dataGlobalArchipelagos,
-    setDataGlobalArchipelagos,
+    userArcs,
+    dataGlobalArcs,
+    setDataGlobalArcs,
     totalMinutes,
     setTotalMinutes,
     sandboxHistory,
@@ -57,9 +57,9 @@ return (
   tier={tier}
   contentName={contentName}
   credit={credit}
-  userArchipelagos={userArchipelagos}
-  dataGlobalArchipelagos={dataGlobalArchipelagos}
-  setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+  userArcs={userArcs}
+  dataGlobalArcs={dataGlobalArcs}
+  setDataGlobalArcs={setDataGlobalArcs}
   totalMinutes={totalMinutes}
   setTotalMinutes={setTotalMinutes}
   sandboxHistory={sandboxHistory}

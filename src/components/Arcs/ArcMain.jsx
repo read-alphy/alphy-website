@@ -11,10 +11,10 @@ import SideFeed from '../SideFeed/SideFeed'
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import ArchipelagoCreation from './ArchipelagoCreation'
+import ArcCreation from './ArcCreation'
 import { Button, Spinner, Input, Textarea } from '@material-tailwind/react'
-import ArchipelagoChat from './ArchipelagoChat'
-import EditArchipelago from './EditArchipelago'
+import ArcChat from './ArcChat'
+import EditArc from './EditArc'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SaveIcon from '@mui/icons-material/Save'
 import Dialog from '@mui/material/Dialog'
@@ -31,8 +31,8 @@ export default function ArcMain({
   setCollapsed,
   tier,
   idToken,
-  userArchipelagos,
-  setUserArchipelagos,
+  userArcs,
+  setUserArcs,
   credit,
   
   setCreditCalled,
@@ -47,13 +47,13 @@ export default function ArcMain({
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
 
   const [called, setCalled] = useState(false)
-  const [sourceIDsArchipelago, setSourceIDsArchipelago] = useState([])
-  const [dataArchipelago, setDataArchipelago] = useState([])
+  const [sourceIDsArc, setSourceIDsArc] = useState([])
+  const [dataArc, setDataArc] = useState([])
   const [data, setData] = useState([])
-  const [archipelagoInfo, setArchipelagoInfo] = useState([])
+  const [arcInfo, setArcInfo] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [archipelagoDescription, setArchipelagoDescription] = useState('')
-  const [archipelagoTitle, setArchipelagoTitle] = useState('')
+  const [arcDescription, setArcDescription] = useState('')
+  const [arcTitle, setArcTitle] = useState('')
   const [deleteDialog, setDeleteDialog] = useState(false)
   const [subCalled, setSubCalled] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
@@ -70,7 +70,7 @@ export default function ArcMain({
     router.asPath.split('/')[1] === 'arc' &&
     router.asPath.split('/')[2] !== 'editArc' &&
     router.asPath.split('/')[2] !== 'createArc'
-  const isArchipelago = router.asPath.split('/')[1] === 'archipelago'
+  const isArcPage = router.asPath.split('/')[1] === 'arc'
 
   let item_thumbnail
   let item_name
@@ -93,8 +93,8 @@ export default function ArcMain({
 
   useEffect(() => {
     
-    if (isArchipelago) {
-      const newPathname = router.asPath.replace('archipelago', 'arc')
+    if (isArcPage) {
+      const newPathname = router.asPath.replace('arc', 'arc')
       router.push(newPathname)
     }
 
@@ -105,7 +105,7 @@ export default function ArcMain({
       setWindowSizeChecked(true)
     }
 
-    if (dataArchipelago !== null && dataArchipelago.length > 1) {
+    if (dataArc !== null && dataArc.length > 1) {
       setErrorMessage(false)
     }
   })
@@ -159,17 +159,17 @@ export default function ArcMain({
             setIsVisible(response.data.is_visible)
             localStorage.setItem('isVisible', response.data.is_visible)
             setIsPublic(response.data.is_public)
-            setArchipelagoInfo(response.data)
+            setArcInfo(response.data)
             if (response.data.description === 'null') {
-              setArchipelagoDescription('')
+              setArcDescription('')
             } else {
-              setArchipelagoDescription(response.data.description)
+              setArcDescription(response.data.description)
             }
-            setArchipelagoTitle(response.data.name)
+            setArcTitle(response.data.name)
             
-            setDataArchipelago(response.data.tracks)
+            setDataArc(response.data.tracks)
             let sources = response.data.tracks.map(item => item.source_id)
-            setSourceIDsArchipelago([...sources])
+            setSourceIDsArc([...sources])
             setIsLoading(false)
           })
       } catch (error) {
@@ -197,12 +197,12 @@ export default function ArcMain({
   }
 
 
-  const handleArchipelago = () => {
-    // disallow creating if dataarchipelago is empty
-    // disallow creating if there is a limit on the number of archipelagos
-    // disallow creating if there is a limit on the number of videos to include in a archipelago
+  const handleArc = () => {
+    // disallow creating if dataarc is empty
+    // disallow creating if there is a limit on the number of arcs
+    // disallow creating if there is a limit on the number of videos to include in a arc
     // disallow creating if the user is not logged in
-    if (dataArchipelago.length === 0) {
+    if (dataArc.length === 0) {
       setErrorMessage(true)
       return
     } else {
@@ -213,10 +213,10 @@ export default function ArcMain({
             .post(
               `${API_URL}/playlists/`,
               {
-                name: archipelagoTitle.length > 0 ? archipelagoTitle : 'My Arc',
+                name: arcTitle.length > 0 ? arcTitle : 'My Arc',
                 user_id: currentUser.uid,
-                description: archipelagoDescription,
-                sources: [...dataArchipelago],
+                description: arcDescription,
+                sources: [...dataArc],
               },
               {
                 headers: {
@@ -236,12 +236,12 @@ export default function ArcMain({
           sessionStorage.setItem('arcAction', 'true')
           axios
             .patch(
-              `${API_URL}/playlists/${archipelagoInfo.uid}`,
+              `${API_URL}/playlists/${arcInfo.uid}`,
               {
-                name: archipelagoTitle.length > 0 ? archipelagoTitle : 'My Arc',
+                name: arcTitle.length > 0 ? arcTitle : 'My Arc',
                 user_id: currentUser.uid,
-                description: archipelagoDescription,
-                sources: [...dataArchipelago],
+                description: arcDescription,
+                sources: [...dataArc],
               },
               {
                 headers: {
@@ -268,19 +268,19 @@ export default function ArcMain({
       }
     }
   }
-  const handleDeleteArchipelago = () => {
+  const handleDeleteArc = () => {
     setIsLoadingDelete(true)
 
     axios
-      .delete(`${API_URL}/playlists/${archipelagoInfo.uid}`, {
+      .delete(`${API_URL}/playlists/${arcInfo.uid}`, {
         headers: {
           'id-token': currentUser.accessToken,
         },
       })
       .then(response => {
-        const index = userArchipelagos.indexOf(archipelagoInfo)
-        userArchipelagos.splice(index, 1)
-        setUserArchipelagos([...userArchipelagos])
+        const index = userArcs.indexOf(arcInfo)
+        userArcs.splice(index, 1)
+        setUserArcs([...userArcs])
         router.push(`/`)
       })
       .catch(error => {
@@ -295,7 +295,7 @@ export default function ArcMain({
     try {
       axios
         .patch(
-          `${API_URL}/playlists/${archipelagoInfo.uid}/visibility?visibility=${targetVisibility}`,
+          `${API_URL}/playlists/${arcInfo.uid}/visibility?visibility=${targetVisibility}`,
           null,
           {
             headers: {
@@ -337,7 +337,7 @@ export default function ArcMain({
               collapsed={collapsed}
               setCollapsed={setCollapsed}
               source_id={source_id}
-              dataArchipelago={dataArchipelago}
+              dataArc={dataArc}
               tier={tier}
               sandboxHistory={sandboxHistory}
               setSandboxHistory={setSandboxHistory}
@@ -362,7 +362,7 @@ export default function ArcMain({
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 source_id={source_id}
-                dataArchipelago={dataArchipelago}
+                dataArc={dataArc}
                 tier={tier}
                 sandboxHistory={sandboxHistory}
                 setSandboxHistory={setSandboxHistory}
@@ -381,20 +381,20 @@ export default function ArcMain({
         >
           {isCreateArc &&
             (currentUser ? (
-              (tier === 'free' && userArchipelagos.length < 1) ||
-              (tier === 'basic' && userArchipelagos.length < 3) ||
+              (tier === 'free' && userArcs.length < 1) ||
+              (tier === 'basic' && userArcs.length < 3) ||
               tier === 'premium' ? (
-                <ArchipelagoCreation
-                  userArchipelagos={userArchipelagos}
+                <ArcCreation
+                  userArcs={userArcs}
                   tier={tier}
-                  archipelagoDescription={archipelagoDescription}
-                  dataArchipelago={dataArchipelago}
-                  setDataArchipelago={setDataArchipelago}
-                  archipelagoTitle={archipelagoTitle}
-                  setArchipelagoDescription={setArchipelagoDescription}
-                  setArchipelagoTitle={setArchipelagoTitle}
-                  sourceIDsArchipelago={sourceIDsArchipelago}
-                  setSourceIDsArchipelago={setSourceIDsArchipelago}
+                  arcDescription={arcDescription}
+                  dataArc={dataArc}
+                  setDataArc={setDataArc}
+                  arcTitle={arcTitle}
+                  setArcDescription={setArcDescription}
+                  setArcTitle={setArcTitle}
+                  sourceIDsArc={sourceIDsArc}
+                  setSourceIDsArc={setSourceIDsArc}
                   errorMessage={errorMessage}
                   setErrorMessage={setErrorMessage}
                   credit={credit}
@@ -470,12 +470,12 @@ export default function ArcMain({
                 </div>
               </div>
             ) : (
-              <ArchipelagoChat
+              <ArcChat
                 data={data}
                 setData={setData}
                 currentUser={currentUser}
-                dataArchipelago={dataArchipelago}
-                setDataArchipelago={setDataArchipelago}
+                dataArc={dataArc}
+                setDataArc={setDataArc}
                 handleVisibility={handleVisibility}
                 isVisible={isVisible}
                 setIsVisible={setIsVisible}
@@ -488,19 +488,19 @@ export default function ArcMain({
 
           {isEditArc &&
             (currentUser ? (
-              <EditArchipelago
-                archipelagoInfo={archipelagoInfo}
+              <EditArc
+                arcInfo={arcInfo}
                 tier={tier}
-                setArchipelagoInfo={setArchipelagoInfo}
-                userArchipelagos={userArchipelagos}
-                archipelagoDescription={archipelagoDescription}
-                dataArchipelago={dataArchipelago}
-                setDataArchipelago={setDataArchipelago}
-                archipelagoTitle={archipelagoTitle}
-                setArchipelagoDescription={setArchipelagoDescription}
-                setArchipelagoTitle={setArchipelagoTitle}
-                sourceIDsArchipelago={sourceIDsArchipelago}
-                setSourceIDsArchipelago={setSourceIDsArchipelago}
+                setArcInfo={setArcInfo}
+                userArcs={userArcs}
+                arcDescription={arcDescription}
+                dataArc={dataArc}
+                setDataArc={setDataArc}
+                arcTitle={arcTitle}
+                setArcDescription={setArcDescription}
+                setArcTitle={setArcTitle}
+                sourceIDsArc={sourceIDsArc}
+                setSourceIDsArc={setSourceIDsArc}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 credit={credit}
@@ -528,8 +528,8 @@ export default function ArcMain({
         </div>
       </div>
       {((isCreateArc &&
-        ((tier === 'free' && userArchipelagos.length < 1) ||
-          (tier === 'basic' && userArchipelagos.length < 3) ||
+        ((tier === 'free' && userArcs.length < 1) ||
+          (tier === 'basic' && userArcs.length < 3) ||
           tier === 'premium')) ||
         isEditArc) && (
         <div
@@ -557,7 +557,7 @@ export default function ArcMain({
                   isLoadingSubmit &&
                   'bg-green-300 pointer-events-none min-w-[106.533px]'
                 }`}
-                onClick={handleArchipelago}
+                onClick={handleArc}
               >
                 {isLoadingSubmit ? (
                   <Spinner
@@ -605,7 +605,7 @@ export default function ArcMain({
                       <p
                         className="text-red-400 cursor-pointer quicksand font-semibold"
                         size="sm"
-                        onClick={handleDeleteArchipelago}
+                        onClick={handleDeleteArc}
                       >
                         Delete
                       </p>

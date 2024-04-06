@@ -10,9 +10,9 @@ export default function HubContent({
   arcs,
   currentUser,
   tier,
-  userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
+  userArcs,
+  dataGlobalArcs,
+  setDataGlobalArcs,
 
   credit,
   globalLayout,
@@ -51,9 +51,9 @@ export default function HubContent({
                   credit={credit}
                   currentUser={currentUser}
                   tier={tier}
-                  userArchipelagos={userArchipelagos}
-                  dataGlobalArchipelagos={dataGlobalArchipelagos}
-                  setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+                  userArcs={userArcs}
+                  dataGlobalArcs={dataGlobalArcs}
+                  setDataGlobalArcs={setDataGlobalArcs}
                   mainShow={mainShow}
                   setMainShow={setMainShow}
                 />
@@ -66,9 +66,9 @@ export default function HubContent({
                   arcs={arcs}
                   currentUser={currentUser}
                   tier={tier}
-                  userArchipelagos={userArchipelagos}
-                  dataGlobalArchipelagos={dataGlobalArchipelagos}
-                  setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+                  userArcs={userArcs}
+                  dataGlobalArcs={dataGlobalArcs}
+                  setDataGlobalArcs={setDataGlobalArcs}
                   mainShow={mainShow}
                   setMainShow={setMainShow}
                   collapsed={collapsed}
@@ -82,9 +82,9 @@ export default function HubContent({
         <HubSubmitPage
           currentUser={currentUser}
           tier={tier}
-          userArchipelagos={userArchipelagos}
-          dataGlobalArchipelagos={dataGlobalArchipelagos}
-          setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+          userArcs={userArcs}
+          dataGlobalArcs={dataGlobalArcs}
+          setDataGlobalArcs={setDataGlobalArcs}
           mainShow={mainShow}
           setMainShow={setMainShow}
           credit={credit}
@@ -95,9 +95,9 @@ export default function HubContent({
         <HubUserPage
           currentUser={currentUser}
           tier={tier}
-          userArchipelagos={userArchipelagos}
-          dataGlobalArchipelagos={dataGlobalArchipelagos}
-          setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+          userArcs={userArcs}
+          dataGlobalArcs={dataGlobalArcs}
+          setDataGlobalArcs={setDataGlobalArcs}
           mainShow={mainShow}
           setMainShow={setMainShow}
           credit={credit}

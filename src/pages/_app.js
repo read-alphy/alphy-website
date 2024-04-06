@@ -50,8 +50,8 @@ function MyApp({ Component, pageProps }) {
     const [contentName, setContentName] = useState('')
     const [collapsed, setCollapsed] = useState(false)
     const [idToken, setIdToken] = useState('')
-    const [userArchipelagos, setUserArchipelagos] = useState([])
-    const [dataGlobalArchipelagos, setDataGlobalArchipelagos] = useState([])
+    const [userArcs, setUserArcs] = useState([])
+    const [dataGlobalArcs, setDataGlobalArcs] = useState([])
     const [userMetadata, setUserMetadata] = useState('')
     const [showWelcomeForm, setShowWelcomeForm] = useState(false)
     const [welcomeFormCalled, setWelcomeFormCalled] = useState(false)
@@ -277,7 +277,7 @@ function MyApp({ Component, pageProps }) {
               })
               .then(response => {
                 
-                setUserArchipelagos(response.data)
+                setUserArcs(response.data)
                 setUserArcsCalled(true)
               })
               .catch(e => {
@@ -341,10 +341,10 @@ const additionalProps ={
     contentName: contentName,
     setContentName:setContentName,
     userMetadata : userMetadata,
-    userArchipelagos : userArchipelagos,
-    setUserArchipelagos : setUserArchipelagos,
-    dataGlobalArchipelagos : dataGlobalArchipelagos,
-    setDataGlobalArchipelagos : setDataGlobalArchipelagos,
+    userArcs : userArcs,
+    setUserArcs : setUserArcs,
+    dataGlobalArcs : dataGlobalArcs,
+    setDataGlobalArcs : setDataGlobalArcs,
     sandboxHistory : sandboxHistory,
     setSandboxHistory : setSandboxHistory,
     getSandboxHistory: getSandboxHistory,

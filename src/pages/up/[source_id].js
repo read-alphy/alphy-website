@@ -24,7 +24,7 @@ const Source = dynamic(() => import('../../components/Content/Source'), {
       setCollapsed,
       tier,
       setContentName,
-      userArchipelagos,
+      userArcs,
       currentUser,
       sandboxHistory,
       setSandboxHistory,
@@ -66,7 +66,7 @@ const Source = dynamic(() => import('../../components/Content/Source'), {
       setCollapsed={setCollapsed}
       tier={tier}
       setContentName={setContentName}
-      userArchipelagos={userArchipelagos}
+      userArcs={userArcs}
       currentUser={currentUser}
       sandboxHistory={sandboxHistory}
       setSandboxHistory={setSandboxHistory}

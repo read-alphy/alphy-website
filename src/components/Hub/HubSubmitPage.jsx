@@ -3,10 +3,10 @@ import HubCreationBlock from './HubCreationBlock'
 export default function HubSubmitPage({
   currentUser,
   tier,
-  userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
-  getDataGlobalArchipelagos,
+  userArcs,
+  dataGlobalArcs,
+  setDataGlobalArcs,
+  getDataGlobalArcs,
   mainShow,
   setMainShow,
   credit,
@@ -17,9 +17,9 @@ export default function HubSubmitPage({
         <HubCreationBlock
           currentUser={currentUser}
           tier={tier}
-          userArchipelagos={userArchipelagos}
-          dataGlobalArchipelagos={dataGlobalArchipelagos}
-          setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+          userArcs={userArcs}
+          dataGlobalArcs={dataGlobalArcs}
+          setDataGlobalArcs={setDataGlobalArcs}
           mainShow={mainShow}
           setMainShow={setMainShow}
           credit={credit}

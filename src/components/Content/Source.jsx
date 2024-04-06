@@ -21,7 +21,7 @@ export default function SourcePage({
   collapsed,
   setCollapsed,
   tier,
-  userArchipelagos,
+  userArcs,
   currentUser,
   sandboxHistory,
   setSandboxHistory,
@@ -345,7 +345,7 @@ const router = useRouter()
               handleVisibility={handleVisibility}
               isBookmarked={isBookmarked}
               setIsBookmarked={setIsBookmarked}
-              userArchipelagos={userArchipelagos}
+              userArcs={userArcs}
               actionsHub={actionsHub}
               language={language}
               setLanguage={setLanguage}

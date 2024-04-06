@@ -32,7 +32,7 @@ export default function Content({
   isVisible,
   handleVisibility,
   tier,
-  userArchipelagos,
+  userArcs,
   isBookmarked,
   setIsBookmarked,
   getSandboxHistory,
@@ -88,7 +88,7 @@ export default function Content({
   const inputRef = useRef(null)
   const contentRef = useRef(null)
 
-  const userArchipelagoNames = userArchipelagos.map(item => [
+  const userArcNames = userArcs.map(item => [
     item.name,
     item.uid,
   ])
@@ -624,7 +624,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
 			} */
   }
 
-  const handleAddToArchipelago = (archipelagoUID, create) => {
+  const handleAddToArc = (arcUID, create) => {
     const newSource = {
       source_id: source_id,
       source_type: source_type,
@@ -634,11 +634,11 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
         .get(
           `${
             API_URL || 'http://localhost:3001'
-          }/playlists/${archipelagoUID}?nof_questions=10&tracks=true`
+          }/playlists/${arcUID}?nof_questions=10&tracks=true`
         )
         .then(response => {
           axios.patch(
-            `${API_URL || 'http://localhost:3001'}/playlists/${archipelagoUID}`,
+            `${API_URL || 'http://localhost:3001'}/playlists/${arcUID}`,
             {
               user_id: currentUser.uid,
               sources: [...response.data.tracks, newSource],
@@ -665,8 +665,8 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
         )
         .then(response => {
           setMainPopoverOpen(false)
-          const archipelagoUID = response.data.uid
-          router.push(`/arc/${archipelagoUID}`)
+          const arcUID = response.data.uid
+          router.push(`/arc/${arcUID}`)
         })
         .catch(error => {
           console.error('Error adding to arc:', error)
@@ -765,8 +765,8 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           handleReportIssue={handleReportIssue}
           showReportIssue={showReportIssue}
           setShowReportIssue={setShowReportIssue}
-          handleAddToArchipelago={handleAddToArchipelago}
-          userArchipelagoNames={userArchipelagoNames}
+          handleAddToArc={handleAddToArc}
+          userArcNames={userArcNames}
           currentUser={currentUser}
           transcript={transcript}
           summary={summary}

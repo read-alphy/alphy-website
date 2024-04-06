@@ -8,8 +8,8 @@ export default function EditArc({
   setCollapsed,
   tier,
   idToken,
-  userArchipelagos,
-  setUserArchipelagos,
+  userArcs,
+  setUserArcs,
   credit,
   setCreditCalled,
   sandboxHistory,
@@ -43,8 +43,8 @@ export default function EditArc({
     setCollapsed={setCollapsed}
     tier={tier}
     idToken={idToken}
-    userArchipelagos={userArchipelagos}
-    setUserArchipelagos={setUserArchipelagos}
+    userArcs={userArcs}
+    setUserArcs={setUserArcs}
     credit={credit}
     setCreditCalled={setCreditCalled}
     sandboxHistory={sandboxHistory}

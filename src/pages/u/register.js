@@ -12,7 +12,7 @@ export default function RegisterPage({
     tier,
     setShowWelcomeForm,
     showWelcomeForm,
-    userArchipelagos,
+    userArcs,
     sandboxHistory,
     setSandboxHistory,
     loggedIn,
@@ -43,7 +43,7 @@ export default function RegisterPage({
         tier={tier}
         setShowWelcomeForm={setShowWelcomeForm}
         showWelcomeForm={showWelcomeForm}
-        userArchipelagos={userArchipelagos}
+        userArcs={userArcs}
         sandboxHistory={sandboxHistory}
         setSandboxHistory={setSandboxHistory}
 

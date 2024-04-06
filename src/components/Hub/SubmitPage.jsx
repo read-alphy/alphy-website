@@ -13,9 +13,9 @@ function SubmitPage({
   tier,
 
   credit,
-  userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
+  userArcs,
+  dataGlobalArcs,
+  setDataGlobalArcs,
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
@@ -126,9 +126,9 @@ setLoggedIn={setLoggedIn}
               tier={tier}
               credit={credit}
               currentUser={currentUser}
-              userArchipelagos={userArchipelagos}
-              dataGlobalArchipelagos={dataGlobalArchipelagos}
-              setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+              userArcs={userArcs}
+              dataGlobalArcs={dataGlobalArcs}
+              setDataGlobalArcs={setDataGlobalArcs}
               globalLayout={globalLayout}
               setGlobalLayout={setGlobalLayout}
               userLayout={userLayout}

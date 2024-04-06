@@ -18,7 +18,7 @@ function PrivacyPolicy({
   showWelcomeForm,
   sandboxHistory,
   setSandboxHistory,
-  userArchipelagos,
+  userArcs,
   loggedIn,
   setLoggedIn
 }) {
@@ -116,7 +116,7 @@ function PrivacyPolicy({
               currentUser={currentUser}
               showWelcomeForm={showWelcomeForm}
               setShowWelcomeForm={setShowWelcomeForm}
-              userArchipelagos={userArchipelagos}
+              userArcs={userArcs}
             />
           )}
         </div>

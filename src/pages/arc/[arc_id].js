@@ -11,8 +11,8 @@ export default function Arc({
   setCollapsed,
   tier,
   idToken,
-  userArchipelagos,
-  setUserArchipelagos,
+  userArcs,
+  setUserArcs,
   credit,
   setCreditCalled,
   sandboxHistory,
@@ -45,8 +45,8 @@ export default function Arc({
     setCollapsed={setCollapsed}
     tier={tier}
     idToken={idToken}
-    userArchipelagos={userArchipelagos}
-    setUserArchipelagos={setUserArchipelagos}
+    userArcs={userArcs}
+    setUserArcs={setUserArcs}
     credit={credit}
     setCreditCalled={setCreditCalled}
     sandboxHistory={sandboxHistory}

@@ -12,10 +12,10 @@ export default function Submit({
     tier,
   
     credit,
-    userArchipelagos,
-    setUserArchipelagos,
-    dataGlobalArchipelagos,
-    setDataGlobalArchipelagos,
+    userArcs,
+    setUserArcs,
+    dataGlobalArcs,
+    setDataGlobalArcs,
     sandboxHistory,
     setSandboxHistory,
     setCreditcalled,
@@ -48,9 +48,9 @@ export default function Submit({
     currentUser={currentUser}
     collapsed={collapsed}
     setCollapsed={setCollapsed}
-    dataGlobalArchipelagos={dataGlobalArchipelagos}
-    userArchipelagos={userArchipelagos}
-    setUserArchipelagos={setUserArchipelagos}
+    dataGlobalArcs={dataGlobalArcs}
+    userArcs={userArcs}
+    setUserArcs={setUserArcs}
     tier={tier}
     
     sandboxHistory={sandboxHistory}

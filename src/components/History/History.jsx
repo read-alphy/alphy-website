@@ -14,7 +14,7 @@ export default function History({
   setCollapsed,
   tier,
   setContentName,
-  userArchipelagos,
+  userArcs,
   currentUser,
   sandboxHistory,
   setSandboxHistory,
@@ -97,7 +97,7 @@ export default function History({
               currentUser={currentUser}
               sandboxHistory={sandboxHistory}
               setSandboxHistory={setSandboxHistory}
-              userArchipelagos={userArchipelagos}
+              userArcs={userArcs}
             />
           )}
         </div>

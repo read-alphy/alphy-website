@@ -247,14 +247,14 @@ body {
   display: none;
 }
 
-.archipelago-search {
+.arc-search {
   scrollbar-width: none;
   /* Firefox */
   -ms-overflow-style: none;
   /* Internet Explorer and Edge */
 }
 
-.archipelago-search::-webkit-scrollbar {
+.arc-search::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, and Opera */
 }

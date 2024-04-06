@@ -19,8 +19,8 @@ export default function HubCreationBlock({
   currentUser,
   tier,
   credit,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
+  dataGlobalArcs,
+  setDataGlobalArcs,
 }) {
   const [submitDialog, setSubmitDialog] = useState(false)
   const [inputValue, setInputValue] = useState('')
@@ -495,7 +495,7 @@ export default function HubCreationBlock({
 
       {/*   {arcDialog &&
                 <Dialog maxWidth="lg" fullWidth="true" open={arcDialog} onClose={() => setArcDialog(false)} >
-                    <ArcBlock currentUser={currentUser} tier={tier} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} />
+                    <ArcBlock currentUser={currentUser} tier={tier} credit={credit} dataGlobalArcs={dataGlobalArcs} setDataGlobalArcs={setDataGlobalArcs} />
                 </Dialog>
 
             } */}

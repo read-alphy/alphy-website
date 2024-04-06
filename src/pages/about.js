@@ -19,7 +19,7 @@ function About({
   showWelcomeForm,
   sandboxHistory,
   setSandboxHistory,
-  userArchipelagos,
+  userArcs,
   loggedIn,
   setLoggedIn
 }) {
@@ -116,7 +116,7 @@ setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               showWelcomeForm={showWelcomeForm}
               setShowWelcomeForm={setShowWelcomeForm}
-              userArchipelagos={userArchipelagos}
+              userArcs={userArcs}
             />
           )}
         </div>

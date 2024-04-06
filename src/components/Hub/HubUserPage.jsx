@@ -18,7 +18,7 @@ export default function HubUserPage({
   currentUser,
   credit,
   tier,
-  userArchipelagos,
+  userArcs,
   setUserLayout,
   setGlobalLayout,
   setSubmitLayout,
@@ -287,7 +287,7 @@ export default function HubUserPage({
               <div className="w-full">
                 <div className="w-full h-full container  lg:max-w-[900px] xl:max-w-[840px] 2xl:max-w-[1200px]  ">
                   <div className="relative ">
-                    {/*   {userArchipelagos.length > 0 &&
+                    {/*   {userArcs.length > 0 &&
                                             <button onClick={scrollBackward} ref={leftButtonRef} type="button" className={`left-arrow absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isBackwardArrowVisible ? '' : 'hidden'
                                                 }`}>
                                                 <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out ">
@@ -321,7 +321,7 @@ export default function HubUserPage({
                         </div>
                       </Link>
 
-                      {userArchipelagos.map((item, index) => (
+                      {userArcs.map((item, index) => (
                         <div className="mt-2">
                           <CuratedCarouselItem
                             currentUser={currentUser}
@@ -334,7 +334,7 @@ export default function HubUserPage({
                       ))}
                     </div>
 
-                    {/*  {userArchipelagos.length > 0 &&
+                    {/*  {userArcs.length > 0 &&
                                             <button onClick={scrollForward} ref={rightButtonRef} type="button" className={`right-arrow absolute top-0 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none ${isForwardArrowVisible ? 'hidden lg:block' : 'hidden'
                                                 }`}>
                                                 <div className="rounded-full bg-zinc-200 bg-opacity-40 p-1 mr-1  hover:opacity-100 hover:transition hover:duration-300 hover:ease-in-out dark:bg-mildDarkMode">

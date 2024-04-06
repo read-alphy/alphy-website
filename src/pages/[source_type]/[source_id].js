@@ -78,7 +78,7 @@ async function fetchData(sourceType, sourceId) {
       setCollapsed,
       tier,
       setContentName,
-      userArchipelagos,
+      userArcs,
       currentUser,
       sandboxHistory,
       setSandboxHistory,
@@ -152,7 +152,7 @@ if (!data || source_id === undefined || source_type === undefined) {
       setCollapsed={setCollapsed}
       tier={tier}
       setContentName={setContentName}
-      userArchipelagos={userArchipelagos}
+      userArcs={userArcs}
       currentUser={currentUser}
       sandboxHistory={sandboxHistory}
       setSandboxHistory={setSandboxHistory}

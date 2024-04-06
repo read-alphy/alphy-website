@@ -11,8 +11,8 @@ import Link from 'next/link'
 import { API_URL } from '../../constants'
 
 export default function HubArcFeed({
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
+  dataGlobalArcs,
+  setDataGlobalArcs,
   currentUser,
   mainShow,
   collapsed,
@@ -132,18 +132,18 @@ useEffect(() => {
     // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
     // Find a way to store idToken in local storage, minding the expiration behavior.
     // Would improve performance throughout.
-    console.log(dataGlobalArchipelagos)
-    if (dataGlobalArchipelagos.length === 0) {
-      getDataGlobalArchipelagos(0, true, true)
+    console.log(dataGlobalArcs)
+    if (dataGlobalArcs.length === 0) {
+      getDataGlobalArcs(0, true, true)
     }
-  }, [currentUser, dataGlobalArchipelagos])
+  }, [currentUser, dataGlobalArcs])
 
-  const getDataGlobalArchipelagos = (
-    offsetGlobalArchipelagos,
+  const getDataGlobalArcs = (
+    offsetGlobalArcs,
     firstTime,
-    hasMoreGlobalArchipelagos
+    hasMoreGlobalArcs
   ) => {
-    if (!hasMoreGlobalArchipelagos) {
+    if (!hasMoreGlobalArcs) {
       return
     }
 
@@ -151,7 +151,7 @@ useEffect(() => {
       .get(`${API_URL}/playlists/`, {
         params: {
           limit_glob,
-          offset: offsetGlobalArchipelagos,
+          offset: offsetGlobalArcs,
           only_my: false,
         },
       })
@@ -160,7 +160,7 @@ useEffect(() => {
           
           shuffleArray(response.data)
 
-          /* setDataGlobalArchipelagos(response.data); */
+          /* setDataGlobalArcs(response.data); */
           const temporary = []
           response.data.forEach(item => {
             if (
@@ -170,7 +170,7 @@ useEffect(() => {
               temporary.push(item)
             }
           })
-          setDataGlobalArchipelagos(temporary)
+          setDataGlobalArcs(temporary)
         } else {
           shuffleArray(response.data)
           const temporary = []
@@ -182,7 +182,7 @@ useEffect(() => {
               temporary.push(item)
             }
           })
-          setDataGlobalArchipelagos(temporary)
+          setDataGlobalArcs(temporary)
         }
 
         setTimeout(() => {
@@ -274,8 +274,8 @@ useEffect(() => {
             <div
               className={`relative  grid grid-cols-2 xsSm:grid-cols-3 overflow-x-hidden w-full`}
             >
-              {dataGlobalArchipelagos.length > 0 &&
-                searchKeyword(dataGlobalArchipelagos).map(
+              {dataGlobalArcs.length > 0 &&
+                searchKeyword(dataGlobalArcs).map(
                   (item, index) =>
                     index < 6 && (
                       <div key={index} className="my-5 mx-2 md:mx-5 md:my-5">
@@ -352,8 +352,8 @@ useEffect(() => {
                   </p>
                 </div>
               </Link>
-              {dataGlobalArchipelagos.length > 0 &&
-                searchKeyword(dataGlobalArchipelagos).map((item, index) => (
+              {dataGlobalArcs.length > 0 &&
+                searchKeyword(dataGlobalArcs).map((item, index) => (
                   <div className="mx-2 my-5 md:mx-5 md:my-5 col-span-1 ">
                     <CuratedCarouselItem
                       currentUser={currentUser}

@@ -10,10 +10,10 @@ export default function Arcs({
     currentUser,
     collapsed,
     setCollapsed,
-    dataGlobalArchipelagos,
-    setDataGlobalArchipelagos,
-    userArchipelagos,
-    setUserArchipelagos,
+    dataGlobalArcs,
+    setDataGlobalArcs,
+    userArcs,
+    setUserArcs,
     tier,
     contentName,
     setContentName,
@@ -46,10 +46,10 @@ export default function Arcs({
                     currentUser={currentUser}
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
-                    dataGlobalArchipelagos={dataGlobalArchipelagos}
-                    setDataGlobalArchipelagos={setDataGlobalArchipelagos}
-                    userArchipelagos={userArchipelagos}
-                    setUserArchipelagos={setUserArchipelagos}
+                    dataGlobalArcs={dataGlobalArcs}
+                    setDataGlobalArcs={setDataGlobalArcs}
+                    userArcs={userArcs}
+                    setUserArcs={setUserArcs}
                     tier={tier}
                     contentName={contentName}
                     setContentName={setContentName}

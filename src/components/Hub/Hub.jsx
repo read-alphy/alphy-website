@@ -19,9 +19,9 @@ export default function Hub({
   setCollapsed,
   tier,
   credit,
-  userArchipelagos,
-  dataGlobalArchipelagos,
-  setDataGlobalArchipelagos,
+  userArcs,
+  dataGlobalArcs,
+  setDataGlobalArcs,
   totalMinutes,
   setTotalMinutes,
   sandboxHistory,
@@ -139,8 +139,8 @@ useEffect(() => {
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="">
               <SideFeed 
-loggedIn={loggedIn}
-setLoggedIn={setLoggedIn}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
@@ -176,9 +176,9 @@ setLoggedIn={setLoggedIn}
                 tier={tier}
                 credit={credit}
                 currentUser={currentUser}
-                userArchipelagos={userArchipelagos}
-                dataGlobalArchipelagos={dataGlobalArchipelagos}
-                setDataGlobalArchipelagos={setDataGlobalArchipelagos}
+                userArcs={userArcs}
+                dataGlobalArcs={dataGlobalArcs}
+                setDataGlobalArcs={setDataGlobalArcs}
                 globalLayout={globalLayout}
                 setGlobalLayout={setGlobalLayout}
                 userLayout={userLayout}

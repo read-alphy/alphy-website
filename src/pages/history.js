@@ -12,7 +12,7 @@ export default function HistoryPage({
     setCollapsed,
     tier,
     
-    userArchipelagos,
+    userArcs,
     currentUser,
     sandboxHistory,
     setSandboxHistory,    
@@ -46,7 +46,7 @@ export default function HistoryPage({
             setCollapsed={setCollapsed}
             tier={tier}
             
-            userArchipelagos={userArchipelagos}
+            userArcs={userArcs}
             sandboxHistory={sandboxHistory}
             setSandboxHistory={setSandboxHistory}
 

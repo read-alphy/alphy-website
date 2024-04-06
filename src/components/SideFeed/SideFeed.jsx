@@ -33,7 +33,7 @@ export default function SideFeed({
   userLayout,
   loggedIn,
   setLoggedIn,
-  dataArchipelago,
+  dataArc,
   tier,
   sandboxHistory,
   currentUser,
@@ -475,8 +475,8 @@ const [mobileScreen, setMobileScreen] = useState(false)
                 </div>
               </div>
             </div>
-            {dataArchipelago !== undefined &&
-            dataArchipelago.length > 0 &&
+            {dataArc !== undefined &&
+            dataArc.length > 0 &&
             location.pathname.includes('/arc/createArc') == false &&
             location.pathname.includes('/arc/editArc') == false ? (
               <div>
@@ -492,7 +492,7 @@ const [mobileScreen, setMobileScreen] = useState(false)
                   }`}
                 >
                   <div className="overflow-x-hidden hidden md:block lg:hidden">
-                    {dataArchipelago.map((item, index) => (
+                    {dataArc.map((item, index) => (
                       <HubFeedItem
                         sideFeed={true}
                         key={index}
@@ -504,8 +504,8 @@ const [mobileScreen, setMobileScreen] = useState(false)
                   </div>
 
                   <div className="overflow-x-hidden md:hidden lg:block">
-                    {dataArchipelago.length > 0
-                      ? dataArchipelago.map((item, index) => (
+                    {dataArc.length > 0
+                      ? dataArc.map((item, index) => (
                           <FeedItem
                             sideFeed={true}
                             key={index}

@@ -32,8 +32,8 @@ export default function HeaderArea({
   handleReportIssue,
   showReportIssue,
   setShowReportIssue,
-  handleAddToArchipelago,
-  userArchipelagoNames,
+  handleAddToArc,
+  userArcNames,
   currentUser,
   transcript,
   summary,
@@ -245,7 +245,7 @@ export default function HeaderArea({
                       </PopoverHandler>
                       <PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
                         <MenuItem
-                          onClick={() => handleAddToArchipelago(0, true)}
+                          onClick={() => handleAddToArc(0, true)}
                           className="text-slate-700 dark:text-zinc-200 flex-row flex quicksand font-bold"
                         >
                           <AddIcon className="text-slate-600 dark:text-zinc-300" />
@@ -253,10 +253,10 @@ export default function HeaderArea({
                             Create An Arc
                           </p>
                         </MenuItem>
-                        {userArchipelagoNames.map(item => (
+                        {userArcNames.map(item => (
                           <MenuItem
                             onClick={() =>
-                              handleAddToArchipelago(item[1], false)
+                              handleAddToArc(item[1], false)
                             }
                             className="text-slate-700 dark:text-zinc-200"
                             value={item}
@@ -701,7 +701,7 @@ export default function HeaderArea({
                 </PopoverHandler>
                 <PopoverContent className="dark:bg-mildDarkMode dark:border-zinc-500 dark:border-darkMode">
                   <MenuItem
-                    onClick={() => handleAddToArchipelago(0, true)}
+                    onClick={() => handleAddToArc(0, true)}
                     className="text-slate-700 dark:text-zinc-200 flex-row flex"
                   >
                     <AddIcon className="text-slate-600 dark:text-zinc-300" />
@@ -709,9 +709,9 @@ export default function HeaderArea({
                       Create An Arc
                     </p>
                   </MenuItem>
-                  {userArchipelagoNames.map(item => (
+                  {userArcNames.map(item => (
                     <MenuItem
-                      onClick={() => handleAddToArchipelago(item[1], false)}
+                      onClick={() => handleAddToArc(item[1], false)}
                       className="text-slate-700 dark:text-zinc-200"
                       value={item}
                     >

@@ -14,7 +14,7 @@ export default function CheckOutPage({
   setShowWelcomeForm,
   showWelcomeForm,
   stripePromise,
-  userArchipelagos,
+  userArcs,
   sandboxHistory,
   setSandboxHistory,
   loggedIn,
@@ -119,7 +119,7 @@ setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               showWelcomeForm={showWelcomeForm}
               setShowWelcomeForm={setShowWelcomeForm}
-              userArchipelagos={userArchipelagos}
+              userArcs={userArcs}
               clientSecret={clientSecret}
               setClientSecret={setClientSecret}
               
