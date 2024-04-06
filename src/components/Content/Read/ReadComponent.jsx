@@ -1,26 +1,25 @@
-import { Tab, Tabs } from 'react-bootstrap'
-import Loading from '../../Loading'
-import ReactMarkdown from 'react-markdown'
-import * as Selection from 'selection-popover'
-import YouTubeIcon from '@mui/icons-material/YouTube'
-import TwitchIcon from '../../../../public/img/twitch.png'
-import X from '../../../../public/img/X.png'
-import TwitterSpaces from '../../../../public/img/twitter_space.png'
+import { Tab, Tabs } from "react-bootstrap";
+import Loading from "../../Loading";
+import ReactMarkdown from "react-markdown";
+import * as Selection from "selection-popover";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TwitchIcon from "../../../../public/img/twitch.png";
+
 
 import {
-  Popover,
-  PopoverHandler,
-  PopoverContent,
-  ThemeProvider,
+ 
   Button,
-  Spinner,
-} from '@material-tailwind/react'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import QuestionAnswering from '../Read/QA/QuestionAnswering'
+
+} from "@material-tailwind/react";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import QuestionAnswering from "../Read/QA/QuestionAnswering";
+import DownloadPopover from "./ReadComponents/DownloadPopover";
+import Timestamp from "./ReadComponents/Timestamp";
+import VideoFrame from "./ReadComponents/VideoFrame";
 
 export default function ReadComponent({
   data,
@@ -64,43 +63,40 @@ export default function ReadComponent({
   requestTranslation,
   tier,
   theme,
-}) 
-
-
-{
-  const [isClient, setIsClient] = useState(false)
-  
+}) {
+  const [isClient, setIsClient] = useState(false);
+  const [chapters, setChapters] = useState([]);
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-
-  
+    setIsClient(true);
+  }, []);
 
   function convertTimeToSeconds(time) {
     // Check if the input is a string and matches the ISO 8601 duration format
-    if (typeof time === 'string' && time.match(/^PT/)) {
+    if (typeof time === "string" && time.match(/^PT/)) {
       const matches = time.match(/PT(\d+H)?(\d+M)?(\d+(?:\.\d+)?S)?/);
       let seconds = 0;
-  
+
       // If hours are present, convert them to seconds and add to total
       if (matches[1]) {
         seconds += parseInt(matches[1]) * 3600;
       }
-  
+
       // If minutes are present, convert them to seconds and add to total
       if (matches[2]) {
         seconds += parseInt(matches[2]) * 60;
       }
-  
+
       // If seconds are present, add them to total
       if (matches[3]) {
         seconds += parseFloat(matches[3]);
       }
-  
+
       return seconds;
-    } else if (typeof time === 'number' || (typeof time === 'string' && time.match(/^\d+(?:\.\d+)?$/))) {
+    } else if (
+      typeof time === "number" ||
+      (typeof time === "string" && time.match(/^\d+(?:\.\d+)?$/))
+    ) {
       // If the input is a numeric value or a string representing a number, parse it directly
       return parseFloat(time);
     } else {
@@ -109,14 +105,22 @@ export default function ReadComponent({
     }
   }
 
+  useEffect(() => {
+    if (summary && summary.summary && summary.summary.length > 0) {
+      const newArray = summary.summary.map(({ summary, at, ...rest }) => {
+        return {
+          ...rest,
+          at: Math.floor(convertTimeToSeconds(at)),
+        };
+      });
 
+      setChapters(newArray);
+    }
+  }, [data]);
 
-
-  
   return (
     <div id="content-area overscroll-none">
-  
-      {(transcript.length > 0 &&
+      {transcript.length > 0 &&
       ((summary !== undefined &&
         summary.complete !== undefined &&
         language === summary.lang) ||
@@ -125,159 +129,29 @@ export default function ReadComponent({
           {transcript.length > 0 && (
             <div
               className={`${
-                data.summaries.length === 0 ? 'hidden' : ''
+                data.summaries.length === 0 ? "hidden" : ""
               } grid-cols-2 w-full md:min-w-[500px]`}
             >
               {/* <div className={`hidden lg:flex justify-center items-center ${data.transcript ? "xl:w-1/2 w-2/3 h-[300px]" : "w-full h-[500px]"}  h-inherit mx-auto pb-10 xl:pb-0`}> */}
 
               {showYouTubeFrame === true && (
-                <div>
-                  <div
-                    className={`hidden ${
-                      data.source_type === 'yt' ||
-                      data.source_type === 'ap' ||
-                      data.source_type === 'tw'
-                        ? 'lg:flex '
-                        : ''
-                    }  justify-center items-center `}
-                  >
-                    {data.source_type === 'yt' &&
-                      (transcript.length > 0 || data.complete === true ? (
-                        <div>
-                          <iframe
-                            id="player"
-                            ref={videoRef}
-                            title="My YouTube Video "
-                            className={`fixed bottom-24 right-4 w-[480px] h-[320px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${
-                              showYouTubeFrame ? 'opacity-100' : 'opacity-0'
-                            }}`}
-                            src={`https://www.youtube.com/embed/${data.source_id}?autoplay=${autoplay}&start=${timestamp}`}
-                            width="100%"
-                            height="100%"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                          ></iframe>
-                          <canvas
-                            ref={canvasRef}
-                            style={{ display: 'none' }}
-                          ></canvas>
-                        </div>
-                      ) : null)}
-
-                    {data.source_type === 'tw' &&
-                      (transcript.length > 0 || data.complete === true ? (
-                        <div>
-                          <iframe
-                            ref={videoRef}
-                            className={`fixed bottom-24 right-4 w-[480px] h-[320px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${
-                              showYouTubeFrame ? 'opacity-100' : 'opacity-0'
-                            }}`}
-                            src={`https://player.twitch.tv/?video=v${
-                              data.source_id
-                            }&parent=${
-                              window.location.href.includes('localhost')
-                                ? 'localhost'
-                                : window.location.href.includes('alphy.app')
-                                ? 'alphy.app'
-                                : 'staging--alphy-web.netlify.app'
-                            }&autoplay=${
-                              autoplay === 0 ? 'false' : 'true'
-                            }&t=${timestamp}`}
-                            width="100%"
-                            height="100%"
-                            allowFullScreen={true}
-                            title={title ? title : ''}
-                          ></iframe>
-                          <canvas
-                            ref={canvasRef}
-                            style={{ display: 'none' }}
-                          ></canvas>
-                        </div>
-                      ) : null)}
-
-                    {data.source_type === 'ap' &&
-                      (transcript.length > 0 || data.complete === true ? (
-                        <div>
-                          <iframe
-                            ref={videoRef}
-                            className={`fixed drop-shadow-xl  bottom-24 right-4 w-[540px] h-[160px] rounded-lg z-50 transition-all duration-500 ease-in-out transform hover:scale-105 ${
-                              showYouTubeFrame ? 'opacity-100' : 'opacity-0'
-                            }}`}
-                            src={`https://embed.podcasts.apple.com/podcast/id${
-                              data.source_id.split('-')[0]
-                            }?i=${data.source_id.split('-')[1]}&theme=${
-                              theme ==='dark'
-                                ? 'dark'
-                                : 'light'
-                            }`}
-                            width="100%"
-                            height="100%"
-                            allowFullScreen={true}
-                            title={title ? title : ''}
-                          ></iframe>
-                        </div>
-                      ) : null)}
-                  </div>
-
-                  <div
-                    className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${
-                      data.source_type === 'sp' ? 'hidden lg:flex' : ' hidden'
-                    }`}
-                  >
-                    <a
-                      className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3"
-                      target="_blank"
-                      href={`https://twitter.com/i/spaces/${data.source_id}`}
-                      rel="noreferrer"
-                    >
-                      <Image
-                        src={TwitterSpaces}
-                        className="w-[240px] h-[120px] mx-auto"
-                        width={240}
-                        alt="Twitter Spaces"
-                      />
-                      <p className="text-md text-slate-600 dark:text-slate-300 mt-10 text-center px-5 mx-auto underline quicksand font-bold">
-                        Listen to{' '}
-                        <span className="font-bold pb-6 hyphenate quicksand font-bold">
-                          "{`${title}`.substring(0, 90)}{' '}
-                          {title.length > 90 && '...'}"
-                        </span>{' '}
-                        on Twitter
-                      </p>
-                    </a>
-                  </div>
-
-                  <div
-                    className={`bg-white dark:bg-mildDarkMode border pt-6 cursor-default items-center border-zinc-300 dark:border-zinc-500 drop-shadow-lg rounded-xl fixed bottom-24 right-4 min-w-[360px] max-w-[400px] min-h-[240px] z-50 ${
-                      data.source_type === 'x' ? 'hidden lg:flex' : ' hidden'
-                    }`}
-                  >
-                    <a
-                      className=" flex flex-col col-span-1 hidden lg:flex mx-auto mb-5 mt-3"
-                      target="_blank"
-                      href={`https://twitter.com/i/status/${data.source_id}`}
-                      rel="noreferrer"
-                    >
-                      <Image src={X} className="w-[240px] h-[120px] mx-auto" width={240}
-                      alt="Twitter Video"
-                      />
-                      <p className="text-md text-slate-600 dark:text-slate-300 mt-10 text-center px-5 mx-auto underline quicksand font-bold">
-                        Watch{' '}
-                        <span className="font-bold pb-6 hyphenate quicksand font-bold">
-                          "{`${title}`.substring(0, 90)}{' '}
-                          {title.length > 90 && '...'}"
-                        </span>{' '}
-                        on Twitter
-                      </p>
-                    </a>
-                  </div>
-                </div>
+                <VideoFrame 
+              data={data}
+              transcript={transcript}
+              showYouTubeFrame={showYouTubeFrame}
+              videoRef={videoRef}
+              canvasRef={canvasRef}
+              autoplay={autoplay}
+              timestamp={timestamp}
+              title={title}
+              theme={theme}
+              />
               )}
 
               <button
                 onClick={handleShowYouTubeFrame}
                 className={`z-50 fixed hidden ${
-                  data.source_type == 'yt' && 'lg:block'
+                  data.source_type == "yt" && "lg:block"
                 } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}
               >
                 {showYouTubeFrame ? (
@@ -290,7 +164,7 @@ export default function ReadComponent({
               <button
                 onClick={handleShowYouTubeFrame}
                 className={`z-50 fixed hidden ${
-                  data.source_type == 'tw' && 'lg:block'
+                  data.source_type == "tw" && "lg:block"
                 } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#9146ff] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}
               >
                 {showYouTubeFrame ? (
@@ -310,7 +184,7 @@ export default function ReadComponent({
               <button
                 onClick={handleShowYouTubeFrame}
                 className={`z-50 fixed hidden ${
-                  data.source_type == 'sp' && 'lg:block'
+                  data.source_type == "sp" && "lg:block"
                 } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}
               >
                 {showYouTubeFrame ? (
@@ -323,7 +197,7 @@ export default function ReadComponent({
               <button
                 onClick={handleShowYouTubeFrame}
                 className={`z-50 fixed hidden ${
-                  data.source_type == 'x' && 'lg:block'
+                  data.source_type == "x" && "lg:block"
                 } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-black transform transition-all duration-500 ease-in-out  hover:-translate-y-2 `}
               >
                 {showYouTubeFrame ? (
@@ -336,7 +210,7 @@ export default function ReadComponent({
               <button
                 onClick={handleShowYouTubeFrame}
                 className={`z-50 fixed hidden ${
-                  data.source_type == 'ap' && 'lg:block'
+                  data.source_type == "ap" && "lg:block"
                 } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#ff4cd7] transform transition-all duration-500 ease-in-out  hover:-translate-y-2 dark:bg-zinc-60`}
               >
                 {showYouTubeFrame ? (
@@ -366,20 +240,20 @@ export default function ReadComponent({
 
               <div
                 className={`col-span-2  ${
-                  data.source_type === 'yt' && ''
+                  data.source_type === "yt" && ""
                 } drop-shadow-sm `}
               >
                 {summary.key_qa !== undefined && summary.key_qa === null ? (
                   <div
                     id="q-and-a"
                     className={
-                      'question-answering  md:min-h-[600px] border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl'
+                      "question-answering  md:min-h-[600px] border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700   rounded-xl"
                     }
                   >
                     <p className="text-xl text-slate-500 dark:text-slate-200 quicksand font-normal max-w-screen-md p-3 text-center italic ">
                       Generating questions... plugging in an AI assistant...
                       <Image
-                        className={'opacity-70 dark:opacity-90 mx-auto'}
+                        className={"opacity-70 dark:opacity-90 mx-auto"}
                         src={working}
                         width={140}
                         alt="My SVG"
@@ -387,7 +261,7 @@ export default function ReadComponent({
                     </p>
                   </div>
                 ) : (
-                  (summary.key_qa ) && (
+                  summary.key_qa && (
                     <QuestionAnswering
                       source_id={data.source_id}
                       source_type={data.source_type}
@@ -409,15 +283,12 @@ export default function ReadComponent({
               </div>
             </div>
           )}
-         
-         
-         
           {transcript.length > 0 && (
             <div
               className={`${
-                isLoading ? 'hidden' : ''
+                isLoading ? "hidden" : ""
               } w-full 3xl:w-5/6 max-w-[700px]  mt-10 md:mt-0 ${
-                window.innerWidth > 1280 && window.innerWidth < 1420 ? '' : ''
+                window.innerWidth > 1280 && window.innerWidth < 1420 ? "" : ""
               }`}
             >
               {transcript.length > 0 ? (
@@ -425,24 +296,24 @@ export default function ReadComponent({
                   className={` mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-md 3xl:min-w-[500px] mb-10 lg:mb-0  ${
                     window.innerWidth > 1280 && window.innerWidth < 1420
                       ? window.innerWidth > 1280 && window.innerWidth < 1340
-                        ? 'ml-2'
-                        : 'ml-6'
-                      : 'xl:ml-10'
+                        ? "ml-2"
+                        : "ml-6"
+                      : "xl:ml-10"
                   } rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700`}
                 >
                   <div className="text-sm font-medium text-center text-slate-700 dark:text-slate-200 dark:border-gray-700 ">
                     <ul className="flex flex-wrap xl:w-[470px] w-full mx-auto quicksand font-bold	">
                       <li
                         className={`w-1/3 md:w-4/12 ${
-                          activeTab === 'tab3'
-                            ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2  quicksand font-bold border-greenColor'
-                            : 'quicksand font-bold border-b border-gray-200   '
+                          activeTab === "tab3"
+                            ? "text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2  quicksand font-bold border-greenColor"
+                            : "quicksand font-bold border-b border-gray-200   "
                         }`}
                       >
                         <button
-                          onClick={() => setActiveTab('tab3')}
+                          onClick={() => setActiveTab("tab3")}
                           className={
-                            'text-l  p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
+                            "text-l  p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor"
                           }
                         >
                           Key Takeaways
@@ -450,15 +321,15 @@ export default function ReadComponent({
                       </li>
                       <li
                         className={` w-1/3 md:w-4/12 ${
-                          activeTab === 'tab1'
-                            ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor'
-                            : 'quicksand font-bold border-b border-gray-200 '
+                          activeTab === "tab1"
+                            ? "text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor"
+                            : "quicksand font-bold border-b border-gray-200 "
                         }`}
                       >
                         <button
-                          onClick={() => setActiveTab('tab1')}
+                          onClick={() => setActiveTab("tab1")}
                           className={
-                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
+                            "text-l inline-block p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor"
                           }
                         >
                           Summary
@@ -466,15 +337,15 @@ export default function ReadComponent({
                       </li>
                       <li
                         className={` w-1/3 md:w-4/12 ${
-                          activeTab === 'tab2'
-                            ? 'text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor'
-                            : 'quicksand font-bold border-b border-gray-200  '
+                          activeTab === "tab2"
+                            ? "text-slate-700 dark:bg-mildDarkMode dark:text-slate-300 border-b-2 quicksand font-bold border-greenColor"
+                            : "quicksand font-bold border-b border-gray-200  "
                         }`}
                       >
                         <button
-                          onClick={() => setActiveTab('tab2')}
+                          onClick={() => setActiveTab("tab2")}
                           className={
-                            'text-l inline-block p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor'
+                            "text-l inline-block p-4 pt-6 rounded-t-lg dark:text-slate-200 dark:border-greenColor"
                           }
                         >
                           Transcript
@@ -493,9 +364,9 @@ export default function ReadComponent({
                           <Button
                             size="sm"
                             className="rounded-md justify-center h-[40px] bg-purple-500 mx-auto w-full mt-2 mb-2 text-white dark:text-slate-800 quicksand font-bold flex flex-row items-center text-center gap-2"
-                            onClick={() => handleAskAlphy('sandbox')}
+                            onClick={() => handleAskAlphy("sandbox")}
                           >
-                            {' '}
+                            {" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="#fde047"
@@ -516,17 +387,17 @@ export default function ReadComponent({
                           <Button
                             size="sm"
                             className="rounded-md bg-green-200  h-[40px] mt-2 mb-2 text-slate-700 dark:text-slate-800 quicksand font-bold drop-shadow-none"
-                            onClick={() => handleAskAlphy('default')}
+                            onClick={() => handleAskAlphy("default")}
                           >
-                            {' '}
+                            {" "}
                             Ask Alphy to learn more about it
                           </Button>
                           <Button
                             size="sm"
                             className="rounded-md bg-blue-300  h-[40px] mt-2 mb-2 text-slate-700 dark:text-slate-800 quicksand font-bold "
-                            onClick={() => handleAskAlphy('ELI5')}
+                            onClick={() => handleAskAlphy("ELI5")}
                           >
-                            {' '}
+                            {" "}
                             Explain like I'm 5
                           </Button>
                         </div>
@@ -542,7 +413,7 @@ export default function ReadComponent({
                       >
                         <Tabs>
                           <Tab eventKey="transcript" title="">
-                            {activeTab === 'tab3' &&
+                            {activeTab === "tab3" &&
                               (data ? (
                                 summary.key_takeaways ? (
                                   summary.key_takeaways.map((item, index) => {
@@ -553,7 +424,7 @@ export default function ReadComponent({
                                           {item}
                                         </ReactMarkdown>
                                       </p>
-                                    )
+                                    );
                                   })
                                 ) : summary === undefined ||
                                   summary.length === 0 ? (
@@ -567,7 +438,7 @@ export default function ReadComponent({
                                       Processing key takeaways...
                                       <Image
                                         className={
-                                          'opacity-70 dark:opacity-90 mx-auto'
+                                          "opacity-70 dark:opacity-90 mx-auto"
                                         }
                                         src={working}
                                         width={80}
@@ -578,10 +449,10 @@ export default function ReadComponent({
                                 )
                               ) : null)}
 
-                            {activeTab === 'tab1' && (
+                            {activeTab === "tab1" && (
                               <div
                                 className={
-                                  'content-area text-l font-normal  max-w-screen-lg overflow-auto h-full xl:max-h-[110vh]'
+                                  "content-area text-l font-normal  max-w-screen-lg overflow-auto h-full xl:max-h-[110vh]"
                                 }
                               >
                                 {/* <button className="flex ml-auto justify-end flex-row justify-end mb-2 mr-8 opacity-60 font-semibold text-black" onClick={handleDownload}><p className="pr-2">Download</p> {downloading ? <img src={Download}></img> : <img title="Download summary" src={DownloadStatic}></img>}</button> */}
@@ -593,12 +464,12 @@ export default function ReadComponent({
                                     {summary === undefined ||
                                     summary.length === 0
                                       ? "This content doesn't have a summary. Check out the transcript!"
-                                      : 'Still waiting for the summary! Meanwhile, check the transcript.'}
+                                      : "Still waiting for the summary! Meanwhile, check the transcript."}
                                     {summary === undefined ||
                                     summary.length === 0 ? null : (
                                       <Image
                                         className={
-                                          'opacity-70 dark:opacity-90 mx-auto'
+                                          "opacity-70 dark:opacity-90 mx-auto"
                                         }
                                         src={working}
                                         width={80}
@@ -606,7 +477,7 @@ export default function ReadComponent({
                                       />
                                     )}
                                   </p>
-                                ) : typeof summaryArray[0] === 'string' ? (
+                                ) : typeof summaryArray[0] === "string" ? (
                                   summaryArray.map((item, index) => {
                                     return (
                                       <div
@@ -617,444 +488,158 @@ export default function ReadComponent({
                                           <ReactMarkdown>{item}</ReactMarkdown>
                                         </div>
                                       </div>
-                                    )
+                                    );
                                   })
                                 ) : (
-                                  Object.values(summaryArray).map(
-                                    (item, index) => (
-                                      <div
-                                        className="mb-4  text-slate-800  quicksand dark:text-slate-200"
-                                        key={index}
-                                      >
-                                        <div className="text-l   dark:border-indigo-100 p-4">
-                                          <h3
-                                            className="text-xl mb-1 quicksand font-bold  underline text-slate-700 cursor-pointer dark:text-slate-200"
-                                            onClick={() =>
-                                              handleClickTimestamp(item.at)
-                                            }
-                                          >
-                                            {`${item.title}`}
-                                          </h3>
-                                          <h5
-                                            onClick={() =>
-                                              handleClickTimestamp(item.at)
-                                            }
-                                            className="mb-2 cursor-pointer"
-                                          >
-                                            {(typeof item.at === 'string' && item.at.match(/^PT/))
-
-                                            ? 
-                                             
-                                            `${
-                                              Math.floor(convertTimeToSeconds(item.at) / 3600) < 10
-                                                ? `0${Math.floor(
-                                                    convertTimeToSeconds(item.at) / 3600
-                                                  )}`
-                                                : `${Math.floor(
-                                                    convertTimeToSeconds(item.at) / 3600
-                                                  )}`
-                                              }
-																								${':'}
-																								${
-                                                  Math.floor(convertTimeToSeconds(item.at) / 60) < 10
-                                                    ? `0${Math.floor(
-                                                        convertTimeToSeconds(item.at) / 60
-                                                      )}`
-                                                    : Math.floor(
-                                                        convertTimeToSeconds(item.at) % 3600
-                                                      ) < 600
-                                                    ? `0${Math.floor(
-                                                        convertTimeToSeconds(item.at) / 60 -
-                                                          Math.floor(
-                                                            convertTimeToSeconds(item.at) / 3600
-                                                          ) *
-                                                            60
-                                                      )}`
-                                                    : Math.floor(
-                                                        convertTimeToSeconds(item.at) / 60 -
-                                                          Math.floor(
-                                                            convertTimeToSeconds(item.at) / 3600
-                                                          ) *
-                                                            60
-                                                      )
-                                                }
-																								${':'}
-																								${
-                                                  Math.floor(convertTimeToSeconds(item.at) % 60) < 10
-                                                    ? `0${Math.floor(
-                                                        convertTimeToSeconds(item.at) % 60
-                                                      )}`
-                                                    : Math.floor(convertTimeToSeconds(item.at) % 60)
-                                                }`
-                                                
-                                                :
-
-
-                                            
-                                            
-                                            
-                                            `${
-                                              Math.floor(item.at / 3600) < 10
-                                                ? `0${Math.floor(
-                                                    item.at / 3600
-                                                  )}`
-                                                : `${Math.floor(
-                                                    item.at / 3600
-                                                  )}`
-                                              }
-																								${':'}
-																								${
-                                                  Math.floor(item.at / 60) < 10
-                                                    ? `0${Math.floor(
-                                                        item.at / 60
-                                                      )}`
-                                                    : Math.floor(
-                                                        item.at % 3600
-                                                      ) < 600
-                                                    ? `0${Math.floor(
-                                                        item.at / 60 -
-                                                          Math.floor(
-                                                            item.at / 3600
-                                                          ) *
-                                                            60
-                                                      )}`
-                                                    : Math.floor(
-                                                        item.at / 60 -
-                                                          Math.floor(
-                                                            item.at / 3600
-                                                          ) *
-                                                            60
-                                                      )
-                                                }
-																								${':'}
-																								${
-                                                  Math.floor(item.at % 60) < 10
-                                                    ? `0${Math.floor(
-                                                        item.at % 60
-                                                      )}`
-                                                    : Math.floor(item.at % 60)
-                                                }`}
-                                          </h5>
-
-                                          {item.summary
-                                            .split('\n')
-                                            .map((item, index) => {
-                                              return (
-                                                <div
-                                                  key={index}
-                                                  className="quicksand font-normal text-slate-700 dark:text-slate-300 text-md mt-4"
-                                                >
-                                                  <ReactMarkdown className="react-markdown-edit quicksand">
-                                                    {item}
-                                                  </ReactMarkdown>
-                                                </div>
-                                              )
-                                            })}
-                                        </div>
-                                      </div>
-                                    )
-                                  )
+                                  <Timestamp summaryArray={summaryArray} convertTimeToSeconds={convertTimeToSeconds} handleClickTimestamp = {handleClickTimestamp} />
                                 )}
                               </div>
                             )}
-                            {activeTab === 'tab2' && (
+                            {activeTab === "tab2" && (
                               <div className="content-area text-l font-normal max-w-screen-md overflow-auto h-full xl:max-h-[110vh] ">
                                 {isLoading ? (
                                   <Loading />
                                 ) : (
                                   transcript.map((item, index) => {
+                                    const leeway = 15; // seconds
+                                    const timeParts = item.split(":");
+                                    const transcriptTimeInSeconds =
+                                      parseInt(timeParts[0]) * 3600 +
+                                      parseInt(timeParts[1]) * 60 +
+                                      parseInt(timeParts[2]);
+                                    
+                                      const chapter = chapters.find(chapter => {
+                                        const chapterTime = chapter.at; // already in seconds due to convertTimeToSeconds
+                                        return Math.abs(chapterTime - transcriptTimeInSeconds) < leeway;
+                                      });
+
                                     if (
                                       index % 2 === 0 &&
                                       index < transcript.length
                                     ) {
                                       return window.innerWidth > 999 &&
-                                        (data.source_type === 'yt' ||
-                                          data.source_type === 'tw') ? (
+                                        (data.source_type === "yt" ||
+                                          data.source_type === "tw") ? (
+                                            <div className="flex flex-col font-bold quicksand ">
+                                              <div className="flex flex-row items-center ">
+                                                {chapter &&
+                                               <p className="text-xl mt-10 mb-6">
+                                              {chapter.title }
+                                            </p>
+                                            }
+                                            <DownloadPopover 
+                                          tier={tier}
+                                          index={index}
+                                          downloading={downloading}
+                                          handleDownload={handleDownload}
+                                          basicDataLoaded={basicDataLoaded}
+                                          themePopover={themePopover}/>
+                                          </div>
                                         <div className="flex flex-row dark:text-slate-300">
+                                        
+                                          
                                           <a
                                             onClick={handleClickTimestamp}
                                             className={`${
-                                              data.source_type === 'yt' ||
-                                              data.source_type === 'tw'
-                                                ? 'lg:cursor-pointer lg:pointer-events-auto'
-                                                : ''
+                                              data.source_type === "yt" ||
+                                              data.source_type === "tw"
+                                                ? "lg:cursor-pointer lg:pointer-events-auto"
+                                                : ""
                                             } lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-slate-300`}
                                             key={index}
                                           >
                                             <br></br>
-
+                                            
                                             <p className="text-md summary-text ">
-                                              {item}{' '}
+                                              {item}{" "}
                                             </p>
                                           </a>
 
-                                          <div
-                                            className={`${
-                                              index !== 0 ? 'hidden' : ''
-                                            }   flex ml-auto justify-end flex-row justify-end `}
-                                          >
-                                            <Popover>
-                                              <PopoverHandler>
-                                                <button
-                                                  id="popoverButtonDownload"
-                                                  data-popover-target="popoverHover"
-                                                  data-popover-trigger="hover"
-                                                  className={`${
-                                                    tier === 'free' ||
-                                                    tier === undefined
-                                                      ? 'cursor-default dark:invert'
-                                                      : ''
-                                                  } mr-8 opacity-80 pt-4`}
-                                                >
-                                                  <button
-                                                    className={`${
-                                                      tier === 'free' ||
-                                                      tier === undefined
-                                                        ? 'bg-indigo-200 text-white pointer-events-none'
-                                                        : ''
-                                                    } text-sm  quicksand font-bold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}
-                                                  >
-                                                    {downloading ? (
-                                                      <Spinner
-                                                        className="flex justify-center mx-auto opacity-70 pointer-events-none"
-                                                        color="gray"
-                                                      />
-                                                    ) : (
-                                                      'Download Transcript'
-                                                    )}
-                                                  </button>
-                                                </button>
-                                              </PopoverHandler>
-
-                                              <div
-                                                data-popover
-                                                id="popoverHover"
-                                                role="tooltip"
-                                                className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white quicksand font-bold  rounded-lg shadow-sm opacity-0 dark:text-slate-200 dark:border-gray-600 dark:bg-mildDarkMode "
-                                              >
-                                                <ThemeProvider
-                                                  value={themePopover}
-                                                >
-                                                  <PopoverContent background="indigo">
-                                                    {tier !== undefined &&
-                                                    tier != 'free' &&
-                                                    basicDataLoaded === true ? (
-                                                      <div className="">
-                                                        <div
-                                                          onClick={() =>
-                                                            handleDownload(1)
-                                                          }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  quicksand font-bold dark:hover:bg-zinc-200 dark:hover:text-slate-500"
-                                                        >
-                                                          <p className="quicksand font-bold">
-                                                            Download as Plain
-                                                            Subtitles (.srt)
-                                                          </p>
-                                                        </div>
-
-                                                        <div
-                                                          onClick={() =>
-                                                            handleDownload(2)
-                                                          }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  quicksand font-bold dark:hover:bg-zinc-200 dark:hover:text-slate-500"
-                                                        >
-                                                          <p className="quicksand font-bold">
-                                                            Download Formatted
-                                                            Transcript (.txt)
-                                                          </p>
-                                                        </div>
-                                                        <div
-                                                          onClick={() =>
-                                                            handleDownload(3)
-                                                          }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100  font-averta-semibold dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
-                                                        >
-                                                          <p className="font-averta-semibold">
-                                                            Download as Plain
-                                                            Text (.txt)
-                                                          </p>
-                                                        </div>
-                                                      </div>
-                                                    ) : (
-                                                      <div className="px-3 cursor-pointer py-2 pointer-events-none ">
-                                                        <p className="quicksand font-bold">
-                                                          Upgrade your plan to
-                                                          download the
-                                                          transcript
-                                                        </p>
-                                                      </div>
-                                                    )}
-                                                  </PopoverContent>
-                                                </ThemeProvider>
-                                              </div>
-                                            </Popover>
-                                          </div>
+                                          
+                                        </div>
                                         </div>
                                       ) : (
-                                        <div className="flex flex-row">
+                                        <div className="flex flex-row ">
+                                          {chapter && 
+                                           <p className="text-xl mt-10 mb-6">
+                                              {chapter.title}
+                                            </p>
+                                            }
                                           <a
                                             target="_blank"
                                             href={
-                                              data.source_type !== 'up'
-                                                ? (data.source_type === 'yt' &&
+                                              data.source_type !== "up"
+                                                ? (data.source_type === "yt" &&
                                                     `https://youtu.be/${
                                                       data.source_id
                                                     }?t=${Math.floor(
                                                       parseInt(
-                                                        item.split(':')[0] *
+                                                        item.split(":")[0] *
                                                           3600
                                                       ) +
                                                         parseInt(
-                                                          item.split(':')[1] *
+                                                          item.split(":")[1] *
                                                             60
                                                         ) +
                                                         parseInt(
-                                                          item.split(':')[2]
+                                                          item.split(":")[2]
                                                         )
                                                     )}`) ||
-                                                  (data.source_type === 'tw' &&
+                                                  (data.source_type === "tw" &&
                                                     `https://www.twitch.tv/videos/${
                                                       data.source_id
                                                     }?t=${
                                                       Math.floor(
                                                         parseInt(
-                                                          item.split(':')[0]
+                                                          item.split(":")[0]
                                                         )
                                                       ) +
-                                                      'h' +
+                                                      "h" +
                                                       Math.floor(
                                                         parseInt(
-                                                          item.split(':')[1]
+                                                          item.split(":")[1]
                                                         )
                                                       ) +
-                                                      'm' +
+                                                      "m" +
                                                       Math.floor(
                                                         parseInt(
-                                                          item.split(':')[2]
+                                                          item.split(":")[2]
                                                         )
                                                       ) +
-                                                      's'
+                                                      "s"
                                                     }`) ||
-                                                  (data.source_type === 'sp' &&
+                                                  (data.source_type === "sp" &&
                                                     `https://twitter.com/i/spaces/${data.source_id}`)
                                                 : null
                                             }
                                             className={`summary-text  ${
-                                              data.source_type === 'yt' ||
-                                              data.source_type === 'tw'
-                                                ? 'lg:cursor-pointer lg:pointer-events-auto'
-                                                : ''
+                                              data.source_type === "yt" ||
+                                              data.source_type === "tw"
+                                                ? "lg:cursor-pointer lg:pointer-events-auto"
+                                                : ""
                                             }  lg:pointer-events-auto lg:text-slate-900 dark:text-slate-300 font-bold underline`}
                                             key={index}
                                             rel="noreferrer"
                                           >
+
+
+                                           
+
                                             <br></br>
-                                            {item}{' '}
+                                            {item}{" "}
                                           </a>
 
-                                          <div
-                                            className={`${
-                                              index !== 0 ? 'hidden' : ''
-                                            }   flex ml-auto justify-end flex-row justify-end`}
-                                          >
-                                            <Popover>
-                                              <PopoverHandler>
-                                                <button
-                                                  id="popoverButtonDownload"
-                                                  data-popover-target="popoverHover"
-                                                  data-popover-trigger="hover"
-                                                  className={`${
-                                                    tier === 'free' ||
-                                                    tier === undefined
-                                                      ? 'cursor-default dark:invert'
-                                                      : ''
-                                                  } mr-8 opacity-80 pt-4`}
-                                                >
-                                                  <button
-                                                    className={`${
-                                                      tier === 'free' ||
-                                                      tier === undefined
-                                                        ? 'bg-indigo-200 text-white pointer-events-none'
-                                                        : ''
-                                                    } text-sm bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white quicksand font-bold`}
-                                                  >
-                                                    {downloading ? (
-                                                      <Spinner
-                                                        className="flex justify-center mx-auto opacity-70"
-                                                        color="gray"
-                                                      />
-                                                    ) : (
-                                                      'Download Transcript'
-                                                    )}
-                                                  </button>
-                                                </button>
-                                              </PopoverHandler>
+                                          <DownloadPopover 
+                                          tier={tier}
+                                          index={index}
+                                          downloading={downloading}
+                                          handleDownload={handleDownload}
+                                          basicDataLoaded={basicDataLoaded}
+                                          themePopover={themePopover}/>
 
-                                              <div
-                                                data-popover
-                                                id="popoverHover"
-                                                role="tooltip"
-                                                className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-slate-200 dark:border-gray-600 dark:bg-mildDarkMode "
-                                              >
-                                                <ThemeProvider
-                                                  value={themePopover}
-                                                >
-                                                  <PopoverContent background="indigo">
-                                                    {tier !== undefined &&
-                                                    tier != 'free' &&
-                                                    basicDataLoaded === true ? (
-                                                      <div>
-                                                        <div
-                                                          onClick={() =>
-                                                            handleDownload(1)
-                                                          }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 quicksand font-bold dark:hover:bg-zinc-200 dark:hover:text-slate-500"
-                                                        >
-                                                          <p className=" quicksand font-bold">
-                                                            Download as Plain
-                                                            Subtitles (.srt)
-                                                          </p>
-                                                        </div>
 
-                                                        <div
-                                                          onClick={() =>
-                                                            handleDownload(2)
-                                                          }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 quicksand font-bold  dark:hover:bg-zinc-200 dark:hover:text-slate-500"
-                                                        >
-                                                          <p className="quicksand font-bold">
-                                                            Download Formatted
-                                                            Transcript (.txt)
-                                                          </p>
-                                                        </div>
-
-                                                        <div
-                                                          onClick={() =>
-                                                            handleDownload(3)
-                                                          }
-                                                          className="px-3 cursor-pointer py-2 hover:bg-zinc-100 font-averta-semibold  dark:hover:bg-zinc-200 dark:hover:text-zinc-500"
-                                                        >
-                                                          <p className="font-averta-semibold">
-                                                            Download as Plain Text (.txt)
-                                                          </p>
-                                                        </div>
-                                                      </div>
-                                                    ) : (
-                                                      <div className="px-3 cursor-pointer py-2 pointer-events-none quicksand font-bold ">
-                                                        <p className="">
-                                                          Upgrade your plan to
-                                                          download the
-                                                          transcript
-                                                        </p>
-                                                      </div>
-                                                    )}
-                                                  </PopoverContent>
-                                                </ThemeProvider>
-                                              </div>
-                                            </Popover>
-                                          </div>
                                         </div>
-                                      )
+                                      );
                                     } else if (
                                       index % 2 === 1 &&
                                       index < transcript.length
@@ -1066,9 +651,9 @@ export default function ReadComponent({
                                         >
                                           <br></br>
 
-                                          {item.replace(/\\h/g, ' ')}
+                                          {item.replace(/\\h/g, " ")}
                                         </div>
-                                      )
+                                      );
                                     }
                                   })
                                 )}
@@ -1084,7 +669,7 @@ export default function ReadComponent({
                 <div></div>
               )}
             </div>
-          )}{' '}
+          )}{" "}
         </div>
       ) : (
         <div className="flex flex-col mb-20 mt-20 ">
@@ -1099,14 +684,14 @@ export default function ReadComponent({
             contentSummaries.length > 1 &&
             (contentSummaries[0].lang === language ||
               contentSummaries[1].lang === language)) ||
-          language === 'en' ? null : (
+          language === "en" ? null : (
             <p className="text-xl text-slate-500 dark:text-slate-200 quicksand font-normal max-w-screen-md mx-auto p-3 text-center">
-              Seems like Alphy hasn't processed the content in{' '}
-              {language_codes[language]} yet.{' '}
-              {tier !== undefined && tier !== 'free' ? (
+              Seems like Alphy hasn't processed the content in{" "}
+              {language_codes[language]} yet.{" "}
+              {tier !== undefined && tier !== "free" ? (
                 <p className="quicksand font-normal">
                   Request Alphy to generate summary, key takeaways, and
-                  questions in {language_codes[language]} clicking{' '}
+                  questions in {language_codes[language]} clicking{" "}
                   <a
                     onClick={requestTranslation}
                     className="underline text-greenColor cursor-pointer"
@@ -1117,13 +702,13 @@ export default function ReadComponent({
                 </p>
               ) : (
                 <p className="quicksand font-normal">
-                  Upgrade your plan request translation. You can check out the{' '}
+                  Upgrade your plan request translation. You can check out the{" "}
                   <a
                     className="underline text-green-300"
-                    href={currentUser ? '/account' : '/plans'}
+                    href={currentUser ? "/account" : "/plans"}
                   >
-                    {currentUser ? 'account' : 'plans'}
-                  </a>{' '}
+                    {currentUser ? "account" : "plans"}
+                  </a>{" "}
                   page for more detail
                 </p>
               )}
@@ -1133,9 +718,7 @@ export default function ReadComponent({
             </p>
           )}
         </div>
-      )
-      )
-        }
+      )}
     </div>
-  )
+  );
 }
