@@ -33,8 +33,10 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
       }))
     }
   }
+  
 
   const imageURLSetter = (source_type, source_id) => {
+    
     if (source_type === 'sp') {
       return Twitter
     } else if (source_type === 'x') {
@@ -123,7 +125,7 @@ export default function HistoryDefault({ sandboxHistory, setSandboxHistory }) {
                     height={100}
                     alt="source image"
                   />
-                  <p className="text-xl text-slate-700 dark:text-zinc-300 quicksand font-bold select-none w-full  group-hover:brightness-[125%] transition  duration-300 ease-in-out ">
+                  <p className="text-lg text-slate-700 dark:text-zinc-300 quicksand font-bold select-none w-full  group-hover:brightness-[125%] transition  duration-300 ease-in-out ">
                     {item.title}
                   </p>
                   <div
