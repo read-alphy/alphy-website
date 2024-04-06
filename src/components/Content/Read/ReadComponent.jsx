@@ -523,7 +523,7 @@ export default function ReadComponent({
                                             <div className="flex flex-col font-bold quicksand ">
                                               <div className="flex flex-row items-center ">
                                                 {chapter &&
-                                               <p className="text-xl mt-10 mb-6">
+                                               <p className="text-2xl mt-10 mb-6">
                                               {chapter.title }
                                             </p>
                                             }
@@ -559,12 +559,21 @@ export default function ReadComponent({
                                         </div>
                                         </div>
                                       ) : (
-                                        <div className="flex flex-row ">
-                                          {chapter && 
-                                           <p className="text-xl mt-10 mb-6">
-                                              {chapter.title}
+                                        <div className="flex flex-col font-bold quicksand ">
+                                         <div className="flex flex-row items-center ">
+                                                {chapter &&
+                                               <p className="text-2xl mt-10 mb-6">
+                                              {chapter.title }
                                             </p>
                                             }
+                                            <DownloadPopover 
+                                          tier={tier}
+                                          index={index}
+                                          downloading={downloading}
+                                          handleDownload={handleDownload}
+                                          basicDataLoaded={basicDataLoaded}
+                                          themePopover={themePopover}/>
+                                          </div>
                                           <a
                                             target="_blank"
                                             href={
@@ -629,14 +638,7 @@ export default function ReadComponent({
                                             {item}{" "}
                                           </a>
 
-                                          <DownloadPopover 
-                                          tier={tier}
-                                          index={index}
-                                          downloading={downloading}
-                                          handleDownload={handleDownload}
-                                          basicDataLoaded={basicDataLoaded}
-                                          themePopover={themePopover}/>
-
+                                      
 
                                         </div>
                                       );
