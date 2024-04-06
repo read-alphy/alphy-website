@@ -12,7 +12,7 @@ export default function DynamicQA({
   updateVariable,
   DataArrayIcon,
   handleShowAllSources,
-  highlightIndex,
+  inputValue,
   handleLength,
 }) {
 
@@ -129,8 +129,8 @@ export default function DynamicQA({
               </svg>
             </h2>
             <div className="col-span-1 justify-end flex flex-row flex ">
-              <svg
-                onClick={handleShareLink}
+            {/*   <svg
+                onClick={() => handleShareLink(inputValue)}
                 className="cursor-pointer"
                 width="20"
                 aria-hidden="true"
@@ -146,10 +146,10 @@ export default function DynamicQA({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 ></path>
-              </svg>
+              </svg> */}
 
               <svg
-                onClick={handleCopyToClipboard}
+                onClick={() => handleCopyToClipboard('')}
                 title="Copy question and answer"
                 className="cursor-pointer"
                 width="20"

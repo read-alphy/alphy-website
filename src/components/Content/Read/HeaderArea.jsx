@@ -172,7 +172,7 @@ export default function HeaderArea({
           )}
         </div>
         <div className="flex flex-row ml-1">
-          <h2 className="col-span-2 mt-2 text-xl  quicksand font-bold lg:max-w-[40vw] text-left lg:col-span-3  text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">
+          <h2 className="col-span-2 mt-2 text-xl  quicksand font-bold lg:max-w-[40vw] text-left lg:col-span-3  text-slate-700 dark:bg-darkMode dark:text-zinc-300 font-bold">
             {data.source_type === 'up'
               ? title.substring(0, title.lastIndexOf('.'))
               : title}

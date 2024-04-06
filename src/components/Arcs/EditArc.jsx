@@ -406,7 +406,7 @@ export default function EditArc({
             <div className="w-full flex justify-center">
               {
                 <button
-                  className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold underline pb-10"
+                  className="justify-center flex text-slate-700 dark:text-zinc-300 font-semibold underline pb-10"
                   onClick={loadMore}
                 >
                   {'Load more'}

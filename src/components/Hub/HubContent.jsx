@@ -57,6 +57,20 @@ export default function HubContent({
                   mainShow={mainShow}
                   setMainShow={setMainShow}
                 />
+
+              <HubArcFeed
+                  arcs={arcs}
+                  currentUser={currentUser}
+                  tier={tier}
+                  userArcs={userArcs}
+                  dataGlobalArcs={dataGlobalArcs}
+                  setDataGlobalArcs={setDataGlobalArcs}
+                  mainShow={mainShow}
+                  setMainShow={setMainShow}
+                  collapsed={collapsed}
+                />
+
+
               </div>
             )}
 

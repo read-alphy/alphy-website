@@ -420,7 +420,7 @@ export default function ArcCreation({
             <div className="w-full flex justify-center">
               {
                 <button
-                  className="justify-center flex text-blueLike dark:text-zinc-300 quicksand font-normal underline pb-10 quicksand font-semibold"
+                  className="justify-center flex text-slate-700 dark:text-zinc-300 quicksand font-normal underline pb-10 quicksand font-semibold"
                   onClick={loadMore}
                 >
                   {'Load more'}

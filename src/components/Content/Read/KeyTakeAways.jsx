@@ -50,7 +50,7 @@ const KeyTakeAways = ({ key_takeaways }) => {
               }`}
             >
               {keysCollapsed ? <ArrowButton direction={'left'} /> : null}
-              <h5 className="text-xl font-bold tracking-tight text-zinc-600 dark:text-zinc-200 text-blueLike dark:bg-darkMode dark:text-zinc-300 items-center">
+              <h5 className="text-xl font-bold tracking-tight text-zinc-600 dark:text-zinc-200 text-slate-700 dark:bg-darkMode dark:text-zinc-300 items-center">
                 Key Takeaways{' '}
                 {keysCollapsed
                   ? `${current + 1}/${key_takeaways.length}`

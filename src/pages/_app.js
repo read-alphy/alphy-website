@@ -400,7 +400,7 @@ return () => {
     <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
 
     <div
-              className={` z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
+              className={` z-40 text-slate-700 bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
                 router.asPath.split('/')[1] === 'arc' &&
                 router.asPath.split('/')[2] !== 'editArc' &&
                 router.asPath.split('/')[2] !== 'createArc'

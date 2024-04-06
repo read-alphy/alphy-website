@@ -10,7 +10,14 @@ import { Button, Spinner } from '@material-tailwind/react'
 import { API_URL } from '../../constants'
 
 
-function HubSourceFeed(props) {
+function HubSourceFeed(
+tier,
+credit,
+currentUser,
+
+
+
+) {
   
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -19,7 +26,7 @@ function HubSourceFeed(props) {
   const [hasMore, setHasMore] = useState(false)
   const [prevLength, setPrevLength] = useState(0)
   /*const const { currentUser } = useAuth(); */
-  const currentUser = props.currentUser
+
   const router  = useRouter()
 
   const [inputValue, setInputValue] = useState('')
@@ -67,7 +74,7 @@ function HubSourceFeed(props) {
       localStorage.setItem('search', '')
     }
   })
-  const limit = 40
+  const limit = 20
   const searchInputRef = React.useRef(null)
 
   // Inside your HubSourceFeed component
@@ -173,7 +180,7 @@ function HubSourceFeed(props) {
         videoId = search.split('/').pop().split('?v=')[1].split('&')[0]
         video_source = 'yt'
       } else if (search.includes('https://twitter.com/i/spaces')) {
-        if (props.tier === 'basic' || props.tier === 'premium') {
+        if (tier === 'basic' || tier === 'premium') {
           videoId = search.split('/').pop().split('?')[0]
           video_source = 'sp'
         } else {
@@ -184,7 +191,7 @@ function HubSourceFeed(props) {
           return
         }
       } else if (search.includes('https://podcasts.apple.com')) {
-        if (props.tier === 'basic' || props.tier === 'premium') {
+        if (tier === 'basic' || tier === 'premium') {
           const idRegex = /id(\d+)/
           const iRegex = /i=(\d+)/
 
@@ -207,7 +214,7 @@ function HubSourceFeed(props) {
         search.includes('https://www.twitch.tv') ||
         search.includes('https://www.twitch.com')
       ) {
-        if (props.tier === 'basic' || props.tier === 'premium') {
+        if (tier === 'basic' || tier === 'premium') {
           const regex = /twitch\.(tv|com)\/videos\/(\d+)/
           const match = search.match(regex)
           videoId = match ? match[1] : null
@@ -225,7 +232,7 @@ function HubSourceFeed(props) {
           search.includes('https://twitter.com')) &&
         !search.includes('i/spaces')
       ) {
-        if (props.tier === 'basic' || props.tier === 'premium') {
+        if (tier === 'basic' || tier === 'premium') {
           setSearch(search.split('/video/')[0])
           const regex = /status\/(\d+)/
           const match = search.split('/video/')[0].match(regex)
@@ -307,7 +314,7 @@ function HubSourceFeed(props) {
   return (
     <div className="xl:min-w-[1000px] xl:max-w-[1000px] 3xl:max-w-[1280px] 3xl:min-w-[1280px] w-full mx-auto xl:mx-0 md:pl-10  lg:pl-16  xl:pl-20 3xl:pl-40   flex flex-row">
       <div className=" p-[10px] mt-10 min-h-[60vh]  w-full">
-        <p className="quicksand font-bold text-zinc-700 dark:text-zinc-300 text-lg font-sans font-semibold text-xl xl:text-2xl pl-2">
+        <p className="quicksand font-bold text-slate-700 dark:text-zinc-300 text-lg  text-xl xl:text-2xl pl-2">
           {' '}
           Explore our database.
         </p>
@@ -400,7 +407,7 @@ function HubSourceFeed(props) {
             <div className="w-full flex justify-center">
               {
                 <button
-                  className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline quicksand font-bold"
+                  className="justify-center flex text-slate-700 dark:text-zinc-300 font-semibold  mt-10 underline quicksand font-bold"
                   onClick={loadMore}
                 >
                   {'Load more'}
@@ -432,9 +439,9 @@ function HubSourceFeed(props) {
                       href="/account"
                       className="text-zinc-500 dark:text-zinc-400"
                     >
-                      {props.tier === 'free' && 'Starter Plan'}
-                      {props.tier === 'basic' && 'Basic Plan'}
-                      {props.tier === 'premium' && 'Premium Plan'}
+                      {tier === 'free' && 'Starter Plan'}
+                      {tier === 'basic' && 'Basic Plan'}
+                      {tier === 'premium' && 'Premium Plan'}
                     </a>
                     <p className="ml-1 mr-1 text-zinc-500 dark:text-zinc-400">
                       {' '}
@@ -442,7 +449,7 @@ function HubSourceFeed(props) {
                     </p>
                     <p className=" text-zinc-500 dark:text-zinc-400">
                       {' '}
-                      Remaining Credits : {Math.floor(props.credit)} minutes
+                      Remaining Credits : {Math.floor(credit)} minutes
                     </p>
                   </div>
                 </div>
@@ -473,7 +480,7 @@ function HubSourceFeed(props) {
                   </div>
                 )}
 
-                {(props.tier === 'basic' || props.tier === 'premium') && (
+                {(tier === 'basic' || tier === 'premium') && (
                   <div className="mt-8 flex flex-row text-sm">
                     <p className="text-zinc-500 dark:text-zinc-400 mr-2">
                       Need more credits?{' '}

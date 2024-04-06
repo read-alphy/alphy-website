@@ -8,7 +8,7 @@ export default function NotFound() {
 
 
   return (
-    <div className="flex flex-col items-center w-full justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-center h-[90vh] ">
+    <div className="flex flex-col items-center w-full justify-center text-slate-700 dark:bg-darkMode dark:text-zinc-300 text-center h-[90vh] ">
       <Image src={Smiley} className="opacity-70 saturate-50" alt = "smiling robot" />
       <h2 className="welcome-prompt mb-5 text-6xl flex md:flex-row flex-col justify-center  text-[2.25rem] font-averta-semibold">
         Oops!

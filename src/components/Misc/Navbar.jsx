@@ -50,7 +50,7 @@ function Navbar({ collapsed, setCollapsed }) {
       } justify-between dark:bg-darkMode pb-2	`}
     >
       <div
-        className={`flex  justify-between flex-row top-0 z-40 text-blueLike bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md quicksand ${
+        className={`flex  justify-between flex-row top-0 z-40 text-slate-700 bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md quicksand ${
           isYt || isSp || isUp || isArc || isHub
             ? 'h-[8vh] min-h-[40px]'
             : 'h-[8vh] min-h-[40px]'

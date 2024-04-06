@@ -32,7 +32,7 @@ export default function AboutInfo() {
       </div>
 
       <div
-        className="mx-auto md:w-800 w-full flex  justify-center text-blueLike dark:bg-darkMode dark:text-zinc-300 bg-white"
+        className="mx-auto md:w-800 w-full flex  justify-center text-slate-700 dark:bg-darkMode dark:text-zinc-300 bg-white"
         id="about"
       >
         <div

@@ -433,7 +433,7 @@ export default function HubUserPage({
                     <div className="w-full flex justify-center">
                       {
                         <button
-                          className="justify-center flex text-blueLike dark:text-zinc-300 quicksand font-bold  mt-10 underline"
+                          className="justify-center flex text-slate-700 dark:text-zinc-300 quicksand font-bold  mt-10 underline"
                           onClick={() => loadMore('personal')}
                         >
                           {'Load more'}
@@ -488,7 +488,7 @@ export default function HubUserPage({
                     <div className="w-full flex justify-center">
                       {
                         <button
-                          className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline"
+                          className="justify-center flex text-slate-700 dark:text-zinc-300 font-semibold  mt-10 underline"
                           onClick={() => loadMore('bookmarks')}
                         >
                           {'Load more'}
@@ -579,7 +579,7 @@ export default function HubUserPage({
                 <div className="w-full flex justify-center">
                   {
                     <button
-                      className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline"
+                      className="justify-center flex text-slate-700 dark:text-zinc-300 font-semibold  mt-10 underline"
                       onClick={() => loadMore('uploads')}
                     >
                       {'Load more'}

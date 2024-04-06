@@ -277,7 +277,7 @@ export default function AccountInfo({
 
  */}
 
-              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-xl 2xl:text-2xl  mt-20 quicksand font-bold">
+              <p className="text-center text-slate-700 dark:bg-darkMode dark:text-zinc-300 text-xl 2xl:text-2xl  mt-20 quicksand font-bold">
                 Manage Subscription{' '}
               </p>
               {tier !== 'premium' && (
@@ -290,7 +290,7 @@ export default function AccountInfo({
 
               {tier !== 'free' ? (
                 <a
-                  className="text-center mb-10 text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline quicksand font-bold mb-4"
+                  className="text-center mb-10 text-slate-700 dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline quicksand font-bold mb-4"
                   target="_blank"
                   href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"
                 >
@@ -374,7 +374,7 @@ export default function AccountInfo({
                 ) : null}
               </div>
 
-              <p className="text-center text-blueLike dark:bg-darkMode dark:text-zinc-300 text-xl xl:text-2xl font-semibold mt-20 mb-10">
+              <p className="text-center text-slate-700 dark:bg-darkMode dark:text-zinc-300 text-xl xl:text-2xl font-semibold mt-20 mb-10">
                 Manage Subscription{' '}
               </p>
 
@@ -389,7 +389,7 @@ export default function AccountInfo({
                 <div className="items-center flex flex-col justify-center">
                   {tier !== 'free' ? (
                     <a
-                      className="text-center text-blueLike dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4"
+                      className="text-center text-slate-700 dark:bg-darkMode max-w-[600px] dark:text-zinc-300 text-l mx-auto justify-center underline font-semibold mb-4"
                       target="_blank"
                       href="https://billing.stripe.com/p/login/bIYdTS2Qs9CscfuaEE"
                     >

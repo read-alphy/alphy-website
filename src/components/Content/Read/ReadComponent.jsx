@@ -480,7 +480,7 @@ export default function ReadComponent({
                           Transcript
                         </button>
                       </li>
-                      {/* 										<li className={` w-1/3 md:w-3/12 ${activeTab === "tab4" ? "text-blueLike dark:bg-darkMode dark:text-slate-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
+                      {/* 										<li className={` w-1/3 md:w-3/12 ${activeTab === "tab4" ? "text-slate-700 dark:bg-darkMode dark:text-slate-300 border-b-2 font-semibold border-blue-600" : "hover:text-gray-600 hover:border-gray-300"}`} >
 											<button onClick={() => setActiveTab("tab4")} className={`text-l inline-block p-4 rounded-t-lg  dark:text-slate-200 dark:border-greenColor`}>Ask questions</button>
 										</li> */}
                     </ul>

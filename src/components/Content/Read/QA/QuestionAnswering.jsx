@@ -156,9 +156,9 @@ export default function QuestionAnswering({
     }
   }
 
-  const handleShareLink = () => {
+  const handleShareLink = (question) => {
     const encodedText = encodeURIComponent(
-      inputValue.length > 0 ? inputValue : baseQuestion
+      question
     )
 
     const url = `${window.location.origin}${
@@ -167,11 +167,9 @@ export default function QuestionAnswering({
     navigator.clipboard.writeText(url)
     /* toast.success('Link copied to clipboard!') */
   }
-  const handleCopyToClipboard = () => {
-    let question
-    if (baseQuestion) {
-      question = baseQuestion
-    } else {
+  const handleCopyToClipboard = (question) => {
+    
+    if (question===null || question === '') {
       question = inputValue
     }
     const myHtml = document.getElementById('answer-area')
@@ -496,6 +494,7 @@ export default function QuestionAnswering({
             setAnswer={setAnswer}
             answer={answer}
             handleClear={handleClear}
+            inputValue={inputValue}
             handleShareLink={handleShareLink}
             handleCopyToClipboard={handleCopyToClipboard}
             formatAnswer={formatAnswer}

@@ -163,8 +163,8 @@ export default function BaseQuestions({
           >
             <div className="py-5 border-b border-gray-200 dark:border-gray-700">
               <div className="flex flex-row justify-end text-slate-400">
-                <svg
-                  onClick={handleShareLink}
+               {/*  <svg
+                  onClick={() => handleShareLink(item)}
                   className="cursor-pointer flex flex-row"
                   width="20"
                   aria-hidden="true"
@@ -180,9 +180,9 @@ export default function BaseQuestions({
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   ></path>
-                </svg>
+                </svg> */}
                 <svg
-                  onClick={handleCopyToClipboard}
+                  onClick={() => handleCopyToClipboard(item)}
                   className="cursor-pointer flex flex-row"
                   width="20"
                   aria-hidden="true"

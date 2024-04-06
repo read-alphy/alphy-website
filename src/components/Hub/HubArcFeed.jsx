@@ -203,64 +203,11 @@ useEffect(() => {
 
   return (
     <div className="w-full mt-10 mx-auto  md:pl-10  lg:pl-16 3xl:pl-40 flex flex-row overflow-hidden">
-      {mainShow === 'default' ? (
+      {mainShow === 'sources' ? (
         <div className=" p-[10px]  xl:min-w-[1200px]  xl:max-w-[1200px] ">
-          <p className="text-zinc-700 dark:text-zinc-300 text-xl xl:text-2xl font-averta-semibold">
-            Learn from the best online sources with Alphy's Arcs.
+          <p className="text-slate-700 dark:text-slate-300 text-xl xl:text-2xl quicksand font-bold">
+            Ask questions to YouTube channels
           </p>
-
-          {/* <form
-										className="flex items-center pt-4"
-										
-										onSubmit={(e) => {
-											e.preventDefault();
-
-										}}
-									>
-										<label htmlFor="voice-search" className="sr-only">
-											Search
-										</label>
-										<div className="relative  ">
-
-
-											<div className="relative h-11 ">
-												<input
-													ref={searchInputRef}
-													
-													onChange={(e) => {
-														setSearch(e.target.value);
-													}}
-													placeholder="Start searching..."
-													className=" pl-10 peer md:min-w-[300px] xl:min-w-[500px] h-full border-zinc-500 bg-white dark:bg-mildDarkMode text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-400 placeholder-shown:border-t-blue-gray-400 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] dark:border-zinc-800 focus:border-blue-000 dark:focus:border-blue-000" />
-												<div
-										
-										className="cursor-pointer absolute inset-y-0 left-0 flex items-center pl-3 "
-									>
-
-										<svg
-											width="20"
-											
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24 "
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												strokeLinecap={'round'}
-												strokeLinejoin={'round'}
-												strokeWidth={'2'}
-												d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-											></path>
-										</svg>
-									</div>
-
-											</div>
-
-
-										</div>
-
-									
-									</form> */}
 
           <div className={`buttons flex justify-between mt-2 `}></div>
 
@@ -294,46 +241,33 @@ useEffect(() => {
             <Link
               href="/arcs"
               type="button"
-              className="md:text-lg  flex flex-row text-zinc-600 font-semibold dark:text-zinc-200 underline mt-6 ml-2 mb-10 "
+              className=" mx-auto  justify-center w-full flex flex-row text-slate-600 font-semibold dark:text-slate-200 underline mt-6 ml-2 mb-10 "
             >
-              <p className="font-averta-semibold">See All Arcs</p>
-              <ArrowForwardIosIcon className="cursor-pointer text-zinc-600 dark:text-zinc-200 p-1 " />
+              <p className="quicksand font-bold">See All Arcs</p>
+              
             </Link>
 
-            {/* <div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-20 mb-10" ></div> */}
-
-            {/* {hasMore && (
-											<div className="w-full flex justify-center">
-												{
-													<button
-														className="justify-center flex text-blueLike dark:text-zinc-300 font-semibold  mt-10 underline"
-														onClick={loadMore}
-													>
-														{'Load more'}
-													</button>
-												}
-											</div>
-										)} */}
+        
           </div>
         </div>
       ) : (
         <div className="p-4">
           <div className="  xl:max-w-[1400px]">
-            <div className="mb-10">
+            {/* <div className="mb-10">
               <Link
                 href="/"
-                className="text-zinc-700 dark:text-zinc-300 text-lg  cursor-pointer"
+                className="text-slate-700 dark:text-slate-300 text-lg  cursor-pointer"
               >
                 <KeyboardArrowLeftIcon fontSize="small" className="" />
                 <span className="text-sm">Go Back</span>
               </Link>
-            </div>
-            <p className="mb-10 text-xl lg:text-2xl text-zinc-700 dark:text-zinc-200 font-averta-semibold ">
+            </div> */}
+            <p className="mb-10 text-xl lg:text-2xl text-slate-700 dark:text-slate-200 quicksand font-bold ">
               Discover All Arcs
             </p>
 
             <div
-              className={`grid grid-cols-2 xsSm:grid-cols-3 xsSm:gap-6 sm:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 `}
+              className={`grid grid-cols-2 xsSm:grid-cols-3 xsSm:gap-6 sm:grid-cols-3 2xl:grid-cols-4    `}
             >
               <Link
                 href="/arc/createArc"
@@ -342,12 +276,12 @@ useEffect(() => {
                 <div>
                   <AddIcon
                     fontSize="large"
-                    className="text-zinc-600 dark:text-zinc-300 mb-4 "
+                    className="text-slate-600 dark:text-slate-300 mb-4 "
                   />
-                  <p className="text-zinc-600 dark:text-zinc-300 text-l lg:text-xl font-averta-semibold">
+                  <p className="text-slate-600 dark:text-slate-300 text-l lg:text-xl quicksand font-bold">
                     Create Your Arc
                   </p>
-                  <p className="text-zinc-600 dark:text-zinc-500 hidden lg:block text-sm px-5 font-normal mt-2">
+                  <p className="text-slate-600 dark:text-slate-500 hidden lg:block text-sm px-5 font-normal mt-2">
                     Connect multiple audio content with AI.
                   </p>
                 </div>
