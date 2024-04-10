@@ -366,7 +366,7 @@ export default function PremiumCard({
               } rounded-lg text-[16px]  drop-shadow-sm  bg-[#4262ff] quicksand font-bold px-5 py-3  justify-center w-full text-center `}
             >{
 
-              subscriptionLinkLoading ? (<CircularProgress color="white" className=" w-5 text-center margin-auto w-full" />)
+              subscriptionLinkLoading ? (<CircularProgress color="inherit" className=" w-5 text-center margin-auto w-full" />)
             :
             (
               tier === 'premium' ? 'Active' : 'Go Premium'

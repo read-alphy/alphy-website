@@ -427,8 +427,8 @@ export default function QuestionAnswering({
               </div>
             ) : null}
             {isLoadingInside ? (
-              <div className="absolute md:right-3 bottom-3 md:bottom-4 right-2">
-                <CircularProgress color="green" className="opacity-60 w-5 h-5 text-" />
+              <div className="absolute md:right-3 bottom-2 md:bottom-3 right-2 pt-4">
+                <CircularProgress color="inherit" size={20} className="opacity-60 " />
               </div>
             ) : (
               <button

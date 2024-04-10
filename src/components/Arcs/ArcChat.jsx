@@ -592,7 +592,7 @@ export default function ArcChat({
                   <CircularProgress
                     fontSize="small"
                     className="opacity-40 p-1 cursor-default z-50"
-                    color="black"
+                    color="inherit"
                   />
                 ) : (
                   <svg

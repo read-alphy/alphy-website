@@ -561,7 +561,7 @@ export default function AccountInfo({
             >
               {creditPurchaseLoading ? (
                 <CircularProgress
-                  color="gray"
+                  color="inherit"
                   className="opacity-40 w-5 text-center margin-auto w-full"
                 />
               ) : (

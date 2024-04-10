@@ -466,7 +466,7 @@ currentUser,
                 >
                   {loading ? (
                     <CircularProgress
-                      color="gray"
+                      color="inherit"
                       size={window.innerWidth > 1000 ? 'lg' : `md`}
                       className="flex mx-auto opacity-30"
                     />
