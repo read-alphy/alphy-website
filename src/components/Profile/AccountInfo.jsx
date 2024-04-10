@@ -563,6 +563,7 @@ export default function AccountInfo({
                 <CircularProgress
                   color="inherit"
                   className="opacity-40 w-5 text-center margin-auto w-full"
+                  size={20}
                 />
               ) : (
                 <p className="py-1 dark:text-zinc-800 text-md quicksand font-bold">

@@ -564,7 +564,7 @@ export default function ArcMain({
                 {isLoadingSubmit ? (
                   <CircularProgress
                     color="inherit"
-                    size={"md"}
+                    size={20}
                     className="flex mx-auto"
                   />
                 ) : (
@@ -587,7 +587,7 @@ export default function ArcMain({
                     <div>
                       <CircularProgress
                         color="success"
-                        size="sm"
+                        size={20}
                         className="flex mx-auto opacity-40 mb-2"
                       />
                       <p className="text-zinc-500 dark:text-zinc-600 italic quicksand font-semibold">

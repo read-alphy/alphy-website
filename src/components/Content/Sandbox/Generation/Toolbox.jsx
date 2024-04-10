@@ -128,7 +128,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : (
@@ -186,7 +186,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : (
@@ -259,7 +259,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : (
@@ -333,7 +333,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : (
@@ -421,7 +421,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -528,7 +528,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -644,7 +644,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -749,7 +749,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -849,7 +849,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -953,7 +953,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -1057,7 +1057,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -1164,7 +1164,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -1270,7 +1270,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -1374,7 +1374,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -1478,7 +1478,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (
@@ -1587,7 +1587,7 @@ export default function Toolbox({
                 {isLoading ? (
                   <CircularProgress
                     color="inherit"
-                    size="sm"
+                    size={20}
                     className="mx-auto w-full justify-center "
                   />
                 ) : tier !== 'premium' ? (

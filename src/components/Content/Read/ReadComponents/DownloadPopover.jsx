@@ -44,7 +44,8 @@ export default function DownloadPopover ({tier,index,downloading,handleDownload,
                                                     {downloading ? (
                                                       <CircularProgress
                                                         className="flex justify-center mx-auto opacity-70 pointer-events-none"
-                                                        color="gray"
+                                                        color="inherit"
+                                                        size={20}
                                                       />
                                                     ) : (
                                                       "Download Transcript"

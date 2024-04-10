@@ -582,16 +582,16 @@ export default function ArcChat({
               <button
                 ref={buttonRef}
                 onClick={handleSubmit}
-                className={`absolute  rounded-md absolute p-1 rounded-md  gizmo:md:bottom-2.5 md:p-2 md:right-3 bottom-2 right-2 ${
+                className={`absolute  rounded-md absolute p-1 rounded-md  gizmo:md:bottom-2.5  ${
                   isLoadingInside
-                    ? 'pointer-events-none cursor-default  md:bottom-2 bg-transparent'
-                    : 'bg-green-200'
+                    ? 'pointer-events-none cursor-default   bg-transparent md:p-2 md:right-3 bottom-0 right-2'
+                    : 'bg-green-200 md:p-2 md:right-3 bottom-2 right-2'
                 }`}
               >
                 {isLoadingInside ? (
                   <CircularProgress
-                    fontSize="small"
-                    className="opacity-40 p-1 cursor-default z-50"
+                    size={25}
+                    className=" p-1 cursor-default z-50"
                     color="inherit"
                   />
                 ) : (

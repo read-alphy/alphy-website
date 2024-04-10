@@ -175,7 +175,7 @@ export default function   GenerationZone({
             >
               {isLoading ? (
                 <CircularProgress
-                  color="blue"
+                  
                   size="sm"
                   className="mx-auto w-full justify-center "
                 />
