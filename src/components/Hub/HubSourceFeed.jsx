@@ -6,7 +6,8 @@ import axios from 'axios'
 import SkeletonItem from '../FeedTabs/SkeletonItem'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import { Button, Spinner } from '@material-tailwind/react'
+import { Button } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
 import { API_URL } from '../../constants'
 
 
@@ -464,7 +465,7 @@ currentUser,
                   } bg-green-200  dark:text-zinc-700 px-6 py-3 text-sm lg:text-[15px] normal-case`}
                 >
                   {loading ? (
-                    <Spinner
+                    <CircularProgress
                       color="gray"
                       size={window.innerWidth > 1000 ? 'lg' : `md`}
                       className="flex mx-auto opacity-30"

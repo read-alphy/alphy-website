@@ -15,10 +15,12 @@ import Loading from '../Loading'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import { Button, Spinner } from '@material-tailwind/react'
+import { Button } from '@material-tailwind/react'
 import Dialog from '@mui/material/Dialog'
 import Switch, { switchClasses } from '@mui/joy/Switch'
 import { API_URL } from '../../constants'
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 export default function AccountInfo({
@@ -558,7 +560,7 @@ export default function AccountInfo({
               onClick={() => getCreditPurchaseLink()}
             >
               {creditPurchaseLoading ? (
-                <Spinner
+                <CircularProgress
                   color="gray"
                   className="opacity-40 w-5 text-center margin-auto w-full"
                 />

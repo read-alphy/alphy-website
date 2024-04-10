@@ -5,7 +5,7 @@ import { useRef } from 'react'
 
 
 import { useRouter } from 'next/router'
-import { Spinner } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
 import QaWsManager from './QaWsManager'
 import { API_HOST, API_SSL } from '../../../../constants'
 
@@ -428,7 +428,7 @@ export default function QuestionAnswering({
             ) : null}
             {isLoadingInside ? (
               <div className="absolute md:right-3 bottom-3 md:bottom-4 right-2">
-                <Spinner color="green" className="opacity-60 w-5 h-5 text-" />
+                <CircularProgress color="green" className="opacity-60 w-5 h-5 text-" />
               </div>
             ) : (
               <button

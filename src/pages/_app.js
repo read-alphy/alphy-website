@@ -381,8 +381,8 @@ return () => {
 <AppRouterCacheProvider>
 <Head>
 
-<link rel="icon" href="favicon.ico" />
-<link rel="icon" href="favicon.png" type= "image/png"/>
+<link rel="icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.png" type= "image/png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />

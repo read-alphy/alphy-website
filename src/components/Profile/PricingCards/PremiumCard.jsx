@@ -1,4 +1,4 @@
-import { Button, Spinner } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
 import {useRouter} from 'next/router'
 
 import VerifiedIcon from '@mui/icons-material/Verified'
@@ -366,7 +366,7 @@ export default function PremiumCard({
               } rounded-lg text-[16px]  drop-shadow-sm  bg-[#4262ff] quicksand font-bold px-5 py-3  justify-center w-full text-center `}
             >{
 
-              subscriptionLinkLoading ? (<Spinner color="white" className=" w-5 text-center margin-auto w-full" />)
+              subscriptionLinkLoading ? (<CircularProgress color="white" className=" w-5 text-center margin-auto w-full" />)
             :
             (
               tier === 'premium' ? 'Active' : 'Go Premium'

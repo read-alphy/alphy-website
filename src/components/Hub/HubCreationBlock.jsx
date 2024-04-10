@@ -86,19 +86,18 @@ export default function HubCreationBlock({
         inputValue.includes('https://www.youtube.com/watch') ||
         inputValue.includes('https://youtu.be') ||
         inputValue.includes('https://m.youtube.com') ||
-        inputValue.includes('https://twitter.com/i/spaces') ||
+        inputValue.includes('https://twitter.com/') ||
         inputValue.includes('https://www.youtube.com/live') ||
         inputValue.includes('https://podcasts.apple.com') ||
         inputValue.includes('https://www.twitch.tv') ||
         inputValue.includes('https://www.twitch.com') ||
         inputValue.includes('https://twitter.com') ||
-        inputValue.includes('https://x.com') ||
-        inputValue.includes('https://x.com/i/spaces')
+        inputValue.includes('https://x.com/')
       )
     ) {
       setInputValue('')
       setErrorMessage(
-        'Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast.'
+        'Please provide a link to a YouTube video, a Twitter post with a space or video, Twitch recording, or an Apple Podcast.'
       )
       setFailed(true)
       return
@@ -119,10 +118,9 @@ export default function HubCreationBlock({
       } else if (inputValue.includes('https://m.youtube.com')) {
         videoId = inputValue.split('/').pop().split('?v=')[1].split('&')[0]
         video_source = 'yt'
-      } else if (inputValue.includes('https://twitter.com/i/spaces')) {
-        if (tier === 'basic' || tier === 'premium') {
+      } else if (inputValue.includes('https://twitter.com/')) {
+        if ( tier === 'premium') {
           videoId = inputValue.split('/').pop().split('?')[0]
-          video_source = 'sp'
         } else {
           setFailed(true)
           setErrorMessage(
@@ -169,10 +167,9 @@ export default function HubCreationBlock({
         }
       } else if (
         (inputValue.includes('https://x.com') ||
-          inputValue.includes('https://twitter.com')) &&
-        !inputValue.includes('i/spaces')
+          inputValue.includes('https://twitter.com')) 
       ) {
-        if (tier === 'basic' || tier === 'premium') {
+        if (tier === 'premium') {
           setInputValue(inputValue.split('/video/')[0])
           const regex = /status\/(\d+)/
           const match = inputValue.split('/video/')[0].match(regex)
@@ -181,11 +178,15 @@ export default function HubCreationBlock({
         } else {
           setFailed(true)
           setErrorMessage(
-            'Upgrade your plan to process Twitter videos. See Account page for more detail.'
+            'Upgrade your plan to process content from Twitter. See Account page for more detail.'
           )
           return
         }
       }
+
+      const updatedUrl = inputValue.replace(/x\.com/g, "twitter.com");
+      
+
 
       if (currentUser) {
         setLoading(true)
@@ -196,10 +197,7 @@ export default function HubCreationBlock({
             .post(
               `${API_URL}/sources/`,
               {
-                url:
-                  video_source === 'x'
-                    ? inputValue.split('/video/')[0]
-                    : inputValue,
+                url:updatedUrl,
               },
               {
                 headers: {

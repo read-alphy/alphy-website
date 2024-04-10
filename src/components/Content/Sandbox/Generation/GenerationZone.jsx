@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import InputArea from './InputArea'
 import Settings from './Settings'
-import { Button, Spinner } from '@material-tailwind/react'
+import { Button } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
 import Toolbox from './Toolbox'
 import VerifiedIcon from '@mui/icons-material/Verified'
 import Link from 'next/link'
@@ -173,7 +174,7 @@ export default function   GenerationZone({
               }  transition-opacity duration-300 ease-in-out bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-slate-800  text-zinc-700 dark:from-purple-400 quicksand font-normal normal-case w-[120px]`}
             >
               {isLoading ? (
-                <Spinner
+                <CircularProgress
                   color="blue"
                   size="sm"
                   className="mx-auto w-full justify-center "

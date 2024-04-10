@@ -1,6 +1,7 @@
 import PublishIcon from '@mui/icons-material/Publish'
 
-import { Button, Spinner } from '@material-tailwind/react'
+import { Button } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Twitch from '../../../public/img/twitch_full.png'
@@ -45,6 +46,7 @@ export default function SubmitBlock({
   return (
     <div className="mt-10 sm:mt-20 text-slate-700 h-full p-5 dark:text-zinc-300 max-w-[1000px] mx-auto items-center  justify-center sm:px-20">
       <div className="mb-10">
+      
         <p
           onClick={() => handleGoBack()}
           className="text-slate-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
@@ -71,6 +73,7 @@ export default function SubmitBlock({
         <div
           className={`sm:col-span-2 lg:col-span-3 relative w-full min-w-[200px] h-12`}
         >
+          
           <input
             ref={inputRef}
             value={inputValue}
@@ -115,7 +118,7 @@ export default function SubmitBlock({
               }`}
             >
               {loading ? (
-                <Spinner></Spinner>
+                <CircularProgress size={20} color="inherit" />
               ) : (
                 <p className="quicksand font-normal">Submit</p>
               )}

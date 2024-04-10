@@ -6,8 +6,9 @@ import {
     PopoverContent,
     ThemeProvider,
     Button,
-    Spinner,
   } from "@material-tailwind/react";
+  import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 export default function DownloadPopover ({tier,index,downloading,handleDownload,basicDataLoaded,themePopover}){
@@ -41,7 +42,7 @@ export default function DownloadPopover ({tier,index,downloading,handleDownload,
                                                     } text-sm  quicksand font-bold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}
                                                   >
                                                     {downloading ? (
-                                                      <Spinner
+                                                      <CircularProgress
                                                         className="flex justify-center mx-auto opacity-70 pointer-events-none"
                                                         color="gray"
                                                       />

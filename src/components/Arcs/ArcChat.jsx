@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
-import { Button, Spinner } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
 import Switch from '@mui/material/Switch'
 import { styled } from '@mui/material/styles'
 import {useRouter} from 'next/router'
@@ -589,7 +589,7 @@ export default function ArcChat({
                 }`}
               >
                 {isLoadingInside ? (
-                  <Spinner
+                  <CircularProgress
                     fontSize="small"
                     className="opacity-40 p-1 cursor-default z-50"
                     color="black"

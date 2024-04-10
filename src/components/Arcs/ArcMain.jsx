@@ -12,7 +12,9 @@ import SideFeed from '../SideFeed/SideFeed'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import ArcCreation from './ArcCreation'
-import { Button, Spinner, Input, Textarea } from '@material-tailwind/react'
+import { Button, Input, Textarea } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
+
 import ArcChat from './ArcChat'
 import EditArc from './EditArc'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -560,7 +562,7 @@ export default function ArcMain({
                 onClick={handleArc}
               >
                 {isLoadingSubmit ? (
-                  <Spinner
+                  <CircularProgress
                     color="white"
                     size={"md"}
                     className="flex mx-auto"
@@ -583,7 +585,7 @@ export default function ArcMain({
                 <div>
                   {isLoadingDelete ? (
                     <div>
-                      <Spinner
+                      <CircularProgress
                         color="green"
                         size="sm"
                         className="flex mx-auto opacity-40 mb-2"

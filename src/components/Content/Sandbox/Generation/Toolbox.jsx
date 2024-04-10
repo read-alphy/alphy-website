@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Spinner } from '@material-tailwind/react'
+import { Button } from '@material-tailwind/react'
+import CircularProgress from '@mui/material/CircularProgress';
 import VerifiedIcon from '@mui/icons-material/Verified'
 
 import { inputMessages } from '../messageBank'
@@ -125,7 +126,7 @@ export default function Toolbox({
                 }  transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -183,7 +184,7 @@ export default function Toolbox({
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -256,7 +257,7 @@ export default function Toolbox({
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -330,7 +331,7 @@ export default function Toolbox({
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -418,7 +419,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -525,7 +526,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -641,7 +642,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -746,7 +747,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -846,7 +847,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -950,7 +951,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -1054,7 +1055,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -1161,7 +1162,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -1267,7 +1268,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -1371,7 +1372,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -1475,7 +1476,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
@@ -1584,7 +1585,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <Spinner
+                  <CircularProgress
                     color="blue"
                     size="sm"
                     className="mx-auto w-full justify-center "
