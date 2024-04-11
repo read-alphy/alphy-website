@@ -107,6 +107,7 @@ export default function ReadComponent({
 
   useEffect(() => {
     if (summary && summary.summary && summary.summary.length > 0) {
+      try{
       const newArray = summary.summary.map(({ summary, at, ...rest }) => {
         return {
           ...rest,
@@ -114,9 +115,14 @@ export default function ReadComponent({
         };
       });
 
+
       setChapters(newArray);
     }
-  }, [data]);
+    catch{
+    console.log("pass")
+    }}
+  },[data])
+    
 
   return (
     <div id="content-area overscroll-none">
