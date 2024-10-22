@@ -1,4 +1,3 @@
-/// FE should be able to tell BE which content to use (summary, summary_prettified, transcript, key takeaways)
 
 import { CharacterPrompts } from './PromptBank.jsx'
 

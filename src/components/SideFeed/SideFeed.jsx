@@ -417,7 +417,7 @@ const [mobileScreen, setMobileScreen] = useState(false)
                         <div className="flex flex-row relative"> 
                         
                         <p className="ml-0.5 quicksand font-semibold">My Creations</p>
-                        <FiberNewIcon fontSize="medium" className="absolute right-0 top-0  -mr-5 -mt-4   text-green-300" /> 
+                        {/* <FiberNewIcon fontSize="medium" className="absolute right-0 top-0  -mr-5 -mt-4   text-green-300" />  */}
                         </div>
                         
                       </Link>

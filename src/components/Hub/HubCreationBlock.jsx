@@ -118,7 +118,7 @@ export default function HubCreationBlock({
       } else if (inputValue.includes('https://m.youtube.com')) {
         videoId = inputValue.split('/').pop().split('?v=')[1].split('&')[0]
         video_source = 'yt'
-      } else if (inputValue.includes('https://twitter.com/')) {
+      } else if (inputValue.includes('https://twitter.com/' || inputValue.includes('https://x.com/'))) {
         if ( tier === 'premium') {
           videoId = inputValue.split('/').pop().split('?')[0]
         } else {
@@ -184,9 +184,8 @@ export default function HubCreationBlock({
         }
       }
 
-      const updatedUrl = inputValue.replace(/x\.com/g, "twitter.com");
-      
-
+      const updatedUrl = inputValue
+      console.log(updatedUrl)
 
       if (currentUser) {
         setLoading(true)

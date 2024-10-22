@@ -370,7 +370,7 @@ export default function Content({
       activeSummary.summary !== undefined &&
       activeSummary.summary !== null
     ) {
-      if (
+      /* if (
         activeSummary.summary_prettified !== undefined &&
         activeSummary.summary_prettified !== null
       ) {
@@ -379,12 +379,12 @@ export default function Content({
         } else {
           await setSummaryArray(activeSummary.summary_prettified)
         }
-      } else {
+      } else  */
         if (typeof activeSummary.summary === 'string') {
           await setSummaryArray(activeSummary.summary.split('\n'))
         } else {
           await setSummaryArray(activeSummary.summary)
-        }
+        
       }
     }
   }
