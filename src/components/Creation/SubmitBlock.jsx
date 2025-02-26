@@ -70,7 +70,7 @@ export default function SubmitBlock({
         <div className="space-y-10">
           {/* Title with subtle accent */}
           <div className="relative">
-            <h3 className="text-2xl font-light text-gray-900 dark:text-white">
+          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
              Process a media from the web
             </h3>
             <div className="absolute -bottom-2 left-0 h-0.5 w-12 bg-indigo-500 dark:bg-indigo-400"></div>

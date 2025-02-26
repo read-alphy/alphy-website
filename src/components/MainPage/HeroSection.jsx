@@ -39,7 +39,7 @@ export default function HeroSection({ currentUser }) {
 
   return (
     <motion.section 
-      className="relative pt-8 md:pt-16 lg:pt-24 overflow-hidden"
+      className="relative pt-8 md:pt-16 overflow-hidden"
       initial="hidden"
       animate="visible"
       variants={fadeIn}
@@ -85,9 +85,9 @@ export default function HeroSection({ currentUser }) {
             className="flex items-center mt-6 text-sm text-slate-500 dark:text-zinc-400"
             variants={slideUp}
           >
-            <span className="font-medium">Trusted by 15,000+ users</span>
+            <span className="font-medium">Trusted by <strong>15,000+</strong> users</span>
             <span className="mx-2">•</span>
-            <span>500,000+ hours processed</span>
+            <span><strong>500,000+</strong> hours processed</span>
           </motion.div>
 
          

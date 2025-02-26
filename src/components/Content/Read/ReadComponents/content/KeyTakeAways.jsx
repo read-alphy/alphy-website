@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { useState } from 'react'
-import ImageGenerator from '../ImageGenerator'
 
 const KeyTakeAways = ({ key_takeaways }) => {
+  
   const [current, setCurrent] = useState(0)
   const [keysCollapsed, setKeysCollapsed] = useState(true)
   const KTref = useRef(null)
