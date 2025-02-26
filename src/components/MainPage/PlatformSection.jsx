@@ -6,7 +6,7 @@ import PlatformIcon from './PlatformIcon';
 
 // Images
 import Twitch from '../../../public/img/twitch_full.png';
-import Twitter from '../../../public/img/twitter_square.png';
+import Twitter from '../../../public/img/x_square.jpg';
 import Youtube from '../../../public/img/youtube.png';
 import ApplePodcast from '../../../public/img/apple_podcasts.png';
 import Spaces from '../../../public/img/spaces_square.png';

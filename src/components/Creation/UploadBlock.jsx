@@ -5,9 +5,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useDropzone } from 'react-dropzone';
 
-// Components
-import { Button } from '@material-tailwind/react';
-
 // Icons
 import { 
   ArrowLeft,
@@ -15,7 +12,8 @@ import {
   FileText,
   AlertCircle,
   X,
-  BadgeCheck
+  BadgeCheck,
+  Info
 } from 'lucide-react';
 
 // Assets
@@ -26,7 +24,8 @@ export default function UploadBlock({
   currentUser,
   tier,
   credit,
-  handleGoBack,
+  setUploadDialog,
+  hideCredits = false
 }) {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadDuration, setUploadDuration] = useState('');
@@ -158,11 +157,98 @@ export default function UploadBlock({
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // For standalone mode only (not tab)
+  if (!hideCredits) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        <button
+          onClick={() => setUploadDialog(false)}
+          className="inline-flex items-center text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mb-8 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4 mr-1" /> Back
+        </button>
+        
+        <UploadContent 
+          currentUser={currentUser}
+          tier={tier}
+          credit={credit}
+          file={file}
+          uploadTitle={uploadTitle}
+          uploadDuration={uploadDuration}
+          uploadProgress={uploadProgress}
+          fileUploading={fileUploading}
+          showError={showError}
+          errorMessage={errorMessage}
+          formatDuration={formatDuration}
+          getRootProps={getRootProps}
+          getInputProps={getInputProps}
+          isDragActive={isDragActive}
+          handleFileUpload={handleFileUpload}
+          handleFileUploadClear={handleFileUploadClear}
+          handlePostUpload={handlePostUpload}
+          navigateCredit={navigateCredit}
+          audioRef={audioRef}
+          showCredits={true}
+        />
+      </div>
+    );
+  }
+
+  // For tab mode
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-    
-      {/* Main content card */}
-      <div className="bg-white dark:bg-zinc-800 rounded-xl  p-8">
+    <div className="p-6">
+      <UploadContent 
+        currentUser={currentUser}
+        tier={tier}
+        credit={credit}
+        file={file}
+        uploadTitle={uploadTitle}
+        uploadDuration={uploadDuration}
+        uploadProgress={uploadProgress}
+        fileUploading={fileUploading}
+        showError={showError}
+        errorMessage={errorMessage}
+        formatDuration={formatDuration}
+        getRootProps={getRootProps}
+        getInputProps={getInputProps}
+        isDragActive={isDragActive}
+        handleFileUpload={handleFileUpload}
+        handleFileUploadClear={handleFileUploadClear}
+        handlePostUpload={handlePostUpload}
+        navigateCredit={navigateCredit}
+        audioRef={audioRef}
+        showCredits={false}
+      />
+    </div>
+  );
+}
+
+// Extracted component to avoid duplication
+function UploadContent({
+  currentUser,
+  tier,
+  credit,
+  file,
+  uploadTitle,
+  uploadDuration,
+  uploadProgress,
+  fileUploading,
+  showError,
+  errorMessage,
+  formatDuration,
+  getRootProps,
+  getInputProps,
+  isDragActive,
+  handleFileUpload,
+  handleFileUploadClear,
+  handlePostUpload,
+  navigateCredit,
+  audioRef,
+  showCredits
+}) {
+  return (
+    <>
+      <div className="bg-white dark:bg-zinc-800 rounded-xl p-6">
         <div className="flex items-center gap-2 mb-6">
           <h3 className="text-xl font-medium text-gray-900 dark:text-white">
             Upload Audio Recording
@@ -211,7 +297,7 @@ export default function UploadBlock({
                     </div>
                   )}
                   
-                  <span className="inline-flex items-center px-4 py-2 rounded-md bg-indigo-50 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 text-sm font-medium">
+                  <span className="inline-flex cursor-pointer items-center px-4 py-2 rounded-md bg-indigo-50 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 text-sm font-medium">
                     Select File
                   </span>
                 </div>
@@ -292,25 +378,28 @@ export default function UploadBlock({
               </div>
             )}
             
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-gray-200 dark:border-gray-700 pt-6 mt-2">
-              <div>
-                <div className="flex items-center">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
-                    Premium Plan
-                  </span>
-                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                    {Math.floor(credit)} minutes remaining
-                  </span>
+            {/* Credits info - only show when not in tab mode */}
+            {showCredits && (
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-gray-200 dark:border-gray-700 pt-6 mt-2">
+                <div>
+                  <div className="flex items-center">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                      Premium Plan
+                    </span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                      {Math.floor(credit)} minutes remaining
+                    </span>
+                  </div>
                 </div>
+                
+                <button
+                  onClick={navigateCredit}
+                  className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+                >
+                  Need more credits?
+                </button>
               </div>
-              
-              <button
-                onClick={navigateCredit}
-                className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
-              >
-                Need more credits?
-              </button>
-            </div>
+            )}
           </>
         ) : (
           <div className="text-center py-8">
@@ -329,29 +418,31 @@ export default function UploadBlock({
       </div>
       
       {/* Convert privately card */}
-      <div className="mt-8 bg-white dark:bg-zinc-800 rounded-xl p-6">
-        <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
-          Need to convert your media?
-        </h4>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Use our free converter tool to get your video and audio files ready for transcription.
-        </p>
-        <a
-          href="https://convertprivately.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center px-4 py-2 rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all "
-        >
-          <Image 
-            src={ConvertPrivatelyIcon} 
-            width={24} 
-            height={24} 
-            className="mr-2" 
-            alt="ConvertPrivately" 
-          />
-          ConvertPrivately
-        </a>
+      <div className="mt-6 border-t border-zinc-200 dark:border-zinc-700">
+        <div className="bg-white dark:bg-zinc-800  dark:border-zinc-700 rounded-xl p-6">
+          <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
+            Need to convert your media?
+          </h4>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Use our free converter tool to get your video and audio files ready for transcription.
+          </p>
+          <a
+            href="https://convertprivately.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-4 py-2 rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all "
+          >
+            <Image 
+              src={ConvertPrivatelyIcon} 
+              width={24} 
+              height={24} 
+              className="mr-2" 
+              alt="ConvertPrivately" 
+            />
+            ConvertPrivately
+          </a>
+        </div>
       </div>
-    </div>
-  )
+    </>
+  );
 }

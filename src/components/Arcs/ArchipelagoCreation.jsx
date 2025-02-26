@@ -97,14 +97,14 @@ export default function ArchipelagoCreation({
         inputValue.includes('https://www.youtube.com/watch') ||
         inputValue.includes('https://youtu.be') ||
         inputValue.includes('https://m.youtube.com') ||
-        inputValue.includes('https://twitter.com/i/spaces') ||
+        inputValue.includes('https://twitter.com/i/status') ||
         inputValue.includes('https://www.youtube.com/live') ||
         inputValue.includes('https://podcasts.apple.com') ||
         inputValue.includes('https://www.twitch.tv') ||
         inputValue.includes('https://www.twitch.com') ||
         inputValue.includes('https://twitter.com') ||
         inputValue.includes('https://x.com') ||
-        inputValue.includes('https://x.com/i/spaces')
+        inputValue.includes('https://x.com/i/status')
       )
     ) {
       setInputValue('')

@@ -6,9 +6,7 @@ import axios from 'axios'
 // Components
 import { Button } from '@material-tailwind/react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import ChatIcon from '@mui/icons-material/Chat'
 import LinkIcon from '@mui/icons-material/Link'
-import Dialog from '@mui/material/Dialog'
 
 import UploadBlock from '../Creation/UploadBlock'
 import SubmitBlock from '../Creation/SubmitBlock'
@@ -21,8 +19,8 @@ const SUPPORTED_URLS = [
   { prefix: 'https://www.youtube.com/live', source: 'yt', idExtractor: (url) => url.split('/').pop().split('?')[0] },
   { prefix: 'https://youtu.be', source: 'yt', idExtractor: (url) => url.split('/').pop().split('?')[0] },
   { prefix: 'https://m.youtube.com', source: 'yt', idExtractor: (url) => url.split('/').pop().split('?v=')[1]?.split('&')[0] },
-  { prefix: 'https://twitter.com/i/spaces', source: 'sp', idExtractor: (url) => url.split('/').pop().split('?')[0], requiresPremium: true },
-  { prefix: 'https://x.com/i/spaces', source: 'sp', idExtractor: (url) => url.split('/').pop().split('?')[0], requiresPremium: true },
+  { prefix: 'https://twitter.com/i/status', source: 'sp', idExtractor: (url) => url.split('/').pop().split('?')[0], requiresPremium: true },
+  { prefix: 'https://x.com/i/status', source: 'sp', idExtractor: (url) => url.split('/').pop().split('?')[0], requiresPremium: true },
   { 
     prefix: 'https://podcasts.apple.com', 
     source: 'ap', 
@@ -57,7 +55,7 @@ const SUPPORTED_URLS = [
     prefix: 'https://twitter.com', 
     source: 'x', 
     requiresPremium: true,
-    excludeIfIncludes: 'i/spaces',
+    excludeIfIncludes: 'i/status',
     idExtractor: (url) => {
       const baseUrl = url.split('/video/')[0]
       const match = baseUrl.match(/status\/(\d+)/)
@@ -68,7 +66,7 @@ const SUPPORTED_URLS = [
     prefix: 'https://x.com', 
     source: 'x', 
     requiresPremium: true,
-    excludeIfIncludes: 'i/spaces',
+    excludeIfIncludes: 'i/status',
     idExtractor: (url) => {
       const baseUrl = url.split('/video/')[0]
       const match = baseUrl.match(/status\/(\d+)/)
@@ -84,10 +82,8 @@ export default function HubCreationBlock({
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
 }) {
-  // Dialog states
-  const [submitDialog, setSubmitDialog] = useState(false)
-  const [uploadDialog, setUploadDialog] = useState(false)
-  const [arcDialog, setArcDialog] = useState(false)
+  // Tab state
+  const [activeTab, setActiveTab] = useState('submit')
   
   // Form states
   const [inputValue, setInputValue] = useState('')
@@ -165,11 +161,9 @@ export default function HubCreationBlock({
     const newItem = localStorage.getItem('newItem')
     if (newItem) {
       if (newItem === 'link') {
-        setSubmitDialog(true)
-        setUploadDialog(false)
+        setActiveTab('submit')
       } else if (newItem === 'upload') {
-        setUploadDialog(true)
-        setSubmitDialog(false)
+        setActiveTab('upload')
       }
       localStorage.setItem('newItem', null)
       sessionStorage.setItem('navigatedFromMainPage', 'true')
@@ -247,219 +241,101 @@ export default function HubCreationBlock({
     }
   }
 
-  // Navigate to Arc creation page
-  const handleArcNavigation = () => {
-    router.push('/arc/createArc')
-  }
-
-  // Handle dialog close
-  const handleGoBack = () => {
-    if (sessionStorage.getItem('navigatedFromMainPage')) {
-      router.push('/')
-      sessionStorage.removeItem('navigatedFromMainPage')
-    }
-    
-    setSubmitDialog(false)
-    setUploadDialog(false)
-    setArcDialog(false)
-  }
-
-  // Render action cards for desktop
-  const renderDesktopView = () => (
-    <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20">
-      <div className="flex flex-col gap-10">
-        <div className="text-xl text-stone-900 dark:text-zinc-300 text-center mb-10 quicksand font-semibold">
-          Process New Content
-        </div>
-
-        {/* Submit Link Card */}
-        <div
-          className="min-h-[230px] max-h-[230px] bg-white dark:bg-zinc-800 dark:border-zinc-700 rounded-lg shadow-md hover:shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-102 transition duration-300 ease-in-out"
-          onClick={() => {
-            setSubmitDialog(true)
-            handleButtonClick()
-          }}
-        >
-          <div className="flex flex-col items-center p-6 h-full">
-            <p className="text-green-400 text-lg font-semibold mb-4">
-              Submit a Link
-            </p>
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm text-center mb-6">
-              Submit a link to an online discussion to process with Alphy.
-            </p>
-            <div className="mt-auto mb-4">
-              <LinkIcon
-                fontSize="medium"
-                className="text-green-400"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Upload Recording Card */}
-        <div
-          className="min-h-[230px] max-h-[230px] bg-white dark:bg-zinc-800 dark:border-zinc-700 rounded-lg shadow-md hover:shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-102 transition duration-300 ease-in-out"
-          onClick={() => setUploadDialog(true)}
-        >
-          <div className="flex flex-col items-center p-6 h-full">
-            <p className="text-indigo-400 text-lg font-semibold mb-4">
-              Upload a Recording
-            </p>
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm text-center mb-6">
-              Import an audio file from your device to transcribe,
-              summarize, and question privately.
-            </p>
-            <div className="mt-auto mb-4">
-              <CloudUploadIcon
-                fontSize="medium"
-                className="text-indigo-400"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Divider */}
-      <div className="mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
-
-      {/* Create Arc Card */}
-      <div className="justify-center flex flex-col">
-        <div className="text-xl text-stone-900 quicksand font-semibold dark:text-zinc-300 text-center mb-10">
-          Connect Audio with AI
-        </div>
-        <div
-          className="min-h-[230px] max-h-[230px] my-auto bg-white dark:bg-zinc-800 dark:border-zinc-700 rounded-lg shadow-md hover:shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-102 transition duration-300 ease-in-out"
-          onClick={handleArcNavigation}
-        >
-          <div className="flex flex-col items-center p-6 h-full">
-            <p className="text-red-400 text-lg font-semibold mb-4">
-              Create an Arc
-            </p>
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm text-center mb-6">
-              Build your own AI-assisted search engine on countless hours of audiovisual content.
-            </p>
-            <div className="mt-auto mb-4">
-              <ChatIcon
-                fontSize="medium"
-                className="text-red-400"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-
-  // Render action cards for mobile
-  const renderMobileView = () => (
-    <div className="dark:bg-zinc-900 lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-auto mt-6 lg:mt-20">
-      <h2 className="mb-10 text-xl font-semibold text-zinc-700 dark:text-zinc-300 text-center">
-        Start discovering Alphy's capabilities
-      </h2>
-      
-      <div className="flex flex-col gap-6 w-full mx-auto max-w-md">
-        {/* Submit Link Card */}
-        <div
-          className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-6 hover:shadow-lg transform hover:scale-102 transition duration-300 ease-in-out"
-          onClick={() => {
-            setSubmitDialog(true)
-            handleButtonClick()
-          }}
-        >
-          <div className="flex items-center">
-            <div className="bg-green-100 dark:bg-green-900/30 p-3 rounded-full mr-4">
-              <LinkIcon className="text-green-500 dark:text-green-400" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-green-500 dark:text-green-400 mb-1">
-                Submit a Link
-              </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
-                {isMobile ? 'Use Alphy on online content' : 'Submit a link to an audiovisual content to process with Alphy.'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Upload Recording Card */}
-        <div
-          className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-6 hover:shadow-lg transform hover:scale-102 transition duration-300 ease-in-out"
-          onClick={() => setUploadDialog(true)}
-        >
-          <div className="flex items-center">
-            <div className="bg-indigo-100 dark:bg-indigo-900/30 p-3 rounded-full mr-4">
-              <CloudUploadIcon className="text-indigo-500 dark:text-indigo-400" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-indigo-500 dark:text-indigo-400 mb-1">
-                Upload a Recording
-              </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
-                {isMobile ? 'Process an audio file from your device' : 'Import an audio file from your device to transcribe, summarize, and question privately.'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Create Arc Card */}
-        <div
-          className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-6 hover:shadow-lg transform hover:scale-102 transition duration-300 ease-in-out"
-          onClick={handleArcNavigation}
-        >
-          <div className="flex items-center">
-            <div className="bg-red-100 dark:bg-red-900/30 p-3 rounded-full mr-4">
-              <ChatIcon className="text-red-500 dark:text-red-400" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-red-500 dark:text-red-400 mb-1">
-                Create an Arc
-              </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
-                {isMobile 
-                  ? 'Create an AI assistant as simply as creating a playlist'
-                  : 'Build your own AI-assisted search engine as effortlessly as building a playlist.'}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-
   return (
-    <div className="md:mt-10 xl:mt-20 mx-auto">
-      {!submitDialog && !uploadDialog && !arcDialog && (
-        <>
-          {renderDesktopView()}
-          {renderMobileView()}
-        </>
+    <div className="max-w-4xl mx-auto my-10 px-4">
+      {/* Credits info card at the top */}
+      {currentUser && (
+        <div className="bg-indigo-50 dark:bg-zinc-800 rounded-xl  border border-zinc-200 overflow-hidden mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-6">
+            <div>
+              <div className="flex items-center">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                  {tier === 'free' ? 'Starter' : tier === 'basic' ? 'Basic' : 'Premium'} Plan
+                </span>
+                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                  {Math.floor(credit)} minutes remaining
+                </span>
+              </div>
+            </div>
+            
+            <button
+              onClick={() => {
+                sessionStorage.setItem('creditPurchase', 'true')
+                router.push('/account')
+              }}
+              className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+            >
+              Need more credits?
+            </button>
+          </div>
+        </div>
       )}
 
-      {submitDialog && (
-        <SubmitBlock
-          handleGoBack={handleGoBack}
-          loading={loading}
-          currentUser={currentUser}
-          tier={tier}
-          handleSubmit={handleSubmit}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          credit={credit}
-          failed={failed}
-          errorMessage={errorMessage}
-          handleButtonClick={handleButtonClick}
-          inputRef={inputRef}
-        />
-      )}
+      {/* Main content with tabs */}
+      <div className="bg-white dark:bg-zinc-800 rounded-xl  border border-zinc-300 dark:border-zinc-500 overflow-hidden">
+        {/* Tab navigation */}
+        <div className="flex border-b border-gray-200 dark:border-gray-700">
+          <button
+            onClick={() => setActiveTab('submit')}
+            className={`flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
+              activeTab === 'submit'
+                ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+            }`}
+          >
+            <LinkIcon className="mr-2" fontSize="small" />
+            Submit a Link
+          </button>
+          <button
+            onClick={() => setActiveTab('upload')}
+            className={`flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
+              activeTab === 'upload'
+                ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+            }`}
+          >
+            <CloudUploadIcon className="mr-2" fontSize="small" />
+            Upload a Recording
+          </button>
+        </div>
 
-      {uploadDialog && (
-        <UploadBlock
-          handleGoBack={handleGoBack}
-          currentUser={currentUser}
-          tier={tier}
-          credit={credit}
-        />
-      )}
+        {/* Tab content */}
+        <div className="p-0">
+          {activeTab === 'submit' && (
+            <div>
+              <SubmitBlock
+                setSubmitDialog={() => {}}  // No-op since we're using tabs now
+                loading={loading}
+                currentUser={currentUser}
+                tier={tier}
+                handleSubmit={handleSubmit}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                credit={credit}
+                failed={failed}
+                errorMessage={errorMessage}
+                handleButtonClick={handleButtonClick}
+                inputRef={inputRef}
+                // Pass flag to hide redundant credit display
+                hideCredits={true}
+              />
+            </div>
+          )}
+
+          {activeTab === 'upload' && (
+            <div>
+              <UploadBlock
+                setUploadDialog={() => {}}  // No-op since we're using tabs now
+                currentUser={currentUser}
+                tier={tier}
+                credit={credit}
+                // Pass flag to hide redundant credit display
+                hideCredits={true}
+              />
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import LanguagePreview from './LanguagePreview';
+import Twitch from '../../../public/img/twitch_full.png';
+import Twitter from '../../../public/img/x_square.jpg';
+import Youtube from '../../../public/img/youtube.png';
+import ApplePodcast from '../../../public/img/apple_podcasts.png';
+import Spaces from '../../../public/img/spaces_square.png';
 
 export default function HeroSection({ currentUser }) {
   const prefersReducedMotion = useReducedMotion();
@@ -83,7 +89,7 @@ export default function HeroSection({ currentUser }) {
             className="flex items-center mt-6 text-sm text-slate-500 dark:text-zinc-400"
             variants={slideUp}
           >
-            <span className="font-medium">Trusted by 10,000+ users</span>
+            <span className="font-medium">Trusted by 15,000+ users</span>
             <span className="mx-2">•</span>
             <span>500,000+ hours processed</span>
           </motion.div>
@@ -282,6 +288,45 @@ export default function HeroSection({ currentUser }) {
                 repeatType: "reverse"
               }}
             />
+
+            {/* Platform logos */}
+            <div className="absolute -bottom-4 -left-4 flex flex-wrap gap-3 justify-center">
+              <motion.div 
+                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Image src={Youtube} alt="YouTube" width={32} height={32} />
+              </motion.div>
+              <motion.div 
+                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Image src={Twitter} alt="Twitter" width={32} height={32} />
+              </motion.div>
+              <motion.div 
+                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Image src={Twitch} alt="Twitch" width={32} height={32} />
+              </motion.div>
+              <motion.div 
+                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Image src={ApplePodcast} alt="Apple Podcasts" width={32} height={32} />
+              </motion.div>
+              <motion.div 
+                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Image src={Spaces} alt="Twitter Spaces" width={32} height={32} />
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
