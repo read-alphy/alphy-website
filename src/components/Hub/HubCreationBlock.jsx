@@ -42,6 +42,7 @@ export default function HubCreationBlock({
     }
   }
 
+  console.log(currentUser)
   
 
   useEffect(() => {
@@ -96,6 +97,7 @@ export default function HubCreationBlock({
         inputValue.includes('https://x.com/i/spaces')
       )
     ) {
+      console.log(inputValue)
       setInputValue('')
       setErrorMessage(
         'Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast.'

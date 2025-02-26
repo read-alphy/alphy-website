@@ -22,7 +22,7 @@ function SubmitPage({
   setLoggedIn
 }) {
   let source_id
-
+  
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
 
   const [deleteDialog, setDeleteDialog] = useState(false)

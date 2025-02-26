@@ -12,48 +12,7 @@ export default function FooterMainPage({ currentUser }) {
 
   return (
     <div className="bottom-0 text-zinc-700 dark:text-zinc-300">
-      {/* <div>
-        <div className="flex flex-row">
-          <div className="flex flex-col">
-            {!currentUser && (
-              <div className=" mt-2 lg:mt-4 pl-6 md:pl-10">
-                <Link
-                  className="text-zinc-500 dark:text-zinc-300 text-sm font-averta-semibold    w-full cursor-pointer w-[120px]"
-                  href="/u/login "
-                >
-                  Sign In
-                </Link>
-              </div>
-            )}
-
-            {(currentUser != undefined && currentUser !== null) ? (
-              <Link
-                className="text-zinc-500  mt-2 lg:mt-4 dark:text-zinc-300 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 "
-                href="/account"
-              >
-                
-                <span className="font-averta-semibold">Account</span>
-              </Link>
-            ) : (
-              <Link
-                className="text-zinc-500 dark:text-zinc-300 mt-2 lg:mt-4 text-sm w-full cursor-pointer w-full pl-6 md:pl-10 "
-                href="/plans"
-              >
-                <span className="font-averta-semibold">Plans</span>
-              </Link>
-            )}
-          </div>
-
-          <div className="mt-1 pl-6 md:pl-10">
-            <button
-              className="text-zinc-500 dark:text-zinc-300 text-sm  font-averta-semibold  w-full cursor-pointer w-[120px]"
-              onClick={() => setOpenFeedbackDialog(true)}
-            >
-              Reach Us
-            </button>
-          </div>
-        </div>
-      </div> */}
+   
 
       <div className="border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-5 mt-5 dark:opacity-40"></div>
 

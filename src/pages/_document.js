@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 class MyDocument extends Document {
   render() {
     return (
-      <html lang="en" suppressHydrationWarning>
+      <Html lang="en" suppressHydrationWarning>
         <Head>
           {/* Static files and scripts */}
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap" />
@@ -62,7 +62,7 @@ class MyDocument extends Document {
        
           <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MSDBCTS" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
         </body>
-      </html>
+      </Html>
     ) 
   }
 }

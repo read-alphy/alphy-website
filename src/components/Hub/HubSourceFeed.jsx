@@ -21,7 +21,8 @@ function HubSourceFeed(props) {
   /*const const { currentUser } = useAuth(); */
   const currentUser = props.currentUser
   const router  = useRouter()
-
+  
+  
   const [inputValue, setInputValue] = useState('')
 
   const [submitted, setSubmitted] = useState(false)
@@ -125,7 +126,7 @@ function HubSourceFeed(props) {
     setPrevLength(search.length)
   }, [search, getData, prevLength]) //
 
-  const handleSubmit = (event, selectedOption) => {
+  const handleSubmit = () => {
     if (
       !(
         search.includes('https://www.youtube.com/watch') ||
@@ -141,6 +142,7 @@ function HubSourceFeed(props) {
         search.includes('https://x.com/i/spaces')
       )
     ) {
+      
       setInputValue('')
       setErrorMessageSubmit('Please provide a valid link.')
       setFailed(true)

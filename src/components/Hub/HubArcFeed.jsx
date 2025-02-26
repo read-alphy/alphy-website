@@ -132,9 +132,15 @@ useEffect(() => {
     // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
     // Find a way to store idToken in local storage, minding the expiration behavior.
     // Would improve performance throughout.
+<<<<<<< Updated upstream
     console.log(dataGlobalArchipelagos)
     if (dataGlobalArchipelagos.length === 0) {
       getDataGlobalArchipelagos(0, true, true)
+=======
+    
+    if (dataGlobalArcs.length === 0) {
+      getDataGlobalArcs(0, true, true)
+>>>>>>> Stashed changes
     }
   }, [currentUser, dataGlobalArchipelagos])
 
