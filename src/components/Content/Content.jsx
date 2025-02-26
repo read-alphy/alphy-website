@@ -19,7 +19,7 @@ const ReadComponent = dynamic(() => import('./Read/ReadComponent'), {
 })
 const Clip = dynamic(() => import('./Clip/ClipMain'), { ssr: false })
 const Sandbox = dynamic(() => import('./Sandbox/Sandbox'), { ssr: false })
-const HeaderArea = dynamic(() => import('./Read/HeaderArea'), { ssr: false })
+const HeaderArea = dynamic(() => import('./Read/Header/HeaderArea'), { ssr: false })
 
 
 export default function Content({
@@ -604,6 +604,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
 			} */
   }
 
+  
   const handleAddToArchipelago = (archipelagoUID, create) => {
     const newSource = {
       source_id: source_id,
@@ -716,7 +717,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
 
-
+  
 
 
   return (
@@ -752,6 +753,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           summary={summary}
           language={language}
           handleLanguageChange={handleLanguageChange}
+          setLanguage={setLanguage}
           languages={languages}
           mainPopoverOpen={mainPopoverOpen}
           setMainPopoverOpen={setMainPopoverOpen}

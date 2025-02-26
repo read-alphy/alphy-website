@@ -3,11 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import LanguagePreview from './LanguagePreview';
-import Twitch from '../../../public/img/twitch_full.png';
-import Twitter from '../../../public/img/x_square.jpg';
-import Youtube from '../../../public/img/youtube.png';
-import ApplePodcast from '../../../public/img/apple_podcasts.png';
-import Spaces from '../../../public/img/spaces_square.png';
+
 
 export default function HeroSection({ currentUser }) {
   const prefersReducedMotion = useReducedMotion();
@@ -289,44 +285,7 @@ export default function HeroSection({ currentUser }) {
               }}
             />
 
-            {/* Platform logos */}
-            <div className="absolute -bottom-4 -left-4 flex flex-wrap gap-3 justify-center">
-              <motion.div 
-                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image src={Youtube} alt="YouTube" width={32} height={32} />
-              </motion.div>
-              <motion.div 
-                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image src={Twitter} alt="Twitter" width={32} height={32} />
-              </motion.div>
-              <motion.div 
-                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image src={Twitch} alt="Twitch" width={32} height={32} />
-              </motion.div>
-              <motion.div 
-                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image src={ApplePodcast} alt="Apple Podcasts" width={32} height={32} />
-              </motion.div>
-              <motion.div 
-                className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image src={Spaces} alt="X Spaces" width={32} height={32} />
-              </motion.div>
-            </div>
+           
           </div>
         </motion.div>
       </div>

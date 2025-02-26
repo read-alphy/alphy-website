@@ -159,7 +159,7 @@ export default function EnhancedValueCards() {
    */
   const FeatureCard = ({ icon, title, description, stat, accentColor }) => {
     return (
-      <div className="rounded-xl bg-white dark:bg-zinc-800 border border-slate-100 dark:border-zinc-700
+      <div className="rounded-xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700
                     p-4 sm:p-6 transition-all duration-300 ease-in-out h-full flex flex-col
                     relative overflow-hidden group">
         {/* Accent color top border */}
