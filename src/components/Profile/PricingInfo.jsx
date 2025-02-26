@@ -188,7 +188,7 @@ const ImprovedPricing = ({ currentUser, tier = null }) => {
   const premiumFeatures = [
     { name: "20 hours of prioritized transcription credits per month", included: true },
     { name: "Upload local audio files", included: true },
-    { name: "Submit YouTube, Twitter Spaces, Twitter videos, Twitch recordings, and Apple Podcasts", included: true },
+    { name: "Submit YouTube, X Spaces, X Videos, Twitch recordings, and Apple Podcasts", included: true },
     { name: "Download transcripts", included: true },
     { name: "Create Unlimited Arcs", included: true },
     { name: "Optional credit topups", included: true }

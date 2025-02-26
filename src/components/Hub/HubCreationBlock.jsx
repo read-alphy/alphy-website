@@ -117,10 +117,10 @@ export default function HubCreationBlock({
         if (urlType.requiresPremium && !isPremiumUser) {
           return {
             isValid: false,
-            error: `Upgrade your plan to process ${urlType.source === 'sp' ? 'Twitter Spaces' : 
+            error: `Upgrade your plan to process ${urlType.source === 'sp' ? 'X Spaces' : 
                     urlType.source === 'ap' ? 'Apple Podcasts' : 
                     urlType.source === 'tw' ? 'Twitch recordings' : 
-                    'Twitter videos'}. See Account page for more detail.`
+                    'X Videos'}. See Account page for more detail.`
           }
         }
 
@@ -145,7 +145,7 @@ export default function HubCreationBlock({
 
     return { 
       isValid: false, 
-      error: 'Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast.' 
+      error: 'Please provide a link to a YouTube video, X Space, X Video, Twitch recording, or an Apple Podcast.' 
     }
   }
 
@@ -227,8 +227,8 @@ export default function HubCreationBlock({
           errorMsg = 'Make sure the content you are submitting has more than 10,000 views.'
         } else if (errorDetail === 'Not enough minutes') {
           errorMsg = "You don't have enough credits to submit this content."
-        } else if (errorDetail === 'Free users cannot submit twitter spaces') {
-          errorMsg = 'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
+        } else if (errorDetail === 'Free users cannot submit X Spaces') {
+          errorMsg = 'Upgrade your plan to process X Spaces. See Account page for more detail.'
         } else if (tier === 'basic' || tier === 'premium') {
           errorMsg = 'There was an error submitting the form. Please refresh the page and try again. If the issue persists, contact us at support@alphy.app'
         }

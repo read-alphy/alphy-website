@@ -33,12 +33,12 @@ export default function PlatformSection() {
     },
     {
       icon: Twitter,
-      name: "Twitter Videos",
+      name: "X Videos",
       alt: "Twitter / X logo"
     },
     {
       icon: Spaces,
-      name: "Twitter Spaces",
+      name: "X Spaces",
       alt: "Twitter / X Spaces logo"
     },
     {

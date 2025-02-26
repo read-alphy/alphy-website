@@ -26,7 +26,7 @@ export default function NotFound() {
         </Link>
 
         <a
-          href="https://twitter.com/alphyapp"
+          href="https://x.com/alphyapp"
           type="button"
           className="text-bordoLike dark:bg-darkMode dark:text-zinc-300 ml-5 underline font-averta-semibold"
         >

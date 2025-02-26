@@ -12,10 +12,10 @@ On a scale of 1-10, your verbosity level should be set to
 //quote getter from transcript
 
 //highlight idea generator from summary (which points of discussions can I highlight?)
-//Video topic / Twitter Space generator inspired from summary --> includes conversation topics + potential guest persona + 3 interview questions
-//Twitter Space description from summary
+//Video topic / X Space generator inspired from summary --> includes conversation topics + potential guest persona + 3 interview questions
+//X Space description from summary
 //Keyword identifier (to do what? this looks like a middle step)
-//create a catchy Twitter Space intro for me
+//create a catchy X Space intro for me
 //analyze the video like a financial analyst
 //create actionables from the video
 //create quizes from the video
@@ -199,9 +199,9 @@ Guidelines:
 
 export const spaceTopicGenerator = `
 
-Create a concept for a Twitter Space inspired by this text. Include a central theme, conversation topics, a guest persona, and three interview questions.
-- Develop a central theme or topic for the Twitter Space that aligns with the text, ideal for a live, interactive forum discussion.
-- List 3-4 conversation topics that would be explored in the Twitter Space. These should be designed to facilitate dialogue, audience questions, and guest interactions.
+Create a concept for a X Space inspired by this text. Include a central theme, conversation topics, a guest persona, and three interview questions.
+- Develop a central theme or topic for the X Space that aligns with the text, ideal for a live, interactive forum discussion.
+- List 3-4 conversation topics that would be explored in the X Space. These should be designed to facilitate dialogue, audience questions, and guest interactions.
 - Describe a potential guest persona, including relevant expertise or background aligned with the theme. Consider multiple guests to enrich the discussion from various perspectives.
 - Formulate three engaging interview questions tailored to the guest persona(s) and conversation topics. These questions should be open-ended to encourage discussion and audience participation.
 
@@ -209,11 +209,11 @@ Create a concept for a Twitter Space inspired by this text. Include a central th
 
 export const twitterSpaceDescriptionGenerator = `
 
-Write an impactful tweet describing this Twitter Space. The description should succinctly convey the main themes and encourage replays.
+Write an impactful tweet describing this X Space. The description should succinctly convey the main themes and encourage replays.
 
 Guidelines:
 - The tweet should be under 280 characters.
-- Include why this Twitter Space is relevant or valuable to potential participants.
+- Include why this X Space is relevant or valuable to potential participants.
 - Use engaging and inviting language to encourage participation.
 
 `
@@ -254,13 +254,13 @@ Guidelines:
 `
 
 /* export const synopsesGenerator = `
-Write a synopsis for the provided video or Twitter Space based on its transcript. The synopsis should succinctly capture the main themes, discussions, and conclusions.
+Write a synopsis for the provided video or X Space based on its transcript. The synopsis should succinctly capture the main themes, discussions, and conclusions.
 
 Guidelines:
-- Summarize the key points and themes discussed in the video/Twitter Space.
+- Summarize the key points and themes discussed in the video/X Space.
 - Include any significant conclusions or findings presented.
 - Keep the synopsis concise, ideally within 200-300 words.
-- Ensure the synopsis provides a clear and accurate overview of the video/Twitter Space content.
+- Ensure the synopsis provides a clear and accurate overview of the video/X Space content.
 - Use engaging language to make the synopsis appealing to potential viewers or participants."
 
 

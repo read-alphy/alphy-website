@@ -200,7 +200,7 @@ export default function PremiumCard({
             </svg>
             {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              Submit YouTube, Twitter Spaces, Twitter videos, Twitch recordings,
+              Submit YouTube, X Spaces, X Videos, Twitch recordings,
               and Apple Podcasts{' '}
             </span>
           </li>

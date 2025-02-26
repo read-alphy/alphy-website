@@ -235,7 +235,7 @@ export default function ReadComponent({
                         src={TwitterSpaces}
                         className="w-[240px] h-[120px] mx-auto"
                         width={240}
-                        alt="Twitter Spaces"
+                        alt="X Spaces"
                       />
                       <p className="text-md text-slate-600 dark:text-slate-300 mt-10 text-center px-5 mx-auto underline quicksand font-bold">
                         Listen to{' '}
@@ -260,7 +260,7 @@ export default function ReadComponent({
                       rel="noreferrer"
                     >
                       <Image src={X} className="w-[240px] h-[120px] mx-auto" width={240}
-                      alt="Twitter Video"
+                      alt="X Video"
                       />
                       <p className="text-md text-slate-600 dark:text-slate-300 mt-10 text-center px-5 mx-auto underline quicksand font-bold">
                         Watch{' '}

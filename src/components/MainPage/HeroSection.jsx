@@ -324,7 +324,7 @@ export default function HeroSection({ currentUser }) {
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Image src={Spaces} alt="Twitter Spaces" width={32} height={32} />
+                <Image src={Spaces} alt="X Spaces" width={32} height={32} />
               </motion.div>
             </div>
           </div>

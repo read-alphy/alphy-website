@@ -128,10 +128,10 @@ function HubSourceFeed({ currentUser, tier, credit }) {
   const getTierRestrictionMessage = (source) => {
     if (tier === 'free') {
       const tierMessages = {
-        'sp': 'Upgrade your plan to process Twitter Spaces.',
+        'sp': 'Upgrade your plan to process X Spaces.',
         'ap': 'Upgrade your plan to process Apple Podcasts.',
         'tw': 'Upgrade your plan to process Twitch recordings.',
-        'x': 'Upgrade your plan to process Twitter videos.'
+        'x': 'Upgrade your plan to process X Videos.'
       }
       
       return tierMessages[source] || 'This content requires a higher tier plan.'
@@ -244,8 +244,8 @@ function HubSourceFeed({ currentUser, tier, credit }) {
       let errorMsg = 'There was an error processing your request.'
       
       if (error.response) {
-        if (error.response.data.detail === 'Free users cannot submit twitter spaces') {
-          errorMsg = 'Upgrade your plan to process Twitter Spaces.'
+        if (error.response.data.detail === 'Free users cannot submit X Spaces') {
+          errorMsg = 'Upgrade your plan to process X Spaces.'
         } else if (error.response.data.detail === 'Not enough minutes') {
           errorMsg = "You don't have enough credits."
         }

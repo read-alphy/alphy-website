@@ -20,7 +20,7 @@ const featureData = {
     {
       icon: "/educationIcons/Video.svg",
       accentColor: "#EC4899", // Pink
-      title: "Use it on YouTube, Twitter Spaces, and Podcasts",
+      title: "Use it on YouTube, X Spaces, and Podcasts",
       description: "Turn the greatest online discussions to text and use Alphy to create new engaging material",
       stat: "100K+ videos processed"
     },
@@ -323,7 +323,7 @@ export default function EnhancedValueCards() {
               See It in Action
             </h3>
             <p className="text-slate-600 dark:text-zinc-300 mb-6">
-              Watch how Alphy transforms a 2-hour Twitter Space into a comprehensive summary with key insights, timestamps, and ready-to-share content.
+              Watch how Alphy transforms a 2-hour X Space into a comprehensive summary with key insights, timestamps, and ready-to-share content.
             </p>
             <button className="bg-slate-900 hover:bg-slate-800 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-medium transition duration-200 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">

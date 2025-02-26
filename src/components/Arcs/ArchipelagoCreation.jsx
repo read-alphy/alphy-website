@@ -109,7 +109,7 @@ export default function ArchipelagoCreation({
     ) {
       setInputValue('')
       setErrorMessageSubmit(
-        'Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast'
+        'Please provide a link to a YouTube video, X Space, X Video, Twitch recording, or an Apple Podcast'
       )
       setFailed(true)
       return
@@ -137,7 +137,7 @@ export default function ArchipelagoCreation({
         } else {
           setFailed(true)
           setErrorMessageSubmit(
-            'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
+            'Upgrade your plan to process X Spaces. See Account page for more detail.'
           )
           return
         }
@@ -192,7 +192,7 @@ export default function ArchipelagoCreation({
         } else {
           setFailed(true)
           setErrorMessageSubmit(
-            'Upgrade your plan to process Twitter videos. See Account page for more detail.'
+            'Upgrade your plan to process X Videos. See Account page for more detail.'
           )
           return
         }
@@ -241,10 +241,10 @@ export default function ArchipelagoCreation({
                 )
               } else if (
                 error.response.data.detail ==
-                'Free users cannot submit twitter spaces'
+                'Free users cannot submit X Spaces'
               ) {
                 setErrorMessageSubmit(
-                  'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
+                  'Upgrade your plan to process X Spaces. See Account page for more detail.'
                 )
               } else if (error.response.data.detail == 'Not enough minutes') {
                 setErrorMessageSubmit("You don't have enough credits.")

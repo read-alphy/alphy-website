@@ -388,13 +388,13 @@ return () => {
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 {/* /*meta description */}
-<meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of YouTube, Twitter Spaces, and Podcasts. Try Alphy for free!"/>
+<meta name="description" content="Convert audio to text, learn better with summaries and AI assistants, and use AI to create on top of YouTube, X Spaces, and Podcasts. Try Alphy for free!"/>
 
     
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap')
   </style>
-   <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, Twitter Spaces, and Podcasts </title>
+   <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, X Spaces, and Podcasts </title>
     
 </Head>
     <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
