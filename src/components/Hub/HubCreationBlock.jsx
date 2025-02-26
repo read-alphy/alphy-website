@@ -1,19 +1,81 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import axios from 'axios'
 
+// Components
 import { Button } from '@material-tailwind/react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import ChatIcon from '@mui/icons-material/Chat'
 import LinkIcon from '@mui/icons-material/Link'
 import Dialog from '@mui/material/Dialog'
-import {useRouter} from 'next/router'
-import axios from 'axios'
-
 
 import UploadBlock from '../Creation/UploadBlock'
-
 import SubmitBlock from '../Creation/SubmitBlock'
 
 import { API_URL } from '../../constants'
+
+// Constants
+const SUPPORTED_URLS = [
+  { prefix: 'https://www.youtube.com/watch', source: 'yt', idExtractor: (url) => url.split('/').pop().split('?v=')[1]?.split('&')[0] },
+  { prefix: 'https://www.youtube.com/live', source: 'yt', idExtractor: (url) => url.split('/').pop().split('?')[0] },
+  { prefix: 'https://youtu.be', source: 'yt', idExtractor: (url) => url.split('/').pop().split('?')[0] },
+  { prefix: 'https://m.youtube.com', source: 'yt', idExtractor: (url) => url.split('/').pop().split('?v=')[1]?.split('&')[0] },
+  { prefix: 'https://twitter.com/i/spaces', source: 'sp', idExtractor: (url) => url.split('/').pop().split('?')[0], requiresPremium: true },
+  { prefix: 'https://x.com/i/spaces', source: 'sp', idExtractor: (url) => url.split('/').pop().split('?')[0], requiresPremium: true },
+  { 
+    prefix: 'https://podcasts.apple.com', 
+    source: 'ap', 
+    requiresPremium: true,
+    idExtractor: (url) => {
+      const idMatch = url.match(/id(\d+)/)
+      const iMatch = url.match(/i=(\d+)/)
+      const podcastId = idMatch ? idMatch[1] : ''
+      const episodeId = iMatch ? iMatch[1] : ''
+      return `${podcastId}-${episodeId}`
+    }
+  },
+  { 
+    prefix: 'https://www.twitch.tv', 
+    source: 'tw', 
+    requiresPremium: true,
+    idExtractor: (url) => {
+      const match = url.match(/twitch\.tv\/videos\/(\d+)/)
+      return match ? match[1] : null
+    }
+  },
+  { 
+    prefix: 'https://www.twitch.com', 
+    source: 'tw', 
+    requiresPremium: true,
+    idExtractor: (url) => {
+      const match = url.match(/twitch\.com\/videos\/(\d+)/)
+      return match ? match[1] : null
+    }
+  },
+  { 
+    prefix: 'https://twitter.com', 
+    source: 'x', 
+    requiresPremium: true,
+    excludeIfIncludes: 'i/spaces',
+    idExtractor: (url) => {
+      const baseUrl = url.split('/video/')[0]
+      const match = baseUrl.match(/status\/(\d+)/)
+      return match ? match[1] : ''
+    }
+  },
+  { 
+    prefix: 'https://x.com', 
+    source: 'x', 
+    requiresPremium: true,
+    excludeIfIncludes: 'i/spaces',
+    idExtractor: (url) => {
+      const baseUrl = url.split('/video/')[0]
+      const match = baseUrl.match(/status\/(\d+)/)
+      return match ? match[1] : ''
+    }
+  }
+]
 
 export default function HubCreationBlock({
   currentUser,
@@ -22,451 +84,355 @@ export default function HubCreationBlock({
   dataGlobalArchipelagos,
   setDataGlobalArchipelagos,
 }) {
+  // Dialog states
   const [submitDialog, setSubmitDialog] = useState(false)
+  const [uploadDialog, setUploadDialog] = useState(false)
+  const [arcDialog, setArcDialog] = useState(false)
+  
+  // Form states
   const [inputValue, setInputValue] = useState('')
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [failed, setFailed] = useState(false)
-  const [uploadDialog, setUploadDialog] = useState(false)
-  const [creationDialogMobile, setCreationDialogMobile] = useState(false)
-  const [mobileWindow, setMobileWindow] = useState(false)
-  const [arcDialog, setArcDialog] = useState(false)
-
+  
+  // Responsive states
+  const [isMobile, setIsMobile] = useState(false)
+  
   const router = useRouter()
   const inputRef = useRef(null)
 
+  // Check if user has premium access
+  const isPremiumUser = useMemo(() => {
+    return tier === 'basic' || tier === 'premium'
+  }, [tier])
+
+  // Handle URL validation and parsing
+  const parseUrl = (url) => {
+    if (!url) return { isValid: false, error: 'Please provide a valid link.' }
+
+    for (const urlType of SUPPORTED_URLS) {
+      if (url.includes(urlType.prefix)) {
+        // Skip if this URL type has an exclusion and it matches
+        if (urlType.excludeIfIncludes && url.includes(urlType.excludeIfIncludes)) {
+          continue
+        }
+
+        // Check if premium is required for this URL type
+        if (urlType.requiresPremium && !isPremiumUser) {
+          return {
+            isValid: false,
+            error: `Upgrade your plan to process ${urlType.source === 'sp' ? 'Twitter Spaces' : 
+                    urlType.source === 'ap' ? 'Apple Podcasts' : 
+                    urlType.source === 'tw' ? 'Twitch recordings' : 
+                    'Twitter videos'}. See Account page for more detail.`
+          }
+        }
+
+        try {
+          const videoId = urlType.idExtractor(url)
+          if (!videoId) throw new Error('Could not extract ID from URL')
+          
+          return {
+            isValid: true,
+            videoId,
+            videoSource: urlType.source,
+            processedUrl: urlType.source === 'x' ? url.split('/video/')[0] : url
+          }
+        } catch (error) {
+          return { 
+            isValid: false, 
+            error: 'Invalid URL format. Please check and try again.' 
+          }
+        }
+      }
+    }
+
+    return { 
+      isValid: false, 
+      error: 'Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast.' 
+    }
+  }
+
+  // Focus input when button is clicked
   const handleButtonClick = () => {
-    // current property is referring to the actual input element
     if (inputRef.current) {
       inputRef.current.focus()
     }
   }
 
-  console.log(currentUser)
-  
-
+  // Check for new item in localStorage on component mount
   useEffect(() => {
-    if (localStorage.getItem('newItem') !== null) {
-      if (localStorage.getItem('newItem') === 'link') {
+    const newItem = localStorage.getItem('newItem')
+    if (newItem) {
+      if (newItem === 'link') {
         setSubmitDialog(true)
         setUploadDialog(false)
-        localStorage.setItem('newItem', null)
-        sessionStorage.setItem('navigatedFromMainPage', 'true')
-      } else if (localStorage.getItem('newItem') === 'upload') {
+      } else if (newItem === 'upload') {
         setUploadDialog(true)
         setSubmitDialog(false)
-        localStorage.setItem('newItem', null)
-        sessionStorage.setItem('navigatedFromMainPage', 'true')
       }
       localStorage.setItem('newItem', null)
-    } else {
-      setSubmitDialog(false)
-      setUploadDialog(false)
+      sessionStorage.setItem('navigatedFromMainPage', 'true')
     }
   }, [])
 
+  // Handle window resize for responsive design
   useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 600) {
-        setMobileWindow(true)
-      } else {
-        setMobileWindow(false)
-      }
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
     }
-
+    
+    // Set initial value
+    handleResize()
+    
     window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const handleSubmit = (event, selectedOption) => {
-    if (
-      !(
-        inputValue.includes('https://www.youtube.com/watch') ||
-        inputValue.includes('https://youtu.be') ||
-        inputValue.includes('https://m.youtube.com') ||
-        inputValue.includes('https://twitter.com/i/spaces') ||
-        inputValue.includes('https://www.youtube.com/live') ||
-        inputValue.includes('https://podcasts.apple.com') ||
-        inputValue.includes('https://www.twitch.tv') ||
-        inputValue.includes('https://www.twitch.com') ||
-        inputValue.includes('https://twitter.com') ||
-        inputValue.includes('https://x.com') ||
-        inputValue.includes('https://x.com/i/spaces')
-      )
-    ) {
-      console.log(inputValue)
-      setInputValue('')
-      setErrorMessage(
-        'Please provide a link to a YouTube video, Twitter Space, Twitter video, Twitch recording, or an Apple Podcast.'
-      )
+  // Process URL submission
+  const handleSubmit = async (event) => {
+    // Parse and validate the URL
+    const { isValid, error, videoId, videoSource, processedUrl } = parseUrl(inputValue)
+    
+    if (!isValid) {
+      setErrorMessage(error)
       setFailed(true)
       return
-    } else {
-      let videoId
-      let video_source
-      //check if video already exists
-      if (inputValue.includes('https://www.youtube.com')) {
-        if (inputValue.includes('https://www.youtube.com/watch')) {
-          videoId = inputValue.split('/').pop().split('?v=')[1].split('&')[0]
-        } else if (inputValue.includes('https://www.youtube.com/live')) {
-          videoId = inputValue.split('/').pop().split('?')[0]
-        }
-        video_source = 'yt'
-      } else if (inputValue.includes('https://youtu.be')) {
-        videoId = inputValue.split('/').pop().split('?')[0]
-        video_source = 'yt'
-      } else if (inputValue.includes('https://m.youtube.com')) {
-        videoId = inputValue.split('/').pop().split('?v=')[1].split('&')[0]
-        video_source = 'yt'
-      } else if (inputValue.includes('https://twitter.com/i/spaces')) {
-        if (tier === 'basic' || tier === 'premium') {
-          videoId = inputValue.split('/').pop().split('?')[0]
-          video_source = 'sp'
-        } else {
-          setFailed(true)
-          setErrorMessage(
-            'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
-          )
-          return
-        }
-      } else if (inputValue.includes('https://podcasts.apple.com')) {
-        if (tier === 'basic' || tier === 'premium') {
-          const idRegex = /id(\d+)/
-          const iRegex = /i=(\d+)/
-
-          const idMatch = inputValue.match(idRegex)
-          const iMatch = inputValue.match(iRegex)
-
-          const podcastId = idMatch ? idMatch[1] : ''
-          const episodeId = iMatch ? iMatch[1] : ''
-
-          videoId = `${podcastId}-${episodeId}`
-          video_source = 'ap'
-        } else {
-          setFailed(true)
-          setErrorMessage(
-            'Upgrade your plan to process Apple Podcasts. See Account page for more detail.'
-          )
-          return
-        }
-      } else if (
-        inputValue.includes('https://www.twitch.tv') ||
-        inputValue.includes('https://www.twitch.com')
-      ) {
-        if (tier === 'basic' || tier === 'premium') {
-          const regex = /twitch\.(tv|com)\/videos\/(\d+)/
-          const match = inputValue.match(regex)
-          videoId = match ? match[1] : null
-
-          video_source = 'tv'
-        } else {
-          setFailed(true)
-          setErrorMessage(
-            'Upgrade your plan to process Twitch recordings. See Account page for more detail.'
-          )
-          return
-        }
-      } else if (
-        (inputValue.includes('https://x.com') ||
-          inputValue.includes('https://twitter.com')) &&
-        !inputValue.includes('i/spaces')
-      ) {
-        if (tier === 'basic' || tier === 'premium') {
-          setInputValue(inputValue.split('/video/')[0])
-          const regex = /status\/(\d+)/
-          const match = inputValue.split('/video/')[0].match(regex)
-          videoId = match ? match[1] : ''
-          video_source = 'tw'
-        } else {
-          setFailed(true)
-          setErrorMessage(
-            'Upgrade your plan to process Twitter videos. See Account page for more detail.'
-          )
-          return
+    }
+    
+    if (!currentUser) {
+      setErrorMessage('Please sign in to submit content.')
+      setFailed(true)
+      return
+    }
+    
+    try {
+      setLoading(true)
+      setFailed(false)
+      
+      const idToken = await currentUser.getIdToken()
+      const response = await axios.post(
+        `${API_URL}/sources/`,
+        { url: processedUrl },
+        { headers: { 'id-token': idToken } }
+      )
+      
+      // Update session and redirect
+      sessionStorage.setItem('refreshCredit', 'true')
+      setErrorMessage('')
+      setInputValue('')
+      router.push(`/${response.data.source_type}/${response.data.source_id}`)
+    } catch (error) {
+      console.error('Submission error:', error)
+      let errorMsg = 'There was an error submitting the form. Please try again.'
+      
+      if (error.response) {
+        const errorDetail = error.response.data.detail
+        
+        if (errorDetail === 'Video not popular enough for free users') {
+          errorMsg = 'Make sure the content you are submitting has more than 10,000 views.'
+        } else if (errorDetail === 'Not enough minutes') {
+          errorMsg = "You don't have enough credits to submit this content."
+        } else if (errorDetail === 'Free users cannot submit twitter spaces') {
+          errorMsg = 'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
+        } else if (tier === 'basic' || tier === 'premium') {
+          errorMsg = 'There was an error submitting the form. Please refresh the page and try again. If the issue persists, contact us at support@alphy.app'
         }
       }
-
-      if (currentUser) {
-        setLoading(true)
-
-        // get id token
-        currentUser.getIdToken().then(idToken => {
-          axios
-            .post(
-              `${API_URL}/sources/`,
-              {
-                url:
-                  video_source === 'x'
-                    ? inputValue.split('/video/')[0]
-                    : inputValue,
-              },
-              {
-                headers: {
-                  'id-token': idToken,
-                },
-              }
-            )
-            .then(response => {
-              sessionStorage.setItem('refreshCredit', 'true')
-
-              videoId = response.data.source_id
-              video_source = response.data.source_type
-
-              setErrorMessage('')
-              setLoading(false)
-              setFailed(false)
-              setInputValue('')
-              router.push(`/${video_source}/${videoId}`)
-            })
-            .catch(error => {
-              console.log(error)
-              setLoading(false)
-              if (tier === 'basic' || tier === 'premium') {
-                setErrorMessage(
-                  'There was an error submitting the form. Please refresh the page and try again. If the issue persists, contact us at support@alphy.app'
-                )
-              } else {
-                if (
-                  error.response.data.detail ==
-                  'Video not popular enough for free users'
-                ) {
-                  setErrorMessage(
-                    'Make sure the content you are submitting has more than 10,000 views.'
-                  )
-                } else if (error.response.data.detail == 'Not enough minutes') {
-                  setErrorMessage(
-                    "You don't have enough credits to submit this content."
-                  )
-                } else if (
-                  error.response.data.detail ==
-                  'Free users cannot submit twitter spaces'
-                ) {
-                  setErrorMessage(
-                    'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
-                  )
-                } else {
-                  setErrorMessage(
-                    'There was an error submitting the form. Please try again.'
-                  )
-                }
-              }
-              setFailed(true)
-              setInputValue('')
-              setLoading(false)
-              throw error
-            })
-        })
-      } else {
-        // sign in
-        // navigate('/auth');
-        setErrorMessage('Please sign in to submit content.')
-      }
+      
+      setErrorMessage(errorMsg)
+      setFailed(true)
+    } finally {
+      setLoading(false)
     }
   }
 
+  // Navigate to Arc creation page
   const handleArcNavigation = () => {
     router.push('/arc/createArc')
   }
 
+  // Handle dialog close
   const handleGoBack = () => {
-    if (sessionStorage.getItem('navigatedFromMainPage') !== null) {
+    if (sessionStorage.getItem('navigatedFromMainPage')) {
       router.push('/')
-
-      setSubmitDialog(false)
-      setUploadDialog(false)
-      setArcDialog(false)
-      sessionStorage.setItem('navigatedFromMainPage', null)
+      sessionStorage.removeItem('navigatedFromMainPage')
     }
+    
     setSubmitDialog(false)
     setUploadDialog(false)
     setArcDialog(false)
   }
 
+  // Render action cards for desktop
+  const renderDesktopView = () => (
+    <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20">
+      <div className="flex flex-col gap-10">
+        <div className="text-xl text-stone-900 dark:text-zinc-300 text-center mb-10 quicksand font-semibold">
+          Process New Content
+        </div>
+
+        {/* Submit Link Card */}
+        <div
+          className="min-h-[230px] max-h-[230px] bg-white dark:bg-zinc-800 dark:border-zinc-700 rounded-lg shadow-md hover:shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-102 transition duration-300 ease-in-out"
+          onClick={() => {
+            setSubmitDialog(true)
+            handleButtonClick()
+          }}
+        >
+          <div className="flex flex-col items-center p-6 h-full">
+            <p className="text-green-400 text-lg font-semibold mb-4">
+              Submit a Link
+            </p>
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm text-center mb-6">
+              Submit a link to an online discussion to process with Alphy.
+            </p>
+            <div className="mt-auto mb-4">
+              <LinkIcon
+                fontSize="medium"
+                className="text-green-400"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Upload Recording Card */}
+        <div
+          className="min-h-[230px] max-h-[230px] bg-white dark:bg-zinc-800 dark:border-zinc-700 rounded-lg shadow-md hover:shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-102 transition duration-300 ease-in-out"
+          onClick={() => setUploadDialog(true)}
+        >
+          <div className="flex flex-col items-center p-6 h-full">
+            <p className="text-indigo-400 text-lg font-semibold mb-4">
+              Upload a Recording
+            </p>
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm text-center mb-6">
+              Import an audio file from your device to transcribe,
+              summarize, and question privately.
+            </p>
+            <div className="mt-auto mb-4">
+              <CloudUploadIcon
+                fontSize="medium"
+                className="text-indigo-400"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
+
+      {/* Create Arc Card */}
+      <div className="justify-center flex flex-col">
+        <div className="text-xl text-stone-900 quicksand font-semibold dark:text-zinc-300 text-center mb-10">
+          Connect Audio with AI
+        </div>
+        <div
+          className="min-h-[230px] max-h-[230px] my-auto bg-white dark:bg-zinc-800 dark:border-zinc-700 rounded-lg shadow-md hover:shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-102 transition duration-300 ease-in-out"
+          onClick={handleArcNavigation}
+        >
+          <div className="flex flex-col items-center p-6 h-full">
+            <p className="text-red-400 text-lg font-semibold mb-4">
+              Create an Arc
+            </p>
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm text-center mb-6">
+              Build your own AI-assisted search engine on countless hours of audiovisual content.
+            </p>
+            <div className="mt-auto mb-4">
+              <ChatIcon
+                fontSize="medium"
+                className="text-red-400"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  // Render action cards for mobile
+  const renderMobileView = () => (
+    <div className="dark:bg-zinc-900 lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-auto mt-6 lg:mt-20">
+      <h2 className="mb-10 text-xl font-semibold text-zinc-700 dark:text-zinc-300 text-center">
+        Start discovering Alphy's capabilities
+      </h2>
+      
+      <div className="flex flex-col gap-6 w-full mx-auto max-w-md">
+        {/* Submit Link Card */}
+        <div
+          className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-6 hover:shadow-lg transform hover:scale-102 transition duration-300 ease-in-out"
+          onClick={() => {
+            setSubmitDialog(true)
+            handleButtonClick()
+          }}
+        >
+          <div className="flex items-center">
+            <div className="bg-green-100 dark:bg-green-900/30 p-3 rounded-full mr-4">
+              <LinkIcon className="text-green-500 dark:text-green-400" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-green-500 dark:text-green-400 mb-1">
+                Submit a Link
+              </h3>
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+                {isMobile ? 'Use Alphy on online content' : 'Submit a link to an audiovisual content to process with Alphy.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Upload Recording Card */}
+        <div
+          className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-6 hover:shadow-lg transform hover:scale-102 transition duration-300 ease-in-out"
+          onClick={() => setUploadDialog(true)}
+        >
+          <div className="flex items-center">
+            <div className="bg-indigo-100 dark:bg-indigo-900/30 p-3 rounded-full mr-4">
+              <CloudUploadIcon className="text-indigo-500 dark:text-indigo-400" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-indigo-500 dark:text-indigo-400 mb-1">
+                Upload a Recording
+              </h3>
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+                {isMobile ? 'Process an audio file from your device' : 'Import an audio file from your device to transcribe, summarize, and question privately.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Create Arc Card */}
+        <div
+          className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-6 hover:shadow-lg transform hover:scale-102 transition duration-300 ease-in-out"
+          onClick={handleArcNavigation}
+        >
+          <div className="flex items-center">
+            <div className="bg-red-100 dark:bg-red-900/30 p-3 rounded-full mr-4">
+              <ChatIcon className="text-red-500 dark:text-red-400" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-red-500 dark:text-red-400 mb-1">
+                Create an Arc
+              </h3>
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+                {isMobile 
+                  ? 'Create an AI assistant as simply as creating a playlist'
+                  : 'Build your own AI-assisted search engine as effortlessly as building a playlist.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
-    <div className="md:mt-10 xl:mt-20 mx-auto ">
+    <div className="md:mt-10 xl:mt-20 mx-auto">
       {!submitDialog && !uploadDialog && !arcDialog && (
-        <div className="hidden pt-10 lg:flex flex-row gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20   ">
-          <div className="flex flex-col gap-10">
-            <div className="text-xl text-stone-900  dark:text-zinc-300 text-center mb-10 quicksand font-semibold">
-              Process New Content
-            </div>
-
-            <div
-              className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer w-[300px] transform hover:scale-105 transition duration-500 ease-in-out"
-              onClick={() => {
-                setSubmitDialog(true)
-                handleButtonClick()
-              }}
-            >
-              <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-                <p className="text-green-300 text-lg quicksand font-semibold text-center row-span-1">
-                  {' '}
-                  Submit a Link
-                </p>
-                <p className="hidden sm:block text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
-                  Submit a link to an online discussion to process with Alphy.
-                </p>
-                <div className="row-span-1 w-full justify-center items-center flex">
-                  <LinkIcon
-                    fontSize={'medium'}
-                    className="text-green-300 mx-auto mb-2"
-                  />
-                </div>
-                {/*  <button className="max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-lg text-white mb-5 row-span-1 dark:text-zinc-700 dark:quicksand font-semibold">
-                                                        Submit
-                                                    </button> */}
-              </div>
-            </div>
-            <div className="min-h-[230px] max-h-[230px] bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[300px] transform hover:scale-105 transition duration-500 ease-in-out">
-              <div
-                className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
-                onClick={() => setUploadDialog(true)}
-              >
-                <p className="text-indigo-400 text-lg quicksand font-semibold text-center row-span-1">
-                  Upload a Recording
-                </p>
-                <p className="hidden sm:block text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
-                  Import an audio file from your device to transcribe,
-                  summarize, and question privately.
-                </p>
-                <div className="row-span-1 w-full justify-center items-center flex">
-                  <CloudUploadIcon
-                    fontSize={'medium'}
-                    className="text-indigo-300 mx-auto mb-2"
-                  />
-                </div>
-                {/*     <button className=" max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-lg text-white   dark:text-zinc-700 dark:quicksand font-semibold"
-                                            >
-                                                Upload
-                                                </button> */}
-              </div>
-            </div>
-          </div>
-
-          <div className=" mt-10 border-r border-gray-200 dark:border-zinc-700 dark:opacity-40"></div>
-
-          <div className="justify-center flex flex-col ">
-            <div className="text-xl text-stone-900   quicksand font-semibold dark:text-zinc-300 text-center mb-10">
-              Connect Audio with AI
-            </div>
-            <div className="min-h-[230px] max-h-[230px]  my-auto  bg-white  dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[300px]    transform hover:scale-105 transition duration-500 ease-in-out">
-              <div
-                onClick={handleArcNavigation}
-                className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
-              >
-                <p className="text-red-300 text-lg quicksand font-semibold text-center mt-2 row-span-1">
-                  Create an Arc
-                </p>
-                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
-                  {mobileWindow===false
-                    ? 'Build your own AI-assisted search engine on countless hours of audiovisual content.'
-                    : 'Build your AI assistants'}
-                </p>
-
-                <div className="row-span-1 w-full justify-center items-center flex mt-1">
-                  <ChatIcon
-                    fontSize={ 'medium'}
-                    className="text-red-300 mx-auto mb-2 "
-                  />
-                </div>
-                {/*    <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-lg text-white dark:text-zinc-700 dark:quicksand font-semibold"
-                    >
-                        Create
-                            </button> */}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {!submitDialog && !uploadDialog && !arcDialog && (
-        <div className="dark:bg-darkMode lg:hidden justify-center h-full py-10 px-5 items-center overflow-y-scroll sm:min-h-[100vh] sm:max-h-[100vh] mt-6 lg:mt-20">
-          <p className="mb-10 text-xl quicksand font-semibold text-zinc-600 dark:text-zinc-300 text-center">
-            Start discovering Alphy's capabilities
-          </p>
-          <div className="flex flex-col gap-6 sm:gap-10 lg:gap-20 w-full mx-auto justify-center xl:px-20 ">
-            <div
-              className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer w-[250px] transform hover:scale-105 transition duration-500 ease-in-out"
-              onClick={() => {
-                setSubmitDialog(true)
-                handleButtonClick()
-              }}
-            >
-              <div className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5">
-                <p className="text-emerald-300 text-lg quicksand font-semibold text-center row-span-1">
-                  {' '}
-                  Submit a Link
-                </p>
-                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal ">
-                  {!mobileWindow
-                    ? 'Submit a link to an audiovisual content to process with Alphy.'
-                    : 'Use Alphy on online content'}
-                </p>
-                <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
-                  <LinkIcon
-                    fontSize={'medium'}
-                    className="text-emerald-200 mx-auto mb-2"
-                  />
-                </div>
-                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-green-300 rounded-lg text-white mb-5  dark:text-zinc-700 dark:quicksand font-semibold">
-                  Submit
-                </button>
-              </div>
-            </div>
-            <div className="bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
-              <div
-                className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
-                onClick={() => setUploadDialog(true)}
-              >
-                <p className="text-indigo-400 text-lg quicksand font-semibold text-center row-span-1">
-                  Upload a Recording
-                </p>
-                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
-                  {!mobileWindow
-                    ? ' Import an audio file from your device to transcribe, summarize, and question privately'
-                    : 'Process an audio file from your device'}
-                </p>
-                <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
-                  <CloudUploadIcon
-                    fontSize={'medium'}
-                    className="text-indigo-300 mx-auto mb-2"
-                  />
-                </div>
-                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-indigo-400  mb-5 rounded-lg text-white row-span-1  dark:text-zinc-700 dark:quicksand font-semibold">
-                  Upload
-                </button>
-              </div>
-            </div>
-            <div className=" bg-white mx-auto dark:bg-mildDarkMode dark:border-zinc-600 rounded-lg drop-shadow-lg hover:cursor-pointer  w-[250px] transform hover:scale-105 transition duration-500 ease-in-out">
-              <div
-                onClick={handleArcNavigation}
-                className="flex flex-col items-center mx-auto px-5 pt-5 grid sm:grid-rows-5"
-              >
-                <p className="text-red-300 text-lg quicksand font-semibold text-center row-span-1">
-                  Create an Arc
-                </p>
-                <p className="text-slate-700 dark:text-zinc-400 text-sm  text-center row-span-2 quicksand font-normal">
-                  {!mobileWindow
-                    ? 'Build your own AI-assisted search engine as effortlessly as building a playlist.'
-                    : 'Create an AI assistant as simply as creating a playlist'}
-                </p>
-
-                <div className="row-span-1 w-full justify-center items-center flex mt-4 mb-4">
-                  <ChatIcon
-                    fontSize={'medium'}
-                    className="text-red-300 mx-auto mb-2 "
-                  />
-                </div>
-                <button className="hidden sm:block max-w-[150px] mx-auto px-5 py-2 bg-red-300 mb-5 rounded-lg text-white dark:text-zinc-700 dark:quicksand font-semibold">
-                  Create
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <>
+          {renderDesktopView()}
+          {renderMobileView()}
+        </>
       )}
 
       {submitDialog && (
@@ -494,13 +460,6 @@ export default function HubCreationBlock({
           credit={credit}
         />
       )}
-
-      {/*   {arcDialog &&
-                <Dialog maxWidth="lg" fullWidth="true" open={arcDialog} onClose={() => setArcDialog(false)} >
-                    <ArcBlock currentUser={currentUser} tier={tier} credit={credit} dataGlobalArchipelagos={dataGlobalArchipelagos} setDataGlobalArchipelagos={setDataGlobalArchipelagos} />
-                </Dialog>
-
-            } */}
     </div>
   )
 }

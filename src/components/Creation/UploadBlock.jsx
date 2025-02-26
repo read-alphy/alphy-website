@@ -1,15 +1,26 @@
-import React, { useState, useRef, useCallback } from 'react'
-import axios from 'axios'
-import Link from 'next/link'
-import {useRouter} from 'next/router'
-import { Button } from '@material-tailwind/react'
-import { useDropzone } from 'react-dropzone'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import { API_URL } from '../../constants'
-import ConvertPrivately from '../../../public/img/convertprivately.png'
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
-import Image from 'next/image'
+import React, { useState, useRef, useCallback } from 'react';
+import axios from 'axios';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useDropzone } from 'react-dropzone';
+
+// Components
+import { Button } from '@material-tailwind/react';
+
+// Icons
+import { 
+  ArrowLeft,
+  CloudUpload,
+  FileText,
+  AlertCircle,
+  X,
+  BadgeCheck
+} from 'lucide-react';
+
+// Assets
+import ConvertPrivatelyIcon from '../../../public/img/convertprivately.png';
+import { API_URL } from '../../constants';
 
 export default function UploadBlock({
   currentUser,
@@ -17,70 +28,82 @@ export default function UploadBlock({
   credit,
   handleGoBack,
 }) {
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [uploadDuration, setUploadDuration] = useState('')
-  const [uploadTitle, setUploadTitle] = useState('')
-  const [file, setFile] = useState(null)
-  const [fileUploading, setFileUploading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(false)
-  const audioRef = useRef(null)
-  const router = useRouter()
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadDuration, setUploadDuration] = useState('');
+  const [uploadTitle, setUploadTitle] = useState('');
+  const [file, setFile] = useState(null);
+  const [fileUploading, setFileUploading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
+  
+  const audioRef = useRef(null);
+  const router = useRouter();
 
   const navigateCredit = () => {
-    sessionStorage.setItem('creditPurchase', 'true')
-    router.push('/account')
-  }
+    sessionStorage.setItem('creditPurchase', 'true');
+    router.push('/account');
+  };
 
   const handleFileUpload = event => {
-    setErrorMessage(false)
-    const uploadFile = event.target.value
+    setShowError(false);
+    const uploadFile = event.target.files[0];
+    
+    if (!uploadFile) return;
 
-    const formData = new FormData()
-    formData.append('file', uploadFile)
-    setFile(formData)
-    const audio = audioRef.current
-    audio.src = URL.createObjectURL(uploadFile)
-    audio.onloadedmetadata = () => {
-      setUploadDuration(audio.duration)
-
-      setUploadTitle(uploadFile.name)
+    const allowedExtensions = ['.mp3', '.m4a', '.mpga', '.mpeg', '.wav', '.webm'];
+    const fileExtension = uploadFile.name.substring(uploadFile.name.lastIndexOf('.')).toLowerCase();
+    
+    if (!allowedExtensions.includes(fileExtension)) {
+      setErrorMessage('Please select a supported audio file format: MP3, M4A, MPGA, MPEG, WAV, or WEBM');
+      setShowError(true);
+      return;
     }
-  }
+
+    const formData = new FormData();
+    formData.append('file', uploadFile);
+    setFile(formData);
+    
+    // Get file metadata
+    const audio = audioRef.current;
+    audio.src = URL.createObjectURL(uploadFile);
+    audio.onloadedmetadata = () => {
+      setUploadDuration(audio.duration);
+      setUploadTitle(uploadFile.name);
+    };
+  };
 
   const handleFileUploadByDrop = files => {
-    setErrorMessage(false)
+    setShowError(false);
 
-    const file = files[0]
-    const allowedExtensions = [
-      '.mp3',
-      '.m4a',
-      '.mpga',
-      '.mpeg',
-      '.wav',
-      '.webm',
-    ]
-    const fileExtension = file.name
-      .substring(file.name.lastIndexOf('.'))
-      .toLowerCase()
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    const allowedExtensions = ['.mp3', '.m4a', '.mpga', '.mpeg', '.wav', '.webm'];
+    const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+    
     if (!allowedExtensions.includes(fileExtension)) {
-      setErrorMessage(true)
-      return
-      // You can display an error message or take other actions here
+      setErrorMessage('Please select a supported audio file format: MP3, M4A, MPGA, MPEG, WAV, or WEBM');
+      setShowError(true);
+      return;
     }
 
-    const formData = new FormData()
-    formData.append('file', file)
-    setFile(formData)
-    const audio = audioRef.current
-    audio.src = URL.createObjectURL(file)
+    const formData = new FormData();
+    formData.append('file', file);
+    setFile(formData);
+    
+    // Get file metadata
+    const audio = audioRef.current;
+    audio.src = URL.createObjectURL(file);
     audio.onloadedmetadata = () => {
-      setUploadDuration(audio.duration)
-      setUploadTitle(file.name)
-    }
-  }
+      setUploadDuration(audio.duration);
+      setUploadTitle(file.name);
+    };
+  };
 
   const handlePostUpload = () => {
-    setFileUploading(true)
+    if (!file || !currentUser) return;
+    
+    setFileUploading(true);
 
     axios
       .post(`${API_URL || 'http://localhost:3001'}/sources/upload`, file, {
@@ -91,377 +114,244 @@ export default function UploadBlock({
         onUploadProgress: progressEvent => {
           const progress = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
-          )
-
-          setUploadProgress(progress)
+          );
+          setUploadProgress(progress);
         },
       })
       .then(response => {
-        // Handle the response after successful upload
-        const responsed = response.data
-
-        navigate('/up/' + responsed.source_id)
-        //page'e navige et
+        // Handle successful upload
+        sessionStorage.setItem('refreshCredit', 'true');
+        router.push('/up/' + response.data.source_id);
       })
       .catch(error => {
-        console.log(error)
-
-        setErrorMessage(true)
-        handleFileUploadClear()
-        // Handle any errors that occur during upload
-        console.error(error)
-      })
-  }
+        console.error('Upload error:', error);
+        setErrorMessage('There was an error uploading your file. Please try again.');
+        setShowError(true);
+        handleFileUploadClear();
+      });
+  };
 
   const handleFileUploadClear = () => {
-    setFile(null)
-    setUploadProgress(0)
-    setUploadDuration('')
-    setUploadTitle('')
-    setFileUploading(false)
-  }
+    setFile(null);
+    setUploadProgress(0);
+    setUploadDuration('');
+    setUploadTitle('');
+    setFileUploading(false);
+  };
 
   const onDrop = useCallback(acceptedFiles => {
-    // Do something with the dropped files
+    handleFileUploadByDrop(acceptedFiles);
+  }, []);
 
-    handleFileUploadByDrop(acceptedFiles)
-  }, [])
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+    onDrop,
+    accept: {
+      'audio/*': ['.mp3', '.m4a', '.mpga', '.mpeg', '.wav', '.webm']
+    }
+  });
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  // Format duration as MM:SS
+  const formatDuration = (seconds) => {
+    if (!seconds) return '';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
 
   return (
-    <div className="mt-10 sm:mt-20 text-zinc-700 h-full p-5 dark:text-zinc-300 max-w-[1000px] mx-auto items-center  justify-center sm:px-20">
-      <div className="mb-10">
-        <p
-          onClick={() => handleGoBack()}
-          className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
-        >
-          <KeyboardArrowLeftIcon fontSize="small" className="" />
-          <span className="text-sm  quicksand font-normal">Go Back</span>
-        </p>
-      </div>
-      <div className="pb-4 ">
-        <div className="flex mx-auto   text-indigo-400 text-sm font-bold mb-10">
-          <VerifiedIcon className="mr-1 " />
-          <span>PREMIUM</span>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+    
+      {/* Main content card */}
+      <div className="bg-white dark:bg-zinc-800 rounded-xl  p-8">
+        <div className="flex items-center gap-2 mb-6">
+          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+            Upload Audio Recording
+          </h3>
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
+            <BadgeCheck className="h-3 w-3 mr-1" />
+            Premium
+          </span>
         </div>
-        <p className="dark:text-zinc-200 text-zinc-700 mb-4 text-lg quicksand font-normal">
-          Upload an audio file (MP3, M4A, MPGA, MPEG, WAV, or WEBM)
-        </p>
-        {/*    <p className="dark:text-slate-700 text-slate-700 mb-6 text-md quicksand font-normal">
-          As we value your privacy, we immediately delete your audio files after
-          transcription, and we make sure Alphy's summary, transcription, and
-          chatbot are only accessible to you and no one else.
-        </p> */}
-      </div>
-
-      {file === null ? (
-        tier === 'premium' ? (
-          <div className="flex items-center justify-center w-full">
-            <label
-              {...getRootProps()}
-              for="dropzone-file"
-              className={`flex flex-col items-center justify-center w-full border-2 border-zinc-00 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-mildDarkMode hover:opacity-80 dark:border-gray-600 dark:hover:border-gray-700 dark:hover:bg-zinc-800 transition duration-200 ease-in `}
-            >
-              <div
-                className={`flex flex-col items-center justify-center pt-5 pb-6 min-w-[200px] ${
-                  isDragActive ? '' : ''
-                }`}
+        
+        {tier === 'premium' ? (
+          <>
+            {!file ? (
+              <div 
+                {...getRootProps()}
+                className={`border-2 border-dashed ${isDragActive ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'border-gray-300 dark:border-gray-600'} rounded-lg p-8 text-center mb-6 transition-colors`}
               >
-                {!isDragActive ? (
-                  <div className="items-center justify-center flex flex-col px-2">
-                    {!errorMessage ? (
-                      <div className="items-center justify-center flex flex-col">
-                        <CloudUploadIcon
-                          fontSize="large"
-                          className="text-indigo-400 mb-4 "
-                        />
-
-                        <p className="mb-2 text-sm text-slate-700 dark:text-zinc-300">
-                          <span className="quicksand font-normal">
-                            Click to upload an audio file
-                          </span>{' '}
-                          or drag and drop.
-                        </p>
-                        <p className="text-xs text-zinc-600 dark:text-zinc-300">
-                          {' '}
-                          We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM
-                        </p>
+                <input 
+                  {...getInputProps()} 
+                  accept=".mp3,.m4a,.mpga,.mpeg,.wav,.webm" 
+                  onChange={handleFileUpload}
+                />
+                <audio className="hidden" ref={audioRef} controls />
+                
+                <div className="flex flex-col items-center justify-center">
+                  <CloudUpload className="h-12 w-12 text-indigo-500 mb-4" />
+                  
+                  {!showError ? (
+                    <>
+                      <p className="text-base font-medium text-gray-900 dark:text-white mb-1">
+                        {isDragActive ? 'Drop your audio file here' : 'Drag and drop or click to upload'}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        MP3, M4A, MPGA, MPEG, WAV, or WEBM (max 100MB)
+                      </p>
+                    </>
+                  ) : (
+                    <div className="text-center mb-4">
+                      <p className="text-base font-medium text-red-600 dark:text-red-400 mb-1 flex items-center justify-center">
+                        <AlertCircle className="h-5 w-5 mr-1" />
+                        File type not supported
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM
+                      </p>
+                    </div>
+                  )}
+                  
+                  <span className="inline-flex items-center px-4 py-2 rounded-md bg-indigo-50 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 text-sm font-medium">
+                    Select File
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="mb-6">
+                <div className="bg-gray-50 dark:bg-zinc-900 rounded-lg p-4 mb-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-md mr-3">
+                        <FileText className="h-5 w-5 text-indigo-500" />
                       </div>
-                    ) : (
-                      <div className="items-center justify-center flex flex-col">
-                        <p className="mb-2 text-sm text-red-500">
-                          <span className="">
-                            Please make sure you submit one of the following
-                            file types!
-                          </span>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">
+                          {uploadTitle || 'Audio file'}
                         </p>
-                        <p className="text-xs text-zinc-600 dark:text-zinc-300">
-                          {' '}
-                          We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM
-                        </p>
+                        {uploadDuration && (
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {formatDuration(uploadDuration)} minutes
+                          </p>
+                        )}
                       </div>
+                    </div>
+                    {!fileUploading && (
+                      <button
+                        onClick={handleFileUploadClear}
+                        className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
                     )}
                   </div>
-                ) : (
-                  <div className="items-center justify-center flex flex-col items-center">
-                    <svg
-                      className="w-10 h-10 mb-3 text-zinc-600 dark:text-zinc-300 items-center flex"
-                      aria-hidden="true"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                    <p className="mb-2 text-sm text-zinc-600 dark:text-zinc-300 font-sans">
-                      <strong>Drop your file here. </strong>
+                  
+                  {uploadProgress > 0 && (
+                    <div className="mt-4">
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {uploadProgress === 100 ? 'Upload complete!' : 'Uploading...'}
+                        </span>
+                        <span className="text-gray-700 dark:text-gray-300">{uploadProgress}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div
+                          className="bg-indigo-500 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${uploadProgress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {showError && (
+                  <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+                    <p className="text-sm text-red-800 dark:text-red-300 flex items-start">
+                      <AlertCircle className="h-4 w-4 mr-1 mt-0.5 flex-shrink-0" />
+                      {errorMessage}
                     </p>
                   </div>
                 )}
-              </div>
-
-              <input
-                {...getInputProps()}
-                className="hidden"
-                accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga"
-              />
-              <input
-                onChange={handleFileUpload}
-                type="file"
-                className="hidden"
-                accept=".mp3,.wav,.mpeg,.m4a,.webm,.mpga"
-              />
-
-              <audio className="hidden" ref={audioRef} controls />
-            </label>
-          </div>
-        ) : (
-          <div>
-            <div className="flex flex-col  col-span-2 mx-auto items-center">
-              <p className="text-slate-700 dark:text-zinc-400 items-center margin-auto text-l  mb-5 w-full  quicksand font-normal col-span-2">
-                You need to go{' '}
-                <Link
-                  className="text-indigo-400 underline font-bold"
-                  href="/account"
+                
+                <button
+                  onClick={handlePostUpload}
+                  disabled={fileUploading}
+                  className={`w-full flex justify-center items-center px-6 py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white font-medium transition-colors ${fileUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  premium
-                </Link>{' '}
-                to upload personal files.
-              </p>
-            </div>
-          </div>
-        )
-      ) : (
-        <div className="rounded-xl dark:border-darkMode  pr-10 pt-10 quicksand font-normal ">
-          <p
-            className={`flex flex-row font-sans text-slate-700 dark:text-zinc-400  ${
-              uploadProgress > 0 ? 'italic' : 'underline'
-            } `}
-          >
-            {' '}
-            {uploadProgress > 0 && uploadProgress !== 100
-              ? 'Sending to Alphy...'
-              : 'Process another file instead'}
-            <svg
-              onClick={handleFileUploadClear}
-              className={`${
-                uploadProgress > 0 && !errorMessage
-                  ? 'opacity-40 pointer-events-none'
-                  : ' cursor-pointer '
-              } ml-2`}
-              width="20px"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title className="font-bold">Clear</title>
-              <path
-                clipRule="evenodd"
-                d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-                fillRule="evenodd"
-              ></path>
-            </svg>
-          </p>
-          <div className="lg:flex lg:flex-row lg:grid lg:grid-cols-5">
-            <p className="lg:col-span-2 flex  items-center font-sans text-slate-700 dark:text-zinc-300 mt-8 lg:mt-0 ">
-              {' '}
-              {uploadTitle}
-            </p>
-            {/* 					<p className="text-sm text-zinc-600 dark:text-zinc-300 "> 
-
-        Duration: {Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes
-
-        </p> */}
-            {/*  */}
-            <div className="lg:col-span-2 mt-2 ">
-              <div className="lg:grid lg:grid-cols-3">
-                <div className="lg:col-span-3 hidden lg:flex  lg:justify-center lg:mt-2 ">
-                  {/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"}`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} /> */}
-                  <div
-                    className={`${
-                      uploadProgress === 0 && 'hidden'
-                    } w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700 mt-2`}
-                  >
-                    <div
-                      className={`bg-indigo-400 h-3 rounded-full `}
-                      style={{ width: uploadProgress + '%' }}
-                    ></div>
-                  </div>
-                  {/*  */}{' '}
-                  {fileUploading === false && (
-                    <p className="text-sm  text-slate-700 dark:text-zinc-300 italic font-sans w-full flex justify-center lg:mt-2">
-                      Click continue to process the file...
-                    </p>
+                  {fileUploading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Processing...
+                    </>
+                  ) : (
+                    'Process Audio'
                   )}
-                  {/* <Progress className={`${uploadProgress>0 && "hidden"}`}color="gray" size="lg" value={100} label={0} /> */}
-                </div>
-                {/* 	<div className="sm:col-span-1 text-sm flex justify-center font-sans  text-slate-700 dark:text-zinc-300">
-    {Math.floor(uploadDuration/60)}.{Math.floor(uploadDuration%60)} minutes
-        </div> */}
+                </button>
               </div>
-            </div>
-
-            <div className="col-span-1 flex flex-col lg:flex-row lg:items-center lg:justify-center  lg:margin-auto">
-              {fileUploading === 0 && (
-                <p className="text-sm  text-slate-700 dark:text-zinc-300 italic font-sans my-4 lg:hidden">
-                  Click continue to process the file...
-                </p>
-              )}
-              <div
-                className={`${
-                  uploadProgress === 0 && 'hidden'
-                } my-4 lg:hidden w-5/6 bg-gray-200 rounded-full h-3 dark:bg-gray-700`}
-              >
-                <div
-                  className={`bg-indigo-400 h-3 rounded-full w-[${uploadProgress}%]`}
-                  style={{ width: uploadProgress + '%' }}
-                ></div>
-              </div>
-              {/* <Progress className={`${uploadProgress===0 ? "hidden" : "w-5/6"} lg:hidden my-4`} color="green"  size="lg" value={uploadProgress} label={uploadProgress} />
-               */}
-              {fileUploading ? (
-                <p className=" text-zinc-600 dark:text-zinc-300 text-sm font-sans italic my-4">
-                  <p
-                    className={`text-sm font-sans ${
-                      errorMessage
-                        ? 'text-red-400 dark:text-400'
-                        : 'text-slate-700 dark:text-zinc-300'
-                    }`}
-                  >
-                    {uploadProgress !== 100
-                      ? `Uploading... ${uploadProgress}% `
-                      : errorMessage
-                      ? 'There was an error. Please try again.'
-                      : `Complete!`}
-                  </p>{' '}
-                </p>
-              ) : (
-                <div className="flex flex-row">
-                  {' '}
-                  {/* <p className="lg:hidden">You are about to process this file.</p> */}
-                  <Button
-                    onClick={handlePostUpload}
-                    className="bg-indigo-400 lg:ml-10 normal-case max-w-[100px] my-4 text-zinc-100 dark:text-zinc-700"
-                  >
-                    Continue
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {tier === 'premium' && file !== null && (
-        <div className={`${file !== null && 'mt-10'}`}>
-          <div className="border-b border-gray-200 dark:border-gray-600 mx-auto items-center flex mb-5 mt-5"></div>
-          <div className="flex-col flex">
-            <div className="flex flex-row">
-              <a
-                href="/account"
-                className=" text-slate-700 dark:text-zinc-400 quicksand font-normal"
-              >
-                {tier === 'free' && 'Starter Plan'}
-                {tier === 'basic' && 'Basic Plan'}
-                {tier === 'premium' && 'Premium Plan'}
-              </a>
-              <p className="ml-1 mr-1"> - </p>
-              <p className="text-slate-700 dark:text-zinc-400 quicksand font-normal">
-                {' '}
-                Remaining Credits : {Math.floor(credit)} minutes
-              </p>
-            </div>
-
-            <div className="mt-8 mb-8  flex flex-col text-sm">
-              <p
-                className={`text-slate-700 dark:text-zinc-400 mr-2  quicksand font-normal`}
-              >
-                Need more credits?{' '}
-              </p>
-
-              <div className="flex flex-col ">
-                <p
-                  onClick={navigateCredit}
-                  size="sm"
-                  className={` ${
-                    tier === 'basic' || tier === 'premium'
-                      ? ''
-                      : 'pointer-events-none opacity-50'
-                  } cursor-pointer mt-4 w-[100px] quicksand font-normal`}
-                >
-                  <span className="mt-1 underline quicksand font-normal text-indigo-400">
-                    Buy here
+            )}
+            
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-gray-200 dark:border-gray-700 pt-6 mt-2">
+              <div>
+                <div className="flex items-center">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                    Premium Plan
                   </span>
-
-                  {/*  <div className="relative flex flex-row group cursor-default">
-						  <WorkspacePremiumIcon className="text-indigo-400"/>
-						  <p className="text-indigo-400 ml-2 quicksand font-normal">Premium Processing</p>
-						  <span className="absolute opacity-0 quicksand font-normal group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-700 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
-							This content was processed with advanced AI models accessible to Premium.
-						  </span>
-						</div> */}
-                </p>
+                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                    {Math.floor(credit)} minutes remaining
+                  </span>
+                </div>
               </div>
+              
+              <button
+                onClick={navigateCredit}
+                className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+              >
+                Need more credits?
+              </button>
             </div>
+          </>
+        ) : (
+          <div className="text-center py-8">
+            <svg className="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H8m10 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Premium Feature</h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">
+              Audio file processing is available with our Premium plan. Upgrade to process your own recordings.
+            </p>
+            <Link href="/account" className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md  text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+              Upgrade to Premium
+            </Link>
           </div>
-        </div>
-      )}
-
-      {file === null && (
-        <div className="pb-10 w-full py-4">
-          <div className="border-b border-gray-200 dark:border-gray-600 mx-auto items-center flex mb-5 "></div>
-
-          <p className=" dark:text-zinc-200 text-slate-700 text-md quicksand font-normal items-center ">
-            Use our free converter tool to get your video and audio files ready
-            for transcription.{' '}
-          </p>
-          <div className="flex flex-row items-center mt-6 ">
-            <a
-              className="cursor-pointer rounded-md bg-gradient-to-br from-indigo-300 to-indigo-500 px-2 py-1 transition duration-500 hover:scale-105 ease-in-out"
-              href="https://convertprivately.com/"
-              target="_blank"
-            >
-              <div className="flex flex-row items-center rounded-lg p-1 ">
-                <Image src={ConvertPrivately} width={30} className="p-1" 
-                alt = "ConvertPrivately"
-                />
-                <p className="ml-2 text-md font-bold text-white dark:text-zinc-800">
-                  {' '}
-                  ConvertPrivately
-                </p>
-              </div>
-            </a>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
+      
+      {/* Convert privately card */}
+      <div className="mt-8 bg-white dark:bg-zinc-800 rounded-xl p-6">
+        <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
+          Need to convert your media?
+        </h4>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          Use our free converter tool to get your video and audio files ready for transcription.
+        </p>
+        <a
+          href="https://convertprivately.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-4 py-2 rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all "
+        >
+          <Image 
+            src={ConvertPrivatelyIcon} 
+            width={24} 
+            height={24} 
+            className="mr-2" 
+            alt="ConvertPrivately" 
+          />
+          ConvertPrivately
+        </a>
+      </div>
     </div>
   )
 }
