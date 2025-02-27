@@ -73,12 +73,7 @@ export function useQAHandlers({
     setInputValue('')
   }, [setShowBaseQA, setInputValue])
 
-  // Handle Enter key press
-  const handleKeyDown = useCallback((event) => {
-    if (event.key === 'Enter') {
-      fetchData()
-    }
-  }, [])
+
 
   // Share link to current question
   const handleShareLink = useCallback(() => {
@@ -153,6 +148,7 @@ export function useQAHandlers({
     }
   }, [singleSource, answer, baseSources, setSingleSource, setAnswer, setBaseSources])
 
+  
   // Fetch answer data
   const fetchData = useCallback(() => {
     // Clear any existing toast notifications
@@ -251,7 +247,11 @@ export function useQAHandlers({
     setTriggerWs, 
     setSelectionCall
   ])
-
+  const handleKeyDown = useCallback((event) => {
+    if (event.key === 'Enter') {
+      fetchData();
+    }
+  }, [fetchData])
   return {
     handleClear,
     handleBaseQA,

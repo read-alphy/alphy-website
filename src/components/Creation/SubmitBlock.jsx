@@ -185,7 +185,7 @@ export default function SubmitBlock({
                 <p className="font-medium text-gray-700 dark:text-gray-300 mb-3">Example formats:</p>
                 <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   <li>• YouTube: youtube.com/watch?v=h6fcK_fRYaI</li>
-                  <li>• X Spaces: x.com/intern/status/1892283575736643620</li>
+                  <li>• X Spaces: x.com/i/status/1892283575736643620</li>
                   <li>• X Videos: x.com/i/status/1731765772874129676</li>
                   <li>• Twitch: twitch.tv/videos/1965889164</li>
                   <li>• Apple Podcasts: podcasts.apple.com/.../id1507881694?i=1000529427756</li>

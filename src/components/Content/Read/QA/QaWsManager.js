@@ -90,7 +90,6 @@ export class QaWsManager {
     const url = `ws${this._options.apiInfo.ssl ? 's' : ''}://${
       this._options.apiInfo.apiHost
     }/ws/question`
-    console.log('Attempting to connect to: ' + url)
     return url
   }
 

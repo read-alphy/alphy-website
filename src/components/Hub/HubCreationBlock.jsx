@@ -205,13 +205,17 @@ export default function HubCreationBlock({
       setFailed(false)
       
       const idToken = await currentUser.getIdToken()
+      console.log( `${API_URL}/sources/`,
+        { url: processedUrl },
+        { headers: { 'id-token': idToken } }
+      )
       const response = await axios.post(
         `${API_URL}/sources/`,
         { url: processedUrl },
         { headers: { 'id-token': idToken } }
       )
       
-      // Update session and redirect
+      
       sessionStorage.setItem('refreshCredit', 'true')
       setErrorMessage('')
       setInputValue('')
