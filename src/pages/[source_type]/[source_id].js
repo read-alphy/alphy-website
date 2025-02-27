@@ -10,7 +10,6 @@ import ApplePodcastBanner from '../../../public/img/apple_podcast_banner.png'
 import Twitch from '../../../public/img/twitchSource.png'
 import X_Image from '../../../public/img/X.png'
 
-export const runtime = 'experimental-edge'
 
 const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,
