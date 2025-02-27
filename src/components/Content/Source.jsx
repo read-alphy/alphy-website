@@ -324,7 +324,7 @@ export default function SourcePage({
             </div>
           ) : (
             isClient && (
-              <Content
+             /*  <Content
                 data={data}
                 tier={tier}
                 isVisible={isVisible}
@@ -342,7 +342,8 @@ export default function SourcePage({
                 getSandboxHistory={getSandboxHistory}
                 source_id={source_id}
                 source_type={source_type}
-              />
+              /> */
+              <></>
             )
           )}
         </div>
