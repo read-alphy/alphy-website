@@ -40,7 +40,7 @@ async function fetchData(sourceType, sourceId) {
     
     const { source_type, source_id } = context.params;
 
-    if (typeof source_id !== 's tring') {
+    if (typeof source_id !== 'string') {
       console.error('source_id is not a string:', source_id);
       // Handle the case or log more details
     }
