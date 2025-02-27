@@ -1,5 +1,5 @@
 import { Tab, Tabs } from 'react-bootstrap'
-import KeyTakeaways from './content/KeyTakeaways'
+import KeyTakeaways from './content/KeyTakeAways'
 import Summary from './content/Summary'
 import Transcript from './content/Transcript'
 
