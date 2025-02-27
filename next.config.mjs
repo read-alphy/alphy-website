@@ -1,26 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-      // Keep your existing images configuration
       images: {
         domains: ['i.ytimg.com', 'flagcdn.com'],
       },
-      
-      // Add Cloudflare Pages compatibility settings
+      // Add Cloudflare compatibility settings
       webpack: (config, { isServer }) => {
         if (isServer) {
-          // Exclude problematic Node.js specific modules that Cloudflare doesn't support
+          // Exclude problematic Node.js modules
           config.externals = [...(config.externals || []), 'async_hooks'];
         }
         return config;
       },
-      
-      // Improved Edge runtime configuration for Cloudflare
+      // Simplified experimental config compatible with Next.js 14.1.0
       experimental: {
-        runtime: 'edge',
-        serverComponents: true,
+        instrumentationHook: true,
       },
-      
-      // Cloudflare Pages specific optimizations
+      // Enable edge runtime at the global config level
       swcMinify: true,
     };
     

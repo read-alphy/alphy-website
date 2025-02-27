@@ -5,9 +5,8 @@ import { API_URL } from '../../constants'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-export const config = {
-  runtime: 'experimental-edge',
-}
+export const runtime = 'experimental-edge'
+
 const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,
 })
@@ -156,7 +155,7 @@ if (!data || source_id === undefined || source_type === undefined) {
 
       {
           (source_id===undefined|| source_type===undefined || data=== null) ?  <Loading /> : 
-      <Source
+     /*  <Source
       source_type={source_type}
       source_id={source_id}
       collapsed={collapsed}
@@ -172,7 +171,9 @@ if (!data || source_id === undefined || source_type === undefined) {
       getSandboxHistory = {getSandboxHistory}
       data={data}
 
-      />
+      /> */
+      <>
+      </>
   }
   </div>
   )
