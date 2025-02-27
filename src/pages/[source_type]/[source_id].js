@@ -5,64 +5,80 @@ import { API_URL } from '../../constants'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-export const runtime = 'experimental-edge'
-
+export const config = {
+  runtime: 'edge',
+}
 const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,
 })
 
 
-// Define the fetchData function
+
 async function fetchData(sourceType, sourceId) {
   if(sourceId === '[object Object]') {
-      return { data: null, error: 'Invalid source ID' };
+    return { data: null, error: 'Invalid source ID' };
   }
       
-      const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
+  const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
     
   try {
-    const response = await fetch(url);
+    // Add explicit timeout and headers to make fetch more robust
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      next: { revalidate: 60 } // Optional: control revalidation
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     const data = await response.json();
     return { data: data, error: null };
   } catch (error) {
-    
     console.error(`Error fetching data: ${error}`);
-    return { data: null, error: error.response ? error.response.data : 'Error fetching data' };
+    return { 
+      data: null, 
+      error: error.message || 'Error fetching data' 
+    };
   }
 }
     
-  export async function getServerSideProps(context) {
-    
+export async function getServerSideProps(context) {
+  try {
     const { source_type, source_id } = context.params;
 
-    if (typeof source_id !== 'string') {
-      console.error('source_id is not a string:', source_id);
-      // Handle the case or log more details
+    if (typeof source_id !== 'string' || source_id === '[object Object]') {
+      return {
+        props: {
+          data: null,
+          error: 'Invalid source ID',
+        },
+      };
     }
-          const { data, error } = await fetchData(source_type, source_id);
-        
-          if (error || !data) {
-            // Handle the case where there is an error or no data
-            console.error(`Fetch error: ${error}`);
-            return {
-              props: {
-                data:null,
-                error: error || 'An unknown error occurred',
-              },
-            };
-          }
-        
-          // If data is valid, return it as props
-          return {
-            props: {
-              data: data,
-              source_id,
-              source_type,
-              error: error
-            },
-          };
-  
+
+    const { data, error } = await fetchData(source_type, source_id);
+    
+    return {
+      props: {
+        data: data || null,
+        source_id,
+        source_type,
+        error: error || null,
+      },
+    };
+  } catch (err) {
+    console.error('Server-side props error:', err);
+    return {
+      props: {
+        data: null,
+        error: 'Failed to fetch data',
+      },
+    };
   }
+}
 
 
   
