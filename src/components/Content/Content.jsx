@@ -625,7 +625,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
   }
 
   
-  const handleAddToArchipelago = (archipelagoUID, create) => {
+  const handleAddToArc = (archipelagoUID, create) => {
     const newSource = {
       source_id: source_id,
       source_type: source_type,
