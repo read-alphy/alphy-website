@@ -31,6 +31,13 @@ export default function QuestionAnswering({
   buttonRef,
   setSelectionCall,
 }) {
+  console.log('QuestionAnswering - Component Rendering', { 
+    currentUser, 
+    key_qa, 
+    data, 
+    inputValue 
+  });
+  
   const QARef = useRef(null)
   const router = useRouter()
   
@@ -69,12 +76,22 @@ export default function QuestionAnswering({
     highlightIndex,
     setHighlightIndex,
   } = useQAState()
+  
+  console.log('QuestionAnswering - State initialized', { 
+    isLoadingInside, 
+    showBaseQA, 
+    isCleared, 
+    showUserQA, 
+    inputError, 
+    clicked 
+  });
 
   // Create refs for the source areas
   const numberOfAreas = 5
   const areaRefs = useRef(
     Array.from({ length: numberOfAreas }, () => createRef())
   )
+  console.log('QuestionAnswering - Area refs created', { numberOfAreas });
 
   // Event handlers with custom hook
   const {
@@ -122,29 +139,44 @@ export default function QuestionAnswering({
     API_SSL,
     buttonRef
   })
+  console.log('QuestionAnswering - Handlers initialized');
 
   // Handle timestamp changes from parent
   const updateVariable = (event) => {
+    console.log('QuestionAnswering - updateVariable called with event:', event);
     timestampChanger(event)
   }
 
   // Process URL query parameter on initial load
   useEffect(() => {
+    console.log('QuestionAnswering - URL query effect running', { 
+      path: router.asPath, 
+      clicked 
+    });
+    
     const processUrlQuery = () => {
+      console.log('QuestionAnswering - Processing URL query');
       if (
         router.asPath.split('/')[2]?.split('&q=')[1] !== undefined &&
         !clicked
       ) {
         const my_question = router.asPath.split('/')[2].split('&q=')[1]
+        console.log('QuestionAnswering - Found question in URL:', my_question);
         runAnswererFromUrl(my_question)
 
         setTimeout(() => {
+          console.log('QuestionAnswering - Attempting to scroll to Q&A section');
           const element = document.querySelector('#q-and-a')
           if (element) {
             QARef.current = element
             element.scrollIntoView({ behavior: 'smooth' })
+            console.log('QuestionAnswering - Scrolled to Q&A section');
+          } else {
+            console.log('QuestionAnswering - Q&A element not found for scrolling');
           }
         }, 300)
+      } else {
+        console.log('QuestionAnswering - No question in URL or already clicked');
       }
     }
 
@@ -153,33 +185,56 @@ export default function QuestionAnswering({
       processUrlQuery()
     }, 1000)
 
-    return () => clearTimeout(timer)
+    return () => {
+      console.log('QuestionAnswering - Cleaning up URL query effect');
+      clearTimeout(timer)
+    }
   }, [router.asPath, clicked])
 
   // Process a question from URL
   const runAnswererFromUrl = (my_question) => {
-    if (!my_question) return
+    console.log('QuestionAnswering - runAnswererFromUrl called with:', my_question);
+    if (!my_question) {
+      console.log('QuestionAnswering - No question provided, returning');
+      return;
+    }
 
     const decodedText = decodeURIComponent(my_question)
+    console.log('QuestionAnswering - Decoded question:', decodedText);
 
     if (key_qa[decodedText]) {
+      console.log('QuestionAnswering - Found question in key_qa');
       const keys = Object.keys(key_qa)
       const index = keys.indexOf(decodedText)
+      console.log('QuestionAnswering - Question index:', index);
 
       setCollapseIndex(index)
       setBaseQuestion(decodedText)
       setClicked(true)
     } else {
+      console.log('QuestionAnswering - Question not in key_qa, setting as input');
       setInputValue(decodedText)
       setClicked(true)
       
       setTimeout(() => {
+        console.log('QuestionAnswering - Attempting to click button');
         if (buttonRef.current) {
           buttonRef.current.click()
+          console.log('QuestionAnswering - Button clicked');
+        } else {
+          console.log('QuestionAnswering - Button ref not available');
         }
       }, 1000)
     }
   }
+
+  console.log('QuestionAnswering - Rendering component', { 
+    isCleared, 
+    isLoadingInside, 
+    answerDataLength: answerData?.answer?.length || 0,
+    showBaseQA,
+    showUserQA
+  });
 
   return (
     <div
@@ -192,6 +247,7 @@ export default function QuestionAnswering({
       </p>
 
       <div className="Md:pl-10 md:pr-10">
+        {console.log('QuestionAnswering - Rendering SearchBar')}
         <SearchBar
           inputRef={inputRef}
           inputValue={inputValue}
@@ -204,11 +260,13 @@ export default function QuestionAnswering({
         />
 
         {inputError && inputValue.length === 0 && (
+          console.log('QuestionAnswering - Rendering ErrorMessage', { errorText }),
           <ErrorMessage message={errorText} />
         )}
 
         <div className="mt-10">
           {isCleared && !isLoadingInside && answerData.answer.length === 0 && (
+            console.log('QuestionAnswering - Rendering BaseQuestions'),
             <BaseQuestions
               key_qa={key_qa}
               data={data}
@@ -231,9 +289,15 @@ export default function QuestionAnswering({
           )}
         </div>
 
-        {isLoadingInside && !showBaseQA && <QuestionLoading />}
+        {isLoadingInside && !showBaseQA && (
+          console.log('QuestionAnswering - Rendering QuestionLoading'),
+          <QuestionLoading />
+        )}
 
         {answerData.answer.length !== 0 && !showBaseQA && showUserQA && (
+          console.log('QuestionAnswering - Rendering DynamicQA', { 
+            answerLength: answerData.answer.length 
+          }),
           <DynamicQA
             answerData={answerData}
             data={data}
