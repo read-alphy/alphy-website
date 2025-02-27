@@ -21,8 +21,8 @@ export function UIProvider({ children, initialData = {} }) {
   const [isBookmarked, setIsBookmarked] = useState(initialData.isBookmarked || false);
   
   // Archipelago/Arc state
-  const [userArchipelagoNames, setUserArchipelagoNames] = useState(
-    initialData.userArchipelagoNames || []
+  const [userArcNames, setuserArcNames] = useState(
+    initialData.userArcNames || []
   );
   
   // Visibility state
@@ -53,7 +53,7 @@ export function UIProvider({ children, initialData = {} }) {
     // Additional logic to save bookmark state to backend
   }, []);
   
-  const handleAddToArchipelago = useCallback((archipelagoId, isNew) => {
+  const handleAddToArc = useCallback((archipelagoId, isNew) => {
     // Logic to add to archipelago
     console.log(`Adding to archipelago: ${archipelagoId}, isNew: ${isNew}`);
     setMainPopoverOpen(false);
@@ -85,8 +85,8 @@ export function UIProvider({ children, initialData = {} }) {
     setCurrentUser,
     isBookmarked,
     setIsBookmarked,
-    userArchipelagoNames,
-    setUserArchipelagoNames,
+    userArcNames,
+    setuserArcNames,
     isVisible,
     setIsVisible,
     language,
@@ -106,7 +106,7 @@ export function UIProvider({ children, initialData = {} }) {
     
     // Handlers
     handleBookmark,
-    handleAddToArchipelago,
+    handleAddToArc,
     handleVisibility,
     handleLanguageChange,
     handleReportIssue,
@@ -114,10 +114,10 @@ export function UIProvider({ children, initialData = {} }) {
     // Additional data
     tier: initialData.tier || 'free',
   }), [
-    theme, data, currentUser, isBookmarked, userArchipelagoNames,
+    theme, data, currentUser, isBookmarked, userArcNames,
     isVisible, language, languages, reorderedLanguageCodes,
     showReportIssue, mainPopoverOpen, isMobile, isSandbox,
-    handleBookmark, handleAddToArchipelago, handleVisibility,
+    handleBookmark, handleAddToArc, handleVisibility,
     handleLanguageChange, handleReportIssue, initialData.tier
   ]);
   

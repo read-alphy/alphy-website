@@ -226,7 +226,7 @@ export default function HeroSection({ currentUser }) {
 
         {/* Hero Image */}
         <motion.div 
-          className="hidden lg:flex lg:w-2/5 flex-shrink-0"
+          className="hidden xl:flex lg:w-2/5 flex-shrink-0"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}

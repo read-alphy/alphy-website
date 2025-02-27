@@ -16,8 +16,8 @@ export default function HeaderArea({
   handleReportIssue,
   showReportIssue,
   setShowReportIssue,
-  handleAddToArchipelago,
-  userArchipelagoNames,
+  handleAddToArc,
+  userArcNames,
   currentUser,
   transcript,
   summary,
@@ -134,8 +134,8 @@ export default function HeaderArea({
               currentUser={currentUser}
               isBookmarked={isBookmarked}
               handleBookmark={handleBookmark}
-              handleAddToArchipelago={handleAddToArchipelago}
-              userArchipelagoNames={userArchipelagoNames}
+              handleAddToArc={handleAddToArc}
+              userArcNames={userArcNames}
               isVisible={isVisible}
               handleVisibility={handleVisibility}
               tier={tier}
