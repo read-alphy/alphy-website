@@ -67,7 +67,7 @@ export default function Explore({
     tier={tier}
     contentName={contentName}
     credit={credit}
-    userArcs={userArcs}
+    userArc={userArcs}
     dataGlobalArcs={dataGlobalArcs}
     setDataGlobalArcs={setDataGlobalArcs}
     totalMinutes={totalMinutes}
