@@ -5,7 +5,7 @@ const nextConfig = {
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
-      config.resolve.alias['async_hooks'] = require.resolve('./polyfills/async_hooks.js');
+      config.resolve.alias['async_hooks'] = new URL('./polyfills/async_hooks.js', import.meta.url).pathname;
     }
     return config;
   },
