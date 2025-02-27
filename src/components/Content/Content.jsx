@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState, useRef } from 'react'
 
 import srtParser2 from 'srt-parser-2'
