@@ -83,15 +83,15 @@ export const inputMessages = [
   },
   {
     command_type: 'space_idea_generator',
-    title: 'Twitter Space Idea',
-    message: 'Come up with a new Twitter Space idea based on this content.',
+    title: 'X Space Idea',
+    message: 'Come up with a new X Space idea based on this content.',
     icon: svgMaker('space_idea_generator'),
   },
   {
     command_type: 'space_description_generator',
-    title: 'Twitter Space Description',
+    title: 'X Space Description',
     message:
-      'Create an impactful tweet describing this Twitter Space to encourage replays.',
+      'Create an impactful tweet describing this X Space to encourage replays.',
     icon: svgMaker('space_description_generator'),
   },
   {

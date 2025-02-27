@@ -25,12 +25,12 @@ function introPromptHandler(
     prompt => prompt.name === character
   )
 
-  let source_platform = 'Twitter Space'
+  let source_platform = 'X Space'
   if (source_type === 'yt') {
     source_platform = 'YouTube'
   }
   if (source_type === 'sp') {
-    source_platform = 'Twitter Space'
+    source_platform = 'X Space'
   }
   if (source_type === 'x') {
     source_platform = 'Twitter'

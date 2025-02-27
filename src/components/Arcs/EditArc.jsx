@@ -101,7 +101,7 @@ export default function EditArc({
     ) {
       setInputValue('')
       setErrorMessageSubmit(
-        'Please provide a link to a YouTube video or Twitter Space.'
+        'Please provide a link to a YouTube video or X Space.'
       )
       setFailed(true)
       return
@@ -129,7 +129,7 @@ export default function EditArc({
         } else {
           setFailed(true)
           setErrorMessageSubmit(
-            'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
+            'Upgrade your plan to process X Spaces. See Account page for more detail.'
           )
           return
         }
@@ -184,7 +184,7 @@ export default function EditArc({
         } else {
           setFailed(true)
           setErrorMessageSubmit(
-            'Upgrade your plan to process Twitter videos. See Account page for more detail.'
+            'Upgrade your plan to process X Videos. See Account page for more detail.'
           )
           return
         }
@@ -231,10 +231,10 @@ export default function EditArc({
                 )
               } else if (
                 error.response.data.detail ==
-                'Free users cannot submit twitter spaces'
+                'Free users cannot submit X Spaces'
               ) {
                 setErrorMessageSubmit(
-                  'Upgrade your plan to process Twitter Spaces. See Account page for more detail.'
+                  'Upgrade your plan to process X Spaces. See Account page for more detail.'
                 )
               }
               setFailed(true)

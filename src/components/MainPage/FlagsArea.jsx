@@ -1,4 +1,7 @@
-import Image from 'next/image'
+import React from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+
 export default function FlagsArea() {
   const languages = [
     { language: 'English', country_code: 'gb' }, // United Kingdom
@@ -63,34 +66,88 @@ export default function FlagsArea() {
     /* {language: "Welsh", country_code: "gb"}, // United Kingdom */
   ]
 
-  return (
-    <div
-      id="languages"
-      className="w-full  pt-20 xl:pt-40 overflow-hidden pb-10"
-    >
-      <p className="text-xl xl:text-2xl  pl-4 text-slate-700 dark:text-zinc-300 quicksand font-bold">
-        Supported Languages
-      </p>
-      <p className="text-md xl:text-lg mb-6  pt-4 pl-4 text-slate-700 dark:text-zinc-300 font-normal quicksand">
-        Transcribe, translate, and use generative AI with more than 40
-        languages.
-      </p>
-      <div className="max-w-[800px] flex flex-wrap gap-6 mt-10">
-        {languages.map((language,index) => (
-          <div className="flex flex-col items-center justify-center mx-auto w-[100px] grid grid-rows-3">
-            <img
-              className="row-span-2 rounded-md   object-cover w-16 h-10 mx-auto"
-              src={`https://flagcdn.com/w80/${language.country_code}.png`}
-              key={index}
-              alt={languages.language}
-            />
+  // Animation variants
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.8 } }
+  };
 
-            <p className="row-span-1 text-center font-normal text-slate-600 dark:text-zinc-400 text-md quicksand">
-              {language.language}
-            </p>
-          </div>
-        ))}
+  const staggerChildren = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const flagAnimation = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 15 
+      } 
+    }
+  };
+
+  return (
+    <motion.section
+      id="languages"
+      className="w-full pt-20 xl:pt-40 overflow-hidden pb-10"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={fadeIn}
+    >
+      <div className="container mx-auto px-4">
+        <motion.h2 
+          className="text-2xl xl:text-3xl text-slate-700 dark:text-zinc-200 quicksand font-bold mb-2"
+          variants={fadeIn}
+        >
+          Supported Languages
+        </motion.h2>
+        <motion.p 
+          className="text-md xl:text-lg mb-10 text-slate-600 dark:text-zinc-300 font-normal quicksand max-w-2xl"
+          variants={fadeIn}
+        >
+          Transcribe, translate, and use generative AI with more than 40
+          languages from around the world.
+        </motion.p>
+        
+        <motion.div 
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"
+          variants={staggerChildren}
+        >
+          {languages.map((language, index) => (
+            <motion.div 
+              key={index}
+              className="flex flex-col items-center justify-center"
+              variants={flagAnimation}
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 10 }}
+            >
+              <div className="relative w-20 h-14 overflow-hidden rounded-md shadow-sm border border-slate-200 dark:border-zinc-700 hover:shadow-md transition-shadow duration-300">
+                <Image
+                  src={`https://flagcdn.com/w160/${language.country_code}.png`}
+                  alt={`${language.language} flag`}
+                  fill
+                  sizes="(max-width: 768px) 80px, 100px"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <p className="mt-2 text-center font-medium text-slate-700 dark:text-zinc-300 text-sm quicksand">
+                {language.language}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </div>
+    </motion.section>
   )
 }

@@ -41,3 +41,6 @@ next-env.d.ts
 .netlify
 
 .envrc
+
+*.sh
+GiantCodebase.md

@@ -11,7 +11,7 @@ import MannerArea from './MannerArea'
 
 /* const sourcesMap = {
   yt: 'YouTube',
-  sp: 'Twitter Spaces',
+  sp: 'X Spaces',
   x: 'Twitter',
   tw: 'Twitch',
   ap: 'Apple Podcasts',

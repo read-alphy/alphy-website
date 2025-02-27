@@ -132,7 +132,7 @@ useEffect(() => {
     // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
     // Find a way to store idToken in local storage, minding the expiration behavior.
     // Would improve performance throughout.
-    console.log(dataGlobalArcs)
+    
     if (dataGlobalArcs.length === 0) {
       getDataGlobalArcs(0, true, true)
     }
