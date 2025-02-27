@@ -20,7 +20,7 @@ const ReadComponent = dynamic(() => import('./Read/ReadComponent'), {
 })
 const Clip = dynamic(() => import('./Clip/ClipMain'), { ssr: false })
 const Sandbox = dynamic(() => import('./Sandbox/Sandbox'), { ssr: false })
-const HeaderArea = dynamic(() => import('./Read/Header/HeaderArea'), { ssr: false })
+const HeaderArea = dynamic(() => import('./Read/HeaderArea'), { ssr: false })
 
 
 export default function Content({
@@ -767,8 +767,8 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           handleReportIssue={handleReportIssue}
           showReportIssue={showReportIssue}
           setShowReportIssue={setShowReportIssue}
-          handleAddToArc={handleAddToArc}
-          userArcNames={userArcNames}
+          handleAddToArchipelago={handleAddToArc}
+          userArchipelagoNames={userArcNames}
           currentUser={currentUser}
           transcript={transcript}
           summary={summary}
