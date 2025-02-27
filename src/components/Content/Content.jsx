@@ -33,7 +33,7 @@ export default function Content({
   isVisible,
   handleVisibility,
   tier,
-  userArcs,
+  userArchipelagos,
   isBookmarked,
   setIsBookmarked,
   getSandboxHistory,
@@ -89,7 +89,7 @@ export default function Content({
   const inputRef = useRef(null)
   const contentRef = useRef(null)
 
-  const userArcNames = userArcs.map(item => [
+  const userArchipelagoNames = userArchipelagos.map(item => [
     item.name,
     item.uid,
   ])
@@ -626,7 +626,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
   }
 
   
-  const handleAddToArc = (arcUID, create) => {
+  const handleAddToArchipelago = (archipelagoUID, create) => {
     const newSource = {
       source_id: source_id,
       source_type: source_type,
@@ -767,8 +767,8 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           handleReportIssue={handleReportIssue}
           showReportIssue={showReportIssue}
           setShowReportIssue={setShowReportIssue}
-          handleAddToArchipelago={handleAddToArc}
-          userArchipelagoNames={userArcNames}
+          handleAddToArchipelago={handleAddToArchipelago}
+          userArchipelagoNames={userArchipelagoNames}
           currentUser={currentUser}
           transcript={transcript}
           summary={summary}
