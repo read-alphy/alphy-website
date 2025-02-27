@@ -2,15 +2,10 @@
 
 import Loading from '../../components/Loading'
 import { API_URL } from '../../constants'
-import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Twitter from '../../../public/img/twitter_space.png'
-import ApplePodcastBanner from '../../../public/img/apple_podcast_banner.png'
-import Twitch from '../../../public/img/twitchSource.png'
-import X_Image from '../../../public/img/X.png'
 
-export const runtime = 'edge';
+export const runtime = 'experimental-edge'
 
 const Source = dynamic(() => import('../../components/Content/Source'), {
   ssr: false,

@@ -18,7 +18,6 @@ import dynamic from 'next/dynamic'
 const ReadComponent = dynamic(() => import('./Read/ReadComponent'), {
   ssr: false,
 })
-const Clip = dynamic(() => import('./Clip/ClipMain'), { ssr: false })
 const Sandbox = dynamic(() => import('./Sandbox/Sandbox'), { ssr: false })
 const HeaderArea = dynamic(() => import('./Read/HeaderArea'), { ssr: false })
 
