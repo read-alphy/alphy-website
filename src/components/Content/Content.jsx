@@ -18,7 +18,6 @@ import dynamic from 'next/dynamic'
 const ReadComponent = dynamic(() => import('./Read/ReadComponent'), {
   ssr: false,
 })
-const Clip = dynamic(() => import('./Clip/ClipMain'), { ssr: false })
 const Sandbox = dynamic(() => import('./Sandbox/Sandbox'), { ssr: false })
 const HeaderArea = dynamic(() => import('./Read/Header/HeaderArea'), { ssr: false })
 
@@ -33,7 +32,7 @@ export default function Content({
   isVisible,
   handleVisibility,
   tier,
-  userArcs,
+  userArchipelagos,
   isBookmarked,
   setIsBookmarked,
   getSandboxHistory,
@@ -89,7 +88,7 @@ export default function Content({
   const inputRef = useRef(null)
   const contentRef = useRef(null)
 
-  const userArcNames = userArcs.map(item => [
+  const userArchipelagoNames = userArchipelagos.map(item => [
     item.name,
     item.uid,
   ])
@@ -626,7 +625,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
   }
 
   
-  const handleAddToArc = (archipelagoUID, create) => {
+  const handleAddToArchipelago = (archipelagoUID, create) => {
     const newSource = {
       source_id: source_id,
       source_type: source_type,
@@ -767,8 +766,8 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           handleReportIssue={handleReportIssue}
           showReportIssue={showReportIssue}
           setShowReportIssue={setShowReportIssue}
-          handleAddToArc={handleAddToArc}
-          userArcNames={userArcNames}
+          handleAddToArchipelago={handleAddToArchipelago}
+          userArchipelagoNames={userArchipelagoNames}
           currentUser={currentUser}
           transcript={transcript}
           summary={summary}

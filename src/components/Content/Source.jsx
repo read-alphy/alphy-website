@@ -16,7 +16,7 @@ export default function SourcePage({
   collapsed,
   setCollapsed,
   tier,
-  userArcs,
+  userArchipelagos,
   currentUser,
   sandboxHistory,
   setSandboxHistory,
@@ -241,6 +241,9 @@ export default function SourcePage({
     }
   };
 
+
+
+
   return (
     <div className="article bg-white dark:bg-darkMode dark:text-zinc-300">
       <Head>
@@ -329,7 +332,7 @@ export default function SourcePage({
                 handleVisibility={handleVisibility}
                 isBookmarked={isBookmarked}
                 setIsBookmarked={setIsBookmarked}
-                userArcs={userArcs}
+                userArchipelagos={userArchipelagos}
                 actionsHub={actionsHub}
                 language={language}
                 setLanguage={setLanguage}

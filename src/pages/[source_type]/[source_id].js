@@ -2,128 +2,110 @@
 
 import Loading from '../../components/Loading'
 import { API_URL } from '../../constants'
-import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Twitter from '../../../public/img/twitter_space.png'
-import ApplePodcastBanner from '../../../public/img/apple_podcast_banner.png'
-import Twitch from '../../../public/img/twitchSource.png'
-import X_Image from '../../../public/img/X.png'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import Source from '../../components/Content/Source'
 
-export const runtime = 'experimental-edge'
-
-const Source = dynamic(() => import('../../components/Content/Source'), {
-  ssr: false,
-})
-
-
-// Define the fetchData function
 async function fetchData(sourceType, sourceId) {
   if(sourceId === '[object Object]') {
-      return { data: null, error: 'Invalid source ID' };
+    return { data: null, error: 'Invalid source ID' };
   }
       
-      const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
+  const url = `${API_URL}/sources/${sourceType}/${sourceId}`;
     
   try {
-    const response = await fetch(url);
+    // Add explicit timeout and headers to make fetch more robust
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     const data = await response.json();
     return { data: data, error: null };
   } catch (error) {
-    
     console.error(`Error fetching data: ${error}`);
-    return { data: null, error: error.response ? error.response.data : 'Error fetching data' };
+    return { 
+      data: null, 
+      error: error.message || 'Error fetching data' 
+    };
   }
 }
-    
-  export async function getServerSideProps(context) {
-    
-    const { source_type, source_id } = context.params;
 
-    if (typeof source_id !== 'string') {
-      console.error('source_id is not a string:', source_id);
-      // Handle the case or log more details
+export default function SourceMaterial({
+    collapsed,
+    setCollapsed,
+    tier,
+    setContentName,
+    userArcs,
+    currentUser,
+    sandboxHistory,
+    setSandboxHistory,
+    getSandboxHistory,
+    loggedIn,
+    setLoggedIn
+}){
+  const router = useRouter();
+  const { source_type, source_id } = router.query;
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    async function loadData() {
+      if (!source_type || !source_id) return;
+      
+      if (typeof source_id !== 'string' || source_id === '[object Object]') {
+        setError('Invalid source ID');
+        setLoading(false);
+        return;
+      }
+
+      const { data, error } = await fetchData(source_type, source_id);
+      setData(data);
+      setError(error);
+      setLoading(false);
+
+      // Set image URL
+      if (data !== null && data.thumbnail !== null) {
+        setImageUrl(data.thumbnail);
+      } else {
+        if (source_type === "x") {
+          setImageUrl("/img/X.png");
+        } else if (source_type === "yt") {
+          setImageUrl(`https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`);
+        } else if (source_type === "sp") {
+          setImageUrl("/img/twitter_space.png");
+        } else if (source_type === "ap") {
+          setImageUrl("/img/apple_podcast_banner.png");
+        } else if (source_type === "tw") {
+          setImageUrl("/img/twitchSource.png");
+        }
+      }
     }
-          const { data, error } = await fetchData(source_type, source_id);
-        
-          if (error || !data) {
-            // Handle the case where there is an error or no data
-            console.error(`Fetch error: ${error}`);
-            return {
-              props: {
-                data:null,
-                error: error || 'An unknown error occurred',
-              },
-            };
-          }
-        
-          // If data is valid, return it as props
-          return {
-            props: {
-              data: data,
-              source_id,
-              source_type,
-              error: error
-            },
-          };
+
+    loadData();
+  }, [source_type, source_id]);
+
+  if (loading || !router.isReady) {
+    return <Loading />;
+  }
   
+  if (error) {    
+    return <div>Error loading data: {error}</div>;
   }
 
-
-  
-
-
-  export default function SourceMaterial({
-      collapsed,
-      setCollapsed,
-      tier,
-      setContentName,
-      userArcs,
-      currentUser,
-      sandboxHistory,
-      setSandboxHistory,
-      getSandboxHistory,
-      loggedIn,
-      setLoggedIn,
-      error,
-      data,
-      source_id,
-      source_type
-  }){
-
-    
-
-    let imageUrl = ""
-if(data !== null && data.thumbnail !== null){
-  imageUrl = data.thumbnail
-}
-else {
-  if (source_type === "x"){
-  imageUrl = "/img/X.png"
+  if (!data || source_id === undefined || source_type === undefined) {
+    return <Loading />;
   }
-  else if (source_type === "yt"){
-  imageUrl = `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`
-  }
-  else if (source_type === "sp"){
-  imageUrl = "/img/twitter_space.png"
-  }
-  else if (source_type === "ap"){
-  imageUrl = "/img/apple_podcast_banner.png"
-  }
-  else if (source_type === "tw"){
-  imageUrl = "/img/twitchSource.png"
-  }
-} 
-
-  
-if (error) {    
-  
-  return <div>Error loading data: {error}</div>;
-}
-
-if (!data || source_id === undefined || source_type === undefined) {
-  return <Loading />;
-}
 
 
   return(
@@ -152,7 +134,7 @@ if (!data || source_id === undefined || source_type === undefined) {
       setCollapsed={setCollapsed}
       tier={tier}
       setContentName={setContentName}
-      userArcs={userArcs}
+      userArchipelagos={userArcs}
       currentUser={currentUser}
       sandboxHistory={sandboxHistory}
       setSandboxHistory={setSandboxHistory}

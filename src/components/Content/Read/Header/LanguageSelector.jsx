@@ -34,7 +34,7 @@ export default function LanguageSelector({ handleLanguageChange, language, reord
   return (
     <div className="flex flex-col">
       <div className="flex items-center gap-2 mb-2">
-        <div className="flex items-center justify-center w-6 h-6">
+        <div className="flex items-center justify-center w-6 h-6 ml-2 pl-0.5">
           <LanguageIcon 
             className="text-slate-700 dark:text-zinc-200" 
             fontSize="small" 

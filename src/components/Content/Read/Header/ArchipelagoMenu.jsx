@@ -8,10 +8,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function ArchipelagoMenu({ handleAddToArc, userArcNames, theme }) {
+export default function ArchipelagoMenu({ handleAddToArchipelago, userArchipelagoNames, theme }) {
   
   // Add a fallback for userArcNames if it's undefined
-  const archipelagoNames = userArcNames || [];
+  const archipelagoNames = userArchipelagoNames || [];
 
   // Function to truncate long names
   const truncateName = (name, maxLength = 20) => {
@@ -38,7 +38,7 @@ export default function ArchipelagoMenu({ handleAddToArc, userArcNames, theme })
       </PopoverHandler>
       <PopoverContent className="bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg shadow-lg p-2 max-w-[200px]">
         <MenuItem
-          onClick={() => handleAddToArc(0, true)}
+          onClick={() => handleAddToArchipelago(0, true)}
           className="flex items-center gap-2 p-2 rounded-md text-slate-700 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-all duration-200 text-sm quicksand font-medium"
         >
           <AddIcon 
@@ -56,7 +56,7 @@ export default function ArchipelagoMenu({ handleAddToArc, userArcNames, theme })
           {archipelagoNames.map(item => (
             <MenuItem
               key={item[1]}
-              onClick={() => handleAddToArc(item[1], false)}
+              onClick={() => handleAddToArchipelago(item[1], false)}
               className="flex items-center p-2 rounded-md text-slate-700 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-all duration-200 text-sm quicksand font-medium"
             >
               <span className="ml-6 truncate w-[130px]" title={item[0]}>

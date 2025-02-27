@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from 'react'
 import MediaPlayer from './ReadComponents/MediaPlayer'
 import MediaControls from './ReadComponents/MediaControls'

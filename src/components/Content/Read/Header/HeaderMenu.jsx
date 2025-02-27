@@ -24,8 +24,8 @@ export default function HeaderMenu({
   handleReportIssue,
   isBookmarked,
   handleBookmark,
-  handleAddToArc,
-  userArcNames,
+  handleAddToArchipelago,
+  userArchipelagoNames,
   language,
   reorderedLanguageCodes,
   languages,
@@ -92,7 +92,7 @@ export default function HeaderMenu({
 
           {/* Add to Arc/Archipelago */}
           <div className="transform hover:scale-102 transition-transform duration-200 py-1">
-            <ArchipelagoMenu handleAddToArc={handleAddToArc} userArcNames={userArcNames} theme={theme} />
+            <ArchipelagoMenu handleAddToArchipelago={handleAddToArchipelago} userArchipelagoNames={userArchipelagoNames} theme={theme} />
           </div>
 
           {/* Visibility Toggle (only for content owners) */}

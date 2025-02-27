@@ -39,7 +39,7 @@ export default function HeroSection({ currentUser }) {
 
   return (
     <motion.section 
-      className="relative pt-8 md:pt-16 overflow-hidden"
+      className="relative pt-8 overflow-hidden"
       initial="hidden"
       animate="visible"
       variants={fadeIn}
