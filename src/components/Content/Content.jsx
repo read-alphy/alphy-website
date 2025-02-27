@@ -19,7 +19,7 @@ const ReadComponent = dynamic(() => import('./Read/ReadComponent'), {
   ssr: false,
 })
 const Sandbox = dynamic(() => import('./Sandbox/Sandbox'), { ssr: false })
-const HeaderArea = dynamic(() => import('./Read/HeaderArea'), { ssr: false })
+const HeaderArea = dynamic(() => import('./Read/Header/HeaderArea'), { ssr: false })
 
 
 export default function Content({
