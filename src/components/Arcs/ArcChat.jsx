@@ -112,6 +112,7 @@ export default function ArcChat({
     setIsCleared(false)
     setErrorMessage(false)
 
+    
     if (
       currentUser === null &&
       selectedQuestions.includes(inputValue) === false
