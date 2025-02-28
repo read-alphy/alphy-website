@@ -308,44 +308,7 @@ export default function SideFeed({
               </SidebarMenu>
             </div>
 
-           {/*  {dataArc !== undefined &&
-            dataArc.length > 0 &&
-            location.pathname.includes('/arc/createArc') == false &&
-            location.pathname.includes('/arc/editArc') == false ? (
-              <div>
-                <div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-4"></div>
-                <p className="text-slate-700 dark:text-zinc-300 mt-6 ml-4 mb-2 text-sm quicksand font-semibold">
-                  Sources
-                </p>
-                <div className="overflow-y-scroll max-h-[65vh] 2xl:max-h-[66vh]">
-                  <div className="overflow-x-hidden hidden md:block lg:hidden">
-                    {dataArc.map((item, index) => (
-                      <HubFeedItem
-                        sideFeed={true}
-                        key={index}
-                        item={item.source}
-                        setCollapsed={setCollapsed}
-                        myBookmarks={false}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="overflow-x-hidden md:hidden lg:block">
-                    {dataArc.length > 0
-                      ? dataArc.map((item, index) => (
-                          <FeedItem
-                            sideFeed={true}
-                            key={index}
-                            item={item.source}
-                            setCollapsed={setCollapsed}
-                            myBookmarks={false}
-                          />
-                        ))
-                      : null}
-                  </div>
-                </div>
-              </div>
-            ) : null} */}
+         
           </SidebarContent>
 
           <SidebarFooter>

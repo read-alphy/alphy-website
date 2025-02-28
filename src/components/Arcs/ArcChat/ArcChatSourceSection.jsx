@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Dialog, DialogContent } from '../../components/ui/dialog'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { ArrowRight, ArrowLeft, FileText } from 'lucide-react'
-import SourceCard from './SourceCard'
+import SourceCard from '../SourceCard'
 
 const ArcChatSourceSection = ({
   answerData,

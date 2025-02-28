@@ -13,21 +13,10 @@ export default function HubArcFeed({
   mainShow,
   collapsed,
 }) {
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
-  const [offset, setOffset] = useState(0)
-  const [hasMore, setHasMore] = useState(false)
-
-  const [inputValue, setInputValue] = useState('')
-  const [submitted, setSubmitted] = useState(false)
-  const [called, setCalled] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchMemory, setSearchMemory] = useState('')
-
-  const searchInputRef = useRef(null)
-  const limit = 16
-  const limit_glob = 40
 
   // Debounce search input
   useEffect(() => {
@@ -36,12 +25,6 @@ export default function HubArcFeed({
     }, 500)
     return () => clearTimeout(timer)
   }, [search])
-
-  useEffect(() => {
-    if (searchQuery || (searchQuery === '' && searchMemory !== '')) {
-      handleSearch()
-    }
-  }, [searchQuery])
 
   // Filter arcs by search term
   function searchKeyword(array) {
@@ -53,62 +36,10 @@ export default function HubArcFeed({
     )
   }
 
-  const handleSearch = () => {
-    setSearchMemory(search)
-    localStorage.setItem('search', search)
-    if (searchInputRef.current?.value.length === 0) {
-      setSearch('')
-    }
-    setOffset(0)
-    getData(0, true, true)
-    setSubmitted(true)
-  }
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', () => {
-      if (submitted === true) {
-        localStorage.setItem('search', search)
-      } else {
-        localStorage.setItem('search', '')
-      }
-    })
-  }, [submitted, search])
-
-  const getData = (offset, firstTime, hasMore) => {
-    if (!hasMore) return
-    
-    setIsLoading(true)
-    const params = {
-      offset,
-      limit,
-    }
-    
-    if (inputValue) {
-      params.q = search
-    }
-    
-    axios
-      .get(`${API_URL}/sources/`, { params })
-      .then(response => {
-        setHasMore(!(response.data.length < limit))
-        if (firstTime) {
-          setData(response.data)
-        } else {
-          setData([...data, ...response.data])
-        }
-        setIsLoading(false)
-      })
-  }
-
-  const loadMore = () => {
-    setOffset(offset + limit)
-    getData(offset + limit, false, true)
-  }
-
-  if (called === false && search.length === 0) {
-    getData(0, true, true)
-    setCalled(true)
-  }
+  // Determine grid columns based on collapsed state
+  const gridClass = `grid grid-cols-1 xs:grid-cols-2 ${
+    collapsed ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-3'
+  } xl:grid-cols-4 2xl:grid-cols-5 gap-4`
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -120,71 +51,32 @@ export default function HubArcFeed({
   }
 
   useEffect(() => {
-    // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
-    // Find a way to store idToken in local storage, minding the expiration behavior.
-    // Would improve performance throughout.
-    
     if (dataGlobalArcs.length === 0) {
-      getDataGlobalArcs(0, true, true)
+      getAllArcs()
     }
   }, [currentUser, dataGlobalArcs])
 
-  const getDataGlobalArcs = (offsetGlobalArcs, firstTime, hasMoreGlobalArcs) => {
-    if (!hasMoreGlobalArcs) return
-
+  const getAllArcs = () => {
+    setIsLoading(true)
     axios
       .get(`${API_URL}/playlists/`, {
         params: {
-          limit_glob,
-          offset: offsetGlobalArcs,
           only_my: false,
         },
       })
       .then(response => {
-        if (firstTime) {
-          shuffleArray(response.data)
-          const temporary = []
-          response.data.forEach(item => {
-            if (
-              item.user_id === null ||
-              item.user_id === 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3'
-            ) {
-              temporary.push(item)
-            }
-          })
-          setDataGlobalArcs(temporary)
-        } else {
-          shuffleArray(response.data)
-          const temporary = []
-          response.data.forEach(item => {
-            if (
-              item.user_id === null ||
-              item.user_id === 'dUfMZPwN8fcxoBtoYeBuR5ENiBD3'
-            ) {
-              temporary.push(item)
-            }
-          })
-          setDataGlobalArcs(temporary)
-        }
-
-        setTimeout(() => {
-          const elements = document.querySelectorAll(
-            '.styles-module_item-provider__YgMwz'
-          )
-          if (elements) {
-            elements.forEach(element => {
-              element.classList.add('cursor-default')
-            })
-          }
-        }, 500)
+        shuffleArray(response.data)
+        // Show all arcs without filtering
+        setDataGlobalArcs(response.data)
+        setIsLoading(false)
       })
       .catch(error => {
         console.error('Error fetching data in global arcs: ', error)
+        setIsLoading(false)
       })
   }
   // Filter arcs by search term
   const filteredArcs = searchKeyword(dataGlobalArcs)
-
   // Create Arc Card Component
   const CreateArcCard = () => (
     <Link href="/arc/createArc">
@@ -208,65 +100,84 @@ export default function HubArcFeed({
       </Card>
     </Link>
   )
-
   // Arc Card Component
-  const ArcCard = ({ item }) => (
-    <Link href={`/arc/${item.uid || item.id}`}>
-      <Card className="h-full overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 dark:bg-zinc-800 dark:border-zinc-700 group">
-        <div 
-          className="w-full h-40 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: (item.thumbnail_url || item.image_url) 
-              ? `url(${item.thumbnail_url || item.image_url})` 
-              : 'linear-gradient(to right, #4f46e5, #3b82f6)',
-          }}
-        >
-          {!(item.thumbnail_url || item.image_url) && (
-            <div className="w-full h-full flex items-center justify-center">
-              <BookOpen className="w-12 h-12 text-white/70" />
-            </div>
-          )}
-        </div>
-        
-        <CardHeader className="p-4 pb-0">
-          <h3 className="text-base font-bold text-slate-800 dark:text-zinc-100 quicksand line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-            {item.name || item.title || "Untitled Arc"}
-          </h3>
-        </CardHeader>
-        
-        <CardContent className="p-4 pt-2">
-          <p className="text-xs text-slate-600 dark:text-zinc-400 line-clamp-3">
-            {item.description || "A collection of related audio content."}
-          </p>
-        </CardContent>
-        
-        <CardFooter className="p-4 pt-0 flex justify-between items-center">
-          <span className="text-xs text-slate-500 dark:text-zinc-500 quicksand">
-            {item.created_at && new Date(item.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
-          </span>
-        </CardFooter>
-      </Card>
-    </Link>
-  )
+  const ArcCard = ({ item }) => {
+    // Check if thumbnail exists and is valid
+    const [thumbnailError, setThumbnailError] = useState(false)
+    const thumbnailUrl = (item.uid === 'iJST5Qk') ? null : (item.thumbnail_url || item.image_url)
+    
+    // Generate a consistent gradient based on the item's id or title
+    const generateGradient = () => {
+      const seed = (item.id || item.uid || item.name || item.title || "").toString()
+      const hash = seed.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+      const hue1 = hash % 360
+      const hue2 = (hue1 + 40) % 360
+      return `linear-gradient(to right, hsl(${hue1}, 70%, 50%), hsl(${hue2}, 70%, 50%))`
+    }
+
+    return (
+      <Link href={`/arc/${item.uid || item.id}`}>
+        <Card className="h-full overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 dark:bg-zinc-800 dark:border-zinc-700 group">
+          <div 
+            className="w-full h-40 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: thumbnailUrl && !thumbnailError
+                ? `url(${thumbnailUrl})`
+                : generateGradient(),
+            }}
+          >
+            {thumbnailUrl && !thumbnailError && (
+              <img 
+                src={thumbnailUrl} 
+                alt=""
+                className="hidden"
+                onError={() => setThumbnailError(true)}
+              />
+            )}
+            
+            {(!thumbnailUrl || thumbnailError) && (
+              <div className="w-full h-full flex items-center justify-center">
+                <BookOpen className="w-12 h-12 text-white/70" />
+              </div>
+            )}
+          </div>
+          
+          <CardHeader className="p-4 pb-0">
+            <h3 className="text-base font-bold text-slate-800 dark:text-zinc-100 quicksand line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+              {item.name || item.title || "Untitled Arc"}
+            </h3>
+          </CardHeader>
+          
+          <CardContent className="p-4 pt-2">
+            <p className="text-xs text-slate-600 dark:text-zinc-400 line-clamp-3">
+              {item.description || "A collection of related audio content."}
+            </p>
+          </CardContent>
+          
+          <CardFooter className="p-4 pt-0 flex justify-between items-center">
+            <span className="text-xs text-slate-500 dark:text-zinc-500 quicksand">
+              {item.created_at && new Date(item.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+            </span>
+          </CardFooter>
+        </Card>
+      </Link>
+    )
+  }
 
   return (
-    <div className="w-full mt-10 mx-auto md:pl-10 lg:pl-16 3xl:pl-40 flex flex-row overflow-hidden">
+    <div className="w-full flex flex-row overflow-hidden">
       {mainShow === 'sources' ? (
         <div className="p-[10px] xl:min-w-[1200px] xl:max-w-[1200px]">
-          
-
           <div className="min-h-[300px]">
             {dataGlobalArcs.length > 0 && (
               <>
-                <div className="flex flex-wrap gap-4 mt-4">
+                <div className={gridClass}>
+                  <CreateArcCard />
                   
-                  {filteredArcs.slice(0, 6).map((item, index) => (
-                    <div key={index} className="w-full sm:w-[calc(50%-8px)] md:w-[calc(33.33%-11px)] lg:w-[calc(25%-12px)]">
-                      <ArcCard item={item} />
-                    </div>
+                  {filteredArcs.map((item, index) => (
+                    <ArcCard key={index} item={item} />
                   ))}
                 </div>
-                
               </>
             )}
           </div>
@@ -280,12 +191,11 @@ export default function HubArcFeed({
 
             <div className="min-h-[300px]">
               {dataGlobalArcs.length > 0 ? (
-                <div className="flex flex-wrap gap-4">
+                <div className={gridClass}>
+                  <CreateArcCard />
 
                   {filteredArcs.map((item, index) => (
-                    <div key={index} className="w-full sm:w-[calc(50%-8px)] md:w-[calc(33.33%-11px)] lg:w-[calc(25%-12px)] xl:w-[calc(20%-13px)]">
-                      <ArcCard item={item} />
-                    </div>
+                    <ArcCard key={index} item={item} />
                   ))}
                 </div>
               ) : (

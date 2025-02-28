@@ -50,7 +50,7 @@ export default function HubContent({
               <div className="min-h-[90vh]">
                 {/*   <AISearchEngine collapsed={collapsed} currentUser={currentUser} /> */}
 
-                <div className="xl:max-w-[1200px] pt-10 p-4">
+                <div className="xl:max-w-[1200px] pt-10">
                   <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                     <div className="flex">
                       <button

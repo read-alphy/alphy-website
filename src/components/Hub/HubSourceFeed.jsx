@@ -295,7 +295,7 @@ function HubSourceFeed({ currentUser, tier, credit }) {
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Type in a key word or paste a link..."
                 aria-label="Search content"
-                className="pl-10 h-10 rounded-md text-sm shadow-sm bg-white dark:bg-zinc-800 w-full transition-all border border-zinc-400 dark:border-zinc-700"
+                className="pl-10 h-10 rounded-md font-normal text-sm shadow-sm bg-white dark:bg-zinc-800 w-full transition-all border border-zinc-400 dark:border-zinc-700"
               />
               {search && (
                 <button 

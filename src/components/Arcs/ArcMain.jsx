@@ -16,7 +16,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Loader2, Save, Trash2, ChevronLeft } from "lucide-react"
 
-import ArcChat from './ArcChat'
+import ArcChat from './ArcChat/ArcChat'
 import EditArc from './EditArc'
 import Loading from '../Loading'
 import axios from 'axios'
