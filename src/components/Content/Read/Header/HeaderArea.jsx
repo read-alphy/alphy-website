@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react'
 
 import ModeToggle from './ModeToggle'
 import HeaderMenu from './HeaderMenu'
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium'
-import MemoryIcon from '@mui/icons-material/Memory'
 
 export default function HeaderArea({
   data,
@@ -91,38 +89,7 @@ export default function HeaderArea({
             : 'xl:col-span-3'
         }`}
       >
-        {/* Processing Tier Info */}
-        <div id="processing-tier" className={`${isSandbox && ''}`}>
-          {modelName === 'HIGH' && (
-            <div className="relative flex flex-col">
-              <div className="relative flex flex-row group cursor-default">
-                <WorkspacePremiumIcon className="text-indigo-400" />
-                <p className="text-indigo-400 ml-2 quicksand font-bold">
-                  Premium Processing
-                </p>
-                <span className="absolute opacity-0 quicksand font-bold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-zinc-300 text-sm rounded py-1 px-2 left-0 md:bottom-full z-50 mb-2 ml-4">
-                  This content was processed with advanced AI models accessible
-                  to Premium.
-                </span>
-              </div>
-            </div>
-          )}
-
-          {modelName === 'MID' && (
-            <div className="relative flex flex-col">
-              <div className="relative flex flex-row group cursor-default">
-                <MemoryIcon className="text-gray-500" />
-                <p className="text-gray-500 ml-2 quicksand font-bold">
-                  Standard Processing
-                </p>
-                <span className="absolute opacity-0 quicksand font-bold group-hover:opacity-100 transform group-hover:scale-100 transition-all duration-500 ease-in-out bg-white dark:bg-zinc-800 drop-shadow-lg text-slate-500 dark:text-gray-300 text-sm rounded py-1 px-2 md:bottom-full z-50 mb-2 ml-4">
-                  This content was processed with standard AI models.
-                </span>
-              </div>
-            </div>
-          )}
-        </div>
-
+       
         {/* Title Section */}
         <div className="flex flex-row ml-1">
           <h2 className="col-span-2 mt-2 text-xl quicksand font-bold lg:max-w-[40vw] text-left lg:col-span-3 text-blueLike dark:bg-darkMode dark:text-zinc-300 font-bold">

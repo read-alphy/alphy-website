@@ -1,5 +1,3 @@
-
-
 import {
     Popover,
     PopoverHandler,
@@ -7,12 +5,9 @@ import {
     ThemeProvider,
     Button,
   } from "@material-tailwind/react";
-  import CircularProgress from '@mui/material/CircularProgress';
-
-
+import { Loader } from "lucide-react";
 
 export default function DownloadPopover ({tier,index,downloading,handleDownload,basicDataLoaded,themePopover}){
-
 
     return(
         <div
@@ -42,9 +37,8 @@ export default function DownloadPopover ({tier,index,downloading,handleDownload,
                                                     } text-sm  quicksand font-bold bg-indigo-300 dark:bg-indigo-400 w-[180px] drop-shadow-sm rounded-lg p-2 text-white`}
                                                   >
                                                     {downloading ? (
-                                                      <CircularProgress
-                                                        className="flex justify-center mx-auto opacity-70 pointer-events-none"
-                                                        color="inherit"
+                                                      <Loader
+                                                        className="flex justify-center mx-auto opacity-70 pointer-events-none animate-spin"
                                                         size={20}
                                                       />
                                                     ) : (

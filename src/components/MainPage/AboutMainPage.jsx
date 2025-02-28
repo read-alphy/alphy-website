@@ -90,7 +90,7 @@ const generalFAQs = [
         topics. It's like music playlists, but for learning from countless
         hours of material.
         <br /><br />
-        <Link href="/arcs" className="underline text-indigo-300">Check out the free Arcs by us.</Link>
+        <Link href="/explore" className="underline text-indigo-300">Check out the free Arcs by us.</Link>
       </>
     )
   }

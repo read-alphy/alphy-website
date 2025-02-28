@@ -6,9 +6,7 @@ import X from '../../../public/img/X.png'
 import axios from 'axios'
 import { useState } from 'react'
 import { Button } from '@material-tailwind/react'
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
-import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove'
-import ReplayIcon from '@mui/icons-material/Replay'
+import { CircleMinus, BookmarkX, RotateCcw } from 'lucide-react'
 
 import Link  from 'next/link'
 import { useRouter } from 'next/router'
@@ -29,6 +27,7 @@ export default function FeedItem ({
   forDetail,
   forCreationPool,
 }) {
+
   const router = useRouter()
   const source_id = item !== undefined && item.source_id
   let formattedDate = ''
@@ -283,7 +282,7 @@ export default function FeedItem ({
                 <div className="col-span-1">
                   {fromArc === 'arc' && forDetail !== true && (
                     <div className="justify-center items-center flex">
-                      <RemoveCircleOutlineIcon
+                      <CircleMinus
                         className="cursor-pointer"
                         onClick={() => {
                           const newArcArray = dataArc.filter(
@@ -376,12 +375,12 @@ export default function FeedItem ({
                     }`}
                   >
                     {removed ? (
-                      <ReplayIcon
+                      <RotateCcw
                         onClick={removeBookmark}
                         className="cursor-pointer text-slate-600 dark:text-zinc-300"
                       />
                     ) : (
-                      <BookmarkRemoveIcon
+                      <BookmarkX
                         onClick={removeBookmark}
                         className="cursor-pointer text-slate-600 dark:text-zinc-300"
                       />

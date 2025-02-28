@@ -1,7 +1,6 @@
-import Radio, { radioClasses } from '@mui/joy/Radio'
-import RadioGroup from '@mui/joy/RadioGroup'
-import Sheet from '@mui/joy/Sheet'
 import React, { useState } from 'react'
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Card } from "@/components/ui/card"
 export default function MannerArea({
   theme,
   settings,
@@ -150,35 +149,7 @@ export default function MannerArea({
       <p className="mb-6 ml-2 text-md text-zinc-500 dark:text-zinc-300">
         Pick your Agent (optional)
       </p>
-      <RadioGroup
-        className="w-screen overflow-x-scroll content-area lg:w-[600px] pl-0.5 pt-2"
-        aria-label="platform"
-        defaultValue="Website"
-        overlay
-        name="platform"
-        sx={{
-          flexDirection: 'row',
-          gap: 2,
-          [`& .${radioClasses.checked}`]: {
-            [`& .${radioClasses.action}`]: {
-              inset: -1,
-              border: '3px solid',
-              borderColor: `${theme === 'light' ? '#a5b4fc' : '#a5b4fc'}  `,
-            },
-          },
-          [`& .${radioClasses.radio}`]: {
-            display: 'contents',
-            '& > svg': {
-              zIndex: 2,
-              position: 'absolute',
-              top: '-8px',
-              right: '-8px',
-              bgcolor: `${theme === 'light' ? '#ffffff' : '#18181b'}    `,
-              borderRadius: '50%',
-            },
-          },
-        }}
-      >
+      <RadioGroup defaultValue="friend" className="flex space-x-2 overflow-x-auto p-1">
         {[
           'friend',
           'teacher',
@@ -188,53 +159,38 @@ export default function MannerArea({
           'writer',
           'journalist',
         ].map(value => (
-          <div className="flex flex-col">
-            <Sheet
-              key={value}
-              variant="outlined"
-              sx={{
-                background: 'transparent',
-
-                width: '70px', // Set a fixed width
-                height: '70px', // Set a height equal to the width to form a square
-                borderRadius: 'md',
-                boxShadow: 'sm',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                border: `1px solid ${
-                  theme === 'light' ? '#e0e7ff' : '#52525b'
-                }`,
-                gap: 1.5,
-                p: 2,
+          <div key={value} className="flex flex-col items-center">
+            <RadioGroupItem
+              value={value}
+              id={value}
+              className="peer sr-only"
+              checked={manner === value}
+              onClick={() => {
+                if (manner === value) {
+                  setManner('')
+                  setSettings({ ...settings, manner: null })
+                } else {
+                  setManner(value)
+                  setSettings({ ...settings, manner: value })
+                }
               }}
-            >
-              <Radio
-                id={value}
-                value={value}
-                checkedIcon={checkIcon}
-                checked={manner === value}
-                onClick={e => {
-                  if (manner === value) {
-                    setManner('')
-                    setSettings({ ...settings, manner: null })
-                  } else {
-                    setManner(e.target.value)
-                    setSettings({ ...settings, manner: e.target.value })
-                  }
-                }}
-              />
-
-              {value === 'friend' && conversationBubble}
-              {value === 'teacher' && building}
-              {value === 'marketer' && megaphone}
-              {value === 'technical' && commandLine}
-              {value === 'scientist' && beaker}
-              {value === 'writer' && book}
-              {value === 'journalist' && newsPaper}
-            </Sheet>
-
-            <p className="dark:text-zinc-300 text-center items-center mx-auto mt-2 text-xs md:text-sm">
+            />
+            <Card className={`w-[70px] h-[70px] flex items-center justify-center border ${
+              manner === value 
+                ? 'border-indigo-300 dark:border-indigo-300' 
+                : 'border-zinc-200 dark:border-zinc-700'
+            } rounded-md cursor-pointer peer-data-[state=checked]:border-indigo-300 peer-data-[state=checked]:dark:border-indigo-300 peer-data-[state=checked]:border-2`}>
+              <label htmlFor={value} className="cursor-pointer flex items-center justify-center w-full h-full">
+                {value === 'friend' && conversationBubble}
+                {value === 'teacher' && building}
+                {value === 'marketer' && megaphone}
+                {value === 'technical' && commandLine}
+                {value === 'scientist' && beaker}
+                {value === 'writer' && book}
+                {value === 'journalist' && newsPaper}
+              </label>
+            </Card>
+            <p className="dark:text-zinc-300 text-center mt-2 text-xs md:text-sm">
               {value.charAt(0).toUpperCase() + value.slice(1)}
             </p>
           </div>

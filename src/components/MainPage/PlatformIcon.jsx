@@ -24,7 +24,7 @@ export default function PlatformIcon({
           alt={alt || name}
           height={64}
           width={80}
-          className="object-contain h-16"
+          className="object-contain h-16 rounded-lg"
         />
       )}
       {showLabel && (

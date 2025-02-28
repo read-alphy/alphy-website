@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '@material-tailwind/react'
-import CircularProgress from '@mui/material/CircularProgress';
-import VerifiedIcon from '@mui/icons-material/Verified'
+import { Loader2, CheckCircle } from 'lucide-react'
 
 import { inputMessages } from '../messageBank'
 
@@ -126,8 +125,7 @@ export default function Toolbox({
                 }  transition-opacity delay-200 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <CircularProgress
-                    color="inherit"
+                  <Loader2
                     size={20}
                     className="mx-auto w-full justify-center "
                   />
@@ -184,7 +182,7 @@ export default function Toolbox({
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -257,7 +255,7 @@ export default function Toolbox({
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -331,7 +329,7 @@ export default function Toolbox({
                 } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 text-slate-800 quicksand font-normal normal-case`}
               >
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -364,7 +362,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -419,7 +417,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -463,7 +461,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -526,7 +524,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -579,7 +577,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -642,7 +640,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -685,7 +683,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -747,7 +745,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -787,7 +785,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -847,7 +845,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -890,7 +888,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -951,7 +949,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -992,7 +990,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -1055,7 +1053,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -1099,7 +1097,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -1162,7 +1160,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -1206,7 +1204,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -1268,7 +1266,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -1310,7 +1308,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -1372,7 +1370,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -1413,7 +1411,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -1476,7 +1474,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "
@@ -1520,7 +1518,7 @@ export default function Toolbox({
               <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
                 <p className="text-indigo-400 text-md  ">
                   {tier !== 'premium' && (
-                    <VerifiedIcon
+                    <CheckCircle
                       fontSize="small"
                       className=" ml-2 text-indigo-400 "
                     />
@@ -1585,7 +1583,7 @@ export default function Toolbox({
                   </svg>
                 )}{' '}
                 {isLoading ? (
-                  <CircularProgress
+                  <Loader2
                     color="inherit"
                     size={20}
                     className="mx-auto w-full justify-center "

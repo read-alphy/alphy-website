@@ -1,31 +1,44 @@
 "use client"
 
 import Image from 'next/image'
-import axios from 'axios'
-import React, { useState, useRef } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../../hooks/useAuth'
-import ExploreIcon from '@mui/icons-material/Explore'
-import AddIcon from '@mui/icons-material/Add'
-import FeedItem from '../FeedTabs/FeedItem'
-import HubIcon from '@mui/icons-material/Hub'
-import Footer from './Footer'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import { LogIn as LoginIcon, Menu, X } from 'lucide-react'
 
-import LoginIcon from '@mui/icons-material/Login'
-import LastPageIcon from '@mui/icons-material/LastPage'
+// Import shadcn sidebar components
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarRail,
+  useSidebar
+} from '../ui/sidebar'
+
+// Import SVG icons
+import { HubIcon, CollapseIcon, ExploreIcon, NewIcon, CreationsIcon, SignInIcon, ExpandIcon } from './svgs'
 import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
 import LogoBlack from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
-import  Link  from 'next/link'
-import HubFeedItem from '../FeedTabs/HubFeedItemElements/HubFeedItem'
-import FiberNewIcon from '@mui/icons-material/FiberNew';
 
+// Import components
+import FeedItem from '../FeedTabs/FeedItem'
+import Footer from './Footer'
+import HubFeedItem from '../FeedTabs/HubFeedItemElements/HubFeedItem'
 
 import { inputMessages } from '../Content/Sandbox/messageBank'
 
-
-
-
+// Custom styles for sidebar width
+const sidebarStyles = {
+  "--sidebar-width": "200px",
+  "--sidebar-width-icon": "50px"
+};
 
 export default function SideFeed({
   collapsed,
@@ -38,46 +51,43 @@ export default function SideFeed({
   sandboxHistory,
   currentUser,
   isArc
-  
 }) {
   const [called, setCalled] = useState(false)
-  
-  
   const carouselRef = useRef(null)
   const auth = useAuth()
-const router = useRouter()
-const [isDragging, setIsDragging] = useState(false)
+  const router = useRouter()
+  const [mobileScreen, setMobileScreen] = useState(false)
 
-const [sideFeedWidth, setSideFeedWidth] = useState(220)
-const [mobileScreen, setMobileScreen] = useState(false)
+  // Initialize state for grouped data and visibility
+  const [groupedData, setGroupedData] = useState([])
+  const [visibleGroups, setVisibleGroups] = useState({})
 
-
-  
   useEffect(() => {
-    if(isArc){
-      setSideFeedWidth(300)
-    }
     setTimeout(() => {
       if(window.innerWidth < 640){
         setMobileScreen(true)
-        setSideFeedWidth(640)
-
       }
       setCalled(true)
     }, 300)
   }, [])
 
-  const [groupedData, setGroupedData] = useState([])
+  // Add keyboard shortcut for toggling sidebar
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Check for Ctrl+B or Cmd+B
+      if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+        e.preventDefault();
+        setCollapsed(!collapsed);
+      }
+    };
 
-  const [visibleGroups, setVisibleGroups] = useState({})
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [collapsed, setCollapsed]);
 
-  const toggleGroupVisibility = index => {
-    setVisibleGroups(prevState => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }))
-  }
-
+  // Group sandbox history data
   useEffect(() => {
     if (sandboxHistory === undefined) {
       return
@@ -108,6 +118,7 @@ const [mobileScreen, setMobileScreen] = useState(false)
     setGroupedData(sortedGroups)
   }, [sandboxHistory])
 
+  // Handle scroll events
   useEffect(() => {
     const handleScroll = () => {
       if (carouselRef.current) {
@@ -117,12 +128,10 @@ const [mobileScreen, setMobileScreen] = useState(false)
       }
     }
 
-    // Attach scroll event listener
     if (carouselRef.current) {
       carouselRef.current.addEventListener('scroll', handleScroll)
     }
 
-    // Clean up the event listener on component unmount
     return () => {
       if (carouselRef.current) {
         carouselRef.current.removeEventListener('scroll', handleScroll)
@@ -130,6 +139,7 @@ const [mobileScreen, setMobileScreen] = useState(false)
     }
   }, [])
 
+  // Handle sign out
   const handleSignOut = async () => {
     try {
       auth.logout()
@@ -145,300 +155,136 @@ const [mobileScreen, setMobileScreen] = useState(false)
     }
   }
 
+  // Navigate to source
   const seeInSource = item => {
     sessionStorage.setItem('fillPrompt', JSON.stringify(item))
-
     router.push(`/${item.source_type}/${item.source_id}`)
   }
 
+  // Toggle group visibility
+  const toggleGroupVisibility = index => {
+    setVisibleGroups(prevState => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }))
+  }
+
+  // Handle sidebar collapse state
 
   
-
-  const onMouseDown = e => {
-    // Only left mouse button
-
-    if (e.button !== 0) return
-    setIsDragging(true)
-    e.stopPropagation()
-    e.preventDefault()
-  }
-
-  const onMouseMove = e => {
-    if (isDragging) {
-      // Set the width to the new mouse position
-      if (e.clientX < 200 || e.clientX > 350) {
-        return
-      }
-      setSideFeedWidth(e.clientX)
-    }
-  }
-
-  const onMouseUp = () => {
-    setIsDragging(false)
-  }
-
-  // Add event listeners when dragging starts and remove them when it ends
-  useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', onMouseMove)
-      window.addEventListener('mouseup', onMouseUp)
-    } else {
-      window.removeEventListener('mousemove', onMouseMove)
-      window.removeEventListener('mouseup', onMouseUp)
-    }
-
-    // Cleanup function to remove event listeners
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove)
-      window.removeEventListener('mouseup', onMouseUp)
-    }
-  }, [isDragging]) // Only re-run the effect if the isDragging state changes
+  // Navigation items with icons
+  const navItems = [
+    { 
+      icon: NewIcon, 
+      label: "New", 
+      href: "/submit", 
+      isActive: router.asPath.includes('/submit'),
+      className: `text-slate-700 ${!collapsed ? 'ml-2' : ''} hover:scale-[102%] shadow-md transition duration-300 ease-in-out bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-200 via-indigo-100 to-sky-200 text-slate-700 dark:text-slate-700 rounded-lg max-w-[140px] flex flex-row quicksand font-extrabold`
+    },
+    { icon: HubIcon, label: "My Hub", href: "/myhub", isActive: userLayout },
+    { icon: ExploreIcon, label: "Explore", href: "/explore", isActive: router.asPath.includes('/explore') },
+    { icon: CreationsIcon, label: "My Creations", href: "/history", isActive: router.asPath.includes('/history'), requiresAuth: true },
+    { icon: SignInIcon, label: "Sign In", href: "/u/login", requiresGuest: true, className: "text-green-400 dark:text-green-200" }
+  ];
 
 
-
-
+  
+  
   return (
     <div className="flex dark:bg-darkMode" id="side-feed">
-      <div
-        id="side-feed"
-        className={` quicksand font-semibold dark:bg-mildDarkMode  dark:text-zinc-300 bg-white sm:bg-slate-50 min-h-[100vh] sm:max-h-[100vh] ${
-          collapsed ? 'w-[60px] max-w-[60px]' : `w-full`
-        } flex flex-col transition-[width] duration-300 ease-in-out	overflow-auto `}
-        style={{ width: `${sideFeedWidth}px` }}
-      >
-        
-        {!collapsed ? (
-          <div className="flex flex-col flex-grow ">
-            <div
-              className={`flex w-full items-center font-bold pt-4 sm:pt-8 relative justify-space-between`}
-            >
-              <Link
-                href="/"
-                className="text-slate-700 dark:text-gray-200 ml-4 sm:ml-6 "
-              >
-                <div className="flex-row flex">
+      <SidebarProvider className="bg-white">
+        <Sidebar 
+          className="dark:bg-mildDarkMode dark:text-zinc-300 bg-white sm:bg-slate-50 min-h-[100vh] sm:max-h-[100vh]"
+          collapsible="icon"
+          open={!collapsed}
+          onOpenChange={(isOpen) => setCollapsed(!isOpen)}
+          style={sidebarStyles}
+        >
+          <SidebarHeader className="pt-4 sm:pt-8">
+            <div className="flex w-items-center font-bold relative justify-between">
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center">
+                  <Link href="/">
                   <Image
                     src={Logo}
-                    width={40}
+                    width={30}
                     className="hidden dark:block"
                     alt="Alphy Logo"
-                  ></Image>
+                  />
                   <Image
                     src={LogoBlack}
-                    width={40}
-                    className="dark:hidden opacity-80 "
+                    width={30}
+                    className="dark:hidden opacity-80"
                     alt="Alphy Logo"
-                  ></Image>
-                  <h2 className="ml-1 text-2xl mt-1 quicksand font-bold">ALPHY</h2>
-                </div> 
-              </Link>
-              <div className="hidden md:flex ml-16 w-full justify-end items-end ">
-                {/* <LastPageIcon onClick={() => setCollapsed(true)} fontSize="large" className="rotate-180 ml-16  text-slate-700 dark:text-slate-700 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1" /> */}
-                <svg
-                  onClick={() => setCollapsed(true)}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30"
-                  height="30"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-chevron-left   text-slate-700 dark:text-slate-700 cursor-pointer rounded-full transition transform hover:-translate-x-1 duration-300 ease-in p-1 mr-1"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </div>
-
-              <div className="absolute right-0 mr-6 -mt-1">
-                <div
-                  id={'nav-icon3'}
-                  onClick={() => setCollapsed(!collapsed)}
-                  className={` cursor-pointer md:hidden ${
-                    collapsed ? ' ' : ' open '
-                  } text-slate-700 dark:text-slate-700`}
-                >
-                  <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-                  <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-                  <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-                  <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-10 md:pl-5">
-              <div className="flex flex-col w-full justify-start px-2 m">
-                <Link
-                  href="/submit"
-                  className={`text-slate-700  drop-shadow-lg px-2 py-2 transition duration-300 ease-in-out    text-sm sm:text-md bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-200 via-indigo-100 to-sky-200   text-slate-700 dark:text-slate-700 rounded-lg  text-md max-w-[140px] flex flex-row `}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 mr-3">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-</svg>
-
-                  <p className="quicksand  font-extrabold">New</p>
-                </Link>
-
-                <div className="flex flex-col w-full justify-start px-3 mt-2 ">
-                  <Link
-                    href="/myhub"
-                    onClick={() => {
-                      if (mobileScreen) {
-                        setCollapsed(true)
-                      }
-                    }}
-                    className={` flex flex-row py-3 mt-2   text-sm sm:text-md  ${
-                      userLayout
-                        ? 'text-slate-700 dark:text-zinc-200'
-                        : 'text-slate-700 dark:text-zinc-300'
-                    } dark:text-zinc-300 hover:text-slate-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
-                  >
-                    <svg
-                      className="mr-3 mt-0.5 feather feather-layers "
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                      <polyline points="2 17 12 22 22 17"></polyline>
-                      <polyline points="2 12 12 17 22 12"></polyline>
-                    </svg>
-                    <p className="quicksand font-semibold">My Hub</p>
+                  />
                   </Link>
-
-                  <Link
-                    href="/explore"
-                    onClick={() => {
-                   {if(mobileScreen){
-                        setCollapsed(true)
-                      }
-                      }
-                    }}
-                    className={`${
-                      router.asPath.includes('/explore')
-                        ? 'text-slate-700 dark:text-zinc-200'
-                        : 'text-slate-700 dark:text-zinc-300'
-                    } flex flex-row py-3 mt-2  text-sm sm:text-md  dark:text-zinc-300 hover:text-slate-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="mr-3 mt-0.5 feather feather-compass"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-                    </svg>
-
-                    <p className="quicksand font-semibold">Explore</p>
-                  </Link>
-
-                  {/* 
-             <Link
-                    href="/arcs"
-                    onClick={() => {
-                        if (window.innerWidth < 640) {
-                        setCollapsed(true)
-                        }
-                    }}
-                    className={`  w-full  mt-2  py-3 flex flex-row text-sm sm:text-md  text-slate-700 dark:text-zinc-300 hover:text-slate-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out`}
-                    >
-                    <svg
-                        className="mr-3 mt-0.5 feather feather-message-square"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    >
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    <p className="quicksand font-semibold text-sm ml-0.5">Arcs</p>
-                    </Link> */}
-
-                  {currentUser && (
-                    <div className="flex flex-col">
-                      <Link
-                        href="/history"
-                        className={`${
-                          window.location.href.includes('/history')
-                            ? 'text-slate-700 dark:text-zinc-200'
-                            : 'text-slate-700 dark:text-zinc-300'
-                        } flex flex-row py-3 mt-2  text-sm sm:text-md  -pr-0.5  hover:text-slate-700 dark:hover:text-zinc-100 transition duration-300 ease-in-out`}
-                      >
-                        {/* 
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-5 h-5 text-slate-700 dark:text-zinc-300 mr-2 "
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                          />
-                        </svg> */}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-5 h-5 text-slate-700 dark:text-zinc-300 mr-2 "
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
-                          />
-                        </svg>
-
-                        {/* <HistoryIcon strokeWidth={"1.5"} className="text-slate-700 dark:text-zinc-300 mr-2  " /> */}
-                        <div className="flex flex-row relative"> 
-                        
-                        <p className="ml-0.5 quicksand font-semibold">My Creations</p>
-                        {/* <FiberNewIcon fontSize="medium" className="absolute right-0 top-0  -mr-5 -mt-4   text-green-300" />  */}
-                        </div>
-                        
+                  <div className="flex flex-row items-center">
+                    {!collapsed && (
+                      <Link href="/">
+                        <h2 className="ml-1 text-xl quicksand font-bold">ALPHY</h2>
                       </Link>
+                    )}
+                  </div>
+                </div>
+                
+                <SidebarTrigger 
+                  disabled={called === false}
+                  onClick={() => setCollapsed(!collapsed)} 
+                  className={`${collapsed ? 'absolute top-0 left-0 opacity-0 ' : 'flex text-slate-700 dark:text-slate-700 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 hover:transition hover:duration-200 hover:ease-in-out p-1 rounded-full ml-1'}`}
+                />
+              </div>
+              
+             
+            </div>
+          </SidebarHeader>
 
-                      {groupedData.length > 0 && (
-                        <div className="select-none relative">
-                          {groupedData.map((item, index) => (
-                            <div className="relative flex flex-col group cursor-pointer">
+          <SidebarContent className="pt-2"
+           >
+            <div className="flex flex-col w-full justify-start">
+              <SidebarMenu className="">
+                {navItems.map((item, index) => (
+                  ((item.requiresAuth && currentUser) || 
+                   (item.requiresGuest && !loggedIn) || 
+                   (!item.requiresAuth && !item.requiresGuest)) && (
+                    <SidebarMenuItem key={index}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={item.isActive}
+                        onClick={() => {
+                          if (mobileScreen) {
+                            setCollapsed(true)
+                          }
+                        }}
+                        className={`py-2 mt-2 text-sm ${item.className || ''}`}
+                        tooltip={item.label}
+                      >
+                        <Link href={item.href}>
+                          <item.icon />
+                            <p className={`quicksand font-semibold text-sm shadow-none bg-transparent  ${item.label === "My Creations" ? "pl-1" : ""} ${item.className || ''} ${item.label === "New" ? "-ml-[6px]" : ""}`}>
+                              {item.label}
+                            </p>
+                      
+                        </Link>
+                      </SidebarMenuButton>
+                      
+                      {item.label === "My Creations" && currentUser &&  groupedData.length > 0 && (
+                        <div className={`select-none relative ml-5 mt-2 ${collapsed && 'hidden'}`}>
+                          {groupedData.map((group, index) => (
+                            <div key={index} className="relative flex flex-col group cursor-pointer">
                               <p
                                 className="text-slate-700 h-[20px] overflow-hidden dark:text-zinc-300 text-xs hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md p-1 quicksand"
                                 onClick={() => toggleGroupVisibility(index)}
                               >
-                                {item[0].title}
+                                {group[0].title}
                               </p>
-                              <div className="pl-2 text-zinc-400 dark:text-zinc-400 font-normal ">
-                                {item.map(subItem => (
+                              <div className="pl-2 text-zinc-400 dark:text-zinc-400 font-normal">
+                                {group.map((subItem, subIndex) => (
                                   <p
+                                    key={subIndex}
                                     onClick={() => seeInSource(subItem)}
                                     className={`text-xs h-[20px] rounded-lg quicksand font-semibold overflow-hidden transition-all duration-200 ease-in-out hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md ${
                                       visibleGroups[index]
-                                        ? 'max-h-96 p-1 '
+                                        ? 'max-h-96 p-1'
                                         : 'max-h-0 p-0'
                                     }`}
                                   >
@@ -456,41 +302,22 @@ const [mobileScreen, setMobileScreen] = useState(false)
                           ))}
                         </div>
                       )}
-                    </div>
-                  )}
-
-                  {loggedIn !== true && (
-                    <Link
-                      className="text-slate-700 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-2 -ml-1 text-sm sm:text-md dark:text-zinc-300 hover:text-slate-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
-                      href="/u/login"
-                    >
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 mr-3 text-green-300 dark:text-green-200 rotate-180">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-              </svg>
-                      <p className="text-green-400 dark:text-green-200 quicksand font-semibold ">
-                        Sign In
-                      </p>
-                    </Link>
-                  )}
-                </div>
-              </div>
+                    </SidebarMenuItem>
+                  )
+                ))}
+              </SidebarMenu>
             </div>
-            {dataArc !== undefined &&
+
+           {/*  {dataArc !== undefined &&
             dataArc.length > 0 &&
             location.pathname.includes('/arc/createArc') == false &&
             location.pathname.includes('/arc/editArc') == false ? (
               <div>
                 <div className="border-b border-zinc-300 dark:border-zinc-600 mx-auto items-center flex mt-4"></div>
-                <p className="text-slate-700 dark:text-zinc-300 mt-10 ml-4 mb-2  text-l quicksand font-semibold">
+                <p className="text-slate-700 dark:text-zinc-300 mt-6 ml-4 mb-2 text-sm quicksand font-semibold">
                   Sources
                 </p>
-                <div
-                  className={`overflow-y-scroll ${
-                    collapsed
-                      ? 'max-h-[55vh] 2xl:max-h-[66vh]'
-                      : 'max-h-[65vh] 2xl:max-h-[66vh]'
-                  }`}
-                >
+                <div className="overflow-y-scroll max-h-[65vh] 2xl:max-h-[66vh]">
                   <div className="overflow-x-hidden hidden md:block lg:hidden">
                     {dataArc.map((item, index) => (
                       <HubFeedItem
@@ -518,153 +345,23 @@ const [mobileScreen, setMobileScreen] = useState(false)
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className="flex flex-grow justify-end items-end w-full">
-                <Footer
-                  currentUser={currentUser}
-                  collapsed={collapsed}
-                  setCollapsed={setCollapsed}
-                  handleSignout={handleSignOut}
-                  loggedIn={loggedIn}
-                  setLoggedIn={setLoggedIn}
-                  tier={tier}
-                />
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="flex flex-col flex-grow">
-            <div className="flex flex-col flex-grow">
-              <div className={`flex items-center font-bold pt-10 pl-0.5`}>
-                <button
-                  onClick={() => setCollapsed(false)}
-                  className="text-slate-700 dark:text-gray-200 "
-                >
-                  <div className="flex-row flex">
-                    <Image
-                      src={Logo}
-                      width={50}
-                      className="hidden dark:block"
-                      alt="Alphy Logo"
-                    ></Image>
-                    <Image
-                      src={LogoBlack}
-                      width={50}
-                      className="dark:hidden opacity-80 "
-                      alt="Alphy Logo"
-                    ></Image>
+            ) : null} */}
+          </SidebarContent>
 
-                    <div className="absolute z-50 pl-1 pt-1">
-                      <button className="opacity-0 hover:opacity-100 hover:text-sky-800 dark:hover:text-slate-700 hover:block text-slate-700 dark:text-slate-700 cursor-pointer rounded-full hover:bg-sky-100 dark:hover:bg-white hover:transition  hover:ease-in-out duration-300 p-1 ">
-                        <svg
-                          onClick={() => setCollapsed(true)}
-                          className="feather feather-chevron-left  rotate-180"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="32"
-                          height="32"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </button>
-              </div>
-
-              <div className="pt-16 ">
-                <div className="flex flex-col w-full justify-start ">
-                  <div className="pl-2">
-                    <Link
-                      href="/submit"
-                      className={`text-slate-700 transition duration-300 ease-in-out rounded-full  px-2 py-2 dark:text-zinc-200 dark:hover:text-white text-md`}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 ml-2">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-</svg>
-
-                    </Link>
-                  </div>
-
-                  <Link
-                    href="/myhub"
-                    className={` pl-4 flex flex-row py-3 mt-6 text-slate-700 dark:text-zinc-300	 dark:text-zinc-300 hover:text-slate-700 dark:hover:text-white  transition duration-300 ease-in-out`}
-                  >
-                    <svg
-                      className="mr-3 mt-0.5 feather feather-layers "
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                      <polyline points="2 17 12 22 22 17"></polyline>
-                      <polyline points="2 12 12 17 22 12"></polyline>
-                    </svg>
-                  </Link>
-                  <Link
-                    href="/"
-                    className={` pl-4 text-slate-700 dark:text-zinc-300 flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-slate-700 dark:hover:text-white transition duration-300 ease-in-out`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="feather feather-compass mr-3 mt-0.5"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-                    </svg>
-                  </Link>
-                  {loggedIn ? null : (
-                    <Link
-                      className="pl-4 text-slate-700 dark:text-zinc-300 hover:text-slate-400 duration-200 transition flex flex-row py-3 mt-6 dark:text-zinc-300 hover:text-slate-700 dark:hover:text-zinc-200 transition duration-300 ease-in-out"
-                      href="/u/login"
-                    >
-                      <LoginIcon
-                        className="mr-3 text-green-300 dark:text-green-200"
-                        fontSize="small"
-                      />
-                    </Link>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex flex-grow justify-end items-end w-full mt-4 pb-4">
-                <Footer
-                  collapsed={collapsed}
-                  setCollapsed={setCollapsed}
-                  handleSignout={handleSignOut}
-                  currentUser={currentUser}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-      <div
-        className=" hidden sm:flex w-1 cursor-col-resize  bg-transparent focus:outline-none focus:border-0 focus:ring-0 ring-0 outline-none border-0"
-        onMouseDown={onMouseDown}
-      >
-        {/* This is the draggable area */}
-      </div>
+          <SidebarFooter>
+            <Footer
+              currentUser={currentUser}
+              collapsed={collapsed}
+              setCollapsed={setCollapsed}
+              handleSignout={handleSignOut}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              tier={tier}
+            />
+          </SidebarFooter>
+          <SidebarRail />
+        </Sidebar>
+      </SidebarProvider>
     </div>
   )
 }
-

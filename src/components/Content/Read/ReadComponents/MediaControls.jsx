@@ -1,7 +1,5 @@
 import Image from 'next/image'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import YouTubeIcon from '@mui/icons-material/YouTube'
-import TwitterIcon from '@mui/icons-material/Twitter'
+import { ArrowDown, Youtube, Twitter } from 'lucide-react'
 import TwitchIcon from '../../../../../public/img/twitch.png'
 
 const MediaControls = ({
@@ -19,9 +17,9 @@ const MediaControls = ({
         } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out hover:-translate-y-2 dark:bg-zinc-60`}
       >
         {showYouTubeFrame ? (
-          <ArrowDownwardIcon fontSize="large" className="text-white" />
+          <ArrowDown size={24} className="text-white" />
         ) : (
-          <YouTubeIcon fontSize="large" className="text-white" />
+          <Youtube size={24} className="text-white" />
         )}
       </button>
 
@@ -33,7 +31,7 @@ const MediaControls = ({
         } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#9146ff] transform transition-all duration-500 ease-in-out hover:-translate-y-2 dark:bg-zinc-60`}
       >
         {showYouTubeFrame ? (
-          <ArrowDownwardIcon fontSize="large" className="text-black" />
+          <ArrowDown size={24} className="text-black" />
         ) : (
           <Image
             src={TwitchIcon}
@@ -53,9 +51,9 @@ const MediaControls = ({
         } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out hover:-translate-y-2`}
       >
         {showYouTubeFrame ? (
-          <ArrowDownwardIcon fontSize="large" className="text-white" />
+          <ArrowDown size={24} className="text-white" />
         ) : (
-          <TwitterIcon fontSize="large" className="text-white" />
+          <Twitter size={24} className="text-white" />
         )}
       </button>
 
@@ -67,9 +65,9 @@ const MediaControls = ({
         } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-black transform transition-all duration-500 ease-in-out hover:-translate-y-2`}
       >
         {showYouTubeFrame ? (
-          <ArrowDownwardIcon fontSize="large" className="text-white" />
+          <ArrowDown size={24} className="text-white" />
         ) : (
-          <TwitterIcon fontSize="large" className="text-white" />
+          <Twitter size={24} className="text-white" />
         )}
       </button>
 
@@ -81,7 +79,7 @@ const MediaControls = ({
         } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#ff4cd7] transform transition-all duration-500 ease-in-out hover:-translate-y-2 dark:bg-zinc-60`}
       >
         {showYouTubeFrame ? (
-          <ArrowDownwardIcon fontSize="large" className="text-white" />
+          <ArrowDown size={24} className="text-white" />
         ) : (
           <svg
             fill="#ffffff"

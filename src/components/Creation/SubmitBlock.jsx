@@ -88,12 +88,12 @@ export default function SubmitBlock({
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder=" "
                   className={`peer w-full px-4 py-2 border-2 rounded-lg ${
-                    failed ? 'border-red-500' : 'border-gray-300 dark:border-gray-600 focus:border-indigo-500 dark:focus:border-indigo-400'
+                    failed ? 'border-red-500' : 'border-indigo-300 dark:border-indigo-700 focus:border-indigo-500 dark:focus:border-indigo-400'
                   } bg-transparent text-gray-900 dark:text-white focus:outline-none transition-colors`}
                 />
                 <label 
                   htmlFor="content-url"
-                  className="absolute left-3 -top-6 text-sm text-gray-500 dark:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400 transition-all duration-200"
+                  className="absolute left-3 -top-6 text-xs text-gray-500 dark:text-gray-400 peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-xs peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400 transition-all duration-200"
                 >
                   Paste your content URL
                 </label>
@@ -158,7 +158,7 @@ export default function SubmitBlock({
           )}
           
           {/* Platforms section - only show when tier is defined */}
-          <div className="mt-12 md:pt-8">
+          <div className="mt-12 md:pt-8 ">
             <div className="flex items-center justify-between mb-6">
               <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Supported Platforms
@@ -175,7 +175,13 @@ export default function SubmitBlock({
             <div className="grid grid-cols-5 gap-4">
               {[YoutubeIcon, TwitterIcon, SpacesIcon, TwitchIcon, ApplePodcastIcon].map((icon, index) => (
                 <div key={index} className="flex items-center justify-center p-3">
-                  <Image src={icon} width={100} height={100} alt="Platform" className="h-12 rounded-md w-auto" />
+                  <Image 
+                    src={icon} 
+                    width={100} 
+                    height={100} 
+                    alt="Platform" 
+                    className="h-12 rounded-md w-auto filter grayscale opacity-70" 
+                  />
                 </div>
               ))}
             </div>

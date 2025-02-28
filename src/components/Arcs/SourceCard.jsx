@@ -3,8 +3,7 @@ import FeedItem from '../FeedTabs/FeedItem'
 import Twitter from '../../../public/img/twitter_spaces.png'
 import React, { useState, useEffect, useRef } from 'react'
 
-import TextSnippetIcon from '@mui/icons-material/TextSnippet'
-import CloseIcon from '@mui/icons-material/Close'
+import { FileText, X } from 'lucide-react'
 import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
 import LogoInverted from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
 import { useRouter } from 'next/router'
@@ -294,10 +293,10 @@ const router = useRouter()
         </div>
       ) : (
         <div className="w-full">
-          <CloseIcon
+          <X
             className="right-0 absolute mr-4 mt-2 cursor-pointer text-slate-600 dark:text-zinc-300"
             onClick={() => setOpenDialog(false)}
-          ></CloseIcon>
+          />
           <div
             className="sm:w-[600px] py-10 px-4 sm:px-10 "
             onBlur={() => setOpenDialog(false)}
@@ -317,7 +316,7 @@ const router = useRouter()
             <p
               className={`text-greenColor mt-4 mb-4 px-2 sm:px-10 quicksand font-bold`}
             >
-              <TextSnippetIcon /> Passage
+              <FileText className="inline mr-1" /> Passage
             </p>
             <p
               className="px-2 sm:px-10 text-slate-600 dark:text-zinc-300 quicksand font-normal"

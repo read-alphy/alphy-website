@@ -1,8 +1,7 @@
 // File: components/QuestionAnswering/index.js
 import React, { useState, useEffect, createRef, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { Spinner } from '@material-tailwind/react'
-import DataArrayIcon from '@mui/icons-material/DataArray'
+import { Database } from 'lucide-react'
 
 // Custom hooks
 import { useQAState } from './hooks/useQAState'
@@ -227,7 +226,7 @@ export default function QuestionAnswering({
               QARef={QARef}
               baseSources={baseSources}
               updateVariable={updateVariable}
-              DataArrayIcon={DataArrayIcon}
+              DataArrayIcon={Database}
               formatAnswer={formatAnswer}
               areaRefs={areaRefs}
               singleSource={singleSource}
@@ -255,7 +254,7 @@ export default function QuestionAnswering({
             singleSource={singleSource}
             showSource={showSource}
             updateVariable={updateVariable}
-            DataArrayIcon={DataArrayIcon}
+            DataArrayIcon={Database}
             handleShowAllSources={handleShowAllSources}
             areaRefs={areaRefs}
             highlightIndex={highlightIndex}

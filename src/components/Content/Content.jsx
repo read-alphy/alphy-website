@@ -6,7 +6,7 @@ import working from './Read/working.svg'
 import axios from 'axios'
 
 import {useRouter} from 'next/router'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import { ArrowUp } from 'lucide-react'
 import { saveAs } from 'file-saver' // library to save file as blob
 import { useAuth } from '../../hooks/useAuth'
 import { API_URL } from '../../constants'
@@ -921,7 +921,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
           {showYouTubeFrame ? (
             <p>SCROLL BACK</p>
           ) : (
-            <ArrowUpwardIcon className="rotate-180" />
+            <ArrowUp className="rotate-180" />
           )}
         </button>
       ) : (
@@ -931,7 +931,7 @@ if(transcriptRaw=== undefined || transcriptRaw === null){return}
             'lg:hidden lg:mb-20 absolute text-zinc-300 dark:text-zinc-600 bottom-5 right-5 bg-mildDarkMode opacity-80 dark:opacity-100 dark:bg-green-200 hover:bg-green-300 hover:text-zinc-800 text-white font-bold py-2 px-2 rounded-full transition ease-in-out duration:300'
           }
         >
-          <ArrowUpwardIcon className="" />
+          <ArrowUp className="" />
         </button>
       )}
     </div>

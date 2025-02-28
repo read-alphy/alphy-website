@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
-import EditNoteIcon from '@mui/icons-material/EditNote'
+import { Quote, FileEdit } from 'lucide-react'
 
 export default function InputArea({
   userPrompt,
@@ -57,12 +55,9 @@ export default function InputArea({
           }}
           className=" px-4  py-1 underline text-sm text-zinc-500 dark:text-zinc-300 flex flex-row items-center gap-0.5"
         >
-          <FormatQuoteIcon
-            className="text-zinc-500  dark:text-zinc-300 mt-1 mr-1"
-            sx={{
-              width: '16px',
-              height: '16px',
-            }}
+          <Quote
+            className="text-zinc-500 dark:text-zinc-300 mr-1"
+            size={16}
           />
           Get me quotes
         </button>
@@ -74,12 +69,9 @@ export default function InputArea({
           }}
           className="  px-4 py-1 underline text-sm dark:text-zinc-300 text-zinc-500 flex flex-row items-center "
         >
-          <EditNoteIcon
-            className="text-zinc-500 dark:text-zinc-300 mt-0.5 mr-1"
-            sx={{
-              width: '16px',
-              height: '16px',
-            }}
+          <FileEdit
+            className="text-zinc-500 dark:text-zinc-300 mr-1"
+            size={16}
           />
           Summarize with focus
         </button>

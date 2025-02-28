@@ -1,26 +1,20 @@
 import React from 'react'
 import 'tailwindcss/tailwind.css'
 
-
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
-
 
 import FreeCard from './PricingCards/FreeCard'
 import BasicCard from './PricingCards/BasicCard'
 import PremiumCard from './PricingCards/PremiumCard'
 
 import Loading from '../Loading'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import { Button } from '@material-tailwind/react'
-import Dialog from '@mui/material/Dialog'
-import Switch, { switchClasses } from '@mui/joy/Switch'
+import { PlusCircle, MinusCircle, Plus } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Switch } from "@/components/ui/switch"
 import { API_URL } from '../../constants'
-import CircularProgress from '@mui/material/CircularProgress';
-
 
 
 export default function AccountInfo({
@@ -30,7 +24,6 @@ export default function AccountInfo({
   canceledAtPeriodEnd,
 }) {
   
-
   const [isYearly, setIsYearly] = useState(true)
   const [quantity, setQuantity] = useState(1)
   const [creditPurchaseLoading, setCreditPurchaseLoading] = useState(false)
@@ -251,6 +244,7 @@ export default function AccountInfo({
                           <div className="mt-4 flex flex-col ">
                             <Button
                               size="sm"
+                              variant="secondary"
                               className={`bg-indigo-300 text-white max-w-[150px] ${
                                 tier === 'basic' || tier === 'premium'
                                   ? ''
@@ -258,7 +252,7 @@ export default function AccountInfo({
                               } quicksand font-bold`}
                               onClick={() => setCreditPurchaseDialog(true)}
                             >
-                              <AddCircleOutlineIcon className="mr-2 dark:text-zinc-800" />
+                              <Plus className="mr-2 h-4 w-4 dark:text-zinc-800" />
                               <span className="mt-1 dark:text-zinc-800 quicksand font-bold">
                                 Buy Credits
                               </span>
@@ -351,6 +345,7 @@ export default function AccountInfo({
                           <div className="mt-4 flex flex-col">
                             <Button
                               size="sm"
+                              variant="secondary"
                               className={`bg-indigo-300 text-white max-w-[150px] ${
                                 tier === 'basic' || tier === 'premium'
                                   ? ''
@@ -358,7 +353,7 @@ export default function AccountInfo({
                               }`}
                               onClick={() => setCreditPurchaseDialog(true)}
                             >
-                              <AddCircleOutlineIcon className="mr-2 dark:text-zinc-800" />
+                              <Plus className="mr-2 h-4 w-4 dark:text-zinc-800" />
                               <span className="mt-1 dark:text-zinc-800 quicksand font-bold">
                                 Buy Credits
                               </span>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import SideFeed from '../../components/ArticleComponents/SideFeed'
 // import ArticleCreator from "./ArticleComponents/ArticleCreator"
 
-import Dialog from '@mui/material/Dialog'
+import { Dialog } from "@/components/ui/dialog"
 
 import Loading from '../../components/Loading'
 import HubContent from './HubContent'
@@ -55,21 +55,7 @@ function Hub({
       ></div>
 
       <div className="flex flex-row bg-white dark:bg-darkMode ">
-        {/* {collapsed==true && 
-			<div className="flex w-full  hidden lg:flex lg:h-[92vh] overflow-hidden bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]">
-			<div className={`hidden md:flex `}>
-				<button onClick={handleCollapse }>
-
-		
-			<svg className={`${!collapsed && "rotate-180"} opacity-30 dark:opacity-80`}  width={30} aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" strokeLinecap="round" strokeLinejoin="round"></path>
-			</svg>
-
-			</button			>
-			</div> 
-
-			</div>
-			} */}
+   
         {
           <div className={`hidden sm:block`}>
             <SideFeed 
@@ -153,10 +139,9 @@ setLoggedIn={setLoggedIn}
       </div>
 
       {deleteDialog && (
-        <Dialog
-          open={deleteDialog}
-          onClose={() => setDeleteDialog(false)}
-        ></Dialog>
+        <Dialog open={deleteDialog} onOpenChange={() => setDeleteDialog(false)}>
+          {/* Dialog content would go here */}
+        </Dialog>
       )}
     </div>
   )

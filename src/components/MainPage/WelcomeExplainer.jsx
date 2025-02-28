@@ -51,7 +51,7 @@ export default function WelcomeExplainer({
 
   return (
     <div className="min-h-screen">
-      <main className="w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+      <main className="w-full max-w-7xl mx-auto px-4">
         {/* Hero Section */}
         <HeroSection currentUser={currentUser} />
 

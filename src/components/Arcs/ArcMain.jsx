@@ -7,19 +7,17 @@ import React, {
   memo,
 } from 'react'
 import SideFeed from '../SideFeed/SideFeed'
-
-// import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import ArcCreation from './ArcCreation'
-import { Button, Input, Textarea } from '@material-tailwind/react'
-import CircularProgress from '@mui/material/CircularProgress';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Loader2, Save, Trash2, ChevronLeft } from "lucide-react"
 
 import ArcChat from './ArcChat'
 import EditArc from './EditArc'
-import DeleteIcon from '@mui/icons-material/Delete'
-import SaveIcon from '@mui/icons-material/Save'
-import Dialog from '@mui/material/Dialog'
 import Loading from '../Loading'
 import axios from 'axios'
 
@@ -324,17 +322,17 @@ export default function ArcMain({
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
       <div
-        className={`w-screen  bg-bordoLike transition origin-top-right transform sm:hidden rounded-t-none rounded-3xl ${
+        className={`w-screen bg-bordoLike transition origin-top-right transform sm:hidden rounded-t-none rounded-3xl ${
           collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
         }`}
       ></div>
 
-      <div className="flex flex-row ">
+      <div className="flex flex-row">
         {
           <div className={`hidden ${isArc ? 'md:flex' : 'md:flex'} `}>
             <SideFeed
-            loggedIn = {loggedIn}
-            setLoggedIn = {setLoggedIn}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               currentUser={currentUser}
               collapsed={collapsed}
               setCollapsed={setCollapsed}
@@ -358,8 +356,8 @@ export default function ArcMain({
           <div className="rounded-lg rounded-t-none shadow-lg">
             <div className="h-screen">
               <SideFeed
-              loggedIn = {loggedIn}
-              setLoggedIn = {setLoggedIn}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 currentUser={currentUser}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
@@ -425,13 +423,10 @@ export default function ArcMain({
                 <div className="mb-10">
                   <Link
                     href="/submit"
-                    className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
+                    className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200 ease-in transition cursor-pointer flex items-center gap-2"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-</svg>
-
-                    <span className="text-sm  quicksand font-semibold">
+                    <ChevronLeft className="h-5 w-5" />
+                    <span className="text-sm quicksand font-semibold">
                       Go Back
                     </span>
                   </Link>
@@ -463,7 +458,7 @@ export default function ArcMain({
                   The arc you're trying to reach either doesn't exist or you
                   don't have permission to access it. Check out arcs by Alphy{' '}
                   <Link
-                    href="/arcs"
+                    href="/explore"
                     className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
                   >
                     here

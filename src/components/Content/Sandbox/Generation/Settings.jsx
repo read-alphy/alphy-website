@@ -1,9 +1,8 @@
-import Slider from '@mui/joy/Slider'
+
 
 import React, { useState } from 'react'
 
-import Checkbox from '@mui/material/Checkbox'
-import Switch, { switchClasses } from '@mui/joy/Switch'
+import { Switch } from "@/components/ui/switch"
 
 export default function Settings({
   settings,
@@ -31,42 +30,9 @@ export default function Settings({
           <div className=" text-lg">Settings</div>
 
           <div className="flex flex-row mt-6">
-            {/*         <button className="items-center margin-auto  mt-10 items-center flex text-center justify-center ml-6 xl:ml-10  hidden md:flex h-10 w-10 rounded-full bg-indigo-400 dark:bg-indigo-500 cursor-pointer" onClick={() => setAdvancedSettingsToggled(!advancedSettingsToggled)}>
-            {adjustments}
-        </button>       
-             */}
+         
           </div>
-          {/* <div className="flex flex-row max-w-[400px]">
-            <p className="mt-4 text-zinc-500 dark:text-zinc-300 text-sm w-[100px]">
-              Detail
-            </p>
-            <Slider
-              className="mt-2 ml-4"
-              aria-label="Detail Level"
-              defaultValue={5}
-              step={1}
-              marks={false}
-              min={0}
-              max={10}
-              onChange={e =>
-                setSettings({ ...settings, detail_level: e.target.value })
-              }
-              valueLabelDisplay="auto"
-              sx={{
-                '& .MuiSlider-track': {
-                  background: '#a5b4fc',
-                },
-                '& .MuiSlider-thumb': {
-                  color: '#a5b4fc',
-                  outline: 'none',
-                },
-                '& .MuiSlider-markLabel': {
-                  color: '#a1a1aa',
-                },
-              }}
-            />
-          </div> */}
-
+         
           <div className="flex flex-row gap-2">
             <p className=" items-center text-center text-zinc-500 dark:text-zinc-300 text-md mr-6  ">
               Detail
@@ -141,30 +107,7 @@ export default function Settings({
             <p className=" items-center text-center text-zinc-500 dark:text-zinc-300 text-md mr-4  ">
               Length
             </p>
-            {/* <Slider
-              className="mt-2 ml-4"
-              aria-label="Output Level"
-              onChange={e =>
-                setSettings({ ...settings, verbosity_level: e.target.value })
-              }
-              defaultValue={5}
-              step={1}
-              marks={false}
-              min={0}
-              max={10}
-              valueLabelDisplay="auto"
-              sx={{
-                '& .MuiSlider-track': {
-                  background: '#93c5fd',
-                },
-                '& .MuiSlider-thumb': {
-                  // Apply styles for the thumb, e.g., background color
-                },
-                '& .MuiSlider-markLabel': {
-                  color: '#a1a1aa',
-                },
-              }}
-            /> */}
+          
 
             <button
               value={'Short'}

@@ -3,8 +3,6 @@ import Twitter from '../../../public/img/twitter_space.png'
 import ApplePodcast from '../../../public/img/apple_podcast_banner.png'
 import Twitch from '../../../public/img/twitchSource.png'
 import X from '../../../public/img/X.png'
-/* import YouTube from '../../img/youtube.png'
-import HistoryIcon from '@mui/icons-material/History' */
 import { useState } from 'react'
 import {useRouter} from 'next/router'
 import ReactMarkdown from 'react-markdown'

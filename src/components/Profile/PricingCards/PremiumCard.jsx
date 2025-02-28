@@ -1,9 +1,6 @@
-import CircularProgress from '@mui/material/CircularProgress';
+import { Loader, Check, ChevronLeft } from 'lucide-react';
 import {useRouter} from 'next/router'
 
-import VerifiedIcon from '@mui/icons-material/Verified'
-
-import Dialog from '@mui/material/Dialog'
 import { useState, useRef } from 'react'
 import axios from 'axios'
 import { API_URL } from '../../../constants'
@@ -100,7 +97,7 @@ export default function PremiumCard({
   return (
     <div className="relative col-span-2  xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 border border-zinc-700 transform *-translate-y-2* rounded-lg sm:p-8  bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-zinc-900 dark:bg-gradient-to-br dark:border-gray-700 ">
       <div className="flex flex-row">
-        <VerifiedIcon fontSize="large" className="-ml-2 text-indigo-400 " />
+        <Check className="-ml-2 text-indigo-400" size={28} />
         <p className="ml-1 mb-4 text-2xl quicksand font-bold text-zinc-900 dark:text-zinc-300">
           Premium
         </p>
@@ -143,40 +140,18 @@ export default function PremiumCard({
           
 
           <li className="flex space-x-3">
-            <svg
-              aria-hidden="true"
+            <Check
               className="flex-shrink-0 w-5 h-5 mt-1 text-greenColor"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Check icon</title>
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            />
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               20 hours of prioritized transcription credits per month
             </span>
           </li>
 
           <li className="flex space-x-3">
-            <svg
-              aria-hidden="true"
+            <Check
               className="flex-shrink-0 w-5 h-5 text-greenColor"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Check icon</title>
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            />
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Upload local audio files
             </span>
@@ -184,20 +159,9 @@ export default function PremiumCard({
 
           
           <li className="flex space-x-3">
-            <svg
-              aria-hidden="true"
+            <Check
               className="flex-shrink-0 w-5 h-5 text-greenColor"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Check icon</title>
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            />
             {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Submit YouTube, X Spaces, X Videos, Twitch recordings,
@@ -205,20 +169,9 @@ export default function PremiumCard({
             </span>
           </li>
           <li className="flex space-x-3">
-            <svg
-              aria-hidden="true"
+            <Check
               className="flex-shrink-0 w-5 h-5 text-greenColor"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Check icon</title>
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            />
             {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Download transcripts
@@ -226,40 +179,18 @@ export default function PremiumCard({
           </li>
         
           <li className="flex space-x-3">
-            <svg
-              aria-hidden="true"
+            <Check
               className="flex-shrink-0 w-5 h-5 text-greenColor"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Check icon</title>
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            />
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Create Unlimited Arcs
             </span>
           </li>
 
           <li className="flex space-x-3">
-            <svg
-              aria-hidden="true"
+            <Check
               className="flex-shrink-0 w-5 h-5 text-greenColor"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Check icon</title>
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            />
             {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Optional credit topups
@@ -269,20 +200,9 @@ export default function PremiumCard({
           <div className="w-full border-b border-gray-300 dark:border-zinc-700 "></div>
 
           <li className="flex space-x-3">
-            <svg
-              aria-hidden="true"
+            <Check
               className="flex-shrink-0 w-5 h-5 text-greenColor"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Check icon</title>
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            />
             {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
             <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
               Full access to Playground:
@@ -291,40 +211,18 @@ export default function PremiumCard({
 
           <div className="flex flex-col ml-6 gap-y-4">
             <li className="flex space-x-3">
-              <svg
-                aria-hidden="true"
-                className="flex-shrink-0 w-5 h-5 text-greenColor "
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Check icon</title>
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              <Check
+                className="flex-shrink-0 w-5 h-5 text-greenColor"
+              />
               {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
               <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
                 Generative AI on Transcripts
               </span>
             </li>
             <li className="flex space-x-3">
-              <svg
-                aria-hidden="true"
+              <Check
                 className="flex-shrink-0 w-5 h-5 text-greenColor"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Check icon</title>
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              />
               {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
               <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
                 Create anything   with your own prompts
@@ -332,20 +230,9 @@ export default function PremiumCard({
             </li>
 
             <li className="flex space-x-3">
-              <svg
-                aria-hidden="true"
+              <Check
                 className="flex-shrink-0 w-5 h-5 text-greenColor"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Check icon</title>
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              />
               {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
               <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
                 Unlimited access to preset commands
@@ -366,7 +253,7 @@ export default function PremiumCard({
               } rounded-lg text-[16px]  drop-shadow-sm  bg-[#4262ff] quicksand font-bold px-5 py-3  justify-center w-full text-center `}
             >{
 
-              subscriptionLinkLoading ? (<CircularProgress color="inherit" className=" w-5 text-center margin-auto w-full" size={20}/>)
+              subscriptionLinkLoading ? (<Loader className="w-5 text-center margin-auto w-full" size={20}/>)
             :
             (
               tier === 'premium' ? 'Active' : 'Go Premium'

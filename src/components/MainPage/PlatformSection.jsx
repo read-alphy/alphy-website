@@ -1,7 +1,7 @@
 // PlatformSection.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import AudioFileIcon from '@mui/icons-material/AudioFile';
+import { FileAudio2 } from 'lucide-react';
 import PlatformIcon from './PlatformIcon';
 
 // Images
@@ -15,12 +15,10 @@ export default function PlatformSection() {
   // Platform data for consistent rendering
   const platforms = [
     {
-      icon: <AudioFileIcon 
-              sx={{
-                color: "#3b82f6",
-                width: "80px",
-                height: "64px",
-              }}
+      icon: <FileAudio2 
+              width={64}
+              height={64}
+              color="oklch(0.623 0.214 259.815)"
             />,
       name: "Local Audio Files",
       alt: "Local Audio Files icon",

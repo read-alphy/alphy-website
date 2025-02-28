@@ -4,9 +4,8 @@ import Link from 'next/link'
 import axios from 'axios'
 
 // Components
-import { Button } from '@material-tailwind/react'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import LinkIcon from '@mui/icons-material/Link'
+import { Button } from '@/components/ui/button'
+import { Link as LinkIcon, Upload } from 'lucide-react'
 
 import UploadBlock from '../Creation/UploadBlock'
 import SubmitBlock from '../Creation/SubmitBlock'
@@ -262,15 +261,16 @@ export default function HubCreationBlock({
               </div>
             </div>
             
-            <button
+            <Button
               onClick={() => {
                 sessionStorage.setItem('creditPurchase', 'true')
                 router.push('/account')
               }}
-              className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+              variant="link"
+              className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 p-0 h-auto"
             >
               Need more credits?
-            </button>
+            </Button>
           </div>
         </div>
       )}
@@ -287,7 +287,7 @@ export default function HubCreationBlock({
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
             }`}
           >
-            <LinkIcon className="mr-2" fontSize="small" />
+            <LinkIcon className="mr-2 h-4 w-4" />
             Submit a Link
           </button>
           <button
@@ -298,7 +298,7 @@ export default function HubCreationBlock({
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
             }`}
           >
-            <CloudUploadIcon className="mr-2" fontSize="small" />
+            <Upload className="mr-2 h-4 w-4" />
             Upload a Recording
           </button>
         </div>
