@@ -196,6 +196,7 @@ export default function ArcChat({
     }, 300)
   }
 
+  
   return (
     <div
       className={`lg:pt-10 pb-10 lg:pb-20 grow mx-auto relative flex flex-col min-h-[90vh] min-h-full max-w-[900px]`}

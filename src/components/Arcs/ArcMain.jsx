@@ -42,6 +42,7 @@ export default function ArcMain({
   const { isCreateArc, isEditArc, isArc, isArcPage } = useMemo(() => 
     getArcPageType(router.asPath), [router.asPath]
   )
+
   
   // State for window size detection
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
@@ -61,14 +62,16 @@ export default function ArcMain({
   
   // Custom hooks
   const arcData = useArcData(isArc, isEditArc, router, currentUser)
+  
   const {
     isLoadingSubmit,
     isLoadingDelete,
-    errorMessage,
+    isLoadingVisibility,
+    error,
     handleCreateOrUpdateArc,
     handleDeleteArc,
     handleVisibility,
-    setMutationState
+    clearError
   } = useArcMutations(router, currentUser, userArcs, setUserArcs)
   
   // Destructure arcData for easier access
@@ -81,8 +84,11 @@ export default function ArcMain({
     isVisible,
     isPublic,
     authorizationError,
-    updateArcState
+    updateArcState,
+    fetchArcData
   } = arcData
+
+  
   
   // Handle window size check on initial load
   useEffect(() => {
@@ -101,6 +107,12 @@ export default function ArcMain({
       window.location.reload()
     }
   }, [])
+  useEffect(() => {
+    if (arcData?.dataArc && dataArc.length === 0) {
+      setDataArc(arcData.dataArc);
+      setSourceIDsArc(arcData.sourceIDsArc);
+    }
+  }, [arcData]);
   
   // Handlers
   const handleArc = () => {
@@ -125,7 +137,6 @@ export default function ArcMain({
     })
   }
   
-
   const setArcDescription = (newDescription) => {
     updateArcState({ arcDescription: newDescription })
   }
@@ -134,9 +145,6 @@ export default function ArcMain({
     updateArcState({ arcTitle: newTitle })
   }
   
-  const setErrorMessage = (value) => {
-    setMutationState(prev => ({ ...prev, errorMessage: value }))
-  }
   
   // Optimized content rendering with memoization
   const createArcContent = useMemo(() => {
@@ -205,8 +213,8 @@ export default function ArcMain({
         setArcTitle={setArcTitle}
         sourceIDsArc={sourceIDsArc}
         setSourceIDsArc={setSourceIDsArc}
-        errorMessage={errorMessage}
-        setErrorMessage={setErrorMessage}
+        errorMessage={error}
+        setErrorMessage={clearError}
         credit={credit}
         setCreditCalled={setCreditCalled}
         isCreateArc={isCreateArc}
@@ -216,7 +224,7 @@ export default function ArcMain({
         onDelete={() => setDeleteDialog(true)}
       />
     )
-  }, [authState.isAuthenticated, authState.canCreate, userArcs, tier, arcDescription, dataArc, arcTitle, sourceIDsArc, errorMessage, credit])
+  }, [authState.isAuthenticated, authState.canCreate, userArcs, tier, arcDescription, dataArc, arcTitle, sourceIDsArc, error, credit, isLoadingSubmit])
   
   const editArcContent = useMemo(() => {
     if (!authState.isAuthenticated) {
@@ -239,9 +247,10 @@ export default function ArcMain({
         </div>
       )
     }
-    
+
     return (
       <EditArc
+        currentUser={currentUser}
         arcInfo={arcInfo}
         tier={tier}
         setArcInfo={(newInfo) => updateArcState({ arcInfo: newInfo })}
@@ -254,8 +263,8 @@ export default function ArcMain({
         setArcTitle={setArcTitle}
         sourceIDsArc={sourceIDsArc}
         setSourceIDsArc={setSourceIDsArc}
-        errorMessage={errorMessage}
-        setErrorMessage={setErrorMessage}
+        errorMessage={error}
+        setErrorMessage={clearError}
         credit={credit}
         setCreditCalled={setCreditCalled}
         isCreateArc={isCreateArc}
@@ -265,7 +274,7 @@ export default function ArcMain({
         onDelete={() => setDeleteDialog(true)}
       />
     )
-  }, [authState.isAuthenticated, arcInfo, tier, userArcs, arcDescription, dataArc, arcTitle, arcData.sourceIDsArc, errorMessage, credit])
+  }, [authState.isAuthenticated, arcInfo, tier, userArcs, arcDescription, dataArc, arcTitle, sourceIDsArc, error, credit, isLoadingSubmit])
   
   const arcContent = useMemo(() => {
     if (isLoading) {
@@ -276,6 +285,8 @@ export default function ArcMain({
       return <AuthorizationError />
     }
     
+    
+
     return (
       <ArcChat
         data={data}
@@ -288,10 +299,11 @@ export default function ArcMain({
         setIsVisible={(newValue) => updateArcState({ isVisible: newValue })}
         isPublic={isPublic}
         setIsPublic={(newValue) => updateArcState({ isPublic: newValue })}
+        isLoadingVisibility={isLoadingVisibility}
         tier={tier}
       />
     )
-  }, [isLoading, authorizationError, data, currentUser, dataArc, isVisible, isPublic, tier])
+  }, [isLoading, authorizationError, data, currentUser, dataArc, isVisible, isPublic, isLoadingVisibility, tier])
   
   // Simplified render logic
   const renderContent = () => {
@@ -366,7 +378,23 @@ export default function ArcMain({
         </div>
       </div>
 
-    
+      {/* Error display */}
+      {error && (
+        <div className="fixed bottom-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded shadow-md">
+          <div className="flex">
+            <div>
+              <p className="font-bold">Error</p>
+              <p>{error}</p>
+            </div>
+            <button 
+              className="ml-4" 
+              onClick={clearError}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Delete confirmation dialog */}
       <DeleteArcDialog

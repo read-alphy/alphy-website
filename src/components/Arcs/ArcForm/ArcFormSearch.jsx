@@ -52,7 +52,7 @@ const ArcFormSearch = ({
         </Card>
       )}
       
-      <div className="max-h-[50vh] overflow-y-auto mb-4">
+      <div className=" overflow-y-auto mb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {renderSearchResults()}
         </div>

@@ -75,7 +75,6 @@ const ArcForm = ({
   const [prevLength, setPrevLength] = useState(0);
   const [firstTime, setFirstTime] = useState(true);
   const [loading, setLoading] = useState(false);
-
   // Navigation
   const handleGoBack = () => {
     if (isEditMode && arcInfo?.uid) {
@@ -125,8 +124,10 @@ const ArcForm = ({
     fetchSources(newOffset, false, true);
   };
 
-  const handleAddOrRemoveItem = (item) => {
 
+
+  const handleAddOrRemoveItem = (item) => {
+  console.log(item)
     if (sourceIDsArc.includes(item.source_id)) {
       setDataArc(prevData => prevData.filter(prevItem => prevItem.source_id !== item.source_id));
       setSourceIDsArc(prevIds => prevIds.filter(source_id => source_id !== item.source_id));
@@ -338,9 +339,11 @@ const ArcForm = ({
     }
   }, []);
 
+
   return (
-    <div className="max-w-[900px]">
+    <div >
       {/* Header */}
+      <div className="max-w-[900px]">
       <ArcFormHeader 
         isEditMode={isEditMode} 
         arcInfo={arcInfo} 
@@ -381,14 +384,17 @@ const ArcForm = ({
         credit={credit}
         setCreditCalled={setCreditCalled}
       />
-      
+      </div>
       
       {/* Playlist Preview */}
       { currentUser && (
+        <div className="sticky bottom-0 bg-white dark:bg-zinc-900 pb-6">
         <ArcPreviewActionBar
           // Preview props
           arcTitle={arcTitle}
+          setArcTitle={setArcTitle}
           arcDescription={arcDescription}
+          setArcDescription={setArcDescription}
           dataArc={dataArc}
           setDataArc={setDataArc}
           sourceIDsArc={sourceIDsArc}
@@ -402,6 +408,7 @@ const ArcForm = ({
           onSave={onSave}
           onDelete={onDelete}
         />
+        </div>
       )}
     </div>
   );

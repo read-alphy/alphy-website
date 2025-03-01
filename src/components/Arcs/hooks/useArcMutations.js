@@ -3,92 +3,171 @@ import { useState } from 'react'
 import axios from 'axios'
 import { API_URL } from '@/constants'
 
+// Constants
+const REDIRECT_DELAY_MS = 2000
+const DEFAULT_ARC_TITLE = 'My Arc'
+
 export default function useArcMutations(router, currentUser, userArcs, setUserArcs) {
-  const [mutationState, setMutationState] = useState({
-    isLoadingSubmit: false,
-    isLoadingDelete: false,
-    errorMessage: false
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+  const [isLoadingVisibility, setIsLoadingVisibility] = useState(false)
+  const [error, setError] = useState(null)
+
+  // Helper for API requests
+  const getAuthHeaders = () => ({
+    'id-token': currentUser?.accessToken
   })
 
+  const validateArcData = (title, dataArc) => {
+    if (!dataArc || dataArc.length === 0) {
+      setError('An arc must contain at least one item')
+      return false
+    }
+    
+    if (!title || title.trim() === '') {
+      setError('Arc title cannot be empty')
+      return false
+    }
+    
+    return true
+  }
+
   const handleCreateOrUpdateArc = async (isCreateArc, arcInfo, arcTitle, arcDescription, dataArc) => {
-    // Validate data
-    if (dataArc.length === 0) {
-      setMutationState(prev => ({ ...prev, errorMessage: true }))
-      return
+    // Validate input data
+    const title = arcTitle?.trim() || DEFAULT_ARC_TITLE
+    if (!validateArcData(title, dataArc)) {
+      return false
     }
 
-    // Set loading state
-    setMutationState(prev => ({ ...prev, isLoadingSubmit: true, errorMessage: false }))
+    // Reset error and set loading state
+    setError(null)
+    setIsLoadingSubmit(true)
+    
     try {
       // Prepare request body
       const requestBody = {
-        name: arcTitle.length > 0 ? arcTitle : 'My Arc',
+        name: title,
         user_id: currentUser.uid,
-        description: arcDescription,
+        description: arcDescription || '',
         sources: [...dataArc]
-      }
-
-      // Headers
-      const headers = {
-        'id-token': currentUser.accessToken
       }
 
       let response
       
       if (isCreateArc) {
-        // Create new arc
         
-        response = await axios.post(`${API_URL}/playlists/`, requestBody, { headers })
+        response = await axios.post(`${API_URL}/playlists/`, requestBody, { 
+          headers: getAuthHeaders() 
+        })
+        
       } else {
         // Update existing arc
-        response = await axios.patch(`${API_URL}/playlists/${arcInfo.uid}`, requestBody, { headers })
+        response = await axios.patch(`${API_URL}/playlists/${arcInfo.uid}`, requestBody, { 
+          headers: getAuthHeaders() 
+        })
       }
 
       // Set arcAction flag in session storage
       sessionStorage.setItem('arcAction', 'true')
       
-      // Wait a bit then redirect to the new/updated arc
+      // Optimistically update the UI
+      if (!isCreateArc && setUserArcs) {
+        const updatedArcs = userArcs.map(arc => 
+          arc.uid === arcInfo.uid ? { ...arc, ...requestBody } : arc
+        )
+        setUserArcs(updatedArcs)
+      }
+
+      
+      
+   /*    // Wait a bit then redirect to the new/updated arc
       setTimeout(() => {
         router.push(`/arc/${response.data.uid}`)
-        setMutationState(prev => ({ ...prev, isLoadingSubmit: false }))
-      }, 2000)
-      
+        setIsLoadingSubmit(false)
+      }, REDIRECT_DELAY_MS)
+       */
+      return true
     } catch (error) {
-      setMutationState(prev => ({ 
-        ...prev, 
-        isLoadingSubmit: false,
-        errorMessage: error.response?.status === 400
-      }))
+      setIsLoadingSubmit(false)
       
-      console.error('Error creating/updating arc:', error)
+      // Handle specific error cases
+      if (error.response?.status === 400) {
+        setError('Invalid arc data. Please check your inputs.')
+      } else if (error.response?.status === 401) {
+        setError('Authentication error. Please log in again.')
+      } else if (error.response?.status === 403) {
+        setError('You do not have permission to perform this action.')
+      } else {
+        setError(`Error ${isCreateArc ? 'creating' : 'updating'} arc: ${error.message || 'Unknown error'}`)
+      }
+      
+      console.error(`Error ${isCreateArc ? 'creating' : 'updating'} arc:`, error)
+      return false
     }
   }
 
   const handleDeleteArc = async (arcInfo) => {
-    setMutationState(prev => ({ ...prev, isLoadingDelete: true }))
+    if (!arcInfo?.uid) {
+      setError('Invalid arc information')
+      return false
+    }
+    
+    setError(null)
+    setIsLoadingDelete(true)
     
     try {
       await axios.delete(`${API_URL}/playlists/${arcInfo.uid}`, {
-        headers: {
-          'id-token': currentUser.accessToken
-        }
+        headers: getAuthHeaders()
       })
       
-      // Update the user's arcs list
-      const updatedArcs = userArcs.filter(arc => arc.uid !== arcInfo.uid)
-      setUserArcs(updatedArcs)
+      // Optimistically update the UI
+      if (setUserArcs) {
+        const updatedArcs = userArcs.filter(arc => arc.uid !== arcInfo.uid)
+        setUserArcs(updatedArcs)
+      }
       
       // Redirect to home
       router.push('/')
-      
+      return true
     } catch (error) {
-      setMutationState(prev => ({ ...prev, isLoadingDelete: false }))
+      setIsLoadingDelete(false)
+      
+      // Handle specific error cases
+      if (error.response?.status === 401) {
+        setError('Authentication error. Please log in again.')
+      } else if (error.response?.status === 403) {
+        setError('You do not have permission to delete this arc.')
+      } else if (error.response?.status === 404) {
+        setError('Arc not found. It may have been already deleted.')
+        // Still update local state since arc doesn't exist
+        if (setUserArcs) {
+          const updatedArcs = userArcs.filter(arc => arc.uid !== arcInfo.uid)
+          setUserArcs(updatedArcs)
+        }
+        router.push('/')
+        return true
+      } else {
+        setError(`Error deleting arc: ${error.message || 'Unknown error'}`)
+      }
+      
       console.error('Error deleting arc:', error)
+      return false
     }
   }
 
   const handleVisibility = async (arcUid, currentVisibility) => {
+    if (!arcUid) {
+      setError('Invalid arc information')
+      return currentVisibility
+    }
+    
+    setError(null)
+    setIsLoadingVisibility(true)
+    
     const targetVisibility = !currentVisibility
+    
+    // Optimistically update local storage
+    localStorage.setItem('isVisible', String(targetVisibility))
     
     try {
       await axios.patch(
@@ -97,26 +176,44 @@ export default function useArcMutations(router, currentUser, userArcs, setUserAr
         {
           headers: {
             accept: 'application/json',
-            'id-token': currentUser.accessToken
+            ...getAuthHeaders()
           }
         }
       )
       
-      // Update local storage
-      localStorage.setItem('isVisible', targetVisibility)
-      
+      setIsLoadingVisibility(false)
       return targetVisibility
     } catch (error) {
+      setIsLoadingVisibility(false)
+      
+      // Revert local storage on failure
+      localStorage.setItem('isVisible', String(currentVisibility))
+      
+      // Handle specific error cases
+      if (error.response?.status === 401) {
+        setError('Authentication error. Please log in again.')
+      } else if (error.response?.status === 403) {
+        setError('You do not have permission to change visibility for this arc.')
+      } else {
+        setError(`Error updating visibility: ${error.message || 'Unknown error'}`)
+      }
+      
       console.error('Error updating visibility:', error)
       return currentVisibility
     }
   }
 
+  // Clear error message
+  const clearError = () => setError(null)
+
   return {
-    ...mutationState,
+    isLoadingSubmit,
+    isLoadingDelete,
+    isLoadingVisibility,
+    error,
     handleCreateOrUpdateArc,
     handleDeleteArc,
     handleVisibility,
-    setMutationState
+    clearError
   }
 }

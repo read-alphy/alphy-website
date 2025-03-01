@@ -267,8 +267,7 @@ function MyApp({ Component, pageProps }) {
             axios
               .get(`${API_URL}/playlists/`, {
                 params: {
-                  // limit: 20,
-                  // offset: 0,
+                  limit: 40,
                   only_my: true,
                 },
                 headers: {

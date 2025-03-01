@@ -15,7 +15,6 @@ export const canCreateArc = (tier, arcCount) => {
    */
   export const getArcPageType = (path) => {
     const segments = path.split('/')
-    
     const isCreateArc = segments[2] === 'createArc'
     const isEditArc = segments[2] === 'editArc'
     const isArc = segments[1] === 'arc' && 

@@ -24,6 +24,8 @@ export default function EditArc({
   onDelete,
 
 }) {
+  
+  
   return (
     <ArcForm
       arcInfo={arcInfo}

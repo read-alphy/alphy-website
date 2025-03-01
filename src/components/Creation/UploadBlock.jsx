@@ -248,9 +248,9 @@ function UploadContent({
 }) {
   return (
     <>
-      <div className="bg-white dark:bg-zinc-800 rounded-xl p-6">
+      <div className="bg-white dark:bg-zinc-800 rounded-xl ">
         <div className="flex items-center gap-2 mb-6">
-          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
             Upload Audio Recording
           </h3>
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">

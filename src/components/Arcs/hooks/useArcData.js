@@ -33,13 +33,13 @@ export default function useArcData(isArc, isEditArc, router, currentUser) {
     }
   }, [currentUser, router.asPath])
 
+  
   const fetchArcData = async () => {
     // Reset error state
     setArcState(prev => ({ ...prev, authorizationError: false, isLoading: true }))
     
     // Get the user's token if available
     const idToken = currentUser?.accessToken || null
-
     try {
       const response = await axios.get(
         `${API_URL}/playlists/${source_id}?nof_questions=30`, 

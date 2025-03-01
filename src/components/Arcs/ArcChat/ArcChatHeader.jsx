@@ -72,7 +72,7 @@ const ArcChatHeader = ({
             </button>
             
             <Badge variant="outline" className="px-3 py-1.5  bg-slate-50 dark:bg-zinc-800/70 text-slate-700 dark:text-zinc-300 rounded-full border-slate-200 dark:border-zinc-700">
-              <span className="font-medium text-sm">{dataArc?.length || 0}</span>
+              <span className="font-medium text-sm">{data?.tracks?.length || 0}</span>
               <span className="ml-1 opacity-80 text-sm">items</span>
             </Badge>
           </div>
@@ -86,7 +86,7 @@ const ArcChatHeader = ({
                
                 
                 <CardContent className="flex-1 overflow-hidden flex flex-col">
-                  <div className="mb-8 px-4 sm:px-6">
+                  <div className="px-4 sm:px-6">
                     <div className="flex flex-col sm:flex-row items-center sm:items-start">
                       {arcImageLink.length > 0 && (
                         <img
@@ -107,9 +107,9 @@ const ArcChatHeader = ({
 
                         <div className="flex flex-wrap items-center justify-center sm:justify-start mt-5 gap-x-6 gap-y-3">
                           <div className="flex items-center">
-                            <List size={16} className="mr-2 text-slate-500 dark:text-zinc-400" />
+                            {/* <List size={16} className="mr-2 text-slate-500 dark:text-zinc-400" /> */}
                             <span className="text-slate-600 dark:text-zinc-400 text-sm quicksand">
-                              {dataArc !== null && dataArc.length} items
+                              {data?.tracks?.length || 0} items
                             </span>
                           </div>
                           
@@ -173,10 +173,10 @@ const ArcChatHeader = ({
                     
                     <div className={`
                       grid grid-cols-1 gap-4
-                      ${dataArc.length === 1 ? 'lg:grid-cols-1 xl:grid-cols-1 lg:max-w-2xl' : 'lg:grid-cols-2 xl:grid-cols-2'}
+                      ${data?.tracks?.length === 1 ? 'lg:grid-cols-1 xl:grid-cols-1 lg:max-w-2xl' : 'lg:grid-cols-2 xl:grid-cols-2'}
                     `}>
-                      {dataArc.length > 0 &&
-                        dataArc.map((item, index) => (
+                      {data?.tracks?.length > 0 &&
+                        data.tracks.map((item, index) => (
                           <div 
                             key={`item-${index}`} 
                             className="rounded-lg hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors duration-200"
@@ -186,7 +186,7 @@ const ArcChatHeader = ({
                               item={item}
                               mainFeedInput=""
                               fromArc="arc"
-                              dataArc={dataArc}
+                              dataArc={data.tracks}
                               setDataArc={setDataArc}
                               forDetail={true}
                             />
