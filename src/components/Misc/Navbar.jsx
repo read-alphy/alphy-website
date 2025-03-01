@@ -119,7 +119,7 @@ function Navbar({ collapsed, setCollapsed }) {
           ) : null}
         </div>
 
-        <div className={`flex `}>
+        {/* <div className={`flex `}>
           <div>
             <div className="flex flex-row mt-6 dark:text-gray-300 ">
               <div
@@ -136,7 +136,7 @@ function Navbar({ collapsed, setCollapsed }) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div

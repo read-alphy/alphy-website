@@ -92,7 +92,6 @@ export default function ArcMain({
   }, [])
 
   useEffect(() => {
-    
     if (isArcPage) {
       const newPathname = router.asPath.replace('arc', 'arc')
       router.push(newPathname)
@@ -108,7 +107,7 @@ export default function ArcMain({
     if (dataArc !== null && dataArc.length > 1) {
       setErrorMessage(false)
     }
-  })
+  }, [isArcPage, windowSizeChecked, dataArc, router.asPath])
 
   useEffect(() => {
     if (
@@ -375,7 +374,7 @@ export default function ArcMain({
         <div
           className={`${
             collapsed ? 'scrolling' : 'scrolling'
-          } md:px-20 pb-20 sm:pb-0 w-full sm:max-h-[100vh] ${
+          } xl:px-20 pb-20 sm:pb-0 w-full sm:max-h-[100vh] ${
             collapsed ? 'hidden' : ' overflow-hidden'
           }}`}
         >

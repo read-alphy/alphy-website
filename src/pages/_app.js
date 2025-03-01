@@ -400,11 +400,8 @@ return () => {
 
     <div
               className={` z-40 text-slate-700 bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
-                router.asPath.split('/')[1] === 'arc' &&
-                router.asPath.split('/')[2] !== 'editArc' &&
-                router.asPath.split('/')[2] !== 'createArc'
-                  ? 'lg:hidden  top-0 w-full '
-                  : 'md:hidden  top-0 w-full '
+                
+              'md:hidden  top-0 w-full '
               }`}
             >
               <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />

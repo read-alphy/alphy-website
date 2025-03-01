@@ -90,17 +90,17 @@ export default function SourceCard({
       displayText = expanded
         ? source.text
         : `${
-            source.text[299] === ' '
-              ? source.text.slice(0, 299)
-              : source.text.slice(0, 300)
+            source.text[149] === ' '
+              ? source.text.slice(0, 149)
+              : source.text.slice(0, 150)
           }`
     } else {
       displayText = expanded
         ? source.text
         : `${
-            source.text[119] === ' '
-              ? source.text.slice(0, 119)
-              : source.text.slice(0, 120)
+            source.text[79] === ' '
+              ? source.text.slice(0, 79)
+              : source.text.slice(0, 80)
           }`
     }
   }
@@ -118,18 +118,18 @@ export default function SourceCard({
   let displayTitle = ''
   if (title) {
     if (window.innerWidth > 600) {
-      if (title.length > 30) {
+      if (title.length > 20) {
         displayTitle = expanded
           ? title
-          : `${title[29] === ' ' ? title.slice(0, 29) : title.slice(0, 30)}...`
+          : `${title[19] === ' ' ? title.slice(0, 19) : title.slice(0, 20)}...`
       } else {
         displayTitle = title
       }
     } else {
-      if (title.length > 20) {
+      if (title.length > 15) {
         displayTitle = expanded
           ? title
-          : `${title[19] === ' ' ? title.slice(0, 19) : title.slice(0, 20)}`
+          : `${title[14] === ' ' ? title.slice(0, 14) : title.slice(0, 15)}...`
       } else {
         displayTitle = title
       }
@@ -185,22 +185,22 @@ export default function SourceCard({
       {!forDialog ? (
         <Card 
           onClick={showDialog}
-          className="overflow-hidden shadow-none transition-all duration-300 hover:shadow-md dark:bg-zinc-800 dark:border-zinc-700 h-[420px] w-[240px] sm:w-[360px] cursor-pointer"
+          className="overflow-hidden shadow-none transition-all duration-300 hover:shadow-md dark:bg-zinc-800 dark:border-zinc-700 h-[280px] w-[180px] sm:w-[220px] cursor-pointer"
         >
           <div
-            className="w-full h-40 bg-cover bg-center bg-no-repeat"
+            className="w-full h-24 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${imageUrl})`,
             }}
           />
           
-          <CardHeader className="p-3 pb-0">
-            <h3 className="text-sm font-bold text-slate-700 dark:text-zinc-300 quicksand line-clamp-2">
+          <CardHeader className="p-2 pb-0">
+            <h3 className="text-xs font-bold text-slate-700 dark:text-zinc-300 quicksand line-clamp-1">
               {displayTitle}
             </h3>
           </CardHeader>
           
-          <CardContent className="p-3 pt-1">
+          <CardContent className="p-2 pt-1">
             <a
               onClick={handleAlphyClick}
               className="underline flex flex-row transform hover:scale-105 transition duration-300"
@@ -208,21 +208,21 @@ export default function SourceCard({
               <div>
                 <Image
                   src={Logo}
-                  className="w-[30px] h-[30px] hidden dark:flex"
+                  className="w-[20px] h-[20px] hidden dark:flex"
                   alt="Alphy Logo"
                 />
                 <Image
                   src={LogoInverted}
-                  className="w-[30px] h-[30px] dark:hidden"
+                  className="w-[20px] h-[20px] dark:hidden"
                   alt="Alphy Logo"
                 />
               </div>
-              <p className="ml-2 mt-1 text-xs text-slate-600 dark:text-zinc-300 quicksand font-normal">
-                See more details on Alphy
+              <p className="ml-1 text-[10px] text-slate-600 dark:text-zinc-300 quicksand font-normal">
+                See on Alphy
               </p>
             </a>
             
-            <p className="mt-2 text-xs text-slate-600 dark:text-zinc-400 quicksand font-bold">
+            <p className="mt-1 text-[10px] text-slate-600 dark:text-zinc-400 quicksand font-bold">
               {Math.floor(startTime / 3600) < 10
                 ? `0${Math.floor(startTime / 3600)}`
                 : `${Math.floor(startTime / 3600)}`}
@@ -240,33 +240,13 @@ export default function SourceCard({
               {Math.floor(startTime % 60) < 10
                 ? `0${Math.floor(startTime % 60)}`
                 : Math.floor(startTime % 60)}
-
-              {' - '}
-
-              {Math.floor(endTime / 3600) < 10
-                ? `0${Math.floor(endTime / 3600)}`
-                : `${Math.floor(endTime / 3600)}`}
-              {':'}
-              {Math.floor(endTime / 60) < 10
-                ? `0${Math.floor(endTime / 60)}`
-                : Math.floor(endTime % 3600) < 600
-                ? `0${Math.floor(
-                    endTime / 60 - Math.floor(endTime / 3600) * 60
-                  )}`
-                : Math.floor(
-                    endTime / 60 - Math.floor(endTime / 3600) * 60
-                  )}
-              {':'}
-              {Math.floor(endTime % 60) < 10
-                ? `0${Math.floor(endTime % 60)}`
-                : Math.floor(endTime % 60)}
             </p>
           </CardContent>
           
-          <CardFooter className="p-3 pt-0 flex flex-col items-start">
+          <CardFooter className="p-2 pt-0 flex flex-col items-start">
             <p
               ref={myRef}
-              className="text-xs text-slate-600 dark:text-zinc-400 quicksand font-normal line-clamp-4"
+              className="text-[10px] text-slate-600 dark:text-zinc-400 quicksand font-normal line-clamp-3"
             >
               {displayText[0] === displayText[0].toUpperCase() ? '' : '...'}
               {displayText}
@@ -279,8 +259,8 @@ export default function SourceCard({
                 ? ''
                 : '...'}
             </p>
-            <Badge variant="outline" className="mt-2 text-greenColor dark:text-green-200 border-green-300 dark:border-green-700">
-              Click to see more
+            <Badge variant="outline" className="mt-1 text-[8px] py-0 h-4 text-greenColor dark:text-green-200 border-green-300 dark:border-green-700">
+              Click for more
             </Badge>
           </CardFooter>
         </Card>

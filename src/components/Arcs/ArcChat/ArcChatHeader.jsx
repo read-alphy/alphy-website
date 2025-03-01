@@ -26,12 +26,12 @@ const ArcChatHeader = ({
   const arcImageLink = data.thumbnail_url || ''
   const displayText = description ? (expanded ? description : `${description.slice(0, 50)}...`) : ''
   return (
-    <div className="mt-10 w-full sm:ml-10 px-3">
-      <div className="flex flex-col sm:flex-row gap-6">
+    <div className="mt-4 sm:mt-10 w-full px-3 ">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
         {arcImageLink.length > 0 && (
-          <div className="hidden sm:block flex-shrink-0">
+          <div className="hidden md:flex justify-center sm:justify-start sm:block flex-shrink-0 mb-2 sm:mb-0">
             <img
-              className="w-[200px] h-[200px] rounded-lg object-cover shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-lg object-cover shadow-lg hover:shadow-xl transition-shadow duration-300"
               src={arcImageLink}
               alt={title}
               width={200}
@@ -39,8 +39,8 @@ const ArcChatHeader = ({
             />
           </div>
         )}
-        <div className="flex flex-col space-y-4 flex-grow">
-          <h1 className="text-3xl font-bold text-slate-800 dark:text-zinc-100 quicksand tracking-tight">
+        <div className="flex flex-col space-y-3 sm:space-y-4 flex-grow">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-zinc-100 quicksand tracking-tight text-center sm:text-left">
             {title}
           </h1>
           
@@ -62,18 +62,18 @@ const ArcChatHeader = ({
             {description}
           </p>
           
-          <div className="flex items-center mt-2 flex-wrap gap-3">
+          <div className="flex items-center mt-2 flex-wrap gap-3 justify-center sm:justify-start">
             <button
-              className="flex items-center px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 rounded-full hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors duration-200 quicksand font-semibold text-sm"
+              className="flex items-center px-3 py-1.5 bg-blue-50 dark:bg-indigo-900/30 text-blue-600 dark:text-indigo-300 rounded-full hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors duration-200 quicksand font-semibold text-sm"
               onClick={() => setShowTrackDetails(true)}
             >
               <Info size={16} className="mr-1.5" />
               View Details
             </button>
             
-            <Badge variant="outline" className="px-3 py-1.5 bg-slate-50 dark:bg-zinc-800/70 text-slate-700 dark:text-zinc-300 rounded-full border-slate-200 dark:border-zinc-700">
-              <span className="font-medium">{dataArc?.length || 0}</span>
-              <span className="ml-1 opacity-80">items</span>
+            <Badge variant="outline" className="px-3 py-1.5  bg-slate-50 dark:bg-zinc-800/70 text-slate-700 dark:text-zinc-300 rounded-full border-slate-200 dark:border-zinc-700">
+              <span className="font-medium text-sm">{dataArc?.length || 0}</span>
+              <span className="ml-1 opacity-80 text-sm">items</span>
             </Badge>
           </div>
 
@@ -81,22 +81,22 @@ const ArcChatHeader = ({
 
           {/* Details Dialog */}
           <Dialog open={showTrackDetails} onOpenChange={setShowTrackDetails}>
-            <DialogContent className=" max-w-[800px] p-0 bg-white dark:bg-zinc-900 border-none shadow-xl max-h-[90vh] overflow-scroll">
+            <DialogContent className="max-w-[800px] p-0 bg-white dark:bg-zinc-900 border-none shadow-xl max-h-[90vh] overflow-scroll">
               <Card className="pt-6 pb-10 bg-white dark:bg-zinc-900 border-none shadow-xl h-full flex flex-col">
                
                 
                 <CardContent className="flex-1 overflow-hidden flex flex-col">
                   <div className="mb-8 px-4 sm:px-6">
-                    <div className="flex items-start">
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start">
                       {arcImageLink.length > 0 && (
                         <img
-                          className="w-[100px] h-[100px] rounded-lg object-cover mr-6 hidden sm:block"
+                          className="w-[100px] h-[100px] rounded-lg object-cover mb-4 sm:mb-0 sm:mr-6"
                           src={arcImageLink}
                           alt={title}
                         />
                       )}
                       
-                      <div className="flex-1">
+                      <div className="flex-1 text-center sm:text-left">
                         <h2 className="text-md font-bold text-slate-800 dark:text-zinc-200 quicksand mb-2">
                           {title}
                         </h2>
@@ -105,7 +105,7 @@ const ArcChatHeader = ({
                           {description}
                         </p>
 
-                        <div className="flex flex-wrap items-center mt-5 gap-x-6 gap-y-3">
+                        <div className="flex flex-wrap items-center justify-center sm:justify-start mt-5 gap-x-6 gap-y-3">
                           <div className="flex items-center">
                             <List size={16} className="mr-2 text-slate-500 dark:text-zinc-400" />
                             <span className="text-slate-600 dark:text-zinc-400 text-sm quicksand">

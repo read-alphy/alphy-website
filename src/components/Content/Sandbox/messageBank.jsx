@@ -139,12 +139,16 @@ const svgMaker = (prompt_type, currentTheme = 'light') => {
   if (prompt_type === 'investment_insight_extractor') {
     return investment_insight_extractor
   }
+  
+  // Add a default return to handle any unmatched prompt_type
+  return <Edit className="row-span-1" color={theme === 'light' ? '#64748b' : '#cbd5e1'} />;
 }
 
 // Create a wrapper component to use the hook and provide icons
 export function MessageIconProvider({ prompt_type }) {
   const { theme } = useTheme() || { theme: 'light' };
-  return svgMaker(prompt_type, theme);
+  // Ensure prompt_type is always defined
+  return svgMaker(prompt_type || 'custom', theme);
 }
 
 export const inputMessages = [

@@ -213,21 +213,6 @@ export default function Settings({
                     e.target.checked === true ? 'transcript' : 'summary',
                 })
               }}
-              sx={{
-                '--Switch-thumbSize': '14px',
-                '--Switch-trackWidth': '36px',
-                '--Switch-trackHeight': '20px',
-                '--Switch-trackBackground': '#64748b',
-                '&:hover': {
-                  '--Switch-trackBackground': '#64748b',
-                },
-                [`&.${switchClasses.checked}`]: {
-                  '--Switch-trackBackground': '#818cf8',
-                  '&:hover': {
-                    '--Switch-trackBackground': '#818cf8',
-                  },
-                },
-              }}
             />
           </div>
 

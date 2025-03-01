@@ -38,10 +38,10 @@ export default function ArcChat({
 
   // Initialize tracks
   useEffect(() => {
-    if (tracks.length === 0 && data.tracks !== undefined && data.tracks.length !== 0) {
-      setTracks(data.tracks)
+    if (tracks.length === 0 && data.tracks?.length > 0) {
+      setTracks(data.tracks);
     }
-  }, [data.tracks, tracks.length])
+  }, [data.tracks]); // Only depend on data.tracks
 
   // Initialize selected questions
   useEffect(() => {
@@ -62,15 +62,9 @@ export default function ArcChat({
     }
   }, [data.questions, i, selectedQuestions.length])
 
-  // Check for arc edits
-  useEffect(() => {
-    if (localStorage.getItem('arcEdited') === 'true') {
-      localStorage.setItem('arcEdited', 'false')
-      window.location.reload()
-    }
-  }, [])
 
   const handleSubmit = () => {
+    console.log('handleSubmit')
     setIsCleared(false)
     setErrorMessage(false)
     
@@ -150,14 +144,13 @@ export default function ArcChat({
     router.push(`/arc/editArc/${data.uid}`)
   }
 
-  const handleAskPremadeQuestion = event => {
-    if (event.target) {
-      setInputValue(event.target.innerText)
+  const handleAskPremadeQuestion = question => {
+    // Check if it's an event or direct question string
+    if (typeof question === 'object' && question.target) {
+      setInputValue(question.target.innerText)
+    } else if (typeof question === 'string') {
+      setInputValue(question)
     }
-    setIsLoadingInside(true)
-    setTimeout(() => {
-      buttonRef.current.click()
-    }, 300)
   }
 
   const formatAnswer = (answer) => {
@@ -205,77 +198,75 @@ export default function ArcChat({
 
   return (
     <div
-      className={`${
-        collapsed
-          ? 'pt-10 pb-20'
-          : 'pt-10 pb-20'
-      } grow mx-auto`}
+      className={`lg:pt-10 pb-10 lg:pb-20 grow mx-auto relative flex flex-col min-h-[90vh] min-h-full max-w-[900px]`}
     >
-      {/* Header Section */}
-      <ArcChatHeader 
-        data={data}
-        arcUserID={data.user_id}
-        title={data.name}
-        description={data.description}
-        expanded={expanded}
-        toggleExpand={() => setExpanded(!expanded)}
-        showTrackDetails={showTrackDetails}
-        setShowTrackDetails={setShowTrackDetails}
-        dataArc={dataArc}
-        setDataArc={setDataArc}
-        currentUser={currentUser}
-        handleEdit={handleEdit}
-        isVisible={isVisible}
-        handleVisibility={handleVisibility}
-        tier={tier}
-      />
+      <div className="flex-grow">
+        {/* Header Section */}
+        <ArcChatHeader 
+          data={data}
+          arcUserID={data.user_id}
+          title={data.name}
+          description={data.description}
+          expanded={expanded}
+          toggleExpand={() => setExpanded(!expanded)}
+          showTrackDetails={showTrackDetails}
+          setShowTrackDetails={setShowTrackDetails}
+          dataArc={dataArc}
+          setDataArc={setDataArc}
+          currentUser={currentUser}
+          handleEdit={handleEdit}
+          isVisible={isVisible}
+          handleVisibility={handleVisibility}
+          tier={tier}
+        />
 
-      {/* Input Section */}
-      <ArcChatInputSection
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-        handleKeyDown={handleKeyDown}
-        handleClear={handleClear}
-        handleSubmit={handleSubmit}
-        isLoadingInside={isLoadingInside}
-        buttonRef={buttonRef}
-        errorMessage={errorMessage}
-      />
+       
 
-      {/* Suggested Questions Section */}
-      <ArcChatSuggestedQuestions
-        answerData={answerData}
-        isLoadingInside={isLoadingInside}
-        selectedQuestions={selectedQuestions}
-        setSelectedQuestions={setSelectedQuestions}
-        setI={setI}
-        handleAskPremadeQuestion={handleAskPremadeQuestion}
-      />
+        {/* Answer Section */}
+        <ArcChatAnswerSection
+          answerData={answerData}
+          isLoadingInside={isLoadingInside}
+          formatAnswer={formatAnswer}
+          setAnswerData={setAnswerData}
+          setInputValue={setInputValue}
+        />
 
-      {/* Answer Section */}
-      <ArcChatAnswerSection
-        answerData={answerData}
-        isLoadingInside={isLoadingInside}
-        formatAnswer={formatAnswer}
-        setAnswerData={setAnswerData}
-        setInputValue={setInputValue}
-      />
+   <ArcChatSourceSection 
+          answerData={answerData}
+          isLoadingInside={isLoadingInside}
+          tracks={tracks}
+          carouselRef={carouselRef}
+          selectedSourceCard={selectedSourceCard}
+          setSelectedSourceCard={setSelectedSourceCard}
+          openDialog={openDialog}
+          setOpenDialog={setOpenDialog}
+        />
+      
+      </div>
 
-      {/* Sources Section */}
-      {answerData.answer !== '' && (
-        <div className="mt-10 border-b border-gray-200 dark:border-zinc-700 mx-auto items-center flex mb-10 dark:opacity-40"></div>
-      )}
-
-      <ArcChatSourceSection 
-        answerData={answerData}
-        isLoadingInside={isLoadingInside}
-        tracks={tracks}
-        carouselRef={carouselRef}
-        selectedSourceCard={selectedSourceCard}
-        setSelectedSourceCard={setSelectedSourceCard}
-        openDialog={openDialog}
-        setOpenDialog={setOpenDialog}
-      />
+      {/* Input Section - Fixed at bottom */}
+      <div className="fixed sm:sticky bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 pb-4 pt-2 z-10">
+   
+         {/* Suggested Questions Section */}
+        <ArcChatSuggestedQuestions
+          answerData={answerData}
+          isLoadingInside={isLoadingInside}
+          selectedQuestions={selectedQuestions}
+          setSelectedQuestions={setSelectedQuestions}
+          setI={setI}
+          handleAskPremadeQuestion={handleAskPremadeQuestion}
+        /> 
+        <ArcChatInputSection
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          handleKeyDown={handleKeyDown}
+          handleClear={handleClear}
+          handleSubmit={handleSubmit}
+          isLoadingInside={isLoadingInside}
+          buttonRef={buttonRef}
+          errorMessage={errorMessage}
+        />
+      </div>
     </div>
   )
 }

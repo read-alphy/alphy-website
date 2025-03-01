@@ -1,5 +1,10 @@
 // File: ArcChatInputSection.jsx
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { Button } from "@/components/ui/button"
+import { ArrowUp, X, Loader2 } from "lucide-react"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import Link from "next/link"
+import { Textarea } from "@/components/ui/textarea"
 
 const ArcChatInputSection = ({
   inputValue,
@@ -11,90 +16,107 @@ const ArcChatInputSection = ({
   buttonRef,
   errorMessage
 }) => {
-  return (
-    <div className="sm:ml-10 px-3">
-      <div>
-        <div className="flex items-center pr-1 mt-6 xl:mt-8 max-w-[900px]">
-          <div className="flex flex-row drop-shadow-md w-full flex-grow relative dark:bg-zinc-800 border border-black/10 dark:text-white rounded-xl dark:rounded-xl gizmo:rounded-2xl shadow-xs dark:shadow-xs bg-white">
-            <input
-              value={inputValue}
-              onChange={event => setInputValue(event.target.value)}
-              onKeyDown={handleKeyDown}
-              title={inputValue}
-              type="text"
-              id="questionAnswering"
-              placeholder="Type your question here..."
-              className="m-0 w-full quicksand font-normal text-slate-800 dark:text-zinc-300 dark:placeholder:text-slate-500 text-sm resize-none border-0 bg-transparent dark:bg-transparent py-[10px] pr-16 focus:outline-none focus:ring-0 focus-visible:ring-0 md:py-4 md:pr-20 gizmo:md:py-3.5 pl-4 md:pl-[26px]"
-            />
-            {inputValue.length > 0 && (
-              <div
-                onClick={handleClear}
-                className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-10 md:mr-14 dark:text-zinc-500 text-slate-500"
-              >
-                <svg
-                  width="20"
-                  onClick={handleClear}
-                  className="cursor-pointer"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 18L18 6M6 6l12 12"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                </svg>
-              </div>
-            )}
+  const textareaRef = useRef(null);
 
-            <button
-              ref={buttonRef}
-              onClick={handleSubmit}
-              className={`absolute rounded-md p-1 gizmo:md:bottom-2.5 ${
-                isLoadingInside
-                  ? 'pointer-events-none cursor-default bg-transparent md:p-2 md:right-3 bottom-0 right-2'
-                  : 'bg-green-200 md:p-2 md:right-3 bottom-2 right-2'
-              }`}
-            >
-              {isLoadingInside ? (
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] p-1 cursor-default z-50 text-slate-700 dark:text-slate-300" />
-              ) : (
-                <svg
-                  className="w-4 h-4 text-slate-700 dark:text-slate-800"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                </svg>
-              )}
-            </button>
+  useEffect(() => {
+    if (textareaRef.current) {
+      // Reset height to auto to get the correct scrollHeight
+      textareaRef.current.style.height = 'auto';
+      
+      // Set a minimum height - smaller on mobile
+      const minHeight = window.innerWidth < 640 ? 60 : 100;
+      // Set a maximum height - smaller on mobile
+      const maxHeight = window.innerWidth < 640 ? 120 : 200;
+      
+      // Calculate the new height based on content
+      const scrollHeight = textareaRef.current.scrollHeight;
+      
+      // Apply the height within min and max constraints
+      textareaRef.current.style.height = 
+        `${Math.min(Math.max(scrollHeight, minHeight), maxHeight)}px`;
+    }
+  }, [inputValue]);
+
+  // Add resize event listener to adjust textarea height on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (textareaRef.current) {
+        // Reset height to auto to get the correct scrollHeight
+        textareaRef.current.style.height = 'auto';
+        
+        // Set a minimum height - smaller on mobile
+        const minHeight = window.innerWidth < 640 ? 60 : 100;
+        // Set a maximum height - smaller on mobile
+        const maxHeight = window.innerWidth < 640 ? 120 : 200;
+        
+        // Calculate the new height based on content
+        const scrollHeight = textareaRef.current.scrollHeight;
+        
+        // Apply the height within min and max constraints
+        textareaRef.current.style.height = 
+          `${Math.min(Math.max(scrollHeight, minHeight), maxHeight)}px`;
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div className="px-2 sm:px-3">
+      <div className="mt-4 sm:mt-6 xl:mt-8">
+        <div className="relative w-full">
+          <Textarea
+            ref={textareaRef}
+            value={inputValue}
+            onChange={event => setInputValue(event.target.value)}
+            onKeyDown={handleKeyDown}
+            title={inputValue}
+            id="questionAnswering"
+            placeholder="Type your question here..."
+            className="focus:border-none focus:ring-0 focus:outline-none pr-14 sm:pr-20 py-3 sm:py-4 rounded-xl quicksand font-normal text-slate-800
+             dark:text-zinc-300 dark:placeholder:text-slate-500 text-sm sm:text-base
+             shadow-md bg-white dark:bg-zinc-800 min-h-[60px] sm:min-h-[100px] max-h-[120px] sm:max-h-[200px] resize-none overflow-y-auto"
+          />
+          
+          <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 flex gap-2">
+            {inputValue.length > 0 && (
+              <Button
+                ref={buttonRef}
+                onClick={() => handleSubmit()}
+                disabled={isLoadingInside}
+                size="icon"
+                className={`rounded-full h-8 w-8 sm:h-10 sm:w-10 ${
+                  isLoadingInside 
+                    ? 'bg-slate-100 dark:bg-zinc-700 text-slate-400 dark:text-zinc-400' 
+                    : 'bg-blue-400 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700'
+                }`}
+                aria-label="Send message"
+              >
+                {isLoadingInside ? (
+                  <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
+                ) : (
+                  <ArrowUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 font-bold stroke-[2.5]" />
+                )}
+              </Button>
+            )}
           </div>
         </div>
       </div>
+      
       {errorMessage && (
-        <div className="mt-4 text-slate-600 dark:text-slate-500">
-          <p className="quicksand font-bold">
+        <Alert variant="destructive" className="mt-3 sm:mt-4 bg-transparent border-slate-200 dark:border-zinc-800">
+          <AlertDescription className="quicksand font-medium text-xs sm:text-sm text-slate-600 dark:text-slate-400">
             Please{' '}
-            <a
+            <Link
               href="/u/login"
-              className="underline text-greenColor dark:text-green-200 quicksand font-bold"
+              className="underline text-green-600 dark:text-green-400 font-bold hover:text-green-700 dark:hover:text-green-300 transition-colors"
             >
               sign in
-            </a>{' '}
+            </Link>{' '}
             to start asking questions.
-          </p>
-        </div>
+          </AlertDescription>
+        </Alert>
       )}
     </div>
   )
