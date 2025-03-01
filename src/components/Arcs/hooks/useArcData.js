@@ -27,13 +27,12 @@ export default function useArcData(isArc, isEditArc, router, currentUser) {
     // Only fetch if we're on an arc page or edit page and haven't fetched yet
     if ((isArc || isEditArc) && 
         arcState.data.length === 0 && 
-        !arcState.called && 
-        currentUser) {
+        !arcState.called) {
       fetchArcData()
     }
   }, [currentUser, router.asPath])
 
-  
+
   const fetchArcData = async () => {
     // Reset error state
     setArcState(prev => ({ ...prev, authorizationError: false, isLoading: true }))

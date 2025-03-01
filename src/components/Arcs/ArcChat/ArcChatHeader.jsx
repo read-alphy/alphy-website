@@ -171,15 +171,14 @@ const ArcChatHeader = ({
                       Content Items
                     </h3>
                     
-                    <div className={`
-                      grid grid-cols-1 gap-4
-                      ${data?.tracks?.length === 1 ? 'lg:grid-cols-1 xl:grid-cols-1 lg:max-w-2xl' : 'lg:grid-cols-2 xl:grid-cols-2'}
+                    <div className={`grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3  gap-4
+                      ${data?.tracks?.length === 1 ? 'lg:grid-cols-1 xl:grid-cols-1 lg:max-w-2xl' : ''}
                     `}>
                       {data?.tracks?.length > 0 &&
                         data.tracks.map((item, index) => (
                           <div 
                             key={`item-${index}`} 
-                            className="rounded-lg hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors duration-200"
+                            className="rounded-lg w-fit transition-colors duration-200"
                           >
                             <FeedItem
                               index={index}
