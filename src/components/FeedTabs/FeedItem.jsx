@@ -27,6 +27,7 @@ export default function FeedItem({
   forDetail,
   forCreationPool,
 }) {
+  
   const router = useRouter()
   const source_id = item !== undefined && item.source_id
   let formattedDate = ''
@@ -137,14 +138,19 @@ export default function FeedItem({
   }
 
   const handleClick = e => {
-    if (fromArc !== undefined && forDetail !== true) {
-      e.preventDefault() // This will prevent the link from navigating
+    if (fromArc === 'search' || (fromArc !== undefined && forDetail !== true)) {
+      e.preventDefault(); // Prevent navigation
     }
   }
 
   const isInProgress = item.summaries !== undefined &&
     item.summaries[0] !== undefined &&
     item.summaries[0].complete !== true;
+
+  const isInArc = () => {
+    if (!sourceIDsArc || !Array.isArray(sourceIDsArc) || !item) return false;
+    return sourceIDsArc.includes(item.source_id);
+  };
 
   if (item.source_type === 'up') {
     return (
@@ -256,35 +262,35 @@ export default function FeedItem({
     <div className={`grid border-b-0 w-full md:w-full ${sideFeed ? '' : ''}`}>
       <Link href={`/${item.source_type}/${source_id}`} onClick={handleClick}>
         <Card className={`overflow-hidden shadow-none transition-all duration-300 hover:shadow-md dark:bg-zinc-800 dark:border-zinc-700 h-full ${
-          ((dataArc !== undefined && dataArc.includes(item) && fromArc === 'search') ||
-            (sourceIDsArc !== undefined && sourceIDsArc.includes(item.source_id) && forCreationPool !== true)) &&
+          ((fromArc === 'search' && isInArc()) ||
+            (isInArc() && forCreationPool !== true)) &&
           'border-4 border-greenColor'
-        }`}>
+        } ${fromArc === 'arc' ? 'max-w-[250px]' : ''}`}>
           <div
-            className="w-full h-40 bg-cover bg-center bg-no-repeat"
+            className={`w-full bg-cover bg-center bg-no-repeat ${fromArc === 'arc' ? 'h-28' : 'h-40'}`}
             style={{
               backgroundImage: `url(${typeof imageUrl === "object" ? imageUrl.src : imageUrl})`,
             }}
           />
           
-          <CardHeader className="p-3 pb-0">
+          <CardHeader className={`p-3 pb-0 ${fromArc === 'arc' ? 'p-2 pb-0' : 'p-3 pb-0'}`}>
             {isInProgress && (
               <Badge variant="outline" className="w-[120px] mb-2 bg-indigo-50 text-indigo-400 dark:bg-purple-900 dark:text-purple-200 border-purple-300 dark:border-purple-700">
                 📝 IN PROGRESS
               </Badge>
             )}
-            <h3 className="text-sm font-bold text-slate-700 dark:text-zinc-300 quicksand line-clamp-2">
+            <h3 className={`font-bold text-slate-700 dark:text-zinc-300 quicksand line-clamp-2 ${fromArc === 'arc' ? 'text-xs' : 'text-sm'}`}>
               {item.title || (item.source && item.source.title)}
             </h3>
           </CardHeader>
           
-          <CardContent className="p-3 pt-1">
+          <CardContent className={`pt-1 ${fromArc === 'arc' ? 'p-2 pt-1' : 'p-3 pt-1'}`}>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 quicksand font-bold">
               {item.creator_name || (item.source && item.source.creator_name)}
             </p>
           </CardContent>
           
-          <CardFooter className="p-3 pt-0 flex flex-col items-start">
+          <CardFooter className={`pt-0 flex flex-col items-start ${fromArc === 'arc' ? 'p-2 pt-0' : 'p-3 pt-0'}`}>
             <div className="flex flex-wrap text-xs text-zinc-400 dark:text-zinc-500 quicksand font-bold">
               {item.summaries !== undefined &&
                 item.summaries.map((summary, index) => (

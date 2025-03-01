@@ -5,12 +5,13 @@ import axios from 'axios'
 
 // Components
 import { Button } from '@/components/ui/button'
-import { Link as LinkIcon, Upload } from 'lucide-react'
+import { Link as LinkIcon, Upload, BookOpen } from 'lucide-react'
 
 import UploadBlock from '../Creation/UploadBlock'
 import SubmitBlock from '../Creation/SubmitBlock'
-
+import ArcBlock from '../Creation/ArcBlock'
 import { API_URL } from '../../constants'
+
 
 // Constants
 const SUPPORTED_URLS = [
@@ -301,6 +302,17 @@ export default function HubCreationBlock({
             <Upload className="mr-2 h-4 w-4" />
             Upload a Recording
           </button>
+          <button
+            onClick={() => setActiveTab('arc')}
+            className={`flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
+              activeTab === 'arc'
+                ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+            }`}
+          >
+            <BookOpen className="mr-2 h-4 w-4" />
+            Create an Arc
+          </button>
         </div>
 
         {/* Tab content */}
@@ -335,6 +347,15 @@ export default function HubCreationBlock({
                 credit={credit}
                 // Pass flag to hide redundant credit display
                 hideCredits={true}
+              />
+            </div>
+          )}
+
+          {activeTab === 'arc' && (
+            <div>
+              <ArcBlock
+                currentUser={currentUser}
+                tier={tier}
               />
             </div>
           )}

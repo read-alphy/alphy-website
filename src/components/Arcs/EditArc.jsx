@@ -1,5 +1,5 @@
 import React from 'react';
-import ArcForm from './ArcForm';
+import ArcForm from './ArcForm/ArcForm';
 
 export default function EditArc({
   arcInfo,
@@ -17,6 +17,12 @@ export default function EditArc({
   errorMessage,
   credit,
   setCreditCalled,
+  isCreateArc,
+  isEditArc,
+  isLoadingSubmit,
+  onSave,
+  onDelete,
+
 }) {
   return (
     <ArcForm
@@ -35,6 +41,11 @@ export default function EditArc({
       errorMessage={errorMessage}
       setCreditCalled={setCreditCalled}
       isEditMode={true}
+      isCreateArc={isCreateArc}
+      isEditArc={isEditArc}
+      isLoadingSubmit={isLoadingSubmit}
+      onSave={onSave}
+      onDelete={onDelete}
     />
   );
 }

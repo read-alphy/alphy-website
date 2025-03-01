@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import ArcForm from './ArcForm';
+import ArcForm from './ArcForm/ArcForm';
 
 export default function ArcCreation({
   arcDescription,
@@ -15,6 +15,11 @@ export default function ArcCreation({
   errorMessage,
   credit,
   setCreditCalled,
+  isCreateArc,
+  isEditArc,
+  isLoadingSubmit,
+  onSave,
+  onDelete,
 }) {
   const { currentUser } = useAuth();
 
@@ -34,6 +39,11 @@ export default function ArcCreation({
       errorMessage={errorMessage}
       setCreditCalled={setCreditCalled}
       isEditMode={false}
+      isCreateArc={isCreateArc}
+      isEditArc={isEditArc}
+      isLoadingSubmit={isLoadingSubmit}
+      onSave={onSave}
+      onDelete={onDelete}
     />
   );
 }

@@ -64,7 +64,7 @@ export default function ArcChat({
 
 
   const handleSubmit = () => {
-    console.log('handleSubmit')
+    
     setIsCleared(false)
     setErrorMessage(false)
     
