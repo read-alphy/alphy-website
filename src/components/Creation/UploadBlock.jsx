@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useDropzone } from 'react-dropzone';
+import { PlusCircle } from 'lucide-react';
 
 // Icons
 import { 
@@ -403,16 +404,16 @@ function UploadContent({
           </>
         ) : (
           <div className="text-center py-8">
-            <svg className="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H8m10 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Premium Feature</h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">
+            <div className="max-w-[500px] mx-auto">
+            <BadgeCheck className="h-12 w-12 mx-auto text-indigo-400 mb-4 " />
+            <h3 className="font-semibold text-xl text-gray-900 dark:text-white mb-2">Premium Feature</h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto text-sm font-normal">
               Audio file processing is available with our Premium plan. Upgrade to process your own recordings.
             </p>
             <Link href="/account" className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md  text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
               Upgrade to Premium
             </Link>
+            </div>
           </div>
         )}
       </div>

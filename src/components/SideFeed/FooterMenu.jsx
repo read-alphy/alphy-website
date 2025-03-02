@@ -11,7 +11,7 @@ export default function FooterMenu({
   theme,
   isClient,
 }) {
-  const menuItemClass = "py-1 text-slate-700 dark:text-zinc-300 text-sm w-full cursor-pointer flex flex-row items-center mb-3";
+  const menuItemClass = "py-1 text-slate-700 dark:text-zinc-300 text-sm w-full cursor-pointer flex flex-row items-center";
   const iconClass = "w-4 h-4 mr-1";
   const textClass = "quicksand ml-1 text-sm";
 

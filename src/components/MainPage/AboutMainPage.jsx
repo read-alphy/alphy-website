@@ -154,8 +154,8 @@ const FAQItem = memo(({ id, question, answer, isOpen, onToggle }) => {
         onClick={() => onToggle(id)}
       >
         <span className="quicksand font-bold w-fit flex items-center gap-2">
-          <span className="text-indigo-500 text-xl" aria-hidden="true">●</span>
-          <span className="quicksand font-bold text-xl">{question}</span>
+          <span className="text-indigo-500 text-lg" aria-hidden="true">●</span>
+          <span className="quicksand font-bold text-lg">{question}</span>
         </span>
       </AccordionHeader>
       <AccordionBody 
@@ -189,9 +189,9 @@ export default function AboutMainPage() {
   return (
     <div
       id="about"
-      className="px-4 scroll-smooth container max-w-4xl mx-auto mt-20 pb-20 text-base md:text-lg text-zinc-700 dark:text-zinc-300"
+      className="px-4 scroll-smooth container max-w-4xl mt-20 pb-20 text-sm md:text-base text-zinc-700 dark:text-zinc-300"
     >
-      <h2 className="text-2xl md:text-3xl mb-8 border-b pb-2 quicksand font-bold">
+      <h2 className="text-xl mb-8 border-b pb-2 quicksand font-bold">
         Frequently Asked Questions
       </h2>
       
@@ -212,7 +212,7 @@ export default function AboutMainPage() {
         id="subscription"
         className="mt-20 mb-8 border-b pb-2"
       >
-        <h2 className="text-2xl md:text-3xl quicksand font-bold">
+        <h2 className="text-xl  quicksand font-bold">
           Subscription & Billing
         </h2>
       </div>

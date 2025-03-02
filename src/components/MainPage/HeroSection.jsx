@@ -129,7 +129,7 @@ export default function HeroSection({ currentUser }) {
                   }
                 }}
                 className="rounded-lg text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700
-                           px-6 py-3.5 font-medium flex items-center transition 
+                           px-6 py-2.5 font-medium flex items-center transition 
                            duration-300 ease-in-out hover:-translate-y-1 transform shadow-lg hover:shadow-xl"
                 aria-label={currentUser ? 'Submit a link' : 'Start for free'}
               >
@@ -192,7 +192,7 @@ export default function HeroSection({ currentUser }) {
                 <Link
                   href="/explore"
                   className="rounded-lg text-zinc-800 dark:text-zinc-200 border border-slate-300 
-                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-3.5 font-medium 
+                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-2.5 font-medium 
                              flex items-center transition duration-300 ease-in-out 
                              hover:translate-x-1 transform"
                   aria-label="See examples"

@@ -205,13 +205,13 @@ export default function SubmitBlock({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
-          <h3 className="text-xl font-light text-gray-900 dark:text-white mb-4">Sign in to continue</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign in to continue</h3>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
             Create an account to process and analyze content with Alphy
           </p>
           <Link 
             href="/u/login" 
-            className="px-8 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
+            className="px-8 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
           >
             Sign In
           </Link>

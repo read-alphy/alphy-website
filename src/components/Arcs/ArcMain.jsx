@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, LogIn, UserPlus, Lock, ArrowRight } from "lucide-react"
 
 // Components
 import SideFeed from '../SideFeed/SideFeed'
@@ -150,53 +150,58 @@ export default function ArcMain({
   const createArcContent = useMemo(() => {
     if (!authState.isAuthenticated) {
       return (
-        <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 pl-5">
-          <div className="mb-10">
-            <Link
-              href="/submit"
-              className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200 ease-in transition cursor-pointer flex items-center gap-2"
+        <div className="flex flex-col items-center justify-center py-16 px-4 max-w-md mx-auto">
+          <div className="h-20 w-20 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-8">
+            <Lock className="h-10 w-10 text-blue-500 dark:text-blue-400" />
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign in to continue</h3>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+            Create an account to create and manage Arcs with Alphy
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs">
+            <Link 
+              href="/u/login" 
+              className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors flex items-center justify-center"
             >
-              <ChevronLeft className="h-5 w-5" />
-              <span className="text-sm quicksand font-semibold">
-                Go Back
-              </span>
+              <LogIn className="h-3 w-3 mr-2" />
+              Sign In
+            </Link>
+            
+            <Link 
+              href="/u/register" 
+              className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors flex items-center justify-center"
+            >
+              <UserPlus className="h-3 w-3 mr-2" />
+              Create Account
             </Link>
           </div>
-          <Link
-            href="/u/login"
-            className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-          >
-            Sign in
-          </Link>{' '}
-          or{' '}
-          <Link
-            href="/u/register"
-            className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-          >
-            create an account
-          </Link>{' '}
-          to access this page.
+          
+         
         </div>
       )
     }
     
     if (!authState.canCreate) {
       return (
-        <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 flex flex-col">
-          <p className="quicksand font-semibold">
-            You've already have the maximum number of Arcs for your
-            plan.
+        <div className="flex flex-col items-center justify-center py-16 px-4 max-w-md mx-auto">
+          <div className="h-20 w-20 rounded-full bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-8">
+            <Lock className="h-10 w-10 text-amber-500 dark:text-amber-400" />
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Plan Limit Reached</h3>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+            You've reached the maximum number of Arcs for your current plan. Upgrade to create more.
           </p>
-
-          <p className="mt-4 quicksand font-semibold">
-            <Link
-              href="/account"
-              className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-            >
-              Upgrade
-            </Link>{' '}
-            your plan to create more Arcs.
-          </p>
+          
+          <Link 
+            href="/account" 
+            className="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition-colors flex items-center justify-center"
+          >
+            Upgrade Plan
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Link>
+          
+         
         </div>
       )
     }
@@ -229,21 +234,32 @@ export default function ArcMain({
   const editArcContent = useMemo(() => {
     if (!authState.isAuthenticated) {
       return (
-        <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 quicksand font-semibold pl-5">
-          <Link
-            href="/u/login"
-            className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-          >
-            Sign in
-          </Link>{' '}
-          or{' '}
-          <Link
-            href="/u/register"
-            className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-          >
-            create an account
-          </Link>{' '}
-          to access this page.
+        <div className="flex flex-col items-center justify-center py-16 px-4 max-w-md mx-auto">
+          <div className="h-20 w-20 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-8">
+            <Lock className="h-10 w-10 text-blue-500 dark:text-blue-400" />
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign in to continue</h3>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+            Create an account to edit and manage Arcs with Alphy
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs">
+            <Link 
+              href="/u/login" 
+              className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors flex items-center justify-center"
+            >
+              <LogIn className="h-3 w-3 mr-2" />
+              Sign In
+            </Link>
+            
+            <Link 
+              href="/u/register" 
+              className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors flex items-center justify-center"
+            >
+              <UserPlus className="h-3 w-3 mr-2" />
+              Create Account
+            </Link>
+          </div>
         </div>
       )
     }

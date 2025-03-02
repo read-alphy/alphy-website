@@ -1,268 +1,52 @@
-import { Loader, Check, ChevronLeft } from 'lucide-react';
-import {useRouter} from 'next/router'
+import React from 'react';
+import PricingCard from './PricingCard';
 
-import { useState, useRef } from 'react'
-import axios from 'axios'
-import { API_URL } from '../../../constants'
-
-export default function PremiumCard({
-  tier,
-
-  currentUser,
-
-  isYearly,
+const PremiumCard = ({ 
+  currentUser, 
+  tier, 
+  triggers, 
+  openPopover, 
+  setOpenPopover, 
+  canceledAtPeriodEnd,
   getSubscriptionLink,
-  subscriptionLinkLoading
-  
-}) {
-  const [showUpgradeDialog, setShowUpgradeDialog] = useState(false)
-  const [upgradeLoading, setUpgradeLoading] = useState(false)
-  const [couponCode, setCouponCode] = useState('')
-  const [showCouponBox, setShowCouponBox] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const router = useRouter()
-  const inputRef = useRef(null)
+  subscriptionLinkLoading,
+  isYearly = true
+}) => {
+  // Define premium plan features
+  const premiumFeatures = [
+    { name: "20 hours of prioritized transcription credits per month", included: true },
+    { name: "Upload local audio files", included: true },
+    { name: "Submit YouTube, X Spaces, X Videos, Twitch recordings, and Apple Podcasts", included: true },
+    { name: "Download transcripts", included: true },
+    { name: "Create Unlimited Arcs", included: true },
+    { name: "Optional credit topups", included: true }
+  ];
 
-  const handleDialog = () => {
-    if (currentUser) {
-      if (tier === 'basic') {
-        setShowUpgradeDialog(true)
-      } else {
-        router.push('/plans/checkout?sub=premium')
-      }
-    } else {
-      router.push('/u/login')
-    }
-  }
+  const premiumSubFeatures = {
+    title: "Full access to Playground:",
+    items: [
+      { name: "Generative AI on Transcripts", included: true },
+      { name: "Create anything with your own prompts", included: true },
+      { name: "Unlimited access to preset commands", included: true }
+    ]
+  };
 
-  const handleCouponCode = e => {
-    setCouponCode(e.target.value)
-  }
-
-  const upgradePlan = async () => {
-    setErrorMessage('')
-    setUpgradeLoading(true)
-
-    await currentUser.getIdToken().then(idToken => {
-      axios
-        .post(
-          `${API_URL}/payments/subscription?subscription_type=premium`,
-          {},
-          {
-            headers: {
-              'id-token': idToken,
-            },
-          }
-        )
-        .then(r => {
-          setUpgradeLoading(false)
-          window.location.reload()
-        })
-        .catch(error => {
-          console.log(error)
-          setUpgradeLoading(false)
-          setErrorMessage('Something went wrong, please try again')
-        })
-    })
-  }
-
-  const handleUpgradeDialog = () => {
-    setShowUpgradeDialog(false)
-    setErrorMessage('')
-  }
-
-  const handleCouponBox = () => {
-    if (showCouponBox === false) {
-      setShowCouponBox(true)
-      setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.focus()
-        }
-      }, 100)
-    } else {
-      setShowCouponBox(false)
-    }
-  }
-  const handlePremiumUpgrade = () => {
-    if (currentUser) {
-      getSubscriptionLink(isYearly)
-    } else {
-      navigate('/u/login')
-    }
-  }
-
-
-
-  
   return (
-    <div className="relative col-span-2  xs:max-w-[400px] xs:min-w-[400px] xl:max-w-[360px] xl:min-w-[270px] p-4 border border-zinc-700 transform *-translate-y-2* rounded-lg sm:p-8  bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-zinc-900 dark:bg-gradient-to-br dark:border-gray-700 ">
-      <div className="flex flex-row">
-        <Check className="-ml-2 text-indigo-400" size={28} />
-        <p className="ml-1 mb-4 text-2xl quicksand font-bold text-zinc-900 dark:text-zinc-300">
-          Premium
-        </p>
-      </div>
+    <PricingCard
+      tier="premium"
+      title="Premium"
+      description="Experience audiovisual mastery"
+      monthlyPrice={19.90}
+      yearlyPrice={12}
+      features={premiumFeatures}
+      subFeatures={premiumSubFeatures}
+      highlighted={true}
+      currentTier={tier}
+      isYearly={isYearly}
+      onSelectPlan={getSubscriptionLink}
+      loading={subscriptionLinkLoading}
+    />
+  );
+};
 
-      {/* <h5 className="mb-4 text-xl quicksand font-bold text-slate-700 dark:text-zinc-300">For Seekers</h5> */}
-      
-      
-    <div className={` transition-all duration-300 overflow-hidden ${isYearly !== true ? " translate-x-[30%] opacity-0 max-h-0" : ""}` }>
-        <div className="flex items-baseline text-gray-900 dark:text-white">
-        <span className="text-3xl quicksand font-bold">$</span>
-        <span className="text-5xl quicksand font-bold tracking-tight">12</span>
-        <span className="ml-1 text-xl quicksand font-bold text-slate-700 dark:text-zinc-300">
-        /month 
-        </span>
-   
-      </div>
-      </div>
-      <div className={` transition-all duration-300 overflow-hidden ${isYearly === true ? " translate-x-[30%] opacity-0 max-h-0" : ""}` }>
-      <div className="flex items-baseline text-gray-900 dark:text-white">
-        <span className="text-3xl quicksand font-bold">$</span>
-        <span className="text-5xl quicksand font-bold tracking-tight">19.90</span>
-        <span className="ml-1 text-xl quicksand font-bold text-slate-700 dark:text-zinc-300">
-          /month 
-        </span>
-      </div>
-      </div>  
-
-      
-        
-      <p className="mt-3 text-gray-400 quicksand">Experience audiovisual mastery </p>
-      <div className={`h-[720px] relative `}>
-        <ul role="list" className="space-y-5 my-7">
-        <li className="flex space-x-3">
-           
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300 underline">
-              Everything on the Starter plan plus:
-            </span>
-          </li>
-          
-
-          <li className="flex space-x-3">
-            <Check
-              className="flex-shrink-0 w-5 h-5 mt-1 text-greenColor"
-            />
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              20 hours of prioritized transcription credits per month
-            </span>
-          </li>
-
-          <li className="flex space-x-3">
-            <Check
-              className="flex-shrink-0 w-5 h-5 text-greenColor"
-            />
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              Upload local audio files
-            </span>
-          </li>
-
-          
-          <li className="flex space-x-3">
-            <Check
-              className="flex-shrink-0 w-5 h-5 text-greenColor"
-            />
-            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              Submit YouTube, X Spaces, X Videos, Twitch recordings,
-              and Apple Podcasts{' '}
-            </span>
-          </li>
-          <li className="flex space-x-3">
-            <Check
-              className="flex-shrink-0 w-5 h-5 text-greenColor"
-            />
-            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              Download transcripts
-            </span>
-          </li>
-        
-          <li className="flex space-x-3">
-            <Check
-              className="flex-shrink-0 w-5 h-5 text-greenColor"
-            />
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              Create Unlimited Arcs
-            </span>
-          </li>
-
-          <li className="flex space-x-3">
-            <Check
-              className="flex-shrink-0 w-5 h-5 text-greenColor"
-            />
-            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              Optional credit topups
-            </span>
-          </li>
-
-          <div className="w-full border-b border-gray-300 dark:border-zinc-700 "></div>
-
-          <li className="flex space-x-3">
-            <Check
-              className="flex-shrink-0 w-5 h-5 text-greenColor"
-            />
-            {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
-            <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-              Full access to Playground:
-            </span>
-          </li>
-
-          <div className="flex flex-col ml-6 gap-y-4">
-            <li className="flex space-x-3">
-              <Check
-                className="flex-shrink-0 w-5 h-5 text-greenColor"
-              />
-              {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
-              <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-                Generative AI on Transcripts
-              </span>
-            </li>
-            <li className="flex space-x-3">
-              <Check
-                className="flex-shrink-0 w-5 h-5 text-greenColor"
-              />
-              {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
-              <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-                Create anything   with your own prompts
-              </span>
-            </li>
-
-            <li className="flex space-x-3">
-              <Check
-                className="flex-shrink-0 w-5 h-5 text-greenColor"
-              />
-              {/* <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">Optional credit top ups</span> */}
-              <span className="text-base quicksand font-bold leading-tight text-slate-700 dark:text-zinc-300">
-                Unlimited access to preset commands
-              </span>
-            </li>
-          </div>
-
-         
-        </ul>
-      </div>
-
-<div className="w-full flex items-center justify-center -mt-16   "> 
-            <button
-              onClick={getSubscriptionLink}
-              type="button"
-              className={`normal-case text-white transition duration-200 ease-in   ${
-                tier === 'premium' ? 'pointer-events-none text-whiteLike' : ''
-              } rounded-lg text-[16px]  drop-shadow-sm  bg-[#4262ff] quicksand font-bold px-5 py-3  justify-center w-full text-center `}
-            >{
-
-              subscriptionLinkLoading ? (<Loader className="w-5 text-center margin-auto w-full" size={20}/>)
-            :
-            (
-              tier === 'premium' ? 'Active' : 'Go Premium'
-              )
-            }
-            </button>
-      
-         
-      </div>
-    </div>
-  )
-}
+export default PremiumCard;

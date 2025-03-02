@@ -70,8 +70,8 @@ export default function Footer({
           </div>
           <div className="transition-opacity duration-300 group-data-[collapsible=icon]:opacity-0">
             <p className="text-sm font-medium">{currentUser.displayName
-                    ? currentUser.displayName
-                    : currentUser.email}</p>
+                    ? currentUser.displayName.substring(0, 15) + (currentUser.displayName.length > 15 ? "..." : "")
+                    : currentUser.email.substring(0, 15) + (currentUser.email.length > 15 ? "..." : "")}</p>
           
           </div>
         </div>

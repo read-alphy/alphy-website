@@ -123,8 +123,8 @@ export default function HubUserPage({
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[60vh] p-8">
           <div className="text-center mb-6">
-            <UserCircle className="h-16 w-16 mx-auto text-indigo-400 dark:text-indigo-500 mb-4" strokeWidth={1.5} />
-            <h3 className="text-xl font-bold text-slate-700 dark:text-zinc-300 mb-2">Sign in to continue</h3>
+            <UserCircle className="h-16 w-16 mx-auto text-indigo-400 dark:text-indigo-500 mb-4" strokeWidth={1.2} />
+            <h3 className="text-xl font-semibold text-slate-700 dark:text-zinc-300 mb-2">Sign in to continue</h3>
             <p className="text-slate-600 dark:text-zinc-400 max-w-md mx-auto mb-6 text-sm font-normal">
               Create an account to access your personal content and collections with Alphy
             </p>
