@@ -126,7 +126,7 @@ export default function BookmarksSection({ currentUser, search, collapsed }) {
                 href="/explore"
                 className="text-sm inline-flex items-center px-4 py-2 bg-indigo-400 hover:bg-indigo-600 text-white rounded-md transition-colors duration-200 quicksand font-bold"
               >
-                <span className="mr-2 text-sm">Discover Content</span>
+                <span className="mr-2 text-sm font-semibold">Discover Content</span>
                 <ArrowRight className="h-3 w-3" />
               </Link>
             </div>

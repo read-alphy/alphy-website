@@ -116,7 +116,7 @@ export default function SubmissionsSection({ currentUser, search, collapsed }) {
               className="text-sm inline-flex items-center px-4 py-2 bg-blue-100  text-zinc-800 rounded-md transition-colors duration-200 quicksand font-bold"
               onClick={() => localStorage.setItem('newItem', 'link')}
             >
-              <span className="mr-2 text-sm">Submit Conversation</span>
+              <span className="mr-2 text-sm font-semibold">Submit Conversation</span>
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>

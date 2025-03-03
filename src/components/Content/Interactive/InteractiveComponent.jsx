@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MessageSquare, ExternalLink, Code, Download } from 'lucide-react';
+import { MessageSquare, ExternalLink, Sparkles, Download } from 'lucide-react';
 import QuestionAnswering from '../Read/QA/QuestionAnswering';
 import Sandbox from './Sandbox';
 
@@ -32,7 +32,7 @@ const InteractiveComponent = ({
 
   return (
     <div className="w-full">
-      <Card className="h-full rounded-lg border border-zinc-200 dark:border-zinc-800 shadow-sm">
+      <Card className="h-full rounded-none border-t-0 border-b-0 border-r-0 border-l  shadow-none ">
         <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
           <div className="flex items-center justify-between">
             <Tabs defaultValue="qa" className="w-full" onValueChange={setActiveTab}>
@@ -46,10 +46,10 @@ const InteractiveComponent = ({
                 </TabsTrigger>
                 <TabsTrigger 
                   value="sandbox" 
-                  className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                  className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-purple-500 data-[state=active]:text-white h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
                 >
-                  <Code className="h-4 w-4 mr-2" />
-                  Sandbox
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Playground
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -68,9 +68,10 @@ const InteractiveComponent = ({
         </div>
         
         <Tabs defaultValue="qa" value={activeTab} className="w-full flex flex-col h-full">
+      
           <TabsContent value="qa" className="m-0 flex-grow overflow-auto">
-            <ScrollArea className="h-full">
-              <div className="p-4">
+            <ScrollArea className="h-full ">
+              <div className="">
                 {summary?.key_qa === null || !summary?.key_qa ? (
                   <div className="flex flex-col items-center justify-center h-40 text-center">
                     <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-3">
@@ -107,7 +108,7 @@ const InteractiveComponent = ({
           
           <TabsContent value="sandbox" className="m-0 flex-grow overflow-auto">
             <ScrollArea className="">
-              <div className="p-4">
+              <div className="">
                 <Sandbox
                   data={data}
                   askAlphyForSandbox={askAlphyForSandbox}

@@ -11,12 +11,12 @@ export default function FooterMenu({
   theme,
   isClient,
 }) {
-  const menuItemClass = "py-1 text-slate-700 dark:text-zinc-300 text-sm w-full cursor-pointer flex flex-row items-center";
+  const menuItemClass = "py-1 text-slate-700 dark:text-zinc-300 text-sm w-full cursor-pointer flex flex-row items-center hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md px-1";
   const iconClass = "w-4 h-4 mr-1";
-  const textClass = "quicksand ml-1 text-sm";
+  const textClass = "quicksand ml-1 text-sm font-normal";
 
   return (
-    <div className="p-4 space-y-1 ">
+    <div className="p-4 space-y-1 rounded-lg ">
      
       {tier === 'premium' && (
         <div className="mb-3 flex flex-row w-full">

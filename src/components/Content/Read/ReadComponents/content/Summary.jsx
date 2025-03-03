@@ -12,7 +12,8 @@ const Summary = ({
   working,
   handleClickTimestamp,
   convertTimeToSeconds,
-  keyTakeaways
+  keyTakeaways,
+  data
 }) => {
   if (isLoading) {
     return <Loading />;
@@ -39,7 +40,7 @@ const Summary = ({
   }
 
   // Render Key Takeaways at the top
-  const KeyTakeawaysSection = () => {
+  const KeyTakeawaysSection = ({data}) => {
     if (!keyTakeaways || keyTakeaways.length === 0) return null;
     
     // Always show 5 takeaways or all if less than 5
@@ -48,12 +49,13 @@ const Summary = ({
     return (
       <Card className="mb-6 border border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-md overflow-hidden">
         <CardHeader className="pb-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40">
-          <CardTitle className="flex items-center text-lg font-bold text-indigo-700 dark:text-indigo-300">
+          <CardTitle className="flex items-center text-lg font-semibold text-indigo-800 dark:text-indigo-300">
             <Lightbulb className="h-4 w-4 mr-2 text-amber-500 dark:text-amber-400" strokeWidth={2} />
             Key Takeaways
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-3">
+          <div className="flex flex-row ">
           <ul className="space-y-2">
             {displayedTakeaways.map((takeaway, index) => (
               <li 
@@ -68,6 +70,19 @@ const Summary = ({
               </li>
             ))}
           </ul>
+
+         {/*  {data?.source_type === 'yt' && data?.source_id && (
+          <div className="mb-4">
+            <img 
+              src={`https://i.ytimg.com/vi/${data.source_id}/hqdefault.jpg`} 
+              alt={data?.title || "YouTube thumbnail"} 
+              className="rounded-lg shadow-md mx-auto justify-center flex"
+              width={300}
+              
+            />
+          </div>
+        )} */}
+        </div>
         </CardContent>
       </Card>
     );
@@ -77,7 +92,7 @@ const Summary = ({
   if (typeof summaryArray[0] === 'string') {
     return (
       <div className="space-y-4">
-        <KeyTakeawaysSection />
+        <KeyTakeawaysSection data={data} />
         
         {summaryArray.map((item, index) => (
           <div className="text-black dark:text-slate-200" key={index}>
@@ -93,11 +108,13 @@ const Summary = ({
   // Object-based summary array (structured format with timestamps)
   return (
     <div className="space-y-6">
-      <KeyTakeawaysSection />
+      <KeyTakeawaysSection data={data}/>
+      
+   
       
       {Object.values(summaryArray).map((item, index) => (
         <div className="text-slate-800 dark:text-slate-200 quicksand rounded-lg  transition-colors" key={index}>
-          <div className="p-4">
+          <div className="py-4">
             <h3
               className="text-xl mb-1 quicksand font-bold underline text-black cursor-pointer dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
               onClick={() => handleClickTimestamp(item.at)}

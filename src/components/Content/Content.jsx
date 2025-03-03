@@ -266,7 +266,7 @@ export default function Content({
     }
   }, [summary])
   
-
+console.log(data)
   useEffect(() => {
     summaryParser();
   }, [language, data, summaryParser]);
@@ -308,7 +308,6 @@ export default function Content({
   }, [])
 
 
-  console.log("hey")
   return (
     <div ref={ref} className="h-screen overflow-hidden">
       <div
@@ -319,8 +318,22 @@ export default function Content({
         } flex flex-row h-full`}
       >
         {/* Left section - 2/3 width */}
+
         <div className="w-3/5 flex flex-col h-full mt-10">
-        <HeaderArea
+        <div className="flex flex-row">
+        {data?.source_type === 'yt' && data?.source_id && (
+          <div className="mb-4">
+            <img 
+              src={`https://i.ytimg.com/vi/${data.source_id}/hqdefault.jpg`} 
+              alt={data?.title || "YouTube thumbnail"} 
+              className="rounded-lg shadow-md max-w-[150px] hover:cursor-pointer hover:opacity-80 transition-opacity duration-200"
+              onClick={handleShowYouTubeFrame}
+              
+            />
+          </div>
+        )}
+         
+          <HeaderArea
             data={data}
             title={data?.title}
             tier={tier}
@@ -355,7 +368,7 @@ export default function Content({
 
           
           /> 
-
+</div>
           <div className="flex-grow overflow-hidden">
            
               <div className="h-full overflow-auto mt-4">

@@ -246,7 +246,7 @@ export default function SideFeed({
                   ((item.requiresAuth && currentUser) || 
                    (item.requiresGuest && !loggedIn) || 
                    (!item.requiresAuth && !item.requiresGuest)) && (
-                    <SidebarMenuItem key={index}>
+                    <SidebarMenuItem key={index} className={`${item.label !== "New" ? "hover:bg-slate-100 dark:hover:bg-zinc-700" : ""} rounded-md px-1`}>
                       <SidebarMenuButton
                         asChild
                         isActive={item.isActive}
@@ -255,7 +255,7 @@ export default function SideFeed({
                             setCollapsed(true)
                           }
                         }}
-                        className={`py-2 mt-2 text-sm ${item.className || ''}`}
+                        className={`py-2 mt-2 text-sm ${item.className || ''} `}
                         tooltip={item.label}
                       >
                         <Link href={item.href}>

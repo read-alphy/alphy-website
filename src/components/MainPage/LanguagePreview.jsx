@@ -13,10 +13,10 @@ export default function LanguagePreview() {
   // Featured languages for header display
   const featuredLanguages = [
     { language: 'English', country_code: 'gb' },
+    { language: 'Chinese', country_code: 'cn' },
     { language: 'Spanish', country_code: 'es' },
     { language: 'French', country_code: 'fr' },
     { language: 'German', country_code: 'de' },
-    { language: 'Chinese', country_code: 'cn' },
     { language: 'Arabic', country_code: 'sa' },
     { language: 'Turkish', country_code: 'tr' },
     { language: 'Japanese', country_code: 'jp' },

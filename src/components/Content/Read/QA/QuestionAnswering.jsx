@@ -9,10 +9,11 @@ import { useQAHandlers } from './hooks/useQAHandlers'
 
 // Components
 import SearchBar from './components/SearchBar'
-import BaseQuestions from './BaseQuestions'
 import QuestionLoading from './QuestionLoading'
-import DynamicQA from './DynamicQA'
 import ErrorMessage from './components/ErrorMessage'
+
+// Import the new unified components
+import { QuestionsDisplay, DynamicQuestion } from './UnifiedQAComponent'
 
 // Services
 import QaWsManager from './QaWsManager'
@@ -33,6 +34,7 @@ export default function QuestionAnswering({
   
   const QARef = useRef(null)
   const router = useRouter()
+  const [question, setQuestion] = useState(null);
   
   // State management with custom hook
   const {
@@ -127,7 +129,6 @@ export default function QuestionAnswering({
   const updateVariable = (event) => {
     timestampChanger(event)
   }
-
   // Process URL query parameter on initial load
   useEffect(() => {
     
@@ -187,80 +188,66 @@ export default function QuestionAnswering({
   }
 
   return (
-    <div
-      id="q-and-a"
-      className="h-screen"
-      ref={QARef}
-    >
     
-      <div className="">
-        {inputError && inputValue.length === 0 && (
-          <ErrorMessage message={errorText} />
-        )}
-
-        {/* <div className="mt-10">
-          {isCleared && !isLoadingInside && answerData.answer.length === 0 && (
-            <BaseQuestions
-              key_qa={key_qa}
+      <div
+        id="q-and-a"
+        className="relative h-[95vh] flex flex-col "
+        ref={QARef}
+      >
+        <div className="">
+          {inputError && inputValue.length === 0 && (
+            <ErrorMessage message={errorText} />
+          )}
+  
+          {isLoadingInside && !showBaseQA && (
+            <QuestionLoading />
+          )}
+  
+          {(
+            <DynamicQuestion
+              answerData={answerData}
               data={data}
-              collapseIndex={collapseIndex}
-              handleBaseQAaccordion={handleBaseQAaccordion}
-              setBaseSources={setBaseSources}
+              handleClear={handleClear}
               handleCopyToClipboard={handleCopyToClipboard}
-              handleShareLink={handleShareLink}
-              handleLength={handleLength}
-              QARef={QARef}
-              baseSources={baseSources}
-              updateVariable={updateVariable}
-              DataArrayIcon={Database}
+              handleShowSingleSource={handleShowSingleSource}
               formatAnswer={formatAnswer}
-              areaRefs={areaRefs}
-              singleSource={singleSource}
-              showSource={showSource}
-              handleShowAllSources={handleShowAllSources}
+              updateVariable={updateVariable}
+              handleLength={handleLength}
+              inputValue={inputValue}
             />
           )}
-        </div> */}
-
-        {isLoadingInside && !showBaseQA && (
-          <QuestionLoading />
-        )}
-
-        {answerData.answer.length !== 0 && !showBaseQA && showUserQA && (
-          <DynamicQA
-            answerData={answerData}
-            data={data}
-            setAnswer={setAnswer}
-            answer={answer}
-            handleClear={handleClear}
+        </div>
+  
+        <div className="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 pb-10">
+          <div className="mb-4">
+            {(
+              <QuestionsDisplay
+                questions={key_qa}
+                data={data}
+                areaRefs={areaRefs}
+                setQuestion={setQuestion}
+                updateVariable={updateVariable}
+                handleCopyToClipboard={handleCopyToClipboard}
+                formatAnswer={formatAnswer}
+                handleLength={handleLength}
+                answerData={answerData}
+                handleShowSingleSource={handleShowSingleSource}
+                setAnswerData={setAnswerData} // Add this prop
+              />
+            )}
+          </div>
+          <SearchBar
+            inputRef={inputRef}
             inputValue={inputValue}
-            handleShareLink={handleShareLink}
-            handleCopyToClipboard={handleCopyToClipboard}
-            formatAnswer={formatAnswer}
-            singleSource={singleSource}
-            showSource={showSource}
-            updateVariable={updateVariable}
-            DataArrayIcon={Database}
-            handleShowAllSources={handleShowAllSources}
-            areaRefs={areaRefs}
-            highlightIndex={highlightIndex}
-            handleLength={handleLength}
+            setInputValue={setInputValue}
+            handleKeyDown={handleKeyDown}
+            handleClear={handleClear}
+            isLoadingInside={isLoadingInside}
+            fetchData={fetchData}
+            buttonRef={buttonRef}
           />
-        )}
+        </div>
       </div>
-      
-      <div className="sticky bottom-0 left-0 right-0 bg-white dark:bg-zinc-800">
-        <SearchBar
-          inputRef={inputRef}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          handleKeyDown={handleKeyDown}
-          handleClear={handleClear}
-          isLoadingInside={isLoadingInside}
-          fetchData={fetchData}
-          buttonRef={buttonRef}
-        />
-      </div>
-    </div>
+    
   )
 }

@@ -130,7 +130,7 @@ export default function UploadsSection({ currentUser, search, collapsed, tier })
                   href="/account"
                   className="text-sm inline-flex items-center px-4 py-2 bg-blue-100 text-zinc-800 rounded-md transition-colors duration-200 quicksand font-bold"
                 >
-                  <span className="mr-2 text-sm">Upgrade to Premium</span>
+                  <span className="mr-2 text-sm font-semibold">Upgrade to Premium</span>
                   <ArrowRight className="h-3 w-3" />
                 </Link>
               ) : (

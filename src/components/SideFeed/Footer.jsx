@@ -21,13 +21,12 @@ export default function Footer({
   const [isClient, setIsClient] = useState(false)
   
   const [FooterShow, setFooterShow] = useState(false)
-
   const handleDarkMode = () => {
     const newTheme = theme === "dark" ? "light" : "dark"
     setTheme(newTheme)
     localStorage.setItem("theme", newTheme)
+    document.documentElement.classList.toggle("dark")
   }
-  
   useEffect(() => {
     setIsClient(true)
   }, [])

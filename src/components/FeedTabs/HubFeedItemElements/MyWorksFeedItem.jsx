@@ -17,6 +17,7 @@ export default function MyWorksFeedItem({
   ) {
     model_name = item.summaries.find(item => item.lang === 'en').quality_str
   }
+  
 
   const isInProgress = item.summaries !== undefined &&
     item.summaries[0] !== undefined &&

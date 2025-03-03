@@ -8,7 +8,7 @@ import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
 import LogoInverted from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-
+import { FileAudio } from 'lucide-react'
 export default function SourceCard({
   source,
   tracks,
@@ -142,6 +142,7 @@ export default function SourceCard({
   } else if (source.source_type === 'sp') {
     imageUrl = Twitter
   }
+ 
 
   const myRef = useRef(null)
   let height
@@ -187,12 +188,18 @@ export default function SourceCard({
           onClick={showDialog}
           className="overflow-hidden shadow-none transition-all duration-300 hover:shadow-md dark:bg-zinc-800 dark:border-zinc-700 h-[280px] w-[180px] sm:w-[220px] cursor-pointer"
         >
-          <div
+          {source.source_type === 'up' && (
+             <div className="w-full h-40 bg-blue-100 dark:bg-zinc-700 flex items-center justify-center">
+             <FileAudio size={48} className="text-slate-400 dark:text-zinc-500" />
+           </div>
+          )}
+          {<div
             className="w-full h-24 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${imageUrl})`,
             }}
           />
+          }
           
           <CardHeader className="p-2 pb-0">
             <h3 className="text-xs font-bold text-slate-700 dark:text-zinc-300 quicksand line-clamp-1">

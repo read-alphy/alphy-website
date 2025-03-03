@@ -7,13 +7,15 @@ const MediaControls = ({
   showYouTubeFrame,
   handleShowYouTubeFrame
 }) => {
+
+
   return (
     <>
       {/* YouTube Button */}
-      <button
+     {/*  <button
         onClick={handleShowYouTubeFrame}
         className={`z-50 hidden ${
-          data.source_type === 'yt' && 'lg:flex'
+          (data.source_type === 'yt' && showYouTubeFrame) && 'lg:flex'
         } rounded-full bg-[#FF0000] p-1 transition-opacity duration-200 hover:opacity-80 dark:bg-zinc-60`}
       >
         {showYouTubeFrame ? (
@@ -21,7 +23,7 @@ const MediaControls = ({
         ) : (
           <Youtube size={20} className="text-white" strokeWidth={1.5}/>
         )}
-      </button>
+      </button> */}
 
       {/* Twitch Button */}
       <button

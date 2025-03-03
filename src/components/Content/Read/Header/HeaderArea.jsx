@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
+import { Clock, BookOpen } from 'lucide-react'
 
 import HeaderMenu from './HeaderMenu'
 
@@ -26,7 +27,10 @@ export default function HeaderArea({
   setMainPopoverOpen,
   reorderedLanguageCodes,
   isSandbox,
-
+  showClip,
+  setShowClip,
+  showYouTubeFrame,
+  handleShowYouTubeFrame
 }) {
   
   const [theme, setTheme] = useState(() => {
@@ -47,6 +51,20 @@ export default function HeaderArea({
     // Default to light theme
     return 'light';
   });
+
+  const [readTime, setReadTime] = useState(0);
+
+  useEffect(() => {
+    // Calculate reading time for summary if available
+    if (data?.summaries && data.summaries.length > 0 && data.summaries[0]?.summary) {
+      // Estimate reading time based on summary content
+      // Average reading speed is about 200-250 words per minute
+      const summaryText = data.summaries[0].summary.map(item => item.summary).join(' ');
+      const wordCount = summaryText.split(/\s+/).length;
+      const readingTimeMinutes = Math.ceil(wordCount / 200); // Using 200 words per minute
+      setReadTime(readingTimeMinutes);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -69,14 +87,18 @@ export default function HeaderArea({
       return prevTheme === 'dark' ? 'light' : 'dark';
     });
   };
+  
   return (
     <div className={`flex ${isSandbox && ''}`}>
       <div className="w-full pl-2 xl:mt-0">
         {/* Title Section */}
         <div className="flex flex-row justify-between items-center w-full ml-1">
-          <h2 className="mt-2 text-lg quicksand font-bold text-left text-blueLike dark:bg-darkMode dark:text-zinc-300">
+        
+          <h2 className="text-lg quicksand font-bold text-left text-blueLike dark:bg-darkMode dark:text-zinc-300">
             {data.source_type === 'up' ? title.substring(0, title.lastIndexOf('.')) : title}
           </h2>
+
+          
           <div className="mr-4">
           <HeaderMenu 
             data={data}
@@ -98,6 +120,11 @@ export default function HeaderArea({
             mainPopoverOpen={mainPopoverOpen}
             setMainPopoverOpen={setMainPopoverOpen}
             theme={theme}
+            toggleTheme={toggleTheme}
+            showClip={showClip}
+            setShowClip={setShowClip}
+            showYouTubeFrame={showYouTubeFrame}
+            handleShowYouTubeFrame={handleShowYouTubeFrame}
           />
           </div>
         </div>
@@ -107,6 +134,13 @@ export default function HeaderArea({
           <h2 className="text-sm text-left quicksand font-normal mt-2 text-slate-600 dark:bg-darkMode dark:text-zinc-400">
             {data.source_type !== 'up' ? data.creator_name : 'Private Content'}
           </h2>
+          {data?.source_mins && (
+            <p className="text-xs text-left quicksand font-normal mt-1 text-slate-500 dark:bg-darkMode dark:text-zinc-500 flex items-center">
+              <Clock className="h-3 w-3 mr-1" /> {parseInt(data.source_mins)} min content 
+              <span className="mx-1">•</span> 
+              <BookOpen className="h-3 w-3 mr-1 ml-1" /> {readTime} min read
+            </p>
+          )}
         </div>
       </div>
     </div>

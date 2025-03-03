@@ -150,8 +150,8 @@ export default function ReadComponent({
                     onValueChange={setActiveTab}
                     className="w-full flex flex-col h-full"
                   >
-                    <div className="border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50 ">
-                      <TabsList className="bg-transparent p-4 rounded-none border-b border-zinc-200 dark:border-zinc-800 h-full h-12 w-full justify-start space-x-2 mb-0">
+                    <div className="border-b-[1px] border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50 ">
+                      <TabsList className="bg-transparent p-4 rounded-none  h-full h-12 w-full justify-start space-x-2 mb-2">
                         {contentTabs.map((tab) => (
                           <TabsTrigger
                             key={tab.id}
@@ -186,8 +186,8 @@ export default function ReadComponent({
                       </TabsList>
                     </div>
                     
-                    <div className="flex-grow overflow-auto ">
-                      <TabsContent value="summary" className="m-0 p-4 h-full border-0">
+                    <div className="flex-grow overflow-auto">
+                      <TabsContent value="summary" className="m-0 py-4 pr-4 h-full border-0">
                         {isLoading ? (
                           <div className="flex justify-center items-center h-full">
                             <img src={working} width={100} alt="Loading" className="opacity-70" />
@@ -201,11 +201,12 @@ export default function ReadComponent({
                           handleClickTimestamp={handleClickTimestamp}
                           convertTimeToSeconds={convertTimeToSeconds}
                           keyTakeaways={keyTakeaways}
+                          data={data}
                           />
                         )}
                       </TabsContent>
                       
-                      <TabsContent value="transcript" className="m-0 p-4 h-full">
+                      <TabsContent value="transcript" className="m-0 py-4 pr-4 h-full border-0">
                         <Transcript
                                   isLoading={isLoading}
                                   transcript={transcript}
