@@ -1,5 +1,4 @@
 import Loading from '../../../../Loading'
-import DownloadOptions from './DownloadOptions'
 
 const Transcript = ({
   isLoading,
@@ -79,15 +78,7 @@ const renderTimestampEntry = (
           <p className="text-md summary-text">{item}</p>
         </a>
 
-        {index === 0 && (
-          <DownloadOptions
-            handleDownload={handleDownload}
-            downloading={downloading}
-            tier={tier}
-            basicDataLoaded={basicDataLoaded}
-            themePopover={themePopover}
-          />
-        )}
+     
       </>
     );
   }
@@ -109,15 +100,7 @@ const renderTimestampEntry = (
         {item}
       </a>
 
-      {index === 0 && (
-        <DownloadOptions
-          handleDownload={handleDownload}
-          downloading={downloading}
-          tier={tier}
-          basicDataLoaded={basicDataLoaded}
-          themePopover={themePopover}
-        />
-      )}
+     
     </>
   );
 };

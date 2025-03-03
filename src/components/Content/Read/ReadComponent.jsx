@@ -1,11 +1,21 @@
 "use client"
-import { useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Download, Play, FileText, List, MessageSquare, LayoutSplit, Layers, Languages, ExternalLink } from 'lucide-react'
+
+import Summary from './ReadComponents/content/Summary'
+import Transcript from './ReadComponents/content/Transcript'
 import MediaPlayer from './ReadComponents/MediaPlayer'
 import MediaControls from './ReadComponents/MediaControls'
-import TabNavigation from './ReadComponents/TabNavigation'
-import ContentDisplay from './ReadComponents/ContentDisplay'
 import SelectionPopover from './ReadComponents/SelectionPopover'
-import QuestionAnswering from './QA/QuestionAnswering'
+import DownloadOptions from './ReadComponents/DownloadOptions'
+
 
 export default function ReadComponent({
   data,
@@ -18,13 +28,7 @@ export default function ReadComponent({
   handleAskAlphy,
   activeTab,
   setActiveTab,
-  inputValue,
-  setInputValue,
-  selectionCall,
-  setSelectionCall,
-  buttonRef,
-  inputRef,
-  timestampChanger,
+  keyTakeaways,
   languages,
   languagesWanted,
   language,
@@ -105,134 +109,177 @@ export default function ReadComponent({
      (contentSummaries[0].lang === language || contentSummaries[1].lang === language)) || 
     language === 'en';
 
+  // Define content tabs
+  const contentTabs = [
+    { id: "summary", label: "Summary", icon: <FileText className="h-4 w-4 mr-2" /> },
+    { id: "transcript", label: "Transcript", icon: <MessageSquare className="h-4 w-4 mr-2" /> }
+  ];
+
   return (
-    <div id="content-area" className="overscroll-none">
+    <div className="">
       {isContentAvailable ? (
-        <div className="flex flex-col xl:flex-row mt-5 lg:mt-16">
+        <div className="flex flex-col">
+          {/* Media Player Section */}
           {transcript.length > 0 && (
-            <div className={`${data.summaries.length === 0 ? 'hidden' : ''} grid-cols-2 w-full md:min-w-[500px]`}>
-              <MediaPlayer 
-                data={data}
-                transcript={transcript}
-                showYouTubeFrame={showYouTubeFrame}
-                videoRef={videoRef}
-                canvasRef={canvasRef}
-                autoplay={autoplay}
-                timestamp={timestamp}
-                title={title}
-                theme={theme}
-              />
-              
-              <MediaControls 
-                data={data}
-                showYouTubeFrame={showYouTubeFrame}
-                handleShowYouTubeFrame={handleShowYouTubeFrame}
-              />
-              
-              {summary.key_qa !== undefined && (
-                <div 
-                  id="q-and-a" 
-                  className={summary.key_qa === null ? 
-                    'question-answering md:min-h-[600px] border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700 rounded-xl' : ''}
-                >
-                  {summary.key_qa === null ? (
-                    <p className="text-xl text-slate-500 dark:text-slate-200 quicksand font-normal max-w-screen-md p-3 text-center italic">
-                      Generating questions... plugging in an AI assistant...
-                      <img
-                        className={'opacity-70 dark:opacity-90 mx-auto'}
-                        src={working}
-                        width={140}
-                        alt="Working"
-                      />
-                    </p>
-                  ) : (
-                    <QuestionAnswering
-                      source_id={data.source_id}
-                      source_type={data.source_type}
-                      selectionCall={selectionCall}
-                      setSelectionCall={setSelectionCall}
-                      key_qa={summary.key_qa}
-                      inputValue={inputValue}
-                      setInputValue={setInputValue}
-                      setShowYouTubeFrame={setShowYouTubeFrame}
-                      buttonRef={buttonRef}
-                      inputRef={inputRef}
-                      data={data}
-                      transcript={transcript}
-                      timestampChanger={timestampChanger}
-                      currentUser={currentUser}
-                    />
-                  )}
-                </div>
-              )}
+           <div>
+                  <MediaPlayer 
+                    data={data}
+                    transcript={transcript}
+                    showYouTubeFrame={showYouTubeFrame}
+                    videoRef={videoRef}
+                    canvasRef={canvasRef}
+                    autoplay={autoplay}
+                    timestamp={timestamp}
+                    title={title}
+                    theme={theme}
+                  />
+                  
+                 
+                
             </div>
           )}
           
-          {transcript.length > 0 && (
-            <div className={`${isLoading ? 'hidden' : ''} w-full 3xl:w-5/6 max-w-[700px] mt-10 md:mt-0`}>
-              {transcript.length > 0 && (
-                <div className="mt-14 xl:mt-0 w-full bg-white dark:bg-mildDarkMode drop-shadow-md 3xl:min-w-[500px] mb-10 lg:mb-0 xl:ml-10 rounded-lg px-5 py-2 border border-zinc-100 drop-shadow-sm dark:border-zinc-700">
-                  <TabNavigation 
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                  />
-                  
-                  <SelectionPopover handleAskAlphy={handleAskAlphy}>
-                    <div ref={contentRef} className="main-content text-slate-700 dark:text-slate-200">
-                      <ContentDisplay
-                        activeTab={activeTab}
-                        data={data}
-                        summary={summary}
-                        summaryArray={summaryArray}
-                        isLoading={isLoading}
-                        transcript={transcript}
-                        handleClickTimestamp={handleClickTimestamp}
-                        working={working}
-                        convertTimeToSeconds={convertTimeToSeconds}
-                        handleDownload={handleDownload}
-                        downloading={downloading}
-                        tier={tier}
-                        basicDataLoaded={basicDataLoaded}
-                        themePopover={themePopover}
-                      />
+          
+          <div className=" ">
+          
+            {transcript.length > 0 && (
+              <div className="">
+                <Card className="h-full p-0 flex flex-col rounded-none border-0">
+                  <Tabs 
+                    value={activeTab} 
+                    onValueChange={setActiveTab}
+                    className="w-full flex flex-col h-full"
+                  >
+                    <div className="border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50 ">
+                      <TabsList className="bg-transparent p-4 rounded-none border-b border-zinc-200 dark:border-zinc-800 h-full h-12 w-full justify-start space-x-2 mb-0">
+                        {contentTabs.map((tab) => (
+                          <TabsTrigger
+                            key={tab.id}
+                            value={tab.id}
+                            className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-900 data-[state=active]:dark:text-blue-300 data-[state=active]:dark:bg-blue-800   h-10 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                          >
+                            {tab.icon}
+                            {tab.label}
+                          </TabsTrigger>
+                        ))}
+
+                        
+                        
+
+                        <div className="ml-auto flex items-center space-x-2">
+                         <DownloadOptions
+                          handleDownload={handleDownload}
+                          downloading={downloading}
+                          tier={tier}
+                          basicDataLoaded={basicDataLoaded}
+                          themePopover={themePopover}
+                         />
+                          
+                        </div>
+                        <div className="pl-4">
+                          <MediaControls 
+                            data={data}
+                            showYouTubeFrame={showYouTubeFrame}
+                            handleShowYouTubeFrame={handleShowYouTubeFrame}
+                            />
+</div>
+                      </TabsList>
                     </div>
-                  </SelectionPopover>
-                </div>
-              )}
-            </div>
-          )}
+                    
+                    <div className="flex-grow overflow-auto ">
+                      <TabsContent value="summary" className="m-0 p-4 h-full border-0">
+                        {isLoading ? (
+                          <div className="flex justify-center items-center h-full">
+                            <img src={working} width={100} alt="Loading" className="opacity-70" />
+                          </div>
+                        ) : (
+                          <Summary
+                          isLoading={isLoading}
+                          summaryArray={summaryArray}
+                          summary={summary}
+                          working={working}
+                          handleClickTimestamp={handleClickTimestamp}
+                          convertTimeToSeconds={convertTimeToSeconds}
+                          keyTakeaways={keyTakeaways}
+                          />
+                        )}
+                      </TabsContent>
+                      
+                      <TabsContent value="transcript" className="m-0 p-4 h-full">
+                        <Transcript
+                                  isLoading={isLoading}
+                                  transcript={transcript}
+                                  data={data}
+                                  handleClickTimestamp={handleClickTimestamp}
+                                  handleDownload={handleDownload}
+                                  downloading={downloading}
+                                  tier={tier}
+                                  basicDataLoaded={basicDataLoaded}
+                                  themePopover={themePopover}
+                        />
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </Card>
+              </div>
+            )}
+
+            
+            {/*  */}
+          </div>
         </div>
       ) : (
-        <div className="flex flex-col mb-20 mt-20">
-          {!needsTranslation && (
-            <p className="text-xl text-slate-500 dark:text-slate-200 quicksand font-normal max-w-screen-md mx-auto p-3 text-center">
-              Seems like Alphy hasn't processed the content in {language_codes[language]} yet.{' '}
-              {tier !== undefined && tier !== 'free' ? (
-                <p className="quicksand font-normal">
-                  Request Alphy to generate summary, key takeaways, and
-                  questions in {language_codes[language]} clicking{" "}
-                  <a
-                    onClick={requestTranslation}
-                    className="underline text-greenColor cursor-pointer"
-                  >
-                    here
-                  </a>
-                  .
+        <div className="flex items-center justify-center h-[50vh]">
+          <Card className="max-w-md p-6">
+            {!needsTranslation ? (
+              <div className="text-center">
+                <div className="bg-zinc-100 dark:bg-zinc-800 rounded-full p-3 inline-flex mb-4">
+                  <Languages className="h-6 w-6 text-zinc-500" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  Content Not Available
+                </h3>
+                <p className="text-zinc-500 dark:text-zinc-400 mb-4">
+                  Seems like Alphy hasn't processed the content in {language_codes[language]} yet.
                 </p>
-              ) : (
-                <p className="quicksand font-normal">
-                  Upgrade your plan request translation. You can check out the{" "}
-                  <a
-                    className="underline text-green-300"
-                    href={currentUser ? "/account" : "/plans"}
+                
+                {tier !== undefined && tier !== 'free' ? (
+                  <Button 
+                    onClick={requestTranslation} 
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
                   >
-                    {currentUser ? "account" : "plans"}
-                  </a>{" "}
-                  page for more detail
+                    Request Translation to {language_codes[language]}
+                  </Button>
+                ) : (
+                  <div>
+                    <p className="text-zinc-500 dark:text-zinc-400 mb-3">
+                      Upgrade your plan to request translation.
+                    </p>
+                    <Button 
+                      className="w-full" 
+                      asChild
+                    >
+                      <a href={currentUser ? "/account" : "/plans"}>
+                        View {currentUser ? "Account" : "Plans"}
+                      </a>
+                    </Button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center">
+                <div className="bg-zinc-100 dark:bg-zinc-800 rounded-full p-3 inline-flex mb-4">
+                  <Layers className="h-6 w-6 text-zinc-500" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  Processing Content
+                </h3>
+                <p className="text-zinc-500 dark:text-zinc-400">
+                  We're currently processing this content. Please check back shortly.
                 </p>
-              )}
-            </p>
-          )}
+              </div>
+            )}
+          </Card>
         </div>
       )}
     </div>

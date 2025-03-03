@@ -189,30 +189,16 @@ export default function QuestionAnswering({
   return (
     <div
       id="q-and-a"
-      className="md:min-h-[600px] lg:w-[700px] xl:w-[500px] 2xl:w-[550px] 3xl:w-full mx-auto sm:mx-0 bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700 rounded-xl text-slate-700 dark:text-zinc-300"
+      className="h-screen"
       ref={QARef}
     >
-      <p className="mb-4 quicksand font-normal text-l text-slate-700 dark:text-zinc-300">
-        Chat with the content. In any language you want
-      </p>
-
-      <div className="Md:pl-10 md:pr-10">
-        <SearchBar
-          inputRef={inputRef}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          handleKeyDown={handleKeyDown}
-          handleClear={handleClear}
-          isLoadingInside={isLoadingInside}
-          fetchData={fetchData}
-          buttonRef={buttonRef}
-        />
-
+    
+      <div className="">
         {inputError && inputValue.length === 0 && (
           <ErrorMessage message={errorText} />
         )}
 
-        <div className="mt-10">
+        {/* <div className="mt-10">
           {isCleared && !isLoadingInside && answerData.answer.length === 0 && (
             <BaseQuestions
               key_qa={key_qa}
@@ -234,7 +220,7 @@ export default function QuestionAnswering({
               handleShowAllSources={handleShowAllSources}
             />
           )}
-        </div>
+        </div> */}
 
         {isLoadingInside && !showBaseQA && (
           <QuestionLoading />
@@ -261,6 +247,19 @@ export default function QuestionAnswering({
             handleLength={handleLength}
           />
         )}
+      </div>
+      
+      <div className="sticky bottom-0 left-0 right-0 bg-white dark:bg-zinc-800">
+        <SearchBar
+          inputRef={inputRef}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          handleKeyDown={handleKeyDown}
+          handleClear={handleClear}
+          isLoadingInside={isLoadingInside}
+          fetchData={fetchData}
+          buttonRef={buttonRef}
+        />
       </div>
     </div>
   )

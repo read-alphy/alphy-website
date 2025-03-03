@@ -165,9 +165,9 @@ export default function HeroSection({ currentUser }) {
                   href="/submit"
                   onClick={() => localStorage.setItem('newItem', 'upload')}
                   className="rounded-lg text-zinc-800 dark:text-zinc-200 border border-slate-300 
-                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-3.5 font-medium 
+                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-2.5 font-medium 
                              flex items-center transition duration-300 ease-in-out 
-                             hover:translate-x-1 transform"
+                             "
                   aria-label="Upload from device"
                 >
                   <svg
@@ -242,7 +242,7 @@ export default function HeroSection({ currentUser }) {
               {/* Waveform visualization representing audio */}
               <g className="opacity-50">
                 {[...Array(20)].map((_, i) => (
-                  <rect 
+                  <motion.rect 
                     key={i} 
                     x={20 * i + 5} 
                     y={150 - (Math.sin(i * 0.5) * 50 + Math.random() * 30)} 
@@ -250,6 +250,16 @@ export default function HeroSection({ currentUser }) {
                     height={(Math.sin(i * 0.5) * 50 + Math.random() * 30) * 2} 
                     rx="2"
                     className="fill-sky-500 dark:fill-sky-400"
+                    animate={{ 
+                      height: [(Math.sin(i * 0.5) * 50 + Math.random() * 30) * 2, (Math.sin(i * 0.5) * 30 + Math.random() * 50) * 2, (Math.sin(i * 0.5) * 50 + Math.random() * 30) * 2],
+                      y: [150 - (Math.sin(i * 0.5) * 50 + Math.random() * 30), 150 - (Math.sin(i * 0.5) * 30 + Math.random() * 50), 150 - (Math.sin(i * 0.5) * 50 + Math.random() * 30)]
+                    }}
+                    transition={{
+                      duration: 2 + i * 0.1,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      ease: "easeInOut"
+                    }}
                   />
                 ))}
               </g>
@@ -258,14 +268,48 @@ export default function HeroSection({ currentUser }) {
               <rect x="80" y="50" width="240" height="200" rx="8" className="fill-white dark:fill-zinc-800 shadow-md" />
               
               {/* Document content lines */}
-              <rect x="100" y="80" width="200" height="6" rx="3" className="fill-slate-300 dark:fill-zinc-600" />
-              <rect x="100" y="100" width="180" height="6" rx="3" className="fill-slate-300 dark:fill-zinc-600" />
-              <rect x="100" y="120" width="160" height="6" rx="3" className="fill-slate-300 dark:fill-zinc-600" />
-              <rect x="100" y="140" width="200" height="6" rx="3" className="fill-slate-300 dark:fill-zinc-600" />
-              <rect x="100" y="160" width="140" height="6" rx="3" className="fill-slate-300 dark:fill-zinc-600" />
-              <rect x="100" y="180" width="180" height="6" rx="3" className="fill-slate-300 dark:fill-zinc-600" />
-              <rect x="100" y="200" width="160" height="6" rx="3" className="fill-slate-300 dark:fill-zinc-600" />
-              
+              <motion.rect 
+                x="100" y="80" width="200" height="6" rx="3" 
+                className="fill-slate-300 dark:fill-zinc-600"
+                animate={{ width: [200, 180, 200] }}
+                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <motion.rect 
+                x="100" y="100" width="180" height="6" rx="3" 
+                className="fill-slate-300 dark:fill-zinc-600"
+                animate={{ width: [180, 200, 180] }}
+                transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <motion.rect 
+                x="100" y="120" width="160" height="6" rx="3" 
+                className="fill-slate-300 dark:fill-zinc-600"
+                animate={{ width: [160, 190, 160] }}
+                transition={{ duration: 3.5, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <motion.rect 
+                x="100" y="140" width="200" height="6" rx="3" 
+                className="fill-slate-300 dark:fill-zinc-600"
+                animate={{ width: [200, 170, 200] }}
+                transition={{ duration: 4.5, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <motion.rect 
+                x="100" y="160" width="140" height="6" rx="3" 
+                className="fill-slate-300 dark:fill-zinc-600"
+                animate={{ width: [140, 180, 140] }}
+                transition={{ duration: 3.2, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <motion.rect 
+                x="100" y="180" width="180" height="6" rx="3" 
+                className="fill-slate-300 dark:fill-zinc-600"
+                animate={{ width: [180, 150, 180] }}
+                transition={{ duration: 3.8, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <motion.rect 
+                x="100" y="200" width="160" height="6" rx="3" 
+                className="fill-slate-300 dark:fill-zinc-600"
+                animate={{ width: [160, 190, 160] }}
+                transition={{ duration: 4.2, repeat: Infinity, repeatType: "reverse" }}
+              />
               {/* Play button indicating audio */}
               <circle cx="320" cy="40" r="16" className="fill-indigo-500" />
               <path d="M316 32L328 40L316 48V32Z" className="fill-white" />

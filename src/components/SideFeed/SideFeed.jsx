@@ -32,7 +32,7 @@ import FeedItem from '../FeedTabs/FeedItem'
 import Footer from './Footer'
 import HubFeedItem from '../FeedTabs/HubFeedItemElements/HubFeedItem'
 
-import { inputMessages } from '../Content/Sandbox/messageBank'
+import { inputMessages } from '../Content/Interactive/messageBank'
 
 // Custom styles for sidebar width
 const sidebarStyles = {

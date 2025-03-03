@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ArrowDown, Youtube, Twitter } from 'lucide-react'
+import { X, Youtube, Twitter } from 'lucide-react'
 import TwitchIcon from '../../../../../public/img/twitch.png'
 
 const MediaControls = ({
@@ -12,79 +12,79 @@ const MediaControls = ({
       {/* YouTube Button */}
       <button
         onClick={handleShowYouTubeFrame}
-        className={`z-50 fixed hidden ${
-          data.source_type === 'yt' && 'lg:block'
-        } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-red-400 transform transition-all duration-500 ease-in-out hover:-translate-y-2 dark:bg-zinc-60`}
+        className={`z-50 hidden ${
+          data.source_type === 'yt' && 'lg:flex'
+        } rounded-full bg-[#FF0000] p-1 transition-opacity duration-200 hover:opacity-80 dark:bg-zinc-60`}
       >
         {showYouTubeFrame ? (
-          <ArrowDown size={24} className="text-white" />
+          <X size={20} className="text-white" />
         ) : (
-          <Youtube size={24} className="text-white" />
+          <Youtube size={20} className="text-white" strokeWidth={1.5}/>
         )}
       </button>
 
       {/* Twitch Button */}
       <button
         onClick={handleShowYouTubeFrame}
-        className={`z-50 fixed hidden ${
-          data.source_type === 'tw' && 'lg:block'
-        } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#9146ff] transform transition-all duration-500 ease-in-out hover:-translate-y-2 dark:bg-zinc-60`}
+        className={`z-50 hidden ${
+          data.source_type === 'tw' && 'lg:flex'
+        } rounded-full bg-[#9146ff] p-2 transition-opacity duration-200 hover:opacity-80 dark:bg-zinc-60`}
       >
         {showYouTubeFrame ? (
-          <ArrowDown size={24} className="text-black" />
+          <X size={20} className="text-black" />
         ) : (
           <Image
             src={TwitchIcon}
             className="text-white opacity-80"
-            width={35}
-            height={35}
+            width={24}
+            height={24}
             alt="Twitch"
           />
         )}
       </button>
 
       {/* Twitter Spaces Button */}
-      <button
+      {/* <button
         onClick={handleShowYouTubeFrame}
-        className={`z-50 fixed hidden ${
-          data.source_type === 'sp' && 'lg:block'
-        } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#7366d7] transform transition-all duration-500 ease-in-out hover:-translate-y-2`}
+        className={`z-50 hidden ${
+          data.source_type === 'sp' && 'lg:flex'
+        } rounded-full bg-[#7366d7] p-2 transition-opacity duration-200 hover:opacity-80`}
       >
         {showYouTubeFrame ? (
-          <ArrowDown size={24} className="text-white" />
+          <X size={20} className="text-white" />
         ) : (
-          <Twitter size={24} className="text-white" />
+          <Twitter size={20} className="text-white" />
         )}
-      </button>
+      </button> */}
 
       {/* X (Twitter) Video Button */}
       <button
         onClick={handleShowYouTubeFrame}
-        className={`z-50 fixed hidden ${
-          data.source_type === 'x' && 'lg:block'
-        } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-black transform transition-all duration-500 ease-in-out hover:-translate-y-2`}
+        className={`z-50 hidden ${
+          data.source_type === 'x' && 'lg:flex'
+        } rounded-full bg-black p-2 transition-opacity duration-200 hover:opacity-80`}
       >
         {showYouTubeFrame ? (
-          <ArrowDown size={24} className="text-white" />
+          <X size={20} className="text-white" />
         ) : (
-          <Twitter size={24} className="text-white" />
+          <Twitter size={20} className="text-white" />
         )}
       </button>
 
       {/* Apple Podcast Button */}
       <button
         onClick={handleShowYouTubeFrame}
-        className={`z-50 fixed hidden ${
-          data.source_type === 'ap' && 'lg:block'
-        } bottom-0 right-0 p-3 mb-4 mr-4 absolute right-0 rounded-full bg-[#ff4cd7] transform transition-all duration-500 ease-in-out hover:-translate-y-2 dark:bg-zinc-60`}
+        className={`z-50 hidden ${
+          data.source_type === 'ap' && 'lg:flex'
+        } rounded-full bg-[#ff4cd7] p-2 transition-opacity duration-200 hover:opacity-80 dark:bg-zinc-60`}
       >
         {showYouTubeFrame ? (
-          <ArrowDown size={24} className="text-white" />
+          <X size={20} className="text-white" />
         ) : (
           <svg
             fill="#ffffff"
-            width="35px"
-            height="35px"
+            width="24px"
+            height="24px"
             viewBox="-32 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
           >
