@@ -127,7 +127,7 @@ const ArcForm = ({
 
 
   const handleAddOrRemoveItem = (item) => {
-  console.log(item)
+  
     if (sourceIDsArc.includes(item.source_id)) {
       setDataArc(prevData => prevData.filter(prevItem => prevItem.source_id !== item.source_id));
       setSourceIDsArc(prevIds => prevIds.filter(source_id => source_id !== item.source_id));

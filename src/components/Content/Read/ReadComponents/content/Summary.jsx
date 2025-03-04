@@ -47,7 +47,7 @@ const Summary = ({
     const displayedTakeaways = keyTakeaways.slice(0, 5);
     
     return (
-      <Card className="mb-6 border border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-md overflow-hidden">
+      <Card className="mb-6 border border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-none overflow-hidden">
         <CardHeader className="pb-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40">
           <CardTitle className="flex items-center text-lg font-semibold text-indigo-800 dark:text-indigo-300">
             <Lightbulb className="h-4 w-4 mr-2 text-amber-500 dark:text-amber-400" strokeWidth={2} />

@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
-import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '@/components/ui/card'
-import { MessageSquare } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { ChevronUp, ChevronDown, RefreshCw, Copy } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '@/components/ui/card';
+import { MessageSquare, RefreshCw, Copy, ChevronUp, ChevronDown, ExternalLink, Clock, BotMessageSquare } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 
 
@@ -70,41 +71,61 @@ const formatUtils = {
   }
 };
 
-// Unified Source component for both question types
+
+// Source component with enhanced UI
 function Source({ source, sourceType, sourceId, updateVariable, handleLength, isMobile }) {
   const startTime = formatUtils.convertTimeToSeconds(source.start);
   const endTime = formatUtils.convertTimeToSeconds(source.end);
   const hasTimestamp = source.start !== null && source.start !== undefined && source.end;
   const sourceUrl = hasTimestamp ? formatUtils.getSourceUrl(sourceType, sourceId, startTime) : '#';
-  
-  const timeDisplay = hasTimestamp ? (
-    formatUtils.formatTimeRange(source.start, source.end)
-  ) : (
-    "00:00:00"
-  );
-  
+  const timeDisplay = hasTimestamp ? formatUtils.formatTimeRange(source.start, source.end) : "00:00:00";
   const isVideoSource = sourceType === 'yt' || sourceType === 'tw';
   
   return (
-    <div className="border border-zinc-300 dark:border-zinc-600 rounded-lg p-5 drop-shadow-sm mb-5">
-      {isVideoSource && !isMobile ? (
-        <div className="cursor-pointer underline" onClick={updateVariable}>
-          {timeDisplay}
+    <Card className="border border-zinc-200 dark:border-zinc-700 overflow-hidden hover:shadow-md transition-all duration-200">
+      <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-zinc-800">
+        <div className="flex items-center gap-2">
+          <Clock className="h-4 w-4 text-blue-500 dark:text-blue-400" />
+          {isVideoSource && !isMobile ? (
+            <button 
+              onClick={updateVariable}
+              className="text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"
+            >
+              {timeDisplay}
+              <ExternalLink className="h-3 w-3" />
+            </button>
+          ) : (
+            <a 
+              href={sourceUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"
+            >
+              {timeDisplay}
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
         </div>
-      ) : (
-        <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">
-          {timeDisplay}
-        </a>
-      )}
+        
+        <Badge variant="outline" className="text-xs px-2 py-0 h-5">
+          {sourceType === 'yt' ? 'YouTube' : 
+           sourceType === 'tw' ? 'Twitch' : 
+           sourceType === 'ap' ? 'Apple Podcast' : 
+           sourceType === 'sp' ? 'Twitter Space' : 'Source'}
+        </Badge>
+      </div>
       
-      <div 
-        className="text-slate-500 dark:text-slate-400 font-normal mt-6"
-        dangerouslySetInnerHTML={{ __html: handleLength(source.text) }}
-      />
-    </div>
+      <Separator />
+      
+      <div className="p-4">
+        <div 
+          className="text-slate-700 dark:text-slate-300 font-normal"
+          dangerouslySetInnerHTML={{ __html: handleLength(source.text) }}
+        />
+      </div>
+    </Card>
   );
 }
-
 
 
 // Question component to display a single question and its answer
@@ -227,9 +248,10 @@ export function QuestionsDisplay({
   );
 }
 
-
 // Redesigned DynamicQuestion component
 export function DynamicQuestion({
+  question,
+  setQuestion,
   answerData,
   data,
   handleClear,
@@ -238,9 +260,13 @@ export function DynamicQuestion({
   updateVariable,
   handleLength,
   inputValue,
+  handleShowSingleSource,
+  showSource,
+  setShowSource,
 }) {
   const [showSources, setShowSources] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [copied, setCopied] = useState(false);
   
   useEffect(() => {
     const checkMobile = () => {
@@ -255,89 +281,99 @@ export function DynamicQuestion({
     };
   }, []);
 
-  /* if (!answerData?.answer) {
-    return (
-      <Alert variant="default" className="mt-4 bg-slate-50 dark:bg-zinc-800 border-blue-100 dark:border-blue-900">
-        <MessageSquare className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-        <AlertDescription className="text-center py-6 text-lg font-medium">
-          It seems like the content doesn't have an answer for this query. Try another one!
-        </AlertDescription>
-      </Alert>
-    );
-  } */
+
+  const hasAnswer = answerData && answerData.answer && answerData.answer.length > 0;
+  const hasSources = answerData && answerData.sources && answerData.sources.length > 0;
+  
+  if (!question || !hasAnswer) return null;
 
   return (
-    <Card className="shadow-none border-none ">
-      <CardHeader className="pb-2">
-        <div className="flex justify-between items-center">
+    <Card className="shadow-none border-0 overflow-hidden rounded-none">
+      <CardHeader className="pb-3 bg-gradient-to-r from-blue-50 to-slate-50 dark:from-zinc-800 dark:to-zinc-900">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
           <div className="flex items-center gap-2">
-            <MessageSquare className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-            <CardTitle className="text-lg font-semibold text-slate-800 dark:text-slate-200">
-              Answer from Alphy
+            <div className="bg-blue-100 dark:bg-blue-900 p-1.5 rounded-md">
+              <BotMessageSquare className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+            </div>
+            <CardTitle className="text-md font-semibold text-slate-800 dark:text-slate-200">
+              Alphy Answer
             </CardTitle>
           </div>
           
-          <div className="flex gap-2">
+          <div className="flex gap-2 ml-auto sm:ml-0">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button 
-                    variant="ghost" 
-                    size="icon"
+                    variant="outline" 
+                    size="sm"
+                    className="h-8"
                     onClick={handleClear}
                   >
-                    <RefreshCw className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+                    <RefreshCw className="h-3.5 w-3.5 mr-1" />
+                    <span className="hidden sm:inline">New Question</span>
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  Clear answer
-                </TooltipContent>
+                <TooltipContent>Clear current answer</TooltipContent>
               </Tooltip>
             </TooltipProvider>
             
-            <TooltipProvider>
+            {/* <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button 
-                    variant="ghost" 
-                    size="icon"
-                    onClick={() => handleCopyToClipboard('')}
+                    variant={copied ? "default" : "outline"}
+                    size="sm"
+                    className="h-8"
+                    onClick={handleCopy}
                   >
-                    <Copy className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+                    <Copy className="h-3.5 w-3.5 mr-1" />
+                    <span className="hidden sm:inline">{copied ? "Copied!" : "Copy"}</span>
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  Copy answer
-                </TooltipContent>
+                <TooltipContent>Copy answer to clipboard</TooltipContent>
               </Tooltip>
-            </TooltipProvider>
+            </TooltipProvider> */}
           </div>
+        </div>
+        
+        {/* Display the original question */}
+        <div className="mt-3 text-md font-semibold text-black bg-slate-100 dark:bg-zinc-800 p-2 rounded-md">
+          <span className="font-medium">Q:</span> {question}
         </div>
       </CardHeader>
       
-      <CardContent className="pt-2 pb-4">
-        <div className="text-slate-700 dark:text-slate-200 mb-6 whitespace-pre-line font-normal">
-          {formatAnswer(answerData.answer, answerData)}
+      <CardContent className="pt-4 px-4 sm:px-6">
+        <div className="text-slate-700 dark:text-slate-200 whitespace-pre-line font-normal leading-relaxed text-md">
+          {formatAnswer(answerData.answer, answerData, handleShowSingleSource)}
         </div>
       </CardContent>
       
-      <CardFooter className="flex flex-col items-start pt-0 px-6 pb-6">
-        <Button
-          variant="outline"
-          size="sm"
-          className="mb-4 font-medium"
-          onClick={() => setShowSources(!showSources)}
-        >
-          {showSources ? 'Hide sources' : 'Show sources'} 
-          {showSources ? (
-            <ChevronUp className="ml-2 h-4 w-4" />
-          ) : (
-            <ChevronDown className="ml-2 h-4 w-4" />
-          )}
-        </Button>
+      <CardFooter className="flex flex-col items-start pt-2 px-4 sm:px-6 pb-4">
+        <Separator className="w-full my-3" />
         
-        {showSources && answerData.sources.length > 0 && (
-          <div className="w-full mt-2 space-y-2">
+        <div className="w-full">
+          <Button
+            variant="ghost"
+            size="sm"
+            className={`font-medium ${hasSources ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500 dark:text-slate-500'}`}
+            onClick={() => setShowSources(!showSources)}
+            disabled={!hasSources}
+          >
+            {showSources ? 'Hide Sources' : 'Show Sources'} 
+            {showSources ? (
+              <ChevronUp className="ml-2 h-4 w-4" />
+            ) : (
+              <ChevronDown className="ml-2 h-4 w-4" />
+            )}
+            <Badge variant="outline" className="ml-2 text-xs">
+              {answerData.sources ? answerData.sources.length : 0}
+            </Badge>
+          </Button>
+        </div>
+        
+        {showSources && hasSources && (
+          <div className="w-full mt-4 grid grid-cols-1 gap-4">
             {answerData.sources.map((source, index) => (
               <Source
                 key={index}
@@ -352,8 +388,8 @@ export function DynamicQuestion({
           </div>
         )}
         
-        {showSources && answerData.sources.length === 0 && (
-          <Alert variant="default" className="w-full bg-slate-50 dark:bg-zinc-800 border-slate-200 dark:border-zinc-700">
+        {showSources && !hasSources && (
+          <Alert variant="default" className="w-full mt-4 bg-slate-50 dark:bg-zinc-800 border-slate-200 dark:border-zinc-700">
             <AlertDescription>
               No sources available for this answer.
             </AlertDescription>

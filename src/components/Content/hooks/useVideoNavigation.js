@@ -6,7 +6,6 @@ export const useVideoNavigation = () => {
   const [showYouTubeFrame, setShowYouTubeFrame] = useState(false)
 
   const handleClickTimestamp = event => {
-    console.log(event)
     setAutoplay(1)
     
     // Handle ISO 8601 duration format (e.g., PT0.08S)

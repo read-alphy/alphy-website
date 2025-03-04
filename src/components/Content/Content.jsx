@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/router'
-import { ArrowUp } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import axios from 'axios'
 import { saveAs } from 'file-saver'
@@ -15,6 +15,7 @@ import { LANGUAGE_CODES } from './constants/languageCodes'
 const ReadComponent = dynamic(() => import('./Read/ReadComponent'), { ssr: false })
 const InteractiveComponent = dynamic(() => import('./Interactive/InteractiveComponent'), { ssr: false })
 const HeaderArea = dynamic(() => import('./Read/Header/HeaderArea'), { ssr: false })
+const MediaControls = dynamic(() => import('./Read/ReadComponents/MediaControls'), { ssr: false })
 
 // Custom hooks
 import { useTranscript } from './hooks/useTranscript'
@@ -70,7 +71,7 @@ export default function Content({
   const [showReportIssue, setShowReportIssue] = useState(false)
   const [showClip, setShowClip] = useState(false)
   const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
-  
+  const [isInteractivePanelCollapsed, setIsInteractivePanelCollapsed] = useState(false)
   // References
   const buttonRef = useRef(null)
   const inputRef = useRef(null)
@@ -214,6 +215,7 @@ export default function Content({
     localStorage.setItem('showYouTubeFrame', String(newValue))
   }, [showYouTubeFrame])
 
+  
   // Effects
   useEffect(() => {
     if (window.innerWidth > 1000) {
@@ -266,7 +268,7 @@ export default function Content({
     }
   }, [summary])
   
-console.log(data)
+
   useEffect(() => {
     summaryParser();
   }, [language, data, summaryParser]);
@@ -308,6 +310,11 @@ console.log(data)
   }, [])
 
 
+
+  const toggleInteractivePanel = useCallback(() => {
+    setIsInteractivePanelCollapsed(prev => !prev)
+  }, [])
+
   return (
     <div ref={ref} className="h-screen overflow-hidden">
       <div
@@ -317,111 +324,130 @@ console.log(data)
             : ''
         } flex flex-row h-full`}
       >
-        {/* Left section - 2/3 width */}
-
-        <div className="w-3/5 flex flex-col h-full mt-10">
-        <div className="flex flex-row">
-        {data?.source_type === 'yt' && data?.source_id && (
-          <div className="mb-4">
-            <img 
-              src={`https://i.ytimg.com/vi/${data.source_id}/hqdefault.jpg`} 
-              alt={data?.title || "YouTube thumbnail"} 
-              className="rounded-lg shadow-md max-w-[150px] hover:cursor-pointer hover:opacity-80 transition-opacity duration-200"
-              onClick={handleShowYouTubeFrame}
-              
-            />
-          </div>
-        )}
-         
-          <HeaderArea
-            data={data}
-            title={data?.title}
-            tier={tier}
-            isVisible={isVisible}
-            handleVisibility={handleVisibility}
-            handleBookmark={handleBookmark}
-            isBookmarked={isBookmarked}
-            handleReportIssue={handleReportIssue}
-            showReportIssue={showReportIssue}
-            setShowReportIssue={setShowReportIssue}
-            handleAddToArchipelago={handleAddToArchipelago}
-            userArchipelagoNames={userArchipelagoNames}
-            currentUser={currentUser}
-            transcript={transcript}
-            summary={summary}
-            language={language}
-            handleLanguageChange={handleLanguageChange}
-            setLanguage={setLanguage}
-            languages={languages}
-            mainPopoverOpen={mainPopoverOpen}
-            setMainPopoverOpen={setMainPopoverOpen}
-            mainPopoverOpenSmall={mainPopoverOpenSmall}
-            setMainPopoverOpenSmall={setMainPopoverOpenSmall}
-            modelName={modelName}
-            reorderedLanguageCodes={reorderedLanguageCodes}
-            isSandbox={isSandbox}
-            setIsSandbox={setIsSandbox}
-            showClip={showClip}
-            setShowClip={setShowClip}
-            showYouTubeFrame={showYouTubeFrame}
-            handleShowYouTubeFrame={handleShowYouTubeFrame}
-
-          
-          /> 
-</div>
-          <div className="flex-grow overflow-hidden">
+        {/* Left section - dynamic width based on collapse state */}
+        <div 
+          className={`transition-all duration-300 ease-in-out ${
+            isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
+          } flex flex-col h-full mt-10`}
+        >
+          <div className="flex flex-row">
+          {data?.source_type === 'yt' && data?.source_id && (
+            <div className="mb-4">
+              <img 
+                src={`https://i.ytimg.com/vi/${data.source_id}/hqdefault.jpg`} 
+                alt={data?.title || "YouTube thumbnail"} 
+                className="rounded-lg shadow-md max-w-[150px] lg:hover:cursor-pointer lg:hover:opacity-80 transition-opacity duration-200"
+                onClick={handleShowYouTubeFrame}
+                
+              />
+            </div>
+          )}
            
-              <div className="h-full overflow-auto mt-4">
+            <HeaderArea
+              data={data}
+              title={data?.title}
+              tier={tier}
+              isVisible={isVisible}
+              handleVisibility={handleVisibility}
+              handleBookmark={handleBookmark}
+              isBookmarked={isBookmarked}
+              handleReportIssue={handleReportIssue}
+              showReportIssue={showReportIssue}
+              setShowReportIssue={setShowReportIssue}
+              handleAddToArchipelago={handleAddToArchipelago}
+              userArchipelagoNames={userArchipelagoNames}
+              currentUser={currentUser}
+              transcript={transcript}
+              summary={summary}
+              language={language}
+              handleLanguageChange={handleLanguageChange}
+              setLanguage={setLanguage}
+              languages={languages}
+              mainPopoverOpen={mainPopoverOpen}
+              setMainPopoverOpen={setMainPopoverOpen}
+              mainPopoverOpenSmall={mainPopoverOpenSmall}
+              setMainPopoverOpenSmall={setMainPopoverOpenSmall}
+              modelName={modelName}
+              reorderedLanguageCodes={reorderedLanguageCodes}
+              isSandbox={isSandbox}
+              setIsSandbox={setIsSandbox}
+              showClip={showClip}
+              setShowClip={setShowClip}
+              showYouTubeFrame={showYouTubeFrame}
+              handleShowYouTubeFrame={handleShowYouTubeFrame}
+            /> 
+          </div>
+          <div className="flex-grow overflow-hidden">
+            <div className="h-full overflow-auto mt-4">
               <ReadComponent
-                  data={data}
-                  transcript={transcript}
-                  summary={summary}
-                  summaryArray={summaryArray}
-                  keyTakeaways={keyTakeaways}
-                  isLoading={isLoading}
-                  handleClickTimestamp={handleClickTimestamp}
-                  handleDownload={handleDownload}
-                  handleAskAlphy={handleAskAlphy}
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                  inputValue={inputValue}
-                  setInputValue={setInputValue}
-                  selectionCall={selectionCall}
-                  setSelectionCall={setSelectionCall}
-                  buttonRef={buttonRef}
-                  inputRef={inputRef}
-                  timestampChanger={timestampChanger}
-                  languages={languages}
-                  languagesWanted={languagesWanted}
-                  language={language}
-                  errorMessage={errorMessage}
-                  contentSummaries={data?.summaries || []}
-                  showYouTubeFrame={showYouTubeFrame}
-                  setShowYouTubeFrame={setShowYouTubeFrame}
-                  videoRef={videoRef}
-                  canvasRef={canvasRef}
-                  autoplay={autoplay}
-                  timestamp={timestamp}
-                  title={data?.title}
-                  basicDataLoaded={basicDataLoaded}
-                  setBasicDataLoaded={setBasicDataLoaded}
-                  handleShowYouTubeFrame={handleShowYouTubeFrame}
-                  contentRef={contentRef}
-                  downloading={downloading}
-                  themePopover={themePopover}
-                  language_codes={LANGUAGE_CODES}
-                  currentUser={currentUser}
-                  requestTranslation={requestTranslation}
-                  tier={tier}
-                /> 
-              </div>
-            
+                data={data}
+                transcript={transcript}
+                summary={summary}
+                summaryArray={summaryArray}
+                keyTakeaways={keyTakeaways}
+                isLoading={isLoading}
+                handleClickTimestamp={handleClickTimestamp}
+                handleDownload={handleDownload}
+                handleAskAlphy={handleAskAlphy}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                selectionCall={selectionCall}
+                setSelectionCall={setSelectionCall}
+                buttonRef={buttonRef}
+                inputRef={inputRef}
+                timestampChanger={timestampChanger}
+                languages={languages}
+                languagesWanted={languagesWanted}
+                language={language}
+                errorMessage={errorMessage}
+                contentSummaries={data?.summaries || []}
+                showYouTubeFrame={showYouTubeFrame}
+                setShowYouTubeFrame={setShowYouTubeFrame}
+                videoRef={videoRef}
+                canvasRef={canvasRef}
+                autoplay={autoplay}
+                timestamp={timestamp}
+                title={data?.title}
+                basicDataLoaded={basicDataLoaded}
+                setBasicDataLoaded={setBasicDataLoaded}
+                handleShowYouTubeFrame={handleShowYouTubeFrame}
+                contentRef={contentRef}
+                downloading={downloading}
+                themePopover={themePopover}
+                language_codes={LANGUAGE_CODES}
+                currentUser={currentUser}
+                requestTranslation={requestTranslation}
+                tier={tier}
+              /> 
+            </div>
           </div>
         </div>
 
-        {/* Right section - 1/3 width */}
-        <div className="w-2/5 h-full">
-        <InteractiveComponent
+        {/* Right section - Interactive Component with collapse animation */}
+        <div 
+          className={`transition-all duration-300 ease-in-out ${
+            isInteractivePanelCollapsed 
+              ? 'w-0 opacity-0 overflow-hidden' 
+              : 'w-2/5 opacity-100'
+          } h-full relative`}
+        >
+          {/* Collapse/Expand toggle button */}
+          <button
+            onClick={toggleInteractivePanel}
+            className="absolute -left-4 top-10 transform -translate-y-1/2 z-[9999] opacity-0  hover:opacity-100 bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm"
+            aria-label={isInteractivePanelCollapsed ? "Expand panel" : "Collapse panel"}
+          >
+            <ChevronRight 
+              size={24} 
+              className={`transition-transform duration-300 ${
+                isInteractivePanelCollapsed ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          
+          <InteractiveComponent
             data={data}
             summary={summary}
             transcript={transcript}
@@ -442,6 +468,17 @@ console.log(data)
             tier={tier}
           />
         </div>
+
+        {/* Floating button to uncollapse when fully collapsed */}
+        {isInteractivePanelCollapsed && (
+          <button
+            onClick={toggleInteractivePanel}
+            className="absolute right-4 top-10 transform -translate-y-1/2 z-[9999]  bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm"
+            aria-label="Open interactive panel"
+          >
+            <ChevronRight size={20} className="rotate-180 stroke-[2.5px]" />
+          </button>
+        )}
       </div>
 
       {basicDataLoaded && (
@@ -466,6 +503,13 @@ console.log(data)
         handleScroll={handleScroll}
         showYouTubeFrame={showYouTubeFrame}
       />
+      {showYouTubeFrame==true && 
+        <MediaControls 
+          data={data}
+          showYouTubeFrame={showYouTubeFrame}
+          handleShowYouTubeFrame={handleShowYouTubeFrame}
+        />
+      }
     </div>
   )
 }

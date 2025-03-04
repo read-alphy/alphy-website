@@ -177,11 +177,13 @@ export default function ReadComponent({
                           
                         </div>
                         <div className="pl-4">
+                          {!showYouTubeFrame&&
                           <MediaControls 
                             data={data}
                             showYouTubeFrame={showYouTubeFrame}
                             handleShowYouTubeFrame={handleShowYouTubeFrame}
                             />
+                          }
 </div>
                       </TabsList>
                     </div>

@@ -206,6 +206,8 @@ export default function QuestionAnswering({
           {(
             <DynamicQuestion
               answerData={answerData}
+              question={question}
+              setQuestion={setQuestion}
               data={data}
               handleClear={handleClear}
               handleCopyToClipboard={handleCopyToClipboard}
@@ -225,6 +227,7 @@ export default function QuestionAnswering({
                 questions={key_qa}
                 data={data}
                 areaRefs={areaRefs}
+                question={question}
                 setQuestion={setQuestion}
                 updateVariable={updateVariable}
                 handleCopyToClipboard={handleCopyToClipboard}
