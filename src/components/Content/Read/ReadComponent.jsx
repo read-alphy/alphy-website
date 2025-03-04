@@ -156,7 +156,7 @@ export default function ReadComponent({
                           <TabsTrigger
                             key={tab.id}
                             value={tab.id}
-                            className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-900 data-[state=active]:dark:text-blue-300 data-[state=active]:dark:bg-blue-800   h-10 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                            className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-900 data-[state=active]:dark:text-blue-300 data-[state=active]:dark:bg-blue-800    rounded-md px-3 py-2 text-sm font-medium flex items-center transition-all"
                           >
                             {tab.icon}
                             {tab.label}
@@ -186,10 +186,10 @@ export default function ReadComponent({
                       </TabsList>
                     </div>
                     
-                    <div className="flex-grow overflow-auto">
+                    <div className="flex-grow overflow-auto pb-10 ">
                       <TabsContent value="summary" className="m-0 py-4 pr-4 h-full border-0">
                         {isLoading ? (
-                          <div className="flex justify-center items-center h-full">
+                          <div className="flex justify-center items-center h-full ">
                             <img src={working} width={100} alt="Loading" className="opacity-70" />
                           </div>
                         ) : (

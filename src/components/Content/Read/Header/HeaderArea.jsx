@@ -53,13 +53,20 @@ export default function HeaderArea({
   });
 
   const [readTime, setReadTime] = useState(0);
-
   useEffect(() => {
     // Calculate reading time for summary if available
     if (data?.summaries && data.summaries.length > 0 && data.summaries[0]?.summary) {
-      // Estimate reading time based on summary content
-      // Average reading speed is about 200-250 words per minute
-      const summaryText = data.summaries[0].summary.map(item => item.summary).join(' ');
+      let summaryText = '';
+      
+      // Check if summary is an array that needs mapping
+      if (Array.isArray(data.summaries[0].summary)) {
+        summaryText = data.summaries[0].summary.map(item => item.summary).join(' ');
+      } 
+      // Check if summary is already a string
+      else if (typeof data.summaries[0].summary === 'string') {
+        summaryText = data.summaries[0].summary;
+      }
+      
       const wordCount = summaryText.split(/\s+/).length;
       const readingTimeMinutes = Math.ceil(wordCount / 200); // Using 200 words per minute
       setReadTime(readingTimeMinutes);

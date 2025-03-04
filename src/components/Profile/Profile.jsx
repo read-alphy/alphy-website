@@ -35,9 +35,6 @@ function Profile({
     }
   }, [])
 
-
-
-
   useEffect(() => {
     if ((tier !== undefined && tier !== null) && subCalled === false) {
       setSubCalled(true)
@@ -50,56 +47,28 @@ function Profile({
   }
 
   return (
-    <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-      <div
-        className={`w-screen bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
-          collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-        }`}
-      ></div>
-
+    <div className="scrolling dark:bg-darkMode dark:text-zinc-300 font-averta-semibold">
       <div className="flex flex-row bg-white dark:bg-darkMode">
-        <div className={`flex hidden sm:block ${isAccountPage ? "" : "mr-5"} bg-zinc-100 dark:bg-mildDarkMode`}>
-          <SideFeed 
-            loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
-            currentUser={currentUser}
-            collapsed={collapsed}
-            setCollapsed={setCollapsed}
-            source_id={source_id}
-            tier={tier}
-            sandboxHistory={sandboxHistory}
-            setSandboxHistory={setSandboxHistory}
-          />
-        </div>
-
-        <div
-          className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${
-            collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-white'
-          }`}
-        >
-          <div className="rounded-lg rounded-t-none shadow-lg">
-            <div className="h-screen">
-              <SideFeed 
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                currentUser={currentUser}
-                collapsed={collapsed}
-                setCollapsed={setCollapsed}
-                source_id={source_id}
-                tier={tier}
-                sandboxHistory={sandboxHistory}
-                setSandboxHistory={setSandboxHistory}
-              />
-            </div>
-          </div>
-        </div>
+        <SideFeed 
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          currentUser={currentUser}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          source_id={source_id}
+          tier={tier}
+          sandboxHistory={sandboxHistory}
+          setSandboxHistory={setSandboxHistory}
+          isArc={false}
+          dataArc={null}
+        />
 
         <div
           className={`${
             collapsed ? 'scrolling' : 'scrolling'
-          } md:px-0 w-full max-h-[90vh] sm:max-h-[100vh] ${
-            collapsed ? 'hidden' : ' max-h-[100vh] overflow-hidden'
-          }}`}
+          } w-full max-h-[90vh] sm:max-h-[100vh] ${
+            collapsed ? 'overflow-hidden' : 'overflow-y-auto'
+          }`}
         >
           {isLoading ? (
             <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />

@@ -87,7 +87,7 @@ export default function HeroSection({ currentUser }) {
           >
             <span className="font-medium">Trusted by <strong>15,000+</strong> users</span>
             <span className="mx-2">•</span>
-            <span><strong>50,000+</strong> hours processed</span>
+            <span><strong>500,000+</strong> minutes processed</span>
           </motion.div>
 
          

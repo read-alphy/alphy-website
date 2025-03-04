@@ -34,7 +34,7 @@ export default function HubContent({
   const [activeTab, setActiveTab] = useState('sources')
   
   return (
-    <div className="">
+    <div className="pr-5">
       {globalLayout &&
         (mainShow === 'default' ? (
           <div className="pt-10 md:pt-16 3xl:pt-20 overflow-x-hidden ">

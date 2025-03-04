@@ -22,7 +22,7 @@ const featureData = {
       accentColor: "#EC4899", // Pink
       title: "Use it on YouTube, X Spaces, and Podcasts",
       description: "Turn the greatest online discussions to text and use Alphy to create new engaging material",
-      stat: "100K+ videos processed"
+      stat: "10K+ videos processed"
     },
     {
       icon: "/educationIcons/Textbook.svg",

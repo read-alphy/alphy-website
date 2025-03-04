@@ -326,7 +326,7 @@ function HubSourceFeed({ currentUser, tier, credit }) {
         {/* Content Grid */}
         <div className="mt-10">
           {isLoading && data.length === 0 ? (
-            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 gap-y-5">
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 gap-y-5 ">
               {[...Array(8)].map((_, index) => (
                 <div key={`skeleton-${index}`} className="flex flex-col space-y-3">
                   <Skeleton className="h-40 w-full rounded-md" />

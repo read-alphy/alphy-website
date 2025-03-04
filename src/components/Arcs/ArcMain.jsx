@@ -330,65 +330,27 @@ export default function ArcMain({
   
   return (
     <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-      {/* Mobile top navigation bar */}
-      <div
-        className={`w-screen bg-bordoLike transition origin-top-right transform sm:hidden rounded-t-none rounded-3xl ${
-          collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-        }`}
-      ></div>
+      <div className="flex flex-row bg-white dark:bg-darkMode">
+        <SideFeed 
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          currentUser={currentUser}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          source_id={isArc ? router.query.arc_id : router.asPath.split('/')[3]}
+          dataArc={dataArc}
+          tier={tier}
+          sandboxHistory={sandboxHistory}
+          setSandboxHistory={setSandboxHistory}
+          isArc={isArc}
+        />
 
-      <div className="flex flex-row">
-        {/* Side feed - desktop */}
-        {<div className={`hidden ${isArc ? 'md:flex' : 'md:flex'} `}>
-          <SideFeed
-            loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
-            currentUser={currentUser}
-            collapsed={collapsed}
-            setCollapsed={setCollapsed}
-            source_id={isArc ? router.query.arc_id : router.asPath.split('/')[3]}
-            dataArc={dataArc}
-            tier={tier}
-            sandboxHistory={sandboxHistory}
-            setSandboxHistory={setSandboxHistory}
-            isArc={isArc}
-          />
-        </div>}
-
-        {/* Side feed - mobile */}
-        <div
-          className={`fixed top-0 z-50 transition origin-top-right transform ${
-            isArc ? 'md:hidden' : 'md:hidden'
-          }  w-full shadow-lg bg-zinc-100 ${
-            collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-white'
-          }`}
-        >
-          <div className="rounded-lg rounded-t-none shadow-lg">
-            <div className="h-screen">
-              <SideFeed
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                currentUser={currentUser}
-                collapsed={collapsed}
-                setCollapsed={setCollapsed}
-                source_id={isArc ? router.query.arc_id : router.asPath.split('/')[3]}
-                dataArc={dataArc}
-                tier={tier}
-                sandboxHistory={sandboxHistory}
-                setSandboxHistory={setSandboxHistory}
-                isArc={isArc}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Main content area */}
         <div
           className={`${
             collapsed ? 'scrolling' : 'scrolling'
-          } xl:px-20 pb-20 sm:pb-0 w-full sm:max-h-[100vh] ${
-            collapsed ? 'hidden' : ' overflow-hidden'
-          }}`}
+          } w-full max-h-[90vh] sm:max-h-[100vh] ${
+            collapsed ? 'overflow-hidden' : 'overflow-y-auto'
+          }`}
         >
           {renderContent()}
         </div>
