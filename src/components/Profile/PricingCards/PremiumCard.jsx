@@ -2,12 +2,8 @@ import React from 'react';
 import PricingCard from './PricingCard';
 
 const PremiumCard = ({ 
-  currentUser, 
   tier, 
-  triggers, 
-  openPopover, 
-  setOpenPopover, 
-  canceledAtPeriodEnd,
+  currentUser,
   getSubscriptionLink,
   subscriptionLinkLoading,
   isYearly = true
@@ -33,6 +29,7 @@ const PremiumCard = ({
 
   return (
     <PricingCard
+    currentUser={currentUser}
       tier="premium"
       title="Premium"
       description="Experience audiovisual mastery"

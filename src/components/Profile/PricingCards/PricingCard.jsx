@@ -50,6 +50,10 @@ const PricingCard = ({
   onSelectPlan,
   loading = false
 }) => {
+
+  
+
+
   const handlePlanSelection = () => {
     if (!currentUser) {
       window.location.href = "/u/register";

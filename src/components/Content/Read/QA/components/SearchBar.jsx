@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowUp, X, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
 
 export default function SearchBar({
   inputRef,
@@ -61,7 +62,16 @@ export default function SearchBar({
               aria-label="Send message"
             >
               {isLoadingInside ? (
-                <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ 
+                    duration: 1, 
+                    repeat: Infinity, 
+                    ease: "linear" 
+                  }}
+                >
+                  <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                </motion.div>
               ) : (
                 <ArrowUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 font-bold stroke-[2.5]" />
               )}

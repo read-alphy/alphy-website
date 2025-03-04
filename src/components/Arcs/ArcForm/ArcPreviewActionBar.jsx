@@ -7,6 +7,7 @@ import ArcPreviewDialog from './ArcPreviewDialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { motion } from "framer-motion";
 
 /**
  * Combined component that shows playlist preview and action buttons
@@ -198,7 +199,16 @@ const renderActionButtons = (isEditArc, isLoadingSubmit, isCreateArc, onDelete, 
       disabled={isLoadingSubmit}
     >
       {isLoadingSubmit ? (
-        <Loader2 className="h-5 w-5 animate-spin mx-auto" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ 
+            duration: 1, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        >
+          <Loader2 className="h-5 w-5 mx-auto" />
+        </motion.div>
       ) : (
         <div className="flex items-center">
           <Save className="mr-2 h-4 w-4" />

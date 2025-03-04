@@ -1,4 +1,4 @@
-import { Download, Loader } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export default function DownloadOptions({
   handleDownload,
@@ -26,7 +27,16 @@ export default function DownloadOptions({
             disabled={downloading}
           >
             {downloading ? (
-              <Loader className="h-4 w-4 animate-spin" />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ 
+                  duration: 1, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }}
+              >
+                <Loader2 className="h-4 w-4" />
+              </motion.div>
             ) : (
               <>
                 <Download className="h-4 w-4" />

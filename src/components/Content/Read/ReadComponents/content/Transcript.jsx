@@ -1,4 +1,6 @@
-import Loading from '../../../../Loading'
+import React from 'react';
+import Loading from '../../../../Loading';
+import { motion } from 'framer-motion';
 
 const Transcript = ({
   isLoading,
@@ -16,7 +18,12 @@ const Transcript = ({
   }
 
   return (
-    <div className="content-area text-l font-normal max-w-screen-md overflow-auto h-full xl:max-h-[110vh]">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="content-area text-base font-normal max-w-screen-md overflow-auto h-full xl:max-h-[110vh] px-1"
+    >
       {transcript.map((item, index) => {
         if (index % 2 === 0 && index < transcript.length) {
           // This is a timestamp entry
@@ -38,7 +45,7 @@ const Transcript = ({
         } else if (index % 2 === 1 && index < transcript.length) {
           // This is the transcript text
           return (
-            <div className="summary-text" key={index}>
+            <div className="summary-text leading-relaxed mb-4" key={index}>
               <br />
               {item.replace(/\\h/g, ' ')}
             </div>
@@ -46,7 +53,7 @@ const Transcript = ({
         }
         return null;
       })}
-    </div>
+    </motion.div>
   );
 };
 
@@ -72,13 +79,11 @@ const renderTimestampEntry = (
             data.source_type === 'yt' || data.source_type === 'tw'
               ? 'lg:cursor-pointer lg:pointer-events-auto'
               : ''
-          } lg:pointer-events-auto lg:text-slate-900 lg:font-bold underline dark:text-slate-300`}
+          } lg:pointer-events-auto lg:text-slate-900 lg:font-semibold underline hover:text-blue-600 transition-colors duration-200 dark:text-slate-300 dark:hover:text-blue-400`}
         >
           <br />
-          <p className="text-md summary-text">{item}</p>
+          <p className="text-sm tracking-wide summary-text">{item}</p>
         </a>
-
-     
       </>
     );
   }
@@ -93,14 +98,12 @@ const renderTimestampEntry = (
           data.source_type === 'yt' || data.source_type === 'tw'
             ? 'lg:cursor-pointer lg:pointer-events-auto'
             : ''
-        } lg:pointer-events-auto lg:text-slate-900 dark:text-slate-300 font-bold underline`}
+        } lg:pointer-events-auto lg:text-slate-900 dark:text-slate-300 font-semibold underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200`}
         rel="noreferrer"
       >
         <br />
-        {item}
+        <span className="text-sm tracking-wide">{item}</span>
       </a>
-
-     
     </>
   );
 };

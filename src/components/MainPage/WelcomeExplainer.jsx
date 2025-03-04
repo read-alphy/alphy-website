@@ -50,7 +50,7 @@ export default function WelcomeExplainer({
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-white via-indigo-50/30 to-purple-50/40">
       <main className="w-full max-w-7xl mx-auto px-4">
         {/* Hero Section */}
         <HeroSection currentUser={currentUser} />

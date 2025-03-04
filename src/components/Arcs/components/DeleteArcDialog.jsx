@@ -3,6 +3,7 @@ import React from 'react'
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Loader2, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 
 const DeleteArcDialog = ({ 
   isOpen, 
@@ -28,7 +29,16 @@ const DeleteArcDialog = ({
           
           {isLoading ? (
             <div className="flex flex-col items-center py-2">
-              <Loader2 className="h-6 w-6 animate-spin mb-3 text-indigo-500" />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ 
+                  duration: 1, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }}
+              >
+                <Loader2 className="h-6 w-6 mb-3 text-indigo-500" />
+              </motion.div>
               <p className="text-slate-500 dark:text-zinc-400 quicksand">
                 Deleting arc...
               </p>

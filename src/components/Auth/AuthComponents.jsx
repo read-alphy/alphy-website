@@ -45,7 +45,16 @@ const SubmitButton = ({ isSubmitting, label, icon }) => (
       className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 quicksand font-medium flex items-center justify-center shadow-md hover:shadow-lg"
     >
       {isSubmitting ? (
-        <Loader2 className="h-5 w-5 animate-spin" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ 
+            duration: 1, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        >
+          <Loader2 className="h-5 w-5" />
+        </motion.div>
       ) : (
         <>
           {icon && <span className="">{icon}</span>}

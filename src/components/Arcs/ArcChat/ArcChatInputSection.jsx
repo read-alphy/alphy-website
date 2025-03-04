@@ -5,6 +5,7 @@ import { ArrowUp, X, Loader2 } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Link from "next/link"
 import { Textarea } from "@/components/ui/textarea"
+import { motion } from "framer-motion"
 
 const ArcChatInputSection = ({
   inputValue,
@@ -94,7 +95,16 @@ const ArcChatInputSection = ({
                 aria-label="Send message"
               >
                 {isLoadingInside ? (
-                  <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ 
+                      duration: 1, 
+                      repeat: Infinity, 
+                      ease: "linear" 
+                    }}
+                  >
+                    <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  </motion.div>
                 ) : (
                   <ArrowUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 font-bold stroke-[2.5]" />
                 )}

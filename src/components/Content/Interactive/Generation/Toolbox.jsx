@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Button } from '@material-tailwind/react'
 import { Loader2, CheckCircle } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 import { inputMessages } from '../messageBank'
 
@@ -88,11 +89,20 @@ const ToolCard = ({
               </svg>
             )}
             {isLoading ? (
-              <Loader2
-                color="inherit"
-                size={20}
-                className="mx-auto w-full justify-center"
-              />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ 
+                  duration: 1, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }}
+              >
+                <Loader2 
+                  color="inherit"
+                  size={20}
+                  className="mx-auto w-full justify-center"
+                />
+              </motion.div>
             ) : isPremium && tier !== 'premium' ? (
               'Premium'
             ) : (
