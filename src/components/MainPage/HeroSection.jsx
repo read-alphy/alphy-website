@@ -128,9 +128,9 @@ export default function HeroSection({ currentUser }) {
                     localStorage.setItem('newItem', 'link');
                   }
                 }}
-                className="rounded-lg text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700
-                           px-6 py-2.5 font-medium flex items-center transition 
-                           duration-300 ease-in-out hover:-translate-y-1 transform shadow-lg hover:shadow-xl"
+                className="rounded-lg text-sm text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 
+                           px-5 py-2 font-medium flex items-center transition-all
+                           duration-300 ease-in-out shadow-lg"
                 aria-label={currentUser ? 'Submit a link' : 'Start for free'}
               >
                 {currentUser ? (
@@ -140,7 +140,7 @@ export default function HeroSection({ currentUser }) {
                     viewBox="0 0 24 24"
                     strokeWidth="2"
                     stroke="currentColor"
-                    className="w-5 h-5 mr-2"
+                    className="w-4 h-4 mr-2"
                     aria-hidden="true"
                   >
                     <path
@@ -165,7 +165,7 @@ export default function HeroSection({ currentUser }) {
                   href="/submit"
                   onClick={() => localStorage.setItem('newItem', 'upload')}
                   className="rounded-lg text-zinc-800 dark:text-zinc-200 border border-slate-300 
-                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-2.5 font-medium 
+                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-5 py-2 text-sm font-medium 
                              flex items-center transition duration-300 ease-in-out 
                              "
                   aria-label="Upload from device"
@@ -176,7 +176,7 @@ export default function HeroSection({ currentUser }) {
                     viewBox="0 0 24 24"
                     strokeWidth="2"
                     stroke="currentColor"
-                    className="w-5 h-5 mr-2"
+                    className="w-4 h-4 mr-2"
                     aria-hidden="true"
                   >
                     <path

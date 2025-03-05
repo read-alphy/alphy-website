@@ -9,6 +9,7 @@ export default function SearchBar({
   inputValue,
   setInputValue,
   handleKeyDown,
+  setQuestion,
   handleClear,
   isLoadingInside,
   fetchData,
@@ -29,6 +30,8 @@ export default function SearchBar({
       handleClear();
     }
   };
+
+  
 
   return (
     <div className="px-2 sm:px-4 py-2 ">

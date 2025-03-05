@@ -41,8 +41,8 @@ export const formatAnswer = (answer, answerData, handleShowSingleSource) => {
       return (
         <div key={index} className="relative inline-flex group">
           <span
-            className="underline text-xs text-blue-500  quicksand font-semibold ml-1"
-           /*  onClick={() => handleShowSingleSource(part)} */
+            className="underline text-xs text-blue-500 quicksand font-semibold ml-1 cursor-pointer"
+            onClick={() => handleShowSingleSource(part)}
           >
             [{part}]
           </span>

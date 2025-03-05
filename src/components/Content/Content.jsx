@@ -316,7 +316,7 @@ export default function Content({
   }, [])
 
   return (
-    <div ref={ref} className="h-screen overflow-hidden">
+    <div ref={ref} className="h-screen overflow-hidden max-w-screen-2xl md:pl-5 3xl:pl-20 ">
       <div
         className={`transition-transform duration-300 ${
           isSandbox

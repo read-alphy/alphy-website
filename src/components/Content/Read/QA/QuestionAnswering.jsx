@@ -1,4 +1,4 @@
-// File: components/QuestionAnswering/index.js
+// Updated QuestionAnswering component
 import React, { useState, useEffect, createRef, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { Database } from 'lucide-react'
@@ -34,7 +34,6 @@ export default function QuestionAnswering({
   
   const QARef = useRef(null)
   const router = useRouter()
-  const [question, setQuestion] = useState(null);
   
   // State management with custom hook
   const {
@@ -70,6 +69,10 @@ export default function QuestionAnswering({
     setCollapseIndex,
     highlightIndex,
     setHighlightIndex,
+    question,
+    setQuestion,
+    openDialog,
+    setOpenDialog,
   } = useQAState()
 
   // Create refs for the source areas
@@ -81,11 +84,8 @@ export default function QuestionAnswering({
   // Event handlers with custom hook
   const {
     handleClear,
-    handleBaseQA,
-    handleBaseQAaccordion,
-    handleOptionClear,
+    handleBaseQA,  // Make sure this is destructured
     handleKeyDown,
-    handleShareLink,
     handleCopyToClipboard,
     handleShowSingleSource,
     handleScroll,
@@ -96,6 +96,10 @@ export default function QuestionAnswering({
     inputValue,
     setInputValue,
     QARef,
+    question,
+    setQuestion,
+    openDialog,
+    setOpenDialog,
     setIsCleared,
     setShowBaseQA,
     setShowUserQA,
@@ -112,6 +116,7 @@ export default function QuestionAnswering({
     setSelectionCall,
     setHighlightIndex,
     setClicked,
+    setShowSource,
     data,
     baseQuestion,
     collapseIndex,
@@ -129,9 +134,9 @@ export default function QuestionAnswering({
   const updateVariable = (event) => {
     timestampChanger(event)
   }
+
   // Process URL query parameter on initial load
   useEffect(() => {
-    
     const processUrlQuery = () => {
       if (
         router.asPath.split('/')[2]?.split('&q=')[1] !== undefined &&
@@ -187,70 +192,81 @@ export default function QuestionAnswering({
     }
   }
 
+  // Effect to update question state when baseQuestion changes
+  useEffect(() => {
+    if (baseQuestion) {
+      setQuestion(baseQuestion);
+    }
+  }, [baseQuestion, setQuestion]);
+
   return (
-    
-      <div
-        id="q-and-a"
-        className="relative h-[95vh] flex flex-col "
-        ref={QARef}
-      >
-        <div className="">
-          {inputError && inputValue.length === 0 && (
-            <ErrorMessage message={errorText} />
-          )}
-  
-          {isLoadingInside && !showBaseQA && (
-            <QuestionLoading />
-          )}
-  
+    <div
+      id="q-and-a"
+      className="relative h-[95vh] flex flex-col "
+      ref={QARef}
+    >
+      <div className="">
+        {inputError && inputValue.length === 0 && (
+          <ErrorMessage message={errorText} />
+        )}
+
+        {isLoadingInside && !showBaseQA && (
+          <QuestionLoading />
+        )}
+
+        {(
+          <DynamicQuestion
+            answerData={answerData}
+            question={baseQuestion || question}  // Prefer baseQuestion if available
+            setQuestion={setQuestion}
+            data={data}
+            handleClear={handleClear}
+            handleCopyToClipboard={handleCopyToClipboard}
+            handleShowSingleSource={handleShowSingleSource}
+            formatAnswer={formatAnswer}
+            updateVariable={updateVariable}
+            handleLength={handleLength}
+            inputValue={inputValue}
+            showSource={showSource}
+            setShowSource={setShowSource}
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+          />
+        )}
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 pb-10">
+        <div className="mb-4">
           {(
-            <DynamicQuestion
-              answerData={answerData}
-              question={question}
+            <QuestionsDisplay
+              questions={key_qa}
               setQuestion={setQuestion}
               data={data}
-              handleClear={handleClear}
-              handleCopyToClipboard={handleCopyToClipboard}
-              handleShowSingleSource={handleShowSingleSource}
-              formatAnswer={formatAnswer}
+              areaRefs={areaRefs}
               updateVariable={updateVariable}
+              handleCopyToClipboard={handleCopyToClipboard}
+              formatAnswer={formatAnswer}
               handleLength={handleLength}
-              inputValue={inputValue}
+              answerData={answerData}
+              handleShowSingleSource={handleShowSingleSource}
+              setAnswerData={setAnswerData}
+              handleBaseQA={handleBaseQA} 
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
             />
           )}
         </div>
-  
-        <div className="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 pb-10">
-          <div className="mb-4">
-            {(
-              <QuestionsDisplay
-                questions={key_qa}
-                data={data}
-                areaRefs={areaRefs}
-                question={question}
-                setQuestion={setQuestion}
-                updateVariable={updateVariable}
-                handleCopyToClipboard={handleCopyToClipboard}
-                formatAnswer={formatAnswer}
-                handleLength={handleLength}
-                answerData={answerData}
-                handleShowSingleSource={handleShowSingleSource}
-                setAnswerData={setAnswerData} // Add this prop
-              />
-            )}
-          </div>
-          <SearchBar
-            inputRef={inputRef}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            handleKeyDown={handleKeyDown}
-            handleClear={handleClear}
-            isLoadingInside={isLoadingInside}
-            fetchData={fetchData}
-            buttonRef={buttonRef}
-          />
-        </div>
+        <SearchBar
+          inputRef={inputRef}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          handleKeyDown={handleKeyDown}
+          handleClear={handleClear}
+          isLoadingInside={isLoadingInside}
+          fetchData={fetchData}
+          buttonRef={buttonRef}
+        />
       </div>
-    
+    </div>
   )
 }

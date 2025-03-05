@@ -32,7 +32,7 @@ const InteractiveComponent = ({
 
   return (
     <div className="w-full">
-      <Card className="h-full rounded-none border-t-0 border-b-0 border-r-0 border-l  shadow-none ">
+      <Card className="h-full rounded-none border-t-0 border-b-0 border-r border-l 2xl:border-r  shadow-none ">
         <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
           <div className="flex items-center justify-between">
             <Tabs defaultValue="qa" className="w-full" onValueChange={setActiveTab}>
