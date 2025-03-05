@@ -1,19 +1,16 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Download, Play, FileText, List, MessageSquare, LayoutSplit, Layers, Languages, ExternalLink } from 'lucide-react'
+
+import { Download, Play, FileText, List, MessageSquare, Layers, Languages, Sparkles } from 'lucide-react'
 
 import Summary from './ReadComponents/content/Summary'
 import Transcript from './ReadComponents/content/Transcript'
 import MediaPlayer from './ReadComponents/MediaPlayer'
 import MediaControls from './ReadComponents/MediaControls'
-import SelectionPopover from './ReadComponents/SelectionPopover'
 import DownloadOptions from './ReadComponents/DownloadOptions'
 
 
@@ -53,6 +50,8 @@ export default function ReadComponent({
   requestTranslation,
   tier,
   theme,
+  activeMobilePanel,
+  setActiveMobilePanel,
 }) {
   const [isClient, setIsClient] = useState(false)
   
@@ -115,6 +114,10 @@ export default function ReadComponent({
     { id: "transcript", label: "Transcript", icon: <MessageSquare className="h-4 w-4 mr-2" /> }
   ];
 
+  const toggleMobilePanel = () => {
+    setActiveMobilePanel(activeMobilePanel === 'read' ? 'interactive' : 'read');
+  };
+
   return (
     <div className="">
       {isContentAvailable ? (
@@ -167,16 +170,26 @@ export default function ReadComponent({
                         
 
                         <div className="ml-auto flex items-center space-x-2">
-                         <DownloadOptions
-                          handleDownload={handleDownload}
-                          downloading={downloading}
-                          tier={tier}
-                          basicDataLoaded={basicDataLoaded}
-                          themePopover={themePopover}
-                         />
-                          
+                          {/* Interactive button for mobile */}
+                          <Button 
+                            onClick={toggleMobilePanel}
+                            className="lg:hidden bg-gradient-to-r from-indigo-500 to-purple-500 text-white h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                          >
+                             <Sparkles className="h-4 w-4 mr-2" />
+                            Interactive
+                          </Button>
+                          {/* Download options for desktop */}
+                          <div className="hidden lg:block">
+                            <DownloadOptions
+                              handleDownload={handleDownload}
+                              downloading={downloading}
+                              tier={tier}
+                              basicDataLoaded={basicDataLoaded}
+                              themePopover={themePopover}
+                            />
+                          </div>
                         </div>
-                        <div className="pl-4">
+                        <div className="pl-4 hidden lg:block">
                           {!showYouTubeFrame&&
                           <MediaControls 
                             data={data}
@@ -184,12 +197,12 @@ export default function ReadComponent({
                             handleShowYouTubeFrame={handleShowYouTubeFrame}
                             />
                           }
-</div>
+                        </div>
                       </TabsList>
                     </div>
                     
                     <div className="flex-grow overflow-auto pb-10 ">
-                      <TabsContent value="summary" className="m-0 py-4 pr-4 h-full border-0">
+                      <TabsContent value="summary" className="m-0 pl-4 lg:pl-0 py-4 pr-4 h-full border-0">
                         {isLoading ? (
                           <div className="flex justify-center items-center h-full ">
                             <img src={working} width={100} alt="Loading" className="opacity-70" />
@@ -208,7 +221,7 @@ export default function ReadComponent({
                         )}
                       </TabsContent>
                       
-                      <TabsContent value="transcript" className="m-0 py-4 pr-4 h-full border-0">
+                      <TabsContent value="transcript" className="m-0 py-4 pr-4 pl-4 lg:pl-0  h-full border-0">
                         <Transcript
                                   isLoading={isLoading}
                                   transcript={transcript}

@@ -4,6 +4,7 @@ import { Clock, BookOpen } from 'lucide-react'
 
 import HeaderMenu from './HeaderMenu'
 
+
 export default function HeaderArea({
   data,
   title,
@@ -30,7 +31,7 @@ export default function HeaderArea({
   showClip,
   setShowClip,
   showYouTubeFrame,
-  handleShowYouTubeFrame
+  handleShowYouTubeFrame,
 }) {
   
   const [theme, setTheme] = useState(() => {

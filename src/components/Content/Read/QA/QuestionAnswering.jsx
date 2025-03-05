@@ -202,10 +202,10 @@ export default function QuestionAnswering({
   return (
     <div
       id="q-and-a"
-      className="relative h-[95vh] flex flex-col "
+      className="relative h-[95vh] flex flex-col"
       ref={QARef}
     >
-      <div className="">
+      <div className="mb-24 lg:mb-0">
         {inputError && inputValue.length === 0 && (
           <ErrorMessage message={errorText} />
         )}
@@ -235,8 +235,8 @@ export default function QuestionAnswering({
         )}
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 pb-10">
-        <div className="mb-4">
+      <div className="fixed lg:absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 pb-4 lg:pb-10  shadow-md lg:shadow-none">
+        <div className="mb-2 lg:mb-4 max-h-32 lg:max-h-none overflow-y-auto">
           {(
             <QuestionsDisplay
               questions={key_qa}

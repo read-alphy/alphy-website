@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MessageSquare, ExternalLink, Sparkles, Download } from 'lucide-react';
+import { MessageSquare, ExternalLink, Sparkles, Download, BookOpen } from 'lucide-react';
 import QuestionAnswering from '../Read/QA/QuestionAnswering';
 import Sandbox from './Sandbox';
 
@@ -26,9 +26,15 @@ const InteractiveComponent = ({
   setAskAlphyForSandbox,
   askText,
   getSandboxHistory,
-  tier
+  tier,
+  activeMobilePanel,
+  setActiveMobilePanel,
 }) => {
   const [activeTab, setActiveTab] = useState("qa");
+
+  const toggleMobilePanel = () => {
+    setActiveMobilePanel(activeMobilePanel === 'read' ? 'interactive' : 'read');
+  };
 
   return (
     <div className="w-full">
@@ -36,7 +42,7 @@ const InteractiveComponent = ({
         <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
           <div className="flex items-center justify-between">
             <Tabs defaultValue="qa" className="w-full" onValueChange={setActiveTab}>
-              <TabsList className="bg-transparent rounded-none h-full h-10 w-full justify-start space-x-2">
+              <TabsList className="bg-transparent rounded-none h-full mt-2 lg:mt-0 h-10 w-full justify-start space-x-2">
                 <TabsTrigger 
                   value="qa" 
                   className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
@@ -51,6 +57,13 @@ const InteractiveComponent = ({
                   <Sparkles className="h-4 w-4 mr-2" />
                   Playground
                 </TabsTrigger>
+                <Button 
+                  onClick={toggleMobilePanel}
+                  className="lg:hidden ml-2 bg-blue-500 text-white h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                >
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Read
+                </Button>
               </TabsList>
             </Tabs>
             <div className="flex items-center space-x-2">

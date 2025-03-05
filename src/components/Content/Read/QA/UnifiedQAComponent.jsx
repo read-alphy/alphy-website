@@ -358,9 +358,7 @@ export function QuestionsDisplay({
       {answerData.answer.length == 0 &&
       <div className="flex flex-col gap-4">
 
-        <div>
-          Ask questions and get sourced answers
-          </div>
+     
       <div className=" grid grid-cols-2 flex gap-4">
         {Object.keys(questions).map((question, index) => (
           <Question
@@ -498,14 +496,14 @@ export function DynamicQuestion({
   return (
     <Card className="shadow-none h-[90vh] border-0">
       <CardHeader className="pb-3 bg-slate-50 dark:from-zinc-800 dark:to-zinc-900">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+        <div className="flex flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-2">
             <CardTitle className="text-md font-semibold text-slate-800 dark:text-slate-200">
              Conversation
             </CardTitle>
           </div>
           
-          <div className="flex gap-2 ml-auto sm:ml-0">
+          <div className="flex gap-2">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
