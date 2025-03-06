@@ -301,170 +301,177 @@ export default function Content({
 
   return (
     <div ref={ref} className="h-screen overflow-hidden max-w-screen-2xl lg:pl-5 3xl:pl-20">
+      
       <div
-        className={`transition-transform duration-300 flex flex-col h-full`}
+        className={`hidden lg:flex lg:flex-row h-full w-full`}
       >
-        {/* Header area - always visible on mobile */}
-        <div className="hidden lg:flex flex flex-row">
-          <div className={`${
-              isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
-            }`}>
-          <div className="flex flex-col">
-            <div className="flex flex-row mt-4">
-            {data?.source_type === 'yt' && data?.source_id && (
-              <div className="mb-4 hidden lg:block">
-                <img 
-                  src={`https://i.ytimg.com/vi/${data.source_id}/hqdefault.jpg`} 
-                  alt={data?.title || "YouTube thumbnail"} 
-                  className="rounded-lg shadow-md max-w-[150px] lg:hover:cursor-pointer lg:hover:opacity-80 transition-opacity duration-200"
-                  onClick={handleShowYouTubeFrame}
-                />
-              </div>
-            )}
-            
-             
-            <HeaderArea
-              data={data}
-              title={data?.title}
-              tier={tier}
-              isVisible={isVisible}
-              handleVisibility={handleVisibility}
-              handleBookmark={handleBookmark}
-              isBookmarked={isBookmarked}
-              handleReportIssue={handleReportIssue}
-              showReportIssue={showReportIssue}
-              setShowReportIssue={setShowReportIssue}
-              handleAddToArchipelago={handleAddToArchipelago}
-              userArchipelagoNames={userArchipelagoNames}
-              currentUser={currentUser}
-              transcript={transcript}
-              summary={summary}
-              language={language}
-              handleLanguageChange={handleLanguageChange}
-              setLanguage={setLanguage}
-              languages={languages}
-              mainPopoverOpen={mainPopoverOpen}
-              setMainPopoverOpen={setMainPopoverOpen}
-              mainPopoverOpenSmall={mainPopoverOpenSmall}
-              setMainPopoverOpenSmall={setMainPopoverOpenSmall}
-              modelName={modelName}
-              reorderedLanguageCodes={reorderedLanguageCodes}
-              isSandbox={isSandbox}
-              setIsSandbox={setIsSandbox}
-              showClip={showClip}
-              setShowClip={setShowClip}
-              showYouTubeFrame={showYouTubeFrame}
-              handleShowYouTubeFrame={handleShowYouTubeFrame}
-              activeMobilePanel={activeMobilePanel}
-              setActiveMobilePanel={setActiveMobilePanel}
-            /> 
-          </div>
           <div 
-            className={`transition-all duration-300 ease-in-out ${
-              isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
-            } flex flex-col h-full lg:mt-10 ${
-              activeMobilePanel === 'read' ? 'block w-full' : 'hidden'
-            } lg:block`}
-          >
-              <div className="h-full overflow-auto mt-4">
-                <ReadComponent
-                  data={data}
-                  transcript={transcript}
-                  summary={summary}
-                  summaryArray={summaryArray}
-                  keyTakeaways={keyTakeaways}
-                  isLoading={isLoading}
-                  handleClickTimestamp={handleClickTimestamp}
-                  handleDownload={handleDownload}
-                  handleAskAlphy={handleAskAlphy}
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                  inputValue={inputValue}
-                  setInputValue={setInputValue}
-                  selectionCall={selectionCall}
-                  setSelectionCall={setSelectionCall}
-                  buttonRef={buttonRef}
-                  inputRef={inputRef}
-                  timestampChanger={timestampChanger}
-                  languages={languages}
-                  languagesWanted={languagesWanted}
-                  language={language}
-                  errorMessage={errorMessage}
-                  contentSummaries={data?.summaries || []}
-                  showYouTubeFrame={showYouTubeFrame}
-                  setShowYouTubeFrame={setShowYouTubeFrame}
-                  videoRef={videoRef}
-                  canvasRef={canvasRef}
-                  autoplay={autoplay}
-                  timestamp={timestamp}
-                  title={data?.title}
-                  basicDataLoaded={basicDataLoaded}
-                  setBasicDataLoaded={setBasicDataLoaded}
-                  handleShowYouTubeFrame={handleShowYouTubeFrame}
-                  contentRef={contentRef}
-                  downloading={downloading}
-                  themePopover={themePopover}
-                  language_codes={LANGUAGE_CODES}
-                  currentUser={currentUser}
-                  requestTranslation={requestTranslation}
-                  tier={tier}
-                  activeMobilePanel={activeMobilePanel}
-                  setActiveMobilePanel={setActiveMobilePanel}
-                /> 
-              </div>
-            </div>
-            </div>
-          </div>
+              className={`transition-all duration-300 ease-in-out ${
+                isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
+              } flex flex-col h-full mt-10`}
+            >
+                <div className="flex flex-row">
+                          {data?.source_type === 'yt' && data?.source_id && (
+                            <div className="mb-4">
+                              <img 
+                                src={`https://i.ytimg.com/vi/${data.source_id}/hqdefault.jpg`} 
+                                alt={data?.title || "YouTube thumbnail"} 
+                                className="rounded-lg shadow-md max-w-[150px] lg:hover:cursor-pointer lg:hover:opacity-80 transition-opacity duration-200"
+                                onClick={handleShowYouTubeFrame}
+                                
+                              />
+                            </div>
+                          )}
+                          <HeaderArea
+                          data={data}
+                          title={data?.title}
+                          tier={tier}
+                          isVisible={isVisible}
+                          handleVisibility={handleVisibility}
+                          handleBookmark={handleBookmark}
+                          isBookmarked={isBookmarked}
+                          handleReportIssue={handleReportIssue}
+                          showReportIssue={showReportIssue}
+                          setShowReportIssue={setShowReportIssue}
+                          handleAddToArchipelago={handleAddToArchipelago}
+                          userArchipelagoNames={userArchipelagoNames}
+                          currentUser={currentUser}
+                          transcript={transcript}
+                          summary={summary}
+                          language={language}
+                          handleLanguageChange={handleLanguageChange}
+                          setLanguage={setLanguage}
+                          languages={languages}
+                          mainPopoverOpen={mainPopoverOpen}
+                          setMainPopoverOpen={setMainPopoverOpen}
+                          mainPopoverOpenSmall={mainPopoverOpenSmall}
+                          setMainPopoverOpenSmall={setMainPopoverOpenSmall}
+                          modelName={modelName}
+                          reorderedLanguageCodes={reorderedLanguageCodes}
+                          isSandbox={isSandbox}
+                          setIsSandbox={setIsSandbox}
+                          showClip={showClip}
+                          setShowClip={setShowClip}
+                          showYouTubeFrame={showYouTubeFrame}
+                          handleShowYouTubeFrame={handleShowYouTubeFrame}
+                        /> 
+                    </div>
+                
+       
+                  <div className="flex-grow overflow-hidden">
+                    <div className="h-full overflow-auto mt-4">
+                       <ReadComponent
+                          data={data}
+                          transcript={transcript}
+                          summary={summary}
+                          summaryArray={summaryArray}
+                          keyTakeaways={keyTakeaways}
+                          isLoading={isLoading}
+                          handleClickTimestamp={handleClickTimestamp}
+                          handleDownload={handleDownload}
+                          handleAskAlphy={handleAskAlphy}
+                          activeTab={activeTab}
+                          setActiveTab={setActiveTab}
+                          inputValue={inputValue}
+                          setInputValue={setInputValue}
+                          selectionCall={selectionCall}
+                          setSelectionCall={setSelectionCall}
+                          buttonRef={buttonRef}
+                          inputRef={inputRef}
+                          timestampChanger={timestampChanger}
+                          languages={languages}
+                          languagesWanted={languagesWanted}
+                          language={language}
+                          errorMessage={errorMessage}
+                          contentSummaries={data?.summaries || []}
+                          showYouTubeFrame={showYouTubeFrame}
+                          setShowYouTubeFrame={setShowYouTubeFrame}
+                          videoRef={videoRef}
+                          canvasRef={canvasRef}
+                          autoplay={autoplay}
+                          timestamp={timestamp}
+                          title={data?.title}
+                          basicDataLoaded={basicDataLoaded}
+                          setBasicDataLoaded={setBasicDataLoaded}
+                          handleShowYouTubeFrame={handleShowYouTubeFrame}
+                          contentRef={contentRef}
+                          downloading={downloading}
+                          themePopover={themePopover}
+                          language_codes={LANGUAGE_CODES}
+                          currentUser={currentUser}
+                          requestTranslation={requestTranslation}
+                          tier={tier}
+                          activeMobilePanel={activeMobilePanel}
+                          setActiveMobilePanel={setActiveMobilePanel}
+                        /> 
+
+                      </div>
+                    </div>
+               </div>
+              
+          
           
           <div 
-            className={`transition-all duration-300 ease-in-out ${
-              isInteractivePanelCollapsed 
-                ? 'w-0 opacity-0 overflow-hidden' 
-                : 'w-2/5 opacity-100'
-            } h-full relative hidden lg:block`}
-          >
-            <InteractiveComponent
-              data={data}
-              summary={summary}
-              transcript={transcript}
-              handleAskAlphy={handleAskAlphy}
-              selectionCall={selectionCall}
-              setSelectionCall={setSelectionCall}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              setShowYouTubeFrame={setShowYouTubeFrame}
-              buttonRef={buttonRef}
-              inputRef={inputRef}
-              timestampChanger={timestampChanger}
-              currentUser={currentUser}
-              askAlphyForSandbox={askAlphyForSandbox}
-              setAskAlphyForSandbox={setAskAlphyForSandbox}
-              askText={askText}
-              getSandboxHistory={getSandboxHistory}
-              tier={tier}
-              activeMobilePanel={activeMobilePanel}
-              setActiveMobilePanel={setActiveMobilePanel}
-            />
-
-            {/* Collapse/Expand toggle button - only visible on desktop */}
+          className={`transition-all duration-300 ease-in-out ${
+            isInteractivePanelCollapsed 
+              ? 'w-0 opacity-0 overflow-hidden' 
+              : 'w-2/5 opacity-100'
+          } h-full `}
+        >
+          
+          {/* Collapse/Expand toggle button */}
           <button
-              onClick={toggleInteractivePanel}
-              className="absolute -left-4 top-10 transform -translate-y-1/2 z-[9999] opacity-0 hover:opacity-100 bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm hidden md:block"
-              aria-label={isInteractivePanelCollapsed ? "Expand panel" : "Collapse panel"}
-            >
-              <ChevronRight 
-                size={24} 
-                className={`transition-transform duration-300 ${
-                  isInteractivePanelCollapsed ? 'rotate-180' : ''
-                }`}
-              />
-            </button>
+            onClick={toggleInteractivePanel}
+            className="absolute -left-4 top-10 transform -translate-y-1/2 z-[9999] opacity-0  hover:opacity-100 bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm"
+            aria-label={isInteractivePanelCollapsed ? "Expand panel" : "Collapse panel"}
+          >
+            <ChevronRight 
+              size={24} 
+              className={`transition-transform duration-300 ${
+                isInteractivePanelCollapsed ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          
+          <InteractiveComponent
+            data={data}
+            summary={summary}
+            transcript={transcript}
+            handleAskAlphy={handleAskAlphy}
+            selectionCall={selectionCall}
+            setSelectionCall={setSelectionCall}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            setShowYouTubeFrame={setShowYouTubeFrame}
+            buttonRef={buttonRef}
+            inputRef={inputRef}
+            timestampChanger={timestampChanger}
+            currentUser={currentUser}
+            askAlphyForSandbox={askAlphyForSandbox}
+            setAskAlphyForSandbox={setAskAlphyForSandbox}
+            askText={askText}
+            getSandboxHistory={getSandboxHistory}
+            tier={tier}
+          />
           </div>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
         
-        </div>
-        
-        <div className="flex lg:hidden w-full">
-          <div className="flex flex-col">
+    <div 
+          className={`lg:hidden transition-all duration-300 ease-in-out w-full flex flex-col h-full `}
+        >
+<div className="flex flex-row">
              <HeaderArea
               data={data}
               title={data?.title}
@@ -500,42 +507,11 @@ export default function Content({
               activeMobilePanel={activeMobilePanel}
               setActiveMobilePanel={setActiveMobilePanel}
             /> 
+ </div>
 
-        {activeMobilePanel === 'interactive' &&
-          <div className="flex-grow overflow-hidden w-[100vw]">
-            <div className="h-full overflow-auto mt-4">
-
-            
-             <InteractiveComponent
-              data={data}
-              summary={summary}
-              transcript={transcript}
-              handleAskAlphy={handleAskAlphy}
-              selectionCall={selectionCall}
-              setSelectionCall={setSelectionCall}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              setShowYouTubeFrame={setShowYouTubeFrame}
-              buttonRef={buttonRef}
-              inputRef={inputRef}
-              timestampChanger={timestampChanger}
-              currentUser={currentUser}
-              askAlphyForSandbox={askAlphyForSandbox}
-              setAskAlphyForSandbox={setAskAlphyForSandbox}
-              askText={askText}
-              getSandboxHistory={getSandboxHistory}
-              tier={tier}
-              activeMobilePanel={activeMobilePanel}
-              setActiveMobilePanel={setActiveMobilePanel}
-            />
-            
-            </div>
-            </div>
-            }
-          {activeMobilePanel === 'read' &&
-              <div>
+            {activeMobilePanel === 'read' &&
             <div className="flex-grow overflow-hidden">
-              <div className="h-full overflow-auto mt-4">
+            <div className="h-full overflow-auto mt-4">
                 <ReadComponent
                   data={data}
                   transcript={transcript}
@@ -580,13 +556,42 @@ export default function Content({
                   activeMobilePanel={activeMobilePanel}
                   setActiveMobilePanel={setActiveMobilePanel}
                 /> 
-              </div>
-            </div>
+                </div>
+                </div>
           
+            }
+            {activeMobilePanel === 'interactive' &&
+             <div className="flex-grow overflow-hidden">
+            <div className="lg:hidden h-full overflow-auto mt-4">
+              <InteractiveComponent
+              data={data}
+              summary={summary}
+              transcript={transcript}
+              handleAskAlphy={handleAskAlphy}
+              selectionCall={selectionCall}
+              setSelectionCall={setSelectionCall}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              setShowYouTubeFrame={setShowYouTubeFrame}
+              buttonRef={buttonRef}
+              inputRef={inputRef}
+              timestampChanger={timestampChanger}
+              currentUser={currentUser}
+              askAlphyForSandbox={askAlphyForSandbox}
+              setAskAlphyForSandbox={setAskAlphyForSandbox}
+              askText={askText}
+              getSandboxHistory={getSandboxHistory}
+              tier={tier}
+              activeMobilePanel={activeMobilePanel}
+              setActiveMobilePanel={setActiveMobilePanel}
+            />
+            </div>
+            </div>
+            }
+
+
           </div>
-          }
-          </div>
-          </div>
+          
           
           
             
@@ -600,36 +605,36 @@ export default function Content({
               <ChevronRight size={20} className="rotate-180 stroke-[2.5px]" />
             </button>
           )}
-        </div>
+       
 
       
 
        
       
 
-      {basicDataLoaded && (
-        <TranslationStatus
-          data={data}
-          transcript={transcript}
-          summary={summary}
-          language={language}
-          languagesWanted={languagesWanted}
-          source_type={source_type}
-          LANGUAGE_CODES={LANGUAGE_CODES}
-        />
-      )}
-      
-      <ErrorMessage 
-        errorMessage={errorMessage} 
-      />
-      
-      {showYouTubeFrame && 
-        <MediaControls 
-          data={data}
-          showYouTubeFrame={showYouTubeFrame}
-          handleShowYouTubeFrame={handleShowYouTubeFrame}
-        />
-      }
+              {basicDataLoaded && (
+                <TranslationStatus
+                  data={data}
+                  transcript={transcript}
+                  summary={summary}
+                  language={language}
+                  languagesWanted={languagesWanted}
+                  source_type={source_type}
+                  LANGUAGE_CODES={LANGUAGE_CODES}
+                />
+              )}
+              
+              <ErrorMessage 
+                errorMessage={errorMessage} 
+              />
+              
+              {showYouTubeFrame && 
+                <MediaControls 
+                  data={data}
+                  showYouTubeFrame={showYouTubeFrame}
+                  handleShowYouTubeFrame={handleShowYouTubeFrame}
+                />
+              }
     </div>
   )
 }

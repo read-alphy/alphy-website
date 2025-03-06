@@ -120,6 +120,7 @@ export default function ReadComponent({
 
   return (
     <div className="">
+      
       {isContentAvailable ? (
         <div className="flex flex-col">
           {/* Media Player Section */}
@@ -159,7 +160,7 @@ export default function ReadComponent({
                           <TabsTrigger
                             key={tab.id}
                             value={tab.id}
-                            className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-900 data-[state=active]:dark:text-blue-300 data-[state=active]:dark:bg-blue-800    rounded-md px-3 py-2 text-sm font-medium flex items-center transition-all"
+                            className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-900 data-[state=active]:dark:text-blue-300 data-[state=active]:dark:bg-blue-800    rounded-md px-3 py-1 text-sm font-medium flex items-center transition-all"
                           >
                             {tab.icon}
                             {tab.label}

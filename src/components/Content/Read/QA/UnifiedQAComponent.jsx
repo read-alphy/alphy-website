@@ -464,12 +464,10 @@ export function DynamicQuestion({
     }
   };
 
-  const toggleMobileCarousel = () => {
-    setShowMobileCarousel(!showMobileCarousel);
-  };
 
   const toggleSources = () => {
     setShowSources(!showSources);
+    setShowMobileCarousel(!showMobileCarousel);
   };
 
   const copyToClipboard = () => {
@@ -681,7 +679,7 @@ export function DynamicQuestion({
         {hasSources && showSources && (
           <div className="w-full mt-4">
             {/* Mobile Banner */}
-            <div className="md:hidden mb-4">
+           {/*  <div className="lg:hidden mb-4">
               <Button 
                 variant="outline" 
                 className="w-full border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 flex items-center justify-between"
@@ -694,7 +692,7 @@ export function DynamicQuestion({
                   <ChevronDown className="h-4 w-4 ml-2" />
                 )}
               </Button>
-            </div>
+            </div> */}
 
             {/* Desktop view always visible, mobile view conditionally visible */}
             <div className={`relative mb-6 ${!showMobileCarousel ? 'hidden md:block' : 'block'}`}>

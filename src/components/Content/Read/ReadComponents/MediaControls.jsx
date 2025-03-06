@@ -8,7 +8,7 @@ const MediaControls = ({
   handleShowYouTubeFrame
 }) => {
 
-  console.log(data.source_type)
+  
   return (
     <>
       {/* YouTube Button */}

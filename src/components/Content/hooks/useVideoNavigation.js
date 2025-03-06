@@ -4,8 +4,8 @@ export const useVideoNavigation = () => {
   const [autoplay, setAutoplay] = useState(0)
   const [timestamp, setTimestamp] = useState()
   const [showYouTubeFrame, setShowYouTubeFrame] = useState(false)
-
   const handleClickTimestamp = event => {
+    // Remove the mediaPlayer element if it exists
     setAutoplay(1)
     
     // Handle ISO 8601 duration format (e.g., PT0.08S)

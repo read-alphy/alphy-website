@@ -45,14 +45,15 @@ const InteractiveComponent = ({
               <TabsList className="bg-transparent rounded-none h-full lg:mt-0 h-10 w-full justify-start space-x-2">
                 <TabsTrigger 
                   value="qa" 
-                  className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                  className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 rounded-md px-3 text-sm font-medium flex items-center transition-all py-1"
                 >
                   <MessageSquare className="h-4 w-4 mr-2" />
                   Q&A
                 </TabsTrigger>
                 <TabsTrigger 
                   value="sandbox" 
-                  className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-purple-500 data-[state=active]:text-white h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                  className="bg-gradient-to-r from-purple-400 to-indigo-500 
+                  text-white data-[state=active]:from-indigo-500 data-[state=active]:to-purple-400 data-[state=active]:text-white rounded-md px-3 text-sm font-medium flex items-center transition-all duration-500"
                 >
                   <Sparkles className="h-4 w-4 mr-2" />
                   Playground

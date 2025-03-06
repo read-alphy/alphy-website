@@ -22,7 +22,7 @@ const Summary = ({
   // No summary available yet
   if (summaryArray.length === 0) {
     return (
-      <div className="text-l text-slate-500 dark:text-slate-200 quicksand font-bold max-w-screen-md mx-auto text-center flex flex-col">
+      <div className="overflow-auto text-l text-slate-500 dark:text-slate-200 quicksand font-bold max-w-screen-md mx-auto text-center flex flex-col">
         {summary === undefined || summary.length === 0
           ? "This content doesn't have a summary. Check out the transcript!"
           : 'Summary is being generated. Meanwhile, check the transcript.'}
@@ -47,7 +47,7 @@ const Summary = ({
     const displayedTakeaways = keyTakeaways.slice(0, 5);
     
     return (
-      <Card className="mb-6 border border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-none overflow-hidden">
+      <Card className="mb-6 border border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-none">
         <CardHeader className="pb-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40">
           <CardTitle className="flex items-center text-lg font-semibold text-indigo-800 dark:text-indigo-300">
             <Lightbulb className="h-4 w-4 mr-2 text-amber-500 dark:text-amber-400" strokeWidth={2} />
@@ -91,7 +91,7 @@ const Summary = ({
   // String-based summary array (simple format)
   if (typeof summaryArray[0] === 'string') {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 overflow-auto h-full">
         <KeyTakeawaysSection data={data} />
         
         {summaryArray.map((item, index) => (
@@ -107,7 +107,7 @@ const Summary = ({
 
   // Object-based summary array (structured format with timestamps)
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 overflow-auto h-full">
       <KeyTakeawaysSection data={data}/>
       
    

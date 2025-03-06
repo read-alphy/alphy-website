@@ -23,7 +23,7 @@ export default function DownloadOptions({
         <PopoverTrigger asChild>
           <Button
             size="sm"
-            className="gap-2 font-medium bg-transparent text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 shadow-none"
+            className="gap-2 py-1 font-medium bg-transparent text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 shadow-none"
             disabled={downloading}
           >
             {downloading ? (
