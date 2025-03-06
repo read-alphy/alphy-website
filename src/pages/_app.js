@@ -400,7 +400,7 @@ return () => {
     <div
               className={` z-40 text-slate-700 bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
                 
-              'md:hidden  top-0 w-full '
+              'lg:hidden  top-0 w-full '
               }`}
             >
               <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />

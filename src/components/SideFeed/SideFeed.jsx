@@ -268,7 +268,7 @@ export default function SideFeed({
                       </SidebarMenuButton>
                       
                       {item.label === "My Creations" && currentUser &&  groupedData.length > 0 && (
-                        <div className={`select-none relative ml-5 mt-2 ${collapsed && 'hidden'}`}>
+                        <div className={`select-none relative ml-5 mt-2 $/* {collapsed && 'hidden'} */`}>
                           {groupedData.map((group, index) => (
                             <div key={index} className="relative flex flex-col group cursor-pointer">
                               <p

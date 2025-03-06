@@ -4,11 +4,11 @@ import { useRouter } from 'next/router'
 import { ChevronRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import axios from 'axios'
-import { saveAs } from 'file-saver'
 
 // Services and utilities
-import { useAuth } from '../../hooks/useAuth'
-import { API_URL } from '../../constants'
+import { useAuth } from '@/hooks/useAuth'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { API_URL } from '@/constants'
 import { LANGUAGE_CODES } from './constants/languageCodes'
 
 // Components
@@ -29,7 +29,6 @@ import { useDownloadHandling } from './hooks/useDownloadHandling'
 // Extracted smaller components
 import { TranslationStatus } from './components/TranslationStatus'
 import { ErrorMessage } from './components/ErrorMessage'
-import { ScrollControls } from './components/ScrollControls'
 
 export default function Content({
   language,
@@ -50,6 +49,7 @@ export default function Content({
 }) {
   const { currentUser } = useAuth()
   const router = useRouter()
+  const isMobile = useIsMobile()
 
   // Organize related state together
   // Basic content state
@@ -72,6 +72,7 @@ export default function Content({
   const [showClip, setShowClip] = useState(false)
   const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
   const [isInteractivePanelCollapsed, setIsInteractivePanelCollapsed] = useState(false)
+  
   // References
   const buttonRef = useRef(null)
   const inputRef = useRef(null)
@@ -106,6 +107,7 @@ export default function Content({
     handleClickTimestamp, 
     timestampChanger 
   } = useVideoNavigation()
+  
   const {
     mainPopoverOpen,
     setMainPopoverOpen,
@@ -120,7 +122,6 @@ export default function Content({
     themePopover
   } = useContentUI()
 
-  
   const {
     highlightClass,
     setHighlightClass,
@@ -132,8 +133,6 @@ export default function Content({
     handleAddToArchipelago
   } = useArchipelago(source_id, source_type, currentUser, setMainPopoverOpen, router)
 
- 
-
   const { handleDownload } = useDownloadHandling(
     activeTab, 
     data, 
@@ -142,13 +141,6 @@ export default function Content({
   )
 
   // Memoized values
-  const formattedDate = useMemo(() => {
-    if (!data?.added_ts) return ''
-    const inputDate = data.added_ts.substring(0, 10)
-    const parts = inputDate.split('-')
-    return `${parts[2]}/${parts[1]}/${parts[0]}`
-  }, [data?.added_ts])
-
   const userArchipelagoNames = useMemo(() => {
     return userArchipelagos.map(item => [item.name, item.uid])
   }, [userArchipelagos])
@@ -202,29 +194,21 @@ export default function Content({
     }
   }, [showReportIssue, currentUser])
 
-  const handleScroll = useCallback(() => {
-    const contentElement = document.getElementById('processing-tier')
-    if (contentElement) {
-      contentElement.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [])
-
   const handleShowYouTubeFrame = useCallback(() => {
     const newValue = !showYouTubeFrame
     setShowYouTubeFrame(newValue)
     localStorage.setItem('showYouTubeFrame', String(newValue))
   }, [showYouTubeFrame])
 
-  
   // Effects
   useEffect(() => {
-    if (window.innerWidth > 1000) {
+    if (!isMobile) {
       setIsPastMainPopoverOpenThreshold(true)
     }
     
     const handleResize = () => {
-      const currentWidth = window.innerWidth
-      const newIsPastThreshold = currentWidth <= 1000
+      
+      const newIsPastThreshold = isMobile
 
       if (isPastMainPopoverOpenThreshold !== newIsPastThreshold) {
         setIsPastMainPopoverOpenThreshold(newIsPastThreshold)
@@ -237,7 +221,7 @@ export default function Content({
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [isPastMainPopoverOpenThreshold])
+  }, [isPastMainPopoverOpenThreshold, isMobile, setIsPastMainPopoverOpenThreshold, setMainPopoverOpen, setMainPopoverOpenSmall])
 
   useEffect(() => {
     if (isLoading) return
@@ -268,7 +252,6 @@ export default function Content({
     }
   }, [summary])
   
-
   useEffect(() => {
     summaryParser();
   }, [language, data, summaryParser]);
@@ -312,21 +295,22 @@ export default function Content({
   const toggleInteractivePanel = useCallback(() => {
     setIsInteractivePanelCollapsed(prev => !prev)
   }, [])
+  
   // Define state for mobile panel switching
   const [activeMobilePanel, setActiveMobilePanel] = useState('read')
 
   return (
-    <div ref={ref} className="h-screen overflow-hidden max-w-screen-2xl md:pl-5 3xl:pl-20">
+    <div ref={ref} className="h-screen overflow-hidden max-w-screen-2xl lg:pl-5 3xl:pl-20">
       <div
-        className={`transition-transform duration-300 ${
-          isSandbox
-            ? 'sm:translate-x-[5%] lg:translate-x-[10%] xl:translate-x-[15%] 3xl:translate-x-[15%]'
-            : ''
-        } flex flex-col lg:flex-row h-full`}
+        className={`transition-transform duration-300 flex flex-col h-full`}
       >
         {/* Header area - always visible on mobile */}
-        <div className="w-full">
-          <div className="flex flex-row">
+        <div className="hidden lg:flex flex flex-row">
+          <div className={`${
+              isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
+            }`}>
+          <div className="flex flex-col">
+            <div className="flex flex-row mt-4">
             {data?.source_type === 'yt' && data?.source_id && (
               <div className="mb-4 hidden lg:block">
                 <img 
@@ -337,6 +321,7 @@ export default function Content({
                 />
               </div>
             )}
+            
              
             <HeaderArea
               data={data}
@@ -374,11 +359,70 @@ export default function Content({
               setActiveMobilePanel={setActiveMobilePanel}
             /> 
           </div>
-        </div>
-
-        {/* Mobile interactive panel - shown below header when toggled */}
-        {activeMobilePanel === 'interactive' && (
-          <div className="w-full lg:hidden">
+          <div 
+            className={`transition-all duration-300 ease-in-out ${
+              isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
+            } flex flex-col h-full lg:mt-10 ${
+              activeMobilePanel === 'read' ? 'block w-full' : 'hidden'
+            } lg:block`}
+          >
+              <div className="h-full overflow-auto mt-4">
+                <ReadComponent
+                  data={data}
+                  transcript={transcript}
+                  summary={summary}
+                  summaryArray={summaryArray}
+                  keyTakeaways={keyTakeaways}
+                  isLoading={isLoading}
+                  handleClickTimestamp={handleClickTimestamp}
+                  handleDownload={handleDownload}
+                  handleAskAlphy={handleAskAlphy}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  selectionCall={selectionCall}
+                  setSelectionCall={setSelectionCall}
+                  buttonRef={buttonRef}
+                  inputRef={inputRef}
+                  timestampChanger={timestampChanger}
+                  languages={languages}
+                  languagesWanted={languagesWanted}
+                  language={language}
+                  errorMessage={errorMessage}
+                  contentSummaries={data?.summaries || []}
+                  showYouTubeFrame={showYouTubeFrame}
+                  setShowYouTubeFrame={setShowYouTubeFrame}
+                  videoRef={videoRef}
+                  canvasRef={canvasRef}
+                  autoplay={autoplay}
+                  timestamp={timestamp}
+                  title={data?.title}
+                  basicDataLoaded={basicDataLoaded}
+                  setBasicDataLoaded={setBasicDataLoaded}
+                  handleShowYouTubeFrame={handleShowYouTubeFrame}
+                  contentRef={contentRef}
+                  downloading={downloading}
+                  themePopover={themePopover}
+                  language_codes={LANGUAGE_CODES}
+                  currentUser={currentUser}
+                  requestTranslation={requestTranslation}
+                  tier={tier}
+                  activeMobilePanel={activeMobilePanel}
+                  setActiveMobilePanel={setActiveMobilePanel}
+                /> 
+              </div>
+            </div>
+            </div>
+          </div>
+          
+          <div 
+            className={`transition-all duration-300 ease-in-out ${
+              isInteractivePanelCollapsed 
+                ? 'w-0 opacity-0 overflow-hidden' 
+                : 'w-2/5 opacity-100'
+            } h-full relative hidden lg:block`}
+          >
             <InteractiveComponent
               data={data}
               summary={summary}
@@ -401,19 +445,95 @@ export default function Content({
               activeMobilePanel={activeMobilePanel}
               setActiveMobilePanel={setActiveMobilePanel}
             />
-          </div>
-        )}
 
-        {/* Main content area - desktop layout */}
-        <div className="flex flex-row h-full w-full">
-          {/* Left section - dynamic width based on collapse state */}
-          <div 
-            className={`transition-all duration-300 ease-in-out ${
-              isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
-            } flex flex-col h-full lg:mt-10 ${
-              activeMobilePanel === 'read' ? 'block w-full' : 'hidden'
-            } lg:block`}
-          >
+            {/* Collapse/Expand toggle button - only visible on desktop */}
+          <button
+              onClick={toggleInteractivePanel}
+              className="absolute -left-4 top-10 transform -translate-y-1/2 z-[9999] opacity-0 hover:opacity-100 bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm hidden md:block"
+              aria-label={isInteractivePanelCollapsed ? "Expand panel" : "Collapse panel"}
+            >
+              <ChevronRight 
+                size={24} 
+                className={`transition-transform duration-300 ${
+                  isInteractivePanelCollapsed ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+          </div>
+        
+        </div>
+        
+        <div className="flex lg:hidden w-full">
+          <div className="flex flex-col">
+             <HeaderArea
+              data={data}
+              title={data?.title}
+              tier={tier}
+              isVisible={isVisible}
+              handleVisibility={handleVisibility}
+              handleBookmark={handleBookmark}
+              isBookmarked={isBookmarked}
+              handleReportIssue={handleReportIssue}
+              showReportIssue={showReportIssue}
+              setShowReportIssue={setShowReportIssue}
+              handleAddToArchipelago={handleAddToArchipelago}
+              userArchipelagoNames={userArchipelagoNames}
+              currentUser={currentUser}
+              transcript={transcript}
+              summary={summary}
+              language={language}
+              handleLanguageChange={handleLanguageChange}
+              setLanguage={setLanguage}
+              languages={languages}
+              mainPopoverOpen={mainPopoverOpen}
+              setMainPopoverOpen={setMainPopoverOpen}
+              mainPopoverOpenSmall={mainPopoverOpenSmall}
+              setMainPopoverOpenSmall={setMainPopoverOpenSmall}
+              modelName={modelName}
+              reorderedLanguageCodes={reorderedLanguageCodes}
+              isSandbox={isSandbox}
+              setIsSandbox={setIsSandbox}
+              showClip={showClip}
+              setShowClip={setShowClip}
+              showYouTubeFrame={showYouTubeFrame}
+              handleShowYouTubeFrame={handleShowYouTubeFrame}
+              activeMobilePanel={activeMobilePanel}
+              setActiveMobilePanel={setActiveMobilePanel}
+            /> 
+
+        {activeMobilePanel === 'interactive' &&
+          <div className="flex-grow overflow-hidden w-[100vw]">
+            <div className="h-full overflow-auto mt-4">
+
+            
+             <InteractiveComponent
+              data={data}
+              summary={summary}
+              transcript={transcript}
+              handleAskAlphy={handleAskAlphy}
+              selectionCall={selectionCall}
+              setSelectionCall={setSelectionCall}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              setShowYouTubeFrame={setShowYouTubeFrame}
+              buttonRef={buttonRef}
+              inputRef={inputRef}
+              timestampChanger={timestampChanger}
+              currentUser={currentUser}
+              askAlphyForSandbox={askAlphyForSandbox}
+              setAskAlphyForSandbox={setAskAlphyForSandbox}
+              askText={askText}
+              getSandboxHistory={getSandboxHistory}
+              tier={tier}
+              activeMobilePanel={activeMobilePanel}
+              setActiveMobilePanel={setActiveMobilePanel}
+            />
+            
+            </div>
+            </div>
+            }
+          {activeMobilePanel === 'read' &&
+              <div>
             <div className="flex-grow overflow-hidden">
               <div className="h-full overflow-auto mt-4">
                 <ReadComponent
@@ -462,54 +582,14 @@ export default function Content({
                 /> 
               </div>
             </div>
+          
           </div>
-
-          {/* Right section - Interactive Component with collapse animation - desktop only */}
-          <div 
-            className={`transition-all duration-300 ease-in-out ${
-              isInteractivePanelCollapsed 
-                ? 'w-0 opacity-0 overflow-hidden' 
-                : 'w-2/5 opacity-100'
-            } h-full relative hidden lg:block`}
-          >
-            {/* Collapse/Expand toggle button - only visible on desktop */}
-            <button
-              onClick={toggleInteractivePanel}
-              className="absolute -left-4 top-10 transform -translate-y-1/2 z-[9999] opacity-0 hover:opacity-100 bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm hidden md:block"
-              aria-label={isInteractivePanelCollapsed ? "Expand panel" : "Collapse panel"}
-            >
-              <ChevronRight 
-                size={24} 
-                className={`transition-transform duration-300 ${
-                  isInteractivePanelCollapsed ? 'rotate-180' : ''
-                }`}
-              />
-            </button>
+          }
+          </div>
+          </div>
+          
+          
             
-            <InteractiveComponent
-              data={data}
-              summary={summary}
-              transcript={transcript}
-              handleAskAlphy={handleAskAlphy}
-              selectionCall={selectionCall}
-              setSelectionCall={setSelectionCall}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              setShowYouTubeFrame={setShowYouTubeFrame}
-              buttonRef={buttonRef}
-              inputRef={inputRef}
-              timestampChanger={timestampChanger}
-              currentUser={currentUser}
-              askAlphyForSandbox={askAlphyForSandbox}
-              setAskAlphyForSandbox={setAskAlphyForSandbox}
-              askText={askText}
-              getSandboxHistory={getSandboxHistory}
-              tier={tier}
-              activeMobilePanel={activeMobilePanel}
-              setActiveMobilePanel={setActiveMobilePanel}
-            />
-          </div>
-
           {/* Floating button to uncollapse when fully collapsed - only visible on desktop */}
           {isInteractivePanelCollapsed && (
             <button
@@ -521,7 +601,11 @@ export default function Content({
             </button>
           )}
         </div>
-      </div>
+
+      
+
+       
+      
 
       {basicDataLoaded && (
         <TranslationStatus
@@ -539,13 +623,7 @@ export default function Content({
         errorMessage={errorMessage} 
       />
       
-     {/*  <ScrollControls
-        showScrollBackButton={showScrollBackButton}
-        scrollToSavedDepth={scrollToSavedDepth}
-        handleScroll={handleScroll}
-        showYouTubeFrame={showYouTubeFrame}
-      /> */}
-      {showYouTubeFrame==true && 
+      {showYouTubeFrame && 
         <MediaControls 
           data={data}
           showYouTubeFrame={showYouTubeFrame}

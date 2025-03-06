@@ -42,7 +42,7 @@ const InteractiveComponent = ({
         <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
           <div className="flex items-center justify-between">
             <Tabs defaultValue="qa" className="w-full" onValueChange={setActiveTab}>
-              <TabsList className="bg-transparent rounded-none h-full mt-2 lg:mt-0 h-10 w-full justify-start space-x-2">
+              <TabsList className="bg-transparent rounded-none h-full lg:mt-0 h-10 w-full justify-start space-x-2">
                 <TabsTrigger 
                   value="qa" 
                   className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"

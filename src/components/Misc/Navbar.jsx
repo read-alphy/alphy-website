@@ -1,6 +1,8 @@
-import React, { useEffect, useR } from 'react'
+import React, { useEffect } from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
+import { PanelLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
 import LogoBlack from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
@@ -8,22 +10,8 @@ import Image from 'next/image'
 
 function Navbar({ collapsed, setCollapsed }) {
   const router = useRouter()
-  
-  
-  
-  
 
   useEffect(() => {
-    /* if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    } */
-
     const handleResize = () => {}
 
     window.addEventListener('resize', handleResize)
@@ -34,10 +22,6 @@ function Navbar({ collapsed, setCollapsed }) {
     }
   }, [])
 
-
- 
-
-  // boolean to check if the user is in the /yt/id or /sp/id
   const isYt = router.asPath.includes('/yt')
   const isSp = router.asPath.includes('/sp')
   const isUp = router.asPath.includes('/up')
@@ -119,24 +103,23 @@ function Navbar({ collapsed, setCollapsed }) {
           ) : null}
         </div>
 
-        {/* <div className={`flex `}>
+        <div className={`flex`}>
           <div>
-            <div className="flex flex-row mt-6 dark:text-gray-300 ">
-              <div
-                id={'nav-icon3'}
+            <div className="flex flex-row mt-6 dark:text-gray-300">
+              <Button
+                variant="ghost" 
+                size="icon"
                 onClick={() => setCollapsed(!collapsed)}
-                className={`block cursor-pointer col-span-3 mr-5 lg:hidden ${
-                  collapsed ? ' ' : ' open '
-                } `}
+                className="block rounded-full items-center justify-center mx-auto lg:hidden"
               >
-                <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-                <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-                <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-                <span className="bg-zinc-700 dark:bg-zinc-200"></span>
-              </div>
+                <div className="flex items-center justify-center w-full h-full">
+                  <PanelLeft className={collapsed ? "" : "rotate-180"} />
+                </div>
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
 
       <div

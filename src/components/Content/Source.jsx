@@ -228,11 +228,7 @@ export default function SourcePage({
             : "Alphy - Turn audio to text, summarize, and generate content with AI"}
         </title>
       </Head>
-      <div
-        className={`w-screen bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
-          collapsed ? "nav-ham-collapsed fixed top-0" : "nav-ham-not-collapsed"
-        }`}
-      ></div>
+      
 
       <div className="flex flex-row bg-white dark:bg-darkMode">
         <SideFeed 
