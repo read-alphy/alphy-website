@@ -364,7 +364,7 @@ export default function EnhancedValueCards() {
         <h2 className="text-3xl font-bold text-slate-800 dark:text-zinc-100 mb-6">
           Ready to transform your audio content?
         </h2>
-        <button className="bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white px-8 py-4 rounded-xl font-medium text-lg shadow-none hover:shadow-none transition duration-200">
+        <button className="bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white px-6 py-2 rounded-xl font-medium text-md shadow-none hover:shadow-none transition duration-200">
           Get Started for Free
         </button>
         <p className="mt-4 text-slate-500 dark:text-zinc-400">

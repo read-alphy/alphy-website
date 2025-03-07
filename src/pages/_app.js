@@ -395,9 +395,9 @@ return () => {
    <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, X Spaces, and Podcasts </title>
     
 </Head>
-    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
+    <div className="App sm:px-10 lg:px-0  bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
 
-    <div
+           <div
               className={` z-40 text-slate-700 bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
                 
               'lg:hidden  top-0 w-full '
@@ -407,7 +407,7 @@ return () => {
             </div>
             <ThemeProvider attribute="class" theme={theme}>
 
-    <Component {...pageProps}  {...additionalProps} />
+     <Component {...pageProps}  {...additionalProps} />
               </ThemeProvider>
     
     </div>

@@ -1,4 +1,4 @@
-import { Bitcoin, Mail, Highlighter, Mic, Video, Search, CheckSquare, HelpCircle, Briefcase, TrendingUp, Edit, Music, Sparkles, FileText, X } from 'lucide-react';
+import { Bitcoin, Mail, Highlighter, Mic, Video, Search, CheckSquare, HelpCircle, Briefcase, TrendingUp, Edit, Music, Sparkles, FileText, Twitter } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 
@@ -10,7 +10,7 @@ const svgMaker = (prompt_type, currentTheme = 'light') => {
   )
 
   const twitter_thread = (
-    <X className="row-span-1 w-6 h-6" color="#4ab3f4" strokeWidth={1.5} />
+    <Twitter className="row-span-1 w-6 h-6" color="#4ab3f4" strokeWidth={1.5} />
   )
 
   const audiogram = (
@@ -158,8 +158,8 @@ export const inputMessages = [
   },
   {
     command_type: 'twitter_thread',
-    title: 'Twitter Thread',
-    message: 'Write an engaging Twitter thread from the conversation.',
+    title: 'X Thread',
+    message: 'Write an engaging X thread from the conversation.',
     icon: renderIconForType('twitter_thread'),
   },
 

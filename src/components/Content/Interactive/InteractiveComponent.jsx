@@ -30,18 +30,18 @@ const InteractiveComponent = ({
   activeMobilePanel,
   setActiveMobilePanel,
 }) => {
-  const [activeTab, setActiveTab] = useState("qa");
+  const [activeTab, setActiveTab] = useState("sandbox");
 
   const toggleMobilePanel = () => {
     setActiveMobilePanel(activeMobilePanel === 'read' ? 'interactive' : 'read');
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <Card className="h-full rounded-none border-t-0 border-b-0 border-r border-l 2xl:border-r  shadow-none ">
         <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
           <div className="flex items-center justify-between">
-            <Tabs defaultValue="qa" className="w-full" onValueChange={setActiveTab}>
+            <Tabs defaultValue="sandbox" className="w-full" onValueChange={setActiveTab}>
               <TabsList className="bg-transparent rounded-none h-full lg:mt-0 h-10 w-full justify-start space-x-2">
                 <TabsTrigger 
                   value="qa" 
@@ -60,7 +60,7 @@ const InteractiveComponent = ({
                 </TabsTrigger>
                 <Button 
                   onClick={toggleMobilePanel}
-                  className="lg:hidden ml-2 bg-blue-500 text-white h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                  className="lg:hidden ml-2 bg-blue-500 text-white h-7  rounded-md px-3 text-sm font-medium flex items-center transition-all"
                 >
                   <BookOpen className="h-4 w-4 mr-2" />
                   Read

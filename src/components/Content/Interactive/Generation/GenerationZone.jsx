@@ -1,22 +1,13 @@
-import React, { useState } from 'react'
-import InputArea from './InputArea'
-import Settings from './Settings'
-import { Button } from '@material-tailwind/react'
-import { CircleNotch, CheckCircle } from 'lucide-react'
-import Toolbox from './Toolbox'
-import Link from 'next/link'
+import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Settings2, CheckCircle, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import InputArea from './InputArea';
+import Settings from './Settings';
+import Toolbox from './Toolbox';
+import MannerArea from './MannerArea';
 
-import MannerArea from './MannerArea'
-
-/* const sourcesMap = {
-  yt: 'YouTube',
-  sp: 'X Spaces',
-  x: 'Twitter',
-  tw: 'Twitch',
-  ap: 'Apple Podcasts',
-} */
-
-export default function   GenerationZone({
+export default function GenerationZone({
   settings,
   setSettings,
   outputMessage,
@@ -33,169 +24,87 @@ export default function   GenerationZone({
   tier,
   authError
 }) {
-  const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false)
-  const [toolboxActive, setToolboxActive] = useState(false)
-
-  const adjustments = (
-    <svg
-      className="w-5 h-5 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke={`${theme === 'light' ? '#52525b' : 'white'}`}
-        strokeLinecap="round"
-        strokeWidth="1.5"
-        d="M6 4v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2m6-16v2m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v10m6-16v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2"
-      />
-    </svg>
-  )
+  const [advancedSettingsToggled, setAdvancedSettingsToggled] = useState(false);
+  const [toolboxActive, setToolboxActive] = useState(false);
 
   return (
-    <div className="mt-6   h-full  flex flex-col  px-2 sm:px-0">
-      <div
-        className={`lg:max-w-[800px]  quicksand font-normal text-lg text-slate-600 dark:text-zinc-200 transition-opacity overflow-hidden ease-in-out ${
-          !toolboxActive && outputMessage.length === 0
-            ? 'opacity-100 delay-300 '
-            : 'opacity-0  pointer-events-none   '
-        }`}
-      >
-        Turn the conversation into vibrant content.
-      </div>
+    <div className="h-full w-full flex flex-col">
+      {/* Toolbox with fixed height and scrolling */}
+      
+        <Toolbox
+          theme={theme}
+          createDopeStuff={createDopeStuff}
+          toolboxActive={toolboxActive}
+          setToolboxActive={setToolboxActive}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          selectedTool={selectedTool}
+          setSelectedTool={setSelectedTool}
+          tier={tier}
+        />
+      
 
-      <div
-        className={` ${
-          selectedTool === 'custom' &&
-          'bg-slate-50 dark:bg-mildDarkMode rounded-lg w-fit mb-4'
-        } sm:p-2 `}
-      >
-        {
-          <div
-            className={` lg:max-w-[800px] w-full overflow-hidden  transition-[max-height] duration-300 sm:px-2 ease-in-out ${
-              toolboxActive ? 'max-h-[100%]' : 'max-h-0 '
-            }`}
-          >{
-            authError ? 
-      <div className="text-xl my-10"><Link href="/u/login" className="text-indigo-400">Sign in</Link> to start creating on Playground!</div>
-            :
-            <MannerArea
-              settings={settings}
-              setSettings={setSettings}
-              theme={theme}
-              manner={manner}
-              setManner={setManner}
-            />
-          }
-          </div>
-        }
-
-        <div
-          className={`relative lg:max-w-[800px] w-fit  overflow-hidden  transition-[max-height] duration-300 ease-in-out rounded-md pb-4 sm:px-2 ${
-            selectedTool === 'custom' ? 'max-h-[100%]' : 'max-h-0 '
-          }`}
-        >
-          {tier !== 'premium' && selectedTool === 'custom' && (
-            <div className="absolute inset-0 bg-sky-50/30 text-slate-700 dark:bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center z-10 dark:text-white rounded-lg ">
-              <p className="text-indigo-400 text-md  ">
-                {tier !== 'premium' && (
-                  <CheckCircle
-                    fontSize="medium"
-                    className=" mb-4 text-indigo-400 "
-                  />
-                )}
-              </p>
-
-              <p>
-                Go{' '}
-                <Link
-                  href="/account"
-                  className="text-indigo-400 dark:text-indigo-300 border-b border-indigo-400"
-                >
-                  premium
-                </Link>{' '}
-                to run custom prompts on transcripts.{' '}
-              </p>
-            </div>
-          )}
-
-          <InputArea
+      {/* Rest of the content in a scrollable area */}
+      <div className="flex-grow overflow-y-auto p-4 ">
+        {/* Custom Tool Area */}
+        <div>
+          {/* Uncomment and adjust as needed */}
+          {/* <InputArea
             userPrompt={userPrompt}
             setUserPrompt={setUserPrompt}
             createDopeStuff={createDopeStuff}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
-          />
-
-          <div className="md:hidden">
-            <Settings
-              settings={settings}
-              setSettings={setSettings}
-              advancedSettingsToggled={advancedSettingsToggled}
-              setAdvancedSettingsToggled={setAdvancedSettingsToggled}
-              theme={theme}
-              adjustments={adjustments}
-              tier={tier}
-            />
-          </div>
-
-          <div className={`flex flex-row justify-end mt-4 -ml-6 mr-4 sm:mr-2`}>
-            <div className="hidden md:flex">
-              <Settings
-                settings={settings}
-                setSettings={setSettings}
-                advancedSettingsToggled={advancedSettingsToggled}
-                setAdvancedSettingsToggled={setAdvancedSettingsToggled}
-                theme={theme}
-                adjustments={adjustments}
-                tier={tier}
-              />
-            </div>
+          /> */}
+          
+          {/* <div className="mt-4 flex flex-row justify-end space-x-4">
             <Button
-              ripple={true}
-              onClick={() =>
-                setAdvancedSettingsToggled(!advancedSettingsToggled)
-              }
-              className="items-center margin-auto  gap-1 items-center flex text-center justify-center bg-transparent border text-slate-700 dark:text-zinc-300 border-indigo-200 dark:border-indigo-200 cursor-pointer normal-case mr-4 h-[40px]"
+              variant="outline"
+              onClick={() => setAdvancedSettingsToggled(!advancedSettingsToggled)}
+              className="border-indigo-200 dark:border-indigo-200 text-slate-700 dark:text-zinc-300"
             >
-              {adjustments} <p className="hidden md:flex">Advanced Settings</p>
+              <Settings2 className="mr-2 h-4 w-4" />
+              <span className="hidden md:inline">Advanced Settings</span>
             </Button>
-
             <Button
               onClick={() => createDopeStuff()}
-              ripple={true}
               disabled={selectedTool === 'custom' && userPrompt.length === 0}
-              className={`${
-                selectedTool === 'custom' && userPrompt.length === 0
-                  ? 'opacity-70'
-                  : 'opacity-100'
-              }  transition-opacity duration-300 ease-in-out bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] h-[38px] from-purple-200 to-blue-200 dark:to-blue-400 dark:text-slate-800  text-zinc-700 dark:from-purple-400 quicksand font-normal normal-case w-[120px]`}
+              className="bg-gradient-to-r from-purple-400 to-blue-400 hover:from-purple-500 hover:to-blue-500 text-white dark:text-slate-800 font-normal w-28"
             >
               {isLoading ? (
-                <CircleNotch
-                  size={16}
-                  className="mx-auto w-full justify-center animate-spin"
-                />
+                <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 'Generate'
               )}
             </Button>
-          </div>
-        </div>
-      </div>
+          </div> */}
 
-      <Toolbox
-        theme={theme}
-        createDopeStuff={createDopeStuff}
-        toolboxActive={toolboxActive}
-        setToolboxActive={setToolboxActive}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-        selectedTool={selectedTool}
-        setSelectedTool={setSelectedTool}
-        tier={tier}
-      />
+          {/* <Settings
+            settings={settings}
+            setSettings={setSettings}
+            advancedSettingsToggled={advancedSettingsToggled}
+            setAdvancedSettingsToggled={setAdvancedSettingsToggled}
+            theme={theme}
+            tier={tier}
+          /> */}
+
+          {authError && (
+            <div className="text-xl my-10">
+              <Link href="/u/login" className="text-indigo-400">Sign in</Link> to start creating on Playground!
+            </div>
+          )}
+        </div>
+
+        {!authError && (
+          <MannerArea
+            settings={settings}
+            setSettings={setSettings}
+            theme={theme}
+            manner={manner}
+            setManner={setManner}
+          />
+        )}
+      </div>
     </div>
-  )
+  );
 }

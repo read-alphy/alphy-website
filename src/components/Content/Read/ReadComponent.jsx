@@ -119,7 +119,7 @@ export default function ReadComponent({
   };
 
   return (
-    <div className="">
+    <div className="overflow-x-hidden">
       
       {isContentAvailable ? (
         <div className="flex flex-col">
@@ -155,7 +155,7 @@ export default function ReadComponent({
                     className="w-full flex flex-col h-full"
                   >
                     <div className="border-b-[1px] border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50 ">
-                      <TabsList className="bg-transparent p-4 rounded-none  h-full h-12 w-full justify-start space-x-2 mb-2">
+                      <TabsList className="bg-transparent overflow-x-auto overflow-y-hidden p-4 rounded-none  h-full h-12 w-full justify-start space-x-2 mb-2">
                         {contentTabs.map((tab) => (
                           <TabsTrigger
                             key={tab.id}
@@ -202,7 +202,7 @@ export default function ReadComponent({
                       </TabsList>
                     </div>
                     
-                    <div className="flex-grow overflow-auto pb-10 ">
+                    <div className="flex-grow overflow-scroll pb-10 ">
                       <TabsContent value="summary" className="m-0 pl-4 lg:pl-0 py-4 pr-4 h-full border-0">
                         {isLoading ? (
                           <div className="flex justify-center items-center h-full ">

@@ -300,7 +300,7 @@ export default function Content({
   const [activeMobilePanel, setActiveMobilePanel] = useState('read')
 
   return (
-    <div ref={ref} className="h-screen overflow-hidden max-w-screen-2xl lg:pl-5 3xl:pl-20">
+    <div ref={ref} className="h-screen  max-w-screen-2xl  lg:pl-5 3xl:pl-20">
       
       <div
         className={`hidden lg:flex lg:flex-row h-full w-full`}
@@ -469,7 +469,6 @@ export default function Content({
 
         
     <div 
-          className={`lg:hidden transition-all duration-300 ease-in-out w-full flex flex-col h-full `}
         >
 <div className="flex flex-row">
              <HeaderArea
@@ -629,11 +628,13 @@ export default function Content({
               />
               
               {showYouTubeFrame && 
+              <div className="hidden lg:block">
                 <MediaControls 
                   data={data}
                   showYouTubeFrame={showYouTubeFrame}
                   handleShowYouTubeFrame={handleShowYouTubeFrame}
                 />
+              </div>
               }
     </div>
   )

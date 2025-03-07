@@ -231,10 +231,10 @@ const [theme, setTheme] = useState('light')
   }
 
   return (
-    <div className="min-h-[70vh] w-full ">
-      <div className="flex flex-col ">
+    <div className="h-full w-full overflow-hidden ">
+      <div className="flex flex-col h-full overflow-auto">
         {creationCalled === true && (
-          <div className=" w-full mt-8 max-w-[800px]">
+          <div className=" w-full mt-8">
             <button
               className=" flex underline flex-row gap-2 ml-2"
               onClick={() => setActiveGenerationZone(!activeGenerationZone)}
@@ -263,15 +263,7 @@ const [theme, setTheme] = useState('light')
           </div>
         )}
 
-        <div className=" grid grid-cols-4 relative">
           {activeGenerationZone === true && (
-            <div
-              className={`transition-transform duration-500 ${
-                activeGenerationZone
-                  ? 'translate-x-0'
-                  : '-translate-x-full opacity-0'
-              } col-span-4`}
-            >
               <GenerationZone
                 data={data}
                 generatedPrompt={generatedPrompt}
@@ -297,29 +289,24 @@ const [theme, setTheme] = useState('light')
                 tier={tier}
                 authError={authError}
               />
-            </div>
+            
           )}
-          <div
-            className={`absolute inset-0 transition-transform transition-opacity duration-300 mx-auto w-full justify-center ${
-              !activeGenerationZone
-                ? 'translate-x-0 opacity-100'
-                : 'translate-x-[125%] opacity-20 '
-            } col-span-4`}
-          >
-            <OutputZone
-              generatedPrompt={generatedPrompt}
-              userPrompt={userPrompt}
-              outputMessage={outputMessage}
-              setOutputMessage={setOutputMessage}
-              activeGenerationZone={activeGenerationZone}
+            {activeGenerationZone === false && (
+              <OutputZone
+                generatedPrompt={generatedPrompt}
+                userPrompt={userPrompt}
+                outputMessage={outputMessage}
+                setOutputMessage={setOutputMessage}
+                activeGenerationZone={activeGenerationZone}
               setActiveGenerationZone={setActiveGenerationZone}
               promptType={promptType}
               setPromptType={setPromptType}
               createDopeStuff={createDopeStuff}
               isLoading={isLoading}
             />
-          </div>
-        </div>
+            )}
+        
+        
       </div>
     </div>
   )

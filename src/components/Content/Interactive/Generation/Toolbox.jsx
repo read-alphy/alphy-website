@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
-import { Button } from '@material-tailwind/react'
-import { Loader2, CheckCircle } from 'lucide-react'
-import { motion } from 'framer-motion'
+import React, { useEffect } from 'react';
+import { Button } from "@/components/ui/button";
+import { Loader2, CheckCircle, Lock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { inputMessages } from '../messageBank';
 
-import { inputMessages } from '../messageBank'
-
-// Tool card component to avoid repetition
+// ToolCard component remains unchanged
 const ToolCard = ({ 
   commandType, 
   isSelected, 
@@ -14,106 +13,72 @@ const ToolCard = ({
   isLoading, 
   createDopeStuff 
 }) => {
-  const tool = inputMessages.find(obj => obj.command_type === commandType)
+  const tool = inputMessages.find(obj => obj.command_type === commandType);
   const isPremium = commandType !== 'custom' && 
                     commandType !== 'twitter_thread' && 
                     commandType !== 'blog_post' && 
                     commandType !== 'space_description_generator' && 
-                    commandType !== 'executive_brief_composer'
+                    commandType !== 'executive_brief_composer';
   
   return (
     <div
-      className={`${
-        isSelected && 'animated-gradient-border rounded-lg '
-      } flex flex-col h-[210px] p-0.5 transition duration-300 ease-in-out`}
+      className={`${isSelected && 'animated-gradient-border rounded-lg'} w-[140px] sm:w-[180px] flex flex-col p-0.5 transition duration-300 ease-in-out`}
     >
       <div
         onClick={() => onSelect(isSelected ? '' : commandType)}
-        className={`p-4 pb-2 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer 
-          border border-slate-100 bg-white dark:bg-mildDarkMode text-slate-700 
-          dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col max-w-[350px] sm:max-w-[240px]`}
+        className={`p-3 h-full grid grid-row-3 normal-case rounded-lg cursor-pointer 
+          border border-slate-200 bg-white dark:bg-mildDarkMode text-slate-700 
+          dark:text-zinc-300 dark:border-zinc-800 drop-shadow-sm flex flex-col w-full`}
       >
         <div className="flex flex-row w-full">
           {tool.icon}
           {isPremium && (
-            <div className="justify-end flex flex-row w-full pl-6 md:pl-10">
+            <div className="justify-end flex flex-row w-full pl-4 md:pl-6">
               {tier !== 'premium' && (
-                <CheckCircle fontSize="small" className="ml-2 text-indigo-400" />
+                <CheckCircle size={16} className="text-indigo-400" />
               )}
             </div>
           )}
         </div>
-
-        <p className="text-md quicksand font-bold text-slate-700 dark:text-zinc-300">
+        <p className="text-sm quicksand font-bold text-slate-700 dark:text-zinc-300 mt-1">
           {tool.title}
         </p>
-        <p className="text-sm quicksand font-normal text-slate-500 dark:text-zinc-400">
+        <p className="text-xs quicksand font-normal text-slate-500 dark:text-zinc-400">
           {tool.message}
         </p>
-
         <div
-          className={`${
-            isSelected ? 'max-h-96' : 'max-h-0'
-          } transition-[max-height] duration-500 ease-in-out overflow-hidden`}
+          className={`${isSelected ? 'max-h-96' : 'max-h-0'} transition-[max-height] duration-500 ease-in-out overflow-hidden`}
         >
           <Button
             onClick={event => {
-              event.stopPropagation()
-              createDopeStuff()
+              event.stopPropagation();
+              createDopeStuff();
             }}
-            ripple={true}
             disabled={!isSelected || (isPremium && tier !== 'premium')}
-            className={`${
-              !isSelected ? 'opacity-0' : 'opacity-100'
-            } ${
+            className={`${!isSelected ? 'opacity-0' : 'opacity-100'} ${
               isPremium && tier !== 'premium' && 'flex flex-row opacity-50'
-            } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-6 w-[120px] 
+            } transition-opacity delay-50 duration-100 ease-in overflow-hidden mt-4 text-xs w-[110px] 
               bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] 
               from-purple-200 to-blue-200 dark:to-blue-400 dark:text-zinc-800 
-              text-slate-800 quicksand font-normal normal-case`}
+              text-slate-800 quicksand font-normal`}
           >
             {isPremium && tier !== 'premium' && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5 mr-1 -mt-0.5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                />
-              </svg>
+              <Lock size={12} className="mr-1" />
             )}
             {isLoading ? (
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ 
-                  duration: 1, 
-                  repeat: Infinity, 
-                  ease: "linear" 
-                }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
               >
-                <Loader2 
-                  color="inherit"
-                  size={20}
-                  className="mx-auto w-full justify-center"
-                />
+                <Loader2 size={16} className="mx-auto w-full justify-center" />
               </motion.div>
-            ) : isPremium && tier !== 'premium' ? (
-              'Premium'
-            ) : (
-              'Generate'
-            )}
+            ) : isPremium && tier !== 'premium' ? 'Premium' : 'Generate'}
           </Button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default function Toolbox({
   tier,
@@ -125,10 +90,9 @@ export default function Toolbox({
   setSelectedTool,
 }) {
   useEffect(() => {
-    setToolboxActive(selectedTool !== '')
-  }, [selectedTool, setToolboxActive])
+    setToolboxActive(selectedTool !== '');
+  }, [selectedTool, setToolboxActive]);
 
-  // List of all tool command types
   const tools = [
     'custom',
     'twitter_thread',
@@ -147,11 +111,11 @@ export default function Toolbox({
     'get_actionables',
     'generate_quizzes',
     'investment_insight_extractor'
-  ]
+  ];
 
   return (
-    <div className="w-full max-w-[800px]">
-      <div className="flex flex-wrap mt-4 gap-6 justify-center sm:justify-normal">
+    <div className=" h-[80vh] overflow-y-auto p-4">
+      <div className="gap-4 flex flex-wrap items-center justify-center mx-auto">
         {tools.map(tool => (
           <ToolCard
             key={tool}
@@ -165,5 +129,5 @@ export default function Toolbox({
         ))}
       </div>
     </div>
-  )
+  );
 }

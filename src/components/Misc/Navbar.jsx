@@ -1,133 +1,75 @@
-import React, { useEffect } from 'react'
-import {useRouter} from 'next/router'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { PanelLeft } from 'lucide-react'
+import { PanelLeft, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
+import Image from 'next/image'
 import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
 import LogoBlack from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
-import Image from 'next/image'
 
 function Navbar({ collapsed, setCollapsed }) {
   const router = useRouter()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
 
   useEffect(() => {
-    const handleResize = () => {}
-
-    window.addEventListener('resize', handleResize)
-
-    // Cleanup the event listener when the component is unmounted
-    return () => {
-      window.removeEventListener('resize', handleResize)
+    const handleRouteChange = () => {
+      setIsMobileMenuOpen(false)
     }
-  }, [])
 
-  const isYt = router.asPath.includes('/yt')
-  const isSp = router.asPath.includes('/sp')
-  const isUp = router.asPath.includes('/up')
-  const isArc = router.asPath.includes('/arc')
-  const isHub = router.asPath.includes('/hub')
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router])
+
   return (
-    <div
-      className={`items-center ${
-        isYt || isSp || isUp || isArc || isHub ? '' : ''
-      } justify-between dark:bg-darkMode pb-2	`}
-    >
-      <div
-        className={`flex  justify-between flex-row top-0 z-40 text-slate-700 bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 text-sm md:text-md quicksand ${
-          isYt || isSp || isUp || isArc || isHub
-            ? 'h-[8vh] min-h-[40px]'
-            : 'h-[8vh] min-h-[40px]'
-        } `}
-      >
-        <div
-          className={`flex mt-4 font-bold ${
-            collapsed == false && 'lg:pl-4'
-          } ${
-            !collapsed
-              ? 'lg:bg-zinc-100 dark:lg:bg-mildDarkMode'
-              : ''
-          } `}
-        >
-          {collapsed == true && isArc && (
-            <div
-              onClick={() => setCollapsed(!collapsed)}
-              className="hidden lg:flex cursor-pointer bg-zinc-100 dark:bg-mildDarkMode min-w-[32px] max-w-[32px]"
-            ></div>
-          )}
-          <Link href={'/'} className="text-zinc-800 dark:text-gray-200 pl-4 ">
-            <div className="flex-row flex">
-              <Image src={Logo} width={40} className="hidden dark:block"
-              alt="Alphy Logo"
-              ></Image>
-              <Image
-                src={LogoBlack}
-                width={40}
-                className="dark:hidden opacity-80 "
-                alt="Alphy Logo"
-              ></Image>
-              <h2 className="ml-1 mt-1 text-2xl quicksand font-bold">ALPHY</h2>
-            </div>
-          </Link>
+    <header className="sticky top-0 fixed z-50 w-full bg-white dark:bg-darkMode border-b border-zinc-200 dark:border-zinc-800">
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo and left side */}
+          <div className="flex items-center">
+            
+            <Link href="/" className="flex items-center space-x-2">
+              <Image 
+                src={Logo} 
+                width={36} 
+                height={36} 
+                alt="Alphy Logo" 
+                className="hidden dark:block"
+              />
+              <Image 
+                src={LogoBlack} 
+                width={36} 
+                height={36} 
+                alt="Alphy Logo" 
+                className="dark:hidden"
+              />
+              <span className="text-xl font-bold tracking-tight quicksand">ALPHY</span>
+            </Link>
+          </div>
 
-          {isArc ? (
-            <div
-              onClick={() => setCollapsed(!collapsed)}
-              className={`hidden lg:flex rounded-full bg-opacity-0 hover:bg-opacity-60 hover:bg-zinc-200 dark:hover:bg-zinc-700 ml-40  mr-4 p-1 transition duration-300 ease-in-out ${
-                collapsed
-                  ? ' lg:hidden bg-slate-50 dark:bg-darkMode'
-                  : ' bg-zinc-100 dark:bg-mildDarkMode  justify-end  '
-              }  `}
-            >
-              <button>
-                <svg
-                  className={`${
-                    !collapsed && 'rotate-180'
-                  } opacity-50 hover:opacity-40 duration-200 ease-in-out transform`}
-                  width={30}
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          ) : null}
-        </div>
+        
 
-        <div className={`flex`}>
-          <div>
-            <div className="flex flex-row mt-6 dark:text-gray-300">
+          {/* Mobile menu button */}
+          <div className="flex items-center lg:hidden">
+             
               <Button
-                variant="ghost" 
+                variant="ghost"
                 size="icon"
                 onClick={() => setCollapsed(!collapsed)}
-                className="block rounded-full items-center justify-center mx-auto lg:hidden"
+                className="mr-2"
+                aria-label="Toggle sidebar"
               >
-                <div className="flex items-center justify-center w-full h-full">
-                  <PanelLeft className={collapsed ? "" : "rotate-180"} />
-                </div>
-                <span className="sr-only">Toggle Menu</span>
+                <PanelLeft className={collapsed ? "" : "rotate-180"} />
               </Button>
-            </div>
+            
           </div>
         </div>
       </div>
 
-      <div
-        className={`w-screen   transition origin-top-right transform lg:hidden ${
-          collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-        }`}
-      ></div>
-    </div>
+     
+    </header>
   )
 }
 
