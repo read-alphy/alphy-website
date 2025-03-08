@@ -11,7 +11,6 @@ const InteractiveComponent = ({
   data, 
   summary, 
   transcript, 
-  working, 
   handleAskAlphy, 
   selectionCall, 
   setSelectionCall, 
@@ -91,12 +90,7 @@ const InteractiveComponent = ({
                     <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-3">
                       Generating questions... plugging in an AI assistant...
                     </p>
-                    <img
-                      src={working}
-                      width={80}
-                      alt="Working"
-                      className="opacity-70 dark:opacity-90"
-                    />
+                    
                   </div>
                 ) : (
                   <QuestionAnswering
