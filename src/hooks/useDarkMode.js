@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 
-export default function useDarkMode() {
-  const [isDarkMode, setDarkMode] = useState(localStorage.theme)
+export const useDarkMode = () => {
+  const [isDarkMode, setDarkMode] = useState(
+    typeof window !== 'undefined' && localStorage.theme ? localStorage.theme : 'light'
+  )
   const colorTheme = isDarkMode === 'dark' ? 'light' : 'dark'
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     document.documentElement.classList.remove(colorTheme)
     document.documentElement.classList.add(isDarkMode)
 
@@ -13,3 +17,6 @@ export default function useDarkMode() {
 
   return [colorTheme, setDarkMode]
 }
+
+// Keep the default export for backward compatibility
+export default useDarkMode

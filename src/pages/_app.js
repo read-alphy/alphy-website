@@ -19,6 +19,7 @@ import { useRouter } from 'next/router';
 import addToUserMetadata from '../utils/addToUserMetadata'
 import { ThemeProvider } from "next-themes"
 import {useTheme} from 'next-themes'
+import {useDarkMode} from "@/hooks/useDarkMode"
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
@@ -58,7 +59,9 @@ function MyApp({ Component, pageProps }) {
     const [sandboxHistoryCalled, setSandboxHistoryCalled] = useState(false)
     const {theme, setTheme} = useTheme('light')
 
-    useEffect(() => {
+    const [colorTheme, setDarkMode] = useDarkMode();
+
+   /*  useEffect(() => {
     const themeRefreshed = localStorage.getItem('themeRefreshed')
     if (themeRefreshed !== 'true') {
       localStorage.setItem('theme', 'light')
@@ -79,7 +82,13 @@ function MyApp({ Component, pageProps }) {
       if (sidebarCollapsed !== null) {
         setCollapsed(sidebarCollapsed === 'true');
       }
-    }, []);
+    }, []); */
+
+
+    useEffect(() => {
+      setTheme('light');
+      setDarkMode(false);
+    }, [colorTheme]);
   
     // Save sidebar collapsed state to localStorage when it changes
     useEffect(() => {

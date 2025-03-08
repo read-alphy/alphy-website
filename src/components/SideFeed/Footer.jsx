@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import Link from 'next/link'
 import FooterMenu from './FooterMenu'
 import { Dialog, DialogContent } from "@/components/ui/dialog"
+import {useDarkMode} from "@/hooks/useDarkMode"
 
 export default function Footer({
   currentUser,
@@ -21,15 +22,16 @@ export default function Footer({
   const [isClient, setIsClient] = useState(false)
   
   const [FooterShow, setFooterShow] = useState(false)
-  const handleDarkMode = () => {
-    const newTheme = theme === "dark" ? "light" : "dark"
-    setTheme(newTheme)
-    localStorage.setItem("theme", newTheme)
-    document.documentElement.classList.toggle("dark")
-  }
+  const [colorTheme, setDarkMode] = useDarkMode();
+
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  const toggleDarkMode = () => {
+    setDarkMode(colorTheme);
+    setTheme(theme === "light" ? "dark" : "light");
+  }
 
   return (
     <div className="w-full mx-auto mb-4">
@@ -47,7 +49,7 @@ export default function Footer({
                     collapsed={collapsed}
                     setCollapsed={setCollapsed}
                     setOpenFeedbackDialog={setOpenFeedbackDialog}
-                    handleDarkMode={handleDarkMode}
+                    handleDarkMode={toggleDarkMode}
                     currentUser={currentUser}
                     handleSignout={handleSignout}
                     loggedIn={loggedIn}
@@ -85,7 +87,7 @@ export default function Footer({
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
                 setOpenFeedbackDialog={setOpenFeedbackDialog}
-                handleDarkMode={handleDarkMode}
+                handleDarkMode={toggleDarkMode}
                 currentUser={currentUser}
                 handleSignout={handleSignout}
                 theme={theme}
@@ -151,14 +153,14 @@ export default function Footer({
 
          {/*  {isClient && (theme === "light" ? (
             <div onClick={() => {
-              handleDarkMode();
+              setDarkMode(true);
               setTheme(theme === "light" ? "dark" : "light");
             }} className="flex flex-row cursor-pointer text-slate-600 dark:text-zinc-200">
               <Sun size={18} strokeWidth={2} />
             </div>
           ) : (
             <div onClick={() => {
-              handleDarkMode();
+              setDarkMode(true);
               setTheme(theme === "light" ? "dark" : "light");
             }} className="flex flex-row cursor-pointer text-slate-600 dark:text-zinc-200">
               <Moon size={18} strokeWidth={2} />
