@@ -94,7 +94,7 @@ export default function HeroSection({ currentUser }) {
 
           {/* Key benefits */}
           <motion.ul 
-            className="mt-6 space-y-2"
+            className="mt-6 hidden md:flex space-y-2"
             variants={staggerChildren}
           >
             {[
@@ -191,8 +191,8 @@ export default function HeroSection({ currentUser }) {
               ) : (
                 <Link
                   href="/explore"
-                  className="rounded-lg text-zinc-800 dark:text-zinc-200 border border-slate-300 
-                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-2.5 font-medium 
+                  className="rounded-lg text-md text-zinc-800 dark:text-zinc-200 border border-slate-300 
+                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-1.5 font-medium 
                              flex items-center transition duration-300 ease-in-out 
                              hover:translate-x-1 transform"
                   aria-label="See examples"
@@ -213,7 +213,7 @@ export default function HeroSection({ currentUser }) {
                     <circle cx="12" cy="12" r="10"></circle>
                     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                   </svg>
-                  See Examples
+                  Examples
                 </Link>
               )}
             </motion.div>
