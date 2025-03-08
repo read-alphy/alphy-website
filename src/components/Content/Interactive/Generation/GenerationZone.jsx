@@ -5,7 +5,12 @@ import Link from 'next/link';
 import InputArea from './InputArea';
 import Settings from './Settings';
 import Toolbox from './Toolbox';
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function GenerationZone({
   settings,
@@ -74,25 +79,6 @@ export default function GenerationZone({
             </div>
           )}
           
-          {/* Premium overlay for custom tool */}
-          {tier !== 'premium' && selectedTool === 'custom' && (
-            <div className="absolute inset-0 bg-sky-50/30 text-slate-700 dark:bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center z-10 dark:text-white rounded-lg mt-16">
-              <p className="text-indigo-400 text-md mb-4">
-                <CheckCircle className="h-6 w-6 mx-auto" />
-              </p>
-              <p>
-                Go{' '}
-                <Link
-                  href="/account"
-                  className="text-indigo-400 dark:text-indigo-300 border-b border-indigo-400"
-                >
-                  premium
-                </Link>{' '}
-                to run custom prompts on transcripts.{' '}
-              </p>
-            </div>
-          )}
-          
           {/* Show InputArea when custom is selected */}
           <div className={`w-full transition-all duration-300 ease-in-out ${selectedTool === 'custom' ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4 h-0 overflow-hidden'}`}>
             {selectedTool === 'custom' && (
@@ -118,17 +104,35 @@ export default function GenerationZone({
                   <Settings2 className="mr-2 h-4 w-4" />
                   <span className="hidden md:inline">Advanced Settings</span>
                 </Button>
-                <Button
-                  onClick={() => createDopeStuff()}
-                  disabled={userPrompt.length === 0}
-                  className="bg-gradient-to-r from-purple-400 to-blue-400 h-8 hover:from-purple-500 hover:to-blue-500 text-white dark:text-slate-800 font-normal w-28 transition-all duration-200"
-                >
-                  {isLoading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    'Generate'
-                  )}
-                </Button>
+                {tier === 'premium' ? (
+                  <Button
+                    onClick={() => createDopeStuff()}
+                    disabled={userPrompt.length === 0}
+                    className="bg-gradient-to-r from-purple-400 to-blue-400 h-8 hover:from-purple-500 hover:to-blue-500 text-white dark:text-slate-800 font-normal w-28 transition-all duration-200"
+                  >
+                    {isLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      'Generate'
+                    )}
+                  </Button>
+                ) : (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          disabled
+                          className="bg-gradient-to-r from-purple-400/60 to-blue-400/60 h-8 text-white dark:text-slate-800 font-normal w-28 cursor-not-allowed"
+                        >
+                          Generate
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Available only for premium users</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
               </div>
             )}
           </div>

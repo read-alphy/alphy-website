@@ -149,7 +149,7 @@ export default function Footer({
             </div>
           </div>
 
-          {isClient && (theme === "light" ? (
+         {/*  {isClient && (theme === "light" ? (
             <div onClick={() => {
               handleDarkMode();
               setTheme(theme === "light" ? "dark" : "light");
@@ -163,7 +163,7 @@ export default function Footer({
             }} className="flex flex-row cursor-pointer text-slate-600 dark:text-zinc-200">
               <Moon size={18} strokeWidth={2} />
             </div>
-          ))}
+          ))} */}
         </div>
       )}
 

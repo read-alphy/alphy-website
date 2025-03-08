@@ -300,7 +300,7 @@ export default function Content({
   const [activeMobilePanel, setActiveMobilePanel] = useState('read')
 
   return (
-    <div ref={ref} className="h-full   lg:overflow-auto lg:max-h-screen max-w-screen-2xl  lg:pl-5 3xl:pl-20">
+    <div ref={ref} className="h-full lg:overflow-auto lg:max-h-screen max-w-screen-2xl  lg:pl-5 3xl:pl-20">
       
       <div
         className={`hidden lg:flex lg:flex-row h-full w-full`}

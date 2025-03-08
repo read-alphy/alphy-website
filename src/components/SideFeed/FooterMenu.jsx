@@ -45,7 +45,7 @@ export default function FooterMenu({
         </Link>
       )}
 
-      {isClient &&
+      {/* {isClient &&
         <div className={menuItemClass} onClick={handleDarkMode}>
           {theme === 'light' ? (
             <>
@@ -59,7 +59,7 @@ export default function FooterMenu({
             </>
           )}
         </div>
-      }
+      } */}
 
       <button
         className={menuItemClass}
