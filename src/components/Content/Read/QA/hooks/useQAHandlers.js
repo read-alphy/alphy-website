@@ -6,6 +6,7 @@ export function useQAHandlers({
   inputValue,
   setInputValue,
   QARef,
+  setOpenDialog,
   setIsCleared,
   setShowBaseQA,
   setShowUserQA,
@@ -33,7 +34,8 @@ export function useQAHandlers({
   QaWsManager,
   API_HOST,
   API_SSL,
-  buttonRef
+  buttonRef,
+  setQuestion
 }) {
   // Clear the input and reset state
   const handleClear = useCallback(() => {
@@ -47,25 +49,35 @@ export function useQAHandlers({
   }, [setAnswerData, setIsCleared, setIsLoadingInside, setShowBaseQA, setShowUserQA, setInputValue, setInputError])
 
   // Handle base question selection
-  const handleBaseQA = useCallback((event) => {
-    setIsCleared(false)
-    setShowBaseQA(true)
-    setInputValue(event.target.textContent)
-    setBaseQuestion(event.target.textContent)
-    QARef.current.scrollIntoView({ behavior: 'smooth' })
-  }, [setIsCleared, setShowBaseQA, setInputValue, setBaseQuestion, QARef])
-
-  // Handle accordion interaction for base questions
-  const handleBaseQAaccordion = useCallback((event, index, item) => {
-    if (collapseIndex === index) {
-      setCollapseIndex(-1)
-      return
-    }
-    
-    setCollapseIndex(index)
-    setBaseQuestion(item)
-    QARef.current.scrollIntoView({ behavior: 'smooth' })
-  }, [collapseIndex, setCollapseIndex, setBaseQuestion, QARef])
+// Updated handleBaseQA function in useQAHandlers.js
+const handleBaseQA = useCallback((event) => {
+  setIsCleared(false);
+  setShowBaseQA(true);
+  setShowUserQA(false);
+  
+  // Get the question text from the clicked element
+  // This handles both direct clicks on the button and clicks on the span inside
+  let questionText;
+  if (event.target.dataset.questionText) {
+    // Get from data attribute if available (from span element)
+    questionText = event.target.dataset.questionText;
+  } else if (event.target.querySelector('[data-question-text]')) {
+    // Try to find a child element with the data attribute
+    questionText = event.target.querySelector('[data-question-text]').dataset.questionText;
+  } else {
+    // Fallback to textContent
+    questionText = event.target.textContent;
+  }
+  
+  // Update state with the question text
+  setInputValue(questionText);
+  setBaseQuestion(questionText);
+  
+  // If we have a QARef, scroll to it
+  if (QARef && QARef.current) {
+    QARef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+}, [setIsCleared, setShowBaseQA, setShowUserQA, setInputValue, setBaseQuestion, QARef]);
 
   // Clear specific options
   const handleOptionClear = useCallback(() => {
@@ -90,13 +102,12 @@ export function useQAHandlers({
   }, [inputValue, baseQuestion])
 
   // Copy answer to clipboard
-  const handleCopyToClipboard = useCallback(() => {
+  const handleCopyToClipboard = useCallback((answer) => {
     const questionText = baseQuestion || inputValue
-    const myHtml = document.getElementById('answer-area')
     
     let plainText = `${questionText} \n\n `
-    if (myHtml) {
-      plainText = `${questionText} \n\n ${myHtml.innerText}`
+    if (answer) {
+      plainText = `${questionText} \n\n ${answer}`
     }
     
     navigator.clipboard.writeText(plainText)
@@ -123,6 +134,7 @@ export function useQAHandlers({
   }, [areaRefs, setHighlightIndex])
   // Show a single source
   const handleShowSingleSource = useCallback((sourceNumber) => {
+    setOpenDialog(true)
     setSingleSource(true)
     setAnswer(true)
     setBaseSources(true)
@@ -152,6 +164,7 @@ export function useQAHandlers({
   // Fetch answer data
   const fetchData = useCallback(() => {
     // Clear any existing toast notifications
+    setQuestion(inputValue)
     setShowBaseQA(false)
     setShowUserQA(true)
     setInputError(false)
@@ -255,7 +268,6 @@ export function useQAHandlers({
   return {
     handleClear,
     handleBaseQA,
-    handleBaseQAaccordion,
     handleOptionClear,
     handleKeyDown,
     handleShareLink,

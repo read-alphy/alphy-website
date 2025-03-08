@@ -1,8 +1,9 @@
-import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove'
-import ReplayIcon from '@mui/icons-material/Replay'
+import { BookmarkX, RotateCcw } from 'lucide-react'
 import axios from 'axios'
-import Link  from 'next/link'
+import Link from 'next/link'
 import { API_URL } from '../../../constants'
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 export default function BookmarkFeedItem({
   item,
@@ -16,7 +17,10 @@ export default function BookmarkFeedItem({
   sideFeed,
   setCollapsed,
 }) {
-  const removeBookmark = () => {
+  const removeBookmark = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
     axios
       .patch(
         `${API_URL}/sources/${item.source_type}/${item.source_id}/bookmark?bookmark=false`,
@@ -29,95 +33,69 @@ export default function BookmarkFeedItem({
         }
       )
       .then(response => {
-        console.log('removed', removed)
         setRemoved(!removed)
       })
   }
+
+  const isInProgress = item.summaries !== undefined &&
+    item.summaries[0] !== undefined &&
+    item.summaries[0].complete !== true;
+
   return (
-    <div className="flex w-full ">
-      <div
-        className={`items-center justify-start w-full h-full  p-2 rounded-md mb-2 transition duration-200 ease-in-out    mr-auto ml-auto`}
-        onClick={() => {
-          // navigate(`/${item.source_type === 'sp' ? 'sp' : 'yt'}/${item.source_id}`);
-        }}
-        target="_blank"
-      >
-        <Link href={`/${item.source_type}/${source_id}`}>
-          <div
-            className={`min-w-[320px] max-w-[320px]  quicksand font-bold xs:min-w-[100px] xs:max-w-[200px]  mr-3 cursor-pointer`}
-          >
-            <div
-              className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600 max-w-[300px]"
-              style={{
-                backgroundImage: `url(${imageUrl})`,
-                paddingBottom: '50%',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-              }}
-            ></div>
-          </div>
-        </Link>
-
-        <div className="text-xs h-full mt-2">
-          <div className="grid grid-cols-3">
-            <div className="col-span-2">
-              {item.summaries !== undefined &&
-              item.summaries[0] !== undefined &&
-              (item.summaries[0].complete === true ||
-                item.summaries[1] !== undefined ||
-                item.summaries[0] !== undefined) ? null : (
-                <div className="font-bold text-purpleLike dark:text-zinc-300 quicksand font-bold">
-                  📝 IN PROGRESS
-                </div>
-              )}
-
-              <Link
-                className="cursor-pointer"
-                href={`/${item.source_type}/${source_id}`}
-              >
-                <div className="text-sm quicksand font-bold text-slate-700 	 dark:text-zinc-300 ">
-                  {item.title}
-                </div>
-                <div className=" text-slate-600 dark:text-zinc-300 quicksand font-normal">
-                  {item.creator_name}
-                </div>
-                <div className="quicksand font-bold text-zinc-400 dark:text-zinc-300 flex flex-row">
-                  {item.summaries !== undefined &&
-                    item.summaries.map((summary, index) => (
-                      <div
-                        className={
-                          index !== 0
-                            ? 'ml-1 quicksand font-bold'
-                            : 'quicksand font-bold'
-                        }
-                      >
-                        {language_codes[summary.lang]}
-                        {index !== item.summaries.length - 1 && ','}
-                      </div>
-                    ))}
-                </div>
-              </Link>
-            </div>
-
-            <div
-              className={`flex  ${sideFeed == true && 'mr-0 mb-0'} col-span-1 `}
-            >
-              {removed ? (
-                <ReplayIcon
-                  onClick={removeBookmark}
-                  className="cursor-pointer text-slate-700 dark:text-zinc-300"
-                />
-              ) : (
-                <BookmarkRemoveIcon
-                  onClick={removeBookmark}
-                  className="cursor-pointer text-slate-700 dark:text-zinc-300"
-                />
-              )}
-            </div>
-          </div>
+    <Link href={`/${item.source_type}/${source_id}`}>
+      <Card className="overflow-hidden shadow-none transition-all duration-300 hover:shadow-md dark:bg-zinc-800 dark:border-zinc-700 h-full relative">
+        <div
+          className="w-full h-40 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${typeof imageUrl === "object" ? imageUrl.src : imageUrl})`,
+          }}
+        />
+        
+        <div className="absolute top-2 right-2">
+          {removed ? (
+            <RotateCcw
+              onClick={removeBookmark}
+              className="cursor-pointer text-white bg-slate-700/70 p-1 rounded-md hover:bg-slate-700/90"
+              size={24}
+            />
+          ) : (
+            <BookmarkX
+              onClick={removeBookmark}
+              className="cursor-pointer text-white bg-slate-700/70 p-1 rounded-md hover:bg-slate-700/90"
+              size={24}
+            />
+          )}
         </div>
-      </div>
-    </div>
+        
+        <CardHeader className="p-3 pb-0">
+          {isInProgress && (
+            <Badge variant="outline" className="mb-2 bg-indigo-50 text-indigo-400 dark:bg-purple-900 dark:text-purple-200 border-purple-300 dark:border-purple-700">
+              📝 IN PROGRESS
+            </Badge>
+          )}
+          <h3 className="text-sm font-bold text-slate-700 dark:text-zinc-300 quicksand line-clamp-2">
+            {item.title}
+          </h3>
+        </CardHeader>
+        
+        <CardContent className="p-3 pt-1">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 quicksand font-bold">
+            {item.creator_name}
+          </p>
+        </CardContent>
+        
+        <CardFooter className="p-3 pt-0 flex flex-col items-start">
+          <div className="flex flex-wrap text-xs text-zinc-400 dark:text-zinc-500 quicksand font-bold">
+            {item.summaries !== undefined &&
+              item.summaries.map((summary, index) => (
+                <span key={index} className={index !== 0 ? 'ml-1' : 'text-sm'}>
+                  {language_codes[summary.lang]}
+                  {index !== item.summaries.length - 1 && ','}
+                </span>
+              ))}
+          </div>
+        </CardFooter>
+      </Card>
+    </Link>
   )
 }

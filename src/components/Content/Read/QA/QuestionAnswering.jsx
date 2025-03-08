@@ -1,8 +1,7 @@
-// File: components/QuestionAnswering/index.js
+// Updated QuestionAnswering component
 import React, { useState, useEffect, createRef, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { Spinner } from '@material-tailwind/react'
-import DataArrayIcon from '@mui/icons-material/DataArray'
+import { BotMessageSquare } from 'lucide-react'
 
 // Custom hooks
 import { useQAState } from './hooks/useQAState'
@@ -10,10 +9,11 @@ import { useQAHandlers } from './hooks/useQAHandlers'
 
 // Components
 import SearchBar from './components/SearchBar'
-import BaseQuestions from './BaseQuestions'
 import QuestionLoading from './QuestionLoading'
-import DynamicQA from './DynamicQA'
 import ErrorMessage from './components/ErrorMessage'
+
+// Import the new unified components
+import { QuestionsDisplay, DynamicQuestion } from './UnifiedQAComponent'
 
 // Services
 import QaWsManager from './QaWsManager'
@@ -69,6 +69,10 @@ export default function QuestionAnswering({
     setCollapseIndex,
     highlightIndex,
     setHighlightIndex,
+    question,
+    setQuestion,
+    openDialog,
+    setOpenDialog,
   } = useQAState()
 
   // Create refs for the source areas
@@ -80,11 +84,8 @@ export default function QuestionAnswering({
   // Event handlers with custom hook
   const {
     handleClear,
-    handleBaseQA,
-    handleBaseQAaccordion,
-    handleOptionClear,
+    handleBaseQA,  // Make sure this is destructured
     handleKeyDown,
-    handleShareLink,
     handleCopyToClipboard,
     handleShowSingleSource,
     handleScroll,
@@ -95,6 +96,10 @@ export default function QuestionAnswering({
     inputValue,
     setInputValue,
     QARef,
+    question,
+    setQuestion,
+    openDialog,
+    setOpenDialog,
     setIsCleared,
     setShowBaseQA,
     setShowUserQA,
@@ -111,6 +116,7 @@ export default function QuestionAnswering({
     setSelectionCall,
     setHighlightIndex,
     setClicked,
+    setShowSource,
     data,
     baseQuestion,
     collapseIndex,
@@ -131,7 +137,6 @@ export default function QuestionAnswering({
 
   // Process URL query parameter on initial load
   useEffect(() => {
-    
     const processUrlQuery = () => {
       if (
         router.asPath.split('/')[2]?.split('&q=')[1] !== undefined &&
@@ -187,17 +192,78 @@ export default function QuestionAnswering({
     }
   }
 
+  // Effect to update question state when baseQuestion changes
+  useEffect(() => {
+    if (baseQuestion) {
+      setQuestion(baseQuestion);
+    }
+  }, [baseQuestion, setQuestion]);
+
   return (
     <div
       id="q-and-a"
-      className="md:min-h-[600px] lg:w-[700px] xl:w-[500px] 2xl:w-[550px] 3xl:w-full mx-auto sm:mx-0 bg-white drop-shadow-sm dark:bg-mildDarkMode border-b overflow-auto pt-10 pl-5 pr-5 pb-5 border border-zinc-100 dark:border-zinc-700 rounded-xl text-slate-700 dark:text-zinc-300"
+      className="relative h-[95vh] flex flex-col"
       ref={QARef}
     >
-      <p className="mb-4 quicksand font-normal text-l text-slate-700 dark:text-zinc-300">
-        Chat with the content. In any language you want
-      </p>
+      {answerData.answer.length == 0 &&
+          <div className="flex flex-col gap-2 w-full h-full items-center justify-center mx-auto">
+            <BotMessageSquare strokeWidth={1.2} className="h-10 w-10 mr-1.5 text-blue-500 dark:text-blue-400 flex-shrink-0" />
+            <span className="text-lg text-zinc-800 dark:text-zinc-300">Chat with the content. In any language you want</span>
+          </div>
 
-      <div className="Md:pl-10 md:pr-10">
+        }
+     
+      <div className="mb-24 lg:mb-0">
+        {inputError && inputValue.length === 0 && (
+          <ErrorMessage message={errorText} />
+        )}
+
+        {isLoadingInside && !showBaseQA && (
+          <QuestionLoading />
+        )}
+
+        {(
+          <DynamicQuestion
+            answerData={answerData}
+            question={baseQuestion || question}  // Prefer baseQuestion if available
+            setQuestion={setQuestion}
+            data={data}
+            handleClear={handleClear}
+            handleCopyToClipboard={handleCopyToClipboard}
+            handleShowSingleSource={handleShowSingleSource}
+            formatAnswer={formatAnswer}
+            updateVariable={updateVariable}
+            handleLength={handleLength}
+            inputValue={inputValue}
+            showSource={showSource}
+            setShowSource={setShowSource}
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+          />
+        )}
+      </div>
+
+      <div className="fixed lg:absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 pb-4 lg:pb-10  shadow-md lg:shadow-none">
+        <div className="mb-2 lg:mb-4 max-h-32 lg:max-h-none overflow-y-auto">
+          {(
+            <QuestionsDisplay
+              questions={key_qa}
+              setQuestion={setQuestion}
+              data={data}
+              areaRefs={areaRefs}
+              updateVariable={updateVariable}
+              handleCopyToClipboard={handleCopyToClipboard}
+              formatAnswer={formatAnswer}
+              handleLength={handleLength}
+              answerData={answerData}
+              handleShowSingleSource={handleShowSingleSource}
+              setAnswerData={setAnswerData}
+              handleBaseQA={handleBaseQA} 
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+            />
+          )}
+        </div>
         <SearchBar
           inputRef={inputRef}
           inputValue={inputValue}
@@ -208,60 +274,6 @@ export default function QuestionAnswering({
           fetchData={fetchData}
           buttonRef={buttonRef}
         />
-
-        {inputError && inputValue.length === 0 && (
-          <ErrorMessage message={errorText} />
-        )}
-
-        <div className="mt-10">
-          {isCleared && !isLoadingInside && answerData.answer.length === 0 && (
-            <BaseQuestions
-              key_qa={key_qa}
-              data={data}
-              collapseIndex={collapseIndex}
-              handleBaseQAaccordion={handleBaseQAaccordion}
-              setBaseSources={setBaseSources}
-              handleCopyToClipboard={handleCopyToClipboard}
-              handleShareLink={handleShareLink}
-              handleLength={handleLength}
-              QARef={QARef}
-              baseSources={baseSources}
-              updateVariable={updateVariable}
-              DataArrayIcon={DataArrayIcon}
-              formatAnswer={formatAnswer}
-              areaRefs={areaRefs}
-              singleSource={singleSource}
-              showSource={showSource}
-              handleShowAllSources={handleShowAllSources}
-            />
-          )}
-        </div>
-
-        {isLoadingInside && !showBaseQA && (
-          <QuestionLoading />
-        )}
-
-        {answerData.answer.length !== 0 && !showBaseQA && showUserQA && (
-          <DynamicQA
-            answerData={answerData}
-            data={data}
-            setAnswer={setAnswer}
-            answer={answer}
-            handleClear={handleClear}
-            inputValue={inputValue}
-            handleShareLink={handleShareLink}
-            handleCopyToClipboard={handleCopyToClipboard}
-            formatAnswer={formatAnswer}
-            singleSource={singleSource}
-            showSource={showSource}
-            updateVariable={updateVariable}
-            DataArrayIcon={DataArrayIcon}
-            handleShowAllSources={handleShowAllSources}
-            areaRefs={areaRefs}
-            highlightIndex={highlightIndex}
-            handleLength={handleLength}
-          />
-        )}
       </div>
     </div>
   )

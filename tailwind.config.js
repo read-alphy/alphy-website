@@ -1,13 +1,13 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: ["class"],
+  darkMode: ["class", 'class'],
   theme: {
   	screens: {
   		xs: '420px',
   		xsSm: '510px',
   		sm: '640px',
   		md: '768px',
-  		lg: '1000px',
+  		lg: '1024px',
   		xl: '1280px',
   		'2xl': '1440px',
   		'3xl': '1660px'
@@ -28,7 +28,7 @@ module.exports = {
   			}
   		},
   		textDecoration: {
-  			'dashed': 'dashed'
+  			dashed: 'dashed'
   		},
   		height: {
   			'120': '30rem',
@@ -129,6 +129,16 @@ module.exports = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
+  			},
+  			sidebar: {
+  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				foreground: 'hsl(var(--sidebar-foreground))',
+  				primary: 'hsl(var(--sidebar-primary))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				accent: 'hsl(var(--sidebar-accent))',
+  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+  				border: 'hsl(var(--sidebar-border))',
+  				ring: 'hsl(var(--sidebar-ring))'
   			}
   		},
   		backgroundImage: {

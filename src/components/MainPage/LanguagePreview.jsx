@@ -13,10 +13,10 @@ export default function LanguagePreview() {
   // Featured languages for header display
   const featuredLanguages = [
     { language: 'English', country_code: 'gb' },
+    { language: 'Chinese', country_code: 'cn' },
     { language: 'Spanish', country_code: 'es' },
     { language: 'French', country_code: 'fr' },
     { language: 'German', country_code: 'de' },
-    { language: 'Chinese', country_code: 'cn' },
     { language: 'Arabic', country_code: 'sa' },
     { language: 'Turkish', country_code: 'tr' },
     { language: 'Japanese', country_code: 'jp' },
@@ -99,7 +99,7 @@ export default function LanguagePreview() {
         ))}
         <motion.div 
           variants={flagAnimation}
-          className="flex items-center justify-center rounded-full w-10 h-10 bg-gradient-to-r from-sky-100 to-indigo-100 dark:from-sky-900/50 dark:to-indigo-900/50 
+          className="flex items-center justify-center rounded-full w-10 h-10 aspect-square bg-gradient-to-r from-sky-100 to-indigo-100 dark:from-sky-900/50 dark:to-indigo-900/50 
                      text-sky-800 dark:text-sky-200 text-xs font-medium border-2 border-white dark:border-zinc-800 shadow-sm"
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}

@@ -1,42 +1,35 @@
-import React, {
-  useCallback,
-  useState,
-  useMemo,
-  useEffect,
-  useRef,
-  memo,
-} from 'react'
-import SideFeed from '../SideFeed/SideFeed'
-
-// import ArticleCreator from "./ArticleComponents/ArticleCreator"
+// components/Arc/ArcMain.jsx
+import React, { useState, useEffect, useMemo } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
+import { ChevronLeft, LogIn, UserPlus, Lock, ArrowRight } from "lucide-react"
+
+// Components
+import SideFeed from '../SideFeed/SideFeed'
 import ArcCreation from './ArcCreation'
-import { Button, Input, Textarea } from '@material-tailwind/react'
-import CircularProgress from '@mui/material/CircularProgress';
-
-import ArcChat from './ArcChat'
+import ArcChat from './ArcChat/ArcChat'
 import EditArc from './EditArc'
-import DeleteIcon from '@mui/icons-material/Delete'
-import SaveIcon from '@mui/icons-material/Save'
-import Dialog from '@mui/material/Dialog'
 import Loading from '../Loading'
-import axios from 'axios'
+import DeleteArcDialog from './components/DeleteArcDialog'
+import AuthorizationError from './components/AuthorizationError'
 
+
+// Custom hooks
+import useArcData from './hooks/useArcData'
+import useArcMutations from './hooks/useArcMutations'
+
+// Utils
+import { getArcPageType, canCreateArc, isMobileWidth } from './utils/arcHelpers'
 import jsonData from './arcs_and_thumbnails.json' // TODO: replace with API call
-import { API_URL } from '../../constants'
-
 
 export default function ArcMain({
   currentUser,
   collapsed,
   setCollapsed,
   tier,
-  idToken,
   userArcs,
   setUserArcs,
   credit,
-  
   setCreditCalled,
   sandboxHistory,
   setSandboxHistory,
@@ -44,583 +37,350 @@ export default function ArcMain({
   setLoggedIn,
 }) {
   const router = useRouter()
-  let source_id
+  
+  // Determine page type from URL
+  const { isCreateArc, isEditArc, isArc, isArcPage } = useMemo(() => 
+    getArcPageType(router.asPath), [router.asPath]
+  )
 
+  
+  // State for window size detection
   const [windowSizeChecked, setWindowSizeChecked] = useState(false)
-
-  const [called, setCalled] = useState(false)
-  const [sourceIDsArc, setSourceIDsArc] = useState([])
   const [dataArc, setDataArc] = useState([])
-  const [data, setData] = useState([])
-  const [arcInfo, setArcInfo] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [arcDescription, setArcDescription] = useState('')
-  const [arcTitle, setArcTitle] = useState('')
+  const [sourceIDsArc, setSourceIDsArc] = useState([])
+  
+  // State for delete dialog
   const [deleteDialog, setDeleteDialog] = useState(false)
-  const [subCalled, setSubCalled] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(false)
-  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
-  const [isLoadingDelete, setIsLoadingDelete] = useState(false)
-  const [helmetThumbnail, setHelmetThumbnail] = useState('')
-  const [isVisible, setIsVisible] = useState(false)
-  const [isPublic, setIsPublic] = useState(false)
-  const [authorizationError, setAuthorizationError] = useState(false)
-
-  const isCreateArc = router.asPath.split('/')[2] === 'createArc'
-  const isEditArc = router.asPath.split('/')[2] === 'editArc'
-  const isArc =
-    router.asPath.split('/')[1] === 'arc' &&
-    router.asPath.split('/')[2] !== 'editArc' &&
-    router.asPath.split('/')[2] !== 'createArc'
-  const isArcPage = router.asPath.split('/')[1] === 'arc'
-
-  let item_thumbnail
-  let item_name
-  if (isArc || isEditArc) {
-    const item = jsonData.find(
-      t => t.arc_id === router.asPath.split('/')[2]
-    )
-    if (item !== undefined) {
-      item_thumbnail = item.thumbnail_url
-      item_name = item.name
+  
+  // Check authorization once and memoize results
+  const authState = useMemo(() => {
+    return {
+      isAuthenticated: !!currentUser,
+      canCreate: currentUser ? canCreateArc(tier, userArcs.length) : false
     }
-  }
+  }, [currentUser, tier, userArcs.length])
+  
+  // Custom hooks
+  const arcData = useArcData(isArc, isEditArc, router, currentUser)
+  
+  const {
+    isLoadingSubmit,
+    isLoadingDelete,
+    isLoadingVisibility,
+    error,
+    handleCreateOrUpdateArc,
+    handleDeleteArc,
+    handleVisibility,
+    clearError
+  } = useArcMutations(router, currentUser, userArcs, setUserArcs)
+  
+  // Destructure arcData for easier access
+  const {
+    data,
+    arcInfo,
+    arcTitle,
+    arcDescription,
+    isLoading,
+    isVisible,
+    isPublic,
+    authorizationError,
+    updateArcState,
+    fetchArcData
+  } = arcData
 
-  useEffect (() => {
+  
+  
+  // Handle window size check on initial load
+  useEffect(() => {
+    if (!windowSizeChecked) {
+      if (isMobileWidth()) {
+        setCollapsed(true)
+      }
+      setWindowSizeChecked(true)
+    }
+  }, [])
+  
+  // Handle arc reload on navigation
+  useEffect(() => {
     if (isArc && sessionStorage.getItem('arcAction') === 'true') {
       sessionStorage.removeItem('arcAction')
       window.location.reload()
     }
   }, [])
-
   useEffect(() => {
-    
-    if (isArcPage) {
-      const newPathname = router.asPath.replace('arc', 'arc')
-      router.push(newPathname)
+    if (arcData?.dataArc && dataArc.length === 0) {
+      setDataArc(arcData.dataArc);
+      setSourceIDsArc(arcData.sourceIDsArc);
     }
-
-    if (!windowSizeChecked) {
-      if (window.innerWidth < 768) {
-        setCollapsed(true)
-      }
-      setWindowSizeChecked(true)
-    }
-
-    if (dataArc !== null && dataArc.length > 1) {
-      setErrorMessage(false)
-    }
-  })
-
-  useEffect(() => {
-    if (
-      (isArc || isEditArc) &&
-      sessionStorage.getItem('arcAction') === 'true'
-    ) {
-      sessionStorage.removeItem('arcAction')
-      window.location.reload()
-    }
-  }, [])
-
-  useEffect(() => {
-    if ((isArc || isEditArc) && data.length === 0 && called !== true) {
-      handleArcInfo()
-    }
-  }, [currentUser])
-
-  const handleArcInfo = async () => {
-    setAuthorizationError(false)
-    sessionStorage.removeItem('arcAction')
-
-    if ((isArc || isEditArc) && data.length === 0 && called !== true) {
-      setIsLoading(true)
-      let idToken
-      if(currentUser){
-        idToken = currentUser.accessToken
-      }
-    
-
-      source_id = isArc
-        ? router.query.arc_id
-        : router.asPath.split('/')[3]
-
-      try {
-        await axios
-          .get(`${API_URL}/playlists/${source_id}?nof_questions=30`, {
-            headers: {
-              accept: 'application/json',
-              'id-token': idToken!==null ? idToken : null,
-            },
-          })
-          .then(response => {
-            
-            setAuthorizationError(false)
-            setCalled(true)
-            setData(response.data)
-
-            setIsVisible(response.data.is_visible)
-            localStorage.setItem('isVisible', response.data.is_visible)
-            setIsPublic(response.data.is_public)
-            setArcInfo(response.data)
-            if (response.data.description === 'null') {
-              setArcDescription('')
-            } else {
-              setArcDescription(response.data.description)
-            }
-            setArcTitle(response.data.name)
-            
-            setDataArc(response.data.tracks)
-            let sources = response.data.tracks.map(item => item.source_id)
-            setSourceIDsArc([...sources])
-            setIsLoading(false)
-          })
-      } catch (error) {
-        setIsLoading(false)
-        
-        /* setCalled(true) */
-        
-
-        if (axios.isCancel(error)) {
-          console.log('Request cancelled')
-        }
-
-        if (
-          (error.response.data.detail =
-            'You are not authorized to see this playlist.')
-        ) {
-          setAuthorizationError(true)
-        } else {
-          console.log('arcChat error', error)
-        }
-
-        /* router.push("/404") */
-      }
-    }
-  }
-
-
+  }, [arcData]);
+  
+  // Handlers
   const handleArc = () => {
-    // disallow creating if dataarc is empty
-    // disallow creating if there is a limit on the number of arcs
-    // disallow creating if there is a limit on the number of videos to include in a arc
-    // disallow creating if the user is not logged in
-    if (dataArc.length === 0) {
-      setErrorMessage(true)
-      return
-    } else {
-      try {
-        if (isCreateArc) {
-          setIsLoadingSubmit(true)
-          axios
-            .post(
-              `${API_URL}/playlists/`,
-              {
-                name: arcTitle.length > 0 ? arcTitle : 'My Arc',
-                user_id: currentUser.uid,
-                description: arcDescription,
-                sources: [...dataArc],
-              },
-              {
-                headers: {
-                  'id-token': currentUser.accessToken,
-                },
-              }
-            )
-            .then(response => {
-              sessionStorage.setItem('arcAction', 'true')
-              setTimeout(() => {
-                router.push(`/arc/${response.data.uid}`)
-                setIsLoadingSubmit(false)
-              }, 2000)
-            })
-        } else if (isEditArc) {
-          setIsLoadingSubmit(true)
-          sessionStorage.setItem('arcAction', 'true')
-          axios
-            .patch(
-              `${API_URL}/playlists/${arcInfo.uid}`,
-              {
-                name: arcTitle.length > 0 ? arcTitle : 'My Arc',
-                user_id: currentUser.uid,
-                description: arcDescription,
-                sources: [...dataArc],
-              },
-              {
-                headers: {
-                  'id-token': currentUser.accessToken,
-                },
-              }
-            )
-            .then(response => {
-              sessionStorage.setItem('arcAction', 'true')
-              setTimeout(() => {
-                router.push(`/arc/${response.data.uid}`)
-                setIsLoadingSubmit(false)
-              }, 2000)
-            })
-        }
-      } catch (error) {
-        setIsLoadingSubmit(false)
-        console.log('arcChat error', error)
-        if (axios.isCancel(error)) {
-          console.log('Request cancelled')
-        } else if (error.response.status === 400) {
-          setErrorMessage(true)
-        }
-      }
-    }
+    handleCreateOrUpdateArc(
+      isCreateArc,
+      arcInfo,
+      arcTitle,
+      arcDescription,
+      dataArc
+    )
   }
-  const handleDeleteArc = () => {
-    setIsLoadingDelete(true)
-
-    axios
-      .delete(`${API_URL}/playlists/${arcInfo.uid}`, {
-        headers: {
-          'id-token': currentUser.accessToken,
-        },
-      })
-      .then(response => {
-        const index = userArcs.indexOf(arcInfo)
-        userArcs.splice(index, 1)
-        setUserArcs([...userArcs])
-        router.push(`/`)
-      })
-      .catch(error => {
-        console.log(error)
-        setIsLoadingDelete(false)
-      })
+  
+  const handleArcDelete = () => {
+    handleDeleteArc(arcInfo)
   }
-
-  const handleVisibility = () => {
-    const targetVisibility = !isVisible
-    localStorage.setItem('isVisible', isVisible)
-    try {
-      axios
-        .patch(
-          `${API_URL}/playlists/${arcInfo.uid}/visibility?visibility=${targetVisibility}`,
-          null,
-          {
-            headers: {
-              accept: 'application/json',
-              'id-token': currentUser.accessToken,
-            },
-          }
-        )
-        .then(response => {
-          localStorage.setItem('isVisible', targetVisibility)
-          setIsVisible(targetVisibility)
-          setIsPublic(targetVisibility)
-        })
-    } catch (error) {
-      console.log('arcChat error', error)
-      if (axios.isCancel(error)) {
-        console.log('Request cancelled')
-      } else if (error.response.status === 400) {
-        setErrorMessage(true)
-      }
-    }
+  
+  const toggleVisibility = async () => {
+    const newVisibility = await handleVisibility(arcInfo.uid, isVisible)
+    updateArcState({ 
+      isVisible: newVisibility, 
+      isPublic: newVisibility
+    })
   }
-
-  return (
-    <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
-      <div
-        className={`w-screen  bg-bordoLike transition origin-top-right transform sm:hidden rounded-t-none rounded-3xl ${
-          collapsed ? 'nav-ham-collapsed fixed top-0' : 'nav-ham-not-collapsed'
-        }`}
-      ></div>
-
-      <div className="flex flex-row ">
-        {
-          <div className={`hidden ${isArc ? 'md:flex' : 'md:flex'} `}>
-            <SideFeed
-            loggedIn = {loggedIn}
-            setLoggedIn = {setLoggedIn}
-              currentUser={currentUser}
-              collapsed={collapsed}
-              setCollapsed={setCollapsed}
-              source_id={source_id}
-              dataArc={dataArc}
-              tier={tier}
-              sandboxHistory={sandboxHistory}
-              setSandboxHistory={setSandboxHistory}
-              isArc={isArc}
-            />
+  
+  const setArcDescription = (newDescription) => {
+    updateArcState({ arcDescription: newDescription })
+  }
+  
+  const setArcTitle = (newTitle) => {
+    updateArcState({ arcTitle: newTitle })
+  }
+  
+  
+  // Optimized content rendering with memoization
+  const createArcContent = useMemo(() => {
+    if (!authState.isAuthenticated) {
+      return (
+        <div className="flex flex-col items-center justify-center py-16 px-4 max-w-md mx-auto">
+          <div className="h-20 w-20 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-8">
+            <Lock className="h-10 w-10 text-blue-500 dark:text-blue-400" />
           </div>
-        }
-
-        <div
-          className={`fixed top-0 z-50 transition origin-top-right transform ${
-            isArc ? 'md:hidden' : 'md:hidden'
-          }  w-full shadow-lg bg-zinc-100 ${
-            collapsed ? 'ham-collapsed hidden' : 'ham-not-collapsed bg-white'
-          }`}
-        >
-          <div className="rounded-lg rounded-t-none shadow-lg">
-            <div className="h-screen">
-              <SideFeed
-              loggedIn = {loggedIn}
-              setLoggedIn = {setLoggedIn}
-                currentUser={currentUser}
-                collapsed={collapsed}
-                setCollapsed={setCollapsed}
-                source_id={source_id}
-                dataArc={dataArc}
-                tier={tier}
-                sandboxHistory={sandboxHistory}
-                setSandboxHistory={setSandboxHistory}
-                isArc={isArc}
-              />
-            </div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign in to continue</h3>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+            Create an account to create and manage Arcs with Alphy
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs">
+            <Link 
+              href="/u/login" 
+              className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors flex items-center justify-center"
+            >
+              <LogIn className="h-3 w-3 mr-2" />
+              Sign In
+            </Link>
+            
+            <Link 
+              href="/u/register" 
+              className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors flex items-center justify-center"
+            >
+              <UserPlus className="h-3 w-3 mr-2" />
+              Create Account
+            </Link>
+          </div>
+          
+         
+        </div>
+      )
+    }
+    
+    if (!authState.canCreate) {
+      return (
+        <div className="flex flex-col items-center justify-center py-16 px-4 max-w-md mx-auto">
+          <div className="h-20 w-20 rounded-full bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-8">
+            <Lock className="h-10 w-10 text-amber-500 dark:text-amber-400" />
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Plan Limit Reached</h3>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+            You've reached the maximum number of Arcs for your current plan. Upgrade to create more.
+          </p>
+          
+          <Link 
+            href="/account" 
+            className="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition-colors flex items-center justify-center"
+          >
+            Upgrade Plan
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Link>
+          
+         
+        </div>
+      )
+    }
+    
+    return (
+      <ArcCreation
+        userArcs={userArcs}
+        tier={tier}
+        arcDescription={arcDescription}
+        dataArc={dataArc}
+        setDataArc={setDataArc}
+        arcTitle={arcTitle}
+        setArcDescription={setArcDescription}
+        setArcTitle={setArcTitle}
+        sourceIDsArc={sourceIDsArc}
+        setSourceIDsArc={setSourceIDsArc}
+        errorMessage={error}
+        setErrorMessage={clearError}
+        credit={credit}
+        setCreditCalled={setCreditCalled}
+        isCreateArc={isCreateArc}
+        isEditArc={isEditArc}
+        isLoadingSubmit={isLoadingSubmit}
+        onSave={handleArc}
+        onDelete={() => setDeleteDialog(true)}
+      />
+    )
+  }, [authState.isAuthenticated, authState.canCreate, userArcs, tier, arcDescription, dataArc, arcTitle, sourceIDsArc, error, credit, isLoadingSubmit])
+  
+  const editArcContent = useMemo(() => {
+    if (!authState.isAuthenticated) {
+      return (
+        <div className="flex flex-col items-center justify-center py-16 px-4 max-w-md mx-auto">
+          <div className="h-20 w-20 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-8">
+            <Lock className="h-10 w-10 text-blue-500 dark:text-blue-400" />
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign in to continue</h3>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+            Create an account to edit and manage Arcs with Alphy
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs">
+            <Link 
+              href="/u/login" 
+              className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors flex items-center justify-center"
+            >
+              <LogIn className="h-3 w-3 mr-2" />
+              Sign In
+            </Link>
+            
+            <Link 
+              href="/u/register" 
+              className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors flex items-center justify-center"
+            >
+              <UserPlus className="h-3 w-3 mr-2" />
+              Create Account
+            </Link>
           </div>
         </div>
+      )
+    }
+
+    return (
+      <EditArc
+        currentUser={currentUser}
+        arcInfo={arcInfo}
+        tier={tier}
+        setArcInfo={(newInfo) => updateArcState({ arcInfo: newInfo })}
+        userArcs={userArcs}
+        arcDescription={arcDescription}
+        dataArc={dataArc}
+        setDataArc={setDataArc}
+        arcTitle={arcTitle}
+        setArcDescription={setArcDescription}
+        setArcTitle={setArcTitle}
+        sourceIDsArc={sourceIDsArc}
+        setSourceIDsArc={setSourceIDsArc}
+        errorMessage={error}
+        setErrorMessage={clearError}
+        credit={credit}
+        setCreditCalled={setCreditCalled}
+        isCreateArc={isCreateArc}
+        isEditArc={isEditArc}
+        isLoadingSubmit={isLoadingSubmit}
+        onSave={handleArc}
+        onDelete={() => setDeleteDialog(true)}
+      />
+    )
+  }, [authState.isAuthenticated, arcInfo, tier, userArcs, arcDescription, dataArc, arcTitle, sourceIDsArc, error, credit, isLoadingSubmit])
+  
+  const arcContent = useMemo(() => {
+    if (isLoading) {
+      return <Loading />
+    }
+    
+    if (authorizationError) {
+      return <AuthorizationError />
+    }
+    
+    
+
+    return (
+      <ArcChat
+        data={data}
+        setData={(newData) => updateArcState({ data: newData })}
+        currentUser={currentUser}
+        dataArc={dataArc}
+        setDataArc={setDataArc}
+        handleVisibility={toggleVisibility}
+        isVisible={isVisible}
+        setIsVisible={(newValue) => updateArcState({ isVisible: newValue })}
+        isPublic={isPublic}
+        setIsPublic={(newValue) => updateArcState({ isPublic: newValue })}
+        isLoadingVisibility={isLoadingVisibility}
+        tier={tier}
+      />
+    )
+  }, [isLoading, authorizationError, data, currentUser, dataArc, isVisible, isPublic, isLoadingVisibility, tier])
+  
+  // Simplified render logic
+  const renderContent = () => {
+    if (isCreateArc) return createArcContent
+    if (isEditArc) return editArcContent
+    return arcContent
+  }
+  
+  return (
+    <div className="scrolling dark:bg-darkMode dark:text-zinc-300">
+      <div className="flex flex-row bg-white dark:bg-darkMode">
+        <SideFeed 
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          currentUser={currentUser}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          source_id={isArc ? router.query.arc_id : router.asPath.split('/')[3]}
+          dataArc={dataArc}
+          tier={tier}
+          sandboxHistory={sandboxHistory}
+          setSandboxHistory={setSandboxHistory}
+          isArc={isArc}
+        />
 
         <div
           className={`${
             collapsed ? 'scrolling' : 'scrolling'
-          } md:px-20 pb-20 sm:pb-0 w-full sm:max-h-[100vh] ${
-            collapsed ? 'hidden' : ' overflow-hidden'
-          }}`}
+          } w-full max-h-[90vh] sm:max-h-[100vh] ${
+            collapsed ? 'overflow-hidden' : 'overflow-y-auto'
+          }`}
         >
-          {isCreateArc &&
-            (currentUser ? (
-              (tier === 'free' && userArcs.length < 1) ||
-              (tier === 'basic' && userArcs.length < 3) ||
-              tier === 'premium' ? (
-                <ArcCreation
-                  userArcs={userArcs}
-                  tier={tier}
-                  arcDescription={arcDescription}
-                  dataArc={dataArc}
-                  setDataArc={setDataArc}
-                  arcTitle={arcTitle}
-                  setArcDescription={setArcDescription}
-                  setArcTitle={setArcTitle}
-                  sourceIDsArc={sourceIDsArc}
-                  setSourceIDsArc={setSourceIDsArc}
-                  errorMessage={errorMessage}
-                  setErrorMessage={setErrorMessage}
-                  credit={credit}
-                  setCreditCalled={setCreditCalled}
-                />
-              ) : isLoadingSubmit === false ? (
-                <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 flex flex-col">
-                  <p className="quicksand font-semibold">
-                    You've already have the maximum number of Arcs for your
-                    plan.
-                  </p>
-
-                  <p className="mt-4 quicksand font-semibold">
-                    <Link
-                      href="/account"
-                      className="dark:text-greenColor text-green-400 underline quicksand font-semibold "
-                    >
-                      Upgrade
-                    </Link>{' '}
-                    your plan to create more Arcs.
-                  </p>
-                </div>
-              ) : null
-            ) : (
-              <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 pl-5">
-                <div className="mb-10">
-                  <Link
-                    href="/submit"
-                    className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 duration-200  ease-in transition cursor-pointer"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-</svg>
-
-                    <span className="text-sm  quicksand font-semibold">
-                      Go Back
-                    </span>
-                  </Link>
-                </div>
-                <Link
-                  href="/u/login"
-                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-                >
-                  Sign in
-                </Link>{' '}
-                or{' '}
-                <Link
-                  href="/u/register"
-                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-                >
-                  {' '}
-                  create an account
-                </Link>{' '}
-                to access this page.
-              </div>
-            ))}
-
-          {!isCreateArc && !isEditArc ? (
-            isLoading ? (
-              <Loading />
-            ) : authorizationError ? (
-              <div className="mx-10 mx-auto md:mx-20  mt-20 md:mt-40">
-                <div className="text-xl  text-zinc-700 dark:text-zinc-300 max-w-[600px] quicksand font-semibold">
-                  The arc you're trying to reach either doesn't exist or you
-                  don't have permission to access it. Check out arcs by Alphy{' '}
-                  <Link
-                    href="/arcs"
-                    className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-                  >
-                    here
-                  </Link>
-                  .
-                </div>
-              </div>
-            ) : (
-              <ArcChat
-                data={data}
-                setData={setData}
-                currentUser={currentUser}
-                dataArc={dataArc}
-                setDataArc={setDataArc}
-                handleVisibility={handleVisibility}
-                isVisible={isVisible}
-                setIsVisible={setIsVisible}
-                isPublic={isPublic}
-                setIsPublic={setIsPublic}
-                tier={tier}
-              />
-            )
-          ) : null}
-
-          {isEditArc &&
-            (currentUser ? (
-              <EditArc
-                arcInfo={arcInfo}
-                tier={tier}
-                setArcInfo={setArcInfo}
-                userArcs={userArcs}
-                arcDescription={arcDescription}
-                dataArc={dataArc}
-                setDataArc={setDataArc}
-                arcTitle={arcTitle}
-                setArcDescription={setArcDescription}
-                setArcTitle={setArcTitle}
-                sourceIDsArc={sourceIDsArc}
-                setSourceIDsArc={setSourceIDsArc}
-                errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}
-                credit={credit}
-                setCreditCalled={setCreditCalled}
-              />
-            ) : (
-              <div className="text-xl text-zinc-700 dark:text-zinc-300 mx-auto mt-20 md:mt-40 quicksand font-semibold pl-5">
-                <Link
-                  href="/u/login"
-                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-                >
-                  Sign in
-                </Link>{' '}
-                or{' '}
-                <Link
-                  href="/u/register"
-                  className="dark:text-greenColor text-green-400 underline quicksand font-semibold"
-                >
-                  {' '}
-                  create an account
-                </Link>{' '}
-                to access this page.
-              </div>
-            ))}
+          {renderContent()}
         </div>
       </div>
-      {((isCreateArc &&
-        ((tier === 'free' && userArcs.length < 1) ||
-          (tier === 'basic' && userArcs.length < 3) ||
-          tier === 'premium')) ||
-        isEditArc) && (
-        <div
-          className={`z-50 absolute bottom-10 w-full flex h-[40px] ${
-            currentUser ? '' : 'hidden'
-          } ${
-            !collapsed  && 'hidden lg:flex'
-          } lg:bg-transparent dark:lg:bg-transparent`}
-        >
-          <div className="flex justify-end items-center flex-grow mr-10 lg:mr-40  ">
-            {isEditArc && !isLoadingSubmit && (
-              <Button
-                size={"md"}
-                className="bg-red-400 px-5 mr-5 quicksand font-semibold"
-                onClick={() => setDeleteDialog(true)}
-              >
-                {' '}
-                <DeleteIcon /> <span className="mt-1">Delete </span>
-              </Button>
-            )}
-            {
-              <Button
-                size={"md"}
-                className={`bg-greenColor px-5 quicksand font-semibold ${
-                  isLoadingSubmit &&
-                  'bg-green-300 pointer-events-none min-w-[106.533px]'
-                }`}
-                onClick={handleArc}
-              >
-                {isLoadingSubmit ? (
-                  <CircularProgress
-                    color="inherit"
-                    size={20}
-                    className="flex mx-auto"
-                  />
-                ) : (
-                  <div className="">
-                    <SaveIcon className="mr-2 " />
-                    {isCreateArc ? 'Create' : 'Save'}
-                  </div>
-                )}
-              </Button>
-            }
+
+      {/* Error display */}
+      {error && (
+        <div className="fixed bottom-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded shadow-md">
+          <div className="flex">
+            <div>
+              <p className="font-bold">Error</p>
+              <p>{error}</p>
+            </div>
+            <button 
+              className="ml-4" 
+              onClick={clearError}
+            >
+              ✕
+            </button>
           </div>
-          {deleteDialog && (
-            <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
-              <div className="p-10 w-[240px] h-[120px] flex md:w-[360px] md:h-[180px] text-zinc-700 dark:text-zinc-300 bg-white dark:bg-mildDarkMode items-center text-center justify-center drop-shadow-sm flex-col">
-                <p className="mb-10 quicksand font-semibold">
-                  You are about to delete this arc. Would you like to continue?
-                </p>
-                <div>
-                  {isLoadingDelete ? (
-                    <div>
-                      <CircularProgress
-                        color="success"
-                        size={20}
-                        className="flex mx-auto opacity-40 mb-2"
-                      />
-                      <p className="text-zinc-500 dark:text-zinc-600 italic quicksand font-semibold">
-                        Deleting...
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="flex flex-row">
-                      <p
-                        className="text-greenColor cursor-pointer quicksand font-semibold"
-                        size="sm"
-                        onClick={() => setDeleteDialog(false)}
-                      >
-                        Cancel
-                      </p>
-                      <div className="border-r h-full mr-4 ml-4"></div>
-                      <p
-                        className="text-red-400 cursor-pointer quicksand font-semibold"
-                        size="sm"
-                        onClick={handleDeleteArc}
-                      >
-                        Delete
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </Dialog>
-          )}
         </div>
       )}
+
+      {/* Delete confirmation dialog */}
+      <DeleteArcDialog
+        isOpen={deleteDialog}
+        onClose={() => setDeleteDialog(false)}
+        onDelete={handleArcDelete}
+        isLoading={isLoadingDelete}
+      />
     </div>
   )
 }
-
-

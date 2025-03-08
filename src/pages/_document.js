@@ -55,7 +55,7 @@ class MyDocument extends Document {
       })(window, document, 'clarity', 'script', 'fy8nzp2uqz')` }} />
           {/* More scripts and meta tags as needed */}
         </Head>
-        <body className="bg-white dark:bg-darkMode">
+        <body className="bg-white dark:bg-darkMode  ">
           <Main />
           <NextScript />    
           {/* Inline script and noscript tags */}

@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Popover,
-  PopoverHandler,
   PopoverContent,
-} from '@material-tailwind/react';
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import MediaSourceLink from './MediaSourceLink';
 import ArchipelagoMenu from './ArchipelagoMenu';
 import VisibilityToggle from './VisibilityToggle';
 import BookmarkButton from './BookmarkButton';
 import LanguageSelector from './LanguageSelector';
 import ReportIssueButton from './ReportIssueButton';
+
 export default function HeaderMenu({ 
   data, 
   currentUser, 
@@ -63,14 +64,8 @@ export default function HeaderMenu({
   );
 
   return (
-    <Popover
-      open={mainPopoverOpen}
-      onBlur={() => setMainPopoverOpen(false)}
-      placement="bottom-end"
-    >
-      <PopoverHandler
-        onClick={() => setMainPopoverOpen(!mainPopoverOpen)}
-      >
+    <Popover open={mainPopoverOpen} onOpenChange={setMainPopoverOpen}>
+      <PopoverTrigger asChild>
         <div 
           className={`flex mt-5 lg:mt-8 mr-4
             rounded-full p-2.5 bg-slate-50 dark:bg-zinc-800 
@@ -82,7 +77,7 @@ export default function HeaderMenu({
         >
           <MenuIcon />
         </div>
-      </PopoverHandler>
+      </PopoverTrigger>
       <PopoverContent className="dark:bg-zinc-800 dark:border-zinc-700 bg-white rounded-lg shadow-lg p-4 max-w-xs w-64 border border-gray-200">
         <div className="space-y-2">
           {/* Media Source Link */}

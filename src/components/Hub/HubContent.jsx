@@ -1,10 +1,12 @@
 import HubSourceFeed from './HubSourceFeed'
-
 import HubArcFeed from './HubArcFeed'
 import HubSubmitPage from './HubSubmitPage'
-import HubUserPage from './HubUserPage.jsx'
+import HubUserPage from './HubUserPage/HubUserPage.jsx'
 import Link from 'next/link'
 import WelcomeExplainer from '../MainPage/WelcomeExplainer'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Separator } from '@/components/ui/separator'
+import { useState } from 'react'
 
 export default function HubContent({
   arcs,
@@ -29,9 +31,10 @@ export default function HubContent({
   setTotalMinutes,
 }) {
 
+  const [activeTab, setActiveTab] = useState('sources')
   
   return (
-    <div className="">
+    <div className="pr-5">
       {globalLayout &&
         (mainShow === 'default' ? (
           <div className="pt-10 md:pt-16 3xl:pt-20 overflow-x-hidden ">
@@ -47,46 +50,60 @@ export default function HubContent({
               <div className="min-h-[90vh]">
                 {/*   <AISearchEngine collapsed={collapsed} currentUser={currentUser} /> */}
 
-                <HubSourceFeed
-                  credit={credit}
-                  currentUser={currentUser}
-                  tier={tier}
-                  userArcs={userArcs}
-                  dataGlobalArcs={dataGlobalArcs}
-                  setDataGlobalArcs={setDataGlobalArcs}
-                  mainShow={mainShow}
-                  setMainShow={setMainShow}
-                />
-
-              <HubArcFeed
-                  arcs={arcs}
-                  currentUser={currentUser}
-                  tier={tier}
-                  userArcs={userArcs}
-                  dataGlobalArcs={dataGlobalArcs}
-                  setDataGlobalArcs={setDataGlobalArcs}
-                  mainShow={mainShow}
-                  setMainShow={setMainShow}
-                  collapsed={collapsed}
-                />
-
-
-              </div>
-            )}
-
-            {mainShow == 'arcs' && (
-              <div className="min-h-[90vh]">
-                <HubArcFeed
-                  arcs={arcs}
-                  currentUser={currentUser}
-                  tier={tier}
-                  userArcs={userArcs}
-                  dataGlobalArcs={dataGlobalArcs}
-                  setDataGlobalArcs={setDataGlobalArcs}
-                  mainShow={mainShow}
-                  setMainShow={setMainShow}
-                  collapsed={collapsed}
-                />
+                <div className="xl:max-w-[1200px] pt-10 md:px-4">
+                  <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                    <div className="flex">
+                      <button
+                        onClick={() => setActiveTab('sources')}
+                        className={`flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
+                          activeTab === 'sources'
+                            ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
+                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                        }`}
+                      >
+                        Sources
+                      </button>
+                      <button 
+                        onClick={() => setActiveTab('arcs')}
+                        className={`flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
+                          activeTab === 'arcs'
+                            ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
+                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                        }`}
+                      >
+                        Arcs
+                      </button>
+                    </div>
+                    <Separator className='mt-4 mb-8 max-w-[800px]'/>
+                    
+                    <TabsContent value="sources">
+                      <HubSourceFeed
+                        credit={credit}
+                        currentUser={currentUser}
+                        tier={tier}
+                        userArcs={userArcs}
+                        dataGlobalArcs={dataGlobalArcs}
+                        setDataGlobalArcs={setDataGlobalArcs}
+                        mainShow={mainShow}
+                        setMainShow={setMainShow}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="arcs">
+                      <HubArcFeed
+                        arcs={arcs}
+                        currentUser={currentUser}
+                        tier={tier}
+                        userArcs={userArcs}
+                        dataGlobalArcs={dataGlobalArcs}
+                        setDataGlobalArcs={setDataGlobalArcs}
+                        mainShow={mainShow}
+                        setMainShow={setMainShow}
+                        collapsed={collapsed}
+                      />
+                    </TabsContent>
+                  </Tabs>
+                </div>
               </div>
             )}
           </div>

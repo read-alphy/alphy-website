@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head';
 
-const Account = dynamic(() => import('../components/Profile/Account'), {
+const Profile = dynamic(() => import('../components/Profile/Profile'), {
   ssr: false,
 })
 
@@ -36,7 +36,7 @@ export default function AccountPage({
   <meta name="twitter:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
   
       </Head>
-     <Account
+     <Profile
      currentUser={currentUser}
       
      credit={credit}

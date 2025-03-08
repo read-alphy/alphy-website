@@ -7,6 +7,7 @@ export function useQAState() {
   const [answer, setAnswer] = useState(false)
   const [showSource, setShowSource] = useState(-1)
   const [singleSource, setSingleSource] = useState(false)
+  const [question, setQuestion] = useState(null);
   
   // Loading and display state
   const [isLoadingInside, setIsLoadingInside] = useState(false)
@@ -19,7 +20,7 @@ export function useQAState() {
   const [baseQuestion, setBaseQuestion] = useState('')
   const [collapseIndex, setCollapseIndex] = useState(0)
   const [highlightIndex, setHighlightIndex] = useState(null)
-  
+  const [openDialog, setOpenDialog] = useState(false);
   // Error handling state
   const [inputError, setInputError] = useState(false)
   const [errorText, setErrorText] = useState('')
@@ -61,5 +62,9 @@ export function useQAState() {
     setCollapseIndex,
     highlightIndex,
     setHighlightIndex,
+    question,
+    setQuestion,
+    openDialog,
+    setOpenDialog,
   }
 }

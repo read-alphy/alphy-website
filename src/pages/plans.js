@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head';
 
-const Pricing = dynamic(() => import('../components/Profile/Pricing'), {
+const Profile = dynamic(() => import('../components/Profile/Profile'), {
   ssr: false,
 })
 
@@ -29,7 +29,7 @@ export default function Plans({ currentUser, collapsed, setCollapsed, tier, sand
   
         </Head>
       
-      <Pricing
+      <Profile
       
       loggedIn = {loggedIn}
       setLoggedIn={setLoggedIn}

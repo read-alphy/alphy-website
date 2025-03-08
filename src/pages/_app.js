@@ -1,19 +1,14 @@
-
- 
 import '../app/globals.css'
-
 
 import React, { useState, useEffect } from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import Navbar from '../components/Misc/Navbar'
 import Head from 'next/head';
 import { useAuth } from '../hooks/useAuth'
 import { initializeApp } from 'firebase/app'
 
 import { loadStripe } from '@stripe/stripe-js'
-
 
 import axios from 'axios'
 
@@ -23,8 +18,6 @@ import { useRouter } from 'next/router';
 import addToUserMetadata from '../utils/addToUserMetadata'
 import { ThemeProvider } from "next-themes"
 import {useTheme} from 'next-themes'
-
-
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCQlDrSG7cOYqqOaj79hFbipJIFqzlRhwg',
@@ -64,7 +57,6 @@ function MyApp({ Component, pageProps }) {
     const [sandboxHistoryCalled, setSandboxHistoryCalled] = useState(false)
     const {theme, setTheme} = useTheme('light')
 
-
     useEffect(() => {
     const themeRefreshed = localStorage.getItem('themeRefreshed')
     if (themeRefreshed !== 'true') {
@@ -73,7 +65,6 @@ function MyApp({ Component, pageProps }) {
     }
 
       const storedTheme = localStorage.getItem('theme');
-
       
       if (storedTheme!==null) {
        setTheme(storedTheme);
@@ -81,9 +72,18 @@ function MyApp({ Component, pageProps }) {
       else {
         setTheme('light')
       }
+
+      // Load sidebar collapsed state from localStorage
+      const sidebarCollapsed = localStorage.getItem('sidebarCollapsed');
+      if (sidebarCollapsed !== null) {
+        setCollapsed(sidebarCollapsed === 'true');
+      }
     }, []);
   
-
+    // Save sidebar collapsed state to localStorage when it changes
+    useEffect(() => {
+      localStorage.setItem('sidebarCollapsed', collapsed.toString());
+    }, [collapsed]);
   
     const [customerID, setCustomerID] = useState('')
     const [userArcsCalled, setUserArcsCalled] = useState(false)
@@ -267,8 +267,7 @@ function MyApp({ Component, pageProps }) {
             axios
               .get(`${API_URL}/playlists/`, {
                 params: {
-                  // limit: 20,
-                  // offset: 0,
+                  limit: 40,
                   only_my: true,
                 },
                 headers: {
@@ -378,7 +377,6 @@ return () => {
 
   return(
     <GoogleOAuthProvider clientId=  "1095799494177-qhg6sot0m532rg51j34kfrf3t0rds5sg.apps.googleusercontent.com">
-<AppRouterCacheProvider>
 <Head>
 
 <link rel="icon" href="/favicon.ico" />
@@ -397,27 +395,23 @@ return () => {
    <title>Alphy - AI Transcriber, Summarizer, Assistant for YouTube, X Spaces, and Podcasts </title>
     
 </Head>
-    <div className="App bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
+    <div className="App  bg-white dark:bg-darkMode dark:text-zinc-300 text-zinc-700 ">
 
-    <div
+           <div
               className={` z-40 text-slate-700 bg-white dark:bg-darkMode  dark:text-zinc-300 dark:text-gray-200 ${
-                router.asPath.split('/')[1] === 'arc' &&
-                router.asPath.split('/')[2] !== 'editArc' &&
-                router.asPath.split('/')[2] !== 'createArc'
-                  ? 'md:hidden  top-0 w-full '
-                  : 'sm:hidden  top-0 w-full '
+                
+              'lg:hidden  top-0 w-full '
               }`}
             >
               <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
             </div>
             <ThemeProvider attribute="class" theme={theme}>
 
-    <Component {...pageProps}  {...additionalProps} />
+     <Component {...pageProps}  {...additionalProps} />
               </ThemeProvider>
     
     </div>
     
-</AppRouterCacheProvider>
 </GoogleOAuthProvider>
   )
 }

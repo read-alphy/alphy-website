@@ -4,14 +4,14 @@ import Link from 'next/link'
 import axios from 'axios'
 
 // Components
-import { Button } from '@material-tailwind/react'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import LinkIcon from '@mui/icons-material/Link'
+import { Button } from '@/components/ui/button'
+import { Link as LinkIcon, Upload, BookOpen } from 'lucide-react'
 
 import UploadBlock from '../Creation/UploadBlock'
 import SubmitBlock from '../Creation/SubmitBlock'
-
+import ArcBlock from '../Creation/ArcBlock'
 import { API_URL } from '../../constants'
+
 
 // Constants
 const SUPPORTED_URLS = [
@@ -262,15 +262,16 @@ export default function HubCreationBlock({
               </div>
             </div>
             
-            <button
+            <Button
               onClick={() => {
                 sessionStorage.setItem('creditPurchase', 'true')
                 router.push('/account')
               }}
-              className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+              variant="link"
+              className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 p-0 h-auto"
             >
               Need more credits?
-            </button>
+            </Button>
           </div>
         </div>
       )}
@@ -287,7 +288,7 @@ export default function HubCreationBlock({
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
             }`}
           >
-            <LinkIcon className="mr-2" fontSize="small" />
+            <LinkIcon className="mr-2 h-4 w-4" />
             Submit a Link
           </button>
           <button
@@ -298,8 +299,19 @@ export default function HubCreationBlock({
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
             }`}
           >
-            <CloudUploadIcon className="mr-2" fontSize="small" />
+            <Upload className="mr-2 h-4 w-4" />
             Upload a Recording
+          </button>
+          <button
+            onClick={() => setActiveTab('arc')}
+            className={`flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
+              activeTab === 'arc'
+                ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+            }`}
+          >
+            <BookOpen className="mr-2 h-4 w-4" />
+            Create an Arc
           </button>
         </div>
 
@@ -335,6 +347,15 @@ export default function HubCreationBlock({
                 credit={credit}
                 // Pass flag to hide redundant credit display
                 hideCredits={true}
+              />
+            </div>
+          )}
+
+          {activeTab === 'arc' && (
+            <div>
+              <ArcBlock
+                currentUser={currentUser}
+                tier={tier}
               />
             </div>
           )}

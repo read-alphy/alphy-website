@@ -1,10 +1,12 @@
 import React from 'react'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
-import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined'
+import { AlertTriangle } from 'lucide-react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { X } from 'lucide-react'
 
 export default function ReportIssueButton({ handleReportIssue, showReportIssue, setShowReportIssue, currentUser, data, theme }) {
 
@@ -16,9 +18,9 @@ export default function ReportIssueButton({ handleReportIssue, showReportIssue, 
         aria-label="Report an issue"
       >
         <div className="flex items-center justify-center w-6 h-6">
-          <ReportProblemOutlinedIcon 
+          <AlertTriangle 
             className="text-amber-500 dark:text-amber-400" 
-            fontSize="small" 
+            size={18} 
           />
         </div>
         <span className="text-slate-700 dark:text-zinc-200 text-sm quicksand font-medium">
@@ -28,35 +30,24 @@ export default function ReportIssueButton({ handleReportIssue, showReportIssue, 
 
       <Dialog
         open={showReportIssue}
-        onClose={() => setShowReportIssue(false)}
-        maxWidth="sm"
-        fullWidth
-        PaperProps={{
-          style: {
-            backgroundColor: theme === 'dark' ? '#27272a' : '#ffffff',
-            borderRadius: '0.5rem',
-            border: theme === 'dark' ? '1px solid #3f3f46' : 'none',
-            overflow: 'hidden',
-          },
-        }}
+        onOpenChange={setShowReportIssue}
       >
-        <DialogTitle className="flex justify-between items-center bg-gray-50 dark:bg-zinc-800 px-6 py-4">
-          <span className="text-slate-700 dark:text-zinc-200 quicksand font-medium">
-            Report an Issue
-          </span>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={() => setShowReportIssue(false)}
-            aria-label="close"
-            size="small"
-            className="text-slate-500 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-200"
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        </DialogTitle>
-        
-        <DialogContent className="p-0">
+        <DialogContent 
+          className="sm:max-w-md p-0 overflow-hidden bg-white dark:bg-zinc-800 border-none dark:border dark:border-zinc-700"
+        >
+          <DialogHeader className="flex justify-between items-center bg-gray-50 dark:bg-zinc-800 px-6 py-4 border-b dark:border-zinc-700">
+            <DialogTitle className="text-slate-700 dark:text-zinc-200 quicksand font-medium">
+              Report an Issue
+            </DialogTitle>
+            <button
+              onClick={() => setShowReportIssue(false)}
+              className="text-slate-500 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-200 rounded-full p-1 hover:bg-gray-100 dark:hover:bg-zinc-700"
+              aria-label="close"
+            >
+              <X size={18} />
+            </button>
+          </DialogHeader>
+          
           {currentUser ? (
             <div className="w-full">
               {theme === 'light' ? (

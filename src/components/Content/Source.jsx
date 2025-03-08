@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SideFeed from "../SideFeed/SideFeed";
-// import ArticleCreator from "./ArticleComponents/ArticleCreator"
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import axios from "axios";
 import Loading from "../Loading";
-
 import Head from "next/head";
-
 import Content from "./Content";
 import { API_URL } from "../../constants";
 
@@ -28,7 +24,6 @@ export default function SourcePage({
   source_type,
 }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
-
   const [isLoading, setIsLoading] = useState(false);
   const [actionsHub, setActionsHub] = useState(false);
   const [bookmarkChecked, setBookmarkChecked] = useState(false);
@@ -36,7 +31,6 @@ export default function SourcePage({
   const [isPublic, setIsPublic] = useState(false);
   const [isSandbox, setIsSandbox] = useState(false);
   const [isClient, setIsClient] = useState(false);
-
   const [language, setLanguage] = useState("en");
   const [called, setCalled] = useState(false);
   const [authorizationError, setAuthorizationError] = useState(false);
@@ -74,13 +68,6 @@ export default function SourcePage({
     }
   }, [source_type]);
 
-  /*  if (router.asPath.split('/')[2].split('&q=')[0] !== undefined) {
-    {source_id} = router.asPath.split('/')[2].split('&q=')[0]
-  } else {
-    source_id = router.asPath.split('/')[2]
-    
-  } */
-
   const checkBookmark = async () => {
     try {
       await axios
@@ -100,9 +87,6 @@ export default function SourcePage({
       setBookmarkChecked(true);
     }
   };
-
-  /* 	const url_bookmark= `${API_URL}/sources/${source_type}/${source_id}/bookmark`
-   */
 
   useEffect(() => {
     if (source_type === "up" && data ===null ) {
@@ -153,12 +137,10 @@ export default function SourcePage({
         .catch((error) => {
           setIsLoading(false);
           console.log(error);
-          /* router.push('/404') */
         });
     } catch (error) {
       if (error.response?.status === 404) {
         setIsLoading(false);
-        /* navigate('/404'); */
       }
       console.error(`Error fetching data: ${error}`);
     } finally {
@@ -167,10 +149,6 @@ export default function SourcePage({
   };
 
   const handleLanguageChange = (event) => {
-    /* 	if(errorMessage ==true || translationMessage==true)
-			{
-				window.location.reload();
-			} */
     const selectedCode = event.target.value;
     setLanguage(selectedCode);
   };
@@ -241,9 +219,6 @@ export default function SourcePage({
     }
   };
 
-
-
-
   return (
     <div className="article bg-white dark:bg-darkMode dark:text-zinc-300">
       <Head>
@@ -253,62 +228,32 @@ export default function SourcePage({
             : "Alphy - Turn audio to text, summarize, and generate content with AI"}
         </title>
       </Head>
-      <div
-        className={`w-screen  bg-bordoLike transition origin-top-right transform md:hidden rounded-t-none rounded-3xl ${
-          collapsed ? "nav-ham-collapsed fixed top-0" : "nav-ham-not-collapsed"
-        }`}
-      ></div>
+      
 
-      <div className="flex flex-row ">
-        {
-          <div className={`hidden sm:flex `}>
-            <SideFeed
-              currentUser={currentUser}
-              collapsed={collapsed}
-              setCollapsed={setCollapsed}
-              source_id={source_id}
-              actionsHub={actionsHub}
-              setActionsHub={setActionsHub}
-              tier={tier}
-              isSandbox={isSandbox}
-              sandboxHistory={sandboxHistory}
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-            />
-          </div>
-        }
+      <div className="flex flex-row bg-white dark:bg-darkMode">
+        <SideFeed 
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          currentUser={currentUser}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          tier={tier}
+          sandboxHistory={sandboxHistory}
+          source_id={source_id}
+          actionsHub={actionsHub}
+          setActionsHub={setActionsHub}
+          isSandbox={isSandbox}
+        />
 
         <div
-          className={`fixed top-0 z-50 transition origin-top-right transform sm:hidden w-full shadow-lg bg-zinc-100 ${
-            collapsed ? "ham-collapsed hidden" : "ham-not-collapsed bg-slate-50"
+          className={`${
+            collapsed ? 'scrolling' : 'scrolling'
+          } w-full max-h-[90vh] sm:max-h-[100vh] ${
+            collapsed ? 'overflow-hidden' : 'overflow-y-auto'
           }`}
         >
-          <div className="rounded-lg rounded-t-none shadow-lg">
-            <div className="h-screen">
-              <SideFeed
-                currentUser={currentUser}
-                collapsed={collapsed}
-                setCollapsed={setCollapsed}
-                source_id={source_id}
-                actionsHub={actionsHub}
-                setActionsHub={setActionsHub}
-                tier={tier}
-                isSandbox={isSandbox}
-                sandboxHistory={sandboxHistory}
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={`scrolling  mx-auto  h-full sm:max-h-[100vh] w-full ${
-            collapsed ? "hidden" : " max-h-[100vh]"
-          }}`}
-        >
           {isLoading || data.length ? (
-            <Loading />
+            <Loading className="mt-40 h-20 w-20 text-zinc-300" color="green" />
           ) : authorizationError ? (
             <div className="flex-col flex mx-10 md:mx-20 mx-auto mt-20 md:mt-40 px-4">
               <div className="text-xl max-w-[600px] text-zinc-700 dark:text-zinc-300 quicksand font-bold ">

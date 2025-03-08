@@ -1,16 +1,14 @@
-import FeedItem from '../FeedTabs/FeedItem'
-
-import Twitter from '../../../public/img/twitter_spaces.png'
 import React, { useState, useEffect, useRef } from 'react'
-
-import TextSnippetIcon from '@mui/icons-material/TextSnippet'
-import CloseIcon from '@mui/icons-material/Close'
-import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
-import LogoInverted from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
+import { FileText, X } from 'lucide-react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-
-
+import FeedItem from '../FeedTabs/FeedItem'
+import Twitter from '../../../public/img/twitter_spaces.png'
+import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
+import LogoInverted from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { FileAudio } from 'lucide-react'
 export default function SourceCard({
   source,
   tracks,
@@ -22,13 +20,12 @@ export default function SourceCard({
   setOpenDialog,
 }) {
   const setOpenDialogInside = setOpenDialog
-  const startTime =convertTimeToSeconds(source.start)
+  const startTime = convertTimeToSeconds(source.start)
   const endTime = convertTimeToSeconds(source.end)
   const [expanded, setExpanded] = useState(false)
-const router = useRouter()
+  const router = useRouter()
   let displayText = ''
   let transcript
-
   let sentences
   let groupedText
 
@@ -93,22 +90,21 @@ const router = useRouter()
       displayText = expanded
         ? source.text
         : `${
-            source.text[299] === ' '
-              ? source.text.slice(0, 299)
-              : source.text.slice(0, 300)
+            source.text[149] === ' '
+              ? source.text.slice(0, 149)
+              : source.text.slice(0, 150)
           }`
     } else {
       displayText = expanded
         ? source.text
         : `${
-            source.text[119] === ' '
-              ? source.text.slice(0, 119)
-              : source.text.slice(0, 120)
+            source.text[79] === ' '
+              ? source.text.slice(0, 79)
+              : source.text.slice(0, 80)
           }`
     }
   }
 
-  
   let title = ''
   if (
     tracks.length !== 0 &&
@@ -122,18 +118,18 @@ const router = useRouter()
   let displayTitle = ''
   if (title) {
     if (window.innerWidth > 600) {
-      if (title.length > 30) {
+      if (title.length > 20) {
         displayTitle = expanded
           ? title
-          : `${title[29] === ' ' ? title.slice(0, 29) : title.slice(0, 30)}...`
+          : `${title[19] === ' ' ? title.slice(0, 19) : title.slice(0, 20)}...`
       } else {
         displayTitle = title
       }
     } else {
-      if (title.length > 20) {
+      if (title.length > 15) {
         displayTitle = expanded
           ? title
-          : `${title[19] === ' ' ? title.slice(0, 19) : title.slice(0, 20)}`
+          : `${title[14] === ' ' ? title.slice(0, 14) : title.slice(0, 15)}...`
       } else {
         displayTitle = title
       }
@@ -146,6 +142,7 @@ const router = useRouter()
   } else if (source.source_type === 'sp') {
     imageUrl = Twitter
   }
+ 
 
   const myRef = useRef(null)
   let height
@@ -153,6 +150,7 @@ const router = useRouter()
   if (element) {
     height = element.getBoundingClientRect().height
   }
+  
   const showDialog = () => {
     setOpenDialogInside(true)
     setSelectedSourceCard(source)
@@ -184,97 +182,78 @@ const router = useRouter()
   }, [setFullWidth])
 
   return (
-    <div className="dark:bg-mildDarkMode ">
+    <div className="dark:bg-mildDarkMode">
       {!forDialog ? (
-        <div
+        <Card 
           onClick={showDialog}
-          className=" border border-zinc-200 dark:border-mildDarkMode dark:bg-mildDarkMode w-[240px]  sm:w-[360px] h-[420px] py-2 px-4 overflow-y-hidden drop-shadow-sm cursor-pointer"
+          className="overflow-hidden shadow-none transition-all duration-300 hover:shadow-md dark:bg-zinc-800 dark:border-zinc-700 h-[280px] w-[180px] sm:w-[220px] cursor-pointer"
         >
-          <div className=" flex flex-row mt-4">
-            <div
-              className={`min-w-[120px] max-w-[120px] mr-3 min-h-[60px] max-h-[60px] overflow-hidden`}
-            >
-              <div
-                className="flex items-center justify-center h-0 dark:opacity-80  rounded-md bg-gray-600"
-                style={{
-                  backgroundImage: `url(${imageUrl})`,
-                  paddingBottom: '50%',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                }}
-              ></div>
-            </div>
-
-            <div className=" text-lg w-full font-sans min-h-[80px] max-h-[80px] overflow-y-hidden text-slate-700 dark:text-zinc-200">
-              <p className="quicksand font-bold">{displayTitle}</p>
-            </div>
-          </div>
-          <div>
+          {source.source_type === 'up' && (
+             <div className="w-full h-40 bg-blue-100 dark:bg-zinc-700 flex items-center justify-center">
+             <FileAudio size={48} className="text-slate-400 dark:text-zinc-500" />
+           </div>
+          )}
+          {<div
+            className="w-full h-24 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${imageUrl})`,
+            }}
+          />
+          }
+          
+          <CardHeader className="p-2 pb-0">
+            <h3 className="text-xs font-bold text-slate-700 dark:text-zinc-300 quicksand line-clamp-1">
+              {displayTitle}
+            </h3>
+          </CardHeader>
+          
+          <CardContent className="p-2 pt-1">
             <a
               onClick={handleAlphyClick}
-              className="underline mt-4 flex flex-row transform hover:scale-105 transition duration-300"
+              className="underline flex flex-row transform hover:scale-105 transition duration-300"
             >
               <div>
                 <Image
                   src={Logo}
-                  className="w-[30px] h-[30px] hidden dark:flex"
+                  className="w-[20px] h-[20px] hidden dark:flex"
                   alt="Alphy Logo"
                 />
                 <Image
                   src={LogoInverted}
-                  className="w-[30px] h-[30px]  dark:hidden"
+                  className="w-[20px] h-[20px] dark:hidden"
                   alt="Alphy Logo"
                 />
               </div>
-              <p className="ml-2 mt-1 text-sm sm:text-md text-slate-600 dark:text-zinc-300 quicksand font-normal">
-                See more details on Alphy{' '}
+              <p className="ml-1 text-[10px] text-slate-600 dark:text-zinc-300 quicksand font-normal">
+                See on Alphy
               </p>
             </a>
-            <p className="mt-4">
-              <a className=" text-slate-600 dark:text-zinc-300 quicksand font-bold">
-                {Math.floor(startTime / 3600) < 10
-                  ? `0${Math.floor(startTime / 3600)}`
-                  : `${Math.floor(startTime / 3600)}`}
-                {':'}
-                {Math.floor(startTime / 60) < 10
-                  ? `0${Math.floor(startTime / 60)}`
-                  : Math.floor(startTime % 3600) < 600
-                  ? `0${Math.floor(
-                      startTime / 60 - Math.floor(startTime / 3600) * 60
-                    )}`
-                  : Math.floor(
-                      startTime / 60 - Math.floor(startTime / 3600) * 60
-                    )}
-                {':'}
-                {Math.floor(startTime % 60) < 10
-                  ? `0${Math.floor(startTime % 60)}`
-                  : Math.floor(startTime % 60)}
-
-                {' - '}
-
-                {Math.floor(endTime / 3600) < 10
-                  ? `0${Math.floor(endTime / 3600)}`
-                  : `${Math.floor(endTime / 3600)}`}
-                {':'}
-                {Math.floor(endTime / 60) < 10
-                  ? `0${Math.floor(endTime / 60)}`
-                  : Math.floor(endTime % 3600) < 600
-                  ? `0${Math.floor(
-                      endTime / 60 - Math.floor(endTime / 3600) * 60
-                    )}`
-                  : Math.floor(
-                      endTime / 60 - Math.floor(endTime / 3600) * 60
-                    )}
-                {':'}
-                {Math.floor(endTime % 60) < 10
-                  ? `0${Math.floor(endTime % 60)}`
-                  : Math.floor(endTime % 60)}
-              </a>
+            
+            <p className="mt-1 text-[10px] text-slate-600 dark:text-zinc-400 quicksand font-bold">
+              {Math.floor(startTime / 3600) < 10
+                ? `0${Math.floor(startTime / 3600)}`
+                : `${Math.floor(startTime / 3600)}`}
+              {':'}
+              {Math.floor(startTime / 60) < 10
+                ? `0${Math.floor(startTime / 60)}`
+                : Math.floor(startTime % 3600) < 600
+                ? `0${Math.floor(
+                    startTime / 60 - Math.floor(startTime / 3600) * 60
+                  )}`
+                : Math.floor(
+                    startTime / 60 - Math.floor(startTime / 3600) * 60
+                  )}
+              {':'}
+              {Math.floor(startTime % 60) < 10
+                ? `0${Math.floor(startTime % 60)}`
+                : Math.floor(startTime % 60)}
             </p>
+          </CardContent>
+          
+          <CardFooter className="p-2 pt-0 flex flex-col items-start">
             <p
               ref={myRef}
-              className={` mt-4 text-slate-600 dark:text-zinc-300 text-md  pb-2 quicksand font-normal`}
+              className="text-[10px] text-slate-600 dark:text-zinc-400 quicksand font-normal line-clamp-3"
             >
               {displayText[0] === displayText[0].toUpperCase() ? '' : '...'}
               {displayText}
@@ -287,17 +266,17 @@ const router = useRouter()
                 ? ''
                 : '...'}
             </p>
-          </div>
-          <p className="absolute bottom-0 text-greenColor quicksand font-bold  ">
-            Click to see more
-          </p>
-        </div>
+            <Badge variant="outline" className="mt-1 text-[8px] py-0 h-4 text-greenColor dark:text-green-200 border-green-300 dark:border-green-700">
+              Click for more
+            </Badge>
+          </CardFooter>
+        </Card>
       ) : (
         <div className="w-full">
-          <CloseIcon
+          <X
             className="right-0 absolute mr-4 mt-2 cursor-pointer text-slate-600 dark:text-zinc-300"
             onClick={() => setOpenDialog(false)}
-          ></CloseIcon>
+          />
           <div
             className="sm:w-[600px] py-10 px-4 sm:px-10 "
             onBlur={() => setOpenDialog(false)}
@@ -317,7 +296,7 @@ const router = useRouter()
             <p
               className={`text-greenColor mt-4 mb-4 px-2 sm:px-10 quicksand font-bold`}
             >
-              <TextSnippetIcon /> Passage
+              <FileText className="inline mr-1" /> Passage
             </p>
             <p
               className="px-2 sm:px-10 text-slate-600 dark:text-zinc-300 quicksand font-normal"

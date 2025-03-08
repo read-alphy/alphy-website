@@ -1,44 +1,14 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
- */
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url(https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold);
-@import url(https://db.onlinewebfonts.com/c/b5d2107c7c6e775b13169eb51d8970c1?family=AvertaStd-Light);
+@import url('https://db.onlinewebfonts.com/c/aef2da2daa6e15be44ff1a2706cc61a1?family=AvertaStd-Semibold');
+@import url('https://db.onlinewebfonts.com/c/b5d2107c7c6e775b13169eb51d8970c1?family=AvertaStd-Light');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-@import url(https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=Bookerly);
-@import url(https://db.onlinewebfonts.com/c/a67d98abe8980caaa1768b6e27b323c6?family=Typewriter);
-@import url('https://fonts.googleapis.com/css2?family=Roboto');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu');
-@import url('https://fonts.googleapis.com/css2?family=Cantarell');
+@import url('https://db.onlinewebfonts.com/c/19b8f54eb1f074fb01efb1c4f02e9623?family=Bookerly');
+@import url('https://db.onlinewebfonts.com/c/a67d98abe8980caaa1768b6e27b323c6?family=Typewriter');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cantarell&display=swap');
 
 * {
   padding: 0;
@@ -113,8 +83,8 @@ body {
 }
 
 .focus-glow-effect {
-  transition: box-shadow 0.3s ease-in-out; /* Adjust durat	ion and timing function as needed */
-  box-shadow: none; /* No shadow initially */
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: none;
 }
 .focus-glow-effect:focus {
   box-shadow: 0 0 13px #bae6fd; /* Your desired glow effect */
@@ -370,33 +340,6 @@ MAIN PAGE
   align-content: center;
 }
 
-.landing-page-input {
-  margin: auto;
-  width: 60vw;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.landing-page-input input {
-  position: relative;
-  cursor: text;
-  font-size: 14px;
-  width: 700px;
-  max-width: 1000px;
-  margin-left: 30px;
-  margin-right: 10px;
-  line-height: 20px;
-  padding: 0 16px;
-  height: 35px;
-
-  border: 1px solid #d6d6e7;
-  border-radius: 3px;
-  box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
-  overflow: hidden;
-  transition: all 100ms ease-in-out;
-}
 
 .language-selection select {
   font-size: 14px;
@@ -410,24 +353,6 @@ MAIN PAGE
   box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
   overflow: hidden;
   transition: all 100ms ease-in-out;
-}
-
-.landing-page-input button {
-  cursor: pointer;
-  background: #2f3542;
-  border: none;
-
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.7s ease;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  margin-left: 25px;
-  cursor: pointer;
-  border-radius: 5px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .welcome-text h2 {
@@ -881,24 +806,142 @@ ol {
   flex-direction: column;
   
 }
+
+/* Summary Text Styling - Enhanced for better readability and visual hierarchy */
 .summary-text p,
-li,
-ul,
-span,
-code,
-pre,
-ol {
+.summary-text li,
+.summary-text ul,
+.summary-text ol,
+.summary-text span,
+.summary-text code,
+.summary-text pre {
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
   font-size: 16px;
+  line-height: 1.6;
+  color: inherit;
+  margin-bottom: 0.75rem;
 }
 
 .summary-text code {
   white-space: pre-wrap;
-  padding-left: 10px;
-  font-family:'Quicksand', sans-serif;
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
 }
 
+.summary-text pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.summary-text a {
+  color: #6366f1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.summary-text a:hover {
+  color: #4f46e5;
+}
+
+/* Headings with consistent hierarchy */
+.summary-text h1,
+.summary-text h2,
+.summary-text h3,
+.summary-text h4,
+.summary-text h5 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.summary-text h1 {
+  font-size: 1.75rem;
+}
+
+.summary-text h2 {
+  font-size: 1.5rem;
+}
+
+.summary-text h3 {
+  font-size: 1.25rem;
+}
+
+.summary-text h4 {
+  font-size: 1.1rem;
+}
+
+.summary-text h5 {
+  font-size: 1rem;
+}
+
+.summary-text strong {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+.summary-text em,
+.summary-text i {
+  font-style: italic;
+}
+
+/* Lists styling */
+.summary-text ul,
+.summary-text ol {
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.summary-text ul {
+  list-style-type: disc;
+}
+
+.summary-text ol {
+  list-style-type: decimal;
+}
+
+.summary-text li {
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+/* Blockquotes */
+.summary-text blockquote {
+  border-left: 4px solid #6366f1;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Dark mode adjustments */
+.dark .summary-text code {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .summary-text pre {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .summary-text blockquote {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Animation for content */
+.summary-text {
+  transition: all 0.3s ease;
+}
+
+/* Other existing styles */
 .select-option span {
   padding-left: 10px;
   padding-top: 5px;
@@ -918,66 +961,8 @@ ol {
   margin-right: 10px;
 }
 
-.summary-text h2 {
-  font-weight: 600;
-  font-size: 20px;
-  margin-top: 30px;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.summary-text h1 {
-  font-weight: 600;
-  font-size: 20px;
-  margin-top: 30px;
-  font-family: 'Quicksand', sans-serif;
-}
-
-/* .summary-text p{
-	font-family : "Bookerly";
-	font-weight:500
-} */
-.summary-text h3 {
-  font-weight: 600;
-  font-size: 20px;
-  margin-top: 30px;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.summary-text h4 {
-  font-weight: 600;
-  font-size: 20px;
-  margin-top: 30px;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.summary-text h5 {
-  font-weight: 600;
-  font-size: 16px;
-  margin-top: 30px;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.summary-text strong {
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-style: italic;
-}
-
 .slick-arrow::before {
   background: 'black';
-}
-
-.summary-text ul {
-  list-style-type: disc;
-}
-
-.summary-text li::before {
-  content: '•';
-  /* Bullet point character */
-  color: #a1a1aa;
-  /* Change color here */
-  margin-right: 0.5em;
-  /* Add some spacing between the bullet and the text */
 }
 
 .sign-in-input input {
@@ -1150,9 +1135,6 @@ DIFFERENT SCREEN SIZES
     padding: 0px;
   }
 
-  .landing-page-input {
-    min-width: 400px;
-  }
 
   .collapsed-feed-menu {
     display: flex;
@@ -1199,29 +1181,7 @@ DIFFERENT SCREEN SIZES
     padding: 0px !important;
   }
 
-  .landing-page-input button {
-    margin-left: 0;
 
-    float: left;
-  }
-
-  .landing-page-input {
-    margin: 0px;
-  }
-
-  .landing-page-input input {
-    width: 350px;
-    max-width: 450px;
-    margin-left: 0px;
-    float: left;
-  }
-}
-
-@media screen and (min-width: 2000px) {
-  .landing-page-input {
-    margin: auto;
-    padding-left: 60px;
-  }
 }
 
 /* hamburger->cross */
@@ -1338,8 +1298,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-/* ---break---
- */
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -1368,6 +1327,7 @@ input[type=number] {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+  
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -1395,8 +1355,20 @@ input[type=number] {
     --chart-5: 340 75% 55%;
   }
 }
-/* ---break---
- */
+
+@layer base {
+  * {
+    @apply border-border;
+    @apply outline-ring/50;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -1405,3 +1377,4 @@ input[type=number] {
     @apply bg-background text-foreground;
   }
 }
+
