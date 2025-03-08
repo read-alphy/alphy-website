@@ -174,7 +174,7 @@ export default function ReadComponent({
                           {/* Interactive button for mobile */}
                           <Button 
                             onClick={toggleMobilePanel}
-                            className="lg:hidden bg-gradient-to-r from-indigo-500 to-purple-500 text-white h-9 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                            className="lg:hidden bg-gradient-to-r from-indigo-500 to-purple-500 text-white h-8 rounded-md px-3 text-sm font-medium flex items-center transition-all"
                           >
                              <Sparkles className="h-4 w-4 mr-2" />
                             Interactive

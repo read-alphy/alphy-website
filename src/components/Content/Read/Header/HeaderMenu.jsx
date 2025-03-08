@@ -33,7 +33,7 @@ export default function HeaderMenu({
   mainPopoverOpen,
   setMainPopoverOpen
 }) {  
-  console.log(mainPopoverOpen)
+  
   // Modern gear icon with simpler design
   const MenuIcon = () => (
     <svg

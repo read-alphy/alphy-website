@@ -97,7 +97,7 @@ export default function HeaderArea({
   };
   
   return (
-    <div className={`flex ${isSandbox && ''}`}>
+    <div className={`flex w-full`}>
       <div className="w-full pl-2 xl:mt-0">
         {/* Title Section */}
         <div className="flex flex-row justify-between items-center w-full ml-1">

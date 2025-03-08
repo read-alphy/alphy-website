@@ -206,7 +206,7 @@ export default function QuestionAnswering({
       ref={QARef}
     >
       {answerData.answer.length == 0 &&
-          <div className="flex flex-col gap-2 w-full h-full items-center justify-center mx-auto">
+          <div className="hidden lg:flex flex-col gap-2 w-full h-full items-center justify-center mx-auto">
             <BotMessageSquare strokeWidth={1.2} className="h-10 w-10 mr-1.5 text-blue-500 dark:text-blue-400 flex-shrink-0" />
             <span className="text-lg text-zinc-800 dark:text-zinc-300">Chat with the content. In any language you want</span>
           </div>

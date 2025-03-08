@@ -481,7 +481,7 @@ export default function Content({
     <div 
         >
          
-    <div className=" flex flex-row lg:hidden">
+    <div className=" flex flex-row max-w-[600px] mx-auto lg:hidden">
              <HeaderArea
               data={data}
               title={data?.title}
@@ -572,7 +572,7 @@ export default function Content({
             }
             {activeMobilePanel === 'interactive' &&
              <div className="flex-grow overflow-hidden">
-            <div className="lg:hidden h-full overflow-auto mt-4">
+            <div className="lg:hidden h-full overflow-auto mt-4 max-w-[600px] mx-auto">
               <InteractiveComponent
               data={data}
               summary={summary}

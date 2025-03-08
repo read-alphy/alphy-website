@@ -24,7 +24,7 @@ export default function MyWorksFeedItem({
     item.summaries[0].complete !== true;
 
   return (
-    <Link href={`/${item.source_type}/${source_id}`}>
+    <Link className="max-w-[300px]" href={`/${item.source_type}/${source_id}`}>
       <Card className="overflow-hidden shadow-none transition-all duration-300 hover:shadow-md dark:bg-zinc-800 dark:border-zinc-700 h-full">
         <div
           className="w-full h-40 bg-cover bg-center bg-no-repeat"

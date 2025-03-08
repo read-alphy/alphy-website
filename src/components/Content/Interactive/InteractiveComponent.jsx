@@ -37,7 +37,7 @@ const InteractiveComponent = ({
 
   return (
     <div className="w-full ">
-      <Card className="h-full min-h-screen rounded-none border-t-0 border-b-0 border-r border-l 2xl:border-r  shadow-none ">
+      <Card className="h-full min-h-screen rounded-none border-t-0 border-b-0 border-r-0 border-l-0 lg:border-r lg:border-l 2xl:border-r  shadow-none ">
         <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
           <div className="flex items-center justify-between">
             <Tabs defaultValue="sandbox" className="w-full" onValueChange={setActiveTab}>
@@ -59,7 +59,7 @@ const InteractiveComponent = ({
                 </TabsTrigger>
                 <Button 
                   onClick={toggleMobilePanel}
-                  className="lg:hidden ml-2 bg-blue-500 text-white h-6 py-1 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                  className="lg:hidden ml-2 bg-blue-500 text-white h-7 py-1 rounded-md px-3 text-sm font-medium flex items-center transition-all"
                 >
                   <BookOpen className="h-4 w-4 mr-2" />
                   Read
