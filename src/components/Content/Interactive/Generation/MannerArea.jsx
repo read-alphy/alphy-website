@@ -8,6 +8,7 @@ export default function MannerArea({
   manner,
   setManner,
 }) {
+  
   const conversationBubble = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -145,57 +146,82 @@ export default function MannerArea({
   )
 
   return (
-    <div className="pt-2">
-      <p className="mb-6 ml-2 text-md text-zinc-500 dark:text-zinc-300">
-        Pick your Agent (optional)
+    <div className="mt-6">
+      <p className="text-sm text-zinc-500 dark:text-zinc-300">
+        Tone
       </p>
-      <RadioGroup defaultValue="friend" className="flex space-x-2 overflow-x-auto p-1">
-        {[
-          'friend',
-          'teacher',
-          'marketer',
-          'technical',
-          'scientist',
-          'writer',
-          'journalist',
-        ].map(value => (
-          <div key={value} className="flex flex-col items-center">
-            <RadioGroupItem
-              value={value}
-              id={value}
-              className="peer sr-only"
-              checked={manner === value}
-              onClick={() => {
-                if (manner === value) {
-                  setManner('')
-                  setSettings({ ...settings, manner: null })
-                } else {
-                  setManner(value)
-                  setSettings({ ...settings, manner: value })
-                }
-              }}
-            />
-            <Card className={`w-[70px] h-[70px] flex items-center justify-center border ${
-              manner === value 
-                ? 'border-indigo-300 dark:border-indigo-300' 
-                : 'border-zinc-200 dark:border-zinc-700'
-            } rounded-md cursor-pointer peer-data-[state=checked]:border-indigo-300 peer-data-[state=checked]:dark:border-indigo-300 peer-data-[state=checked]:border-2`}>
-              <label htmlFor={value} className="cursor-pointer flex items-center justify-center w-full h-full">
-                {value === 'friend' && conversationBubble}
-                {value === 'teacher' && building}
-                {value === 'marketer' && megaphone}
-                {value === 'technical' && commandLine}
-                {value === 'scientist' && beaker}
-                {value === 'writer' && book}
-                {value === 'journalist' && newsPaper}
-              </label>
-            </Card>
-            <p className="dark:text-zinc-300 text-center mt-2 text-xs md:text-sm">
-              {value.charAt(0).toUpperCase() + value.slice(1)}
-            </p>
-          </div>
-        ))}
-      </RadioGroup>
+      <div className="flex flex-col space-y-2 p-1">
+        <div className="flex space-x-4 overflow-x-auto">
+          {[
+            'friend',
+            'teacher',
+            'marketer',
+          ].map(value => (
+            <div key={value} className="flex flex-col items-center">
+              <Card 
+                onClick={() => {
+                  if (manner === value) {
+                    setManner('')
+                    setSettings({ ...settings, manner: null })
+                  } else {
+                    setManner(value)
+                    setSettings({ ...settings, manner: value })
+                  }
+                }}
+                className={`w-[50px] h-[50px] flex items-center justify-center border ${
+                  manner === value 
+                    ? 'border-indigo-300 dark:border-indigo-300 border-2' 
+                    : 'border-zinc-200 dark:border-zinc-700'
+                } rounded-md cursor-pointer hover:border-indigo-200 transition-colors`}
+              >
+                <div className="flex items-center justify-center w-full h-full opacity-70">
+                  {value === 'friend' && conversationBubble}
+                  {value === 'teacher' && building}
+                  {value === 'marketer' && megaphone}
+                </div>
+              </Card>
+              <p className="text-zinc-500 dark:text-zinc-300 text-center mt-2 text-xs">
+                {value.charAt(0).toUpperCase() + value.slice(1)}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="flex space-x-4 overflow-x-auto">
+          {[
+            'technical',
+            'writer',
+            'journalist',
+          ].map(value => (
+            <div key={value} className="flex flex-col items-center">
+              <Card 
+                onClick={() => {
+                  if (manner === value) {
+                    setManner('')
+                    setSettings({ ...settings, manner: null })
+                  } else {
+                    setManner(value)
+                    setSettings({ ...settings, manner: value })
+                  }
+                }}
+                className={`w-[50px] h-[50px] flex items-center justify-center border ${
+                  manner === value 
+                    ? 'border-indigo-300 dark:border-indigo-300 border-2' 
+                    : 'border-zinc-200 dark:border-zinc-700'
+                } rounded-md cursor-pointer hover:border-indigo-200 transition-colors`}
+              >
+                <div className="flex items-center justify-center w-full h-full opacity-70">
+                  {value === 'technical' && commandLine}
+                  {value === 'writer' && book}
+                  {value === 'journalist' && newsPaper}
+                </div>
+              </Card>
+              <p className="text-zinc-500 dark:text-zinc-300 text-center mt-2 text-xs">
+                {value.charAt(0).toUpperCase() + value.slice(1)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

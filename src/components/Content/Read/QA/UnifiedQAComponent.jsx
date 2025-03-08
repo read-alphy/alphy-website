@@ -358,7 +358,6 @@ export function QuestionsDisplay({
       {answerData.answer.length == 0 &&
       <div className="flex flex-col gap-4">
 
-     
       <div className=" grid grid-cols-2 flex gap-4">
         {Object.keys(questions).map((question, index) => (
           <Question
@@ -677,7 +676,7 @@ export function DynamicQuestion({
       
       <CardFooter className="flex flex-col items-start pt-2 px-4 sm:px-6 pb-4">
         {hasSources && showSources && (
-          <div className="w-full mt-4">
+          <div className="w-full mt-4 max-w-[350px]">
             {/* Mobile Banner */}
            {/*  <div className="lg:hidden mb-4">
               <Button 
@@ -713,7 +712,7 @@ export function DynamicQuestion({
 
                 {/* Source Cards Carousel - Added max-w-full to contain within parent */}
                 <div
-                  className="flex flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area max-w-[350px]"
+                  className="flex flex-row gap-4 overflow-x-scroll scroll-smooth carousel-area "
                   ref={carouselRef}
                 >
                   {answerData.sources.map((source, index) => (

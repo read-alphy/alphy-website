@@ -219,11 +219,11 @@ export default function SideFeed({
                   />
                   </Link>
                   <div className="flex flex-row items-center">
-                    {!collapsed && (
+                    
                       <Link href="/">
-                        <h2 className="ml-1 text-xl quicksand font-bold">ALPHY</h2>
+                        <h2 className={`ml-1 text-xl quicksand font-bold ${collapsed ? 'hidden' : ''}`}>ALPHY</h2>
                       </Link>
-                    )}
+                    
                   </div>
                 </div>
                 
@@ -267,12 +267,12 @@ export default function SideFeed({
                         </Link>
                       </SidebarMenuButton>
                       
-                      {item.label === "My Creations" && currentUser &&  groupedData.length > 0 && (
+                      {item.label === "My Creations" && currentUser &&  groupedData.length > 0 && !collapsed && (
                         <div className={`select-none relative ml-5 mt-2 $/* {collapsed && 'hidden'} */`}>
                           {groupedData.map((group, index) => (
                             <div key={index} className="relative flex flex-col group cursor-pointer">
                               <p
-                                className="text-slate-700 h-[20px] overflow-hidden dark:text-zinc-300 text-xs hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-md p-1 quicksand"
+                                className="text-slate-700 h-[20px] overflow-hidden dark:text-zinc-300 text-xs /* hover:bg-slate-100 dark:hover:bg-zinc-800  */rounded-md p-1 quicksand"
                                 onClick={() => toggleGroupVisibility(index)}
                               >
                                 {group[0].title}

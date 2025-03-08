@@ -300,15 +300,15 @@ export default function Content({
   const [activeMobilePanel, setActiveMobilePanel] = useState('read')
 
   return (
-    <div ref={ref} className="h-screen  max-w-screen-2xl  lg:pl-5 3xl:pl-20">
+    <div ref={ref} className="h-full   lg:overflow-auto lg:max-h-screen max-w-screen-2xl  lg:pl-5 3xl:pl-20">
       
       <div
         className={`hidden lg:flex lg:flex-row h-full w-full`}
       >
           <div 
               className={`transition-all duration-300 ease-in-out ${
-                isInteractivePanelCollapsed ? 'w-4/5' : 'w-3/5'
-              } flex flex-col h-full mt-10`}
+                isInteractivePanelCollapsed ? 'w-4/5' : ' w-3/5'
+              } flex flex-col h-full pt-10`}
             >
                 <div className="flex flex-row">
                           {data?.source_type === 'yt' && data?.source_id && (
@@ -359,7 +359,7 @@ export default function Content({
                 
        
                   <div className="flex-grow overflow-hidden">
-                    <div className="h-full overflow-auto mt-4">
+                    <div className="h-full overflow-auto mt-4 ">
                        <ReadComponent
                           data={data}
                           transcript={transcript}
@@ -470,7 +470,7 @@ export default function Content({
         
     <div 
         >
-<div className="flex flex-row">
+<div className="lg:hidden flex flex-row">
              <HeaderArea
               data={data}
               title={data?.title}
@@ -509,8 +509,8 @@ export default function Content({
  </div>
 
             {activeMobilePanel === 'read' &&
-            <div className="flex-grow overflow-hidden">
-            <div className="h-full overflow-auto mt-4">
+            <div className="lg:hidden flex-grow overflow-hidden">
+            <div className="h-full overflow-auto mt-4 max-w-[600px]">
                 <ReadComponent
                   data={data}
                   transcript={transcript}

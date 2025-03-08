@@ -14,7 +14,7 @@ export default function OutputZone({
   contentDetails
 }) {
   return (
-    <div className="content-area   mt-6 max-w-[800px] px-4 sm:px-0 text-zinc-700 dark:text-zinc-300 overflow-y-auto   max-w-[1000px] flex flex-col ">
+    <div className="h-screen mt-6 w-full px-4  text-zinc-700 dark:text-zinc-300 overflow-y-auto   flex flex-col ">
       <div className="flex flex-col ">
         {/*  <InputMessage
           promptType={promptType}
@@ -41,7 +41,7 @@ export default function OutputZone({
         
       />
 
-      <div className="items-end  mt-10 w-full  flex max-w-[800px] pb-10 ">
+      <div className="items-end  mt-10 w-full w-full flex pb-10 ">
         <OutputMessage
           generatedPrompt={generatedPrompt}
           setActiveGenerationZone={setActiveGenerationZone}

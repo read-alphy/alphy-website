@@ -153,6 +153,7 @@ const [theme, setTheme] = useState('light')
   }, [data, settings])
 
   function createDopeStuff() {
+
     setAuthError(false)
     if (currentUser === undefined ||currentUser === null ) {
       setAuthError(true)
@@ -198,6 +199,7 @@ const [theme, setTheme] = useState('light')
     }
 
     const ws = new WebSocket(`wss://${API_HOST}/sandbox/ws`)
+  
 
     /* wss://backend-staging-2459.up.railway.app/ws/question */
     /* wss://backend-staging-2459.up.railway.app/ws/sandbox */

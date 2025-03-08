@@ -202,7 +202,7 @@ export default function ReadComponent({
                       </TabsList>
                     </div>
                     
-                    <div className="flex-grow overflow-scroll pb-10 ">
+                    <div className="flex-grow overflow-auto pb-10 ">
                       <TabsContent value="summary" className="m-0 pl-4 lg:pl-0 py-4 pr-4 h-full border-0">
                         {isLoading ? (
                           <div className="flex justify-center items-center h-full ">
