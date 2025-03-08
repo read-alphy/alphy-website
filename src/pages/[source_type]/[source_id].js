@@ -70,6 +70,7 @@ export default function SourceMaterial({
       }
 
       const { data, error } = await fetchData(source_type, source_id);
+      console.log
       setData(data);
       setError(error);
       setLoading(false);

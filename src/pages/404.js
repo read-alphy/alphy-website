@@ -1,4 +1,3 @@
-
 import NotFound from '../components/404/NotFound'
 import Head from 'next/head';
 
@@ -15,6 +14,8 @@ export default function Custom404({
   loggedIn,
   setLoggedIn,
 }) {
+
+  
   return(
     <div>
       <Head>

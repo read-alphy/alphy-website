@@ -1,6 +1,4 @@
 
-import './FeedItem.css'
-
 const SkeletonItem = () => {
   return (
     <div className={'grid border-b-0 '}>

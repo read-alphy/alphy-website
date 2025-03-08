@@ -1,4 +1,3 @@
-import './FeedItem.css'
 import Twitter from '../../../public/img/twitter_space.png'
 import ApplePodcast from '../../../public/img/apple_podcast_banner.png'
 import Twitch from '../../../public/img/twitchSource.png'

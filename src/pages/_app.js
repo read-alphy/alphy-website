@@ -1,4 +1,5 @@
-import '../app/globals.css'
+import '../globals.css'
+
 
 import React, { useState, useEffect } from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -357,6 +358,8 @@ const additionalProps ={
     setLoggedIn : setLoggedIn,
 
 }
+
+
 function adjustLayoutHeight() {
   const viewportHeight = window.innerHeight;
   document.documentElement.style.height = `${viewportHeight}px`;

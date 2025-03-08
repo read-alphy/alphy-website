@@ -57,8 +57,6 @@ const HistoryCard = ({ item, index, onViewSource }) => {
     if (source_type === 'yt') {
       return `https://i.ytimg.com/vi/${source_id}/hqdefault.jpg`;
     }
-    // Add other source types as needed
-    return '/api/placeholder/320/180';
   };
 
   // Extract command type or prompt for display

@@ -302,6 +302,7 @@ export default function Content({
   return (
     <div ref={ref} className="h-full lg:overflow-auto lg:max-h-screen max-w-screen-2xl  lg:pl-5 3xl:pl-20">
       
+    {!isMobile && (
       <div
         className={`hidden lg:flex lg:flex-row h-full w-full`}
       >
@@ -454,23 +455,33 @@ export default function Content({
             tier={tier}
           />
           </div>
-
+          {isInteractivePanelCollapsed && (
+            <button
+              onClick={toggleInteractivePanel}
+              className="absolute right-4 top-10 transform -translate-y-1/2 z-[9999] bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm hidden lg:block"
+              aria-label="Open interactive panel"
+            >
+              <ChevronRight size={20} className="rotate-180 stroke-[2.5px]" />
+            </button>
+          )}
+       
           </div>
 
 
+            )}
 
 
 
 
 
-
-
+{isMobile && (
 
 
         
     <div 
         >
-<div className="lg:hidden flex flex-row">
+         
+    <div className=" flex flex-row lg:hidden">
              <HeaderArea
               data={data}
               title={data?.title}
@@ -590,20 +601,11 @@ export default function Content({
 
 
           </div>
-          
+      )}          
           
           
             
-          {/* Floating button to uncollapse when fully collapsed - only visible on desktop */}
-          {isInteractivePanelCollapsed && (
-            <button
-              onClick={toggleInteractivePanel}
-              className="absolute right-4 top-10 transform -translate-y-1/2 z-[9999] bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm hidden lg:block"
-              aria-label="Open interactive panel"
-            >
-              <ChevronRight size={20} className="rotate-180 stroke-[2.5px]" />
-            </button>
-          )}
+        
        
 
       
