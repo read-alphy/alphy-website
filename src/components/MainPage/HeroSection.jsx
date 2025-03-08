@@ -94,7 +94,7 @@ export default function HeroSection({ currentUser }) {
 
           {/* Key benefits */}
           <motion.ul 
-            className="mt-6 hidden md:flex space-y-2"
+            className="mt-6 hidden md:block space-y-2"
             variants={staggerChildren}
           >
             {[
