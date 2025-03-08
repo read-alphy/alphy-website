@@ -1,5 +1,3 @@
-  /* import Source from '../../components/Content/Source' */
-
 import Loading from '../../components/Loading'
 import { API_URL } from '../../constants'
 import dynamic from 'next/dynamic'
@@ -66,14 +64,20 @@ export default function SourceMaterial({
       if (typeof source_id !== 'string' || source_id === '[object Object]') {
         setError('Invalid source ID');
         setLoading(false);
+        router.push('/404');
         return;
       }
 
       const { data, error } = await fetchData(source_type, source_id);
-      console.log
+      
       setData(data);
       setError(error);
       setLoading(false);
+
+      if (error) {
+        router.push('/404');
+        return;
+      }
 
       // Set image URL
       if (data !== null && data.thumbnail !== null) {
@@ -94,7 +98,7 @@ export default function SourceMaterial({
     }
 
     loadData();
-  }, [source_type, source_id]);
+  }, [source_type, source_id, router]);
 
   if (loading || !router.isReady) {
     return <Loading />;
