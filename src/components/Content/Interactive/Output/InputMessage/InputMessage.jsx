@@ -48,7 +48,7 @@ export default function InputMessage({ promptType, userPrompt, settings, content
           <div className="flex flex-row justify-between items-center">
             <div
               className={`flex flex-col ${
-                promptAreaExpanded ? 'max-h-96' : 'max-h-14'
+                promptAreaExpanded ? 'max-h-96' : 'max-h-24'
               } overflow-y-hidden transition-all duration-500 ease-in-out`}
             >
               <h3 className="text-zinc-600 dark:text-zinc-100 text-sm font-medium">
@@ -56,7 +56,7 @@ export default function InputMessage({ promptType, userPrompt, settings, content
               </h3>
               <p
                 ref={messageRef}
-                className="text-md mt-2 text-zinc-700 dark:text-zinc-300 overflow-hidden"
+                className="text-sm mt-2 text-zinc-700 dark:text-zinc-300 overflow-hidden"
               >
                 {messageObject !== undefined &&
                   (messageObject.message ? messageObject.message : '')}
