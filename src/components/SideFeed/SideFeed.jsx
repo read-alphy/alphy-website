@@ -5,7 +5,9 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { LogIn as LoginIcon, Menu, X } from 'lucide-react'
+import { useIsMobile } from '@/hooks/use-mobile'
+
+
 
 // Import shadcn sidebar components
 import {
@@ -52,6 +54,7 @@ export default function SideFeed({
   currentUser,
   isArc
 }) {
+  const isMobile = useIsMobile()
   const [called, setCalled] = useState(false)
   const carouselRef = useRef(null)
   const auth = useAuth()
@@ -203,7 +206,7 @@ export default function SideFeed({
           <SidebarHeader className="pt-4 sm:pt-8">
             <div className="flex w-items-center font-bold relative justify-between">
               <div className="flex items-center justify-between w-full">
-                <div className="flex items-center">
+                <div className={`flex items-center ${!collapsed ? 'pl-1' : ''}`}>
                   <Link href="/">
                   <Image
                     src={Logo}
@@ -221,7 +224,7 @@ export default function SideFeed({
                   <div className="flex flex-row items-center">
                     
                       <Link href="/">
-                        <h2 className={`ml-1 text-xl quicksand font-bold ${collapsed ? 'hidden' : ''}`}>ALPHY</h2>
+                        <h2 className={`pl-2 text-xl quicksand font-bold ${collapsed ? 'hidden' : ''}`}>ALPHY</h2>
                       </Link>
                     
                   </div>

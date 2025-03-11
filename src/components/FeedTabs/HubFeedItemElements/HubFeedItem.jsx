@@ -21,6 +21,7 @@ export default function HubFeedItem ({
   setSourceIDsArc,
   forDetail,
 }){
+  console.log(item)
   const source_id = item !== undefined ? item.source_id : ''
   let formattedDate = ''
   const inputDate =
