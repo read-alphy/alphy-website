@@ -39,30 +39,18 @@ export default function ReportIssueButton({ handleReportIssue, showReportIssue, 
             <DialogTitle className="text-slate-700 dark:text-zinc-200 quicksand font-medium">
               Report an Issue
             </DialogTitle>
-            <button
-              onClick={() => setShowReportIssue(false)}
-              className="text-slate-500 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-200 rounded-full p-1 hover:bg-gray-100 dark:hover:bg-zinc-700"
-              aria-label="close"
-            >
-              <X size={18} />
-            </button>
+            
           </DialogHeader>
           
           {currentUser ? (
-            <div className="w-full">
-              {theme === 'light' ? (
+            <div className="w-full ">
+              
                 <iframe
-                  className="h-[600px] md:h-[640px] w-full border-0"
+                  className="h-full w-full border-0 p-4"
                   src={`https://tally.so/embed/wve4d8?source_type=${data?.source_type || ''}&source_id=${data?.source_id || ''}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
                   title="Report issue form"
                 ></iframe>
-              ) : (
-                <iframe
-                  className="h-[600px] md:h-[640px] w-full border-0"
-                  src={`https://tally.so/embed/wMNL70?source_type=${data?.source_type || ''}&source_id=${data?.source_id || ''}&user_id=${currentUser.uid}&alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
-                  title="Report issue form (dark mode)"
-                ></iframe>
-              )}
+             
             </div>
           ) : (
             <div className="p-6 text-center">
