@@ -6,7 +6,7 @@ export const useDownloadHandling = (activeTab, data, transcript, setDownloading)
     setDownloading(true)
     
     const downloadTimer = setTimeout(() => {
-      if (activeTab === 'tab2') {
+       {
         if (selection === 1) {
           // Download subtitles
           const blob = new Blob([data.transcript], { type: 'text/srt' })
