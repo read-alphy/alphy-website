@@ -5,6 +5,33 @@ import { Lightbulb, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
+const SummaryContent = ({bulletPoints}) => {
+  // Summary was string previously, now it can be a json list where each item is a bullet point, without the bullet
+  if (typeof bulletPoints === 'string') {
+    return <div className="space-y-3 mt-3">
+      {bulletPoints.split('\n').map((paragraph, paraIndex) => (
+        <div
+          key={paraIndex}
+          className="quicksand font-normal text-black dark:text-slate-300 text-md"
+        >
+          <ReactMarkdown className="react-markdown-edit quicksand">{paragraph}</ReactMarkdown>
+        </div>
+      ))}
+    </div>
+  } else {
+    return <div className="space-y-3 mt-3">
+      <div className="quicksand font-normal text-black dark:text-slate-300 text-md">
+        <ul>
+          {bulletPoints.map((bp, i) => (
+            <li key={i}>{bp}</li>))}
+        </ul>
+      </div>
+    </div>
+  } 
+}
+
+
+
 const Summary = ({
   isLoading,
   summaryArray,
@@ -18,7 +45,6 @@ const Summary = ({
   if (isLoading) {
     return <Loading />;
   }
-
   // No summary available yet
   if (summaryArray.length === 0) {
     return (
@@ -37,6 +63,12 @@ const Summary = ({
         )}
       </div>
     );
+  }
+  // summary_prettified were a single string for the whole source without chapters, was unusable
+  // Now its in the same format of summary, with chapters
+  // Check if its a list with length, then use pretty instead of the regular summary if exists.
+  if (summary.summary_prettified  && keyTakeaways.length !== undefined) {
+    summaryArray = summary.summary_prettified
   }
 
   // Render Key Takeaways at the top
@@ -109,9 +141,6 @@ const Summary = ({
   return (
     <div className="space-y-6 overflow-auto h-full rounded-lg">
       <KeyTakeawaysSection data={data}/>
-      
-   
-      
       {Object.values(summaryArray).map((item, index) => (
         <div className="text-slate-800 dark:text-slate-200 quicksand rounded-lg  transition-colors" key={index}>
           <div className="py-4">
@@ -127,7 +156,8 @@ const Summary = ({
             >
               {formatTimestamp(item.at, convertTimeToSeconds)}
             </h5>
-            <div className="space-y-3 mt-3">
+            <SummaryContent bulletPoints={item.summary} />
+            {/* <div className="space-y-3 mt-3">
               {item.summary.split('\n').map((paragraph, paraIndex) => (
                 <div
                   key={paraIndex}
@@ -136,7 +166,7 @@ const Summary = ({
                   <ReactMarkdown className="react-markdown-edit quicksand">{paragraph}</ReactMarkdown>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       ))}
