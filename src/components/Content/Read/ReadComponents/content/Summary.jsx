@@ -5,6 +5,33 @@ import { Lightbulb, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
+const SummaryContent = ({bulletPoints}) => {
+  // Summary was string previously, now it can be a json list where each item is a bullet point, without the bullet
+  if (typeof bulletPoints === 'string') {
+    return <div className="space-y-3 mt-3">
+      {bulletPoints.split('\n').map((paragraph, paraIndex) => (
+        <div
+          key={paraIndex}
+          className="quicksand font-normal text-black dark:text-slate-300 text-md"
+        >
+          <ReactMarkdown className="react-markdown-edit quicksand">{paragraph}</ReactMarkdown>
+        </div>
+      ))}
+    </div>
+  } else {
+    return <div className="space-y-3 mt-3">
+      <div className="quicksand font-normal text-black dark:text-slate-300 text-md">
+        <ul>
+          {bulletPoints.map((bp, i) => (
+            <li key={i}>{bp}</li>))}
+        </ul>
+      </div>
+    </div>
+  } 
+}
+
+
+
 const Summary = ({
   isLoading,
   summaryArray,
@@ -38,14 +65,20 @@ const Summary = ({
       </div>
     );
   }
+  // summary_prettified were a single string for the whole source without chapters, was unusable
+  // Now its in the same format of summary, with chapters
+  // Check if its a list with length, then use pretty instead of the regular summary if exists.
+  if (summary.summary_prettified  && keyTakeaways.length !== undefined) {
+    summaryArray = summary.summary_prettified
+  }
 
   // Render Key Takeaways at the top
   const KeyTakeawaysSection = ({data}) => {
     if (!keyTakeaways || keyTakeaways.length === 0) return null;
-    
+
     // Always show 5 takeaways or all if less than 5
     const displayedTakeaways = keyTakeaways.slice(0, 5);
-    
+
     return (
       <Card className="mb-6 border overflow-hidden border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-none">
         <CardHeader className="pb-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40">
@@ -89,18 +122,33 @@ const Summary = ({
   };
 
   // String-based summary array (simple format)
-  if (typeof summaryArray[0] === 'string') {
+  if (typeof summaryArray === 'array' && typeof summaryArray[0] === 'string') {
     return (
       <div className="space-y-4 overflow-auto h-full">
         <KeyTakeawaysSection data={data} />
-        
-        {summaryArray.map((item, index) => (
-          <div className="text-black dark:text-slate-200" key={index}>
-            <div className="summary-text quicksand font-bold">
-              <ReactMarkdown>{item}</ReactMarkdown>
-            </div>
-          </div>
-        ))}
+
+        <div className="text-black dark:text-slate-200">
+          <ul className="space-y-2">
+            {summaryArray.map((item, index) => (
+              <li key={index} className="summary-text quicksand font-normal flex items-start">
+                <span className="mr-2">•</span>
+                <ReactMarkdown>{item.replace(/^[-•]\s*/, '')}</ReactMarkdown>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
+  if (typeof summaryArray === 'string') {
+    return (
+      <div className="space-y-4 overflow-auto h-full">
+        <KeyTakeawaysSection data={data} />
+
+        <div className="text-black dark:text-slate-200">
+          <ReactMarkdown>{summaryArray.replace(/^[-•]\s*/, '')}</ReactMarkdown>
+        </div>
       </div>
     );
   }
@@ -109,9 +157,9 @@ const Summary = ({
   return (
     <div className="space-y-6 overflow-auto h-full rounded-lg">
       <KeyTakeawaysSection data={data}/>
-      
-   
-      
+
+
+
       {Object.values(summaryArray).map((item, index) => (
         <div className="text-slate-800 dark:text-slate-200 quicksand rounded-lg  transition-colors" key={index}>
           <div className="py-4">
@@ -127,7 +175,8 @@ const Summary = ({
             >
               {formatTimestamp(item.at, convertTimeToSeconds)}
             </h5>
-            <div className="space-y-3 mt-3">
+            <SummaryContent bulletPoints={item.summary} />
+            {/* <div className="space-y-3 mt-3">
               {item.summary.split('\n').map((paragraph, paraIndex) => (
                 <div
                   key={paraIndex}
@@ -136,7 +185,7 @@ const Summary = ({
                   <ReactMarkdown className="react-markdown-edit quicksand">{paragraph}</ReactMarkdown>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       ))}
@@ -147,17 +196,17 @@ const Summary = ({
 // Helper function to format timestamps
 const formatTimestamp = (time, convertTimeToSeconds) => {
   let seconds;
-  
+
   if (typeof time === 'string' && time.match(/^PT/)) {
     seconds = convertTimeToSeconds(time);
   } else {
     seconds = time;
   }
-  
+
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = Math.floor(seconds % 60);
-  
+
   return `${hours < 10 ? `0${hours}` : hours}:${
     minutes < 10 ? `0${minutes}` : minutes
   }:${secs < 10 ? `0${secs}` : secs}`;
