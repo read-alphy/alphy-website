@@ -45,7 +45,6 @@ const Summary = ({
   if (isLoading) {
     return <Loading />;
   }
-
   // No summary available yet
   if (summaryArray.length === 0) {
     return (
@@ -157,9 +156,6 @@ const Summary = ({
   return (
     <div className="space-y-6 overflow-auto h-full rounded-lg">
       <KeyTakeawaysSection data={data}/>
-
-
-
       {Object.values(summaryArray).map((item, index) => (
         <div className="text-slate-800 dark:text-slate-200 quicksand rounded-lg  transition-colors" key={index}>
           <div className="py-4">

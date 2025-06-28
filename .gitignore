@@ -45,3 +45,5 @@ next-env.d.ts
 *.sh
 GiantCodebase.md
 internaltodo.md
+
+.zed
