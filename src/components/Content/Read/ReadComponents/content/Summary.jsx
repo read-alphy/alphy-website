@@ -74,10 +74,10 @@ const Summary = ({
   // Render Key Takeaways at the top
   const KeyTakeawaysSection = ({data}) => {
     if (!keyTakeaways || keyTakeaways.length === 0) return null;
-    
+
     // Always show 5 takeaways or all if less than 5
     const displayedTakeaways = keyTakeaways.slice(0, 5);
-    
+
     return (
       <Card className="mb-6 border overflow-hidden border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-none">
         <CardHeader className="pb-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40">
@@ -121,18 +121,33 @@ const Summary = ({
   };
 
   // String-based summary array (simple format)
-  if (typeof summaryArray[0] === 'string') {
+  if (typeof summaryArray === 'array' && typeof summaryArray[0] === 'string') {
     return (
       <div className="space-y-4 overflow-auto h-full">
         <KeyTakeawaysSection data={data} />
-        
-        {summaryArray.map((item, index) => (
-          <div className="text-black dark:text-slate-200" key={index}>
-            <div className="summary-text quicksand font-bold">
-              <ReactMarkdown>{item}</ReactMarkdown>
-            </div>
-          </div>
-        ))}
+
+        <div className="text-black dark:text-slate-200">
+          <ul className="space-y-2">
+            {summaryArray.map((item, index) => (
+              <li key={index} className="summary-text quicksand font-normal flex items-start">
+                <span className="mr-2">•</span>
+                <ReactMarkdown>{item.replace(/^[-•]\s*/, '')}</ReactMarkdown>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
+  if (typeof summaryArray === 'string') {
+    return (
+      <div className="space-y-4 overflow-auto h-full">
+        <KeyTakeawaysSection data={data} />
+
+        <div className="text-black dark:text-slate-200">
+          <ReactMarkdown>{summaryArray.replace(/^[-•]\s*/, '')}</ReactMarkdown>
+        </div>
       </div>
     );
   }
@@ -177,17 +192,17 @@ const Summary = ({
 // Helper function to format timestamps
 const formatTimestamp = (time, convertTimeToSeconds) => {
   let seconds;
-  
+
   if (typeof time === 'string' && time.match(/^PT/)) {
     seconds = convertTimeToSeconds(time);
   } else {
     seconds = time;
   }
-  
+
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = Math.floor(seconds % 60);
-  
+
   return `${hours < 10 ? `0${hours}` : hours}:${
     minutes < 10 ? `0${minutes}` : minutes
   }:${secs < 10 ? `0${secs}` : secs}`;
