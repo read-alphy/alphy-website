@@ -145,9 +145,9 @@ export default function SourceMaterial({
       setSandboxHistory={setSandboxHistory}
       loggedIn={loggedIn}
       setLoggedIn={setLoggedIn}
-      getSandboxHistory = {getSandboxHistory}
+      getSandboxHistory={getSandboxHistory}
       data={data}
-
+      setData={setData}
       />
   }
   </div>

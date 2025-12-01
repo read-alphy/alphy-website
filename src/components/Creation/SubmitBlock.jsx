@@ -3,16 +3,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-// Components
-import { Button } from '@material-tailwind/react';
-
 // Icons
 import { 
   ArrowLeft, 
   HelpCircle,
-  CheckCircle,
   AlertCircle,
-  ArrowRight
+  Loader2,
+  Send,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 // Platform logos
@@ -34,7 +33,7 @@ export default function SubmitBlock({
   errorMessage,
   failed,
   inputRef,
-  hideCredits = false // New prop to conditionally hide credits display
+  hideCredits = false
 }) {
   const router = useRouter();
   const [showExampleLinks, setShowExampleLinks] = useState(false);
@@ -51,14 +50,28 @@ export default function SubmitBlock({
     }
   }, [inputRef]);
 
-  const isPremiumUser = tier === 'basic' || tier === 'premium';
+  // Handle Enter key press
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !loading) {
+      handleSubmit();
+    }
+  };
+
+  const platforms = [
+    { icon: YoutubeIcon, name: 'YouTube', example: 'youtube.com/watch?v=h6fcK_fRYaI' },
+    { icon: TwitterIcon, name: 'X Videos', example: 'x.com/user/status/1731765772874129676' },
+    { icon: SpacesIcon, name: 'X Spaces', example: 'x.com/i/status/1892283575736643620' },
+    { icon: TwitchIcon, name: 'Twitch', example: 'twitch.tv/videos/1965889164' },
+    { icon: ApplePodcastIcon, name: 'Apple Podcasts', example: 'podcasts.apple.com/.../id1507881694?i=1000529427756' }
+  ];
+
   return (
-    <div className="p-6 rounded-xl">
+    <div className="p-6 md:p-8">
       {/* Back button - only when not in tab mode */}
       {!hideCredits && (
         <button
           onClick={() => setSubmitDialog(false)}
-          className="group mb-6 flex items-center text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
+          className="group mb-6 flex items-center text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200"
         >
           <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover:-translate-x-1" />
           Back
@@ -66,74 +79,77 @@ export default function SubmitBlock({
       )}
       
       {currentUser ? (
-        <div className="space-y-10">
-          {/* Title with subtle accent */}
-          <div className="relative mt-20 ">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-             Process a media from the web
+        <div className="space-y-8">
+          {/* Header */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              Process media from the web
             </h3>
-            <div className="absolute -bottom-2 left-0 h-0.5 w-12 bg-blue-500 dark:bg-blue-400"></div>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Paste a URL from any supported platform to transcribe and analyze
+            </p>
           </div>
           
-          {/* URL input with floating label and submit button side by side on md+ screens */}
-          <div className="relative mt-20">
-            <div className="flex flex-col md:flex-row md:items-end gap-6">
-              <div className="flex-grow">
+          {/* URL input with submit button */}
+          <div className="space-y-3">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex-grow relative">
                 <input
                   id="content-url"
                   ref={inputRef}
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder=" "
-                  className={`peer w-full px-4 py-2 border-2 rounded-lg ${
-                    failed ? 'border-red-500' : 'border-blue-300 dark:border-blue-700 focus:border-blue-500 dark:focus:border-blue-400'
-                  } bg-transparent text-gray-900 dark:text-white focus:outline-none transition-colors`}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Paste your URL here..."
+                  className={`w-full px-4 py-3 border-2 rounded-xl ${
+                    failed 
+                      ? 'border-red-400 dark:border-red-500 focus:border-red-500 dark:focus:border-red-400' 
+                      : 'border-gray-200 dark:border-zinc-600 focus:border-indigo-500 dark:focus:border-indigo-400'
+                  } bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:bg-white dark:focus:bg-zinc-800 transition-all duration-200`}
                 />
-                <label 
-                  htmlFor="content-url"
-                  className="absolute left-3 -top-6 text-xs font-normal text-gray-500 dark:text-gray-400 peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-xs peer-focus:text-blue-600 dark:peer-focus:text-blue-400 transition-all duration-200"
-                >
-                  Paste your content URL
-                </label>
               </div>
               
-              {/* Submit button - next to input on md+ screens */}
               <button
                 onClick={handleSubmit}
-                disabled={loading}
-                className={`md:w-auto w-full py-3 px-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium text-sm transition-all duration-300 transform hover:scale-[1.02] ${
-                  loading ? 'opacity-70 cursor-not-allowed' : ''
-                }`}
+                disabled={loading || !inputValue.trim()}
+                className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200 min-w-[140px] ${
+                  loading 
+                    ? 'bg-indigo-400 dark:bg-indigo-600 cursor-wait' 
+                    : !inputValue.trim()
+                      ? 'bg-gray-200 dark:bg-zinc-700 text-gray-400 dark:text-zinc-500 cursor-not-allowed'
+                      : 'bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02]'
+                } ${loading ? 'text-white' : ''}`}
               >
                 {loading ? (
-                  <div className="flex items-center justify-center">
-                    <svg className="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Processing
-                  </div>
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Processing...</span>
+                  </>
                 ) : (
-                  'Submit'
+                  <>
+                    <Send className="h-4 w-4" />
+                    <span>Submit</span>
+                  </>
                 )}
               </button>
             </div>
             
+            {/* Error message */}
             {failed && (
-              <div className="mt-3 flex items-start text-sm text-red-500 dark:text-red-400">
-                <AlertCircle className="h-4 w-4 mr-1 mt-0.5 flex-shrink-0" />
-                <span>{errorMessage}</span>
+              <div className="flex items-start gap-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-400 mt-0.5 flex-shrink-0" />
+                <span className="text-sm text-red-600 dark:text-red-400">{errorMessage}</span>
               </div>
             )}
           </div>
           
           {/* Credits display - only when not in tab mode */}
           {!hideCredits && (
-            <div className="flex justify-between items-center py-4 px-5 bg-blue-50 dark:bg-blue-900/20 rounded-lg my-8">
-              <div className="flex items-center space-x-4">
-                <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-800 flex items-center justify-center">
-                  <span className="text-blue-600 dark:text-blue-300 text-xs font-medium">
+            <div className="flex justify-between items-center py-4 px-5 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl border border-indigo-100 dark:border-indigo-800/30">
+              <div className="flex items-center gap-4">
+                <div className="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-800 flex items-center justify-center">
+                  <span className="text-indigo-600 dark:text-indigo-300 text-sm font-semibold">
                     {Math.floor(credit)}
                   </span>
                 </div>
@@ -148,7 +164,7 @@ export default function SubmitBlock({
               {tier !== 'free' && (
                 <button
                   onClick={navigateCredit}
-                  className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+                  className="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300"
                 >
                   Get more
                 </button>
@@ -156,62 +172,75 @@ export default function SubmitBlock({
             </div>
           )}
           
-          {/* Platforms section - only show when tier is defined */}
-          <div className="pt-20">
-            <div className="flex items-center justify-between mb-6">
-              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Supported Platforms
-              </h4>
-              <button 
-                onClick={() => setShowExampleLinks(!showExampleLinks)}
-                className="text-xs text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center"
-              >
-                <HelpCircle className="h-3 w-3 mr-1" />
-                Example Links
-              </button>
-            </div>
+          {/* Supported Platforms */}
+          <div className="pt-4 border-t border-gray-100 dark:border-zinc-700">
+            <button 
+              onClick={() => setShowExampleLinks(!showExampleLinks)}
+              className="w-full flex items-center justify-between py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              <span className="flex items-center gap-2">
+                <HelpCircle className="h-4 w-4 text-gray-400" />
+                Supported Platforms & Examples
+              </span>
+              {showExampleLinks ? (
+                <ChevronUp className="h-4 w-4 text-gray-400" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-gray-400" />
+              )}
+            </button>
             
-            <div className="grid grid-cols-5 gap-4">
-              {[YoutubeIcon, TwitterIcon, SpacesIcon, TwitchIcon, ApplePodcastIcon].map((icon, index) => (
-                <div key={index} className="flex items-center justify-center p-3">
+            {/* Platform icons - always visible */}
+            <div className="flex items-center justify-start gap-4 py-4 overflow-x-auto">
+              {platforms.map((platform, index) => (
+                <div 
+                  key={index} 
+                  className="flex-shrink-0 flex items-center justify-center p-2 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700"
+                  title={platform.name}
+                >
                   <Image 
-                    src={icon} 
-                    width={100} 
-                    height={100} 
-                    alt="Platform" 
-                    className="h-12 rounded-md w-auto filter grayscale opacity-70" 
+                    src={platform.icon} 
+                    width={36} 
+                    height={36} 
+                    alt={platform.name} 
+                    className="rounded-md opacity-80 hover:opacity-100 transition-opacity" 
                   />
                 </div>
               ))}
             </div>
             
+            {/* Expandable example links */}
             {showExampleLinks && (
-              <div className="mt-8 p-5 rounded-lg text-xs">
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                  <li className="text-sm">• YouTube: youtube.com/watch?v=h6fcK_fRYaI</li>
-                  <li className="text-sm">• X Spaces: x.com/i/status/1892283575736643620</li>
-                  <li className="text-sm">• X Videos: x.com/i/status/1731765772874129676</li>
-                  <li className="text-sm">• Twitch: twitch.tv/videos/1965889164</li>
-                  <li className="text-sm">• Apple Podcasts: podcasts.apple.com/.../id1507881694?i=1000529427756</li>
+              <div className="mt-2 p-4 bg-gray-50 dark:bg-zinc-800/50 rounded-xl border border-gray-100 dark:border-zinc-700">
+                <ul className="space-y-3">
+                  {platforms.map((platform, index) => (
+                    <li key={index} className="flex items-start gap-3 text-sm">
+                      <span className="font-medium text-gray-700 dark:text-gray-300 min-w-[100px]">
+                        {platform.name}:
+                      </span>
+                      <code className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-700 px-2 py-1 rounded break-all">
+                        {platform.example}
+                      </code>
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-16">
-          <div className="h-20 w-20 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-8">
-            <svg className="h-10 w-10 text-blue-500 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex flex-col items-center justify-center py-12">
+          <div className="h-16 w-16 rounded-full bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center mb-6">
+            <svg className="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign in to continue</h3>
-          <p className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-8 text-center max-w-xs">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Sign in to continue</h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center max-w-xs">
             Create an account to process and analyze content with Alphy
           </p>
           <Link 
             href="/u/login" 
-            className="px-8 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
+            className="px-6 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium transition-colors shadow-lg shadow-indigo-500/25"
           >
             Sign In
           </Link>

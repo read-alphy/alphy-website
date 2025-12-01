@@ -37,10 +37,10 @@ const InteractiveComponent = ({
 
   return (
     <div className="w-full ">
-      <Card className="h-full min-h-screen rounded-none border-t-0 border-b-0 border-r-0 border-l-0 lg:border-r lg:border-l 2xl:border-r  shadow-none ">
-        <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
-          <div className="flex items-center justify-between">
-            <Tabs defaultValue="sandbox" className="w-full" onValueChange={setActiveTab}>
+      <Card className="h-full min-h-screen rounded-none border-t-0 border-b-0 border-r-0 border-l-0 lg:border-r lg:border-l 2xl:border-r shadow-none ">
+        <Tabs value={activeTab} onValueChange={setActiveTab} defaultValue="sandbox" className="w-full flex flex-col h-full">
+          <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
+            <div className="flex items-center justify-between">
               <TabsList className="bg-transparent rounded-none h-full lg:mt-0 h-10 w-full justify-start space-x-2">
                 <TabsTrigger 
                   value="qa" 
@@ -65,23 +65,20 @@ const InteractiveComponent = ({
                   Read
                 </Button>
               </TabsList>
-            </Tabs>
-            <div className="flex items-center space-x-2">
-            {/*   <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => handleAskAlphy('sandbox')}
-                className="h-8 rounded-md"
-                title="Open in new window"
-              >
-                <ExternalLink className="h-4 w-4" />
-              </Button> */}
+              <div className="flex items-center space-x-2">
+              {/*   <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => handleAskAlphy('sandbox')}
+                  className="h-8 rounded-md"
+                  title="Open in new window"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                </Button> */}
+              </div>
             </div>
           </div>
-        </div>
         
-        <Tabs defaultValue="qa" value={activeTab} className="w-full flex flex-col h-full">
-      
           <TabsContent value="qa" className="m-0 flex-grow overflow-auto">
             <ScrollArea className="h-full ">
               <div className="">
