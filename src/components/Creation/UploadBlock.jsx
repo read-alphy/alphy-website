@@ -164,9 +164,9 @@ export default function UploadBlock({
       <div className="max-w-3xl mx-auto px-4 py-8">
         <button
           onClick={() => setUploadDialog(false)}
-          className="inline-flex items-center text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mb-8 transition-colors"
+          className="group inline-flex items-center text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 mb-8 transition-colors"
         >
-          <ArrowLeft className="h-4 w-4 mr-1" /> Back
+          <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover:-translate-x-1" /> Back
         </button>
         
         <UploadContent 
@@ -197,7 +197,7 @@ export default function UploadBlock({
 
   // For tab mode
   return (
-    <div className="p-6">
+    <div className="p-6 md:p-8">
       <UploadContent 
         currentUser={currentUser}
         tier={tier}
@@ -248,202 +248,222 @@ function UploadContent({
   showCredits
 }) {
   return (
-    <>
-      <div className="bg-white dark:bg-zinc-800 rounded-xl ">
-        <div className="flex items-center gap-2 mb-6">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+    <div className="space-y-6">
+      {/* Header */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
             Upload Audio Recording
           </h3>
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
-            <BadgeCheck className="h-3 w-3 mr-1" />
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
             Premium
           </span>
         </div>
-        
-        {tier === 'premium' ? (
-          <>
-            {!file ? (
-              <div 
-                {...getRootProps()}
-                className={`border-2 border-dashed ${isDragActive ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'border-gray-300 dark:border-gray-600'} rounded-lg p-8 text-center mb-6 transition-colors`}
-              >
-                <input 
-                  {...getInputProps()} 
-                  accept=".mp3,.m4a,.mpga,.mpeg,.wav,.webm" 
-                  onChange={handleFileUpload}
-                />
-                <audio className="hidden" ref={audioRef} controls />
-                
-                <div className="flex flex-col items-center justify-center">
-                  <CloudUpload className="h-12 w-12 text-indigo-500 mb-4" />
-                  
-                  {!showError ? (
-                    <>
-                      <p className="text-base font-medium text-gray-900 dark:text-white mb-1">
-                        {isDragActive ? 'Drop your audio file here' : 'Drag and drop or click to upload'}
-                      </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                        MP3, M4A, MPGA, MPEG, WAV, or WEBM (max 100MB)
-                      </p>
-                    </>
-                  ) : (
-                    <div className="text-center mb-4">
-                      <p className="text-base font-medium text-red-600 dark:text-red-400 mb-1 flex items-center justify-center">
-                        <AlertCircle className="h-5 w-5 mr-1" />
-                        File type not supported
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM
-                      </p>
-                    </div>
-                  )}
-                  
-                  <span className="inline-flex cursor-pointer items-center px-4 py-2 rounded-md bg-indigo-50 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 text-sm font-medium">
-                    Select File
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <div className="mb-6">
-                <div className="bg-gray-50 dark:bg-zinc-900 rounded-lg p-4 mb-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-md mr-3">
-                        <FileText className="h-5 w-5 text-indigo-500" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">
-                          {uploadTitle || 'Audio file'}
-                        </p>
-                        {uploadDuration && (
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                            {formatDuration(uploadDuration)} minutes
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    {!fileUploading && (
-                      <button
-                        onClick={handleFileUploadClear}
-                        className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                      >
-                        <X className="h-5 w-5" />
-                      </button>
-                    )}
-                  </div>
-                  
-                  {uploadProgress > 0 && (
-                    <div className="mt-4">
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-700 dark:text-gray-300">
-                          {uploadProgress === 100 ? 'Upload complete!' : 'Uploading...'}
-                        </span>
-                        <span className="text-gray-700 dark:text-gray-300">{uploadProgress}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-indigo-500 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${uploadProgress}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  )}
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Upload your own audio files for transcription and analysis
+        </p>
+      </div>
+      
+      {tier === 'premium' ? (
+        <>
+          {!file ? (
+            <div 
+              {...getRootProps()}
+              className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 cursor-pointer ${
+                isDragActive 
+                  ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 scale-[1.01]' 
+                  : 'border-gray-200 dark:border-zinc-600 hover:border-indigo-300 dark:hover:border-indigo-700 hover:bg-gray-50 dark:hover:bg-zinc-900'
+              }`}
+            >
+              <input 
+                {...getInputProps()} 
+                accept=".mp3,.m4a,.mpga,.mpeg,.wav,.webm" 
+                onChange={handleFileUpload}
+              />
+              <audio className="hidden" ref={audioRef} controls />
+              
+              <div className="flex flex-col items-center justify-center">
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors ${
+                  isDragActive 
+                    ? 'bg-indigo-100 dark:bg-indigo-900/50' 
+                    : 'bg-gray-100 dark:bg-zinc-700'
+                }`}>
+                  <CloudUpload className={`h-8 w-8 transition-colors ${
+                    isDragActive ? 'text-indigo-500' : 'text-gray-400 dark:text-gray-500'
+                  }`} />
                 </div>
                 
-                {showError && (
-                  <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
-                    <p className="text-sm text-red-800 dark:text-red-300 flex items-start">
-                      <AlertCircle className="h-4 w-4 mr-1 mt-0.5 flex-shrink-0" />
-                      {errorMessage}
+                {!showError ? (
+                  <>
+                    <p className="text-base font-medium text-gray-900 dark:text-white mb-1">
+                      {isDragActive ? 'Drop your audio file here' : 'Drag and drop or click to upload'}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      MP3, M4A, MPGA, MPEG, WAV, or WEBM (max 100MB)
+                    </p>
+                  </>
+                ) : (
+                  <div className="text-center mb-4">
+                    <p className="text-base font-medium text-red-600 dark:text-red-400 mb-1 flex items-center justify-center">
+                      <AlertCircle className="h-5 w-5 mr-1" />
+                      File type not supported
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      We accept MP3, M4A, MPGA, MPEG, WAV, or WEBM
                     </p>
                   </div>
                 )}
                 
-                <button
-                  onClick={handlePostUpload}
-                  disabled={fileUploading}
-                  className={`w-full flex justify-center items-center px-6 py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white font-medium transition-colors ${fileUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                >
-                  {fileUploading ? (
-                    <>
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Processing...
-                    </>
-                  ) : (
-                    'Process Audio'
-                  )}
-                </button>
+                <span className="inline-flex cursor-pointer items-center px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium shadow-lg shadow-indigo-500/25 transition-all">
+                  Select File
+                </span>
               </div>
-            )}
-            
-            {/* Credits info - only show when not in tab mode */}
-            {showCredits && (
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-gray-200 dark:border-gray-700 pt-6 mt-2">
-                <div>
-                  <div className="flex items-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
-                      Premium Plan
-                    </span>
-                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                      {Math.floor(credit)} minutes remaining
-                    </span>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl p-4 border border-gray-100 dark:border-zinc-700">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 bg-indigo-100 dark:bg-indigo-900/50 rounded-xl">
+                      <FileText className="h-5 w-5 text-indigo-500" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                        {uploadTitle || 'Audio file'}
+                      </p>
+                      {uploadDuration && (
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          Duration: {formatDuration(uploadDuration)}
+                        </p>
+                      )}
+                    </div>
                   </div>
+                  {!fileUploading && (
+                    <button
+                      onClick={handleFileUploadClear}
+                      className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-zinc-700 transition-colors"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
+                  )}
                 </div>
                 
-                <button
-                  onClick={navigateCredit}
-                  className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
-                >
-                  Need more credits?
-                </button>
+                {uploadProgress > 0 && (
+                  <div className="mt-4">
+                    <div className="flex justify-between text-xs mb-2">
+                      <span className="text-gray-600 dark:text-gray-300 font-medium">
+                        {uploadProgress === 100 ? 'Upload complete!' : 'Uploading...'}
+                      </span>
+                      <span className="text-indigo-600 dark:text-indigo-400 font-medium">{uploadProgress}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-zinc-700 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${uploadProgress}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </>
-        ) : (
-          <div className="text-center py-8">
-            <div className="max-w-[500px] mx-auto">
-            <BadgeCheck className="h-12 w-12 mx-auto text-indigo-400 mb-4 " />
-            <h3 className="font-semibold text-xl text-gray-900 dark:text-white mb-2">Premium Feature</h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto text-sm font-normal">
-              Audio file processing is available with our Premium plan. Upgrade to process your own recordings.
-            </p>
-            <Link href="/account" className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md  text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-              Upgrade to Premium
-            </Link>
+              
+              {showError && (
+                <div className="flex items-start gap-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-red-600 dark:text-red-400">{errorMessage}</span>
+                </div>
+              )}
+              
+              <button
+                onClick={handlePostUpload}
+                disabled={fileUploading}
+                className={`w-full flex justify-center items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200 ${
+                  fileUploading 
+                    ? 'bg-indigo-400 cursor-wait text-white' 
+                    : 'bg-indigo-500 hover:bg-indigo-600 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40'
+                }`}
+              >
+                {fileUploading ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  'Process Audio'
+                )}
+              </button>
             </div>
+          )}
+          
+          {/* Credits info - only show when not in tab mode */}
+          {showCredits && (
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-gray-100 dark:border-zinc-700 pt-6">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                  Premium Plan
+                </span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  {Math.floor(credit)} minutes remaining
+                </span>
+              </div>
+              
+              <button
+                onClick={navigateCredit}
+                className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+              >
+                Need more credits?
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="text-center py-10">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 flex items-center justify-center mx-auto mb-4">
+            <BadgeCheck className="h-8 w-8 text-indigo-500 dark:text-indigo-400" />
           </div>
-        )}
-      </div>
+          <h3 className="font-semibold text-xl text-gray-900 dark:text-white mb-2">Premium Feature</h3>
+          <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-sm mx-auto text-sm">
+            Audio file processing is available with our Premium plan. Upgrade to process your own recordings.
+          </p>
+          <Link 
+            href="/account" 
+            className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 shadow-lg shadow-indigo-500/25 transition-all"
+          >
+            Upgrade to Premium
+          </Link>
+        </div>
+      )}
       
       {/* Convert privately card */}
-      <div className="mt-6 border-t border-zinc-200 dark:border-zinc-700">
-        <div className="bg-white dark:bg-zinc-800  dark:border-zinc-700 rounded-xl p-6">
-          <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
-            Need to convert your media?
-          </h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Use our free converter tool to get your video and audio files ready for transcription.
-          </p>
-          <a
-            href="https://convertprivately.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all "
-          >
-            <Image 
-              src={ConvertPrivatelyIcon} 
-              width={24} 
-              height={24} 
-              className="mr-2" 
-              alt="ConvertPrivately" 
-            />
-            ConvertPrivately
-          </a>
+      <div className="pt-6 border-t border-gray-100 dark:border-zinc-700">
+        <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl">
+          <Image 
+            src={ConvertPrivatelyIcon} 
+            width={40} 
+            height={40} 
+            className="rounded-lg flex-shrink-0" 
+            alt="ConvertPrivately" 
+          />
+          <div className="flex-grow">
+            <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+              Need to convert your media?
+            </h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              Use our free converter tool to get your files ready for transcription.
+            </p>
+            <a
+              href="https://convertprivately.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+            >
+              Try ConvertPrivately →
+            </a>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

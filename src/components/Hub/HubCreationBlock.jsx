@@ -5,7 +5,7 @@ import axios from 'axios'
 
 // Components
 import { Button } from '@/components/ui/button'
-import { Link as LinkIcon, Upload, BookOpen } from 'lucide-react'
+import { Link as LinkIcon, Upload, BookOpen, Sparkles } from 'lucide-react'
 
 import UploadBlock from '../Creation/UploadBlock'
 import SubmitBlock from '../Creation/SubmitBlock'
@@ -245,20 +245,44 @@ export default function HubCreationBlock({
     }
   }
 
+  const tabs = [
+    { id: 'submit', label: 'Submit Link', icon: LinkIcon },
+    { id: 'upload', label: 'Upload Audio', icon: Upload },
+    { id: 'arc', label: 'Create Arc', icon: BookOpen }
+  ]
+
   return (
-    <div className="max-w-4xl mx-auto my-10 px-4">
-      {/* Credits info card at the top */}
+    <div className="max-w-3xl mx-auto py-8 md:py-12 px-4">
+      {/* Page Header */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 mb-4 shadow-lg shadow-indigo-500/30">
+          <Sparkles className="h-6 w-6 text-white" />
+        </div>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          Create Something New
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+          Submit a link, upload audio, or create an Arc to get started
+        </p>
+      </div>
+
+      {/* Credits info card */}
       {currentUser && (
-        <div className="bg-indigo-50 dark:bg-zinc-800 rounded-xl  border border-zinc-200 overflow-hidden mb-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-6">
-            <div>
-              <div className="flex items-center">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-zinc-800 dark:to-zinc-800 rounded-2xl border border-indigo-100 dark:border-zinc-700 overflow-hidden mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-5">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white dark:bg-zinc-700 shadow-sm">
+                <span className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  {Math.floor(credit)}
+                </span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  {Math.floor(credit)} minutes available
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
                   {tier === 'free' ? 'Starter' : tier === 'basic' ? 'Basic' : 'Premium'} Plan
-                </span>
-                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                  {Math.floor(credit)} minutes remaining
-                </span>
+                </p>
               </div>
             </div>
             
@@ -267,97 +291,77 @@ export default function HubCreationBlock({
                 sessionStorage.setItem('creditPurchase', 'true')
                 router.push('/account')
               }}
-              variant="link"
-              className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 p-0 h-auto"
+              variant="ghost"
+              size="sm"
+              className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/30"
             >
-              Need more credits?
+              Get more credits →
             </Button>
           </div>
         </div>
       )}
 
       {/* Main content with tabs */}
-      <div className="bg-white dark:bg-zinc-800 rounded-xl  border border-zinc-300 dark:border-zinc-500 overflow-hidden">
+      <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-200 dark:border-zinc-700 overflow-hidden">
         {/* Tab navigation */}
-        <div className="flex border-b border-gray-200 dark:border-gray-700">
-          <button
-            onClick={() => setActiveTab('submit')}
-            className={`flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
-              activeTab === 'submit'
-                ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-            }`}
-          >
-            <LinkIcon className="mr-2 h-4 w-4" />
-            Submit a Link
-          </button>
-          <button
-            onClick={() => setActiveTab('upload')}
-            className={`flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
-              activeTab === 'upload'
-                ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-            }`}
-          >
-            <Upload className="mr-2 h-4 w-4" />
-            Upload a Recording
-          </button>
-          <button
-            onClick={() => setActiveTab('arc')}
-            className={`flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
-              activeTab === 'arc'
-                ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-            }`}
-          >
-            <BookOpen className="mr-2 h-4 w-4" />
-            Create an Arc
-          </button>
+        <div className="flex border-b border-gray-100 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-900/50">
+          {tabs.map((tab) => {
+            const Icon = tab.icon
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex-1 flex items-center justify-center gap-2 px-4 py-4 text-sm font-medium transition-all duration-200 relative ${
+                  activeTab === tab.id
+                    ? 'text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-800'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800'
+                }`}
+              >
+                <Icon className={`h-4 w-4 ${activeTab === tab.id ? 'text-indigo-500' : ''}`} />
+                <span className="hidden sm:inline">{tab.label}</span>
+                {activeTab === tab.id && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500" />
+                )}
+              </button>
+            )
+          })}
         </div>
 
         {/* Tab content */}
-        <div className="p-0">
+        <div>
           {activeTab === 'submit' && (
-            <div>
-              <SubmitBlock
-                setSubmitDialog={() => {}}  // No-op since we're using tabs now
-                loading={loading}
-                currentUser={currentUser}
-                tier={tier}
-                handleSubmit={handleSubmit}
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-                credit={credit}
-                failed={failed}
-                errorMessage={errorMessage}
-                handleButtonClick={handleButtonClick}
-                inputRef={inputRef}
-                // Pass flag to hide redundant credit display
-                hideCredits={true}
-              />
-            </div>
+            <SubmitBlock
+              setSubmitDialog={() => {}}
+              loading={loading}
+              currentUser={currentUser}
+              tier={tier}
+              handleSubmit={handleSubmit}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              credit={credit}
+              failed={failed}
+              errorMessage={errorMessage}
+              handleButtonClick={handleButtonClick}
+              inputRef={inputRef}
+              hideCredits={true}
+            />
           )}
 
           {activeTab === 'upload' && (
-            <div>
-              <UploadBlock
-                setUploadDialog={() => {}}  // No-op since we're using tabs now
-                currentUser={currentUser}
-                tier={tier}
-                credit={credit}
-                // Pass flag to hide redundant credit display
-                hideCredits={true}
-              />
-            </div>
+            <UploadBlock
+              setUploadDialog={() => {}}
+              currentUser={currentUser}
+              tier={tier}
+              credit={credit}
+              hideCredits={true}
+            />
           )}
 
           {activeTab === 'arc' && (
-            <div>
-              <ArcBlock
-                currentUser={currentUser}
-                tier={tier}
-              />
-            </div>
+            <ArcBlock
+              currentUser={currentUser}
+              tier={tier}
+            />
           )}
         </div>
       </div>
