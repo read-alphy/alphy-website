@@ -165,7 +165,7 @@ function MyApp({ Component, pageProps }) {
           window.location.href = `${baseUrl}u/resetpassword/?${queryString}`
         }
       }
-    })
+    }, [searchParams.mode, router.pathname])
   
     useEffect(() => {
       if (
@@ -225,7 +225,7 @@ function MyApp({ Component, pageProps }) {
       if (sandboxHistoryCalled === false && currentUser) {
         getSandboxHistory()
       }
-    }, [sandboxHistory, currentUser])
+    }, [sandboxHistoryCalled, currentUser])
   
     useEffect(() => {
         const verification = searchParams.mode === 'verifyEmail'

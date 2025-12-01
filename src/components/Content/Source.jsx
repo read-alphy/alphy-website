@@ -111,7 +111,7 @@ export default function SourcePage({
   }, [data, currentUser, source_id]);
 
   const fetchDataUpload = async (url, constantFetch) => {
-    console.log("fetching data");
+    console.log("fetching data upload");
 
     try {
       if (constantFetch === false) {
@@ -133,6 +133,39 @@ export default function SourcePage({
           }
           setIsLoading(false);
           setAuthorizationError(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          console.log(error);
+        });
+    } catch (error) {
+      if (error.response?.status === 404) {
+        setIsLoading(false);
+      }
+      console.error(`Error fetching data: ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch data for non-upload sources (public sources)
+  const fetchData = async (fetchUrl, constantFetch) => {
+    console.log("fetching data for public source");
+
+    try {
+      if (constantFetch === false) {
+        setIsLoading(true);
+      }
+
+      const publicUrl = `${API_URL}/sources/${source_type}/${source_id}`;
+      
+      await axios
+        .get(publicUrl)
+        .then((response) => {
+          if (response.data !== null && response.data !== undefined) {
+            setData(response.data);
+          }
+          setIsLoading(false);
         })
         .catch((error) => {
           setIsLoading(false);
