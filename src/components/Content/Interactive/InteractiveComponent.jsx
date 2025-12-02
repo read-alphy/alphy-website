@@ -41,10 +41,10 @@ const InteractiveComponent = ({
         <Tabs value={activeTab} onValueChange={setActiveTab} defaultValue="sandbox" className="w-full flex flex-col h-full">
           <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50">
             <div className="flex items-center justify-between">
-              <TabsList className="bg-transparent rounded-none h-full lg:mt-0 h-10 w-full justify-start space-x-2">
+              <TabsList className="bg-transparent rounded-none h-10 w-full justify-start gap-2 flex flex-row flex-nowrap">
                 <TabsTrigger 
                   value="qa" 
-                  className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 rounded-md px-3 text-sm font-medium flex items-center transition-all py-1"
+                  className="data-[state=active]:bg-zinc-100 data-[state=active]:dark:bg-zinc-800 rounded-md px-3 text-sm font-medium inline-flex items-center transition-all py-1 flex-shrink-0"
                 >
                   <MessageSquare className="h-4 w-4 mr-2" />
                   Q&A
@@ -52,14 +52,14 @@ const InteractiveComponent = ({
                 <TabsTrigger 
                   value="sandbox" 
                   className="bg-gradient-to-r from-purple-400 to-indigo-500 
-                  text-white data-[state=active]:from-indigo-500 data-[state=active]:to-purple-400 data-[state=active]:text-white rounded-md px-3 text-sm font-medium flex items-center transition-all duration-500"
+                  text-white data-[state=active]:from-indigo-500 data-[state=active]:to-purple-400 data-[state=active]:text-white rounded-md px-3 text-sm font-medium inline-flex items-center transition-all duration-500 flex-shrink-0"
                 >
                   <Sparkles className="h-4 w-4 mr-2" />
                   Playground
                 </TabsTrigger>
                 <Button 
                   onClick={toggleMobilePanel}
-                  className="lg:hidden ml-2 bg-blue-500 text-white h-7 py-1 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                  className="lg:hidden ml-2 bg-blue-500 text-white h-7 py-1 rounded-md px-3 text-sm font-medium inline-flex items-center transition-all flex-shrink-0"
                 >
                   <BookOpen className="h-4 w-4 mr-2" />
                   Read

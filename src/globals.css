@@ -1378,3 +1378,26 @@ input[type=number] {
   }
 }
 
+/* Safari-specific fixes for tabs and buttons visibility */
+@supports (-webkit-touch-callout: none) {
+  /* Safari only */
+  [role="tablist"] {
+    display: flex !important;
+    flex-direction: row !important;
+    -webkit-flex-direction: row !important;
+  }
+  
+  [role="tab"] {
+    display: flex !important;
+    -webkit-appearance: none !important;
+    visibility: visible !important;
+  }
+  
+  /* Ensure buttons inside tabs are visible */
+  [role="tablist"] button {
+    display: inline-flex !important;
+    -webkit-appearance: none !important;
+    visibility: visible !important;
+  }
+}
+

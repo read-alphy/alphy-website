@@ -155,12 +155,12 @@ export default function ReadComponent({
                     className="w-full flex flex-col h-full"
                   >
                     <div className="border-b-[1px] border-zinc-200 dark:border-zinc-800 sticky top-0 bg-card z-50 ">
-                      <TabsList className="bg-transparent overflow-x-auto overflow-y-hidden p-4 rounded-none  h-full h-12 w-full justify-start space-x-2 mb-2">
+                      <TabsList className="bg-transparent p-4 rounded-none h-12 w-full justify-start gap-2 mb-2 flex flex-row flex-nowrap items-center">
                         {contentTabs.map((tab) => (
                           <TabsTrigger
                             key={tab.id}
                             value={tab.id}
-                            className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-900 data-[state=active]:dark:text-blue-300 data-[state=active]:dark:bg-blue-800    rounded-md px-3 py-1 text-sm font-medium flex items-center transition-all"
+                            className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-900 data-[state=active]:dark:text-blue-300 data-[state=active]:dark:bg-blue-800 rounded-md px-3 py-1 text-sm font-medium inline-flex items-center transition-all flex-shrink-0"
                           >
                             {tab.icon}
                             {tab.label}
@@ -170,17 +170,17 @@ export default function ReadComponent({
                         
                         
 
-                        <div className="ml-auto flex items-center space-x-2">
+                        <div className="ml-auto flex items-center gap-2 flex-shrink-0">
                           {/* Interactive button for mobile */}
                           <Button 
                             onClick={toggleMobilePanel}
-                            className="lg:hidden bg-gradient-to-r from-indigo-500 to-purple-500 text-white h-8 rounded-md px-3 text-sm font-medium flex items-center transition-all"
+                            className="lg:hidden bg-gradient-to-r from-indigo-500 to-purple-500 text-white h-8 rounded-md px-3 text-sm font-medium inline-flex items-center transition-all flex-shrink-0"
                           >
                              <Sparkles className="h-4 w-4 mr-2" />
                             Interactive
                           </Button>
                           {/* Download options for desktop */}
-                          <div className="hidden lg:block">
+                          <div className="hidden lg:flex lg:items-center">
                             <DownloadOptions
                               handleDownload={handleDownload}
                               downloading={downloading}
@@ -190,7 +190,7 @@ export default function ReadComponent({
                             />
                           </div>
                         </div>
-                        <div className="pl-4 hidden lg:block">
+                        <div className="pl-4 hidden lg:flex lg:items-center flex-shrink-0">
                           {!showYouTubeFrame&&
                           <MediaControls 
                             data={data}

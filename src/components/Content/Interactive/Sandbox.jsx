@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import GenerationZone from './Generation/GenerationZone'
 import OutputZone from './Output/OutputZone'
-import { API_HOST } from '../../../constants'
+import { API_HOST, API_SSL } from '../../../constants'
 
 export default function Sandbox({ data, askAlphyForSandbox, askText, tier, currentUser, getSandboxHistory}) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
@@ -198,28 +198,36 @@ const [theme, setTheme] = useState('light')
       setPromptType(settings.command_type)
     }
 
-    const ws = new WebSocket(`wss://${API_HOST}/sandbox/ws`)
-  
+    const wsUrl = `ws${API_SSL ? 's' : ''}://${API_HOST}/sandbox/ws`
+    console.log('[Sandbox WS] Connecting to:', wsUrl)
+    console.log('[Sandbox WS] API_SSL:', API_SSL, 'API_HOST:', API_HOST)
+    
+    const ws = new WebSocket(wsUrl)
 
-    /* wss://backend-staging-2459.up.railway.app/ws/question */
-    /* wss://backend-staging-2459.up.railway.app/ws/sandbox */
-    /* {idToken: currentUser.accessToken} */
     ws.onopen = () => {
+      console.log('[Sandbox WS] Connection opened successfully')
+      console.log('[Sandbox WS] Sending request...')
       ws.send(JSON.stringify(request))
     }
 
     ws.onmessage = message => {
+      console.log('[Sandbox WS] Message received:', message.data.substring(0, 200))
       setOutputMessage(prevMessage => prevMessage + message.data)
     }
 
     ws.onclose = event => {
+      console.log('[Sandbox WS] Connection closed')
+      console.log('[Sandbox WS] Close code:', event.code)
+      console.log('[Sandbox WS] Close reason:', event.reason)
+      console.log('[Sandbox WS] Was clean:', event.wasClean)
       getSandboxHistory()
-      console.log('closed')
       setIsLoading(false)
       setError(true)
     }
+    
     ws.onerror = error => {
-      console.error('WebSocket Error:', error)
+      console.error('[Sandbox WS] Error occurred:', error)
+      console.error('[Sandbox WS] ReadyState:', ws.readyState)
       setIsLoading(false)
       setError(true)
     }
