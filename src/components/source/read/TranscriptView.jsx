@@ -10,9 +10,10 @@ export default function TranscriptView() {
     return (
       <div className="text-center py-8 text-zinc-500 dark:text-zinc-400">
         <p className="quicksand font-medium">
-          Transcript is being generated...
+          Transcript is being generated now...
         </p>
       </div>
+
     )
   }
   

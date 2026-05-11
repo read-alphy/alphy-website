@@ -160,7 +160,7 @@ function MyApp({ Component, pageProps }) {
         }
       }
     }, [searchParams.mode, router.pathname])
-  
+  //test
     useEffect(() => {
       if (
         userMetadata !== null &&
