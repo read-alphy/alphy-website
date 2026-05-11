@@ -1,6 +1,5 @@
-import { FileText, MessageSquare, Sparkles, Download } from 'lucide-react'
+import { FileText, MessageSquare } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
 import { useSource } from '../context/SourceContext'
 import { useSourceUI } from '../context/UIContext'
 import SummaryView from './SummaryView'
@@ -9,15 +8,11 @@ import DownloadMenu from './DownloadMenu'
 
 export default function ReadPanel() {
   const { transcript, summary } = useSource()
-  const { activeReadTab, setActiveReadTab, activeMobilePanel, setActiveMobilePanel, setShowMediaPlayer } = useSourceUI()
+  const { activeReadTab, setActiveReadTab } = useSourceUI()
   
   // No content yet
   if (transcript.length === 0) {
     return <ProcessingState />
-  }
-  
-  const toggleMobilePanel = () => {
-    setActiveMobilePanel(activeMobilePanel === 'read' ? 'interactive' : 'read')
   }
   
   return (
@@ -52,15 +47,6 @@ export default function ReadPanel() {
             
             {/* Right side actions */}
             <div className="ml-auto flex items-center gap-2">
-              {/* Mobile: Interactive button */}
-              <Button 
-                onClick={toggleMobilePanel}
-                className="lg:hidden bg-gradient-to-r from-indigo-500 to-purple-500 text-white h-8 rounded-md px-3 text-sm font-medium"
-              >
-                <Sparkles className="h-4 w-4 mr-2" />
-                Interactive
-              </Button>
-              
               {/* Desktop: Download options */}
               <div className="hidden lg:block">
                 <DownloadMenu />
@@ -99,4 +85,3 @@ function ProcessingState() {
     </div>
   )
 }
-

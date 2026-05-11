@@ -1,11 +1,10 @@
 // File: components/Hub/HubUserPage/SubmissionsSection.js
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
 import axios from 'axios'
 import Loading from '../../../components/Loading'
 import HubFeedItem from '../../FeedTabs/HubFeedItemElements/HubFeedItem'
 import { API_URL } from '../../../constants'
-import { Link2, ArrowRight } from 'lucide-react'
+import { Link2 } from 'lucide-react'
 
 export default function SubmissionsSection({ currentUser, search, collapsed }) {
   const [isLoading, setIsLoading] = useState(!!currentUser)
@@ -109,16 +108,8 @@ export default function SubmissionsSection({ currentUser, search, collapsed }) {
             <Link2 className="h-16 w-16 mx-auto text-slate-400 dark:text-zinc-500 mb-4" strokeWidth={1.5} />
             <h3 className="text-xl font-bold text-slate-700 dark:text-zinc-300 mb-2">No submissions yet</h3>
             <p className="text-slate-600 dark:text-zinc-400 max-w-md mx-auto mb-6 text-sm font-normal">
-              Process your first online conversation to start building your collection.
+              New submissions are no longer available.
             </p>
-            <Link
-              href="/submit"
-              className="text-sm inline-flex items-center px-4 py-2 bg-blue-100  text-zinc-800 rounded-md transition-colors duration-200 quicksand font-bold"
-              onClick={() => localStorage.setItem('newItem', 'link')}
-            >
-              <span className="mr-2 text-sm font-semibold">Submit Conversation</span>
-              <ArrowRight className="h-3 w-3" />
-            </Link>
           </div>
         </div>
       )}

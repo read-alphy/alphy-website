@@ -1,6 +1,5 @@
 // File: components/Hub/HubUserPage/index.js
 import React, { useState } from 'react'
-import UserArcsSection from './UserArcsSection'
 import SubmissionsSection from './SubmissionsSection'
 import BookmarksSection from './BookmarksSection.jsx'
 import UploadsSection from './UploadsSection'
@@ -42,7 +41,7 @@ export default function HubUserPage({
      
       {currentUser ? (
         <div className="mt-10">
-          <Tabs defaultValue="arcs" value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs defaultValue="submissions" value={activeTab} onValueChange={setActiveTab} className="w-full">
             <div className="flex">
              
               <button
@@ -75,26 +74,9 @@ export default function HubUserPage({
               >
                 Uploads
               </button>
-              <button
-                onClick={() => setActiveTab('arcs')}
-                className={`flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
-                  activeTab === 'arcs'
-                    ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                }`}
-              >
-                Arcs
-              </button>
             </div>
             <Separator className='mt-4 mb-8 max-w-[800px]'/>
-            
-            <TabsContent value="arcs">
-              <UserArcsSection 
-                currentUser={currentUser}
-                userArcs={userArcs}
-              />
-            </TabsContent>
-            
+
             <TabsContent value="submissions">
               <SubmissionsSection 
                 currentUser={currentUser}

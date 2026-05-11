@@ -25,7 +25,7 @@ import {
 } from '../ui/sidebar'
 
 // Import SVG icons
-import { HubIcon, CollapseIcon, ExploreIcon, NewIcon, CreationsIcon, SignInIcon, ExpandIcon } from './svgs'
+import { HubIcon, ExploreIcon, SignInIcon } from './svgs'
 import Logo from '../../../public/img/ALPHY_BG_REMOVED_LIGHT.png'
 import LogoBlack from '../../../public/img/ALPHY_BG_REMOVED_DARK.png'
 
@@ -177,16 +177,8 @@ export default function SideFeed({
   
   // Navigation items with icons
   const navItems = [
-    { 
-      icon: NewIcon, 
-      label: "New", 
-      href: "/submit", 
-      isActive: router.asPath.includes('/submit'),
-      className: `text-slate-700 ${!collapsed ? 'ml-2' : ''} hover:scale-[102%] shadow-md transition duration-300 ease-in-out bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-200 via-indigo-100 to-sky-200 text-slate-700 dark:text-slate-700 rounded-lg max-w-[140px] flex flex-row quicksand font-extrabold`
-    },
     { icon: HubIcon, label: "My Hub", href: "/myhub", isActive: userLayout },
     { icon: ExploreIcon, label: "Explore", href: "/explore", isActive: router.asPath.includes('/explore') },
-    { icon: CreationsIcon, label: "My Creations", href: "/history", isActive: router.asPath.includes('/history'), requiresAuth: true },
     { icon: SignInIcon, label: "Sign In", href: "/u/login", requiresGuest: true, className: "text-green-400 dark:text-green-200" }
   ];
 

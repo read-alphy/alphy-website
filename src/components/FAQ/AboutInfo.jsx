@@ -52,14 +52,12 @@ export default function AboutInfo() {
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="text-l dark:text-zinc-300 font-averta-regular">
-                Alphy is a set of AI tools designed to help users interact with
-              online and offline audiovisual content as easily and effectively
-              as possible. 
+                Alphy is now a read-only archive for previously processed
+              audiovisual content.
               <br/>
               <br/>
-              We use AI to transcribe, summarize, question, and let users
-              create new written content on top of videos and
-              recordings. 
+              Existing summaries and transcripts remain available, but new
+              processing and AI interactions have been disabled.
                 </p>
               </AccordionBody>
             </Accordion>
@@ -73,15 +71,10 @@ export default function AboutInfo() {
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="font-averta-regular">
-                  Upon submitting a link or uploading a recording, Alphy creates
-                  the transcription, summary, key takeaways, and a mini AI
-                  assistant for the content.
-                  <br />
-                  <br />
-                  Then you can combine these content to create your AI-assisted
-                  search engines as effortlessly as building a playlist (we call
-                  them Arcs) that will answer your questions based on the corpus
-                  of content you have curated.
+                  Alphy previously generated transcripts, summaries, and key
+                  takeaways for submitted audiovisual content. The service is
+                  now read-only, so existing materials can be browsed without
+                  creating new processing jobs.
                 </p>
               </AccordionBody>
             </Accordion>
@@ -95,10 +88,8 @@ export default function AboutInfo() {
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="font-averta-regular">
-                You can use Alphy on YouTube
-              videos, Twitter / X Spaces, Twitter / X videos, Twitch recordings,
-              Apple Podcasts, and your local audio files (.mp3, .m4a, .mpga,
-              .mpeg, .wav, or .webm).
+                Existing public materials from supported platforms remain
+              available in the archive.
                 </p>
               </AccordionBody>
             </Accordion>
@@ -112,16 +103,8 @@ export default function AboutInfo() {
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="font-averta-regular">
-                  Yes. When you upload files to Alphy, we handle them the same
-                  way as we do with your online submissions. The key difference
-                  is that your uploads are kept private, ensuring they remain
-                  accessible only to you.
-                  <br />
-                  <br />
-                  We respect your privacy and do not retain your audio files.
-                  After real-time processing, they are deleted. If you ever want
-                  to remove the processed results, simply reach us at{' '}
-                  <span className="underline">support@alphy.app</span>.
+                  No. Uploads have been disabled as part of the service
+                  wind-down.
                 </p>
               </AccordionBody>
             </Accordion>
@@ -131,18 +114,11 @@ export default function AboutInfo() {
                 className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(4)}
               >
-                What are Arcs?
+                Are Arcs still available?
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="font-averta-regular">
-                  An Arc represents Alphy's AI-enhanced search engine for
-                  audiovisual content.
-                  <br />
-                  <br />
-                  Using Arcs, you can categorize and search through vast amounts
-                  of audio content, organized by specific subjects, creators, or
-                  topics. It's like music playlists, but for learning from
-                  countless hours of material.
+                  No. Arcs have been removed as part of the wind-down.
                 </p>
               </AccordionBody>
             </Accordion>
@@ -160,18 +136,13 @@ export default function AboutInfo() {
                 className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(4)}
               >
-                What does Premium offer?
+                Can I subscribe to Alphy?
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="font-averta-regular">
-                  See{' '}
-                  <a
-                    className="underline text-green-300 quicksand font-bold"
-                    href="/plans"
-                  >
-                    here
-                  </a>{' '}
-                  to learn detailed info about Alphy's plans.
+                  No. New subscriptions are no longer available. Alphy is
+                  being kept online as a read-only archive for existing public
+                  materials.
                 </p>
               </AccordionBody>
             </Accordion>
@@ -181,13 +152,11 @@ export default function AboutInfo() {
                 className="cursor-default quicksand font-bold"
                 onClick={() => handleOpen(4)}
               >
-                What happens to my credits if I cancel my subscriptions?
+                Can I buy more credits?
               </AccordionHeader>
               <AccordionBody className="text-md dark:text-zinc-300">
                 <p className="font-averta-regular">
-                  If you want to cancel your subscription, you can do so at any
-                  time. You will be able to spend your credits until the end of
-                  your billing period.
+                  No. Credit purchases and new processing have been disabled.
                 </p>
               </AccordionBody>
             </Accordion>

@@ -13,7 +13,6 @@ import { LANGUAGE_CODES } from './constants/languageCodes'
 
 // Components
 const ReadComponent = dynamic(() => import('./Read/ReadComponent'), { ssr: false })
-const InteractiveComponent = dynamic(() => import('./Interactive/InteractiveComponent'), { ssr: false })
 const HeaderArea = dynamic(() => import('./Read/Header/HeaderArea'), { ssr: false })
 const MediaControls = dynamic(() => import('./Read/ReadComponents/MediaControls'), { ssr: false })
 
@@ -72,6 +71,7 @@ export default function Content({
   const [showClip, setShowClip] = useState(false)
   const [askAlphyForSandbox, setAskAlphyForSandbox] = useState(false)
   const [isInteractivePanelCollapsed, setIsInteractivePanelCollapsed] = useState(false)
+  const aiInteractionsEnabled = false
   
   // References
   const buttonRef = useRef(null)
@@ -159,20 +159,8 @@ export default function Content({
 
   // Memoized handlers
   const requestTranslation = useCallback(async () => {
-    try {
-      const idToken = await currentUser.getIdToken()
-      await axios.post(
-        `${API_URL}/sources/${source_type}/${source_id}?lang=${language}`,
-        { lang: language },
-        { headers: { 'id-token': idToken } }
-      )
-      setLanguagesWanted(prev => [...prev, language])
-      setTranslatingLanguage(language)
-    } catch (error) {
-      setErrorMessage(true)
-      console.error('Translation request error:', error)
-    }
-  }, [currentUser, source_type, source_id, language])
+    setErrorMessage(true)
+  }, [])
 
   const handleBookmark = useCallback(async () => {
     try {
@@ -308,7 +296,7 @@ export default function Content({
       >
           <div 
               className={`transition-all duration-300 ease-in-out ${
-                isInteractivePanelCollapsed ? 'w-4/5' : ' w-3/5'
+                !aiInteractionsEnabled || isInteractivePanelCollapsed ? 'w-full' : ' w-3/5'
               } flex flex-col h-full pt-10`}
             >
                 <div className="flex flex-row">
@@ -412,50 +400,16 @@ export default function Content({
               
           
           
-          <div 
-          className={`transition-all duration-300 ease-in-out ${
-            isInteractivePanelCollapsed 
-              ? 'w-0 opacity-0 overflow-hidden' 
-              : 'w-2/5 opacity-100'
-          } h-full `}
-        >
-          
-          {/* Collapse/Expand toggle button */}
-          <button
-            onClick={toggleInteractivePanel}
-            className="absolute -left-4 top-10 transform -translate-y-1/2 z-[9999] opacity-0  hover:opacity-100 bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm"
-            aria-label={isInteractivePanelCollapsed ? "Expand panel" : "Collapse panel"}
-          >
-            <ChevronRight 
-              size={24} 
-              className={`transition-transform duration-300 ${
-                isInteractivePanelCollapsed ? 'rotate-180' : ''
-              }`}
+          {aiInteractionsEnabled && (
+            <div
+              className={`transition-all duration-300 ease-in-out ${
+                isInteractivePanelCollapsed
+                  ? 'w-0 opacity-0 overflow-hidden'
+                  : 'w-2/5 opacity-100'
+              } h-full `}
             />
-          </button>
-          
-          <InteractiveComponent
-            data={data}
-            summary={summary}
-            transcript={transcript}
-            handleAskAlphy={handleAskAlphy}
-            selectionCall={selectionCall}
-            setSelectionCall={setSelectionCall}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            setShowYouTubeFrame={setShowYouTubeFrame}
-            buttonRef={buttonRef}
-            inputRef={inputRef}
-            timestampChanger={timestampChanger}
-            currentUser={currentUser}
-            askAlphyForSandbox={askAlphyForSandbox}
-            setAskAlphyForSandbox={setAskAlphyForSandbox}
-            askText={askText}
-            getSandboxHistory={getSandboxHistory}
-            tier={tier}
-          />
-          </div>
-          {isInteractivePanelCollapsed && (
+          )}
+          {aiInteractionsEnabled && isInteractivePanelCollapsed && (
             <button
               onClick={toggleInteractivePanel}
               className="absolute right-4 top-10 transform -translate-y-1/2 z-[9999] bg-indigo-100 p-1 rounded-full shadow-xl transition-all duration-300 backdrop-blur-sm hidden lg:block"
@@ -570,36 +524,6 @@ export default function Content({
                 </div>
           
             }
-            {activeMobilePanel === 'interactive' &&
-             <div className="flex-grow overflow-hidden">
-            <div className="lg:hidden h-full overflow-auto mt-4 max-w-[600px] mx-auto">
-              <InteractiveComponent
-              data={data}
-              summary={summary}
-              transcript={transcript}
-              handleAskAlphy={handleAskAlphy}
-              selectionCall={selectionCall}
-              setSelectionCall={setSelectionCall}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              setShowYouTubeFrame={setShowYouTubeFrame}
-              buttonRef={buttonRef}
-              inputRef={inputRef}
-              timestampChanger={timestampChanger}
-              currentUser={currentUser}
-              askAlphyForSandbox={askAlphyForSandbox}
-              setAskAlphyForSandbox={setAskAlphyForSandbox}
-              askText={askText}
-              getSandboxHistory={getSandboxHistory}
-              tier={tier}
-              activeMobilePanel={activeMobilePanel}
-              setActiveMobilePanel={setActiveMobilePanel}
-            />
-            </div>
-            </div>
-            }
-
-
           </div>
       )}          
           

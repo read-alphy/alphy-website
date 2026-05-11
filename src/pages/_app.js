@@ -9,11 +9,9 @@ import Head from 'next/head';
 import { useAuth } from '../hooks/useAuth'
 import { initializeApp } from 'firebase/app'
 
-import { loadStripe } from '@stripe/stripe-js'
-
 import axios from 'axios'
 
-import { API_URL, STRIPE_PK } from '../constants'
+import { API_URL } from '../constants'
 import getUserMetadata from '../utils/getUserMetadata'
 import { useRouter } from 'next/router';
 import addToUserMetadata from '../utils/addToUserMetadata'
@@ -56,7 +54,6 @@ function MyApp({ Component, pageProps }) {
     const [userLayout, setUserLayout] = useState(false)
     const [submitLayout, setSubmitLayout] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
-    const [sandboxHistoryCalled, setSandboxHistoryCalled] = useState(false)
     const {theme, setTheme} = useTheme('light')
 
     const [colorTheme, setDarkMode] = useDarkMode();
@@ -96,7 +93,6 @@ function MyApp({ Component, pageProps }) {
     }, [collapsed]);
   
     const [customerID, setCustomerID] = useState('')
-    const [userArcsCalled, setUserArcsCalled] = useState(false)
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlParams.entries());
@@ -129,8 +125,6 @@ function MyApp({ Component, pageProps }) {
       , [])
  
     
-  
-    const stripePromise = loadStripe(`${STRIPE_PK}`)
   
     useEffect(() => {
       // TODO this delays the loading of the page, but it's necessary to get the user's idToken.
@@ -207,25 +201,7 @@ function MyApp({ Component, pageProps }) {
       }
     }, [currentUser, called])
   
-    const getSandboxHistory = () => {
-      axios
-        .get(`${API_URL}/sandbox/`, {
-          headers: {
-            'id-token': currentUser.accessToken,
-          },
-        })
-        .then(response => {
-          setSandboxHistoryCalled(true) 
-          setSandboxHistory(response.data)
-          
-        })
-    }
-  
-    useEffect(() => {
-      if (sandboxHistoryCalled === false && currentUser) {
-        getSandboxHistory()
-      }
-    }, [sandboxHistoryCalled, currentUser])
+    const getSandboxHistory = () => {}
   
     useEffect(() => {
         const verification = searchParams.mode === 'verifyEmail'
@@ -272,30 +248,9 @@ function MyApp({ Component, pageProps }) {
             localStorage.setItem('userId', currentUser.uid)
           }
   
-          if (userArcsCalled === false) {
-          
-            axios
-              .get(`${API_URL}/playlists/`, {
-                params: {
-                  limit: 40,
-                  only_my: true,
-                },
-                headers: {
-                  'id-token': currentUser.accessToken,
-                },
-              })
-              .then(response => {
-                
-                setUserArcs(response.data)
-                setUserArcsCalled(true)
-              })
-              .catch(e => {
-                console.log(e)
-              })
-          }
         }
       }, 1000)
-    }, [currentUser, called, userArcsCalled])
+    }, [currentUser, called])
   
     const getCustomerInfo = async currentUser => {
       await axios
@@ -343,7 +298,6 @@ const additionalProps ={
     credit : credit,
     setCreditCalled : setCreditCalled,
     totalMinutes : totalMinutes,
-    stripe : stripePromise,
     setTotalMinutes : setTotalMinutes,
     collapsed: collapsed,
     setCollapsed:setCollapsed,

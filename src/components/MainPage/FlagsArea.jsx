@@ -115,8 +115,8 @@ export default function FlagsArea() {
           className="text-md xl:text-lg mb-10 text-slate-600 dark:text-zinc-300 font-normal quicksand max-w-2xl"
           variants={fadeIn}
         >
-          Transcribe, translate, and use generative AI with more than 40
-          languages from around the world.
+          Existing transcripts and summaries remain available across more than
+          40 languages. New processing and translation requests are closed.
         </motion.p>
         
         <motion.div 

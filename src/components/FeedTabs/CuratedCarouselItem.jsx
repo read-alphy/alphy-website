@@ -45,7 +45,7 @@ export default function CuratedCarouselItem(props) {
   }
 
   return (
-    <Link href={`/arc/${props.item.uid}`}>
+    <Link href="/explore">
       {props.expandedLayout !== true ? (
         <div
           className={`relative min-w-[150px] max-w-[150px] ${

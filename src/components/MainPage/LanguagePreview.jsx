@@ -61,7 +61,7 @@ export default function LanguagePreview() {
       variants={fadeIn}
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center text-slate-600 dark:text-zinc-300 text-lg">
-        <span className="quicksand font-medium">Transcribe and analyze content in</span>
+        <span className="quicksand font-medium">Existing archive material spans</span>
         <button
           onClick={scrollToLanguages}
           className="text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 

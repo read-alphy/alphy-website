@@ -1,15 +1,11 @@
 import { useSource } from '../context/SourceContext'
-import { useSourceUI } from '../context/UIContext'
 import Loading from '@/components/Loading'
 import Link from 'next/link'
 import SourceHeader from '../header/SourceHeader'
 import ReadPanel from '../read/ReadPanel'
-import InteractivePanel from '../interactive/InteractivePanel'
-import ResizableLayout from './ResizableLayout'
 
 export default function SourceLayout() {
   const { source, isLoading, error } = useSource()
-  const { activeMobilePanel } = useSourceUI()
   
   // Loading state
   if (isLoading) {
@@ -50,26 +46,13 @@ export default function SourceLayout() {
   
   return (
     <div className="h-full lg:overflow-hidden lg:max-h-screen">
-      {/* Desktop Layout - Resizable */}
-      <div className="hidden lg:block h-full">
-        <ResizableLayout
-          leftPanel={
-            <div className="flex flex-col h-full pt-6 px-4">
-              <SourceHeader />
-              <div className="flex-grow overflow-auto mt-4">
-                <ReadPanel />
-              </div>
-            </div>
-          }
-          rightPanel={
-            <div className="h-full pt-6">
-              <InteractivePanel />
-            </div>
-          }
-          defaultLeftWidth={60}
-          minLeftWidth={35}
-          maxLeftWidth={75}
-        />
+      <div className="hidden h-full lg:block">
+        <div className="mx-auto flex h-full max-w-5xl flex-col px-4 pt-6">
+          <SourceHeader />
+          <div className="mt-4 flex-grow overflow-auto">
+            <ReadPanel />
+          </div>
+        </div>
       </div>
       
       {/* Mobile Layout */}
@@ -79,17 +62,9 @@ export default function SourceLayout() {
             <SourceHeader />
           </div>
           
-          {activeMobilePanel === 'read' && (
-            <div className="mt-4">
-              <ReadPanel />
-            </div>
-          )}
-          
-          {activeMobilePanel === 'interactive' && (
-            <div className="mt-4">
-              <InteractivePanel />
-            </div>
-          )}
+          <div className="mt-4">
+            <ReadPanel />
+          </div>
         </div>
       </div>
     </div>

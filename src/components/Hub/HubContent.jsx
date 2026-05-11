@@ -1,8 +1,6 @@
 import HubSourceFeed from './HubSourceFeed'
-import HubArcFeed from './HubArcFeed'
 import HubSubmitPage from './HubSubmitPage'
 import HubUserPage from './HubUserPage/HubUserPage.jsx'
-import Link from 'next/link'
 import WelcomeExplainer from '../MainPage/WelcomeExplainer'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Separator } from '@/components/ui/separator'
@@ -63,16 +61,6 @@ export default function HubContent({
                       >
                         Sources
                       </button>
-                      <button 
-                        onClick={() => setActiveTab('arcs')}
-                        className={`flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
-                          activeTab === 'arcs'
-                            ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                        }`}
-                      >
-                        Arcs
-                      </button>
                     </div>
                     <Separator className='mt-4 mb-8 max-w-[800px]'/>
                     
@@ -89,19 +77,6 @@ export default function HubContent({
                       />
                     </TabsContent>
                     
-                    <TabsContent value="arcs">
-                      <HubArcFeed
-                        arcs={arcs}
-                        currentUser={currentUser}
-                        tier={tier}
-                        userArcs={userArcs}
-                        dataGlobalArcs={dataGlobalArcs}
-                        setDataGlobalArcs={setDataGlobalArcs}
-                        mainShow={mainShow}
-                        setMainShow={setMainShow}
-                        collapsed={collapsed}
-                      />
-                    </TabsContent>
                   </Tabs>
                 </div>
               </div>

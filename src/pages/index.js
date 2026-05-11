@@ -42,19 +42,19 @@ export default function Explore({
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
   <meta property="og:image" content="/img/ALPHY_PREVIEW.png" /> 
 
-<meta property="og:title" content={"Alphy - Transcribe, summarize, and generate content with AI"} />
-<meta property="og:description" content="Upload a file or submit a link to transcribe, summarize, and generate new content from audiovisual with ease!" />
+<meta property="og:title" content={"Alphy - Read-only audio archive"} />
+<meta property="og:description" content="Alphy is no longer accepting new subscriptions or processing new content. Existing materials remain online for existing users." />
 
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Alphy - Turn audio to text, summarize, and generate content with AI" />
+  <meta property="og:site_name" content="Alphy - Read-only audio archive" />
   <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />  
-  <meta name="twitter:title" content={"Alphy - Transcribe, summarize, and generate content with AI"} />
-  <meta name="twitter:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
+  <meta name="twitter:title" content={"Alphy - Read-only audio archive"} />
+  <meta name="twitter:description" content="Alphy is being kept online for existing users. New subscriptions, uploads, and AI interactions are closed." />
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap')
   </style>   
-   <title>Alphy - AI Transcriber, Summarizer, Assistant</title>
+   <title>Alphy - Read-only Audio Archive</title>
     
 </Head>
   <Hub

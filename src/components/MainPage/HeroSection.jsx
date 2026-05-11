@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import LanguagePreview from './LanguagePreview';
 
@@ -62,22 +61,23 @@ export default function HeroSection({ currentUser }) {
             className="inline-block px-4 py-1 mb-4 bg-sky-100 dark:bg-sky-900 text-sky-800 dark:text-sky-100 text-sm font-medium rounded-full"
             variants={slideUp}
           >
-            Powered by state-of-the-art AI
+            Read-only archive
           </motion.div>
           
           <motion.h1 
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-zinc-100 quicksand leading-tight"
             variants={slideUp}
           >
-            Turn <span className="bg-gradient-to-r from-sky-400 to-indigo-500 bg-clip-text text-transparent text-3xl md:text-4xl lg:text-5xl font-bold">audio to text</span>, summarize, and generate content with AI
+            Existing <span className="bg-gradient-to-r from-sky-400 to-indigo-500 bg-clip-text text-transparent text-3xl md:text-4xl lg:text-5xl font-bold">audio knowledge</span>, kept online
           </motion.h1>
           
           <motion.p 
             className="text-lg md:text-xl text-slate-600 dark:text-zinc-300 mt-6 quicksand max-w-2xl"
             variants={slideUp}
           >
-            Join the Alphy community to transcribe, summarize, and create content 
-            with the highest quality AI models on the market.
+            Alphy is no longer accepting new subscriptions or processing new content.
+            We are keeping existing transcripts, summaries, and source pages online for
+            users who already rely on them.
           </motion.p>
 
           {/* Social proof */}
@@ -85,9 +85,9 @@ export default function HeroSection({ currentUser }) {
             className="flex items-center mt-6 text-sm text-slate-500 dark:text-zinc-400"
             variants={slideUp}
           >
-            <span className="font-medium">Trusted by <strong>15,000+</strong> users</span>
+            <span className="font-medium">Archive access maintained for existing users</span>
             <span className="mx-2">•</span>
-            <span><strong>500,000+</strong> minutes processed</span>
+            <span><strong>500,000+</strong> minutes previously processed</span>
           </motion.div>
 
          
@@ -98,9 +98,9 @@ export default function HeroSection({ currentUser }) {
             variants={staggerChildren}
           >
             {[
-              "Transcribe with 98% accuracy in 100+ languages",
-              "Generate summaries, insights, and follow-up content",
-              "Collaborate and share with your team or community"
+              "Browse existing public transcripts and summaries",
+              "Sign in to access previously processed materials",
+              "New subscriptions, uploads, and AI interactions are closed"
             ].map((benefit, index) => (
               <motion.li 
                 key={index} 
@@ -122,100 +122,47 @@ export default function HeroSection({ currentUser }) {
           >
             <motion.div variants={slideUp}>
               <Link
-                href={`${currentUser ? '/submit' : '/u/register'}`}
-                onClick={() => {
-                  if (currentUser) {
-                    localStorage.setItem('newItem', 'link');
-                  }
-                }}
+                href="/explore"
                 className="rounded-lg text-sm text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 
                            px-5 py-2 font-medium flex items-center transition-all
                            duration-300 ease-in-out shadow-lg"
-                aria-label={currentUser ? 'Submit a link' : 'Start for free'}
+                aria-label="Browse archive"
               >
-                {currentUser ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-4 h-4 mr-2"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
-                    />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                )}
-                {currentUser ? 'Submit a Link' : 'Start for Free'}
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7a2 2 0 012-2h5l2 2h7a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+                </svg>
+                Browse Archive
               </Link>
             </motion.div>
             
 
             <motion.div variants={slideUp}>
-              {currentUser ? (
-                <Link
-                  href="/submit"
-                  onClick={() => localStorage.setItem('newItem', 'upload')}
-                  className="rounded-lg text-zinc-800 dark:text-zinc-200 border border-slate-300 
-                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-5 py-2 text-sm font-medium 
-                             flex items-center transition duration-300 ease-in-out 
-                             "
-                  aria-label="Upload from device"
+              <Link
+                href={currentUser ? "/account" : "/u/login"}
+                className="rounded-lg text-md text-zinc-800 dark:text-zinc-200 border border-slate-300 
+                           dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-1.5 font-medium 
+                           flex items-center transition duration-300 ease-in-out 
+                           hover:translate-x-1 transform"
+                aria-label={currentUser ? "Open account" : "Sign in"}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="mr-2"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-4 h-4 mr-2"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-                    />
-                  </svg>
-                  <span className="hidden sm:inline">Upload from Device</span>
-                  <span className="sm:hidden">Upload</span>
-                </Link>
-              ) : (
-                <Link
-                  href="/explore"
-                  className="rounded-lg text-md text-zinc-800 dark:text-zinc-200 border border-slate-300 
-                             dark:border-zinc-700 hover:border-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800 px-6 py-1.5 font-medium 
-                             flex items-center transition duration-300 ease-in-out 
-                             hover:translate-x-1 transform"
-                  aria-label="See examples"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="mr-2 feather feather-compass"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-                  </svg>
-                  Examples
-                </Link>
-              )}
+                  <path d="M20 21a8 8 0 0 0-16 0"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                {currentUser ? "Account" : "Sign In"}
+              </Link>
             </motion.div>
 
             {/* Language Preview Component */}

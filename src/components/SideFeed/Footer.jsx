@@ -134,7 +134,7 @@ export default function Footer({
                 href={
                   loggedIn
                     ? '/account'
-                    : '/plans'
+                    : '/explore'
                 }
               >
                 <User size={18} strokeWidth={2} />

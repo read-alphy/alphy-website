@@ -91,7 +91,7 @@ export function getSourceTypeName(sourceType) {
 /**
  * Build WebSocket URL
  * 
- * @param {string} path - WebSocket path (e.g., '/sandbox/ws', '/qa/ws')
+ * @param {string} path - WebSocket path
  * @returns {string} Full WebSocket URL
  */
 export function getWebSocketUrl(path) {
@@ -110,4 +110,3 @@ export const VALID_SOURCE_TYPES = ['yt', 'sp', 'x', 'tw', 'ap', 'up']
 export function isValidSourceType(type) {
   return VALID_SOURCE_TYPES.includes(type)
 }
-

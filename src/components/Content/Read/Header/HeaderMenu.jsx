@@ -5,7 +5,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import MediaSourceLink from './MediaSourceLink';
-import ArchipelagoMenu from './ArchipelagoMenu';
 import VisibilityToggle from './VisibilityToggle';
 import BookmarkButton from './BookmarkButton';
 import LanguageSelector from './LanguageSelector';
@@ -25,8 +24,6 @@ export default function HeaderMenu({
   handleReportIssue,
   isBookmarked,
   handleBookmark,
-  handleAddToArchipelago,
-  userArchipelagoNames,
   language,
   reorderedLanguageCodes,
   languages,
@@ -85,11 +82,6 @@ export default function HeaderMenu({
           <MediaSourceLink data={data} theme={theme} />
           
           {data?.source_type && <Divider />}
-
-          {/* Add to Arc/Archipelago */}
-          <div className="transform hover:scale-102 transition-transform duration-200 py-1">
-            <ArchipelagoMenu handleAddToArchipelago={handleAddToArchipelago} userArchipelagoNames={userArchipelagoNames} theme={theme} />
-          </div>
 
           {/* Visibility Toggle (only for content owners) */}
           {data?.source_type === 'up' &&

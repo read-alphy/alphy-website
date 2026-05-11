@@ -1,61 +1,21 @@
-import SubmitPage from '../components/Hub/SubmitPage'
-import Head from 'next/head';
+import Head from 'next/head'
+import WindDownNotice from '../components/WindDownNotice'
 
-
-
-
-export default function Submit({
-
-    currentUser,
-    collapsed,
-    setCollapsed,
-    tier,
-  
-    credit,
-    userArcs,
-    setUserArcs,
-    dataGlobalArcs,
-    setDataGlobalArcs,
-    sandboxHistory,
-    setSandboxHistory,
-    setCreditcalled,
-    loggedIn,
-    setLoggedIn
-
-}) {
-    return (
-      <div>
-        <Head >
-          <title>Alphy - Submit</title>
-          <meta property="og:image" content="/img/ALPHY_PREVIEW.png" /> 
-      <meta property="og:title" content={"Alphy - Submit a link or upload a file"} />
-      <meta property="og:description" content="Upload a file or submit a link to transcribe, summarize, and generate new content from audiovisual with ease!" />
-  
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Alphy - Turn audio to text, summarize, and generate content with AI" />
-  <meta property="og:locale" content="en_US" />
-<meta name="twitter:card" content="summary_larger_image" />  
-  <meta name="twitter:title" content={"Alphy - Submit a link or upload a file"} />
-  <meta name="twitter:description" content="Explore audiovisual content like never before with Alphy. Transcribe, summarize, and generate new content from audiovisual with ease." />
-  
-          </Head>
-      <SubmitPage
-      loggedIn ={loggedIn}
-      setLoggedIn={setLoggedIn}
-      credit={credit}
-      setCreditcalled={setCreditcalled}
-    currentUser={currentUser}
-    collapsed={collapsed}
-    setCollapsed={setCollapsed}
-    dataGlobalArcs={dataGlobalArcs}
-    userArcs={userArcs}
-    setUserArcs={setUserArcs}
-    tier={tier}
-    
-    sandboxHistory={sandboxHistory}
-    setSandboxHistory={setSandboxHistory}
-                    />
-                    </div>
-    );
-    }
+export default function Submit() {
+  return (
+    <div>
+      <Head>
+        <title>Alphy - Read-only Archive</title>
+        <meta property="og:title" content="Alphy - Read-only Archive" />
+        <meta
+          property="og:description"
+          content="Alphy is now a read-only archive. New submissions and uploads are no longer available."
+        />
+      </Head>
+      <WindDownNotice
+        title="New processing is no longer available"
+        body="Submitting links and uploading audio have been disabled as part of the Alphy wind-down. Existing public materials remain available for reading."
+      />
+    </div>
+  )
+}

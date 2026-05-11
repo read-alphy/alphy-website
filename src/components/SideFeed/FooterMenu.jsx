@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CheckCircle, User, Briefcase, Sun, Moon, MessageSquare, HelpCircle, LayoutDashboard, FileText, LogOut } from 'lucide-react'
+import { CheckCircle, User, Compass, Sun, Moon, MessageSquare, HelpCircle, LayoutDashboard, FileText, LogOut } from 'lucide-react'
 
 export default function FooterMenu({
   currentUser,
@@ -33,15 +33,15 @@ export default function FooterMenu({
           href="/account"
         >
           <User className={iconClass} />
-          <span className={textClass}>My Plan</span>
+          <span className={textClass}>Account</span>
         </Link>
       ) : (
         <Link
           className={menuItemClass}
-          href="/plans"
+          href="/explore"
         >
-          <Briefcase className={iconClass} />
-          <span className={textClass}>Pricing</span>
+          <Compass className={iconClass} />
+          <span className={textClass}>Explore</span>
         </Link>
       )}
 

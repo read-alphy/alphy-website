@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
-import { Download, Play, FileText, List, MessageSquare, Layers, Languages, Sparkles } from 'lucide-react'
+import { FileText, MessageSquare, Languages } from 'lucide-react'
 
 import Summary from './ReadComponents/content/Summary'
 import Transcript from './ReadComponents/content/Transcript'
@@ -114,10 +114,6 @@ export default function ReadComponent({
     { id: "transcript", label: "Transcript", icon: <MessageSquare className="h-4 w-4 mr-2" /> }
   ];
 
-  const toggleMobilePanel = () => {
-    setActiveMobilePanel(activeMobilePanel === 'read' ? 'interactive' : 'read');
-  };
-
   return (
     <div className="overflow-x-hidden">
       
@@ -171,14 +167,6 @@ export default function ReadComponent({
                         
 
                         <div className="ml-auto flex items-center gap-2 flex-shrink-0">
-                          {/* Interactive button for mobile */}
-                          <Button 
-                            onClick={toggleMobilePanel}
-                            className="lg:hidden bg-gradient-to-r from-indigo-500 to-purple-500 text-white h-8 rounded-md px-3 text-sm font-medium inline-flex items-center transition-all flex-shrink-0"
-                          >
-                             <Sparkles className="h-4 w-4 mr-2" />
-                            Interactive
-                          </Button>
                           {/* Download options for desktop */}
                           <div className="hidden lg:flex lg:items-center">
                             <DownloadOptions

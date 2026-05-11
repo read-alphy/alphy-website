@@ -4,7 +4,6 @@ import {
   AccordionHeader,
   AccordionBody,
 } from '@material-tailwind/react'
-import Link from 'next/link'
 
 // Extracting FAQ data into separate arrays for better organization
 const generalFAQs = [
@@ -13,13 +12,11 @@ const generalFAQs = [
     question: "What is Alphy?",
     answer: (
       <>
-        Alphy is a set of AI tools designed to help users interact with
-        online and offline audiovisual content as easily and effectively
-        as possible.
+        Alphy is now a read-only archive for previously processed
+        audiovisual content.
         <br/><br/>
-        We use AI to transcribe, summarize, question, and let users
-        create new written content on top of videos and
-        recordings.
+        Existing summaries and transcripts remain available, but new
+        processing and AI interactions have been disabled.
       </>
     )
   },
@@ -28,14 +25,10 @@ const generalFAQs = [
     question: "How does Alphy work?",
     answer: (
       <>
-        Upon submitting a link or uploading a recording, Alphy creates the
-        transcription, summary, key takeaways, and a mini AI assistant for
-        the content.
-        <br /><br />
-        Then you can combine these content to create your AI-assisted
-        search engines as effortlessly as building a playlist (we call
-        them Arcs) that will answer your questions based on the corpus of
-        content you have curated.
+        Alphy previously generated transcripts, summaries, and takeaways
+        for submitted audiovisual content. The service is now read-only,
+        so those existing materials can be browsed without creating new
+        processing jobs.
       </>
     )
   },
@@ -44,10 +37,8 @@ const generalFAQs = [
     question: "What kind of content can I use Alphy with?",
     answer: (
       <>
-        You can use Alphy on YouTube
-        videos, Twitter / X Spaces, Twitter / X videos, Twitch recordings,
-        Apple Podcasts, and your local audio files (.mp3, .m4a, .mpga,
-        .mpeg, .wav, or .webm).
+        Existing public materials from supported platforms remain
+        available in the archive.
       </>
     )
   },
@@ -56,15 +47,7 @@ const generalFAQs = [
     question: "Can I upload local audio files for processing?",
     answer: (
       <>
-        Yes. When you upload files to Alphy, we handle them the same way
-        as we do with your online submissions. The key difference is that
-        your uploads are kept private, ensuring they remain accessible
-        only to you.
-        <br /><br />
-        We respect your privacy and do not retain your audio files. After
-        real-time processing, they are deleted. If you ever want to remove
-        the processed results, reach us at{' '}
-        <span className="underline">support@alphy.app</span>.
+        No. Uploads have been disabled as part of the service wind-down.
       </>
     )
   },
@@ -73,24 +56,17 @@ const generalFAQs = [
     question: "Can I download the transcripts?",
     answer: (
       <>
-        Yes. If you are a Premium user, you can download the transcripts in subtitle (.srt) or text (.txt) format.
+        Existing transcript downloads remain available where the original
+        content page supports them.
       </>
     )
   },
   {
     id: 6,
-    question: "What are Arcs?",
+    question: "Are Arcs still available?",
     answer: (
       <>
-        An Arc represents Alphy's AI-enhanced search engine for
-        audiovisual content.
-        <br /><br />
-        Using Arcs, you can categorize and search through vast amounts of
-        audio content, organized by specific subjects, creators, or
-        topics. It's like music playlists, but for learning from countless
-        hours of material.
-        <br /><br />
-        <Link href="/explore" className="underline text-indigo-300">Check out the free Arcs by us.</Link>
+        No. Arcs have been removed as part of the wind-down.
       </>
     )
   }
@@ -99,28 +75,20 @@ const generalFAQs = [
 const subscriptionFAQs = [
   {
     id: 7,
-    question: "What does Premium offer?",
+    question: "Can I subscribe to Alphy?",
     answer: (
       <>
-        More hours, uploads, full access to Alphy's capabilities. See our {' '}
-        <a
-          className="underline text-indigo-300 quicksand font-bold"
-          href="/plans"
-        >
-          pricing page
-        </a>{' '}
-        to learn more about it
+        No. New subscriptions are no longer available. Alphy is being kept
+        online as a read-only archive for existing public materials.
       </>
     )
   },
   {
     id: 8,
-    question: "What happens to my credits if I cancel my subscriptions?",
+    question: "Can I buy more credits?",
     answer: (
       <>
-        If you want to cancel your subscription, you can do so at any
-        time. You will be able to spend your credits until the end of your
-        billing period.
+        No. Credit purchases and new processing have been disabled.
       </>
     )
   },
@@ -129,7 +97,7 @@ const subscriptionFAQs = [
     question: "Can I get a refund?",
     answer: (
       <>
-        Yes. Simply reach us at <span className="underline">support@alphy.app</span> and we'll reimburse you for the remaining credits on your account.
+        Reach us at <span className="underline">support@alphy.app</span> for account or billing questions.
       </>
     )
   }

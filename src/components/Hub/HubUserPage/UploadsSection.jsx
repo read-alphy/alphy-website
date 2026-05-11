@@ -1,8 +1,7 @@
 // File: components/Hub/HubUserPage/UploadsSection.js
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
 import axios from 'axios'
-import { FileAudio2, ArrowRight } from 'lucide-react'
+import { FileAudio2 } from 'lucide-react'
 import Loading from '../../../components/Loading'
 import HubFeedItem from '../../FeedTabs/HubFeedItemElements/HubFeedItem'
 import { API_URL } from '../../../constants'
@@ -118,31 +117,12 @@ export default function UploadsSection({ currentUser, search, collapsed, tier })
               <FileAudio2 className="h-16 w-16 mx-auto text-slate-400 dark:text-zinc-500 mb-4" strokeWidth={1.5} />
               <h3 className="text-xl font-bold text-slate-700 dark:text-zinc-300 mb-2">No uploads yet</h3>
               <p className="text-slate-600 dark:text-zinc-400 max-w-md mx-auto mb-6 text-sm font-normal">
-                {tier !== 'premium' ? (
-                  <>Upload your own files by upgrading to premium.</>
-                ) : (
-                  <>Process your first file to start building your collection.</>
-                )}
+                Uploads are no longer available.
               </p>
               
-              {tier !== 'premium' ? (
-                <Link
-                  href="/account"
-                  className="text-sm inline-flex items-center px-4 py-2 bg-blue-100 text-zinc-800 rounded-md transition-colors duration-200 quicksand font-bold"
-                >
-                  <span className="mr-2 text-sm font-semibold">Upgrade to Premium</span>
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
-              ) : (
-                <Link
-                  href="/submit"
-                  className="text-sm inline-flex items-center px-4 py-2 bg-blue-100 text-zinc-800 rounded-md transition-colors duration-200 quicksand font-bold"
-                  onClick={() => localStorage.setItem('newItem', 'upload')}
-                >
-                  <span className="mr-2 text-sm">Upload File</span>
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
-              )}
+              <p className="text-sm text-slate-500 dark:text-zinc-400">
+                Uploads are no longer available.
+              </p>
             </div>
           </div>
         )}

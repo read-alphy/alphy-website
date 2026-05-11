@@ -1,33 +1,10 @@
-import Success from '../../../components/Payment/Success'
+import WindDownNotice from '../../../components/WindDownNotice'
 
-
-export default function SuccessPage({
-    currentUser,
-    collapsed,
-    setCollapsed,
-    tier,
-    customerID,
-    credit,
-  
-    sandboxHistory,
-    setSandboxHistory,
-    loggedIn,
-    setLoggedIn
-}) {
-    return (
-        <Success 
-        
-        currentUser={currentUser}
-        loggedIn={loggedIn}
-        setLoggedIn={setLoggedIn}
-        credit={credit}
-        tier={tier}
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-        customerID={customerID}
-        sandboxHistory={sandboxHistory}
-        setSandboxHistory={setSandboxHistory}
-        
-            />
-    );
-    }
+export default function SuccessPage() {
+  return (
+    <WindDownNotice
+      title="Checkout is no longer available"
+      body="Alphy no longer accepts new subscriptions or credit purchases. Existing materials remain available for reading."
+    />
+  )
+}

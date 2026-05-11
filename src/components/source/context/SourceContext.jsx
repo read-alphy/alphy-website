@@ -148,19 +148,8 @@ export function SourceProvider({ children, sourceType, sourceId }) {
   }, [currentUser, sourceType, sourceId, source])
 
   const requestTranslation = useCallback(async (lang) => {
-    if (!currentUser) return
-    
-    try {
-      await fetch(`${API_URL}/sources/${sourceType}/${sourceId}?lang=${lang}`, {
-        method: 'POST',
-        headers: { 'id-token': currentUser.accessToken }
-      })
-      // Trigger a refetch to start polling
-      fetchSource()
-    } catch (err) {
-      console.error('Failed to request translation:', err)
-    }
-  }, [currentUser, sourceType, sourceId, fetchSource])
+    return
+  }, [])
 
   const value = {
     // Data
@@ -204,4 +193,3 @@ export function useSource() {
   }
   return context
 }
-
